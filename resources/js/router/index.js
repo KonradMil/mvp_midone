@@ -5,21 +5,16 @@ import About from '../pages/About';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
-
+import SideMenu from '../layouts/side-menu/Main'
 import Books from '../components/Books';
 import AddBook from '../components/AddBook';
 import EditBook from '../components/EditBook';
 
 export const routes = [
     {
-        name: 'home',
-        path: '/',
-        component: Home
-    },
-    {
-        name: 'about',
-        path: '/about',
-        component: About
+        name: 'login',
+        path: '/login',
+        component: Login
     },
     {
         name: 'register',
@@ -27,30 +22,41 @@ export const routes = [
         component: Register
     },
     {
-        name: 'login',
-        path: '/login',
-        component: Login
-    },
-    {
-        name: 'dashboard',
-        path: '/dashboard',
-        component: Dashboard
-    },
-    {
-        name: 'books',
-        path: '/books',
-        component: Books
-    },
-    {
-        name: 'addbook',
-        path: '/books/add',
-        component: AddBook
-    },
-    {
-        name: 'editbook',
-        path: '/books/edit/:id',
-        component: EditBook
-    },
+        path: "/",
+        component: SideMenu,
+        children: [
+            {
+                name: 'home',
+                path: '/',
+                component: Home
+            },
+            {
+                name: 'about',
+                path: '/about',
+                component: About
+            },
+            {
+                name: 'dashboard',
+                path: '/dashboard',
+                component: Dashboard
+            },
+            {
+                name: 'books',
+                path: '/books',
+                component: Books
+            },
+            {
+                name: 'addbook',
+                path: '/books/add',
+                component: AddBook
+            },
+            {
+                name: 'editbook',
+                path: '/books/edit/:id',
+                component: EditBook
+            },
+        ]
+    }
 ];
 
 const router = createRouter({
