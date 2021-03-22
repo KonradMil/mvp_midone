@@ -368,7 +368,7 @@
                                 store.dispatch('login/login', {
                                     user
                                 })
-                                this.$router.push('kreator');
+                                this.$router.replace('kreator');
                             } else {
                                 this.error = response.data.message
                             }
