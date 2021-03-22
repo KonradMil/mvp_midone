@@ -258,6 +258,7 @@
     import { useVuelidate } from "@vuelidate/core";
     import {useToast} from "vue-toastification";
     const toast = useToast();
+    const store = useStore();
 
     export default {
         components: {
