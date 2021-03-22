@@ -1,0 +1,64 @@
+{
+    "en": {
+        "login": {
+            "signup": "Sing Up",
+            "password": "Password",
+            "login": "Login",
+            "loginTitle": "Sign In",
+            "forgot": "Forgot Password?",
+            "pol1": "By signin up, you agree to our",
+            "pol2": "Terms and Conditions",
+            "pol3": "Privacy policy"
+        },
+        "darkmode": {
+            "title": "Dark Mode"
+        },
+        "register": {
+            "signup": "Sing Up",
+            "safepassword": "What is a secure password?",
+            "passwordConfirm": "Confirm password",
+            "pol1": "I understand and agree with ",
+            "iam": "I am:"
+        },
+        "common": {
+            "integratorem": "Integrator",
+            "integrator": "Integrator",
+            "investorem": "Investor",
+            "investor": "Investor",
+            "select": "Select"
+        }
+    },
+    "pl": {
+        "validation": {
+            "Value is required": "To pole jest obowiązkowe.",
+            "Value is not a valid email address": "To nie jest poprawny adres email.",
+            "The value must be equal to the other value": "Ta wartość musi być taka sama jak hasło"
+        },
+        "login": {
+            "signup": "Zarejestruj się",
+            "password": "Hasło",
+            "login": "Zaloguj",
+            "loginTitle": "Zaloguj się",
+            "forgot": "Zapomniałeś hasła?",
+            "pol1": "Logując się akceptujesz nasze",
+            "pol2": "Warunki świadczenia usług",
+            "pol3": "Politykę prywatności"
+        },
+        "darkmode": {
+            "title": "Tryb Ciemny"
+        },"register": {
+            "signup": "Zarejestruj",
+            "safepassword": "Czym jest bezpieczne hasło?",
+            "passwordConfirm": "Potwierdź hasło",
+            "pol1": "Zapoznałem się, zgadzem się i rozumiem ",
+            "iam": "Jestem:"
+        },
+        "common": {
+            "integratorem": "Integratorem",
+            "integrator": "Integrator",
+            "investorem": "Inwestorem",
+            "investor": "Inwestor",
+            "select": "Wybierz"
+        }
+    }
+}

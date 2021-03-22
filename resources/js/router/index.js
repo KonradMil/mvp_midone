@@ -1,14 +1,14 @@
 import {createWebHistory, createRouter} from "vue-router";
 
-import Home from '../pages/Home';
-import About from '../pages/About';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 import SideMenu from '../layouts/side-menu/Main'
-import Books from '../components/Books';
-import AddBook from '../components/AddBook';
-import EditBook from '../components/EditBook';
+import Wizard from "../pages/Wizard";
+import Profile from "../pages/Wizard";
+import WizardOne from "../pages/WizardOne";
+import WizardTwo from "../pages/WizardTwo";
+
 
 export const routes = [
     {
@@ -26,35 +26,30 @@ export const routes = [
         component: SideMenu,
         children: [
             {
-                name: 'home',
-                path: '/',
-                component: Home
+                name: 'wizard',
+                path: '/kreator',
+                component: Wizard
+            },{
+                name: 'wizardone',
+                path: '/kreator-krok-jeden',
+                component: WizardOne
             },
             {
-                name: 'about',
-                path: '/about',
-                component: About
+                name: 'wizardtwo',
+                path: '/kreator-krok-dwa',
+                component: WizardTwo
+            },
+            {
+                name: 'profile',
+                path: '/profile',
+                component: Profile,
             },
             {
                 name: 'dashboard',
                 path: '/dashboard',
                 component: Dashboard
             },
-            {
-                name: 'books',
-                path: '/books',
-                component: Books
-            },
-            {
-                name: 'addbook',
-                path: '/books/add',
-                component: AddBook
-            },
-            {
-                name: 'editbook',
-                path: '/books/edit/:id',
-                component: EditBook
-            },
+
         ]
     }
 ];

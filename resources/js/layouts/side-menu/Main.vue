@@ -5,22 +5,24 @@
     <div class="flex">
       <!-- BEGIN: Side Menu -->
       <nav class="side-nav">
-        <!-- BEGIN: Logo -->
-        <router-link
-          :to="{ name: 'home' }"
-          tag="a"
-          class="intro-x flex items-center pl-5 pt-4"
-        >
-          <img
-            alt="Icewall Tailwind HTML Admin Template"
-            class="w-6"
-            src="../../../images/logo.svg"
-          />
-          <span class="hidden xl:block text-white text-lg ml-3">
-            Ru<span class="font-medium">bick</span>
-          </span>
-        </router-link>
-        <!-- END: Logo -->
+<!--         BEGIN: Logo-->
+          <div class="flex-row w-full items-center">
+              <router-link
+                  :to="{ name: 'dashboard' }"
+                  tag="a"
+                  class="intro-x flex items-center  pt-4 px-12"
+              >
+                  <img
+                      alt="DBR77 Platforma Robotów "
+                      class="w-full"
+                      src="https://dbr77.com/wp-content/uploads/2020/02/logo_dbr_white.png"
+                  />
+                  <!--          <span class="hidden xl:block text-white text-lg ml-3">-->
+                  <!--            Ru<span class="font-medium">bick</span>-->
+                  <!--          </span>-->
+              </router-link>
+          </div>
+<!--         END: Logo-->
         <div class="side-nav__devider my-6"></div>
         <ul>
           <!-- BEGIN: First Child -->
@@ -152,6 +154,12 @@ export default defineComponent({
     DarkModeSwitcher,
     SideMenuTooltip
   },
+    beforeRouteEnter(to, from, next) {
+        if (!window.Laravel.isLoggedin) {
+            return    next({ path: '/login' });
+        }
+        next();
+    },
   setup() {
     const route = useRoute();
     const router = useRouter();

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use Session;
+use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +11,49 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+
+    public function updateProfile(Request $request)
+    {
+        $u = Auth::user();
+        $u->name = $request->name;
+        $u->lastname = $request->lastname;
+        $r =  $u->save();
+
+        return response()->json([
+            'success' => $r,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $u
+        ]);
+    }
+    public function storeAvatar(Request $request)
+    {
+
+        $request->validate([
+            'file' => 'required|mimes:jpg,png,JPG,jpeg|max:4096',
+        ]);
+
+        $fileName = time().'.'.$request->file->extension();
+
+        $request->file->move(public_path('uploads'), $fileName);
+        $u = Auth::user();
+        $u->avatar = $fileName;
+        $u->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Awatar został wgrany poprawnie',
+            'payload' => $fileName
+        ]);
+    }
+    public function checkEmail($email)
+    {
+       $user = User::where('email', '=', $email)->first();
+        if($user == NULL) {
+            return response()->json(true);
+        } else {
+            return response()->json(false);
+        }
+    }
     /**
      * Register
      */
@@ -18,8 +61,9 @@ class UserController extends Controller
     {
         try {
             $user = new User();
-            $user->name = $request->name;
+//            $user->name = $request->name;
             $user->email = $request->email;
+            $user->type = $request->type;
             $user->password = Hash::make($request->password);
             $user->save();
 
@@ -60,6 +104,7 @@ class UserController extends Controller
         $response = [
             'success' => $success,
             'message' => $message,
+            'payload' => Auth::user(),
         ];
         return response()->json($response);
     }

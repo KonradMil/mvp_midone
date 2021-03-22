@@ -150,3 +150,16 @@
 @import "components/ads-box";
 @import "components/full-calendar";
 @import "components/pristine";
+
+
+.btn-primary {
+    background-color: #930f68 !important;
+    border-color: #930f68 !important;
+}
+
+.po-password-strength-bar {
+    display: none !important;
+}
+.search__input::placeholder {
+    color: #fff !important;
+}

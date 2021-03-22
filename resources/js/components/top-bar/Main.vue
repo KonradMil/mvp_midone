@@ -13,12 +13,13 @@
       <div class="search hidden sm:block">
         <input
           type="text"
+          style="color: #fff"
           class="search__input form-control border-transparent placeholder-theme-13"
-          placeholder="Search..."
+          placeholder="Szukaj..."
           @focus="showSearchDropdown"
           @blur="hideSearchDropdown"
         />
-        <SearchIcon class="search__icon dark:text-gray-300" />
+        <SearchIcon class="search__icon dark:text-gray-300" style="color: #fff"/>
       </div>
       <a class="notification sm:hidden" href="">
         <SearchIcon class="notification__icon dark:text-gray-300" />
@@ -62,7 +63,7 @@
             >
               <div class="w-8 h-8 image-fit">
                 <img
-                  alt="Icewall Tailwind HTML Admin Template"
+                  alt="DBR77 Platforma Robotów "
                   class="rounded-full"
                   :src="require(`../../../images/${faker.photos[0]}`)"
                 />
@@ -84,7 +85,7 @@
           >
             <div class="w-8 h-8 image-fit">
               <img
-                alt="Icewall Tailwind HTML Admin Template"
+                alt="DBR77 Platforma Robotów "
                 class="rounded-full"
                 :src="require(`../../../images/${faker.images[0]}`)"
               />
@@ -120,7 +121,7 @@
           >
             <div class="w-12 h-12 flex-none image-fit mr-1">
               <img
-                alt="Icewall Tailwind HTML Admin Template"
+                alt="DBR77 Platforma Robotów "
                 class="rounded-full"
                 :src="require(`../../../images/${faker.photos[0]}`)"
               />
@@ -154,7 +155,7 @@
         aria-expanded="false"
       >
         <img
-          alt="Icewall Tailwind HTML Admin Template"
+          alt="DBR77 Platforma Robotów "
           :src="require(`../../../images/${$f()[9].photos[0]}`)"
         />
       </div>
@@ -196,10 +197,10 @@
           </div>
           <div class="p-2 border-t border-theme-27 dark:border-dark-3">
             <a
-              href=""
+             @click="logout"
               class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
             >
-              <ToggleRightIcon class="w-4 h-4 mr-2" /> Logout
+              <ToggleRightIcon class="w-4 h-4 mr-2" /> Wyloguj
             </a>
           </div>
         </div>
@@ -212,11 +213,30 @@
 
 <script>
 import { defineComponent, ref } from "vue";
+import store, {useStore} from "../../store";
 
 export default defineComponent({
+    methods: {
+      logout() {
+          this.$axios.get('/sanctum/csrf-cookie').then(response => {
+              this.$axios.post('api/logout')
+                  .then(response => {
+                      if (response.data.success) {
+                          store.dispatch('login/logout')
+                          this.$router.go('/login');
+                      } else {
+                          toast.error(response.data.message);
+                      }
+                  })
+              // .catch(function (error) {
+              //     this.toast.error(error);
+              // });
+          })
+      }
+    },
   setup() {
     const searchDropdown = ref(false);
-
+      const store = useStore();
     const showSearchDropdown = () => {
       searchDropdown.value = true;
     };

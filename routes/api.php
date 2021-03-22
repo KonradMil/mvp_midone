@@ -7,6 +7,14 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
+Route::get('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
+Route::get('test', function (){dd(\Illuminate\Support\Facades\Auth::user());});
+Route::get('email/unique/{email}', 'App\Http\Controllers\API\UserController@checkEmail');
+Route::post('avatar/store', 'App\Http\Controllers\API\UserController@storeAvatar');
+Route::post('profile/update', 'App\Http\Controllers\API\UserController@updateProfile');
+Route::post('company/search/nip', 'App\Http\Controllers\TerytController@searchRegonNip');
+Route::post('company/search/krs', 'App\Http\Controllers\TerytController@searchRegonKrs');
+Route::post('company/create', 'App\Http\Controllers\API\CompanyController@saveCompany');
 
 Route::group(['prefix' => 'books', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [BookController::class, 'index']);

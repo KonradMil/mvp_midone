@@ -4,7 +4,7 @@
     <div class="mobile-menu-bar">
       <a href class="flex mr-auto">
         <img
-          alt="Icewall Tailwind HTML Admin Template"
+          alt="DBR77 Platforma Robotów "
           class="w-6"
           src="../../../images/logo.svg"
         />

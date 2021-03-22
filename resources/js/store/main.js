@@ -5,7 +5,6 @@ const state = () => {
     darkMode: false
   };
 };
-
 // getters
 const getters = {
   darkMode: state => state.darkMode
