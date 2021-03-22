@@ -73,11 +73,12 @@ class UserController extends Controller
             $success = false;
             $message = $ex->getMessage();
         }
-
+        Auth::login($user);
         // response
         $response = [
             'success' => $success,
             'message' => $message,
+            'payload' => $user
         ];
         return response()->json($response);
     }

@@ -363,7 +363,11 @@
                     })
                         .then(response => {
                             if (response.data.success) {
-                                this.$router.push('login');
+                                let user = response.data.payload;
+                                store.dispatch('login/login', {
+                                    user
+                                })
+                                this.$router.push('kreator');
                             } else {
                                 this.error = response.data.message
                             }
