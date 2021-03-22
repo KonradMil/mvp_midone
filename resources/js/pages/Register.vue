@@ -367,8 +367,9 @@
                                 let user = response.data.payload;
                                 store.dispatch('login/login', {
                                     user
-                                })
-                                this.$router.replace('kreator');
+                                });
+                                window.location.replace('/kreator');
+                                // this.$router.replace('kreator');
                             } else {
                                 this.error = response.data.message
                             }
