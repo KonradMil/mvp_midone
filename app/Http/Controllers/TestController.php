@@ -34,7 +34,7 @@ class TestController extends Controller
             'headers' => [
                 'Accept'     => 'application/json',
                 'Content-Type'     => 'application/json',
-                'Authorization'      => 'Bearer ' . $inp[0]['token']
+                'Authorization'      => 'Bearer ' . $inp['locations'][0]['token']
             ],
             'json' => [
                 'locations' => $locations
