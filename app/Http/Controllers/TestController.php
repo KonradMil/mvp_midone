@@ -15,7 +15,7 @@ class TestController extends Controller
         Log::error('Location came');
         Log::error($inp);
         $locations = [];
-        foreach ($inp as $i) {
+        foreach ($inp->locations as $i) {
             Log::error($i);
             $marker = new MapMarker();
             $marker->lng = $i['longitude'];
