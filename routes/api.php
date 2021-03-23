@@ -15,6 +15,7 @@ Route::post('profile/update', 'App\Http\Controllers\API\UserController@updatePro
 Route::post('company/search/nip', 'App\Http\Controllers\TerytController@searchRegonNip');
 Route::post('company/search/krs', 'App\Http\Controllers\TerytController@searchRegonKrs');
 Route::post('company/create', 'App\Http\Controllers\API\CompanyController@saveCompany');
+Route::post('locations', 'App\Http\Controllers\TestController@locations');
 
 Route::group(['prefix' => 'books', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [BookController::class, 'index']);
