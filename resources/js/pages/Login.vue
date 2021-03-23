@@ -152,7 +152,8 @@
                                         user
                                     })
                                     console.log(store);
-                                    this.$router.go('/kreator');
+                                    window.location.replace('/kreator');
+                                    // this.$router.go('/kreator');
                                 } else {
                                     toast.error(response.data.message);
                                 }

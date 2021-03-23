@@ -122,6 +122,7 @@
       <path value="$PROJECT_DIR$/vendor/mrcnpdlk/regon-api" />
       <path value="$PROJECT_DIR$/vendor/mrcnpdlk/lib-exception" />
       <path value="$PROJECT_DIR$/vendor/mrcnpdlk/lib-mapper" />
+      <path value="$PROJECT_DIR$/vendor/laravel/telescope" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
