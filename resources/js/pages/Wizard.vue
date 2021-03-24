@@ -135,6 +135,7 @@
             console.log(store.state);
           this.name = store.state.login.user.name;
           this.lastname = store.state.login.user.lastname;
+          this.getMarkers();
         },
         data() {
             return {
