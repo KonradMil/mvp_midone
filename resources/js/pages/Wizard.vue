@@ -56,21 +56,21 @@
                     </div>
                     <div class="intro-y col-span-4 sm:col-span-4">
                         <GoogleMap :init="initializeGoogleMap" :markers="markers" />
-<!--                        <Dropzone-->
-<!--                            ref-key="dropzoneSingleRef"-->
-<!--                            :options="{-->
-<!--                  url: '/api/avatar/store',-->
-<!--                  thumbnailWidth: 150,-->
-<!--                  maxFilesize: 4,-->
-<!--                  maxFiles: 1,-->
+                        <Dropzone
+                            ref-key="dropzoneSingleRef"
+                            :options="{
+                  url: '/api/avatar/store',
+                  thumbnailWidth: 150,
+                  maxFilesize: 4,
+                  maxFiles: 1,
 
-<!--                }"-->
-<!--                            class="dropzone"-->
-<!--                        >-->
-<!--                            <div class="text-lg font-medium">-->
-<!--                               Wgraj swój awatar-->
-<!--                            </div>-->
-<!--                        </Dropzone>-->
+                }"
+                            class="dropzone"
+                        >
+                            <div class="text-lg font-medium">
+                               Wgraj swój awatar
+                            </div>
+                        </Dropzone>
                     </div>
 
                     <div
