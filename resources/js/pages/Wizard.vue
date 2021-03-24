@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="intro-y col-span-4 sm:col-span-4">
-                        <GoogleMap :init="initializeGoogleMap" :markers="markers" />
+                        <GoogleMap :init="init" :markers="markers" />
                         <Dropzone
                             ref-key="dropzoneSingleRef"
                             :options="{
@@ -104,13 +104,6 @@
             Dropzone
         },
         setup() {
-
-            const initializeGoogleMap = {
-                streetViewControl: true,
-                scaleControl: true,
-                center: { lat: 34.04924594193164, lng: 34.04924594193164 },
-                zoom: 2,
-            };
             const toast = useToast();
             const dropzoneSingleRef = ref();
             provide("bind[dropzoneSingleRef]", el => {
@@ -142,7 +135,13 @@
                 name: "",
                 lastname: "",
                 error: null,
-                markers: {}
+                markers: {},
+                init:{
+                    streetViewControl: true,
+                    scaleControl: true,
+                    center: { lat: 34.04924594193164, lng: 34.04924594193164 },
+                    zoom: 2,
+                }
             }
         },
         methods: {
