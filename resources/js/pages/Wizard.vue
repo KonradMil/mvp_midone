@@ -135,7 +135,7 @@
                 name: "",
                 lastname: "",
                 error: null,
-                markers: {},
+                markers: [],
                 init:{
                     streetViewControl: true,
                     scaleControl: true,
