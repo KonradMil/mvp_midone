@@ -96,12 +96,7 @@
     import GoogleMap from 'googlemaps-vue3'
     const toast = useToast();
     const store = useStore();
-    const initializeGoogleMap = {
-        streetViewControl: true,
-        scaleControl: true,
-        center: { lat: 34.04924594193164, lng: 34.04924594193164 },
-        zoom: 2,
-    };
+
 
     export default {
         components: {
@@ -110,7 +105,12 @@
         },
         setup() {
 
-
+            const initializeGoogleMap = {
+                streetViewControl: true,
+                scaleControl: true,
+                center: { lat: 34.04924594193164, lng: 34.04924594193164 },
+                zoom: 2,
+            };
             const toast = useToast();
             const dropzoneSingleRef = ref();
             provide("bind[dropzoneSingleRef]", el => {
@@ -150,7 +150,7 @@
                 this.$axios.get('/sanctum/csrf-cookie').then(response => {
                     this.$axios.post('api/locations/get')
                         .then(response => {
-                          this.markers = response;
+                          this.markers = response.data;
                         })
                 })
             },
