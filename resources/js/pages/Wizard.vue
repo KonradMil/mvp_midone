@@ -158,7 +158,7 @@
                           response.data.forEach(function (item) {
                                 m.push({lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
                           });
-
+                            console.log(m);
                             this.markers = m;
                         })
                 })
