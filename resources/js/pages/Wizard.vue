@@ -29,6 +29,11 @@
             <div
                 class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"
             >
+                <GoogleMap :init="init" :markers="markers" />
+            </div>
+            <div
+                class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"
+            >
 <!--                <div class="font-medium text-base">Profile Settings</div>-->
                 <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                     <div class="col-span-2"></div>
@@ -55,7 +60,7 @@
                         </div>
                     </div>
                     <div class="intro-y col-span-4 sm:col-span-4">
-                        <GoogleMap :init="init" :markers="markers" />
+
                         <Dropzone
                             ref-key="dropzoneSingleRef"
                             :options="{
