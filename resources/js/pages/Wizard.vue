@@ -149,7 +149,12 @@
                 this.$axios.get('/sanctum/csrf-cookie').then(response => {
                     this.$axios.post('api/locations/get')
                         .then(response => {
-                          this.markers = response.data;
+                            let m = [];
+                          response.data.forEach(function (item) {
+                                m.push({lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
+                          });
+
+                            this.markers = m;
                         })
                 })
             },
