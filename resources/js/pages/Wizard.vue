@@ -144,8 +144,8 @@
                 init:{
                     streetViewControl: true,
                     scaleControl: true,
-                    center: { lat: 34.04924594193164, lng: 34.04924594193164 },
-                    zoom: 2,
+                    center: { lat: 54.04924594193164, lng: 18.04924594193164 },
+                    zoom: 9,
                 }
             }
         },

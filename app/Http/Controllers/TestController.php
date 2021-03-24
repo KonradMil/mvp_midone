@@ -50,7 +50,7 @@ class TestController extends Controller
 
     public function getLocations()
     {
-        $markers = MapMarker::get();
+        $markers = MapMarker::orderBy('created_at', 'DESC')->take(50)->get();
         return response()->json($markers);
     }
 
