@@ -26,6 +26,7 @@
     "dayjs": "^1.10.4",
     "dropzone": "^5.8.1",
     "google-maps-api-loader": "^1.1.1",
+    "googlemaps-vue3": "^2.0.4",
     "highlight.js": "^10.7.0",
     "js-beautify": "^1.13.5",
     "lines-and-columns": "^1.1.6",

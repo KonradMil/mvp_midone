@@ -55,21 +55,22 @@
                         </div>
                     </div>
                     <div class="intro-y col-span-4 sm:col-span-4">
-                        <Dropzone
-                            ref-key="dropzoneSingleRef"
-                            :options="{
-                  url: '/api/avatar/store',
-                  thumbnailWidth: 150,
-                  maxFilesize: 4,
-                  maxFiles: 1,
+                        <GoogleMap :init="initializeGoogleMap" :markers="markers" />
+<!--                        <Dropzone-->
+<!--                            ref-key="dropzoneSingleRef"-->
+<!--                            :options="{-->
+<!--                  url: '/api/avatar/store',-->
+<!--                  thumbnailWidth: 150,-->
+<!--                  maxFilesize: 4,-->
+<!--                  maxFiles: 1,-->
 
-                }"
-                            class="dropzone"
-                        >
-                            <div class="text-lg font-medium">
-                               Wgraj swój awatar
-                            </div>
-                        </Dropzone>
+<!--                }"-->
+<!--                            class="dropzone"-->
+<!--                        >-->
+<!--                            <div class="text-lg font-medium">-->
+<!--                               Wgraj swój awatar-->
+<!--                            </div>-->
+<!--                        </Dropzone>-->
                     </div>
 
                     <div
@@ -92,14 +93,23 @@
     import Dropzone from '../global-components/dropzone/Main'
     import { useToast } from "vue-toastification";
     import {useStore} from "../store";
+    import GoogleMap from 'googlemaps-vue3'
     const toast = useToast();
     const store = useStore();
+    const initializeGoogleMap = {
+        streetViewControl: true,
+        scaleControl: true,
+        center: { lat: 34.04924594193164, lng: 34.04924594193164 },
+        zoom: 2,
+    };
+
     export default {
         components: {
             DarkModeSwitcher,
             Dropzone
         },
         setup() {
+
 
             const toast = useToast();
             const dropzoneSingleRef = ref();
@@ -130,10 +140,19 @@
             return {
                 name: "",
                 lastname: "",
-                error: null
+                error: null,
+                markers: {}
             }
         },
         methods: {
+            getMarkers() {
+                this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                    this.$axios.post('api/locations/get')
+                        .then(response => {
+                          this.markers = response;
+                        })
+                })
+            },
             next() {
                 this.$axios.get('/sanctum/csrf-cookie').then(response => {
                     this.$axios.post('api/profile/update', {
