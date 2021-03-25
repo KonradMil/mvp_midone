@@ -11,7 +11,7 @@ import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import messages from './locales/messages.json';
 import { createI18n } from 'vue-i18n'
-import GoogleMap from 'googlemaps-vue3'
+
 
 const options = {
 
@@ -29,7 +29,7 @@ require('./bootstrap')
 const app = createApp(App)
 globalComponents(app);
 utils(app);
-app.use(GoogleMap, { apiKey: 'AIzaSyDefRrfD0R87hIvAJkpBFuZuA-eSP3AO94' });
+
 app.config.globalProperties.$axios = axios;
 app.config.globalProperties.cash = cash;
 router.beforeEach((to, from, next) => {

@@ -29,7 +29,15 @@
             <div
                 class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"
             >
-                <GoogleMap :init="init" :markers="markers" />
+                <GoogleMap
+                    api-key="YAIzaSyDefRrfD0R87hIvAJkpBFuZuA-eSP3AO94"
+                    style="width: 100%; height: 500px"
+                    :center="{ lat: 54.04924594193164, lng: 18.04924594193164 }"
+                    :zoom="15"
+                >
+                    <Marker  v-for="marker in markers" :options="{ position: marker }" />
+                </GoogleMap>
+
             </div>
             <div
                 class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"
@@ -98,7 +106,8 @@
     import Dropzone from '../global-components/dropzone/Main'
     import { useToast } from "vue-toastification";
     import {useStore} from "../store";
-    import GoogleMap from 'googlemaps-vue3'
+    import { GoogleMap, Marker } from 'vue3-google-map'
+
     const toast = useToast();
     const store = useStore();
 
@@ -106,7 +115,9 @@
     export default {
         components: {
             DarkModeSwitcher,
-            Dropzone
+            Dropzone,
+            GoogleMap,
+            Marker
         },
         setup() {
             const toast = useToast();
