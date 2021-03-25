@@ -30,7 +30,7 @@
                 class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"
             >
                 <GoogleMap
-                    api-key="AIzaSyC0k6ITYbldy-lzMCt-MOVU5p2L7r_DyFs"
+                    api-key="AIzaSyBsKJBCpnTAnjhzE1psl0yIUO3YDWny2Ew"
                     style="width: 100%; height: 500px"
                     :center="{ lat: 54.04924594193164, lng: 18.04924594193164 }"
                     :zoom="15"
