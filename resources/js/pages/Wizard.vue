@@ -119,6 +119,7 @@
             GoogleMap,
             Marker
         },
+
         setup() {
             const toast = useToast();
             const dropzoneSingleRef = ref();
