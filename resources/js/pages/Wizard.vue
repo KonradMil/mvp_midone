@@ -32,7 +32,7 @@
                 <GoogleMap
                     api-key="AIzaSyBsKJBCpnTAnjhzE1psl0yIUO3YDWny2Ew"
                     style="width: 100%; height: 500px"
-                    :center="{ lat: 54.04924594193164, lng: 18.04924594193164 }"
+                    :center="{ lat: 53.0510715, lng: 18.6029603 }"
                     :zoom="15"
                 >
                     <Marker  v-for="marker in markers" :options="{ position: marker }" />
