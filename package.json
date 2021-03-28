@@ -19,6 +19,7 @@
     "@vue/cli-shared-utils": "^4.5.12",
     "@vuelidate/core": "^2.0.0-alpha.14",
     "@vuelidate/validators": "^2.0.0-alpha.12",
+    "@websanova/vue-upload": "^2.1.0",
     "@zhuowenli/vue-feather-icons": "^5.0.2",
     "cash-dom": "^8.1.0",
     "chart.js": "^2.9.4",
