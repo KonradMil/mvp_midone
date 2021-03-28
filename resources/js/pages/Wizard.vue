@@ -209,7 +209,6 @@
 
             return {
                 state,
-                start,
                 select,
             };
         },
