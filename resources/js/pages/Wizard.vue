@@ -136,6 +136,10 @@
             //     dropzoneSingleRef.value = el;
             // });
             //
+            function select() {
+                upload.select('demo-single');
+            }
+
             onMounted(() => {
             //         const elDropzoneSingleRef = dropzoneSingleRef.value;
             //         elDropzoneSingleRef.dropzone.on("success", (resp) => {
