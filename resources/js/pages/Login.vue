@@ -46,8 +46,10 @@
                                 class="intro-x login__input form-control py-3 px-4 border-gray-300 block"
                                 placeholder="Email"
                                 v-model="email"
+                                @keyup.enter="handleSubmit"
                             />
                             <input
+                                @keyup.enter="handleSubmit"
                                 type="password"
                                 class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
                                 :placeholder="$t('login.password')"

@@ -132,6 +132,19 @@
         setup() {
             const toast = useToast();
             const dropzoneSingleRef = ref();
+            const upload = useUpload();
+            const state = reactive({
+                file: {
+                    image: null
+                },
+                _file: computed(() => {
+                    return upload.file('demo-single');
+                }),
+                _image: computed(() => {
+                    return state.file.image || '//www.gravatar.com/avatar/?d=robohash&s=320';
+                })
+            });
+
             // provide("bind[dropzoneSingleRef]", el => {
             //     dropzoneSingleRef.value = el;
             // });
@@ -198,18 +211,7 @@
                 upload.off('demo-single');
             });
 
-            const upload = useUpload();
-            const state = reactive({
-                file: {
-                    image: null
-                },
-                _file: computed(() => {
-                    return upload.file('demo-single');
-                }),
-                _image: computed(() => {
-                    return state.file.image || '//www.gravatar.com/avatar/?d=robohash&s=320';
-                })
-            });
+
 
             return {
                 state,
