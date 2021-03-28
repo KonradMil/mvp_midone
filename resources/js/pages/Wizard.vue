@@ -132,7 +132,8 @@
         setup() {
             const toast = useToast();
             const dropzoneSingleRef = ref();
-
+            console.log(upload);
+            console.log("upload");
             const state = reactive({
                 file: {
                     image: null
