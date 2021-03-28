@@ -108,7 +108,7 @@
 </template>
 
 <script>
-    import { defineComponent, ref, onMounted, provide, onBeforeUnmount, reactive } from "vue";
+    import { defineComponent, ref, onMounted, provide, onBeforeUnmount, reactive, computed } from "vue";
     import DarkModeSwitcher from "../components/dark-mode-switcher/Main.vue";
     import cash from "cash-dom";
     import Dropzone from '../global-components/dropzone/Main'
