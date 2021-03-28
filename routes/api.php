@@ -16,8 +16,8 @@ Route::post('company/search/nip', 'App\Http\Controllers\TerytController@searchRe
 Route::post('company/search/krs', 'App\Http\Controllers\TerytController@searchRegonKrs');
 Route::post('company/create', 'App\Http\Controllers\API\CompanyController@saveCompany');
 Route::post('locations', 'App\Http\Controllers\TestController@locations');
-Route::post('locations/own', 'App\Http\Controllers\TestController@locations');
-Route::post('locations/sync', 'App\Http\Controllers\TestController@locations');
+Route::post('locations/own', 'App\Http\Controllers\TestController@locationsOwn');
+Route::post('locations/sync', 'App\Http\Controllers\TestController@locationSync');
 Route::post('locations/get', 'App\Http\Controllers\TestController@getLocations');
 
 Route::group(['prefix' => 'books', 'middleware' => 'auth:sanctum'], function () {
