@@ -5,7 +5,7 @@
 <script>
 import { defineComponent, watch, computed } from "vue";
 import MarkerClusterer from "@google/markerclusterer";
-import { useStore } from "@/store";
+import { useStore } from "../../store";
 
 export default defineComponent({
   props: {
@@ -590,7 +590,7 @@ export default defineComponent({
         maxWidth: 400
       });
 
-      const location = await require("@/assets/json/location.json");
+      const location = await require("../../json/location.json");
       new MarkerClusterer(
         map,
         location.map(function(markerElem) {
@@ -609,7 +609,7 @@ export default defineComponent({
             map: map,
             position: point,
             icon: {
-              url: require("@/assets/images/map-marker.png")
+              url: require("../../../images/map-marker.png")
             }
           });
 
@@ -638,7 +638,7 @@ export default defineComponent({
               width: 51,
               height: 50,
               textColor: "white",
-              url: require("@/assets/images/map-marker-region.png"),
+              url: require("../../../images/map-marker-region.png"),
               anchor: [0, 0]
             }
           ]

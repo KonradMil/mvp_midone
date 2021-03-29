@@ -221,7 +221,7 @@
                             }
                         })
                         .catch(function (error) {
-                            this.toast.error(error);
+                            toast.error(error);
                         });
                 })
             },
@@ -268,7 +268,7 @@
                             }
                         })
                         .catch(function (error) {
-                            this.toast.error(error);
+                            toast.error(error);
                         });
                 })
             },
@@ -295,7 +295,7 @@
                             }
                         })
                         .catch(function (error) {
-                            this.toast.error(error);
+                            toast.error(error);
                         });
                 })
             }

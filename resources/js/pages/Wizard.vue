@@ -35,14 +35,14 @@
                     :center="{ lat: 53.0510715, lng: 18.6029603 }"
                     :zoom="15"
                 >
-                    <Marker  v-for="marker in markers" :options="{ position: marker }" />
+                    <Marker v-for="marker in markers" :options="{ position: marker }"/>
                 </GoogleMap>
 
             </div>
             <div
                 class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"
             >
-<!--                <div class="font-medium text-base">Profile Settings</div>-->
+                <!--                <div class="font-medium text-base">Profile Settings</div>-->
                 <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                     <div class="col-span-2"></div>
                     <div class="intro-y col-span-4 sm:col-span-4">
@@ -57,39 +57,44 @@
                             />
                         </div>
                         <div class="row" style="margin-top: 20px;">
-                        <label for="input-wizard-2" class="form-label">Nazwisko</label>
-                        <input
-                            id="input-wizard-2"
-                            type="text"
-                            class="form-control"
-                            placeholder="Kowalski"
-                            v-model="lastname"
-                        />
+                            <label for="input-wizard-2" class="form-label">Nazwisko</label>
+                            <input
+                                id="input-wizard-2"
+                                type="text"
+                                class="form-control"
+                                placeholder="Kowalski"
+                                v-model="lastname"
+                            />
                         </div>
                     </div>
                     <div class="intro-y col-span-4 sm:col-span-4">
-
+                        <div class="row" style="width: 100%">
+                            <img class="avatar-preview" v-if="avatar_path != ''" :src="avatar_path"/>
+                        </div>
                         <Dropzone
                             ref-key="dropzoneSingleRef"
                             :options="{
-                  url: '/api/avatar/store',
-                  thumbnailWidth: 150,
-                  maxFilesize: 4,
-                  maxFiles: 1,
-
-                }"
-                            class="dropzone"
-                        >
+                              url: '/api/avatar/store',
+                              thumbnailWidth: 150,
+                              maxFilesize: 4,
+                              maxFiles: 1,
+                              previewTemplate: '<div style=\'display: none\'></div>'
+                            }"
+                            class="dropzone">
                             <div class="text-lg font-medium">
-                               Kliknij lub upuść swój awatar
+                                Kliknij lub upuść swój awatar
                             </div>
                         </Dropzone>
+<!--                        <button v-if="avatar_path != ''" @onClick="avatar_path.value = ''"-->
+<!--                                class="btn btn-danger mr-1 mb-2">-->
+<!--                            <TrashIcon class="w-5 h-5"/>-->
+<!--                        </button>-->
                     </div>
 
                     <div
                         class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5"
                     >
-<!--                        <button class="btn btn-secondary w-24" disabled>Previous</button>-->
+                        <!--                        <button class="btn btn-secondary w-24" disabled>Previous</button>-->
                         <button class="btn btn-primary w-24 ml-2" @click="next">Dalej</button>
                     </div>
                 </div>
@@ -100,13 +105,13 @@
 </template>
 
 <script>
-    import { defineComponent, ref, onMounted, provide } from "vue";
+    import {defineComponent, ref, onMounted, provide} from "vue";
     import DarkModeSwitcher from "../components/dark-mode-switcher/Main.vue";
     import cash from "cash-dom";
     import Dropzone from '../global-components/dropzone/Main'
-    import { useToast } from "vue-toastification";
+    import {useToast} from "vue-toastification";
     import {useStore} from "../store";
-    import { GoogleMap, Marker } from 'vue3-google-map'
+    import {GoogleMap, Marker} from 'vue3-google-map'
 
     const toast = useToast();
     const store = useStore();
@@ -123,29 +128,35 @@
         setup() {
             const toast = useToast();
             const dropzoneSingleRef = ref();
+            const avatar_path = ref();
             provide("bind[dropzoneSingleRef]", el => {
                 dropzoneSingleRef.value = el;
             });
 
             onMounted(() => {
-                    const elDropzoneSingleRef = dropzoneSingleRef.value;
-                    elDropzoneSingleRef.dropzone.on("success", (resp) => {
-
-                    });
-                    elDropzoneSingleRef.dropzone.on("error", () => {
-                        toast.error("Błąd");
-                    });
+                const elDropzoneSingleRef = dropzoneSingleRef.value;
+                console.log(elDropzoneSingleRef);
+                elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                    console.log(resp.xhr.response);
+                    avatar_path.value = '/uploads/' + JSON.parse(resp.xhr.response).payload;
+                });
+                elDropzoneSingleRef.dropzone.on("error", () => {
+                    toast.error("Błąd");
+                });
+                avatar_path.value = '';
                 cash("body")
                     .removeClass("main")
                     .removeClass("error-page")
                     .addClass("login");
             });
+
+            return {avatar_path};
         },
         mounted() {
             console.log(store.state);
-          this.name = store.state.login.user.name;
-          this.lastname = store.state.login.user.lastname;
-          this.getMarkers();
+            this.name = store.state.login.user.name;
+            this.lastname = store.state.login.user.lastname;
+            this.getMarkers();
         },
         data() {
             return {
@@ -153,10 +164,11 @@
                 lastname: "",
                 error: null,
                 markers: [],
-                init:{
+                image_path: '',
+                init: {
                     streetViewControl: true,
                     scaleControl: true,
-                    center: { lat: 54.04924594193164, lng: 18.04924594193164 },
+                    center: {lat: 54.04924594193164, lng: 18.04924594193164},
                     zoom: 9,
                 }
             }
@@ -167,9 +179,9 @@
                     this.$axios.post('api/locations/get')
                         .then(response => {
                             let m = [];
-                          response.data.forEach(function (item) {
+                            response.data.forEach(function (item) {
                                 m.push({lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
-                          });
+                            });
                             console.log(m);
                             this.markers = m;
                         })

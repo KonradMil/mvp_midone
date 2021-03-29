@@ -156,7 +156,7 @@
       >
         <img
           alt="DBR77 Platforma Robotów "
-          :src="require(`../../../images/${$f()[9].photos[0]}`)"
+          :src="'uploads/' + avatar_path"
         />
       </div>
       <div class="dropdown-menu w-56">
@@ -216,6 +216,11 @@ import { defineComponent, ref } from "vue";
 import store, {useStore} from "../../store";
 
 export default defineComponent({
+    data() {
+        return {
+            avatar_path: '',
+        }
+    },
     methods: {
       logout() {
           this.$axios.get('/sanctum/csrf-cookie').then(response => {
@@ -234,7 +239,12 @@ export default defineComponent({
           })
       }
     },
-  setup() {
+    created() {
+        if (window.Laravel.user) {
+            this.avatar_path = window.Laravel.user.avatar;
+        }
+        },
+    setup() {
     const searchDropdown = ref(false);
       const store = useStore();
     const showSearchDropdown = () => {
