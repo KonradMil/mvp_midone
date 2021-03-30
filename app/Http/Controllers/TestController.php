@@ -44,10 +44,10 @@ class TestController extends Controller
                     'locations' => $locations
                 ]
             ]);
-        }
-        Log::error('RESPONSE SPTECH');
-        Log::error($response->getBody()->getContents());
 
+            Log::error('RESPONSE SPTECH');
+            Log::error($response->getBody()->getContents());
+        }
 
         return response()->json('ok');
 
@@ -99,7 +99,6 @@ class TestController extends Controller
             Log::error($response->getBody()->getContents());
         }
 
-
         return response()->json('ok');
     }
 
@@ -137,9 +136,10 @@ class TestController extends Controller
                     'locations' => $locations
                 ]
             ]);
+            Log::error('RESPONSE SPTECH');
+            Log::error($response->getBody()->getContents());
         }
-        Log::error('RESPONSE SPTECH');
-        Log::error($response->getBody()->getContents());
+
 
 
         return response()->json('ok');
