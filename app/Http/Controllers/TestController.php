@@ -17,29 +17,34 @@ class TestController extends Controller
         $locations = [];
         foreach ($inp['locations'] as $i) {
             Log::error($i);
-            $marker = new MapMarker();
-            $marker->lng = $i['longitude'];
-            $marker->lat = $i['latitude'];
-            $marker->timestamp = $i['time'];
-            $marker->save();
+            $check = MapMarker::where('lng', '=', $i['longitude'])->where('lat', '=', $i['latitude'])->where('timestamp', '=', $i['time'])->first();
+            if ($check == null) {
+                $marker = new MapMarker();
+                $marker->lng = $i['longitude'];
+                $marker->lat = $i['latitude'];
+                $marker->timestamp = $i['time'];
+                $marker->save();
 
-            array_push($locations, ['latitude' => $i['latitude'], 'longitude' => $i['longitude'], 'time' => $i['time']]);
+                array_push($locations, ['latitude' => $i['latitude'], 'longitude' => $i['longitude'], 'time' => $i['time']]);
+            }
         }
 
         $client = new Client();
         Log::error(json_encode(['json' => [
             'locations' => $locations
         ]]));
-        $response = $client->request('POST', 'https://dev.raily.sptech.pl/api/app/locations', [
-            'headers' => [
-                'Accept'     => 'application/json',
-                'Content-Type'     => 'application/json',
-                'Authorization'       => 'Bearer ' . $inp['locations'][0]['token']
-            ],
-            'json' => [
-                'locations' => $locations
-            ]
-        ]);
+        if(!empty($locations)) {
+            $response = $client->request('POST', 'https://dev.raily.sptech.pl/api/app/locations', [
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Bearer ' . $inp['locations'][0]['token']
+                ],
+                'json' => [
+                    'locations' => $locations
+                ]
+            ]);
+        }
         Log::error('RESPONSE SPTECH');
         Log::error($response->getBody()->getContents());
 
@@ -56,41 +61,43 @@ class TestController extends Controller
 
     public function locationsOwn(Request $request)
     {
-//        $inp = $request->input();
-//        Log::error('Location OWN came');
-//        Log::error($inp);
-//        return response()->json('ok');
         $inp = $request->input();
         Log::error('Location came');
         Log::error($inp);
         $locations = [];
         foreach ($inp as $i) {
             Log::error($i);
-            $marker = new MapMarker();
-            $marker->lng = $i['longitude'];
-            $marker->lat = $i['latitude'];
-            $marker->timestamp = $i['time'];
-            $marker->save();
+            $check = MapMarker::where('lng', '=', $i['longitude'])->where('lat', '=', $i['latitude'])->where('timestamp', '=', $i['time'])->first();
+            if($check == null) {
+                $marker = new MapMarker();
+                $marker->lng = $i['longitude'];
+                $marker->lat = $i['latitude'];
+                $marker->timestamp = $i['time'];
+                $marker->save();
 
-            array_push($locations, ['latitude' => $i['latitude'], 'longitude' => $i['longitude'], 'time' => $i['time']]);
+                array_push($locations, ['latitude' => $i['latitude'], 'longitude' => $i['longitude'], 'time' => $i['time']]);
+            }
         }
 
         $client = new Client();
         Log::error(json_encode(['json' => [
             'locations' => $locations
         ]]));
-        $response = $client->request('POST', 'https://dev.raily.sptech.pl/api/app/locations', [
-            'headers' => [
-                'Accept'     => 'application/json',
-                'Content-Type'     => 'application/json',
-                'Authorization'       => 'Bearer ' . $inp[0]['token']
-            ],
-            'json' => [
-                'locations' => $locations
-            ]
-        ]);
-        Log::error('RESPONSE SPTECH');
-        Log::error($response->getBody()->getContents());
+
+        if(!empty($locations)) {
+            $response = $client->request('POST', 'https://dev.raily.sptech.pl/api/app/locations', [
+                'headers' => [
+                    'Accept'     => 'application/json',
+                    'Content-Type'     => 'application/json',
+                    'Authorization'       => 'Bearer ' . $inp[0]['token']
+                ],
+                'json' => [
+                    'locations' => $locations
+                ]
+            ]);
+            Log::error('RESPONSE SPTECH');
+            Log::error($response->getBody()->getContents());
+        }
 
 
         return response()->json('ok');
@@ -102,30 +109,35 @@ class TestController extends Controller
         Log::error($inp);
         $locations = [];
         foreach ($inp as $i) {
-            Log::error($i);
-            $marker = new MapMarker();
-            $marker->lng = $i['longitude'];
-            $marker->lat = $i['latitude'];
-            $marker->timestamp = $i['time'];
-            $marker->save();
+            $check = MapMarker::where('lng', '=', $i['longitude'])->where('lat', '=', $i['latitude'])->where('timestamp', '=', $i['time'])->first();
+            if($check == null) {
+                Log::error($i);
+                $marker = new MapMarker();
+                $marker->lng = $i['longitude'];
+                $marker->lat = $i['latitude'];
+                $marker->timestamp = $i['time'];
+                $marker->save();
 
-            array_push($locations, ['latitude' => $i['latitude'], 'longitude' => $i['longitude'], 'time' => $i['time']]);
+                array_push($locations, ['latitude' => $i['latitude'], 'longitude' => $i['longitude'], 'time' => $i['time']]);
+            }
         }
 
         $client = new Client();
         Log::error(json_encode(['json' => [
             'locations' => $locations
         ]]));
-        $response = $client->request('POST', 'https://dev.raily.sptech.pl/api/app/locations', [
-            'headers' => [
-                'Accept'     => 'application/json',
-                'Content-Type'     => 'application/json',
-                'Authorization'       => 'Bearer ' . $inp[0]['token']
-            ],
-            'json' => [
-                'locations' => $locations
-            ]
-        ]);
+        if(!empty($locations)) {
+            $response = $client->request('POST', 'https://dev.raily.sptech.pl/api/app/locations', [
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Bearer ' . $inp[0]['token']
+                ],
+                'json' => [
+                    'locations' => $locations
+                ]
+            ]);
+        }
         Log::error('RESPONSE SPTECH');
         Log::error($response->getBody()->getContents());
 
