@@ -38,7 +38,7 @@ class TestController extends Controller
                 'headers' => [
                     'Accept' => 'application/json',
                     'Content-Type' => 'application/json',
-                    'Authorization' => 'Bearer ' . $inp['locations'][0]['token']
+                    'Authorization' => 'Bearer ' . $inp['locations'][(count($inp)-1)]['token']
                 ],
                 'json' => [
                     'locations' => $locations
@@ -89,7 +89,7 @@ class TestController extends Controller
                 'headers' => [
                     'Accept'     => 'application/json',
                     'Content-Type'     => 'application/json',
-                    'Authorization'       => 'Bearer ' . $inp[0]['token']
+                    'Authorization'       => 'Bearer ' . $inp[(count($inp)-1)]['token']
                 ],
                 'json' => [
                     'locations' => $locations
@@ -125,12 +125,13 @@ class TestController extends Controller
         Log::error(json_encode(['json' => [
             'locations' => $locations
         ]]));
+
         if(!empty($locations)) {
             $response = $client->request('POST', 'https://dev.raily.sptech.pl/api/app/locations', [
                 'headers' => [
                     'Accept' => 'application/json',
                     'Content-Type' => 'application/json',
-                    'Authorization' => 'Bearer ' . $inp[0]['token']
+                    'Authorization' => 'Bearer ' . $inp[(count($inp)-1)]['token']
                 ],
                 'json' => [
                     'locations' => $locations
@@ -139,8 +140,6 @@ class TestController extends Controller
             Log::error('RESPONSE SPTECH');
             Log::error($response->getBody()->getContents());
         }
-
-
 
         return response()->json('ok');
     }
