@@ -1,7 +1,7 @@
 <template>
     <div class="flex fixed">
         <div class="flex-1">
-            <LoadingIcon></LoadingIcon>
+            <TrashIcon class="w-5 h-5"/>
         </div>
     </div>
 </template>
