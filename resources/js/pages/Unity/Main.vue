@@ -1,5 +1,5 @@
 <template>
-    <Studio hideFooter="true" :src="unity_path" :width="window_width" unityLoader="/UnityLoader.js" ref="gameWindow"/>
+    <Studio @onload="initialize" hideFooter="true" :src="unity_path" :width="window_width" unityLoader="/UnityLoader.js" ref="gameWindow"/>
 </template>
 
 <script>
@@ -15,10 +15,16 @@ export default {
     components: {Studio},
     setup(props, {emit}) {
         const bridge = ref();
+        const gameWindow = ref(null);
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const unity_path = ref('/s3/unity/AssemBrot19_03.json');
         const window_width = ref('100%');
+
+        const initalize = async () => {
+            gameWindow.message('NetworkBridge', 'SetHangarApperance', 0);
+            gameWindow.message('NetworkBridge', 'UnlockUnityInput');
+        }
 
         onBeforeMount(() => {
             bridge.value = UnityBridge();
@@ -32,7 +38,9 @@ export default {
         return {
             unity_path,
             window_width,
-            bridge
+            bridge,
+            gameWindow,
+            initalize
         }
     }
 }

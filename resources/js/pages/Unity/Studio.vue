@@ -52,7 +52,7 @@ export default {
                 script.setAttribute('defer', '')
                 document.body.appendChild(script)
                 script.onload = () => {
-                    emitter.emit('onload', { a: 'b' })
+                    emitter.emit('onload', { done:1 })
                 }
             }
         })
