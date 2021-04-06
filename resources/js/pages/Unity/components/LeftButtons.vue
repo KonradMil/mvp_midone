@@ -1,5 +1,5 @@
 <template>
-    <div class="flex fixed">
+    <div class="flex fixed h-full">
         <div class="flex-1">
             <TrashIcon class="w-5 h-5"/>
         </div>
