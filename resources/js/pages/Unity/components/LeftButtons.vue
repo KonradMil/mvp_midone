@@ -1,14 +1,16 @@
 <template>
-    <div class="flex fixed h-full">
+    <div class="flex fixed h-full z-50">
         <div class="flex-1">
-            <TrashIcon class="w-5 h-5"/>
+            <UnityButton tooltip="cos" alttext="alt_text" path="/builder_icons/chair_simple.png" class="w-10 h-10"/>
         </div>
     </div>
 </template>
 
 <script>
+import UnityButton from "./UnityButton";
 export default {
-    name: "LeftButtons"
+    name: "LeftButtons",
+    components: {UnityButton}
 }
 </script>
 

@@ -40,7 +40,7 @@ class TeamsController extends Controller
         $team->owner_id = Auth::user()->id;
         $team->name = $name;
         $team->save();
-        dd($team);
+//        dd($team);
         Auth::user()->attachTeam($team);
 
         return response()->json([
