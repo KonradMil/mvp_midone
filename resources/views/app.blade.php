@@ -12,7 +12,8 @@
     <script>
         window.Laravel = {!!json_encode([
                'isLoggedin' => true,
-               'user' => Auth::user()
+               'user' => Auth::user(),
+               'notifications' => Auth::user()->notifications
            ])!!}
     </script>
 @else

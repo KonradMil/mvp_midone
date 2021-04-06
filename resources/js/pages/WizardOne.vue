@@ -170,9 +170,8 @@
         setup() {
             onMounted(() => {
                 cash("body")
-                    .removeClass("main")
                     .removeClass("error-page")
-                    .addClass("login");
+
             });
         },
         data() {

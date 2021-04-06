@@ -8,7 +8,10 @@ import Wizard from "../pages/Wizard";
 import Profile from "../pages/Wizard";
 import WizardOne from "../pages/WizardOne";
 import WizardTwo from "../pages/WizardTwo";
-
+import Challenges from "../pages/Challenges/Main";
+import AddChallenge from "../pages/Challenges/New";
+import Teams from "../pages/Teams/Teams";
+import NotFound from "../pages/NotFound";
 
 export const routes = [
     {
@@ -22,9 +25,30 @@ export const routes = [
         component: Register
     },
     {
+        name: 'acceptInvite',
+        path: '/teams/user/accept_invite/:token',
+        component: Register,
+        props: true
+    },
+    {
         path: "/",
         component: SideMenu,
         children: [
+            {
+                name: 'addChallenge',
+                path: '/challenge/add',
+                component: AddChallenge
+            },
+            {
+                name: 'challenges',
+                path: '/challenges',
+                component: Challenges
+            },
+            {
+                name: 'teams',
+                path: '/teams',
+                component: Teams
+            },
             {
                 name: 'wizard',
                 path: '/kreator',
@@ -51,7 +75,11 @@ export const routes = [
             },
 
         ]
-    }
+    },
+    {
+        path: "/:catchAll(.*)",
+        component: NotFound,
+    },
 ];
 
 const router = createRouter({

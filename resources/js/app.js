@@ -11,6 +11,9 @@ import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 import messages from './locales/messages.json';
 import { createI18n } from 'vue-i18n'
+import dayjs from "dayjs";
+import VueFinalModal from 'vue-final-modal'
+import Echo from 'laravel-echo';
 
 
 const options = {
@@ -20,16 +23,27 @@ const i18n = createI18n({
     locale: 'pl', // set locale
     fallbackLocale: 'en', // set fallback locale
     messages, // set locale messages
-    // If you need to specify other options, you can set other options
-    // ...
 })
 require('./bootstrap')
 
 
+window.Pusher = require('pusher-js');
+
+window.Echo = new Echo({
+    authEndpoint: '/api/broadcast/auth',
+    broadcaster: 'pusher',
+    key: '04989c27fdac187aad41',
+    cluster: 'eu',
+    wsHost: window.location.hostname,
+    wsPort: 6001,
+    forceTLS: false,
+    disableStats: true,
+});
+
 const app = createApp(App)
 globalComponents(app);
 utils(app);
-
+app.config.globalProperties.$dayjs = dayjs;
 app.config.globalProperties.$axios = axios;
 app.config.globalProperties.cash = cash;
 router.beforeEach((to, from, next) => {
@@ -49,6 +63,7 @@ router.beforeEach((to, from, next) => {
         next();
     }
 })
+app.use(VueFinalModal)
 app.use(router)
 app.use(store)
 app.use(Toast, options);

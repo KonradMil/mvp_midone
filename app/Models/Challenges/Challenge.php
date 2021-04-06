@@ -1,19 +1,25 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Challenges;
 
+use App\Models\File;
+use App\Models\Solutions\Solution;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
+use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Spatie\Tags\HasTags;
+use BeyondCode\Comments\Traits\HasComments;
 
-
-class Challenge extends Model
+class Challenge extends Model implements ReactableInterface
 {
+    use Reactable, HasTags, HasComments;
+
     public $table = 'challenges';
     protected $fillable = [
-        'type', 'detail_weight', 'pick_quality',
-        'detail_material', 'detail_size', 'detail_pick', 'detail_position', 'detail_range',
-        'detail_destination', 'number_of_lines', 'cycle_time', 'work_shifts',
+        'type',
         'name', 'solution_deadline', 'offer_deadline', 'status', 'stage', 'save_json', 'screenshot_path',
-        'client_id', 'author_id', 'financial_before_id', 'description'
+        'client_id', 'author_id', 'financial_before_id', 'description', 'allowed_publishing'
     ];
 
 

@@ -154,7 +154,12 @@
                                         user
                                     })
                                     console.log(store);
-                                    window.location.replace('/kreator');
+                                    if(user.name != undefined || user.name != '') {
+                                        window.location.replace('/dashboard');
+                                    } else {
+                                        window.location.replace('/kreator');
+                                    }
+
                                     // this.$router.go('/kreator');
                                 } else {
                                     toast.error(response.data.message);

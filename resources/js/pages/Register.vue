@@ -265,8 +265,11 @@
             DarkModeSwitcher,
             PasswordMeter,
         },
-        setup() { onMounted(() => {
-            const store = useStore();
+        props: {
+          token: String
+        },
+        setup(props, {emit}) { onMounted(() => {
+
 
             cash("body")
                 .removeClass("main")
@@ -344,7 +347,7 @@
                 save,
                 password,
                 onScore,
-                score
+                score,
             };
         },
         data() {
@@ -357,10 +360,11 @@
                 this.save();
                 console.log('hre');
                 axios.get('/sanctum/csrf-cookie').then(response => {
-                    axios.post('api/register', {
+                    axios.post('/api/register', {
                         type: this.formData.type,
                         email: this.formData.email,
-                        password: this.formData.password
+                        password: this.formData.password,
+                        token: this.token
                     })
                         .then(response => {
                             if (response.data.success) {

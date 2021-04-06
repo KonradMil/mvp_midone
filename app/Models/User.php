@@ -2,14 +2,25 @@
 
 namespace App\Models;
 
+use App\Models\Challenges\Challenge;
+use App\Models\Solutions\Solution;
+use BeyondCode\Comments\Contracts\Commentator;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
+use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
+use Mpociot\Teamwork\Traits\UserHasTeams;
 
-class User extends Authenticatable
+class User extends Authenticatable implements ReacterableInterface, Commentator
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Reacterable, UserHasTeams;
+
+    public function needsCommentApproval($model): bool
+    {
+        return false;
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -27,7 +38,8 @@ class User extends Authenticatable
         'avatar',
         'privacy_policy',
         'pricing',
-        'terms'
+        'terms',
+        'company_id'
     ];
 
     /**
@@ -48,4 +60,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function challenges()
+    {
+        return $this->belongsTo(Challenge::class, 'author_id');
+    }
+
+    public function solutions()
+    {
+        return $this->belongsTo(Solution::class, 'author_id');
+    }
+
+    public function own_company() {
+        return $this->hasOne(Company::class, 'author_id');
+    }
+
+    public function companies() {
+        return $this->belongsToMany(Company::class, 'user_companies')->withTimestamps();
+    }
 }

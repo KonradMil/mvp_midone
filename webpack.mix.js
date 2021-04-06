@@ -23,7 +23,7 @@ mix.webpackConfig(webpack => {
                             loader: "file-loader",
                         }
                     ]
-                }
+                },
             ]
         },
         plugins: [

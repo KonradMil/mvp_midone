@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Mpociot\Teamwork\Facades\Teamwork;
 
 class UserController extends Controller
 {
@@ -74,6 +75,15 @@ class UserController extends Controller
             $message = $ex->getMessage();
         }
         Auth::login($user);
+
+        if(!empty($request->token)){
+            $invite = Teamwork::getInviteFromAcceptToken( $request->token );
+
+            if( $invite ) // valid token found
+            {
+                Teamwork::acceptInvite( $invite );
+            }
+        }
         // response
         $response = [
             'success' => $success,
@@ -131,4 +141,6 @@ class UserController extends Controller
         ];
         return response()->json($response);
     }
+
+
 }

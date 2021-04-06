@@ -11,13 +11,13 @@ class S3Controller extends Controller
     public function reRoute(Request $request, $path)
     {
 //        dd(Storage::disk('s3')->get('videos/Roboty w branzy spozywczej - JBB Baldyga.mp4'));
-        Log::info($path);
+//        dd($path);
         if(Storage::disk('s3')->exists($path)){
 
         } else {
             if (strpos($path, 'workshop') !== false) {
                 $path = 'workshop/' .$path;
-            } elseif (strpos($path, '_images') !== false) {
+            } elseif ((strpos($path, '_images') !== false) || (strpos($path, 'screenshots') !== false)) {
                 $path = $path;
             }  else {
                     $path = 'unity/' .$path;

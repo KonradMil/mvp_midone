@@ -33,6 +33,10 @@ class TerytController extends Controller
 
         $oApi = new Api($oConfig);
         $resp = $oApi->searchByKrs($ss);
-        return resp()->data(compact('resp'));
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $resp
+        ]);
     }
 }

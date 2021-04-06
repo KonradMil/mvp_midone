@@ -3,14 +3,20 @@ const state = () => {
         menu: [
             {
                 icon: "HomeIcon",
-                pageName: "ashboard",
+                pageName: "dashboard",
                 title: "Dashboard",
             },
             {
                 icon: "BoxIcon",
-                pageName: "challenges",
+                pageName: "#",
                 title: "Wyzwania",
                 subMenu: [
+                    {
+                        icon: "",
+                        pageName: "challenges",
+                        title: "Wszystkie",
+                        ignore: true
+                    },
                     {
                         icon: "",
                         pageName: "challenges-active",
@@ -31,6 +37,7 @@ const state = () => {
                     }
                 ]
             },
+
             {
                 icon: "BoxIcon",
                 pageName: "solutions",
@@ -93,6 +100,11 @@ const state = () => {
                         ignore: true
                     },
                 ]
+            },
+            {
+                icon: "HomeIcon",
+                pageName: "teams",
+                title: "Zespoły",
             },
             {
                 icon: "InboxIcon",

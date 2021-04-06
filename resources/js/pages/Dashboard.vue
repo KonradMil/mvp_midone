@@ -618,52 +618,52 @@
                     <!-- END: Weekly Best Sellers -->
 
                     <!-- BEGIN: Transactions -->
-<!--                    <div-->
-<!--                        class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-3"-->
-<!--                    >-->
-<!--                        <div class="intro-x flex items-center h-10">-->
-<!--                            <h2 class="text-lg font-medium truncate mr-5">Transactions</h2>-->
-<!--                        </div>-->
-<!--                        <div class="mt-5">-->
-<!--                            <div-->
-<!--                                v-for="(faker, fakerKey) in $_.take($f(), 5)"-->
-<!--                                :key="fakerKey"-->
-<!--                                class="intro-x"-->
-<!--                            >-->
-<!--                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">-->
-<!--                                    <div-->
-<!--                                        class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"-->
-<!--                                    >-->
-<!--                                        <img-->
-<!--                                            alt="Icewall Tailwind HTML Admin Template"-->
-<!--                                            :src="'/uploads/1616990649.jpg'"-->
-<!--                                        />-->
-<!--                                    </div>-->
-<!--                                    <div class="ml-4 mr-auto">-->
-<!--                                        <div class="font-medium">-->
-<!--                                            {{ faker.users[0].name }}-->
-<!--                                        </div>-->
-<!--                                        <div class="text-gray-600 text-xs mt-0.5">-->
-<!--                                            {{ faker.dates[0] }}-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div-->
-<!--                                        :class="{-->
-<!--                      'text-theme-9': faker.trueFalse[0],-->
-<!--                      'text-theme-6': !faker.trueFalse[0]-->
-<!--                    }"-->
-<!--                                    >-->
-<!--                                        {{ faker.trueFalse[0] ? "+" : "-" }}${{ faker.totals[0] }}-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <a-->
-<!--                                href=""-->
-<!--                                class="intro-x w-full block text-center rounded-md py-3 border border-dotted border-theme-15 dark:border-dark-5 text-theme-16 dark:text-gray-600"-->
-<!--                            >View More</a-->
-<!--                            >-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <div
+                        class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-3"
+                    >
+                        <div class="intro-x flex items-center h-10">
+                            <h2 class="text-lg font-medium truncate mr-5">Transactions</h2>
+                        </div>
+                        <div class="mt-5">
+                            <div
+                                v-for="(faker, fakerKey) in $_.take($f(), 5)"
+                                :key="fakerKey"
+                                class="intro-x"
+                            >
+                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
+                                    <div
+                                        class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"
+                                    >
+                                        <img
+                                            alt="Icewall Tailwind HTML Admin Template"
+                                            :src="'/uploads/1616990649.jpg'"
+                                        />
+                                    </div>
+                                    <div class="ml-4 mr-auto">
+                                        <div class="font-medium">
+                                            {{ faker.users[0].name }}
+                                        </div>
+                                        <div class="text-gray-600 text-xs mt-0.5">
+                                            {{ faker.dates[0] }}
+                                        </div>
+                                    </div>
+                                    <div
+                                        :class="{
+                      'text-theme-9': faker.trueFalse[0],
+                      'text-theme-6': !faker.trueFalse[0]
+                    }"
+                                    >
+                                        {{ faker.trueFalse[0] ? "+" : "-" }}${{ faker.totals[0] }}
+                                    </div>
+                                </div>
+                            </div>
+                            <a
+                                href=""
+                                class="intro-x w-full block text-center rounded-md py-3 border border-dotted border-theme-15 dark:border-dark-5 text-theme-16 dark:text-gray-600"
+                            >View More</a
+                            >
+                        </div>
+                    </div>
                     <!-- END: Transactions -->
 
 

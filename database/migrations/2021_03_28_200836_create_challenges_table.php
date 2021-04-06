@@ -18,17 +18,6 @@ class CreateChallengesTable extends Migration
             $table->integer('type');
             $table->string('name')->nullable();
             $table->string('description')->nullable();
-            $table->integer('detail_weight')->nullable();
-            $table->integer('pick_quality');
-            $table->integer('detail_material');
-            $table->integer('detail_size');
-            $table->integer('detail_pick');
-            $table->integer('detail_position');
-            $table->integer('detail_range');
-            $table->integer('detail_destination');
-            $table->integer('number_of_lines');
-            $table->integer('cycle_time');
-            $table->integer('work_shifts');
             $table->timestamp('solution_deadline');
             $table->timestamp('offer_deadline');
             $table->integer('status');
