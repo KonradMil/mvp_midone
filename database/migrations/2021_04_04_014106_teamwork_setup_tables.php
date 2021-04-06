@@ -12,7 +12,7 @@ class TeamworkSetupTables extends Migration
      */
     public function up()
     {
-        Schema::table('users_table', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->integer('current_team_id')->unsigned()->nullable();
         });
 
@@ -30,7 +30,7 @@ class TeamworkSetupTables extends Migration
 
             $table->foreign('user_id')
                 ->references(\Config::get('teamwork.user_foreign_key'))
-                ->on('users_table')
+                ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
@@ -63,7 +63,7 @@ class TeamworkSetupTables extends Migration
      */
     public function down()
     {
-        Schema::table('users_table', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('current_team_id');
         });
 
