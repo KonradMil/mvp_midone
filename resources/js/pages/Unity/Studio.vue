@@ -16,15 +16,12 @@
 
 <script>
 import {onMounted, onBeforeMount, ref, getCurrentInstance} from "vue";
-// import mitt from 'mitt'
-// const emitter = mitt();
-import WindowWatcher from "../../events/WindowWatcher";
-const ww = WindowWatcher();
+
 export default {
     props: ['src', 'module', 'width', 'height', 'externalProgress', 'unityLoader', 'hideFooter'],
     name: 'Studio',
     setup(props,{emit}) {
-        const app = getCurrentInstance()
+        const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const containerId = ref();
         const gameInstance = ref();
@@ -92,8 +89,6 @@ export default {
 
 
         onMounted(()=> {
-            console.log("ww");
-            console.log(ww);
             emitter.on('onload', e =>  instantiate() )
         });
 
