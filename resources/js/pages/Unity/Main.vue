@@ -1,4 +1,5 @@
 <template>
+    <LeftButtons></LeftButtons>
     <Studio hideFooter="true" :src="unity_path" :width="window_width" unityLoader="/UnityLoader.js" ref="gameWindow"/>
 </template>
 
@@ -8,12 +9,13 @@ import {getCurrentInstance, onBeforeMount, onMounted, ref} from "vue";
 import WindowWatcher from "../../events/WindowWatcher";
 import UnityBridge from "./bridge";
 import cash from "cash-dom";
+import LeftButtons from "./components/LeftButtons";
 
 const ww = WindowWatcher();
 
 export default {
     name: "Main",
-    components: {Studio},
+    components: {LeftButtons, Studio},
     setup(props, {emit}) {
         //GLOBAL
         const app = getCurrentInstance();
