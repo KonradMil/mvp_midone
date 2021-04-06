@@ -22,7 +22,8 @@ export default {
         const window_width = ref('100%');
 
         const initalize = async () => {
-            gameWindow.message('NetworkBridge', 'SetHangarApperance', 0);
+            console.log("initializeMe");
+            gameWindow.message('NetworkBridge', 'SetHangarApperance', 1);
             gameWindow.message('NetworkBridge', 'UnlockUnityInput');
         }
 
