@@ -29,7 +29,7 @@ class TeamworkSetupTables extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')
-                ->references(\Config::get('teamwork.user_foreign_key'))
+                ->references('id')
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
