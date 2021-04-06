@@ -57,6 +57,7 @@ export default {
         return {
             unity_path,
             window_width,
+            gameWindow
         }
     }
 }
