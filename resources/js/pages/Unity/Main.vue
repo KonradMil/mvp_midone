@@ -7,6 +7,7 @@ import Studio from "./Studio";
 import {getCurrentInstance, onBeforeMount, onMounted, ref} from "vue";
 import WindowWatcher from "../../events/WindowWatcher";
 import UnityBridge from "./bridge";
+import cash from "cash-dom";
 
 const ww = WindowWatcher();
 
@@ -27,7 +28,7 @@ export default {
                 console.log(gameWindow);
                 gameWindow.value.message('NetworkBridge', 'SetHangarApperance', 1);
                 gameWindow.value.message('NetworkBridge', 'UnlockUnityInput');
-            }, 8000);
+            }, 2000);
 
         }
         emitter.on('onInitialized', e =>  initalize() )
@@ -38,6 +39,10 @@ export default {
         onMounted(()=> {
             console.log("ww");
             console.log(ww);
+            cash("body")
+                .removeClass("main")
+                .removeClass("error-page")
+                .addClass("p0");
         });
 
         return {
