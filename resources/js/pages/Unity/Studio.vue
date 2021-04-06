@@ -17,8 +17,8 @@
 <script>
 import {onMounted, onBeforeMount, ref} from "vue";
 import mitt from 'mitt'
-import WindowWatcher from "../../events/WindowWatcher";
 const emitter = mitt();
+import WindowWatcher from "../../events/WindowWatcher";
 const ww = WindowWatcher();
 export default {
     props: ['src', 'module', 'width', 'height', 'externalProgress', 'unityLoader', 'hideFooter'],

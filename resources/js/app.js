@@ -14,7 +14,9 @@ import { createI18n } from 'vue-i18n'
 import dayjs from "dayjs";
 import VueFinalModal from 'vue-final-modal'
 import Echo from 'laravel-echo';
+import mitt from 'mitt'
 
+const emitter = mitt()
 const options = {
 
 };
@@ -45,6 +47,7 @@ utils(app);
 app.config.globalProperties.$dayjs = dayjs;
 app.config.globalProperties.$axios = axios;
 app.config.globalProperties.cash = cash;
+app.config.globalProperties.emitter = emitter;
 
 router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
