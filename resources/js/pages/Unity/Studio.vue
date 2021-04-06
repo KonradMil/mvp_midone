@@ -76,7 +76,12 @@ export default {
                 params.onProgress = props.externalProgress
             } else {
                 params.onProgress = ((gameInstance, progresss) => {
-                    loaded.value = (progresss === 1)
+                     if(progresss === 1) {
+                        loaded.value = true;
+                         emitter.emit('onInitialized', { loaded: true });
+                    } else {
+                         loaded.value = false;
+                     }
                     progress.value = progresss
                 })
             }

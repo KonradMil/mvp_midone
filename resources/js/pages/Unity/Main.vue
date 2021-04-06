@@ -1,5 +1,5 @@
 <template>
-    <Studio @onload="initialize" hideFooter="true" :src="unity_path" :width="window_width" unityLoader="/UnityLoader.js" ref="gameWindow"/>
+    <Studio hideFooter="true" :src="unity_path" :width="window_width" unityLoader="/UnityLoader.js" ref="gameWindow"/>
 </template>
 
 <script>
@@ -26,7 +26,7 @@ export default {
             gameWindow.message('NetworkBridge', 'SetHangarApperance', 1);
             gameWindow.message('NetworkBridge', 'UnlockUnityInput');
         }
-        emitter.on('onload', e =>  initalize() )
+        emitter.on('onInitialized', e =>  initalize() )
         onBeforeMount(() => {
             bridge.value = UnityBridge();
         });
