@@ -1,5 +1,5 @@
 <template>
-    <LeftButtons></LeftButtons>
+    <LeftButtons :icons="icons"></LeftButtons>
     <Studio hideFooter="true" :src="unity_path" :width="window_width" unityLoader="/UnityLoader.js" ref="gameWindow"/>
 </template>
 
@@ -26,6 +26,7 @@ export default {
         //EXTERNAL
         const unity_path = ref('/s3/unity/AssemBrot19_03.json');
         const window_width = ref('100%');
+        const icons = require("../../json/unity_buttons.json");
 
         //RUNS WHEN UNITY IS READY
         emitter.on('onInitialized', e =>  initalize() )
@@ -57,7 +58,8 @@ export default {
         return {
             unity_path,
             window_width,
-            gameWindow
+            gameWindow,
+            icons
         }
     }
 }
