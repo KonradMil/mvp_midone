@@ -26,7 +26,7 @@ export default {
             gameWindow.message('NetworkBridge', 'SetHangarApperance', 1);
             gameWindow.message('NetworkBridge', 'UnlockUnityInput');
         }
-
+        emitter.on('onload', e =>  initalize() )
         onBeforeMount(() => {
             bridge.value = UnityBridge();
         });

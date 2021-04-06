@@ -8,9 +8,9 @@
                 </div>
             </div>
         </div>
-        <div class="footer" v-if="hideFooter !== true">
-            <a class="fullscreen" @click.prevent="setFullscreen">Fullscreen</a>
-        </div>
+<!--        <div class="footer" v-if="hideFooter !== true">-->
+<!--            <a class="fullscreen" @click.prevent="setFullscreen">Fullscreen</a>-->
+<!--        </div>-->
     </div>
 </template>
 
