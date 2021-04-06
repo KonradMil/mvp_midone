@@ -12,6 +12,7 @@ import Challenges from "../pages/Challenges/Main";
 import AddChallenge from "../pages/Challenges/New";
 import Teams from "../pages/Teams/Teams";
 import NotFound from "../pages/NotFound";
+import Main from "../pages/Unity/Main";
 
 export const routes = [
     {
@@ -28,6 +29,12 @@ export const routes = [
         name: 'acceptInvite',
         path: '/teams/user/accept_invite/:token',
         component: Register,
+        props: true
+    },
+    {
+        name: 'studio',
+        path: '/studio',
+        component: Main,
         props: true
     },
     {
