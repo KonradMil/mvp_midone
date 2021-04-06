@@ -25,8 +25,8 @@ export default {
             console.log("initializeMe");
             setTimeout(function () {
                 console.log(gameWindow);
-                gameWindow.message('NetworkBridge', 'SetHangarApperance', 1);
-                gameWindow.message('NetworkBridge', 'UnlockUnityInput');
+                gameWindow.value.message('NetworkBridge', 'SetHangarApperance', 1);
+                gameWindow.value.message('NetworkBridge', 'UnlockUnityInput');
             }, 8000);
 
         }
