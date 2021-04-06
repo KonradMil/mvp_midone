@@ -1,5 +1,5 @@
 <template>
-    <div class="flex">
+    <div class="flex fixed">
         <div class="flex-1">
             <LoadingIcon></LoadingIcon>
         </div>

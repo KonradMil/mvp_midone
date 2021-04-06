@@ -36,7 +36,7 @@ export default {
                 console.log(gameWindow);
                 gameWindow.value.message('NetworkBridge', 'SetHangarApperance', 1);
                 gameWindow.value.message('NetworkBridge', 'UnlockUnityInput');
-            }, 2000);
+            }, 4000);
         }
 
 
