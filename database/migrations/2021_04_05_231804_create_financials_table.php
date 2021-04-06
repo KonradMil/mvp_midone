@@ -26,7 +26,7 @@ class CreateFinancialsTable extends Migration
             $table->integer('number_of_operators')->default(2);
             $table->integer('operator_cost')->default(4500);
             $table->integer('absence')->default(12);
-            $table->integer('challenge_id');
+            $table->integer('challenge_id')->nullable();;
             $table->integer('cycle_time')->nullable();
             $table->timestamps();
         });
