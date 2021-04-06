@@ -37,8 +37,8 @@ export default {
             if (param === null) {
                 param = ''
             }
-            if (gameInstance !== null){
-                gameInstance.SendMessage(gameObject, method, param)
+            if (gameInstance.value !== null){
+                gameInstance.value.SendMessage(gameObject, method, param)
             } else {
                 console.warn('vue-unity-webgl: you\'ve sent a message to the Unity content, but it wasn\t instantiated yet.')
             }
