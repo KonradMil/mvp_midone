@@ -15,7 +15,6 @@ import dayjs from "dayjs";
 import VueFinalModal from 'vue-final-modal'
 import Echo from 'laravel-echo';
 
-
 const options = {
 
 };
@@ -46,6 +45,7 @@ utils(app);
 app.config.globalProperties.$dayjs = dayjs;
 app.config.globalProperties.$axios = axios;
 app.config.globalProperties.cash = cash;
+
 router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
     const publicPages = ['/login', '/register'];

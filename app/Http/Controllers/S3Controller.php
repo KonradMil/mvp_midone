@@ -41,7 +41,7 @@ class S3Controller extends Controller
 
         $fs = Storage::disk('s3')->getDriver();
         $stream = $fs->readStream($path);
-
+        Log::error($headers);
         return response()->stream(
             function() use($stream) {
                 fpassthru($stream);
