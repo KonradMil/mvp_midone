@@ -16,8 +16,8 @@
 
 <script>
 import {onMounted, onBeforeMount, ref} from "vue";
-import mitt from 'mitt'
-const emitter = mitt();
+// import mitt from 'mitt'
+// const emitter = mitt();
 import WindowWatcher from "../../events/WindowWatcher";
 const ww = WindowWatcher();
 export default {
