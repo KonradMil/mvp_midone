@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {onMounted, onBeforeMount, ref} from "vue";
+import {onMounted, onBeforeMount, ref, getCurrentInstance} from "vue";
 // import mitt from 'mitt'
 // const emitter = mitt();
 import WindowWatcher from "../../events/WindowWatcher";
@@ -24,7 +24,8 @@ export default {
     props: ['src', 'module', 'width', 'height', 'externalProgress', 'unityLoader', 'hideFooter'],
     name: 'Studio',
     setup(props,{emit}) {
-
+        const app = getCurrentInstance()
+        const emitter = app.appContext.config.globalProperties.emitter;
         const containerId = ref();
         const gameInstance = ref();
         const loaded = ref(false);
