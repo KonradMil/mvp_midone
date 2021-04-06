@@ -24,9 +24,10 @@ export default {
         const initalize = async () => {
             console.log("initializeMe");
             setTimeout(function () {
+                console.log(gameWindow);
                 gameWindow.message('NetworkBridge', 'SetHangarApperance', 1);
                 gameWindow.message('NetworkBridge', 'UnlockUnityInput');
-            }, 5000);
+            }, 8000);
 
         }
         emitter.on('onInitialized', e =>  initalize() )
