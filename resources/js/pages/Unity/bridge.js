@@ -1,5 +1,6 @@
-import {onMounted, watch, ref} from 'vue';
+import {onMounted, watch, ref, getCurrentInstance} from 'vue';
 const UnityBridge = () => {
+    const app = getCurrentInstance();
     const emitter = app.appContext.config.globalProperties.emitter;
 
     onMounted(() => {
