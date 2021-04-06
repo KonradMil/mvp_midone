@@ -15,12 +15,18 @@ export default {
     name: "Main",
     components: {Studio},
     setup(props, {emit}) {
-        const bridge = ref();
-        const gameWindow = ref(null);
+        //GLOBAL
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
+        //INTERNAL
+        const bridge = ref();
+        const gameWindow = ref(null);
+        //EXTERNAL
         const unity_path = ref('/s3/unity/AssemBrot19_03.json');
         const window_width = ref('100%');
+
+        //RUNS WHEN UNITY IS READY
+        emitter.on('onInitialized', e =>  initalize() )
 
         const initalize = async () => {
             console.log("initializeMe");
@@ -29,28 +35,26 @@ export default {
                 gameWindow.value.message('NetworkBridge', 'SetHangarApperance', 1);
                 gameWindow.value.message('NetworkBridge', 'UnlockUnityInput');
             }, 2000);
-
         }
-        emitter.on('onInitialized', e =>  initalize() )
+
+
+
         onBeforeMount(() => {
+            //ADDS LISTENERS
             bridge.value = UnityBridge();
         });
 
         onMounted(()=> {
-            console.log("ww");
-            console.log(ww);
+            //REMOVES PADDING
             cash("body")
                 .removeClass("main")
                 .removeClass("error-page")
-                .addClass("p0");
+                .addClass("p-0");
         });
 
         return {
             unity_path,
             window_width,
-            bridge,
-            gameWindow,
-            initalize
         }
     }
 }
