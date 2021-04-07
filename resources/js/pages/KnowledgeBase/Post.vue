@@ -98,7 +98,7 @@
         <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
             <div class="w-full flex text-gray-600 text-xs sm:text-sm">
                 <div class="mr-2">
-                    {{$t('challengeMain.comments')}}: <span class="font-medium">{{post.comments_count}}</span>
+                    {{ $t('challengeMain.comments') }}: <span class="font-medium">{{ post.comments_count }}</span>
                 </div>
                 <div class="ml-auto">
                     Polubień: <span class="font-medium">{{ post.likes }}</span>
@@ -117,8 +117,12 @@
 import CommentSectionKnowledge from "../../components/social/CommentSectionKnowledge";
 
 export default {
-name: "Post",
+    name: "Post",
     components: {CommentSectionKnowledge},
+    props: {
+        user: Object,
+        post: Object
+    },
     setup() {
 
     }

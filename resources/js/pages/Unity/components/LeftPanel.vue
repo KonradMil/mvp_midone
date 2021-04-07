@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import {getCurrentInstance, onMounted} from "vue";
+import {getCurrentInstance, onMounted, ref} from "vue";
 
 export default {
     name: "LeftPanel",
