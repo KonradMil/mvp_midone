@@ -10,6 +10,9 @@
 import UnityButton from "./UnityButton";
 export default {
     name: "LeftButtons",
+    props: {
+        icons: Array
+    },
     components: {UnityButton}
 }
 </script>
