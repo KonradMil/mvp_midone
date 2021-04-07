@@ -1,7 +1,7 @@
 <template>
     <div class="flex fixed h-full z-50 pt-2">
         <div class="flex-1 pt-2 ml-10">
-            <UnityButton v-for="(icon, index) in icons" :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :key="'leftIcon_' + index" @click.native="action(index)" />
+            <UnityButton v-for="(icon, index) in icons" :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :key="'leftIcon_' + index" @click="console.log('CLICKED')" />
         </div>
     </div>
 </template>
