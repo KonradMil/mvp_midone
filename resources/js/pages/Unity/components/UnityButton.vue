@@ -16,7 +16,7 @@
             />
         </div>
     </Tippy>
-    <div v-if="tooltip == ''" class="w-20 py-2 text-center flex justify-center items-center cursor-pointer hover:translate-x-3">
+    <div v-if="tooltip == ''" class="w-20 py-2 text-center flex justify-center items-center cursor-pointer hover:scale-50">
         <div class="w-16 h-16 flex-none image-fit overflow-hidden">
             <img class=""
                  :alt="alttext"
