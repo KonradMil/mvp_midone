@@ -4,12 +4,12 @@
         tag="a"
         :content="tooltip"
         href="javascript:;"
-        class="w-full sm:w-40 py-4 text-center flex justify-center items-center"
+        class=" py-4 text-center flex justify-center items-center"
         aria-selected="false"
         @click=""
     >
-        <div class="w-10 h-10 flex-none image-fit overflow-hidden">
-            <img
+        <div class=" flex-none image-fit overflow-hidden">
+            <img class="w-20 p-5 h-20 hover:translate-x-1"
                 :alt="alttext"
                 :src="path"
             />
