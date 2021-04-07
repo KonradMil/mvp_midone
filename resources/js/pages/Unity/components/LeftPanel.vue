@@ -37,6 +37,7 @@ export default {
         const subcategories = ref([]);
         const categories = ref([]);
         const visible = ref(false);
+
         //LEFT BUTTON CLICKED
         emitter.on('leftbuttonclick', e =>  handleChange(e.val) )
 
@@ -49,7 +50,8 @@ export default {
                 category.value = cat_id;
                 console.log(cat_id);
                 visible.value = true;
-                subcategories.value = categories[cat_id].subcategories;
+                console.log(categories[cat_id]);
+                subcategories.value = categories[cat_id]['subcategories'];
             }
         }
 
