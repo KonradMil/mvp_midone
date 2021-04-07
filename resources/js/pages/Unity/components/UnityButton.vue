@@ -43,7 +43,7 @@ export default {
 
         const doAction = (name) => {
             console.log('CLIK CLICK');
-            emitter.emit('leftbuttonclick', { name: name })
+            emitter.emit('leftbuttonclick', { val: name })
         };
 
         return {
