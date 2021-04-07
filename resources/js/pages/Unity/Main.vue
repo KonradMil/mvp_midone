@@ -26,7 +26,8 @@ export default {
         //EXTERNAL
         const unity_path = ref('/s3/unity/AssemBrot19_03.json');
         const window_width = ref('100%');
-        const icons = require("../../json/unity_buttons.json");
+        const icons = ref([])
+
 
         //RUNS WHEN UNITY IS READY
         emitter.on('onInitialized', e =>  initalize() )
@@ -40,8 +41,6 @@ export default {
             }, 5000);
         }
 
-
-
         onBeforeMount(() => {
             //ADDS LISTENERS
             bridge.value = UnityBridge();
@@ -53,6 +52,7 @@ export default {
                 .removeClass("main")
                 .removeClass("error-page")
                 .addClass("p-0");
+            icons.value = require("../../json/unity_buttons.json");
         });
 
         return {
