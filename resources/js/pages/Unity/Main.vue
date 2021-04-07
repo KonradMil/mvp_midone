@@ -52,7 +52,7 @@ export default {
                 .removeClass("main")
                 .removeClass("error-page")
                 .addClass("p-0");
-            const  i =require("../../json/unity_buttons.json");
+            const  i =require("../../json/unity_left_buttons.json");
             icons.value = i.icons;
         });
 

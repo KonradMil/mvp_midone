@@ -1,0 +1,54 @@
+{
+    "icons": {
+        "elements": {
+            "src": "\/s3/builder_icons/chair_simple.png",
+            "tooltip": "",
+            "alttext": ""
+        },
+        "robots": {
+            "src": "\/s3/builder_icons/robot_simple.png",
+            "tooltip": "",
+            "alttext": ""
+        },
+        "application": {
+            "src": "\/s3/builder_icons/manipulator_simple.png",
+            "tooltip": "",
+            "alttext": ""
+        },
+        "positioning": {
+            "src": "\/s3/builder_icons/positioning_simple.png",
+            "tooltip": "",
+            "alttext": ""
+        },
+        "control": {
+            "src": "\/s3/builder_icons/control_simple.png",
+            "tooltip": "",
+            "alttext": ""
+        },
+        "security": {
+            "src": "\/s3/builder_icons/padlock_simple.png",
+            "tooltip": "",
+            "alttext": ""
+        },
+        "remote_control": {
+            "src": "\/s3/builder_icons/remote_control_simple.png",
+            "tooltip": "",
+            "alttext": ""
+        },
+        "other": {
+            "src": "\/s3/builder_icons/other_simple.png",
+            "tooltip": "",
+            "alttext": ""
+        },
+        "operator": {
+            "src": "\/s3/builder_icons/workers_simple.png",
+            "tooltip": "",
+            "alttext": ""
+        },
+        "geometric": {
+            "src": "\/s3/builder_icons/geometric_simple.png",
+            "tooltip": "",
+            "alttext": ""
+        }
+    }
+}
