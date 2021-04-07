@@ -4,7 +4,7 @@
         tag="a"
         :content="tooltip"
         href="javascript:;"
-        class=" py-4 text-center flex justify-center items-center"
+        class="w-20 py-4 text-center flex justify-center items-center"
         aria-selected="false"
         @click=""
     >
