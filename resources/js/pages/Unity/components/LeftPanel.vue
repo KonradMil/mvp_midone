@@ -47,6 +47,7 @@ export default {
                 visible.value = false;
             } else {
                 category.value = cat_id;
+                console.log(cat_id);
                 visible.value = true;
                 subcategories.value = categories[cat_id].subcategories;
             }
@@ -60,7 +61,9 @@ export default {
         return {
             search,
             visible,
-            subcategories
+            subcategories,
+            category,
+            categories
         }
     }
 }
