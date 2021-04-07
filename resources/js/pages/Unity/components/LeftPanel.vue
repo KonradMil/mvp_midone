@@ -25,7 +25,6 @@
 
 <script>
 import {getCurrentInstance, onMounted} from "vue";
-import cash from "cash-dom";
 
 export default {
     name: "LeftPanel",
