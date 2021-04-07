@@ -50,8 +50,8 @@ export default {
                 category.value = cat_id;
                 console.log(cat_id);
                 visible.value = true;
-                console.log(categories[cat_id]);
-                subcategories.value = categories[cat_id]['subcategories'];
+                console.log(categories.value[cat_id]);
+                subcategories.value = categories.value[cat_id]['subcategories'];
             }
         }
 
