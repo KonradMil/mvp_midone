@@ -1,6 +1,6 @@
 <template>
     <div
-        v-for="(challenge, index) in challenges.list"
+        v-for="(post, index) in posts.list"
         :key="index"
         class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box"
     >
@@ -11,19 +11,15 @@
                 <img
                     alt="Icewall Tailwind HTML Admin Template"
                     class="rounded-full"
-                    :src="'s3/' + challenge.screenshot_path"
+                    :src="'s3/' + post.thumbnail"
                 />
             </div>
             <div class="ml-3 mr-auto">
-                <a href="" class="font-medium">{{ challenge.name }}</a>
+                <a href="" class="font-medium">{{ post.name }}</a>
                 <div class="flex text-gray-600 truncate text-xs mt-0.5">
-                    <a
-                        class="text-theme-1 dark:text-theme-10 inline-block truncate"
-                        href=""
-                    >{{ types[challenge.type] }}</a
-                    >
-                    <span class="mx-1" v-if="challenge.stage == 1">• {{ challenge.solution_deadline }}</span>
-                    <span class="mx-1" v-if="challenge.stage == 2">• {{ challenge.offer_deadline }}</span>
+                    <a class="text-theme-1 dark:text-theme-10 inline-block truncate" href="">
+                        {{ post.category }}
+                    </a>
                 </div>
             </div>
             <div class="dropdown ml-3">
@@ -59,12 +55,12 @@
                 <img
                     alt="Icewall Tailwind HTML Admin Template"
                     class="rounded-md"
-                    :src="'s3/' + challenge.screenshot_path"
+                    :src="'s3/' + post.thumbnail"
                 />
             </div>
             <a href="" class="block font-medium text-base mt-5"></a>
             <div class="text-gray-700 dark:text-gray-600 mt-2">
-                {{ challenge.description }}
+                {{ post.description }}
             </div>
         </div>
         <div
@@ -80,8 +76,8 @@
             </Tippy>
             <div class="intro-x flex mr-2">
             </div>
-            <Tippy v-if="!challenge.liked"
-                   @click.prevent="like(challenge)"
+            <Tippy v-if="!post.liked"
+                   @click.prevent="like(post)"
                    tag="a"
                    href=""
                    class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 ml-auto"
@@ -89,7 +85,7 @@
             >
                 <ThumbsUpIcon class="w-3 h-3"/>
             </Tippy>
-            <Tippy v-if="challenge.liked"
+            <Tippy v-if="post.liked"
                    @click.prevent=""
                    tag="a"
                    href=""
@@ -102,14 +98,14 @@
         <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
             <div class="w-full flex text-gray-600 text-xs sm:text-sm">
                 <div class="mr-2">
-                    {{$t('challengeMain.comments')}}: <span class="font-medium">{{challenge.comments_count}}</span>
+                    {{$t('challengeMain.comments')}}: <span class="font-medium">{{post.comments_count}}</span>
                 </div>
                 <div class="ml-auto">
-                    Polubień: <span class="font-medium">{{ challenge.likes }}</span>
+                    Polubień: <span class="font-medium">{{ post.likes }}</span>
                 </div>
             </div>
             <CommentSection
-                :challenge="challenge"
+                :post="post"
                 :user="user"
             />
         </div>
@@ -117,8 +113,15 @@
 </template>
 
 <script>
+import CommentSection from "../../components/social/CommentSection";
+
+
 export default {
-name: "Post"
+name: "Post",
+    components: {CommentSection},
+    setup() {
+
+    }
 }
 </script>
 

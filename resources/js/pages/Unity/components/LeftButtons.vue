@@ -8,7 +8,7 @@
 
 <script>
 import UnityButton from "./UnityButton";
-import {getCurrentInstance} from "vue";
+
 export default {
     name: "LeftButtons",
     props: {

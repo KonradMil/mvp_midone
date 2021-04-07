@@ -32,7 +32,7 @@ export default {
         //RUNS WHEN UNITY IS READY
         emitter.on('onInitialized', e =>  initalize() );
         //LEFT BUTTON CLICKED
-        emitter.on('leftbuttonclick', e =>  console.log(e) )
+        emitter.on('leftbuttonclick', (type, e) =>  console.log([type, e]) )
 
         const initalize = async () => {
             console.log("initializeMe");
