@@ -10,7 +10,7 @@
         @click=""
     >
         <div class="w-16 h-16 flex-none image-fit overflow-hidden cursor-pointer ">
-            <img class="hover:scale-125"
+            <img class="intro-y"
                 :alt="alttext"
                 :src="path"
             />
@@ -18,7 +18,7 @@
     </Tippy>
     <div v-if="tooltip == ''" class="w-20 py-2 text-center flex justify-center items-center cursor-pointer ">
         <div class="w-16 h-16 flex-none image-fit overflow-hidden">
-            <img class="hover:scale-125"
+            <img class="intro-y"
                  :alt="alttext"
                  :src="path"
             />
