@@ -8,8 +8,8 @@
         aria-selected="false"
         @click=""
     >
-        <div class=" flex-none image-fit overflow-hidden">
-            <img class="w-20 p-5 h-20 hover:translate-x-1"
+        <div class="w-30 p-5 h-30 flex-none image-fit overflow-hidden">
+            <img class="hover:translate-x-1"
                 :alt="alttext"
                 :src="path"
             />
