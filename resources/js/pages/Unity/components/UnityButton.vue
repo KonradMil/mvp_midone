@@ -9,7 +9,7 @@
         aria-selected="false"
         @click=""
     >
-        <div class="w-16 h-16 flex-none image-fit overflow-hidden zoom-in">
+        <div class="w-16 h-16 flex-none image-fit overflow-hidden zoom-in" @click.native="doAction">
             <img class=""
                 :alt="alttext"
                 :src="path"
@@ -27,15 +27,28 @@
 </template>
 
 <script>
+import {getCurrentInstance} from "vue";
+
 export default {
     name: "UnityButton",
     props: {
         path: String,
         alttext: String,
-        tooltip: String
+        tooltip: String,
+        action: String
     },
     setup() {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
 
+        const doAction = (name) => {
+            console.log('CLIK CLICK');
+            emitter.emit('leftbuttonclick', { name: name })
+        };
+
+        return {
+            doAction
+        }
     }
 }
 </script>
