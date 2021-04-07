@@ -1,5 +1,8 @@
 {
     "en": {
+        "challengeMain": {
+            "comments": "Comments"
+        },
         "login": {
             "signup": "Sing Up",
             "password": "Password",
@@ -29,6 +32,9 @@
         }
     },
     "pl": {
+        "challengeMain": {
+            "comments": "Komentarzy"
+        },
         "validation": {
             "Value is required": "To pole jest obowiązkowe.",
             "Value is not a valid email address": "To nie jest poprawny adres email.",

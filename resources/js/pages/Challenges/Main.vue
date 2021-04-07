@@ -108,42 +108,7 @@
                         <BookmarkIcon class="w-3 h-3"/>
                     </Tippy>
                     <div class="intro-x flex mr-2">
-                        <!--                        <div class="intro-x w-8 h-8 image-fit">-->
-                        <!--                            <Tippy-->
-                        <!--                                tag="img"-->
-                        <!--                                alt="Icewall Tailwind HTML Admin Template"-->
-                        <!--                                class="rounded-full border border-white zoom-in"-->
-                        <!--                                :src="'s3/' + challenge.screenshot_path"-->
-                        <!--                                content="faker.users[0].name"-->
-                        <!--                            />-->
-                        <!--                        </div>-->
-                        <!--                        <div class="intro-x w-8 h-8 image-fit -ml-4">-->
-                        <!--                            <Tippy-->
-                        <!--                                tag="img"-->
-                        <!--                                alt="Icewall Tailwind HTML Admin Template"-->
-                        <!--                                class="rounded-full border border-white zoom-in"-->
-                        <!--                                src="require(`./../../..//images/${faker.photos[1]}`)"-->
-                        <!--                                content="faker.users[1].name"-->
-                        <!--                            />-->
-                        <!--                        </div>-->
-                        <!--                        <div class="intro-x w-8 h-8 image-fit -ml-4">-->
-                        <!--                            <Tippy-->
-                        <!--                                tag="img"-->
-                        <!--                                alt="Icewall Tailwind HTML Admin Template"-->
-                        <!--                                class="rounded-full border border-white zoom-in"-->
-                        <!--                                src="require(`./../../..//images/${faker.photos[2]}`)"-->
-                        <!--                                content="faker.users[2].name"-->
-                        <!--                            />-->
-                        <!--                        </div>-->
                     </div>
-<!--                    <Tippy-->
-<!--                        tag="a"-->
-<!--                        href=""-->
-<!--                        class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 ml-auto"-->
-<!--                        content="Share"-->
-<!--                    >-->
-<!--                        <Share2Icon class="w-3 h-3"/>-->
-<!--                    </Tippy>-->
                     <Tippy v-if="!challenge.liked"
                            @click.prevent="like(challenge)"
                            tag="a"
@@ -166,7 +131,7 @@
                 <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
                     <div class="w-full flex text-gray-600 text-xs sm:text-sm">
                         <div class="mr-2">
-                            Komentarzy: <span class="font-medium">{{challenge.comments_count}}</span>
+                            {{$t('challengeMain.comments')}}: <span class="font-medium">{{challenge.comments_count}}</span>
                         </div>
                         <div class="ml-auto">
                             Polubień: <span class="font-medium">{{ challenge.likes }}</span>
