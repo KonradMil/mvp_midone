@@ -20,6 +20,7 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
 
         const action = (name) => {
+            console.log('CLIK CLICK');
             emitter.emit('leftbuttonclick', { name: name })
         };
 

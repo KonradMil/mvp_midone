@@ -76,7 +76,7 @@ const UnityBridge = () => {
             console.log(str);
         };
         window.UnityLogMessage = function UnityLogMessage(e) {
-            console.log(e);
+            console.log('THIS SHIET ' + e);
         };
         window.UnityGoToUrl = function UnityGoToUrl(e) {
             console.log('URL');
