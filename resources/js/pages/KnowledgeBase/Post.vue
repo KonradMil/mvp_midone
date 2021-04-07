@@ -105,7 +105,7 @@
                 </div>
             </div>
             <CommentSection
-                :post="post"
+                :object="post"
                 :user="user"
             />
         </div>
@@ -113,12 +113,12 @@
 </template>
 
 <script>
-import CommentSection from "../../components/social/CommentSection";
 
+import CommentSectionKnowledge from "../../components/social/CommentSectionKnowledge";
 
 export default {
 name: "Post",
-    components: {CommentSection},
+    components: {CommentSectionKnowledge},
     setup() {
 
     }
