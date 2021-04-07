@@ -10,7 +10,7 @@
     >
         <div class="w-10 h-10 flex-none image-fit overflow-hidden">
             <img
-                :alt="alt_text"
+                :alt="alttext"
                 :src="path"
             />
         </div>
@@ -20,6 +20,11 @@
 <script>
 export default {
     name: "UnityButton",
+    props: {
+        path: String,
+        alttext: String,
+        tooltip: String
+    },
     setup() {
 
     }
