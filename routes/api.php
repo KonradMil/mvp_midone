@@ -35,6 +35,13 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
     Route::post('user/comment', [ChallengeController::class, 'commentChallenge']);
     Route::post('images/store', [ChallengeController::class, 'storeImage']);
 });
+
+Route::group(['prefix' => 'knowledgebase/post', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('get', [ChallengeController::class, 'getPosts']);
+    Route::post('add', [ChallengeController::class, 'addPost']);
+    Route::post('edit', [ChallengeController::class, 'editPost']);
+});
+
 Route::group(['prefix' => 'notifications', 'middleware' => 'auth:sanctum'], function () {
     Route::post('get', [NotificationsController::class, 'getNotifications']);
 });

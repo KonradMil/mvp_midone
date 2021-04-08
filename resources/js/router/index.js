@@ -13,6 +13,8 @@ import AddChallenge from "../pages/Challenges/New";
 import Teams from "../pages/Teams/Teams";
 import NotFound from "../pages/NotFound";
 import Main from "../pages/Unity/Main";
+import MainKnowledgebase  from "../pages/KnowledgeBase/Main";
+import AddKnowledgebase  from "../pages/KnowledgeBase/Add";
 
 export const routes = [
     {
@@ -50,6 +52,16 @@ export const routes = [
                 name: 'challenges',
                 path: '/challenges',
                 component: Challenges
+            },
+            {
+                name: 'knowledgebase',
+                path: '/knowledgebase',
+                component: MainKnowledgebase
+            },
+            {
+                name: 'addKnowledgebasePost',
+                path: '/knowledgebase/post/add',
+                component: AddKnowledgebase
             },
             {
                 name: 'teams',

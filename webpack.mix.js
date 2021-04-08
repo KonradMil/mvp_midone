@@ -11,12 +11,12 @@ let postcssImport = require('postcss-import');
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.options({
-    hmrOptions: {
-        host: 'devsys.appworks-dev.pl',
-        port: '8080'
-    }
-});
+// mix.options({
+//     hmrOptions: {
+//         host: 'devsys.appworks-dev.pl',
+//         port: '8080'
+//     }
+// });
 mix.webpackConfig(webpack => {
     return {
         module: {

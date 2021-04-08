@@ -13,8 +13,14 @@ class CreateKnowledgebaseVideosTable extends Migration
      */
     public function up()
     {
-        Schema::create('knowladgebase_videos', function (Blueprint $table) {
+        Schema::create('knowledgebase_videos', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('src');
+            $table->string('poster');
+            $table->string('description');
+            $table->integer('category');
+            $table->integer('published');
             $table->timestamps();
         });
     }
@@ -26,6 +32,6 @@ class CreateKnowledgebaseVideosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('knowladgebase_videos');
+        Schema::dropIfExists('knowledgebase_videos');
     }
 }

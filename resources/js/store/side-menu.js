@@ -113,7 +113,7 @@ const state = () => {
             },
             {
                 icon: "InboxIcon",
-                pageName: "knowledge-base",
+                pageName: "knowledgebase",
                 title: "Baza wiedzy"
             },
             {

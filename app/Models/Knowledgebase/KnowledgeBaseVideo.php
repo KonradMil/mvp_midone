@@ -16,6 +16,6 @@ class KnowledgeBaseVideo extends Model implements ReactableInterface
     protected $table = 'knowledgebase_videos';
 
     protected $fillable = [
-      'name', 'src', 'poster', 'description', 'rating'
+      'name', 'src', 'poster', 'description', 'rating', 'category', 'published'
     ];
 }
