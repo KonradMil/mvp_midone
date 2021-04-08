@@ -10,7 +10,23 @@
         <!-- END: Breadcrumb -->
         <!-- BEGIN: Search -->
         <div class="intro-x relative mr-3 sm:mr-6">
-            <button @click="changeLang">EN</button>
+            <TailSelect
+                @update:modelValue="changeLang"
+                @update="changeLang"
+                id="post-form-3"
+                v-model="lang"
+                :options="{
+                locale: 'pl',
+                limit: 'Nie można wybrać więcej',
+                search: false,
+                hideSelected: false,
+                classNames: 'w-12'
+              }"
+            >
+                <option value="pl">PL</option>
+                <option value="en">EN</option>
+
+            </TailSelect>
             <div class="search hidden sm:block">
                 <input
                     type="text"
@@ -263,10 +279,11 @@ export default defineComponent({
         const user = window.Laravel.user;
         const echo = window.Echo;
         const notifications = ref([]);
+        const lang = ref('pl');
         const { t, locale } = useI18n({ useScope: 'global' })
 
         const changeLang = () => {
-            locale.value = 'en'
+            locale.value = lang.value;
         }
 
         echo.private('App.Models.User.' + user.id)
@@ -316,7 +333,8 @@ export default defineComponent({
             goTo,
             notifications,
             notificationsComp,
-            changeLang
+            changeLang,
+            lang
         };
     }
 });
