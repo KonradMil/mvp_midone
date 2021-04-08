@@ -13,7 +13,7 @@ class CreateKnowledgebaseVideoTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('knowladgebase_video_tags', function (Blueprint $table) {
+        Schema::create('knowledgebase_video_tags', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateKnowledgebaseVideoTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('knowladgebase_video_tags');
+        Schema::dropIfExists('knowledgebase_video_tags');
     }
 }
