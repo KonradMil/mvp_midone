@@ -51,6 +51,7 @@
         "vue3-google-map": "^0.7.0",
         "vuex": "^4.0.0",
         "vuex-persistedstate": "^4.0.0-beta.3",
+        "youtube-vue3": "^0.1.10",
         "zoom-vanilla.js": "^2.0.6"
     },
     "devDependencies": {

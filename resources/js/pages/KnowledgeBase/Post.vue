@@ -1,7 +1,5 @@
 <template>
     <div
-        v-for="(post, index) in posts.list"
-        :key="index"
         class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box"
     >
         <div
@@ -10,8 +8,8 @@
             <div class="w-10 h-10 flex-none image-fit">
                 <img
                     alt="Icewall Tailwind HTML Admin Template"
-                    class="rounded-full"
-                    :src="'s3/' + post.thumbnail"
+                    class="rounded-full w-100"
+                    :src="post.poster"
                 />
             </div>
             <div class="ml-3 mr-auto">
@@ -51,12 +49,18 @@
             </div>
         </div>
         <div class="p-5">
-            <div class="h-40 xxl:h-56 image-fit">
-                <img
-                    alt="Icewall Tailwind HTML Admin Template"
-                    class="rounded-md"
-                    :src="'s3/' + post.thumbnail"
-                />
+            <div class="h-64 w-100 object-cover">
+                <div class="cursor-pointer">
+                    <img v-if="!play[post.id]"
+                         :alt="post.name"
+                         class="w-100 h-64"
+                         :src="post.poster"
+                         @click="playVideo(post.id)"
+                    />
+                    <PlayIcon @click="playVideo(post.id)" class="absolute -mt-8 w-24 h-24" style="color: #fff; margin-top: -13rem; margin-left: 11rem; background-color: #930f68; border-radius: 50%; padding: 10px; padding-left: 15px;"/>
+                </div>
+
+                <YoutubeVue3 v-if="play[post.id]" ref="youtube" videoid="neAFHplKu-Y" :loop="false" class="w-100 h-64" style="width: 100%;"/>
             </div>
             <a href="" class="block font-medium text-base mt-5"></a>
             <div class="text-gray-700 dark:text-gray-600 mt-2">
@@ -104,7 +108,7 @@
                     Polubień: <span class="font-medium">{{ post.likes }}</span>
                 </div>
             </div>
-            <CommentSection
+            <CommentSectionKnowledge
                 :object="post"
                 :user="user"
             />
@@ -115,16 +119,30 @@
 <script>
 
 import CommentSectionKnowledge from "../../components/social/CommentSectionKnowledge";
-
+import { YoutubeVue3 } from 'youtube-vue3'
+import {ref} from "vue";
 export default {
     name: "Post",
-    components: {CommentSectionKnowledge},
+    components: {CommentSectionKnowledge, YoutubeVue3},
     props: {
         user: Object,
         post: Object
     },
     setup() {
+        const play = ref([]);
 
+        const playVideo = (id) => {
+            if(play.value[id] != undefined) {
+                play.value[id] = !play.value[id];
+            } else {
+                play.value[id] = true;
+            }
+        }
+
+        return {
+            play,
+            playVideo
+        }
     }
 }
 </script>

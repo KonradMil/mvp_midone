@@ -10,6 +10,7 @@
         <!-- END: Breadcrumb -->
         <!-- BEGIN: Search -->
         <div class="intro-x relative mr-3 sm:mr-6">
+            <button @click="changeLang">EN</button>
             <div class="search hidden sm:block">
                 <input
                     type="text"
@@ -220,12 +221,12 @@
 </template>
 
 <script>
-import {defineComponent, onMounted, ref, computed} from "vue";
+import {defineComponent, onMounted, ref, computed, getCurrentInstance} from "vue";
 import store, {useStore} from "../../store";
 import Avatar from "../avatar/Avatar";
 import router from '../../router';
 import GetNotifications from "../../compositions/GetNotifications"
-import GetChallenges from "../../compositions/GetChallenges";
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
     components: {Avatar},
@@ -262,6 +263,11 @@ export default defineComponent({
         const user = window.Laravel.user;
         const echo = window.Echo;
         const notifications = ref([]);
+        const { t, locale } = useI18n({ useScope: 'global' })
+
+        const changeLang = () => {
+            locale.value = 'en'
+        }
 
         echo.private('App.Models.User.' + user.id)
             .notification((notification) => {
@@ -309,7 +315,8 @@ export default defineComponent({
             user,
             goTo,
             notifications,
-            notificationsComp
+            notificationsComp,
+            changeLang
         };
     }
 });

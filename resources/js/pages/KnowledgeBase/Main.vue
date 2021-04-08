@@ -28,7 +28,7 @@
         </div>
         <div class="intro-y grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Blog Layout -->
-            <Post v-for="(post, index) in posts" :user="user" :post="post" :key="'post_' + index"></Post>
+            <Post v-for="(post, index) in postsList" :user="user" :post="post" :key="'post_' + index"></Post>
             <!-- END: Blog Layout -->
 
         </div>
@@ -39,7 +39,7 @@
 <script>
 import Post from "./Post";
 import GetKnowledgebasePosts from "../../compositions/GetKnowledgebasePosts";
-import {onMounted, ref} from 'vue';
+import {computed, onMounted, ref} from 'vue';
 
 export default {
     name: "MainKnowledgebase",
@@ -48,10 +48,18 @@ export default {
         const posts = ref([]);
         const user = ref({});
         const getPostsRepositories = async () => {
-            let p = await GetKnowledgebasePosts();
-            console.log(p);
-            posts.value = p;
+            posts.value = GetKnowledgebasePosts();
+
         }
+
+        const postsList = computed(() => {
+            console.log(posts.value);
+           if(posts.value.list != undefined) {
+               return posts.value.list;
+           } else {
+               return posts.value;
+           }
+        });
 
         onMounted(function () {
             getPostsRepositories();
@@ -62,7 +70,8 @@ export default {
 
         return {
             user,
-            posts
+            posts,
+            postsList
         }
     }
 }
