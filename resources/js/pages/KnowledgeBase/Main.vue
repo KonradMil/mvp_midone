@@ -40,6 +40,7 @@
 import Post from "./Post";
 import GetKnowledgebasePosts from "../../compositions/GetKnowledgebasePosts";
 import {onMounted, ref} from 'vue';
+
 export default {
     name: "MainKnowledgebase",
     components: {Post},
@@ -47,7 +48,9 @@ export default {
         const posts = ref([]);
         const user = ref({});
         const getPostsRepositories = async () => {
-            posts.value = GetKnowledgebasePosts();
+            let p = await GetKnowledgebasePosts();
+            console.log(p);
+            posts.value = p;
         }
 
         onMounted(function () {

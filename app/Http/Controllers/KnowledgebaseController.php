@@ -29,13 +29,15 @@ class KnowledgebaseController extends Controller
 
     public function addPost(Request $request)
     {
-        $input = $request->input();
+        $input = $request->input('data');
+
         $post = new KnowledgeBaseVideo();
-        $post->src = 'https://www.youtube.com/embed/' . $input->youtube;
-        $post->name = $input->name;
-        $post->description = $input->description;
-        $post->category = $input->category;
-        $post->poster = 'http://img.youtube.com/vi/' . $input->youtube .'/hqdefault.jpg';
+        $post->src = 'https://www.youtube.com/embed/' . $input['youtube'];
+        $post->name = $input['name'];
+        $post->description = $input['description'];
+        $post->category = $input['category'];
+        $post->poster = 'http://img.youtube.com/vi/' . $input['youtube'] .'/hqdefault.jpg';
+        $post->published = (int)$input['published'];
         $post->save();
 
         return response()->json([

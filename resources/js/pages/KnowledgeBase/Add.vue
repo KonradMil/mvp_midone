@@ -118,7 +118,7 @@
                         <label for="post-form-5" class="form-check-label ml-0 mb-2"
                         >Publikuj</label
                         >
-                        <input id="post-form-5" class="form-check-switch" v-model="publish" type="checkbox"/>
+                        <input id="post-form-5" class="form-check-switch" v-model="published" type="checkbox"/>
                     </div>
                 </div>
             </div>
@@ -140,6 +140,7 @@ export default {
         const tab = ref('desc');
         const categories = ref([])
         const category = ref('');
+        const published = ref(false);
 
         const saveKnowledgebasePost = async () => {
             SavePost({
@@ -147,7 +148,8 @@ export default {
                 description: description.value,
                 type: category.value,
                 youtube: youtube.value,
-                category: category.value
+                category: category.value,
+                published: published.value
             });
         }
 
@@ -164,7 +166,8 @@ export default {
             categories,
             category,
             saveKnowledgebasePost,
-            youtube
+            youtube,
+            published
         }
     }
 }

@@ -11,7 +11,7 @@ use BeyondCode\Comments\Traits\HasComments;
 
 class KnowledgeBaseVideo extends Model implements ReactableInterface
 {
-    use HasFactory, Reactable, HasTags, HasComments;
+    use HasFactory, Reactable, HasTags, HasComments, Reactable;
 
     protected $table = 'knowledgebase_videos';
 

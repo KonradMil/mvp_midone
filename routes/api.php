@@ -4,6 +4,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\Crud\ChallengeController;
 use App\Http\Controllers\Crud\TeamsController;
 use App\Http\Controllers\NotificationsController;
+use App\Http\Controllers\KnowledgebaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,9 +38,9 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
 });
 
 Route::group(['prefix' => 'knowledgebase/post', 'middleware' => 'auth:sanctum'], function () {
-    Route::post('get', [ChallengeController::class, 'getPosts']);
-    Route::post('add', [ChallengeController::class, 'addPost']);
-    Route::post('edit', [ChallengeController::class, 'editPost']);
+    Route::post('get', [KnowledgebaseController::class, 'getPosts']);
+    Route::post('add', [KnowledgebaseController::class, 'addPost']);
+    Route::post('edit', [KnowledgebaseController::class, 'editPost']);
 });
 
 Route::group(['prefix' => 'notifications', 'middleware' => 'auth:sanctum'], function () {
