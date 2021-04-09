@@ -7,6 +7,7 @@ use App\Models\Challenges\Challenge;
 use App\Models\File;
 use App\Models\Financial;
 use App\Models\TechnicalDetails;
+use Carbon\Carbon;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -122,8 +123,8 @@ class ChallengeController extends Controller
 
         $challenge->description = $request->description;
         $challenge->type = $request->type;
-        $challenge->solution_deadline = $request->solution_deadline;
-        $challenge->offer_deadline = $request->offer_deadline;
+        $challenge->solution_deadline = Carbon::createFromFormat('d.m.Y', $request->solution_deadline);
+        $challenge->offer_deadline = Carbon::createFromFormat('d.m.Y', $request->offer_deadline);
         $challenge->allowed_publishing = $request->allowed_publishing;
         $challenge->financial_before_id = $financial->id;
         $challenge->author_id = Auth::user()->id;
