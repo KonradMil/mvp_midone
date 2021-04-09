@@ -3,7 +3,7 @@
 
         <div class="grid grid-cols-12 gap-6 mt-5">
             <div class="col-span-9">
-                <h2 class="intro-y text-lg font-medium mt-5">Zespoły</h2>
+                <h2 class="intro-y text-lg font-medium mt-5">{{$t('teams.teams')}}</h2>
                 <div class="grid grid-cols-12 gap-6 mt-5">
                     <div
                         class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2"
@@ -12,11 +12,11 @@
                             <input
                                 type="text"
                                 class="form-control w-56 box pr-10 placeholder-theme-13"
-                                placeholder="Nazwa"
+                                :placeholder="$t('teams.name')"
                                 v-model="new_team_name"
                             />
                         </div>
-                        <button class="btn btn-primary shadow-md mr-2" @click="addTeam">Dodaj zespół</button>
+                        <button class="btn btn-primary shadow-md mr-2" @click="addTeam">{{$t('teams.addTeam')}}</button>
 
                         <div class="hidden md:block mx-auto text-gray-600">
 
@@ -26,7 +26,7 @@
                                 <input
                                     type="text"
                                     class="form-control w-56 box pr-10 placeholder-theme-13"
-                                    placeholder="Szukaj..."
+                                    :placeholder="$t('teams.find')"
                                     v-model="search"
                                 />
                                 <SearchIcon
@@ -58,9 +58,9 @@
                                     </div>
                                 </div>
                                 <div class="flex mt-4 lg:mt-0">
-                                    <button class="btn btn-primary py-1 px-2 mr-2" @click="showAddToTeamModal(team.id)" v-if="team.owner_id === user.id">Dodaj</button>
+                                    <button class="btn btn-primary py-1 px-2 mr-2" @click="showAddToTeamModal(team.id)" v-if="team.owner_id === user.id">{{$t('teams.add')}}</button>
                                     <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
-                                        Szczegóły
+                                        {{$t('teams.details')}}
                                     </button>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="col-span-3">
-                <h2 class="intro-y text-lg font-medium mt-5">Zaproszenia</h2>
+                <h2 class="intro-y text-lg font-medium mt-5">{{$t('teams.invitations')}}</h2>
                 <div class="grid-cols-12 grid">
                     <div
                         class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-2"
@@ -116,7 +116,7 @@
                                         class="py-1 px-2 rounded-full text-xs bg-theme-9 text-white cursor-pointer font-medium"
                                         @click="acceptInvite(invite.id)"
                                     >
-                                        Akceptuj zaproszenie
+                                        {{$t('teams.acceptInvite')}}
                                     </div>
                                 </div>
                             </div>

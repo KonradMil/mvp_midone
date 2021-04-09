@@ -2,8 +2,8 @@
     "private": true,
     "scripts": {
         "dev": "npm run development",
-        "development": "NODE_OPTIONS=\\\"--max-old-space-size=8000\\\" mix",
-        "hot": "NODE_ENV=development NODE_OPTIONS=\\\"--max-old-space-size=8000\\\" mix watch --hot",
+        "development": "mix",
+        "hot":  "mix watch --hot",
         "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\"",
         "prod": "npm run production",
         "production": "mix --production",

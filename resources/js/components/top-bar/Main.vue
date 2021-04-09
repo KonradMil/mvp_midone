@@ -200,28 +200,28 @@
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
                         >
                             <UserIcon class="w-4 h-4 mr-2"/>
-                            Profile
+                            {{$t('topBar.profil')}}
                         </a>
                         <a
                             href=""
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
                         >
                             <EditIcon class="w-4 h-4 mr-2"/>
-                            Add Account
+                            {{$t('topBar.addAccount')}}
                         </a>
                         <a
                             href=""
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
                         >
                             <LockIcon class="w-4 h-4 mr-2"/>
-                            Reset Password
+                            {{$t('topBar.resetPassword')}}
                         </a>
                         <a
                             href=""
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
                         >
                             <HelpCircleIcon class="w-4 h-4 mr-2"/>
-                            Help
+                            {{$t('topBar.help')}}
                         </a>
                     </div>
                     <div class="p-2 border-t border-theme-27 dark:border-dark-3">
@@ -230,7 +230,7 @@
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
                         >
                             <ToggleRightIcon class="w-4 h-4 mr-2"/>
-                            Wyloguj
+                            {{$t('topBar.logout')}}
                         </a>
                     </div>
                 </div>

@@ -1,7 +1,49 @@
 {
     "en": {
-        "challengeMain": {
-            "comments": "Comments"
+        "topBar": {
+            "profil": "Profile",
+            "addAccount": "Add account",
+            "resetPassword": "Reset password",
+            "help": "Help",
+            "logout": "Logout"
+        },
+        "menu": {
+            "Dashboard": "Dashboard",
+            "Wyzwania": "Challenges",
+            "Rozwiązania": "Solutions",
+            "Oferty": "Offers",
+            "Projekty": "Projects",
+            "Zespoły": "Teams",
+            "3D Studio": "3D Studio",
+            "Baza wiedzy": "Knowledge base",
+            "Marketplace obiektów": "Marketplace objects",
+            "Komunikacja": "Communication"
+        },
+        "subMenu": {
+            "Wszystkie": "All",
+            "Aktywne": "Active",
+            "Archiwalne": "Archival",
+            "Obserwowane": "Watched"
+        },
+        "challengesMain": {
+            "challenges": "Challenges",
+            "addChallenge": "Add new challenge"
+        },
+        "teams": {
+            "teams": "Teams",
+            "name": "Name",
+            "find": "Find...",
+            "addTeam": "Add team",
+            "add": "Add",
+            "details": "Details",
+            "invitations": "Invitations",
+            "acceptInvite": "Accept the invitation"
+        },
+        "CommentSection": {
+            "comments": "Comments",
+            "likes": "Likes",
+            "showComments": "Show comments",
+            "hideComments": "Hide comments"
         },
         "login": {
             "signup": "Sing Up",
@@ -32,8 +74,51 @@
         }
     },
     "pl": {
-        "challengeMain": {
-            "comments": "Komentarzy"
+        "topBar": {
+            "profil": "Profil",
+            "addAccount": "Dodaj konto",
+            "resetPassword": "Reset hasła",
+            "help": "Pomoc",
+            "logout": "Wyloguj"
+        },
+        "menu": {
+            "Dashboard": "Dashboard",
+            "Wyzwania": "Wyzwania",
+            "Rozwiązania": "Rozwiązania",
+            "Oferty": "Oferty",
+            "Projekty": "Projekty",
+            "Zespoły": "Zespoły",
+            "3D Studio": "3D Studio",
+            "Baza wiedzy": "Baza wiedzy",
+            "Marketplace obiektów": "Marketplace obiektów",
+            "Komunikacja": "Komunikacja"
+        },
+
+        "subMenu": {
+            "Wszystkie": "Wszystkie",
+            "Aktywne": "Aktywne",
+            "Archiwalne": "Archiwalne",
+            "Obserwowane": "Obserwowane"
+        },
+        "teams": {
+            "teams": "Zespoły",
+            "name": "Nazwa",
+            "find": "Szukaj...",
+            "addTeam": "Dodaj zespół",
+            "add": "Dodaj",
+            "details": "Szczegóły",
+            "invitations": "Zaproszenia",
+            "acceptInvite": "Akceptuj zaproszenie"
+        },
+        "challengesMain": {
+            "challenges": "Wyzwania",
+            "addChallenge": "Dodaj nowe wyzwanie"
+        },
+        "CommentSection": {
+            "comments": "Komentarzy",
+            "likes": "Polubień",
+            "showComments": "Zobacz komentarze",
+            "hideComments": "Ukryj komentarze"
         },
         "validation": {
             "Value is required": "To pole jest obowiązkowe.",
@@ -52,7 +137,8 @@
         },
         "darkmode": {
             "title": "Tryb Ciemny"
-        },"register": {
+        },
+        "register": {
             "signup": "Zarejestruj",
             "safepassword": "Czym jest bezpieczne hasło?",
             "passwordConfirm": "Potwierdź hasło",

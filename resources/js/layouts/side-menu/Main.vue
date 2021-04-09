@@ -48,7 +48,7 @@
                   <component :is="menu.icon" />
                 </div>
                 <div class="side-menu__title">
-                  {{ menu.title }}
+                    {{ $t('menu.' + menu.title) }}
                   <div
                     v-if="menu.subMenu"
                     class="side-menu__sub-icon"
@@ -77,7 +77,7 @@
                         <ActivityIcon />
                       </div>
                       <div class="side-menu__title">
-                        {{ subMenu.title }}
+                        {{ $t('subMenu.' + subMenu.title) }}
                         <div
                           v-if="subMenu.subMenu"
                           class="side-menu__sub-icon"

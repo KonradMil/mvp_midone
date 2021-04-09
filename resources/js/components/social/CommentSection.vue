@@ -1,10 +1,10 @@
 <template>
     <div class="w-full flex text-gray-600 text-xs sm:text-sm">
         <div class="mr-2" v-if="obj != undefined">
-            {{ $t('challengeMain.comments') }}: <span class="font-medium">{{ obj.comments_count }}</span>
+            {{ $t('CommentSection.comments') }}: <span class="font-medium">{{ obj.comments_count }}</span>
         </div>
         <div class="ml-auto" v-if="obj != undefined">
-            Polubień: <span class="font-medium">{{ obj.likes }}</span>
+            {{$t('CommentSection.likes')}}: <span class="font-medium">{{ obj.likes }}</span>
         </div>
     </div>
     <div v-if="object != undefined">
@@ -18,8 +18,8 @@
             class="intro-x w-full block text-center rounded-md py-3 mt-3 border border-dotted border-theme-15 dark:border-dark-5 text-theme-16 dark:text-gray-600">
 
               <span
-                  v-if="((current_object_focus == object.id && !current_object_focus_showComments) || !(current_object_focus == obj.id)) && comments.length != 0">Zobacz komentarze</span>
-            <span v-if="(current_object_focus == object.id && current_object_focus_showComments) && comments.length != 0">Ukryj komentarze</span>
+                  v-if="((current_object_focus == object.id && !current_object_focus_showComments) || !(current_object_focus == obj.id)) && comments.length != 0">{{$t('CommentSection.showComments')}}</span>
+            <span v-if="(current_object_focus == object.id && current_object_focus_showComments) && comments.length != 0">{{$t('CommentSection.hideComments')}}</span>
         </a>
     </div>
     <div class="w-full flex items-center mt-3">
