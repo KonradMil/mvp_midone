@@ -373,7 +373,7 @@
                             :options="{
                 autoApply: false,
                 showWeekNumbers: true,
-            lang: 'pl',
+                lang: 'pl',
                 format: 'DD.MM.YYYY',
                 showWeekNumbers: true,
                  buttonText: {'apply':'OK','cancel':'Anuluj'},
@@ -396,19 +396,12 @@
                                 locale: 'pl',
                                 placeholder: 'Wybierz kategorie...',
                                 limit: 'Nie można wybrać więcej',
-                search: false,
-
-                hideSelected: false,
-
-
-
-                classNames: 'w-full'
-              }"
-                        >
-
+                                search: false,
+                                hideSelected: false,
+                                classNames: 'w-full'
+                                }">
                             <option selected disabled>Wybierz kategorie...</option>
                             <option v-for="(category,index) in categories" :value="index">{{ category }}</option>
-
                         </TailSelect>
                     </div>
                     <div class="mt-3">

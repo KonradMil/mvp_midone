@@ -136,13 +136,13 @@ name: "Avatar",
                 font: `${Math.floor(props.size / 2.5)}px/${props.size}px Roboto, Arial, sans-serif`,
                 color: fontColor.value
             }
-            console.log(initialBackgroundAndFontStyle);
+            // console.log(initialBackgroundAndFontStyle);
             const backgroundAndFontStyle = (isImage.value)
                 ? imgBackgroundAndFontStyle
                 : initialBackgroundAndFontStyle
-            console.log(backgroundAndFontStyle);
+            // console.log(backgroundAndFontStyle);
             Object.assign(style, backgroundAndFontStyle)
-            console.log(style);
+            // console.log(style);
             return style
         })
 

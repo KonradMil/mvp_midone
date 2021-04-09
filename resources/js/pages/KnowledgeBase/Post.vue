@@ -49,17 +49,8 @@
             </div>
         </div>
         <div class="p-5">
-            <div class="h-64 w-100 object-cover">
-                <div class="cursor-pointer">
-                    <img v-if="!play[post.id]"
-                         :alt="post.name"
-                         class="w-100 h-64"
-                         :src="post.poster"
-                         @click="playVideo(post.id)"
-                    />
-                    <PlayIcon @click="playVideo(post.id)" class="absolute -mt-8 w-24 h-24" style="color: #fff; margin-top: -13rem; margin-left: 11rem; background-color: #930f68; border-radius: 50%; padding: 10px; padding-left: 15px;"/>
-                </div>
-
+            <div class="h-64 w-100 object-cover" :style="'background-image: url(\'' + post.poster + '\'); background-size: cover;'">
+                    <PlayIcon v-if="!play[post.id]" @click="playVideo(post.id)" class="cursor-pointer absolute -mt-8 w-14 h-14" style="color: #fff; margin-top: 6.5rem; margin-left: 13rem; background-color: #930f68; border-radius: 50%; padding: 10px; padding-left: 15px;"/>
                 <YoutubeVue3 v-if="play[post.id]" ref="youtube" videoid="neAFHplKu-Y" :loop="false" class="w-100 h-64" style="width: 100%;"/>
             </div>
             <a href="" class="block font-medium text-base mt-5"></a>
@@ -100,17 +91,11 @@
             </Tippy>
         </div>
         <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
-            <div class="w-full flex text-gray-600 text-xs sm:text-sm">
-                <div class="mr-2">
-                    {{ $t('challengeMain.comments') }}: <span class="font-medium">{{ post.comments_count }}</span>
-                </div>
-                <div class="ml-auto">
-                    Polubień: <span class="font-medium">{{ post.likes }}</span>
-                </div>
-            </div>
+
             <CommentSectionKnowledge
                 :object="post"
                 :user="user"
+                type="knowledge"
             />
         </div>
     </div>
@@ -120,7 +105,8 @@
 
 import CommentSectionKnowledge from "../../components/social/CommentSectionKnowledge";
 import { YoutubeVue3 } from 'youtube-vue3'
-import {ref} from "vue";
+import {getCurrentInstance, ref, onMounted} from "vue";
+
 export default {
     name: "Post",
     components: {CommentSectionKnowledge, YoutubeVue3},
@@ -128,8 +114,32 @@ export default {
         user: Object,
         post: Object
     },
-    setup() {
+    setup(props, {emit}) {
+        //GLOBAL
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
+        const postObj = ref({})
         const play = ref([]);
+
+        const like = (post) => {
+            axios.post('api/knowledgebase/post/like', {id: post.id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        // console.log(response.data);
+                        postObj.likes = postObj.likes + 1;
+                        postObj.liked = true;
+                        emitter.emit('liked', {id: postObj.id})
+                        // getChallengeRepositories();
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        }
+
+        onMounted(function () {
+            postObj.value = props.post;
+        })
 
         const playVideo = (id) => {
             if(play.value[id] != undefined) {
@@ -140,8 +150,10 @@ export default {
         }
 
         return {
+            like,
             play,
-            playVideo
+            playVideo,
+            postObj
         }
     }
 }

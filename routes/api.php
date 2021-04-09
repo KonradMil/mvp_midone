@@ -5,6 +5,7 @@ use App\Http\Controllers\Crud\ChallengeController;
 use App\Http\Controllers\Crud\TeamsController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\KnowledgebaseController;
+use App\Http\Controllers\CommentsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,7 +42,10 @@ Route::group(['prefix' => 'knowledgebase/post', 'middleware' => 'auth:sanctum'],
     Route::post('get', [KnowledgebaseController::class, 'getPosts']);
     Route::post('add', [KnowledgebaseController::class, 'addPost']);
     Route::post('edit', [KnowledgebaseController::class, 'editPost']);
+    Route::post('like', [KnowledgebaseController::class, 'likePost']);
 });
+
+Route::post('user/comment', [CommentsController::class, 'comment']);
 
 Route::group(['prefix' => 'notifications', 'middleware' => 'auth:sanctum'], function () {
     Route::post('get', [NotificationsController::class, 'getNotifications']);

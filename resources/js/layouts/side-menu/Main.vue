@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DarkModeSwitcher />
+
     <MobileMenu />
     <div class="flex">
       <!-- BEGIN: Side Menu -->
@@ -151,7 +151,6 @@ export default defineComponent({
   components: {
     TopBar,
     MobileMenu,
-    DarkModeSwitcher,
     SideMenuTooltip
   },
     beforeRouteEnter(to, from, next) {

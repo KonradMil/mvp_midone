@@ -1,10 +1,13 @@
 <template>
   <!-- BEGIN: Dark Mode Switcher-->
   <div
-    class="dark-mode-switcher cursor-pointer shadow-md fixed bottom-0 right-0 box dark:bg-dark-2 border rounded-full w-40 h-12 flex items-center justify-center z-50 mb-10 mr-10"
+    class="dark-mode-switcher cursor-pointer w-24 h-12 flex items-center justify-center z-50 mr-1 bg-transparent"
     @click="switchMode"
   >
-    <div class="mr-4 text-gray-700 dark:text-gray-300">{{$t('darkmode.title')}}</div>
+    <div class="mr-2 text-gray-700 dark:text-gray-300 bg-transparent">
+        <SunIcon class="w-6 h-6" v-if="!darkMode"></SunIcon>
+        <MoonIcon class="w-6 h-6" v-if="darkMode"></MoonIcon>
+    </div>
     <div
       :class="{ 'dark-mode-switcher__toggle--active': darkMode }"
       class="dark-mode-switcher__toggle border"

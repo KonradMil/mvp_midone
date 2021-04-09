@@ -84,19 +84,7 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function commentChallenge(Request $request)
-    {
-        $id = $request->input('id');
-        $message = $request->input('message');
-        $challenge = Challenge::find($id);
-        $challenge->comment($message);
-        $comments = $challenge->comments;
-        return response()->json([
-            'success' => true,
-            'message' => 'Skomentowano.',
-            'payload' => $comments
-        ]);
-    }
+
 
     public function storeImage(Request $request)
     {

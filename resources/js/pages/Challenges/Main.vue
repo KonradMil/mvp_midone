@@ -137,9 +137,10 @@
                             Polubień: <span class="font-medium">{{ challenge.likes }}</span>
                         </div>
                     </div>
-                    <CommentSection
+                    <CommentSectionKnowledge
                         :challenge="challenge"
                         :user="user"
+                        type="challenge"
                     />
                 </div>
             </div>
@@ -200,12 +201,12 @@
 <script>
 import {defineComponent, ref, provide, onMounted} from "vue";
 import GetChallenges from "../../compositions/GetChallenges";
-import CommentSection from "../../components/social/CommentSection";
+import CommentSectionKnowledge from "../../components/social/CommentSectionKnowledge";
 
 
 export default {
     name: "ChallengesMain",
-    components: {CommentSection, Comment, GetChallenges},
+    components: {CommentSectionKnowledge, Comment, GetChallenges},
     setup: function () {
         const challenges = ref([]);
         const user = ref({});

@@ -21,7 +21,7 @@ const options = {
 
 };
 const i18n = createI18n({
-    locale: 'pl', // set locale
+    locale: store.state.main.currentLang, // set locale
     fallbackLocale: 'en', // set fallback locale
     messages, // set locale messages
 })

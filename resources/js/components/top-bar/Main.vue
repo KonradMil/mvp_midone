@@ -3,30 +3,35 @@
     <div class="top-bar">
         <!-- BEGIN: Breadcrumb -->
         <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
-            <a href="">Application</a>
-            <ChevronRightIcon class="breadcrumb__icon"/>
-            <a href="" class="breadcrumb--active">Dashboard</a>
+<!--            <a href="">Application</a>-->
+<!--            <ChevronRightIcon class="breadcrumb__icon"/>-->
+<!--            <a href="" class="breadcrumb&#45;&#45;active">Dashboard</a>-->
         </div>
         <!-- END: Breadcrumb -->
         <!-- BEGIN: Search -->
+        <div class="intro-x relative mr-2 sm:mr-2">
+            <DarkModeSwitcher />
+        </div>
         <div class="intro-x relative mr-3 sm:mr-6">
-            <TailSelect
-                @update:modelValue="changeLang"
-                @update="changeLang"
-                id="post-form-3"
-                v-model="lang"
-                :options="{
+            <div class="w-16">
+                <TailSelect
+                    id="post-form-3"
+                    v-model="lang"
+                    :options="{
                 locale: 'pl',
                 limit: 'Nie można wybrać więcej',
                 search: false,
                 hideSelected: false,
-                classNames: 'w-12'
+                classNames: 'w-16'
               }"
-            >
-                <option value="pl">PL</option>
-                <option value="en">EN</option>
+                >
+                    <option value="pl">PL</option>
+                    <option value="en">EN</option>
 
-            </TailSelect>
+                </TailSelect>
+            </div>
+        </div>
+            <div class="intro-x relative mr-3 sm:mr-6">
             <div class="search hidden sm:block">
                 <input
                     type="text"
@@ -237,15 +242,16 @@
 </template>
 
 <script>
-import {defineComponent, onMounted, ref, computed, getCurrentInstance} from "vue";
+import {defineComponent, onMounted, ref, computed, getCurrentInstance, watch} from "vue";
 import store, {useStore} from "../../store";
 import Avatar from "../avatar/Avatar";
 import router from '../../router';
 import GetNotifications from "../../compositions/GetNotifications"
 import { useI18n } from 'vue-i18n'
+import DarkModeSwitcher from "../dark-mode-switcher/Main";
 
 export default defineComponent({
-    components: {Avatar},
+    components: {Avatar,DarkModeSwitcher},
     data() {
         return {
             avatar_path: '',
@@ -284,7 +290,12 @@ export default defineComponent({
 
         const changeLang = () => {
             locale.value = lang.value;
+            store.dispatch('main/setCurrentLang', lang.value);
         }
+
+        watch(() => lang.value, (val) => {
+            changeLang();
+        });
 
         echo.private('App.Models.User.' + user.id)
             .notification((notification) => {
@@ -323,6 +334,7 @@ export default defineComponent({
         };
 
         onMounted(function () {
+            lang.value = store.state.main.currentLang;
            notifications.value = user.notifications;
         })
         return {
