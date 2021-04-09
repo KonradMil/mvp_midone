@@ -10,8 +10,7 @@ class S3Controller extends Controller
 {
     public function reRoute(Request $request, $path)
     {
-//        dd(Storage::disk('s3')->get('videos/Roboty w branzy spozywczej - JBB Baldyga.mp4'));
-//        dd($path);
+
         if(Storage::disk('s3')->exists($path)){
 
         } else {
@@ -25,7 +24,6 @@ class S3Controller extends Controller
 
         }
 
-//        $data = Storage::disk('s3')->get($path);
         $getMimeType = Storage::disk('s3')->getMimetype($path);
 
         $headers = [
@@ -48,7 +46,6 @@ class S3Controller extends Controller
             },
             200,
             $headers);
-//        return response()->make($data, 200, $headers);
     }
 
 

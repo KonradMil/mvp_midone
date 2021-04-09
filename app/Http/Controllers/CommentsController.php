@@ -31,6 +31,7 @@ class CommentsController extends Controller
             } else {
                 $object->liked = false;
             }
+        $object->comments = $comments;
         $object->comments_count = $object->comments()->count();
         $object->likes = $object->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
 

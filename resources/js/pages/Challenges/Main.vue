@@ -129,16 +129,8 @@
                     </Tippy>
                 </div>
                 <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
-                    <div class="w-full flex text-gray-600 text-xs sm:text-sm">
-                        <div class="mr-2">
-                            {{$t('challengeMain.comments')}}: <span class="font-medium">{{challenge.comments_count}}</span>
-                        </div>
-                        <div class="ml-auto">
-                            Polubień: <span class="font-medium">{{ challenge.likes }}</span>
-                        </div>
-                    </div>
-                    <CommentSectionKnowledge
-                        :challenge="challenge"
+                    <CommentSection
+                        :object="challenge"
                         :user="user"
                         type="challenge"
                     />
@@ -199,17 +191,19 @@
 </template>
 
 <script>
-import {defineComponent, ref, provide, onMounted} from "vue";
+import {defineComponent, ref, provide, onMounted, getCurrentInstance} from "vue";
 import GetChallenges from "../../compositions/GetChallenges";
-import CommentSectionKnowledge from "../../components/social/CommentSectionKnowledge";
+import CommentSection from "../../components/social/CommentSection";
 
 
 export default {
     name: "ChallengesMain",
-    components: {CommentSectionKnowledge, Comment, GetChallenges},
+    components: {CommentSection, Comment, GetChallenges},
     setup: function () {
         const challenges = ref([]);
         const user = ref({});
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
 
         const getChallengeRepositories = async () => {
             challenges.value = GetChallenges();
@@ -229,8 +223,10 @@ export default {
                     // console.log(response.data)
                     if (response.data.success) {
                         // console.log(response.data);
-                        challenge.likes = challenge.likes + 1;
+                        // challenge.likes = challenge.likes + 1;
                         challenge.liked = true;
+                        console.log(challenge);
+                        emitter.emit('liked', {id: challenge.id})
                         // getChallengeRepositories();
                     } else {
                         // toast.error(response.data.message);

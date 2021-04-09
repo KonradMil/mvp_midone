@@ -1,14 +1,27 @@
 <template>
-    <Comment v-if="current_challenge_focus == challenge.id && current_challenge_focus_showComments" v-for="comment in challenge.comments" :user="user" :comment="comment"/>
-    <a
-        @click.prevent="showComments(challenge.id)"
-        href=""
-        class="intro-x w-full block text-center rounded-md py-3 mt-3 border border-dotted border-theme-15 dark:border-dark-5 text-theme-16 dark:text-gray-600"
-    >
-        <span v-if="(current_challenge_focus == challenge.id && !current_challenge_focus_showComments) || !(current_challenge_focus == challenge.id)">Zobacz komentarze</span>
-        <span v-if="current_challenge_focus == challenge.id && current_challenge_focus_showComments">Ukryj komentarze</span>
-    </a
-    >
+    <div class="w-full flex text-gray-600 text-xs sm:text-sm">
+        <div class="mr-2" v-if="obj != undefined">
+            {{ $t('challengeMain.comments') }}: <span class="font-medium">{{ obj.comments_count }}</span>
+        </div>
+        <div class="ml-auto" v-if="obj != undefined">
+            Polubień: <span class="font-medium">{{ obj.likes }}</span>
+        </div>
+    </div>
+    <div v-if="object != undefined">
+        <Comment v-if="(current_object_focus == obj.id && current_object_focus_showComments)"
+                 v-for="comment in comments" :user="user" :comment="comment"/>
+    </div>
+    <div v-if="comments != undefined && obj != undefined && comments.length != 0" >
+        <a
+            @click.prevent="showComments(obj.id)"
+            href=""
+            class="intro-x w-full block text-center rounded-md py-3 mt-3 border border-dotted border-theme-15 dark:border-dark-5 text-theme-16 dark:text-gray-600">
+
+              <span
+                  v-if="((current_object_focus == object.id && !current_object_focus_showComments) || !(current_object_focus == obj.id)) && comments.length != 0">Zobacz komentarze</span>
+            <span v-if="(current_object_focus == object.id && current_object_focus_showComments) && comments.length != 0">Ukryj komentarze</span>
+        </a>
+    </div>
     <div class="w-full flex items-center mt-3">
         <div class="w-8 h-8 flex-none image-fit mr-3">
             <Avatar :src="'uploads/' + user.avatar" :username="user.name + ' ' + user.lastname" size="40" color="#FFF"
@@ -16,7 +29,7 @@
         </div>
         <div class="flex-1 relative text-gray-700">
             <form role="form" @submit.prevent>
-                <input @keyup.enter="addCommentChallenge(challenge.id)"
+                <input @keyup.enter="addCommentObject(object.id)"
                        type="text"
                        v-model="message"
                        class="form-control form-control-rounded border-transparent bg-gray-200 pr-10 placeholder-theme-13"
@@ -32,39 +45,58 @@
 </template>
 
 <script>
-import {ref} from "vue";
+import {getCurrentInstance, onMounted, ref} from "vue";
 import Comment from "../../components/social/Comment";
 import Avatar from "../avatar/Avatar";
-export default {
-name: "CommentSection",
-    props: {
-        challenge: Object,
-        user: Object,
 
+export default {
+    name: "CommentSection",
+    props: {
+        object: Object,
+        user: Object,
+        type: String
     },
     components: {
         Avatar,
-    Comment
+        Comment
     },
-    setup() {
-        const current_challenge_focus = ref(0);
-        const current_challenge_focus_showComments = ref(false);
+    setup(props, {emit}) {
+        const current_object_focus = ref(0);
+        const current_object_focus_showComments = ref(false);
         const message = ref('');
+        const comments = ref([]);
+        const obj = ref([]);
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
 
-        const addCommentChallenge = async (id) => {
-            current_challenge_focus.value = id;
-            axios.post('api/challenge/user/comment', {id: id, message: message.value})
+        onMounted(function () {
+            console.log(props.object);
+            comments.value = props.object.comments;
+            obj.value = props.object;
+        });
+
+
+        //LIKED
+        emitter.on('liked', e =>  like(e.id) )
+
+        const like = (id) => {
+            console.log('LIKED EVENT ON');
+            console.log([id, obj.value]);
+            if(obj.value.id === id) {
+                obj.value.likes = obj.value.likes + 1;
+            }
+        }
+
+        const addCommentObject = async (id) => {
+            current_object_focus.value = id;
+            axios.post('api/user/comment', {id: id, message: message.value, type: props.type})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
-                        challenges.value.list.forEach(function(obj) {
-                            console.log(obj);
-                            console.log(obj.id);
-                            console.log(current_challenge_focus);
-                            if(obj.id == current_challenge_focus.value) {
-                                obj.comments = response.data.payload;
-                            }
-                        });
+                        comments.value = response.data.payload.comments;
+                        obj.value = response.data.payload;
+                        showComments(id);
+                        current_object_focus_showComments.value = true;
+                        message.value = '';
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -72,16 +104,18 @@ name: "CommentSection",
         }
 
         const showComments = (id) => {
-            current_challenge_focus.value = id;
-            current_challenge_focus_showComments.value = !current_challenge_focus_showComments.value;
+            current_object_focus.value = id;
+            current_object_focus_showComments.value = !current_object_focus_showComments.value;
         }
 
         return {
-            addCommentChallenge,
+            addCommentObject,
             message,
-            current_challenge_focus,
-            current_challenge_focus_showComments,
-            showComments
+            current_object_focus,
+            current_object_focus_showComments,
+            showComments,
+            comments,
+            obj
         }
     }
 }

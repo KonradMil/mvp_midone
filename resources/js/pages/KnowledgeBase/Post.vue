@@ -92,7 +92,7 @@
         </div>
         <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
 
-            <CommentSectionKnowledge
+            <CommentSection
                 :object="post"
                 :user="user"
                 type="knowledge"
@@ -103,13 +103,13 @@
 
 <script>
 
-import CommentSectionKnowledge from "../../components/social/CommentSectionKnowledge";
+import CommentSection from "../../components/social/CommentSection";
 import { YoutubeVue3 } from 'youtube-vue3'
 import {getCurrentInstance, ref, onMounted} from "vue";
 
 export default {
     name: "Post",
-    components: {CommentSectionKnowledge, YoutubeVue3},
+    components: {CommentSection, YoutubeVue3},
     props: {
         user: Object,
         post: Object
@@ -127,9 +127,10 @@ export default {
                     // console.log(response.data)
                     if (response.data.success) {
                         // console.log(response.data);
-                        postObj.likes = postObj.likes + 1;
-                        postObj.liked = true;
-                        emitter.emit('liked', {id: postObj.id})
+                        postObj.value.likes = postObj.value.likes + 1;
+                        postObj.value.liked = true;
+
+                        emitter.emit('liked', {id: postObj.value.id})
                         // getChallengeRepositories();
                     } else {
                         // toast.error(response.data.message);
