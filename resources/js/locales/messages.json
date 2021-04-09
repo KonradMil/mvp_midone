@@ -1,5 +1,9 @@
 {
     "en": {
+        "global": {
+            "Szukaj" : "Search...",
+            "name": "Name"
+        },
         "topBar": {
             "profil": "Profile",
             "addAccount": "Add account",
@@ -74,6 +78,10 @@
         }
     },
     "pl": {
+        "global": {
+            "Szukaj" : "Szukaj...",
+            "name": "Nazwa"
+        },
         "topBar": {
             "profil": "Profil",
             "addAccount": "Dodaj konto",

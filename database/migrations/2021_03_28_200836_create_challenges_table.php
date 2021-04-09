@@ -17,7 +17,9 @@ class CreateChallengesTable extends Migration
             $table->id();
             $table->integer('type');
             $table->string('name')->nullable();
+            $table->string('en_name')->nullable();
             $table->string('description')->nullable();
+            $table->string('en_description')->nullable();
             $table->timestamp('solution_deadline');
             $table->timestamp('offer_deadline');
             $table->integer('status');

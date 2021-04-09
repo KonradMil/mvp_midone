@@ -24,8 +24,10 @@ class CreateSolutionsTable extends Migration
             $table->integer('financial_after_id')->nullable();
             $table->longText('save_json')->nullable();
             $table->string('name');
+            $table->string('en_name');
             $table->string('screenshot_path');
             $table->mediumText('description')->nullable();
+            $table->mediumText('en_description')->nullable();
             $table->integer('status');
             $table->integer('published');
             $table->timestamps();

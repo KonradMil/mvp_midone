@@ -18,8 +18,8 @@ class Challenge extends Model implements ReactableInterface
     public $table = 'challenges';
     protected $fillable = [
         'type',
-        'name', 'solution_deadline', 'offer_deadline', 'status', 'stage', 'save_json', 'screenshot_path',
-        'client_id', 'author_id', 'financial_before_id', 'description', 'allowed_publishing'
+        'name', 'en_name', 'solution_deadline', 'offer_deadline', 'status', 'stage', 'save_json', 'screenshot_path',
+        'client_id', 'author_id', 'financial_before_id', 'description', 'en_description', 'allowed_publishing'
     ];
 
 

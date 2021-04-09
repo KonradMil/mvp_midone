@@ -16,6 +16,7 @@ import VueFinalModal from 'vue-final-modal'
 import Echo from 'laravel-echo';
 import mitt from 'mitt'
 
+
 const emitter = mitt()
 const options = {
 
@@ -66,6 +67,7 @@ router.beforeEach((to, from, next) => {
         next();
     }
 })
+
 app.use(VueFinalModal)
 app.use(router)
 app.use(store)
