@@ -15,6 +15,8 @@ import NotFound from "../pages/NotFound";
 import Main from "../pages/Unity/Main";
 import MainKnowledgebase  from "../pages/KnowledgeBase/Main";
 import AddKnowledgebase  from "../pages/KnowledgeBase/Add";
+import List from "../pages/Models/List";
+import ModelAdd from "../pages/Models/ModelAdd";
 
 export const routes = [
     {
@@ -33,6 +35,7 @@ export const routes = [
         component: Register,
         props: true
     },
+
     {
         name: 'studio',
         path: '/studio',
@@ -43,6 +46,18 @@ export const routes = [
         path: "/",
         component: SideMenu,
         children: [
+            {
+                name: 'models',
+                path: '/models',
+                component: List,
+                props: true
+            },
+            {
+                name: 'modelsAdd',
+                path: '/models/add',
+                component: ModelAdd,
+                props: true
+            },
             {
                 name: 'addChallenge',
                 path: '/challenge/add',

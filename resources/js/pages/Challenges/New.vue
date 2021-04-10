@@ -565,11 +565,6 @@ export default {
             teams.value = GetTeams();
         }
 
-        const prepareVals = (vals) => {
-            console.log('VALS');
-            console.log(vals);
-        }
-
         const saveChallengeRepo = async () => {
             SaveChallenge({
                 name: name.value,
@@ -643,8 +638,7 @@ export default {
             name_lang,
             en_name,
             description_lang,
-            en_description,
-            prepareVals
+            en_description
         };
     },
     beforeRouteEnter(to, from, next) {

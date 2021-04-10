@@ -7,6 +7,11 @@ const state = () => {
                 title: "Dashboard",
             },
             {
+                icon: "HomeIcon",
+                pageName: "models",
+                title: "Models",
+            },
+            {
                 icon: "BoxIcon",
                 pageName: "#",
                 title: "Wyzwania",

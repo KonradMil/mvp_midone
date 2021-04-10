@@ -13,6 +13,7 @@
         },
         "menu": {
             "Dashboard": "Dashboard",
+            "Models": "Models",
             "Wyzwania": "Challenges",
             "Rozwiązania": "Solutions",
             "Oferty": "Offers",
@@ -20,7 +21,7 @@
             "Zespoły": "Teams",
             "3D Studio": "3D Studio",
             "Baza wiedzy": "Knowledge base",
-            "Marketplace obiektów": "Marketplace objects",
+            "Marketplace obiektów": "Objects marketplace",
             "Komunikacja": "Communication"
         },
         "subMenu": {
@@ -91,6 +92,7 @@
         },
         "menu": {
             "Dashboard": "Dashboard",
+            "Models": "Modele",
             "Wyzwania": "Wyzwania",
             "Rozwiązania": "Rozwiązania",
             "Oferty": "Oferty",

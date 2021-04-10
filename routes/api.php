@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\Crud\ChallengeController;
+use App\Http\Controllers\Crud\ModelController;
 use App\Http\Controllers\Crud\TeamsController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\KnowledgebaseController;
@@ -61,3 +62,7 @@ Route::group(['prefix' => 'teams', 'middleware' => 'auth:sanctum'], function () 
     Route::post('user/get', [TeamsController::class, 'getUserTeamsFiltered']);
 });
 
+Route::group(['prefix' => 'models', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('get', [ModelController::class, 'getModels']);
+    Route::post('add', [ModelController::class, 'addModel']);
+});
