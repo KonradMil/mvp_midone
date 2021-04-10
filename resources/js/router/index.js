@@ -15,7 +15,7 @@ import NotFound from "../pages/NotFound";
 import Main from "../pages/Unity/Main";
 import MainKnowledgebase  from "../pages/KnowledgeBase/Main";
 import AddKnowledgebase  from "../pages/KnowledgeBase/Add";
-
+import Profiles from "../pages/Profiles/Main";
 export const routes = [
     {
         name: 'login',
@@ -92,7 +92,11 @@ export const routes = [
                 path: '/dashboard',
                 component: Dashboard
             },
-
+            {
+                name: 'profiles',
+                path: '/profiles',
+                component: Profiles
+            },
         ]
     },
     {
