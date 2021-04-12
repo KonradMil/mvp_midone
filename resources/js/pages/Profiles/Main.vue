@@ -50,7 +50,7 @@
                     <a id="account-tab" data-toggle="tab" data-target="#account" href="javascript:;" class="py-4 sm:mr-8 flex items-center" role="tab" aria-selected="false"> <i class="w-4 h-4 mr-2" data-feather="shield"></i> Account </a>
                     <a @click="$router.push('change-password')" id="change-password-tab" data-toggle="tab" data-target="#change-password" href="javascript:;" class="py-4 sm:mr-8 flex items-center" role="tab" aria-selected="false"> <i class="w-4 h-4 mr-2" data-feather="lock"></i> Change Password </a>
                     <a id="settings-tab" data-toggle="tab" data-target="#settings" href="javascript:;" class="py-4 sm:mr-8 flex items-center" role="tab" aria-selected="false"> <i class="w-4 h-4 mr-2" data-feather="settings"></i> Settings </a>
-                    <a @click="$router.push('update-profile')" data-toggle="tab" data-target="#settings" href="javascript:;" class="py-4 sm:mr-8 flex items-center" role="tab" aria-selected="false"> <i class="w-4 h-4 mr-2" data-feather="settings"></i> Update Profile </a>
+                    <a @click="$router.push('update-profile')" data-toggle="tab" data-target="#settings" href="javascript:" class="py-4 sm:mr-8 flex items-center" role="tab" aria-selected="false"> <i class="w-4 h-4 mr-2" data-feather="settings"></i> Update Profile </a>
                 </div>
             </div>
             <!-- END: Profile Info -->

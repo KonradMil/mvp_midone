@@ -10,6 +10,8 @@ import WizardOne from "../pages/WizardOne";
 import WizardTwo from "../pages/WizardTwo";
 import Challenges from "../pages/Challenges/Main";
 import AddChallenge from "../pages/Challenges/New";
+import Solutions from "../pages/Solutions/Main";
+import AddSolution from "../pages/Solutions/New";
 import Teams from "../pages/Teams/Teams";
 import NotFound from "../pages/NotFound";
 import Main from "../pages/Unity/Main";
@@ -18,6 +20,9 @@ import AddKnowledgebase  from "../pages/KnowledgeBase/Add";
 import Profiles from "../pages/Profiles/Main";
 import List from "../pages/Models/List";
 import ModelAdd from "../pages/Models/ModelAdd";
+import UpdateProfile from "../pages/Profiles/UpdateProfile";
+import ChangePassword from "../pages/Profiles/ChangePassword";
+import Communication from "../pages/Communication/Main";
 
 export const routes = [
     {
@@ -70,6 +75,16 @@ export const routes = [
                 component: Challenges
             },
             {
+                name: 'addSolution',
+                path: '/solution/add',
+                component: AddSolution
+            },
+            {
+                name: 'solutions',
+                path: '/solutions',
+                component: Solutions
+            },
+            {
                 name: 'knowledgebase',
                 path: '/knowledgebase',
                 component: MainKnowledgebase
@@ -83,6 +98,11 @@ export const routes = [
                 name: 'teams',
                 path: '/teams',
                 component: Teams
+            },
+            {
+                name: 'communication',
+                path: '/communication',
+                component: Communication
             },
             {
                 name: 'wizard',
@@ -113,6 +133,17 @@ export const routes = [
                 path: '/profiles',
                 component: Profiles
             },
+            {
+                name: 'update-profile',
+                path: '/update-profile',
+                component: UpdateProfile
+            },
+            {
+                name: 'change-password',
+                path: '/change-password',
+                component: ChangePassword
+            },
+
         ]
     },
     {
