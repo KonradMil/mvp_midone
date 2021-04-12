@@ -50,7 +50,7 @@
                     />
                 </div>
 
-                <div class="post intro-y overflow-hidden box mt-5">
+                <div class="post intro-y box mt-5">
                     <div
                         class="post__tabs nav nav-tabs flex-col sm:flex-row bg-gray-300 dark:bg-dark-2 text-gray-600"
                         role="tablist"
@@ -302,13 +302,13 @@
 
                                                 </TailSelect>
                                             </div>
-                                            <div class="intro-y col-span-12 sm:col-span-6">
+                                            <div class="intro-y col-span-12 sm:col-span-6" >
                                                 <label for="input-wizard-9" class="form-label">Ilość obsługiwanych
                                                     stanowisk/lini</label>
                                                 <TailSelect
                                                     id="input-wizard-9"
                                                     v-model="select_number_of_lines"
-                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', openAbove: true, animate: false, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', openAbove: false, animate: false, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
                                                     <option selected disabled>Wybierz...</option>
                                                     <option
