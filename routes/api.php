@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\Crud\ChallengeController;
+use App\Http\Controllers\Crud\ModelController;
+use App\Http\Controllers\Crud\SolutionController;
 use App\Http\Controllers\Crud\TeamsController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\KnowledgebaseController;
@@ -38,6 +40,15 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
     Route::post('images/store', [ChallengeController::class, 'storeImage']);
 });
 
+Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('user/get', [SolutionController::class, 'getUserSolutionsFiltered']);
+    Route::post('user/create', [SolutionController::class, 'createSolution']);
+    Route::post('user/like', [SolutionController::class, 'likeSolution']);
+    Route::post('user/comment', [SolutionController::class, 'commentSolution']);
+    Route::post('images/store', [SolutionController::class, 'storeImage']);
+});
+
+
 Route::group(['prefix' => 'knowledgebase/post', 'middleware' => 'auth:sanctum'], function () {
     Route::post('get', [KnowledgebaseController::class, 'getPosts']);
     Route::post('add', [KnowledgebaseController::class, 'addPost']);
@@ -61,3 +72,7 @@ Route::group(['prefix' => 'teams', 'middleware' => 'auth:sanctum'], function () 
     Route::post('user/get', [TeamsController::class, 'getUserTeamsFiltered']);
 });
 
+Route::group(['prefix' => 'models', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('get', [ModelController::class, 'getModels']);
+    Route::post('add', [ModelController::class, 'addModel']);
+});

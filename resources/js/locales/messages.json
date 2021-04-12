@@ -1,5 +1,9 @@
 {
     "en": {
+        "global": {
+            "Szukaj" : "Search...",
+            "name": "Name"
+        },
         "topBar": {
             "profil": "Profile",
             "addAccount": "Add account",
@@ -9,6 +13,7 @@
         },
         "menu": {
             "Dashboard": "Dashboard",
+            "Models": "Models",
             "Wyzwania": "Challenges",
             "Rozwiązania": "Solutions",
             "Oferty": "Offers",
@@ -16,7 +21,7 @@
             "Zespoły": "Teams",
             "3D Studio": "3D Studio",
             "Baza wiedzy": "Knowledge base",
-            "Marketplace obiektów": "Marketplace objects",
+            "Marketplace obiektów": "Objects marketplace",
             "Komunikacja": "Communication"
         },
         "subMenu": {
@@ -74,6 +79,10 @@
         }
     },
     "pl": {
+        "global": {
+            "Szukaj" : "Szukaj...",
+            "name": "Nazwa"
+        },
         "topBar": {
             "profil": "Profil",
             "addAccount": "Dodaj konto",
@@ -83,6 +92,7 @@
         },
         "menu": {
             "Dashboard": "Dashboard",
+            "Models": "Modele",
             "Wyzwania": "Wyzwania",
             "Rozwiązania": "Rozwiązania",
             "Oferty": "Oferty",

@@ -37,7 +37,7 @@
                     type="text"
                     style="color: #fff"
                     class="search__input form-control border-transparent placeholder-theme-13"
-                    placeholder="Szukaj..."
+                    :placeholder="$t('global.Szukaj')"
                     @focus="showSearchDropdown"
                     @blur="hideSearchDropdown"
                 />
@@ -181,7 +181,7 @@
                 role="button"
                 aria-expanded="false"
             >
-                <Avatar :src="'uploads/' + user.avatar_path" :username="user.name + ' ' + user.lastname" size="30"
+                <Avatar :src="'uploads/' + user.avatar" :username="user.name + ' ' + user.lastname" size="30"
                         color="#FFF" background-color="#930f68"/>
             </div>
             <div class="dropdown-menu w-56">
@@ -198,6 +198,7 @@
                         <a
                             href=""
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
+                            @click="$router.push('profiles')"
                         >
                             <UserIcon class="w-4 h-4 mr-2"/>
                             {{$t('topBar.profil')}}

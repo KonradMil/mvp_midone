@@ -7,6 +7,11 @@ const state = () => {
                 title: "Dashboard",
             },
             {
+                icon: "HomeIcon",
+                pageName: "models",
+                title: "Models",
+            },
+            {
                 icon: "BoxIcon",
                 pageName: "#",
                 title: "Wyzwania",
@@ -43,6 +48,12 @@ const state = () => {
                 pageName: "solutions",
                 title: "Rozwiązania",
                 subMenu: [
+                    {
+                        icon: "",
+                        pageName: "solutions",
+                        title: "Wszystkie",
+                        ignore: true
+                    },
                     {
                         icon: "",
                         pageName: "solutions-active",

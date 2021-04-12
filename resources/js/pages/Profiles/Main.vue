@@ -4,199 +4,6 @@
         <!-- BEGIN: Content -->
         <div class="content">
             <!-- BEGIN: Top Bar -->
-            <div class="top-bar">
-                <!-- BEGIN: Breadcrumb -->
-                <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="" class="breadcrumb--active">Dashboard</a> </div>
-                <!-- END: Breadcrumb -->
-                <!-- BEGIN: Search -->
-                <div class="intro-x relative mr-3 sm:mr-6">
-                    <div class="search hidden sm:block">
-                        <input type="text" class="search__input form-control border-transparent placeholder-theme-13" placeholder="Search...">
-                        <i data-feather="search" class="search__icon dark:text-gray-300"></i>
-                    </div>
-                    <a class="notification sm:hidden" href=""> <i data-feather="search" class="notification__icon dark:text-gray-300"></i> </a>
-                    <div class="search-result">
-                        <div class="search-result__content">
-                            <div class="search-result__content__title">Pages</div>
-                            <div class="mb-5">
-                                <a href="" class="flex items-center">
-                                    <div class="w-8 h-8 bg-theme-18 text-theme-9 flex items-center justify-center rounded-full"> <i class="w-4 h-4" data-feather="inbox"></i> </div>
-                                    <div class="ml-3">Mail Settings</div>
-                                </a>
-                                <a href="" class="flex items-center mt-2">
-                                    <div class="w-8 h-8 bg-theme-17 text-theme-11 flex items-center justify-center rounded-full"> <i class="w-4 h-4" data-feather="users"></i> </div>
-                                    <div class="ml-3">Users & Permissions</div>
-                                </a>
-                                <a href="" class="flex items-center mt-2">
-                                    <div class="w-8 h-8 bg-theme-14 text-theme-10 flex items-center justify-center rounded-full"> <i class="w-4 h-4" data-feather="credit-card"></i> </div>
-                                    <div class="ml-3">Transactions Report</div>
-                                </a>
-                            </div>
-                            <div class="search-result__content__title">Users</div>
-                            <div class="mb-5">
-                                <a href="" class="flex items-center mt-2">
-                                    <div class="w-8 h-8 image-fit">
-                                        <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-9.jpg">
-                                    </div>
-                                    <div class="ml-3">Brad Pitt</div>
-                                    <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">bradpitt@left4code.com</div>
-                                </a>
-                                <a href="" class="flex items-center mt-2">
-                                    <div class="w-8 h-8 image-fit">
-                                        <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-9.jpg">
-                                    </div>
-                                    <div class="ml-3">Al Pacino</div>
-                                    <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">alpacino@left4code.com</div>
-                                </a>
-                                <a href="" class="flex items-center mt-2">
-                                    <div class="w-8 h-8 image-fit">
-                                        <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-15.jpg">
-                                    </div>
-                                    <div class="ml-3">Leonardo DiCaprio</div>
-                                    <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">leonardodicaprio@left4code.com</div>
-                                </a>
-                                <a href="" class="flex items-center mt-2">
-                                    <div class="w-8 h-8 image-fit">
-                                        <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-12.jpg">
-                                    </div>
-                                    <div class="ml-3">Leonardo DiCaprio</div>
-                                    <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">leonardodicaprio@left4code.com</div>
-                                </a>
-                            </div>
-                            <div class="search-result__content__title">Products</div>
-                            <a href="" class="flex items-center mt-2">
-                                <div class="w-8 h-8 image-fit">
-                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/preview-11.jpg">
-                                </div>
-                                <div class="ml-3">Samsung Q90 QLED TV</div>
-                                <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">Electronic</div>
-                            </a>
-                            <a href="" class="flex items-center mt-2">
-                                <div class="w-8 h-8 image-fit">
-                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/preview-10.jpg">
-                                </div>
-                                <div class="ml-3">Apple MacBook Pro 13</div>
-                                <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">PC &amp; Laptop</div>
-                            </a>
-                            <a href="" class="flex items-center mt-2">
-                                <div class="w-8 h-8 image-fit">
-                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/preview-9.jpg">
-                                </div>
-                                <div class="ml-3">Samsung Q90 QLED TV</div>
-                                <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">Electronic</div>
-                            </a>
-                            <a href="" class="flex items-center mt-2">
-                                <div class="w-8 h-8 image-fit">
-                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/preview-12.jpg">
-                                </div>
-                                <div class="ml-3">Sony Master Series A9G</div>
-                                <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">Electronic</div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- END: Search -->
-                <!-- BEGIN: Notifications -->
-                <div class="intro-x dropdown mr-auto sm:mr-6">
-                    <div class="dropdown-toggle notification notification--bullet cursor-pointer" role="button" aria-expanded="false"> <i data-feather="bell" class="notification__icon dark:text-gray-300"></i> </div>
-                    <div class="notification-content pt-2 dropdown-menu">
-                        <div class="notification-content__box dropdown-menu__content box dark:bg-dark-6">
-                            <div class="notification-content__title">Notifications</div>
-                            <div class="cursor-pointer relative flex items-center ">
-                                <div class="w-12 h-12 flex-none image-fit mr-1">
-                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-9.jpg">
-                                    <div class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white"></div>
-                                </div>
-                                <div class="ml-2 overflow-hidden">
-                                    <div class="flex items-center">
-                                        <a href="javascript:;" class="font-medium truncate mr-5">Brad Pitt</a>
-                                        <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">06:05 AM</div>
-                                    </div>
-                                    <div class="w-full truncate text-gray-600 mt-0.5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500</div>
-                                </div>
-                            </div>
-                            <div class="cursor-pointer relative flex items-center mt-5">
-                                <div class="w-12 h-12 flex-none image-fit mr-1">
-                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-9.jpg">
-                                    <div class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white"></div>
-                                </div>
-                                <div class="ml-2 overflow-hidden">
-                                    <div class="flex items-center">
-                                        <a href="javascript:;" class="font-medium truncate mr-5">Al Pacino</a>
-                                        <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">05:09 AM</div>
-                                    </div>
-                                    <div class="w-full truncate text-gray-600 mt-0.5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500</div>
-                                </div>
-                            </div>
-                            <div class="cursor-pointer relative flex items-center mt-5">
-                                <div class="w-12 h-12 flex-none image-fit mr-1">
-                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-15.jpg">
-                                    <div class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white"></div>
-                                </div>
-                                <div class="ml-2 overflow-hidden">
-                                    <div class="flex items-center">
-                                        <a href="javascript:;" class="font-medium truncate mr-5">Leonardo DiCaprio</a>
-                                        <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">05:09 AM</div>
-                                    </div>
-                                    <div class="w-full truncate text-gray-600 mt-0.5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500</div>
-                                </div>
-                            </div>
-                            <div class="cursor-pointer relative flex items-center mt-5">
-                                <div class="w-12 h-12 flex-none image-fit mr-1">
-                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-12.jpg">
-                                    <div class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white"></div>
-                                </div>
-                                <div class="ml-2 overflow-hidden">
-                                    <div class="flex items-center">
-                                        <a href="javascript:;" class="font-medium truncate mr-5">Leonardo DiCaprio</a>
-                                        <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">01:10 PM</div>
-                                    </div>
-                                    <div class="w-full truncate text-gray-600 mt-0.5">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem </div>
-                                </div>
-                            </div>
-                            <div class="cursor-pointer relative flex items-center mt-5">
-                                <div class="w-12 h-12 flex-none image-fit mr-1">
-                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-8.jpg">
-                                    <div class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white"></div>
-                                </div>
-                                <div class="ml-2 overflow-hidden">
-                                    <div class="flex items-center">
-                                        <a href="javascript:;" class="font-medium truncate mr-5">Brad Pitt</a>
-                                        <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">01:10 PM</div>
-                                    </div>
-                                    <div class="w-full truncate text-gray-600 mt-0.5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END: Notifications -->
-                <!-- BEGIN: Account Menu -->
-                <div class="intro-x dropdown w-8 h-8">
-                    <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in" role="button" aria-expanded="false">
-                        <img alt="Rubick Tailwind HTML Admin Template" src="dist/images/profile-8.jpg">
-                    </div>
-                    <div class="dropdown-menu w-56">
-                        <div class="dropdown-menu__content box bg-theme-26 dark:bg-dark-6 text-white">
-                            <div class="p-4 border-b border-theme-27 dark:border-dark-3">
-                                <div class="font-medium">Brad Pitt</div>
-                                <div class="text-xs text-theme-28 mt-0.5 dark:text-gray-600">DevOps Engineer</div>
-                            </div>
-                            <div class="p-2">
-                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="user" class="w-4 h-4 mr-2"></i> Profile </a>
-                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="edit" class="w-4 h-4 mr-2"></i> Add Account </a>
-                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="lock" class="w-4 h-4 mr-2"></i> Reset Password </a>
-                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="help-circle" class="w-4 h-4 mr-2"></i> Help </a>
-                            </div>
-                            <div class="p-2 border-t border-theme-27 dark:border-dark-3">
-                                <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="toggle-right" class="w-4 h-4 mr-2"></i> Logout </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END: Account Menu -->
-            </div>
-            <!-- END: Top Bar -->
             <div class="intro-y flex items-center mt-8">
                 <h2 class="text-lg font-medium mr-auto">
                     Profile Layout
@@ -207,17 +14,18 @@
                 <div class="flex flex-col lg:flex-row border-b border-gray-200 dark:border-dark-5 pb-5 -mx-5">
                     <div class="flex flex-1 px-5 items-center justify-center lg:justify-start">
                         <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
-                            <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-11.jpg">
-                        </div>
+                            <Avatar :src="'uploads/' + user.avatar" :username="user.name + ' ' + user.lastname" size="120"
+                                    color="#FFF" background-color="#930f68"/>                   </div>
                         <div class="ml-5">
-                            <div class="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">Al Pacino</div>
-                            <div class="text-gray-600">Backend Engineer</div>
+                            <div class="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{{ user.name }} {{user.lastname}}</div>
+                            <div class="text-gray-600">{{ user.type }}</div>
                         </div>
                     </div>
                     <div class="mt-6 lg:mt-0 flex-1 dark:text-gray-300 px-5 border-l border-r border-gray-200 dark:border-dark-5 border-t lg:border-t-0 pt-5 lg:pt-0">
                         <div class="font-medium text-center lg:text-left lg:mt-3">Contact Details</div>
                         <div class="flex flex-col justify-center items-center lg:items-start mt-4">
-                            <div class="truncate sm:whitespace-normal flex items-center"> <i data-feather="mail" class="w-4 h-4 mr-2"></i> alpacino@left4code.com </div>
+                            <div class="truncate sm:whitespace-normal flex items-center"> <i data-feather="mail" class="w-4 h-4 mr-2"></i>
+                                {{ user.email }} </div>
                             <div class="truncate sm:whitespace-normal flex items-center mt-3"> <i data-feather="instagram" class="w-4 h-4 mr-2"></i> Instagram Al Pacino </div>
                             <div class="truncate sm:whitespace-normal flex items-center mt-3"> <i data-feather="twitter" class="w-4 h-4 mr-2"></i> Twitter Al Pacino </div>
                         </div>
@@ -240,8 +48,9 @@
                 <div class="nav nav-tabs flex-col sm:flex-row justify-center lg:justify-start" role="tablist">
                     <a id="profile-tab" data-toggle="tab" data-target="#profile" href="javascript:;" class="py-4 sm:mr-8 flex items-center active" role="tab" aria-controls="profile" aria-selected="true"> <i class="w-4 h-4 mr-2" data-feather="user"></i> Profile </a>
                     <a id="account-tab" data-toggle="tab" data-target="#account" href="javascript:;" class="py-4 sm:mr-8 flex items-center" role="tab" aria-selected="false"> <i class="w-4 h-4 mr-2" data-feather="shield"></i> Account </a>
-                    <a id="change-password-tab" data-toggle="tab" data-target="#change-password" href="javascript:;" class="py-4 sm:mr-8 flex items-center" role="tab" aria-selected="false"> <i class="w-4 h-4 mr-2" data-feather="lock"></i> Change Password </a>
+                    <a @click="$router.push('change-password')" id="change-password-tab" data-toggle="tab" data-target="#change-password" href="javascript:;" class="py-4 sm:mr-8 flex items-center" role="tab" aria-selected="false"> <i class="w-4 h-4 mr-2" data-feather="lock"></i> Change Password </a>
                     <a id="settings-tab" data-toggle="tab" data-target="#settings" href="javascript:;" class="py-4 sm:mr-8 flex items-center" role="tab" aria-selected="false"> <i class="w-4 h-4 mr-2" data-feather="settings"></i> Settings </a>
+                    <a @click="$router.push('update-profile')" data-toggle="tab" data-target="#settings" href="javascript:;" class="py-4 sm:mr-8 flex items-center" role="tab" aria-selected="false"> <i class="w-4 h-4 mr-2" data-feather="settings"></i> Update Profile </a>
                 </div>
             </div>
             <!-- END: Profile Info -->
@@ -688,8 +497,8 @@
                                                 </div>
                                             </div>
                                             <div class="mr-auto text-center sm:text-left mt-3 sm:mt-0">
-                                                <a href="" class="font-medium text-lg">Al Pacino</a>
-                                                <div class="text-gray-600 mt-1 sm:mt-0">Backend Engineer</div>
+                                                <a href="" class="font-medium text-lg">{{ user.name }} {{user.lastname}}</a>
+                                                <div class="text-gray-600 mt-1 sm:mt-0">{{ user.type }}</div>
                                             </div>
                                         </div>
                                         <div class="w-full lg:w-auto mt-6 lg:mt-0 pt-4 lg:pt-0 flex-1 flex flex-col justify-center items-center lg:items-start px-5 border-t lg:border-t-0 border-gray-200 dark:border-dark-5">
@@ -873,9 +682,114 @@
 </template>
 
 <script>
-export default {
-name: "Main"
-}
+import {defineComponent, onMounted, ref, computed, getCurrentInstance, watch} from "vue";
+import store, {useStore} from "../../store";
+import Avatar from "../../components/avatar/Avatar";
+import router from '../../router';
+import GetNotifications from "../../compositions/GetNotifications"
+import { useI18n } from 'vue-i18n'
+import DarkModeSwitcher from "../../components/dark-mode-switcher/Main";
+
+export default defineComponent({
+    components: {Avatar,DarkModeSwitcher},
+    data() {
+        return {
+            avatar_path: '',
+        }
+    },
+    methods: {
+        logout() {
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.post('api/logout')
+                    .then(response => {
+                        if (response.data.success) {
+                            store.dispatch('login/logout')
+                            this.$router.go('/login');
+                        } else {
+                            toast.error(response.data.message);
+                        }
+                    })
+                // .catch(function (error) {
+                //     this.toast.error(error);
+                // });
+            })
+        }
+    },
+    created() {
+        if (window.Laravel.user) {
+            // this.user = window.Laravel.user;
+            this.avatar_path = window.Laravel.user.avatar;
+        }
+    },
+    setup() {
+        const user = window.Laravel.user;
+        const echo = window.Echo;
+        const notifications = ref([]);
+        const lang = ref('pl');
+        const { t, locale } = useI18n({ useScope: 'global' })
+
+        const changeLang = () => {
+            locale.value = lang.value;
+            store.dispatch('main/setCurrentLang', lang.value);
+        }
+
+        watch(() => lang.value, (val) => {
+            changeLang();
+        });
+
+        echo.private('App.Models.User.' + user.id)
+            .notification((notification) => {
+                console.log(notification);
+                getNotificationsRepositories();
+            });
+
+        const getNotificationsRepositories = async () => {
+            console.log(GetNotifications());
+            // if(GetNotifications().list.)
+            notifications.value = GetNotifications();
+        }
+
+        const searchDropdown = ref(false);
+        const store = useStore();
+
+        const showSearchDropdown = () => {
+            searchDropdown.value = true;
+        };
+
+        const hideSearchDropdown = () => {
+            searchDropdown.value = false;
+        };
+
+        const notificationsComp = computed(() => {
+            if(notifications.value.list == undefined) {
+                return notifications.value;
+            }  else {
+                console.log(notifications.value.list);
+                return notifications.value.list;
+            }
+        });
+
+        const goTo = (link) => {
+            router.push({ path: link})
+        };
+
+        onMounted(function () {
+            lang.value = store.state.main.currentLang;
+            notifications.value = user.notifications;
+        })
+        return {
+            searchDropdown,
+            showSearchDropdown,
+            hideSearchDropdown,
+            user,
+            goTo,
+            notifications,
+            notificationsComp,
+            changeLang,
+            lang
+        };
+    }
+});
 </script>
 
 <style scoped>

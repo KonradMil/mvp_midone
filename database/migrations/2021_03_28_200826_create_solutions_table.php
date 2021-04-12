@@ -15,19 +15,21 @@ class CreateSolutionsTable extends Migration
     {
         Schema::create('solutions', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('deadline_offered')->nullable();
-            $table->timestamp('published_at')->nullable();
+            $table->string('name');
+            $table->string('en_name');
+            $table->string('screenshot_path');
+            $table->mediumText('description')->nullable();
+            $table->mediumText('en_description')->nullable();
             $table->float('price')->nullable();
             $table->integer('author_id');
             $table->integer('challenge_id');
             $table->integer('installer_id')->nullable();
             $table->integer('financial_after_id')->nullable();
-            $table->longText('save_json')->nullable();
-            $table->string('name');
-            $table->string('screenshot_path');
-            $table->mediumText('description')->nullable();
             $table->integer('status');
             $table->integer('published');
+            $table->longText('save_json')->nullable();
+            $table->timestamp('deadline_offered')->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }

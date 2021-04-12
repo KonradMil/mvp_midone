@@ -1,0 +1,223 @@
+<template>
+    <div>
+        <h2 class="intro-y text-lg font-medium mt-10">Modele</h2>
+        <div class="grid grid-cols-12 gap-6 mt-5">
+            <div
+                class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2"
+            >
+                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'modelsAdd'})">Dodaj model</button>
+                <div class="hidden md:block mx-auto text-gray-600">
+
+                </div>
+                <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+                    <div class="w-56 relative text-gray-700 dark:text-gray-300">
+                        <input
+                            type="text"
+                            class="form-control w-56 box pr-10 placeholder-theme-13"
+                            placeholder="Search..."
+                        />
+                        <SearchIcon
+                            class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0"
+                        />
+                    </div>
+                </div>
+            </div>
+            <!-- BEGIN: Data List -->
+            <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                <table class="table table-report -mt-2">
+                    <thead>
+                    <tr>
+                        <th class="whitespace-nowrap">Zdjęcie</th>
+                        <th class="whitespace-nowrap">Nazwa</th>
+                        <th class="whitespace-nowrap">Model</th>
+                        <th class="whitespace-nowrap">Marka</th>
+                        <th class="whitespace-nowrap">Kategoria</th>
+                        <th class="whitespace-nowrap">Akcje</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr
+                        v-for="(model, index) in models.list"
+                        :key="index"
+                        class="intro-x"
+                    >
+                        <td>
+                            <div class="flex">
+                                <div class="w-10 h-10 image-fit zoom-in">
+                                    <Tippy
+                                        tag="img"
+                                        :alt="model.name"
+                                        class="rounded-full"
+                                        :src="'/s3/models_images/' + model.model_file + '.png'"
+                                        :content="model.name"
+                                    />
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="font-medium whitespace-nowrap">
+                                {{model.name }}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">
+                                {{ model.model }}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">
+                                {{ model.brand }}
+                            </div>
+                        </td>
+                        <td>
+                            <a href="" class="font-medium whitespace-nowrap">
+                                <CategoryName :categories="categories" :id="model.category"/>
+                            </a>
+                            <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">
+                                <SubcategoryName :categories="categories" :id="model.subcategory" :catid="model.category"/>
+                            </div>
+                        </td>
+                        <td class="table-report__action w-56">
+                            <div class="flex justify-center items-center">
+                                <a class="flex items-center mr-3" href="javascript:;">
+                                    <CheckSquareIcon class="w-4 h-4 mr-1"/>
+                                    Edytuj
+                                </a>
+                                <a
+                                    class="flex items-center text-theme-6"
+                                    href="javascript:;"
+                                    data-toggle="modal"
+                                    data-target="#delete-confirmation-modal"
+                                >
+                                    <Trash2Icon class="w-4 h-4 mr-1"/>
+                                    Usuń
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- END: Data List -->
+            <!-- BEGIN: Pagination -->
+<!--            <div-->
+<!--                class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center"-->
+<!--            >-->
+<!--                <ul class="pagination">-->
+<!--                    <li>-->
+<!--                        <a class="pagination__link" href="">-->
+<!--                            <ChevronsLeftIcon class="w-4 h-4"/>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a class="pagination__link" href="">-->
+<!--                            <ChevronLeftIcon class="w-4 h-4"/>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a class="pagination__link" href="">...</a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a class="pagination__link" href="">1</a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a class="pagination__link pagination__link&#45;&#45;active" href="">2</a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a class="pagination__link" href="">3</a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a class="pagination__link" href="">...</a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a class="pagination__link" href="">-->
+<!--                            <ChevronRightIcon class="w-4 h-4"/>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a class="pagination__link" href="">-->
+<!--                            <ChevronsRightIcon class="w-4 h-4"/>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                <select class="w-20 form-select box mt-3 sm:mt-0">-->
+<!--                    <option>10</option>-->
+<!--                    <option>25</option>-->
+<!--                    <option>35</option>-->
+<!--                    <option>50</option>-->
+<!--                </select>-->
+<!--            </div>-->
+            <!-- END: Pagination -->
+        </div>
+        <!-- BEGIN: Delete Confirmation Modal -->
+        <div
+            id="delete-confirmation-modal"
+            class="modal"
+            tabindex="-1"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body p-0">
+                        <div class="p-5 text-center">
+                            <XCircleIcon class="w-16 h-16 text-theme-6 mx-auto mt-3"/>
+                            <div class="text-3xl mt-5">Are you sure?</div>
+                            <div class="text-gray-600 mt-2">
+                                Do you really want to delete these records? <br/>This process
+                                cannot be undone.
+                            </div>
+                        </div>
+                        <div class="px-5 pb-8 text-center">
+                            <button
+                                type="button"
+                                data-dismiss="modal"
+                                class="btn btn-outline-secondary w-24 mr-1"
+                            >
+                                Cancel
+                            </button>
+                            <button type="button" class="btn btn-danger w-24">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END: Delete Confirmation Modal -->
+    </div>
+</template>
+
+<script>
+import {computed, onMounted, ref} from "vue";
+import GetModels from "../../compositions/GetModels";
+import cash from "cash-dom";
+import CategoryName from "./CategoryName";
+import SubcategoryName from "./SubcategoryName";
+
+export default {
+    name: "List",
+    components: {SubcategoryName, CategoryName},
+    setup() {
+        const models = ref([]);
+        const categories = ref([]);
+        const types = require("../../json/model_categories.json");
+        const getModelRepositories = async () => {
+            models.value = GetModels();
+        }
+
+        onMounted(() => {
+            categories.value = types.categories;
+            cash("body")
+                .removeClass("error-page");
+        });
+
+        getModelRepositories();
+        return {
+            models,
+            categories
+        }
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

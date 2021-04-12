@@ -32,7 +32,7 @@
               :key="menu + menuKey"
               class="side-nav__devider my-6"
             ></li>
-            <li v-else :key="menu + menuKey">
+            <li v-else :key="menu + menuKey" v-if="menu.admin == undefined || (user.role == 'admin')">
               <SideMenuTooltip
                 tag="a"
                 :content="menu.title"
@@ -163,9 +163,10 @@ export default defineComponent({
     const route = useRoute();
     const router = useRouter();
     const store = useStore();
+    const user = ref({});
     const formattedMenu = ref([]);
     const sideMenu = computed(() =>
-      nestedMenu(store.state.sideMenu.menu, route)
+            nestedMenu(store.state.sideMenu.menu, route)
     );
 
     watch(
@@ -176,6 +177,9 @@ export default defineComponent({
     );
 
     onMounted(() => {
+        if (window.Laravel.user) {
+            user.value = window.Laravel.user;
+        }
       cash("body")
         .removeClass("error-page")
         .removeClass("login")
@@ -188,7 +192,8 @@ export default defineComponent({
       router,
       linkTo,
       enter,
-      leave
+      leave,
+        user
     };
   }
 });

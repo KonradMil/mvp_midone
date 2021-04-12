@@ -24,12 +24,32 @@
         <div class="pos intro-y grid grid-cols-12 gap-5 mt-5">
             <!-- BEGIN: Post Content -->
             <div class="intro-y col-span-12 lg:col-span-8">
-                <input
-                    type="text"
-                    class="intro-y form-control py-3 px-4 box pr-10 placeholder-theme-13"
-                    placeholder="Nazwa"
-                    v-model="name"
-                />
+                <div class="input-group mt-2">
+                    <div class="input-group-text">
+                        <TailSelect
+                            id="input-wizard-2"
+                            v-model="name_lang"
+                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                        >
+                            <option value="pl">PL</option>
+                            <option value="en">ENG</option>
+
+                        </TailSelect>
+                    </div>
+                    <input v-if="name_lang == 'pl'"
+                        type="text"
+                        class="intro-y form-control py-3 px-4 box pr-10 placeholder-theme-13"
+                        :placeholder="$t('global.name')"
+                        v-model="name"
+                    />
+                    <input v-if="name_lang == 'en'"
+                           type="text"
+                           class="intro-y form-control py-3 px-4 box pr-10 placeholder-theme-13"
+                           :placeholder="$t('global.name')"
+                           v-model="en_name"
+                    />
+                </div>
+
                 <div class="post intro-y overflow-hidden box mt-5">
                     <div
                         class="post__tabs nav nav-tabs flex-col sm:flex-row bg-gray-300 dark:bg-dark-2 text-gray-600"
@@ -81,7 +101,18 @@
                                 <div
                                     class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"
                                 >
-                                    <ChevronDownIcon class="w-4 h-4 mr-2"/>
+                                    <div class="w-22 mr-3">
+                                        <TailSelect
+                                            id="input-wizard-2"
+                                            v-model="description_lang"
+                                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                                        >
+                                            <option value="pl">PL</option>
+                                            <option value="en">ENG</option>
+
+                                        </TailSelect>
+                                    </div>
+
                                     Opis
                                 </div>
                                 <div class="mt-5">
@@ -143,15 +174,9 @@
                             <div
                                 class="border border-gray-200 dark:border-dark-5 rounded-md p-5"
                             >
-                                <div
-                                    class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"
-                                >
-                                    <ChevronDownIcon class="w-4 h-4 mr-2"/>
-                                    Opis
-                                </div>
                                 <div class="mt-5">
                                     <div
-                                        class="px-5 sm:px-10 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"
+                                        class="px-5 sm:px-10pt-2"
                                     >
                                         <!--                <div class="font-medium text-base">Profile Settings</div>-->
                                         <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
@@ -283,7 +308,7 @@
                                                 <TailSelect
                                                     id="input-wizard-9"
                                                     v-model="select_number_of_lines"
-                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', openAbove: true, animate: false, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
                                                     <option selected disabled>Wybierz...</option>
                                                     <option
@@ -295,17 +320,26 @@
                                             </div>
                                             <div class="intro-y col-span-12 sm:col-span-6">
                                                 <label for="input-wizard-10" class="form-label">Liczba zmian</label>
-                                                <TailSelect
-                                                    id="input-wizard-10"
+                                                <Multiselect
+                                                    class="w-full h-8 z-50"
                                                     v-model="select_work_shifts"
-                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
-                                                >
-                                                    <option selected disabled>Wybierz...</option>
-                                                    <option v-for="(det,index) in challengeSelects.select_work_shifts"
-                                                            :value="det.value">{{ det.name }}
-                                                    </option>
+                                                    mode="single"
+                                                    label="name"
+                                                    max="1"
+                                                    placeholder="Wybierz"
+                                                    valueProp="value"
+                                                    :options="challengeSelects.select_work_shifts"
+                                                />
 
-                                                </TailSelect>
+
+<!--                                                <TailSelect-->
+<!--                                                    id="input-wizard-10"-->
+<!--                                                    v-model="select_work_shifts"-->
+<!--                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"-->
+<!--                                                >-->
+
+
+<!--                                                </TailSelect>-->
                                             </div>
                                         </div>
                                     </div>
@@ -445,28 +479,28 @@
             <!-- END: Post Info -->
         </div>
     </div>
-    <Modal :show="showModal" @closed="modalClosed">
-        <h3 class="intro-y text-lg font-medium mt-5">Dodaj członka zespołu</h3>
-        <div class="intro-y box p-5 mt-12 sm:mt-5">
-            <div>
-                Jeśli podany mail jest powziązany z już zarejestrowanym użytkownikiem będzie on musiał jedynie
-                potwierdzić chęć dołączenia.
-            </div>
-        </div>
-        <div class="intro-y box p-5 mt-12 sm:mt-5">
-            <div class="relative text-gray-700 dark:text-gray-300 mr-4">
-                <input
-                    type="text"
-                    class="form-control w-56 box pr-10 placeholder-theme-13"
-                    placeholder="Email"
-                    v-model="new_team_member_email"
-                />
-                <button class="btn btn-primary shadow-md mr-2" @click="addMember">Zaproś</button>
-            </div>
+<!--    <Modal :show="showModal" @closed="modalClosed">-->
+<!--        <h3 class="intro-y text-lg font-medium mt-5">Dodaj członka zespołu</h3>-->
+<!--        <div class="intro-y box p-5 mt-12 sm:mt-5">-->
+<!--            <div>-->
+<!--                Jeśli podany mail jest powziązany z już zarejestrowanym użytkownikiem będzie on musiał jedynie-->
+<!--                potwierdzić chęć dołączenia.-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="intro-y box p-5 mt-12 sm:mt-5">-->
+<!--            <div class="relative text-gray-700 dark:text-gray-300 mr-4">-->
+<!--                <input-->
+<!--                    type="text"-->
+<!--                    class="form-control w-56 box pr-10 placeholder-theme-13"-->
+<!--                    placeholder="Email"-->
+<!--                    v-model="new_team_member_email"-->
+<!--                />-->
+<!--                <button class="btn btn-primary shadow-md mr-2" @click="addMember">Zaproś</button>-->
+<!--            </div>-->
 
-        </div>
+<!--        </div>-->
 
-    </Modal>
+<!--    </Modal>-->
 </template>
 
 <script>
@@ -475,14 +509,16 @@ import cash from "cash-dom";
 import {useToast} from "vue-toastification";
 import GetTeams from "../../compositions/GetTeams";
 import SaveChallenge from "../../compositions/SaveChallenge";
-
+import { useI18n } from 'vue-i18n'
+import Multiselect from '@vueform/multiselect'
 
 const toast = useToast();
 
 export default {
     name: "AddChallenge",
-    components: {},
+    components: {Multiselect},
     setup() {
+        const { t, locale } = useI18n({ useScope: 'global' })
         const toast = useToast();
         const category = ref();
         const showModal = ref(false);
@@ -507,7 +543,11 @@ export default {
         const teams = ref([]);
         const teamsAllowed = ref([]);
         const description = ref('');
+        const description_lang = ref(locale.value);
+        const en_description = ref('');
         const name = ref('');
+        const en_name = ref('');
+        const name_lang = ref(locale.value);
         const allowed_publishing = ref(false);
         const publish = ref(false);
         const dropzoneSingleRef = ref();
@@ -594,7 +634,11 @@ export default {
             modalClosed,
             showModal,
             images,
-            saveChallengeRepo
+            saveChallengeRepo,
+            name_lang,
+            en_name,
+            description_lang,
+            en_description
         };
     },
     beforeRouteEnter(to, from, next) {

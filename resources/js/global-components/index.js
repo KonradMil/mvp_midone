@@ -1,4 +1,4 @@
-import Chart from "./chart/Main.vue";
+    import Chart from "./chart/Main.vue";
 import GoogleMapLoader from "./google-map-loader/Main.vue";
 import Highlight from "./highlight/Main.vue";
 import Litepicker from "./litepicker/Main.vue";
