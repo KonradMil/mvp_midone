@@ -17,6 +17,7 @@ import MainKnowledgebase  from "../pages/KnowledgeBase/Main";
 import AddKnowledgebase  from "../pages/KnowledgeBase/Add";
 import List from "../pages/Models/List";
 import ModelAdd from "../pages/Models/ModelAdd";
+import Card from "../pages/Challenges/Card";
 
 export const routes = [
     {
@@ -67,6 +68,12 @@ export const routes = [
                 name: 'challenges',
                 path: '/challenges',
                 component: Challenges
+            },
+            {
+                name: 'internalChallenegeCard',
+                path: '/challenges/card/:id',
+                component: Card,
+                props: true
             },
             {
                 name: 'knowledgebase',
