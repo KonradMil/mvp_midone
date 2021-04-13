@@ -656,6 +656,8 @@
                             Personal Information
                         </h2>
                     </div>
+
+                    <form @submit.prevent="save">
                     <div class="p-5">
                         <div class="grid grid-cols-12 gap-x-5">
                             <div class="col-span-12 xl:col-span-6">
@@ -719,10 +721,11 @@
                             </div>
                         </div>
                         <div class="flex justify-end mt-4">
-                            <button class="btn btn-primary w-20 mr-auto" @click="save">Save</button>
+                            <button class="btn btn-primary w-20 mr-auto" type="submit" >Save</button>
                             <a href="" class="text-theme-6 flex items-center"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete Account </a>
                         </div>
                     </div>
+                    </form>
                 </div>
                 <!-- END: Personal Information -->
             </div>
@@ -802,7 +805,7 @@ export default defineComponent({
                             store.dispatch('login/login', {
                                 user
                             });
-                            this.$router.go(0);
+                            // this.$router.go(0);
                         } else {
                             toast.error(response.data.message);
                         }
