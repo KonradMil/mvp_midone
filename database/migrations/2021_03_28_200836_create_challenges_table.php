@@ -20,16 +20,16 @@ class CreateChallengesTable extends Migration
             $table->string('en_name')->nullable();
             $table->string('description')->nullable();
             $table->string('en_description')->nullable();
-            $table->timestamp('solution_deadline');
-            $table->timestamp('offer_deadline');
+            $table->string('screenshot_path')->nullable();
+            $table->longText('save_json')->nullable();;
             $table->integer('status');
             $table->integer('stage')->nullable();;
             $table->integer('published')->nullable();;
-            $table->longText('save_json')->nullable();;
-            $table->string('screenshot_path')->nullable();
             $table->integer('author_id');
             $table->integer('financial_before_id')->nullable();;
             $table->integer('client_id')->nullable();;
+            $table->timestamp('solution_deadline');
+            $table->timestamp('offer_deadline');
             $table->timestamps();
         });
     }

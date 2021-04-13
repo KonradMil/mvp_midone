@@ -50,6 +50,12 @@ const state = () => {
                 subMenu: [
                     {
                         icon: "",
+                        pageName: "solutions",
+                        title: "Wszystkie",
+                        ignore: true
+                    },
+                    {
+                        icon: "",
                         pageName: "solutions-active",
                         title: "Aktywne",
                         ignore: true

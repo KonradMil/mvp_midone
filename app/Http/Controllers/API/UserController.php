@@ -18,6 +18,8 @@ class UserController extends Controller
         $u = Auth::user();
         $u->name = $request->name;
         $u->lastname = $request->lastname;
+        $u->email = $request->input("email", $u->email);
+
         $r =  $u->save();
 
         return response()->json([

@@ -91,7 +91,7 @@
             <div class="col-span-12 lg:col-span-4">
                 <div class="intro-y box p-5">
                     <div class="mt-3">
-                        <label for="post-form-3" class="form-label">Categories</label>
+                        <label class="form-label">Categories</label>
                         <TailSelect
                             id="post-form-3"
                             v-model="category"
