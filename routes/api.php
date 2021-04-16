@@ -20,6 +20,7 @@ Route::get('test', function (){dd(\Illuminate\Support\Facades\Auth::user());});
 Route::get('email/unique/{email}', 'App\Http\Controllers\API\UserController@checkEmail');
 Route::post('avatar/store', 'App\Http\Controllers\API\UserController@storeAvatar');
 Route::post('profile/update', 'App\Http\Controllers\API\UserController@updateProfile');
+Route::post('profile/change-password', 'App\Http\Controllers\API\UserController@changePassword');
 
 Route::post('locations', 'App\Http\Controllers\TestController@locations');
 Route::post('locations/own', 'App\Http\Controllers\TestController@locationsOwn');

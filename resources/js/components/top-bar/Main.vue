@@ -226,13 +226,13 @@
                         </a>
                     </div>
                     <div class="p-2 border-t border-theme-27 dark:border-dark-3">
-                        <a
+                        <button
                             @click="logout"
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
                         >
                             <ToggleRightIcon class="w-4 h-4 mr-2"/>
                             {{$t('topBar.logout')}}
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -250,6 +250,9 @@ import router from '../../router';
 import GetNotifications from "../../compositions/GetNotifications"
 import { useI18n } from 'vue-i18n'
 import DarkModeSwitcher from "../dark-mode-switcher/Main";
+import {useToast} from "vue-toastification";
+
+const toast = useToast();
 
 export default defineComponent({
     components: {Avatar,DarkModeSwitcher},
@@ -265,6 +268,7 @@ export default defineComponent({
                     .then(response => {
                         if (response.data.success) {
                             store.dispatch('login/logout')
+                            toast.success(response.data.message);
                             this.$router.go('/login');
                         } else {
                             toast.error(response.data.message);

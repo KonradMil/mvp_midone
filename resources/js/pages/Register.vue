@@ -325,12 +325,17 @@
                     required
                }
             };
+
             const validate = useVuelidate(rules, toRefs(formData));
             // const s = this.methods.handleSubmit();
             const save = () => {
                 console.log('here');
                 if(formData.password != formData.passwordConfirm) {
                     toast.warning('Hasła muszą być takie same');
+                }
+                else if(formData.email === '')
+                {
+                    toast.error('Email nie może byc pusty');
                 }
                 validate.value.$touch();
                 if (validate.value.$invalid) {
@@ -358,7 +363,7 @@
         methods: {
             handleSubmit(e) {
                 this.save();
-                console.log('hre');
+                console.log('here');
                 axios.get('/sanctum/csrf-cookie').then(response => {
                     axios.post('/api/register', {
                         type: this.formData.type,

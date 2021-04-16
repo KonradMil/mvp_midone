@@ -12,7 +12,13 @@ use Mpociot\Teamwork\Facades\Teamwork;
 
 class UserController extends Controller
 {
-
+    public function changePassword(Request $request)
+    {
+        $u = Auth::user();
+        $u->password = $request->password;
+        $u->passwordNew = Hash::make($request->passwordNew);
+        $u->save();
+    }
     public function updateProfile(Request $request)
     {
         $u = Auth::user();
@@ -143,6 +149,4 @@ class UserController extends Controller
         ];
         return response()->json($response);
     }
-
-
 }

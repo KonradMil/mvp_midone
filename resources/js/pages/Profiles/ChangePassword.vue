@@ -575,15 +575,33 @@
                         <div class="p-5">
                             <div>
                                 <label for="change-password-form-1" class="form-label">Old Password</label>
-                                <input id="change-password-form-1" type="password" class="form-control" placeholder="Input text">
+                                <input
+                                    id="change-password-form-1"
+                                    type="password"
+                                    class="form-control"
+                                    placeholder="Input text"
+                                    v-model="password"
+                                >
                             </div>
                             <div class="mt-3">
                                 <label for="change-password-form-2" class="form-label">New Password</label>
-                                <input id="change-password-form-2" type="password" class="form-control" placeholder="Input text">
+                                <input
+                                    id="change-password-form-2"
+                                    type="password"
+                                    class="form-control"
+                                    placeholder="Input text"
+                                    v-model="passwordNew"
+                                >
                             </div>
                             <div class="mt-3">
                                 <label for="change-password-form-3" class="form-label">Confirm New Password</label>
-                                <input id="change-password-form-3" type="password" class="form-control" placeholder="Input text">
+                                <input
+                                    id="change-password-form-3"
+                                    type="password"
+                                    class="form-control"
+                                    placeholder="Input text"
+                                    v-model="passwordNewConfirm"
+                                >
                             </div>
                             <button type="button" class="btn btn-primary mt-4">Change Password</button>
                         </div>
@@ -617,16 +635,26 @@ export default defineComponent({
     data() {
         return {
             avatar_path: '',
+            password: '',
+            passwordNew: '',
+            passwordNewConfirm: ''
         }
     },
     methods: {
-        logout() {
+        change() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('api/logout')
+                this.$axios.post('api/profile/change-password', {
+                    password: this.password,
+                    passwordNew: this.passwordNew,
+                    passwordNewConfirm: this.passwordNewConfirm
+                })
                     .then(response => {
+                        console.log(response.data)
                         if (response.data.success) {
-                            store.dispatch('login/logout')
-                            this.$router.go('/login');
+                            let user = response.data.payload;
+                            store.dispatch('login/login', {
+                                user
+                            });
                         } else {
                             toast.error(response.data.message);
                         }

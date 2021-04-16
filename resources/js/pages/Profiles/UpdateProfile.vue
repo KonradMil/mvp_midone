@@ -657,7 +657,7 @@
                         </h2>
                     </div>
 
-                    <form @submit.prevent="save">
+                    <form @submit.prevent="handleSubmit">
                     <div class="p-5">
                         <div class="grid grid-cols-12 gap-x-5">
                             <div class="col-span-12 xl:col-span-6">
@@ -742,7 +742,7 @@
 </template>
 
 <script>
-import {defineComponent, onMounted, ref, computed, getCurrentInstance, watch, provide} from "vue";
+import {defineComponent, onMounted, ref, computed, getCurrentInstance, watch, provide, reactive, toRefs} from "vue";
 import store, {useStore} from "../../store";
 import Avatar from "../../components/avatar/Avatar";
 import router from '../../router';
@@ -752,6 +752,8 @@ import DarkModeSwitcher from "../../components/dark-mode-switcher/Main";
 import Dropzone from '../../global-components/dropzone/Main'
 import {useToast} from "vue-toastification";
 import cash from "cash-dom";
+import {email, minLength, required} from "@vuelidate/validators";
+import {useVuelidate} from "@vuelidate/core";
 
 export default defineComponent({
     components: {
@@ -771,7 +773,8 @@ export default defineComponent({
             name: "",
             lastname: "",
             email:"",
-            error: null
+            error: null,
+            // minLength: 3
         }
     },
     methods: {
@@ -791,15 +794,20 @@ export default defineComponent({
                 // });
             })
         },
-        save() {
+        handleSubmit() {
+            this.save();
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post('api/profile/update', {
-                    name: this.name,
-                    lastname: this.lastname,
-                    email: this.email
+                    name: this.formData.name,
+                    lastname: this.formData.lastname,
+                    email: this.formData.email
                 })
                     .then(response => {
                         console.log(response.data)
+                        // const toast = useToast();
+                        // if(this.name === '' || this.lastname === ''){
+                        //     toast.error('Uzupełnij imie i nazwisko!');
+                        // }
                         if (response.data.success) {
                             let user = response.data.payload;
                             store.dispatch('login/login', {
@@ -900,6 +908,34 @@ export default defineComponent({
             lang.value = store.state.main.currentLang;
             notifications.value = user.notifications;
         })
+
+        const formData = reactive ({
+            name: '',
+            lastname: '',
+            email: ''
+        })
+
+        const rules = {
+            email: {required, email},
+            name: {required, minLength: minLength(3)},
+            lastname: {required, minLength: minLength(3)}
+        }
+
+        const validate = useVuelidate(rules, toRefs(formData));
+
+        const save = () => {
+            console.log('here');
+            if(formData.name < minLength || formData.name < minLength) {
+                toast.warning('Imie i nazwisko musi sie skladac z conajmniej 3 znakow');
+            }
+            validate.value.$touch();
+            if (validate.value.$invalid) {
+                return false;
+            } else {
+                return true;
+            }
+        };
+
         return {
             searchDropdown,
             showSearchDropdown,
@@ -909,7 +945,10 @@ export default defineComponent({
             notifications,
             notificationsComp,
             changeLang,
-            lang
+            lang,
+            formData,
+            validate,
+            save
         };
     }
 });

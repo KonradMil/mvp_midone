@@ -153,8 +153,9 @@
                                     store.dispatch('login/login', {
                                         user
                                     })
+                                    toast.success(response.data.message)
                                     console.log(store);
-                                    if(user.name != undefined || user.name != '') {
+                                    if(user.name !== undefined || user.name !== '') {
                                         window.location.replace('/dashboard');
                                     } else {
                                         window.location.replace('/kreator');

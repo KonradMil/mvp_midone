@@ -208,12 +208,8 @@
                     })
                         .then(response => {
                             console.log(response.data)
+                            // ??
                             if (response.data.success) {
-                                if (response.data.success) {
-
-                                } else {
-                                    toast.error(response.data.message);
-                                }
 
                             } else {
                                 toast.error(response.data.message);

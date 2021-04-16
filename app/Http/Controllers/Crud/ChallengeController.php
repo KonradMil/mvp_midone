@@ -117,7 +117,7 @@ class ChallengeController extends Controller
         $technical = new TechnicalDetails();
         $financial = new Financial();
         $financial->save();
-    $request = json_decode(json_encode($request->data));
+        $request = json_decode(json_encode($request->data));
 //    dd($request);
         $challenge->name = $request->name;
 
