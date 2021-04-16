@@ -195,14 +195,14 @@
                         </div>
                     </div>
                     <div class="p-2">
-                        <a
+                        <button
                             href=""
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
                             @click="$router.push('profiles')"
                         >
                             <UserIcon class="w-4 h-4 mr-2"/>
                             {{$t('topBar.profil')}}
-                        </a>
+                        </button>
                         <a
                             href=""
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
