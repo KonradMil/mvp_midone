@@ -20,6 +20,7 @@ import AddKnowledgebase  from "../pages/KnowledgeBase/Add";
 import Profiles from "../pages/Profiles/Main";
 import List from "../pages/Models/List";
 import ModelAdd from "../pages/Models/ModelAdd";
+import Card from "../pages/Challenges/Card";
 import UpdateProfile from "../pages/Profiles/UpdateProfile";
 import ChangePassword from "../pages/Profiles/ChangePassword";
 import Communication from "../pages/Communication/Main";
@@ -73,6 +74,12 @@ export const routes = [
                 name: 'challenges',
                 path: '/challenges',
                 component: Challenges
+            },
+            {
+                name: 'internalChallenegeCard',
+                path: '/challenges/card/:id',
+                component: Card,
+                props: true
             },
             {
                 name: 'addSolution',

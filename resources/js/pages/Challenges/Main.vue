@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div class="p-5">
-                    <div class="h-40 xxl:h-56 image-fit">
+                    <div class="h-40 xxl:h-56 image-fit" @click="$router.push( {path : '/challenges/card/' + challenge.id})">
                         <img
                             alt="Icewall Tailwind HTML Admin Template"
                             class="rounded-md"

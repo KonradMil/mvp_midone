@@ -20,8 +20,10 @@ class ChallengeController extends Controller
 
         if(Auth::user()->type == 'integrator') {
             $challenges = Challenge::whereIn('stage', [1,2])->where('status', '=', 1)->get();
-        } else {
+        } else  if(Auth::user()->type == 'inwestor') {
             $challenges = Auth::user()->challenges()->get();
+        } else {
+            $challenges = Challenge::get();
         }
 
         return response()->json([
@@ -36,8 +38,10 @@ class ChallengeController extends Controller
         $query = Challenge::query();
         if(Auth::user()->type == 'integrator') {
             $query->whereIn('stage', [1,2])->where('status', '=', 1);
-        } else {
+        } else  if(Auth::user()->type == 'inwestor') {
             $query->where('author_id', '=', Auth::user()->id);
+        } else {
+
         }
 
 
@@ -155,5 +159,21 @@ class ChallengeController extends Controller
             'payload' => $challenge
         ]);
 
+    }
+
+    public function getCardData(Request $request)
+    {
+        if(isset($request->id)) {
+            $challenge = Challenge::with('solutions', 'author')->find($request->id);
+
+        } else {
+            $challenge = NULL;
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Wyzwanie zostao dodane poprawnie',
+            'payload' => $challenge
+        ]);
     }
 }
