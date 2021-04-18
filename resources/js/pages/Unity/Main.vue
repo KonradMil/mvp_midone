@@ -94,7 +94,7 @@ export default {
             const  li = require("../../json/unity_left_buttons.json");
             leftIcons.value = li.icons;
             const  ti = require("../../json/unity_top_buttons.json");
-            leftIcons.value = ti.icons;
+            topIcons.value = ti.icons;
         });
 
         return {
