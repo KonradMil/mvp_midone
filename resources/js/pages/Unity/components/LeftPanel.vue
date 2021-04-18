@@ -137,11 +137,12 @@ export default {
         const categories = ref([]);
         const visible = ref(false);
         const models = ref([]);
+        const outgoingActions = ref({});
         const brands = require("../../../json/robot_brands.json");
         //LEFT BUTTON CLICKED
         emitter.on('leftbuttonclick', e => handleChange(e.val))
+        console.log(props);
 
-        const outgoingActions = unityActionOutgoing(props.gameWindow);
 
         const getModelRepositories = async () => {
             models.value = GetModels({
@@ -177,6 +178,7 @@ export default {
         onMounted(() => {
             const c = require("../../../json/model_categories.json");
             categories.value = c.categories;
+            outgoingActions.value = unityActionOutgoing(props.gameWindow);
         });
 
 
