@@ -36,7 +36,12 @@ export default {
         emitter.on('onInitialized', e =>  initalize() );
 
         //HANDLES ALL UNITY ACTIONS
-        emitter.on('unityoutgoingaction', e =>  handleUnityActionOutgoing(e) );
+        emitter.on('unityoutgoingaction', e => {
+            console.log('EEE');
+            console.log(e);
+            handleUnityActionOutgoing(e);
+        });
+
 
         const handleUnityActionOutgoing = (e) => {
             console.log('E');
