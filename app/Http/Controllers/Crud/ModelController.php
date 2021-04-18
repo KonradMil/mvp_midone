@@ -10,8 +10,18 @@ class ModelController extends Controller
 {
     public function getModels(Request  $request)
     {
+//        dd($request->search);
         if(isset($request->search)) {
-            $models = UnityModel::where('name', 'LIKE', '%'. $request->search . '%')->get();
+            if(is_array($request->search)){
+                if(!empty($request->search['brand'])) {
+                    $models = UnityModel::where('category', '=', $request->search['category_id'])->where('subcategory', '=', $request->search['subcategory_id'])->where('brand', '=', $request->search['brand'])->get();
+                } else {
+                    $models = UnityModel::where('category', '=', $request->search['category_id'])->where('subcategory', '=', $request->search['subcategory_id'])->get();
+                }
+
+            } else {
+                $models = UnityModel::where('name', 'LIKE', '%'. $request->search . '%')->get();
+            }
         } else {
             $models = UnityModel::get();
         }

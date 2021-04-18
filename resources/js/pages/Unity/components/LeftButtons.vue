@@ -1,13 +1,16 @@
 <template>
     <div class="flex fixed h-full z-50 pt-2">
         <div class="flex-1 pt-2 ml-10">
-            <UnityButton v-for="(icon, index) in icons" :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :key="'leftIcon_' + index" :action="icon.value" />
+            <div :class="(category == icon.value)?'left-button-category-active':''" v-for="(icon, index) in icons" :key="'leftIcon_' + index">
+            <UnityButton    :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="icon.value" />
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import UnityButton from "./UnityButton";
+import {getCurrentInstance, ref} from "vue";
 
 export default {
     name: "LeftButtons",
@@ -16,7 +19,20 @@ export default {
     },
     components: {UnityButton},
     setup() {
-
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
+        const category = ref(null);
+        emitter.on('leftbuttonclick', e =>  handleChange(e.val) );
+        const handleChange = (cat_id) => {
+            if(category.value === cat_id) {
+                category.value = null;
+            } else {
+                category.value = cat_id;
+            }
+        }
+        return {
+            category
+        }
     }
 }
 </script>

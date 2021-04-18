@@ -37,11 +37,15 @@
                 {
                     "name": "Robot",
                     "value": 0
+                },{
+                    "name": "Robot kartezjański",
+                    "value": 2
                 },
                 {
                     "name": "Mocowanie",
                     "value": 1
                 }
+
             ]
         },
         {

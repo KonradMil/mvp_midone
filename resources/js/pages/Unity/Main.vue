@@ -34,7 +34,6 @@ export default {
         //RUNS WHEN UNITY IS READY
         emitter.on('onInitialized', e =>  initalize() );
 
-
         const initalize = async () => {
             console.log("initializeMe");
             setTimeout(function () {

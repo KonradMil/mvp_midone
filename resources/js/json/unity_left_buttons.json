@@ -21,43 +21,44 @@
         "positioning": {
             "src": "\/s3/builder_icons/positioning_simple.png",
             "tooltip": "",
-            "alttext": ""
+            "alttext": "",
+            "value": 3
         },
         "control": {
             "src": "\/s3/builder_icons/control_simple.png",
             "tooltip": "",
             "alttext": "",
-            "value": 3
+            "value": 4
         },
         "security": {
             "src": "\/s3/builder_icons/padlock_simple.png",
             "tooltip": "",
             "alttext": "",
-            "value": 4
+            "value": 5
         },
         "remote_control": {
             "src": "\/s3/builder_icons/remote_control_simple.png",
             "tooltip": "",
             "alttext": "",
-            "value": 5
+            "value": 6
         },
         "other": {
             "src": "\/s3/builder_icons/other_simple.png",
             "tooltip": "",
             "alttext": "",
-            "value": 6
+            "value": 7
         },
         "operator": {
             "src": "\/s3/builder_icons/workers_simple.png",
             "tooltip": "",
             "alttext": "",
-            "value": 7
+            "value": 8
         },
         "geometric": {
             "src": "\/s3/builder_icons/geometric_simple.png",
             "tooltip": "",
             "alttext": "",
-            "value": 8
+            "value": 9
         }
     }
 }
