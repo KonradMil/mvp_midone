@@ -186,7 +186,7 @@ export default {
                     outgoingActions.value = unityActionOutgoing(props.gameWindow);
                     console.log(outgoingActions.value);
                     console.log('1221312312');
-                }, 3000);
+                }, 6000);
             }
 
             console.log(outgoingActions.value);
