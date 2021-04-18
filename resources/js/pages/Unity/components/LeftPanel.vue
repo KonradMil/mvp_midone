@@ -123,7 +123,10 @@ import unityActionOutgoing from '../composables/ActionsOutgoing';
 
 export default {
     name: "LeftPanel",
-    setup() {
+    props: {
+        gameWindow: Object
+    },
+    setup(props, {emit}) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const search = ref('');
@@ -138,7 +141,7 @@ export default {
         //LEFT BUTTON CLICKED
         emitter.on('leftbuttonclick', e => handleChange(e.val))
 
-        const outgoingActions = unityActionOutgoing();
+        const outgoingActions = unityActionOutgoing(props.gameWindow);
 
         const getModelRepositories = async () => {
             models.value = GetModels({

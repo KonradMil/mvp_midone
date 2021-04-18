@@ -1,6 +1,6 @@
 <template>
     <LeftButtons :icons="icons"></LeftButtons>
-    <LeftPanel></LeftPanel>
+    <LeftPanel :gameWindow="gameWindow"></LeftPanel>
     <Studio hideFooter="true" :src="unity_path" :width="window_width" unityLoader="/UnityLoader.js" ref="gameWindow"/>
 </template>
 
