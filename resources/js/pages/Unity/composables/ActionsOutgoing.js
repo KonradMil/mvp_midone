@@ -39,7 +39,7 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function setSessionId(id) {
-        outgoing(game, 'SetSesionID', id)
+        // outgoing(game, 'SetSesionID', id)
     }
 
     function setHangarAppearance (id) {
@@ -57,6 +57,8 @@ export default function unityActionOutgoing(gameWindow) {
     return {
         placeObject,
         deleteObject,
-        setSessionId
+        setSessionId,
+        setHangarAppearance,
+        unlockUnityInput
     };
 }
