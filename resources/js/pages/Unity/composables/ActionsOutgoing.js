@@ -9,16 +9,16 @@ function outgoing(game, action, data, json) {
 
     game.message('NetworkBridge', action, finalData);
 
-    this.gameWindow.message('NetworkBridge', 'OrderPart', JSON.stringify({
-        // model_name: 'M-410iC',
-        model_name: obj.model_file,
-        model_id: obj.id,
-        prefab_url: `${this.$http.$url}s3/models/${obj.model_file}`,
-        attributes: [
-            {
-            },
-        ],
-    }));
+    // this.gameWindow.message('NetworkBridge', 'OrderPart', JSON.stringify({
+    //     // model_name: 'M-410iC',
+    //     model_name: obj.model_file,
+    //     model_id: obj.id,
+    //     prefab_url: `${this.$http.$url}s3/models/${obj.model_file}`,
+    //     attributes: [
+    //         {
+    //         },
+    //     ],
+    // }));
 }
 export default function unityActionOutgoing(gameWindow) {
     const game = gameWindow;
