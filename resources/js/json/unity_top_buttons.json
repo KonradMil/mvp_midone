@@ -1,64 +1,44 @@
 {
     "icons": {
-        "elements": {
-            "src": "\/s3/builder_icons/chair_simple.png",
+        "animation_mode": {
+            "src": "\/s3/builder_icons/animation_mode_simple2.png",
             "tooltip": "",
-            "alttext": "",
-            "value": 0
+            "alttext": ""
         },
-        "robots": {
-            "src": "\/s3/builder_icons/robot_simple.png",
+        "edit_mode": {
+            "src": "\/s3/builder_icons/edit_mode_simple.png",
             "tooltip": "",
-            "alttext": "",
-            "value": 1
+            "alttext": ""
         },
-        "application": {
-            "src": "\/s3/builder_icons/manipulator_simple.png",
+        "fullscreen": {
+            "src": "\/s3/builder_icons/fullscreen_simple.png",
             "tooltip": "",
-            "alttext": "",
-            "value": 2
+            "alttext": ""
         },
-        "positioning": {
-            "src": "\/s3/builder_icons/positioning_simple.png",
+        "logout": {
+            "src": "\/s3/builder_icons/logout_simple.png",
             "tooltip": "",
-            "alttext": "",
-            "value": 3
+            "alttext": ""
         },
-        "control": {
-            "src": "\/s3/builder_icons/control_simple.png",
+        "eye": {
+            "src": "\/s3/builder_icons/eye_simple3.png",
             "tooltip": "",
-            "alttext": "",
-            "value": 4
+            "alttext": ""
         },
-        "security": {
-            "src": "\/s3/builder_icons/padlock_simple.png",
+        "save": {
+            "src": "\/s3/builder_icons/save_simple.png",
             "tooltip": "",
-            "alttext": "",
-            "value": 5
+            "alttext": ""
         },
-        "remote_control": {
-            "src": "\/s3/builder_icons/remote_control_simple.png",
+        "help": {
+            "src": "\/s3/builder_icons/help_simple.png",
             "tooltip": "",
-            "alttext": "",
-            "value": 6
+            "alttext": ""
         },
-        "other": {
-            "src": "\/s3/builder_icons/other_simple.png",
+        "layout": {
+            "src": "\/s3/builder_icons/layoute_mode_simple2.png",
             "tooltip": "",
-            "alttext": "",
-            "value": 7
-        },
-        "operator": {
-            "src": "\/s3/builder_icons/workers_simple.png",
-            "tooltip": "",
-            "alttext": "",
-            "value": 8
-        },
-        "geometric": {
-            "src": "\/s3/builder_icons/geometric_simple.png",
-            "tooltip": "",
-            "alttext": "",
-            "value": 9
+            "alttext": ""
         }
     }
 }
