@@ -119,13 +119,11 @@
 <script>
 import {getCurrentInstance, onMounted, ref, watch} from "vue";
 import GetModels from "../../../compositions/GetModels";
-import unityActionOutgoing from '../composables/ActionsOutgoing';
+
 
 export default {
     name: "LeftPanel",
-    props: {
-        gameWindow: Object
-    },
+
     setup(props, {emit}) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
@@ -137,7 +135,6 @@ export default {
         const categories = ref([]);
         const visible = ref(false);
         const models = ref([]);
-        const outgoingActions = ref({});
         const brands = require("../../../json/robot_brands.json");
         //LEFT BUTTON CLICKED
         emitter.on('leftbuttonclick', e => handleChange(e.val))
@@ -153,7 +150,7 @@ export default {
         }
 
         const selectModel = (model) => {
-
+            emitter.emit('unityoutgoingaction', { action: 'placeObject', data:model })
         }
 
         const handleChange = (cat_id) => {
@@ -178,20 +175,6 @@ export default {
         onMounted(() => {
             const c = require("../../../json/model_categories.json");
             categories.value = c.categories;
-            if(props.gameWindow != undefined) {
-                outgoingActions.value = unityActionOutgoing(props.gameWindow);
-                console.log(outgoingActions.value);
-                console.log('122');
-
-            } else {
-                setTimeout(function() {
-                    outgoingActions.value = unityActionOutgoing(props.gameWindow);
-                    console.log(outgoingActions.value);
-                    console.log('1221312312');
-                }, 6000);
-            }
-
-            console.log(outgoingActions.value);
         });
 
 
@@ -206,8 +189,7 @@ export default {
             brands,
             getModelRepositories,
             selectedBrand,
-            selectModel,
-            outgoingActions
+            selectModel
         }
     }
 }
