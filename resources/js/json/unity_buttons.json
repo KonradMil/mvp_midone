@@ -5,41 +5,13 @@
             "tooltip": "",
             "alttext": ""
         },
-        "animation_mode": {
-            "src": "\/s3/builder_icons/animation_mode_simple2.png",
-            "tooltip": "",
-            "alttext": ""
-        },
-        "edit_mode": {
-            "src": "\/s3/builder_icons/edit_mode_simple.png",
-            "tooltip": "",
-            "alttext": ""
-        },
-        "fullscreen": {
-            "src": "\/s3/builder_icons/fullscreen_simple.png",
-            "tooltip": "",
-            "alttext": ""
-        },
-        "logout": {
-            "src": "\/s3/builder_icons/logout_simple.png",
-            "tooltip": "",
-            "alttext": ""
-        },
+
         "grid": {
             "src": "\/s3/builder_icons/grid_simple.png",
             "tooltip": "",
             "alttext": ""
         },
-        "eye": {
-            "src": "\/s3/builder_icons/eye_simple3.png",
-            "tooltip": "",
-            "alttext": ""
-        },
-        "save": {
-            "src": "\/s3/builder_icons/save_simple.png",
-            "tooltip": "",
-            "alttext": ""
-        },
+
         "play": {
             "src": "\/s3/builder_icons/play_simple.png",
             "tooltip": "",
@@ -95,16 +67,7 @@
             "tooltip": "",
             "alttext": ""
         },
-        "help": {
-            "src": "\/s3/builder_icons/help_simple.png",
-            "tooltip": "",
-            "alttext": ""
-        },
-        "layout": {
-            "src": "\/s3/builder_icons/layoute_mode_simple2.png",
-            "tooltip": "",
-            "alttext": ""
-        },
+
         "speedup": {
             "src": "\/s3/builder_icons/speedup_radial.png",
             "tooltip": "",

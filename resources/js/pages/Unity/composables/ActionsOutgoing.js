@@ -38,8 +38,25 @@ export default function unityActionOutgoing(gameWindow) {
 
     }
 
+    function setSessionId(id) {
+        outgoing(game, 'SetSesionID', id)
+    }
+
+    function setHangarAppearance (id) {
+        outgoing(game, 'SetHangarApperance', id)
+    }
+
+    function unlockUnityInput () {
+        outgoing(game, 'UnlockUnityInput', '')
+    }
+
+    function save() {
+        outgoing(game, 'SaveStructure', '');
+    }
+
     return {
         placeObject,
-        deleteObject
+        deleteObject,
+        setSessionId
     };
 }
