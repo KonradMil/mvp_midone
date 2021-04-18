@@ -31,7 +31,7 @@ export default function unityActionOutgoing(gameWindow) {
             model_name: data.name,
             model_id: data.id,
             prefab_url: location.host + 's3/models/' + data.model_file
-        })
+        }, true)
     }
 
     function deleteObject() {

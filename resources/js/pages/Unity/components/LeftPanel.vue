@@ -180,14 +180,9 @@ export default {
             categories.value = c.categories;
             if(props.gameWindow != undefined) {
                 outgoingActions.value = unityActionOutgoing(props.gameWindow);
-                console.log(outgoingActions.value);
-                console.log('122');
-
             } else {
                 setTimeout(function() {
                     outgoingActions.value = unityActionOutgoing(props.gameWindow);
-                    console.log(outgoingActions.value);
-                    console.log('1221312312');
                 }, 6000);
             }
 
