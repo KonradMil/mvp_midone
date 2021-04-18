@@ -59,6 +59,7 @@ export default {
         });
 
         const handleUnityActionOutgoing = (e) => {
+            console.log(e);
             unityActionOutgoingObject.value[e.action](e.data);
         }
 
