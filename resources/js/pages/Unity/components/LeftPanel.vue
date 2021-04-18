@@ -178,7 +178,14 @@ export default {
         onMounted(() => {
             const c = require("../../../json/model_categories.json");
             categories.value = c.categories;
-            outgoingActions.value = unityActionOutgoing(props.gameWindow);
+            if(props.gameWindow != undefined) {
+                outgoingActions.value = unityActionOutgoing(props.gameWindow);
+                setTimeout(function() {
+                    outgoingActions.value = unityActionOutgoing(props.gameWindow);
+                }, 2000);
+            }
+
+            console.log(outgoingActions.value);
         });
 
 
