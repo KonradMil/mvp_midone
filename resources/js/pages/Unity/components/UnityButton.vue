@@ -35,15 +35,16 @@ export default {
         path: String,
         alttext: String,
         tooltip: String,
-        action: String
+        action: String,
+        position: String
     },
-    setup() {
+    setup(props) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
 
         const doAction = (name) => {
             console.log('CLIK CLICK');
-            emitter.emit('leftbuttonclick', { val: name })
+            emitter.emit(props.position, { val: name })
         };
 
         return {

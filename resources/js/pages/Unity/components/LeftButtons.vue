@@ -2,7 +2,7 @@
     <div class="flex fixed h-full z-50 pt-2">
         <div class="flex-1 pt-2 ml-10">
             <div :class="(category == icon.value)?'left-button-category-active':''" v-for="(icon, index) in icons" :key="'leftIcon_' + index">
-            <UnityButton    :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="icon.value" />
+            <UnityButton    :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="icon.value" position="leftbuttonclick" />
             </div>
         </div>
     </div>
