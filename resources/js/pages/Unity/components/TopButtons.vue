@@ -1,7 +1,7 @@
 <template>
     <div class="flex fixed w-full z-50 pt-2 h-24 top-0" id="top">
         <div class="flex-1 pt-2 ml-10 flex-row">
-            <div  v-for="(icon, index) in icons" :key="'topIcon_' + index">
+            <div  v-for="(icon, index) in icons" :key="'topIcon_' + index" class="top-i">
                 <UnityButton    :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="icon.value" position="topbuttonclick"/>
             </div>
         </div>
