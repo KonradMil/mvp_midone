@@ -96,7 +96,7 @@
                 <div class="p-5 w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
                     <button class="btn btn-primary shadow-md w-1/2" @click="subcategory = null; selectedBrand = '';">Powrót</button>
                 </div>
-                <div class=" p-5 w-full" v-for="(model, index) in models.list" :key="'model_' + index" @click="outgoingActions.placeObject(model)">
+                <div class=" p-5 w-full" v-for="(model, index) in models.list" :key="'model_' + index" @click="selectModel(model)">
                     <div class=" shadow-md rounded-md zoom-in">
                         <div class="flex-none pos-image relative block w-full">
                             <div class="pos-image__preview image-fit h-24 w-full">
