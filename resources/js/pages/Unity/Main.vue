@@ -12,7 +12,7 @@ import UnityBridge from "./bridge";
 import cash from "cash-dom";
 import LeftButtons from "./components/LeftButtons";
 import LeftPanel from "./components/LeftPanel";
-import unityActionOutgoing from 'composables/ActionsOutgoing';
+import unityActionOutgoing from './composables/ActionsOutgoing';
 
 const ww = WindowWatcher();
 
