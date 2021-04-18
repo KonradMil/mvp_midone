@@ -30,7 +30,7 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'OrderPart', {
             model_name: data.name,
             model_id: data.id,
-            prefab_url: location.host + '/s3/models/' + data.model_file
+            prefab_url: 'https://' + location.host + '/s3/models/' + data.model_file
         }, true)
     }
 
