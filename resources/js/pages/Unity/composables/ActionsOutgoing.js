@@ -67,19 +67,19 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function beginLayoutEdit() {
-        outgoing(game, 'BeginLayoutEdit', '');
+        outgoing(game, 'BeginLayoutEdit', 0);
     }
 
     function beginLayoutLabel() {
-        outgoing(game, 'BeginLayoutLabel', '');
+        outgoing(game, 'BeginLayoutLabel', 0);
     }
 
     function beginLayoutDraw() {
-        outgoing(game, 'BeginLayoutDraw', '');
+        outgoing(game, 'BeginLayoutDraw', 0);
     }
 
     function beginLayoutComment() {
-        outgoing(game, 'BeginLayoutComment', '');
+        outgoing(game, 'BeginLayoutComment', 0);
     }
 
     return {
