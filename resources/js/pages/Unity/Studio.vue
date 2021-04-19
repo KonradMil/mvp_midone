@@ -32,7 +32,7 @@ export default {
         const setFullscreen = () => {
             gameInstance.value.SetFullscreen(1);
         }
-
+4
         const message = (gameObject, method, param) => {
             if (param === null) {
                 param = ''
