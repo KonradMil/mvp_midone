@@ -58,6 +58,15 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'SaveStructure', '');
     }
 
+    function changeGridSize(val) {
+        if(val === 0) {
+            outgoing(game, 'HideGrid', val)
+        } else {
+            outgoing(game, 'DisplayGrid', val)
+        }
+
+    }
+
     return {
         placeObject,
         deleteObject,

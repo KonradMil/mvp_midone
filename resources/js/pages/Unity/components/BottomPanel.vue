@@ -19,7 +19,7 @@
                     </button>
                     <div class="dropdown-menu w-36">
                         <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                            <Slider v-model="gridSize" min="1" max="15" style="width: 100%;"/>
+                            <Slider v-model="gridSize" min="0" max="15" style="width: 100%;" @change="changeGridSize"/>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
 </template>
 <style src="@vueform/slider/themes/default.css"></style>
 <script>
-import {onMounted, ref} from "vue";
+import {getCurrentInstance, onMounted, ref} from "vue";
 import cash from "cash-dom";
 import AnimationPanel from "./AnimationPanel";
 import UnityButton from "./UnityButton";
@@ -48,10 +48,17 @@ export default {
         mode: String
     },
     setup() {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const animation_icons = ref([]);
         const edit_icons = ref([]);
         const layout_icons = ref([]);
-        const gridSize = ref(1);
+        const gridSize = ref(0);
+
+        const changeGridSize = (val) => {
+            gridSize.value = val;
+            emitter.emit('gridsizechange', { val: val })
+        }
         onMounted(()=> {
             //REMOVES PADDING
             cash("body")
@@ -69,7 +76,8 @@ export default {
             layout_icons,
             edit_icons,
             animation_icons,
-            gridSize
+            gridSize,
+            changeGridSize
         }
     }
 }

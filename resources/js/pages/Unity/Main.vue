@@ -52,9 +52,11 @@ export default {
             handleUnityActionOutgoing(e);
         });
 
-        const changeMode = (mode) => {
+        //HANDLES GRID SIZE
+        emitter.on('gridsizechange', e => {
+            handleUnityActionOutgoing({action: 'changeGridSize', data: e.val});
+        });
 
-        }
 
         emitter.on('topbuttonclick', e =>  {
             console.log(e);
