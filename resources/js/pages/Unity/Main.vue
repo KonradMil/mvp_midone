@@ -31,7 +31,7 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         //INTERNAL
         const type = ref('challenge');
-        const mode = ref('');
+        const mode = ref('edit');
         const bridge = ref();
         const gameWindow = ref(null);
         const gameLoad = ref({});

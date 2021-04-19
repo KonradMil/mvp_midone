@@ -17,9 +17,9 @@
                             </div>
                         </div>
                     </button>
-                    <div class="dropdown-menu w-75">
+                    <div class="dropdown-menu w-36">
                         <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                            <Slider v-model="gridSize" />
+                            <Slider v-model="gridSize" min="1" max="15" style="width: 100%;"/>
                         </div>
                     </div>
                 </div>
