@@ -28,7 +28,7 @@
                         <label for="modal-form-1" class="form-label"
                         >From</label
                         >
-                        <VSwatches v-model="color"></VSwatches>
+                        <VSwatches v-model="color" inline></VSwatches>
                     </div>
                     <div class="mt-3">
                         <label for="modal-form-2" class="form-label">To</label>
