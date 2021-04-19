@@ -1,6 +1,6 @@
 <template>
     <div
-        id="header-footer-slide-over-preview"
+        id="right-panel"
         class="modal modal-slide-over"
         data-backdrop="static"
         tabindex="-1"
@@ -136,7 +136,8 @@
 </template>
 
 <script>
-import {getCurrentInstance, ref} from "vue";
+import {getCurrentInstance, onMounted, ref} from "vue";
+import cash from "cash-dom";
 
 export default {
     name: "RightPanel",
@@ -147,7 +148,16 @@ export default {
         const layouts = ref([]);
         const labels = ref([]);
         const comments = ref([]);
-        const showSidebar = ref(false);
+
+
+
+        const showPanel = () => {
+            cash("#right-panel").modal("show");
+        }
+
+        const hidePanel = () => {
+            cash("#right-panel").modal("hide");
+        }
 
         emitter.on('UnityLayoutSelected', e => {
 
@@ -161,6 +171,10 @@ export default {
 
         });
 
+
+        onMounted(() => {
+            showPanel();
+        });
 
     }
 }
