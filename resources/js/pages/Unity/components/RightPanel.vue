@@ -14,36 +14,12 @@
                 <!-- BEGIN: Slide Over Header -->
                 <div class="modal-header">
                     <h2 class="font-medium text-base mr-auto">
-                        Broadcast Message
+                        {{currentTitle}}
                     </h2>
-                    <button class="btn btn-outline-secondary hidden sm:flex">
-                        <FileIcon class="w-4 h-4 mr-2" />
-                        Download Docs
-                    </button>
-                    <div class="dropdown sm:hidden">
-                        <a
-                            class="dropdown-toggle w-5 h-5 block"
-                            href="javascript:;"
-                            aria-expanded="false"
-                        >
-                            <MoreHorizontalIcon
-                                class="w-5 h-5 text-gray-600 dark:text-gray-600"
-                            />
-                        </a>
-                        <div class="dropdown-menu w-40">
-                            <div
-                                class="dropdown-menu__content box dark:bg-dark-1 p-2"
-                            >
-                                <a
-                                    href="javascript:;"
-                                    class="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                                >
-                                    <FileIcon class="w-4 h-4 mr-2" />
-                                    Download Docs
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+<!--                    <button class="btn btn-outline-secondary hidden sm:flex">-->
+<!--                        <FileIcon class="w-4 h-4 mr-2" />-->
+<!--                        Download Docs-->
+<!--                    </button>-->
                 </div>
                 <!-- END: Slide Over Header -->
                 <!-- BEGIN: Slide Over Body -->
@@ -52,12 +28,7 @@
                         <label for="modal-form-1" class="form-label"
                         >From</label
                         >
-                        <input
-                            id="modal-form-1"
-                            type="text"
-                            class="form-control"
-                            placeholder="example@gmail.com"
-                        />
+                        <VSwatches v-model="color"></VSwatches>
                     </div>
                     <div class="mt-3">
                         <label for="modal-form-2" class="form-label">To</label>
@@ -138,9 +109,13 @@
 <script>
 import {getCurrentInstance, onMounted, ref} from "vue";
 import cash from "cash-dom";
+import VSwatches from '../../../components/color-swatches/VSwatches'
 
 export default {
     name: "RightPanel",
+    components: {
+        VSwatches
+    },
     setup() {
         //GLOBAL
         const app = getCurrentInstance();
@@ -148,8 +123,8 @@ export default {
         const layouts = ref([]);
         const labels = ref([]);
         const comments = ref([]);
-
-
+        const currentTitle = ref('');
+        const color = ref('');
 
         const showPanel = () => {
             cash("#right-panel").modal("show");
@@ -176,6 +151,13 @@ export default {
             showPanel();
         });
 
+        return {
+            currentTitle,
+            comments,
+            layouts,
+            labels,
+            color
+        }
     }
 }
 </script>
