@@ -2,7 +2,7 @@
     <div class="flex fixed w-full z-50 pt-2 h-24 top-0" id="top">
         <div class="flex  pt-2 ml-10 flex-row">
             <div  v-for="(icon, index) in icons" :key="'topIcon_' + index" class="top-i w-20 pl-10">
-                <UnityButton  v-if="icon.type != 'dropdown'" :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"/>
+                <UnityButton  v-if="icon.type !== 'dropdown'" :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"/>
 
             </div>
         </div>
