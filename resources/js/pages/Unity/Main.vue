@@ -31,7 +31,7 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         //INTERNAL
         const type = ref('challenge');
-        const mode = ref('edit');
+        const mode = ref('');
         const bridge = ref();
         const gameWindow = ref(null);
         const gameLoad = ref({});
@@ -45,19 +45,18 @@ export default {
         window_height.value = window.innerHeight;
 
         //RUNS WHEN UNITY IS READY
-        emitter.on('onInitialized', e =>  initalize() );
+        emitter.on('onInitialized', e => initalize());
 
         //HANDLES ALL UNITY ACTIONS
         emitter.on('unityoutgoingaction', e => {
             handleUnityActionOutgoing(e);
         });
 
-
         const changeMode = (mode) => {
 
         }
 
-        emitter.on('topbuttonclick', e =>  {
+        emitter.on('topbuttonclick', e => {
             console.log(e);
             switch (e.val) {
                 case 'animation_mode':
@@ -71,7 +70,7 @@ export default {
                     break;
                 case 'fullscreen':
                     console.log(gameWindow);
-                        gameWindow.value.setFullscreen();
+                    gameWindow.value.setFullscreen();
                     break;
                 case 'logout':
                     // handleUnityActionOutgoing(e);
@@ -89,7 +88,7 @@ export default {
                     handleUnityActionOutgoing({action: 'ChangeCamera', data: 0});
                     break;
                 case 'save':
-                    handleUnityActionOutgoing({action: 'SaveStructure', data: '' });
+                    handleUnityActionOutgoing({action: 'SaveStructure', data: ''});
                     break;
                 case 'help':
 
@@ -100,7 +99,7 @@ export default {
 
         emitter.on('UnitySave', e => {
             gameLoad.value.save_json = e.saveGame;
-            if(type.value == 'challenge') {
+            if (type.value == 'challenge') {
                 SaveChallengeUnity(gameLoad);
             } else {
 
@@ -111,7 +110,7 @@ export default {
         const handleUnityActionOutgoing = (e) => {
             try {
                 unityActionOutgoingObject.value[e.action](e.data);
-            }catch (ee) {
+            } catch (ee) {
                 console.log([ee, e]);
             }
         }
@@ -135,15 +134,15 @@ export default {
             bridge.value = UnityBridge();
         });
 
-        onMounted(()=> {
+        onMounted(() => {
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")
                 .removeClass("error-page")
                 .addClass("p-0");
-            const  li = require("../../json/unity_left_buttons.json");
+            const li = require("../../json/unity_left_buttons.json");
             leftIcons.value = li.icons;
-            const  ti = require("../../json/unity_top_buttons.json");
+            const ti = require("../../json/unity_top_buttons.json");
             topIcons.value = ti.icons;
         });
 
