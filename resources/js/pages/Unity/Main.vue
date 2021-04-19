@@ -44,6 +44,12 @@ export default {
         const unityActionOutgoingObject = ref({});
         window_height.value = window.innerHeight;
 
+
+        onBeforeMount(() => {
+            //ADDS LISTENERS
+            bridge.value = UnityBridge();
+        });
+
         //RUNS WHEN UNITY IS READY
         emitter.on('onInitialized', e =>  initalize() );
 
@@ -131,10 +137,7 @@ export default {
             }, 5000);
         }
 
-        onBeforeMount(() => {
-            //ADDS LISTENERS
-            bridge.value = UnityBridge();
-        });
+
 
         onMounted(()=> {
             //REMOVES PADDING
