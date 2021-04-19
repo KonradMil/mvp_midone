@@ -64,7 +64,22 @@ export default function unityActionOutgoing(gameWindow) {
         } else {
             outgoing(game, 'DisplayGrid', val)
         }
+    }
 
+    function beginLayoutEdit() {
+        outgoing(game, 'BeginLayoutEdit', '');
+    }
+
+    function beginLayoutLabel() {
+        outgoing(game, 'BeginLayoutLabel', '');
+    }
+
+    function beginLayoutDraw() {
+        outgoing(game, 'BeginLayoutDraw', '');
+    }
+
+    function beginLayoutComment() {
+        outgoing(game, 'BeginLayoutComment', '');
     }
 
     return {
@@ -75,6 +90,10 @@ export default function unityActionOutgoing(gameWindow) {
         unlockUnityInput,
         ChangeCamera,
         changeGridSize,
-        save
+        save,
+        beginLayoutEdit,
+        beginLayoutLabel,
+        beginLayoutDraw,
+        beginLayoutComment
     };
 }
