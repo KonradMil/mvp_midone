@@ -68,8 +68,17 @@ export default {
                 case 'logout':
                     // handleUnityActionOutgoing(e);
                     break;
-                case 'eye':
-
+                case 'orto':
+                    handleUnityActionOutgoing({action: 'ChangeCamera', data: 2});
+                    break;
+                case 'fpv':
+                    handleUnityActionOutgoing({action: 'ChangeCamera', data: 3});
+                    break;
+                case 'topdown':
+                    handleUnityActionOutgoing({action: 'ChangeCamera', data: 1});
+                    break;
+                case 'standard':
+                    handleUnityActionOutgoing({action: 'ChangeCamera', data: 0});
                     break;
                 case 'save':
                     handleUnityActionOutgoing({action: 'SaveStructure', data: '' });

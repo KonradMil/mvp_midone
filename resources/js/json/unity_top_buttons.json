@@ -51,7 +51,7 @@
                     },
                     {
                         "name" : "Kamera z góry",
-                        "action": "updown"
+                        "action": "topdown"
                     },
                     {
                         "name" : "Kamera ortograficzna",
