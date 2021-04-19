@@ -4,7 +4,7 @@
             class="dropdown-toggle btn px-2 box text-gray-700 dark:text-gray-300"
             aria-expanded="false"
         >
-            <div v-if="tooltip == ''" class="w-20 py-2 text-center flex justify-center items-center">
+            <div class="w-20 py-2 text-center flex justify-center items-center">
                 <div class="w-16 h-16 flex-none image-fit overflow-hidden zoom-in" @click.native="doAction(action)">
                     <img class=""
                          :alt="alttext"
