@@ -50,6 +50,10 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'UnlockUnityInput', '')
     }
 
+    function ChangeCamera (val) {
+        outgoing(game, 'ChangeCamera', val)
+    }
+
     function save() {
         outgoing(game, 'SaveStructure', '');
     }
@@ -59,6 +63,7 @@ export default function unityActionOutgoing(gameWindow) {
         deleteObject,
         setSessionId,
         setHangarAppearance,
-        unlockUnityInput
+        unlockUnityInput,
+        ChangeCamera
     };
 }

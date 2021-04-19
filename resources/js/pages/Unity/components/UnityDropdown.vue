@@ -5,7 +5,7 @@
             aria-expanded="false"
         >
             <div class="w-20 py-2 text-center flex justify-center items-center">
-                <div class="w-16 h-16 flex-none image-fit overflow-hidden zoom-in" @click.native="doAction(action)">
+                <div class="w-16 h-16 flex-none image-fit overflow-hidden zoom-in">
                     <img class=""
                          :alt="alttext"
                          :src="path"
@@ -13,14 +13,14 @@
                 </div>
             </div>
         </button>
-        <div class="dropdown-menu w-40">
+        <div class="dropdown-menu w-75">
             <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
                 <a  @click.prevent="doAction(option.action)"
                     v-for="(option, index) in options"
                     href=""
                     class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
                 >
-                    <PrinterIcon class="w-4 h-4 mr-2" /> {{option.name}}
+                    {{option.name}}
                 </a>
             </div>
         </div>
