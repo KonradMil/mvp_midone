@@ -19,7 +19,7 @@
                     </button>
                     <div class="dropdown-menu w-36">
                         <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                            <Slider v-model="gridSize" min=0 max=15 style="width: 100%;" @change="changeGridSize"/>
+                            <Slider v-model="gridSize" :min="0" :max="15" style="width: 100%;" @change="changeGridSize"/>
                         </div>
                     </div>
                 </div>
