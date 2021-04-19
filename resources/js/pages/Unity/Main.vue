@@ -48,6 +48,37 @@ export default {
             handleUnityActionOutgoing(e);
         });
 
+        emitter.on('topbuttonclick', e =>  {
+            console.log(e);
+            switch (e.action) {
+                case 'animation_mode':
+
+                    break;
+                case 'edit_mode':
+
+                    break;
+                case 'layout':
+
+                    break;
+                case 'fullscreen':
+                        gameWindow.SetFullscreen(1);
+                    break;
+                case 'logout':
+                    // handleUnityActionOutgoing(e);
+                    break;
+                case 'eye':
+
+                    break;
+                case 'save':
+                    handleUnityActionOutgoing({action: 'SaveStructure', data: '' });
+                    break;
+                case 'help':
+
+                    break;
+            }
+        });
+
+
         emitter.on('UnitySave', e => {
             gameLoad.value.save_json = e.saveGame;
             if(type.value == 'challenge') {

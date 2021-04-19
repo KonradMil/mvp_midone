@@ -2,7 +2,7 @@
     <div class="flex fixed w-full z-50 pt-2 h-24 top-0" id="top">
         <div class="flex  pt-2 ml-10 flex-row">
             <div  v-for="(icon, index) in icons" :key="'topIcon_' + index" class="top-i w-20 pl-10">
-                <UnityButton    :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="icon.value" position="topbuttonclick"/>
+                <UnityButton    :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"/>
             </div>
         </div>
     </div>
@@ -19,15 +19,10 @@ export default {
     },
     components: {UnityButton},
     setup() {
-        const app = getCurrentInstance();
-        const emitter = app.appContext.config.globalProperties.emitter;
-        const category = ref(null);
-        emitter.on('topbuttonclick', e =>  handleChange(e.val) );
-        const handleChange = (val) => {
-            console.log(val);
-        }
+
+
         return {
-            category
+
         }
     }
 }
