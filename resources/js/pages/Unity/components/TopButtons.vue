@@ -6,7 +6,7 @@
                     <UnityDropdown v-if="icon.type === 'dropdown'" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"></UnityDropdown>
                 </div>
             </div>
-            <div class="right flex  pt-2 ml-10 flex-row" style="margin-left: auto;">
+            <div class="right flex  pt-2 mr-10 flex-row" style="margin-left: auto;">
                 <div  v-for="(icon, index) in icons.right" :key="'topIcon_' + index" class="top-i w-30 pl-6">
                     <UnityButton  v-if="icon.type === 'button'" :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"/>
                     <UnityDropdown v-if="icon.type === 'dropdown'" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"></UnityDropdown>
