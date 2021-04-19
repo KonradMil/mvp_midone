@@ -50,7 +50,7 @@ export default {
 
         emitter.on('topbuttonclick', e =>  {
             console.log(e);
-            switch (e.action) {
+            switch (e.val) {
                 case 'animation_mode':
 
                     break;
