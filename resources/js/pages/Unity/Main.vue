@@ -61,7 +61,7 @@ export default {
 
                     break;
                 case 'fullscreen':
-                        gameWindow.SetFullscreen(1);
+                        gameWindow.setFullscreen(1);
                     break;
                 case 'logout':
                     // handleUnityActionOutgoing(e);
