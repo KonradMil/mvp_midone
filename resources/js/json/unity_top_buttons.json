@@ -43,7 +43,25 @@
                 "tooltip": "",
                 "alttext": "",
                 "type": "dropdown",
-                "position": "right"
+                "position": "right",
+                "options": [
+                    {
+                        "name" : "Standardowa kamera",
+                        "action": "standard"
+                    },
+                    {
+                        "name" : "Kamera z góry",
+                        "action": "updown"
+                    },
+                    {
+                        "name" : "Kamera ortograficzna",
+                        "action": "orto"
+                    },
+                    {
+                        "name" : "Kamera pierwszoosobowa",
+                        "action": "fpv"
+                    }
+                ]
             },
             "save": {
                 "src": "\/s3/builder_icons/save_simple.png",
