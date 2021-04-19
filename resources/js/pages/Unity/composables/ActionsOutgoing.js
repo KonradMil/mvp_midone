@@ -73,6 +73,8 @@ export default function unityActionOutgoing(gameWindow) {
         setSessionId,
         setHangarAppearance,
         unlockUnityInput,
-        ChangeCamera
+        ChangeCamera,
+        changeGridSize,
+        save
     };
 }
