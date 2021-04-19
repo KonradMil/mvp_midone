@@ -1,7 +1,7 @@
 <template>
     <div class="dropdown">
         <button
-            class="dropdown-toggle btn px-2 box text-gray-700 dark:text-gray-300"
+            class="dropdown-toggle"
             aria-expanded="false"
         >
             <div class="w-20 py-2 text-center flex justify-center items-center">

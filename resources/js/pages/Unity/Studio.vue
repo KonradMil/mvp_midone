@@ -30,7 +30,7 @@ export default {
         const error = ref(null);
         containerId.value = 'unity-container-' + Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
         const setFullscreen = () => {
-            gameInstance.SetFullscreen(1);
+            gameInstance.value.SetFullscreen(1);
         }
 
         const message = (gameObject, method, param) => {
