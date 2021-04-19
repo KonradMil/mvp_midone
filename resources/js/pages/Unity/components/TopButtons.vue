@@ -9,7 +9,7 @@
             <div class="right flex  pt-2 mr-24 flex-row" style="margin-left: auto;">
                 <div  v-for="(icon, index) in icons.right" :key="'topIcon_' + index" class="top-i w-30 pl-6">
                     <UnityButton  v-if="icon.type === 'button'" :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"/>
-                    <UnityDropdown v-if="icon.type === 'dropdown'" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"></UnityDropdown>
+                    <UnityDropdown v-if="icon.type === 'dropdown'" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick" :options="icon.options"></UnityDropdown>
                 </div>
             </div>
     </div>
