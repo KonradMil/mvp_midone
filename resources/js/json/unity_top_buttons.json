@@ -3,37 +3,44 @@
         "animation_mode": {
             "src": "\/s3/builder_icons/animation_mode_simple2.png",
             "tooltip": "",
-            "alttext": ""
+            "alttext": "",
+            "type": "button"
         },
         "edit_mode": {
             "src": "\/s3/builder_icons/edit_mode_simple.png",
             "tooltip": "",
-            "alttext": ""
+            "alttext": "",
+            "type": "button"
         },
         "fullscreen": {
             "src": "\/s3/builder_icons/fullscreen_simple.png",
             "tooltip": "",
-            "alttext": ""
+            "alttext": "",
+            "type": "button"
         },
         "logout": {
             "src": "\/s3/builder_icons/logout_simple.png",
             "tooltip": "",
-            "alttext": ""
+            "alttext": "",
+            "type": "button"
         },
         "eye": {
             "src": "\/s3/builder_icons/eye_simple3.png",
             "tooltip": "",
-            "alttext": ""
+            "alttext": "",
+            "type": "dropdown"
         },
         "save": {
             "src": "\/s3/builder_icons/save_simple.png",
             "tooltip": "",
-            "alttext": ""
+            "alttext": "",
+            "type": "button"
         },
         "help": {
             "src": "\/s3/builder_icons/help_simple.png",
             "tooltip": "",
-            "alttext": ""
+            "alttext": "",
+            "type": "button"
         },
         "layout": {
             "src": "\/s3/builder_icons/layoute_mode_simple2.png",
