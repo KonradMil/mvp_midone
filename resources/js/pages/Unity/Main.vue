@@ -44,11 +44,6 @@ export default {
         const unityActionOutgoingObject = ref({});
         window_height.value = window.innerHeight;
 
-
-        // onBeforeMount(() => {
-        //
-        // });
-
         //RUNS WHEN UNITY IS READY
         emitter.on('onInitialized', e =>  initalize() );
 
@@ -57,11 +52,10 @@ export default {
             handleUnityActionOutgoing(e);
         });
 
-        //HANDLES GRID SIZE
-        emitter.on('gridsizechange', e => {
-            handleUnityActionOutgoing({action: 'changeGridSize', data: e.val});
-        });
 
+        const changeMode = (mode) => {
+
+        }
 
         emitter.on('topbuttonclick', e =>  {
             console.log(e);
@@ -136,11 +130,12 @@ export default {
             }, 5000);
         }
 
-
-
-        onMounted(()=> {
+        onBeforeMount(() => {
             //ADDS LISTENERS
             bridge.value = UnityBridge();
+        });
+
+        onMounted(()=> {
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")
