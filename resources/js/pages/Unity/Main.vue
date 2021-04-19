@@ -3,7 +3,7 @@
     <LeftButtons :icons="leftIcons"></LeftButtons>
     <LeftPanel></LeftPanel>
 
-    <Studio hideFooter="true" :src="unity_path" :width="window_width" unityLoader="/UnityLoader.js" ref="gameWindow"/>
+    <Studio hideFooter="true" :src="unity_path" :width="window_width" height="" unityLoader="/UnityLoader.js" ref="gameWindow"/>
 </template>
 
 <script>
@@ -35,10 +35,11 @@ export default {
         //EXTERNAL
         const unity_path = ref('/s3/unity/AssemBrot19_03.json');
         const window_width = ref('100%');
+        const window_height = ref(0);
         const leftIcons = ref([])
         const topIcons = ref([])
         const unityActionOutgoingObject = ref({});
-
+        window_height.value = window.innerHeight;
 
         //RUNS WHEN UNITY IS READY
         emitter.on('onInitialized', e =>  initalize() );
@@ -132,6 +133,7 @@ export default {
         return {
             unity_path,
             window_width,
+            window_height,
             gameWindow,
             leftIcons,
             topIcons
