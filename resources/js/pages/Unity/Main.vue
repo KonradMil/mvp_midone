@@ -60,13 +60,13 @@ export default {
             console.log(e);
             switch (e.val) {
                 case 'animation_mode':
-
+                    mode.value = 'animation';
                     break;
                 case 'edit_mode':
-
+                    mode.value = 'edit';
                     break;
                 case 'layout':
-
+                    mode.value = 'layout';
                     break;
                 case 'fullscreen':
                     console.log(gameWindow);
