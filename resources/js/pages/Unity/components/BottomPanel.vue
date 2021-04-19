@@ -1,10 +1,77 @@
 <template>
-
+    <AnimationPanel v-if="mode == 'animation'"></AnimationPanel>
+    <div class="flex fixed w-full z-50 pb-2 h-24 bottom-0 " id="bottom">
+        <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto;">
+            <div  v-if="mode == 'edit'" class="bot-i w-30 pl-6">
+                <div class="dropdown">
+                    <button
+                        class="dropdown-toggle"
+                        aria-expanded="false"
+                    >
+                        <div class="w-20 py-2 text-center flex justify-center items-center">
+                            <div class="w-16 h-16 flex-none image-fit overflow-hidden zoom-in">
+                                <img class=""
+                                     alt="Siatka"
+                                     src="/s3/builder_icons/grid_simple.png"
+                                />
+                            </div>
+                        </div>
+                    </button>
+                    <div class="dropdown-menu w-75">
+                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                            <Slider v-model="gridSize" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div  v-if="mode == 'animation'" v-for="(icon, index) in animation_icons" :key="'animationIcon_' + index" class="bot-i w-30 pl-6">
+                <UnityButton    :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="icon.value" position="animationbuttonclick" />
+            </div>
+            <div  v-if="mode == 'layout'" v-for="(icon, index) in layout_icons" :key="'layoutIcon_' + index" class="bot-i w-30 pl-6">
+                <UnityButton    :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="icon.value" position="layoutbuttonclick" />
+            </div>
+        </div>
+    </div>
 </template>
-
+<style src="@vueform/slider/themes/default.css"></style>
 <script>
+import {onMounted, ref} from "vue";
+import cash from "cash-dom";
+import AnimationPanel from "./AnimationPanel";
+import UnityButton from "./UnityButton";
+import Slider from '@vueform/slider'
+
 export default {
-    name: "BottomPanel"
+    name: "BottomPanel",
+    components: {AnimationPanel, UnityButton, Slider},
+    props: {
+        mode: String
+    },
+    setup() {
+        const animation_icons = ref([]);
+        const edit_icons = ref([]);
+        const layout_icons = ref([]);
+        const gridSize = ref(1);
+        onMounted(()=> {
+            //REMOVES PADDING
+            cash("body")
+                .removeClass("main")
+                .removeClass("error-page")
+            const  li = require("../../../json/unity_layout_buttons.json");
+            layout_icons.value = li.icons;
+            const  ei = require("../../../json/unity_edit_buttons.json");
+            edit_icons.value = ei.icons;
+            const  ai = require("../../../json/unity_animation_buttons.json");
+            animation_icons.value = ai.icons;
+        });
+
+        return {
+            layout_icons,
+            edit_icons,
+            animation_icons,
+            gridSize
+        }
+    }
 }
 </script>
 

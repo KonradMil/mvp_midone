@@ -4,6 +4,7 @@
     <LeftPanel></LeftPanel>
 
     <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
+    <BottomPanel :mode="mode"></BottomPanel>
 </template>
 
 <script>
@@ -17,18 +18,20 @@ import LeftPanel from "./components/LeftPanel";
 import SaveChallengeUnity from "../../compositions/SaveChallengeUnity";
 import unityActionOutgoing from './composables/ActionsOutgoing';
 import TopButtons from "./components/TopButtons";
+import BottomPanel from "./components/BottomPanel";
 
 const ww = WindowWatcher();
 
 export default {
     name: "Main",
-    components: {TopButtons, LeftPanel, LeftButtons, Studio},
+    components: {BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
     setup(props, {emit}) {
         //GLOBAL
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         //INTERNAL
         const type = ref('challenge');
+        const mode = ref('');
         const bridge = ref();
         const gameWindow = ref(null);
         const gameLoad = ref({});
@@ -48,6 +51,10 @@ export default {
         emitter.on('unityoutgoingaction', e => {
             handleUnityActionOutgoing(e);
         });
+
+        const changeMode = (mode) => {
+
+        }
 
         emitter.on('topbuttonclick', e =>  {
             console.log(e);
@@ -145,7 +152,8 @@ export default {
             window_height,
             gameWindow,
             leftIcons,
-            topIcons
+            topIcons,
+            mode
         }
     }
 }

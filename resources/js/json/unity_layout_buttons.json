@@ -1,0 +1,28 @@
+{
+    "icons": {
+        "edit": {
+            "src": "\/s3/builder_icons/edit_simple.png",
+            "tooltip": "",
+            "alttext": "",
+            "type": "button"
+        },
+        "addlabel": {
+            "src": "\/s3/builder_icons/addlabel_radial.png",
+            "tooltip": "",
+            "alttext": "",
+            "type": "button"
+        },
+        "addlayout": {
+            "src": "\/s3/builder_icons/addlayout_radial.png",
+            "tooltip": "",
+            "alttext": "",
+            "type": "button"
+        },
+        "notatka": {
+            "src": "\/s3/builder_icons/notatka_simple.png",
+            "tooltip": "",
+            "alttext": "",
+            "type": "button"
+        }
+    }
+}

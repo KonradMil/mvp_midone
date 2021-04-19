@@ -1,0 +1,11 @@
+{
+    "icons": {
+
+            "grid": {
+                "src": "\/s3/builder_icons/grid_simple.png",
+                "tooltip": "",
+                "alttext": "",
+                "type": "grid"
+            }
+    }
+}
