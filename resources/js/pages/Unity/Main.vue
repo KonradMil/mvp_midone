@@ -3,7 +3,7 @@
     <LeftButtons :icons="leftIcons"></LeftButtons>
     <LeftPanel></LeftPanel>
 
-    <Studio hideFooter="true" :src="unity_path" :width="window_width" height="" unityLoader="/UnityLoader.js" ref="gameWindow"/>
+    <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
 </template>
 
 <script>
