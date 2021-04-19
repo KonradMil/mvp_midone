@@ -5,6 +5,7 @@
 
     <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     <BottomPanel :mode="mode"></BottomPanel>
+    <RightPanel></RightPanel>
 </template>
 
 <script>
@@ -19,12 +20,13 @@ import SaveChallengeUnity from "../../compositions/SaveChallengeUnity";
 import unityActionOutgoing from './composables/ActionsOutgoing';
 import TopButtons from "./components/TopButtons";
 import BottomPanel from "./components/BottomPanel";
+import RightPanel from "./components/RightPanel";
 
 const ww = WindowWatcher();
 
 export default {
     name: "Main",
-    components: {BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
+    components: {RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
     setup(props, {emit}) {
         //GLOBAL
         const app = getCurrentInstance();
