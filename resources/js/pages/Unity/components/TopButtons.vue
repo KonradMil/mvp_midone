@@ -1,19 +1,17 @@
 <template>
     <div class="flex fixed w-full z-50 pt-2 h-24 top-0" id="top">
-        <div class="flex  pt-2 ml-10 flex-row">
-            <div class="left" style="margin-right: auto;">
+            <div class="left flex  pt-2 ml-10 flex-row" style="margin-right: auto;">
                 <div  v-for="(icon, index) in icons.left" :key="'topIcon_' + index" class="top-i w-40 pl-10">
                     <UnityButton  v-if="icon.type === 'button'" :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"/>
                     <UnityDropdown v-if="icon.type === 'dropdown'" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"></UnityDropdown>
                 </div>
             </div>
-            <div class="right" style="margin-left: auto;">
+            <div class="right flex  pt-2 ml-10 flex-row" style="margin-left: auto;">
                 <div  v-for="(icon, index) in icons.right" :key="'topIcon_' + index" class="top-i w-40 pl-10">
                     <UnityButton  v-if="icon.type === 'button'" :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"/>
                     <UnityDropdown v-if="icon.type === 'dropdown'" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"></UnityDropdown>
                 </div>
             </div>
-        </div>
     </div>
 </template>
 
