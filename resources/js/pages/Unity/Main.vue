@@ -73,7 +73,6 @@ export default {
                     handleUnityActionOutgoing({action: "beginLayoutComment", data: ''});
                     break;
             }
-            handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
         });
 
         const changeMode = (mode) => {
