@@ -62,7 +62,7 @@ export default {
                     break;
                 case 'fullscreen':
                     console.log(gameWindow);
-                        gameWindow.setFullscreen();
+                        gameWindow.value.setFullscreen();
                     break;
                 case 'logout':
                     // handleUnityActionOutgoing(e);
