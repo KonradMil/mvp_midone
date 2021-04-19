@@ -45,10 +45,9 @@ export default {
         window_height.value = window.innerHeight;
 
 
-        onBeforeMount(() => {
-            //ADDS LISTENERS
-            bridge.value = UnityBridge();
-        });
+        // onBeforeMount(() => {
+        //
+        // });
 
         //RUNS WHEN UNITY IS READY
         emitter.on('onInitialized', e =>  initalize() );
@@ -140,6 +139,8 @@ export default {
 
 
         onMounted(()=> {
+            //ADDS LISTENERS
+            bridge.value = UnityBridge();
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")
