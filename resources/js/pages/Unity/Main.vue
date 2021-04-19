@@ -52,6 +52,11 @@ export default {
             handleUnityActionOutgoing(e);
         });
 
+        //HANDLES ALL UNITY ACTIONS
+        emitter.on('gridsizechange', e => {
+            handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
+        });
+
         const changeMode = (mode) => {
 
         }
@@ -144,6 +149,8 @@ export default {
             leftIcons.value = li.icons;
             const ti = require("../../json/unity_top_buttons.json");
             topIcons.value = ti.icons;
+
+            mode.value = 'edit';
         });
 
         return {
