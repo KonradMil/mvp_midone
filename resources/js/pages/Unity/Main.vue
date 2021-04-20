@@ -7,7 +7,10 @@
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
     <BottomPanel :mode="mode"></BottomPanel>
-    <RightPanel></RightPanel>
+    <div @mouseover="lockInput" @mouseleave="unlockInput">
+        <RightPanel></RightPanel>
+    </div>
+
 </template>
 
 <script>
@@ -83,6 +86,14 @@ export default {
                     break;
             }
         });
+
+        const lockInput = () => {
+            handleUnityActionOutgoing({action: "lockInput", data: ''});
+        }
+
+        const unlockInput = () => {
+            handleUnityActionOutgoing({action: "unlockInput", data: ''});
+        }
 
         const openMenu = (e) => {
                 e.preventDefault();
@@ -215,7 +226,9 @@ export default {
             leftIcons,
             topIcons,
             mode,
-            openMenu
+            openMenu,
+            lockInput,
+            unlockInput
         }
     }
 }

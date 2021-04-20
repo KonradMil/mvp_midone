@@ -94,6 +94,14 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'BeginLayoutComment', 0);
     }
 
+    function lockInput() {
+        outgoing(game, 'LockUnityInput', '');
+    }
+
+    function unlockInput() {
+        outgoing(game, 'UnlockUnityInput', '');
+    }
+
     return {
         placeObject,
         deleteObject,
@@ -109,6 +117,8 @@ export default function unityActionOutgoing(gameWindow) {
         beginLayoutComment,
         animationMode,
         editMode,
-        layoutMode
+        layoutMode,
+        lockInput,
+        unlockInput
     };
 }
