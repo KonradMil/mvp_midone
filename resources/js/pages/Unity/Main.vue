@@ -106,9 +106,10 @@ export default {
         const openMenu = (e) => {
                 e.preventDefault();
                 console.log('RIGHT CLICK');
+                console.log(e);
                 if(loaded.value) {
                     if (doubleClick.value) {
-                        if ((mousePositionX > (e.clientX - 10) && mousePositionX < (e.clientX + 10)) && (mousePositionY > (e.clientY - 10) && mousePositionY < (e.clientY + 19))) {
+                        if ((mousePositionX.value > (e.clientX - 10) && mousePositionX.value < (e.clientX + 10)) && (mousePositionY.value > (e.clientY - 10) && mousePositionY.value < (e.clientY + 19))) {
                            let data = JSON.stringify({menu: currentRadialMenu.value});
                             handleUnityActionOutgoing({action: 'showRadialMenu', data: data});
                         } else {
