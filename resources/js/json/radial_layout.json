@@ -1,0 +1,93 @@
+[
+    {
+        "icon": "https://platform.dbr77.com/s3/builder_icons/edit_radial.png",
+        "name": "BeginLayoutEdit",
+        "label": "Edycja",
+        "buttonColors": {
+            "selectedColor": "#edbaf5",
+            "defaultColor": "#BA68C8"
+        },
+        "iconColors": {
+            "selectedColor": "#edbaf5",
+            "defaultColor": "#e2dce3"
+        }
+    },
+    {
+        "icon": "https://platform.dbr77.com/s3/builder_icons/copy_radial.png",
+        "name": "CopyLayoutElement",
+        "label": "Kopiuj",
+        "buttonColors": {
+            "selectedColor": "#edbaf5",
+            "defaultColor": "#BA68C8"
+        },
+        "iconColors": {
+            "selectedColor": "#edbaf5",
+            "defaultColor": "#e2dce3"
+        }
+    },
+    {
+        "icon": "https://platform.dbr77.com/s3/builder_icons/paste_radial.png",
+        "name": "PasteLayoutElement",
+        "label": "Wklej",
+        "buttonColors": {
+            "selectedColor": "#edbaf5",
+            "defaultColor": "#BA68C8"
+        },
+        "iconColors": {
+            "selectedColor": "#edbaf5",
+            "defaultColor": "#e2dce3"
+        }
+    },
+    {
+        "icon": "https://platform.dbr77.com/s3/builder_icons/add_layout_radial.png",
+        "name": "BeginLayoutDraw",
+        "label": "Dodaj obszar",
+        "buttonColors": {
+            "selectedColor": "#edbaf5",
+            "defaultColor": "#BA68C8"
+        },
+        "iconColors": {
+            "selectedColor": "#edbaf5",
+            "defaultColor": "#e2dce3"
+        }
+    },
+    {
+        "icon": "https://platform.dbr77.com/s3/builder_icons/add_label_radial.png",
+        "name": "BeginLayoutLabel",
+        "label": "Dodaj etykiete",
+        "buttonColors": {
+            "selectedColor": "#edbaf5",
+            "defaultColor": "#e2dce3"
+        },
+        "iconColors": {
+            "selectedColor": "#edbaf5",
+            "defaultColor": "#BA68C8"
+        }
+    },
+    {
+        "icon": "https://platform.dbr77.com/s3/builder_icons/delete_radial.png",
+        "name": "RemoveLayout",
+        "label": "Usuń",
+        "buttonColors": {
+            "selectedColor": "#edbaf5",
+            "defaultColor": "#BA68C8"
+        },
+        "iconColors": {
+            "selectedColor": "#edbaf5",
+            "defaultColor": "#e2dce3"
+        }
+    },
+    {
+        "icon": "https://platform.dbr77.com/s3/builder_icons/settings_radial.png",
+        "name": "SettingsLayout",
+        "label": "Właściwości",
+        "buttonColors": {
+            "selectedColor": "#edbaf5",
+            "defaultColor": "#BA68C8"
+        },
+        "iconColors": {
+            "selectedColor": "#edbaf5",
+            "defaultColor": "#e2dce3"
+        },
+    }
+]

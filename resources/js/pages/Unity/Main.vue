@@ -1,9 +1,11 @@
 <template>
+
     <TopButtons :icons="topIcons"></TopButtons>
     <LeftButtons :icons="leftIcons"></LeftButtons>
     <LeftPanel></LeftPanel>
-
-    <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
+    <div @contextmenu.prevent="openMenu">
+        <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
+    </div>
     <BottomPanel :mode="mode"></BottomPanel>
     <RightPanel></RightPanel>
 </template>
@@ -37,8 +39,12 @@ export default {
         const bridge = ref();
         const gameWindow = ref(null);
         const gameLoad = ref({});
+        const loaded = ref(false);
+        const doubleClick = ref(false);
+        const mousePositionY = ref(0);
+        const mousePositionX = ref(0);
         //EXTERNAL
-        const unity_path = ref('/s3/unity/AssemBrot19_03.json');
+        const unity_path = ref('/s3/unity/AssemBrot17_04_ver2.json');
         const window_width = ref('100%');
         const window_height = ref(0);
         const leftIcons = ref([])
@@ -77,6 +83,30 @@ export default {
                     break;
             }
         });
+
+        const openMenu = (e) => {
+                e.preventDefault();
+                console.log('RIGHT CLICK');
+                if(loaded) {
+                    if (doubleClick) {
+                        if ((mousePositionX > (e.clientX - 10) && mousePositionX < (e.clientX + 10)) && (mousePositionY > (e.clientY - 10) && mousePositionY < (e.clientY + 19))) {
+                            this.gameWindow.message('NetworkBridge', 'ShowRadialMenu', JSON.stringify({menu: this.properMenu}));
+                        } else {
+                            this.dblClick = false;
+                        }
+                    } else {
+                        console.log('ONE CLICK');
+                        mousePositionX.value = e.clientX;
+                        mousePositionY.value = e.clientY;
+                        doubleClick.value = true;
+                        this.gameWindow.message('NetworkBridge', 'CloseRadialMenu', '');
+                    }
+
+                    setTimeout(function () {
+                        doubleClick.value = false;
+                    }, 1000);
+                }
+        }
 
         const changeMode = (mode) => {
 
@@ -144,7 +174,7 @@ export default {
         const initalize = async () => {
             console.log("initializeMe");
             setTimeout(function () {
-                console.log(gameWindow);
+                loaded.value = true;
                 // gameWindow.value.message('NetworkBridge', 'SetHangarApperance', 1);
                 // gameWindow.value.message('NetworkBridge', 'UnlockUnityInput');
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
@@ -181,7 +211,8 @@ export default {
             gameWindow,
             leftIcons,
             topIcons,
-            mode
+            mode,
+            openMenu
         }
     }
 }

@@ -1,0 +1,54 @@
+[
+    {
+        icon: "https://platform.dbr77.com/s3/builder_icons/play_radial.png",
+        name: "StartAnimationButton",
+        label: "Odtwórz",
+        buttonColors: {
+            selectedColor: "#edbaf5",
+            defaultColor: "#BA68C8"
+        },
+        iconColors: {
+            selectedColor: "#edbaf5",
+            defaultColor: "#e2dce3"
+        }
+    },
+    {
+        icon: "https://platform.dbr77.com/s3/builder_icons/pause_radial.png",
+        name: "PauseAnimation",
+        label: "Pauza",
+        buttonColors: {
+            selectedColor: "#edbaf5",
+            defaultColor: "#BA68C8"
+        },
+        iconColors: {
+            selectedColor: "#edbaf5",
+            defaultColor: "#e2dce3"
+        }
+    },
+    {
+        icon: "https://platform.dbr77.com/s3/builder_icons/stop_radial.png",
+        name: "StopAnimation",
+        label: "Zatrzymaj",
+        buttonColors: {
+            selectedColor: "#edbaf5",
+            defaultColor: "#e2dce3"
+        },
+        iconColors: {
+            selectedColor: "#edbaf5",
+            defaultColor: "#BA68C8"
+        }
+    },
+    {
+        icon: "https://platform.dbr77.com/s3/builder_icons/ranges_radial.png",
+        name: "ShowVisualRanges",
+        label: "Pokaż zasięgi",
+        buttonColors: {
+            selectedColor: "#edbaf5",
+            defaultColor: "#BA68C8"
+        },
+        iconColors: {
+            selectedColor: "#edbaf5",
+            defaultColor: "#e2dce3"
+        }
+    },
+]
