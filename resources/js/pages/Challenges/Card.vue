@@ -1088,7 +1088,8 @@ export default defineComponent({
         const questions = ref({});
         const user = ref({});
         const getCardChallengeRepositories = async (id) => {
-            challenge.value = GetCardChallenge(id);
+            let ch = GetCardChallenge(id);
+            challenge.value = ch.list;
         }
 
         onMounted(function () {
@@ -1143,7 +1144,8 @@ export default defineComponent({
             prevNewProjects,
             nextNewProjects,
             prevTodaySchedules,
-            nextTodaySchedules
+            nextTodaySchedules,
+            challenge
         };
     }
 });
