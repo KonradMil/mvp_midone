@@ -53,6 +53,12 @@ export default {
         const leftIcons = ref([])
         const topIcons = ref([])
         const unityActionOutgoingObject = ref({});
+        const currentRadialMenu = ref([]);
+        const radialMenuEdit = ref([]);
+        const radialMenuAnimation = ref([]);
+        const radialMenuLayout = ref([]);
+
+
         window_height.value = window.innerHeight;
 
         //RUNS WHEN UNITY IS READY
@@ -100,25 +106,26 @@ export default {
         const openMenu = (e) => {
                 e.preventDefault();
                 // console.log('RIGHT CLICK');
-                // if(loaded) {
-                //     if (doubleClick) {
-                //         if ((mousePositionX > (e.clientX - 10) && mousePositionX < (e.clientX + 10)) && (mousePositionY > (e.clientY - 10) && mousePositionY < (e.clientY + 19))) {
-                //             this.gameWindow.message('NetworkBridge', 'ShowRadialMenu', JSON.stringify({menu: this.properMenu}));
-                //         } else {
-                //             this.dblClick = false;
-                //         }
-                //     } else {
-                //         console.log('ONE CLICK');
-                //         mousePositionX.value = e.clientX;
-                //         mousePositionY.value = e.clientY;
-                //         doubleClick.value = true;
-                //         this.gameWindow.message('NetworkBridge', 'CloseRadialMenu', '');
-                //     }
-                //
-                //     setTimeout(function () {
-                //         doubleClick.value = false;
-                //     }, 1000);
-                // }
+                if(loaded) {
+                    if (doubleClick) {
+                        if ((mousePositionX > (e.clientX - 10) && mousePositionX < (e.clientX + 10)) && (mousePositionY > (e.clientY - 10) && mousePositionY < (e.clientY + 19))) {
+                           let data = JSON.stringify({menu: currentRadialMenu.value});
+                            handleUnityActionOutgoing({action: 'showRadialMenu', data: data});
+                        } else {
+                            doubleClick.value = false;
+                        }
+                    } else {
+                        console.log('ONE CLICK');
+                        mousePositionX.value = e.clientX;
+                        mousePositionY.value = e.clientY;
+                        doubleClick.value = true;
+                        handleUnityActionOutgoing({action: 'closeRadialMenu', data: ''});
+                    }
+
+                    setTimeout(function () {
+                        doubleClick.value = false;
+                    }, 1000);
+                }
         }
 
         const changeMode = (mode) => {
@@ -130,14 +137,17 @@ export default {
             switch (e.val) {
                 case 'animation_mode':
                     handleUnityActionOutgoing({action: "animationMode", data: ''});
+                    currentRadialMenu.value = radialMenuAnimation.value;
                     mode.value = 'animation';
                     break;
                 case 'edit_mode':
                     handleUnityActionOutgoing({action: "editMode", data: ''});
+                    currentRadialMenu.value = radialMenuEdit.value;
                     mode.value = 'edit';
                     break;
                 case 'layout':
                     handleUnityActionOutgoing({action: "layoutMode", data: ''});
+                    currentRadialMenu.value = radialMenuLayout.value;
                     mode.value = 'layout';
                     break;
                 case 'fullscreen':
@@ -216,7 +226,9 @@ export default {
             leftIcons.value = li.icons;
             const ti = require("../../json/unity_top_buttons.json");
             topIcons.value = ti.icons;
-
+            radialMenuAnimation.value = require("../../json/radial_animation.json");
+            radialMenuEdit.value = require("../../json/radial_edit.json");
+            radialMenuLayout.value = require("../../json/radial_layout.json");
             mode.value = 'edit';
         });
 

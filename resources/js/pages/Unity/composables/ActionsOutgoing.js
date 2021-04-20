@@ -102,6 +102,14 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'UnlockUnityInput', '');
     }
 
+    function closeRadialMenu () {
+        outgoing(game, 'CloseRadialMenu', '');
+    }
+
+    function showRadialMenu(val) {
+        outgoing(game, 'ShowRadialMenu', val);
+    }
+
     return {
         placeObject,
         deleteObject,
@@ -119,6 +127,8 @@ export default function unityActionOutgoing(gameWindow) {
         editMode,
         layoutMode,
         lockInput,
-        unlockInput
+        unlockInput,
+        showRadialMenu,
+        closeRadialMenu
     };
 }
