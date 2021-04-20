@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="intro-y flex items-center mt-8">
-            <h2 class="text-lg font-medium mr-auto">Profile Layout</h2>
+            <h2 class="text-lg font-medium mr-auto">Wyzwanie</h2>
         </div>
         <div class="grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Profile Menu -->
@@ -19,7 +19,7 @@
                         </div>
                         <div class="ml-4 mr-auto">
                             <div class="font-medium text-base">
-                                {{ $f()[0].users[0].name }}
+                                {{ challenge.name }}
                             </div>
                             <div class="text-gray-600">{{ $f()[0].jobs[0] }}</div>
                         </div>

@@ -124,9 +124,9 @@ export default {
                         handleUnityActionOutgoing({action: 'closeRadialMenu', data: ''});
                     }
 
-                    setTimeout(function () {
-                        doubleClick.value = false;
-                    }, 1000);
+                    // setTimeout(function () {
+                    //     doubleClick.value = false;
+                    // }, 1000);
                 }
         }
 
