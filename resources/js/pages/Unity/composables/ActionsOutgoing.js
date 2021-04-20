@@ -106,6 +106,9 @@ export default function unityActionOutgoing(gameWindow) {
         beginLayoutEdit,
         beginLayoutLabel,
         beginLayoutDraw,
-        beginLayoutComment
+        beginLayoutComment,
+        animationMode,
+        editMode,
+        layoutMode
     };
 }
