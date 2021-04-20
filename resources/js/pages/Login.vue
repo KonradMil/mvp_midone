@@ -69,7 +69,7 @@
 <!--                                >Remember me</label-->
 <!--                                >-->
 <!--                            </div>-->
-                            <a href="">{{$t('login.forgot')}}</a>
+                            <button @click="showAddToTeamModal">{{$t('login.forgot')}}</button>
                         </div>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                             <button
@@ -103,21 +103,63 @@
             </div>
         </div>
     </div>
+    <Modal :show="show" @closed="modalClosed">
+        <h3 class="intro-y text-lg font-medium mt-5">Zresetuj hasło</h3>
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+            <div>
+                Na podany adres email zostanie wysłany link do resetu hasła.
+            </div>
+        </div>
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+            <div class="relative text-gray-700 dark:text-gray-300 mr-4">
+                <input
+                    type="email"
+                    class="form-control w-56 box pr-10 placeholder-theme-13"
+                    placeholder="Email"
+                    v-model="email"
+                />
+                <button class="btn btn-primary shadow-md mr-2" @click="sendEmail">Wyślij</button>
+            </div>
+
+        </div>
+
+    </Modal>
 </template>
 
 <script>
-    import { defineComponent, onMounted } from "vue";
+import {defineComponent, onMounted, ref} from "vue";
     import DarkModeSwitcher from "../components/dark-mode-switcher/Main.vue";
     import cash from "cash-dom";
     import { useToast } from "vue-toastification";
     import {useStore} from '../store';
+    import Modal from "../components/Modal";
+    import AddTeamMember from "../compositions/AddTeamMember";
+
     const toast = useToast();
     const store = useStore();
     export default {
         components: {
-            DarkModeSwitcher
+            DarkModeSwitcher,
+            Modal
         },
         setup() {
+            const show = ref(false);
+            const email = ref('');
+
+            const showAddToTeamModal = () => {
+                show.value = true;
+                }
+            const modalClosed = () => {
+                show.value = false;
+            }
+            const sendEmail = async () => {
+                if(email.value === '') {
+                    toast.error('Email nie może być pusty');
+                } else {
+                    await AddTeamMember(email.value)
+                    toast.success('Success!')
+                }
+            }
 
             console.log(store);
             onMounted(() => {
@@ -126,6 +168,12 @@
                     .removeClass("error-page")
                     .addClass("login");
             });
+
+            return {
+                show,
+                showAddToTeamModal,
+                modalClosed,
+            };
         },
         data() {
             return {
