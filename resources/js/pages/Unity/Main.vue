@@ -86,26 +86,26 @@ export default {
 
         const openMenu = (e) => {
                 e.preventDefault();
-                console.log('RIGHT CLICK');
-                if(loaded) {
-                    if (doubleClick) {
-                        if ((mousePositionX > (e.clientX - 10) && mousePositionX < (e.clientX + 10)) && (mousePositionY > (e.clientY - 10) && mousePositionY < (e.clientY + 19))) {
-                            this.gameWindow.message('NetworkBridge', 'ShowRadialMenu', JSON.stringify({menu: this.properMenu}));
-                        } else {
-                            this.dblClick = false;
-                        }
-                    } else {
-                        console.log('ONE CLICK');
-                        mousePositionX.value = e.clientX;
-                        mousePositionY.value = e.clientY;
-                        doubleClick.value = true;
-                        this.gameWindow.message('NetworkBridge', 'CloseRadialMenu', '');
-                    }
-
-                    setTimeout(function () {
-                        doubleClick.value = false;
-                    }, 1000);
-                }
+                // console.log('RIGHT CLICK');
+                // if(loaded) {
+                //     if (doubleClick) {
+                //         if ((mousePositionX > (e.clientX - 10) && mousePositionX < (e.clientX + 10)) && (mousePositionY > (e.clientY - 10) && mousePositionY < (e.clientY + 19))) {
+                //             this.gameWindow.message('NetworkBridge', 'ShowRadialMenu', JSON.stringify({menu: this.properMenu}));
+                //         } else {
+                //             this.dblClick = false;
+                //         }
+                //     } else {
+                //         console.log('ONE CLICK');
+                //         mousePositionX.value = e.clientX;
+                //         mousePositionY.value = e.clientY;
+                //         doubleClick.value = true;
+                //         this.gameWindow.message('NetworkBridge', 'CloseRadialMenu', '');
+                //     }
+                //
+                //     setTimeout(function () {
+                //         doubleClick.value = false;
+                //     }, 1000);
+                // }
         }
 
         const changeMode = (mode) => {
