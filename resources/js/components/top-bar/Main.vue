@@ -189,7 +189,7 @@
                     class="dropdown-menu__content box bg-theme-26 dark:bg-dark-6 text-white"
                 >
                     <div class="p-4 border-b border-theme-27 dark:border-dark-3">
-                        <div class="font-medium">{{ user.name }} {{ user.last_name }}</div>
+                        <div class="font-medium">{{ user.name }} {{ user.lastname }}</div>
                         <div class="text-xs text-theme-28 mt-0.5 dark:text-gray-600">
                             {{ user.type }}
                         </div>

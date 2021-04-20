@@ -210,7 +210,7 @@
                             console.log(response.data)
                             // ??
                             if (response.data.success) {
-
+                                this.$router.push('/kreator-krok-dwa');
                             } else {
                                 toast.error(response.data.message);
                             }

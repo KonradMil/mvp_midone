@@ -262,6 +262,7 @@ export default {
                         new_team_name.value = '';
                         modalClosed();
                     }, 1000);
+                toast.success('Success!')
             }
         }
 
@@ -276,6 +277,7 @@ export default {
                     getTeamsRepositories(search.value);
                     new_team_member_email.value = '';
                 }, 1000);
+                toast.success('Success!')
             }
         }
 

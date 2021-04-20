@@ -6,7 +6,7 @@
     <meta name="x-apple-disable-message-reformatting">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="telephone=no" name="format-detection">
-    <title>Zaproszenie do zespołu</title>
+    <title>Czy chcesz zmienić hasło?</title>
     <!--[if (mso 16)]>
     <style type="text/css">
     a {text-decoration: none;}
