@@ -1004,13 +1004,15 @@ export default defineComponent({
         const announcementRef = ref();
         const newProjectsRef = ref();
         const todaySchedulesRef = ref();
-        const challenge = ref();
+        const challenge = ref({});
         const solutions = ref({});
         const questions = ref({});
         const user = ref({});
         const getCardChallengeRepositories = async (id) => {
             let ch = GetCardChallenge(id);
+            console.log(ch);
             challenge.value = ch.list;
+            console.log(challenge.value);
         }
 
         onMounted(function () {
