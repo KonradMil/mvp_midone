@@ -44,7 +44,7 @@ export default {
         const mousePositionY = ref(0);
         const mousePositionX = ref(0);
         //EXTERNAL
-        const unity_path = ref('/s3/unity/AssemBrot17_04_ver2.json');
+        const unity_path = ref('/s3/unity/AssemBrot20_04_ver2.json');
         const window_width = ref('100%');
         const window_height = ref(0);
         const leftIcons = ref([])
