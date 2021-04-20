@@ -94,7 +94,7 @@ export default {
 
 
         onMounted(() => {
-            showPanel();
+            // showPanel();
         });
 
         return {

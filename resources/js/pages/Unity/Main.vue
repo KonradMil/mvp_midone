@@ -88,10 +88,12 @@ export default {
         });
 
         const lockInput = () => {
+            console.log('LOCK');
             handleUnityActionOutgoing({action: "lockInput", data: ''});
         }
 
         const unlockInput = () => {
+            console.log('UNLOCK');
             handleUnityActionOutgoing({action: "unlockInput", data: ''});
         }
 
