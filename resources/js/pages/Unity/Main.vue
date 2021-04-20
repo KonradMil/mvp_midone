@@ -7,9 +7,7 @@
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
     <BottomPanel :mode="mode"></BottomPanel>
-    <div @mouseover.native="lockInput" @mouseleave.native="unlockInput">
-        <RightPanel></RightPanel>
-    </div>
+        <RightPanel @mouseover.native="lockInput" @mouseleave.native="unlockInput"></RightPanel>
 
 </template>
 
