@@ -24,65 +24,8 @@
                 <!-- END: Slide Over Header -->
                 <!-- BEGIN: Slide Over Body -->
                 <div class="modal-body">
-                    <div>
-                        <label for="modal-form-1" class="form-label"
-                        >From</label
-                        >
-                        <VSwatches v-model="color" inline></VSwatches>
-                    </div>
-                    <div class="mt-3">
-                        <label for="modal-form-2" class="form-label">To</label>
-                        <input
-                            id="modal-form-2"
-                            type="text"
-                            class="form-control"
-                            placeholder="example@gmail.com"
-                        />
-                    </div>
-                    <div class="mt-3">
-                        <label for="modal-form-3" class="form-label"
-                        >Subject</label
-                        >
-                        <input
-                            id="modal-form-3"
-                            type="text"
-                            class="form-control"
-                            placeholder="Important Meeting"
-                        />
-                    </div>
-                    <div class="mt-3">
-                        <label for="modal-form-4" class="form-label"
-                        >Has the Words</label
-                        >
-                        <input
-                            id="modal-form-4"
-                            type="text"
-                            class="form-control"
-                            placeholder="Job, Work, Documentation"
-                        />
-                    </div>
-                    <div class="mt-3">
-                        <label for="modal-form-5" class="form-label"
-                        >Doesn't Have</label
-                        >
-                        <input
-                            id="modal-form-5"
-                            type="text"
-                            class="form-control"
-                            placeholder="Job, Work, Documentation"
-                        />
-                    </div>
-                    <div class="mt-3">
-                        <label for="modal-form-6" class="form-label"
-                        >Size</label
-                        >
-                        <select id="modal-form-6" class="form-select">
-                            <option>10</option>
-                            <option>25</option>
-                            <option>35</option>
-                            <option>50</option>
-                        </select>
-                    </div>
+                    <LabelDialog v-if="content == 'label'"/>
+                    <CommentDialog v-if="content == 'comment'"/>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
@@ -94,10 +37,10 @@
                         data-dismiss="modal"
                         class="btn btn-outline-secondary w-20 mr-1"
                     >
-                        Cancel
+                        Anuluj
                     </button>
                     <button type="button" class="btn btn-primary w-20">
-                        Send
+                        Zapisz
                     </button>
                 </div>
                 <!-- END: Slide Over Footer -->
@@ -109,13 +52,12 @@
 <script>
 import {getCurrentInstance, onMounted, ref} from "vue";
 import cash from "cash-dom";
-import VSwatches from '../../../components/color-swatches/VSwatches'
+import LabelDialog from "./right-panel/LabelDialog";
+import CommentDialog from "./right-panel/CommentDialog";
 
 export default {
     name: "RightPanel",
-    components: {
-        VSwatches
-    },
+    components: {CommentDialog, LabelDialog},
     setup() {
         //GLOBAL
         const app = getCurrentInstance();
@@ -124,7 +66,7 @@ export default {
         const labels = ref([]);
         const comments = ref([]);
         const currentTitle = ref('');
-        const color = ref('');
+        const content = ref('');
 
         const showPanel = () => {
             cash("#right-panel").modal("show");
@@ -139,11 +81,11 @@ export default {
         });
 
         emitter.on('UnityLabelSelected', e => {
-
+            content.value = 'label';
         });
 
         emitter.on('UnityCommentSelected', e => {
-
+            content.value = 'comment';
         });
 
 
@@ -156,7 +98,7 @@ export default {
             comments,
             layouts,
             labels,
-            color
+            content
         }
     }
 }
