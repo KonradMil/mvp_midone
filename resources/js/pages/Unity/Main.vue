@@ -105,7 +105,7 @@ export default {
 
         const openMenu = (e) => {
                 e.preventDefault();
-                // console.log('RIGHT CLICK');
+                console.log('RIGHT CLICK');
                 if(loaded) {
                     if (doubleClick) {
                         if ((mousePositionX > (e.clientX - 10) && mousePositionX < (e.clientX + 10)) && (mousePositionY > (e.clientY - 10) && mousePositionY < (e.clientY + 19))) {
