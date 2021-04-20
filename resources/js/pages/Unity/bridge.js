@@ -16,6 +16,7 @@ const UnityBridge = () => {
 
         window.UnityCommentSelected = function UnityCommentSelected(str) {
             console.log('COMMENT SELCTED');
+            console.log(str);
             emitter.emit('UnityCommentSelected', { commentSelected: JSON.parse(str) })
         };
 
@@ -26,12 +27,13 @@ const UnityBridge = () => {
             emitter.emit('UnityRoundMenuPicked', { round_menu_picked: JSON.parse(str) })
         };
         window.LayoutSelected = function LayoutSelected(str) {
+            console.log('LAYOUT SELCTED');
+            console.log(str);
             emitter.emit('LayoutSelected', { layout_selected: JSON.parse(str) })
         };
         window.UnityMenuLabelSelected = function MenuLabelSelected(str) {
-            // console.log(str);
-            // window.v.unity.menu_selected = str;
-            // window.v.unity.radialMenuClicked(str);
+            console.log('LABEL SELCTED');
+            console.log(str);
             emitter.emit('UnityMenuLabelSelected', { menu_selected: str })
         };
         window.UnityLabelSelected = function LabelSelected(str) {
