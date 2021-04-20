@@ -70,6 +70,18 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'BeginLayoutEdit', 0);
     }
 
+    function layoutMode() {
+        outgoing(game, 'LayoutMode', '');
+    }
+
+    function editMode() {
+        outgoing(game, 'EditMode', '');
+    }
+
+    function animationMode() {
+        outgoing(game, 'LineAnimationMode', '');
+    }
+
     function beginLayoutLabel() {
         outgoing(game, 'BeginLayoutLabel', 0);
     }

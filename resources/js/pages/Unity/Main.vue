@@ -116,12 +116,15 @@ export default {
             console.log(e);
             switch (e.val) {
                 case 'animation_mode':
+                    handleUnityActionOutgoing({action: "animationMode", data: ''});
                     mode.value = 'animation';
                     break;
                 case 'edit_mode':
+                    handleUnityActionOutgoing({action: "editMode", data: ''});
                     mode.value = 'edit';
                     break;
                 case 'layout':
+                    handleUnityActionOutgoing({action: "layoutMode", data: ''});
                     mode.value = 'layout';
                     break;
                 case 'fullscreen':
