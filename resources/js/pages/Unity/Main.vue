@@ -113,7 +113,7 @@ export default {
                            let data = JSON.stringify({menu: currentRadialMenu.value});
                            console.log(data);
                             console.log('RIGHT CLICK SHOW');
-                            // handleUnityActionOutgoing({action: 'showRadialMenu', data: data});
+                            handleUnityActionOutgoing({action: 'showRadialMenu', data: data});
                         } else {
                             doubleClick.value = false;
                         }
@@ -233,6 +233,7 @@ export default {
             radialMenuAnimation.value = require("../../json/radial_animation.json");
             radialMenuEdit.value = require("../../json/radial_edit.json");
             radialMenuLayout.value = require("../../json/radial_layout.json");
+            currentRadialMenu.value = radialMenuEdit.value;
             mode.value = 'edit';
         });
 

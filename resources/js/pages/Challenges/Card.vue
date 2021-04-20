@@ -143,35 +143,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="intro-y box p-5 bg-theme-1 text-white mt-5">
-                    <div class="flex items-center">
-                        <div class="font-medium text-lg">Important Update</div>
-                        <div
-                            class="text-xs bg-white dark:bg-theme-1 dark:text-white text-gray-800 px-1 rounded-md ml-auto"
-                        >
-                            New
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text
-                        ever since the 1500s.
-                    </div>
-                    <div class="font-medium flex mt-5">
-                        <button
-                            type="button"
-                            class="btn py-1 px-2 border-white text-white dark:border-gray-700 dark:text-gray-300"
-                        >
-                            Take Action
-                        </button>
-                        <button
-                            type="button"
-                            class="btn py-1 px-2 border-transparent text-white dark:text-gray-500 ml-auto"
-                        >
-                            Dismiss
-                        </button>
-                    </div>
-                </div>
+                <WhatsNext></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
             <div class="col-span-12 lg:col-span-8 xxl:col-span-9">
@@ -181,7 +153,7 @@
                         <div
                             class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5"
                         >
-                            <h2 class="font-medium text-base mr-auto">Daily Sales</h2>
+                            <h2 class="font-medium text-base mr-auto">Zdjęcia</h2>
                             <div class="dropdown ml-auto sm:hidden">
                                 <a
                                     class="dropdown-toggle w-5 h-5 block"
@@ -208,60 +180,7 @@
                             </button>
                         </div>
                         <div class="p-5">
-                            <div class="relative flex items-center">
-                                <div class="w-12 h-12 flex-none image-fit">
-                                    <img
-                                        alt="Icewall Tailwind HTML Admin Template"
-                                        class="rounded-full"
-                                        :src="require(`../../../images/${$f()[0].photos[0]}`)"
-                                    />
-                                </div>
-                                <div class="ml-4 mr-auto">
-                                    <a href="" class="font-medium">{{ $f()[0].users[0].name }}</a>
-                                    <div class="text-gray-600 mr-5 sm:mr-5">
-                                        Bootstrap 4 HTML Admin Template
-                                    </div>
-                                </div>
-                                <div class="font-medium text-gray-700 dark:text-gray-500">
-                                    +$19
-                                </div>
-                            </div>
-                            <div class="relative flex items-center mt-5">
-                                <div class="w-12 h-12 flex-none image-fit">
-                                    <img
-                                        alt="Icewall Tailwind HTML Admin Template"
-                                        class="rounded-full"
-                                        :src="require(`../../../images/${$f()[1].photos[0]}`)"
-                                    />
-                                </div>
-                                <div class="ml-4 mr-auto">
-                                    <a href="" class="font-medium">{{ $f()[1].users[0].name }}</a>
-                                    <div class="text-gray-600 mr-5 sm:mr-5">
-                                        Tailwind HTML Admin Template
-                                    </div>
-                                </div>
-                                <div class="font-medium text-gray-700 dark:text-gray-500">
-                                    +$25
-                                </div>
-                            </div>
-                            <div class="relative flex items-center mt-5">
-                                <div class="w-12 h-12 flex-none image-fit">
-                                    <img
-                                        alt="Icewall Tailwind HTML Admin Template"
-                                        class="rounded-full"
-                                        :src="require(`../../../images/${$f()[2].photos[0]}`)"
-                                    />
-                                </div>
-                                <div class="ml-4 mr-auto">
-                                    <a href="" class="font-medium">{{ $f()[2].users[0].name }}</a>
-                                    <div class="text-gray-600 mr-5 sm:mr-5">
-                                        Vuejs HTML Admin Template
-                                    </div>
-                                </div>
-                                <div class="font-medium text-gray-700 dark:text-gray-500">
-                                    +$21
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <!-- END: Daily Sales -->
@@ -1070,10 +989,12 @@
 <script>
 import {defineComponent, ref, provide, onMounted} from "vue";
 import GetCardChallenge from "../../compositions/GetCardChallenge";
+import WhatsNext from "./WhatsNext";
 
 export default defineComponent({
     name: 'Card',
     components: {
+        WhatsNext
 
     },
     props: {
