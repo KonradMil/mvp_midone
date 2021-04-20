@@ -81,11 +81,15 @@ export default {
         });
 
         emitter.on('UnityLabelSelected', e => {
+            console.log(e);
             content.value = 'label';
+            showPanel();
         });
 
         emitter.on('UnityCommentSelected', e => {
+            console.log(e);
             content.value = 'comment';
+            showPanel();
         });
 
 
