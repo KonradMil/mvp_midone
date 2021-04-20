@@ -62,7 +62,7 @@
         "iconColors": {
             "selectedColor": "#edbaf5",
            " defaultColor": "#e2dce3"
-        },
+        }
     },
     {
         "icon": "https://platform.dbr77.com/s3/builder_icons/confine_radial.png",
