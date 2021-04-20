@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="challenge != undefined">
         <div class="intro-y flex items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">Wyzwanie</h2>
         </div>
@@ -1004,7 +1004,7 @@ export default defineComponent({
         const announcementRef = ref();
         const newProjectsRef = ref();
         const todaySchedulesRef = ref();
-        const challenge = ref({});
+        const challenge = ref();
         const solutions = ref({});
         const questions = ref({});
         const user = ref({});
