@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Mail\ChangePassword;
+use App\Mail\TeamInvitation;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -9,15 +12,48 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Mpociot\Teamwork\Facades\Teamwork;
+use Mpociot\Teamwork\TeamInvite;
 
 class UserController extends Controller
 {
     public function changePassword(Request $request)
     {
         $u = Auth::user();
-        $u->password = $request->password;
-        $u->passwordNew = Hash::make($request->passwordNew);
-        $u->save();
+        $credentials = [
+            'email' => $u->email,
+            'password' => $request->password,
+        ];
+
+        if (Auth::attempt($credentials)) {
+            $u->password = Hash::make($request->passwordNew);
+            $r =  $u->save();
+            Mail::to([$u->email])->send(new ChangePassword($u->name));
+            return response()->json([
+                'success' => $r,
+                'message' => 'Zapisano poprawnie',
+                'payload' => $u
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Błedne hasło!',
+            'payload' => Auth::user(),
+        ]);
+    }
+    public function accept(Request  $request)
+    {
+        $invite = TeamInvite::find($request->id);
+        Teamwork::acceptInvite( $invite );
+        $team = $invite->team;
+        $invite->delete();
+        Auth::user()->attachTeam($team);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => []
+        ]);
     }
     public function updateProfile(Request $request)
     {

@@ -312,10 +312,10 @@
                         </a>
                     </li>
                     <li>
-                        <a  @click="$router.push('change-password')" class="menu">
+                        <button  @click="$router.push('change-password')" class="menu">
                             <div class="menu__icon"> <i data-feather="activity"></i> </div>
                             <div class="menu__title"> Change Password </div>
-                        </a>
+                        </button>
                     </li>
                 </ul>
             </li>
@@ -549,7 +549,7 @@
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
                         <a class="flex items-center text-theme-1 dark:text-theme-10 font-medium" href=""> <i data-feather="activity" class="w-4 h-4 mr-2"></i> Personal Information </a>
                         <a class="flex items-center mt-5" href=""> <i data-feather="box" class="w-4 h-4 mr-2"></i> Account Settings </a>
-                        <a  @click="$router.push('change-password')" class="flex items-center mt-5" href=""> <i data-feather="lock" class="w-4 h-4 mr-2"></i> Change Password </a>
+                        <button  @click="$router.push('change-password')" class="flex items-center mt-5" href=""> <i data-feather="lock" class="w-4 h-4 mr-2"></i> Change Password </button>
                         <a class="flex items-center mt-5" href=""> <i data-feather="settings" class="w-4 h-4 mr-2"></i> User Settings </a>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
@@ -573,30 +573,45 @@
                             Display Information
                         </h2>
                     </div>
+                    <form @submit.prevent="handleSubmit">
                     <div class="p-5">
                         <div class="flex flex-col-reverse xl:flex-row flex-col">
                             <div class="flex-1 mt-6 xl:mt-0">
                                 <div class="grid grid-cols-12 gap-x-5">
                                     <div class="col-span-12 xxl:col-span-6">
                                         <div>
-                                            <label for="update-profile-form-1" class="form-label">Display name</label>
-                                            <input id="update-profile-form-1" type="text" class="form-control" placeholder="Input text" :value="user.name + ' ' + user.lastname">
+                                            <label for="update-profile-form-1" class="form-label">Email</label>
+                                            <input
+                                                id="update-profile-form-1"
+                                                type="email"
+                                                class="form-control"
+                                                placeholder="Mail"
+                                                v-model="email"
+                                            />
                                         </div>
                                         <div class="mt-3">
-                                            <label for="update-profile-form-2" class="form-label">Nearest MRT Station</label>
-                                            <select id="update-profile-form-2" data-search="true" class="tail-select w-full">
-                                                <option value="1">Admiralty</option>
-                                                <option value="2">Aljunied</option>
-                                                <option value="3">Ang Mo Kio</option>
-                                                <option value="4">Bartley</option>
-                                                <option value="5">Beauty World</option>
-                                            </select>
-                                        </div>
+                                            <label for="update-profile-form-2" class="form-label">Name</label>
+                                            <input
+                                                id="update-profile-form-2"
+                                                type="text"
+                                                class="form-control"
+                                                :placeholder="user.name"
+                                                v-model="name"
+                                            />                                </div>
+                                        <div class="mt-3">
+                                            <label for="update-profile-form-3" class="form-label">Last name</label>
+                                            <input
+                                                id="update-profile-form-3"
+                                                type="text"
+                                                class="form-control"
+                                                :placeholder="user.lastname"
+                                                v-model="lastname"
+                                            />                                </div>
                                     </div>
                                     <div class="col-span-12 xxl:col-span-6">
                                         <div class="mt-3 xxl:mt-0">
-                                            <label for="update-profile-form-3" class="form-label">Postal Code</label>
-                                            <select id="update-profile-form-3" data-search="true" class="tail-select w-full">
+                                            <label for="update-profile-form-6" class="form-label">Postal Code</label>
+                                            <select id="update-profile-form-6" data-search="true" class="tail-select w-full">
                                                 <option value="1">018906 - 1 STRAITS BOULEVARD SINGA...</option>
                                                 <option value="2">018910 - 5A MARINA GARDENS DRIVE...</option>
                                                 <option value="3">018915 - 100A CENTRAL BOULEVARD...</option>
@@ -647,87 +662,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- END: Display Information -->
-                <!-- BEGIN: Personal Information -->
-                <div class="intro-y box mt-5">
-                    <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
-                        <h2 class="font-medium text-base mr-auto">
-                            Personal Information
-                        </h2>
-                    </div>
-
-                    <form @submit.prevent="handleSubmit">
-                    <div class="p-5">
-                        <div class="grid grid-cols-12 gap-x-5">
-                            <div class="col-span-12 xl:col-span-6">
-                                <div>
-                                    <label for="update-profile-form-6" class="form-label">Email</label>
-                                    <input
-                                        id="update-profile-form-6"
-                                        type="email"
-                                        class="form-control"
-                                        placeholder="Mail"
-                                        v-model="email"
-                                    />
-                                </div>
-                                <div class="mt-3">
-                                    <label for="update-profile-form-7" class="form-label">Name</label>
-                                    <input
-                                        id="update-profile-form-7"
-                                        type="text"
-                                        class="form-control"
-                                        :placeholder="user.name"
-                                        v-model="name"
-                                    />                                </div>
-                                <div class="mt-3">
-                                    <label for="update-profile-form-10" class="form-label">Last name</label>
-                                    <input
-                                        id="update-profile-form-10"
-                                        type="text"
-                                        class="form-control"
-                                        :placeholder="user.lastname"
-                                        v-model="lastname"
-                                    />                                </div>
-                                <div class="mt-3">
-                                    <label for="update-profile-form-9" class="form-label">ID Number</label>
-                                    <input id="update-profile-form-9" type="text" class="form-control" placeholder="Input text" value="357821204950001">
-                                </div>
-                            </div>
-                            <div class="col-span-12 xl:col-span-6">
-                                <div class="mt-3">
-                                    <label for="update-profile-form-8" class="form-label">ID Type</label>
-                                    <select id="update-profile-form-8" class="form-select">
-                                        <option>IC</option>
-                                        <option>FIN</option>
-                                        <option>Passport</option>
-                                    </select>
-                                </div>
-                                <div class="mt-3">
-                                    <label for="update-profile-form-11" class="form-label">Address</label>
-                                    <input id="update-profile-form-11" type="text" class="form-control" placeholder="Input text" value="10 Anson Road, International Plaza, #10-11, 079903 Singapore, Singapore">
-                                </div>
-                                <div class="mt-3">
-                                    <label for="update-profile-form-12" class="form-label">Bank Name</label>
-                                    <select id="update-profile-form-12" data-search="true" class="tail-select w-full">
-                                        <option value="1">SBI - STATE BANK OF INDIA</option>
-                                        <option value="1">CITI BANK - CITI BANK</option>
-                                    </select>
-                                </div>
-                                <div class="mt-3">
-                                    <label for="update-profile-form-13" class="form-label">Bank Account</label>
-                                    <input id="update-profile-form-13" type="text" class="form-control" placeholder="Input text" value="DBS Current 011-903573-0">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex justify-end mt-4">
-                            <button class="btn btn-primary w-20 mr-auto" type="submit" >Save</button>
-                            <a href="" class="text-theme-6 flex items-center"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete Account </a>
-                        </div>
-                    </div>
                     </form>
                 </div>
-                <!-- END: Personal Information -->
+                <!-- END: Display Information -->
             </div>
         </div>
     </div>
@@ -755,80 +692,13 @@ import cash from "cash-dom";
 import {email, minLength, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 
+const toast = useToast();
+
 export default defineComponent({
     components: {
         Avatar,
         DarkModeSwitcher,
         Dropzone
-    },
-    mounted() {
-        console.log(store.state);
-        this.name = store.state.login.user.name;
-        this.lastname = store.state.login.user.lastname;
-        this.email = store.state.login.user.email;
-    },
-    data() {
-        return {
-            avatar_path: '',
-            name: "",
-            lastname: "",
-            email:"",
-            error: null,
-            // minLength: 3
-        }
-    },
-    methods: {
-        logout() {
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('api/logout')
-                    .then(response => {
-                        if (response.data.success) {
-                            store.dispatch('login/logout')
-                            this.$router.go('/login');
-                        } else {
-                            toast.error(response.data.message);
-                        }
-                    })
-                // .catch(function (error) {
-                //     this.toast.error(error);
-                // });
-            })
-        },
-        handleSubmit() {
-            this.save();
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('api/profile/update', {
-                    name: this.formData.name,
-                    lastname: this.formData.lastname,
-                    email: this.formData.email
-                })
-                    .then(response => {
-                        console.log(response.data)
-                        // const toast = useToast();
-                        // if(this.name === '' || this.lastname === ''){
-                        //     toast.error('Uzupełnij imie i nazwisko!');
-                        // }
-                        if (response.data.success) {
-                            let user = response.data.payload;
-                            store.dispatch('login/login', {
-                                user
-                            });
-                            // this.$router.go(0);
-                        } else {
-                            toast.error(response.data.message);
-                        }
-                    })
-                // .catch(function (error) {
-                //     this.toast.error(error);
-                // });
-            })
-        }
-    },
-    created() {
-        if (window.Laravel.user) {
-            // this.user = window.Laravel.user;
-            this.avatar_path = window.Laravel.user.avatar;
-        }
     },
     setup() {
         const toast = useToast();
@@ -839,6 +709,20 @@ export default defineComponent({
         const notifications = ref([]);
         const lang = ref('pl');
         const { t, locale } = useI18n({ useScope: 'global' });
+        const email = ref("");
+        const name = ref("");
+        const lastname = ref("");
+        const formData = reactive ({
+            name: '',
+            lastname: '',
+            email: ''
+        })
+        const rules = {
+            email: {required, email},
+            name: {required, minLength: minLength(3)},
+            lastname: {required, minLength: minLength(3)}
+        }
+
         provide("bind[dropzoneSingleRef]", el => {
             dropzoneSingleRef.value = el;
         });
@@ -909,18 +793,6 @@ export default defineComponent({
             notifications.value = user.notifications;
         })
 
-        const formData = reactive ({
-            name: '',
-            lastname: '',
-            email: ''
-        })
-
-        const rules = {
-            email: {required, email},
-            name: {required, minLength: minLength(3)},
-            lastname: {required, minLength: minLength(3)}
-        }
-
         const validate = useVuelidate(rules, toRefs(formData));
 
         const save = () => {
@@ -950,7 +822,76 @@ export default defineComponent({
             validate,
             save
         };
-    }
+    },
+    mounted() {
+        console.log(store.state);
+        this.name = store.state.login.user.name;
+        this.lastname = store.state.login.user.lastname;
+        this.email = store.state.login.user.email;
+    },
+    data() {
+        return {
+            email:"",
+            error: null,
+            name: "",
+            lastname: "",
+            avatar_path: '',
+            minLength: 3
+        }
+    },
+    methods: {
+        logout() {
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.post('api/logout')
+                    .then(response => {
+                        if (response.data.success) {
+                            store.dispatch('login/logout')
+                            this.$router.go('/login');
+                        } else {
+                            toast.error(response.data.message);
+                        }
+                    })
+                // .catch(function (error) {
+                //     this.toast.error(error);
+                // });
+            })
+        },
+        handleSubmit() {
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.post('api/profile/update', {
+                    name: this.name,
+                    lastname: this.lastname,
+                    email: this.email
+                })
+                    .then(response => {
+                        console.log(response.data)
+                        // const toast = useToast();
+                        // if(this.name === '' || this.lastname === ''){
+                        //     toast.error('Uzupełnij imie i nazwisko!');
+                        // }
+                        if (response.data.success) {
+                            let user = response.data.payload;
+                            store.dispatch('login/login', {
+                                user
+                            });
+                            toast.success('zapisano poprawnie!');
+                            // this.$router.go(0);
+                        } else {
+                            toast.error(response.data.message);
+                        }
+                    })
+                // .catch(function (error) {
+                //     this.toast.error(error);
+                // });
+            })
+        }
+    },
+    created() {
+        if (window.Laravel.user) {
+            // this.user = window.Laravel.user;
+            this.avatar_path = window.Laravel.user.avatar;
+        }
+    },
 });
 </script>
 

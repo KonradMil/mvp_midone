@@ -572,6 +572,7 @@
                                 Change Password
                             </h2>
                         </div>
+                        <form @submit.prevent="change">
                         <div class="p-5">
                             <div>
                                 <label for="change-password-form-1" class="form-label">Old Password</label>
@@ -603,8 +604,9 @@
                                     v-model="passwordNewConfirm"
                                 >
                             </div>
-                            <button type="button" class="btn btn-primary mt-4">Change Password</button>
+                            <button type="submit" class="btn btn-primary mt-4">Change Password</button>
                         </div>
+                        </form>
                     </div>
                     <!-- END: Change Password -->
                 </div>
@@ -629,6 +631,10 @@ import router from '../../router';
 import GetNotifications from "../../compositions/GetNotifications"
 import { useI18n } from 'vue-i18n'
 import DarkModeSwitcher from "../../components/dark-mode-switcher/Main";
+import AddTeamMember from "../../compositions/AddTeamMember";
+import {useToast} from "vue-toastification";
+
+const toast = useToast();
 
 export default defineComponent({
     components: {Avatar,DarkModeSwitcher},
@@ -642,27 +648,28 @@ export default defineComponent({
     },
     methods: {
         change() {
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('api/profile/change-password', {
-                    password: this.password,
-                    passwordNew: this.passwordNew,
-                    passwordNewConfirm: this.passwordNewConfirm
-                })
-                    .then(response => {
-                        console.log(response.data)
-                        if (response.data.success) {
-                            let user = response.data.payload;
-                            store.dispatch('login/login', {
-                                user
-                            });
-                        } else {
-                            toast.error(response.data.message);
-                        }
+            if (this.passwordNew === this.passwordNewConfirm) {
+                this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                    this.$axios.post('api/profile/change-password', {
+                        password: this.password,
+                        passwordNew: this.passwordNew,
                     })
-                // .catch(function (error) {
-                //     this.toast.error(error);
-                // });
-            })
+                        .then(response => {
+                            console.log(response.data)
+                            if (response.data.success) {
+                                let user = response.data.payload;
+                                store.dispatch('login/login', {
+                                    user
+                                });
+                            } else {
+                                toast.error(response.data.message);
+                            }
+                        })
+                    // .catch(function (error) {
+                    //     this.toast.error(error);
+                    // });
+                })
+            }
         }
     },
     created() {
@@ -676,7 +683,12 @@ export default defineComponent({
         const echo = window.Echo;
         const notifications = ref([]);
         const lang = ref('pl');
-        const { t, locale } = useI18n({ useScope: 'global' })
+        const { t, locale } = useI18n({ useScope: 'global' });
+        const password = ref('');
+        const password_new = ref('');
+        const password_new_confirm = ref('');
+        const toast = useToast();
+
 
         const changeLang = () => {
             locale.value = lang.value;
@@ -723,6 +735,21 @@ export default defineComponent({
             router.push({ path: link})
         };
 
+        const addMember = async () => {
+            if(password_new.value === '') {
+                toast.error('Haslo nie może być puste');
+            } else if (password_new.value.length < 3) {
+                toast.error('Email nie może mieć mniej niż 3 znaki');
+            } else {
+                await AddTeamMember(new_team_member_email.value, temporary_team_id.value)
+                setTimeout(function () {
+                    getTeamsRepositories(search.value);
+                    new_team_member_email.value = '';
+                }, 1000);
+                toast.success('Success!')
+            }
+        }
+
         onMounted(function () {
             lang.value = store.state.main.currentLang;
             notifications.value = user.notifications;
@@ -736,7 +763,8 @@ export default defineComponent({
             notifications,
             notificationsComp,
             changeLang,
-            lang
+            lang,
+            addMember
         };
     }
 });
