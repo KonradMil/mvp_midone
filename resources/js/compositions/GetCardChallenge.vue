@@ -6,7 +6,7 @@
 import {ref} from 'vue';
 
 export default function GetCardChallenge(id) {
-    const list = ref([]);
+    const list = ref({});
 
     async function getCardChallenge(id) {
         axios.post('/api/challenge/user/get/card', {id: id})

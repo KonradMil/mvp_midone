@@ -987,7 +987,7 @@
 </template>
 
 <script>
-import {defineComponent, ref, provide, onMounted} from "vue";
+import {defineComponent, ref, provide, onMounted, unref, toRaw} from "vue";
 import GetCardChallenge from "../../compositions/GetCardChallenge";
 import WhatsNext from "./WhatsNext";
 
@@ -1009,9 +1009,10 @@ export default defineComponent({
         const questions = ref({});
         const user = ref({});
         const getCardChallengeRepositories = async (id) => {
-            let ch = GetCardChallenge(id);
-            console.log(ch);
-            challenge.value = ch.list;
+            // let ch = GetCardChallenge(id);
+            // let c = toRaw(ch.list);
+            // console.log(c);
+            challenge.value = GetCardChallenge(id).list.value;
             console.log(challenge.value);
         }
 
