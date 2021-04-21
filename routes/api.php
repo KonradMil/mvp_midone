@@ -26,6 +26,7 @@ Route::post('locations', 'App\Http\Controllers\TestController@locations');
 Route::post('locations/own', 'App\Http\Controllers\TestController@locationsOwn');
 Route::post('locations/sync', 'App\Http\Controllers\TestController@locationSync');
 Route::post('locations/get', 'App\Http\Controllers\TestController@getLocations');
+Route::get('import', 'App\Http\Controllers\TestController@importModels');
 
 Route::group(['prefix' => 'company', 'middleware' => 'auth:sanctum'], function () {
     Route::post('search/nip', 'App\Http\Controllers\TerytController@searchRegonNip');
