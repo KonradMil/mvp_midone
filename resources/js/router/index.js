@@ -18,11 +18,10 @@ import Main from "../pages/Unity/Main";
 import MainKnowledgebase  from "../pages/KnowledgeBase/Main";
 import AddKnowledgebase  from "../pages/KnowledgeBase/Add";
 import Profiles from "../pages/Profiles/Main";
+import ChangePassword from "../pages/Profiles/ChangePassword";
 import List from "../pages/Models/List";
 import ModelAdd from "../pages/Models/ModelAdd";
 import Card from "../pages/Challenges/Card";
-import UpdateProfile from "../pages/Profiles/UpdateProfile";
-import ChangePassword from "../pages/Profiles/ChangePassword";
 import Communication from "../pages/Communication/Main";
 
 export const routes = [
@@ -112,6 +111,11 @@ export const routes = [
                 component: Communication
             },
             {
+                name: 'communication',
+                path: '/communication',
+                component: Communication
+            },
+            {
                 name: 'wizard',
                 path: '/kreator',
                 component: Wizard
@@ -139,11 +143,6 @@ export const routes = [
                 name: 'profiles',
                 path: '/profiles',
                 component: Profiles
-            },
-            {
-                name: 'update-profile',
-                path: '/update-profile',
-                component: UpdateProfile
             },
             {
                 name: 'change-password',
