@@ -6,14 +6,14 @@
 import {ref} from 'vue';
 
 export default function GetCardChallenge(id) {
-    const list = ref({});
+    let list = ref({});
 
     async function getCardChallenge(id) {
-        axios.post('/api/challenge/user/get/card', {id: id})
+        await  axios.post('/api/challenge/user/get/card', {id: id})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
-                    // console.log(response.data);
+                    console.log(response.data.payload);
                     list.value = response.data.payload;
                 } else {
                     // toast.error(response.data.message);
