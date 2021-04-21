@@ -116,7 +116,7 @@
                     type="email"
                     class="form-control w-56 box pr-10 placeholder-theme-13"
                     placeholder="Email"
-                    v-model="email"
+                    v-model="emailNew"
                 />
                 <button class="btn btn-primary shadow-md mr-2" @click="sendEmail">Wyślij</button>
             </div>
@@ -144,7 +144,7 @@ import {defineComponent, onMounted, ref} from "vue";
         },
         setup() {
             const show = ref(false);
-            const email = ref('');
+            const emailNew = ref('');
 
             const showAddToTeamModal = () => {
                 show.value = true;
@@ -153,10 +153,10 @@ import {defineComponent, onMounted, ref} from "vue";
                 show.value = false;
             }
             const sendEmail = async () => {
-                if(email.value === '') {
+                if(emailNew.value === '') {
                     toast.error('Email nie może być pusty');
                 } else {
-                    await AddTeamMember(email.value)
+                    await AddTeamMember(emailNew.value)
                     toast.success('Success!')
                 }
             }
@@ -173,6 +173,7 @@ import {defineComponent, onMounted, ref} from "vue";
                 show,
                 showAddToTeamModal,
                 modalClosed,
+                sendEmail
             };
         },
         data() {
