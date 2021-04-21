@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Mail\ChangePassword;
+use App\Mail\ForgotPassword;
 use App\Mail\TeamInvitation;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -16,6 +17,19 @@ use Mpociot\Teamwork\TeamInvite;
 
 class UserController extends Controller
 {
+    public function getUsers()
+    {
+        $users = User::all();
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => $users
+        ]);
+    }
+    public function resetPassword(Request $request)
+    {
+        Mail::to([$request->email])->send(new ForgotPassword($request->email));
+    }
     public function changePassword(Request $request)
     {
         $u = Auth::user();
