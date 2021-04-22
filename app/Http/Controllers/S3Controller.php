@@ -21,7 +21,6 @@ class S3Controller extends Controller
             }  else {
                     $path = 'unity/' .$path;
             }
-
         }
 
         $getMimeType = Storage::disk('s3')->getMimetype($path);
