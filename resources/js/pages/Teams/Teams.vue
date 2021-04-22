@@ -103,7 +103,7 @@
                                     <div
                                         class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden"
                                     >
-                                        <Avatar :src="'uploads/' + invite.inviter.avatar_path" :username="invite.inviter.name + ' ' + invite.inviter.lastname" size="40" color="#FFF" background-color="#930f68"/>
+                                        <Avatar :src="'uploads/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" size="40" color="#FFF" background-color="#930f68"/>
                                     </div>
                                     <div class="ml-4 mr-auto">
                                         <div class="font-medium">{{invite.team.name}}</div>
@@ -112,7 +112,7 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="py-1 px-2 rounded-full text-xs bg-theme-9 text-white cursor-pointer font-medium"
+                                        class="py-1 px-2 rounded-full text-xs text-center bg-theme-9 text-white cursor-pointer font-medium"
                                         @click="acceptInvite(invite.id)"
                                     >
                                         {{$t('teams.acceptInvite')}}
