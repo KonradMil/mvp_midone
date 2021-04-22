@@ -1,7 +1,7 @@
 <template>
     <div class="webgl-content">
 
-        <div :id="containerId" v-bind:style="{ width: width + 'px', height: height + 'px' }"></div>
+        <canvas :id="containerId" v-bind:style="{ width: width + 'px', height: height + 'px' }"></canvas>
         <div v-if="loaded === false">
             <div class="unity-loader">
                 <div class="bar">
