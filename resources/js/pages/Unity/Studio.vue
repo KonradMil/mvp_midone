@@ -70,8 +70,9 @@ export default {
                 productName: "platform.dbr77.com",
                 productVersion: "1.0",
             }).then(function (instance) {
-
-
+                gameInstance.value = instance;
+                loaded.value = true;
+                emitter.emit('onInitialized', { loaded: true });
                 // window.addEventListener('resize', onResize);
                 // onResize();
             });
