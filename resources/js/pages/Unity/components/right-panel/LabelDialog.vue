@@ -33,7 +33,7 @@ export default {
         label: Object
     },
     emits: ["update:label"],
-    setup(props) {
+    setup(props, context) {
         const l = ref({fontSize: 36, message: '', textColor: ''});
         watch(l, (lab, prevLabel) => {
             console.log('CHANGE');
