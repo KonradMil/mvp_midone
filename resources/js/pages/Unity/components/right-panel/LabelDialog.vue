@@ -58,6 +58,9 @@ export default {
             } else {
                 l.value.textColor = '';
             }
+            l.value.index = props.label.index;
+            l.value.labelPosition = props.label.labelPosition;
+            l.value.labelRotation = props.label.labelRotation;
         });
 
         return {
