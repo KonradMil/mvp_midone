@@ -60,6 +60,7 @@ export default {
         })
 
         const instantiate = () => {
+            console.log(document.querySelector('#' + containerId.value));
             createUnityInstance(document.querySelector('#' + containerId.value), {
                 dataUrl: "/s3/unity/AssemBrot22_04_dev2020.data.br",
                 frameworkUrl: "/s3/unity/AssemBrot22_04_dev2020.framework.js.br",
