@@ -70,11 +70,11 @@ export default {
 
         const save = () => {
             if(content.value === 'label') {
-                emitter.emit('unityoutgoingaction', { action: 'updateLabel', data:label });
+                emitter.emit('unityoutgoingaction', { action: 'updateLabel', data:label, json: true });
             } else if(content.value === 'layout') {
-                emitter.emit('unityoutgoingaction', { action: 'updateLayout', data:layout });
+                emitter.emit('unityoutgoingaction', { action: 'updateLayout', data:layout, json: true });
             } else if (content.value === 'comment') {
-                emitter.emit('unityoutgoingaction', { action: 'updateComment', data:comment });
+                emitter.emit('unityoutgoingaction', { action: 'updateComment', data:comment, json: true });
             }
         }
 
