@@ -5,11 +5,11 @@
 <script>
 import {ref} from 'vue';
 
-export default function GetNotifications() {
+export default function GetNotifications(number = 5) {
     const list = ref(false);
 
-    async function getNotifications() {
-        axios.post('api/notifications/get', {})
+    async function getNotifications(number) {
+        axios.post('api/notifications/get', {number : number})
             .then(response => {
                 if (response.data.success) {
                     // console.log(response.data);
@@ -20,7 +20,7 @@ export default function GetNotifications() {
             })
     }
 
-    getNotifications();
+    getNotifications(number);
 
     return {
         list

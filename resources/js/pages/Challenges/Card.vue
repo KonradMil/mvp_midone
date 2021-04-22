@@ -458,12 +458,6 @@ export default defineComponent({
                         // toast.error(response.data.message);
                     }
                 })
-            // console.log(ch.list.value);
-
-            // let c = toRaw(ch.list);
-
-            // challenge.value = GetCardChallenge(id);
-            // console.log(challenge.value.list);
         }
 
         onMounted(function () {
@@ -483,9 +477,6 @@ export default defineComponent({
             newProjectsRef.value = el;
         });
 
-        provide("bind[todaySchedulesRef]", el => {
-            todaySchedulesRef.value = el;
-        });
 
         const prevAnnouncement = () => {
             const el = announcementRef.value;

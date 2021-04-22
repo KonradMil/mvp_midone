@@ -39,7 +39,7 @@
                     >
                         Anuluj
                     </button>
-                    <button type="button" class="btn btn-primary w-20">
+                    <button type="button" class="btn btn-primary w-20" @click="save">
                         Zapisz
                     </button>
                 </div>
@@ -67,6 +67,13 @@ export default {
         const comments = ref([]);
         const currentTitle = ref('');
         const content = ref('');
+
+        const save = () => {
+            if(content.value == 'label') {
+
+            }
+
+        }
 
         const showPanel = () => {
             cash("#right-panel").modal("show");
@@ -102,7 +109,8 @@ export default {
             comments,
             layouts,
             labels,
-            content
+            content,
+            save
         }
     }
 }

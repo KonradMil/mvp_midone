@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Pusher\Pusher;
@@ -17,6 +18,10 @@ class NotificationsController extends Controller
     public function getNotifications()
     {
         $notifications = Auth::user()->notifications;
+//        foreach ($notifications as $not) {
+//            $data = $not['data'];
+//            $not->author = User::find($data['author']['id']);
+//        }
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',

@@ -9,37 +9,36 @@
                     </h2>
                     <!-- BEGIN: Inbox Menu -->
                     <div class="intro-y box bg-theme-1 p-5 mt-6">
-                        <button type="button" class="btn text-gray-700 dark:text-gray-300 w-full bg-white dark:bg-theme-1 mt-1" @click="showAddToTeamModal"> <i class="w-4 h-4 mr-2" data-feather="edit-3"></i> Compose </button>
+                        <button type="button" class="btn text-gray-700 dark:text-gray-300 w-full bg-white dark:bg-theme-1 mt-1" @click="showAddToTeamModal"> <i class="w-4 h-4 mr-2" data-feather="edit-3"></i> Zgłoś błąd </button>
                         <div class="border-t border-theme-3 dark:border-dark-5 mt-6 pt-6 text-white">
-                            <a href="" class="flex items-center px-3 py-2 rounded-md bg-theme-20 dark:bg-dark-1 font-medium"> <i class="w-4 h-4 mr-2" data-feather="mail"></i> Inbox </a>
-                            <button class="flex items-center px-3 py-2 mt-2 rounded-md" @click="$router.push('teams')"> <i class="w-4 h-4 mr-2" data-feather="star"></i> Teams </button>
-                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md"> <i class="w-4 h-4 mr-2" data-feather="inbox"></i> Draft </a>
-                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md"> <i class="w-4 h-4 mr-2" data-feather="send"></i> Sent </a>
-                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md"> <i class="w-4 h-4 mr-2" data-feather="trash"></i> Trash </a>
+                            <a href="" class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab == 'notifications')? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'notifications'"> <i class="w-4 h-4 mr-2" data-feather="mail"></i> Powiadomienia </a>
+                            <a class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab == 'teams')? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'teams'"> <i class="w-4 h-4 mr-2" data-feather="star"></i> Zespoły </a>
+                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab == 'questions')? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''"  @click.prevent="activeTab = 'questions'"> <i class="w-4 h-4 mr-2" data-feather="inbox"></i> Pytania </a>
+                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab == 'tickets')? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'tickets'"> <i class="w-4 h-4 mr-2" data-feather="send"></i> Zgłoszenia </a>
                         </div>
-                        <div class="border-t border-theme-3 dark:border-dark-5 mt-4 pt-4 text-white">
-                            <a href="" class="flex items-center px-3 py-2 truncate">
-                                <div class="w-2 h-2 bg-theme-11 rounded-full mr-3"></div>
-                                Custom Work
-                            </a>
-                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">
-                                <div class="w-2 h-2 bg-theme-9 rounded-full mr-3"></div>
-                                Important Meetings
-                            </a>
-                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">
-                                <div class="w-2 h-2 bg-theme-12 rounded-full mr-3"></div>
-                                Work
-                            </a>
-                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">
-                                <div class="w-2 h-2 bg-theme-11 rounded-full mr-3"></div>
-                                Design
-                            </a>
-                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">
-                                <div class="w-2 h-2 bg-theme-6 rounded-full mr-3"></div>
-                                Next Week
-                            </a>
-                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate"> <i class="w-4 h-4 mr-2" data-feather="plus"></i> Add New Label </a>
-                        </div>
+<!--                        <div class="border-t border-theme-3 dark:border-dark-5 mt-4 pt-4 text-white">-->
+<!--                            <a href="" class="flex items-center px-3 py-2 truncate">-->
+<!--                                <div class="w-2 h-2 bg-theme-11 rounded-full mr-3"></div>-->
+<!--                                Custom Work-->
+<!--                            </a>-->
+<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
+<!--                                <div class="w-2 h-2 bg-theme-9 rounded-full mr-3"></div>-->
+<!--                                Important Meetings-->
+<!--                            </a>-->
+<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
+<!--                                <div class="w-2 h-2 bg-theme-12 rounded-full mr-3"></div>-->
+<!--                                Work-->
+<!--                            </a>-->
+<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
+<!--                                <div class="w-2 h-2 bg-theme-11 rounded-full mr-3"></div>-->
+<!--                                Design-->
+<!--                            </a>-->
+<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
+<!--                                <div class="w-2 h-2 bg-theme-6 rounded-full mr-3"></div>-->
+<!--                                Next Week-->
+<!--                            </a>-->
+<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate"> <i class="w-4 h-4 mr-2" data-feather="plus"></i> Add New Label </a>-->
+<!--                        </div>-->
                     </div>
                     <!-- END: Inbox Menu -->
                 </div>
@@ -123,16 +122,16 @@
                                 <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="more-horizontal"></i> </a>
                             </div>
                             <div class="flex items-center sm:ml-auto">
-                                <div class="dark:text-gray-300">1 - 50 of 5,238</div>
-                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="chevron-left"></i> </a>
-                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="chevron-right"></i> </a>
-                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="settings"></i> </a>
+<!--                                <div class="dark:text-gray-300">1 - 50 of 5,238</div>-->
+<!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="chevron-left"></i></a>-->
+<!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="chevron-right"></i></a>-->
+<!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="settings"></i></a>-->
                             </div>
                         </div>
-<!--                        start -->
                         <div class="overflow-x-auto sm:overflow-x-visible"
-                             v-for="(user, index) in users.list"
-                             :key="index"
+                             v-for="(notification, index) in notifications.list"
+                             :key="'notification_' + index"
+                             v-if="activeTab == 'notifications'"
                         >
                             <div class="intro-y" >
                                 <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
@@ -142,43 +141,19 @@
                                             <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
                                             <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
                                             <div class="w-6 h-6 flex-none image-fit relative ml-5">
-                                                <Avatar :src="'uploads/' + user.avatar" :username="user.name + ' ' + user.lastname" size="30"
-                                                        color="#FFF" background-color="#930f68"/>                                            </div>
-                                            <div class="inbox__item--sender truncate ml-3">{{ user.name }} {{user.lastname}}</div>
-                                        </div>
-                                        <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">There are many variations of passages of Lorem Ips</span> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomi </div>
-                                        <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">01:10 PM</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-<!--                        end-->
-                        <div class="overflow-x-auto sm:overflow-x-visible"
-                             v-for="(invite, index) in invites.list"
-                             :key="'invite_' + index"
-                        >
-                            <div class="intro-y" >
-                                <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
-                                    <div class="flex px-5 py-3">
-                                        <div class="w-72 flex-none flex items-center mr-5">
-                                            <input class="form-check-input flex-none" type="checkbox" checked>
-                                            <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
-                                            <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
-                                            <div class="w-6 h-6 flex-none image-fit relative ml-5">
-                                                <Avatar :src="'uploads/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" size="30" color="#FFF" background-color="#930f68"/>
+                                                <Avatar :src="'uploads/' + notification.data.author.avatar" :username="notification.data.author.name + ' ' + notification.data.author.lastname" size="30" color="#FFF" background-color="#930f68"/>
                                             </div>
-                                            <div class="inbox__item--sender truncate ml-3">{{invite.inviter.name + ' ' + invite.inviter.lastname}}</div>
+                                            <div class="inbox__item--sender truncate ml-3">{{notification.data.author.name + ' ' + notification.data.author.lastname}}</div>
                                         </div>
-                                        <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">Akceptuj zaproszenie</span></div>
-                                        <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">01:10 PM</div>
+                                        <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">{{notification.data.message}}</span> <button v-if="notification.data.link != undefined" type="button" class="btn ml-5" @click="$router.push({path: notification.data.link})">Przejdź</button> </div>
+                                        <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">{{$dayjs(notification.created_at).format('DD.MM.YYYY HH:mm')}}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">
-                            <div class="dark:text-gray-300">4.41 GB (25%) of 17 GB used Manage</div>
-                            <div class="sm:ml-auto mt-2 sm:mt-0 dark:text-gray-300">Last account activity: 36 minutes ago</div>
+
                         </div>
                     </div>
                     <!-- END: Inbox Content -->
@@ -218,21 +193,22 @@
 <script>
 import {onMounted, ref} from "vue";
 import GetUsers from '../../compositions/GetUsers'
-import GetInvites from '../../compositions/GetInvites'
+import GetNotifications from '../../compositions/GetNotifications'
 import {useToast} from "vue-toastification";
 import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
 
 
 export default {
-    name: "Teams",
+    name: "Communication",
     components: {Avatar, Modal, GetUsers},
     setup(props, {emit}) {
         // const user = ref({});
         const toast = useToast();
         const users = ref([]);
-        const invites = ref([]);
+        const notifications = ref([]);
         const show = ref(false);
+        const activeTab = ref('notifications');
 
         const showAddToTeamModal = () => {
                show.value = !show.value;
@@ -243,23 +219,23 @@ export default {
         const getUsersRepositories = async () => {
             users.value = GetUsers();
         }
-        const GetInvitesReposistories = async() => {
-            invites.value = GetInvites();
+        const GetNotificationsReposistories = async() => {
+            notifications.value = GetNotifications();
         }
         onMounted(function () {
             getUsersRepositories('');
-            GetInvitesReposistories('');
+            GetNotificationsReposistories('');
             // if (window.Laravel.user) {
             //     user.value = window.Laravel.user;
             // }
         })
         return {
             users,
-            invites,
+            notifications,
             show,
             showAddToTeamModal,
-            modalClosed
-            // user,
+            modalClosed,
+            activeTab
         }
     },
     beforeRouteEnter(to, from, next) {
