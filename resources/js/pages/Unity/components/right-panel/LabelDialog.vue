@@ -38,7 +38,7 @@ export default {
         watch(l, (lab, prevLabel) => {
             console.log('CHANGE');
             context.emit("update:label", lab);
-        })
+        },{ deep: true })
 
         onMounted(() => {
             if (props.label.message != undefined && props.label.message != '') {
