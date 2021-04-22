@@ -132,41 +132,68 @@
                     class="notification-content__box dropdown-menu__content box dark:bg-dark-6"
                 >
                     <div class="notification-content__title">Powiadomienia</div>
-                    <div
-                        v-for="(notification, index) in notificationsComp"
-                        :key="'notification_' + index"
-                        class="cursor-pointer relative flex items-center"
-                        :class="{ 'mt-5': index }"
-                        @click="goTo(notification.data.link)"
-                    >
-                        <div class="w-12 h-12 flex-none image-fit mr-1">
-                            <Avatar :src="'uploads/' + notification.data.author.avatar"
-                                    :username="notification.data.author.name + ' ' + notification.data.author.lastname"
-                                    size="50" color="#FFF" background-color="#930f68"/>
+<!--                    <div-->
+<!--                        v-for="(notification, index) in notificationsComp"-->
+<!--                        :key="'notification_' + index"-->
+<!--                        class="cursor-pointer relative flex items-center"-->
+<!--                        :class="{ 'mt-5': index }"-->
+<!--                        @click="goTo(notification.data.link)"-->
+<!--                    >-->
+<!--                        <div class="w-12 h-12 flex-none image-fit mr-1">-->
+<!--                            <Avatar :src="'uploads/' + notification.data.author.avatar"-->
+<!--                                    :username="notification.data.author.name + ' ' + notification.data.author.lastname"-->
+<!--                                    size="50" color="#FFF" background-color="#930f68"/>-->
 
-                            <div v-if="notification.read_at === null"
-                                 class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white"
-                            ></div>
-                        </div>
-                        <div class="ml-2 overflow-hidden">
-                            <div class="flex items-center">
-                                <a href="#" class="font-medium truncate mr-5"></a>
-                                <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">
-                                    {{ $dayjs(notification.created_at).format('DD.MM.YYYY HH:mm') }}
+<!--                            <div v-if="notification.read_at === null"-->
+<!--                                 class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white"-->
+<!--                            ></div>-->
+<!--                        </div>-->
+<!--                        <div class="ml-2 overflow-hidden">-->
+<!--                            <div class="flex items-center">-->
+<!--                                <a href="#" class="font-medium truncate mr-5"></a>-->
+<!--                                <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">-->
+<!--                                    {{ $dayjs(notification.created_at).format('DD.MM.YYYY HH:mm') }}-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="w-full truncate text-gray-600 mt-0.5">-->
+<!--                                {{ notification.data.message }}-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div-->
+<!--                       v-if="notifications.length === 0"-->
+<!--                        class="relative flex items-center mt-5"-->
+<!--                    >-->
+<!--                        <div class="ml-2 overflow-hidden">-->
+<!--                            <div class="w-full truncate text-gray-600 mt-0.5">-->
+<!--                                Nie masz żadnych powiadomień.-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="mt-5">
+                        <div
+                            v-for="(invite, index) in invites.list"
+                            :key="'invite_' + index"
+                            class="intro-y"
+                        >
+                            <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
+                                <div
+                                    class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden"
+                                >
+                                    <Avatar :src="'uploads/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" size="40" color="#FFF" background-color="#930f68"/>
                                 </div>
-                            </div>
-                            <div class="w-full truncate text-gray-600 mt-0.5">
-                                {{ notification.data.message }}
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                       v-if="notifications.length === 0"
-                        class="relative flex items-center mt-5"
-                    >
-                        <div class="ml-2 overflow-hidden">
-                            <div class="w-full truncate text-gray-600 mt-0.5">
-                                Nie masz żadnych powiadomień.
+                                <div class="ml-4 mr-auto">
+                                    <div class="font-medium">{{invite.team.name}}</div>
+                                    <div class="text-gray-600 text-xs mt-0.5">
+                                        Od: {{invite.inviter.name + ' ' + invite.inviter.lastname}}
+                                    </div>
+                                </div>
+                                <div
+                                    class="py-1 px-2 rounded-full text-xs text-center bg-theme-9 text-white cursor-pointer font-medium"
+                                    @click="acceptInvite(invite.id)"
+                                >
+                                    {{$t('teams.acceptInvite')}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -248,6 +275,7 @@ import store, {useStore} from "../../store";
 import Avatar from "../avatar/Avatar";
 import router from '../../router';
 import GetNotifications from "../../compositions/GetNotifications"
+import GetInvites from "../../compositions/GetInvites"
 import { useI18n } from 'vue-i18n'
 import DarkModeSwitcher from "../dark-mode-switcher/Main";
 import {useToast} from "vue-toastification";
@@ -287,6 +315,7 @@ export default defineComponent({
         }
     },
     setup() {
+        const invites = ref([]);
         const user = window.Laravel.user;
         const echo = window.Echo;
         const notifications = ref([]);
@@ -314,6 +343,9 @@ export default defineComponent({
             notifications.value = GetNotifications();
         }
 
+        const GetInvitesRepositories = async () => {
+            invites.value = GetInvites();
+        }
         const searchDropdown = ref(false);
         const store = useStore();
 
@@ -339,6 +371,7 @@ export default defineComponent({
         };
 
         onMounted(function () {
+            GetInvitesRepositories();
             lang.value = store.state.main.currentLang;
            notifications.value = user.notifications;
         })
@@ -351,7 +384,8 @@ export default defineComponent({
             notifications,
             notificationsComp,
             changeLang,
-            lang
+            lang,
+            invites
         };
     }
 });
