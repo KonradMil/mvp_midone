@@ -15,7 +15,7 @@
     </div>
     <div class="mt-3">
         <label for="modal-form-3" class="form-label">Wielkość etykiety</label>
-        <Slider id="modal-form-3" v-model="l.fontSize" :min="0" :max="15" style="width: 100%;"/>
+        <Slider id="modal-form-3" v-model="l.fontSize" :min="0" :max="55" style="width: 100%;"/>
     </div>
 </template>
 <style src="@vueform/slider/themes/default.css"></style>
@@ -34,7 +34,7 @@ export default {
     },
     emits: ["update:label"],
     setup(props) {
-        const l = ref({});
+        const l = ref({fontSize: 36, message: '', textColor: ''});
         watch(l, (lab, prevLabel) => {
             console.log('CHANGE');
             context.emit("update:label", lab);
