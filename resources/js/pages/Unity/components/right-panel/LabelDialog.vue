@@ -56,7 +56,7 @@ export default {
             if (props.label.textColor != undefined && props.label.textColor != '') {
                 l.value.textColor = props.label.textColor;
             } else {
-                l.value.textColor = '';
+                l.value.textColor = '#222F3D';
             }
             l.value.index = props.label.index;
             l.value.labelPosition = props.label.labelPosition;
