@@ -1,5 +1,6 @@
 <template>
     <div class="webgl-content">
+
         <div :id="containerId" v-bind:style="{ width: width + 'px', height: height + 'px' }"></div>
         <div v-if="loaded === false">
             <div class="unity-loader">
@@ -16,6 +17,7 @@
 
 <script>
 import {onMounted, onBeforeMount, ref, getCurrentInstance} from "vue";
+import cash from "cash-dom/dist/cash";
 
 export default {
     props: ['src', 'module', 'width', 'height', 'externalProgress', 'unityLoader', 'hideFooter'],
@@ -45,51 +47,65 @@ export default {
         }
 
         onBeforeMount(() => {
-            if (props.unityLoader) {
+            // if (props.unityLoader) {
                 const script = document.createElement('SCRIPT')
-                script.setAttribute('src', props.unityLoader)
+                script.setAttribute('src', 's3/unity/AssemBrot22_04_dev2020.loader.js')
                 script.setAttribute('async', '')
                 script.setAttribute('defer', '')
                 document.body.appendChild(script)
                 script.onload = () => {
                     emitter.emit('onload', { done:1 })
                 }
-            }
+            // }
         })
 
         const instantiate = () => {
-            if (typeof UnityLoader === 'undefined') {
-                let errorr = 'The UnityLoader was not defined, please add the script tag ' +
-                    'to the base html and embed the UnityLoader.js file Unity exported or use "unityLoader" attribute for path to UnityLoader.js.'
-                console.error(errorr)
-                error.value = errorr
-                return
-            }
-            if (props.src === null) {
-                let errorr = 'Please provice a path to a valid JSON in the "src" attribute.'
-                console.error(errorr)
-                error.value = errorr
-                return
-            }
-            let params = {}
-            if (props.externalProgress) {
-                params.onProgress = props.externalProgress
-            } else {
-                params.onProgress = ((gameInstance, progresss) => {
-                     if(progresss === 1) {
-                        loaded.value = true;
-                         emitter.emit('onInitialized', { loaded: true });
-                    } else {
-                         loaded.value = false;
-                     }
-                    progress.value = progresss
-                })
-            }
-            if (props.module) {
-                params.Module = params.module
-            }
-            console.log(containerId.value);
-            gameInstance.value = UnityLoader.instantiate(containerId.value, props.src, params)
+            createUnityInstance(document.querySelector('#' + containerId.value), {
+                dataUrl: "/s3/unity/AssemBrot22_04_dev2020.data.br",
+                frameworkUrl: "/s3/unity/AssemBrot22_04_dev2020.framework.js.br",
+                codeUrl: "/s3/unity/AssemBrot22_04_dev2020.wasm.br",
+                streamingAssetsUrl: "StreamingAssets",
+                companyName: "DBR",
+                productName: "platform.dbr77.com",
+                productVersion: "1.0",
+            }).then(function (instance) {
+
+
+                // window.addEventListener('resize', onResize);
+                // onResize();
+            });
+            // if (typeof UnityLoader === 'undefined') {
+            //     let errorr = 'The UnityLoader was not defined, please add the script tag ' +
+            //         'to the base html and embed the UnityLoader.js file Unity exported or use "unityLoader" attribute for path to UnityLoader.js.'
+            //     console.error(errorr)
+            //     error.value = errorr
+            //     return
+            // }
+            // if (props.src === null) {
+            //     let errorr = 'Please provice a path to a valid JSON in the "src" attribute.'
+            //     console.error(errorr)
+            //     error.value = errorr
+            //     return
+            // }
+            // let params = {}
+            // if (props.externalProgress) {
+            //     params.onProgress = props.externalProgress
+            // } else {
+            //     params.onProgress = ((gameInstance, progresss) => {
+            //          if(progresss === 1) {
+            //             loaded.value = true;
+            //              emitter.emit('onInitialized', { loaded: true });
+            //         } else {
+            //              loaded.value = false;
+            //          }
+            //         progress.value = progresss
+            //     })
+            // }
+            // if (props.module) {
+            //     params.Module = params.module
+            // }
+            // console.log(containerId.value);
+            // gameInstance.value = UnityLoader.instantiate(containerId.value, props.src, params)
         }
 
 
