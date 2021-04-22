@@ -24,8 +24,8 @@
                 <!-- END: Slide Over Header -->
                 <!-- BEGIN: Slide Over Body -->
                 <div class="modal-body">
-                    <LabelDialog v-if="content == 'label'"/>
-                    <CommentDialog v-if="content == 'comment'"/>
+                    <LabelDialog v-if="content == 'label'" v-model:label="label"/>
+                    <CommentDialog v-if="content == 'comment'" v-model:comment="comment"/>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
@@ -62,17 +62,20 @@ export default {
         //GLOBAL
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
-        const layouts = ref([]);
-        const labels = ref([]);
-        const comments = ref([]);
+        const layout = ref({});
+        const label = ref({});
+        const comment = ref({});
         const currentTitle = ref('');
         const content = ref('');
 
         const save = () => {
-            if(content.value == 'label') {
-
+            if(content.value === 'label') {
+                emitter.emit('unityoutgoingaction', { action: 'updateLabel', data:label });
+            } else if(content.value === 'layout') {
+                emitter.emit('unityoutgoingaction', { action: 'updateLayout', data:layout });
+            } else if (content.value === 'comment') {
+                emitter.emit('unityoutgoingaction', { action: 'updateComment', data:comment });
             }
-
         }
 
         const showPanel = () => {
@@ -84,17 +87,21 @@ export default {
         }
 
         emitter.on('UnityLayoutSelected', e => {
-
+            content.value = 'layout';
+            layout.value = e.layoutSelected;
+            showPanel();
         });
 
         emitter.on('UnityLabelSelected', e => {
             console.log(e);
             content.value = 'label';
+            label.value = e.labelSelected;
             showPanel();
         });
 
         emitter.on('UnityCommentSelected', e => {
             console.log(e);
+            comment.value = e.commentSelected;
             content.value = 'comment';
             showPanel();
         });
@@ -106,9 +113,9 @@ export default {
 
         return {
             currentTitle,
-            comments,
-            layouts,
-            labels,
+            comment,
+            layout,
+            label,
             content,
             save
         }

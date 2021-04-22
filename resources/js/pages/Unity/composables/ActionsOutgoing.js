@@ -110,7 +110,22 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'ShowRadialMenu', val);
     }
 
+    function updateComment(val) {
+        outgoing(game, 'UpdateComment', val);
+    }
+
+    function updateLabel(val) {
+        outgoing(game, 'UpdateLabel', val);
+    }
+
+    function updateLayout(val) {
+        outgoing(game, 'UpdateLayout', val);
+    }
+
     return {
+        updateComment,
+        updateLabel,
+        updateLayout,
         placeObject,
         deleteObject,
         setSessionId,

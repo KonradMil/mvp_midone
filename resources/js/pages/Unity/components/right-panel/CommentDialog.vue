@@ -24,6 +24,9 @@ import {onMounted, ref} from "vue";
 
 export default {
     name: "CommentDialog",
+    props: {
+      comment: Object
+    },
     setup(props) {
         const title = ref('');
         const comment = ref('');
