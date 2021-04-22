@@ -111,15 +111,15 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function updateComment(val) {
-        outgoing(game, 'UpdateComment', val);
+        outgoing(game, 'UpdateComment', val, true);
     }
 
     function updateLabel(val) {
-        outgoing(game, 'UpdateLabel', val);
+        outgoing(game, 'UpdateLabel', val, true);
     }
 
     function updateLayout(val) {
-        outgoing(game, 'UpdateLayout', val);
+        outgoing(game, 'UpdateLayout', val, true);
     }
 
     return {
