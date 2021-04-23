@@ -28,7 +28,7 @@ export default {
       comment: Object
     },
     emits: ["update:comment"],
-    setup(props) {
+    setup(props, context) {
         const c = ref({message: '', title: ''});
         watch(c, (ca, prevLabel) => {
             console.log('CHANGE');
