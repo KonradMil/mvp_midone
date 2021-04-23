@@ -271,6 +271,15 @@
                 </div><!--v-if--></div>
         </div>
     </div>
+    <div class="mt-3">
+        <label for="modal-form-11" class="form-label">Podświetl po wejściu</label>
+        <div class="mt-2">
+            <div class="form-check">
+                <input id="checkbox-switch-7" class="form-check-switch" type="checkbox" v-model="l.light_on_enter" />
+<!--                <label class="form-check-label" for="checkbox-switch-7">Default switch checkbox input</label>-->
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
