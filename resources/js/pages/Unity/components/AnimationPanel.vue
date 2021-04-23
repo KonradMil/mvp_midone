@@ -12,7 +12,7 @@
                     <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" position="animationbuttonclick"/>
                     <UnityButton tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick"/>
                 </div>
-                <div class="col-span-11" style="background-color: rgba(147, 15, 104, 0.25)">
+                <div class="col-span-11 rounded-md" style="background-color: rgba(147, 15, 104, 0.25)">
                     <div class="grid grid-cols-12">
                         <div class="col-span-2">
 
