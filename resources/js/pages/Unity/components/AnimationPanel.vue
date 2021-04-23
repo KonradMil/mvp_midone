@@ -4,7 +4,7 @@
             <AnimationButtons :icons="icons"></AnimationButtons>
         </div>
     </div>
-    <div class="flex fixed w-full z-50 pb-2 h-24 bottom-0 "  v-if="expanded == 1"id="bottom-animation-normal">
+    <div class="flex fixed w-full z-50 pb-2 h-24 bottom-0 "  v-if="expanded == 1" id="bottom-animation-normal">
         <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto;">
 
         </div>
