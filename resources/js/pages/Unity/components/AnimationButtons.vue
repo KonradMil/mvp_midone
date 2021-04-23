@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import UnityButton from './UnityButton'
+
 export default {
     name: "AnimationButtons",
     components: {
