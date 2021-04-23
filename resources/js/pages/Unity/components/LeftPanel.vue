@@ -191,7 +191,8 @@ export default {
         }
 
         const handleChange = (cat_id) => {
-            subcategory.value = null
+            subcategory.value = null;
+            selectedBrand.value = null;
             if (category.value === cat_id) {
                 category.value = null;
                 visible.value = false;
