@@ -6,7 +6,7 @@ function outgoing(game, action, data, json) {
     } else {
         finalData = data;
     }
-
+    console.log(['NetworkBridge', action, finalData]);
     game.message('NetworkBridge', action, finalData);
 
     // this.gameWindow.message('NetworkBridge', 'OrderPart', JSON.stringify({
