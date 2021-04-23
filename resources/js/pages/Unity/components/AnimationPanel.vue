@@ -23,8 +23,8 @@
                                     <div v-for="(animable, index) in line.animables">
                                         <div class="pos-image__preview image-fit">
                                             <img
-                                                :alt="animable.name + '.png'"
-                                                :src="animable.name + '.png'"
+                                                :alt="animable.name.replace('models', 'models_images') + '.png'"
+                                                :src="animable.name.replace('models', 'models_images') + '.png'"
                                             />
                                         </div>
                                     </div>
