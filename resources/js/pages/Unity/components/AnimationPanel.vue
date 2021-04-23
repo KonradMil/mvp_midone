@@ -71,7 +71,7 @@ export default {
                     emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: ''})
                     break;
                 case 'addline':
-                    emitter.emit('unityoutgoingaction', {action: 'addLine', data: lines.length})
+                    emitter.emit('unityoutgoingaction', {action: 'addLine', data: lines.value.length})
                     break;
                 case 'removeline':
                     emitter.emit('unityoutgoingaction', {action: 'removeLine', data: ''})
