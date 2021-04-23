@@ -1,5 +1,7 @@
 import {watch, unref, onUnmounted} from 'vue';
 function outgoing(game, action, data, json) {
+    console.log('ADASD');
+    console.log(data);
     let finalData = '';
     if(json) {
          finalData = JSON.stringify(data.value);
