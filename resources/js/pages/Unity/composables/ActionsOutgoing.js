@@ -2,7 +2,7 @@ import {watch, unref, onUnmounted} from 'vue';
 function outgoing(game, action, data, json) {
     let finalData = '';
     if(json) {
-         finalData = JSON.stringify(data);
+         finalData = JSON.stringify(data.value);
     } else {
         finalData = data;
     }
