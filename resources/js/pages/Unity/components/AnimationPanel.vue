@@ -5,7 +5,7 @@
         </div>
     </div>
     <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-96 bottom-0 bg-white rounded-md bg-opacity-25" v-if="expanded == 1" id="bottom-animation-normal">
-        <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto;">
+        <div class="left flex pt-2 flex-row ml-24">
             <div class="row">
                 <div class="col-span-3">
                     <UnityButton  tooltip="Dodaj linie" alttext="Dodaj linie" path="/s3/builder_icons/add_simple.png" action="addline" position="animationbuttonclick" />
@@ -24,7 +24,7 @@
         </div>
     </div>
     <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-24 bottom-0 h-100 bg-white rounded-md bg-opacity-25" v-if="expanded == 2" id="bottom-animation-expanded">
-        <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto;">
+        <div class="left flex  pt-2 flex-row ml-24">
 
         </div>
     </div>
