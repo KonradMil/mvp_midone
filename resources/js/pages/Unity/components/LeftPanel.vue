@@ -24,7 +24,6 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-auto relative mr-auto mt-1 sm:mt-0 p-2" v-if="category == 1 && subcategory == 0">
-
                     <div class="p-5 m-2" v-for="(brand, index) in brands.brands" :key="'subcat_' + index" @click="subcategory = subcat.value">
                         <div class="flex-none pos-image relative block">
                             <div class="pos-image__preview image-fit">

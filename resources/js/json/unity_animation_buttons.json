@@ -1,11 +1,29 @@
 {
     "icons": {
-
-            "grid": {
-                "src": "\/s3/builder_icons/grid_simple.png",
-                "tooltip": "",
-                "alttext": "",
-                "type": "grid"
-            }
+        "maximize": {
+            "src": "\/s3/builder_icons/maximize_simple.png",
+            "tooltip": "",
+            "alttext": ""
+        },
+        "speedupleft": {
+            "src": "\/s3/builder_icons/speedup.png",
+            "tooltip": "",
+            "alttext": ""
+        },
+        "stop": {
+            "src": "\/s3/builder_icons/stop_simple.png",
+            "tooltip": "",
+            "alttext": ""
+        },
+        "pause": {
+            "src": "\/s3/builder_icons/pause_simple.png",
+            "tooltip": "",
+            "alttext": ""
+        },
+        "play": {
+            "src": "\/s3/builder_icons/play_simple.png",
+            "tooltip": "",
+            "alttext": ""
+        }
     }
 }
