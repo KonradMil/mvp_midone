@@ -47,7 +47,10 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         emitter.on('animationbuttonclick', e => handleClick(e.val))
-        emitter.on('UnityAnimationChainUpdate', e => lines.value = e);
+        emitter.on('UnityAnimationChainUpdate', e => {
+            lines.value = e;
+            console.log(e);
+        });
 
         const handleClick = (val) => {
             console.log(val);
