@@ -12,7 +12,7 @@
                     <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" position="animationbuttonclick"/>
                     <UnityButton tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick"/>
                 </div>
-                <div class="col-span-11 rounded-md mr-1" style="background-color: rgba(147, 15, 104, 0.25);">
+                <div class="col-span-11 rounded-md mr-5" style="background-color: rgba(147, 15, 104, 0.25);">
                     <div class="grid grid-cols-12">
                         <div class="col-span-2">
 
@@ -20,8 +20,13 @@
                         <div class="col-span-10">
                             <div class="w-full" style="overflow-x: scroll;">
                                 <div v-for="(line, index) in lines" class="row" :class="(activeLineIndex == index)? 'active':''">
-                                    <div>
-
+                                    <div v-for="(animable, index) in line.animables">
+                                        <div class="pos-image__preview image-fit">
+                                            <img
+                                                :alt="animable.name + '.png'"
+                                                :src="animable.name + '.png'"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
