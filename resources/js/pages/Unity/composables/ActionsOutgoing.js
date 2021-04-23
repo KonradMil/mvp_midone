@@ -4,7 +4,12 @@ function outgoing(game, action, data, json) {
     console.log(data);
     let finalData = '';
     if(json) {
-         finalData = JSON.stringify(data.value);
+        if(data.value != undefined) {
+            finalData = JSON.stringify(data.value);
+        } else {
+            finalData = JSON.stringify(data);
+        }
+
     } else {
         finalData = data;
     }
