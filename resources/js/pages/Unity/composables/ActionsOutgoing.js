@@ -146,6 +146,14 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'SetPlaybackSpeed', val);
     }
 
+    function addLine(val) {
+        outgoing(game, 'SetNewAnimationLayer', val)
+    }
+
+    function removeLine() {
+        outgoing(game, 'DeleteLine', val);
+    }
+
     return {
         updateComment,
         updateLabel,
@@ -172,6 +180,8 @@ export default function unityActionOutgoing(gameWindow) {
         runAnimation,
         stopAnimation,
         setPlaybackSpeed,
-        pauseAnimation
+        pauseAnimation,
+        addLine,
+        removeLine
     };
 }

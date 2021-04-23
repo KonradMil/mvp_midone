@@ -69,6 +69,19 @@ export default {
                 case 'play':
                     emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: ''})
                     break;
+                case 'addline':
+                    emitter.emit('unityoutgoingaction', {action: 'addLine', data: ''})
+                    break;
+                case 'removeline':
+                    emitter.emit('unityoutgoingaction', {action: 'removeLine', data: ''})
+                    break;
+                case 'minimalize':
+                  if(expanded.value == 1) {
+                      expanded.value = 0;
+                  } else if(expanded.value == 2) {
+                      expanded.value = 1;
+                  }
+                    break;
             }
         }
 
