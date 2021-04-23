@@ -6,7 +6,7 @@
             type="text"
             class="form-control"
             placeholder=""
-            v-model="title"
+            v-model="c.title"
         />
     </div>
     <div class="mt-3">
@@ -14,7 +14,7 @@
         <textarea
             id="modal-form-2"
             class="form-control"
-            v-model="comment"
+            v-model="c.message"
         />
     </div>
 </template>
