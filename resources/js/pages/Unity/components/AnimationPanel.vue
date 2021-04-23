@@ -4,7 +4,7 @@
             <AnimationButtons :icons="icons"></AnimationButtons>
         </div>
     </div>
-    <div class="flex fixed w-full z-50 pb-2 h-96 bottom-0 bg-white rounded-md" v-if="expanded == 1" id="bottom-animation-normal">
+    <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-96 bottom-0 bg-white rounded-md bg-opacity-25" v-if="expanded == 1" id="bottom-animation-normal">
         <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto;">
             <div class="row">
                 <div class="col-span-3">
@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="flex fixed w-full z-50 pb-2 h-24 bottom-0 h-100 bg-white rounded-md" v-if="expanded == 2" id="bottom-animation-expanded">
+    <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-24 bottom-0 h-100 bg-white rounded-md bg-opacity-25" v-if="expanded == 2" id="bottom-animation-expanded">
         <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto;">
 
         </div>
