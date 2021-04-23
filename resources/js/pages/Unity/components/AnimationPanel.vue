@@ -5,20 +5,22 @@
         </div>
     </div>
     <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-96 bottom-0 bg-white rounded-md bg-opacity-25" v-if="expanded == 1" id="bottom-animation-normal">
-        <div class="left flex pt-2 flex-row ml-24">
-            <div class="grid grid-cols-24">
-                <div class="col-span-3">
+        <div class="left flex-1 pt-2 flex-row ml-24">
+            <div class="grid grid-cols-12 w-full">
+                <div class="col-span-2">
                     <UnityButton tooltip="Dodaj linie" alttext="Dodaj linie" path="/s3/builder_icons/add_simple.png" action="addline" position="animationbuttonclick"/>
                     <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" position="animationbuttonclick"/>
                     <UnityButton tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick"/>
                 </div>
-                <div class="col-span-3">
+                <div class="col-span-2">
 
                 </div>
-                <div class="col-span-18">
-                    <div v-for="(line, index) in lines" class="row" :class="(activeLineIndex == index)? 'active':''">
-                        <div class="w-full bg-opacity-25" style="background-color: #930f68">
+                <div class="col-span-8">
+                    <div class="w-full" style="overflow-x: scroll;">
+                        <div v-for="(line, index) in lines" class="row" :class="(activeLineIndex == index)? 'active':''">
+                            <div class="w-full bg-opacity-25" style="background-color: #930f68">
 
+                            </div>
                         </div>
                     </div>
                 </div>
