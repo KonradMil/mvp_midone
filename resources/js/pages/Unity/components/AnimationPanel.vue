@@ -8,9 +8,9 @@
         <div class="left flex pt-2 flex-row ml-24">
             <div class="row">
                 <div class="col-span-3">
-                    <UnityButton  tooltip="Dodaj linie" alttext="Dodaj linie" path="/s3/builder_icons/add_simple.png" action="addline" position="animationbuttonclick" />
-                    <UnityButton  tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" position="animationbuttonclick" />
-                    <UnityButton  tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick" />
+                    <UnityButton tooltip="Dodaj linie" alttext="Dodaj linie" path="/s3/builder_icons/add_simple.png" action="addline" position="animationbuttonclick"/>
+                    <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" position="animationbuttonclick"/>
+                    <UnityButton tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick"/>
                 </div>
                 <div class="col-span-3">
 
@@ -70,17 +70,17 @@ export default {
                     emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: ''})
                     break;
                 case 'addline':
-                    emitter.emit('unityoutgoingaction', {action: 'addLine', data: ''})
+                    emitter.emit('unityoutgoingaction', {action: 'addLine', data: lines.length})
                     break;
                 case 'removeline':
                     emitter.emit('unityoutgoingaction', {action: 'removeLine', data: ''})
                     break;
                 case 'minimalize':
-                  if(expanded.value == 1) {
-                      expanded.value = 0;
-                  } else if(expanded.value == 2) {
-                      expanded.value = 1;
-                  }
+                    if (expanded.value == 1) {
+                        expanded.value = 0;
+                    } else if (expanded.value == 2) {
+                        expanded.value = 1;
+                    }
                     break;
             }
         }
