@@ -115,6 +115,7 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function updateLabel(val) {
+        console.log(val);
         outgoing(game, 'UpdateLabel', val, true);
     }
 
