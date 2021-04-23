@@ -16,7 +16,7 @@
             />
         </div>
     </Tippy>
-    <div v-if="tooltip == ''" class="w-20 py-2 text-center flex justify-center items-center">
+    <div v-if="tooltip == ''" class="w-16 py-2 text-center flex justify-center items-center">
         <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="doAction(action)">
             <img class=""
                  :alt="alttext"
