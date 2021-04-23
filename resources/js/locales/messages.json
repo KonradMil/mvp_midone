@@ -2,7 +2,9 @@
     "en": {
         "global": {
             "Szukaj" : "Search...",
-            "name": "Name"
+            "name": "Name",
+            "notifications" : "Notifications",
+            "anyNotifications" : "You don't have any notifications"
         },
         "topBar": {
             "profil": "Profile",
@@ -42,7 +44,12 @@
             "add": "Add",
             "details": "Details",
             "invitations": "Invitations",
-            "acceptInvite": "Accept the invitation"
+            "acceptInvite": "Accept the invitation",
+            "created" : "Created",
+            "members" : "Members",
+            "addMember" : "Add a team member",
+            "invite" : "Invite",
+            "description" : "If the given e-mail address is related to an already registered user, he will only have to confirm the willingness to join."
         },
         "CommentSection": {
             "comments": "Comments",
@@ -76,12 +83,69 @@
             "investorem": "Investor",
             "investor": "Investor",
             "select": "Select"
+        },
+        "profiles" : {
+            "profile" : "Profiles",
+            "personality" : "Personality",
+            "name" : "Name",
+            "lastname" : "Last name",
+            "phone" : "Phone number",
+            "changeAvatar" : "Change avatar",
+            "save" : "Save",
+            "company" : "Company",
+            "changePassword" : "Change password",
+            "oldPassword" : "Old password",
+            "newPassword" : "New password",
+            "newPasswordConfirm" : "Confirm new password",
+            "agreements" : "Agreements",
+            "acceptProvisions" : "Accepts the provisions",
+            "servicesPlatform" : " services on the platform DBR77.com",
+            "termsService" : "terms of service",
+            "priceList" : "price list of services",
+            "notifyQuestion" : "Notify me when you receive the answer to my question",
+            "informSolution" : "Notify me about the accepting the solution",
+            "informService" : "Notify me about the accepting the offer",
+            "socialMedia" : "Social media",
+            "biddersList" : "Bidders list",
+            "privacyPolicy" : "privacy policy",
+            "accept" : "Accept"
+        },
+        "communication" : {
+            "questions" : "Questions",
+            "teams" : "Teams",
+            "reportError" : "Report error",
+            "reports" : "Reports",
+            "goTo" : "Go to"
+        },
+        "challengesNew" : {
+            "new" : "New Challenge",
+            "description" : "Description",
+            "details" : "Details",
+            "photo" : "Photos",
+            "uploadPhoto" : "Upload photos",
+            "file" : "Upload",
+            "fileUpload" : "or drop the file",
+            "choose" : "Choose",
+            "maxWeight": "Maximum detail weight",
+            "detail" : "Detail material",
+            "way" : "The way of taking the detail",
+            "quality" : "The quality of gripping the detail",
+            "size" : "Detail size",
+            "position" : "Is the detail positioned for download?",
+            "distance" : "Distance between the picking point and the part deposit",
+            "numberSupported" : "Number of supported workstations / lines",
+            "place" : "Place of putting away the detail",
+            "changeNumber" : "Number of changes",
+            "change" : "Change",
+            "changes" : "Changes"
         }
     },
     "pl": {
         "global": {
             "Szukaj" : "Szukaj...",
-            "name": "Nazwa"
+            "name": "Nazwa",
+            "notifications" : "Powiadomienia",
+            "anyNotifications" : "Nie masz żadnych powiadomień."
         },
         "topBar": {
             "profil": "Profil",
@@ -118,7 +182,12 @@
             "add": "Dodaj",
             "details": "Szczegóły",
             "invitations": "Zaproszenia",
-            "acceptInvite": "Akceptuj zaproszenie"
+            "acceptInvite": "Akceptuj zaproszenie",
+            "created" : "Utworzono",
+            "members" : "Członków",
+            "addMember" : "Dodaj członka zespołu",
+            "invite" : "Zaproś",
+            "description" : "Jeśli podany mail jest powziązany z już zarejestrowanym użytkownikiem będzie on musiał jedynie potwierdzić chęć dołączenia."
         },
         "challengesMain": {
             "challenges": "Wyzwania",
@@ -161,6 +230,60 @@
             "investorem": "Inwestorem",
             "investor": "Inwestor",
             "select": "Wybierz"
+        },
+        "profiles" : {
+            "profile" : "Profil",
+            "personality" : "Personalia",
+            "name" : "Imie",
+            "lastname" : "Nazwisko",
+            "phone" : "Numer kontaktowy",
+            "changeAvatar" : "Zmień avatar",
+            "save" : "Zapisz",
+            "company" : "Firma",
+            "changePassword" : "Zmień hasło",
+            "oldPassword" : "Aktualne hasło",
+            "newPassword" : "Nowe hasło",
+            "newPasswordConfirm" : "Powtórz nowe hasło",
+            "agreements" : "Zgody",
+            "privacyPolicy" : "polityki prywatności",
+            "acceptProvisions" : "Akceptuje postanowienia",
+            "termsService" : "warunki świadczenia",
+            "servicesPlatform" : " services on the platform DBR77.com",
+            "priceList" : "cennik usług",
+            "notifyQuestion" : "Poinformuj mnie o pojawieniu się odpowiedzi na moje pytanie.",
+            "informSolution" : "Informuj mnie o akceptacji rozwiązania.",
+            "informService" : "Informuj mnie o akceptacji oferty.",
+            "accept" : "Akceptuję",
+            "socialMedia" : "Konta społecznościowe",
+            "biddersList" : "Lista ofert"
+        },
+        "communication" : {
+            "questions" : "Pytania",
+            "reportError" : "Zgłoś błąd",
+            "reports" : "Zgłoszenia",
+            "goTo" : "Przejdź"
+        },
+        "challengesNew" : {
+            "new" : "Nowe wyzwanie",
+            "description" : "Opis",
+            "details" : "Szczegóły",
+            "photo" : "Zdjęcia",
+            "uploadPhoto" : "Wgraj zdjęcia",
+            "file" : "Wgraj plik",
+            "fileUpload" : "lub przyciagnij i upuść",
+            "choose" : "Wybierz",
+            "maxWeight": "Maksymalna waga detalu",
+            "detail" : "Material detalu",
+            "way" : "Sposób pobierania metalu",
+            "quality" : "Jakość chwytania detalu",
+            "size" : "Wielkość detalu",
+            "position" : "Czy detal jest pozycjonowany do pobrania?",
+            "distance" : "Odległość pomiędzy miejscem pobrania i odkładania detalu",
+            "numberSupported" : "Ilość obsługiwanych stanowisk/linii",
+            "place" : "Miejsce odłożenia detalu",
+            "changeNumber" : "Liczba zmian",
+            "change" : "Zmiana",
+            "changes" : "Zmiany"
         }
     }
 }

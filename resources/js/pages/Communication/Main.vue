@@ -9,12 +9,12 @@
                     </h2>
                     <!-- BEGIN: Inbox Menu -->
                     <div class="intro-y box bg-theme-1 p-5 mt-6">
-                        <button type="button" class="btn text-gray-700 dark:text-gray-300 w-full bg-white dark:bg-theme-1 mt-1" @click="showAddToTeamModal"> <i class="w-4 h-4 mr-2" data-feather="edit-3"></i> Zgłoś błąd </button>
+                        <button type="button" class="btn text-gray-700 dark:text-gray-300 w-full bg-white dark:bg-theme-1 mt-1" @click="showAddToTeamModal"> <i class="w-4 h-4 mr-2" data-feather="edit-3"></i>{{$t('communication.reportError')}}</button>
                         <div class="border-t border-theme-3 dark:border-dark-5 mt-6 pt-6 text-white">
-                            <a href="" class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab == 'notifications')? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'notifications'"> <i class="w-4 h-4 mr-2" data-feather="mail"></i> Powiadomienia </a>
-                            <a class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab == 'teams')? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'teams'"> <i class="w-4 h-4 mr-2" data-feather="star"></i> Zespoły </a>
-                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab == 'questions')? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''"  @click.prevent="activeTab = 'questions'"> <i class="w-4 h-4 mr-2" data-feather="inbox"></i> Pytania </a>
-                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab == 'tickets')? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'tickets'"> <i class="w-4 h-4 mr-2" data-feather="send"></i> Zgłoszenia </a>
+                            <a href="" class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'notifications') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'notifications'"> <i class="w-4 h-4 mr-2" data-feather="mail"></i>{{$t('global.notifications')}}</a>
+                            <a class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'teams') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'teams'" @click="showAddTeams"> <i class="w-4 h-4 mr-2" data-feather="star"></i>{{$t('menu.Zespoły')}}</a>
+                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'questions') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''"  @click.prevent="activeTab = 'questions'"> <i class="w-4 h-4 mr-2" data-feather="inbox"></i> {{$t('communication.questions')}}</a>
+                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'tickets') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'tickets'"> <i class="w-4 h-4 mr-2" data-feather="send"></i>{{$t('communication.reports')}}</a>
                         </div>
 <!--                        <div class="border-t border-theme-3 dark:border-dark-5 mt-4 pt-4 text-white">-->
 <!--                            <a href="" class="flex items-center px-3 py-2 truncate">-->
@@ -128,10 +128,9 @@
 <!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="settings"></i></a>-->
                             </div>
                         </div>
-                        <div class="overflow-x-auto sm:overflow-x-visible"
+                        <div class="overflow-x-auto sm:overflow-x-visible" v-show="!showTeams"
                              v-for="(notification, index) in notifications.list"
                              :key="'notification_' + index"
-                             v-if="activeTab == 'notifications'"
                         >
                             <div class="intro-y" >
                                 <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
@@ -145,55 +144,164 @@
                                             </div>
                                             <div class="inbox__item--sender truncate ml-3">{{notification.data.author.name + ' ' + notification.data.author.lastname}}</div>
                                         </div>
-                                        <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">{{notification.data.message}}</span> <button v-if="notification.data.link != undefined" type="button" class="btn ml-5" @click="$router.push({path: notification.data.link})">Przejdź</button> </div>
+                                        <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">{{notification.data.message}}</span> <button v-if="notification.data.link != undefined" type="button" class="btn ml-5" @click="$router.push({path: notification.data.link})">{{$t('communication.goTo')}}</button> </div>
                                         <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">{{$dayjs(notification.created_at).format('DD.MM.YYYY HH:mm')}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            asdsadsadad
+                        </div>
+                        <div class="overflow-x-auto sm:overflow-x-visible" v-show="!showTeams"
+                        >
+                            <div class="intro-y" >
+                                <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                                    <div class="flex px-5 py-3">
+                                        <div class="w-72 flex-none flex items-center mr-5">
+                                            <input class="form-check-input flex-none" type="checkbox" checked>
+                                            <a href="javascript:" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                            <a href="javascript:" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                            <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                            </div>
+                                            <div class="inbox__item--sender truncate ml-3"></div>
+                                        </div>
+                                        <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight"></span> <button type="button" class="btn ml-5" >{{$t('communication.goTo')}}</button> </div>
+                                        <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">asdsaffa</div>
+                                    </div>
+                                </div>
+                            </div>
+                            asdsadsadad
+                        </div>
+                        <div
+                            v-for="(team, index) in teams.list"
+                            :key="'team_' + index"
+                            class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12"
+                            v-show="showTeams"
+                        >
+                            <div class="box">
+                                <div class="flex flex-col lg:flex-row items-center p-5">
+                                    <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
+                                        <Avatar :username="team.name" color="#FFF" background-color="#930f68"/>
+                                    </div>
+                                    <div
+                                        class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0"
+                                    >
+                                        <a href="" class="font-medium">{{ team.name }}</a>
+                                        <div class="text-gray-600 text-xs mt-0.5">
+                                            Utworzono: {{ $dayjs(team.created_at).format('DD.MM.YYYY HH:mm') }}
+                                        </div>
+                                        <div class="text-gray-600 text-xs mt-0.5">
+                                            Członków: {{ team.users.length }}
+                                        </div>
+                                    </div>
+                                    <div class="flex mt-4 lg:mt-0">
+                                        <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
+                                            {{$t('teams.details')}}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col lg:flex-row items-center p-5" v-if="showDetails[team.id] === true">
+                                    <div class="intro-y box w-full">
+                                        <div class="p-5">
+                                            <div v-for="(member, index) in team.users" class="relative flex items-center" :key="'member_' + index">
+                                                <div class="w-12 h-12 flex-none image-fit">
+                                                    <Avatar :src="'uploads/' + member.avatar" :username="member.name + ' ' + member.lastname" size="40" color="#FFF" background-color="#930f68"/>
+                                                </div>
+                                                <div class="ml-4 mr-auto">
+                                                    <a href="" class="font-medium">{{ member.name + ' ' + member.lastname }}</a>
+                                                    <div class="text-gray-600 mr-5 sm:mr-5" v-if="member.companies.length != 0">
+                                                        {{member.companies[0].company_name}}
+                                                    </div>
+                                                </div>
+                                                <div class="font-medium text-gray-700 dark:text-gray-600">
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">
-
-                        </div>
+<!--                        <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">-->
+<!--                            asdsadsadsa-->
+<!--                        </div>-->
                     </div>
                     <!-- END: Inbox Content -->
                 </div>
             </div>
         </div>
-        <!-- END: Content -->
-    </div>
-    <!-- BEGIN: Dark Mode Switcher-->
-    <div data-url="side-menu-dark-inbox.html" class="dark-mode-switcher cursor-pointer shadow-md fixed bottom-0 right-0 box dark:bg-dark-2 border rounded-full w-40 h-12 flex items-center justify-center z-50 mb-10 mr-10">
-        <div class="mr-4 text-gray-700 dark:text-gray-300">Dark Mode</div>
-        <div class="dark-mode-switcher__toggle border"></div>
-    </div>
-    <!-- END: Dark Mode Switcher-->
-    <!-- BEGIN: JS Assets-->
-    <Modal :show="show" @closed="modalClosed">
-        <h3 class="intro-y text-lg font-medium mt-5">Zadaj pytanie</h3>
-        <div class="intro-y box p-5 mt-12 sm:mt-5">
-            <div>
-                Jeśli podany mail jest powziązany z już zarejestrowanym użytkownikiem będzie on musiał jedynie potwierdzić chęć dołączenia.
-            </div>
-        </div>
-        <div class="intro-y box p-5 mt-12 sm:mt-5">
-            <div class="relative text-gray-700 dark:text-gray-300 mr-4">
-                <input
-                    type="text"
-                    class="form-control w-56 box pr-10 placeholder-theme-13"
-                    placeholder="Email"
-                />
-                <button class="btn btn-primary shadow-md mr-2" >Zaproś</button>
-            </div>
 
+       <!-- END: Content -->
+    </div>
+    <Modal :show="show" @closed="modalClosed">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- BEGIN: Modal Header -->
+            <div class="modal-header">
+                <h2 class="font-medium text-base mr-auto">
+                    Broadcast Message
+                </h2>
+                <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button>
+                <div class="dropdown sm:hidden">
+                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false"> <i data-feather="more-horizontal" class="w-5 h-5 text-gray-600 dark:text-gray-600"></i> </a>
+                    <div class="dropdown-menu w-40">
+                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                            <a href="javascript:;" class="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Modal Header -->
+            <!-- BEGIN: Modal Body -->
+            <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
+                <div class="col-span-12 sm:col-span-6">
+                    <label for="modal-form-1" class="form-label">From</label>
+                    <input id="modal-form-1" type="text" class="form-control" placeholder="example@gmail.com">
+                </div>
+                <div class="col-span-12 sm:col-span-6">
+                    <label for="modal-form-2" class="form-label">To</label>
+                    <input id="modal-form-2" type="text" class="form-control" placeholder="example@gmail.com">
+                </div>
+                <div class="col-span-12 sm:col-span-6">
+                    <label for="modal-form-3" class="form-label">Subject</label>
+                    <input id="modal-form-3" type="text" class="form-control" placeholder="Important Meeting">
+                </div>
+                <div class="col-span-12 sm:col-span-6">
+                    <label for="modal-form-4" class="form-label">Has the Words</label>
+                    <input id="modal-form-4" type="text" class="form-control" placeholder="Job, Work, Documentation">
+                </div>
+                <div class="col-span-12 sm:col-span-6">
+                    <label for="modal-form-5" class="form-label">Doesn't Have</label>
+                    <input id="modal-form-5" type="text" class="form-control" placeholder="Job, Work, Documentation">
+                </div>
+                <div class="col-span-12 sm:col-span-6">
+                    <label for="modal-form-6" class="form-label">Size</label>
+                    <select id="modal-form-6" class="form-select">
+                        <option>10</option>
+                        <option>25</option>
+                        <option>35</option>
+                        <option>50</option>
+                    </select>
+                </div>
+            </div>
+            <!-- END: Modal Body -->
+            <!-- BEGIN: Modal Footer -->
+            <div class="modal-footer text-right">
+                <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1" @click="modalClosed">Cancel</button>
+                <button type="button" class="btn btn-primary w-20">Send</button>
+            </div>
+            <!-- END: Modal Footer -->
         </div>
+    </div>
     </Modal>
+
 </template>
 
 <script>
 import {onMounted, ref} from "vue";
 import GetUsers from '../../compositions/GetUsers'
 import GetNotifications from '../../compositions/GetNotifications'
+import GetTeams from '../../compositions/GetTeams'
 import {useToast} from "vue-toastification";
 import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
@@ -201,39 +309,54 @@ import Modal from "../../components/Modal";
 
 export default {
     name: "Communication",
-    components: {Avatar, Modal, GetUsers},
+    components: {Avatar, Modal,GetTeams, GetUsers},
     setup(props, {emit}) {
-        // const user = ref({});
         const toast = useToast();
+        const showDetails = ref([]);
         const users = ref([]);
+        const user =ref({});
         const notifications = ref([]);
         const show = ref(false);
+        const showTeams = ref(false);
         const activeTab = ref('notifications');
+        const teams = ref([]);
 
+        const GetUsersRepositories = async () => {
+            users.value = GetUsers();
+        }
+        const showAddTeams = () => {
+            showTeams.value = !showTeams.value;
+        }
         const showAddToTeamModal = () => {
                show.value = !show.value;
             }
         const modalClosed = () => {
             show.value = false;
         }
-        const getUsersRepositories = async () => {
-            users.value = GetUsers();
+        const GetTeamsRepositiories = async () => {
+            teams.value = GetTeams();
         }
         const GetNotificationsReposistories = async() => {
             notifications.value = GetNotifications();
         }
         onMounted(function () {
-            getUsersRepositories('');
+            GetUsersRepositories('');
             GetNotificationsReposistories('');
-            // if (window.Laravel.user) {
-            //     user.value = window.Laravel.user;
-            // }
+            GetTeamsRepositiories('');
+            if (window.Laravel.user) {
+                user.value = window.Laravel.user;
+            }
         })
         return {
             users,
+            teams,
+            user,
+            showDetails,
             notifications,
             show,
             showAddToTeamModal,
+            showTeams,
+            showAddTeams,
             modalClosed,
             activeTab
         }

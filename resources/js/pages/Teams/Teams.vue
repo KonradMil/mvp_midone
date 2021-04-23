@@ -50,10 +50,10 @@
                                 >
                                     <a href="" class="font-medium">{{ team.name }}</a>
                                     <div class="text-gray-600 text-xs mt-0.5">
-                                        Utworzono: {{ $dayjs(team.created_at).format('DD.MM.YYYY HH:mm') }}
+                                        {{$t('teams.created')}}: {{ $dayjs(team.created_at).format('DD.MM.YYYY HH:mm') }}
                                     </div>
                                     <div class="text-gray-600 text-xs mt-0.5">
-                                        Członków: {{ team.users.length }}
+                                        {{ $t('teams.members')}}: {{ team.users.length }}
                                     </div>
                                 </div>
                                 <div class="flex mt-4 lg:mt-0">
@@ -177,10 +177,10 @@
         </div>
     </div>
     <Modal :show="show" @closed="modalClosed">
-        <h3 class="intro-y text-lg font-medium mt-5">Dodaj członka zespołu</h3>
+        <h3 class="intro-y text-lg font-medium mt-5">{{$t('teams.addMember')}}</h3>
         <div class="intro-y box p-5 mt-12 sm:mt-5">
             <div>
-                Jeśli podany mail jest powziązany z już zarejestrowanym użytkownikiem będzie on musiał jedynie potwierdzić chęć dołączenia.
+              {{$t('teams.description')}}
             </div>
         </div>
         <div class="intro-y box p-5 mt-12 sm:mt-5">
@@ -191,7 +191,7 @@
                     placeholder="Email"
                     v-model="new_team_member_email"
                 />
-                <button class="btn btn-primary shadow-md mr-2" @click="addMember">Zaproś</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="addMember">{{ $t('teams.invite') }}</button>
             </div>
 
         </div>

@@ -5,7 +5,7 @@
     <div class="content">
         <div class="intro-y flex items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">
-                Update Profile
+                {{$t('profiles.profile')}}
             </h2>
         </div>
         <div class="grid grid-cols-12 gap-6">
@@ -23,26 +23,26 @@
                         </div>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
-                        <a class="flex items-center text-theme-1 dark:text-theme-10 font-medium" href=""> <i data-feather="activity" class="w-4 h-4 mr-2"></i> Personalia </a>
-                        <a class="flex items-center mt-5" href=""> <i data-feather="box" class="w-4 h-4 mr-2"></i> Firma </a>
-                        <button  @click="$router.push('change-password')" class="flex items-center mt-5" href=""> <i data-feather="lock" class="w-4 h-4 mr-2"></i> Zmień hasło </button>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer dark:text-theme-10 font-medium" :class="(activeTab === 'personalia') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'personalia'" @click="showAddPersonality"> <i data-feather="activity" class="w-4 h-4 mr-2"></i> {{$t('profiles.personality')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" href="" :class="(activeTab === 'firma') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'firma'" > <i data-feather="box" class="w-4 h-4 mr-2"></i> {{$t('profiles.company')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" href="" :class="(activeTab === 'change-password') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'change-password'" @click="showAddChangePassword"> <i data-feather="lock" class="w-4 h-4 mr-2"></i> {{$t('profiles.changePassword')}} </a>
 <!--                        <a class="flex items-center mt-5" href=""> <i data-feather="settings" class="w-4 h-4 mr-2"></i> User Settings </a>-->
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
 <!--                        <a class="flex items-center" href=""> <i data-feather="activity" class="w-4 h-4 mr-2"></i> Email Settings </a>-->
-                        <button class="flex items-center" @click="showAdd"> <i data-feather="box" class="w-4 h-4 mr-2"></i> Zgody </button>
-                        <a class="flex items-center mt-5" href=""> <i data-feather="lock" class="w-4 h-4 mr-2"></i> Konta społecznościowe </a>
-                        <a class="flex items-center mt-5" href=""> <i data-feather="settings" class="w-4 h-4 mr-2"></i> Bidders list </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'zgody') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'zgody'" @click="showAddTerms"> <i data-feather="box" class="w-4 h-4 mr-2"></i> {{$t('profiles.agreements')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'social-media') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'social-media'" @click="showAddSocials"> <i data-feather="lock" class="w-4 h-4 mr-2"></i> {{$t('profiles.socialMedia')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'bidders-list') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'bidders-list'"> <i data-feather="settings" class="w-4 h-4 mr-2"></i> {{$t('profiles.biddersList')}} </a>
                     </div>
                 </div>
             </div>
             <!-- END: Profile Menu -->
             <div class="col-span-12 lg:col-span-8 xxl:col-span-9">
                 <!-- BEGIN: Display Information -->
-                <div class="intro-y box lg:mt-5" v-if="!show">
+                <div class="intro-y box lg:mt-5" v-show="showPersonality">
                     <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
                         <h2 class="font-medium text-base mr-auto">
-                            Display Information
+                            {{$t('profiles.personality')}}
                         </h2>
                     </div>
                     <form @submit.prevent="handleSubmit">
@@ -52,7 +52,7 @@
                                 <div class="grid grid-cols-12 gap-x-5">
                                     <div class="col-span-12 xxl:col-span-6">
                                         <div class="mt-3">
-                                            <label for="update-profile-form-2" class="form-label">Name</label>
+                                            <label for="update-profile-form-2" class="form-label">{{$t('profiles.name')}}</label>
                                             <input
                                                 id="update-profile-form-2"
                                                 type="text"
@@ -61,7 +61,7 @@
                                                 v-model="name"
                                             />                                </div>
                                         <div class="mt-3">
-                                            <label for="update-profile-form-3" class="form-label">Last name</label>
+                                            <label for="update-profile-form-3" class="form-label">{{$t('profiles.lastname')}}</label>
                                             <input
                                                 id="update-profile-form-3"
                                                 type="text"
@@ -82,19 +82,18 @@
                                             />
                                         </div>
                                         <div class="mt-3">
-                                            <label for="update-profile-form-4" class="form-label">Phone Number</label>
+                                            <label for="update-profile-form-4" class="form-label">{{$t('profiles.phone')}}</label>
                                             <input id="update-profile-form-4" type="text" class="form-control" placeholder="Input text" value="65570828">
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary w-20 mt-3" @click="save">Save</button>
+                                <button class="btn btn-primary w-20 mt-3" @click="save">{{$t('profiles.save')}}</button>
                             </div>
                             <div class="w-52 mx-auto xl:mr-0 xl:ml-6">
                                 <div class="border-2 border-dashed shadow-sm border-gray-200 dark:border-dark-5 rounded-md p-5">
                                     <div class="h-40 relative image-fit cursor-pointer zoom-in mx-auto">
                                         <Avatar :src="'uploads/' + avatar_path" :username="user.name + ' ' + user.lastname" size="160"
                                                 color="#FFF" background-color="#930f68"/>
-                                        <div title="Remove this profile photo?" class="tooltip w-5 h-5 flex items-center justify-center absolute rounded-full text-white bg-theme-6 right-0 top-0 -mr-2 -mt-2"> <i data-feather="x" class="w-4 h-4"></i> </div>
                                     </div>
                                     <Dropzone
                                         ref-key="dropzoneSingleRef"
@@ -107,7 +106,7 @@
                                         }"
                                         class="dropzone">
                                         <div class="text-lg font-medium">
-                                            Change avatar
+                                            {{$t('profiles.changeAvatar')}}
                                         </div>
                                     </Dropzone>
 <!--                                    <div class="mx-auto cursor-pointer relative mt-5">-->
@@ -121,15 +120,36 @@
                     </form>
                 </div>
                 <!-- END: Display Information -->
-                <div class="col-span-12 lg:col-span-8 xxl:col-span-9" v-show="show">
+
+                <div id="social-media-button" class="p-5" v-show="showSocials"
+                >
+                    <div class="intro-y box lg:mt-5">
+                    <div class="preview">
+                        <div class="flex flex-wrap">
+                            <button class="btn btn-facebook w-32 mr-2 mb-2"> <i data-feather="facebook" class="w-4 h-4 mr-2"></i> Facebook </button>
+                            <button class="btn btn-twitter w-32 mr-2 mb-2"> <i data-feather="twitter" class="w-4 h-4 mr-2"></i> Twitter </button>
+                            <button class="btn btn-instagram w-32 mr-2 mb-2"> <i data-feather="instagram" class="w-4 h-4 mr-2"></i> Instagram </button>
+                            <button class="btn btn-linkedin w-32 mr-2 mb-2"> <i data-feather="linkedin" class="w-4 h-4 mr-2"></i> Linkedin </button>
+                        </div>
+                    </div>
+                    <div class="source-code hidden">
+                        <button data-target="#copy-social-media-button" class="copy-code btn py-1 px-2 btn-outline-secondary"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Copy example code </button>
+                        <div class="overflow-y-auto mt-3 rounded-md">
+                            <pre id="copy-social-media-button" class="source-preview"> <code class="text-xs p-0 rounded-md html pl-5 pt-8 pb-4 -mb-10 -mt-10"> HTMLOpenTagbutton class=&quot;btn btn-facebook w-32 mr-2 mb-2&quot;HTMLCloseTag HTMLOpenTagi data-feather=&quot;facebook&quot; class=&quot;w-4 h-4 mr-2&quot;HTMLCloseTagHTMLOpenTag/iHTMLCloseTag Facebook HTMLOpenTag/buttonHTMLCloseTag HTMLOpenTagbutton class=&quot;btn btn-twitter w-32 mr-2 mb-2&quot;HTMLCloseTag HTMLOpenTagi data-feather=&quot;twitter&quot; class=&quot;w-4 h-4 mr-2&quot;HTMLCloseTagHTMLOpenTag/iHTMLCloseTag Twitter HTMLOpenTag/buttonHTMLCloseTag HTMLOpenTagbutton class=&quot;btn btn-instagram w-32 mr-2 mb-2&quot;HTMLCloseTag HTMLOpenTagi data-feather=&quot;instagram&quot; class=&quot;w-4 h-4 mr-2&quot;HTMLCloseTagHTMLOpenTag/iHTMLCloseTag Instagram HTMLOpenTag/buttonHTMLCloseTag HTMLOpenTagbutton class=&quot;btn btn-linkedin w-32 mr-2 mb-2&quot;HTMLCloseTag HTMLOpenTagi data-feather=&quot;linkedin&quot; class=&quot;w-4 h-4 mr-2&quot;HTMLCloseTagHTMLOpenTag/iHTMLCloseTag Linkedin HTMLOpenTag/buttonHTMLCloseTag </code> </pre>
+                        </div>
+                     </div>
+                    </div>
+                </div>
+                <div class="col-span-12 lg:col-span-8 xxl:col-span-9" v-show="showTerms">
                     <!-- BEGIN: Display Information -->
                 <div class="intro-y box lg:mt-5">
                     <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
                         <h2 class="font-medium text-base mr-auto">
-                            Display Information
+                            {{$t('profiles.agreements')}}
                         </h2>
                     </div>
                     <!-- END: Display Information -->
+                    <div class="pl-4 pb-5">
                     <div
                         class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm "
                     >
@@ -140,10 +160,10 @@
                             :checked="user.privacy_policy"
                         />
                         <label class="cursor-pointer select-none" for="rodo"
-                        >Akceptuję postanowienia </label
+                        >{{$t('profiles.acceptProvisions')}}</label
                         >
                         <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
-                        >polityki prywatności.</a
+                        >{{$t('profiles.privacyPolicy')}}</a
                         >.
                     </div>
                     <div
@@ -156,14 +176,14 @@
                             :checked="user.terms"
                         />
                         <label class="cursor-pointer select-none" for="rodo3"
-                        >Akceptuję </label
+                        >{{$t('profiles.accept')}}</label
                         >
                         <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
-                        > warunki świadczenia </a
-                        > usług na platformie DBR77.com.
+                        > {{$t('profiles.termsService')}} </a
+                        >{{$t('profiles.servicesPlatform')}}
                     </div>
                     <div
-                        class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm border-b border-gray-200 dark:border-dark-5"
+                        class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5"
                     >
                         <input
                             id="rodo2"
@@ -172,12 +192,13 @@
                             :checked="user.pricing"
                         />
                          <label class="cursor-pointer select-none" for="rodo2"
-                        >Akceptuję </label
+                        >{{$t('profiles.accept')}}</label
                         >
                         <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
-                        >cennik usług</a
+                        >{{$t('profiles.priceList')}}</a
                         >.
                      </div>
+                     <div class="border-b border-gray-200 dark:border-dark-5"></div>
                     <div
                         class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
                     >
@@ -187,7 +208,7 @@
                             class="form-check-input border mr-2"
                         />
                         <label class="cursor-pointer select-none" for="rodo2"
-                        >Poinformuj mnie o pojawieniu się odpowiedzi na moje pytanie.</label
+                        >{{$t('profiles.notifyQuestion')}}</label
                         >
                     </div>
                     <div
@@ -199,7 +220,7 @@
                             class="form-check-input border mr-2"
                         />
                         <label class="cursor-pointer select-none" for="rodo2"
-                        >Informuj mnie o akceptacji rozwiązania </label
+                        >{{$t('profiles.informSolution')}}</label
                         >
                     </div>
                     <div
@@ -211,11 +232,59 @@
                             class="form-check-input border mr-2"
                         />
                         <label class="cursor-pointer select-none" for="rodo2"
-                        >Informuj mnie o akceptacji oferty </label
+                        >{{$t('profiles.informService')}}</label
                         >
+                        </div>
+                      </div>
                     </div>
-                  </div>
                 </div>
+                <div class="col-span-12 lg:col-span-8 xxl:col-span-9" v-show="showChangePassword">
+                    <!-- BEGIN: Change Password -->
+                    <div class="intro-y box lg:mt-5">
+                        <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
+                            <h2 class="font-medium text-base mr-auto">
+                                {{$t('profiles.changePassword')}}
+                            </h2>
+                        </div>
+                        <form @submit.prevent="change">
+                            <div class="p-5">
+                                <div>
+                                    <label for="change-password-form-1" class="form-label">{{$t('profiles.oldPassword')}}</label>
+                                    <input
+                                        id="change-password-form-1"
+                                        type="password"
+                                        class="form-control"
+                                        placeholder="Input text"
+                                        v-model="password"
+                                    >
+                                </div>
+                                <div class="mt-3">
+                                    <label for="change-password-form-2" class="form-label">{{$t('profiles.newPassword')}}</label>
+                                    <input
+                                        id="change-password-form-2"
+                                        type="password"
+                                        class="form-control"
+                                        placeholder="Input text"
+                                        v-model="passwordNew"
+                                    >
+                                </div>
+                                <div class="mt-3">
+                                    <label for="change-password-form-3" class="form-label">{{$t('profiles.newPasswordConfirm')}}</label>
+                                    <input
+                                        id="change-password-form-3"
+                                        type="password"
+                                        class="form-control"
+                                        placeholder="Input text"
+                                        v-model="passwordNewConfirm"
+                                    >
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-4">{{ $t('profiles.changePassword') }}</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END: Change Password -->
+                </div>
+
             </div>
         </div>
     </div>
@@ -246,7 +315,11 @@ export default defineComponent({
         Dropzone
     },
     setup() {
-        const show = ref(false);
+        const activeTab = ref('personalia');
+        const showTerms = ref(false);
+        const showChangePassword = ref(false);
+        const showPersonality = ref(true);
+        const showSocials = ref(false);
         const toast = useToast();
         const dropzoneSingleRef = ref();
         const avatar_path = ref();
@@ -303,9 +376,29 @@ export default defineComponent({
                 console.log(notification);
                 getNotificationsRepositories();
             });
-
-        const showAdd = async () => {
-              show.value = !show.value
+        const showAddSocials = async () => {
+            showTerms.value = false;
+            showPersonality.value = false;
+            showChangePassword.value = false;
+            showSocials.value=  true;
+        }
+        const showAddTerms = async () => {
+              showTerms.value = true;
+              showPersonality.value = false;
+              showChangePassword.value = false;
+              showSocials.value=  false;
+        }
+        const showAddPersonality = async () => {
+            showPersonality.value = !showPersonality.value;
+            showTerms.value = false;
+            showChangePassword.value = false;
+            showSocials.value=  false;
+        }
+        const showAddChangePassword = async () => {
+            showChangePassword.value = true;
+            showPersonality.value = false;
+            showTerms.value = false;
+            showSocials.value=  false;
         }
         const getNotificationsRepositories = async () => {
             console.log(GetNotifications());
@@ -325,7 +418,7 @@ export default defineComponent({
         };
 
         const notificationsComp = computed(() => {
-            if(notifications.value.list == undefined) {
+            if(notifications.value.list === undefined) {
                 return notifications.value;
             }  else {
                 console.log(notifications.value.list);
@@ -371,9 +464,16 @@ export default defineComponent({
             formData,
             validate,
             save,
-            showAdd,
-            show,
-            avatar_path
+            showAddTerms,
+            showTerms,
+            showAddPersonality,
+            showPersonality,
+            showAddChangePassword,
+            showChangePassword,
+            showSocials,
+            showAddSocials,
+            avatar_path,
+            activeTab
         };
     },
     mounted() {
