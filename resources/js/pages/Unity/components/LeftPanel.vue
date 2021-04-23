@@ -113,6 +113,39 @@
                 </div>
             </div>
         </div>
+        <div style="margin-left: 8.9rem; background-color: #fff;" class="ml-36 flex fixed h-full z-50 pt-2" v-if="!(category == 1 && subcategory == 0 && selectedBrand != '') && !((category != 1 && subcategory != 0) && subcategory != null)">
+            <div class="w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
+                <div class="w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
+                    <SearchIcon
+                        class="w-4 h-1 absolute my-auto inset-y-0 ml-3 left-0 z-10 text-gray-700 dark:text-gray-300" style="visibility: hidden"
+                    />
+                    <input style="visibility: hidden"
+                           v-model="search"
+                           type="text"
+                           class="form-control w-full sm:w-64 box px-10 text-gray-700 dark:text-gray-300 placeholder-theme-13 h-1"
+                           placeholder="Szukaj..."
+                    />
+                </div>
+                <div class="p-5 w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
+                    <button class="btn btn-primary shadow-md w-1/2" @click="subcategory = null;">Powrót</button>
+                </div>
+                <div class=" p-5 w-full" v-for="(model, index) in models.list" :key="'model_' + index" @click="selectModel(model)">
+                    <div class=" shadow-md rounded-md zoom-in">
+                        <div class="flex-none pos-image relative block w-full">
+                            <div class="pos-image__preview image-fit h-24 w-full">
+                                <img
+                                    class="w-full p-4 "
+                                    :alt="model.name"
+                                    :src="'s3/models_images/' + model.model_file + '.png'"
+                                />
+
+                            </div>
+                        </div>
+                        <h5 class="model_name w-full">{{model.name}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -166,11 +199,6 @@ export default {
                 subcategories.value = categories.value[cat_id]['subcategories'];
             }
         }
-
-        // watch(subcategory, (currentValue, oldValue) => {
-        //     console.log('LOADING');
-        //     ();
-        // });
 
         onMounted(() => {
             const c = require("../../../json/model_categories.json");
