@@ -129,21 +129,24 @@
                 <div class="p-5 w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
                     <button class="btn btn-primary shadow-md w-1/2" @click="subcategory = null;">Powrót</button>
                 </div>
-                <div class=" p-5 w-full" v-for="(model, index) in models.list" :key="'model_' + index" @click="selectModel(model)">
-                    <div class=" shadow-md rounded-md zoom-in">
-                        <div class="flex-none pos-image relative block w-full">
-                            <div class="pos-image__preview image-fit h-24 w-full">
-                                <img
-                                    class="w-full p-4 "
-                                    :alt="model.name"
-                                    :src="'s3/models_images/' + model.model_file + '.png'"
-                                />
+                <div style="overflow-y: scroll;">
+                    <div class=" p-5 w-full" v-for="(model, index) in models.list" :key="'model_' + index" @click="selectModel(model)">
+                        <div class=" shadow-md rounded-md zoom-in">
+                            <div class="flex-none pos-image relative block w-full">
+                                <div class="pos-image__preview image-fit h-24 w-full">
+                                    <img
+                                        class="w-full p-4 "
+                                        :alt="model.name"
+                                        :src="'s3/models_images/' + model.model_file + '.png'"
+                                    />
 
+                                </div>
                             </div>
+                            <h5 class="model_name w-full">{{model.name}}</h5>
                         </div>
-                        <h5 class="model_name w-full">{{model.name}}</h5>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
