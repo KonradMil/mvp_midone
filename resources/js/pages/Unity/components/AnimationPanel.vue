@@ -49,6 +49,7 @@ export default {
         emitter.on('animationbuttonclick', e => handleClick(e.val))
 
         const handleClick = (val) => {
+            console.log(val);
             switch (val) {
                 case 'maximize':
                     if (expanded.value == 0) {
