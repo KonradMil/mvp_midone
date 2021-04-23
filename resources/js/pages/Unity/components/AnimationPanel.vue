@@ -17,9 +17,9 @@
                 </div>
                 <div class="col-span-18">
                     <div v-for="(line, index) in lines" class="row" :class="(activeLineIndex == index)? 'active':''">
-<!--                        <div v-for="(layer.)">-->
+                        <div class="w-full bg-opacity-25" style="background-color: #930f68">
 
-<!--                        </div>-->
+                        </div>
                     </div>
                 </div>
             </div>
