@@ -7,7 +7,7 @@ const UnityBridge = () => {
         window.UnityAnimationChainUpdate = function UnityAnimationChainUpdate(str) {
             console.log('ODEBRANE LAYERY');
             console.log(str);
-            emitter.emit('UnityAnimationChainUpdate', { layers: JSON.parse(str).layers })
+            emitter.emit('UnityAnimationChainUpdate', { layers: JSON.parse(str) })
         };
 
         window.UnityAnimationErrors = function UnityAnimationErrors(str) {
