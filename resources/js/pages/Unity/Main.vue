@@ -1,5 +1,4 @@
 <template>
-
     <TopButtons :icons="topIcons"></TopButtons>
     <LeftButtons :icons="leftIcons"></LeftButtons>
     <LeftPanel></LeftPanel>
@@ -8,7 +7,6 @@
     </div>
     <BottomPanel :mode="mode"></BottomPanel>
         <RightPanel @mouseover.native="lockInput" @mouseleave.native="unlockInput"></RightPanel>
-
 </template>
 
 <script>
