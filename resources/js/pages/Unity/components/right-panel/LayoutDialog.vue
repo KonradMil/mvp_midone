@@ -298,26 +298,26 @@ export default {
         }, {deep: true});
 
         onMounted(() => {
-            if (props.label.fillColor != undefined && props.label.fillColor != '') {
-                l.value.fillColor = props.label.fillColor;
+            if (props.layout.fillColor != undefined && props.layout.fillColor != '') {
+                l.value.fillColor = props.layout.fillColor;
             } else {
                 l.value.fillColor = '#4C4C4C';
             }
 
-            if (props.label.lineColor != undefined && props.label.lineColor != '') {
-                l.value.lineColor = props.label.lineColor;
+            if (props.layout.lineColor != undefined && props.layout.lineColor != '') {
+                l.value.lineColor = props.layout.lineColor;
             } else {
                 l.value.lineColor = '#FFFFFF';
             }
 
-            if (props.label.light_on_enter != undefined && props.label.light_on_enter != '') {
-                l.value.light_on_enter = props.label.light_on_enter;
+            if (props.layout.light_on_enter != undefined && props.layout.light_on_enter != '') {
+                l.value.light_on_enter = props.layout.light_on_enter;
             } else {
                 l.value.light_on_enter = false;
             }
 
-            l.value.index = props.label.index;
-            l.value.vertex_position = props.label.vertex_position;
+            l.value.index = props.layout.index;
+            l.value.vertex_position = props.layout.vertex_position;
         });
 
         return {
