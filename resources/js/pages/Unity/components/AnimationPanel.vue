@@ -12,14 +12,18 @@
                     <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" position="animationbuttonclick"/>
                     <UnityButton tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick"/>
                 </div>
-                <div class="col-span-1">
+                <div class="col-span-11 bg-opacity-25" style="background-color: #930f68">
+                    <div class="grid grid-cols-12">
+                        <div class="col-span-2">
 
-                </div>
-                <div class="col-span-10">
-                    <div class="w-full" style="overflow-x: scroll;">
-                        <div v-for="(line, index) in lines" class="row" :class="(activeLineIndex == index)? 'active':''">
-                            <div class="w-full bg-opacity-25" style="background-color: #930f68">
+                        </div>
+                        <div class="col-span-10">
+                            <div class="w-full" style="overflow-x: scroll;">
+                                <div v-for="(line, index) in lines" class="row" :class="(activeLineIndex == index)? 'active':''">
+                                    <div>
 
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
