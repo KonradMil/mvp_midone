@@ -113,7 +113,7 @@
                 </div>
             </div>
         </div>
-        <div style="margin-left: 8.9rem; background-color: #fff;" class="ml-36 flex fixed h-full z-50 pt-2" v-if="!(category == 1 && subcategory == 0 && selectedBrand != '') && !((category != 1 && subcategory != 0) && subcategory != null)">
+        <div style="margin-left: 8.9rem; background-color: #fff;" class="ml-36 flex fixed h-full z-50 pt-2" v-if="!((category != 1 && subcategory != 0) && subcategory != null)">
             <div class="w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
                 <div class="w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
                     <SearchIcon
