@@ -16,8 +16,10 @@
 
                 </div>
                 <div class="col-span-18">
-                    <div v-for="(line, index) in lines" class="row">
-                        LINIA
+                    <div v-for="(line, index) in lines" class="row" :class="(activeLineIndex == index)? 'active':''">
+<!--                        <div v-for="(layer.)">-->
+
+<!--                        </div>-->
                     </div>
                 </div>
             </div>
@@ -42,7 +44,8 @@ export default {
         icons: Object
     },
     setup(props, context) {
-        const lines = ref([]);
+        const lines = ref([{}]);
+        const activeLineIndex = ref(0);
         const expanded = ref(0);
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
@@ -92,7 +95,8 @@ export default {
 
         return {
             expanded,
-            lines
+            lines,
+            activeLineIndex
         }
     }
 }
