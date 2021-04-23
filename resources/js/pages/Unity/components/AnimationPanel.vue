@@ -6,10 +6,24 @@
     </div>
     <div class="flex fixed w-full z-50 pb-2 h-24 bottom-0 " v-if="expanded == 1" id="bottom-animation-normal">
         <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto;">
+            <div class="row">
+                <div class="col-span-3">
+                    <UnityButton  tooltip="Dodaj linie" alttext="Dodaj linie" path="/s3/builder_icons/add_simple.png" action="addline" position="animationbuttonclick" />
+                    <UnityButton  tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" position="animationbuttonclick" />
+                    <UnityButton  tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick" />
+                </div>
+                <div class="col-span-3">
 
+                </div>
+                <div class="col-span-18">
+                    <div v-for="(line, index) in lines" class="row">
+                        LINIA
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="flex fixed w-full z-50 pb-2 h-24 bottom-0 " v-if="expanded == 2" :class="(expanded)? 'h-100': 'h-50'" id="bottom-animation-expanded">
+    <div class="flex fixed w-full z-50 pb-2 h-24 bottom-0 h-100" v-if="expanded == 2" id="bottom-animation-expanded">
         <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto;">
 
         </div>
@@ -19,10 +33,11 @@
 <script>
 import AnimationButtons from "./AnimationButtons";
 import {getCurrentInstance, ref} from "vue";
+import UnityButton from "./UnityButton";
 
 export default {
     name: "AnimationPanel",
-    components: {AnimationButtons},
+    components: {AnimationButtons, UnityButton},
     props: {
         icons: Object
     },

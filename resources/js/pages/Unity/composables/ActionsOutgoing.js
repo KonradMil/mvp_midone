@@ -130,8 +130,8 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'UpdateLayout', val, true);
     }
 
-    function runAnimation () {
-        outgoing(game, 'RunAnimation', '');
+    function runAnimation (val) {
+        outgoing(game, 'StartAnimation', val);
     }
 
     function pauseAnimation () {
