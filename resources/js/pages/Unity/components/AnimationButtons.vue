@@ -1,5 +1,5 @@
 <template>
-    <div v-for="(icon, index) in icons" :key="'animationIcon_' + index" class="bot-i pl-3">
+    <div v-for="(icon, index) in icons" :key="'animationIcon_' + index" class="bot-i">
         <UnityButton  :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="animationbuttonclick" />
     </div>
 </template>

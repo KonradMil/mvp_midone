@@ -130,6 +130,22 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'UpdateLayout', val, true);
     }
 
+    function runAnimation () {
+        outgoing(game, 'RunAnimation', '');
+    }
+
+    function pauseAnimation () {
+        outgoing(game, 'PauseAnimation', '');
+    }
+
+    function stopAnimation () {
+        outgoing(game, 'StopAnimation', '');
+    }
+
+    function setPlaybackSpeed (val) {
+        outgoing(game, 'SetPlaybackSpeed', val);
+    }
+
     return {
         updateComment,
         updateLabel,
@@ -152,6 +168,10 @@ export default function unityActionOutgoing(gameWindow) {
         lockInput,
         unlockInput,
         showRadialMenu,
-        closeRadialMenu
+        closeRadialMenu,
+        runAnimation,
+        stopAnimation,
+        setPlaybackSpeed,
+        pauseAnimation
     };
 }
