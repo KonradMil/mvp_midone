@@ -21,6 +21,7 @@ Route::get('email/unique/{email}', 'App\Http\Controllers\API\UserController@chec
 Route::post('avatar/store', 'App\Http\Controllers\API\UserController@storeAvatar');
 Route::post('profile/update', 'App\Http\Controllers\API\UserController@updateProfile');
 Route::post('profile/change-password', 'App\Http\Controllers\API\UserController@changePassword');
+Route::get('communication', 'App\Http\Controllers\API\UserController@getUsers');
 
 Route::post('locations', 'App\Http\Controllers\TestController@locations');
 Route::post('locations/own', 'App\Http\Controllers\TestController@locationsOwn');

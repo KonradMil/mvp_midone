@@ -131,7 +131,7 @@
                 <div
                     class="notification-content__box dropdown-menu__content box dark:bg-dark-6"
                 >
-                    <div class="notification-content__title">Powiadomienia</div>
+                    <div class="notification-content__title">{{$t('global.notifications')}}</div>
                     <div
                         v-for="(notification, index) in notificationsComp"
                         :key="'notification_' + index"
@@ -166,7 +166,7 @@
                     >
                         <div class="ml-2 overflow-hidden">
                             <div class="w-full truncate text-gray-600 mt-0.5">
-                                Nie masz żadnych powiadomień.
+                                {{ $t('global.anyNotifications') }}
                             </div>
                         </div>
                     </div>
@@ -358,7 +358,7 @@ export default defineComponent({
         };
 
         const notificationsComp = computed(() => {
-           if(notifications.value.list == undefined) {
+           if(notifications.value.list === undefined) {
                return notifications.value;
            }  else {
                console.log(notifications.value.list);
@@ -372,8 +372,9 @@ export default defineComponent({
 
         onMounted(function () {
             GetInvitesRepositories();
+            getNotificationsRepositories();
             lang.value = store.state.main.currentLang;
-           notifications.value = user.notifications;
+            notifications.value = user.notifications;
         })
         return {
             searchDropdown,
