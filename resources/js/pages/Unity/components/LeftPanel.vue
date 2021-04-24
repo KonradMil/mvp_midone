@@ -75,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="overflow-y: scroll; height: 100%;"  v-if="(category != 1 && subcategory != 0) || selectedBrand != null">
+                    <div style="overflow-y: scroll; height: 100%;"  v-if="!(category == 1 && subcategory == 0) || selectedBrand != null">
                         <div class=" p-5 w-full" v-for="(model, index) in models.list" :key="'model_' + index" @click="selectModel(model)">
                             <div class=" shadow-md rounded-md zoom-in">
                                 <div class="flex-none pos-image relative block w-full">
