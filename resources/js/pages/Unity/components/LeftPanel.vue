@@ -136,7 +136,7 @@
                                     <img
                                         class="w-full p-4 "
                                         :alt="model.name"
-                                        :src="'s3/models_images/' + model.model_file + '.png'"
+                                        v-lazy="'s3/models_images/' + model.model_file + '.png'"
                                     />
                                 </div>
                             </div>
