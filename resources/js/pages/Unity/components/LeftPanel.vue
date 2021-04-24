@@ -49,7 +49,7 @@
                         placeholder="Szukaj..."
                     />
                 </div>
-                <div class="w-full sm:w-auto relative mr-auto mt-3 sm:mt-0" v-if="category == 1 && subcategory == 0">
+                <div class="w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
                     <div class="w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
                         <SearchIcon
                             class="w-4 h-1 absolute my-auto inset-y-0 ml-3 left-0 z-10 text-gray-700 dark:text-gray-300" style="visibility: hidden"
