@@ -545,13 +545,13 @@
     position: absolute;
     top: 0;
     right: 0;
-    margin-top: -19px;
+    margin-top: -18px;
     transform: rotate(
             90deg
     ) scale(1.04);
 }
 .left-button-category-active:after {
-    margin-top: 69px;
+    margin-top: 60px;
     transform: scale(1.04);
     content: "";
     width: 35px;
@@ -568,10 +568,10 @@
     z-index: -1;
     --tw-bg-opacity: 1;
     background-color: white;
-    height: 72%;
+    height: 68%;
     margin-right: -1.4rem;
     position: absolute;
-    top: 14%;
+    top: 16%;
     right: 0;
     width: 3.6rem;
 }
