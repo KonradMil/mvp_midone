@@ -27,9 +27,8 @@
                     <div class="p-5 m-2" v-for="(brand, index) in brands.brands" :key="'subcat_' + index" @click="subcategory = subcat.value">
                         <div class="flex-none pos-image relative block">
                             <div class="pos-image__preview image-fit">
-                                <img
+                                <img v-lazy="brand.image"
                                     :alt="brand.name"
-                                    :src="brand.image"
                                 />
                             </div>
                         </div>
@@ -69,9 +68,9 @@
                         <div class="flex-none pos-image relative block w-full">
                             <div class="pos-image__preview image-fit h-24 w-full shadow-md rounded-md  zoom-in">
                                 <img
-                                    class="w-full p-4 "
+                                    class="w-full p-4"
+                                    v-lazy="brand.image"
                                     :alt="brand.name"
-                                    :src="brand.image"
                                 />
                             </div>
                         </div>
@@ -102,8 +101,8 @@
                                 <div class="pos-image__preview image-fit h-24 w-full">
                                     <img
                                         class="w-full p-4 "
+                                        v-lazy="'s3/models_images/' + model.model_file + '.png'"
                                         :alt="model.name"
-                                        :src="'s3/models_images/' + model.model_file + '.png'"
                                     />
                                 </div>
                             </div>
