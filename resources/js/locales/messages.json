@@ -113,7 +113,7 @@
         "communication" : {
             "questions" : "Questions",
             "teams" : "Teams",
-            "reportError" : "Report error",
+            "reportError" : "Report a bug",
             "reports" : "Reports",
             "goTo" : "Go to"
         },
