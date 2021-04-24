@@ -4,7 +4,8 @@
             "Szukaj" : "Search...",
             "name": "Name",
             "notifications" : "Notifications",
-            "anyNotifications" : "You don't have any notifications"
+            "anyNotifications" : "You don't have any notifications",
+            "save" : "Save"
         },
         "topBar": {
             "profil": "Profile",
@@ -108,7 +109,17 @@
             "socialMedia" : "Social media",
             "biddersList" : "Bidders list",
             "privacyPolicy" : "privacy policy",
-            "accept" : "Accept"
+            "accept" : "Accept",
+            "companyName" : "Company name",
+            "searchFor" : "Search for",
+            "city" : "City",
+            "street" : "Street",
+            "houseNumber" : "House number",
+            "flatNumber" : "Flat number",
+            "postCode" : "Post code",
+            "post" : "Post",
+            "province" : "Province",
+            "country" : "Country"
         },
         "communication" : {
             "questions" : "Questions",
@@ -125,7 +136,7 @@
             "uploadPhoto" : "Upload photos",
             "file" : "Upload",
             "fileUpload" : "or drop the file",
-            "choose" : "Choose",
+            "select" : "Select",
             "maxWeight": "Maximum detail weight",
             "detail" : "Detail material",
             "way" : "The way of taking the detail",
@@ -137,7 +148,31 @@
             "place" : "Place of putting away the detail",
             "changeNumber" : "Number of changes",
             "change" : "Change",
-            "changes" : "Changes"
+            "changes" : "Changes",
+            "preview" : "Preview",
+            "teamAccess" : "Team access",
+            "deadlineSolutions" : "Solutions deadline",
+            "deadlineOffer" : "Offers deadline",
+            "categories" : "Categories",
+            "tags" : "Tags",
+            "publish" : "Publish",
+            "acceptPublic" : "After accepting the offer, make the challenge public",
+            "cancel" : "Cancel",
+            "selectCategories" : "Select categories...",
+            "selectTags" : "Select tags...",
+            "pickPlace" : "Pick & Place",
+            "assembly" : "Assembly",
+            "qualityControl" : "Quality control",
+            "painting" : "Painting",
+            "welding" : "Welding",
+            "more" : "more kg",
+            "ferrousMetals" : "Ferrous metals and alloys of these metals",
+            "nonFerrousMetals" : "Non-ferrous metals and alloys of these metals",
+            "plastics" : "Plastics",
+            "paperWood" : "Paper and wood products",
+            "other" : "Other",
+            "detailStationaryEasy" : "The detail is stationary in an easily accessible place",
+            "detailStationaryHard" : "The detail lies motionless in a hard-to-reach place"
         }
     },
     "pl": {
@@ -145,7 +180,8 @@
             "Szukaj" : "Szukaj...",
             "name": "Nazwa",
             "notifications" : "Powiadomienia",
-            "anyNotifications" : "Nie masz żadnych powiadomień."
+            "anyNotifications" : "Nie masz żadnych powiadomień.",
+            "save" : "Zapisz"
         },
         "topBar": {
             "profil": "Profil",
@@ -255,7 +291,17 @@
             "informService" : "Informuj mnie o akceptacji oferty.",
             "accept" : "Akceptuję",
             "socialMedia" : "Konta społecznościowe",
-            "biddersList" : "Lista ofert"
+            "biddersList" : "Lista ofert",
+            "companyName" : "Nazwa firmy",
+            "searchFor" : "Szukaj po",
+            "city" : "Miejscowość",
+            "street" : "Ulica",
+            "houseNumber" : "Numer domu",
+            "flatNumber" : "Numer lokalu",
+            "postCode" : "Kod pocztowy",
+            "post" : "Poczta",
+            "province" : "Województwo",
+            "country" : "Kraj"
         },
         "communication" : {
             "questions" : "Pytania",
@@ -271,7 +317,7 @@
             "uploadPhoto" : "Wgraj zdjęcia",
             "file" : "Wgraj plik",
             "fileUpload" : "lub przyciagnij i upuść",
-            "choose" : "Wybierz",
+            "select" : "Wybierz",
             "maxWeight": "Maksymalna waga detalu",
             "detail" : "Material detalu",
             "way" : "Sposób pobierania metalu",
@@ -283,7 +329,24 @@
             "place" : "Miejsce odłożenia detalu",
             "changeNumber" : "Liczba zmian",
             "change" : "Zmiana",
-            "changes" : "Zmiany"
+            "changes" : "Zmiany",
+            "preview" : "Podgląd",
+            "teamAccess" : "Dostęp zespołów",
+            "deadlineSolutions" : "Deadline rozwiązań",
+            "deadlineOffer" : "Deadline ofert",
+            "categories" : "Kategorie",
+            "tags" : "Tagi",
+            "publish" : "Publish",
+            "acceptPublic" : "Po zakceptowaniu oferty upublicznij wyzwanie",
+            "cancel" : "Anuluj",
+            "selectCategories" : "Wybierz kategorie...",
+            "selectTags" : "Wybierz tagi...",
+            "pickPlace" : "Wybierz i połóż",
+            "assembly" : "Montaż",
+            "qualityControl" : "Kontrola jakośći",
+            "painting" : "Malowanie",
+            "welding" : "Spawanie",
+            "more" : "więcej kg"
         }
     }
 }
