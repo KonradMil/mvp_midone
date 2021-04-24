@@ -109,7 +109,17 @@
             "socialMedia" : "Social media",
             "biddersList" : "Bidders list",
             "privacyPolicy" : "privacy policy",
-            "accept" : "Accept"
+            "accept" : "Accept",
+            "companyName" : "Company name",
+            "searchFor" : "Search for",
+            "city" : "City",
+            "street" : "Street",
+            "houseNumber" : "House number",
+            "flatNumber" : "Flat number",
+            "postCode" : "Post code",
+            "post" : "Post",
+            "province" : "Province",
+            "country" : "Country"
         },
         "communication" : {
             "questions" : "Questions",
@@ -281,7 +291,17 @@
             "informService" : "Informuj mnie o akceptacji oferty.",
             "accept" : "Akceptuję",
             "socialMedia" : "Konta społecznościowe",
-            "biddersList" : "Lista ofert"
+            "biddersList" : "Lista ofert",
+            "companyName" : "Nazwa firmy",
+            "searchFor" : "Szukaj po",
+            "city" : "Miejscowość",
+            "street" : "Ulica",
+            "houseNumber" : "Numer domu",
+            "flatNumber" : "Numer lokalu",
+            "postCode" : "Kod pocztowy",
+            "post" : "Poczta",
+            "province" : "Województwo",
+            "country" : "Kraj"
         },
         "communication" : {
             "questions" : "Pytania",
