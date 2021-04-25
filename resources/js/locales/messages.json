@@ -8,7 +8,13 @@
             "save" : "Save",
             "preview" : "Preview",
             "details" : "Details",
-            "description" : "Description"
+            "description" : "Description",
+            "main" : "Main",
+            "newPost" : "New post",
+            "addPost" : "Add new post",
+            "knowledgeBase" : "Knowledge base",
+            "sharePost" : "Share post",
+            "downloadPost" : "Download post"
         },
         "topBar": {
             "profil": "Profile",
@@ -38,7 +44,9 @@
         },
         "challengesMain": {
             "challenges": "Challenges",
-            "addChallenge": "Add new challenge"
+            "addChallenge": "Add new challenge",
+            "editPost" : "Edit Post",
+            "deletePost" : "Delete Post"
         },
         "teams": {
             "teams": "Teams",
@@ -220,7 +228,13 @@
             "save" : "Zapisz",
             "preview" : "Przegląd",
             "details" : "Szczegóły",
-            "description" : "Opis"
+            "description" : "Opis",
+            "main" : "Główne",
+            "newPost" : "Nowy post",
+            "addPost" : "Dodaj nowy post",
+            "knowledgeBase" : "Baza wiedzy",
+            "sharePost" : "Udostępnij post",
+            "downloadPost" : "Pobierz post"
         },
         "topBar": {
             "profil": "Profil",
@@ -266,7 +280,9 @@
         },
         "challengesMain": {
             "challenges": "Wyzwania",
-            "addChallenge": "Dodaj nowe wyzwanie"
+            "addChallenge": "Dodaj nowe wyzwanie",
+            "editPost" : "Edytuj Post",
+            "deletePost" : "Usuń Post"
         },
         "CommentSection": {
             "comments": "Komentarzy",

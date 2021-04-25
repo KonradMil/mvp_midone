@@ -1,14 +1,14 @@
 <template>
     <div>
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-            <h2 class="text-lg font-medium mr-auto">Nowy post</h2>
+            <h2 class="text-lg font-medium mr-auto">{{ $t('global.newPost') }}</h2>
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
                 <button
                     type="button"
                     class="btn box text-gray-700 dark:text-gray-300 mr-2 flex items-center ml-auto sm:ml-0"
                 >
                     <EyeIcon class="w-4 h-4 mr-2"/>
-                    Podgląd
+                    {{ $t('global.preview') }}
                 </button>
                 <button
                     class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
@@ -16,7 +16,7 @@
                     @click="saveKnowledgebasePost"
                 >
                     <SaveIcon class="w-4 h-4 mr-2"/>
-                    Zapisz
+                    {{ $t('global.save') }}
                 </button>
             </div>
         </div>
@@ -48,7 +48,7 @@
                             @click="tab = 'desc'"
                         >
                             <FileTextIcon class="w-4 h-4 mr-2"/>
-                            Główne
+                            {{ $t('global.main') }}
                         </Tippy>
                     </div>
                     <div class="post__content tab-content">
@@ -66,7 +66,7 @@
                                     class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"
                                 >
                                     <ChevronDownIcon class="w-4 h-4 mr-2"/>
-                                    Opis
+                                    {{ $t('global.description') }}
                                 </div>
                                 <div class="mt-5">
                                     <textarea v-model="description" style="width: 100%;"></textarea>
@@ -91,7 +91,7 @@
             <div class="col-span-12 lg:col-span-4">
                 <div class="intro-y box p-5">
                     <div class="mt-3">
-                        <label class="form-label">Categories</label>
+                        <label class="form-label"> {{ $t('challengesNew.categories') }}</label>
                         <TailSelect
                             id="post-form-3"
                             v-model="category"
@@ -109,14 +109,14 @@
               }"
                         >
 
-                            <option selected disabled>Wybierz kategorie...</option>
+                            <option selected disabled>{{ $t('challengesNew.selectCategories') }}</option>
                             <option v-for="(category,index) in categories" :value="category.value">{{ category.name }}</option>
 
                         </TailSelect>
                     </div>
                     <div class="form-check flex-col items-start mt-3">
                         <label for="post-form-5" class="form-check-label ml-0 mb-2"
-                        >Publikuj</label
+                        >{{ $t('challengesNew.publish') }}</label
                         >
                         <input id="post-form-5" class="form-check-switch" v-model="published" type="checkbox"/>
                     </div>
