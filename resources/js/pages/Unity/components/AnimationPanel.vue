@@ -17,11 +17,11 @@
                         <div class="col-span-1">
 
                         </div>
-                        <div class="col-span-11 h-full" style="overflow-x: scroll;">
+                        <div class="col-span-11 h-full" style="overflow-x: scroll; overflow-y: hidden;">
                             <div class="w-full  h-full">
                                 <div v-for="(line, index) in lines" class="row  h-full" :class="(activeLineIndex == index)? 'active':''">
                                     <div class=" h-full" v-for="(animable, index) in line.animables">
-                                        <div class="pos-image__preview image-fit w-64 h-4/5 rounded-md m-5" style="overflow: hidden;">
+                                        <div class="pos-image__preview image-fit w-64 h-4/5 rounded-md m-5" style="overflow: hidden; ">
                                             <img class="w-full h-full"
                                                 :alt="animable.name.replace('models', 'models_images') + '.png'"
                                                 :src="animable.name.replace('models', 'models_images') + '.png'"
