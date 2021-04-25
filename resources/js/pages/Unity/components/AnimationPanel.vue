@@ -15,8 +15,9 @@
                 <div class="col-span-11 rounded-md mr-5" style="background-color: rgba(147, 15, 104, 0.25);">
                     <div class="grid grid-cols-12 h-full">
                         <div class="col-span-1">
-<div style="border-radius: 50%; background-color: #FFF;">
-    C: 10
+<div style="border-radius: 50%; background-color: #FFF;     height: 56px;
+    width: 56px;">
+    <span>C: 10</span>
 </div>
                         </div>
                         <div class="col-span-11 h-full" style="overflow-x: auto; overflow-y: hidden;">
