@@ -17,10 +17,10 @@
                         <div class="col-span-2">
 
                         </div>
-                        <div class="col-span-10">
-                            <div class="w-full" style="overflow-x: scroll;">
-                                <div v-for="(line, index) in lines" class="row" :class="(activeLineIndex == index)? 'active':''">
-                                    <div v-for="(animable, index) in line.animables">
+                        <div class="col-span-10 h-full">
+                            <div class="w-full  h-full" style="overflow-x: scroll;">
+                                <div v-for="(line, index) in lines" class="row  h-full" :class="(activeLineIndex == index)? 'active':''">
+                                    <div class=" h-full" v-for="(animable, index) in line.animables">
                                         <div class="pos-image__preview image-fit w-72 h-full">
                                             <img class="w-full h-full"
                                                 :alt="animable.name.replace('models', 'models_images') + '.png'"
