@@ -5,7 +5,10 @@
             "name": "Name",
             "notifications" : "Notifications",
             "anyNotifications" : "You don't have any notifications",
-            "save" : "Save"
+            "save" : "Save",
+            "preview" : "Preview",
+            "details" : "Details",
+            "description" : "Description"
         },
         "topBar": {
             "profil": "Profile",
@@ -173,6 +176,39 @@
             "other" : "Other",
             "detailStationaryEasy" : "The detail is stationary in an easily accessible place",
             "detailStationaryHard" : "The detail lies motionless in a hard-to-reach place"
+        },
+        "models" : {
+            "models" : "Models",
+            "addModel" : "Add model",
+            "photo" : "Photo",
+            "name" : "Name",
+            "brand" : "Brand",
+            "cat" : "Category",
+            "actions" : "Actions",
+            "description" : "Description",
+            "details" : "Details",
+            "maxCapacity" : "Maximum lifting capacity",
+            "numAxles" : "Number of axles",
+            "range" : "Range",
+            "liftCapacity" : "Lifting capacity",
+            "maxRange" : "Maximum range",
+            "maxSpeed" : "Max speed",
+            "connectMethod" : "Connection method",
+            "reproducibility" : "Reproducibility",
+            "edit" : "Edit",
+            "delete" : "Delete",
+            "areSure" : "Are you sure?",
+            "reallyDelete" : "Do you really want to delete these records?",
+            "processUndone" : "This process cannot be undone.",
+            "cancel" : "Cancel",
+            "preview" : "Preview",
+            "newModel" : "New model",
+            "subcat" : "Subcategory"
+        },
+        "solutions": {
+            "solutions" : "Solutions",
+            "newSolution" : "New solution",
+            "addNew" : "Add new solution"
         }
     },
     "pl": {
@@ -181,7 +217,10 @@
             "name": "Nazwa",
             "notifications" : "Powiadomienia",
             "anyNotifications" : "Nie masz żadnych powiadomień.",
-            "save" : "Zapisz"
+            "save" : "Zapisz",
+            "preview" : "Przegląd",
+            "details" : "Szczegóły",
+            "description" : "Opis"
         },
         "topBar": {
             "profil": "Profil",
@@ -317,7 +356,7 @@
             "uploadPhoto" : "Wgraj zdjęcia",
             "file" : "Wgraj plik",
             "fileUpload" : "lub przyciagnij i upuść",
-            "select" : "Wybierz",
+            "select" : "Wybierz...",
             "maxWeight": "Maksymalna waga detalu",
             "detail" : "Material detalu",
             "way" : "Sposób pobierania metalu",
@@ -347,6 +386,39 @@
             "painting" : "Malowanie",
             "welding" : "Spawanie",
             "more" : "więcej kg"
+        },
+        "models" : {
+            "models" : "Modele",
+            "addModel" : "Dodaj model",
+            "photo" : "Zdjecie",
+            "name" : "Nazwa",
+            "marka" : "Marka",
+            "cat" : "Kategoria",
+            "actions" : "Akcje",
+            "description" : "Opis",
+            "details" : "Szczegóły",
+            "maxCapacity" : "Maksymalny udźwig",
+            "numAxles" : "Liczba osi",
+            "range" : "Zasięg",
+            "liftCapacity" : "Udźwig",
+            "maxRange" : "Maksymalny zasięg",
+            "maxSpeed" : "Maksymalna prędkość",
+            "connectMethod" : "Metoda połączenia",
+            "reproducibility" : "Powtarzalność",
+            "edit" : "Edytuj",
+            "delete" : "Usuń",
+            "areSure" : "Jesteś pewny?",
+            "reallyDelete" : "Czy na pewno chcesz usunąć zaznaczone rekordy?",
+            "processUndone" : "Tego procesu nie można cofnąć.",
+            "cancel" : "Anuluj",
+            "preview" : "Podgląd",
+            "newModel" : "Nowy model",
+            "subcat" : "Subkategoria"
+        },
+        "solutions": {
+            "solutions" : "Rozwiązania",
+            "newSolution" : "Nowe rozwiązania",
+            "addNew" : "Dodaj nowe rozwiązanie"
         }
     }
 }

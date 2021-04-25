@@ -1,11 +1,11 @@
 <template>
     <div>
-        <h2 class="intro-y text-lg font-medium mt-10">Modele</h2>
+        <h2 class="intro-y text-lg font-medium mt-10">{{$t('models.models')}}</h2>
         <div class="grid grid-cols-12 gap-6 mt-5">
             <div
                 class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2"
             >
-                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'modelsAdd'})">Dodaj model</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'modelsAdd'})">{{$t('models.addModel')}}</button>
                 <div class="hidden md:block mx-auto text-gray-600">
 
                 </div>
@@ -27,12 +27,12 @@
                 <table class="table table-report -mt-2">
                     <thead>
                     <tr>
-                        <th class="whitespace-nowrap">Zdjęcie</th>
-                        <th class="whitespace-nowrap">Nazwa</th>
+                        <th class="whitespace-nowrap">{{$t('models.photo')}}</th>
+                        <th class="whitespace-nowrap">{{$t('models.name')}}</th>
                         <th class="whitespace-nowrap">Model</th>
-                        <th class="whitespace-nowrap">Marka</th>
-                        <th class="whitespace-nowrap">Kategoria</th>
-                        <th class="whitespace-nowrap">Akcje</th>
+                        <th class="whitespace-nowrap">{{$t('models.brand')}}</th>
+                        <th class="whitespace-nowrap">{{$t('models.cat')}}</th>
+                        <th class="whitespace-nowrap">{{$t('models.actions')}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -81,7 +81,7 @@
                             <div class="flex justify-center items-center">
                                 <a class="flex items-center mr-3" href="javascript:;">
                                     <CheckSquareIcon class="w-4 h-4 mr-1"/>
-                                    Edytuj
+                                    {{$t('models.edit')}}
                                 </a>
                                 <a
                                     class="flex items-center text-theme-6"
@@ -90,7 +90,7 @@
                                     data-target="#delete-confirmation-modal"
                                 >
                                     <Trash2Icon class="w-4 h-4 mr-1"/>
-                                    Usuń
+                                    {{$t('models.delete')}}
                                 </a>
                             </div>
                         </td>
@@ -161,10 +161,10 @@
                     <div class="modal-body p-0">
                         <div class="p-5 text-center">
                             <XCircleIcon class="w-16 h-16 text-theme-6 mx-auto mt-3"/>
-                            <div class="text-3xl mt-5">Are you sure?</div>
+                            <div class="text-3xl mt-5">{{$t('models.areSure')}}</div>
                             <div class="text-gray-600 mt-2">
-                                Do you really want to delete these records? <br/>This process
-                                cannot be undone.
+                                {{ $t('models.reallyDelete') }} <br/>
+                                {{ $t('models.processUndone') }}
                             </div>
                         </div>
                         <div class="px-5 pb-8 text-center">
@@ -173,9 +173,9 @@
                                 data-dismiss="modal"
                                 class="btn btn-outline-secondary w-24 mr-1"
                             >
-                                Cancel
+                                {{ $t('models.cancel') }}
                             </button>
-                            <button type="button" class="btn btn-danger w-24">Delete</button>
+                            <button type="button" class="btn btn-danger w-24">{{ $t('models.delete') }}</button>
                         </div>
                     </div>
                 </div>

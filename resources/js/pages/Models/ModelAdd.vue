@@ -1,14 +1,14 @@
 <template>
     <div>
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-            <h2 class="text-lg font-medium mr-auto">Nowe wyzwanie</h2>
+            <h2 class="text-lg font-medium mr-auto">{{ $t('models.newModel') }}</h2>
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
                 <button
                     type="button"
                     class="btn box text-gray-700 dark:text-gray-300 mr-2 flex items-center ml-auto sm:ml-0"
                 >
                     <EyeIcon class="w-4 h-4 mr-2"/>
-                    Podgląd
+                    {{ $t('models.preview') }}
                 </button>
                 <button
                     class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
@@ -16,7 +16,7 @@
                     @click="saveModelRepo"
                 >
                     <SaveIcon class="w-4 h-4 mr-2"/>
-                    Zapisz
+                    {{ $t('global.save') }}
                 </button>
             </div>
         </div>
@@ -51,7 +51,7 @@
                             @click="tab = 'desc'"
                         >
                             <FileTextIcon class="w-4 h-4 mr-2"/>
-                            Opis
+                            {{ $t('models.description') }}
                         </Tippy>
                     </div>
                     <div class="post__content tab-content">
@@ -68,7 +68,7 @@
                                 <div
                                     class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"
                                 >
-                                    Szczegóły
+                                    {{ $t('models.details') }}
                                 </div>
                                 <div class="mt-5">
                                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
@@ -82,7 +82,7 @@
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
-                                            <label for="input-wizard-2" class="form-label">Marka</label>
+                                            <label for="input-wizard-2" class="form-label">{{ $t('models.brand') }}</label>
                                             <input
                                                 id="input-wizard-2"
                                                 type="text"
@@ -91,7 +91,7 @@
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
-                                            <label for="input-wizard-2" class="form-label">Maksymalny udźwig</label>
+                                            <label for="input-wizard-2" class="form-label">{{ $t('models.maxCapacity') }}</label>
                                             <input
                                                 id="input-wizard-3"
                                                 type="text"
@@ -100,7 +100,7 @@
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
-                                            <label for="input-wizard-2" class="form-label">Maksymalny zasięg</label>
+                                            <label for="input-wizard-2" class="form-label">{{ $t('models.maxRange') }}</label>
                                             <input
                                                 id="input-wizard-4"
                                                 type="text"
@@ -109,7 +109,7 @@
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
-                                            <label for="input-wizard-2" class="form-label">Liczba osi</label>
+                                            <label for="input-wizard-2" class="form-label">{{ $t('models.numAxles') }}</label>
                                             <input
                                                 id="input-wizard-5"
                                                 type="text"
@@ -118,7 +118,7 @@
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
-                                            <label for="input-wizard-2" class="form-label">Maksymalna prędkość</label>
+                                            <label for="input-wizard-2" class="form-label">{{ $t('models.maxSpeed') }}</label>
                                             <input
                                                 id="input-wizard-6"
                                                 type="text"
@@ -136,7 +136,7 @@
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
-                                            <label for="input-wizard-2" class="form-label">Metoda połączenia</label>
+                                            <label for="input-wizard-2" class="form-label">{{ $t('models.connectMethod') }}</label>
                                             <input
                                                 id="input-wizard-8"
                                                 type="text"
@@ -145,7 +145,7 @@
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
-                                            <label for="input-wizard-2" class="form-label">Zasięg</label>
+                                            <label for="input-wizard-2" class="form-label">{{ $t('models.range') }}</label>
                                             <input
                                                 id="input-wizard-9"
                                                 type="text"
@@ -154,7 +154,7 @@
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
-                                            <label for="input-wizard-2" class="form-label">Powtarzalność</label>
+                                            <label for="input-wizard-2" class="form-label">{{ $t('models.reproducibility') }}</label>
                                             <input
                                                 id="input-wizard-10"
                                                 type="text"
@@ -163,7 +163,7 @@
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
-                                            <label for="input-wizard-2" class="form-label">Udźwig</label>
+                                            <label for="input-wizard-2" class="form-label">{{ $t('models.liftCapacity') }}</label>
                                             <input
                                                 id="input-wizard-11"
                                                 type="text"
@@ -227,7 +227,7 @@
             <div class="col-span-12 lg:col-span-4">
                 <div class="intro-y box p-5">
                     <div class="mt-3">
-                        <label for="post-form-3" class="form-label">Kategoria</label>
+                        <label for="post-form-3" class="form-label">{{ $t('models.cat') }}</label>
                         <TailSelect
                             id="post-form-3"
                             v-model="category"
@@ -239,14 +239,14 @@
                                 hideSelected: false,
                                 classNames: 'w-full'
                                 }">
-                            <option selected disabled>Wybierz kategorie...</option>
+                            <option selected disabled>{{ $t('challengesNew.selectCategories') }}</option>
                             <option v-for="(category,index) in categories.categories" :value="category.value">{{ category.name }}</option>
                         </TailSelect>
                     </div>
                 </div>
                 <div class="intro-y box p-5" v-if="category != ''">
                     <div class="mt-3">
-                        <label for="post-form-3" class="form-label">Subkategoria</label>
+                        <label for="post-form-3" class="form-label">{{ $t('challengesNew.subcat') }}</label>
                         <TailSelect
                             id="post-form-3"
                             v-model="subcategory"
@@ -258,7 +258,7 @@
                                 hideSelected: false,
                                 classNames: 'w-full'
                                 }">
-                            <option selected disabled>Wybierz kategorie...</option>
+                            <option selected disabled>{{ $t('challengesNew.selectCategories') }}</option>
                             <option v-for="(cat,index) in categories.categories[category].subcategories" :value="cat.value">{{ cat.name }}</option>
                         </TailSelect>
                     </div>

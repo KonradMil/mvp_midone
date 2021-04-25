@@ -1,14 +1,14 @@
 <template>
     <div>
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-            <h2 class="text-lg font-medium mr-auto">Nowe rozwiązania</h2>
+            <h2 class="text-lg font-medium mr-auto">{{ $t('solutions.newSolution') }}</h2>
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
                 <button
                     type="button"
                     class="btn box text-gray-700 dark:text-gray-300 mr-2 flex items-center ml-auto sm:ml-0"
                 >
                     <EyeIcon class="w-4 h-4 mr-2"/>
-                    Podgląd
+                    {{ $t('global.preview') }}
                 </button>
                 <button
                     class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
@@ -16,7 +16,7 @@
                     @click="saveSolutionRepo"
                 >
                     <SaveIcon class="w-4 h-4 mr-2"/>
-                    Zapisz
+                    {{ $t('global.save') }}
 
                 </button>
             </div>
@@ -69,8 +69,7 @@
                             @click="tab = 'desc'"
                         >
                             <FileTextIcon class="w-4 h-4 mr-2"/>
-                            Opis
-                        </Tippy>
+                            {{$t('challengesNew.description')}}                        </Tippy>
                         <Tippy
                             id="meta-title-tab"
                             tag="a"
@@ -84,7 +83,7 @@
                             @click="tab = 'details'"
                         >
                             <CodeIcon class="w-4 h-4 mr-2"/>
-                            Szczegóły
+                            {{ $t('global.preview') }}
                         </Tippy>
                     </div>
                     <div class="post__content tab-content">
@@ -112,8 +111,7 @@
 
                                         </TailSelect>
                                     </div>
-
-                                    Opis
+                                    {{$t('global.description')}}
                                 </div>
                                 <div class="mt-5">
                                     <textarea v-model="description" style="width: 100%;"></textarea>
@@ -126,11 +124,11 @@
                                     class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"
                                 >
                                     <ChevronDownIcon class="w-4 h-4 mr-2"/>
-                                    Zdjęcia
+                                    {{ $t('challengesNew.photo') }}
                                 </div>
                                 <div class="mt-5">
                                     <div class="mt-3">
-                                        <label class="form-label">Wgraj zjęcia</label>
+                                        <label class="form-label">{{ $t('challengesNew.uploadPhoto') }}</label>
                                         <div
                                             class="rounded-md pt-4"
                                         >
@@ -152,9 +150,9 @@
                                                     >
                                                         <ImageIcon class="w-4 h-4 mr-2"/>
                                                         <span class="text-theme-1 dark:text-theme-10 mr-1"
-                                                        >Wgraj plik</span
+                                                        >{{ $t('challengesNew.file') }}</span
                                                         >
-                                                        lub przyciągnij i upuść
+                                                        {{ $t('challengesNew.fileUpload') }}
                                                     </div>
                                                 </Dropzone>
                                             </div>
@@ -181,14 +179,15 @@
                                         <!--                <div class="font-medium text-base">Profile Settings</div>-->
                                         <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                                             <div class="intro-y col-span-12 sm:col-span-6">
-                                                <label for="input-wizard-1" class="form-label">Maksymalna waga
-                                                    detalu</label>
+                                                <label for="input-wizard-1" class="form-label">
+                                                    {{ $t('challengesNew.maxWeight') }}
+                                                </label>
                                                 <TailSelect
                                                     id="input-wizard-1"
                                                     v-model="select_detail_weight"
                                                     :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
-                                                    <option selected disabled>Wybierz...</option>
+                                                    <option selected disabled>{{ $t('challengesNew.select') }}</option>
                                                     <option v-for="(det,index) in solutionSelects.select_detail_weight"
                                                             :value="det.value">{{ det.name }}
                                                     </option>
@@ -196,14 +195,15 @@
                                                 </TailSelect>
                                             </div>
                                             <div class="intro-y col-span-12 sm:col-span-6">
-                                                <label for="input-wizard-2" class="form-label">Jakość chwytania
-                                                    detalu</label>
+                                                <label for="input-wizard-2" class="form-label">
+                                                    {{ $t('challengesNew.quality') }}
+                                                </label>
                                                 <TailSelect
                                                     id="input-wizard-2"
                                                     v-model="select_pick_quality"
                                                     :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
-                                                    <option selected disabled>Wybierz...</option>
+                                                    <option selected disabled>{{ $t('challengesNew.select') }}</option>
                                                     <option v-for="(det,index) in solutionSelects.select_pick_quality"
                                                             :value="det.value">{{ det.name }}
                                                     </option>
@@ -212,13 +212,13 @@
 
                                             </div>
                                             <div class="intro-y col-span-12 sm:col-span-6">
-                                                <label for="input-wizard-3" class="form-label">Materiał detalu</label>
+                                                <label for="input-wizard-3" class="form-label">{{ $t('challengesNew.detail') }}</label>
                                                 <TailSelect
                                                     id="input-wizard-3"
                                                     v-model="select_detail_material"
                                                     :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
-                                                    <option selected disabled>Wybierz...</option>
+                                                    <option selected disabled>{{ $t('challengesNew.select') }}</option>
                                                     <option
                                                         v-for="(det,index) in solutionSelects.select_detail_material"
                                                         :value="det.value">{{ det.name }}
@@ -227,13 +227,13 @@
                                                 </TailSelect>
                                             </div>
                                             <div class="intro-y col-span-12 sm:col-span-6">
-                                                <label for="input-wizard-4" class="form-label">Wielkość detalu</label>
+                                                <label for="input-wizard-4" class="form-label">{{ $t('challengesNew.size') }}</label>
                                                 <TailSelect
                                                     id="input-wizard-4"
                                                     v-model="select_detail_size"
                                                     :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
-                                                    <option selected disabled>Wybierz...</option>
+                                                    <option selected disabled>{{ $t('challengesNew.select') }}</option>
                                                     <option v-for="(det,index) in solutionSelects.select_detail_size"
                                                             :value="det.value">{{ det.name }}
                                                     </option>
@@ -241,14 +241,15 @@
                                                 </TailSelect>
                                             </div>
                                             <div class="intro-y col-span-12 sm:col-span-6">
-                                                <label for="input-wizard-5" class="form-label">Sposób pobierania
-                                                    detalu</label>
+                                                <label for="input-wizard-5" class="form-label">
+                                                    {{ $t('challengesNew.way') }}
+                                                    </label>
                                                 <TailSelect
                                                     id="input-wizard-5"
                                                     v-model="select_detail_pick"
                                                     :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
-                                                    <option selected disabled>Wybierz...</option>
+                                                    <option selected disabled>{{ $t('challengesNew.select') }}</option>
                                                     <option v-for="(det,index) in solutionSelects.select_detail_pick"
                                                             :value="det.value">{{ det.name }}
                                                     </option>
@@ -256,14 +257,15 @@
                                                 </TailSelect>
                                             </div>
                                             <div class="intro-y col-span-12 sm:col-span-6">
-                                                <label for="input-wizard-6" class="form-label">Czy detal jest
-                                                    pozycjonowany do pobrania?</label>
+                                                <label for="input-wizard-6" class="form-label">
+                                                    {{ $t('challengesNew.position') }}
+                                                </label>
                                                 <TailSelect
                                                     id="input-wizard-6"
                                                     v-model="select_detail_position"
                                                     :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
-                                                    <option selected disabled>Wybierz...</option>
+                                                    <option selected disabled>{{ $t('challengesNew.select') }}</option>
                                                     <option
                                                         v-for="(det,index) in solutionSelects.select_detail_position"
                                                         :value="det.value">{{ det.name }}
@@ -272,14 +274,15 @@
                                                 </TailSelect>
                                             </div>
                                             <div class="intro-y col-span-12 sm:col-span-6">
-                                                <label for="input-wizard-7" class="form-label">Odległość pomiędzy
-                                                    miejscem pobrania i odkładania detalu</label>
+                                                <label for="input-wizard-7" class="form-label">
+                                                    {{ $t('challengesNew.distance') }}
+                                                </label>
                                                 <TailSelect
                                                     id="input-wizard-7"
                                                     v-model="select_detail_range"
                                                     :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
-                                                    <option selected disabled>Wybierz...</option>
+                                                    <option selected disabled>{{ $t('challengesNew.select') }}</option>
                                                     <option v-for="(det,index) in solutionSelects.select_detail_range"
                                                             :value="det.value">{{ det.name }}
                                                     </option>
@@ -287,14 +290,15 @@
                                                 </TailSelect>
                                             </div>
                                             <div class="intro-y col-span-12 sm:col-span-6">
-                                                <label for="input-wizard-8" class="form-label">Miejsce odłożenia
-                                                    detalu</label>
+                                                <label for="input-wizard-8" class="form-label">
+                                                    {{ $t('challengesNew.place') }}
+                                                </label>
                                                 <TailSelect
                                                     id="input-wizard-8"
                                                     v-model="select_detail_destination"
                                                     :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
-                                                    <option selected disabled>Wybierz...</option>
+                                                    <option selected disabled>{{ $t('challengesNew.select') }}</option>
                                                     <option
                                                         v-for="(det,index) in solutionSelects.select_detail_destination"
                                                         :value="det.value">{{ det.name }}
@@ -303,14 +307,15 @@
                                                 </TailSelect>
                                             </div>
                                             <div class="intro-y col-span-12 sm:col-span-6">
-                                                <label for="input-wizard-9" class="form-label">Ilość obsługiwanych
-                                                    stanowisk/lini</label>
+                                                <label for="input-wizard-9" class="form-label">
+                                                    {{ $t('challengesNew.numberSupported') }}
+                                                </label>
                                                 <TailSelect
                                                     id="input-wizard-9"
                                                     v-model="select_number_of_lines"
                                                     :options="{locale: 'pl', placeholder: 'Wybierz...', openAbove: true, animate: false, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
-                                                    <option selected disabled>Wybierz...</option>
+                                                    <option selected disabled>{{ $t('challengesNew.select') }}</option>
                                                     <option
                                                         v-for="(det,index) in solutionSelects.select_number_of_lines"
                                                         :value="det.value">{{ det.name }}
@@ -319,7 +324,7 @@
                                                 </TailSelect>
                                             </div>
                                             <div class="intro-y col-span-12 sm:col-span-6">
-                                                <label for="input-wizard-10" class="form-label">Liczba zmian</label>
+                                                <label for="input-wizard-10" class="form-label">{{ $t('challengesNew.changeNumber') }}</label>
                                                 <Multiselect
                                                     class="w-full h-8 z-50"
                                                     v-model="select_work_shifts"
@@ -355,7 +360,7 @@
             <div class="col-span-12 lg:col-span-4">
                 <div class="intro-y box p-5">
                     <div>
-                        <label class="form-label">Dostęp zespołów</label>
+                        <label class="form-label">{{ $t('challengesNew.teamAccess') }}</label>
                         <TailSelect
                             id="post-form-5"
                             v-model="teamsAllowed"
@@ -374,12 +379,12 @@
               }"
                             multiple
                         >
-                            <option selected disabled>Wybierz tagi...</option>
+                            <option selected disabled>{{ $t('challengesNew.tags') }}</option>
                             <option v-for="(team,index) in teams.list" :value="team.id">{{ team.name }}</option>
                         </TailSelect>
                     </div>
                     <div class="mt-3">
-                        <label for="post-form-2" class="form-label">Deadline rozwiązań</label>
+                        <label for="post-form-2" class="form-label">{{ $t('challengesNew.deadlineSolutions') }}</label>
                         <Litepicker
                             id="post-form-2"
                             v-model="solution_deadline"
@@ -400,7 +405,7 @@
                         />
                     </div>
                     <div class="mt-3">
-                        <label for="post-form-21" class="form-label">Deadline ofert</label>
+                        <label for="post-form-21" class="form-label">{{ $t('challengesNew.deadlineOffer') }}</label>
                         <Litepicker
                             id="post-form-2"
                             v-model="offer_deadline"
@@ -422,7 +427,7 @@
                         />
                     </div>
                     <div class="mt-3">
-                        <label for="post-form-3" class="form-label">Categories</label>
+                        <label for="post-form-3" class="form-label">{{ $t('challengesNew.categories') }}</label>
                         <TailSelect
                             id="post-form-3"
                             v-model="category"
@@ -439,7 +444,7 @@
                         </TailSelect>
                     </div>
                     <div class="mt-3">
-                        <label for="post-form-4" class="form-label">Tags</label>
+                        <label for="post-form-4" class="form-label">{{ $t('challengesNew.tags') }}</label>
                         <TailSelect
                             id="post-form-4"
                             v-model="tagsSelected"
@@ -458,19 +463,19 @@
                                }"
                             multiple
                         >
-                            <option selected disabled>Wybierz tagi...</option>
+                            <option selected disabled>{{ $t('challengesNew.selectTags') }}</option>
                             <option v-for="(tag,index) in tags" :value="index">{{ tag }}</option>
                         </TailSelect>
                     </div>
                     <div class="form-check flex-col items-start mt-3">
                         <label for="post-form-5" class="form-check-label ml-0 mb-2"
-                        >Publikuj</label
+                        >{{ $t('challengesNew.publish') }}</label
                         >
                         <input id="post-form-5" class="form-check-switch" v-model="publish" type="checkbox"/>
                     </div>
                     <div class="form-check flex-col items-start mt-3">
                         <label for="post-form-6" class="form-check-label ml-0 mb-2"
-                        >Po zaakceptowaniu oferty upublicznij wyzwanie</label
+                        >{{ $t('challengesNew.acceptPublic')}}</label
                         >
                         <input id="post-form-6" v-model="allowed_publishing" class="form-check-switch" type="checkbox"/>
                     </div>
