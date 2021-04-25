@@ -22,7 +22,7 @@
                                 <div v-for="(line, index) in lines" class="row" :class="(activeLineIndex == index)? 'active':''">
                                     <div v-for="(animable, index) in line.animables">
                                         <div class="pos-image__preview image-fit w-72 h-50">
-                                            <img
+                                            <img class="w-full h-full"
                                                 :alt="animable.name.replace('models', 'models_images') + '.png'"
                                                 :src="animable.name.replace('models', 'models_images') + '.png'"
                                             />
