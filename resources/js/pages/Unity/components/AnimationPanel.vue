@@ -5,7 +5,7 @@
         </div>
     </div>
     <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-96 bottom-0 bg-white rounded-md bg-opacity-25" v-if="expanded == 1" id="bottom-animation-normal">
-        <div class="left flex-1 pt-2 flex-row ml-24">
+        <div class="left flex-1 pt-2 flex-row ml-5">
             <div class="grid grid-cols-12 w-full">
                 <div class="col-span-1">
                     <UnityButton tooltip="Dodaj linie" alttext="Dodaj linie" path="/s3/builder_icons/add_simple.png" action="addline" position="animationbuttonclick"/>
@@ -21,7 +21,7 @@
                             <div class="w-full  h-full">
                                 <div v-for="(line, index) in lines" class="row  h-full" :class="(activeLineIndex == index)? 'active':''">
                                     <div class=" h-full" v-for="(animable, index) in line.animables">
-                                        <div class="pos-image__preview image-fit w-54 h-4/5 rounded-md m-5" style="overflow: hidden; ">
+                                        <div class="pos-image__preview image-fit w-44 h-4/5 rounded-md m-5" style="overflow: hidden; ">
                                             <img class="w-full h-full"
                                                 :alt="animable.name.replace('models', 'models_images') + '.png'"
                                                 :src="animable.name.replace('models', 'models_images') + '.png'"
