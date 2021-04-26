@@ -127,7 +127,7 @@
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
-                                            <label for="input-wizard-2" class="form-label">Tech sheet url</label>
+                                            <label for="input-wizard-2" class="form-label">{{ $t('models.techSheet') }}</label>
                                             <input
                                                 id="input-wizard-7"
                                                 type="text"

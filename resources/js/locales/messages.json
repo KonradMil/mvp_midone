@@ -211,7 +211,8 @@
             "cancel" : "Cancel",
             "preview" : "Preview",
             "newModel" : "New model",
-            "subcat" : "Subcategory"
+            "subcat" : "Subcategory",
+            "techSheet" : "Tech sheet url"
         },
         "solutions": {
             "solutions" : "Solutions",
@@ -429,7 +430,8 @@
             "cancel" : "Anuluj",
             "preview" : "Podgląd",
             "newModel" : "Nowy model",
-            "subcat" : "Subkategoria"
+            "subcat" : "Subkategoria",
+            "techSheet" : "URL arkusza technicznego"
         },
         "solutions": {
             "solutions" : "Rozwiązania",
