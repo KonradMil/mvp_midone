@@ -13,7 +13,7 @@
                 <button
                     class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
                     aria-expanded="false"
-                    @click="saveModelRepo"
+                    @click="editModelRepo"
                 >
                     <SaveIcon class="w-4 h-4 mr-2"/>
                     {{ $t('global.save') }}
@@ -277,6 +277,8 @@ import SaveModel from "../../compositions/SaveModel";
 import { useI18n } from 'vue-i18n'
 import Multiselect from '@vueform/multiselect';
 import GetModels from "../../compositions/GetModels";
+import EditModel from "../../compositions/EditModel";
+
 const toast = useToast();
 
 export default {
@@ -336,8 +338,28 @@ export default {
                 load: load.value
             });
         }
+        const editModelRepo = async (id) => {
+            EditModel({
+                name: name.value,
+                category: category.value,
+                subcategory: subcategory.value,
+                model_file: model_file.value,
+                brand: brand.value,
+                model: model.value,
+                max_load_kg: max_load_kg.value,
+                max_range_mm: max_range_mm.value,
+                max_speed_mms: max_speed_mms.value,
+                axis: axis.value,
+                tech_sheet: tech_sheet.value,
+                connection_method: connection_method.value,
+                range: range.value,
+                repetity: repetity.value,
+                load: load.value
+            });
+        }
 
         onMounted(() => {
+            getModelRepositiories('');
             categories.value = types;
             // const elDropzoneSingleRef = dropzoneSingleRef.value;
             // elDropzoneSingleRef.dropzone.on("success", (resp) => {
@@ -360,6 +382,7 @@ export default {
             showModal,
             images,
             saveModelRepo,
+            editModelRepo,
             subcategory,
             load,
             repetity,
