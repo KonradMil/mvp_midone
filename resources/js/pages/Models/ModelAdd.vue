@@ -246,7 +246,7 @@
                 </div>
                 <div class="intro-y box p-5" v-if="category != ''">
                     <div class="mt-3">
-                        <label for="post-form-3" class="form-label">{{ $t('challengesNew.subcat') }}</label>
+                        <label for="post-form-3" class="form-label">{{ $t('models.subcat') }}</label>
                         <TailSelect
                             id="post-form-3"
                             v-model="subcategory"
