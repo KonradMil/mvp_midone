@@ -21,6 +21,7 @@ import Profiles from "../pages/Profiles/Main";
 import ChangePassword from "../pages/Profiles/ChangePassword";
 import List from "../pages/Models/List";
 import ModelAdd from "../pages/Models/ModelAdd";
+import ModelEdit from "../pages/Models/ModelEdit";
 import Card from "../pages/Challenges/Card";
 import Communication from "../pages/Communication/Main";
 
@@ -63,6 +64,11 @@ export const routes = [
                 path: '/models/add',
                 component: ModelAdd,
                 props: true
+            },
+            {
+                name: 'modelEdit',
+                path: '/models/edit',
+                component: ModelEdit
             },
             {
                 name: 'addChallenge',
