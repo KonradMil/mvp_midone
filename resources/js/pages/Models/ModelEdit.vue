@@ -284,7 +284,12 @@ const toast = useToast();
 export default {
     name: "ModelEdit",
     components: {Multiselect},
-    setup() {
+    props :{
+        id :{
+            type: Object
+            }
+    },
+    setup(props, {emit}) {
         const { t, locale } = useI18n({ useScope: 'global' })
         const toast = useToast();
         const tab = ref('desc');
@@ -338,7 +343,7 @@ export default {
                 load: load.value
             });
         }
-        const editModelRepo = async (id) => {
+        const editModelRepo = async () => {
             EditModel({
                 name: name.value,
                 category: category.value,
@@ -355,7 +360,7 @@ export default {
                 range: range.value,
                 repetity: repetity.value,
                 load: load.value
-            });
+            }, id);
         }
 
         onMounted(() => {

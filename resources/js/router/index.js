@@ -67,8 +67,9 @@ export const routes = [
             },
             {
                 name: 'modelEdit',
-                path: '/models/edit',
-                component: ModelEdit
+                path: '/models/edit/:id',
+                component: ModelEdit,
+                props: true
             },
             {
                 name: 'addChallenge',
