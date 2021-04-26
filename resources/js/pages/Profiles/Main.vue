@@ -440,12 +440,6 @@ export default defineComponent({
     },
     setup() {
         const activeTab = ref('personalia');
-        // const showTerms = ref(false);
-        // const showChangePassword = ref(false);
-        // const showPersonality = ref(true);
-        // const showSocials = ref(false);
-        // const showCompany = ref(false);
-        const show = ref('personality');
         const toast = useToast();
         const dropzoneSingleRef = ref();
         const avatar_path = ref();
@@ -502,44 +496,6 @@ export default defineComponent({
                 console.log(notification);
                 getNotificationsRepositories();
             });
-        // const showAdd = async (value) => {
-        //
-        // }
-        // const showAddCompany = async () => {
-        //     showCompany.value = true;
-        //     showTerms.value = false;
-        //     showPersonality.value = false;
-        //     showChangePassword.value = false;
-        //     showSocials.value=  false;
-        // }
-        // const showAddSocials = async () => {
-        //     showTerms.value = false;
-        //     showPersonality.value = false;
-        //     showChangePassword.value = false;
-        //     showSocials.value=  true;
-        //     showCompany.value = false;
-        // }
-        // const showAddTerms = async () => {
-        //       showTerms.value = true;
-        //       showPersonality.value = false;
-        //       showChangePassword.value = false;
-        //       showSocials.value=  false;
-        //       showCompany.value = false;
-        // }
-        // const showAddPersonality = async () => {
-        //     showPersonality.value = !showPersonality.value;
-        //     showTerms.value = false;
-        //     showChangePassword.value = false;
-        //     showSocials.value=  false;
-        //     showCompany.value = false;
-        // }
-        // const showAddChangePassword = async () => {
-        //     showChangePassword.value = true;
-        //     showPersonality.value = false;
-        //     showTerms.value = false;
-        //     showSocials.value=  false;
-        //     showCompany.value = false;
-        // }
         const getNotificationsRepositories = async () => {
             console.log(GetNotifications());
             // if(GetNotifications().list.)
@@ -604,19 +560,8 @@ export default defineComponent({
             formData,
             validate,
             save,
-            // showAddTerms,
-            // showTerms,
-            // showAddPersonality,
-            // showPersonality,
-            // showAddChangePassword,
-            // showChangePassword,
-            // showSocials,
-            // showAddSocials,
-            // showCompany,
-            // showAddCompany,
             avatar_path,
             activeTab,
-            show
         };
     },
     mounted() {
