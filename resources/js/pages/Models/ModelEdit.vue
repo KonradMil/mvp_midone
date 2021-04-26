@@ -276,7 +276,7 @@ import {useToast} from "vue-toastification";
 import SaveModel from "../../compositions/SaveModel";
 import { useI18n } from 'vue-i18n'
 import Multiselect from '@vueform/multiselect';
-import GetModels from '../compositions/GetModels';
+import GetModels from "../../compositions/GetModels";
 const toast = useToast();
 
 export default {
