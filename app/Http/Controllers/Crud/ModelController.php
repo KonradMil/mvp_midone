@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 class ModelController extends Controller
 {
 
-    public function getModel($id)
+    public function getModel(Request  $request)
     {
-        $model = UnityModel::find($id);
+        $model = UnityModel::find($request->id);
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
