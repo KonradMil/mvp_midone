@@ -79,7 +79,7 @@
                         </td>
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
-                                <a class="flex items-center mr-3" href="" @click.prevent="$router.push({path: 'modelEdit' + model.id})">
+                                <a class="flex items-center mr-3" href="" @click.prevent="$router.push({path: 'model/edit/' + model.id})">
                                     <CheckSquareIcon class="w-4 h-4 mr-1"/>
                                     {{$t('models.edit')}}
                                 </a>
