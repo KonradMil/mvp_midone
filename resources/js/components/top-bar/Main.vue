@@ -225,7 +225,7 @@
                         <a
                             href=""
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
-                            @click.prevent="$router.push('profiles')"
+                            @click.prevent="$router.push({path: '/profiles'})"
                         >
                             <UserIcon class="w-4 h-4 mr-2"/>
                             {{$t('topBar.profil')}}
@@ -233,13 +233,7 @@
                         <a
                             href=""
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
-                        >
-                            <EditIcon class="w-4 h-4 mr-2"/>
-                            {{$t('topBar.addAccount')}}
-                        </a>
-                        <a
-                            href=""
-                            class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
+                            @click.prevent="$router.push({path: '/change-password'})"
                         >
                             <LockIcon class="w-4 h-4 mr-2"/>
                             {{$t('topBar.resetPassword')}}
