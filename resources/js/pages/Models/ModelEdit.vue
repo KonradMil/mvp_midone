@@ -28,6 +28,7 @@
                         type="text"
                         class="intro-y form-control py-3 px-4 box pr-10 placeholder-theme-13"
                         :placeholder="$t('global.name')"
+                        v-model="model.name"
                     />
                 </div>
 
