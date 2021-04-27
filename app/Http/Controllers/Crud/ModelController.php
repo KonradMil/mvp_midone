@@ -46,8 +46,10 @@ class ModelController extends Controller
             'payload' => $model
         ]);
     }
-    public function editModel(Request $request,UnityModel $model)
+    public function editModel(Request $request, $id)
     {
+//        UnityModel $model
+        $model = UnityModel::find($id);
         $model->fill($request->input('data'));
         $model->save();
 
