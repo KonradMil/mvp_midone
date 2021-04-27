@@ -198,7 +198,6 @@ export default {
     props :{
         model :{
             type: Object,
-            required : true
         }
     },
     setup() {
