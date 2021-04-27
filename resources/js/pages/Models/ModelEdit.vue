@@ -284,7 +284,10 @@ const toast = useToast();
 export default {
     name: "ModelEdit",
     components: {Multiselect},
-
+    props: {
+        model: Object,
+        id: Number
+    },
     setup(props, {emit}) {
         const { t, locale } = useI18n({ useScope: 'global' })
         const toast = useToast();
