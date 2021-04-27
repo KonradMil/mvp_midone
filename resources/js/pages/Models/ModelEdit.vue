@@ -323,7 +323,7 @@ export default {
         const getModelRepositiories = async () => {
             let m = await GetModel(model_id);
             console.log(m);
-            model.value = m.list[0];
+            model.value = m.list.value[0];
         }
         // const saveModelRepo = async () => {
         //     SaveModel({
