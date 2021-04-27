@@ -274,7 +274,7 @@ import {defineComponent, ref, onMounted, provide} from "vue";
 import cash from "cash-dom";
 import {useToast} from "vue-toastification";
 import SaveModel from "../../compositions/SaveModel";
-import { useI18n } from 'vue-i18n'
+import {useI18n} from 'vue-i18n'
 import Multiselect from '@vueform/multiselect';
 import GetModel from "../../compositions/GetModel";
 import EditModel from "../../compositions/EditModel";
@@ -285,10 +285,10 @@ export default {
     name: "ModelEdit",
     components: {Multiselect},
     props: {
-      id: Number
+        id: Number
     },
     setup(props, {emit}) {
-        const { t, locale } = useI18n({ useScope: 'global' })
+        const {t, locale} = useI18n({useScope: 'global'})
         const toast = useToast();
         const tab = ref('desc');
         const showModal = ref(false);
@@ -321,8 +321,10 @@ export default {
             showModal.value = false;
         }
         const getModelRepositiories = async () => {
-               model.value = await GetModel(model_id);
-             model.value = model.value.list[0];
+            model.value = await GetModel(model_id);
+            console.log(model.value);
+            console.log(model.value.list);
+            model.value = model.value.list;
         }
         // const saveModelRepo = async () => {
         //     SaveModel({
