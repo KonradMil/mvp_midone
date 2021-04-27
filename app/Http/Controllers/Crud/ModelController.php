@@ -24,13 +24,13 @@ class ModelController extends Controller
         if(isset($request->search)) {
             if(is_array($request->search)){
                 if(!empty($request->search['brand'])) {
-                    $models = UnityModel::where('category', '=', $request->search['category_id'])->where('subcategory', '=', $request->search['subcategory_id'])->where('brand', '=', $request->search['brand'])->get();
+                    $models = UnityModel::where('category', '=', $request->search['category_id'])->where('subcategory', '=', $request->search['subcategory_id'])->where('brand', '=', $request->search['brand'])->take(10)->get();
                 } else {
-                    $models = UnityModel::where('category', '=', $request->search['category_id'])->where('subcategory', '=', $request->search['subcategory_id'])->get();
+                    $models = UnityModel::where('category', '=', $request->search['category_id'])->where('subcategory', '=', $request->search['subcategory_id'])->take(10)->get();
                 }
 
             } else {
-                $models = UnityModel::where('name', 'LIKE', '%'. $request->search . '%')->get();
+                $models = UnityModel::where('name', 'LIKE', '%'. $request->search . '%')->take(10)->get();
             }
         } else {
             $models = UnityModel::get();
