@@ -79,7 +79,7 @@
                         </td>
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
-                                <a class="flex items-center mr-3" href="" @click.prevent="$router.push({name: 'modelEdit'}, {id:model.id})">
+                                <a class="flex items-center mr-3" href="" @click.prevent="$router.push({path: 'models/edit/' + model.id})">
                                     <CheckSquareIcon class="w-4 h-4 mr-1"/>
                                     {{$t('models.edit')}}
                                 </a>
@@ -195,6 +195,12 @@ import SubcategoryName from "./SubcategoryName";
 export default {
     name: "List",
     components: {SubcategoryName, CategoryName},
+    props :{
+        model :{
+            type: Object,
+            required : true
+        }
+    },
     setup() {
         const models = ref([]);
         const categories = ref([]);
