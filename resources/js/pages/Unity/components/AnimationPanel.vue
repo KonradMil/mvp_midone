@@ -9,47 +9,35 @@
             <div class="grid grid-cols-12 w-full">
                 <div class="col-span-1">
                     <UnityButton tooltip="Dodaj linie" alttext="Dodaj linie" path="/s3/builder_icons/add_simple.png" action="addline" position="animationbuttonclick"/>
-                    <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" position="animationbuttonclick"/>
+                    <UnityButton tooltip="Maksymalizuj" alttext="Maksymalizuj" path="/s3/builder_icons/maximize_simple.png" action="maximize" position="animationbuttonclick"/>
                     <UnityButton tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick"/>
+                    <UnityButton tooltip="Odtwórz" alttext="Odtwórz" path="/s3/builder_icons/play_simple.png" action="play" position="animationbuttonclick"/>
                 </div>
                 <div class="col-span-11 rounded-md mr-5" style="background-color: rgba(147, 15, 104, 0.25);">
                     <div class="grid grid-cols-12 h-full" v-for="(line, index) in lines">
                         <div class="col-span-1">
-                            <div style="    border-radius: 50%;
-    background-color: rgb(255, 255, 255);
-    height: 56px;
-    width: 56px;
-    margin-left: 25%;
-    margin-top: 25%;">
-    <span style="font-size: 20px;
-    font-weight: bold;
-    top: 33%;
-    left: 6%;
-    position: relative;">C: {{line.interval}}</span>
+                            <UnityButton tooltip="Ustawienia" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
+                            <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" position="animationbuttonclick"/>
+                        </div>
+                        <div class="col-span-1">
+                            <div style="border-radius: 50%; background-color: rgb(255, 255, 255); height: 56px; width: 56px; margin-left: 25%; margin-top: 25%;">
+    <span style="font-size: 20px; font-weight: bold; top: 33%; left: 6%; position: relative;">C: {{ line.interval }}</span>
                             </div>
-                            <div style="    border-radius: 50%;
-    background-color: rgb(255, 255, 255);
-    height: 56px;
-    width: 56px;
-    margin-left: 25%;
-    margin-top: 25%;">
-    <span style="font-size: 20px;
-    font-weight: bold;
-    top: 33%;
-    left: 6%;
-    position: relative;">D: {{line.delay}}</span>
+                            <div style="border-radius: 50%; background-color: rgb(255, 255, 255); height: 56px; width: 56px; margin-left: 25%; margin-top: 25%;">
+    <span style="font-size: 20px; font-weight: bold; top: 33%; left: 6%; position: relative;">D: {{ line.delay }}</span>
                             </div>
                         </div>
-                        <div class="col-span-11 h-full" style="overflow-x: auto; overflow-y: hidden;">
+                        <div class="col-span-10 h-full" style="overflow-x: auto; overflow-y: hidden;">
                             <div class="w-full  h-full">
-                                <div  class="row  h-full" :class="(activeLineIndex == index)? 'active':''">
+                                <div class="row  h-full" :class="(activeLineIndex == index)? 'active':''">
                                     <div class=" h-full" v-for="(animable, index) in line.animables">
                                         <div class="pos-image__preview image-fit w-44 h-4/5 rounded-md m-5" style="overflow: hidden; ">
                                             <img class="w-full h-full"
                                                  :alt="animable.name.replace('models', 'models_images') + '.png'"
                                                  :src="animable.name.replace('models', 'models_images') + '.png'"
                                             />
-                                            <span>Czas trwania: {{animable.duration}}</span>
+                                            <div style="width: 94%; bottom: 0; position: relative; margin-top: 85%; margin-left: 10px; font-size: 16px; font-weight: bold;">Czas trwania: {{ animable.duration }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
