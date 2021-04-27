@@ -92,13 +92,15 @@ export default {
 
         emitter.on('UnityLineSettings', e => {
             content.value = 'line';
-            line.value = e.layoutSelected;
+            console.log(e);
+            line.value = e;
             showPanel();
         });
 
         emitter.on('UnityAnimableSettings', e => {
             content.value = 'animable';
-            animable.value = e.layoutSelected;
+            console.log(e);
+            animable.value = e;
             showPanel();
         });
 
