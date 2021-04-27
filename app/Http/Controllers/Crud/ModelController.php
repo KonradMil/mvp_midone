@@ -46,4 +46,15 @@ class ModelController extends Controller
             'payload' => $model
         ]);
     }
+    public function editModel(Request $request,UnityModel $model)
+    {
+        $model->fill($request->input('data'));
+        $model->save();
+
+        return response()->json([
+           'success' => true,
+           'message' => 'Edytowano poprawnie.',
+           'payload' => $model
+        ]);
+    }
 }

@@ -13,7 +13,7 @@
                 <button
                     class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
                     aria-expanded="false"
-                    @click="saveModelRepo"
+                    @click="editModelRepo"
                 >
                     <SaveIcon class="w-4 h-4 mr-2"/>
                     {{ $t('global.save') }}
@@ -25,10 +25,10 @@
             <div class="intro-y col-span-12 lg:col-span-8">
                 <div class="input-group mt-2">
                     <input
-                           type="text"
-                           class="intro-y form-control py-3 px-4 box pr-10 placeholder-theme-13"
-                           :placeholder="$t('global.name')"
-                           v-model="name"
+                        type="text"
+                        class="intro-y form-control py-3 px-4 box pr-10 placeholder-theme-13"
+                        :placeholder="$t('global.name')"
+                        v-model="name"
                     />
                 </div>
 
@@ -127,7 +127,7 @@
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
-                                            <label for="input-wizard-2" class="form-label">{{ $t('models.techSheet') }}</label>
+                                            <label for="input-wizard-2" class="form-label">Tech sheet url</label>
                                             <input
                                                 id="input-wizard-7"
                                                 type="text"
@@ -174,50 +174,50 @@
                                     </div>
                                 </div>
                             </div>
-<!--                            <div-->
-<!--                                class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5"-->
-<!--                            >-->
-<!--                                <div-->
-<!--                                    class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"-->
-<!--                                >-->
-<!--                                    <ChevronDownIcon class="w-4 h-4 mr-2"/>-->
-<!--                                    Zdjęcia-->
-<!--                                </div>-->
-<!--                                <div class="mt-5">-->
-<!--                                    <div class="mt-3">-->
-<!--                                        <label class="form-label">Wgraj zjęcia</label>-->
-<!--                                        <div-->
-<!--                                            class="rounded-md pt-4"-->
-<!--                                        >-->
-<!--                                            <div class="flex flex-wrap px-4">-->
-<!--                                                <Dropzone-->
-<!--                                                    style="position: relative;-->
-<!--    display: flex;"-->
-<!--                                                    ref-key="dropzoneSingleRef"-->
-<!--                                                    :options="{-->
-<!--                              url: '/api/challenge/images/store',-->
-<!--                              thumbnailWidth: 150,-->
-<!--                              maxFilesize: 5,-->
-<!--                              maxFiles: 5,-->
-<!--                              previewTemplate: '<div style=\'display: none\'></div>'-->
-<!--                            }"-->
-<!--                                                    class="dropzone">-->
-<!--                                                    <div-->
-<!--                                                        class="px-4 py-4 flex items-center cursor-pointer relative"-->
-<!--                                                    >-->
-<!--                                                        <ImageIcon class="w-4 h-4 mr-2"/>-->
-<!--                                                        <span class="text-theme-1 dark:text-theme-10 mr-1"-->
-<!--                                                        >Wgraj plik</span-->
-<!--                                                        >-->
-<!--                                                        lub przyciągnij i upuść-->
-<!--                                                    </div>-->
-<!--                                                </Dropzone>-->
-<!--                                            </div>-->
+                            <!--                            <div-->
+                            <!--                                class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5"-->
+                            <!--                            >-->
+                            <!--                                <div-->
+                            <!--                                    class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"-->
+                            <!--                                >-->
+                            <!--                                    <ChevronDownIcon class="w-4 h-4 mr-2"/>-->
+                            <!--                                    Zdjęcia-->
+                            <!--                                </div>-->
+                            <!--                                <div class="mt-5">-->
+                            <!--                                    <div class="mt-3">-->
+                            <!--                                        <label class="form-label">Wgraj zjęcia</label>-->
+                            <!--                                        <div-->
+                            <!--                                            class="rounded-md pt-4"-->
+                            <!--                                        >-->
+                            <!--                                            <div class="flex flex-wrap px-4">-->
+                            <!--                                                <Dropzone-->
+                            <!--                                                    style="position: relative;-->
+                            <!--    display: flex;"-->
+                            <!--                                                    ref-key="dropzoneSingleRef"-->
+                            <!--                                                    :options="{-->
+                            <!--                              url: '/api/challenge/images/store',-->
+                            <!--                              thumbnailWidth: 150,-->
+                            <!--                              maxFilesize: 5,-->
+                            <!--                              maxFiles: 5,-->
+                            <!--                              previewTemplate: '<div style=\'display: none\'></div>'-->
+                            <!--                            }"-->
+                            <!--                                                    class="dropzone">-->
+                            <!--                                                    <div-->
+                            <!--                                                        class="px-4 py-4 flex items-center cursor-pointer relative"-->
+                            <!--                                                    >-->
+                            <!--                                                        <ImageIcon class="w-4 h-4 mr-2"/>-->
+                            <!--                                                        <span class="text-theme-1 dark:text-theme-10 mr-1"-->
+                            <!--                                                        >Wgraj plik</span-->
+                            <!--                                                        >-->
+                            <!--                                                        lub przyciągnij i upuść-->
+                            <!--                                                    </div>-->
+                            <!--                                                </Dropzone>-->
+                            <!--                                            </div>-->
 
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
+                            <!--                                        </div>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -246,7 +246,7 @@
                 </div>
                 <div class="intro-y box p-5" v-if="category != ''">
                     <div class="mt-3">
-                        <label for="post-form-3" class="form-label">{{ $t('models.subcat') }}</label>
+                        <label for="post-form-3" class="form-label">{{ $t('challengesNew.subcat') }}</label>
                         <TailSelect
                             id="post-form-3"
                             v-model="subcategory"
@@ -267,28 +267,6 @@
             <!-- END: Post Info -->
         </div>
     </div>
-    <!--    <Modal :show="showModal" @closed="modalClosed">-->
-    <!--        <h3 class="intro-y text-lg font-medium mt-5">Dodaj członka zespołu</h3>-->
-    <!--        <div class="intro-y box p-5 mt-12 sm:mt-5">-->
-    <!--            <div>-->
-    <!--                Jeśli podany mail jest powziązany z już zarejestrowanym użytkownikiem będzie on musiał jedynie-->
-    <!--                potwierdzić chęć dołączenia.-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--        <div class="intro-y box p-5 mt-12 sm:mt-5">-->
-    <!--            <div class="relative text-gray-700 dark:text-gray-300 mr-4">-->
-    <!--                <input-->
-    <!--                    type="text"-->
-    <!--                    class="form-control w-56 box pr-10 placeholder-theme-13"-->
-    <!--                    placeholder="Email"-->
-    <!--                    v-model="new_team_member_email"-->
-    <!--                />-->
-    <!--                <button class="btn btn-primary shadow-md mr-2" @click="addMember">Zaproś</button>-->
-    <!--            </div>-->
-
-    <!--        </div>-->
-
-    <!--    </Modal>-->
 </template>
 
 <script>
@@ -297,14 +275,21 @@ import cash from "cash-dom";
 import {useToast} from "vue-toastification";
 import SaveModel from "../../compositions/SaveModel";
 import { useI18n } from 'vue-i18n'
-import Multiselect from '@vueform/multiselect'
+import Multiselect from '@vueform/multiselect';
+import GetModels from "../../compositions/GetModels";
+import EditModel from "../../compositions/EditModel";
 
 const toast = useToast();
 
 export default {
-    name: "ModelAdd",
+    name: "ModelEdit",
     components: {Multiselect},
-    setup() {
+    props :{
+        id :{
+            type: Object
+            }
+    },
+    setup(props, {emit}) {
         const { t, locale } = useI18n({ useScope: 'global' })
         const toast = useToast();
         const tab = ref('desc');
@@ -328,6 +313,7 @@ export default {
         // const dropzoneSingleRef = ref();
         const categories = ref([]);
         const types = require("../../json/model_categories.json");
+        const models = ref([]);
 
         // provide("bind[dropzoneSingleRef]", el => {
         //     dropzoneSingleRef.value = el;
@@ -335,8 +321,9 @@ export default {
         const modalClosed = () => {
             showModal.value = false;
         }
-
-
+        const getModelRepositiories = () => {
+            model.value = GetModels();
+        }
         const saveModelRepo = async () => {
             SaveModel({
                 name: name.value,
@@ -356,8 +343,28 @@ export default {
                 load: load.value
             });
         }
+        const editModelRepo = async () => {
+            EditModel({
+                name: name.value,
+                category: category.value,
+                subcategory: subcategory.value,
+                model_file: model_file.value,
+                brand: brand.value,
+                model: model.value,
+                max_load_kg: max_load_kg.value,
+                max_range_mm: max_range_mm.value,
+                max_speed_mms: max_speed_mms.value,
+                axis: axis.value,
+                tech_sheet: tech_sheet.value,
+                connection_method: connection_method.value,
+                range: range.value,
+                repetity: repetity.value,
+                load: load.value
+            }, id);
+        }
 
         onMounted(() => {
+            getModelRepositiories('');
             categories.value = types;
             // const elDropzoneSingleRef = dropzoneSingleRef.value;
             // elDropzoneSingleRef.dropzone.on("success", (resp) => {
@@ -371,6 +378,7 @@ export default {
                 .removeClass("error-page");
         });
         return {
+            models,
             categories,
             category,
             name,
@@ -379,6 +387,7 @@ export default {
             showModal,
             images,
             saveModelRepo,
+            editModelRepo,
             subcategory,
             load,
             repetity,
@@ -401,8 +410,8 @@ export default {
         next();
     }
 }
-
 </script>
+
 <style scoped>
 
 </style>

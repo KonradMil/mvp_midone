@@ -222,14 +222,14 @@
                         </div>
                     </div>
                     <div class="p-2">
-                        <button
+                        <a
                             href=""
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
-                            @click="$router.push('profiles')"
+                            @click.prevent="$router.push('profiles')"
                         >
                             <UserIcon class="w-4 h-4 mr-2"/>
                             {{$t('topBar.profil')}}
-                        </button>
+                        </a>
                         <a
                             href=""
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
@@ -253,13 +253,14 @@
                         </a>
                     </div>
                     <div class="p-2 border-t border-theme-27 dark:border-dark-3">
-                        <button
-                            @click="logout"
+                        <a
+                            href=""
+                            @click.prevent="logout"
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
                         >
                             <ToggleRightIcon class="w-4 h-4 mr-2"/>
                             {{$t('topBar.logout')}}
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

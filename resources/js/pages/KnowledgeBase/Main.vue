@@ -1,9 +1,10 @@
 <template>
     <div>
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-            <h2 class="text-lg font-medium mr-auto">Baza wiedzy</h2>
+            <h2 class="text-lg font-medium mr-auto">{{$t('global.knowledgeBase')}}</h2>
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'addKnowledgebasePost'})">Dodaj nowy post</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'addKnowledgebasePost'})">
+                    {{ $t('global.addPost') }}</button>
                 <div class="dropdown ml-auto sm:ml-0">
                     <div class="dropdown-menu w-40">
                         <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
@@ -12,14 +13,14 @@
                                 class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
                             >
                                 <Share2Icon class="w-4 h-4 mr-2"/>
-                                Share Post
+                                {{ $t('global.sharePost') }}
                             </a>
                             <a
                                 href=""
                                 class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
                             >
                                 <DownloadIcon class="w-4 h-4 mr-2"/>
-                                Download Post
+                                {{ $t('global.downloadPost') }}
                             </a>
                         </div>
                     </div>

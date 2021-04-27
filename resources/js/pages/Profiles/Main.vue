@@ -23,15 +23,15 @@
                         </div>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
-                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer dark:text-theme-10 font-medium" :class="(activeTab === 'personalia') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'personalia'" @click="showAddPersonality"> <i data-feather="activity" class="w-4 h-4 mr-2"></i> {{$t('profiles.personality')}} </a>
-                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" href="" :class="(activeTab === 'firma') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'firma'" @click="showAddCompany" > <i data-feather="box" class="w-4 h-4 mr-2"></i> {{$t('profiles.company')}} </a>
-                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" href="" :class="(activeTab === 'change-password') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'change-password'" @click="showAddChangePassword"> <i data-feather="lock" class="w-4 h-4 mr-2"></i> {{$t('profiles.changePassword')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer dark:text-theme-10 font-medium" :class="(activeTab === 'personalia') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'personalia'"> <i data-feather="activity" class="w-4 h-4 mr-2"></i> {{$t('profiles.personality')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" href="" :class="(activeTab === 'company') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'company'" > <i data-feather="box" class="w-4 h-4 mr-2"></i> {{$t('profiles.company')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" href="" :class="(activeTab === 'change_password') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'change_password'" > <i data-feather="lock" class="w-4 h-4 mr-2"></i> {{$t('profiles.changePassword')}} </a>
 <!--                        <a class="flex items-center mt-5" href=""> <i data-feather="settings" class="w-4 h-4 mr-2"></i> User Settings </a>-->
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
 <!--                        <a class="flex items-center" href=""> <i data-feather="activity" class="w-4 h-4 mr-2"></i> Email Settings </a>-->
-                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'zgody') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'zgody'" @click="showAddTerms"> <i data-feather="box" class="w-4 h-4 mr-2"></i> {{$t('profiles.agreements')}} </a>
-                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'social-media') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'social-media'" @click="showAddSocials"> <i data-feather="lock" class="w-4 h-4 mr-2"></i> {{$t('profiles.socialMedia')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'terms') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'terms'"> <i data-feather="box" class="w-4 h-4 mr-2"></i> {{$t('profiles.agreements')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'socials') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'socials'" > <i data-feather="lock" class="w-4 h-4 mr-2"></i> {{$t('profiles.socialMedia')}} </a>
                         <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'bidders-list') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'bidders-list'"> <i data-feather="settings" class="w-4 h-4 mr-2"></i> {{$t('profiles.biddersList')}} </a>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
             <!-- END: Profile Menu -->
             <div class="col-span-12 lg:col-span-8 xxl:col-span-9">
                 <!-- BEGIN: Display Information -->
-                <div class="intro-y box lg:mt-5" v-show="showPersonality">
+                <div class="intro-y box lg:mt-5" v-if="activeTab==='personalia'">
                     <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
                         <h2 class="font-medium text-base mr-auto">
                             {{$t('profiles.personality')}}
@@ -121,7 +121,7 @@
                 </div>
                 <!-- END: Display Information -->
 
-                <div id="social-media-button" class="p-5" v-show="showSocials"
+                <div id="social-media-button" class="p-5" v-if="activeTab==='socials'"
                 >
                     <div class="intro-y box lg:mt-5">
                     <div class="preview">
@@ -140,7 +140,7 @@
                      </div>
                     </div>
                 </div>
-                <div class="col-span-12 lg:col-span-8 xxl:col-span-9" v-show="showTerms">
+                <div class="col-span-12 lg:col-span-8 xxl:col-span-9" v-if="activeTab === 'terms'">
                     <!-- BEGIN: Display Information -->
                 <div class="intro-y box lg:mt-5">
                     <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
@@ -238,7 +238,7 @@
                       </div>
                     </div>
                 </div>
-                <div class="col-span-12 lg:col-span-8 xxl:col-span-9" v-show="showChangePassword">
+                <div class="col-span-12 lg:col-span-8 xxl:col-span-9" v-if="activeTab === 'change_password'">
                     <!-- BEGIN: Change Password -->
                     <div class="intro-y box lg:mt-5">
                         <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
@@ -286,7 +286,7 @@
                 </div>
                 <div
                     class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"
-                    v-show="showCompany"
+                    v-if="activeTab === 'company'"
                 >
                     <!--                <div class="font-medium text-base">Profile Settings</div>-->
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
@@ -440,12 +440,6 @@ export default defineComponent({
     },
     setup() {
         const activeTab = ref('personalia');
-        const showTerms = ref(false);
-        const showChangePassword = ref(false);
-        const showPersonality = ref(true);
-        const showSocials = ref(false);
-        const showCompany = ref(false);
-        const show = ref('personality');
         const toast = useToast();
         const dropzoneSingleRef = ref();
         const avatar_path = ref();
@@ -502,44 +496,6 @@ export default defineComponent({
                 console.log(notification);
                 getNotificationsRepositories();
             });
-        const showAdd = async (value) => {
-
-        }
-        const showAddCompany = async () => {
-            showCompany.value = true;
-            showTerms.value = false;
-            showPersonality.value = false;
-            showChangePassword.value = false;
-            showSocials.value=  false;
-        }
-        const showAddSocials = async () => {
-            showTerms.value = false;
-            showPersonality.value = false;
-            showChangePassword.value = false;
-            showSocials.value=  true;
-            showCompany.value = false;
-        }
-        const showAddTerms = async () => {
-              showTerms.value = true;
-              showPersonality.value = false;
-              showChangePassword.value = false;
-              showSocials.value=  false;
-              showCompany.value = false;
-        }
-        const showAddPersonality = async () => {
-            showPersonality.value = !showPersonality.value;
-            showTerms.value = false;
-            showChangePassword.value = false;
-            showSocials.value=  false;
-            showCompany.value = false;
-        }
-        const showAddChangePassword = async () => {
-            showChangePassword.value = true;
-            showPersonality.value = false;
-            showTerms.value = false;
-            showSocials.value=  false;
-            showCompany.value = false;
-        }
         const getNotificationsRepositories = async () => {
             console.log(GetNotifications());
             // if(GetNotifications().list.)
@@ -604,18 +560,8 @@ export default defineComponent({
             formData,
             validate,
             save,
-            showAddTerms,
-            showTerms,
-            showAddPersonality,
-            showPersonality,
-            showAddChangePassword,
-            showChangePassword,
-            showSocials,
-            showAddSocials,
-            showCompany,
-            showAddCompany,
             avatar_path,
-            activeTab
+            activeTab,
         };
     },
     mounted() {
