@@ -321,10 +321,8 @@ export default {
             showModal.value = false;
         }
         const getModelRepositiories = async () => {
-            let m = await GetModel(model_id);
-            console.log(m.list);
-            console.log(m.list.value);
-            model.value = m.list.value[0];
+               model.value = await GetModel(model_id);
+             model.value = model.value.list[0];
         }
         // const saveModelRepo = async () => {
         //     SaveModel({
