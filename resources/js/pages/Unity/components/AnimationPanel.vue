@@ -13,7 +13,7 @@
                     <UnityButton tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick"/>
                     <UnityButton tooltip="Odtwórz" alttext="Odtwórz" path="/s3/builder_icons/play_simple.png" action="play" position="animationbuttonclick"/>
                 </div>
-                <div class="col-span-11 rounded-md mr-5" style="background-color: rgba(147, 15, 104, 0.25);">
+                <div class="col-span-11 rounded-md mr-5" style="background-color: rgba(147, 15, 104, 0.25); overflow-y: scroll;">
                     <div class="grid grid-cols-12 h-full" v-for="(line, index) in lines">
                         <div class="col-span-1">
                             <UnityButton style="margin-left: 25%; margin-top: 25%;" tooltip="Ustawienia" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
@@ -31,7 +31,7 @@
                             <div class="w-full  h-full">
                                 <div class="row flex h-full" :class="(activeLineIndex == index)? 'active':''">
                                     <div class=" h-full" v-for="(animable, index) in line.animables">
-                                        <div class="pos-image__preview image-fit w-44 h-4/5 rounded-md m-5" style="overflow: hidden;"  @click="activeAnimableIndex = index">
+                                        <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;"  @click="activeAnimableIndex = index">
                                             <img class="w-full h-full"
                                                  :alt="animable.name.replace('models', 'models_images') + '.png'"
                                                  :src="animable.name.replace('models', 'models_images') + '.png'"
@@ -107,7 +107,7 @@ export default {
                 case 'removeline':
                     emitter.emit('unityoutgoingaction', {action: 'removeLine', data: activeLineIndex})
                     break;
-                case 'settings':
+                case 'settingsline':
                     emitter.emit('UnityLineSettings', {action: 'removeLine', data: lines.value[activeLineIndex]})
                     break;
                 case 'line':
