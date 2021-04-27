@@ -374,7 +374,6 @@ export default {
                 .removeClass("error-page");
         });
         return {
-            models,
             categories,
             category,
             name,
