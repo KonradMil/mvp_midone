@@ -67,7 +67,7 @@ export const routes = [
             },
             {
                 name: 'modelEdit',
-                path: '/models/edit',
+                path: '/models/edit/:id',
                 component: ModelEdit,
                 props: true
             },

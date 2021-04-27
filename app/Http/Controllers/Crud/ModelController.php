@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 
 class ModelController extends Controller
 {
+
+    public function getModel($id)
+    {
+        $model = UnityModel::find($id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => $model
+        ]);
+    }
     public function getModels(Request  $request)
     {
 //        dd($request->search);

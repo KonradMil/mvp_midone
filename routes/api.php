@@ -75,7 +75,7 @@ Route::group(['prefix' => 'teams', 'middleware' => 'auth:sanctum'], function () 
     Route::post('user/invite/accept', [TeamsController::class, 'acceptInvite']);
     Route::post('user/get', [TeamsController::class, 'getUserTeamsFiltered']);
 });
-
+Route::post('model/get', [ModelController::class, 'getModel']);
 Route::group(['prefix' => 'models', 'middleware' => 'auth:sanctum'], function () {
     Route::post('get', [ModelController::class, 'getModels']);
     Route::post('add', [ModelController::class, 'addModel']);

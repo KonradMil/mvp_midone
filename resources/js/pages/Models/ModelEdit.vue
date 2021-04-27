@@ -276,7 +276,7 @@ import {useToast} from "vue-toastification";
 import SaveModel from "../../compositions/SaveModel";
 import { useI18n } from 'vue-i18n'
 import Multiselect from '@vueform/multiselect';
-import GetModels from "../../compositions/GetModels";
+import GetModel from "../../compositions/GetModel";
 import EditModel from "../../compositions/EditModel";
 
 const toast = useToast();
@@ -284,9 +284,9 @@ const toast = useToast();
 export default {
     name: "ModelEdit",
     components: {Multiselect},
-    props: (route) => ({
-        ...route.params
-    }),
+    props: {
+      id: Number
+    },
     setup(props, {emit}) {
         const { t, locale } = useI18n({ useScope: 'global' })
         const toast = useToast();
@@ -311,6 +311,7 @@ export default {
         // const dropzoneSingleRef = ref();
         const categories = ref([]);
         const types = require("../../json/model_categories.json");
+        const model_id = ref(null);
         // const models = ref([]);
 
         // provide("bind[dropzoneSingleRef]", el => {
@@ -319,9 +320,9 @@ export default {
         const modalClosed = () => {
             showModal.value = false;
         }
-        // const getModelRepositiories = () => {
-        //     model.value = GetModels();
-        // }
+        const getModelRepositiories = () => {
+            model.value = GetModel(model_id);
+        }
         // const saveModelRepo = async () => {
         //     SaveModel({
         //         name: name.value,
@@ -362,7 +363,8 @@ export default {
         }
 
         onMounted(() => {
-            model.value = props.model;
+            model_id.value = props.id;
+            getModelRepositiories();
             categories.value = types;
             // const elDropzoneSingleRef = dropzoneSingleRef.value;
             // elDropzoneSingleRef.dropzone.on("success", (resp) => {
