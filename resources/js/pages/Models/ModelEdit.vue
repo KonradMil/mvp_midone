@@ -323,7 +323,8 @@ export default {
         const getModelRepositiories = async () => {
             model.value = await GetModel(model_id);
             console.log(model.value);
-            console.log(model.value.list);
+            console.log(model.value.list.list);
+            console.log(model.value.list.value);
             model.value = model.value.list;
         }
         // const saveModelRepo = async () => {
