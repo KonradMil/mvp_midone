@@ -16,8 +16,8 @@
                 <div class="col-span-11 rounded-md mr-5" style="background-color: rgba(147, 15, 104, 0.25);">
                     <div class="grid grid-cols-12 h-full" v-for="(line, index) in lines">
                         <div class="col-span-1">
-                            <UnityButton tooltip="Ustawienia" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
-                            <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" position="animationbuttonclick"/>
+                            <UnityButton style="margin-left: 25%; margin-top: 25%;" tooltip="Ustawienia" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
+                            <UnityButton style="margin-left: 25%; margin-top: 25%;" tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" position="animationbuttonclick"/>
                         </div>
                         <div class="col-span-1">
                             <div style="border-radius: 50%; background-color: rgb(255, 255, 255); height: 56px; width: 56px; margin-left: 25%; margin-top: 25%;">
