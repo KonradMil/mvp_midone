@@ -16,10 +16,10 @@
                 <div class="col-span-11 rounded-md mr-5" style="background-color: rgba(147, 15, 104, 0.25); overflow-y: scroll;">
                     <div class="grid grid-cols-12 h-full" v-for="(line, index) in lines">
                         <div class="col-span-1">
-                            <div style="margin-left: 25%; margin-top: 25%;">
+                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);">
                                 <UnityButton tooltip="Ustawienia" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
                             </div>
-                            <div style="margin-left: 25%; margin-top: 25%;">
+                            <div style="margin-left: 25%; margin-top: calc(25% - 10px)">
                                 <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" position="animationbuttonclick"/>
                             </div>
                         </div>
