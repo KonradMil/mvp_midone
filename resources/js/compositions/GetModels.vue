@@ -5,27 +5,27 @@
 <script>
 import {ref} from 'vue';
 
-export default function GetModels(search) {
-    const list = ref([]);
+export default async function GetModels(search) {
+
 
     async function getModels(search) {
-        axios.post('/api/models/get', {search: search})
+        await axios.post('/api/models/get', {search: search})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
                     // console.log(response.data);
-                    list.value = response.data.payload;
+                    const list = response.data.payload;
+                    console.log(list);
+                    return list;
                 } else {
                     // toast.error(response.data.message);
                 }
             })
     }
 
-    getModels(search);
+    let list = await getModels(search);
+    return list;
 
-    return {
-        list
-    }
 }
 </script>
 
