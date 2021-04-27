@@ -3,10 +3,10 @@
 </template>
 
 <script>
-import {ref} from 'vue';
+import {ref, unref} from 'vue';
 
 export default function GetModel(id) {
-    const list = ref([]);
+    const list = [];
 
     async function getModel(id) {
         axios.post('/api/model/get', {id: id})
