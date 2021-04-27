@@ -1,6 +1,6 @@
 <template>
     <TopButtons :icons="topIcons"></TopButtons>
-    <LeftButtons :icons="leftIcons"></LeftButtons>
+    <LeftButtons :icons="leftIcons" v-if="mode == 'edit'"></LeftButtons>
     <LeftPanel></LeftPanel>
     <div @contextmenu.prevent="openMenu">
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
