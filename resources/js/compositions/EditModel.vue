@@ -5,11 +5,11 @@
 <script>
 import {ref} from 'vue';
 
-export default function EditModel(id) {
+export default function EditModel(data,id) {
     const list = ref([]);
 
-    async function editModel(id) {
-        axios.post(`/api/models/edit/${id}`, {id})
+    async function editModel(data,id) {
+        axios.post(`/api/models/edit/${id}`, {data,id})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
@@ -21,7 +21,7 @@ export default function EditModel(id) {
             })
     }
 
-    editModel(id);
+    editModel(data,id);
 
     return {
         list
