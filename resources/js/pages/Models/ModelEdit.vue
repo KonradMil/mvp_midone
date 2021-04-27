@@ -296,7 +296,7 @@ export default {
         const subcategory = ref('');
         const model_file = ref('');
         const brand = ref('');
-        const model = ref(props.model);
+        const model = ref('');
         const max_load_kg = ref('');
         const max_range_mm = ref('');
         const max_speed_mms = ref('');
@@ -360,6 +360,7 @@ export default {
         }
 
         onMounted(() => {
+            model.value = props.model;
             categories.value = types;
             // const elDropzoneSingleRef = dropzoneSingleRef.value;
             // elDropzoneSingleRef.dropzone.on("success", (resp) => {
