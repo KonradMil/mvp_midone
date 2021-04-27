@@ -320,8 +320,9 @@ export default {
         const modalClosed = () => {
             showModal.value = false;
         }
-        const getModelRepositiories = () => {
-            let m = GetModel(model_id);
+        const getModelRepositiories = async () => {
+            let m = await GetModel(model_id);
+            console.log(m);
             model.value = m.list[0];
         }
         // const saveModelRepo = async () => {
