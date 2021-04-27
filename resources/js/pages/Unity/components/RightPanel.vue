@@ -66,7 +66,9 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         const layout = ref({});
         const label = ref({});
+        const line = ref({});
         const comment = ref({});
+        const animable = ref({});
         const currentTitle = ref('');
         const content = ref('');
 
@@ -87,6 +89,18 @@ export default {
         const hidePanel = () => {
             cash("#right-panel").modal("hide");
         }
+
+        emitter.on('UnityLineSettings', e => {
+            content.value = 'line';
+            line.value = e.layoutSelected;
+            showPanel();
+        });
+
+        emitter.on('UnityAnimableSettings', e => {
+            content.value = 'animable';
+            animable.value = e.layoutSelected;
+            showPanel();
+        });
 
         emitter.on('UnityLayoutSelected', e => {
             content.value = 'layout';

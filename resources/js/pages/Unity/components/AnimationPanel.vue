@@ -31,7 +31,7 @@
                             <div class="w-full  h-full">
                                 <div class="row flex h-full" :class="(activeLineIndex == index)? 'active':''">
                                     <div class=" h-full" v-for="(animable, index) in line.animables">
-                                        <div class="pos-image__preview image-fit w-44 h-4/5 rounded-md m-5" style="overflow: hidden; ">
+                                        <div class="pos-image__preview image-fit w-44 h-4/5 rounded-md m-5" style="overflow: hidden;"  @click="activeAnimableIndex = index">
                                             <img class="w-full h-full"
                                                  :alt="animable.name.replace('models', 'models_images') + '.png'"
                                                  :src="animable.name.replace('models', 'models_images') + '.png'"
@@ -69,7 +69,8 @@ export default {
     setup(props, context) {
         const lines = ref([{}]);
         const activeLineIndex = ref(0);
-        const expanded = ref(0);
+        const activeAnimableIndex = ref(0);
+        const expanded = ref(1);
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         emitter.on('animationbuttonclick', e => handleClick(e.val))
@@ -104,7 +105,13 @@ export default {
                     emitter.emit('unityoutgoingaction', {action: 'addLine', data: lines.value.length})
                     break;
                 case 'removeline':
-                    emitter.emit('unityoutgoingaction', {action: 'removeLine', data: ''})
+                    emitter.emit('unityoutgoingaction', {action: 'removeLine', data: activeLineIndex})
+                    break;
+                case 'settings':
+                    emitter.emit('UnityLineSettings', {action: 'removeLine', data: lines.value[activeLineIndex]})
+                    break;
+                case 'line':
+                    emitter.emit('UnityAnimableSettings', {action: 'removeLine', data: lines.value[activeLineIndex].animables[activeAnimableIndex]})
                     break;
                 case 'minimalize':
                     if (expanded.value == 1) {
@@ -119,7 +126,8 @@ export default {
         return {
             expanded,
             lines,
-            activeLineIndex
+            activeLineIndex,
+            activeAnimableIndex
         }
     }
 }
