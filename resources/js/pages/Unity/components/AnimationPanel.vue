@@ -16,22 +16,26 @@
                 <div class="col-span-11 rounded-md mr-5" style="background-color: rgba(147, 15, 104, 0.25); overflow-y: scroll;">
                     <div class="grid grid-cols-12 h-full" v-for="(line, index) in lines">
                         <div class="col-span-1">
-                            <UnityButton style="margin-left: 25%; margin-top: 25%;" tooltip="Ustawienia" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
-                            <UnityButton style="margin-left: 25%; margin-top: 25%;" tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" position="animationbuttonclick"/>
+                            <div style="margin-left: 25%; margin-top: 25%;">
+                                <UnityButton tooltip="Ustawienia" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
+                            </div>
+                            <div style="margin-left: 25%; margin-top: 25%;">
+                                <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" position="animationbuttonclick"/>
+                            </div>
                         </div>
                         <div class="col-span-1">
                             <div style="border-radius: 50%; background-color: rgb(255, 255, 255); height: 56px; width: 56px; margin-left: 25%; margin-top: 25%;">
-    <span style="font-size: 20px; font-weight: bold; top: 33%; left: 6%; position: relative;">C: {{ line.interval }}</span>
+                                <span style="font-size: 20px; font-weight: bold; top: 33%; left: 6%; position: relative;">C: {{ line.interval }}</span>
                             </div>
                             <div style="border-radius: 50%; background-color: rgb(255, 255, 255); height: 56px; width: 56px; margin-left: 25%; margin-top: 25%;">
-    <span style="font-size: 20px; font-weight: bold; top: 33%; left: 6%; position: relative;">D: {{ line.delay }}</span>
+                                <span style="font-size: 20px; font-weight: bold; top: 33%; left: 6%; position: relative;">D: {{ line.delay }}</span>
                             </div>
                         </div>
                         <div class="col-span-10 h-full" style="overflow-x: auto; overflow-y: hidden;">
                             <div class="w-full  h-full">
                                 <div class="row flex h-full" :class="(activeLineIndex == index)? 'active':''">
                                     <div class=" h-full" v-for="(animable, index) in line.animables">
-                                        <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;"  @click="activeAnimableIndex = index">
+                                        <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;" @click="activeAnimableIndex = index">
                                             <img class="w-full h-full"
                                                  :alt="animable.name.replace('models', 'models_images') + '.png'"
                                                  :src="animable.name.replace('models', 'models_images') + '.png'"
@@ -111,7 +115,10 @@ export default {
                     emitter.emit('UnityLineSettings', {action: 'removeLine', data: lines.value[activeLineIndex]})
                     break;
                 case 'line':
-                    emitter.emit('UnityAnimableSettings', {action: 'removeLine', data: lines.value[activeLineIndex].animables[activeAnimableIndex]})
+                    emitter.emit('UnityAnimableSettings', {
+                        action: 'removeLine',
+                        data: lines.value[activeLineIndex].animables[activeAnimableIndex]
+                    })
                     break;
                 case 'minimalize':
                     if (expanded.value == 1) {
