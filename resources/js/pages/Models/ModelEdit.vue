@@ -381,7 +381,6 @@ export default {
             modalClosed,
             showModal,
             images,
-            saveModelRepo,
             editModelRepo,
             subcategory,
             load,
