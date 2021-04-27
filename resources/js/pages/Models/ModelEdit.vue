@@ -28,7 +28,7 @@
                         type="text"
                         class="intro-y form-control py-3 px-4 box pr-10 placeholder-theme-13"
                         :placeholder="$t('global.name')"
-                        v-model="name"
+                        v-model="model.name"
                     />
                 </div>
 
@@ -78,7 +78,7 @@
                                                 id="input-wizard-1"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="model_file"
+                                                v-model="model.model_file"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -87,7 +87,7 @@
                                                 id="input-wizard-2"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="brand"
+                                                v-model="model.brand"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -96,7 +96,7 @@
                                                 id="input-wizard-3"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="max_load_kg"
+                                                v-model="model.max_load_kg"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -105,7 +105,7 @@
                                                 id="input-wizard-4"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="max_range_mm"
+                                                v-model="model.max_range_mm"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -114,7 +114,7 @@
                                                 id="input-wizard-5"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="axis"
+                                                v-model="model.axis"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -123,7 +123,7 @@
                                                 id="input-wizard-6"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="max_speed_mms"
+                                                v-model="model.max_speed_mms"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -132,7 +132,7 @@
                                                 id="input-wizard-7"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="tech_sheet"
+                                                v-model="model.tech_sheet"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -141,7 +141,7 @@
                                                 id="input-wizard-8"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="connection_method"
+                                                v-model="model.connection_method"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -150,7 +150,7 @@
                                                 id="input-wizard-9"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="range"
+                                                v-model="model.range"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -159,7 +159,7 @@
                                                 id="input-wizard-10"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="repetity"
+                                                v-model="model.repetity"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -168,7 +168,7 @@
                                                 id="input-wizard-11"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="load"
+                                                v-model="model.load"
                                             />
                                         </div>
                                     </div>
@@ -284,11 +284,7 @@ const toast = useToast();
 export default {
     name: "ModelEdit",
     components: {Multiselect},
-    props :{
-        id :{
-            type: Object
-            }
-    },
+
     setup(props, {emit}) {
         const { t, locale } = useI18n({ useScope: 'global' })
         const toast = useToast();
@@ -313,7 +309,7 @@ export default {
         // const dropzoneSingleRef = ref();
         const categories = ref([]);
         const types = require("../../json/model_categories.json");
-        const models = ref([]);
+        // const models = ref([]);
 
         // provide("bind[dropzoneSingleRef]", el => {
         //     dropzoneSingleRef.value = el;
@@ -321,29 +317,29 @@ export default {
         const modalClosed = () => {
             showModal.value = false;
         }
-        const getModelRepositiories = () => {
-            model.value = GetModels();
-        }
-        const saveModelRepo = async () => {
-            SaveModel({
-                name: name.value,
-                category: category.value,
-                subcategory: subcategory.value,
-                model_file: model_file.value,
-                brand: brand.value,
-                model: model.value,
-                max_load_kg: max_load_kg.value,
-                max_range_mm: max_range_mm.value,
-                max_speed_mms: max_speed_mms.value,
-                axis: axis.value,
-                tech_sheet: tech_sheet.value,
-                connection_method: connection_method.value,
-                range: range.value,
-                repetity: repetity.value,
-                load: load.value
-            });
-        }
-        const editModelRepo = async () => {
+        // const getModelRepositiories = () => {
+        //     model.value = GetModels();
+        // }
+        // const saveModelRepo = async () => {
+        //     SaveModel({
+        //         name: name.value,
+        //         category: category.value,
+        //         subcategory: subcategory.value,
+        //         model_file: model_file.value,
+        //         brand: brand.value,
+        //         model: model.value,
+        //         max_load_kg: max_load_kg.value,
+        //         max_range_mm: max_range_mm.value,
+        //         max_speed_mms: max_speed_mms.value,
+        //         axis: axis.value,
+        //         tech_sheet: tech_sheet.value,
+        //         connection_method: connection_method.value,
+        //         range: range.value,
+        //         repetity: repetity.value,
+        //         load: load.value
+        //     });
+        // }
+        const editModelRepo = async (id) => {
             EditModel({
                 name: name.value,
                 category: category.value,
