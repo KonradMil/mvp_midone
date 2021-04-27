@@ -296,7 +296,7 @@ export default {
         const subcategory = ref('');
         const model_file = ref('');
         const brand = ref('');
-        const model = ref('');
+        const model = ref(props.model);
         const max_load_kg = ref('');
         const max_range_mm = ref('');
         const max_speed_mms = ref('');
