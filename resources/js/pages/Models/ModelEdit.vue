@@ -325,7 +325,6 @@ export default {
                model.value = res.payload[0];
                 category.value = res.payload[0].category;
                 subcategory.value = res.payload[0].subcategory;
-
             })
         }
         // const saveModelRepo = async () => {
@@ -348,7 +347,7 @@ export default {
         //     });
         // }
         const editModelRepo = async () => {
-            EditModel(model_id, {
+            EditModel({
                 name: name.value,
                 category: category.value,
                 subcategory: subcategory.value,
@@ -364,7 +363,7 @@ export default {
                 range: range.value,
                 repetity: repetity.value,
                 load: load.value
-            });
+            }, model_id );
         }
 
         onMounted(() => {
