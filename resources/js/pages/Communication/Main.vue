@@ -246,29 +246,30 @@
                                        v-model="type"
                                 >
                             </div>
+                            <div class="pt-5">
                             <div
                                 class="border border-gray-200 dark:border-dark-5 rounded-md p-5"
                             >
                                 <div
                                     class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"
                                 >
-                                    <div class="w-22 mr-3">
-                                        <TailSelect
-                                            id="input-wizard-2"
-                                            :options="{
-                                                locale: 'pl',
-                                                placeholder: 'Wybierz...',
-                                                limit: 'Nie można wybrać więcej',
-                                                search: false,
-                                                hideSelected: false,
-                                                classNames: 'w-full'
-                                            }"
-                                        >
-                                            <option value="pl">PL</option>
-                                            <option value="en">ENG</option>
+<!--                                    <div class="w-22 mr-3">-->
+<!--                                        <TailSelect-->
+<!--                                            id="input-wizard-2"-->
+<!--                                            :options="{-->
+<!--                                                locale: 'pl',-->
+<!--                                                placeholder: 'Wybierz...',-->
+<!--                                                limit: 'Nie można wybrać więcej',-->
+<!--                                                search: false,-->
+<!--                                                hideSelected: false,-->
+<!--                                                classNames: 'w-full'-->
+<!--                                            }"-->
+<!--                                        >-->
+<!--                                            <option value="pl">PL</option>-->
+<!--                                            <option value="en">ENG</option>-->
 
-                                        </TailSelect>
-                                    </div>
+<!--                                        </TailSelect>-->
+<!--                                    </div>-->
                                     {{$t('challengesNew.description')}}
                                 </div>
                                 <div class="mt-5">
@@ -278,6 +279,52 @@
                                     <button type="button" class="btn btn-primary w-20" @click="saveReportRepo">Send</button>
                                 </div>
                             </div>
+                            </div>
+                            <div
+                                class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5"
+                            >
+                                <div
+                                    class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"
+                                >
+                                    <ChevronDownIcon class="w-4 h-4 mr-2"/>
+                                    {{ $t('challengesNew.photo') }}
+                                </div>
+                                <div class="mt-5">
+                                    <div class="mt-3">
+                                        <label class="form-label"> {{ $t('challengesNew.uploadPhoto') }}</label>
+                                        <div
+                                            class="rounded-md pt-4"
+                                        >
+                                            <div class="flex flex-wrap px-4">
+                                                <Dropzone
+                                                    style="position: relative;
+    display: flex;"
+                                                    ref-key="dropzoneSingleRef"
+                                                    :options="{
+                                                     url: '/api/report/files/store',
+                                                     thumbnailWidth: 150,
+                                                     maxFilesize: 5,
+                                                     maxFiles: 5,
+                                                     previewTemplate: '<div style=\'display: none\'></div>'
+                                                    }"
+                                                    class="dropzone">
+                                                    <div
+                                                        class="px-4 py-4 flex items-center cursor-pointer relative"
+                                                    >
+                                                        <ImageIcon class="w-4 h-4 mr-2"/>
+                                                        <span class="text-theme-1 dark:text-theme-10 mr-1"
+                                                        >{{$t('challengesNew.file')}}</span
+                                                        >
+                                                        {{ $t('challengesNew.fileUpload')}}
+                                                    </div>
+                                                </Dropzone>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
 
@@ -353,11 +400,13 @@
 </template>
 
 <script>
-import {onMounted, ref} from "vue";
+import {onMounted, provide, ref} from "vue";
+import cash from "cash-dom";
 import GetUsers from '../../compositions/GetUsers'
 import GetNotifications from '../../compositions/GetNotifications'
 import GetTeams from '../../compositions/GetTeams';
 import SaveReport from '../../compositions/SaveReport';
+import Dropzone from '../../global-components/dropzone/Main'
 import {useToast} from "vue-toastification";
 import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
@@ -366,7 +415,13 @@ import SaveChallenge from "../../compositions/SaveChallenge";
 
 export default {
     name: "Communication",
-    components: {Avatar, Modal,GetTeams, GetUsers},
+    components: {
+        Avatar,
+        Modal,
+        GetTeams,
+        GetUsers,
+        Dropzone
+    },
     setup(props, {emit}) {
         const toast = useToast();
         const showDetails = ref([]);
@@ -381,6 +436,11 @@ export default {
         const type = ref('');
         const description = ref('');
         const files = ref([]);
+        const dropzoneSingleRef = ref();
+
+        provide("bind[dropzoneSingleRef]", el => {
+            dropzoneSingleRef.value = el;
+        });
 
         const saveReportRepo = async () => {
             SaveReport({
@@ -412,6 +472,15 @@ export default {
             GetUsersRepositories('');
             GetNotificationsReposistories('');
             GetTeamsRepositiories('');
+            // const elDropzoneSingleRef = dropzoneSingleRef.value;
+            // console.log(elDropzoneSingleRef);
+            // elDropzoneSingleRef.dropzone.on("success", (resp) => {
+            //     files.value.push(JSON.parse(resp.xhr.response).payload);
+            //
+            // });
+            // elDropzoneSingleRef.dropzone.on("error", () => {
+            //     toast.error("Błąd");
+            // });
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
