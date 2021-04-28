@@ -30,15 +30,13 @@
 <!--        />-->
     </div>
 </template>
-<style src="@vueform/slider/themes/default.css"></style>
 <script>
-import VSwatches from "../../../../components/color-swatches/VSwatches";
 import {onMounted, ref, watch, watchEffect} from "vue";
 
 export default {
     name: "LineDialog",
     components: {
-        VSwatches, Slider
+
     },
     props: {
         line: Object
