@@ -5,6 +5,7 @@ use App\Http\Controllers\Crud\ChallengeController;
 use App\Http\Controllers\Crud\ModelController;
 use App\Http\Controllers\Crud\SolutionController;
 use App\Http\Controllers\Crud\TeamsController;
+use App\Http\Controllers\Crud\ReportController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\KnowledgebaseController;
 use App\Http\Controllers\CommentsController;
@@ -42,6 +43,11 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
     Route::post('user/like', [ChallengeController::class, 'likeChallenge']);
     Route::post('user/comment', [ChallengeController::class, 'commentChallenge']);
     Route::post('images/store', [ChallengeController::class, 'storeImage']);
+});
+
+Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('user/create', [ReportController::class, 'createReport']);
+    Route::post('file/store', [ReportController::class, 'storeFile']);
 });
 
 Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
