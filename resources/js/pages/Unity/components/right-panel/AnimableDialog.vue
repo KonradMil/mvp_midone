@@ -6,57 +6,37 @@
             type="text"
             class="form-control"
             placeholder=""
-            v-model="l.message"
+            v-model="l.duration"
         />
     </div>
 
-    <div class="mt-3">
-        <label for="modal-form-3" class="form-label">Wielkość etykiety</label>
-        <Slider id="modal-form-3" v-model="l.delay" :min="0" :max="55" style="width: 100%;"/>
-    </div>
 </template>
-<style src="@vueform/slider/themes/default.css"></style>
 <script>
-import VSwatches from "../../../../components/color-swatches/VSwatches";
 import {onMounted, ref, watch, watchEffect} from "vue";
-import Slider from '@vueform/slider'
 
 export default {
     name: "AnimableDialog",
     components: {
-        VSwatches, Slider
     },
     props: {
-        label: Object
+        animable: Object
     },
-    emits: ["update:line"],
+    emits: ["update:animable"],
     setup(props, context) {
-        const l = ref({cycleTime: 36, delay: '', selectedDetail: ''});
-        const details = ref([]);
+        const l = ref({duration: 1});
 
         watch(l, (lab, prevLabel) => {
             console.log('CHANGE');
-            context.emit("update:line", lab);
+            context.emit("update:animable", lab);
         }, {deep: true})
 
         onMounted(() => {
-            if (props.label.cycleTime != undefined && props.label.cycleTime != '') {
-                l.value.cycleTime = props.label.cycleTime;
+            if (props.animable.duration != undefined && props.animable.duration != '') {
+                l.value.duration = props.animable.duration;
             } else {
-                l.value.cycleTime = '';
+                l.value.duration = 1;
             }
 
-            if (props.label.delay != undefined && props.label.delay != '') {
-                l.value.delay = props.label.delay;
-            } else {
-                l.value.delay = 36;
-            }
-
-            if (props.label.selectedDetail != undefined && props.label.selectedDetail != '') {
-                l.value.selectedDetail = props.label.selectedDetail;
-            } else {
-                l.value.selectedDetail = '#222F3D';
-            }
             l.value.index = props.label.index;
         });
 
