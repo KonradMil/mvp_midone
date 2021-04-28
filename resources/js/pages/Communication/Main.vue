@@ -233,18 +233,30 @@
                             </div>
                             <div class="mt-3">
                                 <label for="crud-form-2" class="form-label">Czego dotyczy</label>
-<!--                                <select data-placeholder="Select your favorite actors" class="tail-select w-full" id="crud-form-2" multiple>-->
-<!--                                    <option value="1" selected>Sport & Outdoor</option>-->
-<!--                                    <option value="2">PC & Laptop</option>-->
-<!--                                    <option value="3" selected>Smartphone & Tablet</option>-->
-<!--                                    <option value="4">Photography</option>-->
-<!--                                </select>-->
-                                <input id="crud-form-2"
-                                       type="text"
-                                       class="form-control w-full"
-                                       placeholder="Input text"
-                                       v-model="type"
-                                >
+                                <TailSelect
+                                    id="post-form-3"
+                                    v-model="type"
+                                    :options="{
+                                     locale: 'pl',
+                                     limit: 'Nie można wybrać więcej',
+                                     search: false,
+                                     hideSelected: false,
+                                     classNames: 'w-16'
+                                     }"
+                                   >
+                                    <option value="wyzwanie">Wyzwanie</option>
+                                    <option value="rozwiazanie">Rozwiązanie</option>
+                                    <option value="oferta">Oferta</option>
+                                    <option value="projekt">Projekt</option>
+                                    <option value="stanowisko">Stanowisko</option>
+                                    <option value="inne">Inne</option>
+                                </TailSelect>
+<!--                                <input id="crud-form-2"-->
+<!--                                       type="text"-->
+<!--                                       class="form-control w-full"-->
+<!--                                       placeholder="Input text"-->
+<!--                                       v-model="type"-->
+<!--                                >-->
                             </div>
                             <div class="pt-5">
                             <div
