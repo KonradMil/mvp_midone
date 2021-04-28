@@ -33,7 +33,7 @@
                        type="text"
                        v-model="message"
                        class="form-control form-control-rounded border-transparent bg-gray-200 pr-10 placeholder-theme-13"
-                       placeholder="Skomentuj..."
+                       :placeholder="$t('global.comment')"
                 />
             </form>
             <SmileIcon

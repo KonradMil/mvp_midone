@@ -1,7 +1,7 @@
 {
     "en": {
         "global": {
-            "Szukaj" : "Search...",
+            "search" : "Search...",
             "name": "Name",
             "notifications" : "Notifications",
             "anyNotifications" : "You don't have any notifications",
@@ -14,7 +14,9 @@
             "addPost" : "Add new post",
             "knowledgeBase" : "Knowledge base",
             "sharePost" : "Share post",
-            "downloadPost" : "Download post"
+            "downloadPost" : "Download post",
+            "comment" : "Comment...",
+            "select" : "Select"
         },
         "topBar": {
             "profil": "Profile",
@@ -42,6 +44,7 @@
             "Archiwalne": "Archival",
             "Obserwowane": "Watched"
         },
+
         "challengesMain": {
             "challenges": "Challenges",
             "addChallenge": "Add new challenge",
@@ -222,7 +225,7 @@
     },
     "pl": {
         "global": {
-            "Szukaj" : "Szukaj...",
+            "search" : "Szukaj...",
             "name": "Nazwa",
             "notifications" : "Powiadomienia",
             "anyNotifications" : "Nie masz żadnych powiadomień.",
@@ -235,7 +238,9 @@
             "addPost" : "Dodaj nowy post",
             "knowledgeBase" : "Baza wiedzy",
             "sharePost" : "Udostępnij post",
-            "downloadPost" : "Pobierz post"
+            "downloadPost" : "Pobierz post",
+            "comment" : "Skomentuj...",
+            "select" : "Wybierz"
         },
         "topBar": {
             "profil": "Profil",

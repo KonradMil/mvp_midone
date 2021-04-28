@@ -29,7 +29,13 @@
                         <TailSelect
                             id="input-wizard-2"
                             v-model="name_lang"
-                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                            :options="{
+                                locale: 'pl',
+                                placeholder: 'Wybierz...',
+                                limit: 'Nie można wybrać więcej',
+                                search: false,
+                                hideSelected: false,
+                                classNames: 'w-full' }"
                         >
                             <option value="pl">PL</option>
                             <option value="en">ENG</option>
@@ -331,7 +337,7 @@
                                                     mode="single"
                                                     label="name"
                                                     max="1"
-                                                    placeholder="Wybierz"
+                                                    :placeholder="$t('global.select')"
                                                     valueProp="value"
                                                     :options="solutionSelects.select_work_shifts"
                                                 />

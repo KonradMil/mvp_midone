@@ -14,7 +14,7 @@
                         <input
                             type="text"
                             class="form-control w-56 box pr-10 placeholder-theme-13"
-                            placeholder="Search..."
+                            :placeholder="$t('global.search')"
                         />
                         <SearchIcon
                             class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0"

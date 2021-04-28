@@ -12,7 +12,7 @@
                         <button type="button" class="btn text-gray-700 dark:text-gray-300 w-full bg-white dark:bg-theme-1 mt-1" @click="showAddToTeamModal"> <i class="w-4 h-4 mr-2" data-feather="edit-3"></i>{{$t('communication.reportError')}}</button>
                         <div class="border-t border-theme-3 dark:border-dark-5 mt-6 pt-6 text-white">
                             <a href="" class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'notifications') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'notifications'"> <i class="w-4 h-4 mr-2" data-feather="mail"></i>{{$t('global.notifications')}}</a>
-                            <a class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'teams') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'teams'" @click="showAddTeams"> <i class="w-4 h-4 mr-2" data-feather="star"></i>{{$t('menu.Zespoły')}}</a>
+                            <a class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'teams') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'teams'" > <i class="w-4 h-4 mr-2" data-feather="star"></i>{{$t('menu.Zespoły')}}</a>
                             <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'questions') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''"  @click.prevent="activeTab = 'questions'"> <i class="w-4 h-4 mr-2" data-feather="inbox"></i> {{$t('communication.questions')}}</a>
                             <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'tickets') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'tickets'"> <i class="w-4 h-4 mr-2" data-feather="send"></i>{{$t('communication.reports')}}</a>
                         </div>
@@ -128,7 +128,7 @@
 <!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="settings"></i></a>-->
                             </div>
                         </div>
-                        <div class="overflow-x-auto sm:overflow-x-visible" v-show="!showTeams"
+                        <div class="overflow-x-auto sm:overflow-x-visible" v-if="activeTab === 'notifications'"
                              v-for="(notification, index) in notifications.list"
                              :key="'notification_' + index"
                         >
@@ -151,31 +151,31 @@
                             </div>
                             asdsadsadad
                         </div>
-                        <div class="overflow-x-auto sm:overflow-x-visible" v-show="!showTeams"
-                        >
-                            <div class="intro-y" >
-                                <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
-                                    <div class="flex px-5 py-3">
-                                        <div class="w-72 flex-none flex items-center mr-5">
-                                            <input class="form-check-input flex-none" type="checkbox" checked>
-                                            <a href="javascript:" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
-                                            <a href="javascript:" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
-                                            <div class="w-6 h-6 flex-none image-fit relative ml-5">
-                                            </div>
-                                            <div class="inbox__item--sender truncate ml-3"></div>
-                                        </div>
-                                        <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight"></span> <button type="button" class="btn ml-5" >{{$t('communication.goTo')}}</button> </div>
-                                        <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">asdsaffa</div>
-                                    </div>
-                                </div>
-                            </div>
-                            asdsadsadad
-                        </div>
+<!--                        <div class="overflow-x-auto sm:overflow-x-visible" v-if="activeTab === 'teams'"-->
+<!--                        >-->
+<!--                            <div class="intro-y" >-->
+<!--                                <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">-->
+<!--                                    <div class="flex px-5 py-3">-->
+<!--                                        <div class="w-72 flex-none flex items-center mr-5">-->
+<!--                                            <input class="form-check-input flex-none" type="checkbox" checked>-->
+<!--                                            <a href="javascript:" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>-->
+<!--                                            <a href="javascript:" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>-->
+<!--                                            <div class="w-6 h-6 flex-none image-fit relative ml-5">-->
+<!--                                            </div>-->
+<!--                                            <div class="inbox__item&#45;&#45;sender truncate ml-3"></div>-->
+<!--                                        </div>-->
+<!--                                        <div class="w-64 sm:w-auto truncate"> <span class="inbox__item&#45;&#45;highlight"></span> <button type="button" class="btn ml-5" >{{$t('communication.goTo')}}</button> </div>-->
+<!--                                        <div class="inbox__item&#45;&#45;time whitespace-nowrap ml-auto pl-10">asdsaffa</div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            asdsadsadad-->
+<!--                        </div>-->
                         <div
                             v-for="(team, index) in teams.list"
                             :key="'team_' + index"
                             class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12"
-                            v-show="showTeams"
+                            v-if="activeTab==='teams'"
                         >
                             <div class="box">
                                 <div class="flex flex-col lg:flex-row items-center p-5">
@@ -221,8 +221,67 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="intro-y box p-5" v-if="activeTab==='questions'">
+                            <div>
+                                <label for="crud-form-1" class="form-label">Title</label>
+                                <input id="crud-form-1"
+                                       type="text"
+                                       class="form-control w-full"
+                                       placeholder="Input text"
+                                       v-model="title"
+                                >
+                            </div>
+                            <div class="mt-3">
+                                <label for="crud-form-2" class="form-label">Czego dotyczy</label>
+<!--                                <select data-placeholder="Select your favorite actors" class="tail-select w-full" id="crud-form-2" multiple>-->
+<!--                                    <option value="1" selected>Sport & Outdoor</option>-->
+<!--                                    <option value="2">PC & Laptop</option>-->
+<!--                                    <option value="3" selected>Smartphone & Tablet</option>-->
+<!--                                    <option value="4">Photography</option>-->
+<!--                                </select>-->
+                                <input id="crud-form-2"
+                                       type="text"
+                                       class="form-control w-full"
+                                       placeholder="Input text"
+                                       v-model="type"
+                                >
+                            </div>
+                            <div
+                                class="border border-gray-200 dark:border-dark-5 rounded-md p-5"
+                            >
+                                <div
+                                    class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"
+                                >
+                                    <div class="w-22 mr-3">
+                                        <TailSelect
+                                            id="input-wizard-2"
+                                            :options="{
+                                                locale: 'pl',
+                                                placeholder: 'Wybierz...',
+                                                limit: 'Nie można wybrać więcej',
+                                                search: false,
+                                                hideSelected: false,
+                                                classNames: 'w-full'
+                                            }"
+                                        >
+                                            <option value="pl">PL</option>
+                                            <option value="en">ENG</option>
 
-<!--                        <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">-->
+                                        </TailSelect>
+                                    </div>
+                                    {{$t('challengesNew.description')}}
+                                </div>
+                                <div class="mt-5">
+                                    <textarea v-model="description" style="width: 100%;"></textarea>
+                                </div>
+                                <div class="modal-footer text-right">
+                                    <button type="button" class="btn btn-primary w-20" @click="saveReportRepo">Send</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--                        <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">-->
 <!--                            asdsadsadsa-->
 <!--                        </div>-->
                     </div>
@@ -255,19 +314,15 @@
             <!-- BEGIN: Modal Body -->
             <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
                 <div class="col-span-12 sm:col-span-6">
-                    <label for="modal-form-1" class="form-label">From</label>
+                    <label for="modal-form-1" class="form-label">Tytuł</label>
                     <input id="modal-form-1" type="text" class="form-control" placeholder="example@gmail.com">
                 </div>
-                <div class="col-span-12 sm:col-span-6">
-                    <label for="modal-form-2" class="form-label">To</label>
-                    <input id="modal-form-2" type="text" class="form-control" placeholder="example@gmail.com">
-                </div>
-                <div class="col-span-12 sm:col-span-6">
-                    <label for="modal-form-3" class="form-label">Subject</label>
+                <div class="col-span-12 sm:col-span-6 pb-5">
+                    <label for="modal-form-3" class="form-label">Czego dotyczy</label>
                     <input id="modal-form-3" type="text" class="form-control" placeholder="Important Meeting">
                 </div>
                 <div class="col-span-12 sm:col-span-6">
-                    <label for="modal-form-4" class="form-label">Has the Words</label>
+                    <label for="modal-form-4" class="form-label">Opis</label>
                     <input id="modal-form-4" type="text" class="form-control" placeholder="Job, Work, Documentation">
                 </div>
                 <div class="col-span-12 sm:col-span-6">
@@ -301,10 +356,12 @@
 import {onMounted, ref} from "vue";
 import GetUsers from '../../compositions/GetUsers'
 import GetNotifications from '../../compositions/GetNotifications'
-import GetTeams from '../../compositions/GetTeams'
+import GetTeams from '../../compositions/GetTeams';
+import SaveReport from '../../compositions/SaveReport';
 import {useToast} from "vue-toastification";
 import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
+import SaveChallenge from "../../compositions/SaveChallenge";
 
 
 export default {
@@ -320,7 +377,19 @@ export default {
         const showTeams = ref(false);
         const activeTab = ref('notifications');
         const teams = ref([]);
+        const title = ref('');
+        const type = ref('');
+        const description = ref('');
+        const files = ref([]);
 
+        const saveReportRepo = async () => {
+            SaveReport({
+                title: title.value,
+                description: description.value,
+                type: type.value,
+                files: files.value
+            });
+        }
         const GetUsersRepositories = async () => {
             users.value = GetUsers();
         }
@@ -358,7 +427,12 @@ export default {
             showTeams,
             showAddTeams,
             modalClosed,
-            activeTab
+            activeTab,
+            saveReportRepo,
+            title,
+            type,
+            description,
+            files
         }
     },
     beforeRouteEnter(to, from, next) {

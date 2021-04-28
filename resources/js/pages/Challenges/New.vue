@@ -104,7 +104,14 @@
                                         <TailSelect
                                             id="input-wizard-2"
                                             v-model="description_lang"
-                                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                                            :options="{
+                                                locale: 'pl',
+                                                placeholder: 'Wybierz...',
+                                                limit: 'Nie można wybrać więcej',
+                                                search: false,
+                                                hideSelected: false,
+                                                classNames: 'w-full'
+                                            }"
                                         >
                                             <option value="pl">PL</option>
                                             <option value="en">ENG</option>
@@ -591,7 +598,6 @@ export default {
                 teams: teamsAllowed.value,
                 tags: tagsSelected.value,
                 images: images.value
-
             });
         }
 

@@ -26,7 +26,7 @@
                 <input
                     type="text"
                     class="intro-y form-control py-3 px-4 box pr-10 placeholder-theme-13"
-                    placeholder="Nazwa"
+                    :placeholder="$t('global.name')"
                     v-model="name"
                 />
                 <div class="post intro-y overflow-hidden box mt-5">
@@ -99,16 +99,11 @@
                                 locale: 'pl',
                                 placeholder: 'Wybierz kategorie...',
                                 limit: 'Nie można wybrać więcej',
-                search: false,
-
-                hideSelected: false,
-
-
-
-                classNames: 'w-full'
-              }"
-                        >
-
+                                search: false,
+                                hideSelected: false,
+                                classNames: 'w-full'
+                             }"
+                         >
                             <option selected disabled>{{ $t('challengesNew.selectCategories') }}</option>
                             <option v-for="(category,index) in categories" :value="category.value">{{ category.name }}</option>
 

@@ -37,7 +37,7 @@
                     type="text"
                     style="color: #fff"
                     class="search__input form-control border-transparent placeholder-theme-13"
-                    :placeholder="$t('global.Szukaj')"
+                    :placeholder="$t('global.search')"
                     @focus="showSearchDropdown"
                     @blur="hideSearchDropdown"
                 />
