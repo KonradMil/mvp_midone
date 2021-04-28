@@ -27,6 +27,8 @@
                     <LabelDialog v-if="content == 'label'" v-model:label="label"/>
                     <CommentDialog v-if="content == 'comment'" v-model:comment="comment"/>
                     <LayoutDialog v-if="content == 'layout'" v-model:layout="layout"/>
+                    <LineDialog v-if="content == 'line'" v-model:line="line"/>
+                    <AnimableDialog v-if="content == 'animable'" v-model:animable="animable"/>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
@@ -135,7 +137,9 @@ export default {
             layout,
             label,
             content,
-            save
+            save,
+            line,
+            animable
         }
     }
 }
