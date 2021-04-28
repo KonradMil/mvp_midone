@@ -43,7 +43,7 @@ export default {
     },
     emits: ["update:line"],
     setup(props, context) {
-        const l = ref({cycleTime: 36, delay: '', selectedDetail: ''});
+        const l = ref({cycleTime: 10, delay: 0, selectedDetail: ''});
         const details = ref([]);
 
         watch(l, (lab, prevLabel) => {
@@ -53,24 +53,24 @@ export default {
 
         onMounted(() => {
             details.value = require('../../../../json/details.json');
-            if (props.label.cycleTime != undefined && props.label.cycleTime != '') {
-                l.value.cycleTime = props.label.cycleTime;
+            if (props.line.cycleTime != undefined && props.line.cycleTime != '') {
+                l.value.cycleTime = props.line.cycleTime;
             } else {
                 l.value.cycleTime = 10;
             }
 
-            if (props.label.delay != undefined && props.label.delay != '') {
-                l.value.delay = props.label.delay;
+            if (props.line.delay != undefined && props.line.delay != '') {
+                l.value.delay = props.line.delay;
             } else {
                 l.value.delay = 0;
             }
 
-            if (props.label.selectedDetail != undefined && props.label.selectedDetail != '') {
-                l.value.selectedDetail = props.label.selectedDetail;
+            if (props.line.selectedDetail != undefined && props.line.selectedDetail != '') {
+                l.value.selectedDetail = props.line.selectedDetail;
             } else {
                 l.value.selectedDetail = 'carton';
             }
-            l.value.index = props.label.index;
+            l.value.index = props.line.index;
         });
 
         return {
