@@ -106,13 +106,15 @@ export default {
                     emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: ''})
                     break;
                 case 'addline':
-                    emitter.emit('unityoutgoingaction', {action: 'addLine', data: lines.value.length})
+                    emitter.emit('unityoutgoingaction', {data: lines.value.length})
                     break;
                 case 'removeline':
-                    emitter.emit('unityoutgoingaction', {action: 'removeLine', data: activeLineIndex})
+                    emitter.emit('unityoutgoingaction', {data: activeLineIndex.value})
                     break;
                 case 'settingsline':
-                    emitter.emit('UnityLineSettings', {action: 'removeLine', data: lines.value[activeLineIndex]})
+                    console.log(lines.value);
+                    console.log(activeAnimableIndex);
+                    emitter.emit('UnityLineSettings', {action: 'settingsline', data: lines.value[activeLineIndex.value]})
                     break;
                 case 'line':
                     emitter.emit('UnityAnimableSettings', {

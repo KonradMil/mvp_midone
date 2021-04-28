@@ -27,6 +27,8 @@
                     <LabelDialog v-if="content == 'label'" v-model:label="label"/>
                     <CommentDialog v-if="content == 'comment'" v-model:comment="comment"/>
                     <LayoutDialog v-if="content == 'layout'" v-model:layout="layout"/>
+                    <LineDialog v-if="content == 'line'" v-model:line="line"/>
+                    <AnimableDialog v-if="content == 'animable'" v-model:animable="animable"/>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
@@ -56,10 +58,12 @@ import cash from "cash-dom";
 import LabelDialog from "./right-panel/LabelDialog";
 import CommentDialog from "./right-panel/CommentDialog";
 import LayoutDialog from "./right-panel/LayoutDialog";
+import LineDialog from "./right-panel/LineDialog";
+import AnimableDialog from "./right-panel/AnimableDialog";
 
 export default {
     name: "RightPanel",
-    components: {LayoutDialog, CommentDialog, LabelDialog},
+    components: {LayoutDialog, CommentDialog, LabelDialog, LineDialog, AnimableDialog},
     setup() {
         //GLOBAL
         const app = getCurrentInstance();
@@ -94,6 +98,7 @@ export default {
             content.value = 'line';
             console.log(e);
             line.value = e;
+            currentTitle.value = 'Ustawienia lini animacji';
             showPanel();
         });
 
@@ -101,12 +106,14 @@ export default {
             content.value = 'animable';
             console.log(e);
             animable.value = e;
+            currentTitle.value = 'Ustawienia elementu animacji';
             showPanel();
         });
 
         emitter.on('UnityLayoutSelected', e => {
             content.value = 'layout';
             layout.value = e.layoutSelected;
+
             showPanel();
         });
 
@@ -114,6 +121,7 @@ export default {
             console.log(e);
             content.value = 'label';
             label.value = e.labelSelected;
+            currentTitle.value = 'Ustawienia etykiety';
             showPanel();
         });
 
@@ -121,6 +129,7 @@ export default {
             console.log(e);
             comment.value = e.commentSelected;
             content.value = 'comment';
+            currentTitle.value = 'Ustawienia komentarza';
             showPanel();
         });
 
@@ -135,7 +144,9 @@ export default {
             layout,
             label,
             content,
-            save
+            save,
+            line,
+            animable
         }
     }
 }
