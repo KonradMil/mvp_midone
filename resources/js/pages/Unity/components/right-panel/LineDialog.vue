@@ -33,7 +33,7 @@
                                 classNames: 'w-full'
                                 }">
             <option selected disabled>{{ $t('challengesNew.selectCategories') }}</option>
-            <option v-for="(detail,index) in details.cargoAr" :value="detail.model_id">{{ detail.model_name }}</option>
+            <option v-for="detail in detailsAr.cargoAr" :value="detail.model_id">{{ detail.model_name }}</option>
         </TailSelect>
     </div>
 </template>
@@ -51,7 +51,7 @@ export default {
     emits: ["update:line"],
     setup(props, context) {
         const l = ref({interval: 10, delay: 0, model_name: ''});
-        const details = ref([]);
+        const detailsAr = ref([]);
 
         watch(l, (lab, prevLabel) => {
             console.log('CHANGE');
@@ -59,7 +59,7 @@ export default {
         }, {deep: true})
 
         onMounted(() => {
-            details.value = require('../../../../json/details.json');
+            detailsAr.value = require('../../../../json/details.json');
             if (props.line.interval != undefined && props.line.interval != '') {
                 l.value.interval = props.line.interval;
             } else {
@@ -82,7 +82,7 @@ export default {
 
         return {
             l,
-            details
+            detailsAr
         }
     }
 }
