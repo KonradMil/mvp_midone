@@ -4,6 +4,10 @@
 
 <script>
 import {ref} from 'vue';
+import {useToast} from "vue-toastification";
+
+const toast = useToast();
+
 
 export default function SaveReport(data) {
     const list = ref([]);
@@ -15,8 +19,9 @@ export default function SaveReport(data) {
                 if (response.data.success) {
                     // console.log(response.data);
                     list.value = response.data.payload;
+                    toast.success(response.data.message);
                 } else {
-                    // toast.error(response.data.message);
+                    toast.error(response.data.message);
                 }
             })
     }

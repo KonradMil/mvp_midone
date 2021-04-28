@@ -99,7 +99,7 @@ class ReportController extends Controller
 //        $challenge->files()->attach($file);
         return response()->json([
             'success' => true,
-            'message' => 'Awatar został wgrany poprawnie',
+            'message' => 'Plik został wgrany poprawnie',
             'payload' => $file
         ]);
     }
@@ -108,7 +108,7 @@ class ReportController extends Controller
     {
         $report = new Report();
         $request = json_decode(json_encode($request->data));
-//    dd($request);
+     //    dd($request);
         $report->title = $request->title;
         $report->type = $request->type;
         $report->description = $request->description;
@@ -119,7 +119,6 @@ class ReportController extends Controller
             'message' => 'Zgłoszenie zostało dodane poprawnie',
             'payload' => $report
         ]);
-
     }
 
     public function getCardData(Request $request)
