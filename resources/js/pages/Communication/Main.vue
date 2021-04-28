@@ -275,9 +275,6 @@
                                 <div class="mt-5">
                                     <textarea v-model="description" style="width: 100%;"></textarea>
                                 </div>
-                                <div class="modal-footer text-right">
-                                    <button type="button" class="btn btn-primary w-20" @click="saveReportRepo">Send</button>
-                                </div>
                             </div>
                             </div>
                             <div
@@ -320,14 +317,16 @@
                                                 </Dropzone>
                                             </div>
 
-                                        </div>
+                                         </div>
+
                                     </div>
+
                                 </div>
                             </div>
-
+                            <div class="modal-footer text-right">
+                                <button type="button" class="btn btn-primary w-20" @click="saveReportRepo">Send</button>
+                            </div>
                         </div>
-
-
                         <!--                        <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">-->
 <!--                            asdsadsadsa-->
 <!--                        </div>-->
