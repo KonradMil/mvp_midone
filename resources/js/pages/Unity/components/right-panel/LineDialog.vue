@@ -33,7 +33,7 @@
                                 classNames: 'w-full'
                                 }">
             <option selected disabled>{{ $t('challengesNew.selectCategories') }}</option>
-            <option v-for="detail in detailsAr.cargoAr" :value="detail.model_id">{{ detail.model_name }}</option>
+            <option v-for="detail in detailsAr" :value="detail.model_id">{{ detail.model_name }}</option>
         </TailSelect>
     </div>
 </template>
