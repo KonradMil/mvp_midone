@@ -9,7 +9,7 @@
                     </h2>
                     <!-- BEGIN: Inbox Menu -->
                     <div class="intro-y box bg-theme-1 p-5 mt-6">
-                        <button type="button" class="btn text-gray-700 dark:text-gray-300 w-full bg-white dark:bg-theme-1 mt-1" @click="showAddToTeamModal"> <i class="w-4 h-4 mr-2" data-feather="edit-3"></i>{{$t('communication.reportError')}}</button>
+                        <button type="button" class="btn text-gray-700 dark:text-gray-300 w-full bg-white dark:bg-theme-1 mt-1" @click.prevent="activeTab = 'report'"> <i class="w-4 h-4 mr-2" data-feather="edit-3"></i>{{$t('communication.reportError')}}</button>
                         <div class="border-t border-theme-3 dark:border-dark-5 mt-6 pt-6 text-white">
                             <a href="" class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'notifications') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'notifications'"> <i class="w-4 h-4 mr-2" data-feather="mail"></i>{{$t('global.notifications')}}</a>
                             <a class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'teams') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'teams'" > <i class="w-4 h-4 mr-2" data-feather="star"></i>{{$t('menu.Zespoły')}}</a>
@@ -221,7 +221,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="intro-y box p-5" v-if="activeTab==='questions'">
+                        <div class="intro-y box p-5" v-if="activeTab==='report'">
                             <div>
                                 <label for="crud-form-1" class="form-label">Title</label>
                                 <input id="crud-form-1"
