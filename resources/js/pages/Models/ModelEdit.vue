@@ -322,7 +322,7 @@ export default {
         }
         const getModelRepositiories = async () => {
             GetModel(model_id, (res) => {
-                model.value = res.payload[0];
+               model.value = res.payload[0];
                 category.value = res.payload[0].category;
                 subcategory.value = res.payload[0].subcategory;
 
