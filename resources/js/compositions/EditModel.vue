@@ -4,6 +4,9 @@
 
 <script>
 import {ref} from 'vue';
+import {useToast} from "vue-toastification";
+
+const toast = useToast();
 
 export default function EditModel(data,id) {
     const list = ref([]);
@@ -15,8 +18,9 @@ export default function EditModel(data,id) {
                 if (response.data.success) {
                     // console.log(response.data);
                     list.value = response.data.payload;
+                    toast.success(response.data.message);
                 } else {
-                    // toast.error(response.data.message);
+                    toast.error(response.data.message);
                 }
             })
     }
