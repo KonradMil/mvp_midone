@@ -72,11 +72,14 @@ export default {
                 l.value.delay = 0;
             }
 
-            if (props.line.cargo.model_name != undefined && props.line.cargo.model_name != '') {
-                l.value.model_name = props.line.cargo.model_name;
-            } else {
-                l.value.model_name = 'carton';
+            if(props.line.cargo != undefined) {
+                if (props.line.cargo.model_name != undefined && props.line.cargo.model_name != '') {
+                    l.value.model_name = props.line.cargo.model_name;
+                } else {
+                    l.value.model_name = 'carton';
+                }
             }
+
             l.value.index = props.line.index;
         });
 
