@@ -58,10 +58,12 @@ import cash from "cash-dom";
 import LabelDialog from "./right-panel/LabelDialog";
 import CommentDialog from "./right-panel/CommentDialog";
 import LayoutDialog from "./right-panel/LayoutDialog";
+import LineDialog from "./right-panel/LineDialog";
+import AnimableDialog from "./right-panel/AnimableDialog";
 
 export default {
     name: "RightPanel",
-    components: {LayoutDialog, CommentDialog, LabelDialog},
+    components: {LayoutDialog, CommentDialog, LabelDialog, LineDialog, AnimableDialog},
     setup() {
         //GLOBAL
         const app = getCurrentInstance();
