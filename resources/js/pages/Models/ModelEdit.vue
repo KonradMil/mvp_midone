@@ -322,7 +322,7 @@ export default {
         }
         const getModelRepositiories = async () => {
             GetModel(model_id, (res) => {
-               model.value = res.payload[0];
+                model.value = res.payload[0];
                 category.value = res.payload[0].category;
                 subcategory.value = res.payload[0].subcategory;
 
@@ -347,8 +347,8 @@ export default {
         //         load: load.value
         //     });
         // }
-        const editModelRepo = async (id) => {
-            EditModel({
+        const editModelRepo = async () => {
+            EditModel(model_id, {
                 name: name.value,
                 category: category.value,
                 subcategory: subcategory.value,
@@ -364,7 +364,7 @@ export default {
                 range: range.value,
                 repetity: repetity.value,
                 load: load.value
-            }, id);
+            });
         }
 
         onMounted(() => {
