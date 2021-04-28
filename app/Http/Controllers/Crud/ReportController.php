@@ -16,21 +16,14 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class ReportController extends Controller
 {
-    public function getUserChallenges()
+    public function getUserReports()
     {
-
-        if(Auth::user()->type == 'integrator') {
-            $challenges = Challenge::whereIn('stage', [1,2])->where('status', '=', 1)->get();
-        } else  if(Auth::user()->type == 'inwestor') {
-            $challenges = Auth::user()->challenges()->get();
-        } else {
-            $challenges = Challenge::get();
-        }
+        $reports = Report::get();
 
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
-            'payload' => $challenges
+            'payload' => $reports
         ]);
     }
 

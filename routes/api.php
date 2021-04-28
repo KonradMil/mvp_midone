@@ -46,6 +46,7 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
 });
 
 Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('user/get', [ReportController::class, 'getUserReports']);
     Route::post('user/create', [ReportController::class, 'createReport']);
     Route::post('files/store', [ReportController::class, 'storeFile']);
 });
