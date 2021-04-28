@@ -239,7 +239,7 @@
                                 hideSelected: false,
                                 classNames: 'w-full'
                                 }">
-                            <option selected disabled>{{ $t('challengesNew.selectCategories') }}</option>
+                            <option disabled>{{ $t('challengesNew.selectCategories') }}</option>
                             <option v-for="(category,index) in categories.categories" :value="category.value">{{ category.name }}</option>
                         </TailSelect>
                     </div>
@@ -258,7 +258,7 @@
                                 hideSelected: false,
                                 classNames: 'w-full'
                                 }">
-                            <option selected disabled>{{ $t('challengesNew.selectCategories') }}</option>
+                            <option disabled>{{ $t('challengesNew.selectCategories') }}</option>
                             <option v-for="(cat,index) in categories.categories[category].subcategories" :value="cat.value">{{ cat.name }}</option>
                         </TailSelect>
                     </div>
@@ -321,9 +321,12 @@ export default {
             showModal.value = false;
         }
         const getModelRepositiories = async () => {
-            let m = await GetModel(model_id);
-            console.log(m.list);
-            model.value = m.list;
+            GetModel(model_id, (res) => {
+               model.value = res.payload[0];
+                category.value = res.payload[0].category;
+                subcategory.value = res.payload[0].subcategory;
+
+            })
         }
         // const saveModelRepo = async () => {
         //     SaveModel({
