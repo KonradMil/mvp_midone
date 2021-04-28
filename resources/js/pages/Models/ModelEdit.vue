@@ -28,7 +28,7 @@
                         type="text"
                         class="intro-y form-control py-3 px-4 box pr-10 placeholder-theme-13"
                         :placeholder="$t('global.name')"
-                        v-model="model.name"
+                        v-model="model.model.name"
                     />
                 </div>
 
@@ -87,7 +87,7 @@
                                                 id="input-wizard-2"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="model.brand"
+                                                v-model="model.model.brand"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -96,7 +96,7 @@
                                                 id="input-wizard-3"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="model.max_load_kg"
+                                                v-model="model.model.max_load_kg"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -105,7 +105,7 @@
                                                 id="input-wizard-4"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="model.max_range_mm"
+                                                v-model="model.model.max_range_mm"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -114,7 +114,7 @@
                                                 id="input-wizard-5"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="model.axis"
+                                                v-model="model.model.axis"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -123,7 +123,7 @@
                                                 id="input-wizard-6"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="model.max_speed_mms"
+                                                v-model="model.model.max_speed_mms"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -132,7 +132,7 @@
                                                 id="input-wizard-7"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="model.tech_sheet"
+                                                v-model="model.model.tech_sheet"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -141,7 +141,7 @@
                                                 id="input-wizard-8"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="model.connection_method"
+                                                v-model="model.model.connection_method"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -150,7 +150,7 @@
                                                 id="input-wizard-9"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="model.range"
+                                                v-model="model.model.range"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -159,7 +159,7 @@
                                                 id="input-wizard-10"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="model.repetity"
+                                                v-model="model.model.repetity"
                                             />
                                         </div>
                                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -168,7 +168,7 @@
                                                 id="input-wizard-11"
                                                 type="text"
                                                 class="form-control"
-                                                v-model="model.load"
+                                                v-model="model.model.load"
                                             />
                                         </div>
                                     </div>
