@@ -98,6 +98,7 @@ export default {
             content.value = 'line';
             console.log(e);
             line.value = e;
+            currentTitle.value = 'Ustawienia lini animacji';
             showPanel();
         });
 
@@ -105,12 +106,14 @@ export default {
             content.value = 'animable';
             console.log(e);
             animable.value = e;
+            currentTitle.value = 'Ustawienia elementu animacji';
             showPanel();
         });
 
         emitter.on('UnityLayoutSelected', e => {
             content.value = 'layout';
             layout.value = e.layoutSelected;
+
             showPanel();
         });
 
@@ -118,6 +121,7 @@ export default {
             console.log(e);
             content.value = 'label';
             label.value = e.labelSelected;
+            currentTitle.value = 'Ustawienia etykiety';
             showPanel();
         });
 
@@ -125,6 +129,7 @@ export default {
             console.log(e);
             comment.value = e.commentSelected;
             content.value = 'comment';
+            currentTitle.value = 'Ustawienia komentarza';
             showPanel();
         });
 
