@@ -348,7 +348,7 @@ export default {
         //     });
         // }
         const editModelRepo = async () => {
-            EditModel({
+            EditModel(model_id, {
                 name: name.value,
                 category: category.value,
                 subcategory: subcategory.value,

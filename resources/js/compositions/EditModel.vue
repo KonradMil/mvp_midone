@@ -8,11 +8,11 @@ import {useToast} from "vue-toastification";
 
 const toast = useToast();
 
-export default function EditModel() {
+export default function EditModel(id,data) {
     const list = ref([]);
 
-    async function editModel() {
-        axios.post('/api/model/edit/')
+    async function editModel(id,data) {
+        axios.post('/api/model/edit/', {id : id,data : data})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
@@ -25,7 +25,7 @@ export default function EditModel() {
             })
     }
 
-    editModel();
+    editModel(id,data);
 
     return {
         list
