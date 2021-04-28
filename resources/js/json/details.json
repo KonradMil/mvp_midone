@@ -1,5 +1,5 @@
 {
-    "cargoAr": {
+    "cargoAr": [
         "carton": {
             "model_name": "Karton duży",
             "model_id": "9195a37a-9e13-11e3-8591-034165a3a613",
@@ -176,5 +176,5 @@
                 {}
             ]
         }
-    }
+    ]
 }
