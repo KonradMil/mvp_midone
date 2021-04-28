@@ -231,6 +231,7 @@
                         <TailSelect
                             id="post-form-3"
                             v-model="category"
+                            :placeholder="model.model.category"
                             :options="{
                                 locale: 'pl',
                                 placeholder: 'Wybierz kategorie...',
