@@ -19,7 +19,7 @@
                             class="col-span-12 sm:col-span-4 xxl:col-span-3 box bg-theme-1 dark:bg-theme-1 p-5 m-2 cursor-pointer zoom-in"
                         >
                             <div class="font-medium text-base text-white">{{ subcat.name }}</div>
-                            <div class="text-theme-22 dark:text-gray-400">8 Items</div>
+<!--                            <div class="text-theme-22 dark:text-gray-400">8 Items</div>-->
                         </div>
                     </div>
                 </div>
