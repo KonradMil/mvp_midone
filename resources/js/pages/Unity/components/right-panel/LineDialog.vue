@@ -38,7 +38,7 @@
     </div>
 </template>
 <script>
-import {onMounted, ref, watch, watchEffect} from "vue";
+import {getCurrentInstance, onMounted, ref, watch, watchEffect} from "vue";
 
 export default {
     name: "LineDialog",
@@ -52,46 +52,48 @@ export default {
     setup(props, context) {
         const l = ref({interval: 10, delay: 0, model_name: ''});
         const detailsAr = ref([]);
-        const lineObj = ref(props.line)
-        watch(l, (lab, prevLabel) => {
-            console.log('CHANGE');
-            context.emit("update:line", lab);
-        }, {deep: true})
 
-        watch(lineObj, (lin, prevLabel) => {
-            console.log('HERE I GOT AGAINdsadsadsad');
-            if (props.line.interval != undefined && props.line.interval != '') {
-                lin.interval = props.line.interval;
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
+
+        emitter.on('settingsline', e => {
+            if (e.interval != undefined && e.interval != '') {
+                l.interval = e.interval;
             } else {
-                lin.interval = 10;
+                l.interval = 10;
             }
 
-            if (props.line.delay != undefined && props.line.delay != '') {
-                lin.delay = props.line.delay;
+            if (e.delay != undefined && e.delay != '') {
+                l.delay = e.delay;
             } else {
-                lin.delay = 0;
+                l.delay = 0;
             }
 
-            if(props.line.cargo != undefined) {
-                if (props.line.cargo.model_name != undefined && props.line.cargo.model_name != '') {
-                    lin.model_name = props.line.cargo.model_name;
+            if(e.cargo != undefined) {
+                if (e.cargo.model_name != undefined && e.cargo.model_name != '') {
+                    l.model_name = e.cargo.model_name;
                 } else {
-                    lin.model_name = 'carton';
+                    l.model_name = 'carton';
                 }
             }
             console.log('HERE I GOT AGAIN');
             console.log(props.line);
             console.log(props.line.value);
             console.log(props.line.value.data.value);
-            lin.index = props.line.index;
-            lin.cargo = props.line.cargo;
-            lin.animables = props.line.animables;
+            l.index = props.line.index;
+            l.cargo = props.line.cargo;
+            l.animables = props.line.animables;
+        });
+
+        watch(l, (lab, prevLabel) => {
+            console.log('CHANGE');
+            context.emit("update:line", lab);
         }, {deep: true})
+
+
 
         onMounted(() => {
             detailsAr.value = require('../../../../json/details.json');
-
-
         });
 
         return {
