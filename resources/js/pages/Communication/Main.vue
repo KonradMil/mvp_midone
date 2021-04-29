@@ -132,9 +132,9 @@
                             <table class="table table-report -mt-2">
                                 <thead>
                                 <tr>
-                                    <th class="whitespace-nowrap">IMAGES</th>
-                                    <th class="whitespace-nowrap">PRODUCT NAME</th>
-                                    <th class="text-center whitespace-nowrap">STOCK</th>
+                                    <th class="whitespace-nowrap">Plik</th>
+                                    <th class="whitespace-nowrap">Tytuł</th>
+                                    <th class="text-center whitespace-nowrap">Zgłoszono dnia</th>
                                     <th class="text-center whitespace-nowrap">STATUS</th>
                                     <th class="text-center whitespace-nowrap">ACTIONS</th>
                                 </tr>
@@ -162,8 +162,8 @@
                                     </td>
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
-                                            <a class="flex items-center mr-3" href="javascript:;"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                            <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                                            <a class="flex items-center mr-3" href="javascript:" @click.prevent="$router.push({path: '/report/show/' + report.id })"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Podgląd </a>
+                                            <a @click.prevent="DeleteReport(report.id)" class="flex items-center text-theme-6" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -198,10 +198,10 @@
                             <table class="table table-report -mt-2">
                                 <thead>
                                 <tr>
-                                    <th class="whitespace-nowrap">IMAGES</th>
-                                    <th class="whitespace-nowrap">PRODUCT NAME</th>
-                                    <th class="text-center whitespace-nowrap">STOCK</th>
-                                    <th class="text-center whitespace-nowrap">STATUS</th>
+                                    <th class="whitespace-nowrap">Avatar</th>
+                                    <th class="whitespace-nowrap">Nazwa zespołu</th>
+                                    <th class="text-center whitespace-nowrap">Założono</th>
+                                    <th class="text-center whitespace-nowrap">Liczba członków</th>
                                     <th class="text-center whitespace-nowrap">ACTIONS</th>
                                 </tr>
                                 </thead>
@@ -227,7 +227,7 @@
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
                                             <a class="flex items-center mr-3" href="javascript:;"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                            <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                                            <a @click.prevent="$router.push({path: '/user/team/delete/' + team.id})" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -496,6 +496,7 @@ import GetNotifications from '../../compositions/GetNotifications'
 import GetTeams from '../../compositions/GetTeams';
 import GetReports from '../../compositions/GetReports';
 import SaveReport from '../../compositions/SaveReport';
+import DeleteReport from '../../compositions/DeleteReport';
 import Dropzone from '../../global-components/dropzone/Main'
 import {useToast} from "vue-toastification";
 import Avatar from "../../components/avatar/Avatar";
@@ -511,6 +512,7 @@ export default {
         GetTeams,
         GetUsers,
         Dropzone,
+        DeleteReport,
         GetReports
     },
     setup(props, {emit}) {
@@ -518,6 +520,7 @@ export default {
         const showDetails = ref([]);
         const users = ref([]);
         const user =ref({});
+        const report = ref('');
         const notifications = ref([]);
         const show = ref(false);
         const showTeams = ref(false);
@@ -542,6 +545,7 @@ export default {
                 files: files.value
             });
         }
+
         const GetReportsRepositiories = async () => {
             reports.value = GetReports();
         }
@@ -598,7 +602,8 @@ export default {
             type,
             description,
             files,
-            reports
+            reports,
+            DeleteReport,
         }
     },
     beforeRouteEnter(to, from, next) {

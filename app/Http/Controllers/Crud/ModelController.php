@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class ModelController extends Controller
 {
-
     public function getModel(Request  $request)
     {
         $model = UnityModel::find($request->id);

@@ -16,6 +16,24 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class ReportController extends Controller
 {
+    public function getReport(Request  $request)
+    {
+        $report = Report::find($request->id);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => $report
+        ]);
+    }
+    public function deleteReport(Request $request)
+    {
+        Report::destroy($request->id);
+        return response()->json([
+           'success' => true,
+           'message' => 'Usunięto poprawnie'
+        ]);
+    }
     public function getUserReports()
     {
         $reports = Report::get();

@@ -24,6 +24,7 @@ import ModelAdd from "../pages/Models/ModelAdd";
 import ModelEdit from "../pages/Models/ModelEdit";
 import Card from "../pages/Challenges/Card";
 import Communication from "../pages/Communication/Main";
+import ReportReview from "../pages/Communication/ReportReview";
 
 export const routes = [
     {
@@ -69,6 +70,12 @@ export const routes = [
                 name: 'modelEdit',
                 path: '/models/edit/:id',
                 component: ModelEdit,
+                props: true
+            },
+            {
+                name: 'reportReview',
+                path: '/report/show/:id',
+                component: ReportReview,
                 props: true
             },
             {
@@ -126,7 +133,8 @@ export const routes = [
                 name: 'wizard',
                 path: '/kreator',
                 component: Wizard
-            },{
+            },
+            {
                 name: 'wizardone',
                 path: '/kreator-krok-jeden',
                 component: WizardOne
