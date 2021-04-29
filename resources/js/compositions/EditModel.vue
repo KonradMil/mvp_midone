@@ -12,7 +12,7 @@ export default function EditModel(data,id) {
     const list = ref([]);
 
     async function editModel(data,id) {
-        axios.post('/api/model/edit/', {data : data, id : id})
+        axios.post(`/api/model/edit/${id}`, data)
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {

@@ -347,23 +347,7 @@ export default {
         //     });
         // }
         const editModelRepo = async () => {
-            EditModel({
-                name: name.value,
-                category: category.value,
-                subcategory: subcategory.value,
-                model_file: model_file.value,
-                brand: brand.value,
-                model: model.value,
-                max_load_kg: max_load_kg.value,
-                max_range_mm: max_range_mm.value,
-                max_speed_mms: max_speed_mms.value,
-                axis: axis.value,
-                tech_sheet: tech_sheet.value,
-                connection_method: connection_method.value,
-                range: range.value,
-                repetity: repetity.value,
-                load: load.value
-            }, model_id );
+            EditModel(model.value, model_id );
         }
 
         onMounted(() => {
