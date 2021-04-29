@@ -79,8 +79,11 @@ export default {
                     l.value.model_name = 'carton';
                 }
             }
-
+            console.log('HERE I GOT AGAIN');
+            console.log(props.line);
             l.value.index = props.line.index;
+            l.value.cargo = props.line.cargo;
+            l.value.animables = props.line.animables;
         });
 
         return {
