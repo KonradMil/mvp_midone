@@ -57,6 +57,9 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
 
         emitter.on('UnityLineSettings', e => {
+            console.log('HERE I GOT AGAINAAAA');
+            console.log(e);
+
             if (e.data.interval != undefined && e.data.interval != '') {
                 l.interval = e.data.interval;
             } else {
