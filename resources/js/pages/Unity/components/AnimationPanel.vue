@@ -80,6 +80,9 @@ export default {
         emitter.on('animationbuttonclick', e => handleClick(e.val))
 
         emitter.on('rightpanelaction', e => {
+            console.log("lines.value");
+            console.log(lines.value);
+            console.log(e);
             if(e.action === 'updateLine') {
                 lines.value[activeLineIndex.value] = e.data;
             } else if (e.action === 'updateAnimable') {
