@@ -66,13 +66,13 @@ export default {
             console.log('HERE I GOT AGAINAAAA');
             console.log(props.line);
             if (props.line.data.interval != undefined && props.line.data.interval != '') {
-                l.value.interval = toInteger(props.line.data.interval);
+                l.value.interval = parseInt(props.line.data.interval);
             } else {
                 l.value.interval = 10;
             }
 
             if (props.line.data.delay != undefined && props.line.data.delay != '') {
-                l.value.delay = toInteger(props.line.data.delay);
+                l.value.delay = parseInt(props.line.data.delay);
             } else {
                 l.value.delay = 0;
             }
@@ -87,7 +87,7 @@ export default {
 
             console.log('HERE I GOT AGAIN');
             console.log(props.line.data);
-            l.value.index = toInteger(props.line.data.index);
+            l.value.index = parseInt(props.line.data.index);
             l.value.cargo = props.line.data.cargo;
             l.value.animables = props.line.data.animables;
 
