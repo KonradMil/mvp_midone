@@ -189,7 +189,7 @@
 <script>
 import {computed, onMounted, ref} from "vue";
 import GetModels from "../../compositions/GetModels";
-import DeleteModel from "../../compositions/Deletemodel";
+import DeleteModel from "../../compositions/DeleteModel";
 import cash from "cash-dom";
 import CategoryName from "./CategoryName";
 import SubcategoryName from "./SubcategoryName";
