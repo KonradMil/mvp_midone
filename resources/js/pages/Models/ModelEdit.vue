@@ -311,7 +311,7 @@ export default {
         // const dropzoneSingleRef = ref();
         const categories = ref([]);
         const types = require("../../json/model_categories.json");
-        const model_id = ref(null);
+        // const model_id = ref(null);
         // const models = ref([]);
 
         // provide("bind[dropzoneSingleRef]", el => {
@@ -322,7 +322,7 @@ export default {
         }
         const getModelRepositiories = async () => {
             GetModel(model_id, (res) => {
-               model.value = res.payload[0];
+                model.value = res.payload[0];
                 category.value = res.payload[0].category;
                 subcategory.value = res.payload[0].subcategory;
             })
@@ -363,7 +363,7 @@ export default {
                 range: range.value,
                 repetity: repetity.value,
                 load: load.value
-            }, model_id );
+            });
         }
 
         onMounted(() => {
