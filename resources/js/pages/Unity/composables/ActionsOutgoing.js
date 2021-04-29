@@ -150,12 +150,12 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'SetNewAnimationLayer', val)
     }
 
-    function removeLine() {
+    function removeLine(val) {
         outgoing(game, 'DeleteLine', val);
     }
 
     function updateCurrentAnimation (val) {
-        outgoing(game, 'UpdateCurrentAnimation', val);
+        outgoing(game, 'UpdateCurrentAnimation', val, true);
     }
 
     return {
