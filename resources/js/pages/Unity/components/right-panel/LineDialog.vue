@@ -56,33 +56,31 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
 
-        emitter.on('settingsline', e => {
-            if (e.interval != undefined && e.interval != '') {
-                l.interval = e.interval;
+        emitter.on('UnityLineSettings', e => {
+            if (e.data.interval != undefined && e.data.interval != '') {
+                l.interval = e.data.interval;
             } else {
                 l.interval = 10;
             }
 
-            if (e.delay != undefined && e.delay != '') {
-                l.delay = e.delay;
+            if (e.data.delay != undefined && e.data.delay != '') {
+                l.delay = e.data.delay;
             } else {
                 l.delay = 0;
             }
 
-            if(e.cargo != undefined) {
-                if (e.cargo.model_name != undefined && e.cargo.model_name != '') {
-                    l.model_name = e.cargo.model_name;
+            if(e.data.cargo != undefined) {
+                if (e.data.cargo.model_name != undefined && e.data.cargo.model_name != '') {
+                    l.model_name = e.data.cargo.model_name;
                 } else {
                     l.model_name = 'carton';
                 }
             }
             console.log('HERE I GOT AGAIN');
-            console.log(props.line);
-            console.log(props.line.value);
-            console.log(props.line.value.data.value);
-            l.index = props.line.index;
-            l.cargo = props.line.cargo;
-            l.animables = props.line.animables;
+            console.log(e.data);
+            l.index = e.data.index;
+            l.cargo = e.data.cargo;
+            l.animables = e.data.animables;
         });
 
         watch(l, (lab, prevLabel) => {
