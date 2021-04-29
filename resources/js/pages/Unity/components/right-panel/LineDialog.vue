@@ -80,6 +80,8 @@ export default {
             }
             console.log('HERE I GOT AGAIN');
             console.log(props.line);
+            console.log(props.line.value);
+            console.log(props.line.value.data.value);
             lin.index = props.line.index;
             lin.cargo = props.line.cargo;
             lin.animables = props.line.animables;
