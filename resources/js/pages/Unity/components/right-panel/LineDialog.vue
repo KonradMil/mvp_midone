@@ -50,7 +50,7 @@ export default {
     },
     emits: ["update:line"],
     setup(props, context) {
-        const l = ref({interval: 10, delay: 0, model_name: ''});
+        const l = ref({interval: 10, delay: 0, model_name: '', cargo: {}, animables: []});
         const detailsAr = ref([]);
 
         const app = getCurrentInstance();
@@ -66,30 +66,30 @@ export default {
             console.log('HERE I GOT AGAINAAAA');
             console.log(props.line);
             if (props.line.data.interval != undefined && props.line.data.interval != '') {
-                l.interval = props.line.data.interval;
+                l.value.interval = props.line.data.interval;
             } else {
-                l.interval = 10;
+                l.value.interval = 10;
             }
 
             if (props.line.data.delay != undefined && props.line.data.delay != '') {
-                l.delay = props.line.data.delay;
+                l.value.delay = props.line.data.delay;
             } else {
-                l.delay = 0;
+                l.value.delay = 0;
             }
 
             if(props.line.data.cargo != undefined) {
                 if (props.line.data.cargo.model_name != undefined && props.line.data.cargo.model_name != '') {
-                    l.model_name = props.line.data.cargo.model_name;
+                    l.value.model_name = props.line.data.cargo.model_name;
                 } else {
-                    l.model_name = 'carton';
+                    l.value.model_name = 'carton';
                 }
             }
 
             console.log('HERE I GOT AGAIN');
             console.log(props.line.data);
-            l.index = props.line.data.index;
-            l.cargo = props.line.data.cargo;
-            l.animables = props.line.data.animables;
+            l.value.index = props.line.data.index;
+            l.value.cargo = props.line.data.cargo;
+            l.value.animables = props.line.data.animables;
 
             detailsAr.value = require('../../../../json/details.json');
         });
