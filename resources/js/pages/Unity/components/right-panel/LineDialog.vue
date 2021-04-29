@@ -52,13 +52,13 @@ export default {
     setup(props, context) {
         const l = ref({interval: 10, delay: 0, model_name: ''});
         const detailsAr = ref([]);
-
+        const lineObj = ref(props.line)
         watch(l, (lab, prevLabel) => {
             console.log('CHANGE');
             context.emit("update:line", lab);
         }, {deep: true})
 
-        watch(props.line, (lin, prevLabel) => {
+        watch(lineObj, (lin, prevLabel) => {
             console.log('HERE I GOT AGAINdsadsadsad');
             if (props.line.interval != undefined && props.line.interval != '') {
                 lin.interval = props.line.interval;
