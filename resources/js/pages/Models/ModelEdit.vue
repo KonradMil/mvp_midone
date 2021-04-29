@@ -347,7 +347,7 @@ export default {
         //     });
         // }
         const editModelRepo = async () => {
-            EditModel(model.value, model_id );
+            EditModel(model.value, model.value.id );
         }
 
         onMounted(() => {
