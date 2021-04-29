@@ -86,6 +86,9 @@ export default {
             console.log(lines.value[activeLineIndex.value].animables[activeAnimableIndex.value]);
             console.log(e);
             if(e.action === 'updateLine') {
+                if(activeLineIndex.value == undefined) {
+                    activeLineIndex.value = 0;
+                }
                 lines.value[activeLineIndex.value] = e.data;
                 console.log(lines.value);
             } else if (e.action === 'updateAnimable') {
