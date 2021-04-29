@@ -59,6 +59,7 @@ export default {
         }, {deep: true})
 
         watch(props.line, (lin, prevLabel) => {
+            console.log('HERE I GOT AGAINdsadsadsad');
             if (props.line.interval != undefined && props.line.interval != '') {
                 lin.interval = props.line.interval;
             } else {
