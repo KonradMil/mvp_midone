@@ -135,8 +135,9 @@ export default {
                     break;
                 case 'settingsline':
                     console.log(lines.value);
-                    console.log(activeAnimableIndex);
-                    emitter.emit('UnityLineSettings', {action: 'settingsline', data: lines.value[activeLineIndex.value]})
+                    console.log('IMPORTANT');
+                    console.log( lines.value[activeLineIndex.value]);
+                    emitter.emit('UnityLineSettings', {action: 'settingsline', data: {layers: lines.value[activeLineIndex.value]}})
                     break;
                 case 'line':
                     emitter.emit('UnityAnimableSettings', {
