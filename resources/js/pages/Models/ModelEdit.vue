@@ -363,7 +363,7 @@ export default {
                 range: range.value,
                 repetity: repetity.value,
                 load: load.value
-            });
+            }, model_id );
         }
 
         onMounted(() => {
