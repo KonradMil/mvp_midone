@@ -58,32 +58,37 @@ export default {
             context.emit("update:line", lab);
         }, {deep: true})
 
-        onMounted(() => {
-            detailsAr.value = require('../../../../json/details.json');
+        watch(props.line, (lin, prevLabel) => {
             if (props.line.interval != undefined && props.line.interval != '') {
-                l.value.interval = props.line.interval;
+                lin.interval = props.line.interval;
             } else {
-                l.value.interval = 10;
+                lin.interval = 10;
             }
 
             if (props.line.delay != undefined && props.line.delay != '') {
-                l.value.delay = props.line.delay;
+                lin.delay = props.line.delay;
             } else {
-                l.value.delay = 0;
+                lin.delay = 0;
             }
 
             if(props.line.cargo != undefined) {
                 if (props.line.cargo.model_name != undefined && props.line.cargo.model_name != '') {
-                    l.value.model_name = props.line.cargo.model_name;
+                    lin.model_name = props.line.cargo.model_name;
                 } else {
-                    l.value.model_name = 'carton';
+                    lin.model_name = 'carton';
                 }
             }
             console.log('HERE I GOT AGAIN');
             console.log(props.line);
-            l.value.index = props.line.index;
-            l.value.cargo = props.line.cargo;
-            l.value.animables = props.line.animables;
+            lin.index = props.line.index;
+            lin.cargo = props.line.cargo;
+            lin.animables = props.line.animables;
+        }, {deep: true})
+
+        onMounted(() => {
+            detailsAr.value = require('../../../../json/details.json');
+
+
         });
 
         return {
