@@ -311,7 +311,7 @@ export default {
         // const dropzoneSingleRef = ref();
         const categories = ref([]);
         const types = require("../../json/model_categories.json");
-        // const model_id = ref(null);
+        const model_id = ref(null);
         // const models = ref([]);
 
         // provide("bind[dropzoneSingleRef]", el => {
