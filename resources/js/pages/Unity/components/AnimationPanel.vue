@@ -99,7 +99,7 @@ export default {
             }
             console.log('FINAL EMIT');
             console.log({layers: lines.value});
-            emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: {layers: lines.value}});
+            emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: lines.value});
         });
 
         emitter.on('UnityAnimationChainUpdate', e => {
