@@ -86,6 +86,8 @@ export default {
             } else if (content.value === 'animable') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable, json: true });
             } else if (content.value === 'line') {
+                console.log('HERE IMPORTA');
+                console.log({layers: line});
                 emitter.emit('rightpanelaction', { action: 'updateLine', data:{layers: line}, json: true });
             }
         }
