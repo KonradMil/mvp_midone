@@ -87,8 +87,10 @@ export default {
             console.log(e);
             if(e.action === 'updateLine') {
                 lines.value[activeLineIndex.value] = e.data;
+                console.log(lines.value);
             } else if (e.action === 'updateAnimable') {
                 lines.value[activeLineIndex.value].animables[activeAnimableIndex.value] = e.data;
+                console.log(lines.value);
             }
             emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: lines.value});
         });
