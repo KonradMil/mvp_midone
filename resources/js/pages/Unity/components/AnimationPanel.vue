@@ -82,6 +82,8 @@ export default {
         emitter.on('rightpanelaction', e => {
             console.log("lines.value");
             console.log(lines.value);
+            console.log(lines.value[activeLineIndex.value]);
+            console.log(lines.value[activeLineIndex.value].animables[activeAnimableIndex.value]);
             console.log(e);
             if(e.action === 'updateLine') {
                 lines.value[activeLineIndex.value] = e.data;
