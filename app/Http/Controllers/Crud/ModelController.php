@@ -58,7 +58,7 @@ class ModelController extends Controller
     }
     public function editModel(Request $request,UnityModel $model)
     {
-        $model->fill[($request->input('data'))];
+        $model->fill($request->input('data'));
         $model->save();
 
         return response()->json([
