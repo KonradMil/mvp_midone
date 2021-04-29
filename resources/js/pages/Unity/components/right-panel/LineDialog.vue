@@ -94,6 +94,7 @@ export default {
 
 
         onMounted(() => {
+            console.log(props.line);
             detailsAr.value = require('../../../../json/details.json');
         });
 

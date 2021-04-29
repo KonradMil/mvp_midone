@@ -103,6 +103,7 @@ export default {
             console.log(e);
             line.value = e;
             currentTitle.value = 'Ustawienia lini animacji';
+            emitter.emit('changeprop', { data:line, json: true });
             showPanel();
         });
 
