@@ -538,12 +538,13 @@ export default {
         });
 
         const saveReportRepo = async () => {
-            SaveReport({
+            await SaveReport({
                 title: title.value,
                 description: description.value,
                 type: type.value,
                 files: files.value
             });
+            await GetReportsRepositiories();
         }
 
         const GetReportsRepositiories = async () => {
@@ -571,7 +572,7 @@ export default {
             GetUsersRepositories('');
             GetNotificationsReposistories('');
             GetTeamsRepositiories('');
-            GetReportsRepositiories('');
+            GetReportsRepositiories();
             // const elDropzoneSingleRef = dropzoneSingleRef.value;
             // console.log(elDropzoneSingleRef);
             // elDropzoneSingleRef.dropzone.on("success", (resp) => {
