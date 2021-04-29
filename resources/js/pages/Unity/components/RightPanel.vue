@@ -83,6 +83,10 @@ export default {
                 emitter.emit('unityoutgoingaction', { action: 'updateLayout', data:layout, json: true });
             } else if (content.value === 'comment') {
                 emitter.emit('unityoutgoingaction', { action: 'updateComment', data:comment, json: true });
+            } else if (content.value === 'animable') {
+                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable, json: true });
+            } else if (content.value === 'line') {
+                emitter.emit('rightpanelaction', { action: 'updateLine', data:line, json: true });
             }
         }
 

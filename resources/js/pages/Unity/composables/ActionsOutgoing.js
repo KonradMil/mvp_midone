@@ -154,6 +154,10 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'DeleteLine', val);
     }
 
+    function updateCurrentAnimation (val) {
+        outgoing(game, 'UpdateCurrentAnimation', val);
+    }
+
     return {
         updateComment,
         updateLabel,
@@ -182,6 +186,7 @@ export default function unityActionOutgoing(gameWindow) {
         setPlaybackSpeed,
         pauseAnimation,
         addLine,
-        removeLine
+        removeLine,
+        updateCurrentAnimation
     };
 }

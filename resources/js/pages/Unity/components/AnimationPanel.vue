@@ -78,6 +78,16 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         emitter.on('animationbuttonclick', e => handleClick(e.val))
+
+        emitter.on('rightpanelaction', e => {
+            if(e.action === 'updateLine') {
+                lines.value[activeLineIndex.value] = e.data;
+            } else if (e.action === 'updateAnimable') {
+                lines.value[activeLineIndex.value].animables[activeAnimableIndex.value] = e.data;
+            }
+            emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: lines.value});
+        });
+
         emitter.on('UnityAnimationChainUpdate', e => {
             lines.value = e.layers.layers;
             console.log(e);
@@ -119,7 +129,7 @@ export default {
                 case 'line':
                     emitter.emit('UnityAnimableSettings', {
                         action: 'removeLine',
-                        data: lines.value[activeLineIndex].animables[activeAnimableIndex]
+                        data: lines.value[activeLineIndex.value].animables[activeAnimableIndex.value]
                     })
                     break;
                 case 'minimalize':
