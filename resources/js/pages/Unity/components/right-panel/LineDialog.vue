@@ -56,45 +56,41 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
 
-        emitter.on('UnityLineSettings', e => {
-            console.log('HERE I GOT AGAINAAAA');
-            console.log(e);
-
-            if (e.data.interval != undefined && e.data.interval != '') {
-                l.interval = e.data.interval;
-            } else {
-                l.interval = 10;
-            }
-
-            if (e.data.delay != undefined && e.data.delay != '') {
-                l.delay = e.data.delay;
-            } else {
-                l.delay = 0;
-            }
-
-            if(e.data.cargo != undefined) {
-                if (e.data.cargo.model_name != undefined && e.data.cargo.model_name != '') {
-                    l.model_name = e.data.cargo.model_name;
-                } else {
-                    l.model_name = 'carton';
-                }
-            }
-            console.log('HERE I GOT AGAIN');
-            console.log(e.data);
-            l.index = e.data.index;
-            l.cargo = e.data.cargo;
-            l.animables = e.data.animables;
-        });
-
         watch(l, (lab, prevLabel) => {
             console.log('CHANGE');
             context.emit("update:line", lab);
         }, {deep: true})
 
 
-
         onMounted(() => {
+            console.log('HERE I GOT AGAINAAAA');
             console.log(props.line);
+            if (props.line.data.interval != undefined && props.line.data.interval != '') {
+                l.interval = props.line.data.interval;
+            } else {
+                l.interval = 10;
+            }
+
+            if (props.line.data.delay != undefined && props.line.data.delay != '') {
+                l.delay = props.line.data.delay;
+            } else {
+                l.delay = 0;
+            }
+
+            if(props.line.data.cargo != undefined) {
+                if (props.line.data.cargo.model_name != undefined && props.line.data.cargo.model_name != '') {
+                    l.model_name = props.line.data.cargo.model_name;
+                } else {
+                    l.model_name = 'carton';
+                }
+            }
+
+            console.log('HERE I GOT AGAIN');
+            console.log(props.line.data);
+            l.index = props.line.data.index;
+            l.cargo = props.line.data.cargo;
+            l.animables = props.line.data.animables;
+
             detailsAr.value = require('../../../../json/details.json');
         });
 
