@@ -45,9 +45,15 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
     Route::post('images/store', [ChallengeController::class, 'storeImage']);
 });
 
+
+Route::post('report/show', [ReportController::class, 'getReport']);
+
 Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('user/get', [ReportController::class, 'getUserReports']);
+    Route::post('user/show', [ReportController::class, 'getReport']);
     Route::post('user/create', [ReportController::class, 'createReport']);
-    Route::post('file/store', [ReportController::class, 'storeFile']);
+    Route::post('user/delete', [ReportController::class, 'deleteReport']);
+    Route::post('files/store', [ReportController::class, 'storeFile']);
 });
 
 Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
@@ -82,8 +88,9 @@ Route::group(['prefix' => 'teams', 'middleware' => 'auth:sanctum'], function () 
     Route::post('user/get', [TeamsController::class, 'getUserTeamsFiltered']);
 });
 
-Route::post('model/edit', [ModelController::class, 'editModel']);
+Route::post('model/edit/{model}', [ModelController::class, 'editModel']);
 Route::post('model/get', [ModelController::class, 'getModel']);
+Route::post('model/delete', [ModelController::class, 'deleteModel']);
 Route::group(['prefix' => 'models', 'middleware' => 'auth:sanctum'], function () {
     Route::post('get', [ModelController::class, 'getModels']);
     Route::post('add', [ModelController::class, 'addModel']);

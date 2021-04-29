@@ -14,7 +14,7 @@
                             <a href="" class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'notifications') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'notifications'"> <i class="w-4 h-4 mr-2" data-feather="mail"></i>{{$t('global.notifications')}}</a>
                             <a class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'teams') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'teams'" > <i class="w-4 h-4 mr-2" data-feather="star"></i>{{$t('menu.Zespoły')}}</a>
                             <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'questions') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''"  @click.prevent="activeTab = 'questions'"> <i class="w-4 h-4 mr-2" data-feather="inbox"></i> {{$t('communication.questions')}}</a>
-                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'tickets') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'tickets'"> <i class="w-4 h-4 mr-2" data-feather="send"></i>{{$t('communication.reports')}}</a>
+                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'reports') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'reports'"> <i class="w-4 h-4 mr-2" data-feather="send"></i>{{$t('communication.reports')}}</a>
                         </div>
 <!--                        <div class="border-t border-theme-3 dark:border-dark-5 mt-4 pt-4 text-white">-->
 <!--                            <a href="" class="flex items-center px-3 py-2 truncate">-->
@@ -128,6 +128,49 @@
 <!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="settings"></i></a>-->
                             </div>
                         </div>
+                        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible" v-if="activeTab==='reports'">
+                            <table class="table table-report -mt-2">
+                                <thead>
+                                <tr>
+                                    <th class="whitespace-nowrap">Plik</th>
+                                    <th class="whitespace-nowrap">Tytuł</th>
+                                    <th class="text-center whitespace-nowrap">Zgłoszono dnia</th>
+                                    <th class="text-center whitespace-nowrap">STATUS</th>
+                                    <th class="text-center whitespace-nowrap">ACTIONS</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="intro-x"
+                                    v-for="(report, index) in reports.list"
+                                    :key="'team_' + index"
+                                    v-if="activeTab==='reports'"
+                                >
+                                    <td class="w-40">
+                                        <div class="flex">
+                                            <div class="w-10 h-10 image-fit zoom-in">
+                                                File
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="" class="font-medium whitespace-nowrap">{{ report.title }}</a>
+                                        <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">{{report.type}}</div>
+                                    </td>
+                                    <td class="text-center">{{ $dayjs(report.created_at).format('DD.MM.YYYY HH:mm') }}</td>
+                                    <td class="w-40">
+                                        <div class="flex items-center justify-center text-theme-9"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> {{ report.description }} </div>
+                                    </td>
+                                    <td class="table-report__action w-56">
+                                        <div class="flex justify-center items-center">
+                                            <a class="flex items-center mr-3" href="javascript:" @click.prevent="$router.push({path: '/report/show/' + report.id })"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Podgląd </a>
+                                            <a @click.prevent="DeleteReport(report.id)" class="flex items-center text-theme-6" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                         <div class="overflow-x-auto sm:overflow-x-visible" v-if="activeTab === 'notifications'"
                              v-for="(notification, index) in notifications.list"
                              :key="'notification_' + index"
@@ -151,9 +194,50 @@
                             </div>
                             asdsadsadad
                         </div>
-<!--                        <div class="overflow-x-auto sm:overflow-x-visible" v-if="activeTab === 'teams'"-->
+                        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible" v-if="activeTab==='teams'">
+                            <table class="table table-report -mt-2">
+                                <thead>
+                                <tr>
+                                    <th class="whitespace-nowrap">Avatar</th>
+                                    <th class="whitespace-nowrap">Nazwa zespołu</th>
+                                    <th class="text-center whitespace-nowrap">Założono</th>
+                                    <th class="text-center whitespace-nowrap">Liczba członków</th>
+                                    <th class="text-center whitespace-nowrap">ACTIONS</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="intro-x"
+                                    v-for="(team, index) in teams.list"
+                                    :key="'team_' + index" >
+                                    <td class="w-40">
+                                        <div class="flex">
+                                            <div class="w-10 h-10 image-fit zoom-in">
+                                                <Avatar :username="team.name" color="#FFF" background-color="#930f68"/>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="" class="font-medium whitespace-nowrap">{{ team.name }}</a>
+                                        <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">Sport &amp; Outdoor</div>
+                                    </td>
+                                    <td class="text-center">{{ $dayjs(team.created_at).format('DD.MM.YYYY HH:mm') }}</td>
+                                    <td class="w-40">
+                                        <div class="flex items-center justify-center text-theme-9"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> {{ team.users.length }} </div>
+                                    </td>
+                                    <td class="table-report__action w-56">
+                                        <div class="flex justify-center items-center">
+                                            <a class="flex items-center mr-3" href="javascript:;"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                            <a @click.prevent="$router.push({path: '/user/team/delete/' + team.id})" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!--                        <div class="overflow-x-auto sm:overflow-x-visible" v-if="activeTab === 'teams'"-->
 <!--                        >-->
-<!--                            <div class="intro-y" >-->
+<!--                                                         <div class="intro-y" >-->
 <!--                                <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">-->
 <!--                                    <div class="flex px-5 py-3">-->
 <!--                                        <div class="w-72 flex-none flex items-center mr-5">-->
@@ -175,7 +259,7 @@
                             v-for="(team, index) in teams.list"
                             :key="'team_' + index"
                             class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12"
-                            v-if="activeTab==='teams'"
+                            v-if="activeTab==='teams2'"
                         >
                             <div class="box">
                                 <div class="flex flex-col lg:flex-row items-center p-5">
@@ -233,18 +317,30 @@
                             </div>
                             <div class="mt-3">
                                 <label for="crud-form-2" class="form-label">Czego dotyczy</label>
-<!--                                <select data-placeholder="Select your favorite actors" class="tail-select w-full" id="crud-form-2" multiple>-->
-<!--                                    <option value="1" selected>Sport & Outdoor</option>-->
-<!--                                    <option value="2">PC & Laptop</option>-->
-<!--                                    <option value="3" selected>Smartphone & Tablet</option>-->
-<!--                                    <option value="4">Photography</option>-->
-<!--                                </select>-->
-                                <input id="crud-form-2"
-                                       type="text"
-                                       class="form-control w-full"
-                                       placeholder="Input text"
-                                       v-model="type"
-                                >
+                                <TailSelect
+                                    id="post-form-3"
+                                    v-model="type"
+                                    :options="{
+                                     locale: 'pl',
+                                     limit: 'Nie można wybrać więcej',
+                                     search: false,
+                                     hideSelected: false,
+                                     classNames: 'w-16'
+                                     }"
+                                   >
+                                    <option value="Wyzwanie">Wyzwanie</option>
+                                    <option value="Rozwiazanie">Rozwiązanie</option>
+                                    <option value="Oferta">Oferta</option>
+                                    <option value="Projekt">Projekt</option>
+                                    <option value="Stanowisko">Stanowisko</option>
+                                    <option value="Inne">Inne</option>
+                                </TailSelect>
+<!--                                <input id="crud-form-2"-->
+<!--                                       type="text"-->
+<!--                                       class="form-control w-full"-->
+<!--                                       placeholder="Input text"-->
+<!--                                       v-model="type"-->
+<!--                                >-->
                             </div>
                             <div class="pt-5">
                             <div
@@ -398,7 +494,9 @@ import cash from "cash-dom";
 import GetUsers from '../../compositions/GetUsers'
 import GetNotifications from '../../compositions/GetNotifications'
 import GetTeams from '../../compositions/GetTeams';
+import GetReports from '../../compositions/GetReports';
 import SaveReport from '../../compositions/SaveReport';
+import DeleteReport from '../../compositions/DeleteReport';
 import Dropzone from '../../global-components/dropzone/Main'
 import {useToast} from "vue-toastification";
 import Avatar from "../../components/avatar/Avatar";
@@ -413,18 +511,22 @@ export default {
         Modal,
         GetTeams,
         GetUsers,
-        Dropzone
+        Dropzone,
+        DeleteReport,
+        GetReports
     },
     setup(props, {emit}) {
         const toast = useToast();
         const showDetails = ref([]);
         const users = ref([]);
         const user =ref({});
+        const report = ref('');
         const notifications = ref([]);
         const show = ref(false);
         const showTeams = ref(false);
         const activeTab = ref('notifications');
         const teams = ref([]);
+        const reports = ref([]);
         const title = ref('');
         const type = ref('');
         const description = ref('');
@@ -436,12 +538,17 @@ export default {
         });
 
         const saveReportRepo = async () => {
-            SaveReport({
+            await SaveReport({
                 title: title.value,
                 description: description.value,
                 type: type.value,
                 files: files.value
             });
+            await GetReportsRepositiories();
+        }
+
+        const GetReportsRepositiories = async () => {
+            reports.value = GetReports();
         }
         const GetUsersRepositories = async () => {
             users.value = GetUsers();
@@ -465,6 +572,7 @@ export default {
             GetUsersRepositories('');
             GetNotificationsReposistories('');
             GetTeamsRepositiories('');
+            GetReportsRepositiories();
             // const elDropzoneSingleRef = dropzoneSingleRef.value;
             // console.log(elDropzoneSingleRef);
             // elDropzoneSingleRef.dropzone.on("success", (resp) => {
@@ -494,7 +602,9 @@ export default {
             title,
             type,
             description,
-            files
+            files,
+            reports,
+            DeleteReport,
         }
     },
     beforeRouteEnter(to, from, next) {

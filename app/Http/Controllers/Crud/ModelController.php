@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class ModelController extends Controller
 {
-
     public function getModel(Request  $request)
     {
         $model = UnityModel::find($request->id);
@@ -65,6 +64,14 @@ class ModelController extends Controller
            'success' => true,
            'message' => 'Edytowano poprawnie.',
            'payload' => $model
+        ]);
+    }
+    public function deleteModel(Request $request)
+    {
+        UnityModel::destroy($request->id);
+        return response()->json([
+           'success' => true,
+           'message' => 'Usunięto poprawnie',
         ]);
     }
 }

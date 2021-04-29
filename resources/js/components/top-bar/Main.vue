@@ -18,11 +18,11 @@
                     id="post-form-3"
                     v-model="lang"
                     :options="{
-                locale: 'pl',
-                limit: 'Nie można wybrać więcej',
-                search: false,
-                hideSelected: false,
-                classNames: 'w-16'
+                    locale: 'pl',
+                    limit: 'Nie można wybrać więcej',
+                    search: false,
+                    hideSelected: false,
+                    classNames: 'w-16'
               }"
                 >
                     <option value="pl">PL</option>
@@ -233,7 +233,7 @@
                         <a
                             href=""
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
-                            @click.prevent="$router.push({path: '/change-password'})"
+                            @click.prevent="$router.push({path: '/profiles'})"
                         >
                             <LockIcon class="w-4 h-4 mr-2"/>
                             {{$t('topBar.resetPassword')}}

@@ -16,21 +16,32 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class ReportController extends Controller
 {
-    public function getUserChallenges()
+    public function getReport(Request  $request)
     {
-
-        if(Auth::user()->type == 'integrator') {
-            $challenges = Challenge::whereIn('stage', [1,2])->where('status', '=', 1)->get();
-        } else  if(Auth::user()->type == 'inwestor') {
-            $challenges = Auth::user()->challenges()->get();
-        } else {
-            $challenges = Challenge::get();
-        }
+        $report = Report::find($request->id);
 
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
-            'payload' => $challenges
+            'payload' => $report
+        ]);
+    }
+    public function deleteReport(Request $request)
+    {
+        Report::destroy($request->id);
+        return response()->json([
+           'success' => true,
+           'message' => 'Usunięto poprawnie'
+        ]);
+    }
+    public function getUserReports()
+    {
+        $reports = Report::get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => $reports
         ]);
     }
 

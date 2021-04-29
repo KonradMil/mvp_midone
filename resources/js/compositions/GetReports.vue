@@ -4,28 +4,24 @@
 
 <script>
 import {ref} from 'vue';
-import {useToast} from "vue-toastification";
 
-const toast = useToast();
-
-export default function EditModel(data,id) {
+export default function GetReports() {
     const list = ref([]);
 
-    async function editModel(data,id) {
-        axios.post(`/api/model/edit/${id}`, {data})
+    async function getReports() {
+        axios.post('api/report/user/get', {})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
                     // console.log(response.data);
                     list.value = response.data.payload;
-                    toast.success(response.data.message);
                 } else {
-                    toast.error(response.data.message);
+                    // toast.error(response.data.message);
                 }
             })
     }
 
-    editModel(data,id);
+    getReports();
 
     return {
         list

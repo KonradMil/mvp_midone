@@ -84,6 +84,7 @@
                                     {{$t('models.edit')}}
                                 </a>
                                 <a
+                                    @click.prevent="DeleteModel(model.id)"
                                     class="flex items-center text-theme-6"
                                     href="javascript:;"
                                     data-toggle="modal"
@@ -188,6 +189,7 @@
 <script>
 import {computed, onMounted, ref} from "vue";
 import GetModels from "../../compositions/GetModels";
+import DeleteModel from "../../compositions/DeleteModel";
 import cash from "cash-dom";
 import CategoryName from "./CategoryName";
 import SubcategoryName from "./SubcategoryName";
@@ -199,6 +201,8 @@ export default {
         const models = ref([]);
         const categories = ref([]);
         const types = require("../../json/model_categories.json");
+
+
         const getModelRepositories = async () => {
             models.value = GetModels();
         }
@@ -212,7 +216,8 @@ export default {
         getModelRepositories();
         return {
             models,
-            categories
+            categories,
+            DeleteModel
         }
     }
 }
