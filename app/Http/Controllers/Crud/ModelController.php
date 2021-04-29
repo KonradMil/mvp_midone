@@ -67,4 +67,12 @@ class ModelController extends Controller
            'payload' => $model
         ]);
     }
+    public function deleteModel(Request $request)
+    {
+        UnityModel::destroy($request->id);
+        return response()->json([
+           'success' => true,
+           'message' => 'Usunięto poprawnie',
+        ]);
+    }
 }
