@@ -1,16 +1,19 @@
 import {watch, unref, onUnmounted} from 'vue';
 function outgoing(game, action, data, json) {
     console.log('ADASD');
-    console.log(data);
+
     let finalData = '';
     if(json) {
         if(data.value != undefined) {
+            console.log(data.value);
             finalData = JSON.stringify(data.value);
         } else {
+            console.log(data);
             finalData = JSON.stringify(data);
         }
 
     } else {
+        console.log(data);
         finalData = data;
     }
     console.log(['NetworkBridge', action, finalData]);

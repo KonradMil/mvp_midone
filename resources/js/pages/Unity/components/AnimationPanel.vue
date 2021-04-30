@@ -80,22 +80,13 @@ export default {
         emitter.on('animationbuttonclick', e => handleClick(e.val))
 
         emitter.on('rightpanelaction', e => {
-            // console.log("lines.value");
-            // console.log(lines.value);
-            // console.log(activeLineIndex.value);
-            // console.log(activeAnimableIndex.value);
-            // console.log(lines.value[activeLineIndex.value]);
-            // console.log(lines.value[activeLineIndex.value].animables[activeAnimableIndex.value]);
-            // console.log(e);
             if(e.action === 'updateLine') {
                 if(activeLineIndex.value == undefined) {
                     activeLineIndex.value = 0;
                 }
                 lines.value[activeLineIndex.value] = e.data;
-                // console.log(lines.value);
             } else if (e.action === 'updateAnimable') {
                 lines.value[activeLineIndex.value].animables[activeAnimableIndex.value] = e.data;
-                // console.log(lines.value);
             }
             console.log('FINAL EMIT');
             console.log({layers: lines.value});
