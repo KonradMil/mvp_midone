@@ -89,8 +89,8 @@ export default {
                 lines.value[activeLineIndex.value].animables[activeAnimableIndex.value] = e.data;
             }
             console.log('FINAL EMIT');
-            console.log({layers: lines.value});
-            emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: lines.value});
+            console.log({layers: lines.value[0]});
+            emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: lines.value[0]});
         });
 
         emitter.on('UnityAnimationChainUpdate', e => {
