@@ -80,6 +80,7 @@ export default {
         emitter.on('animationbuttonclick', e => handleClick(e.val))
 
         emitter.on('rightpanelaction', e => {
+            console.log(e);
             if(e.action === 'updateLine') {
                 if(activeLineIndex.value == undefined) {
                     activeLineIndex.value = 0;
