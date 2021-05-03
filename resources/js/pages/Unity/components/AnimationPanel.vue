@@ -85,6 +85,9 @@ export default {
             console.log(animation.layers[index]);
             console.log('TRYYY');
             console.log(object.layers);
+            let a = unref(object.layers);
+            console.log(a);
+            console.log(unref(object.layers));
             animation.layers = object.layers;
             // animation.layers.forEach(function (val, ind) {
             //     console.log("val");
