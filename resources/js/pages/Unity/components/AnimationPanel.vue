@@ -63,7 +63,7 @@
 import AnimationButtons from "./AnimationButtons";
 import {getCurrentInstance, ref} from "vue";
 import UnityButton from "./UnityButton";
-import animationLayers from "./../../composables/AnimationLayers";
+
 
 export default {
     name: "AnimationPanel",
@@ -72,15 +72,28 @@ export default {
         icons: Object
     },
     setup(props, context) {
-        const animation = ref({});
-        animation.value = animationLayers();
+        const animation = ref({layers: []});
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
 
-        // const lines = ref([{}]);
+        //ANIMATION CONTROLLER
+        function swapObjectByIndex(index, object) {
+            animation.value.layers[index] = object;
+        }
+
+        function addLine() {
+            animation.value.layers[animation.layers.length + 1] = {};
+        }
+
+        function updateAnimationUnity() {
+            emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: animation});
+        }
+        //END OF ANIMATION CONTROLLER
+
         const activeLineIndex = ref(0);
         const activeAnimableIndex = ref(0);
         const expanded = ref(1);
-        const app = getCurrentInstance();
-        const emitter = app.appContext.config.globalProperties.emitter;
+
         emitter.on('animationbuttonclick', e => handleClick(e.val))
 
         emitter.on('rightpanelaction', e => {
@@ -89,20 +102,17 @@ export default {
                 if(activeLineIndex.value == undefined) {
                     activeLineIndex.value = 0;
                 }
-                animation.value['swapObjectByIndex'](activeLineIndex.value, e.data);
-                // lines.value[activeLineIndex.value] = e.data;
+                swapObjectByIndex(activeLineIndex.value, e.data);
             }
-            // else if () {
-            //     lines.value[activeLineIndex.value].animables[activeAnimableIndex.value] = e.data;
-            // }
             console.log('FINAL EMIT');
             console.log({layers: lines.value[0]});
+            updateAnimationUnity();
             // emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: lines.value[0]});
         });
 
         emitter.on('UnityAnimationChainUpdate', e => {
-            lines.value = e.layers.layers;
-            console.log(e);
+            // lines.value = e.layers.layers;
+            animation.value.layers = e.layers.layers;
         });
 
         const handleClick = (val) => {
