@@ -81,7 +81,7 @@ export default {
             console.log('IMPORTANT NOW: ');
             console.log([index, object.value]);
             console.log(animation.value.layers[index]);
-            animation.value.layers[index] = object.value;
+            animation.value.layers[index] = unref(object);
             console.log(unref(animation.value));
             console.log('END IMPORTANT NOW: ');
         }
