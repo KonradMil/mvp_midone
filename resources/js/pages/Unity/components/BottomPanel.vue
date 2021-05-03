@@ -35,7 +35,7 @@
 </template>
 <style src="@vueform/slider/themes/default.css"></style>
 <script>
-import {getCurrentInstance, onMounted, ref} from "vue";
+import {getCurrentInstance, onMounted, ref, watch} from "vue";
 import cash from "cash-dom";
 import AnimationPanel from "./AnimationPanel";
 import UnityButton from "./UnityButton";
@@ -62,6 +62,11 @@ export default {
             gridSize.value = val;
             emitter.emit('gridsizechange', { val: val })
         }
+
+        watch(animationSave, (lab, prevLabel) => {
+            context.emit("update:animationSave", lab);
+        }, {deep: true})
+
         onMounted(()=> {
             animationSave.layers = props.animationSave.layers;
             //REMOVES PADDING
