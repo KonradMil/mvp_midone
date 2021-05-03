@@ -78,7 +78,11 @@ export default {
 
         //ANIMATION CONTROLLER
         function swapObjectByIndex(index, object) {
+            console.log('IMPORTANT NOW: ');
+            console.log([index, object]);
             animation.value.layers[index] = object;
+            console.log(animation.value);
+            console.log('END IMPORTANT NOW: ');
         }
 
         function addLine() {
@@ -86,6 +90,8 @@ export default {
         }
 
         function updateAnimationUnity() {
+            console.log('FINAL EMIT IMP: ');
+            console.log(animation);
             emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: animation});
         }
         //END OF ANIMATION CONTROLLER
