@@ -224,8 +224,7 @@ export default {
         });
 
         onMounted(() => {
-            type.value = props.type;
-            id.value = props.id;
+
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")
@@ -240,6 +239,8 @@ export default {
             radialMenuLayout.value = require("../../json/radial_layout.json");
             currentRadialMenu.value = radialMenuEdit.value;
             mode.value = 'edit';
+            type.value = props.type;
+            id.value = props.id;
         });
 
         return {
