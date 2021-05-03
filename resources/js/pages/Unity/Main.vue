@@ -241,6 +241,8 @@ export default {
             mode.value = 'edit';
             type.value = props.type;
             id.value = props.id;
+            console.log(props);
+            console.log(props.load);
             if(props.load != undefined) {
                 console.log('LOAD');
                 console.log(props.load);
