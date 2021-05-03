@@ -63,6 +63,8 @@
 import AnimationButtons from "./AnimationButtons";
 import {getCurrentInstance, ref} from "vue";
 import UnityButton from "./UnityButton";
+import animationLayers from '../composables/AnimationLayers';
+import unityActionOutgoing from "../composables/ActionsOutgoing";
 
 export default {
     name: "AnimationPanel",
@@ -71,7 +73,10 @@ export default {
         icons: Object
     },
     setup(props, context) {
-        const lines = ref([{}]);
+        const animation = ref({});
+        animation.value = animationLayers();
+
+        // const lines = ref([{}]);
         const activeLineIndex = ref(0);
         const activeAnimableIndex = ref(0);
         const expanded = ref(1);
@@ -81,17 +86,19 @@ export default {
 
         emitter.on('rightpanelaction', e => {
             console.log(e);
-            if(e.action === 'updateLine') {
+            if(e.action === 'updateLine' || e.action === 'updateAnimable' ) {
                 if(activeLineIndex.value == undefined) {
                     activeLineIndex.value = 0;
                 }
-                lines.value[activeLineIndex.value] = e.data;
-            } else if (e.action === 'updateAnimable') {
-                lines.value[activeLineIndex.value].animables[activeAnimableIndex.value] = e.data;
+                animation.value['swapObjectByIndex'](activeLineIndex.value, e.data);
+                // lines.value[activeLineIndex.value] = e.data;
             }
+            // else if () {
+            //     lines.value[activeLineIndex.value].animables[activeAnimableIndex.value] = e.data;
+            // }
             console.log('FINAL EMIT');
             console.log({layers: lines.value[0]});
-            emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: lines.value[0]});
+            // emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: lines.value[0]});
         });
 
         emitter.on('UnityAnimationChainUpdate', e => {
