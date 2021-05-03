@@ -223,6 +223,20 @@ export default {
             bridge.value = UnityBridge();
         });
 
+
+        const getCardChallengeRepositories = async (id) => {
+            await axios.post('/api/challenge/user/get/card', {id: id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        console.log(response.data.payload);
+                        handleUnityActionOutgoing({action: 'loadStructure', data: response.data.payload.save_json});
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        }
+
         onMounted(() => {
 
             //REMOVES PADDING
@@ -241,15 +255,8 @@ export default {
             mode.value = 'edit';
             type.value = props.type;
             id.value = props.id;
-            setTimeout(function () {
-                console.log(props);
-                console.log(props.load);
-                if(props.load != undefined) {
-                    console.log('LOAD');
-                    console.log(props.load);
-                    handleUnityActionOutgoing({action: 'loadStructure', data: props.load.save_json});
-                }
-            }, 1500);
+
+            getCardChallengeRepositories(props.id);
 
         });
 
