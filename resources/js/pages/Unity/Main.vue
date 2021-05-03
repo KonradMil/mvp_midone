@@ -188,7 +188,7 @@ export default {
         emitter.on('UnitySave', e => {
             gameLoad.value.save_json = e.saveGame;
             if (type.value == 'challenge') {
-                SaveChallengeUnity({save: gameLoad.value, id: });
+                SaveChallengeUnity({save: gameLoad.value, id: id.value});
             } else {
 
             }
