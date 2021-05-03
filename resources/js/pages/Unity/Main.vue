@@ -242,6 +242,8 @@ export default {
         });
 
         return {
+            type,
+            id,
             animationSave,
             unity_path,
             window_width,
