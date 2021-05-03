@@ -61,7 +61,7 @@
 
 <script>
 import AnimationButtons from "./AnimationButtons";
-import {getCurrentInstance, ref} from "vue";
+import {getCurrentInstance, ref, unref} from "vue";
 import UnityButton from "./UnityButton";
 
 
@@ -82,7 +82,7 @@ export default {
             console.log([index, object.value]);
             console.log(animation.value.layers[index]);
             animation.value.layers[index] = object.value;
-            console.log(animation.value);
+            console.log(unref(animation.value));
             console.log('END IMPORTANT NOW: ');
         }
 
