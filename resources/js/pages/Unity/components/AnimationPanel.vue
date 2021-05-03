@@ -80,8 +80,9 @@ export default {
         function swapObjectByIndex(index, object) {
             console.log('IMPORTANT NOW: ');
             console.log([index, object]);
+            console.log(animation.value);
+            console.log(animation.value.layers);
             console.log(animation.value.layers[index]);
-            console.log(animation.value.layers[index].value);
             animation.value.layers[index].cargo = object.cargo;
             animation.value.layers[index].animables = object.animable;
             animation.value.layers[index].index = object.index;
