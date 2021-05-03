@@ -61,7 +61,7 @@
 
 <script>
 import AnimationButtons from "./AnimationButtons";
-import {getCurrentInstance, reactive, ref, toRaw, unref} from "vue";
+import {getCurrentInstance, onMounted, reactive, ref, toRaw, unref} from "vue";
 import UnityButton from "./UnityButton";
 
 
@@ -69,8 +69,10 @@ export default {
     name: "AnimationPanel",
     components: {AnimationButtons, UnityButton},
     props: {
-        icons: Object
+        icons: Object,
+        animationSave: Object
     },
+    emits: ["update:animationSave"],
     setup(props, context) {
         const animation = reactive({layers: []});
         const app = getCurrentInstance();
@@ -78,35 +80,9 @@ export default {
 
         //ANIMATION CONTROLLER
         function swapObjectByIndex(index, object) {
-            console.log('IMPORTANT NOW: ');
-            console.log([index, object]);
-            console.log(animation);
-            console.log(animation.layers);
-            console.log(animation.layers[index]);
-            console.log('TRYYY');
-            console.log(object.layers);
-            console.log(toRaw(object.layers));
-            console.log(unref(object.layers));
+            // console.log('IMPORTANT NOW: ');
             animation.layers[index] = toRaw(object.layers);
-            // animation.layers.forEach(function (val, ind) {
-            //     console.log("val");
-            //     console.log(val);
-            //     console.log([index, ind]);
-            //     if(index == ind) {
-            //         console.log(object);
-            //         console.log(object.cargo);
-            //         val.cargo = object.cargo;
-            //         val.animables = object.animable;
-            //         val.index = object.index;
-            //         val.duration = object.duration;
-            //         val.interval = object.interval;
-            //     }
-            //     console.log(index);
-            // });
-
-            // animation.value.layers[index] = unref(object);
-            console.log(animation);
-            console.log('END IMPORTANT NOW: ');
+            // console.log('END IMPORTANT NOW: ');
         }
 
         function addLine() {
@@ -135,7 +111,6 @@ export default {
                 swapObjectByIndex(activeLineIndex.value, e.data);
             }
             console.log('FINAL EMIT');
-            // console.log({layers: lines.value[0]});
             updateAnimationUnity();
             // emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: lines.value[0]});
         });
@@ -143,6 +118,10 @@ export default {
         emitter.on('UnityAnimationChainUpdate', e => {
             // lines.value = e.layers.layers;
             animation.layers = e.layers.layers;
+        });
+
+        onMounted(() => {
+            animation.layers = props.animationSave.layers;
         });
 
         const handleClick = (val) => {

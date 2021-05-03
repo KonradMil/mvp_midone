@@ -5,13 +5,13 @@
     <div @contextmenu.prevent="openMenu">
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
-    <BottomPanel :mode="mode"></BottomPanel>
+    <BottomPanel :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
         <RightPanel @mouseover.native="lockInput" @mouseleave.native="unlockInput"></RightPanel>
 </template>
 
 <script>
 import Studio from "./Studio";
-import {getCurrentInstance, onBeforeMount, onMounted, ref} from "vue";
+import {getCurrentInstance, onBeforeMount, onMounted, reactive, ref} from "vue";
 import WindowWatcher from "../../events/WindowWatcher";
 import UnityBridge from "./bridge";
 import cash from "cash-dom";
@@ -53,6 +53,7 @@ export default {
         const radialMenuEdit = ref([]);
         const radialMenuAnimation = ref([]);
         const radialMenuLayout = ref([]);
+        const animationSave = reactive({});
 
 
         window_height.value = window.innerHeight;
@@ -234,6 +235,7 @@ export default {
         });
 
         return {
+            animationSave,
             unity_path,
             window_width,
             window_height,
