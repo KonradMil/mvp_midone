@@ -80,7 +80,7 @@ export default {
         function swapObjectByIndex(index, object) {
             console.log('IMPORTANT NOW: ');
             console.log([index, object]);
-            animation.value.layers[index] = object;
+            animation.value.layers[index] = object.value;
             console.log(animation.value);
             console.log('END IMPORTANT NOW: ');
         }
