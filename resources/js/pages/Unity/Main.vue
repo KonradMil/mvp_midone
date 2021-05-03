@@ -171,7 +171,7 @@ export default {
                     handleUnityActionOutgoing({action: 'ChangeCamera', data: 0});
                     break;
                 case 'save':
-                    handleUnityActionOutgoing({action: 'SaveStructure', data: ''});
+                    handleUnityActionOutgoing({action: 'save', data: ''});
                     break;
                 case 'help':
 
