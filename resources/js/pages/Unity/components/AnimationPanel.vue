@@ -63,8 +63,7 @@
 import AnimationButtons from "./AnimationButtons";
 import {getCurrentInstance, ref} from "vue";
 import UnityButton from "./UnityButton";
-import animationLayers from '../composables/AnimationLayers';
-import unityActionOutgoing from "../composables/ActionsOutgoing";
+import animationLayers from "../composables/AnimationLayers";
 
 export default {
     name: "AnimationPanel",
