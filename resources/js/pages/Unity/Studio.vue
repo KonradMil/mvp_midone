@@ -112,7 +112,9 @@ export default {
 
 
         onMounted(()=> {
-            emitter.on('onload', e =>  instantiate() )
+            emitter.on('onload', e =>  setTimeout(function () {
+                instantiate();
+            }, 1500))
         });
 
         return {

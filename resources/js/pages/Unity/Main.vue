@@ -211,7 +211,7 @@ export default {
                 // gameWindow.value.message('NetworkBridge', 'SetHangarApperance', 1);
                 // gameWindow.value.message('NetworkBridge', 'UnlockUnityInput');
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
-                handleUnityActionOutgoing({action: 'setSessionId', data: 1});
+                handleUnityActionOutgoing({action: 'setSessionId', data: Number(Math.random().toString().substr(3, length) + Date.now()).toString(36)});
                 // handleUnityActionOutgoing({action: 'setHangarAppearance', data: 1});
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
 
