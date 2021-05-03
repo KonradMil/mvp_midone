@@ -167,7 +167,6 @@ export default {
 
         return {
             expanded,
-            lines,
             activeLineIndex,
             activeAnimableIndex
         }
