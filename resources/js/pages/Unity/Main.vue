@@ -27,12 +27,17 @@ const ww = WindowWatcher();
 
 export default {
     name: "Main",
+    props: {
+      type: String,
+      id: Number
+    },
     components: {RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
     setup(props, {emit}) {
         //GLOBAL
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         //INTERNAL
+        const id = ref(0);
         const type = ref('challenge');
         const mode = ref('');
         const bridge = ref();
@@ -183,7 +188,7 @@ export default {
         emitter.on('UnitySave', e => {
             gameLoad.value.save_json = e.saveGame;
             if (type.value == 'challenge') {
-                SaveChallengeUnity(gameLoad);
+                SaveChallengeUnity({save: gameLoad.value, id: });
             } else {
 
             }
@@ -218,6 +223,8 @@ export default {
         });
 
         onMounted(() => {
+            type.value = props.type;
+            id.value = props.id;
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")

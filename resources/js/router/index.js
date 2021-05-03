@@ -89,6 +89,18 @@ export const routes = [
                 component: Challenges
             },
             {
+                name: 'challengeStudio',
+                path: '/studio/challenge/:id',
+                component: Main,
+                props: true
+            },
+            {
+                name: 'solutionStudio',
+                path: '/studio/solution/:id',
+                component: Main,
+                props: true
+            },
+            {
                 name: 'internalChallenegeCard',
                 path: '/challenges/card/:id',
                 component: Card,
