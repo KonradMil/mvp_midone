@@ -79,7 +79,8 @@ export default {
         //ANIMATION CONTROLLER
         function swapObjectByIndex(index, object) {
             console.log('IMPORTANT NOW: ');
-            console.log([index, object]);
+            console.log([index, object.value]);
+            console.log(animation.value.layers[index]);
             animation.value.layers[index] = object.value;
             console.log(animation.value);
             console.log('END IMPORTANT NOW: ');
