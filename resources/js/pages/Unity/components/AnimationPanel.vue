@@ -89,6 +89,7 @@ export default {
                 console.log(val);
                 console.log([index, ind]);
                 if(index == ind) {
+                    console.log(object);
                     console.log(object.cargo);
                     val.cargo = object.cargo;
                     val.animables = object.animable;
