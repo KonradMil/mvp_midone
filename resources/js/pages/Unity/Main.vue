@@ -241,6 +241,9 @@ export default {
             mode.value = 'edit';
             type.value = props.type;
             id.value = props.id;
+            if(props.load != undefined) {
+                handleUnityActionOutgoing({action: 'loadStructure', data: props.load.save_json});
+            }
         });
 
         return {

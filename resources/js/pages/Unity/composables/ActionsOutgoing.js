@@ -161,7 +161,12 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'UpdateCurrentAnimation', val, true);
     }
 
+    function loadStructure (val) {
+        outgoing(game, 'LoadStructure', val, true);
+    }
+
     return {
+        loadStructure,
         updateComment,
         updateLabel,
         updateLayout,
