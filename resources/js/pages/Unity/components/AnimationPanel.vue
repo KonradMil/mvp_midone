@@ -144,9 +144,9 @@ export default {
                     emitter.emit('unityoutgoingaction', {data: activeLineIndex.value})
                     break;
                 case 'settingsline':
-                    console.log(lines.value);
+                    console.log(animation.value);
                     console.log('IMPORTANT');
-                    console.log( lines.value[activeLineIndex.value]);
+                    // console.log( lines.value[activeLineIndex.value]);
                     emitter.emit('UnityLineSettings', {action: 'settingsline', data: animation.value.layers[activeLineIndex.value]})
                     break;
                 case 'line':
