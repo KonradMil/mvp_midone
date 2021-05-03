@@ -105,7 +105,7 @@ export default {
                 swapObjectByIndex(activeLineIndex.value, e.data);
             }
             console.log('FINAL EMIT');
-            console.log({layers: lines.value[0]});
+            // console.log({layers: lines.value[0]});
             updateAnimationUnity();
             // emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: lines.value[0]});
         });
