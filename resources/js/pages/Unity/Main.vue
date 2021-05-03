@@ -214,6 +214,8 @@ export default {
                 handleUnityActionOutgoing({action: 'setSessionId', data: Number(Math.random().toString().substr(3, length) + Date.now()).toString(36)});
                 // handleUnityActionOutgoing({action: 'setHangarAppearance', data: 1});
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
+                console.log('GET ME');
+                getCardChallengeRepositories(props.id);
 
             }, 5000);
         }
@@ -255,8 +257,6 @@ export default {
             mode.value = 'edit';
             type.value = props.type;
             id.value = props.id;
-            console.log('GET ME');
-            getCardChallengeRepositories(props.id);
 
         });
 
