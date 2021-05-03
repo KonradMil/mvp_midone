@@ -147,12 +147,12 @@ export default {
                     console.log(lines.value);
                     console.log('IMPORTANT');
                     console.log( lines.value[activeLineIndex.value]);
-                    emitter.emit('UnityLineSettings', {action: 'settingsline', data: lines.value[activeLineIndex.value]})
+                    emitter.emit('UnityLineSettings', {action: 'settingsline', data: animation.value.layers[activeLineIndex.value]})
                     break;
                 case 'line':
                     emitter.emit('UnityAnimableSettings', {
                         action: 'removeLine',
-                        data: lines.value[activeLineIndex.value].animables[activeAnimableIndex.value]
+                        data: animation.value.layers[activeLineIndex.value].animables[activeAnimableIndex.value]
                     })
                     break;
                 case 'minimalize':
