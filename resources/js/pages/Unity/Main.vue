@@ -241,13 +241,16 @@ export default {
             mode.value = 'edit';
             type.value = props.type;
             id.value = props.id;
-            console.log(props);
-            console.log(props.load);
-            if(props.load != undefined) {
-                console.log('LOAD');
+            setTimeout(function () {
+                console.log(props);
                 console.log(props.load);
-                handleUnityActionOutgoing({action: 'loadStructure', data: props.load.save_json});
-            }
+                if(props.load != undefined) {
+                    console.log('LOAD');
+                    console.log(props.load);
+                    handleUnityActionOutgoing({action: 'loadStructure', data: props.load.save_json});
+                }
+            }, 1500);
+
         });
 
         return {
