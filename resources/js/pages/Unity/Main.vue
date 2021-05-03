@@ -215,7 +215,7 @@ export default {
                 // handleUnityActionOutgoing({action: 'setHangarAppearance', data: 1});
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
                 console.log('GET ME');
-                getCardChallengeRepositories(props.id);
+                getCardChallengeRepositories(id.value);
 
             }, 5000);
         }
