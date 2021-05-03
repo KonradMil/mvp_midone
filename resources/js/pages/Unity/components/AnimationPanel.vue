@@ -87,7 +87,9 @@ export default {
             animation.layers.forEach(function (val, ind) {
                 console.log("val");
                 console.log(val);
+                console.log([index, ind]);
                 if(index == ind) {
+                    console.log(object.cargo);
                     val.cargo = object.cargo;
                     val.animables = object.animable;
                     val.index = object.index;
