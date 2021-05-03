@@ -61,7 +61,7 @@
 
 <script>
 import AnimationButtons from "./AnimationButtons";
-import {getCurrentInstance, reactive, ref, unref} from "vue";
+import {getCurrentInstance, reactive, ref, toRaw, unref} from "vue";
 import UnityButton from "./UnityButton";
 
 
@@ -85,7 +85,7 @@ export default {
             console.log(animation.layers[index]);
             console.log('TRYYY');
             console.log(object.layers);
-            let a = unref(object.layers);
+            let a = toRaw(object.layers);
             console.log(a);
             console.log(unref(object.layers));
             animation.layers = object.layers;
