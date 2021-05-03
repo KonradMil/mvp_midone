@@ -51,6 +51,18 @@ export const routes = [
         props: true
     },
     {
+        name: 'challengeStudio',
+        path: '/studio/challenge/:id',
+        component: Main,
+        props: true
+    },
+    {
+        name: 'solutionStudio',
+        path: '/studio/solution/:id',
+        component: Main,
+        props: true
+    },
+    {
         path: "/",
         component: SideMenu,
         children: [
@@ -87,18 +99,6 @@ export const routes = [
                 name: 'challenges',
                 path: '/challenges',
                 component: Challenges
-            },
-            {
-                name: 'challengeStudio',
-                path: '/studio/challenge/:id',
-                component: Main,
-                props: true
-            },
-            {
-                name: 'solutionStudio',
-                path: '/studio/solution/:id',
-                component: Main,
-                props: true
             },
             {
                 name: 'internalChallenegeCard',
