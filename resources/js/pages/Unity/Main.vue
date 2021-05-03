@@ -29,6 +29,7 @@ export default {
     name: "Main",
     props: {
       type: String,
+        load: Object,
       id: Number
     },
     components: {RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
