@@ -64,8 +64,12 @@ export default {
         }
 
         watch(animationSave, (lab, prevLabel) => {
-            context.emit("update:animationSave", lab);
+          emitMe(lab);
         }, {deep: true})
+
+        function emitMe(lab) {
+            context.emit("update:animationSave", lab);
+        }
 
         onMounted(()=> {
             animationSave.layers = props.animationSave.layers;
