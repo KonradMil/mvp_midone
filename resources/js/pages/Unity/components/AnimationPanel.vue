@@ -87,7 +87,7 @@ export default {
             console.log(object.layers);
             console.log(toRaw(object.layers));
             console.log(unref(object.layers));
-            animation.layers = toRaw(object.layers);
+            animation.layers[index] = toRaw(object.layers);
             // animation.layers.forEach(function (val, ind) {
             //     console.log("val");
             //     console.log(val);
