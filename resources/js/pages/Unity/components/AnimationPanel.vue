@@ -14,7 +14,7 @@
                     <UnityButton tooltip="Odtwórz" alttext="Odtwórz" path="/s3/builder_icons/play_simple.png" action="play" position="animationbuttonclick"/>
                 </div>
                 <div class="col-span-11 rounded-md mr-5" style="background-color: rgba(147, 15, 104, 0.25); overflow-y: scroll;">
-                    <div class="grid grid-cols-12 h-full" v-for="(line, index) in lines">
+                    <div class="grid grid-cols-12 h-full" v-for="(line, index) in animation.layers">
                         <div class="col-span-1">
                             <div style="margin-left: 25%; margin-top: calc(25% - 10px);">
                                 <UnityButton tooltip="Ustawienia" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
@@ -166,6 +166,7 @@ export default {
         }
 
         return {
+            animation,
             expanded,
             activeLineIndex,
             activeAnimableIndex
