@@ -49,7 +49,7 @@ export default {
         animationSave: Object
     },
     emits: ["update:animationSave"],
-    setup(props, {emit}) {
+    setup(props, context) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const animation_icons = ref([]);
