@@ -84,18 +84,21 @@ export default {
             console.log(animation.value.layers);
             console.log(animation.value.layers[index]);
             console.log('TRYYY');
-            animation.value.layers.forEach(function (val, index) {
+            animation.value.layers.forEach(function (val, ind) {
                 console.log("val");
                 console.log(val);
+                if(index == ind) {
+                    val.cargo = object.cargo;
+                    val.animables = object.animable;
+                    val.index = object.index;
+                    val.duration = object.duration;
+                    val.interval = object.interval;
+                }
                 console.log(index);
             });
-            animation.value.layers[index].cargo = object.cargo;
-            animation.value.layers[index].animables = object.animable;
-            animation.value.layers[index].index = object.index;
-            animation.value.layers[index].duration = object.duration;
-            animation.value.layers[index].interval = object.interval;
+
             // animation.value.layers[index] = unref(object);
-            console.log(unref(animation.value));
+            console.log(animation.value);
             console.log('END IMPORTANT NOW: ');
         }
 
