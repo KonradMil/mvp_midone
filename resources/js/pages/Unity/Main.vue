@@ -242,6 +242,8 @@ export default {
             type.value = props.type;
             id.value = props.id;
             if(props.load != undefined) {
+                console.log('LOAD');
+                console.log(props.load);
                 handleUnityActionOutgoing({action: 'loadStructure', data: props.load.save_json});
             }
         });
