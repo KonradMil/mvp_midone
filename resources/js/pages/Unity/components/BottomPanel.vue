@@ -1,5 +1,5 @@
 <template>
-    <AnimationPanel v-if="mode == 'animation'" :icons="animation_icons" v-model:animation></AnimationPanel>
+    <AnimationPanel v-if="mode == 'animation'" :icons="animation_icons" v-model:animationSave="animationSave"></AnimationPanel>
     <div v-if="mode == 'edit' || mode == 'layout'" class="flex fixed w-full z-50 pb-2 h-24 bottom-0 " id="bottom">
         <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto;">
             <div  v-if="mode == 'edit'" class="bot-i w-30 pl-6">
@@ -45,21 +45,25 @@ export default {
     name: "BottomPanel",
     components: {AnimationPanel, UnityButton, Slider},
     props: {
-        mode: String
+        mode: String,
+        animationSave: Object
     },
-    setup() {
+    emits: ["update:animationSave"],
+    setup(props, {emit}) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const animation_icons = ref([]);
         const edit_icons = ref([]);
         const layout_icons = ref([]);
         const gridSize = ref(0);
+        const animationSave = ref({});
 
         const changeGridSize = (val) => {
             gridSize.value = val;
             emitter.emit('gridsizechange', { val: val })
         }
         onMounted(()=> {
+            animationSave.layers = props.animationSave.layers;
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")
@@ -73,6 +77,7 @@ export default {
         });
 
         return {
+            animationSave,
             layout_icons,
             edit_icons,
             animation_icons,
