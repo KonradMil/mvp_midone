@@ -52,13 +52,13 @@ export const routes = [
     },
     {
         name: 'challengeStudio',
-        path: '/studio/challenge/:id',
+        path: '/studio/challenge',
         component: Main,
         props: true
     },
     {
         name: 'solutionStudio',
-        path: '/studio/solution/:id',
+        path: '/studio/solution',
         component: Main,
         props: true
     },
