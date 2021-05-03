@@ -84,9 +84,10 @@ export default {
             console.log(animation.value.layers);
             console.log(animation.value.layers[index]);
             console.log('TRYYY');
-            animation.value.layers.forEach(function (val) {
+            animation.value.layers.forEach(function (val, index) {
                 console.log("val");
                 console.log(val);
+                console.log(index);
             });
             animation.value.layers[index].cargo = object.cargo;
             animation.value.layers[index].animables = object.animable;
