@@ -60,6 +60,9 @@
                         <button type="button" class="btn btn-primary py-1 px-2">
                             Edytuj
                         </button>
+                        <button type="button" class="btn btn-primary py-1 px-2" @click="$router.push({path: 'studio/challenge/' + challenge.id, params: {type: 'challenge', load: challenge}})">
+                            Studio 3D
+                        </button>
                         <button
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
