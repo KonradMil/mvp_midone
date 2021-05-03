@@ -61,7 +61,7 @@
 
 <script>
 import AnimationButtons from "./AnimationButtons";
-import {getCurrentInstance, ref, unref} from "vue";
+import {getCurrentInstance, reactive, ref, unref} from "vue";
 import UnityButton from "./UnityButton";
 
 
@@ -72,7 +72,7 @@ export default {
         icons: Object
     },
     setup(props, context) {
-        const animation = ref({layers: []});
+        const animation = reactive({layers: []});
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
 
@@ -80,11 +80,11 @@ export default {
         function swapObjectByIndex(index, object) {
             console.log('IMPORTANT NOW: ');
             console.log([index, object]);
-            console.log(animation.value);
-            console.log(animation.value.layers);
-            console.log(animation.value.layers[index]);
+            console.log(animation);
+            console.log(animation.layers);
+            console.log(animation.layers[index]);
             console.log('TRYYY');
-            animation.value.layers.forEach(function (val, ind) {
+            animation.layers.forEach(function (val, ind) {
                 console.log("val");
                 console.log(val);
                 if(index == ind) {
@@ -98,12 +98,12 @@ export default {
             });
 
             // animation.value.layers[index] = unref(object);
-            console.log(animation.value);
+            console.log(animation);
             console.log('END IMPORTANT NOW: ');
         }
 
         function addLine() {
-            animation.value.layers[animation.layers.length + 1] = {};
+            animation.layers[animation.layers.length + 1] = {};
         }
 
         function updateAnimationUnity() {
@@ -135,7 +135,7 @@ export default {
 
         emitter.on('UnityAnimationChainUpdate', e => {
             // lines.value = e.layers.layers;
-            animation.value.layers = e.layers.layers;
+            animation.layers = e.layers.layers;
         });
 
         const handleClick = (val) => {
@@ -161,21 +161,21 @@ export default {
                     emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: ''})
                     break;
                 case 'addline':
-                    emitter.emit('unityoutgoingaction', {data: animation.value.layers.length})
+                    emitter.emit('unityoutgoingaction', {data: animation.layers.length})
                     break;
                 case 'removeline':
                     emitter.emit('unityoutgoingaction', {data: activeLineIndex.value})
                     break;
                 case 'settingsline':
-                    console.log(animation.value);
+                    console.log(animation);
                     console.log('IMPORTANT');
                     // console.log( lines.value[activeLineIndex.value]);
-                    emitter.emit('UnityLineSettings', {action: 'settingsline', data: animation.value.layers[activeLineIndex.value]})
+                    emitter.emit('UnityLineSettings', {action: 'settingsline', data: animation.layers[activeLineIndex.value]})
                     break;
                 case 'line':
                     emitter.emit('UnityAnimableSettings', {
                         action: 'removeLine',
-                        data: animation.value.layers[activeLineIndex.value].animables[activeAnimableIndex.value]
+                        data: animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value]
                     })
                     break;
                 case 'minimalize':
