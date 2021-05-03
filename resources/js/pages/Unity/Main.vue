@@ -255,7 +255,7 @@ export default {
             mode.value = 'edit';
             type.value = props.type;
             id.value = props.id;
-
+            console.log('GET ME');
             getCardChallengeRepositories(props.id);
 
         });
