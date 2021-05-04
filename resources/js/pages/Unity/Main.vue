@@ -232,7 +232,7 @@ export default {
                     // console.log(response.data)
                     if (response.data.success) {
                         console.log(response.data.payload);
-                        handleUnityActionOutgoing({action: 'loadStructure', data: response.data.payload.save_json});
+                        handleUnityActionOutgoing({action: 'loadStructure', data: JSON.parse(response.data.payload.save_json)});
                     } else {
                         // toast.error(response.data.message);
                     }
