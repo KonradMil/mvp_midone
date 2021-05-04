@@ -118,6 +118,7 @@ export default {
 
         emitter.on('UnityAnimationChainUpdate', e => {
             // lines.value = e.layers.layers;
+            console.log('UPDATE ANIMATION');
             animation.layers = e.layers.layers;
             context.emit("update:animationSave", animation);
         });
