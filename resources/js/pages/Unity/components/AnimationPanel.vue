@@ -138,6 +138,8 @@ export default {
 
         onMounted(() => {
             console.log('MOUNTED LAYERS');
+            console.log(props);
+            console.log(props.animationSave);
             console.log(props.animationSave.layers);
             animation.layers = props.animationSave.layers;
         });
