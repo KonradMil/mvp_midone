@@ -131,11 +131,14 @@ export default {
             } else {
                 animation.layers = e.layers;
             }
-
+            console.log('ANIMATION CHAIN UPDATGE');
+            console.log(animation);
             context.emit("update:animationSave", animation);
         });
 
         onMounted(() => {
+            console.log('MOUNTED LAYERS');
+            console.log(props.animationSave.layers);
             animation.layers = props.animationSave.layers;
         });
 
