@@ -60,7 +60,7 @@ export default {
         const radialMenuEdit = ref([]);
         const radialMenuAnimation = ref([]);
         const radialMenuLayout = ref([]);
-        const animationSave = reactive({layers: []});
+        const animationSave = ref({layers: []});
 
 
         window_height.value = window.innerHeight;
@@ -234,7 +234,7 @@ export default {
                     if (response.data.success) {
                         console.log(response.data.payload);
                         initialLoad.value = JSON.parse(response.data.payload.save_json);
-                        animationSave.layers = JSON.parse(response.data.payload.save_json).layers;
+                        animationSave.value.layers = JSON.parse(response.data.payload.save_json).layers;
                         handleUnityActionOutgoing({action: 'loadStructure', data: JSON.parse(response.data.payload.save_json)});
                         // console.log('EMIT LOAD');
                         // emitter.emit('saveLoaded', {save: (response.data.payload)});
