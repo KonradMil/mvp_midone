@@ -73,11 +73,11 @@ export default {
         animationSave: Object
     },
     emits: ["update:animationSave"],
-    setup(props, {emit}) {
+    setup(props, context) {
         const animation = reactive({layers: []});
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
-        const e = emit;
+
         //ANIMATION CONTROLLER
         function swapObjectByIndex(index, object) {
             // console.log('IMPORTANT NOW: ');
@@ -137,7 +137,8 @@ export default {
         });
 
         const emitMe = () => {
-            e("update:animationSave", animation);
+            console.log(context);
+            // e("update:animationSave", animation);
         };
 
         onMounted(() => {
