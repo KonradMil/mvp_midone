@@ -46,7 +46,8 @@ export default {
     components: {AnimationPanel, UnityButton, Slider},
     props: {
         mode: String,
-        animationSave: Object
+        animationSave: Object,
+
     },
     emits: ["update:animationSave"],
     setup(props, context) {

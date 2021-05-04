@@ -5,7 +5,7 @@
     <div @contextmenu.prevent="openMenu">
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
-    <BottomPanel :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
+    <BottomPanel :mode="mode" v-model:animationSave="animationSave" ></BottomPanel>
         <RightPanel @mouseover.native="lockInput" @mouseleave.native="unlockInput"></RightPanel>
 </template>
 
@@ -48,6 +48,7 @@ export default {
         const doubleClick = ref(false);
         const mousePositionY = ref(0);
         const mousePositionX = ref(0);
+        const initialLoad = ref({});
         //EXTERNAL
         const unity_path = ref('/s3/unity/AssemBrot20_04_ver2.json');
         const window_width = ref('100%');
@@ -232,8 +233,11 @@ export default {
                     // console.log(response.data)
                     if (response.data.success) {
                         console.log(response.data.payload);
+                        initialLoad.value = JSON.parse(response.data.payload.save_json);
+                        animationSave.value = JSON.parse(response.data.payload.save_json).layers;
                         handleUnityActionOutgoing({action: 'loadStructure', data: JSON.parse(response.data.payload.save_json)});
-                        emitter.emit('saveLoaded', {save: (response.data.payload)});
+                        // console.log('EMIT LOAD');
+                        // emitter.emit('saveLoaded', {save: (response.data.payload)});
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -262,6 +266,7 @@ export default {
         });
 
         return {
+            initialLoad,
             type,
             id,
             animationSave,
