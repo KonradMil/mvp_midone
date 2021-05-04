@@ -18,6 +18,7 @@ class ChallengeController extends Controller
 
     public function saveChallenge(Request $request)
     {
+        dd($request->data);
         $c = Challenge::find($request->data->id);
         $c->save_json = json_decode($request->data->save->save_json);
         $c->save();
