@@ -84,7 +84,7 @@
                                     {{$t('models.edit')}}
                                 </a>
                                 <a
-                                    @click.prevent="DeleteModel(model.id)"
+                                    @click.prevent="del(model)"
                                     class="flex items-center text-theme-6"
                                     href="javascript:;"
                                     data-toggle="modal"
@@ -202,7 +202,18 @@ export default {
         const categories = ref([]);
         const types = require("../../json/model_categories.json");
 
-
+        const del = async(model) => {
+            await axios.post('/api/model/user/delete', {id: model.id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        console.log(response.data);
+                        toast.success(response.data.message);
+                    } else {
+                        toast.error('Ups! Coś poszło nie tak!');
+                    }
+                })
+        }
         const getModelRepositories = async () => {
             models.value = GetModels();
         }
@@ -217,7 +228,8 @@ export default {
         return {
             models,
             categories,
-            DeleteModel
+            DeleteModel,
+            del
         }
     }
 }
