@@ -80,7 +80,7 @@ export default {
         // }
 
         onMounted(()=> {
-            animationSave.value = props.animationSave;
+            // animationSave.value = props.animationSave;
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")
