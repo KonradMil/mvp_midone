@@ -35,7 +35,7 @@
 </template>
 <style src="@vueform/slider/themes/default.css"></style>
 <script>
-import {getCurrentInstance, onMounted, ref, watch} from "vue";
+import {computed, getCurrentInstance, onMounted, ref, watch} from "vue";
 import cash from "cash-dom";
 import AnimationPanel from "./AnimationPanel";
 import UnityButton from "./UnityButton";
@@ -57,27 +57,30 @@ export default {
         const edit_icons = ref([]);
         const layout_icons = ref([]);
         const gridSize = ref(0);
-        const animationSaves = ref({});
 
+        const animationSave = computed({
+            get: () => props.animationSave,
+            set: (value) => emit('update:animationSave', value),
+        });
         const changeGridSize = (val) => {
             gridSize.value = val;
             emitter.emit('gridsizechange', { val: val })
         }
 
-        watch(animationSaves, (lab, prevLabel) => {
+        watch(animationSave, (lab, prevLabel) => {
           emitMe(lab);
         }, {deep: true})
 
-        watch(props.animationSave, (lab, prevLabel) => {
-            animationSaves.value = lab;
-        }, {deep: true})
+        // watch(props.animationSave, (lab, prevLabel) => {
+        //     animationSaves.value = lab;
+        // }, {deep: true})
 
         function emitMe(lab) {
-            // context.emit("update:animationSave", lab);
+            context.emit("update:animationSave", lab);
         }
 
         onMounted(()=> {
-            animationSaves.value = props.animationSave;
+            animationSave.value = props.animationSave;
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")
@@ -91,7 +94,7 @@ export default {
         });
 
         return {
-            animationSaves,
+            animationSave,
             layout_icons,
             edit_icons,
             animation_icons,
