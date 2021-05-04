@@ -236,7 +236,7 @@ export default {
                         console.log(response.data.payload);
                         console.log(JSON.parse(response.data.payload.save_json));
                         initialLoad.value = JSON.parse(response.data.payload.save_json);
-                        animationSave.value.layers = JSON.parse(response.data.payload.save_json).layers;
+                        animationSave.value.layers = JSON.parse(response.data.payload.save_json).animation_layers.layers;
                         handleUnityActionOutgoing({action: 'loadStructure', data: JSON.parse(response.data.payload.save_json)});
                         // console.log('EMIT LOAD');
                         // emitter.emit('saveLoaded', {save: (response.data.payload)});
