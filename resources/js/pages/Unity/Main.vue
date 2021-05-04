@@ -214,6 +214,8 @@ export default {
                 handleUnityActionOutgoing({action: 'setSessionId', data: Number(Math.random().toString().substr(3, length) + Date.now()).toString(36)});
                 // handleUnityActionOutgoing({action: 'setHangarAppearance', data: 1});
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
+                console.log('GET ME');
+                getCardChallengeRepositories(id.value);
 
             }, 5000);
         }
@@ -222,6 +224,20 @@ export default {
             //ADDS LISTENERS
             bridge.value = UnityBridge();
         });
+
+
+        const getCardChallengeRepositories = async (id) => {
+            await axios.post('/api/challenge/user/get/card', {id: id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        console.log(response.data.payload);
+                        handleUnityActionOutgoing({action: 'loadStructure', data: JSON.parse(response.data.payload.save_json)});
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        }
 
         onMounted(() => {
 
@@ -241,15 +257,6 @@ export default {
             mode.value = 'edit';
             type.value = props.type;
             id.value = props.id;
-            setTimeout(function () {
-                console.log(props);
-                console.log(props.load);
-                if(props.load != undefined) {
-                    console.log('LOAD');
-                    console.log(props.load);
-                    handleUnityActionOutgoing({action: 'loadStructure', data: props.load.save_json});
-                }
-            }, 1500);
 
         });
 

@@ -15,6 +15,19 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class ChallengeController extends Controller
 {
+
+    public function saveChallenge(Request $request)
+    {
+//        dd($request->data);
+        $c = Challenge::find($request->data['id']);
+        $c->save_json = $request->data['save']['save_json'];
+        $c->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisanp poprawnie.',
+            'payload' => $c
+        ]);
+     }
     public function getUserChallenges()
     {
 
