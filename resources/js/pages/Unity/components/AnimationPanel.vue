@@ -103,6 +103,9 @@ export default {
         emitter.on('animationbuttonclick', e => handleClick(e.val));
 
         emitter.on('saveLoaded', e => {
+            console.log('SAVE LOADED');
+            console.log(e);
+            console.log(JSON.parse(e.save.save_json));
             animation.layers = JSON.parse(e.save.save_json).layers;
         })
 
