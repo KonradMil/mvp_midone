@@ -1,5 +1,5 @@
 <template>
-    <AnimationPanel v-if="mode == 'animation'" :icons="animation_icons" animationSave="animationSave"></AnimationPanel>
+    <AnimationPanel v-if="mode == 'animation'" :icons="animation_icons" v-model:animationSave="animationSaves"></AnimationPanel>
     <div v-if="mode == 'edit' || mode == 'layout'" class="flex fixed w-full z-50 pb-2 h-24 bottom-0 " id="bottom">
         <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto;">
             <div  v-if="mode == 'edit'" class="bot-i w-30 pl-6">
@@ -57,19 +57,19 @@ export default {
         const edit_icons = ref([]);
         const layout_icons = ref([]);
         const gridSize = ref(0);
-        const animationSave = ref({});
+        const animationSaves = ref({});
 
         const changeGridSize = (val) => {
             gridSize.value = val;
             emitter.emit('gridsizechange', { val: val })
         }
 
-        watch(animationSave, (lab, prevLabel) => {
+        watch(animationSaves, (lab, prevLabel) => {
           emitMe(lab);
         }, {deep: true})
 
         watch(props.animationSave, (lab, prevLabel) => {
-            animationSave.value = lab;
+            animationSaves.value = lab;
         }, {deep: true})
 
         function emitMe(lab) {
@@ -77,7 +77,7 @@ export default {
         }
 
         onMounted(()=> {
-            animationSave.value = props.animationSave;
+            animationSaves.value = props.animationSave;
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")
@@ -91,7 +91,7 @@ export default {
         });
 
         return {
-            animationSave,
+            animationSaves,
             layout_icons,
             edit_icons,
             animation_icons,
