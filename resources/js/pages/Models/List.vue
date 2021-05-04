@@ -216,7 +216,6 @@ export default {
                         toast.error('Ups! Coś poszło nie tak!');
                     }
                 })
-            await getModelRepositories();
         }
         const getModelRepositories = async () => {
             models.value = GetModels();
