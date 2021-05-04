@@ -197,6 +197,7 @@ export default {
     name: "List",
     components: {SubcategoryName, CategoryName},
     setup() {
+        const model = ref('');
         const models = ref([]);
         const categories = ref([]);
         const types = require("../../json/model_categories.json");
@@ -219,13 +220,15 @@ export default {
         }
 
         onMounted(() => {
+            getModelRepositories();
             categories.value = types.categories;
             cash("body")
                 .removeClass("error-page");
         });
 
-        getModelRepositories();
+        // getModelRepositories();
         return {
+            model,
             models,
             categories,
             DeleteModel,
