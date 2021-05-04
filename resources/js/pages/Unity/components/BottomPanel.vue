@@ -73,7 +73,7 @@ export default {
         }, {deep: true})
 
         function emitMe(lab) {
-            context.emit("update:animationSave", lab);
+            // context.emit("update:animationSave", lab);
         }
 
         onMounted(()=> {
