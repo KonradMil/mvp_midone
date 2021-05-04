@@ -232,7 +232,9 @@ export default {
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
+                        console.log("response.data.payload");
                         console.log(response.data.payload);
+                        console.log(JSON.parse(response.data.payload.save_json));
                         initialLoad.value = JSON.parse(response.data.payload.save_json);
                         animationSave.value.layers = JSON.parse(response.data.payload.save_json).layers;
                         handleUnityActionOutgoing({action: 'loadStructure', data: JSON.parse(response.data.payload.save_json)});
