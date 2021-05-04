@@ -12,6 +12,7 @@ const UnityBridge = () => {
 
         window.UnityAnimationErrors = function UnityAnimationErrors(str) {
             console.log('PART PLACED ANIMATIONSD ERRORS');
+            console.log(str);
             emitter.emit('UnityAnimationErrors', { animation_errors: JSON.parse(str) })
         };
 
