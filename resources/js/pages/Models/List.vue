@@ -222,13 +222,12 @@ export default {
         }
 
         onMounted(() => {
-            getModelRepositories();
             categories.value = types.categories;
             cash("body")
                 .removeClass("error-page");
         });
 
-        // getModelRepositories();
+        getModelRepositories();
         return {
             model,
             models,
