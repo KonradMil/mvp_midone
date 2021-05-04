@@ -20,7 +20,7 @@ class ChallengeController extends Controller
     {
 //        dd($request->data);
         $c = Challenge::find($request->data['id']);
-        $c->save_json = json_decode($request->data['save']['save_json']);
+        $c->save_json = $request->data['save']['save_json'];
         $c->save();
         return response()->json([
             'success' => true,
