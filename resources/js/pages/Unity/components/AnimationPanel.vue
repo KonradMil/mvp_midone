@@ -100,7 +100,11 @@ export default {
         const activeAnimableIndex = ref(0);
         const expanded = ref(1);
 
-        emitter.on('animationbuttonclick', e => handleClick(e.val))
+        emitter.on('animationbuttonclick', e => handleClick(e.val));
+
+        emitter.on('saveLoaded', e => {
+            animation.layers = JSON.parse(e.save.save_json).layers;
+        })
 
         emitter.on('rightpanelaction', e => {
             console.log(e);

@@ -233,6 +233,7 @@ export default {
                     if (response.data.success) {
                         console.log(response.data.payload);
                         handleUnityActionOutgoing({action: 'loadStructure', data: JSON.parse(response.data.payload.save_json)});
+                        emitter.emit('saveLoaded', {save: (response.data.payload)});
                     } else {
                         // toast.error(response.data.message);
                     }
