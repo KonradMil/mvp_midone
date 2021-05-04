@@ -175,7 +175,7 @@
                             >
                                 {{ $t('models.cancel') }}
                             </button>
-                            <button @click.prevent="del(model)" type="button" class="btn btn-danger w-24">{{ $t('models.delete') }}</button>
+                            <button @click="del(model)" type="button" class="btn btn-danger w-24">{{ $t('models.delete') }}</button>
                         </div>
                     </div>
                 </div>
