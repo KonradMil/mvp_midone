@@ -192,11 +192,14 @@ import DeleteModel from "../../compositions/DeleteModel";
 import cash from "cash-dom";
 import CategoryName from "./CategoryName";
 import SubcategoryName from "./SubcategoryName";
+import {useToast} from "vue-toastification";
+
 
 export default {
     name: "List",
     components: {SubcategoryName, CategoryName},
     setup() {
+        const toast = useToast();
         const model = ref('');
         const models = ref([]);
         const categories = ref([]);
