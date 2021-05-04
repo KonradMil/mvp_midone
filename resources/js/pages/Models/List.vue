@@ -202,7 +202,7 @@ export default {
         const types = require("../../json/model_categories.json");
 
         const del = async(model) => {
-            await axios.post('/api/model/user/delete', {id: model.id})
+            await axios.post('/api/model/delete', {id: model.id})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
