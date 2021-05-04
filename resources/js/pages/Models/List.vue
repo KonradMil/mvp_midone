@@ -84,7 +84,6 @@
                                     {{$t('models.edit')}}
                                 </a>
                                 <a
-                                    @click.prevent="DeleteModel(model.id)"
                                     class="flex items-center text-theme-6"
                                     href="javascript:;"
                                     data-toggle="modal"
@@ -176,7 +175,7 @@
                             >
                                 {{ $t('models.cancel') }}
                             </button>
-                            <button type="button" class="btn btn-danger w-24">{{ $t('models.delete') }}</button>
+                            <button @click="del(model)" type="button" class="btn btn-danger w-24">{{ $t('models.delete') }}</button>
                         </div>
                     </div>
                 </div>
@@ -193,16 +192,31 @@ import DeleteModel from "../../compositions/DeleteModel";
 import cash from "cash-dom";
 import CategoryName from "./CategoryName";
 import SubcategoryName from "./SubcategoryName";
+import {useToast} from "vue-toastification";
+
 
 export default {
     name: "List",
     components: {SubcategoryName, CategoryName},
     setup() {
+        const toast = useToast();
+        const model = ref('');
         const models = ref([]);
         const categories = ref([]);
         const types = require("../../json/model_categories.json");
 
-
+        const del = async(model) => {
+            await axios.post('/api/model/delete', {id: model.id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        console.log(response.data);
+                        toast.success(response.data.message);
+                    } else {
+                        toast.error('Ups! Coś poszło nie tak!');
+                    }
+                })
+        }
         const getModelRepositories = async () => {
             models.value = GetModels();
         }
@@ -215,9 +229,11 @@ export default {
 
         getModelRepositories();
         return {
+            model,
             models,
             categories,
-            DeleteModel
+            DeleteModel,
+            del
         }
     }
 }
