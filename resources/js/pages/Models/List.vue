@@ -84,7 +84,6 @@
                                     {{$t('models.edit')}}
                                 </a>
                                 <a
-                                    @click.prevent="del(model)"
                                     class="flex items-center text-theme-6"
                                     href="javascript:;"
                                     data-toggle="modal"
@@ -176,7 +175,7 @@
                             >
                                 {{ $t('models.cancel') }}
                             </button>
-                            <button type="button" class="btn btn-danger w-24">{{ $t('models.delete') }}</button>
+                            <button @click.prevent="del(model)" type="button" class="btn btn-danger w-24">{{ $t('models.delete') }}</button>
                         </div>
                     </div>
                 </div>
