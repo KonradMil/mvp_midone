@@ -75,9 +75,9 @@ export default {
         //     animationSaves.value = lab;
         // }, {deep: true})
 
-        function emitMe(lab) {
-            context.emit("update:animationSave", lab);
-        }
+        // function emitMe(lab) {
+        //     context.emit("update:animationSave", lab);
+        // }
 
         onMounted(()=> {
             animationSave.value = props.animationSave;
