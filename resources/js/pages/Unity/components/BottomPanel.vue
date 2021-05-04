@@ -1,5 +1,5 @@
 <template>
-    <AnimationPanel v-if="mode == 'animation'" :icons="animation_icons" v-model:animationSave="animationSaves"></AnimationPanel>
+    <AnimationPanel v-if="mode == 'animation'" :icons="animation_icons" v-model:animationSave="animationSave"></AnimationPanel>
     <div v-if="mode == 'edit' || mode == 'layout'" class="flex fixed w-full z-50 pb-2 h-24 bottom-0 " id="bottom">
         <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto;">
             <div  v-if="mode == 'edit'" class="bot-i w-30 pl-6">
