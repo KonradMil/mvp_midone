@@ -68,6 +68,10 @@ export default {
           emitMe(lab);
         }, {deep: true})
 
+        watch(props.animationSave, (lab, prevLabel) => {
+            animationSave.value = lab;
+        }, {deep: true})
+
         function emitMe(lab) {
             context.emit("update:animationSave", lab);
         }
