@@ -129,6 +129,7 @@
                             </div>
                         </div>
                         <div class="intro-y col-span-12 overflow-auto lg:overflow-visible" :class="(activeTab==='reports')? '':'hidden'">
+                            <Report></Report>
                             <table class="table table-report -mt-2">
                                 <thead>
                                 <tr>
@@ -140,33 +141,11 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="intro-x"
-                                    v-for="(report, index) in reports.list"
-                                    :key="'team_' + index"
-                                    v-if="activeTab==='reports'"
-                                >
-                                    <td class="w-40">
-                                        <div class="flex">
-                                            <div class="w-10 h-10 image-fit zoom-in" v-if="report.files.length != '0'">
-                                                {{ report.files[0].original_name }}
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="" class="font-medium whitespace-nowrap">{{ report.title }}</a>
-                                        <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">{{report.type}}</div>
-                                    </td>
-                                    <td class="text-center">{{ $dayjs(report.created_at).format('DD.MM.YYYY HH:mm') }}</td>
-                                    <td class="w-40">
-                                        <div class="flex items-center justify-center text-theme-9"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> {{ report.description }} </div>
-                                    </td>
-                                    <td class="table-report__action w-56">
-                                        <div class="flex justify-center items-center">
-                                            <a class="flex items-center mr-3" href="javascript:" @click.prevent="$router.push({path: '/report/show/' + report.id })"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Podgląd </a>
-                                            <a @click.prevent="del(report)" class="flex items-center text-theme-6" href="" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <Report class="intro-x"
+                                        v-for="(report, index) in reports.list"
+                                        :key="'team_' + index"
+                                        v-if="activeTab==='reports'"></Report>
+
                                 </tbody>
                             </table>
                         </div>
@@ -495,19 +474,21 @@ import GetNotifications from '../../compositions/GetNotifications'
 import GetTeams from '../../compositions/GetTeams';
 import GetReports from '../../compositions/GetReports';
 import SaveReport from '../../compositions/SaveReport';
-import DeleteReport from '../../compositions/DeleteReport';
+
 import Dropzone from '../../global-components/dropzone/Main'
 import {useToast} from "vue-toastification";
 import {useStore} from "../../store";
 import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
 import SaveChallenge from "../../compositions/SaveChallenge";
+import Report from "./Report";
 
 const store = useStore();
 
 export default {
     name: "Communication",
     components: {
+        Report,
         GoogleMap,
         Marker,
         Avatar,
@@ -549,26 +530,7 @@ export default {
         //     }
         // }, {deep: true})
 
-        const del = async (report) => {
-            axios.post('api/report/user/delete', {id: report.id})
-                .then(response => {
-                    // console.log(response.data)
-                    if (response.data.success) {
-                        toast.success(response.data.message);
-                        console.log(report);
 
-                    } else {
-                        // toast.error(response.data.message);
-                    }
-                })
-            await GetReportsRepositiories();
-        }
-
-
-        const deleteReportRepo = async () => {
-              DeleteReport(report.value.id);
-            await GetReportsRepositiories();
-        }
 
         const saveReportRepo = async () => {
             await SaveReport({
