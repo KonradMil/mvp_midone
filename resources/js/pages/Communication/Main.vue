@@ -149,7 +149,7 @@
                                         <div class="flex">
                                             <div class="w-10 h-10 image-fit zoom-in">
                                                 File
-<!--                                                {{report.file.original_name}}-->
+<!--                                                {{report.file.name}}-->
                                             </div>
                                         </div>
                                     </td>
@@ -576,7 +576,7 @@ export default {
                 title: title.value,
                 description: description.value,
                 type: type.value,
-                file: file.value
+                file_id : file.value.id
             });
             await GetReportsRepositiories();
         }
@@ -613,7 +613,7 @@ export default {
             console.log(elDropzoneSingleRef);
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
                 console.log(resp.xhr.response);
-                file.value = '/uploads/' + JSON.parse(resp.xhr.response).payload;
+                file.value = JSON.parse(resp.xhr.response).payload;
                 toast.success('Success!');
             });
             elDropzoneSingleRef.dropzone.on("error", () => {

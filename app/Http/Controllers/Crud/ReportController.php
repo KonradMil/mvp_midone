@@ -19,6 +19,7 @@ class ReportController extends Controller
     public function getReport(Request $request)
     {
         $report = Report::find($request->id);
+
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
@@ -36,7 +37,7 @@ class ReportController extends Controller
     }
     public function getUserReports()
     {
-        $reports = Report::get();
+        $reports = Auth::user()->reports()->with('files')->get();
 
         return response()->json([
             'success' => true,
