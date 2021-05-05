@@ -123,165 +123,15 @@
 
                 <div id="social-media-button" class="p-5" v-if="activeTab==='socials'"
                 >
-                    <div class="intro-y box lg:mt-5">
-                    <div class="preview">
-                        <div class="flex flex-wrap">
-                            <button class="btn btn-facebook w-32 mr-2 mb-2"> <i data-feather="facebook" class="w-4 h-4 mr-2"></i> Facebook </button>
-                            <button class="btn btn-twitter w-32 mr-2 mb-2"> <i data-feather="twitter" class="w-4 h-4 mr-2"></i> Twitter </button>
-                            <button class="btn btn-instagram w-32 mr-2 mb-2"> <i data-feather="instagram" class="w-4 h-4 mr-2"></i> Instagram </button>
-                            <button class="btn btn-linkedin w-32 mr-2 mb-2"> <i data-feather="linkedin" class="w-4 h-4 mr-2"></i> Linkedin </button>
-                        </div>
-                    </div>
-                    <div class="source-code hidden">
-                        <button data-target="#copy-social-media-button" class="copy-code btn py-1 px-2 btn-outline-secondary"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Copy example code </button>
-                        <div class="overflow-y-auto mt-3 rounded-md">
-                            <pre id="copy-social-media-button" class="source-preview"> <code class="text-xs p-0 rounded-md html pl-5 pt-8 pb-4 -mb-10 -mt-10"> HTMLOpenTagbutton class=&quot;btn btn-facebook w-32 mr-2 mb-2&quot;HTMLCloseTag HTMLOpenTagi data-feather=&quot;facebook&quot; class=&quot;w-4 h-4 mr-2&quot;HTMLCloseTagHTMLOpenTag/iHTMLCloseTag Facebook HTMLOpenTag/buttonHTMLCloseTag HTMLOpenTagbutton class=&quot;btn btn-twitter w-32 mr-2 mb-2&quot;HTMLCloseTag HTMLOpenTagi data-feather=&quot;twitter&quot; class=&quot;w-4 h-4 mr-2&quot;HTMLCloseTagHTMLOpenTag/iHTMLCloseTag Twitter HTMLOpenTag/buttonHTMLCloseTag HTMLOpenTagbutton class=&quot;btn btn-instagram w-32 mr-2 mb-2&quot;HTMLCloseTag HTMLOpenTagi data-feather=&quot;instagram&quot; class=&quot;w-4 h-4 mr-2&quot;HTMLCloseTagHTMLOpenTag/iHTMLCloseTag Instagram HTMLOpenTag/buttonHTMLCloseTag HTMLOpenTagbutton class=&quot;btn btn-linkedin w-32 mr-2 mb-2&quot;HTMLCloseTag HTMLOpenTagi data-feather=&quot;linkedin&quot; class=&quot;w-4 h-4 mr-2&quot;HTMLCloseTagHTMLOpenTag/iHTMLCloseTag Linkedin HTMLOpenTag/buttonHTMLCloseTag </code> </pre>
-                        </div>
-                     </div>
-                    </div>
+                  <Socials></Socials>
                 </div>
                 <div class="col-span-12 lg:col-span-8 xxl:col-span-9" v-if="activeTab === 'terms'">
+                    <Terms></Terms>
                     <!-- BEGIN: Display Information -->
-                <div class="intro-y box lg:mt-5">
-                    <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
-                        <h2 class="font-medium text-base mr-auto">
-                            {{$t('profiles.agreements')}}
-                        </h2>
-                    </div>
-                    <!-- END: Display Information -->
-                    <div class="pl-4 pb-5">
-                    <div
-                        class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm "
-                    >
-                        <input
-                            id="rodo"
-                            type="checkbox"
-                            class="form-check-input border mr-2"
-                            :checked="user.privacy_policy"
-                        />
-                        <label class="cursor-pointer select-none" for="rodo"
-                        >{{$t('profiles.acceptProvisions')}}</label
-                        >
-                        <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
-                        >{{$t('profiles.privacyPolicy')}}</a
-                        >.
-                    </div>
-                    <div
-                        class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
-                    >
-                        <input
-                            id="rodo3"
-                            type="checkbox"
-                            class="form-check-input border mr-2"
-                            :checked="user.terms"
-                        />
-                        <label class="cursor-pointer select-none" for="rodo3"
-                        >{{$t('profiles.accept')}}</label
-                        >
-                        <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
-                        > {{$t('profiles.termsService')}} </a
-                        >{{$t('profiles.servicesPlatform')}}
-                    </div>
-                    <div
-                        class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5"
-                    >
-                        <input
-                            id="rodo2"
-                            type="checkbox"
-                            class="form-check-input border mr-2"
-                            :checked="user.pricing"
-                        />
-                         <label class="cursor-pointer select-none" for="rodo2"
-                        >{{$t('profiles.accept')}}</label
-                        >
-                        <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
-                        >{{$t('profiles.priceList')}}</a
-                        >.
-                     </div>
-                     <div class="border-b border-gray-200 dark:border-dark-5"></div>
-                    <div
-                        class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
-                    >
-                        <input
-                            id="1"
-                            type="checkbox"
-                            class="form-check-input border mr-2"
-                        />
-                        <label class="cursor-pointer select-none" for="rodo2"
-                        >{{$t('profiles.notifyQuestion')}}</label
-                        >
-                    </div>
-                    <div
-                        class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
-                    >
-                        <input
-                            id="2"
-                            type="checkbox"
-                            class="form-check-input border mr-2"
-                        />
-                        <label class="cursor-pointer select-none" for="rodo2"
-                        >{{$t('profiles.informSolution')}}</label
-                        >
-                    </div>
-                    <div
-                        class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
-                    >
-                        <input
-                            id="3"
-                            type="checkbox"
-                            class="form-check-input border mr-2"
-                        />
-                        <label class="cursor-pointer select-none" for="rodo2"
-                        >{{$t('profiles.informService')}}</label
-                        >
-                        </div>
-                      </div>
-                    </div>
                 </div>
                 <div class="col-span-12 lg:col-span-8 xxl:col-span-9" v-if="activeTab === 'change_password'">
                     <!-- BEGIN: Change Password -->
-                    <div class="intro-y box lg:mt-5">
-                        <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
-                            <h2 class="font-medium text-base mr-auto">
-                                {{$t('profiles.changePassword')}}
-                            </h2>
-                        </div>
-                        <form @submit.prevent="change">
-                            <div class="p-5">
-                                <div>
-                                    <label for="change-password-form-1" class="form-label">{{$t('profiles.oldPassword')}}</label>
-                                    <input
-                                        id="change-password-form-1"
-                                        type="password"
-                                        class="form-control"
-                                        placeholder="Input text"
-                                        v-model="password"
-                                    >
-                                </div>
-                                <div class="mt-3">
-                                    <label for="change-password-form-2" class="form-label">{{$t('profiles.newPassword')}}</label>
-                                    <input
-                                        id="change-password-form-2"
-                                        type="password"
-                                        class="form-control"
-                                        placeholder="Input text"
-                                        v-model="passwordNew"
-                                    >
-                                </div>
-                                <div class="mt-3">
-                                    <label for="change-password-form-3" class="form-label">{{$t('profiles.newPasswordConfirm')}}</label>
-                                    <input
-                                        id="change-password-form-3"
-                                        type="password"
-                                        class="form-control"
-                                        placeholder="Input text"
-                                        v-model="passwordNewConfirm"
-                                    >
-                                </div>
-                                <button type="submit" class="btn btn-primary mt-4" @click="changePassword">{{ $t('profiles.changePassword') }}</button>
-                            </div>
-                        </form>
-                    </div>
+                    <ChangePassword></ChangePassword>
                     <!-- END: Change Password -->
                 </div>
                 <div
@@ -289,124 +139,7 @@
                     v-if="activeTab === 'company'"
                 >
                     <!--                <div class="font-medium text-base">Profile Settings</div>-->
-                    <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <label for="input-wizard-1" class="form-label">{{$t('profiles.companyName')}}</label>
-                            <input
-                                id="input-wizard-1"
-                                type="text"
-                                class="form-control"
-                                v-model="company_name"
-                            />
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <label for="input-wizard-2" class="form-label">NIP</label>
-                            <input
-                                id="input-wizard-2"
-                                type="text"
-                                class="form-control"
-                                v-model="nip"
-                            />
-                            <button class="btn btn-primary w-1/4 mt-2" @click="searchNip">{{$t('profiles.searchFor')}} NIP</button>
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <label for="input-wizard-3" class="form-label">REGON</label>
-                            <input
-                                id="input-wizard-3"
-                                type="text"
-                                class="form-control"
-                                v-model="regon"
-                            />
-                            <button class="btn btn-primary w-1/4 mt-2" @click="searchRegon">{{$t('profiles.searchFor')}} REGON</button>
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <label for="input-wizard-4" class="form-label">KRS</label>
-                            <input
-                                id="input-wizard-4"
-                                type="text"
-                                class="form-control"
-                                v-model="krs"
-                            />
-                            <button class="btn btn-primary w-1/4 mt-2" @click="searchKRS">{{$t('profiles.searchFor')}} KRS</button>
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <label for="input-wizard-5" class="form-label">{{$t('profiles.city')}}</label>
-                            <input
-                                id="input-wizard-5"
-                                type="text"
-                                class="form-control"
-                                v-model="city"
-                            />
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <label for="input-wizard-6" class="form-label">{{$t('profiles.street')}}</label>
-                            <input
-                                id="input-wizard-6"
-                                type="text"
-                                class="form-control"
-                                v-model="street"
-                            />
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <label for="input-wizard-5" class="form-label">{{$t('profiles.houseNumber')}}</label>
-                            <input
-                                id="input-wizard-7"
-                                type="text"
-                                class="form-control"
-                                v-model="house_nr"
-                            />
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <label for="input-wizard-6" class="form-label">{{$t('profiles.flatNumber')}}</label>
-                            <input
-                                id="input-wizard-8"
-                                type="text"
-                                class="form-control"
-                                v-model="loc_nr"
-                            />
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <label for="input-wizard-5" class="form-label">{{$t('profiles.postCode')}}</label>
-                            <input
-                                id="input-wizard-9"
-                                type="text"
-                                class="form-control"
-                                v-model="postcode"
-                            />
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <label for="input-wizard-6" class="form-label">{{$t('profiles.post')}}</label>
-                            <input
-                                id="input-wizard-10"
-                                type="text"
-                                class="form-control"
-                                v-model="loc_nr"
-                            />
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <label for="input-wizard-5" class="form-label">{{$t('profiles.province')}}</label>
-                            <input
-                                id="input-wizard-11"
-                                type="text"
-                                class="form-control"
-                                v-model="voivodeship"
-                            />
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <label for="input-wizard-6" class="form-label">{{$t('profiles.country')}}</label>
-                            <input
-                                id="input-wizard-12"
-                                type="text"
-                                class="form-control"
-                                v-model="country"
-                            />
-                        </div>
-                        <div
-                            class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5"
-                        >
-                            <button class="btn btn-primary w-24 ml-2" @click="saveCompany">{{ $t('global.save') }}</button>
-                        </div>
-                    </div>
+                   <Company></Company>
                 </div>
 
             </div>
@@ -430,14 +163,19 @@ import cash from "cash-dom";
 import {email, minLength, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 import GetTeams from "../../compositions/GetTeams"
-
+import Company from "./Company"
+import Terms  from "./Terms"
+import ChangePassword from "./ChangePassword";
 const toast = useToast();
 
 export default defineComponent({
     components: {
+        ChangePassword,
         Avatar,
         DarkModeSwitcher,
-        Dropzone
+        Dropzone,
+        Company,
+        Terms,
     },
     setup() {
         const activeTab = ref('personalia');

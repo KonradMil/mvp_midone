@@ -1,0 +1,125 @@
+<template>
+    <div class="intro-y box lg:mt-5">
+        <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
+            <h2 class="font-medium text-base mr-auto">
+                {{$t('profiles.agreements')}}
+            </h2>
+        </div>
+        <!-- END: Display Information -->
+        <div class="pl-4 pb-5">
+            <div
+                class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm "
+            >
+                <input
+                    id="rodo"
+                    type="checkbox"
+                    class="form-check-input border mr-2"
+                    :checked="user.privacy_policy"
+                />
+                <label class="cursor-pointer select-none" for="rodo"
+                >{{$t('profiles.acceptProvisions')}}</label
+                >
+                <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
+                >{{$t('profiles.privacyPolicy')}}</a
+                >.
+            </div>
+            <div
+                class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
+            >
+                <input
+                    id="rodo3"
+                    type="checkbox"
+                    class="form-check-input border mr-2"
+                    :checked="user.terms"
+                />
+                <label class="cursor-pointer select-none" for="rodo3"
+                >{{$t('profiles.accept')}}</label
+                >
+                <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
+                > {{$t('profiles.termsService')}} </a
+                >{{$t('profiles.servicesPlatform')}}
+            </div>
+            <div
+                class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5"
+            >
+                <input
+                    id="rodo2"
+                    type="checkbox"
+                    class="form-check-input border mr-2"
+                    :checked="user.pricing"
+                />
+                <label class="cursor-pointer select-none" for="rodo2"
+                >{{$t('profiles.accept')}}</label
+                >
+                <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
+                >{{$t('profiles.priceList')}}</a
+                >.
+            </div>
+            <div class="border-b border-gray-200 dark:border-dark-5"></div>
+            <div
+                class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
+            >
+                <input
+                    id="1"
+                    type="checkbox"
+                    class="form-check-input border mr-2"
+                />
+                <label class="cursor-pointer select-none" for="rodo2"
+                >{{$t('profiles.notifyQuestion')}}</label
+                >
+            </div>
+            <div
+                class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
+            >
+                <input
+                    id="2"
+                    type="checkbox"
+                    class="form-check-input border mr-2"
+                />
+                <label class="cursor-pointer select-none" for="rodo2"
+                >{{$t('profiles.informSolution')}}</label
+                >
+            </div>
+            <div
+                class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
+            >
+                <input
+                    id="3"
+                    type="checkbox"
+                    class="form-check-input border mr-2"
+                />
+                <label class="cursor-pointer select-none" for="rodo2"
+                >{{$t('profiles.informService')}}</label
+                >
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import DarkModeSwitcher from "../../components/dark-mode-switcher/Main";
+
+export default {
+    components: {
+        DarkModeSwitcher,
+    },
+    setup() {
+        const user = window.Laravel.user;
+        return {
+            user,
+        };
+    },
+    data() {
+        return {
+            error: null,
+            privacy_policy: '',
+            pricing: '',
+            terms:'',
+        }
+    },
+}
+</script>
+
+<style scoped>
+
+</style>
