@@ -35,7 +35,7 @@
                             <div class="w-full  h-full">
                                 <div class="row flex h-full" :class="(activeLineIndex == index)? 'active':''">
                                     <div class=" h-full" v-for="(animable, index) in line.animables">
-                                        <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;" @click="activeAnimableIndex = index">
+                                        <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;" @click="activeAnimableIndex = index; showAnimableDialog();">
                                             <img class="w-full h-full"
                                                  :alt="animable.name.replace('models', 'models_images') + '.png'"
                                                  :src="animable.name.replace('models', 'models_images') + '.png'"
@@ -77,6 +77,7 @@ export default {
         const animation = reactive({layers: []});
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
+        c
 
         //ANIMATION CONTROLLER
         function swapObjectByIndex(index, object) {
@@ -95,6 +96,10 @@ export default {
             emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: animation});
         }
         //END OF ANIMATION CONTROLLER
+
+        const showAnimableDialog = () => {
+            emitter.emit('animationbuttonclick', {action: 'settingsanimable', data: activeAnimableIndex.value});
+        }
 
         const activeLineIndex = ref(0);
         const activeAnimableIndex = ref(0);
@@ -172,6 +177,9 @@ export default {
                 case 'removeline':
                     emitter.emit('unityoutgoingaction', {data: activeLineIndex.value})
                     break;
+                case 'settingsanimable':
+                    emitter.emit('UnityAnimableSettings', {action: 'settingsanimable', data: animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value]})
+                    break;
                 case 'settingsline':
                     console.log(animation);
                     console.log('IMPORTANT');
@@ -195,6 +203,7 @@ export default {
         }
 
         return {
+            showAnimableDialog,
             animation,
             expanded,
             activeLineIndex,
