@@ -193,7 +193,6 @@
                                     </div>
                                 </div>
                             </div>
-                            asdsadsadad
                         </div>
                         <div class="intro-y col-span-12 overflow-auto lg:overflow-visible" v-if="activeTab==='teams'">
                             <table class="table table-report -mt-2">
@@ -489,7 +488,7 @@
 </template>
 
 <script>
-import {onMounted, provide, ref} from "vue";
+import {onMounted, provide, ref, watch} from "vue";
 import {GoogleMap, Marker} from 'vue3-google-map'
 import cash from "cash-dom";
 import GetUsers from '../../compositions/GetUsers'
@@ -542,6 +541,13 @@ export default {
         const avatar_path = ref();
 
 
+        watch(activeTab, (lab, prevLabel) => {
+            if(lab == 'report') {
+                provide("bind[dropzoneSingleRef]", el => {
+                    dropzoneSingleRef.value = el;
+                });
+            }
+        }, {deep: true})
 
         const del = async (report) => {
             axios.post('api/report/user/delete', {id: report.id})
@@ -601,9 +607,7 @@ export default {
             GetTeamsRepositiories('');
 
             GetReportsRepositiories();
-            provide("bind[dropzoneSingleRef]", el => {
-                dropzoneSingleRef.value = el;
-            });
+
             const elDropzoneSingleRef = dropzoneSingleRef.value;
             console.log(elDropzoneSingleRef);
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
