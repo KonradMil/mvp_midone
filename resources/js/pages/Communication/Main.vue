@@ -644,7 +644,8 @@ export default {
             DeleteReport,
             report_id,
             del,
-            avatar_path
+            avatar_path,
+            dropzoneSingleRef
         }
     },
     beforeRouteEnter(to, from, next) {
