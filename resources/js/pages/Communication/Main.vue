@@ -128,7 +128,7 @@
 <!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="settings"></i></a>-->
                             </div>
                         </div>
-                        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible" v-if="activeTab==='reports'">
+                        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible" :class="(activeTab==='reports')? '':'hidden'">
                             <table class="table table-report -mt-2">
                                 <thead>
                                 <tr>
@@ -172,7 +172,7 @@
                             </table>
                         </div>
 
-                        <div class="overflow-x-auto sm:overflow-x-visible" v-if="activeTab === 'notifications'"
+                        <div class="overflow-x-auto sm:overflow-x-visible"  :class="(activeTab==='notifications')? '':'hidden'"
                              v-for="(notification, index) in notifications.list"
                              :key="'notification_' + index"
                         >
@@ -194,7 +194,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible" v-if="activeTab==='teams'">
+                        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible"  :class="(activeTab==='teams')? '':'hidden'">
                             <table class="table table-report -mt-2">
                                 <thead>
                                 <tr>
@@ -305,7 +305,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="intro-y box p-5" v-if="activeTab==='report'">
+                        <div class="intro-y box p-5"  :class="(activeTab==='report')? '':'hidden'">
                             <div>
                                 <label for="crud-form-1" class="form-label">Title</label>
                                 <input id="crud-form-1"
@@ -540,24 +540,15 @@ export default {
         const file = ref({});
         const avatar_path = ref();
 
-
-        watch(activeTab, (lab, prevLabel) => {
-            if(lab == 'report') {
-                provide("bind[dropzoneSingleRef]", el => {
-                    dropzoneSingleRef.value = el;
-                });
-                const elDropzoneSingleRef = dropzoneSingleRef.value;
-                console.log(elDropzoneSingleRef);
-                elDropzoneSingleRef.dropzone.on("success", (resp) => {
-                    console.log(resp.xhr.response);
-                    file.value = '/uploads/' + JSON.parse(resp.xhr.response).payload;
-                    toast.success('Success!');
-                });
-                elDropzoneSingleRef.dropzone.on("error", () => {
-                    toast.error("Błąd");
-                });
-            }
-        }, {deep: true})
+        provide("bind[dropzoneSingleRef]", el => {
+            dropzoneSingleRef.value = el;
+        });
+        // watch(activeTab, (lab, prevLabel) => {
+        //     if(lab == 'report') {
+        //
+        //
+        //     }
+        // }, {deep: true})
 
         const del = async (report) => {
             axios.post('api/report/user/delete', {id: report.id})
@@ -618,7 +609,16 @@ export default {
 
             GetReportsRepositiories();
 
-
+            const elDropzoneSingleRef = dropzoneSingleRef.value;
+            console.log(elDropzoneSingleRef);
+            elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                console.log(resp.xhr.response);
+                file.value = '/uploads/' + JSON.parse(resp.xhr.response).payload;
+                toast.success('Success!');
+            });
+            elDropzoneSingleRef.dropzone.on("error", () => {
+                toast.error("Błąd");
+            });
             avatar_path.value = '';
             cash("body")
                 .removeClass("error-page")
