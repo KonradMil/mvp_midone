@@ -77,7 +77,6 @@ export default {
         const animation = reactive({layers: []});
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
-        c
 
         //ANIMATION CONTROLLER
         function swapObjectByIndex(index, object) {
