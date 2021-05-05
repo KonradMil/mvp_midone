@@ -546,6 +546,16 @@ export default {
                 provide("bind[dropzoneSingleRef]", el => {
                     dropzoneSingleRef.value = el;
                 });
+                const elDropzoneSingleRef = dropzoneSingleRef.value;
+                console.log(elDropzoneSingleRef);
+                elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                    console.log(resp.xhr.response);
+                    file.value = '/uploads/' + JSON.parse(resp.xhr.response).payload;
+                    toast.success('Success!');
+                });
+                elDropzoneSingleRef.dropzone.on("error", () => {
+                    toast.error("Błąd");
+                });
             }
         }, {deep: true})
 
@@ -608,16 +618,7 @@ export default {
 
             GetReportsRepositiories();
 
-            const elDropzoneSingleRef = dropzoneSingleRef.value;
-            console.log(elDropzoneSingleRef);
-            elDropzoneSingleRef.dropzone.on("success", (resp) => {
-                console.log(resp.xhr.response);
-                file.value = '/uploads/' + JSON.parse(resp.xhr.response).payload;
-                toast.success('Success!');
-            });
-            elDropzoneSingleRef.dropzone.on("error", () => {
-                toast.error("Błąd");
-            });
+
             avatar_path.value = '';
             cash("body")
                 .removeClass("error-page")
