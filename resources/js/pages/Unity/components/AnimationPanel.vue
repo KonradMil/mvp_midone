@@ -86,8 +86,10 @@ export default {
         }
 
         function swapAnimableObjectByIndex(object) {
-            // console.log('IMPORTANT NOW: ');
-            animation.layers[activeLineIndex.value].animable[activeAnimableIndex.value] = toRaw(object);
+            console.log('IMPORTANT NOW: ');
+            console.log(animation.layers[activeLineIndex.value].animable[activeAnimableIndex.value]);
+            console.log(object);
+            animation.layers[activeLineIndex.value].animable[activeAnimableIndex.value] = object;
             // console.log('END IMPORTANT NOW: ');
         }
 
