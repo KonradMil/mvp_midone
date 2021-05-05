@@ -9,36 +9,42 @@
                     </h2>
                     <!-- BEGIN: Inbox Menu -->
                     <div class="intro-y box bg-theme-1 p-5 mt-6">
-                        <button type="button" class="btn text-gray-700 dark:text-gray-300 w-full bg-white dark:bg-theme-1 mt-1" @click.prevent="activeTab = 'report'"> <i class="w-4 h-4 mr-2" data-feather="edit-3"></i>{{$t('communication.reportError')}}</button>
+                        <button type="button" class="btn text-gray-700 dark:text-gray-300 w-full bg-white dark:bg-theme-1 mt-1" @click.prevent="activeTab = 'report'">
+                            <i class="w-4 h-4 mr-2" data-feather="edit-3"></i>{{ $t('communication.reportError') }}
+                        </button>
                         <div class="border-t border-theme-3 dark:border-dark-5 mt-6 pt-6 text-white">
-                            <a href="" class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'notifications') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'notifications'"> <i class="w-4 h-4 mr-2" data-feather="mail"></i>{{$t('global.notifications')}}</a>
-                            <a class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'teams') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'teams'" > <i class="w-4 h-4 mr-2" data-feather="star"></i>{{$t('menu.Zespoły')}}</a>
-                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'questions') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''"  @click.prevent="activeTab = 'questions'"> <i class="w-4 h-4 mr-2" data-feather="inbox"></i> {{$t('communication.questions')}}</a>
-                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'reports') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'reports'"> <i class="w-4 h-4 mr-2" data-feather="send"></i>{{$t('communication.reports')}}</a>
+                            <a href="" class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'notifications') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'notifications'">
+                                <i class="w-4 h-4 mr-2" data-feather="mail"></i>{{ $t('global.notifications') }}</a>
+                            <a class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'teams') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'teams'">
+                                <i class="w-4 h-4 mr-2" data-feather="star"></i>{{ $t('menu.Zespoły') }}</a>
+                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'questions') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'questions'">
+                                <i class="w-4 h-4 mr-2" data-feather="inbox"></i> {{ $t('communication.questions') }}</a>
+                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'reports') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'reports'">
+                                <i class="w-4 h-4 mr-2" data-feather="send"></i>{{ $t('communication.reports') }}</a>
                         </div>
-<!--                        <div class="border-t border-theme-3 dark:border-dark-5 mt-4 pt-4 text-white">-->
-<!--                            <a href="" class="flex items-center px-3 py-2 truncate">-->
-<!--                                <div class="w-2 h-2 bg-theme-11 rounded-full mr-3"></div>-->
-<!--                                Custom Work-->
-<!--                            </a>-->
-<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
-<!--                                <div class="w-2 h-2 bg-theme-9 rounded-full mr-3"></div>-->
-<!--                                Important Meetings-->
-<!--                            </a>-->
-<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
-<!--                                <div class="w-2 h-2 bg-theme-12 rounded-full mr-3"></div>-->
-<!--                                Work-->
-<!--                            </a>-->
-<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
-<!--                                <div class="w-2 h-2 bg-theme-11 rounded-full mr-3"></div>-->
-<!--                                Design-->
-<!--                            </a>-->
-<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
-<!--                                <div class="w-2 h-2 bg-theme-6 rounded-full mr-3"></div>-->
-<!--                                Next Week-->
-<!--                            </a>-->
-<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate"> <i class="w-4 h-4 mr-2" data-feather="plus"></i> Add New Label </a>-->
-<!--                        </div>-->
+                        <!--                        <div class="border-t border-theme-3 dark:border-dark-5 mt-4 pt-4 text-white">-->
+                        <!--                            <a href="" class="flex items-center px-3 py-2 truncate">-->
+                        <!--                                <div class="w-2 h-2 bg-theme-11 rounded-full mr-3"></div>-->
+                        <!--                                Custom Work-->
+                        <!--                            </a>-->
+                        <!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
+                        <!--                                <div class="w-2 h-2 bg-theme-9 rounded-full mr-3"></div>-->
+                        <!--                                Important Meetings-->
+                        <!--                            </a>-->
+                        <!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
+                        <!--                                <div class="w-2 h-2 bg-theme-12 rounded-full mr-3"></div>-->
+                        <!--                                Work-->
+                        <!--                            </a>-->
+                        <!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
+                        <!--                                <div class="w-2 h-2 bg-theme-11 rounded-full mr-3"></div>-->
+                        <!--                                Design-->
+                        <!--                            </a>-->
+                        <!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
+                        <!--                                <div class="w-2 h-2 bg-theme-6 rounded-full mr-3"></div>-->
+                        <!--                                Next Week-->
+                        <!--                            </a>-->
+                        <!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate"> <i class="w-4 h-4 mr-2" data-feather="plus"></i> Add New Label </a>-->
+                        <!--                        </div>-->
                     </div>
                     <!-- END: Inbox Menu -->
                 </div>
@@ -99,8 +105,10 @@
                                 </button>
                                 <div class="dropdown-menu w-40">
                                     <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="user" class="w-4 h-4 mr-2"></i> Contacts </a>
-                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="settings" class="w-4 h-4 mr-2"></i> Settings </a>
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                            <i data-feather="user" class="w-4 h-4 mr-2"></i> Contacts </a>
+                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                            <i data-feather="settings" class="w-4 h-4 mr-2"></i> Settings </a>
                                     </div>
                                 </div>
                             </div>
@@ -113,19 +121,29 @@
                             <div class="flex items-center mt-3 sm:mt-0 border-t sm:border-0 border-gray-200 pt-5 sm:pt-0 mt-5 sm:mt-0 -mx-5 sm:mx-0 px-5 sm:px-0">
                                 <input class="form-check-input" type="checkbox">
                                 <div class="dropdown ml-1" data-placement="bottom-start">
-                                    <a class="dropdown-toggle w-5 h-5 block dark:text-gray-300" href="javascript:;" aria-expanded="false"> <i data-feather="chevron-down" class="w-5 h-5"></i> </a>
+                                    <a class="dropdown-toggle w-5 h-5 block dark:text-gray-300" href="javascript:;" aria-expanded="false">
+                                        <i data-feather="chevron-down" class="w-5 h-5"></i> </a>
                                     <div class="dropdown-menu w-32">
-                                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2"> <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">All</a> <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">None</a> <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Read</a> <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Unread</a> <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Starred</a> <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Unstarred</a> </div>
+                                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                            <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">All</a>
+                                            <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">None</a>
+                                            <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Read</a>
+                                            <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Unread</a>
+                                            <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Starred</a>
+                                            <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Unstarred</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="refresh-cw"></i> </a>
-                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="more-horizontal"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300">
+                                    <i class="w-4 h-4" data-feather="refresh-cw"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300">
+                                    <i class="w-4 h-4" data-feather="more-horizontal"></i> </a>
                             </div>
                             <div class="flex items-center sm:ml-auto">
-<!--                                <div class="dark:text-gray-300">1 - 50 of 5,238</div>-->
-<!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="chevron-left"></i></a>-->
-<!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="chevron-right"></i></a>-->
-<!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="settings"></i></a>-->
+                                <!--                                <div class="dark:text-gray-300">1 - 50 of 5,238</div>-->
+                                <!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="chevron-left"></i></a>-->
+                                <!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="chevron-right"></i></a>-->
+                                <!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="settings"></i></a>-->
                             </div>
                         </div>
                         <div class="intro-y col-span-12 overflow-auto lg:overflow-visible" :class="(activeTab==='reports')? '':'hidden'">
@@ -149,22 +167,26 @@
                                         <div class="flex">
                                             <div class="w-10 h-10 image-fit zoom-in">
                                                 File
-<!--                                                {{report.file.original_name}}-->
+                                                <!--                                                {{report.file.original_name}}-->
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <a href="" class="font-medium whitespace-nowrap">{{ report.title }}</a>
-                                        <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">{{report.type}}</div>
+                                        <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">{{ report.type }}</div>
                                     </td>
                                     <td class="text-center">{{ $dayjs(report.created_at).format('DD.MM.YYYY HH:mm') }}</td>
                                     <td class="w-40">
-                                        <div class="flex items-center justify-center text-theme-9"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> {{ report.description }} </div>
+                                        <div class="flex items-center justify-center text-theme-9">
+                                            <i data-feather="check-square" class="w-4 h-4 mr-2"></i> {{ report.description }}
+                                        </div>
                                     </td>
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
-                                            <a class="flex items-center mr-3" href="javascript:" @click.prevent="$router.push({path: '/report/show/' + report.id })"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Podgląd </a>
-                                            <a @click.prevent="del(report)" class="flex items-center text-theme-6" href="" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                                            <a class="flex items-center mr-3" href="javascript:" @click.prevent="$router.push({path: '/report/show/' + report.id })">
+                                                <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Podgląd </a>
+                                            <a @click.prevent="del(report)" class="flex items-center text-theme-6" href="" data-toggle="modal" data-target="#delete-confirmation-modal">
+                                                <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -172,29 +194,34 @@
                             </table>
                         </div>
 
-                        <div class="overflow-x-auto sm:overflow-x-visible"  :class="(activeTab==='notifications')? '':'hidden'"
+                        <div class="overflow-x-auto sm:overflow-x-visible" :class="(activeTab==='notifications')? '':'hidden'"
                              v-for="(notification, index) in notifications.list"
                              :key="'notification_' + index"
                         >
-                            <div class="intro-y" >
+                            <div class="intro-y">
                                 <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
                                     <div class="flex px-5 py-3">
                                         <div class="w-72 flex-none flex items-center mr-5">
                                             <input class="form-check-input flex-none" type="checkbox" checked>
-                                            <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
-                                            <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                            <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500">
+                                                <i class="w-4 h-4" data-feather="star"></i> </a>
+                                            <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500">
+                                                <i class="w-4 h-4" data-feather="bookmark"></i> </a>
                                             <div class="w-6 h-6 flex-none image-fit relative ml-5">
                                                 <Avatar :src="'uploads/' + notification.data.author.avatar" :username="notification.data.author.name + ' ' + notification.data.author.lastname" size="30" color="#FFF" background-color="#930f68"/>
                                             </div>
-                                            <div class="inbox__item--sender truncate ml-3">{{notification.data.author.name + ' ' + notification.data.author.lastname}}</div>
+                                            <div class="inbox__item--sender truncate ml-3">{{ notification.data.author.name + ' ' + notification.data.author.lastname }}</div>
                                         </div>
-                                        <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">{{notification.data.message}}</span> <button v-if="notification.data.link != undefined" type="button" class="btn ml-5" @click="$router.push({path: notification.data.link})">{{$t('communication.goTo')}}</button> </div>
-                                        <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">{{$dayjs(notification.created_at).format('DD.MM.YYYY HH:mm')}}</div>
+                                        <div class="w-64 sm:w-auto truncate">
+                                            <span class="inbox__item--highlight">{{ notification.data.message }}</span>
+                                            <button v-if="notification.data.link != undefined" type="button" class="btn ml-5" @click="$router.push({path: notification.data.link})">{{ $t('communication.goTo') }}</button>
+                                        </div>
+                                        <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">{{ $dayjs(notification.created_at).format('DD.MM.YYYY HH:mm') }}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible"  :class="(activeTab==='teams')? '':'hidden'">
+                        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible" :class="(activeTab==='teams')? '':'hidden'">
                             <table class="table table-report -mt-2">
                                 <thead>
                                 <tr>
@@ -208,7 +235,7 @@
                                 <tbody>
                                 <tr class="intro-x"
                                     v-for="(team, index) in teams.list"
-                                    :key="'team_' + index" >
+                                    :key="'team_' + index">
                                     <td class="w-40">
                                         <div class="flex">
                                             <div class="w-10 h-10 image-fit zoom-in">
@@ -222,12 +249,16 @@
                                     </td>
                                     <td class="text-center">{{ $dayjs(team.created_at).format('DD.MM.YYYY HH:mm') }}</td>
                                     <td class="w-40">
-                                        <div class="flex items-center justify-center text-theme-9"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> {{ team.users.length }} </div>
+                                        <div class="flex items-center justify-center text-theme-9">
+                                            <i data-feather="check-square" class="w-4 h-4 mr-2"></i> {{ team.users.length }}
+                                        </div>
                                     </td>
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
-                                            <a class="flex items-center mr-3" href="javascript:;"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                            <a @click.prevent="$router.push({path: '/user/team/delete/' + team.id})" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                                            <a class="flex items-center mr-3" href="javascript:;">
+                                                <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                            <a @click.prevent="$router.push({path: '/user/team/delete/' + team.id})" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal">
+                                                <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -236,25 +267,25 @@
                         </div>
 
                         <!--                        <div class="overflow-x-auto sm:overflow-x-visible" v-if="activeTab === 'teams'"-->
-<!--                        >-->
-<!--                                                         <div class="intro-y" >-->
-<!--                                <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">-->
-<!--                                    <div class="flex px-5 py-3">-->
-<!--                                        <div class="w-72 flex-none flex items-center mr-5">-->
-<!--                                            <input class="form-check-input flex-none" type="checkbox" checked>-->
-<!--                                            <a href="javascript:" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>-->
-<!--                                            <a href="javascript:" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>-->
-<!--                                            <div class="w-6 h-6 flex-none image-fit relative ml-5">-->
-<!--                                            </div>-->
-<!--                                            <div class="inbox__item&#45;&#45;sender truncate ml-3"></div>-->
-<!--                                        </div>-->
-<!--                                        <div class="w-64 sm:w-auto truncate"> <span class="inbox__item&#45;&#45;highlight"></span> <button type="button" class="btn ml-5" >{{$t('communication.goTo')}}</button> </div>-->
-<!--                                        <div class="inbox__item&#45;&#45;time whitespace-nowrap ml-auto pl-10">asdsaffa</div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            asdsadsadad-->
-<!--                        </div>-->
+                        <!--                        >-->
+                        <!--                                                         <div class="intro-y" >-->
+                        <!--                                <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">-->
+                        <!--                                    <div class="flex px-5 py-3">-->
+                        <!--                                        <div class="w-72 flex-none flex items-center mr-5">-->
+                        <!--                                            <input class="form-check-input flex-none" type="checkbox" checked>-->
+                        <!--                                            <a href="javascript:" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>-->
+                        <!--                                            <a href="javascript:" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>-->
+                        <!--                                            <div class="w-6 h-6 flex-none image-fit relative ml-5">-->
+                        <!--                                            </div>-->
+                        <!--                                            <div class="inbox__item&#45;&#45;sender truncate ml-3"></div>-->
+                        <!--                                        </div>-->
+                        <!--                                        <div class="w-64 sm:w-auto truncate"> <span class="inbox__item&#45;&#45;highlight"></span> <button type="button" class="btn ml-5" >{{$t('communication.goTo')}}</button> </div>-->
+                        <!--                                        <div class="inbox__item&#45;&#45;time whitespace-nowrap ml-auto pl-10">asdsaffa</div>-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                            asdsadsadad-->
+                        <!--                        </div>-->
                         <div
                             v-for="(team, index) in teams.list"
                             :key="'team_' + index"
@@ -279,7 +310,7 @@
                                     </div>
                                     <div class="flex mt-4 lg:mt-0">
                                         <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
-                                            {{$t('teams.details')}}
+                                            {{ $t('teams.details') }}
                                         </button>
                                     </div>
                                 </div>
@@ -293,7 +324,7 @@
                                                 <div class="ml-4 mr-auto">
                                                     <a href="" class="font-medium">{{ member.name + ' ' + member.lastname }}</a>
                                                     <div class="text-gray-600 mr-5 sm:mr-5" v-if="member.companies.length != 0">
-                                                        {{member.companies[0].company_name}}
+                                                        {{ member.companies[0].company_name }}
                                                     </div>
                                                 </div>
                                                 <div class="font-medium text-gray-700 dark:text-gray-600">
@@ -305,7 +336,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="intro-y box p-5"  :class="(activeTab==='report')? '':'hidden'">
+                        <div class="intro-y box p-5" :class="(activeTab==='report')? '':'hidden'">
                             <div>
                                 <label for="crud-form-1" class="form-label">Title</label>
                                 <input id="crud-form-1"
@@ -327,7 +358,7 @@
                                      hideSelected: false,
                                      classNames: 'w-16'
                                      }"
-                                   >
+                                >
                                     <option value="Wyzwanie">Wyzwanie</option>
                                     <option value="Rozwiazanie">Rozwiązanie</option>
                                     <option value="Oferta">Oferta</option>
@@ -335,43 +366,43 @@
                                     <option value="Stanowisko">Stanowisko</option>
                                     <option value="Inne">Inne</option>
                                 </TailSelect>
-<!--                                <input id="crud-form-2"-->
-<!--                                       type="text"-->
-<!--                                       class="form-control w-full"-->
-<!--                                       placeholder="Input text"-->
-<!--                                       v-model="type"-->
-<!--                                >-->
+                                <!--                                <input id="crud-form-2"-->
+                                <!--                                       type="text"-->
+                                <!--                                       class="form-control w-full"-->
+                                <!--                                       placeholder="Input text"-->
+                                <!--                                       v-model="type"-->
+                                <!--                                >-->
                             </div>
                             <div class="pt-5">
-                            <div
-                                class="border border-gray-200 dark:border-dark-5 rounded-md p-5"
-                            >
                                 <div
-                                    class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"
+                                    class="border border-gray-200 dark:border-dark-5 rounded-md p-5"
                                 >
-<!--                                    <div class="w-22 mr-3">-->
-<!--                                        <TailSelect-->
-<!--                                            id="input-wizard-2"-->
-<!--                                            :options="{-->
-<!--                                                locale: 'pl',-->
-<!--                                                placeholder: 'Wybierz...',-->
-<!--                                                limit: 'Nie można wybrać więcej',-->
-<!--                                                search: false,-->
-<!--                                                hideSelected: false,-->
-<!--                                                classNames: 'w-full'-->
-<!--                                            }"-->
-<!--                                        >-->
-<!--                                            <option value="pl">PL</option>-->
-<!--                                            <option value="en">ENG</option>-->
+                                    <div
+                                        class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"
+                                    >
+                                        <!--                                    <div class="w-22 mr-3">-->
+                                        <!--                                        <TailSelect-->
+                                        <!--                                            id="input-wizard-2"-->
+                                        <!--                                            :options="{-->
+                                        <!--                                                locale: 'pl',-->
+                                        <!--                                                placeholder: 'Wybierz...',-->
+                                        <!--                                                limit: 'Nie można wybrać więcej',-->
+                                        <!--                                                search: false,-->
+                                        <!--                                                hideSelected: false,-->
+                                        <!--                                                classNames: 'w-full'-->
+                                        <!--                                            }"-->
+                                        <!--                                        >-->
+                                        <!--                                            <option value="pl">PL</option>-->
+                                        <!--                                            <option value="en">ENG</option>-->
 
-<!--                                        </TailSelect>-->
-<!--                                    </div>-->
-                                    {{$t('challengesNew.description')}}
+                                        <!--                                        </TailSelect>-->
+                                        <!--                                    </div>-->
+                                        {{ $t('challengesNew.description') }}
+                                    </div>
+                                    <div class="mt-5">
+                                        <textarea v-model="description" style="width: 100%;"></textarea>
+                                    </div>
                                 </div>
-                                <div class="mt-5">
-                                    <textarea v-model="description" style="width: 100%;"></textarea>
-                                </div>
-                            </div>
                             </div>
                             <div
                                 class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5"
@@ -399,14 +430,14 @@
                                                     >
                                                         <ImageIcon class="w-4 h-4 mr-2"/>
                                                         <span class="text-theme-1 dark:text-theme-10 mr-1"
-                                                        >{{$t('challengesNew.file')}}</span
+                                                        >{{ $t('challengesNew.file') }}</span
                                                         >
-                                                        {{ $t('challengesNew.fileUpload')}}
+                                                        {{ $t('challengesNew.fileUpload') }}
                                                     </div>
                                                 </Dropzone>
                                             </div>
 
-                                         </div>
+                                        </div>
 
                                     </div>
 
@@ -417,72 +448,76 @@
                             </div>
                         </div>
                         <!--                        <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">-->
-<!--                            asdsadsadsa-->
-<!--                        </div>-->
+                        <!--                            asdsadsadsa-->
+                        <!--                        </div>-->
                     </div>
                     <!-- END: Inbox Content -->
                 </div>
             </div>
         </div>
 
-       <!-- END: Content -->
+        <!-- END: Content -->
     </div>
     <Modal :show="show" @closed="modalClosed">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- BEGIN: Modal Header -->
-            <div class="modal-header">
-                <h2 class="font-medium text-base mr-auto">
-                    Broadcast Message
-                </h2>
-                <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button>
-                <div class="dropdown sm:hidden">
-                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false"> <i data-feather="more-horizontal" class="w-5 h-5 text-gray-600 dark:text-gray-600"></i> </a>
-                    <div class="dropdown-menu w-40">
-                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                            <a href="javascript:;" class="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </a>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- BEGIN: Modal Header -->
+                <div class="modal-header">
+                    <h2 class="font-medium text-base mr-auto">
+                        Broadcast Message
+                    </h2>
+                    <button class="btn btn-outline-secondary hidden sm:flex">
+                        <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs
+                    </button>
+                    <div class="dropdown sm:hidden">
+                        <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false">
+                            <i data-feather="more-horizontal" class="w-5 h-5 text-gray-600 dark:text-gray-600"></i> </a>
+                        <div class="dropdown-menu w-40">
+                            <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                                <a href="javascript:;" class="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                    <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </a>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!-- END: Modal Header -->
+                <!-- BEGIN: Modal Body -->
+                <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
+                    <div class="col-span-12 sm:col-span-6">
+                        <label for="modal-form-1" class="form-label">Tytuł</label>
+                        <input id="modal-form-1" type="text" class="form-control" placeholder="example@gmail.com">
+                    </div>
+                    <div class="col-span-12 sm:col-span-6 pb-5">
+                        <label for="modal-form-3" class="form-label">Czego dotyczy</label>
+                        <input id="modal-form-3" type="text" class="form-control" placeholder="Important Meeting">
+                    </div>
+                    <div class="col-span-12 sm:col-span-6">
+                        <label for="modal-form-4" class="form-label">Opis</label>
+                        <input id="modal-form-4" type="text" class="form-control" placeholder="Job, Work, Documentation">
+                    </div>
+                    <div class="col-span-12 sm:col-span-6">
+                        <label for="modal-form-5" class="form-label">Doesn't Have</label>
+                        <input id="modal-form-5" type="text" class="form-control" placeholder="Job, Work, Documentation">
+                    </div>
+                    <div class="col-span-12 sm:col-span-6">
+                        <label for="modal-form-6" class="form-label">Size</label>
+                        <select id="modal-form-6" class="form-select">
+                            <option>10</option>
+                            <option>25</option>
+                            <option>35</option>
+                            <option>50</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- END: Modal Body -->
+                <!-- BEGIN: Modal Footer -->
+                <div class="modal-footer text-right">
+                    <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1" @click="modalClosed">Cancel</button>
+                    <button type="button" class="btn btn-primary w-20">Send</button>
+                </div>
+                <!-- END: Modal Footer -->
             </div>
-            <!-- END: Modal Header -->
-            <!-- BEGIN: Modal Body -->
-            <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
-                <div class="col-span-12 sm:col-span-6">
-                    <label for="modal-form-1" class="form-label">Tytuł</label>
-                    <input id="modal-form-1" type="text" class="form-control" placeholder="example@gmail.com">
-                </div>
-                <div class="col-span-12 sm:col-span-6 pb-5">
-                    <label for="modal-form-3" class="form-label">Czego dotyczy</label>
-                    <input id="modal-form-3" type="text" class="form-control" placeholder="Important Meeting">
-                </div>
-                <div class="col-span-12 sm:col-span-6">
-                    <label for="modal-form-4" class="form-label">Opis</label>
-                    <input id="modal-form-4" type="text" class="form-control" placeholder="Job, Work, Documentation">
-                </div>
-                <div class="col-span-12 sm:col-span-6">
-                    <label for="modal-form-5" class="form-label">Doesn't Have</label>
-                    <input id="modal-form-5" type="text" class="form-control" placeholder="Job, Work, Documentation">
-                </div>
-                <div class="col-span-12 sm:col-span-6">
-                    <label for="modal-form-6" class="form-label">Size</label>
-                    <select id="modal-form-6" class="form-select">
-                        <option>10</option>
-                        <option>25</option>
-                        <option>35</option>
-                        <option>50</option>
-                    </select>
-                </div>
-            </div>
-            <!-- END: Modal Body -->
-            <!-- BEGIN: Modal Footer -->
-            <div class="modal-footer text-right">
-                <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1" @click="modalClosed">Cancel</button>
-                <button type="button" class="btn btn-primary w-20">Send</button>
-            </div>
-            <!-- END: Modal Footer -->
         </div>
-    </div>
     </Modal>
 
 </template>
@@ -523,7 +558,7 @@ export default {
         const toast = useToast();
         const showDetails = ref([]);
         const users = ref([]);
-        const user =ref({});
+        const user = ref({});
         const report = ref('');
         const notifications = ref([]);
         const show = ref(false);
@@ -567,7 +602,7 @@ export default {
 
 
         const deleteReportRepo = async () => {
-              DeleteReport(report.value.id);
+            DeleteReport(report.value.id);
             await GetReportsRepositiories();
         }
 
@@ -591,18 +626,18 @@ export default {
             showTeams.value = !showTeams.value;
         }
         const showAddToTeamModal = () => {
-               show.value = !show.value;
-            }
+            show.value = !show.value;
+        }
         const modalClosed = () => {
             show.value = false;
         }
         const GetTeamsRepositiories = async () => {
             teams.value = GetTeams();
         }
-        const GetNotificationsReposistories = async() => {
+        const GetNotificationsReposistories = async () => {
             notifications.value = GetNotifications();
         }
-        onMounted( () => {
+        onMounted(() => {
             GetUsersRepositories('');
             GetNotificationsReposistories('');
             GetTeamsRepositiories('');
