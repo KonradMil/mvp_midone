@@ -129,7 +129,6 @@
                             </div>
                         </div>
                         <div class="intro-y col-span-12 overflow-auto lg:overflow-visible" :class="(activeTab==='reports')? '':'hidden'">
-                            <Report></Report>
                             <table class="table table-report -mt-2">
                                 <thead>
                                 <tr>
@@ -144,8 +143,8 @@
                                 <Report class="intro-x"
                                         v-for="(report, index) in reports.list"
                                         :key="'team_' + index"
-                                        v-if="activeTab==='reports'"></Report>
-
+                                            :ind="index"
+                                        :report="report"></Report>
                                 </tbody>
                             </table>
                         </div>
@@ -284,115 +283,7 @@
                             </div>
                         </div>
                         <div class="intro-y box p-5"  :class="(activeTab==='report')? '':'hidden'">
-                            <div>
-                                <label for="crud-form-1" class="form-label">Title</label>
-                                <input id="crud-form-1"
-                                       type="text"
-                                       class="form-control w-full"
-                                       placeholder="Input text"
-                                       v-model="title"
-                                >
-                            </div>
-                            <div class="mt-3">
-                                <label for="crud-form-2" class="form-label">Czego dotyczy</label>
-                                <TailSelect
-                                    id="post-form-3"
-                                    v-model="type"
-                                    :options="{
-                                     locale: 'pl',
-                                     limit: 'Nie można wybrać więcej',
-                                     search: false,
-                                     hideSelected: false,
-                                     classNames: 'w-16'
-                                     }"
-                                   >
-                                    <option value="Wyzwanie">Wyzwanie</option>
-                                    <option value="Rozwiazanie">Rozwiązanie</option>
-                                    <option value="Oferta">Oferta</option>
-                                    <option value="Projekt">Projekt</option>
-                                    <option value="Stanowisko">Stanowisko</option>
-                                    <option value="Inne">Inne</option>
-                                </TailSelect>
-<!--                                <input id="crud-form-2"-->
-<!--                                       type="text"-->
-<!--                                       class="form-control w-full"-->
-<!--                                       placeholder="Input text"-->
-<!--                                       v-model="type"-->
-<!--                                >-->
-                            </div>
-                            <div class="pt-5">
-                            <div
-                                class="border border-gray-200 dark:border-dark-5 rounded-md p-5"
-                            >
-                                <div
-                                    class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"
-                                >
-<!--                                    <div class="w-22 mr-3">-->
-<!--                                        <TailSelect-->
-<!--                                            id="input-wizard-2"-->
-<!--                                            :options="{-->
-<!--                                                locale: 'pl',-->
-<!--                                                placeholder: 'Wybierz...',-->
-<!--                                                limit: 'Nie można wybrać więcej',-->
-<!--                                                search: false,-->
-<!--                                                hideSelected: false,-->
-<!--                                                classNames: 'w-full'-->
-<!--                                            }"-->
-<!--                                        >-->
-<!--                                            <option value="pl">PL</option>-->
-<!--                                            <option value="en">ENG</option>-->
-
-<!--                                        </TailSelect>-->
-<!--                                    </div>-->
-                                    {{$t('challengesNew.description')}}
-                                </div>
-                                <div class="mt-5">
-                                    <textarea v-model="description" style="width: 100%;"></textarea>
-                                </div>
-                            </div>
-                            </div>
-                            <div
-                                class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5"
-                            >
-                                <div class="mt-5">
-                                    <div class="mt-3">
-                                        <label class="form-label"> {{ $t('challengesNew.file') }}</label>
-                                        <div
-                                            class="rounded-md pt-4"
-                                        >
-                                            <div class="flex flex-wrap px-4">
-                                                <Dropzone
-                                                    style="position: relative; display: flex;"
-                                                    ref-key="dropzoneSingleRef"
-                                                    :options="{
-                                                     url: '/api/report/files/store',
-                                                     thumbnailWidth: 150,
-                                                     maxFilesize: 5,
-                                                     maxFiles: 5,
-                                                     previewTemplate: '<div style=\'display: none\'></div>'
-                                                    }"
-                                                    class="dropzone">
-                                                    <div
-                                                        class="px-4 py-4 flex items-center cursor-pointer relative"
-                                                    >
-                                                        <ImageIcon class="w-4 h-4 mr-2"/>
-                                                        <span class="text-theme-1 dark:text-theme-10 mr-1"
-                                                        >{{$t('challengesNew.file')}}</span
-                                                        >
-                                                        {{ $t('challengesNew.fileUpload')}}
-                                                    </div>
-                                                </Dropzone>
-                                            </div>
-
-                                         </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="modal-footer text-right">
-                                <button type="button" class="btn btn-primary w-20" @click="saveReportRepo">Send</button>
-                            </div>
+                            <AddReport></AddReport>
                         </div>
                         <!--                        <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">-->
 <!--                            asdsadsadsa-->
@@ -405,83 +296,78 @@
 
        <!-- END: Content -->
     </div>
-    <Modal :show="show" @closed="modalClosed">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- BEGIN: Modal Header -->
-            <div class="modal-header">
-                <h2 class="font-medium text-base mr-auto">
-                    Broadcast Message
-                </h2>
-                <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button>
-                <div class="dropdown sm:hidden">
-                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false"> <i data-feather="more-horizontal" class="w-5 h-5 text-gray-600 dark:text-gray-600"></i> </a>
-                    <div class="dropdown-menu w-40">
-                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                            <a href="javascript:;" class="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END: Modal Header -->
-            <!-- BEGIN: Modal Body -->
-            <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
-                <div class="col-span-12 sm:col-span-6">
-                    <label for="modal-form-1" class="form-label">Tytuł</label>
-                    <input id="modal-form-1" type="text" class="form-control" placeholder="example@gmail.com">
-                </div>
-                <div class="col-span-12 sm:col-span-6 pb-5">
-                    <label for="modal-form-3" class="form-label">Czego dotyczy</label>
-                    <input id="modal-form-3" type="text" class="form-control" placeholder="Important Meeting">
-                </div>
-                <div class="col-span-12 sm:col-span-6">
-                    <label for="modal-form-4" class="form-label">Opis</label>
-                    <input id="modal-form-4" type="text" class="form-control" placeholder="Job, Work, Documentation">
-                </div>
-                <div class="col-span-12 sm:col-span-6">
-                    <label for="modal-form-5" class="form-label">Doesn't Have</label>
-                    <input id="modal-form-5" type="text" class="form-control" placeholder="Job, Work, Documentation">
-                </div>
-                <div class="col-span-12 sm:col-span-6">
-                    <label for="modal-form-6" class="form-label">Size</label>
-                    <select id="modal-form-6" class="form-select">
-                        <option>10</option>
-                        <option>25</option>
-                        <option>35</option>
-                        <option>50</option>
-                    </select>
-                </div>
-            </div>
-            <!-- END: Modal Body -->
-            <!-- BEGIN: Modal Footer -->
-            <div class="modal-footer text-right">
-                <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1" @click="modalClosed">Cancel</button>
-                <button type="button" class="btn btn-primary w-20">Send</button>
-            </div>
-            <!-- END: Modal Footer -->
-        </div>
-    </div>
-    </Modal>
+<!--    <Modal :show="show" @closed="modalClosed">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            &lt;!&ndash; BEGIN: Modal Header &ndash;&gt;-->
+<!--            <div class="modal-header">-->
+<!--                <h2 class="font-medium text-base mr-auto">-->
+<!--                    Broadcast Message-->
+<!--                </h2>-->
+<!--                <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button>-->
+<!--                <div class="dropdown sm:hidden">-->
+<!--                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false"> <i data-feather="more-horizontal" class="w-5 h-5 text-gray-600 dark:text-gray-600"></i> </a>-->
+<!--                    <div class="dropdown-menu w-40">-->
+<!--                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">-->
+<!--                            <a href="javascript:;" class="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; END: Modal Header &ndash;&gt;-->
+<!--            &lt;!&ndash; BEGIN: Modal Body &ndash;&gt;-->
+<!--            <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">-->
+<!--                <div class="col-span-12 sm:col-span-6">-->
+<!--                    <label for="modal-form-1" class="form-label">Tytuł</label>-->
+<!--                    <input id="modal-form-1" type="text" class="form-control" placeholder="example@gmail.com">-->
+<!--                </div>-->
+<!--                <div class="col-span-12 sm:col-span-6 pb-5">-->
+<!--                    <label for="modal-form-3" class="form-label">Czego dotyczy</label>-->
+<!--                    <input id="modal-form-3" type="text" class="form-control" placeholder="Important Meeting">-->
+<!--                </div>-->
+<!--                <div class="col-span-12 sm:col-span-6">-->
+<!--                    <label for="modal-form-4" class="form-label">Opis</label>-->
+<!--                    <input id="modal-form-4" type="text" class="form-control" placeholder="Job, Work, Documentation">-->
+<!--                </div>-->
+<!--                <div class="col-span-12 sm:col-span-6">-->
+<!--                    <label for="modal-form-5" class="form-label">Doesn't Have</label>-->
+<!--                    <input id="modal-form-5" type="text" class="form-control" placeholder="Job, Work, Documentation">-->
+<!--                </div>-->
+<!--                <div class="col-span-12 sm:col-span-6">-->
+<!--                    <label for="modal-form-6" class="form-label">Size</label>-->
+<!--                    <select id="modal-form-6" class="form-select">-->
+<!--                        <option>10</option>-->
+<!--                        <option>25</option>-->
+<!--                        <option>35</option>-->
+<!--                        <option>50</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; END: Modal Body &ndash;&gt;-->
+<!--            &lt;!&ndash; BEGIN: Modal Footer &ndash;&gt;-->
+<!--            <div class="modal-footer text-right">-->
+<!--                <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1" @click="modalClosed">Cancel</button>-->
+<!--                <button type="button" class="btn btn-primary w-20">Send</button>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; END: Modal Footer &ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    </Modal>-->
 
 </template>
 
 <script>
-import {onMounted, provide, ref, watch} from "vue";
-import {GoogleMap, Marker} from 'vue3-google-map'
+import {getCurrentInstance, onMounted, provide, ref, watch} from "vue";
 import cash from "cash-dom";
 import GetUsers from '../../compositions/GetUsers'
 import GetNotifications from '../../compositions/GetNotifications'
 import GetTeams from '../../compositions/GetTeams';
 import GetReports from '../../compositions/GetReports';
-import SaveReport from '../../compositions/SaveReport';
-
-import Dropzone from '../../global-components/dropzone/Main'
-import {useToast} from "vue-toastification";
 import {useStore} from "../../store";
 import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
-import SaveChallenge from "../../compositions/SaveChallenge";
 import Report from "./Report";
+import AddReport from "./AddReport";
 
 const store = useStore();
 
@@ -489,58 +375,37 @@ export default {
     name: "Communication",
     components: {
         Report,
-        GoogleMap,
-        Marker,
         Avatar,
         Modal,
         GetTeams,
         GetUsers,
-        Dropzone,
-        DeleteReport,
-        GetReports
+        GetReports,
+        AddReport
     },
     setup(props, {emit}) {
-        const toast = useToast();
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const showDetails = ref([]);
         const users = ref([]);
         const user =ref({});
-        const report = ref('');
         const notifications = ref([]);
         const show = ref(false);
         const showTeams = ref(false);
         const activeTab = ref('notifications');
         const teams = ref([]);
         const reports = ref([]);
-        const title = ref('');
-        const type = ref('');
-        const description = ref('');
-        const files = ref([]);
-        const dropzoneSingleRef = ref();
         const report_id = ref(null);
-        const file = ref({});
-        const avatar_path = ref();
 
-        provide("bind[dropzoneSingleRef]", el => {
-            dropzoneSingleRef.value = el;
+
+
+        emitter.on('deletereport', e => {
+           reports.value.list.splice(e.index, 1);
         });
-        // watch(activeTab, (lab, prevLabel) => {
-        //     if(lab == 'report') {
-        //
-        //
-        //     }
-        // }, {deep: true})
 
+        emitter.on('addreport', e => {
+            reports.value.list.push(e.obj);
+        });
 
-
-        const saveReportRepo = async () => {
-            await SaveReport({
-                title: title.value,
-                description: description.value,
-                type: type.value,
-                file_id : file.value.id
-            });
-            await GetReportsRepositiories();
-        }
 
         const GetReportsRepositiories = async () => {
             reports.value = GetReports();
@@ -567,20 +432,8 @@ export default {
             GetUsersRepositories('');
             GetNotificationsReposistories('');
             GetTeamsRepositiories('');
-
             GetReportsRepositiories();
 
-            const elDropzoneSingleRef = dropzoneSingleRef.value;
-            console.log(elDropzoneSingleRef);
-            elDropzoneSingleRef.dropzone.on("success", (resp) => {
-                console.log(resp.xhr.response);
-                file.value = JSON.parse(resp.xhr.response).payload;
-                toast.success('Success!');
-            });
-            elDropzoneSingleRef.dropzone.on("error", () => {
-                toast.error("Błąd");
-            });
-            avatar_path.value = '';
             cash("body")
                 .removeClass("error-page")
             if (window.Laravel.user) {
@@ -588,7 +441,6 @@ export default {
             }
         })
         return {
-            file,
             users,
             teams,
             user,
@@ -600,18 +452,8 @@ export default {
             showAddTeams,
             modalClosed,
             activeTab,
-            saveReportRepo,
-            deleteReportRepo,
-            title,
-            type,
-            description,
-            files,
             reports,
-            DeleteReport,
             report_id,
-            del,
-            avatar_path,
-            dropzoneSingleRef
         }
     },
     beforeRouteEnter(to, from, next) {

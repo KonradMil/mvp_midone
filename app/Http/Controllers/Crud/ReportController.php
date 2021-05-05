@@ -128,9 +128,11 @@ class ReportController extends Controller
         $report->author_id = Auth::user()->id;
         $report->save();
 
+
+
         $file = File::find($request->file_id);
         $report->files()->attach($file);
-
+        $report->files = $report->files()->get();
 
         return response()->json([
             'success' => true,

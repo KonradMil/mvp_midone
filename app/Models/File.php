@@ -21,7 +21,7 @@ class File extends Model
     ];
 
     public function reports(){
-        return $this->belongsToMany(Report::class);
+        return $this->belongsToMany(Report::class, 'file_reports');
     }
     public function author() {
         return $this->hasMany(User::class);
