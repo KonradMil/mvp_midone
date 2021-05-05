@@ -138,6 +138,7 @@ export default {
 
         const emitMe = () => {
             console.log(context);
+            console.log(app);
             // e("update:animationSave", animation);
         };
 
