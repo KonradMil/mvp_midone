@@ -541,9 +541,7 @@ export default {
         const file = ref({});
         const avatar_path = ref();
 
-        provide("bind[dropzoneSingleRef]", el => {
-            dropzoneSingleRef.value = el;
-        });
+
 
         const del = async (report) => {
             axios.post('api/report/user/delete', {id: report.id})
@@ -603,6 +601,9 @@ export default {
             GetTeamsRepositiories('');
 
             GetReportsRepositiories();
+            provide("bind[dropzoneSingleRef]", el => {
+                dropzoneSingleRef.value = el;
+            });
             const elDropzoneSingleRef = dropzoneSingleRef.value;
             console.log(elDropzoneSingleRef);
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
