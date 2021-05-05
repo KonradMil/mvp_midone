@@ -97,7 +97,7 @@ export default {
         //END OF ANIMATION CONTROLLER
 
         const showAnimableDialog = () => {
-            emitter.emit('animationbuttonclick', {action: 'settingsanimable', data: activeAnimableIndex.value});
+            emitter.emit('animationbuttonclick', {val: 'settingsanimable', data: activeAnimableIndex.value});
         }
 
         const activeLineIndex = ref(0);
