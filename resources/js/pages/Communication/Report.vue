@@ -29,7 +29,7 @@
 
 
 import DeleteReport from '../../compositions/DeleteReport';
-
+import {useToast} from "vue-toastification";
 
 export default {
     name: "Report",
@@ -37,7 +37,7 @@ export default {
         report: Object
     },
     setup(props, {emit}) {
-
+        const toast = useToast();
 
         const del = async (report) => {
             axios.post('api/report/user/delete', {id: report.id})
