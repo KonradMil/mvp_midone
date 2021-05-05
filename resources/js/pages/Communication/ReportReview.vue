@@ -77,28 +77,11 @@
                         class="rounded-md pt-4"
                     >
                         <div class="flex flex-wrap px-4">
-                            <Dropzone
-                                style="position: relative;
-    display: flex;"
-                                ref-key="dropzoneSingleRef"
-                                :options="{
-                                                     url: '/api/report/files/store',
-                                                     thumbnailWidth: 150,
-                                                     maxFilesize: 5,
-                                                     maxFiles: 5,
-                                                     previewTemplate: '<div style=\'display: none\'></div>'
-                                                    }"
-                                class="dropzone">
-                                <div
-                                    class="px-4 py-4 flex items-center cursor-pointer relative"
-                                >
-                                    <ImageIcon class="w-4 h-4 mr-2"/>
-                                    <span class="text-theme-1 dark:text-theme-10 mr-1"
-                                    >{{$t('challengesNew.file')}}</span
-                                    >
-                                    {{ $t('challengesNew.fileUpload')}}
+                            <div class="flex" v-if="report.files != undefined">
+                                <div class="w-10 h-10 image-fit zoom-in" v-if="report.files.length != '0'">
+                                    {{ report.files[0].original_name }}
                                 </div>
-                            </Dropzone>
+                            </div>
                         </div>
 
                     </div>
@@ -182,7 +165,8 @@ export default {
             users,
             user,
             reports,
-            report
+            report,
+            files
         }
     },
     beforeRouteEnter(to, from, next) {

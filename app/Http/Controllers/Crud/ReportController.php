@@ -18,7 +18,7 @@ class ReportController extends Controller
 {
     public function getReport(Request $request)
     {
-        $report = Report::find($request->id);
+        $report = Report::with('files')->find($request->id);
 
         return response()->json([
             'success' => true,
