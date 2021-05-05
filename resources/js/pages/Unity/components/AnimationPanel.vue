@@ -139,7 +139,7 @@ export default {
         const emitMe = () => {
             console.log(context);
             console.log(app);
-            // e("update:animationSave", animation);
+            app.emit("update:animationSave", animation);
         };
 
         onMounted(() => {
