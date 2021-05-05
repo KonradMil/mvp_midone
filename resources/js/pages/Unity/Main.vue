@@ -226,6 +226,9 @@ export default {
             bridge.value = UnityBridge();
         });
 
+        emitter.on('updateanimationSave', e => {
+            animationSave.value.layers = e.data.layers;
+        });
 
         const getCardChallengeRepositories = async (id) => {
             await axios.post('/api/challenge/user/get/card', {id: id})

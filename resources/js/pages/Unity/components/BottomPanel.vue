@@ -67,6 +67,8 @@ export default {
             emitter.emit('gridsizechange', { val: val })
         }
 
+
+
         // watch(animationSave, (lab, prevLabel) => {
         //   emitMe(lab);
         // }, {deep: true})

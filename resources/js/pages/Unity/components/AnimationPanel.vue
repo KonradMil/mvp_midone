@@ -133,14 +133,8 @@ export default {
             }
             console.log('ANIMATION CHAIN UPDATGE');
             console.log(animation);
-            emitMe();
+            emitter.emit('updateanimationSave', {data: animation});
         });
-
-        const emitMe = () => {
-            console.log(context);
-            console.log(app);
-            getCurrentInstance().emit("update:animationSave", animation);
-        };
 
         onMounted(() => {
             console.log('MOUNTED LAYERS');
