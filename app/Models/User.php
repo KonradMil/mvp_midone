@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Challenges\Challenge;
+use App\Models\Reports\Report;
 use App\Models\Solutions\Solution;
 use BeyondCode\Comments\Contracts\Commentator;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -60,6 +61,11 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'author_id');
+    }
 
     public function challenges()
     {

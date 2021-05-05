@@ -19,6 +19,7 @@ class Report extends Model
         'type',
         'title',
         'description',
+        'author_id'
     ];
 
 
@@ -46,7 +47,7 @@ class Report extends Model
 
     public function files()
     {
-        return $this->hasMany(File::class);
+        return $this->belongsToMany(File::class);
     }
 
     public function solutions()

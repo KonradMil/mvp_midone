@@ -296,7 +296,7 @@
                                 id="input-wizard-1"
                                 type="text"
                                 class="form-control"
-                                v-model="nameCompany"
+                                v-model="company_name"
                             />
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -429,6 +429,7 @@ import {useToast} from "vue-toastification";
 import cash from "cash-dom";
 import {email, minLength, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
+import GetTeams from "../../compositions/GetTeams"
 
 const toast = useToast();
 
@@ -465,6 +466,7 @@ export default defineComponent({
         provide("bind[dropzoneSingleRef]", el => {
             dropzoneSingleRef.value = el;
         });
+
 
         onMounted(() => {
             const elDropzoneSingleRef = dropzoneSingleRef.value;
@@ -581,7 +583,7 @@ export default defineComponent({
             privacy_policy: '',
             pricing: '',
             terms:'',
-            nameCompany: '',
+            company_name: '',
             krs: '',
             nip: '',
             regon: '',
@@ -644,7 +646,7 @@ export default defineComponent({
                 this.$axios.post('api/company/create', {
                     regon : this.regon,
                     nip: this.nip,
-                    company_name: this.nameCompany,
+                    company_name: this.company_name,
                     city: this.city,
                     street: this.street,
                     flat_nr: this.loc_nr,
@@ -695,7 +697,7 @@ export default defineComponent({
                                 this.regon = response.data.payload[0].regon;
                                 this.nip = response.data.payload[0].nip;
                                 this.city = response.data.payload[0].postalCityName;
-                                this.nameCompany = response.data.payload[0].nameCompany;
+                                this.company_name = response.data.payload[0].company_name;
                                 this.street = response.data.payload[0].streetName;
                                 this.loc_nr = response.data.payload[0].flatNr;
                                 this.house_nr = response.data.payload[0].homeNr;
@@ -726,7 +728,7 @@ export default defineComponent({
                             this.regon = response.data.payload[0].regon;
                             this.nip = response.data.payload[0].nip;
                             this.city = response.data.payload[0].postalCityName;
-                            this.nameCompany = response.data.payload[0].nameCompany;
+                            this.company_name = response.data.payload[0].company_name;
                             this.street = response.data.payload[0].streetName;
                             this.loc_nr = response.data.payload[0].flatNr;
                             this.house_nr = response.data.payload[0].homeNr;

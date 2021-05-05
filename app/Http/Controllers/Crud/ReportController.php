@@ -16,7 +16,7 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class ReportController extends Controller
 {
-    public function getReport(Request  $request)
+    public function getReport(Request $request)
     {
         $report = Report::find($request->id);
 
@@ -29,14 +29,15 @@ class ReportController extends Controller
     public function deleteReport(Request $request)
     {
         Report::destroy($request->id);
+
         return response()->json([
            'success' => true,
-           'message' => 'Usunięto poprawnie'
+           'message' => 'Usunięto poprawnie',
         ]);
     }
     public function getUserReports()
     {
-        $reports = Report::get();
+        $reports = Auth::user()->reports()->with('files')->get();
 
         return response()->json([
             'success' => true,
@@ -105,9 +106,10 @@ class ReportController extends Controller
         $file->ext = $ext;
         $file->path = 'uploads/' . $fileName;
         $file->original_name = $request->file->getClientOriginalName();
+
         $file->save();
-//        $challenge = Report::find($request->challenge_id);
-//        $challenge->files()->attach($file);
+
+
         return response()->json([
             'success' => true,
             'message' => 'Plik został wgrany poprawnie',
@@ -123,8 +125,13 @@ class ReportController extends Controller
         $report->title = $request->title;
         $report->type = $request->type;
         $report->description = $request->description;
-
+        $report->author_id = Auth::user()->id;
         $report->save();
+
+        $file = File::find($request->file_id);
+        $report->files()->attach($file);
+
+
         return response()->json([
             'success' => true,
             'message' => 'Zgłoszenie zostało dodane poprawnie',
