@@ -89,7 +89,7 @@ export default {
             console.log('IMPORTANT NOW: ');
             console.log(animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value]);
             console.log(object);
-            animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value] = object;
+            animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value].duration = object.duration;
             // console.log('END IMPORTANT NOW: ');
         }
 
