@@ -85,6 +85,12 @@ export default {
             // console.log('END IMPORTANT NOW: ');
         }
 
+        function swapAnimableObjectByIndex(object) {
+            // console.log('IMPORTANT NOW: ');
+            animation.layers[activeLineIndex.value].animable[activeAnimableIndex.value] = toRaw(object);
+            // console.log('END IMPORTANT NOW: ');
+        }
+
         function addLine() {
             animation.layers[animation.layers.length + 1] = {};
         }
@@ -115,11 +121,17 @@ export default {
 
         emitter.on('rightpanelaction', e => {
             console.log(e);
-            if(e.action === 'updateLine' || e.action === 'updateAnimable' ) {
+            if(e.action === 'updateLine' ) {
                 if(activeLineIndex.value == undefined) {
                     activeLineIndex.value = 0;
                 }
                 swapObjectByIndex(activeLineIndex.value, e.data);
+            } else if(e.action === 'updateAnimable') {
+                if(activeAnimableIndex.value == undefined) {
+                    activeAnimableIndex.value = 0;
+                }
+                swapAnimableObjectByIndex(e.data);
+
             }
             console.log('FINAL EMIT');
             updateAnimationUnity();

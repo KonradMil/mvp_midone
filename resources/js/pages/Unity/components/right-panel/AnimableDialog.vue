@@ -36,8 +36,6 @@ export default {
             } else {
                 l.value.duration = 1;
             }
-
-            l.value.index = props.label.index;
         });
 
         return {

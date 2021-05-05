@@ -84,7 +84,7 @@ export default {
             } else if (content.value === 'comment') {
                 emitter.emit('unityoutgoingaction', { action: 'updateComment', data:comment, json: true });
             } else if (content.value === 'animable') {
-                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable, json: true });
+                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'line') {
                 console.log('HERE IMPORTA');
                 console.log({layers: line.value});
@@ -112,7 +112,7 @@ export default {
         emitter.on('UnityAnimableSettings', e => {
             content.value = 'animable';
             console.log(e);
-            animable.value = e;
+            animable.value = e.data;
             currentTitle.value = 'Ustawienia elementu animacji';
             showPanel();
         });
