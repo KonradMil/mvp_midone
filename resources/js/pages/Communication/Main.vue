@@ -149,6 +149,7 @@
                                         <div class="flex">
                                             <div class="w-10 h-10 image-fit zoom-in">
                                                 File
+<!--                                                {{report.file.original_name}}-->
                                             </div>
                                         </div>
                                     </td>
@@ -163,7 +164,7 @@
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
                                             <a class="flex items-center mr-3" href="javascript:" @click.prevent="$router.push({path: '/report/show/' + report.id })"> <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Podgląd </a>
-                                            <a @click.prevent="DeleteReport(report.id)" class="flex items-center text-theme-6" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                                            <a @click.prevent="del(report)" class="flex items-center text-theme-6" href="" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -384,8 +385,7 @@
                                         >
                                             <div class="flex flex-wrap px-4">
                                                 <Dropzone
-                                                    style="position: relative;
-    display: flex;"
+                                                    style="position: relative; display: flex;"
                                                     ref-key="dropzoneSingleRef"
                                                     :options="{
                                                      url: '/api/report/files/store',
@@ -490,6 +490,7 @@
 
 <script>
 import {onMounted, provide, ref} from "vue";
+import {GoogleMap, Marker} from 'vue3-google-map'
 import cash from "cash-dom";
 import GetUsers from '../../compositions/GetUsers'
 import GetNotifications from '../../compositions/GetNotifications'
@@ -499,14 +500,18 @@ import SaveReport from '../../compositions/SaveReport';
 import DeleteReport from '../../compositions/DeleteReport';
 import Dropzone from '../../global-components/dropzone/Main'
 import {useToast} from "vue-toastification";
+import {useStore} from "../../store";
 import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
 import SaveChallenge from "../../compositions/SaveChallenge";
 
+const store = useStore();
 
 export default {
     name: "Communication",
     components: {
+        GoogleMap,
+        Marker,
         Avatar,
         Modal,
         GetTeams,
@@ -532,17 +537,41 @@ export default {
         const description = ref('');
         const files = ref([]);
         const dropzoneSingleRef = ref();
+        const report_id = ref(null);
+        const file = ref({});
+        const avatar_path = ref();
 
         provide("bind[dropzoneSingleRef]", el => {
             dropzoneSingleRef.value = el;
         });
+
+        const del = async (report) => {
+            axios.post('api/report/user/delete', {id: report.id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        toast.success(response.data.message);
+                        console.log(report);
+
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+            await GetReportsRepositiories();
+        }
+
+
+        const deleteReportRepo = async () => {
+              DeleteReport(report.value.id);
+            await GetReportsRepositiories();
+        }
 
         const saveReportRepo = async () => {
             await SaveReport({
                 title: title.value,
                 description: description.value,
                 type: type.value,
-                files: files.value
+                file: file.value
             });
             await GetReportsRepositiories();
         }
@@ -568,25 +597,31 @@ export default {
         const GetNotificationsReposistories = async() => {
             notifications.value = GetNotifications();
         }
-        onMounted(function () {
+        onMounted( () => {
             GetUsersRepositories('');
             GetNotificationsReposistories('');
             GetTeamsRepositiories('');
+
             GetReportsRepositiories();
-            // const elDropzoneSingleRef = dropzoneSingleRef.value;
-            // console.log(elDropzoneSingleRef);
-            // elDropzoneSingleRef.dropzone.on("success", (resp) => {
-            //     files.value.push(JSON.parse(resp.xhr.response).payload);
-            //
-            // });
-            // elDropzoneSingleRef.dropzone.on("error", () => {
-            //     toast.error("Błąd");
-            // });
+            const elDropzoneSingleRef = dropzoneSingleRef.value;
+            console.log(elDropzoneSingleRef);
+            elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                console.log(resp.xhr.response);
+                file.value = '/uploads/' + JSON.parse(resp.xhr.response).payload;
+                toast.success('Success!');
+            });
+            elDropzoneSingleRef.dropzone.on("error", () => {
+                toast.error("Błąd");
+            });
+            avatar_path.value = '';
+            cash("body")
+                .removeClass("error-page")
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
         })
         return {
+            file,
             users,
             teams,
             user,
@@ -599,12 +634,16 @@ export default {
             modalClosed,
             activeTab,
             saveReportRepo,
+            deleteReportRepo,
             title,
             type,
             description,
             files,
             reports,
             DeleteReport,
+            report_id,
+            del,
+            avatar_path
         }
     },
     beforeRouteEnter(to, from, next) {
