@@ -147,9 +147,8 @@
                                 >
                                     <td class="w-40">
                                         <div class="flex">
-                                            <div class="w-10 h-10 image-fit zoom-in">
-                                                File
-<!--                                                {{report.file.name}}-->
+                                            <div class="w-10 h-10 image-fit zoom-in" v-if="report.files.length != '0'">
+                                                {{ report.files[0].original_name }}
                                             </div>
                                         </div>
                                     </td>
