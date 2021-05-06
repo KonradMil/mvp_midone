@@ -6,6 +6,7 @@
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
     <BottomPanel :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
+    <RightButtons :icons="rightIcons"></RightButtons>
     <RightPanel @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge"></RightPanel>
 </template>
 
@@ -22,6 +23,7 @@ import unityActionOutgoing from './composables/ActionsOutgoing';
 import TopButtons from "./components/TopButtons";
 import BottomPanel from "./components/BottomPanel";
 import RightPanel from "./components/RightPanel";
+import RightButtons from "./components/RightButtons";
 
 const ww = WindowWatcher();
 
@@ -32,7 +34,7 @@ export default {
         load: Object,
         id: Number
     },
-    components: {RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
+    components: {RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
     setup(props, {emit}) {
         //GLOBAL
         const app = getCurrentInstance();
@@ -54,8 +56,9 @@ export default {
         const unity_path = ref('/s3/unity/AssemBrot20_04_ver2.json');
         const window_width = ref('100%');
         const window_height = ref(0);
-        const leftIcons = ref([])
-        const topIcons = ref([])
+        const rightIcons = ref([]);
+        const leftIcons = ref([]);
+        const topIcons = ref([]);
         const unityActionOutgoingObject = ref({});
         const currentRadialMenu = ref([]);
         const radialMenuEdit = ref([]);
@@ -265,6 +268,8 @@ export default {
                 .addClass("p-0");
             const li = require("../../json/unity_left_buttons.json");
             leftIcons.value = li.icons;
+            const ri = require("../../json/unity_right_buttons.json");
+            rightIcons.value = ri.icons;
             const ti = require("../../json/unity_top_buttons.json");
             topIcons.value = ti.icons;
             radialMenuAnimation.value = require("../../json/radial_animation.json");
@@ -289,6 +294,7 @@ export default {
             gameWindow,
             leftIcons,
             topIcons,
+            rightIcons,
             mode,
             openMenu,
             lockInput,
