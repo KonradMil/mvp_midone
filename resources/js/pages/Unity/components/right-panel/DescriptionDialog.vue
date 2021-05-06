@@ -24,23 +24,26 @@ import {onMounted, ref, watch} from "vue";
 
 export default {
     name: "DescriptionDialog",
+    props: {
+        object: Object
+    },
     setup(props, context) {
-        const c = ref({message: '', title: ''});
+        const c = ref({description: '', title: ''});
         watch(c, (ca, prevLabel) => {
             console.log('CHANGE');
             context.emit("update:comment", ca);
         }, {deep: true})
         onMounted(() => {
-            if (props.comment.message != undefined && props.comment.message != '') {
-                c.value.message = props.comment.message;
-            } else {
-                c.value.message = '';
-            }
-
-            if (props.comment.title != undefined && props.comment.title != '') {
-                c.value.title = props.comment.title;
+            if (props.object.title != undefined && props.object.title != '') {
+                c.value.title = props.object.title;
             } else {
                 c.value.title = '';
+            }
+
+            if (props.object.description != undefined && props.object.description != '') {
+                c.value.description = props.object.description;
+            } else {
+                c.value.description = '';
             }
         });
 
