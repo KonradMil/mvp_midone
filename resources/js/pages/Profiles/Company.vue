@@ -1,12 +1,12 @@
 <template>
-      <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+      <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5" v-for="company in companies" :key="company.id">
             <div class="intro-y col-span-12 sm:col-span-6">
                 <label for="input-wizard-1" class="form-label">{{$t('profiles.companyName')}}</label>
                 <input
                     id="input-wizard-1"
                     type="text"
                     class="form-control"
-                    v-model="name"
+                    v-model="company.company_name"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -15,7 +15,7 @@
                     id="input-wizard-2"
                     type="text"
                     class="form-control"
-                    v-model="nip"
+                    v-model="company.nip"
                 />
                 <button class="btn btn-primary w-1/4 mt-2" @click="searchNip">{{$t('profiles.searchFor')}} NIP</button>
             </div>
@@ -25,7 +25,7 @@
                     id="input-wizard-3"
                     type="text"
                     class="form-control"
-                    v-model="regon"
+                    v-model="company.regon"
                 />
                 <button class="btn btn-primary w-1/4 mt-2" @click="searchRegon">{{$t('profiles.searchFor')}} REGON</button>
             </div>
@@ -35,7 +35,7 @@
                     id="input-wizard-4"
                     type="text"
                     class="form-control"
-                    v-model="krs"
+                    v-model="company.krs"
                 />
                 <button class="btn btn-primary w-1/4 mt-2" @click="searchKRS">{{$t('profiles.searchFor')}} KRS</button>
             </div>
@@ -45,7 +45,7 @@
                     id="input-wizard-5"
                     type="text"
                     class="form-control"
-                    v-model="city"
+                    v-model="company.city"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -54,7 +54,7 @@
                     id="input-wizard-6"
                     type="text"
                     class="form-control"
-                    v-model="street"
+                    v-model="company.street"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -63,7 +63,7 @@
                     id="input-wizard-7"
                     type="text"
                     class="form-control"
-                    v-model="house_nr"
+                    v-model="company.house_nr"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -72,7 +72,7 @@
                     id="input-wizard-8"
                     type="text"
                     class="form-control"
-                    v-model="loc_nr"
+                    v-model="company.loc_nr"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -81,7 +81,7 @@
                     id="input-wizard-9"
                     type="text"
                     class="form-control"
-                    v-model="postcode"
+                    v-model="company.postcode"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -90,7 +90,7 @@
                     id="input-wizard-10"
                     type="text"
                     class="form-control"
-                    v-model="loc_nr"
+                    v-model="company.loc_nr"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -99,7 +99,7 @@
                     id="input-wizard-11"
                     type="text"
                     class="form-control"
-                    v-model="voivodeship"
+                    v-model="company.voivodeship"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -108,7 +108,7 @@
                     id="input-wizard-12"
                     type="text"
                     class="form-control"
-                    v-model="country"
+                    v-model="company.country"
                 />
             </div>
             <div
@@ -120,9 +120,11 @@
 </template>
 
 <script>
-import {defineComponent, onMounted} from "vue";
+import {defineComponent, onMounted, ref} from "vue";
 import DarkModeSwitcher from "../../components/dark-mode-switcher/Main.vue";
 import cash from "cash-dom";
+import GetTeams from "../../compositions/GetTeams";
+import GetCompanies from "../../compositions/GetCompanies"
 import {useToast} from "vue-toastification";
 
 const toast = useToast();
@@ -132,14 +134,32 @@ export default {
         DarkModeSwitcher
     },
     setup() {
+        const user = window.Laravel.user;
+        const teams = ref([]);
+        // const companies = ref([]);
+
+        // const getCompaniesRepositories = async () =>{
+        //     companies.value = GetCompanies();
+        // }
+        const getTeamsRepositories = async () => {
+            teams.value = GetTeams();
+            console.log(teams.value);
+        }
         onMounted(() => {
+            // getCompaniesRepositories('');
+            getTeamsRepositories('');
             cash("body")
                 .removeClass("error-page")
 
         });
+        return {
+            teams,
+            // companies
+        }
     },
     data() {
         return {
+            companies: [],
             name: '',
             krs: '',
             nip: '',
@@ -153,6 +173,18 @@ export default {
             country: '',
             error: null
         }
+    },
+    created(){
+         this.$axios.get('/sanctum/csrf-cookie').then(response=>{
+           this.$axios.get('api/company/get')
+             .then(response => {
+                  this.companies = response.data.payload
+                  console.log(response.data);
+             })
+             .catch(function (error){
+                 console.log(error);
+             });
+         })
     },
     methods: {
         handleSubmit() {

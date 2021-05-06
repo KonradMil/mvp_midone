@@ -316,25 +316,6 @@ export default defineComponent({
             error: null,
             name: "",
             lastname: "",
-            // avatar_path: '',
-            minLength: 3,
-            privacy_policy: '',
-            pricing: '',
-            terms:'',
-            company_name: '',
-            krs: '',
-            nip: '',
-            regon: '',
-            city: '',
-            street: '',
-            loc_nr: '',
-            house_nr: '',
-            postcode: '',
-            voivodeship: '',
-            country: '',
-            password: '',
-            passwordNew: '',
-            passwordNewConfirm: ''
         }
     },
     methods: {
@@ -353,31 +334,6 @@ export default defineComponent({
                 //     this.toast.error(error);
                 // });
             })
-        },
-        changePassword() {
-            if (this.passwordNew === this.passwordNewConfirm) {
-                this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                    this.$axios.post('api/profile/change-password', {
-                        password: this.password,
-                        passwordNew: this.passwordNew,
-                    })
-                        .then(response => {
-                            console.log(response.data)
-                            if (response.data.success) {
-                                toast.success('Success');
-                                let user = response.data.payload;
-                                store.dispatch('login/login', {
-                                    user
-                                });
-                            } else {
-                                toast.error("Error!");
-                            }
-                        })
-                    // .catch(function (error) {
-                    //     this.toast.error(error);
-                    // });
-                })
-            }
         },
         saveCompany(){
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
