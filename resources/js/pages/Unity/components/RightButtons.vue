@@ -1,5 +1,5 @@
 <template>
-    <div class="flex fixed h-full z-50 pt-14">
+    <div class="flex fixed h-full z-50 pt-14" style="top: 0; right: 0;">
         <div class="flex-1 pt-2 mr-10">
             <div v-for="(icon, index) in icons" :key="'rightIcon_' + index">
                 <UnityButton :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="icon.value" position="rightbuttonclick" />
