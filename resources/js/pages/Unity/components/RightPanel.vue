@@ -109,7 +109,7 @@ export default {
 
         const object = computed(() => {
             if(type.value == 'challenge') {
-                return props.object;
+                return props.challenge;
             } else if(type.value == 'solution') {
 
             }
