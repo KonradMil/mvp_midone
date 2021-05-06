@@ -34,6 +34,18 @@ export default {
                 case 'description':
                     emitter.emit('DescriptionDialog', { val: '' });
                     break;
+                case 'settings':
+                    emitter.emit('DescriptionDialog', { val: '' });
+                    break;
+                case 'operational':
+                    emitter.emit('DescriptionDialog', { val: '' });
+                    break;
+                case 'operationalanalysis':
+                    emitter.emit('DescriptionDialog', { val: '' });
+                    break;
+                case 'financial':
+                    emitter.emit('DescriptionDialog', { val: '' });
+                    break;
             }
         }
     }
