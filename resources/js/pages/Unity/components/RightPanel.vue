@@ -108,10 +108,12 @@ export default {
         }
 
         const object = computed(() => {
-            if(type.value == 'challenge') {
+            if(props.type == 'challenge') {
                 return props.challenge;
-            } else if(type.value == 'solution') {
+            } else if(props.type == 'solution') {
 
+            } else {
+                console.log(type.value)
             }
         });
 
