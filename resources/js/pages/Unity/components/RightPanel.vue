@@ -32,6 +32,10 @@
                     <DescriptionDialog v-if="content == 'description'" :object="object"/>
                     <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>
                     <TeamsDialog v-if="content == 'teams'"></TeamsDialog>
+                    <FinancialAnalysisDialog v-if="content == 'financial'"></FinancialAnalysisDialog>
+                    <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
+                    <OperationDialog v-if="content == 'operational'"></OperationDialog>
+                    <SettingsDialog v-if="content == 'settings'"></SettingsDialog>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
@@ -66,10 +70,18 @@ import AnimableDialog from "./right-panel/AnimableDialog";
 import DescriptionDialog from "./right-panel/DescriptionDialog";
 import MultiplayerDialog from "./right-panel/TeamsDialog";
 import TeamsDialog from "./right-panel/TeamsDialog";
+import FinancialAnalysisDialog from "./right-panel/FinancialAnalysisDialog";
+import OperationalAnalysisDialog from "./right-panel/OperationalAnalysisDialog";
+import OperationDialog from "./right-panel/OperationDialog";
+import SettingsDialog from "./right-panel/SettingsDialog";
 
 export default {
     name: "RightPanel",
     components: {
+        SettingsDialog,
+        OperationDialog,
+        OperationalAnalysisDialog,
+        FinancialAnalysisDialog,
         TeamsDialog,
         MultiplayerDialog,
         DescriptionDialog, LayoutDialog, CommentDialog, LabelDialog, LineDialog, AnimableDialog},
@@ -99,6 +111,18 @@ export default {
             } else if (content.value === 'comment') {
                 emitter.emit('unityoutgoingaction', { action: 'updateComment', data:comment, json: true });
             } else if (content.value === 'animable') {
+                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+            } else if (content.value === 'teams') {
+                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+            } else if (content.value === 'description') {
+                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+            } else if (content.value === 'multiplayer') {
+                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+            } else if (content.value === 'operational') {
+                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+            } else if (content.value === 'financial') {
+                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+            } else if (content.value === 'settings') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'line') {
                 console.log('HERE IMPORTA');
