@@ -21,10 +21,20 @@ export default {
     setup() {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
-        const category = ref(null);
         emitter.on('rightbuttonclick', e =>  handleChange(e.val) );
         const handleChange = (val) => {
             console.log(val);
+            switch(val) {
+                case 'teams':
+                    emitter.emit('TeamsDialog', { val: '' });
+                    break;
+                case 'multiplayer':
+                    emitter.emit('MultiplayerDialog', { val: '' });
+                    break;
+                case 'description':
+                    emitter.emit('DescriptionDialog', { val: '' });
+                    break;
+            }
         }
     }
 }

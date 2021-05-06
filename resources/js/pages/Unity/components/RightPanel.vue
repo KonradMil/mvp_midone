@@ -30,6 +30,7 @@
                     <LineDialog v-if="content == 'line'" v-model:line="line"/>
                     <AnimableDialog v-if="content == 'animable'" v-model:animable="animable"/>
                     <DescriptionDialog v-if="content == 'description'" :object="object"/>
+                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
@@ -62,10 +63,13 @@ import LayoutDialog from "./right-panel/LayoutDialog";
 import LineDialog from "./right-panel/LineDialog";
 import AnimableDialog from "./right-panel/AnimableDialog";
 import DescriptionDialog from "./right-panel/DescriptionDialog";
+import MultiplayerDialog from "./right-panel/TeamsDialog";
 
 export default {
     name: "RightPanel",
-    components: {DescriptionDialog, LayoutDialog, CommentDialog, LabelDialog, LineDialog, AnimableDialog},
+    components: {
+        MultiplayerDialog,
+        DescriptionDialog, LayoutDialog, CommentDialog, LabelDialog, LineDialog, AnimableDialog},
     props: {
         challenge: Object,
         type: String
@@ -156,6 +160,30 @@ export default {
             showPanel();
         });
 
+        emitter.on('TeamsDialog', e => {
+            content.value = 'teams';
+            currentTitle.value = 'Zespoły';
+            showPanel();
+        });
+
+        emitter.on('MultiplayerDialog', e => {
+            content.value = 'multiplayer';
+            currentTitle.value = 'Współpraca w czasie rzeczywistym';
+            showPanel();
+        });
+
+        emitter.on('DescriptionDialog', e => {
+            content.value = 'description';
+            currentTitle.value = 'Ustawienia podstawowe';
+            showPanel();
+        });
+
+        emitter.on('OperationalAnalysisDialog', e => {
+
+        });
+        emitter.on('OperationDialog', e => {
+
+        });
 
         onMounted(() => {
             // showPanel();

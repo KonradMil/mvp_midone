@@ -23,7 +23,7 @@
 import {onMounted, ref, watch} from "vue";
 
 export default {
-    name: "MultiplayerDialog",
+    name: "TeamsDialog",
     props: {
       comment: Object
     },
