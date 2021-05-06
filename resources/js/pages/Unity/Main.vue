@@ -5,8 +5,8 @@
     <div @contextmenu.prevent="openMenu">
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
-    <BottomPanel :mode="mode" v-model:animationSave="animationSave" ></BottomPanel>
-        <RightPanel @mouseover.native="lockInput" @mouseleave.native="unlockInput"></RightPanel>
+    <BottomPanel :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
+    <RightPanel @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge"></RightPanel>
 </template>
 
 <script>
@@ -28,9 +28,9 @@ const ww = WindowWatcher();
 export default {
     name: "Main",
     props: {
-      type: String,
+        type: String,
         load: Object,
-      id: Number
+        id: Number
     },
     components: {RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
     setup(props, {emit}) {
@@ -49,6 +49,7 @@ export default {
         const mousePositionY = ref(0);
         const mousePositionX = ref(0);
         const initialLoad = ref({});
+        const challenge = ref({});
         //EXTERNAL
         const unity_path = ref('/s3/unity/AssemBrot20_04_ver2.json');
         const window_width = ref('100%');
@@ -73,7 +74,6 @@ export default {
             handleUnityActionOutgoing(e);
         });
 
-
         //HANDLES ALL UNITY ACTIONS
         emitter.on('gridsizechange', e => {
             handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
@@ -81,7 +81,7 @@ export default {
 
         //HANDLES ALL LAYOUT ACTIONS
         emitter.on('layoutbuttonclick', e => {
-            switch(e.val){
+            switch (e.val) {
                 case "edit":
                     handleUnityActionOutgoing({action: "beginLayoutEdit", data: ''});
                     break;
@@ -108,32 +108,32 @@ export default {
         }
 
         const openMenu = (e) => {
-                e.preventDefault();
-                console.log('RIGHT CLICK');
-                console.log(e);
-                if(loaded.value) {
-                    if (doubleClick.value) {
-                        if ((mousePositionX.value > (e.clientX - 10) && mousePositionX.value < (e.clientX + 10)) && (mousePositionY.value > (e.clientY - 10) && mousePositionY.value < (e.clientY + 19))) {
-                           let data = JSON.stringify({menu: currentRadialMenu.value});
-                           console.log(data);
-                            console.log('RIGHT CLICK SHOW');
-                            handleUnityActionOutgoing({action: 'showRadialMenu', data: data});
-                        } else {
-                            doubleClick.value = false;
-                        }
+            e.preventDefault();
+            console.log('RIGHT CLICK');
+            console.log(e);
+            if (loaded.value) {
+                if (doubleClick.value) {
+                    if ((mousePositionX.value > (e.clientX - 10) && mousePositionX.value < (e.clientX + 10)) && (mousePositionY.value > (e.clientY - 10) && mousePositionY.value < (e.clientY + 19))) {
+                        let data = JSON.stringify({menu: currentRadialMenu.value});
+                        console.log(data);
+                        console.log('RIGHT CLICK SHOW');
+                        handleUnityActionOutgoing({action: 'showRadialMenu', data: data});
                     } else {
-                        console.log('ONE CLICK');
-                        mousePositionX.value = e.clientX;
-                        mousePositionY.value = e.clientY;
-                        doubleClick.value = true;
-                        handleUnityActionOutgoing({action: 'closeRadialMenu', data: ''});
-                        setTimeout(function () {
-                            doubleClick.value = false;
-                        }, 1000);
+                        doubleClick.value = false;
                     }
-
-
+                } else {
+                    console.log('ONE CLICK');
+                    mousePositionX.value = e.clientX;
+                    mousePositionY.value = e.clientY;
+                    doubleClick.value = true;
+                    handleUnityActionOutgoing({action: 'closeRadialMenu', data: ''});
+                    setTimeout(function () {
+                        doubleClick.value = false;
+                    }, 1000);
                 }
+
+
+            }
         }
 
         const changeMode = (mode) => {
@@ -212,7 +212,10 @@ export default {
                 // gameWindow.value.message('NetworkBridge', 'SetHangarApperance', 1);
                 // gameWindow.value.message('NetworkBridge', 'UnlockUnityInput');
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
-                handleUnityActionOutgoing({action: 'setSessionId', data: Number(Math.random().toString().substr(3, length) + Date.now()).toString(36)});
+                handleUnityActionOutgoing({
+                    action: 'setSessionId',
+                    data: Number(Math.random().toString().substr(3, length) + Date.now()).toString(36)
+                });
                 // handleUnityActionOutgoing({action: 'setHangarAppearance', data: 1});
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
                 console.log('GET ME');
@@ -238,9 +241,13 @@ export default {
                         console.log("response.data.payload");
                         console.log(response.data.payload);
                         console.log(JSON.parse(response.data.payload.save_json));
+                        challenge.value = response.data.payload;
                         initialLoad.value = JSON.parse(response.data.payload.save_json);
                         animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
-                        handleUnityActionOutgoing({action: 'loadStructure', data: JSON.parse(response.data.payload.save_json)});
+                        handleUnityActionOutgoing({
+                            action: 'loadStructure',
+                            data: JSON.parse(response.data.payload.save_json)
+                        });
                         // console.log('EMIT LOAD');
                         // emitter.emit('saveLoaded', {save: (response.data.payload)});
                     } else {
@@ -271,6 +278,7 @@ export default {
         });
 
         return {
+            challenge,
             initialLoad,
             type,
             id,

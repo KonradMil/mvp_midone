@@ -29,6 +29,7 @@
                     <LayoutDialog v-if="content == 'layout'" v-model:layout="layout"/>
                     <LineDialog v-if="content == 'line'" v-model:line="line"/>
                     <AnimableDialog v-if="content == 'animable'" v-model:animable="animable"/>
+                    <DescriptionDialog v-if="content == 'description'" :object="object"/>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
@@ -53,18 +54,23 @@
 </template>
 
 <script>
-import {getCurrentInstance, onMounted, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, ref} from "vue";
 import cash from "cash-dom";
 import LabelDialog from "./right-panel/LabelDialog";
 import CommentDialog from "./right-panel/CommentDialog";
 import LayoutDialog from "./right-panel/LayoutDialog";
 import LineDialog from "./right-panel/LineDialog";
 import AnimableDialog from "./right-panel/AnimableDialog";
+import DescriptionDialog from "./right-panel/DescriptionDialog";
 
 export default {
     name: "RightPanel",
-    components: {LayoutDialog, CommentDialog, LabelDialog, LineDialog, AnimableDialog},
-    setup() {
+    components: {DescriptionDialog, LayoutDialog, CommentDialog, LabelDialog, LineDialog, AnimableDialog},
+    props: {
+        challenge: Object,
+        type: String
+    },
+    setup(props) {
         //GLOBAL
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
@@ -75,6 +81,8 @@ export default {
         const animable = ref({});
         const currentTitle = ref('');
         const content = ref('');
+        const challenge = ref({});
+        const type = ref('');
 
         const save = () => {
             if(content.value === 'label') {
@@ -91,6 +99,14 @@ export default {
                 emitter.emit('rightpanelaction', { action: 'updateLine', data:{layers: line.value}, json: true });
             }
         }
+
+        const object = computed(() => {
+            if(type.value == 'challenge') {
+                return props.object;
+            } else if(type.value == 'solution') {
+
+            }
+        });
 
         const showPanel = () => {
             cash("#right-panel").modal("show");
@@ -153,7 +169,10 @@ export default {
             content,
             save,
             line,
-            animable
+            animable,
+            challenge,
+            type,
+            object
         }
     }
 }
