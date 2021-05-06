@@ -31,6 +31,7 @@
                     <AnimableDialog v-if="content == 'animable'" v-model:animable="animable"/>
                     <DescriptionDialog v-if="content == 'description'" :object="object"/>
                     <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>
+                    <TeamsDialog v-if="content == 'teams'"></TeamsDialog>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
@@ -64,10 +65,12 @@ import LineDialog from "./right-panel/LineDialog";
 import AnimableDialog from "./right-panel/AnimableDialog";
 import DescriptionDialog from "./right-panel/DescriptionDialog";
 import MultiplayerDialog from "./right-panel/TeamsDialog";
+import TeamsDialog from "./right-panel/TeamsDialog";
 
 export default {
     name: "RightPanel",
     components: {
+        TeamsDialog,
         MultiplayerDialog,
         DescriptionDialog, LayoutDialog, CommentDialog, LabelDialog, LineDialog, AnimableDialog},
     props: {
