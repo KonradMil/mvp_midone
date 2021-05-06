@@ -1,6 +1,6 @@
 <template>
     <div class="flex fixed h-full z-50 pt-14">
-        <div class="flex-1 pt-2 ml-10">
+        <div class="flex-1 pt-2 mr-10">
             <div v-for="(icon, index) in icons" :key="'rightIcon_' + index">
                 <UnityButton :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="icon.value" position="rightbuttonclick" />
             </div>
