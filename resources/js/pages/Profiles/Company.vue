@@ -124,7 +124,6 @@ import {defineComponent, onMounted, ref} from "vue";
 import DarkModeSwitcher from "../../components/dark-mode-switcher/Main.vue";
 import cash from "cash-dom";
 import GetTeams from "../../compositions/GetTeams";
-import GetCompanies from "../../compositions/GetCompanies"
 import {useToast} from "vue-toastification";
 
 const toast = useToast();
