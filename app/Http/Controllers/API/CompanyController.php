@@ -24,4 +24,14 @@ class CompanyController extends Controller
             'payload' => $company
         ]);
     }
+    public function getUserCompanies()
+    {
+        $company = Auth::user()->load('companies');
+
+        return response()->json([
+           'success' => true,
+           'message' => 'Pobrano poprawnie',
+           'payload' => $company->companies
+        ]);
+    }
 }

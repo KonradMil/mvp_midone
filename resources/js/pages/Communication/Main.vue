@@ -16,29 +16,6 @@
                             <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'questions') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''"  @click.prevent="activeTab = 'questions'"> <i class="w-4 h-4 mr-2" data-feather="inbox"></i> {{$t('communication.questions')}}</a>
                             <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'reports') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'reports'"> <i class="w-4 h-4 mr-2" data-feather="send"></i>{{$t('communication.reports')}}</a>
                         </div>
-<!--                        <div class="border-t border-theme-3 dark:border-dark-5 mt-4 pt-4 text-white">-->
-<!--                            <a href="" class="flex items-center px-3 py-2 truncate">-->
-<!--                                <div class="w-2 h-2 bg-theme-11 rounded-full mr-3"></div>-->
-<!--                                Custom Work-->
-<!--                            </a>-->
-<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
-<!--                                <div class="w-2 h-2 bg-theme-9 rounded-full mr-3"></div>-->
-<!--                                Important Meetings-->
-<!--                            </a>-->
-<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
-<!--                                <div class="w-2 h-2 bg-theme-12 rounded-full mr-3"></div>-->
-<!--                                Work-->
-<!--                            </a>-->
-<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
-<!--                                <div class="w-2 h-2 bg-theme-11 rounded-full mr-3"></div>-->
-<!--                                Design-->
-<!--                            </a>-->
-<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate">-->
-<!--                                <div class="w-2 h-2 bg-theme-6 rounded-full mr-3"></div>-->
-<!--                                Next Week-->
-<!--                            </a>-->
-<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md truncate"> <i class="w-4 h-4 mr-2" data-feather="plus"></i> Add New Label </a>-->
-<!--                        </div>-->
                     </div>
                     <!-- END: Inbox Menu -->
                 </div>
@@ -143,33 +120,23 @@
                                 <Report class="intro-x"
                                         v-for="(report, index) in reports.list"
                                         :key="'team_' + index"
-                                            :ind="index"
-                                        :report="report"></Report>
+                                        :ind="index"
+                                        :report="report">
+
+                                </Report>
                                 </tbody>
                             </table>
                         </div>
 
                         <div class="overflow-x-auto sm:overflow-x-visible"  :class="(activeTab==='notifications')? '':'hidden'"
-                             v-for="(notification, index) in notifications.list"
-                             :key="'notification_' + index"
                         >
-                            <div class="intro-y" >
-                                <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
-                                    <div class="flex px-5 py-3">
-                                        <div class="w-72 flex-none flex items-center mr-5">
-                                            <input class="form-check-input flex-none" type="checkbox" checked>
-                                            <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
-                                            <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
-                                            <div class="w-6 h-6 flex-none image-fit relative ml-5">
-                                                <Avatar :src="'uploads/' + notification.data.author.avatar" :username="notification.data.author.name + ' ' + notification.data.author.lastname" size="30" color="#FFF" background-color="#930f68"/>
-                                            </div>
-                                            <div class="inbox__item--sender truncate ml-3">{{notification.data.author.name + ' ' + notification.data.author.lastname}}</div>
-                                        </div>
-                                        <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">{{notification.data.message}}</span> <button v-if="notification.data.link != undefined" type="button" class="btn ml-5" @click="$router.push({path: notification.data.link})">{{$t('communication.goTo')}}</button> </div>
-                                        <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">{{$dayjs(notification.created_at).format('DD.MM.YYYY HH:mm')}}</div>
-                                    </div>
-                                </div>
-                            </div>
+                            <Notifications class="intro-y"
+                                 v-for="(notification, index) in notifications.list"
+                                 :key="'notification_' + index"
+                                 :ind="index"
+                                 :notification="notification"
+                            >
+                            </Notifications>
                         </div>
                         <div class="intro-y col-span-12 overflow-auto lg:overflow-visible"  :class="(activeTab==='teams')? '':'hidden'">
                             <table class="table table-report -mt-2">
@@ -183,9 +150,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="intro-x"
+                                <Teams class="intro-x"
                                     v-for="(team, index) in teams.list"
-                                    :key="'team_' + index" >
+                                    :key="'team_' + index"
+                                    :ind="index"
+                                    :team="team"
+                                >
                                     <td class="w-40">
                                         <div class="flex">
                                             <div class="w-10 h-10 image-fit zoom-in">
@@ -207,87 +177,13 @@
                                             <a @click.prevent="$router.push({path: '/user/team/delete/' + team.id})" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
                                         </div>
                                     </td>
-                                </tr>
+                                </Teams>
                                 </tbody>
                             </table>
-                        </div>
-
-                        <!--                        <div class="overflow-x-auto sm:overflow-x-visible" v-if="activeTab === 'teams'"-->
-<!--                        >-->
-<!--                                                         <div class="intro-y" >-->
-<!--                                <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">-->
-<!--                                    <div class="flex px-5 py-3">-->
-<!--                                        <div class="w-72 flex-none flex items-center mr-5">-->
-<!--                                            <input class="form-check-input flex-none" type="checkbox" checked>-->
-<!--                                            <a href="javascript:" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>-->
-<!--                                            <a href="javascript:" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>-->
-<!--                                            <div class="w-6 h-6 flex-none image-fit relative ml-5">-->
-<!--                                            </div>-->
-<!--                                            <div class="inbox__item&#45;&#45;sender truncate ml-3"></div>-->
-<!--                                        </div>-->
-<!--                                        <div class="w-64 sm:w-auto truncate"> <span class="inbox__item&#45;&#45;highlight"></span> <button type="button" class="btn ml-5" >{{$t('communication.goTo')}}</button> </div>-->
-<!--                                        <div class="inbox__item&#45;&#45;time whitespace-nowrap ml-auto pl-10">asdsaffa</div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            asdsadsadad-->
-<!--                        </div>-->
-                        <div
-                            v-for="(team, index) in teams.list"
-                            :key="'team_' + index"
-                            class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12"
-                            v-if="activeTab==='teams2'"
-                        >
-                            <div class="box">
-                                <div class="flex flex-col lg:flex-row items-center p-5">
-                                    <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                                        <Avatar :username="team.name" color="#FFF" background-color="#930f68"/>
-                                    </div>
-                                    <div
-                                        class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0"
-                                    >
-                                        <a href="" class="font-medium">{{ team.name }}</a>
-                                        <div class="text-gray-600 text-xs mt-0.5">
-                                            Utworzono: {{ $dayjs(team.created_at).format('DD.MM.YYYY HH:mm') }}
-                                        </div>
-                                        <div class="text-gray-600 text-xs mt-0.5">
-                                            Członków: {{ team.users.length }}
-                                        </div>
-                                    </div>
-                                    <div class="flex mt-4 lg:mt-0">
-                                        <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
-                                            {{$t('teams.details')}}
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="flex flex-col lg:flex-row items-center p-5" v-if="showDetails[team.id] === true">
-                                    <div class="intro-y box w-full">
-                                        <div class="p-5">
-                                            <div v-for="(member, index) in team.users" class="relative flex items-center" :key="'member_' + index">
-                                                <div class="w-12 h-12 flex-none image-fit">
-                                                    <Avatar :src="'uploads/' + member.avatar" :username="member.name + ' ' + member.lastname" size="40" color="#FFF" background-color="#930f68"/>
-                                                </div>
-                                                <div class="ml-4 mr-auto">
-                                                    <a href="" class="font-medium">{{ member.name + ' ' + member.lastname }}</a>
-                                                    <div class="text-gray-600 mr-5 sm:mr-5" v-if="member.companies.length != 0">
-                                                        {{member.companies[0].company_name}}
-                                                    </div>
-                                                </div>
-                                                <div class="font-medium text-gray-700 dark:text-gray-600">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="intro-y box p-5"  :class="(activeTab==='report')? '':'hidden'">
                             <AddReport></AddReport>
                         </div>
-                        <!--                        <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">-->
-<!--                            asdsadsadsa-->
-<!--                        </div>-->
                     </div>
                     <!-- END: Inbox Content -->
                 </div>
@@ -296,64 +192,6 @@
 
        <!-- END: Content -->
     </div>
-<!--    <Modal :show="show" @closed="modalClosed">-->
-<!--    <div class="modal-dialog">-->
-<!--        <div class="modal-content">-->
-<!--            &lt;!&ndash; BEGIN: Modal Header &ndash;&gt;-->
-<!--            <div class="modal-header">-->
-<!--                <h2 class="font-medium text-base mr-auto">-->
-<!--                    Broadcast Message-->
-<!--                </h2>-->
-<!--                <button class="btn btn-outline-secondary hidden sm:flex"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </button>-->
-<!--                <div class="dropdown sm:hidden">-->
-<!--                    <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false"> <i data-feather="more-horizontal" class="w-5 h-5 text-gray-600 dark:text-gray-600"></i> </a>-->
-<!--                    <div class="dropdown-menu w-40">-->
-<!--                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">-->
-<!--                            <a href="javascript:;" class="flex items-center p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Download Docs </a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            &lt;!&ndash; END: Modal Header &ndash;&gt;-->
-<!--            &lt;!&ndash; BEGIN: Modal Body &ndash;&gt;-->
-<!--            <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">-->
-<!--                <div class="col-span-12 sm:col-span-6">-->
-<!--                    <label for="modal-form-1" class="form-label">Tytuł</label>-->
-<!--                    <input id="modal-form-1" type="text" class="form-control" placeholder="example@gmail.com">-->
-<!--                </div>-->
-<!--                <div class="col-span-12 sm:col-span-6 pb-5">-->
-<!--                    <label for="modal-form-3" class="form-label">Czego dotyczy</label>-->
-<!--                    <input id="modal-form-3" type="text" class="form-control" placeholder="Important Meeting">-->
-<!--                </div>-->
-<!--                <div class="col-span-12 sm:col-span-6">-->
-<!--                    <label for="modal-form-4" class="form-label">Opis</label>-->
-<!--                    <input id="modal-form-4" type="text" class="form-control" placeholder="Job, Work, Documentation">-->
-<!--                </div>-->
-<!--                <div class="col-span-12 sm:col-span-6">-->
-<!--                    <label for="modal-form-5" class="form-label">Doesn't Have</label>-->
-<!--                    <input id="modal-form-5" type="text" class="form-control" placeholder="Job, Work, Documentation">-->
-<!--                </div>-->
-<!--                <div class="col-span-12 sm:col-span-6">-->
-<!--                    <label for="modal-form-6" class="form-label">Size</label>-->
-<!--                    <select id="modal-form-6" class="form-select">-->
-<!--                        <option>10</option>-->
-<!--                        <option>25</option>-->
-<!--                        <option>35</option>-->
-<!--                        <option>50</option>-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            &lt;!&ndash; END: Modal Body &ndash;&gt;-->
-<!--            &lt;!&ndash; BEGIN: Modal Footer &ndash;&gt;-->
-<!--            <div class="modal-footer text-right">-->
-<!--                <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1" @click="modalClosed">Cancel</button>-->
-<!--                <button type="button" class="btn btn-primary w-20">Send</button>-->
-<!--            </div>-->
-<!--            &lt;!&ndash; END: Modal Footer &ndash;&gt;-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    </Modal>-->
-
 </template>
 
 <script>
@@ -368,15 +206,19 @@ import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
 import Report from "./Report";
 import AddReport from "./AddReport";
+import Notifications from "./Notifications";
+import Teams from "./Teams";
 
 const store = useStore();
 
 export default {
     name: "Communication",
     components: {
+        Teams,
         Report,
         Avatar,
         Modal,
+        Notifications,
         GetTeams,
         GetUsers,
         GetReports,

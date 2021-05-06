@@ -13,7 +13,7 @@
                         id="change-password-form-1"
                         type="password"
                         class="form-control"
-                        placeholder="Input text"
+                        placeholder=""
                         v-model="password"
                     >
                 </div>
@@ -23,7 +23,7 @@
                         id="change-password-form-2"
                         type="password"
                         class="form-control"
-                        placeholder="Input text"
+                        placeholder=""
                         v-model="passwordNew"
                     >
                 </div>
@@ -33,7 +33,7 @@
                         id="change-password-form-3"
                         type="password"
                         class="form-control"
-                        placeholder="Input text"
+                        placeholder=""
                         v-model="passwordNewConfirm"
                     >
                 </div>

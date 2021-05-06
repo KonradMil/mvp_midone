@@ -34,6 +34,7 @@ Route::group(['prefix' => 'company', 'middleware' => 'auth:sanctum'], function (
     Route::post('search/nip', 'App\Http\Controllers\TerytController@searchRegonNip');
     Route::post('search/krs', 'App\Http\Controllers\TerytController@searchRegonKrs');
     Route::post('create', 'App\Http\Controllers\API\CompanyController@saveCompany');
+    Route::get('get', '\App\Http\Controllers\API\CompanyController@getUserCompanies');
 });
 
 Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function () {
