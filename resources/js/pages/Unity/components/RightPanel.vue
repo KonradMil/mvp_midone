@@ -29,7 +29,7 @@
                     <LayoutDialog v-if="content == 'layout'" v-model:layout="layout"/>
                     <LineDialog v-if="content == 'line'" v-model:line="line"/>
                     <AnimableDialog v-if="content == 'animable'" v-model:animable="animable"/>
-                    <DescriptionDialog v-if="content == 'description'" :object="object"/>
+                    <DescriptionDialog v-if="content == 'description'" v-model:object="object"/>
                     <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>
                     <TeamsDialog v-if="content == 'teams'"></TeamsDialog>
                     <FinancialAnalysisDialog v-if="content == 'financial'"></FinancialAnalysisDialog>
@@ -74,6 +74,7 @@ import FinancialAnalysisDialog from "./right-panel/FinancialAnalysisDialog";
 import OperationalAnalysisDialog from "./right-panel/OperationalAnalysisDialog";
 import OperationDialog from "./right-panel/OperationDialog";
 import SettingsDialog from "./right-panel/SettingsDialog";
+import SaveChallengeDescription from "../../../compositions/SaveChallengeDescription";
 
 export default {
     name: "RightPanel",
@@ -115,7 +116,7 @@ export default {
             } else if (content.value === 'teams') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'description') {
-                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+               saveChallengeRepo({name: challenge.name, description: challenge.description});
             } else if (content.value === 'multiplayer') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'operational') {
@@ -139,6 +140,8 @@ export default {
             } else {
                 console.log(type.value)
             }
+        }, () => {
+
         });
 
         const showPanel = () => {
@@ -217,6 +220,21 @@ export default {
         onMounted(() => {
             // showPanel();
         });
+
+        const saveChallengeRepo = async (data) => {
+            SaveChallengeDescription({
+                name: data.name,
+                description: data.description,
+            });
+        }
+
+        const addTeam = () => {
+
+        };
+
+        const removeTeam = () => {
+
+        };
 
         return {
             currentTitle,
