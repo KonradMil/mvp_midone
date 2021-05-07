@@ -119,7 +119,7 @@
                                 <tbody>
                                 <Report class="intro-x"
                                         v-for="(report, index) in reports.list"
-                                        :key="'team_' + index"
+                                        :key="'report_' + index"
                                         :ind="index"
                                         :report="report">
 
@@ -213,6 +213,9 @@ const store = useStore();
 
 export default {
     name: "Communication",
+    props :{
+        activeTab: String,
+    },
     components: {
         Teams,
         Report,
