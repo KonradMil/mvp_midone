@@ -29,7 +29,13 @@
                     <LayoutDialog v-if="content == 'layout'" v-model:layout="layout"/>
                     <LineDialog v-if="content == 'line'" v-model:line="line"/>
                     <AnimableDialog v-if="content == 'animable'" v-model:animable="animable"/>
-                    <DescriptionDialog v-if="content == 'description'" :object="object"/>
+                    <DescriptionDialog v-if="content == 'description'" v-model:object="object"/>
+                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>
+                    <TeamsDialog v-if="content == 'teams'"></TeamsDialog>
+                    <FinancialAnalysisDialog v-if="content == 'financial'"></FinancialAnalysisDialog>
+                    <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
+                    <OperationDialog v-if="content == 'operational'"></OperationDialog>
+                    <SettingsDialog v-if="content == 'settings'"></SettingsDialog>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
@@ -62,10 +68,24 @@ import LayoutDialog from "./right-panel/LayoutDialog";
 import LineDialog from "./right-panel/LineDialog";
 import AnimableDialog from "./right-panel/AnimableDialog";
 import DescriptionDialog from "./right-panel/DescriptionDialog";
+import MultiplayerDialog from "./right-panel/TeamsDialog";
+import TeamsDialog from "./right-panel/TeamsDialog";
+import FinancialAnalysisDialog from "./right-panel/FinancialAnalysisDialog";
+import OperationalAnalysisDialog from "./right-panel/OperationalAnalysisDialog";
+import OperationDialog from "./right-panel/OperationDialog";
+import SettingsDialog from "./right-panel/SettingsDialog";
+import SaveChallengeDescription from "../../../compositions/SaveChallengeDescription";
 
 export default {
     name: "RightPanel",
-    components: {DescriptionDialog, LayoutDialog, CommentDialog, LabelDialog, LineDialog, AnimableDialog},
+    components: {
+        SettingsDialog,
+        OperationDialog,
+        OperationalAnalysisDialog,
+        FinancialAnalysisDialog,
+        TeamsDialog,
+        MultiplayerDialog,
+        DescriptionDialog, LayoutDialog, CommentDialog, LabelDialog, LineDialog, AnimableDialog},
     props: {
         challenge: Object,
         type: String
@@ -93,6 +113,18 @@ export default {
                 emitter.emit('unityoutgoingaction', { action: 'updateComment', data:comment, json: true });
             } else if (content.value === 'animable') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+            } else if (content.value === 'teams') {
+                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+            } else if (content.value === 'description') {
+               saveChallengeRepo({name: challenge.name, description: challenge.description});
+            } else if (content.value === 'multiplayer') {
+                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+            } else if (content.value === 'operational') {
+                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+            } else if (content.value === 'financial') {
+                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+            } else if (content.value === 'settings') {
+                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'line') {
                 console.log('HERE IMPORTA');
                 console.log({layers: line.value});
@@ -101,11 +133,15 @@ export default {
         }
 
         const object = computed(() => {
-            if(type.value == 'challenge') {
-                return props.object;
-            } else if(type.value == 'solution') {
+            if(props.type == 'challenge') {
+                return props.challenge;
+            } else if(props.type == 'solution') {
 
+            } else {
+                console.log(type.value)
             }
+        }, () => {
+
         });
 
         const showPanel = () => {
@@ -156,10 +192,49 @@ export default {
             showPanel();
         });
 
+        emitter.on('TeamsDialog', e => {
+            content.value = 'teams';
+            currentTitle.value = 'Zespoły';
+            showPanel();
+        });
+
+        emitter.on('MultiplayerDialog', e => {
+            content.value = 'multiplayer';
+            currentTitle.value = 'Współpraca w czasie rzeczywistym';
+            showPanel();
+        });
+
+        emitter.on('DescriptionDialog', e => {
+            content.value = 'description';
+            currentTitle.value = 'Ustawienia podstawowe';
+            showPanel();
+        });
+
+        emitter.on('OperationalAnalysisDialog', e => {
+
+        });
+        emitter.on('OperationDialog', e => {
+
+        });
 
         onMounted(() => {
             // showPanel();
         });
+
+        const saveChallengeRepo = async (data) => {
+            SaveChallengeDescription({
+                name: data.name,
+                description: data.description,
+            });
+        }
+
+        const addTeam = () => {
+
+        };
+
+        const removeTeam = () => {
+
+        };
 
         return {
             currentTitle,

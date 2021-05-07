@@ -1,16 +1,16 @@
 <template>
     <div class="mt-3">
-        <label for="modal-form-1" class="form-label">Tytuł</label>
-        <input
-            id="modal-form-1"
-            type="text"
-            class="form-control"
-            placeholder=""
-            v-model="c.title"
-        />
+        <label for="modal-form-1" class="form-label">Zespoły</label>
+<!--        <input-->
+<!--            id="modal-form-1"-->
+<!--            type="text"-->
+<!--            class="form-control"-->
+<!--            placeholder=""-->
+<!--            v-model="c.title"-->
+<!--        />-->
     </div>
     <div class="mt-3">
-        <label for="modal-form-2" class="form-label">Komentarz</label>
+        <label for="modal-form-2" class="form-label">Wiadomości</label>
         <textarea
             id="modal-form-2"
             class="form-control"
@@ -23,33 +23,18 @@
 import {onMounted, ref, watch} from "vue";
 
 export default {
-    name: "MultiplayerDialog",
+    name: "TeamsDialog",
     props: {
       comment: Object
     },
-    emits: ["update:comment"],
     setup(props, context) {
-        const c = ref({message: '', title: ''});
+        const c = ref({message: '', addedTeams: [], teams: []});
         watch(c, (ca, prevLabel) => {
             console.log('CHANGE');
             context.emit("update:comment", ca);
         }, {deep: true})
         onMounted(() => {
-            if (props.comment.message != undefined && props.comment.message != '') {
-                c.value.message = props.comment.message;
-            } else {
-                c.value.message = '';
-            }
 
-            if (props.comment.title != undefined && props.comment.title != '') {
-                c.value.title = props.comment.title;
-            } else {
-                c.value.title = '';
-            }
-
-            c.value.index = props.comment.index;
-            c.value.labelPosition = props.comment.commentPosition;
-            c.value.labelRotation = props.comment.commentRotation;
         });
 
         return {

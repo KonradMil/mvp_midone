@@ -18,7 +18,25 @@
             "alttext": "",
             "value": 2
         },
-        "positioning": {
+        "settings": {
+            "src": "\/s3/builder_icons/positioning_simple.png",
+            "tooltip": "",
+            "alttext": "",
+            "value": 3
+        },
+        "financial": {
+            "src": "\/s3/builder_icons/positioning_simple.png",
+            "tooltip": "",
+            "alttext": "",
+            "value": 3
+        },
+        "operational": {
+            "src": "\/s3/builder_icons/positioning_simple.png",
+            "tooltip": "",
+            "alttext": "",
+            "value": 3
+        },
+        "operationalanalysis": {
             "src": "\/s3/builder_icons/positioning_simple.png",
             "tooltip": "",
             "alttext": "",

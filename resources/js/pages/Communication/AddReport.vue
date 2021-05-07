@@ -137,7 +137,7 @@ export default {
                 file_id : file.value.id
             }, handleCallback);
             console.log(resp);
-            // emitter.emit('addreport', {obj: resp});
+            emitter.emit('changetab', {val: 'reports'});
 
         }
 

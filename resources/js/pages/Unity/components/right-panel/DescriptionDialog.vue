@@ -6,7 +6,7 @@
             type="text"
             class="form-control"
             placeholder=""
-            v-model="c.title"
+            v-model="c.name"
         />
     </div>
     <div class="mt-3">
@@ -28,16 +28,16 @@ export default {
         object: Object
     },
     setup(props, context) {
-        const c = ref({description: '', title: ''});
+        const c = ref({description: '', name: ''});
         watch(c, (ca, prevLabel) => {
             console.log('CHANGE');
             context.emit("update:comment", ca);
         }, {deep: true})
         onMounted(() => {
-            if (props.object.title != undefined && props.object.title != '') {
-                c.value.title = props.object.title;
+            if (props.object.name != undefined && props.object.name != '') {
+                c.value.name = props.object.name;
             } else {
-                c.value.title = '';
+                c.value.name = '';
             }
 
             if (props.object.description != undefined && props.object.description != '') {

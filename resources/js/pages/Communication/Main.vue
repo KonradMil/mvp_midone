@@ -241,7 +241,9 @@ export default {
         const reports = ref([]);
         const report_id = ref(null);
 
-
+        emitter.on('changetab', e => {
+            activeTab.value = e.val;
+        });
 
         emitter.on('deletereport', e => {
            reports.value.list.splice(e.index, 1);
