@@ -229,7 +229,7 @@ export default {
         object: Object
     },
     setup(props, context) {
-        const c = ref(null);
+        const c = ref({description: '', name: '', solution_deadline: '', offer_deadline: ''});
 
         const types = require("../../../../json/types.json");
         const tagss = require("../../../../json/tagsChallenge.json");
@@ -240,7 +240,7 @@ export default {
             context.emit("update:comment", ca);
         }, {deep: true})
         onMounted(() => {
-            c.value = props.object
+            c.value = props.object.value
             // if (props.object.name != undefined && props.object.name != '') {
             //     c.value.name = props.object.name;
             // } else {
