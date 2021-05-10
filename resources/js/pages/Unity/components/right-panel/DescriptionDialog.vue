@@ -181,7 +181,7 @@
 <!--        </div>-->
 <!--    </div>-->
     <div class="mt-3">
-        <label for="modal-form-3" class="form-label">Tytuł</label>
+        <label for="modal-form-3" class="form-label">Solution deadline</label>
         <input
             id="modal-form-3"
             type="text"
@@ -191,7 +191,7 @@
         />
     </div>
     <div class="mt-3">
-        <label for="modal-form-4" class="form-label">Tytuł</label>
+        <label for="modal-form-4" class="form-label">Offer deadline</label>
         <input
             id="modal-form-4"
             type="text"
