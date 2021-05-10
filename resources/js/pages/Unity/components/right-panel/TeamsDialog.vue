@@ -12,7 +12,7 @@
                        search: false,
                 hideSelected: true,
                 hideDisabled: true,
-                multiLimit: 15,
+                multiLimit: 3,
                 multiShowCount: false,
                 multiContainer: true,
                 classNames: 'w-full'
