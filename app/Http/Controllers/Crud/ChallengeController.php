@@ -58,8 +58,9 @@ class ChallengeController extends Controller
         } else  if(Auth::user()->type == 'inwestor') {
             $challenges = Auth::user()->challenges()->get();
         } else {
-            $challenges = Challenge::get();
+            $challenges = Challenge::with('technicalDetails')->get();
         }
+
 
         return response()->json([
             'success' => true,
@@ -164,7 +165,7 @@ class ChallengeController extends Controller
         $challenge->type = $request->type;
         $challenge->solution_deadline = Carbon::createFromFormat('d.m.Y', $request->solution_deadline);
         $challenge->offer_deadline = Carbon::createFromFormat('d.m.Y', $request->offer_deadline);
-        $challenge->allowed_publishing = $request->allowed_publishing;
+        $challenge->allowed_publishing = $request-> allowed_publishing;
         $challenge->financial_before_id = $financial->id;
         $challenge->author_id = Auth::user()->id;
         $challenge->screenshot_path = 'screenshots/dbr_placeholder.jpeg';
