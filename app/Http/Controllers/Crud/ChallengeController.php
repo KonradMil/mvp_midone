@@ -61,7 +61,6 @@ class ChallengeController extends Controller
             $challenges = Auth::user()->challenges()->with('technicalDetails')->get();
         }
 
-
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
@@ -94,7 +93,7 @@ class ChallengeController extends Controller
             $query->where('favourite', '=', 1);
         }
 
-        $challenges = $query->with('comments', 'comments.commentator')->get();
+        $challenges = $query->with('comments',   'comments.commentator')->with('technicalDetails')->get();
 
         foreach ($challenges as $challenge) {
             if(Auth::user()->viaLoveReacter()->hasReactedTo($challenge)){
