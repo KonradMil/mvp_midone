@@ -93,7 +93,7 @@ class ChallengeController extends Controller
             $query->where('favourite', '=', 1);
         }
 
-        $challenges = $query->with('comments',   'comments.commentator')->with('technicalDetails')->get();
+        $challenges = $query->with(['comments.commentator', 'technicalDetails'])->get();
 
         foreach ($challenges as $challenge) {
             if(Auth::user()->viaLoveReacter()->hasReactedTo($challenge)){
