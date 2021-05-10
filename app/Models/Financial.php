@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Challenges\Challenge;
+use App\Models\Solutions\Solution;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,4 +20,14 @@ class Financial extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function challenges()
+    {
+           return $this->hasMany(Challenge::class);
+    }
+    public function solutions()
+    {
+        return $this->hasMany(Solution::class);
+    }
+
 }
