@@ -93,7 +93,7 @@
                     </div>
                     <a href="" class="block font-medium text-base mt-5"></a>
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
-                        {{ challenge.description }}
+                        {{ challenge.technical_details[0].detail_pick }}
                     </div>
                 </div>
                 <div
