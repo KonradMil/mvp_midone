@@ -29,7 +29,6 @@
                         </label>
                         <TailSelect
                             id="input-wizard-2"
-                            v-model="select_pick_quality"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>Wybierz...</option>
@@ -44,7 +43,6 @@
                         <label for="input-wizard-3" class="form-label">{{$t('challengesNew.detail')}}</label>
                         <TailSelect
                             id="input-wizard-3"
-                            v-model="select_detail_material"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>{{$t('challengesNew.select')}}</option>
@@ -59,7 +57,6 @@
                         <label for="input-wizard-4" class="form-label">{{$t('challengesNew.size')}}</label>
                         <TailSelect
                             id="input-wizard-4"
-                            v-model="select_detail_size"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>{{$t('challengesNew.select')}}</option>
@@ -75,7 +72,6 @@
                         </label>
                         <TailSelect
                             id="input-wizard-5"
-                            v-model="select_detail_pick"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
@@ -91,7 +87,6 @@
                         </label>
                         <TailSelect
                             id="input-wizard-6"
-                            v-model="select_detail_position"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
@@ -108,7 +103,6 @@
                         </label>
                         <TailSelect
                             id="input-wizard-7"
-                            v-model="select_detail_range"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
@@ -124,7 +118,6 @@
                         </label>
                         <TailSelect
                             id="input-wizard-8"
-                            v-model="select_detail_destination"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
@@ -141,7 +134,6 @@
                         </label>
                         <TailSelect
                             id="input-wizard-9"
-                            v-model="select_number_of_lines"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', openAbove: false, animate: false, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>{{$t('challengesNew.select')}}</option>
@@ -156,13 +148,11 @@
                         <label for="input-wizard-10" class="form-label">{{$t('challengesNew.changeNumber')}}</label>
                         <Multiselect
                             class="w-full h-8 z-50"
-                            v-model="select_work_shifts"
                             mode="single"
                             label="name"
                             max="1"
                             placeholder="Wybierz"
                             valueProp="value"
-                            :options="challengeSelects.select_work_shifts"
                         />
 
 
