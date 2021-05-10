@@ -38,7 +38,7 @@ Route::group(['prefix' => 'company', 'middleware' => 'auth:sanctum'], function (
 });
 
 Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function () {
-    Route::post('user/get', [ChallengeController::class, 'getUserChallenges']);
+    Route::post('user/get', [ChallengeController::class, 'getUserChallengesFiltered']);
     Route::post('user/get/card', [ChallengeController::class, 'getCardData']);
     Route::post('user/create', [ChallengeController::class, 'createChallenge']);
     Route::post('user/save', [ChallengeController::class, 'saveChallenge']);
