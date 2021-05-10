@@ -4,6 +4,7 @@ namespace App\Models\Challenges;
 
 use App\Models\File;
 use App\Models\Solutions\Solution;
+use App\Models\TechnicalDetails;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
@@ -43,7 +44,9 @@ class Challenge extends Model implements ReactableInterface
 //        return $this->belongsToMany(Team::class, 'teams_challenges');
 //    }
 
-
+    public function technicalDetails(){
+        return $this->hasMany(TechnicalDetails::class);
+    }
 
     public function files()
     {
