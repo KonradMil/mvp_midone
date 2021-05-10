@@ -240,18 +240,27 @@ export default {
             context.emit("update:comment", ca);
         }, {deep: true})
         onMounted(() => {
-            c.value = props.object.value
-            // if (props.object.name != undefined && props.object.name != '') {
-            //     c.value.name = props.object.name;
-            // } else {
-            //     c.value.name = '';
-            // }
-            //
-            // if (props.object.description != undefined && props.object.description != '') {
-            //     c.value.description = props.object.description;
-            // } else {
-            //     c.value.description = '';
-            // }
+            if (props.object.name != undefined && props.object.name != '') {
+                c.value.name = props.object.name;
+            } else {
+                c.value.name = '';
+            }
+
+            if (props.object.description != undefined && props.object.description != '') {
+                c.value.description = props.object.description;
+            } else {
+                c.value.description = '';
+            }
+            if (props.object.solution_deadline != undefined && props.object.solution_deadline != '') {
+                c.value.solution_deadline = props.object.solution_deadline;
+            } else {
+                c.value.solution_deadline = '';
+            }
+            if (props.object.offer_deadline != undefined && props.object.offer_deadline != '') {
+                c.value.offer_deadline = props.object.offer_deadline;
+            } else {
+                c.value.offer_deadline = '';
+            }
         });
 
         return {
