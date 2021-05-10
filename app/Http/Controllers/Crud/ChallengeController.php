@@ -58,7 +58,7 @@ class ChallengeController extends Controller
         } else  if(Auth::user()->type == 'inwestor') {
             $challenges = Auth::user()->challenges()->get();
         } else {
-            $challenges = Challenge::with('technicalDetails')->get();
+            $challenges = Auth::user()->challenges()->with('technicalDetails')->get();
         }
 
 
