@@ -77,7 +77,7 @@
                                     class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
                                 >
                                     <div class="text-gray-700 dark:text-gray-600 mt-2">
-                                        {{ sels.select_detail_pick.find(i => i.value === challenges.technical_details.detail_pick).name }}                                    </div>
+                                        {{ sels.select_detail_pick.find(i => i.value === challenge.technical_details.detail_pick).name }}                                    </div>
                                     <TrashIcon class="w-4 h-4 mr-2"/>
                                     {{ $t('challengesMain.deletePost') }}
                                 </a>
