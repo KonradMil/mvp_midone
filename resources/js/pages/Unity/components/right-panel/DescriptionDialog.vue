@@ -70,7 +70,7 @@ export default {
             context.emit("update:comment", ca);
         }, {deep: true})
         onMounted(() => {
-
+           c.value = props.object
             // if (props.object.name != undefined && props.object.name != '') {
             //     c.value.name = props.object.name;
             // } else {
