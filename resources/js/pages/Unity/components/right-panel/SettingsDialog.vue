@@ -198,7 +198,7 @@ export default {
             select_detail_pick.value = sels.select_detail_pick.find(i => i.value === object.technical_details.detail_pick).name
             c.value = props.object
             select_work_shifts.value = sels.select_work_shifts;
-            console.log(select_work_shifts);
+            console.log("-------------"+select_work_shifts.value);
         });
 
         return {
