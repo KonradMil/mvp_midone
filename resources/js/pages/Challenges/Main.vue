@@ -76,6 +76,9 @@
                                     href=""
                                     class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
                                 >
+                                    <div class="text-gray-700 dark:text-gray-600 mt-2">
+                                        {{ challenge.description }}
+                                    </div>
                                     <TrashIcon class="w-4 h-4 mr-2"/>
                                     {{ $t('challengesMain.deletePost') }}
                                 </a>
