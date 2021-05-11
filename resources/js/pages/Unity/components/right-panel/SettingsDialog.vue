@@ -155,21 +155,21 @@
                             max="1"
                             placeholder=""
                             valueProp="value"
-                            :options="select_work_shifts"
+                            :options="sels.select_work_shifts"
                         />
 
 
-                                                                        <TailSelect
-                                                                            id="input-wizard-10"
-                                                                            :options="{locale: 'pl', placeholder: sels.select_work_shifts.find(i => i.value === object.technical_details.work_shifts).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
-                                                                        >
-                                                                            <option selected disabled>{{$t('challengesNew.select')}}</option>
-                                                                            <option
-                                                                                v-for="(det,index) in sels.select_work_shifts"
-                                                                                :value="det.value">{{ det.name }}
-                                                                            </option>
+<!--                                                                        <TailSelect-->
+<!--                                                                            id="input-wizard-10"-->
+<!--                                                                            :options="{locale: 'pl', placeholder: sels.select_work_shifts.find(i => i.value === object.technical_details.work_shifts).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"-->
+<!--                                                                        >-->
+<!--                                                                            <option selected disabled>{{$t('challengesNew.select')}}</option>-->
+<!--                                                                            <option-->
+<!--                                                                                v-for="(det,index) in sels.select_work_shifts"-->
+<!--                                                                                :value="det.value">{{ det.name }}-->
+<!--                                                                            </option>-->
 
-                                                                        </TailSelect>
+<!--                                                                        </TailSelect>-->
                     </div>
                 </div>
             </div>
