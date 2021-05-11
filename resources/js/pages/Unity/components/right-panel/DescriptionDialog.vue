@@ -17,9 +17,9 @@
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>Wybierz...</option>
-<!--                            <option v-for="(det,index) in challengeSelects.select_detail_weight"-->
-<!--                                    :value="det.value">{{ det.name }}-->
-<!--                            </option>-->
+                            <option v-for="(det,index) in challengeSelects.select_detail_weight"
+                                    :value="det.value">{{ det.name }}
+                            </option>
 
                         </TailSelect>
                     </div>
@@ -224,7 +224,7 @@ export default {
         const c = ref({description: '', name: '', solution_deadline: '', offer_deadline: ''});
 
         const challengeSelects = ref();
-        const select_detail_weight = ref();
+        // const select_detail_weight = ref();
 
         const types = require("../../../../json/types.json");
         const tagss = require("../../../../json/tagsChallenge.json");
@@ -265,7 +265,7 @@ export default {
             sels,
             tagss,
             types,
-            select_detail_weight,
+            // select_detail_weight,
             challengeSelects
         }
     }
