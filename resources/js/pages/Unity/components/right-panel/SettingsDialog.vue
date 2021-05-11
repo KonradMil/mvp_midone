@@ -146,7 +146,7 @@
 
                         </TailSelect>
                     </div>
-                    <div class="intro-y col-span-12" v-if="select_work_shifts">
+                    <div class="intro-y col-span-12">
                         <label for="input-wizard-10" class="form-label">{{$t('challengesNew.changeNumber')}}</label>
                         <Multiselect
                             class="w-full h-8 z-50"
@@ -159,14 +159,17 @@
                         />
 
 
-<!--                                                                        <TailSelect-->
-<!--                                                                            id="input-wizard-10"-->
-<!--                                                                            v-model="select_work_shifts"-->
-<!--                                                                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"-->
-<!--                                                                        >-->
+                                                                        <TailSelect
+                                                                            id="input-wizard-10"
+                                                                            :options="{locale: 'pl', placeholder: sels.select_work_shifts.find(i => i.value === object.technical_details.work_shifts).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                                                                        >
+                                                                            <option selected disabled>{{$t('challengesNew.select')}}</option>
+                                                                            <option
+                                                                                v-for="(det,index) in sels.select_work_shifts"
+                                                                                :value="det.value">{{ det.name }}
+                                                                            </option>
 
-
-<!--                                                                        </TailSelect>-->
+                                                                        </TailSelect>
                     </div>
                 </div>
             </div>
@@ -176,11 +179,11 @@
 
 <script>
 import {onMounted, ref} from "vue";
-import Multiselect from '@vueform/multiselect'
+// import Multiselect from '@vueform/multiselect'
 
 export default {
     name: "SettingsDialog",
-    components: {Multiselect},
+    // components: {Multiselect},
     props: {
         object: Object
     },
@@ -188,7 +191,6 @@ export default {
         const sels = require("../../../../json/challenge.json");
 
         const select_detail_pick = ref();
-        const select_work_shifts = ref();
 
 
 
@@ -197,14 +199,12 @@ export default {
             challengeSelects.value = sels;
             select_detail_pick.value = sels.select_detail_pick.find(i => i.value === object.technical_details.detail_pick).name
             c.value = props.object
-            select_work_shifts.value = sels.select_work_shifts;
-            console.log("-------------"+select_work_shifts);
+
         });
 
         return {
             sels,
             select_detail_pick,
-            select_work_shifts
         }
     }
 }
