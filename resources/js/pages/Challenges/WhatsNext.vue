@@ -60,7 +60,6 @@ name: "WhatsNext",
             text,
             action,
             buttonText,
-            choose
         }
     }
 }
