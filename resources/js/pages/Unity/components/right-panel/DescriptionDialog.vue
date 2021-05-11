@@ -1,6 +1,7 @@
 <template>
+    <div class="flex">
     <div
-        class="border border-gray-200 dark:border-dark-5 rounded-md p-5"
+        class="border border-gray-200 dark:border-dark-5 rounded-md p-5 flex-initial"
     >
         <div class="mt-5">
             <div
@@ -170,7 +171,8 @@
             </div>
         </div>
     </div>
-    <div class="mt-3">
+    <div class="flex-initial">
+    <div class="mt-3 ">
         <label for="modal-form-3" class="form-label">Solution deadline</label>
         <input
             id="modal-form-3"
@@ -207,6 +209,8 @@
             class="form-control"
             v-model="c.description"
         />
+    </div>
+    </div>
     </div>
 </template>
 
