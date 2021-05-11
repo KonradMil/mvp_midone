@@ -146,7 +146,7 @@
 
                         </TailSelect>
                     </div>
-                    <div class="intro-y col-span-12">
+                    <div class="intro-y col-span-12" v-if="sels.select_work_shifts">
                         <label for="input-wizard-10" class="form-label">{{$t('challengesNew.changeNumber')}}</label>
                         <Multiselect
                             class="w-full h-8 z-50"
@@ -154,6 +154,7 @@
                             label="name"
                             max="1"
                             placeholder=""
+                            valueProp="value"
                             :options="sels.select_work_shifts"
                         />
 
