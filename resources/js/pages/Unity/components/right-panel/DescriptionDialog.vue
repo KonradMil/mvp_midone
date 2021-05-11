@@ -34,9 +34,9 @@
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>Wybierz...</option>
-<!--                            <option v-for="(det,index) in challengeSelects.select_pick_quality"-->
-<!--                                    :value="det.value">{{ det.name }}-->
-<!--                            </option>-->
+                            <option v-for="(det,index) in sels.select_pick_quality"
+                                    :value="det.value">{{ det.name }}
+                            </option>
 
                         </TailSelect>
 
@@ -48,10 +48,10 @@
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>{{$t('challengesNew.select')}}</option>
-<!--                            <option-->
-<!--                                v-for="(det,index) in challengeSelects.select_detail_material"-->
-<!--                                :value="det.value">{{ det.name }}-->
-<!--                            </option>-->
+                            <option
+                                v-for="(det,index) in sels.select_detail_material"
+                                :value="det.value">{{ det.name }}
+                            </option>
 
                         </TailSelect>
                     </div>
@@ -62,9 +62,9 @@
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>{{$t('challengesNew.select')}}</option>
-<!--                            <option v-for="(det,index) in challengeSelects.select_detail_size"-->
-<!--                                    :value="det.value">{{ det.name }}-->
-<!--                            </option>-->
+                            <option v-for="(det,index) in sels.select_detail_size"
+                                    :value="det.value">{{ det.name }}
+                            </option>
 
                         </TailSelect>
                     </div>
@@ -77,9 +77,9 @@
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
-<!--                            <option v-for="(det,index) in challengeSelects.select_detail_pick"-->
-<!--                                    :value="det.value">{{ det.name }}-->
-<!--                            </option>-->
+                            <option v-for="(det,index) in sels.select_detail_pick"
+                                    :value="det.value">{{ det.name }}
+                            </option>
 
                         </TailSelect>
                     </div>
@@ -92,10 +92,10 @@
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
-<!--                            <option-->
-<!--                                v-for="(det,index) in challengeSelects.select_detail_position"-->
-<!--                                :value="det.value">{{ det.name }}-->
-<!--                            </option>-->
+                            <option
+                                v-for="(det,index) in sels.select_detail_position"
+                                :value="det.value">{{ det.name }}
+                            </option>
 
                         </TailSelect>
                     </div>
@@ -108,9 +108,9 @@
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
-<!--                            <option v-for="(det,index) in challengeSelects.select_detail_range"-->
-<!--                                    :value="det.value">{{ det.name }}-->
-<!--                            </option>-->
+                            <option v-for="(det,index) in sels.select_detail_range"
+                                    :value="det.value">{{ det.name }}
+                            </option>
 
                         </TailSelect>
                     </div>
@@ -123,10 +123,10 @@
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
-<!--                            <option-->
-<!--                                v-for="(det,index) in challengeSelects.select_detail_destination"-->
-<!--                                :value="det.value">{{ det.name }}-->
-<!--                            </option>-->
+                            <option
+                                v-for="(det,index) in sels.select_detail_destination"
+                                :value="det.value">{{ det.name }}
+                            </option>
 
                         </TailSelect>
                     </div>
@@ -139,10 +139,10 @@
                             :options="{locale: 'pl', placeholder: 'Wybierz...', openAbove: false, animate: false, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>{{$t('challengesNew.select')}}</option>
-<!--                            <option-->
-<!--                                v-for="(det,index) in challengeSelects.select_number_of_lines"-->
-<!--                                :value="det.value">{{ det.name }}-->
-<!--                            </option>-->
+                            <option
+                                v-for="(det,index) in sels.select_number_of_lines"
+                                :value="det.value">{{ det.name }}
+                            </option>
 
                         </TailSelect>
                     </div>
@@ -155,6 +155,7 @@
                             max="1"
                             placeholder="Wybierz"
                             valueProp="value"
+                            :options="sels.select_work_shifts"
                         />
 
 
