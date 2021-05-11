@@ -16,7 +16,7 @@
                             id="input-wizard-1"
                             v-model="select_detail_pick "
                             :placeholder="select_detail_pick"
-                            :options="{locale: 'pl', placeholder: select_detail_pick, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                            :options="{locale: 'pl', placeholder: sels.select_detail_pick.find(i => i.value === object.technical_details.detail_pick).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>Wybierz...</option>
                             <option v-for="(det,index) in sels.select_detail_weight"
@@ -186,6 +186,7 @@ export default {
         const sels = require("../../../../json/challenge.json");
 
         const select_detail_pick = ref();
+
 
 
         const challengeSelects = ref();
