@@ -22,6 +22,7 @@ class ChallengeController extends Controller
     {
 //        dd($request->data);
         $c = Challenge::find($request->data['id']);
+
         $j = json_decode($request->data['save']['save_json'], true);
         if (!empty($j['screenshot'])) {
 
@@ -199,7 +200,7 @@ class ChallengeController extends Controller
     public function getCardData(Request $request)
     {
         if(isset($request->id)) {
-            $challenge = Challenge::with('solutions', 'author')->find($request->id);
+            $challenge = Challenge::with('solutions', 'author','technicalDetails')->find($request->id);
 
         } else {
             $challenge = NULL;
