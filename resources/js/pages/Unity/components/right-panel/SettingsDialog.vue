@@ -154,7 +154,7 @@
                             mode="single"
                             label="name"
                             :max="1"
-                            :placeholder="sels.select_work_shifts.find(i => i.value === object.technical_details.work_shifts).name"
+                            placeholder="Wybierz..."
                             valueProp="value"
                             :options="sels.select_work_shifts"
                         />
@@ -193,8 +193,7 @@ export default {
 
         // const select_detail_pick = ref();
         const select_work_shifts = ref();
-
-
+        const work = ref();
 
         const challengeSelects = ref();
         onMounted(() => {
