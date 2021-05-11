@@ -153,8 +153,8 @@
                             class="w-full h-8 z-50"
                             mode="single"
                             label="name"
-                            max="1"
-                            placeholder=""
+                            :max="1"
+                            :placeholder="sels.select_work_shifts.find(i => i.value === object.technical_details.work_shifts).name"
                             valueProp="value"
                             :options="sels.select_work_shifts"
                         />
