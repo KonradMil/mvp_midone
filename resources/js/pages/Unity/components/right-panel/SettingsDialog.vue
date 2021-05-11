@@ -178,6 +178,9 @@ import {onMounted, ref} from "vue";
 
 export default {
     name: "SettingsDialog",
+    props: {
+        object: Object
+    },
     setup(props) {
         const sels = require("../../../../json/challenge.json");
 
