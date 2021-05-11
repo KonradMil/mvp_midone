@@ -15,6 +15,7 @@
                         <TailSelect
                             id="input-wizard-1"
                             v-model="select_detail_pick "
+                            :placeholder="select_detail_pick"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>Wybierz...</option>

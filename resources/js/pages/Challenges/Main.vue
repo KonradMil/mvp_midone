@@ -102,8 +102,6 @@
                         class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 mr-2"
                         content="Bookmark"
                     >
-                        <div class="text-gray-700 dark:text-gray-600 mt-2">
-                            {{ sels.select_detail_pick.find(i => i.value === challenge.technical_details.detail_pick).name }}                                    </div>
                         <BookmarkIcon class="w-3 h-3"/>
                     </Tippy>
                     <div class="intro-x flex mr-2">
