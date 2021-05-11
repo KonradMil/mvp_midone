@@ -60,16 +60,6 @@
                                 <img :alt="challenge.name" :src="'/s3/' + challenge.screenshot_path"/>
                             </div>
                         </div>
-                        <div class="h-64 px-2">
-                            <div class="h-full image-fit rounded-md overflow-hidden">
-                                <img alt="Icewall Tailwind HTML Admin Template" :src="require(`../../../../images/${$f()[1].images[1]}`)"/>
-                            </div>
-                        </div>
-                        <div class="h-64 px-2">
-                            <div class="h-full image-fit rounded-md overflow-hidden">
-                                <img alt="Icewall Tailwind HTML Admin Template" :src="require(`../../../../images/${$f()[2].images[2]}`)"/>
-                            </div>
-                        </div>
                     </TinySlider>
                 </div>
             </div>

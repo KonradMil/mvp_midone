@@ -70,7 +70,7 @@
                         </a>
 
                     </div>
-                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex">
+                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id == user.id">
                         <button type="button" class="btn btn-primary py-1 px-2">
                             Edytuj
                         </button>
@@ -90,6 +90,23 @@
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
                         >
                             Odpublikuj
+                        </button>
+                    </div>
+                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id != user.id && user.type == 'integrator'">
+
+                        <button
+                            v-if="challenge.stage == 1"
+                            type="button"
+                            class="btn btn-outline-secondary py-1 px-2 ml-auto"
+                        >
+                            Dodaj rozwiązanie
+                        </button>
+                        <button
+                            v-if="challenge.stage == 2"
+                            type="button"
+                            class="btn btn-outline-secondary py-1 px-2 ml-auto"
+                        >
+                            Złóż ofertę
                         </button>
                     </div>
                 </div>

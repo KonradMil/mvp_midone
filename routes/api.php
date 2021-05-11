@@ -10,6 +10,7 @@ use App\Http\Controllers\Crud\ReportController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\KnowledgebaseController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +56,7 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
 
 
 Route::post('report/show', [ReportController::class, 'getReport']);
+Route::post('search', [SearchController::class, 'search']);
 
 Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function () {
     Route::post('user/get', [ReportController::class, 'getUserReports']);

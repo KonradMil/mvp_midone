@@ -36,85 +36,21 @@
                 <input
                     type="text"
                     style="color: #fff"
+                    v-model="searchTerm"
                     class="search__input form-control border-transparent placeholder-theme-13"
                     :placeholder="$t('global.search')"
-                    @focus="showSearchDropdown"
+                    @keyup.enter="searchMe"
+
                     @blur="hideSearchDropdown"
                 />
+                <!--                    @focus="showSearchDropdown"-->
                 <SearchIcon class="search__icon dark:text-gray-300" style="color: #fff"/>
             </div>
             <a class="notification sm:hidden" href="">
                 <SearchIcon class="notification__icon dark:text-gray-300"/>
             </a>
             <div class="search-result" :class="{ show: searchDropdown }">
-                <div class="search-result__content">
-                    <div class="search-result__content__title">Pages</div>
-                    <div class="mb-5">
-                        <a href="" class="flex items-center">
-                            <div
-                                class="w-8 h-8 bg-theme-18 text-theme-9 flex items-center justify-center rounded-full"
-                            >
-                                <InboxIcon class="w-4 h-4"/>
-                            </div>
-                            <div class="ml-3">Mail Settings</div>
-                        </a>
-                        <a href="" class="flex items-center mt-2">
-                            <div
-                                class="w-8 h-8 bg-theme-17 text-theme-11 flex items-center justify-center rounded-full"
-                            >
-                                <UsersIcon class="w-4 h-4"/>
-                            </div>
-                            <div class="ml-3">Users & Permissions</div>
-                        </a>
-                        <a href="" class="flex items-center mt-2">
-                            <div
-                                class="w-8 h-8 bg-theme-14 text-theme-10 flex items-center justify-center rounded-full"
-                            >
-                                <CreditCardIcon class="w-4 h-4"/>
-                            </div>
-                            <div class="ml-3">Transactions Report</div>
-                        </a>
-                    </div>
-                    <div class="search-result__content__title">Users</div>
-                    <div class="mb-5">
-                        <a
-                            v-for="(faker, fakerKey) in $_.take($f(), 4)"
-                            :key="fakerKey"
-                            href
-                            class="flex items-center mt-2"
-                        >
-                            <div class="w-8 h-8 image-fit">
-                                <Avatar :src="user.avatar_path" :username="user.name + ' ' + user.lastname" color="#FFF"
-                                        background-color="#930f68"/>
-                            </div>
-                            <div class="ml-3">{{ faker.users[0].name }}</div>
-                            <div
-                                class="ml-auto w-48 truncate text-gray-600 text-xs text-right"
-                            >
-                                {{ faker.users[0].email }}
-                            </div>
-                        </a>
-                    </div>
-                    <div class="search-result__content__title">Products</div>
-                    <a
-                        v-for="(faker, fakerKey) in $_.take($f(), 4)"
-                        :key="fakerKey"
-                        href
-                        class="flex items-center mt-2"
-                    >
-                        <div class="w-8 h-8 image-fit">
-                            <img
-                                alt="DBR77 Platforma Robotów "
-                                class="rounded-full"
-                                :src="require(`../../../images/${faker.images[0]}`)"
-                            />
-                        </div>
-                        <div class="ml-3">{{ faker.products[0].name }}</div>
-                        <div class="ml-auto w-48 truncate text-gray-600 text-xs text-right">
-                            {{ faker.products[0].category }}
-                        </div>
-                    </a>
-                </div>
+                <Results :results="results"/>
             </div>
         </div>
         <!-- END: Search -->
@@ -274,16 +210,12 @@ import GetInvites from "../../compositions/GetInvites"
 import { useI18n } from 'vue-i18n'
 import DarkModeSwitcher from "../dark-mode-switcher/Main";
 import {useToast} from "vue-toastification";
+import Results from "./Results";
 
 const toast = useToast();
 
 export default defineComponent({
-    components: {Avatar,DarkModeSwitcher},
-    data() {
-        return {
-            avatar_path: '',
-        }
-    },
+    components: {Results, Avatar,DarkModeSwitcher},
     methods: {
         logout() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
@@ -303,12 +235,6 @@ export default defineComponent({
             })
         }
     },
-    created() {
-        if (window.Laravel.user) {
-            // this.user = window.Laravel.user;
-            this.avatar_path = window.Laravel.user.avatar;
-        }
-    },
     setup() {
         const invites = ref([]);
         const user = window.Laravel.user;
@@ -316,10 +242,24 @@ export default defineComponent({
         const notifications = ref([]);
         const lang = ref('pl');
         const { t, locale } = useI18n({ useScope: 'global' })
-
+        const results = ref({});
+        const searchTerm = ref('');
         const changeLang = () => {
             locale.value = lang.value;
             store.dispatch('main/setCurrentLang', lang.value);
+        }
+
+        const searchMe = () => {
+            axios.post('api/search', {query: searchTerm.value})
+                .then(response => {
+                    if (response.data.success) {
+                        console.log(response.data.payload);
+                     results.value = response.data.payload;
+                        showSearchDropdown();
+                    } else {
+                        toast.error(response.data.message);
+                    }
+                })
         }
 
         watch(() => lang.value, (val) => {
@@ -381,7 +321,10 @@ export default defineComponent({
             notificationsComp,
             changeLang,
             lang,
-            invites
+            invites,
+            searchMe,
+            searchTerm,
+            results
         };
     }
 });
