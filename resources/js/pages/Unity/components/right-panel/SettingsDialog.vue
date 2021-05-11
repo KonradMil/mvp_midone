@@ -155,7 +155,7 @@
                             max="1"
                             placeholder=""
                             valueProp="value"
-                            :options="{...sels.select_work_shifts}"
+                            :options="[...sels.select_work_shifts]"
                         />
 
 
