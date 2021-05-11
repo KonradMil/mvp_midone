@@ -17,9 +17,9 @@
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>Wybierz...</option>
-<!--                            <option v-for="(det,index) in challengeSelects.select_detail_weight"-->
-<!--                                    :value="det.value">{{ det.name }}-->
-<!--                            </option>-->
+                            <option v-for="(det,index) in challengeSelects.select_detail_weight"
+                                    :value="det.value">{{ det.name }}
+                            </option>
 
                         </TailSelect>
                     </div>
@@ -211,6 +211,9 @@
 
 <script>
 import {onMounted, ref, watch} from "vue";
+import Multiselect from '@vueform/multiselect'
+import cash from "cash-dom";
+
 
 export default {
     name: "DescriptionDialog",
@@ -219,6 +222,8 @@ export default {
     },
     setup(props, context) {
         const c = ref({description: '', name: '', solution_deadline: '', offer_deadline: ''});
+
+        const select_detail_weight = ref();
 
         const types = require("../../../../json/types.json");
         const tagss = require("../../../../json/tagsChallenge.json");
@@ -229,6 +234,8 @@ export default {
             context.emit("update:comment", ca);
         }, {deep: true})
         onMounted(() => {
+            challengeSelects.value = sels;
+
             if (props.object.name != undefined && props.object.name != '') {
                 c.value.name = props.object.name;
             } else {
@@ -256,7 +263,9 @@ export default {
             c,
             sels,
             tagss,
-            types
+            types,
+            select_detail_weight,
+            challengeSelects
         }
     }
 }
