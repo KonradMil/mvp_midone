@@ -175,11 +175,11 @@
 
 <script>
 import {onMounted, ref} from "vue";
-import Multiselect from '@vueform/multiselect'
+// import Multiselect from '@vueform/multiselect'
 
 export default {
     name: "SettingsDialog",
-    components: {Multiselect},
+    // components: {Multiselect},
     props: {
         object: Object
     },
