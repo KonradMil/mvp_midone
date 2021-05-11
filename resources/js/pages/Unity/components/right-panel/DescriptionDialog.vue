@@ -17,7 +17,7 @@
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>Wybierz...</option>
-                            <option v-for="(det,index) in challengeSelects.select_detail_weight"
+                            <option v-for="(det,index) in sels.select_detail_weight"
                                     :value="det.value">{{ det.name }}
                             </option>
 
