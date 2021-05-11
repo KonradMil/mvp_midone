@@ -171,7 +171,7 @@
             </div>
         </div>
     </div>
-    <div class="flex-initial">
+    <div class="flex-initial pl-2">
     <div class="mt-3 ">
         <label for="modal-form-3" class="form-label">Solution deadline</label>
         <input
