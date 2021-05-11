@@ -149,6 +149,7 @@
                     <div class="intro-y col-span-12">
                         <label for="input-wizard-10" class="form-label">{{$t('challengesNew.changeNumber')}}</label>
                         <Multiselect
+                            v-model="select_work_shifts"
                             class="w-full h-8 z-50"
                             mode="single"
                             label="name"
@@ -191,6 +192,7 @@ export default {
         const sels = require("../../../../json/challenge.json");
 
         const select_detail_pick = ref();
+        const select_work_shifts = ref();
 
 
 
@@ -204,6 +206,7 @@ export default {
 
         return {
             sels,
+            select_work_shifts,
             select_detail_pick,
         }
     }
