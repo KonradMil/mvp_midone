@@ -96,7 +96,6 @@
                                 v-for="(det,index) in sels.select_detail_position"
                                 :value="det.value">{{ det.name }}
                             </option>
-
                         </TailSelect>
                     </div>
                     <div class="intro-y col-span-12">
