@@ -14,8 +14,9 @@
                         </label>
                         <TailSelect
                             id="input-wizard-1"
-                            v-model="select_detail_weight"
-                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                            v-model="select_detail_pick "
+                            :placeholder="select_detail_pick"
+                            :options="{locale: 'pl', placeholder: sels.select_detail_weight.find(i => i.value === object.technical_details.detail_weight).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>Wybierz...</option>
                             <option v-for="(det,index) in sels.select_detail_weight"
@@ -30,7 +31,7 @@
                         </label>
                         <TailSelect
                             id="input-wizard-2"
-                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                            :options="{locale: 'pl', placeholder: sels.select_pick_quality.find(i => i.value === object.technical_details.pick_quality).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>Wybierz...</option>
                             <option v-for="(det,index) in sels.select_pick_quality"
@@ -44,7 +45,7 @@
                         <label for="input-wizard-3" class="form-label">{{$t('challengesNew.detail')}}</label>
                         <TailSelect
                             id="input-wizard-3"
-                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                            :options="{locale: 'pl', placeholder: sels.select_detail_material.find(i => i.value === object.technical_details.detail_material).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>{{$t('challengesNew.select')}}</option>
                             <option
@@ -58,7 +59,7 @@
                         <label for="input-wizard-4" class="form-label">{{$t('challengesNew.size')}}</label>
                         <TailSelect
                             id="input-wizard-4"
-                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                            :options="{locale: 'pl', placeholder: sels.select_detail_size.find(i => i.value === object.technical_details.detail_size).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>{{$t('challengesNew.select')}}</option>
                             <option v-for="(det,index) in sels.select_detail_size"
@@ -73,7 +74,7 @@
                         </label>
                         <TailSelect
                             id="input-wizard-5"
-                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                            :options="{locale: 'pl', placeholder: sels.select_detail_pick.find(i => i.value === object.technical_details.detail_pick).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
                             <option v-for="(det,index) in sels.select_detail_pick"
@@ -88,14 +89,13 @@
                         </label>
                         <TailSelect
                             id="input-wizard-6"
-                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                            :options="{locale: 'pl', placeholder: sels.select_detail_position.find(i => i.value === object.technical_details.detail_position).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
                             <option
                                 v-for="(det,index) in sels.select_detail_position"
                                 :value="det.value">{{ det.name }}
                             </option>
-
                         </TailSelect>
                     </div>
                     <div class="intro-y col-span-12">
@@ -104,7 +104,7 @@
                         </label>
                         <TailSelect
                             id="input-wizard-7"
-                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                            :options="{locale: 'pl', placeholder: sels.select_detail_range.find(i => i.value === object.technical_details.detail_range).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
                             <option v-for="(det,index) in sels.select_detail_range"
@@ -119,7 +119,7 @@
                         </label>
                         <TailSelect
                             id="input-wizard-8"
-                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                            :options="{locale: 'pl', placeholder: sels.select_detail_destination.find(i => i.value === object.technical_details.detail_destination).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
                             <option
@@ -135,7 +135,7 @@
                         </label>
                         <TailSelect
                             id="input-wizard-9"
-                            :options="{locale: 'pl', placeholder: 'Wybierz...', openAbove: false, animate: false, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                            :options="{locale: 'pl', placeholder: sels.select_number_of_lines.find(i => i.value === object.technical_details.number_of_lines).name, openAbove: false, animate: false, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>{{$t('challengesNew.select')}}</option>
                             <option
@@ -148,24 +148,28 @@
                     <div class="intro-y col-span-12">
                         <label for="input-wizard-10" class="form-label">{{$t('challengesNew.changeNumber')}}</label>
                         <Multiselect
+                            v-model="select_work_shifts"
                             class="w-full h-8 z-50"
                             mode="single"
                             label="name"
-                            max="1"
-                            placeholder="Wybierz"
+                            :max="1"
+                            placeholder="Wybierz..."
                             valueProp="value"
                             :options="sels.select_work_shifts"
                         />
 
 
-                        <!--                                                <TailSelect-->
-                        <!--                                                    id="input-wizard-10"-->
-                        <!--                                                    v-model="select_work_shifts"-->
-                        <!--                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"-->
-                        <!--                                                >-->
+<!--                                                                        <TailSelect-->
+<!--                                                                            id="input-wizard-10"-->
+<!--                                                                            :options="{locale: 'pl', placeholder: sels.select_work_shifts.find(i => i.value === object.technical_details.work_shifts).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"-->
+<!--                                                                        >-->
+<!--                                                                            <option selected disabled>{{$t('challengesNew.select')}}</option>-->
+<!--                                                                            <option-->
+<!--                                                                                v-for="(det,index) in sels.select_work_shifts"-->
+<!--                                                                                :value="det.value">{{ det.name }}-->
+<!--                                                                            </option>-->
 
-
-                        <!--                                                </TailSelect>-->
+<!--                                                                        </TailSelect>-->
                     </div>
                 </div>
             </div>
@@ -175,24 +179,33 @@
 
 <script>
 import {onMounted, ref} from "vue";
+import Multiselect from '@vueform/multiselect'
 
 export default {
     name: "SettingsDialog",
+    components: {Multiselect},
     props: {
         object: Object
     },
     setup(props) {
         const sels = require("../../../../json/challenge.json");
 
+        // const select_detail_pick = ref();
+        const select_work_shifts = ref();
+        const work = ref();
+
         const challengeSelects = ref();
         onMounted(() => {
             challengeSelects.value = sels;
+            // select_detail_pick.value = sels.select_detail_pick.find(i => i.value === object.technical_details.detail_pick).name
+            // c.value = props.object
 
-            c.value = props.object
         });
 
         return {
-            sels
+            sels,
+            select_work_shifts,
+            // select_detail_pick,
         }
     }
 }
