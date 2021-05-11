@@ -138,7 +138,6 @@ export default {
             }, handleCallback);
             console.log(resp);
             emitter.emit('changetab', {val: 'reports'});
-
         }
 
         return {

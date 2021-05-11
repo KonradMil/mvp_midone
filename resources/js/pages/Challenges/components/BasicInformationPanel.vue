@@ -1,0 +1,137 @@
+<template>
+    <div class="col-span-12 lg:col-span-8 xxl:col-span-9">
+        <div class="grid grid-cols-12 gap-6">
+            <!-- BEGIN: Announcement -->
+            <div class="intro-y box col-span-12 xxl:col-span-6">
+                <div
+                    class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5"
+                >
+                    <h2 class="font-medium text-base mr-auto"> Dane podstawowe</h2>
+                </div>
+                <div class="px-5 pt-5">
+                    <div class="font-medium text-lg"><strong>Nazwa:</strong> {{ challenge.name }}</div>
+                    <div class="font-medium text-lg dark:text-theme-10 text-theme-1"><strong>Etap:</strong> {{ stage }}
+                    </div>
+                    <div class="text-gray-700 dark:text-gray-600 mt-2">
+                        <strong>Typ:</strong> {{ types[challenge.type] }}
+                    </div>
+                    <div class="text-gray-700 dark:text-gray-600 mt-2">
+                        <strong>Opis:</strong> {{ challenge.description }}
+                    </div>
+                    <div class="text-gray-700 dark:text-gray-600 mt-2">
+                        <strong>Deadline składania rozwiązań:</strong> {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }}
+                    </div>
+                    <div class="text-gray-700 dark:text-gray-600 mt-2">
+                        <strong>Deadline składania ofert:</strong> {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }}
+                    </div>
+
+                    <div class="flex items-center mt-5">
+                        <div
+                            class="px-3 py-2 bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 rounded font-medium"
+                            v-if="$dayjs().isBefore($dayjs(challenge.offer_deadline))"
+                        >
+                            Następny deadline:
+                            <span v-if="$dayjs().isAfter($dayjs(challenge.solution_deadline))">Składanie rozwiązań do: {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }}</span>
+                            <span v-if="$dayjs().isBefore($dayjs(challenge.solution_deadline))">Składanie ofert do: {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }}</span>
+                        </div>
+                        <button class="btn btn-secondary ml-auto">
+                            Śledź
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Announcement -->
+            <!-- BEGIN: Daily Sales -->
+            <div class="intro-y box col-span-12 xxl:col-span-6">
+                <div
+                    class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5"
+                >
+                    <h2 class="font-medium text-base mr-auto">Zdjęcia</h2>
+                </div>
+                <div class="p-10" v-if="challenge.screenshot_path != undefined">
+                    <TinySlider :options="{
+                            mode: 'gallery',
+                            controls: true,
+                            nav: true,
+                            speed: 500,
+                          }">
+                        <div class="h-64 px-2">
+                            <div class="h-full image-fit rounded-md overflow-hidden">
+                                <img :alt="challenge.name" :src="'/s3/' + challenge.screenshot_path"/>
+                            </div>
+                        </div>
+                        <div class="h-64 px-2">
+                            <div class="h-full image-fit rounded-md overflow-hidden">
+                                <img alt="Icewall Tailwind HTML Admin Template" :src="require(`../../../../images/${$f()[1].images[1]}`)"/>
+                            </div>
+                        </div>
+                        <div class="h-64 px-2">
+                            <div class="h-full image-fit rounded-md overflow-hidden">
+                                <img alt="Icewall Tailwind HTML Admin Template" :src="require(`../../../../images/${$f()[2].images[2]}`)"/>
+                            </div>
+                        </div>
+                    </TinySlider>
+                </div>
+            </div>
+            <!-- END: Daily Sales -->
+
+        </div>
+    </div>
+</template>
+
+<script>
+import {computed, onMounted, reactive, ref} from "vue";
+
+export default {
+    name: "BasicInformationPanel",
+    props: {
+        challenge: Object
+    },
+    setup(props) {
+        const challenge = computed(() => {
+            return props.challenge;
+        });
+        const types = require("../../../json/types.json");
+
+        onMounted(() => {
+
+        });
+
+        const stage = computed(function () {
+            switch (challenge.value.stage) {
+                case 0:
+                    return 'Szkic';
+                    break;
+                case 1:
+                    return 'Oczekiwanie na rozwiązania';
+                    break;
+                case 2:
+                    return 'Oczekiwanie na oferty';
+                    break;
+                case 3:
+                    return 'Podisywanie umowy';
+                    break;
+                case 4:
+                    return 'Planowanie projektu';
+                    break;
+                case 5:
+                    return 'Wdrażanie';
+                    break;
+                case 6:
+                    return 'Fakturowanie';
+                    break;
+            }
+        });
+
+        return {
+            stage,
+            challenge,
+            types
+        }
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

@@ -199,7 +199,7 @@ class ChallengeController extends Controller
     public function getCardData(Request $request)
     {
         if(isset($request->id)) {
-            $challenge = Challenge::with('solutions', 'author')->find($request->id);
+            $challenge = Challenge::with('solutions', 'author', 'technical')->find($request->id);
 
         } else {
             $challenge = NULL;

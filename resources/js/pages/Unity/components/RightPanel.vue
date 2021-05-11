@@ -34,7 +34,7 @@
                     <TeamsDialog v-if="content == 'teams'"></TeamsDialog>
                     <FinancialAnalysisDialog v-if="content == 'financial'"></FinancialAnalysisDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
-                    <OperationDialog v-if="content == 'operational'"></OperationDialog>
+                    <OperationDialog v-if="content == 'operational'" ></OperationDialog>
                     <SettingsDialog v-if="content == 'settings'"></SettingsDialog>
                 </div>
                 <!-- END: Slide Over Body -->

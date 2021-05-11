@@ -19,10 +19,6 @@ class TechnicalDetails extends Model
         'detail_destination', 'number_of_lines', 'cycle_time', 'work_shifts',
     ];
 
-    public function solution()
-    {
-        return $this->belongsTo(Solution::class, 'solution_id');
-    }
 
     public function challenge()
     {

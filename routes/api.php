@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\Crud\ChallengeController;
 use App\Http\Controllers\Crud\ModelController;
+use App\Http\Controllers\Crud\QuestionController;
 use App\Http\Controllers\Crud\SolutionController;
 use App\Http\Controllers\Crud\TeamsController;
 use App\Http\Controllers\Crud\ReportController;
@@ -35,6 +36,11 @@ Route::group(['prefix' => 'company', 'middleware' => 'auth:sanctum'], function (
     Route::post('search/krs', 'App\Http\Controllers\TerytController@searchRegonKrs');
     Route::post('create', 'App\Http\Controllers\API\CompanyController@saveCompany');
     Route::get('get', '\App\Http\Controllers\API\CompanyController@getUserCompanies');
+});
+
+Route::group(['prefix' => 'question', 'middleware' => 'auth:sanctum'], function() {
+   Route::post('create', [QuestionController::class, 'create']);
+   Route::post('get', [QuestionController::class, 'get']);
 });
 
 Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function () {

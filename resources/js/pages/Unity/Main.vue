@@ -134,8 +134,6 @@ export default {
                         doubleClick.value = false;
                     }, 1000);
                 }
-
-
             }
         }
 
@@ -279,7 +277,6 @@ export default {
             mode.value = 'edit';
             type.value = props.type;
             id.value = props.id;
-
         });
 
         return {

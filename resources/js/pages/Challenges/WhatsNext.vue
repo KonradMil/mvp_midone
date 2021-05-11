@@ -31,8 +31,38 @@
 </template>
 
 <script>
+import {computed, onMounted, ref} from "vue";
+
 export default {
-name: "WhatsNext"
+name: "WhatsNext",
+    props: {
+        challenge: Object,
+        user: Object
+    },
+    setup(props) {
+        const title = ref('Następny krok');
+        const text = ref('');
+        const action = ref('');
+        const buttonText = ref('');
+
+
+
+        onMounted(() => {
+           if(props.user.type == 'integrator') {
+
+           } else {
+
+           }
+        });
+
+        return {
+            title,
+            text,
+            action,
+            buttonText,
+            choose
+        }
+    }
 }
 </script>
 
