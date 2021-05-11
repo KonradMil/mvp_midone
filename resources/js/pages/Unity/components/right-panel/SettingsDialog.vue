@@ -184,15 +184,19 @@ export default {
     setup(props) {
         const sels = require("../../../../json/challenge.json");
 
+        const select_detail_pick = ref();
+
+
         const challengeSelects = ref();
         onMounted(() => {
             challengeSelects.value = sels;
-
+            select_detail_pick.value = sels.select_detail_pick.find(i => i.value === object.technical_details.detail_pick).name
             c.value = props.object
         });
 
         return {
-            sels
+            sels,
+            select_detail_pick,
         }
     }
 }
