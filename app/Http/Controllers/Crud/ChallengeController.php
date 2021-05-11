@@ -22,6 +22,7 @@ class ChallengeController extends Controller
     {
 //        dd($request->data);
         $c = Challenge::find($request->data['id']);
+
         $j = json_decode($request->data['save']['save_json'], true);
         if (!empty($j['screenshot'])) {
 
@@ -58,7 +59,7 @@ class ChallengeController extends Controller
         } else  if(Auth::user()->type == 'inwestor') {
             $challenges = Auth::user()->challenges()->get();
         } else {
-            $challenges = Challenge::get();
+            $challenges = Auth::user()->challenges()->with('technicalDetails')->get();
         }
 
         return response()->json([
@@ -93,7 +94,7 @@ class ChallengeController extends Controller
             $query->where('favourite', '=', 1);
         }
 
-        $challenges = $query->with('comments', 'comments.commentator')->get();
+        $challenges = $query->with(['comments.commentator', 'technicalDetails'])->get();
 
         foreach ($challenges as $challenge) {
             if(Auth::user()->viaLoveReacter()->hasReactedTo($challenge)){
@@ -164,7 +165,7 @@ class ChallengeController extends Controller
         $challenge->type = $request->type;
         $challenge->solution_deadline = Carbon::createFromFormat('d.m.Y', $request->solution_deadline);
         $challenge->offer_deadline = Carbon::createFromFormat('d.m.Y', $request->offer_deadline);
-        $challenge->allowed_publishing = $request->allowed_publishing;
+        $challenge->allowed_publishing = $request-> allowed_publishing;
         $challenge->financial_before_id = $financial->id;
         $challenge->author_id = Auth::user()->id;
         $challenge->screenshot_path = 'screenshots/dbr_placeholder.jpeg';
@@ -199,7 +200,7 @@ class ChallengeController extends Controller
     public function getCardData(Request $request)
     {
         if(isset($request->id)) {
-            $challenge = Challenge::with('solutions', 'author', 'technical')->find($request->id);
+            $challenge = Challenge::with('solutions', 'author','technicalDetails')->find($request->id);
 
         } else {
             $challenge = NULL;

@@ -2,6 +2,8 @@
 
 namespace App\Models\Solutions;
 
+use App\Models\Challenges\Challenge;
+use App\Models\Financial;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
@@ -36,7 +38,7 @@ class Solution extends Model implements ReactableInterface
 //        return $this->belongsTo(User::class);
 //    }
 
-    public function challenge()
+    public function challenges()
     {
         return $this->belongsTo(Challenge::class);
     }
@@ -46,10 +48,10 @@ class Solution extends Model implements ReactableInterface
 //        return $this->hasMany(Offer::class);
 //    }
 
-//    public function financial_after()
-//    {
-//        return $this->belongsTo(Financial::class);
-//    }
+    public function financial_after()
+    {
+        return $this->belongsTo(Financial::class);
+    }
 //
 //    public function estimate()
 //    {

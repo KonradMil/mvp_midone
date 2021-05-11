@@ -3,6 +3,7 @@
 namespace App\Models\Challenges;
 
 use App\Models\File;
+use App\Models\Financial;
 use App\Models\Solutions\Solution;
 use App\Models\TechnicalDetails;
 use App\Models\User;
@@ -44,7 +45,9 @@ class Challenge extends Model implements ReactableInterface
 //        return $this->belongsToMany(Team::class, 'teams_challenges');
 //    }
 
-
+    public function technicalDetails(){
+        return $this->hasMany(TechnicalDetails::class);
+    }
 
     public function files()
     {
@@ -71,10 +74,10 @@ class Challenge extends Model implements ReactableInterface
 //        return $this->hasMany(Offer::class);
 //    }
 //
-//    public function financial_before()
-//    {
-//        return $this->belongsTo(Financial::class);
-//    }
+    public function financial_before()
+    {
+        return $this->belongsTo(Financial::class);
+    }
 
     public function technical()
     {
