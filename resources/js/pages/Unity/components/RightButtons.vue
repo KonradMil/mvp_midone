@@ -35,7 +35,7 @@ export default {
                     emitter.emit('DescriptionDialog', { val: '' });
                     break;
                 case 'settings':
-                    emitter.emit('DescriptionDialog', { val: '' });
+                    emitter.emit('SettingsDialog', { val: '' });
                     break;
                 case 'operational':
                     emitter.emit('DescriptionDialog', { val: '' });

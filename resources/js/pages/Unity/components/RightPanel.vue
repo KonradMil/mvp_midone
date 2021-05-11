@@ -213,6 +213,11 @@ export default {
         emitter.on('OperationalAnalysisDialog', e => {
 
         });
+        emitter.on('SettingsDialog', e => {
+            content.value = 'settings';
+            currentTitle.value = 'Dane techiczne';
+            showPanel();
+        });
         emitter.on('OperationDialog', e => {
 
         });

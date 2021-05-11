@@ -1,5 +1,11 @@
 {
     "icons": {
+        "description": {
+            "src": "\/s3/builder_icons/manipulator_simple.png",
+            "tooltip": "",
+            "alttext": "",
+            "value": 2
+        },
         "teams": {
             "src": "\/s3/builder_icons/chair_simple.png",
             "tooltip": "",
@@ -11,12 +17,6 @@
             "tooltip": "",
             "alttext": "",
             "value": 1
-        },
-        "description": {
-            "src": "\/s3/builder_icons/manipulator_simple.png",
-            "tooltip": "",
-            "alttext": "",
-            "value": 2
         },
         "settings": {
             "src": "\/s3/builder_icons/positioning_simple.png",
