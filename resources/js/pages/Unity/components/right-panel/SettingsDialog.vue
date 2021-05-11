@@ -153,20 +153,20 @@
                             mode="single"
                             label="name"
                             max="1"
-                            placeholder="Wybierz"
+                            placeholder=""
                             valueProp="value"
                             :options="sels.select_work_shifts"
                         />
 
 
-                        <!--                                                <TailSelect-->
-                        <!--                                                    id="input-wizard-10"-->
-                        <!--                                                    v-model="select_work_shifts"-->
-                        <!--                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"-->
-                        <!--                                                >-->
+<!--                                                                        <TailSelect-->
+<!--                                                                            id="input-wizard-10"-->
+<!--                                                                            v-model="select_work_shifts"-->
+<!--                                                                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"-->
+<!--                                                                        >-->
 
 
-                        <!--                                                </TailSelect>-->
+<!--                                                                        </TailSelect>-->
                     </div>
                 </div>
             </div>
@@ -176,9 +176,11 @@
 
 <script>
 import {onMounted, ref} from "vue";
+import Multiselect from '@vueform/multiselect'
 
 export default {
     name: "SettingsDialog",
+    components: {Multiselect},
     props: {
         object: Object
     },
