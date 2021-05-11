@@ -223,7 +223,7 @@ export default {
     setup(props, context) {
         const c = ref({description: '', name: '', solution_deadline: '', offer_deadline: ''});
 
-        const challengeSelects = ref();
+        // const challengeSelects = ref();
         const select_detail_weight = ref();
 
         const types = require("../../../../json/types.json");
@@ -266,7 +266,7 @@ export default {
             tagss,
             types,
             select_detail_weight,
-            challengeSelects
+            // challengeSelects
         }
     }
 }
