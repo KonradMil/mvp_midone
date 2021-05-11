@@ -76,8 +76,6 @@
                                     href=""
                                     class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
                                 >
-                                    <div class="text-gray-700 dark:text-gray-600 mt-2">
-                                        {{ sels.select_detail_pick.find(i => i.value === challenge.technical_details.detail_pick).name }}                                    </div>
                                     <TrashIcon class="w-4 h-4 mr-2"/>
                                     {{ $t('challengesMain.deletePost') }}
                                 </a>
@@ -104,6 +102,8 @@
                         class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 mr-2"
                         content="Bookmark"
                     >
+                        <div class="text-gray-700 dark:text-gray-600 mt-2">
+                            {{ sels.select_detail_pick.find(i => i.value === challenge.technical_details.detail_pick).name }}                                    </div>
                         <BookmarkIcon class="w-3 h-3"/>
                     </Tippy>
                     <div class="intro-x flex mr-2">
