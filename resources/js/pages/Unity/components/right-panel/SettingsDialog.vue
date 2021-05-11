@@ -200,7 +200,7 @@ export default {
         onMounted(() => {
             challengeSelects.value = sels;
             // select_detail_pick.value = sels.select_detail_pick.find(i => i.value === object.technical_details.detail_pick).name
-            c.value = props.object
+            // c.value = props.object
 
         });
 
