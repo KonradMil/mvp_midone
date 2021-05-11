@@ -154,6 +154,7 @@
                             label="name"
                             max="1"
                             placeholder=""
+                            valueProp="value"
                             :options="sels.select_work_shifts"
                         />
 
