@@ -10,7 +10,7 @@
                 <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                     <div class="intro-y col-span-12 sm:col-span-6">
                         <label for="input-wizard-1" class="form-label">
-                            {{$t('challengesNew.maxWeight')}}
+                            Max waga
                         </label>
                         <TailSelect
                             id="input-wizard-1"
@@ -223,7 +223,7 @@ export default {
     setup(props, context) {
         const c = ref({description: '', name: '', solution_deadline: '', offer_deadline: ''});
 
-        // const challengeSelects = ref();
+        const challengeSelects = ref();
         const select_detail_weight = ref();
 
         const types = require("../../../../json/types.json");
@@ -266,7 +266,7 @@ export default {
             tagss,
             types,
             select_detail_weight,
-            // challengeSelects
+            challengeSelects
         }
     }
 }
