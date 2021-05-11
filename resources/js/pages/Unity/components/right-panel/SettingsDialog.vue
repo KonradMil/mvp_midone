@@ -146,7 +146,7 @@
 
                         </TailSelect>
                     </div>
-                    <div class="intro-y col-span-12" v-if="select_work_shifts.value">
+                    <div class="intro-y col-span-12" v-if="select_work_shifts">
                         <label for="input-wizard-10" class="form-label">{{$t('challengesNew.changeNumber')}}</label>
                         <Multiselect
                             class="w-full h-8 z-50"
@@ -155,7 +155,7 @@
                             max="1"
                             placeholder=""
                             valueProp="value"
-                            :options="select_work_shifts.value"
+                            :options="select_work_shifts"
                         />
 
 
@@ -198,12 +198,13 @@ export default {
             select_detail_pick.value = sels.select_detail_pick.find(i => i.value === object.technical_details.detail_pick).name
             c.value = props.object
             select_work_shifts.value = sels.select_work_shifts;
-            console.log("-------------"+select_work_shifts.value);
+            console.log("-------------"+select_work_shifts);
         });
 
         return {
             sels,
             select_detail_pick,
+            select_work_shifts
         }
     }
 }
