@@ -14,6 +14,7 @@
                         </label>
                         <TailSelect
                             id="input-wizard-1"
+                            v-model="select_detail_weight"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>Wybierz...</option>
@@ -237,27 +238,27 @@ export default {
         onMounted(() => {
             challengeSelects.value = sels;
 
-            if (props.object.name != undefined && props.object.name != '') {
-                c.value.name = props.object.name;
-            } else {
-                c.value.name = '';
-            }
-
-            if (props.object.description != undefined && props.object.description != '') {
-                c.value.description = props.object.description;
-            } else {
-                c.value.description = '';
-            }
-            if (props.object.solution_deadline != undefined && props.object.solution_deadline != '') {
-                c.value.solution_deadline = props.object.solution_deadline;
-            } else {
-                c.value.solution_deadline = '';
-            }
-            if (props.object.offer_deadline != undefined && props.object.offer_deadline != '') {
-                c.value.offer_deadline = props.object.offer_deadline;
-            } else {
-                c.value.offer_deadline = '';
-            }
+            c.value = props.object
+            // if (props.object.name != undefined && props.object.name != '') {
+            //     c.value.name = props.object.name;
+            // } else {
+            //     c.value.name = '';
+            // }
+            // if (props.object.description != undefined && props.object.description != '') {
+            //     c.value.description = props.object.description;
+            // } else {
+            //     c.value.description = '';
+            // }
+            // if (props.object.solution_deadline != undefined && props.object.solution_deadline != '') {
+            //     c.value.solution_deadline = props.object.solution_deadline;
+            // } else {
+            //     c.value.solution_deadline = '';
+            // }
+            // if (props.object.offer_deadline != undefined && props.object.offer_deadline != '') {
+            //     c.value.offer_deadline = props.object.offer_deadline;
+            // } else {
+            //     c.value.offer_deadline = '';
+            // }
         });
 
         return {
