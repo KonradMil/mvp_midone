@@ -223,6 +223,7 @@ export default {
     setup(props, context) {
         const c = ref({description: '', name: '', solution_deadline: '', offer_deadline: ''});
 
+        const challengeSelects = ref();
         const select_detail_weight = ref();
 
         const types = require("../../../../json/types.json");
