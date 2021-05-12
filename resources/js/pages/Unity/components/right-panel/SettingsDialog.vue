@@ -185,7 +185,8 @@ export default {
     name: "SettingsDialog",
     components: {Multiselect},
     props: {
-        object: Object
+        object: Object,
+        technical: Object
     },
     setup(props) {
         const sels = require("../../../../json/challenge.json");
