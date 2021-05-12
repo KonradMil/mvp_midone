@@ -117,7 +117,7 @@ export default {
             } else if (content.value === 'teams') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'description') {
-               saveChallengeRepo({name: challenge.name, description: challenge.description});
+               // saveChallengeRepo({name: challenge.name, description: challenge.description});
             } else if (content.value === 'multiplayer') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'operational') {
