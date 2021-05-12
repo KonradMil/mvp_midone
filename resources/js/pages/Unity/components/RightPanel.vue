@@ -103,6 +103,7 @@ export default {
         const content = ref('');
         const challenge = ref({});
         const type = ref('');
+        const technical = ref({});
 
         const save = () => {
             if(content.value === 'label') {
@@ -252,7 +253,8 @@ export default {
             animable,
             challenge,
             type,
-            object
+            object,
+            technical
         }
     }
 }
