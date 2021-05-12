@@ -103,7 +103,6 @@ export default {
         const content = ref('');
         const challenge = ref({});
         const type = ref('');
-        const technical = ref({});
 
         const save = () => {
             if(content.value === 'label') {
@@ -134,6 +133,18 @@ export default {
         }
 
         const object = computed(() => {
+            if(props.type == 'challenge') {
+                return props.challenge;
+            } else if(props.type == 'solution') {
+
+            } else {
+                console.log(type.value)
+            }
+        }, () => {
+
+        });
+
+        const technical = computed(() => {
             if(props.type == 'challenge') {
                 return props.challenge;
             } else if(props.type == 'solution') {
