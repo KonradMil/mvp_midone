@@ -17,7 +17,17 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class ChallengeController extends Controller
 {
+    public function saveChallengeDetails(Request $request, TechnicalDetails $technical)
+    {
+        $technical->fill($request->input('data'));
+        $technical->save();
 
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano edycje.',
+            'payload' => $technical
+        ]);
+    }
     public function saveChallenge(Request $request)
     {
 //        dd($request->data);
@@ -35,7 +45,7 @@ class ChallengeController extends Controller
         $c->save();
         return response()->json([
             'success' => true,
-            'message' => 'Zapisanp poprawnie.',
+            'message' => 'Zapisano poprawnie.',
             'payload' => $c
         ]);
      }
