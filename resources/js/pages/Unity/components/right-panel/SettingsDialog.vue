@@ -184,7 +184,8 @@ export default {
     // components: {Multiselect},
     props: {
         object: Object,
-        technical: Object
+        technical: Object,
+        id: Number
     },
     setup(props) {
         const sels = require("../../../../json/challenge.json");
@@ -193,7 +194,7 @@ export default {
         const select_work_shifts = ref();
         const work = ref();
 
-        console.log(technical.id);
+        console.log('TECHNICAL.ID!!!!' + technical.id);
         const challengeSelects = ref();
         onMounted(() => {
             challengeSelects.value = sels;
