@@ -194,7 +194,7 @@ export default {
         const select_work_shifts = ref();
         const work = ref();
 
-        console.log('TECHNICAL.ID!!!!' + technical.id);
+        console.log('TECHNICAL.ID!!!!' + technical.value.id);
         const challengeSelects = ref();
         onMounted(() => {
             challengeSelects.value = sels;
