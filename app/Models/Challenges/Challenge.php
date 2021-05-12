@@ -49,6 +49,7 @@ class Challenge extends Model implements ReactableInterface
         return $this->hasOne(TechnicalDetails::class);
     }
 
+
     public function files()
     {
         return $this->hasMany(File::class);
