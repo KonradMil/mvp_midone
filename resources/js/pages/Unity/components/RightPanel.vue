@@ -35,7 +35,7 @@
                     <FinancialAnalysisDialog v-if="content == 'financial'"></FinancialAnalysisDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
                     <OperationDialog v-if="content == 'operational'" ></OperationDialog>
-                    <SettingsDialog v-if="content == 'settings' && type == 'challenge'" v-model:technical="challenge.technical_details"></SettingsDialog>
+                    <SettingsDialog v-if="content == 'settings'" v-model:technical="challenge.technical_details"></SettingsDialog>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
@@ -124,7 +124,9 @@ export default {
             } else if (content.value === 'financial') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'settings') {
-                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+                emitter.emit('rightpanelaction', {
+                    action: 'updateAnimable', data:animable.value
+                });
             } else if (content.value === 'line') {
                 console.log('HERE IMPORTA');
                 console.log({layers: line.value});
