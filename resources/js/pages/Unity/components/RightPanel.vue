@@ -152,6 +152,8 @@ export default {
 
         });
 
+        console.log('TECHNICAL ID - ' + technical.id);
+
         const showPanel = () => {
             cash("#right-panel").modal("show");
         }
