@@ -29,7 +29,7 @@
                 <!-- END: Register Info -->
                 <!-- BEGIN: Register Form -->
 
-                <div class="h-screen xl:h-auto flex py-5 xl:py-12 my-10 xl:my-0">
+                <div class="h-screen xl:h-auto flex py-15 xl:py-18 my-10 xl:my-0">
                     <form class="validate-form" @submit.prevent="handleSubmit">
                     <div
                         class="my-auto mx-auto xl:ml-20 bg-white dark:bg-dark-1 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto"
