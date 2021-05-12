@@ -153,7 +153,6 @@ export default {
         }, () => {
 
         });
-        console.log('TECHNICAL ID - ' + props.challenge.technical_details.id);
 
 
         const showPanel = () => {
