@@ -79,7 +79,7 @@
                                 {{$t('login.login')}}
                             </button>
                             <button
-                                @click="$router.push('register')"
+                                @click="$router.replace({name:'register'})"
                                 class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top"
                             >
                                 {{$t('login.signup')}}
