@@ -152,7 +152,7 @@ export default {
 
         });
 
-        console.log('TECHNICAL ID - ' + technical.id);
+        console.log('TECHNICAL ID - ' + challenge.technical_details.id);
 
         const showPanel = () => {
             cash("#right-panel").modal("show");
