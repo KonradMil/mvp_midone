@@ -202,7 +202,7 @@ import {defineComponent, onMounted, ref} from "vue";
                                     store.dispatch('login/login', {
                                         user
                                     })
-                                    toast.success(response.data.message)
+                                    // toast.success(response.data.message)
                                     console.log(store);
                                     if(user.name !== undefined || user.name !== '') {
                                         window.location.replace('/dashboard');
