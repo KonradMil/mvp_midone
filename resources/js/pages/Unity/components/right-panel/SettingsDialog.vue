@@ -194,11 +194,11 @@ export default {
         const select_work_shifts = ref();
         const work = ref();
 
-        console.log('TECHNICAL.ID!!!!' + technical.value.id);
+        console.log('TECHNICAL.ID!!!!' + t.id);
         const challengeSelects = ref();
         onMounted(() => {
             challengeSelects.value = sels;
-
+            t.value = props.technical
             // select_detail_pick.value = sels.select_detail_pick.find(i => i.value === object.detail_pick).name
             // c.value = props.object
 
