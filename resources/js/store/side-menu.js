@@ -10,6 +10,7 @@ const state = () => {
                 icon: "HomeIcon",
                 pageName: "models",
                 title: "Models",
+                admin: true
             },
             {
                 icon: "BoxIcon",
