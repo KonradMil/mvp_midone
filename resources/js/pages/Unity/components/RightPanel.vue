@@ -141,6 +141,8 @@ export default {
 
             } else {
                 console.log(type.value)
+                console.log('TECHNICAL ID - ' + props.challenge.technical_details.id);
+
             }
         }, () => {
 
@@ -152,7 +154,6 @@ export default {
 
         });
 
-        console.log('TECHNICAL ID - ' + challenge.technical_details.id);
 
         const showPanel = () => {
             cash("#right-panel").modal("show");
