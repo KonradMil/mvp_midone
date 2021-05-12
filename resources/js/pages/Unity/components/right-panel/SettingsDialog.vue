@@ -14,6 +14,7 @@
                         </label>
                         <TailSelect
                             id="input-wizard-1"
+                            v-model="technical.detail_weight"
                             :options="{locale: 'pl', placeholder: sels.select_detail_weight.find(i => i.value === technical.detail_weight).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>Wybierz...</option>
