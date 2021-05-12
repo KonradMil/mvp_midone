@@ -35,7 +35,7 @@
                     <FinancialAnalysisDialog v-if="content == 'financial'"></FinancialAnalysisDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
                     <OperationDialog v-if="content == 'operational'" ></OperationDialog>
-                    <SettingsDialog v-if="content == 'settings'" v-model:technical="challenge.technical_details"></SettingsDialog>
+                    <SettingsDialog v-if="content == 'settings'" v-model:technical="technical"></SettingsDialog>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
