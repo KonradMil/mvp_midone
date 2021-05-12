@@ -146,7 +146,7 @@ export default {
 
         const technical = computed(() => {
             if(props.type == 'challenge') {
-                return props.challenge;
+                return props.challenge.technical_details;
             } else if(props.type == 'solution') {
 
             } else {
