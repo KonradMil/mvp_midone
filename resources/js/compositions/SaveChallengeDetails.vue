@@ -9,7 +9,7 @@ export default function SaveChallengeDetails(data,id) {
     const list = ref([]);
 
     async function saveChallengeDetails(data,id) {
-        axios.post(`/api/challenge/user/save/description/${id}`, {data})
+        axios.post(`/api/challenge/user/save/details/${id}`, {data})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
