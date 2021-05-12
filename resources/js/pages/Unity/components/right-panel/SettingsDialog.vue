@@ -30,6 +30,7 @@
                         </label>
                         <TailSelect
                             id="input-wizard-2"
+                            v-model="technical.pick_quality"
                             :options="{locale: 'pl', placeholder: sels.select_pick_quality.find(i => i.value === technical.pick_quality).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>Wybierz...</option>
@@ -44,6 +45,7 @@
                         <label for="input-wizard-3" class="form-label">{{$t('challengesNew.detail')}}</label>
                         <TailSelect
                             id="input-wizard-3"
+                            v-model="technical.detail_material"
                             :options="{locale: 'pl', placeholder: sels.select_detail_material.find(i => i.value === technical.detail_material).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>{{$t('challengesNew.select')}}</option>
@@ -58,6 +60,7 @@
                         <label for="input-wizard-4" class="form-label">{{$t('challengesNew.size')}}</label>
                         <TailSelect
                             id="input-wizard-4"
+                            v-model="technical.detail_size"
                             :options="{locale: 'pl', placeholder: sels.select_detail_size.find(i => i.value === technical.detail_size).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>{{$t('challengesNew.select')}}</option>
@@ -73,6 +76,7 @@
                         </label>
                         <TailSelect
                             id="input-wizard-5"
+                            v-model="technical.detail_pick"
                             :options="{locale: 'pl', placeholder: sels.select_detail_pick.find(i => i.value === technical.detail_pick).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
@@ -88,6 +92,7 @@
                         </label>
                         <TailSelect
                             id="input-wizard-6"
+                            v-model="technical.detail_position"
                             :options="{locale: 'pl', placeholder: sels.select_detail_position.find(i => i.value === technical.detail_position).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
@@ -103,6 +108,7 @@
                         </label>
                         <TailSelect
                             id="input-wizard-7"
+                            v-model="technical.detail_range"
                             :options="{locale: 'pl', placeholder: sels.select_detail_range.find(i => i.value === technical.detail_range).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
@@ -118,6 +124,7 @@
                         </label>
                         <TailSelect
                             id="input-wizard-8"
+                            v-model="technical.detail_destination"
                             :options="{locale: 'pl', placeholder: sels.select_detail_destination.find(i => i.value === technical.detail_destination).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled> {{$t('challengesNew.select')}}</option>
@@ -134,6 +141,7 @@
                         </label>
                         <TailSelect
                             id="input-wizard-9"
+                            v-model="technical.number_of_lines"
                             :options="{locale: 'pl', placeholder: sels.select_number_of_lines.find(i => i.value === technical.number_of_lines).name, openAbove: false, animate: false, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>{{$t('challengesNew.select')}}</option>
