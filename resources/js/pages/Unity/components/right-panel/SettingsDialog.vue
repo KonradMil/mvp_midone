@@ -195,9 +195,9 @@ export default {
 
         const challengeSelects = ref();
         onMounted(() => {
-            challengeSelects.value = sels;
+            // challengeSelects.value = sels;
             // select_detail_pick.value = sels.select_detail_pick.find(i => i.value === object.detail_pick).name
-            // c.value = props.object
+            t.value = props.technical
 
         });
 
