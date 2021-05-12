@@ -219,7 +219,7 @@ export default defineComponent({
     methods: {
         logout() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('api/logout')
+                this.$axios.post('/api/logout')
                     .then(response => {
                         if (response.data.success) {
                             store.dispatch('login/logout')
@@ -250,7 +250,7 @@ export default defineComponent({
         }
 
         const searchMe = () => {
-            axios.post('api/search', {query: searchTerm.value})
+            axios.post('/api/search', {query: searchTerm.value})
                 .then(response => {
                     if (response.data.success) {
                         console.log(response.data.payload);
