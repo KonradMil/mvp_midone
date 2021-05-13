@@ -154,30 +154,17 @@
                     </div>
                     <div class="intro-y col-span-12">
                         <label for="input-wizard-10" class="form-label">{{$t('challengesNew.changeNumber')}}</label>
-<!--                        <Multiselect-->
-<!--                            v-model="select_work_shifts"-->
-<!--                            class="w-full h-8 z-50"-->
-<!--                            mode="single"-->
-<!--                            label="name"-->
-<!--                            :max="1"-->
-<!--                            placeholder="Wybierz..."-->
-<!--                            valueProp="value"-->
-<!--                            :options="sels.select_work_shifts"-->
-<!--                        />-->
-
-
-                                                                        <TailSelect
-                                                                            id="input-wizard-10"
-                                                                            v-model="technical.work_shifts"
-                                                                            :options="{locale: 'pl', placeholder: sels.select_work_shifts.find(i => i.value === technical.work_shifts).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
-                                                                        >
-                                                                            <option selected disabled>{{$t('challengesNew.select')}}</option>
-                                                                            <option
-                                                                                v-for="(det,index) in sels.select_work_shifts"
-                                                                                :value="det.value">{{ det.name }}
-                                                                            </option>
-
-                                                                        </TailSelect>
+                        <TailSelect
+                            id="input-wizard-10"
+                            v-model="technical.work_shifts"
+                            :options="{locale: 'pl', placeholder: sels.select_work_shifts.find(i => i.value === technical.work_shifts).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                        >
+                            <option selected disabled>{{$t('challengesNew.select')}}</option>
+                            <option
+                                v-for="(det,index) in sels.select_work_shifts"
+                                :value="det.value">{{ det.name }}
+                            </option>
+                        </TailSelect>
                     </div>
                 </div>
             </div>
