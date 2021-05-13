@@ -14,7 +14,7 @@
                             <img
                                 v-if="challenge.screenshot_path != undefined"
                                 class="rounded-full"
-                                :alt="challenge.name" :src="'/s3/' + challenge.screenshot_path"
+                                :alt="challenge.name" :src="'/' + challenge.screenshot_path"
                             />
                         </div>
                         <div class="ml-4 mr-auto">

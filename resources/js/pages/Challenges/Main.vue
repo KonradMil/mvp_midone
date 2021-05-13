@@ -3,7 +3,7 @@
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">{{$t('challengesMain.challenges')}}</h2>
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="user.type == 'investor'" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
                 <div class="dropdown ml-auto sm:ml-0">
                     <div class="dropdown-menu w-40">
                         <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
@@ -40,10 +40,10 @@
                         <img
                             alt="Icewall Tailwind HTML Admin Template"
                             class="rounded-full"
-                            :src="'s3/' + challenge.screenshot_path"
+                            :src="'/' + challenge.screenshot_path"
                         />
                     </div>
-                    <div class="ml-3 mr-auto">
+                    <div class="ml-3 mr-auto" @click="$router.push( {path : '/challenges/card/' + challenge.id})">
                         <a href="" class="font-medium">{{ challenge.name }}</a>
                         <div class="flex text-gray-600 truncate text-xs mt-0.5">
                             <a
@@ -88,7 +88,7 @@
                         <img
                             alt="Icewall Tailwind HTML Admin Template"
                             class="rounded-md"
-                            :src="'s3/' + challenge.screenshot_path"
+                            :src="'/' + challenge.screenshot_path"
                         />
                     </div>
                     <a href="" class="block font-medium text-base mt-5"></a>
