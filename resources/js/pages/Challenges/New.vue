@@ -570,7 +570,6 @@ export default {
         const tagss = require("../../json/tagsChallenge.json");
         const sels = require("../../json/challenge.json");
 
-        const emitter = app.appContext.config.globalProperties.emitter;
 
         provide("bind[dropzoneSingleRef]", el => {
             dropzoneSingleRef.value = el;
