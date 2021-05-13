@@ -18,6 +18,12 @@
             "comment" : "Comment...",
             "select" : "Select"
         },
+        "validation": {
+            "Value is required": "Value is required.",
+            "This field should be at least 6 long": "This field should be at least 6 long.",
+            "Value is not a valid email address": "Value is not a valid email address.",
+            "The value must be equal to the other value": "The value must be equal to the other value"
+        },
         "topBar": {
             "profil": "Profile",
             "addAccount": "Add account",
@@ -298,6 +304,7 @@
         },
         "validation": {
             "Value is required": "To pole jest obowiązkowe.",
+            "This field should be at least 6 long": "Hasło musi zawierać conajmniej 6 znaków.",
             "Value is not a valid email address": "To nie jest poprawny adres email.",
             "The value must be equal to the other value": "Ta wartość musi być taka sama jak hasło"
         },
@@ -331,7 +338,7 @@
         "profiles" : {
             "profile" : "Profil",
             "personality" : "Personalia",
-            "name" : "Imie",
+            "name" : "Imię",
             "lastname" : "Nazwisko",
             "phone" : "Numer kontaktowy",
             "changeAvatar" : "Zmień avatar",

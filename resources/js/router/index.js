@@ -7,7 +7,6 @@ import SideMenu from '../layouts/side-menu/Main'
 import Wizard from "../pages/Wizard";
 import Profile from "../pages/Wizard";
 import WizardOne from "../pages/WizardOne";
-import WizardTwo from "../pages/WizardTwo";
 import Challenges from "../pages/Challenges/Main";
 import AddChallenge from "../pages/Challenges/New";
 import Solutions from "../pages/Solutions/Main";
@@ -150,11 +149,6 @@ export const routes = [
                 name: 'wizardone',
                 path: '/kreator-krok-jeden',
                 component: WizardOne
-            },
-            {
-                name: 'wizardtwo',
-                path: '/kreator-krok-dwa',
-                component: WizardTwo
             },
             {
                 name: 'profile',

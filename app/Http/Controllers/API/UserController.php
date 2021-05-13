@@ -101,7 +101,8 @@ class UserController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Awatar został wgrany poprawnie',
-            'payload' => $fileName
+            'payload' => $fileName,
+            'user' => Auth::user()
         ]);
     }
     public function checkEmail($email)

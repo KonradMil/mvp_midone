@@ -1,5 +1,6 @@
 <template>
-      <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5" v-for="company in companies" :key="company.id">
+<!--    COMPANIES-->
+      <div id="companies" class="grid grid-cols-12 gap-4 gap-y-5 mt-5" v-for="company in companies" :key="company.id">
             <div class="intro-y col-span-12 sm:col-span-6">
                 <label for="input-wizard-1" class="form-label">{{$t('profiles.companyName')}}</label>
                 <input

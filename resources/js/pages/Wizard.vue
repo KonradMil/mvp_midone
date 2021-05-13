@@ -17,12 +17,6 @@
                 >
                     2
                 </button>
-                <button
-                    @click="$router.push('/kreator-krok-dwa')"
-                    class="intro-y w-10 h-10 rounded-full btn bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2"
-                >
-                    3
-                </button>
             </div>
             <div class="px-5 mt-10">
                 <div class="font-medium text-center text-lg">Dane podstawowe</div>
@@ -71,9 +65,17 @@
                             />
                         </div>
                     </div>
-                    <div class="intro-y col-span-4 sm:col-span-4">
-                        <div class="row" style="width: 100%">
-                            <img class="avatar-preview" v-if="avatar_path != ''" :src="avatar_path"/>
+                    <div class="intro-y col-span-4 sm:col-span-4" id="dr">
+                        <div v-if="avatar_path != ''" class="row" id="prev" style="width: 100%;    position: absolute;
+    max-height: 120px;
+    top: 15px;
+    overflow: hidden;">
+                            <div :style="'background-image: url(' + avatar_path + ');     width: 200px;\n'+
+'    height: 120px;\n'+
+'    background-size: contain;\n'+
+'    background-repeat: no-repeat;\n'+
+'    margin: 0 auto;'"></div>
+<!--                            <img class="avatar-preview"  :src="avatar_path"/>-->
                         </div>
                         <Dropzone
                             ref-key="dropzoneSingleRef"
@@ -84,6 +86,7 @@
                               maxFiles: 1,
                               previewTemplate: '<div style=\'display: none\'></div>'
                             }"
+                            style="height: 153px;"
                             class="dropzone">
                             <div class="text-lg font-medium">
                                 Kliknij lub upuść swój awatar
@@ -160,7 +163,7 @@
             console.log(store.state);
             this.name = store.state.login.user.name;
             this.lastname = store.state.login.user.lastname;
-            this.getMarkers();
+            // this.getMarkers();
         },
         data() {
             return {
@@ -178,43 +181,55 @@
             }
         },
         methods: {
-            getMarkers() {
-                this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                    this.$axios.post('api/locations/get')
-                        .then(response => {
-                            let m = [];
-                            response.data.forEach(function (item) {
-                                m.push({lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
-                            });
-                            console.log(m);
-                            this.markers = m;
-                        })
-                })
-            },
+            // getMarkers() {
+            //     this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            //         this.$axios.post('api/locations/get')
+            //             .then(response => {
+            //                 let m = [];
+            //                 response.data.forEach(function (item) {
+            //                     m.push({lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
+            //                 });
+            //                 console.log(m);
+            //                 this.markers = m;
+            //             })
+            //     })
+            // },
             next() {
-                this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                    this.$axios.post('api/profile/update', {
-                        name: this.name,
-                        lastname: this.lastname
-                    })
-                        .then(response => {
-                            console.log(response.data)
-                            if (response.data.success) {
-                                let user = response.data.payload;
-                                store.dispatch('login/login', {
-                                    user
-                                });
-                                toast.success('Pomyślnie przeszedłeś do kolejnego kroku!')
-                                this.$router.push('/kreator-krok-jeden');
-                            } else {
-                                toast.error(response.data.message);
-                            }
+                if( (this.lastname == '' || this.lastname == null) || (this.name == '' || this.name == null)) {
+                    toast.warning('Imię i nazwisko nie mogą być puste.');
+                } else {
+                    this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                        this.$axios.post('api/profile/update', {
+                            name: this.name,
+                            lastname: this.lastname
                         })
-                    // .catch(function (error) {
-                    //     this.toast.error(error);
-                    // });
-                })
+                            .then(response => {
+                                console.log(response.data)
+                                if (response.data.success) {
+                                    let user = response.data.payload;
+                                    store.dispatch('login/login', {
+                                        user
+                                    });
+                                    toast.success('Pomyślnie przeszedłeś do kolejnego kroku!')
+                                    this.$router.push('/kreator-krok-jeden');
+                                } else {
+                                    toast.error(response.data.message);
+                                }
+                            })
+                        // .catch(function (error) {
+                        //     this.toast.error(error);
+                        // });
+                    })
+                }
+
             }
         },
     }
 </script>
+<style>
+#dr .dz-message {
+    position: absolute;
+    bottom: calc(50% - 15px);
+    left: calc(50% - 115px);
+}
+</style>

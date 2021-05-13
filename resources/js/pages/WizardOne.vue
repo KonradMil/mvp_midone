@@ -14,16 +14,11 @@
                 >
                     2
                 </button>
-                <button
-                    class="intro-y w-10 h-10 rounded-full btn bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2"
-                >
-                    3
-                </button>
             </div>
             <div class="px-5 mt-10">
                 <div class="font-medium text-center text-lg">Firma</div>
                 <div class="text-gray-600 text-center mt-2">
-                    Uzupełnij dane firmowe
+                    Uzupełnij dane firmy
                 </div>
             </div>
             <div
@@ -210,7 +205,7 @@
                             console.log(response.data)
                             // ??
                             if (response.data.success) {
-                                this.$router.push('/kreator-krok-dwa');
+                                this.$router.push('/profiles');
                             } else {
                                 toast.error(response.data.message);
                             }

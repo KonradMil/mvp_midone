@@ -23,16 +23,16 @@
                         </div>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
-                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer dark:text-theme-10 font-medium" :class="(activeTab === 'personalia') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'personalia'"> <i data-feather="activity" class="w-4 h-4 mr-2"></i> {{$t('profiles.personality')}} </a>
-                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" href="" :class="(activeTab === 'company') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'company'" > <i data-feather="box" class="w-4 h-4 mr-2"></i> {{$t('profiles.company')}} </a>
-                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" href="" :class="(activeTab === 'change_password') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'change_password'" > <i data-feather="lock" class="w-4 h-4 mr-2"></i> {{$t('profiles.changePassword')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer dark:text-theme-10 font-medium" :class="(activeTab === 'personalia') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'personalia'"> <i data-feather="activity" class="w-4 h-4 mr-2"></i> {{$t('profiles.personality')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" href="" :class="(activeTab === 'company') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'company'" > <i data-feather="box" class="w-4 h-4 mr-2"></i> {{$t('profiles.company')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" href="" :class="(activeTab === 'change_password') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'change_password'" > <i data-feather="lock" class="w-4 h-4 mr-2"></i> {{$t('profiles.changePassword')}} </a>
 <!--                        <a class="flex items-center mt-5" href=""> <i data-feather="settings" class="w-4 h-4 mr-2"></i> User Settings </a>-->
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
 <!--                        <a class="flex items-center" href=""> <i data-feather="activity" class="w-4 h-4 mr-2"></i> Email Settings </a>-->
-                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'terms') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'terms'"> <i data-feather="box" class="w-4 h-4 mr-2"></i> {{$t('profiles.agreements')}} </a>
-                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'socials') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'socials'" > <i data-feather="lock" class="w-4 h-4 mr-2"></i> {{$t('profiles.socialMedia')}} </a>
-                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'bidders-list') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'bidders-list'"> <i data-feather="settings" class="w-4 h-4 mr-2"></i> {{$t('profiles.biddersList')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'terms') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'terms'"> <i data-feather="box" class="w-4 h-4 mr-2"></i> {{$t('profiles.agreements')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'socials') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'socials'" > <i data-feather="lock" class="w-4 h-4 mr-2"></i> {{$t('profiles.socialMedia')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'bidders-list') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'bidders-list'"> <i data-feather="settings" class="w-4 h-4 mr-2"></i> {{$t('profiles.biddersList')}} </a>
                     </div>
                 </div>
             </div>
@@ -121,27 +121,22 @@
                 </div>
                 <!-- END: Display Information -->
 
-                <div id="social-media-button" class="p-5" v-if="activeTab==='socials'"
-                >
+                <div id="social-media-button" class="p-5" v-if="activeTab==='socials'">
                   <Socials></Socials>
                 </div>
                 <div class="col-span-12 lg:col-span-8 xxl:col-span-9" v-if="activeTab === 'terms'">
                     <Terms></Terms>
-                    <!-- BEGIN: Display Information -->
                 </div>
                 <div class="col-span-12 lg:col-span-8 xxl:col-span-9" v-if="activeTab === 'change_password'">
                     <!-- BEGIN: Change Password -->
                     <ChangePassword></ChangePassword>
                     <!-- END: Change Password -->
                 </div>
-                <div
-                    class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"
-                    v-if="activeTab === 'company'"
-                >
-                    <!--                <div class="font-medium text-base">Profile Settings</div>-->
+                <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" v-if="activeTab === 'company'">
+                    <!-- BEGIN: Company -->
                    <Company></Company>
+                    <!-- END: Company -->
                 </div>
-
             </div>
         </div>
     </div>
@@ -164,6 +159,7 @@ import {email, minLength, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 import GetTeams from "../../compositions/GetTeams"
 import Company from "./Company"
+import Socials from "./Socials"
 import Terms  from "./Terms"
 import ChangePassword from "./ChangePassword";
 const toast = useToast();
@@ -176,6 +172,7 @@ export default defineComponent({
         Dropzone,
         Company,
         Terms,
+        Socials
     },
     setup() {
         const activeTab = ref('personalia');
@@ -205,13 +202,18 @@ export default defineComponent({
             dropzoneSingleRef.value = el;
         });
 
-
         onMounted(() => {
             const elDropzoneSingleRef = dropzoneSingleRef.value;
             console.log(elDropzoneSingleRef);
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                console.log("resp.xhr.response");
                 console.log(resp.xhr.response);
                 avatar_path.value = JSON.parse(resp.xhr.response).payload;
+                let user = JSON.parse(resp.xhr.response).user;
+                store.dispatch('login/login', {
+                    user
+                });
+                location.reload();
             });
             elDropzoneSingleRef.dropzone.on("error", () => {
                 toast.error("Błąd");

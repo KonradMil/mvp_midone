@@ -29,10 +29,10 @@
                 <!-- END: Register Info -->
                 <!-- BEGIN: Register Form -->
 
-                <div class="h-screen xl:h-auto flex py-15 xl:py-18 my-10 xl:my-0">
+                <div class="h-screen xl:h-auto flex py-15 xl:py-18 my-10 xl:my-0 ">
                     <form class="validate-form" @submit.prevent="handleSubmit">
                     <div
-                        class="my-auto mx-auto xl:ml-20 bg-white dark:bg-dark-1 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto"
+                        class="my-auto mx-auto xl:ml-20 bg-white dark:bg-dark-1 mt-20 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto"
                     >
                         <h2
                             class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left"
@@ -332,10 +332,12 @@
                 console.log('here');
                 if(formData.password != formData.passwordConfirm) {
                     toast.warning('Hasła muszą być takie same');
+                    return false;
                 }
                 else if(formData.email === '')
                 {
                     toast.error('Email nie może byc pusty');
+                    return false;
                 }
                 validate.value.$touch();
                 if (validate.value.$invalid) {
@@ -362,8 +364,14 @@
         },
         methods: {
             handleSubmit(e) {
-                this.save();
+                let a = this.save();
+                if(!a) {
+                    return false;
+                }
                 console.log('here');
+                if(this.formData.password != this.formData.passwordConfirm) {
+                    return false;
+                }
                 axios.get('/sanctum/csrf-cookie').then(response => {
                     axios.post('/api/register', {
                         type: this.formData.type,
