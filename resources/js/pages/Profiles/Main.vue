@@ -159,7 +159,6 @@ import {email, minLength, required} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 import GetTeams from "../../compositions/GetTeams"
 import Company from "./Company"
-import Socials from "./Socials"
 import Terms  from "./Terms"
 import ChangePassword from "./ChangePassword";
 import Socials from "./Socials";
