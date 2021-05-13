@@ -223,7 +223,7 @@
                                                 <TailSelect
                                                     id="input-wizard-3"
                                                     v-model="select_detail_material"
-                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', openAbove: false,search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
                                                     <option selected disabled>{{$t('challengesNew.select')}}</option>
                                                     <option
@@ -238,7 +238,7 @@
                                                 <TailSelect
                                                     id="input-wizard-4"
                                                     v-model="select_detail_size"
-                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej',openAbove: false, search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
                                                     <option selected disabled>{{$t('challengesNew.select')}}</option>
                                                     <option v-for="(det,index) in challengeSelects.select_detail_size"
@@ -254,7 +254,7 @@
                                                 <TailSelect
                                                     id="input-wizard-5"
                                                     v-model="select_detail_pick"
-                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej',openAbove: false, search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
                                                     <option selected disabled> {{$t('challengesNew.select')}}</option>
                                                     <option v-for="(det,index) in challengeSelects.select_detail_pick"
@@ -270,7 +270,7 @@
                                                 <TailSelect
                                                     id="input-wizard-6"
                                                     v-model="select_detail_position"
-                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej',openAbove: false, search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
                                                     <option selected disabled> {{$t('challengesNew.select')}}</option>
                                                     <option
@@ -523,6 +523,8 @@ import GetTeams from "../../compositions/GetTeams";
 import SaveChallenge from "../../compositions/SaveChallenge";
 import { useI18n } from 'vue-i18n'
 import Multiselect from '@vueform/multiselect'
+import router from '../../router';
+
 
 const toast = useToast();
 
@@ -563,9 +565,12 @@ export default {
         const allowed_publishing = ref(false);
         const publish = ref(false);
         const dropzoneSingleRef = ref();
+
         const types = require("../../json/types.json");
         const tagss = require("../../json/tagsChallenge.json");
         const sels = require("../../json/challenge.json");
+
+        const emitter = app.appContext.config.globalProperties.emitter;
 
         provide("bind[dropzoneSingleRef]", el => {
             dropzoneSingleRef.value = el;
@@ -577,8 +582,13 @@ export default {
             teams.value = GetTeams();
         }
 
+        const handleCallback = (resp) => {
+            console.log(resp);
+            router.push({ name: 'challengeStudio', params : {id: resp.id, type: 'challenge', load: resp}})
+        };
+
         const saveChallengeRepo = async () => {
-            SaveChallenge({
+           let resp = await SaveChallenge({
                 name: name.value,
                 description: description.value,
                 type: category.value,
@@ -598,7 +608,9 @@ export default {
                 teams: teamsAllowed.value,
                 tags: tagsSelected.value,
                 images: images.value
-            });
+            }, handleCallback);
+            // emitter.emit('changestudio', {val: 'challenge'});
+
         }
 
         onMounted(() => {
