@@ -164,7 +164,7 @@ export default {
                     gameWindow.value.setFullscreen();
                     break;
                 case 'logout':
-                    // handleUnityActionOutgoing(e);
+                    $router.push('/challenges')
                     break;
                 case 'orto':
                     handleUnityActionOutgoing({action: 'ChangeCamera', data: 2});
