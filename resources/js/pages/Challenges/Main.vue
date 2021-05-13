@@ -43,7 +43,7 @@
                             :src="'s3/' + challenge.screenshot_path"
                         />
                     </div>
-                    <div class="ml-3 mr-auto">
+                    <div class="ml-3 mr-auto" @click="$router.push( {path : '/challenges/card/' + challenge.id})">
                         <a href="" class="font-medium">{{ challenge.name }}</a>
                         <div class="flex text-gray-600 truncate text-xs mt-0.5">
                             <a
