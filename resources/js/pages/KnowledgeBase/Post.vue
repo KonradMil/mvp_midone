@@ -120,6 +120,7 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         const postObj = ref({})
         const play = ref([]);
+        const categories = ref([]);
 
         const like = (post) => {
             axios.post('api/knowledgebase/post/like', {id: post.id})
@@ -140,7 +141,9 @@ export default {
 
         onMounted(function () {
             postObj.value = props.post;
-        })
+            const c = require("../../json/knowledgebase_categories.json");
+            categories.value = c.categories;
+        });
 
         const playVideo = (id) => {
             if(play.value[id] != undefined) {
@@ -154,7 +157,8 @@ export default {
             like,
             play,
             playVideo,
-            postObj
+            postObj,
+            categories
         }
     }
 }
