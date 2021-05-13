@@ -287,7 +287,7 @@
                                                 <TailSelect
                                                     id="input-wizard-7"
                                                     v-model="select_detail_range"
-                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', openAbove: false, search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
                                                     <option selected disabled> {{$t('challengesNew.select')}}</option>
                                                     <option v-for="(det,index) in challengeSelects.select_detail_range"
@@ -320,7 +320,7 @@
                                                 <TailSelect
                                                     id="input-wizard-9"
                                                     v-model="select_number_of_lines"
-                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', animate: false, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                                                    :options="{locale: 'pl', placeholder: 'Wybierz...', openAbove: false, animate: false, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
                                                     <option selected disabled>{{$t('challengesNew.select')}}</option>
                                                     <option
