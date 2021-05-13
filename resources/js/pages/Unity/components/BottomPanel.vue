@@ -9,7 +9,7 @@
                         aria-expanded="false"
                     >
                         <div class="w-20 py-2 text-center flex justify-center items-center">
-                            <div class="w-16 h-16 flex-none image-fit overflow-hidden zoom-in">
+                            <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in">
                                 <img class=""
                                      alt="Siatka"
                                      src="/s3/builder_icons/grid_simple.png"
