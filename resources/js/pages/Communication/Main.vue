@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="w-full sm:w-auto flex">
-                            <button class="btn btn-primary shadow-md mr-2">Start a Video Call</button>
+<!--                            <button class="btn btn-primary shadow-md mr-2">Start a Video Call</button>-->
                             <div class="dropdown">
                                 <button class="dropdown-toggle btn px-2 box text-gray-700 dark:text-gray-300" aria-expanded="false">
                                     <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
