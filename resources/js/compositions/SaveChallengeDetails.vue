@@ -8,11 +8,11 @@ import {useToast} from "vue-toastification";
 
 const toast = useToast();
 
-export default function SaveChallenge(data) {
+export default function SaveChallengeDetails(data,id) {
     const list = ref([]);
 
-    async function saveChallenge(data) {
-        axios.post('/api/challenge/user/create', {data})
+    async function saveChallengeDetails(data,id) {
+        axios.post(`/api/challenge/user/save/details/${id}`, {data})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
@@ -25,7 +25,7 @@ export default function SaveChallenge(data) {
             })
     }
 
-    saveChallenge(data);
+    saveChallengeDetails(data,id);
 
     return {
         list

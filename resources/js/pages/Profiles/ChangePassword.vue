@@ -81,13 +81,14 @@ export default {
                         .then(response => {
                             console.log(response.data)
                             if (response.data.success) {
-                                toast.success('Success');
                                 let user = response.data.payload;
                                 store.dispatch('login/login', {
                                     user
                                 });
+                                toast.success(response.data.message);
+
                             } else {
-                                toast.error("Error!");
+                                toast.error(response.data.message);
                             }
                         })
                 })

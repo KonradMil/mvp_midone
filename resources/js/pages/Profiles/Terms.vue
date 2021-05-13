@@ -92,7 +92,10 @@
                 >{{$t('profiles.informService')}}</label
                 >
             </div>
+            <button class="btn btn-primary w-20 mt-3" @click="save">{{$t('profiles.save')}}</button>
         </div>
+
+
     </div>
 </template>
 

@@ -75,6 +75,7 @@ import OperationalAnalysisDialog from "./right-panel/OperationalAnalysisDialog";
 import OperationDialog from "./right-panel/OperationDialog";
 import SettingsDialog from "./right-panel/SettingsDialog";
 import SaveChallengeDescription from "../../../compositions/SaveChallengeDescription";
+import SaveChallengeDetails from "../../../compositions/SaveChallengeDetails";
 
 export default {
     name: "RightPanel",
@@ -124,9 +125,10 @@ export default {
             } else if (content.value === 'financial') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'settings') {
-                emitter.emit('rightpanelaction', {
-                    action: 'updateAnimable', data:animable.value
-                });
+                // emitter.emit('rightpanelaction', {
+                //     // action: 'updateAnimable', data:animable.value{
+                // });
+                saveChallengeDetailsRepo();
             } else if (content.value === 'line') {
                 console.log('HERE IMPORTA');
                 console.log({layers: line.value});
@@ -151,6 +153,7 @@ export default {
         }, () => {
 
         });
+
 
         const showPanel = () => {
             cash("#right-panel").modal("show");
@@ -232,6 +235,7 @@ export default {
 
         onMounted(() => {
             // showPanel();
+            saveChallengeDetailsRepo('');
         });
 
         const saveChallengeRepo = async (data) => {
@@ -239,6 +243,10 @@ export default {
                 name: data.name,
                 description: data.description,
             });
+        }
+
+        const saveChallengeDetailsRepo = async () => {
+            SaveChallengeDetails(technical.value, technical.value.id);
         }
 
         const addTeam = () => {
