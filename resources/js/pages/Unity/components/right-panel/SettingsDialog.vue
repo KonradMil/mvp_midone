@@ -157,7 +157,7 @@
                         <TailSelect
                             id="input-wizard-10"
                             v-model="technical.work_shifts"
-                            :options="{locale: 'pl', placeholder: sels.select_work_shifts.find(i => i.value === technical.work_shifts).name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                            :options="{locale: 'pl', placeholder: sels.select_work_shifts.find(i => i.value === technical.work_shifts).name, limit: 'Nie można wybrać więcej', openAbove: false, search: false, hideSelected: false, classNames: 'w-full' }"
                         >
                             <option selected disabled>{{$t('challengesNew.select')}}</option>
                             <option
