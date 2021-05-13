@@ -24,6 +24,7 @@ import TopButtons from "./components/TopButtons";
 import BottomPanel from "./components/BottomPanel";
 import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
+import router from "../../router";
 
 const ww = WindowWatcher();
 
@@ -164,7 +165,7 @@ export default {
                     gameWindow.value.setFullscreen();
                     break;
                 case 'logout':
-                    $router.push('/challenges')
+                    router.push('/challenges')
                     break;
                 case 'orto':
                     handleUnityActionOutgoing({action: 'ChangeCamera', data: 2});
