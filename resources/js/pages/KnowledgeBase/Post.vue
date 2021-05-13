@@ -16,7 +16,7 @@
                 <a href="" class="font-medium">{{ post.name }}</a>
                 <div class="flex text-gray-600 truncate text-xs mt-0.5">
                     <a class="text-theme-1 dark:text-theme-10 inline-block truncate" href="">
-                        {{ post.category }}
+                        {{ categories[post.category].name }}
                     </a>
                 </div>
             </div>
