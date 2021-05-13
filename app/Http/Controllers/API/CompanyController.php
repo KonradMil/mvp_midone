@@ -26,7 +26,6 @@ class CompanyController extends Controller
     }
     public function getUserCompanies()
     {
-
         return response()->json([
            'success' => true,
            'message' => 'Pobrano poprawnie',

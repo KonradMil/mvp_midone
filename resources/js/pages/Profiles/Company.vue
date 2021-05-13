@@ -28,7 +28,7 @@
                     class="form-control"
                     v-model="company.regon"
                 />
-                <button class="btn btn-primary w-1/4 mt-2" @click="searchRegon">{{$t('profiles.searchFor')}} REGON</button>
+                <button class="btn btn-primary w-1/3 mt-2" @click="searchRegon">{{$t('profiles.searchFor')}} REGON</button>
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
                 <label for="input-wizard-4" class="form-label">KRS</label>
