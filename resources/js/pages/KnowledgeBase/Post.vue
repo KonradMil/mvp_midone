@@ -51,7 +51,7 @@
         <div class="p-5">
             <div class="h-64 w-100 object-cover" :style="'background-image: url(\'' + post.poster + '\'); background-size: cover;'">
                     <PlayIcon v-if="!play[post.id]" @click="playVideo(post.id)" class="cursor-pointer absolute -mt-8 w-14 h-14" style="color: #fff; margin-top: 6.5rem; margin-left: 13rem; background-color: #930f68; border-radius: 50%; padding: 10px; padding-left: 15px;"/>
-                <YoutubeVue3 v-if="play[post.id]" ref="youtube" videoid="neAFHplKu-Y" :loop="false" class="w-100 h-64" style="width: 100%;"/>
+                <YoutubeVue3 v-if="play[post.id]" ref="youtube" :videoid="" :loop="false" class="w-100 h-64" style="width: 100%;"/>
             </div>
             <a href="" class="block font-medium text-base mt-5"></a>
             <div class="text-gray-700 dark:text-gray-600 mt-2">

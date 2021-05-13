@@ -47,6 +47,7 @@ class KnowledgebaseController extends Controller
         $post->category = $input['category'];
         $post->poster = 'http://img.youtube.com/vi/' . $input['youtube'] .'/hqdefault.jpg';
         $post->published = (int)$input['published'];
+        $post->video_id = $input['youtube'];
         $post->save();
 
         return response()->json([
