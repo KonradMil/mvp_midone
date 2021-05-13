@@ -166,6 +166,8 @@ import GetTeams from "../../compositions/GetTeams"
 import Company from "./Company"
 import Terms  from "./Terms"
 import ChangePassword from "./ChangePassword";
+import Socials from "./Socials";
+
 const toast = useToast();
 
 export default defineComponent({
@@ -176,6 +178,7 @@ export default defineComponent({
         Dropzone,
         Company,
         Terms,
+        Socials
     },
     setup() {
         const activeTab = ref('personalia');
