@@ -167,7 +167,7 @@ export default defineComponent({
     const menu = require('../../json/main_menu.json');
     const formattedMenu = ref([]);
     const sideMenu = computed(() =>
-            nestedMenu(menu, route)
+            nestedMenu(menu.menu, route)
     );
 
     watch(
