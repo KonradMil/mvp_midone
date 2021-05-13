@@ -81,7 +81,7 @@
                             v-if="challenge.status == 0"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
-                            @click="publish"
+                            @click="publish(challenge.id)"
                         >
                             Opublikuj
                         </button>
@@ -89,7 +89,7 @@
                             v-if="challenge.status == 1 && challenge.solutions.length == 0"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
-                            @click="unpublish"
+                            @click="unpublish(challenge.id)"
                         >
                             Odpublikuj
                         </button>
@@ -183,7 +183,7 @@ export default defineComponent({
             newProjectsRef.value = el;
         });
 
-        const publish = () => {
+        const publish = (id) => {
             axios.post('/api/challenge/publish', {id: id})
                 .then(response => {
                     // console.log(response.data)
@@ -196,7 +196,7 @@ export default defineComponent({
                 })
         }
 
-        const unpublish = () => {
+        const unpublish = (id) => {
             axios.post('/api/challenge/unpublish', {id: id})
                 .then(response => {
                     // console.log(response.data)
