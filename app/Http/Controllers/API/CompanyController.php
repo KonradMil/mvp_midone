@@ -27,7 +27,7 @@ class CompanyController extends Controller
     public function getUserCompanies()
     {
 
-        dd(Auth::user()->with('companies'));
+        dd(Auth::user()->with('companies')->get());
         return response()->json([
            'success' => true,
            'message' => 'Pobrano poprawnie',
