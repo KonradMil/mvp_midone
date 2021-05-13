@@ -40,7 +40,7 @@
                         <img
                             alt="Icewall Tailwind HTML Admin Template"
                             class="rounded-full"
-                            :src="'s3/' + challenge.screenshot_path"
+                            :src="'/' + challenge.screenshot_path"
                         />
                     </div>
                     <div class="ml-3 mr-auto" @click="$router.push( {path : '/challenges/card/' + challenge.id})">
@@ -88,7 +88,7 @@
                         <img
                             alt="Icewall Tailwind HTML Admin Template"
                             class="rounded-md"
-                            :src="'s3/' + challenge.screenshot_path"
+                            :src="'/' + challenge.screenshot_path"
                         />
                     </div>
                     <a href="" class="block font-medium text-base mt-5"></a>

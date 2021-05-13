@@ -1,16 +1,11 @@
 <template>
-    <div
-        class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box"
-    >
-        <div
-            class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4"
-        >
+    <div class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+        <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
             <div class="w-10 h-10 flex-none image-fit">
                 <img
                     alt="Icewall Tailwind HTML Admin Template"
                     class="rounded-full w-100"
-                    :src="post.poster"
-                />
+                    :src="post.poster"/>
             </div>
             <div class="ml-3 mr-auto">
                 <a href="" class="font-medium">{{ post.name }}</a>
@@ -24,23 +19,20 @@
                 <a
                     href="javascript:;"
                     class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300"
-                    aria-expanded="false"
-                >
+                    aria-expanded="false">
                     <MoreVerticalIcon class="w-5 h-5"/>
                 </a>
                 <div class="dropdown-menu w-40">
                     <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
                         <a
                             href=""
-                            class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                        >
+                            class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                             <Edit2Icon class="w-4 h-4 mr-2"/>
                             Edit Post
                         </a>
                         <a
                             href=""
-                            class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                        >
+                            class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                             <TrashIcon class="w-4 h-4 mr-2"/>
                             Delete Post
                         </a>
