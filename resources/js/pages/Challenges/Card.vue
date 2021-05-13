@@ -234,7 +234,9 @@ export default defineComponent({
             challenge,
             types,
             activeTab,
-            user
+            user,
+            publish,
+            unpublish
         };
     }
 });
