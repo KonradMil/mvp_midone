@@ -164,9 +164,10 @@ export default defineComponent({
     const router = useRouter();
     const store = useStore();
     const user = ref({});
+    const menu = require('../../json/main_menu.json');
     const formattedMenu = ref([]);
     const sideMenu = computed(() =>
-            nestedMenu(store.state.sideMenu.menu, route)
+            nestedMenu(menu.menu, route)
     );
 
     watch(
