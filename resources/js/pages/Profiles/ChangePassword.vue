@@ -86,8 +86,10 @@ export default {
                                 store.dispatch('login/login', {
                                     user
                                 });
+                                toast.success(response.data.message);
+
                             } else {
-                                toast.error("Error!");
+                                toast.error(response.data.message);
                             }
                         })
                 })
