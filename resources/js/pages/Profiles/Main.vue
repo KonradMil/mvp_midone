@@ -280,7 +280,7 @@ export default defineComponent({
         const save = () => {
             console.log('here');
             if(formData.name < minLength || formData.name < minLength) {
-                toast.warning('Imie i nazwisko musi sie skladac z conajmniej 3 znakow');
+                // toast.warning('Imie i nazwisko musi sie skladac z conajmniej 3 znakow');
             }
             validate.value.$touch();
             if (validate.value.$invalid) {
