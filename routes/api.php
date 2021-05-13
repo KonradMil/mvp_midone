@@ -53,6 +53,8 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
     Route::post('user/like', [ChallengeController::class, 'likeChallenge']);
     Route::post('user/comment', [ChallengeController::class, 'commentChallenge']);
     Route::post('images/store', [ChallengeController::class, 'storeImage']);
+    Route::post('publish', [ChallengeController::class, 'publish']);
+    Route::post('unpublish', [ChallengeController::class, 'unpublish']);
 });
 
 

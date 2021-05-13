@@ -222,4 +222,30 @@ class ChallengeController extends Controller
             'payload' => $challenge
         ]);
     }
+
+    public function publish(Request $request)
+    {
+        $challenge = Challenge::find($request->input('id'));
+        $challenge->status = 1;
+        $challenge->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Opublikowano poprawnie.',
+            'payload' => $challenge
+        ]);
+    }
+
+    public function unpublish(Request $request)
+    {
+        $challenge = Challenge::find($request->input('id'));
+        $challenge->status = 0;
+        $challenge->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Odpublikowano poprawnie',
+            'payload' => $challenge
+        ]);
+    }
 }

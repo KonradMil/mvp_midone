@@ -81,6 +81,7 @@
                             v-if="challenge.status == 0"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
+                            @click="publish"
                         >
                             Opublikuj
                         </button>
@@ -88,6 +89,7 @@
                             v-if="challenge.status == 1 && challenge.solutions.length == 0"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
+                            @click="unpublish"
                         >
                             Odpublikuj
                         </button>
@@ -181,6 +183,31 @@ export default defineComponent({
             newProjectsRef.value = el;
         });
 
+        const publish = () => {
+            axios.post('/api/challenge/publish', {id: id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        console.log(response.data.payload);
+                        challenge.value = response.data.payload;
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        }
+
+        const unpublish = () => {
+            axios.post('/api/challenge/unpublish', {id: id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        console.log(response.data.payload);
+                        challenge.value = response.data.payload;
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        }
 
         const prevAnnouncement = () => {
             const el = announcementRef.value;
