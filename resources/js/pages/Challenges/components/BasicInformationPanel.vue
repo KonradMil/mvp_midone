@@ -57,7 +57,7 @@
                           }">
                         <div class="h-64 px-2">
                             <div class="h-full image-fit rounded-md overflow-hidden">
-                                <img :alt="challenge.name" :src="'/s3/' + challenge.screenshot_path"/>
+                                <img :alt="challenge.name" :src="'/' + challenge.screenshot_path"/>
                             </div>
                         </div>
                     </TinySlider>
