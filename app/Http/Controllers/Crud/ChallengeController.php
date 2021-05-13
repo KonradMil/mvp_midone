@@ -90,7 +90,6 @@ class ChallengeController extends Controller
 
         }
 
-
         if(isset($input->status)){
             $query->where('status', '=', $input->status);
         }
@@ -227,6 +226,7 @@ class ChallengeController extends Controller
     {
         $challenge = Challenge::find($request->input('id'));
         $challenge->status = 1;
+        $challenge->stage = 1;
         $challenge->save();
 
         return response()->json([
@@ -240,6 +240,7 @@ class ChallengeController extends Controller
     {
         $challenge = Challenge::find($request->input('id'));
         $challenge->status = 0;
+        $challenge->stage = 0;
         $challenge->save();
 
         return response()->json([
