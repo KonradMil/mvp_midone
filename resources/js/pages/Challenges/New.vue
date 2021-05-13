@@ -582,7 +582,7 @@ export default {
         }
 
         const handleCallback = (resp) => {
-            console.log(resp);
+            console.log('RESPPPPPPPP' + resp);
             router.push({ name: 'challengeStudio', params : {id: resp.id, type: 'challenge', load: resp}})
         };
 
