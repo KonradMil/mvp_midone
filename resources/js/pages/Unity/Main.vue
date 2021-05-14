@@ -283,14 +283,14 @@ export default {
             currentRadialMenu.value = radialMenuEdit.value;
             mode.value = 'edit';
             if(props.type == undefined) {
-                type.value = $cookies.get('type');
-                id.value = $cookies.get('id');
+                type.value = this.$cookies.get('type');
+                id.value = this.$cookies.get('id');
 
             } else {
                 type.value = props.type;
                 id.value = props.id;
-                $cookies.set('type', props.type);
-                $cookies.set('id', props.id);
+                this.$cookies.set('type', props.type);
+                this.$cookies.set('id', props.id);
             }
 
         });
