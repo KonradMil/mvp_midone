@@ -282,8 +282,17 @@ export default {
             radialMenuLayout.value = require("../../json/radial_layout.json");
             currentRadialMenu.value = radialMenuEdit.value;
             mode.value = 'edit';
-            type.value = props.type;
-            id.value = props.id;
+            if(props.type == undefined) {
+                type.value = $cookies.get('type');
+                id.value = $cookies.get('id');
+
+            } else {
+                type.value = props.type;
+                id.value = props.id;
+                $cookies.set('type', props.type);
+                $cookies.set('id', props.id);
+            }
+
         });
 
         return {

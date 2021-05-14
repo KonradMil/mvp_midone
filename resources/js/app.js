@@ -16,8 +16,9 @@ import VueFinalModal from 'vue-final-modal'
 import Echo from 'laravel-echo';
 import mitt from 'mitt'
 import lazyPlugin from 'vue3-lazy'
+import VueCookies from 'vue3-cookies'
 
-const emitter = mitt()
+const emitter = mitt();
 const options = {
 
 };
@@ -70,6 +71,9 @@ router.beforeEach((to, from, next) => {
         next();
     }
 })
+app.use(VueCookies, {
+    expireTimes: "1h",
+});
 app.use(VueFinalModal)
 app.use(router)
 app.use(store)
