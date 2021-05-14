@@ -171,6 +171,7 @@ import {defineComponent, onMounted, ref} from "vue";
 
             return {
                 show,
+                emailNew,
                 showAddToTeamModal,
                 modalClosed,
                 sendEmail
