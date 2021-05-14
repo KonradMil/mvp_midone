@@ -20,6 +20,7 @@
                 >{{$t('profiles.acceptProvisions')}}</label
                 >
                 <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
+                   @click.prevent="$router.push({name: 'privacyPolicy'})"
                 >{{$t('profiles.privacyPolicy')}}</a
                 >.
             </div>
@@ -36,6 +37,7 @@
                 >{{$t('profiles.accept')}}</label
                 >
                 <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
+                   @click.prevent="$router.push({name: 'termsService'})"
                 > {{$t('profiles.termsService')}} </a
                 >{{$t('profiles.servicesPlatform')}}
             </div>
@@ -52,6 +54,7 @@
                 >{{$t('profiles.accept')}}</label
                 >
                 <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
+                   @click.prevent="$router.push({name: 'priceList'})"
                 >{{$t('profiles.priceList')}}</a
                 >.
             </div>
