@@ -134,6 +134,7 @@ export default {
                 console.log({layers: line.value});
                 emitter.emit('rightpanelaction', { action: 'updateLine', data:{layers: line.value}, json: true });
             }
+            hidePanel();
         }
 
         const object = computed(() => {
