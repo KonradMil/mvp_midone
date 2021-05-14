@@ -65,8 +65,9 @@ export default {
         }, {deep: true})
 
 
-        watch(l.cargo.model_name, (lab, prevLabel) => {
+        watch(l.model_name, (lab, prevLabel) => {
             console.log('CHANGE');
+            l.cargo.model_name = l.model_name;
             context.emit("update:line", lab);
         }, {deep: true})
 
