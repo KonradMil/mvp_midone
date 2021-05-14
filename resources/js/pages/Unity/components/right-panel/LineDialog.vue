@@ -53,10 +53,13 @@ export default {
         const l = ref({interval: 10, delay: 0, model_name: '', cargo: {}, animables: []});
         const detailsAr = ref([]);
 
-        const app = getCurrentInstance();
-        const emitter = app.appContext.config.globalProperties.emitter;
 
         watch(l, (lab, prevLabel) => {
+            console.log('CHANGE');
+            context.emit("update:line", lab);
+        }, {deep: true})
+
+        watch(l.cargo.model_name, (lab, prevLabel) => {
             console.log('CHANGE');
             context.emit("update:line", lab);
         }, {deep: true})
