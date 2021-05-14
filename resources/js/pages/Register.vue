@@ -186,6 +186,7 @@
                             >Akceptuję </label
                             >
                             <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
+                               @click.prevent="$router.push({name: 'termsService'})"
                             >warunki świadczenia </a
                             > usług na platformie DBR77.com.
                         </div>
@@ -211,6 +212,7 @@
                             >Akceptuję </label
                             >
                             <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
+                               @click.prevent="$router.push({name: 'priceList'})"
                             >cennik usług</a
                             >.
                         </div>

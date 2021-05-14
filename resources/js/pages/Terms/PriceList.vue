@@ -176,7 +176,7 @@
 
 <script>
 export default {
-name: "privacyPolicy.vue"
+name: "PriceList"
 }
 </script>
 

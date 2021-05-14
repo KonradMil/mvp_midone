@@ -25,6 +25,8 @@ import Card from "../pages/Challenges/Card";
 import Communication from "../pages/Communication/Main";
 import ReportReview from "../pages/Communication/ReportReview";
 import PrivacyPolicy from "../pages/Terms/PrivacyPolicy";
+import TermsService from "../pages/Terms/TermsService";
+import PriceList from "../pages/Terms/PriceList";
 
 export const routes = [
     {
@@ -66,6 +68,16 @@ export const routes = [
         name: 'privacyPolicy',
         path: '/policy',
         component: PrivacyPolicy,
+    },
+    {
+        name: 'termsService',
+        path: '/terms-service',
+        component: TermsService,
+    },
+    {
+        name: 'priceList',
+        path: '/price-list',
+        component: PriceList,
     },
     {
         path: "/",
