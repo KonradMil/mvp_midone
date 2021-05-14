@@ -160,6 +160,7 @@
                             >Akceptuję postanowienia </label
                             >
                             <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
+                            @click.prevent="$router.push({name: 'privacyPolicy'})"
                             >polityki prywatności.</a
                             >.
                         </div>

@@ -24,6 +24,7 @@ import ModelEdit from "../pages/Models/ModelEdit";
 import Card from "../pages/Challenges/Card";
 import Communication from "../pages/Communication/Main";
 import ReportReview from "../pages/Communication/ReportReview";
+import PrivacyPolicy from "../pages/Terms/PrivacyPolicy";
 
 export const routes = [
     {
@@ -60,6 +61,11 @@ export const routes = [
         path: '/studio/solution',
         component: Main,
         props: true
+    },
+    {
+        name: 'privacyPolicy',
+        path: '/policy',
+        component: PrivacyPolicy,
     },
     {
         path: "/",
