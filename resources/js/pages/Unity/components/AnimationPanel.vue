@@ -182,6 +182,7 @@ export default {
                     emitter.emit('unityoutgoingaction', {action: 'pauseAnimation', data: ''});
                     break;
                 case 'play':
+                    console.log(animation);
                     emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: animation})
                     break;
                 case 'addline':
