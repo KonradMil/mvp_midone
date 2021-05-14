@@ -68,6 +68,8 @@ export default {
 
         watch(selected, (lab, prevLabel) => {
             console.log('CHANGE');
+            console.log( l.cargo);
+            console.log( l);
             l.cargo.model_name = detailsAr.value[lab].model_id;
             l.cargo.prefab_url = detailsAr.value[lab].prefab_url;
             context.emit("update:line", lab);
