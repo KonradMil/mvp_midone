@@ -308,7 +308,6 @@ export default {
                 setCookie('type', props.type, 1);
                 setCookie('id', props.id, 1);
             }
-
         });
 
         return {
