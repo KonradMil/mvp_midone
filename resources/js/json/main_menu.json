@@ -21,24 +21,6 @@
                     "pageName": "challenges",
                     "title": "Wszystkie",
                     "ignore": true
-                },
-                {
-                    "icon": "",
-                    "pageName": "challenges-active",
-                    "title": "Aktywne",
-                    "ignore": true
-                },
-                {
-                    "icon": "",
-                    "pageName": "challenges-archived",
-                    "title": "Archiwalne",
-                    "ignore": true
-                },
-                {
-                    "icon": "",
-                    "pageName": "challenges-watched",
-                    "title": "Obserwowane",
-                    "ignore": true
                 }
             ]
         },
@@ -51,24 +33,6 @@
                     "icon": "",
                     "pageName": "solutions",
                     "title": "Wszystkie",
-                    "ignore": true
-                },
-                {
-                    "icon": "",
-                    "pageName": "solutions-active",
-                    "title": "Aktywne",
-                    "ignore": true
-                },
-                {
-                    "icon": "",
-                    "pageName": "solutions-archived",
-                    "title": "Archiwalne",
-                    "ignore": true
-                },
-                {
-                    "icon": "",
-                    "pageName": "solutions-watched",
-                    "title": "Obserwowane",
                     "ignore": true
                 }
             ]
