@@ -23,7 +23,7 @@
         <label for="modal-form-1" class="form-label">Detal</label>
         <TailSelect
             id="post-form-3"
-            v-model="l.model_name"
+            v-model="selected"
             :options="{
                                 locale: 'pl',
                                 placeholder: 'Wybierz kategorie...',
@@ -33,7 +33,7 @@
                                 classNames: 'w-full'
                                 }">
             <option selected disabled>{{ $t('challengesNew.selectCategories') }}</option>
-            <option v-for="detail in detailsAr" :value="detail.model_id">{{ detail.model_name }}</option>
+            <option v-for="(detail, index) in detailsAr" :value="index">{{ detail.model_name }}</option>
         </TailSelect>
     </div>
 </template>
@@ -56,6 +56,7 @@ export default {
                 prefab_url: "https://devsys.appworks-dev.pl/models/carton_sredni",
                 additional_data: ""
             }, animables: []});
+        const selected = ref(0);
         const detailsAr = ref([]);
 
 
@@ -65,9 +66,10 @@ export default {
         }, {deep: true})
 
 
-        watch(l.model_name, (lab, prevLabel) => {
+        watch(selected, (lab, prevLabel) => {
             console.log('CHANGE');
-            l.cargo.model_name = l.model_name;
+            l.cargo.model_name = detailsAr.value[lab].model_id;
+            l.cargo.prefab_url = detailsAr.value[lab].prefab_url;
             context.emit("update:line", lab);
         }, {deep: true})
 
@@ -106,7 +108,8 @@ export default {
 
         return {
             l,
-            detailsAr
+            detailsAr,
+            selected
         }
     }
 }
