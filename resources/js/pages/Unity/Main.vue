@@ -25,8 +25,8 @@ import BottomPanel from "./components/BottomPanel";
 import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
 import router from "../../router";
-import { VueCookies as $cookies } from 'vue3-cookies'
-
+// import { VueCookies as $cookies } from 'vue3-cookies'
+import {VueCookies as $cookies} from 'vue3-cookies'
 const ww = WindowWatcher();
 
 export default {
@@ -265,6 +265,12 @@ export default {
                 })
         }
 
+        const getCookies = (name) => {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        };
+
         onMounted(() => {
 
             //REMOVES PADDING
@@ -284,14 +290,14 @@ export default {
             currentRadialMenu.value = radialMenuEdit.value;
             mode.value = 'edit';
             if(props.type == undefined) {
-                type.value = $cookies.get('type');
-                id.value = $cookies.get('id');
+                type.value = getCookies('type');
+                id.value = getCookies('id');
 
             } else {
                 type.value = props.type;
                 id.value = props.id;
-                $cookies.set('type', props.type);
-                $cookies.set('id', props.id);
+                document.cookie = "type=" + props.type;
+                document.cookie = "id=" + props.id;
             }
 
         });
