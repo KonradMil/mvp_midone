@@ -25,7 +25,7 @@ import BottomPanel from "./components/BottomPanel";
 import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
 import router from "../../router";
-import { VueCookieNext as $cookie } from 'vue-cookie-next'
+import { VueCookies as $cookies } from 'vue3-cookies'
 
 const ww = WindowWatcher();
 
