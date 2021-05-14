@@ -66,7 +66,7 @@
                     </div>
                     <div class="p-5 w-full"  v-if="category == 1 && subcategory == 0 && selectedBrand == null" v-for="(brand, index) in brands" :key="'subcat_' + index" @click="selectedBrand = brand.brand; getModelRepositories();">
                         <div class="flex-none pos-image relative block w-full">
-                            <div class="pos-image__preview image-fit h-24 w-full shadow-md rounded-md  zoom-in">
+                            <div class="pos-image__preview image-fit h-24 w-full shadow-md rounded-md zoom-in">
                                 <img
                                     class="w-full p-4"
                                     v-lazy="brand.image"
@@ -75,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="overflow-y: scroll; height: 100%;"  v-if="!(category == 1 && subcategory == 0) || selectedBrand != null">
+                    <div style="overflow-y: scroll; height: 80vh"  v-if="!(category == 1 && subcategory == 0) || selectedBrand != null">
                         <div class=" p-5 w-full" v-for="(model, index) in models.list" :key="'model_' + index" @click="selectModel(model)">
                             <div class=" shadow-md rounded-md zoom-in">
                                 <div class="flex-none pos-image relative block w-full">
