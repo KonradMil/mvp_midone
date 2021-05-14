@@ -17,7 +17,7 @@ export default function SaveChallenge(data) {
                 if (response.data.success) {
                     // console.log(response.data);
                     list.value = response.data.payload;
-                    toast.error('Zapisano.');
+                    toast.success('Zapisano.');
                 } else {
                     toast.error(response.data.message);
                 }
