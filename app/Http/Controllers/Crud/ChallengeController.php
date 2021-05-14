@@ -139,8 +139,10 @@ class ChallengeController extends Controller
         $id = $request->input('id');
         $challenge = Challenge::find($id);
 //        Auth::user()->viaLoveReacter()->reactTo($challenge, 'Dislike');
-        Reaction::where('reactant_id', '=', $request->input('id'))->where('reacter_id', '=', Auth::user()->id)->first();
-        return response()->json([
+       $r = Reaction::where('reactant_id', '=', $request->input('id'))->where('reacter_id', '=', Auth::user()->id)->first();
+       $r->delete();
+
+       return response()->json([
             'success' => true,
             'message' => 'Odlajkowane.',
             'payload' => ''
