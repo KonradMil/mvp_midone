@@ -46,9 +46,9 @@ export default {
 
     },
     props: {
-        line: Object
+        modelValue: Object
     },
-    emits: ["update:line"],
+    emits: ["update:modelValue"],
     setup(props, context) {
         const l = ref({interval: 10, delay: 0, model_name: '', cargo: {
                 model_name: "9195a37a-9a13-12e3-8591-012165a3a613",
@@ -62,7 +62,7 @@ export default {
 
         watch(l, (lab, prevLabel) => {
             console.log('CHANGE');
-            context.emit("update:line", lab);
+            context.emit("update:modelValue", lab);
         }, {deep: true})
 
 
@@ -76,32 +76,32 @@ export default {
 
         onMounted(() => {
             console.log('HERE I GOT AGAINAAAA');
-            console.log(props.line);
-            if (props.line.data.interval != undefined && props.line.data.interval != '') {
-                l.value.interval = parseInt(props.line.data.interval);
+            console.log(props.modelValue);
+            if (props.modelValue.data.interval != undefined && props.modelValue.data.interval != '') {
+                l.value.interval = parseInt(props.modelValue.data.interval);
             } else {
                 l.value.interval = 10;
             }
 
-            if (props.line.data.delay != undefined && props.line.data.delay != '') {
-                l.value.delay = parseInt(props.line.data.delay);
+            if (props.modelValue.data.delay != undefined && props.modelValue.data.delay != '') {
+                l.value.delay = parseInt(props.modelValue.data.delay);
             } else {
                 l.value.delay = 0;
             }
 
-            if(props.line.data.cargo != undefined) {
-                if (props.line.data.cargo.model_name != undefined && props.line.data.cargo.model_name != '') {
-                    l.value.model_name = props.line.data.cargo.model_name;
+            if(props.modelValue.data.cargo != undefined) {
+                if (props.modelValue.data.cargo.model_name != undefined && props.modelValue.data.cargo.model_name != '') {
+                    l.value.model_name = props.modelValue.data.cargo.model_name;
                 } else {
                     l.value.model_name = 'carton';
                 }
             }
 
             console.log('HERE I GOT AGAIN');
-            console.log(props.line.data);
-            l.value.index = parseInt(props.line.data.index);
-            l.value.cargo = props.line.data.cargo;
-            l.value.animables = props.line.data.animables;
+            console.log(props.modelValue.data);
+            l.value.index = parseInt(props.modelValue.data.index);
+            l.value.cargo = props.modelValue.data.cargo;
+            l.value.animables = props.modelValue.data.animables;
 
             detailsAr.value = require('../../../../json/details.json');
         });
