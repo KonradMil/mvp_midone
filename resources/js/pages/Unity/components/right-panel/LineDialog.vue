@@ -50,7 +50,12 @@ export default {
     },
     emits: ["update:line"],
     setup(props, context) {
-        const l = ref({interval: 10, delay: 0, model_name: '', cargo: {}, animables: []});
+        const l = ref({interval: 10, delay: 0, model_name: '', cargo: {
+                model_name: "9195a37a-9a13-12e3-8591-012165a3a613",
+                model_id: "Karton średni",
+                prefab_url: "https://beta.dbr77.com/models/carton_sredni",
+                additional_data: ""
+            }, animables: []});
         const detailsAr = ref([]);
 
 
@@ -60,7 +65,7 @@ export default {
         }, {deep: true})
 
 
-        watch(l.cargo, (lab, prevLabel) => {
+        watch(l.cargo.model_name, (lab, prevLabel) => {
             console.log('CHANGE');
             context.emit("update:line", lab);
         }, {deep: true})
