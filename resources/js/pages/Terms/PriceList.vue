@@ -1,8 +1,5 @@
 <template>
     <div>
-        <div class="intro-y flex items-center mt-8">
-            <h2 class="text-lg font-medium mr-auto">Image Zoom</h2>
-        </div>
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Image Zoom -->
             <div class="intro-y col-span-12 lg:col-span-6">
@@ -10,20 +7,7 @@
                     <div
                         class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5"
                     >
-                        <h2 class="font-medium text-base mr-auto">Implementation</h2>
-                        <div
-                            class="w-full sm:w-auto flex items-center sm:ml-auto mt-3 sm:mt-0"
-                        >
-                            <label class="form-check-label ml-0 sm:ml-2" for="show-example-1"
-                            >Show example code</label
-                            >
-                            <input
-                                id="show-example-1"
-                                data-target="#image-zoom"
-                                class="show-code form-check-switch mr-0 ml-3"
-                                type="checkbox"
-                            />
-                        </div>
+                        <h2 class="font-medium text-base mr-auto">Cennik Usług Platformy DBR77.com</h2>
                     </div>
                     <div id="image-zoom" class="p-5">
                         <div class="preview">
