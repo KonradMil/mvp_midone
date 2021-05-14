@@ -290,9 +290,10 @@ export default {
             currentRadialMenu.value = radialMenuEdit.value;
             mode.value = 'edit';
             if(props.type == undefined) {
+                console.log(document.cookies);
                 type.value = getCookies('type');
                 id.value = getCookies('id');
-
+                console.log(getCookies('id'));
             } else {
                 type.value = props.type;
                 id.value = props.id;
