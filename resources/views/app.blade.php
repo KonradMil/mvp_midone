@@ -6,6 +6,7 @@
     <meta name="csrf-token" value="{{ csrf_token() }}"/>
     <title>{{env('APP_NAME')}}</title>
     <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
+    <link rel="icon" href="/favicon.ico">
 </head>
 <body>
 @if (Auth::check())
