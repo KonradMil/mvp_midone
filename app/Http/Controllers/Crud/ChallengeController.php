@@ -134,6 +134,18 @@ class ChallengeController extends Controller
         ]);
     }
 
+    public function dislikeChallenge(Request $request) {
+        $id = $request->input('id');
+        $challenge = Challenge::find($id);
+        Auth::user()->viaLoveReacter()->reactTo($challenge, 'Dislike');
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Odlajkowane.',
+            'payload' => ''
+        ]);
+    }
+
 
 
     public function storeImage(Request $request)

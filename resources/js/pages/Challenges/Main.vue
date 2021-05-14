@@ -111,16 +111,16 @@
                            tag="a"
                            href=""
                            class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 ml-auto"
-                           content="Share"
+                           content="Like"
                     >
                         <ThumbsUpIcon class="w-3 h-3"/>
                     </Tippy>
                     <Tippy v-if="challenge.liked"
-                           @click.prevent=""
+                           @click.prevent="dislike(challenge)"
                            tag="a"
                            href=""
                            class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white ml-2 ml-auto"
-                           content="Like"
+                           content="Unlike"
                     >
                         <ThumbsUpIcon class="w-3 h-3"/>
                     </Tippy>
@@ -232,12 +232,30 @@ export default {
                 })
         }
 
+        const dislike = async (challenge) => {
+            axios.post('api/challenge/user/dislike', {id: challenge.id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        // console.log(response.data);
+                        // challenge.likes = challenge.likes + 1;
+                        challenge.liked = true;
+                        console.log(challenge);
+                        emitter.emit('disliked', {id: challenge.id})
+                        // getChallengeRepositories();
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        }
+
         return {
             challenges,
             user,
             types,
             sels,
-            like
+            like,
+            dislike
         }
     },
     beforeRouteEnter(to, from, next) {

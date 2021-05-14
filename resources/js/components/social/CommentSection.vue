@@ -87,6 +87,16 @@ export default {
             }
         }
 
+        emitter.on('disliked', e =>  dislike(e.id) )
+
+        const dislike = (id) => {
+            console.log('LIKED EVENT ON');
+            console.log([id, obj.value]);
+            if(obj.value.id === id) {
+                obj.value.likes = obj.value.likes - 1;
+            }
+        }
+
         const addCommentObject = async (id) => {
             current_object_focus.value = id;
             axios.post('api/user/comment', {id: id, message: message.value, type: props.type})

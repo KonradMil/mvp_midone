@@ -51,6 +51,7 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
     Route::post('user/save', [ChallengeController::class, 'saveChallenge']);
     Route::post('user/save/details/{technical}', [ChallengeController::class, 'saveChallengeDetails']);
     Route::post('user/like', [ChallengeController::class, 'likeChallenge']);
+    Route::post('user/dislike', [ChallengeController::class, 'dislikeChallenge']);
     Route::post('user/comment', [ChallengeController::class, 'commentChallenge']);
     Route::post('images/store', [ChallengeController::class, 'storeImage']);
     Route::post('publish', [ChallengeController::class, 'publish']);
@@ -104,6 +105,7 @@ Route::group(['prefix' => 'teams', 'middleware' => 'auth:sanctum'], function () 
 Route::post('model/edit/{model}', [ModelController::class, 'editModel']);
 Route::post('model/get', [ModelController::class, 'getModel']);
 Route::post('model/delete', [ModelController::class, 'deleteModel']);
+
 Route::group(['prefix' => 'models', 'middleware' => 'auth:sanctum'], function () {
     Route::post('get', [ModelController::class, 'getModels']);
     Route::post('add', [ModelController::class, 'addModel']);
