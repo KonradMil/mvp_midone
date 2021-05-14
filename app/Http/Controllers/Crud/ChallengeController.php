@@ -9,6 +9,7 @@ use App\Models\Financial;
 use App\Models\TechnicalDetails;
 use App\Modules\Dbr\Module\Http\UnityController;
 use Carbon\Carbon;
+use Cog\Laravel\Love\Reaction\Models\Reaction;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -137,8 +138,8 @@ class ChallengeController extends Controller
     public function dislikeChallenge(Request $request) {
         $id = $request->input('id');
         $challenge = Challenge::find($id);
-        Auth::user()->viaLoveReacter()->reactTo($challenge, 'Dislike');
-
+//        Auth::user()->viaLoveReacter()->reactTo($challenge, 'Dislike');
+        Reaction::where('reactant_id', '=', $request->input('id'))->where('reacter_id', '=', Auth::user()->id)->first();
         return response()->json([
             'success' => true,
             'message' => 'Odlajkowane.',
