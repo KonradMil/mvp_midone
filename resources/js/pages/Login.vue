@@ -118,7 +118,7 @@
                     placeholder="Email"
                     v-model="emailNew"
                 />
-                <button class="btn btn-primary shadow-md mr-2" @click="sendEmail">Wyślij</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="reset">Wyślij</button>
             </div>
 
         </div>
@@ -133,7 +133,7 @@ import {defineComponent, onMounted, ref} from "vue";
     import { useToast } from "vue-toastification";
     import {useStore} from '../store';
     import Modal from "../components/Modal";
-    import AddTeamMember from "../compositions/AddTeamMember";
+    import ResetPassword from "../compositions/ResetPassword";
 
     const toast = useToast();
     const store = useStore();
@@ -152,11 +152,11 @@ import {defineComponent, onMounted, ref} from "vue";
             const modalClosed = () => {
                 show.value = false;
             }
-            const sendEmail = async () => {
+            const reset = async () => {
                 if(emailNew.value === '') {
                     toast.error('Email nie może być pusty');
                 } else {
-                    await AddTeamMember(emailNew.value)
+                    await ResetPassword(emailNew.value)
                     toast.success('Success!')
                 }
             }
@@ -174,7 +174,7 @@ import {defineComponent, onMounted, ref} from "vue";
                 emailNew,
                 showAddToTeamModal,
                 modalClosed,
-                sendEmail
+                reset
             };
         },
         data() {

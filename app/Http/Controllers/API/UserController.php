@@ -5,13 +5,16 @@ namespace App\Http\Controllers\API;
 use App\Mail\ChangePassword;
 use App\Mail\ForgotPassword;
 use App\Mail\TeamInvitation;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Mpociot\Teamwork\Facades\Teamwork;
 use Mpociot\Teamwork\TeamInvite;
 
@@ -26,9 +29,85 @@ class UserController extends Controller
             'payload' => $users
         ]);
     }
-    public function resetPassword(Request $request)
+    public function forgotPassword(Request $request)
     {
-        Mail::to([$request->email])->send(new ForgotPassword($request->email));
+        $request->validate(['email' => 'required|email']);
+
+        $token = Str::random(60);
+
+        Mail::to([$request->email])->send(new ForgotPassword($request->email, $token));
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Wysłano poprawnie',
+            'payload' => $token
+        ]);
+
+
+//        $status = Password::sendResetLink(
+//            $request->only('email')
+//            );
+//
+//        return $status === Password::RESET_LINK_SENT
+//            ? back()->with(['status' => __($status)])
+//            : back()->withErrors(['email' => __($status)]);
+
+
+
+//        if($status===Password::RESET_LINK_SENT){
+//            Mail::to([$request->email])->send(new ForgotPassword($request->email));
+//            return response()->json([
+//                'success' => true,
+//                'message' => 'Wysłano poprawnie',
+//                'payload' => $request
+//            ]);
+//        }
+//        else
+//        {
+//            return response()->json([
+//               'success' => false,
+//               'message' => 'Error email',
+//               'payload' => $request
+//            ]);
+//        }
+
+    }
+    public function resetPasswordToken(Request $request)
+    {
+        $request->validate([
+           'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function($user,$password) use ($request) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
+
+                $user->save();
+                event(new PasswordReset($user));
+            }
+        );
+
+            if($status==Password::PASSWORD_RESET){
+                Mail::to([$request->email])->send(new ForgotPassword($request->email));
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Wysłano poprawnie',
+                    'payload' => $request
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Error',
+                    'payload' => $request
+                ]);
+            }
     }
     public function changePassword(Request $request)
     {
