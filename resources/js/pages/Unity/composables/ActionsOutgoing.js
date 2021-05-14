@@ -134,7 +134,7 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function runAnimation (val) {
-        outgoing(game, 'StartAnimation', val);
+        outgoing(game, 'StartAnimation', val, true);
     }
 
     function pauseAnimation () {
