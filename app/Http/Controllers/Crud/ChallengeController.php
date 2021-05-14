@@ -184,17 +184,38 @@ class ChallengeController extends Controller
         $financial->challenge_id = $challenge->id;
         $financial->save();
 
-        $technical->detail_weight = (string)$request->detail_weight;
-        $technical->pick_quality = (string)$request->pick_quality;
-        $technical->detail_material = (string)$request->detail_material;
-        $technical->detail_size = (string)$request->detail_size;
-        $technical->detail_pick = (string)$request->detail_pick;
-        $technical->detail_position = (string)$request->detail_position;
-        $technical->detail_range = (string)$request->detail_range;
-        $technical->detail_destination = (string)$request->detail_destination;
-        $technical->number_of_lines = (string)$request->number_of_lines;
+        if(isset($request->detail_weight)){
+            $technical->detail_weight = (string)$request->detail_weight;
+        }
+        if(isset($request->pick_quality)){
+            $technical->pick_quality = (string)$request->pick_quality;
+        }
+        if(isset($request->detail_material)){
+            $technical->detail_material = (string)$request->detail_material;
+        }
+        if(isset($request->detail_size)){
+            $technical->detail_size = (string)$request->detail_size;
+        }
+        if(isset($request->detail_pick)){
+            $technical->detail_pick = (string)$request->detail_pick;
+        }
+        if(isset($request->detail_position)){
+            $technical->detail_position = (string)$request->detail_position;
+        }
+        if(isset($request->detail_range)){
+            $technical->detail_range = (string)$request->detail_range;
+        }
+        if(isset($request->detail_destination)){
+            $technical->detail_destination = (string)$request->detail_destination;
+        }
+        if(isset($request->number_of_lines)){
+            $technical->number_of_lines = (string)$request->number_of_lines ?? 1;
+        }
+        if(isset($request->work_shifts)){
+            $technical->work_shifts = (string)$request->work_shifts;
+        }
         $technical->cycle_time = 0;
-        $technical->work_shifts = (string)$request->work_shifts;
+
         $technical->challenge_id = $challenge->id;
         $technical->save();
 

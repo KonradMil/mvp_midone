@@ -150,9 +150,15 @@
 @import "components/ads-box";
 @import "components/full-calendar";
 @import "components/pristine";
-
+.form-check-input:focus, .form-control:focus {
+    outline: none !important;
+}
+.form-check-input[type=checkbox] {
+    background-color: #930f68 !important;
+    border-color: #930f68 !important;
+}
 .select-dropdown {
-    z-index: 999999999;
+    z-index: 999999999 !important;
 }
 .btn-primary {
     background-color: #930f68 !important;

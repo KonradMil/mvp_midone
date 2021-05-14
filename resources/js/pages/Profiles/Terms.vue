@@ -13,7 +13,7 @@
                 <input
                     id="rodo"
                     type="checkbox"
-                    class="form-check-input border mr-2"
+                    class="form-check-input border mr-2 ring-0"
                     :checked="user.privacy_policy"
                 />
                 <label class="cursor-pointer select-none" for="rodo"
@@ -29,7 +29,7 @@
                 <input
                     id="rodo3"
                     type="checkbox"
-                    class="form-check-input border mr-2"
+                    class="form-check-input border mr-2 ring-0"
                     :checked="user.terms"
                 />
                 <label class="cursor-pointer select-none" for="rodo3"
@@ -45,7 +45,7 @@
                 <input
                     id="rodo2"
                     type="checkbox"
-                    class="form-check-input border mr-2"
+                    class="form-check-input border mr-2 ring-0"
                     :checked="user.pricing"
                 />
                 <label class="cursor-pointer select-none" for="rodo2"
@@ -62,7 +62,7 @@
                 <input
                     id="1"
                     type="checkbox"
-                    class="form-check-input border mr-2"
+                    class="form-check-input border mr-2 ring-0"
                 />
                 <label class="cursor-pointer select-none" for="rodo2"
                 >{{$t('profiles.notifyQuestion')}}</label
@@ -74,7 +74,7 @@
                 <input
                     id="2"
                     type="checkbox"
-                    class="form-check-input border mr-2"
+                    class="form-check-input border mr-2 ring-0"
                 />
                 <label class="cursor-pointer select-none" for="rodo2"
                 >{{$t('profiles.informSolution')}}</label
@@ -86,7 +86,7 @@
                 <input
                     id="3"
                     type="checkbox"
-                    class="form-check-input border mr-2"
+                    class="form-check-input border mr-2 ring-0"
                 />
                 <label class="cursor-pointer select-none" for="rodo2"
                 >{{$t('profiles.informService')}}</label

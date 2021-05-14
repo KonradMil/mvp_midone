@@ -38,13 +38,13 @@
                     <input v-if="name_lang == 'pl'"
                         type="text"
                         class="intro-y form-control py-3 px-4 box pr-10 placeholder-theme-13"
-                        :placeholder="$t('global.name')"
+                        :placeholder="$t('global.name') + '*'"
                         v-model="name"
                     />
                     <input v-if="name_lang == 'en'"
                            type="text"
                            class="intro-y form-control py-3 px-4 box pr-10 placeholder-theme-13"
-                           :placeholder="$t('global.name')"
+                           :placeholder="$t('global.name') + '*'"
                            v-model="en_name"
                     />
                 </div>
@@ -425,7 +425,7 @@
                         />
                     </div>
                     <div class="mt-3">
-                        <label for="post-form-3" class="form-label">{{ $t('challengesNew.categories') }}</label>
+                        <label for="post-form-3" class="form-label">{{ $t('challengesNew.categories') }}*</label>
                         <TailSelect
                             id="post-form-3"
                             v-model="category"
@@ -467,8 +467,7 @@
                     </div>
                     <div class="form-check flex-col items-start mt-3">
                         <label for="post-form-5" class="form-check-label ml-0 mb-2"
-                        >{{ $t('challengesNew.publish') }}</label
-                        >
+                        >{{ $t('challengesNew.publish') }}</label>
                         <input id="post-form-5" class="form-check-switch" v-model="publish" type="checkbox"/>
                     </div>
                     <div class="form-check flex-col items-start mt-3">
@@ -578,28 +577,35 @@ export default {
         };
 
         const saveChallengeRepo = async () => {
-           let resp = await SaveChallenge({
-                name: name.value,
-                description: description.value,
-                type: category.value,
-                solution_deadline: solution_deadline.value,
-                offer_deadline: offer_deadline.value,
-                allowed_publishing: allowed_publishing.value,
-                detail_weight: select_detail_weight.value,
-                pick_quality: select_pick_quality.value,
-                detail_material: select_detail_material.value,
-                detail_size: select_detail_size.value,
-                detail_pick: select_detail_pick.value,
-                detail_position: select_detail_position.value,
-                detail_range: select_detail_range.value,
-                detail_destination: select_detail_destination.value,
-                number_of_lines: select_number_of_lines.value,
-                work_shifts: select_work_shifts.value,
-                teams: teamsAllowed.value,
-                tags: tagsSelected.value,
-                images: images.value
-            }, handleCallback);
-            // emitter.emit('changestudio', {val: 'challenge'});
+            if(name.value == undefined || name.value ==  '') {
+                toast.error("Nazwa jest wymagana.");
+            } else if (category.value == undefined || category.value == null) {
+                toast.error("Typ stanowiska jest wymagany");
+            } else {
+                let resp = await SaveChallenge({
+                    name: name.value,
+                    description: description.value,
+                    type: category.value,
+                    solution_deadline: solution_deadline.value,
+                    offer_deadline: offer_deadline.value,
+                    allowed_publishing: allowed_publishing.value,
+                    detail_weight: select_detail_weight.value,
+                    pick_quality: select_pick_quality.value,
+                    detail_material: select_detail_material.value,
+                    detail_size: select_detail_size.value,
+                    detail_pick: select_detail_pick.value,
+                    detail_position: select_detail_position.value,
+                    detail_range: select_detail_range.value,
+                    detail_destination: select_detail_destination.value,
+                    number_of_lines: select_number_of_lines.value,
+                    work_shifts: select_work_shifts.value,
+                    teams: teamsAllowed.value,
+                    tags: tagsSelected.value,
+                    images: images.value
+                }, handleCallback);
+                // emitter.emit('changestudio', {val: 'challenge'});
+
+            }
 
         }
 

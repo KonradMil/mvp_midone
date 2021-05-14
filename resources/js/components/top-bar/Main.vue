@@ -37,7 +37,7 @@
                     type="text"
                     style="color: #fff"
                     v-model="searchTerm"
-                    class="search__input form-control border-transparent placeholder-theme-13"
+                    class="search__input form-control border-transparent placeholder-theme-13  ring-0"
                     :placeholder="$t('global.search')"
                     @keyup.enter="searchMe"
 
