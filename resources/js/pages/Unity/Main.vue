@@ -283,14 +283,14 @@ export default {
             currentRadialMenu.value = radialMenuEdit.value;
             mode.value = 'edit';
             if(props.type == undefined) {
-                type.value = this.$cookies.get('type');
-                id.value = this.$cookies.get('id');
+                type.value = Vue.$cookies.get('type');
+                id.value = Vue.$cookies.get('id');
 
             } else {
                 type.value = props.type;
                 id.value = props.id;
-                this.$cookies.set('type', props.type);
-                this.$cookies.set('id', props.id);
+                Vue.$cookies.set('type', props.type);
+                Vue.$cookies.set('id', props.id);
             }
 
         });
