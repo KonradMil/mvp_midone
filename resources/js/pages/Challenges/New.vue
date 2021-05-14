@@ -317,32 +317,22 @@
                                                 <label for="input-wizard-9" class="form-label">
                                                     {{$t('challengesNew.numberSupported')}}
                                                 </label>
+                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                            </div>
+                                            <div class="intro-y col-span-12 sm:col-span-6">
+                                                <label for="input-wizard-10" class="form-label">{{$t('challengesNew.changeNumber')}}</label>
                                                 <TailSelect
                                                     id="input-wizard-9"
-                                                    v-model="select_number_of_lines"
+                                                    v-model="select_work_shifts"
                                                     :options="{locale: 'pl', placeholder: 'Wybierz...', openAbove: false, animate: false, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                                                 >
                                                     <option selected disabled>{{$t('challengesNew.select')}}</option>
                                                     <option
-                                                        v-for="(det,index) in challengeSelects.select_number_of_lines"
+                                                        v-for="(det,index) in challengeSelects.select_work_shifts"
                                                         :value="det.value">{{ det.name }}
                                                     </option>
 
                                                 </TailSelect>
-                                            </div>
-                                            <div class="intro-y col-span-12 sm:col-span-6">
-                                                <label for="input-wizard-10" class="form-label">{{$t('challengesNew.changeNumber')}}</label>
-                                                <Multiselect
-                                                    class="w-full h-8 z-50"
-                                                    v-model="select_work_shifts"
-                                                    mode="single"
-                                                    label="name"
-                                                    max="1"
-                                                    placeholder="Wybierz"
-                                                    valueProp="value"
-                                                    :options="challengeSelects.select_work_shifts"
-                                                />
-
 
 <!--                                                <TailSelect-->
 <!--                                                    id="input-wizard-10"-->
