@@ -25,6 +25,7 @@ import BottomPanel from "./components/BottomPanel";
 import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
 import router from "../../router";
+import { VueCookieNext as $cookie } from 'vue-cookie-next'
 
 const ww = WindowWatcher();
 
@@ -283,14 +284,14 @@ export default {
             currentRadialMenu.value = radialMenuEdit.value;
             mode.value = 'edit';
             if(props.type == undefined) {
-                type.value = Vue.$cookies.get('type');
-                id.value = Vue.$cookies.get('id');
+                type.value = $cookies.get('type');
+                id.value = $cookies.get('id');
 
             } else {
                 type.value = props.type;
                 id.value = props.id;
-                Vue.$cookies.set('type', props.type);
-                Vue.$cookies.set('id', props.id);
+                $cookies.set('type', props.type);
+                $cookies.set('id', props.id);
             }
 
         });
