@@ -1,46 +1,43 @@
 <template>
-    <div class="flex">
-
     <div class="flex-initial pl-2">
-    <div class="mt-3 ">
-        <label for="modal-form-3" class="form-label">Solution deadline</label>
-        <input
-            id="modal-form-3"
-            type="text"
-            class="form-control"
-            placeholder=""
-            v-model="c.solution_deadline"
-        />
-    </div>
-    <div class="mt-3">
-        <label for="modal-form-4" class="form-label">Offer deadline</label>
-        <input
-            id="modal-form-4"
-            type="text"
-            class="form-control"
-            placeholder=""
-            v-model="c.offer_deadline"
-        />
-    </div>
-    <div class="mt-3">
-        <label for="modal-form-1" class="form-label">Tytuł</label>
-        <input
-            id="modal-form-1"
-            type="text"
-            class="form-control"
-            placeholder=""
-            v-model="c.name"
-        />
-    </div>
-    <div class="mt-3">
-        <label for="modal-form-2" class="form-label">Opis</label>
-        <textarea
-            id="modal-form-2"
-            class="form-control"
-            v-model="c.description"
-        />
-    </div>
-    </div>
+        <div class="mt-3 ">
+            <label for="modal-form-3" class="form-label">Solution deadline</label>
+            <input
+                id="modal-form-3"
+                type="text"
+                class="form-control"
+                placeholder=""
+                v-model="c.solution_deadline"
+            />
+        </div>
+        <div class="mt-3">
+            <label for="modal-form-4" class="form-label">Offer deadline</label>
+            <input
+                id="modal-form-4"
+                type="text"
+                class="form-control"
+                placeholder=""
+                v-model="c.offer_deadline"
+            />
+        </div>
+        <div class="mt-3">
+            <label for="modal-form-1" class="form-label">Tytuł</label>
+            <input
+                id="modal-form-1"
+                type="text"
+                class="form-control"
+                placeholder=""
+                v-model="c.name"
+            />
+        </div>
+        <div class="mt-3">
+            <label for="modal-form-2" class="form-label">Opis</label>
+            <textarea
+                id="modal-form-2"
+                class="form-control"
+                v-model="c.description"
+            />
+        </div>
     </div>
 </template>
 
@@ -70,7 +67,7 @@ export default {
             context.emit("update:comment", ca);
         }, {deep: true})
         onMounted(() => {
-           c.value = props.object
+            c.value = props.object
             // if (props.object.name != undefined && props.object.name != '') {
             //     c.value.name = props.object.name;
             // } else {
