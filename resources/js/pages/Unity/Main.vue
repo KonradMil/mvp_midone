@@ -268,6 +268,7 @@ export default {
         const getCookies = (name) => {
             const value = `; ${document.cookie}`;
             const parts = value.split(`; ${name}=`);
+            console.log(parts);
             if (parts.length === 2) return parts.pop().split(';').shift();
         };
 
@@ -290,7 +291,7 @@ export default {
             currentRadialMenu.value = radialMenuEdit.value;
             mode.value = 'edit';
             if(props.type == undefined) {
-                console.log(document.cookies);
+                console.log(document.cookie);
                 type.value = getCookies('type');
                 id.value = getCookies('id');
                 console.log(getCookies('id'));
