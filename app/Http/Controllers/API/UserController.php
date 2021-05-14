@@ -33,8 +33,8 @@ class UserController extends Controller
     {
         $request->validate(['email' => 'required|email']);
 
-        $token = Str::random(60);
-
+//        $token = Str::random(60);
+           $token = sha1(time());
         Mail::to([$request->email])->send(new ForgotPassword($request->email, $token));
 
         return response()->json([
