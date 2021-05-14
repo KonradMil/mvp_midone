@@ -55,7 +55,7 @@ export default {
         const initialLoad = ref({});
         const challenge = ref({});
         //EXTERNAL
-        const unity_path = ref('/s3/unity/AssemBrot20_04_ver2.json');
+        const unity_path = ref('/s3/unity/AssemBrot14_05_ver2.json');
         const window_width = ref('100%');
         const window_height = ref(0);
         const rightIcons = ref([]);
