@@ -121,8 +121,8 @@
                                     {{$t('challengesNew.description')}}
                                 </div>
                                 <div class="mt-5">
-                                    <textarea v-if="name_lang == 'pl'" v-model="description" class="w-full h-36 form-control" style="width: 100%;"></textarea>
-                                    <textarea v-if="name_lang == 'en'" v-model="description" class="w-full h-36 form-control" style="width: 100%;"></textarea>
+                                    <textarea v-if="description_lang == 'pl'" v-model="description" class="w-full h-36 form-control" style="width: 100%;"></textarea>
+                                    <textarea v-if="description_lang == 'en'" v-model="en_description" class="w-full h-36 form-control" style="width: 100%;"></textarea>
                                 </div>
                             </div>
                             <div
