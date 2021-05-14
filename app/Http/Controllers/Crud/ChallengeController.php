@@ -224,7 +224,7 @@ class ChallengeController extends Controller
 
     public function publish(Request $request)
     {
-        $challenge = Challenge::find($request->input('id'));
+        $challenge = Challenge::with('solutions')->find($request->input('id'));
         $challenge->status = 1;
         $challenge->stage = 1;
         $challenge->save();
@@ -238,7 +238,7 @@ class ChallengeController extends Controller
 
     public function unpublish(Request $request)
     {
-        $challenge = Challenge::find($request->input('id'));
+        $challenge = Challenge::with('solutions')->find($request->input('id'));
         $challenge->status = 0;
         $challenge->stage = 0;
         $challenge->save();
