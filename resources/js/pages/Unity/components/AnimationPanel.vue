@@ -182,8 +182,8 @@ export default {
                     emitter.emit('unityoutgoingaction', {action: 'pauseAnimation', data: ''});
                     break;
                 case 'play':
-                    console.log(toRaw(animation));
-                    emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: toRaw(animation)})
+                    // console.log(toRaw(animation));
+                    emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: animation})
                     break;
                 case 'addline':
                     emitter.emit('unityoutgoingaction', {data: animation.layers.length})
