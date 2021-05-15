@@ -9,7 +9,7 @@ export default function AddTeam(name) {
     const list = ref(false);
 
     async function addTeam(name) {
-        axios.post('api/teams/user/create', {name: name})
+        axios.post('/api/teams/user/create', {name: name})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {

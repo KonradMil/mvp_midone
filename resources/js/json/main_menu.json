@@ -21,6 +21,12 @@
                     "pageName": "challenges",
                     "title": "Wszystkie",
                     "ignore": true
+                },
+                {
+                    "icon": "",
+                    "pageName": "challengesFollowed",
+                    "title": "Śledzone",
+                    "ignore": true
                 }
             ]
         },

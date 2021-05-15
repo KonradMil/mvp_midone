@@ -34,8 +34,12 @@
                             <span v-if="$dayjs().isAfter($dayjs(challenge.solution_deadline))">Składanie rozwiązań do: {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }}</span>
                             <span v-if="$dayjs().isBefore($dayjs(challenge.solution_deadline))">Składanie ofert do: {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }}</span>
                         </div>
-                        <button class="btn btn-secondary ml-auto">
+                        <button v-if="!challenge.followed" class="btn btn-secondary ml-auto" @click="follow">
                             Śledź
+                        </button>
+
+                        <button v-if="challenge.followed" class="btn btn-secondary ml-auto" @click="unfollow">
+                            Przestań śledzić
                         </button>
                     </div>
                 </div>
@@ -71,6 +75,7 @@
 
 <script>
 import {computed, onMounted, reactive, ref} from "vue";
+import {useToast} from "vue-toastification";
 
 export default {
     name: "BasicInformationPanel",
@@ -81,11 +86,38 @@ export default {
         const challenge = computed(() => {
             return props.challenge;
         });
+        const toast = useToast();
         const types = require("../../../json/types.json");
 
         onMounted(() => {
 
         });
+
+        const follow = () => {
+            axios.post('/api/challenge/user/follow', {id: props.challenge.id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        challenge.value.followed = true;
+                        toast.success('Teraz śledzisz to wyzwanie.');
+                    } else {
+
+                    }
+                })
+        }
+
+        const unfollow = () => {
+            axios.post('/api/challenge/user/unfollow', {id: props.challenge.id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        challenge.value.followed = false;
+                        toast.success('Nie śledzisz już tego wyzwania.');
+                    } else {
+
+                    }
+                })
+        }
 
         const stage = computed(function () {
             switch (challenge.value.stage) {
@@ -116,7 +148,9 @@ export default {
         return {
             stage,
             challenge,
-            types
+            types,
+            follow,
+            unfollow
         }
     }
 }

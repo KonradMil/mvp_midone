@@ -17,9 +17,6 @@
                             class="w-full"
                             src="/logo_dbr_white.png"
                         />
-                        <!--          <span class="hidden xl:block text-white text-lg ml-3">-->
-                        <!--            Ru<span class="font-medium">bick</span>-->
-                        <!--          </span>-->
                     </router-link>
                 </div>
             </div>

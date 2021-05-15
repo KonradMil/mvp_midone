@@ -9,7 +9,7 @@ export default function AddTeamMember(email,team_id) {
     const list = ref(false);
 
     async function addTeam(email, team_id) {
-        axios.post('api/teams/user/invite', {email: email, team_id: team_id})
+        axios.post('/api/teams/user/invite', {email: email, team_id: team_id})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {

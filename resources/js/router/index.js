@@ -104,7 +104,14 @@ export const routes = [
             {
                 name: 'challenges',
                 path: '/challenges',
-                component: Challenges
+                component: Challenges,
+                props: { type: 'normal' }
+            },
+            {
+                name: 'challengesFollowed',
+                path: '/challenges/followed',
+                component: Challenges,
+                props: { type: 'followed' }
             },
             {
                 name: 'internalChallenegeCard',

@@ -48,12 +48,15 @@ Route::group(['prefix' => 'question', 'middleware' => 'auth:sanctum'], function(
 
 Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function () {
     Route::post('user/get', [ChallengeController::class, 'getUserChallengesFiltered']);
+    Route::post('user/get/followed', [ChallengeController::class, 'getUserChallengesFollowed']);
     Route::post('user/get/card', [ChallengeController::class, 'getCardData']);
     Route::post('user/create', [ChallengeController::class, 'createChallenge']);
     Route::post('user/save', [ChallengeController::class, 'saveChallenge']);
     Route::post('user/save/details/{technical}', [ChallengeController::class, 'saveChallengeDetails']);
     Route::post('user/like', [ChallengeController::class, 'likeChallenge']);
     Route::post('user/dislike', [ChallengeController::class, 'dislikeChallenge']);
+    Route::post('user/follow', [ChallengeController::class, 'followChallenge']);
+    Route::post('user/unfollow', [ChallengeController::class, 'unfollowChallenge']);
     Route::post('user/comment', [ChallengeController::class, 'commentChallenge']);
     Route::post('images/store', [ChallengeController::class, 'storeImage']);
     Route::post('publish', [ChallengeController::class, 'publish']);

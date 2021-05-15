@@ -5,11 +5,11 @@
 <script>
 import {ref} from 'vue';
 
-export default function GetChallenges() {
+export default function GetChallengesFollowed() {
     const list = ref([]);
 
-    async function getChallenges() {
-        axios.post('/api/challenge/user/get', {})
+    async function getChallengesFollowed() {
+        axios.post('/api/challenge/user/get/followed', {})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
@@ -21,7 +21,7 @@ export default function GetChallenges() {
             })
     }
 
-    getChallenges();
+    getChallengesFollowed();
 
     return {
         list

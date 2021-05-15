@@ -188,22 +188,31 @@
 </template>
 
 <script>
-import {defineComponent, ref, provide, onMounted, getCurrentInstance} from "vue";
+import {defineComponent, ref, provide, onMounted, getCurrentInstance, watch, onUpdated} from "vue";
 import GetChallenges from "../../compositions/GetChallenges";
+import GetChallengesFollowed from "../../compositions/GetChallengesFollowed";
 import CommentSection from "../../components/social/CommentSection";
 
 
 export default {
     name: "ChallengesMain",
     components: {CommentSection, Comment, GetChallenges},
-    setup: function () {
+    props: {
+      type: String
+    },
+    setup(props) {
         const challenges = ref([]);
         const user = ref({});
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
 
         const getChallengeRepositories = async () => {
-            challenges.value = GetChallenges();
+            if(props.type == 'followed') {
+                challenges.value = GetChallengesFollowed();
+            } else {
+                challenges.value = GetChallenges();
+            }
+
         }
         const types = require("../../json/types.json");
         const sels = require("../../json/challenge.json");
@@ -213,7 +222,7 @@ export default {
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
-        })
+        });
 
         const like = async (challenge) => {
             axios.post('api/challenge/user/like', {id: challenge.id})
@@ -255,14 +264,17 @@ export default {
             types,
             sels,
             like,
-            dislike
+            dislike,
+            getChallengeRepositories
         }
     },
     beforeRouteEnter(to, from, next) {
         if (!window.Laravel.isLoggedin) {
             window.location.href = "/";
         }
-        next();
+        next((vm) => {
+            vm.getChallengeRepositories();
+        });
     }
 }
 </script>
