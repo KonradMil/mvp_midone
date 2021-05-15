@@ -15,7 +15,7 @@
                         <img
                             alt="DBR77 Platforma Robotów "
                             class="w-full"
-                            src="https://dbr77.com/wp-content/uploads/2020/02/logo_dbr_white.png"
+                            src="/logo_dbr_white.png"
                         />
                         <!--          <span class="hidden xl:block text-white text-lg ml-3">-->
                         <!--            Ru<span class="font-medium">bick</span>-->
@@ -40,6 +40,8 @@ import PriceListMenu from "./components/PriceListMenu";
 import TermsOfServiceMenu from "./components/TermsOfServiceMenu";
 import TermsOfServiceContent from "./components/TermsOfServiceContent";
 import PriceListContent from "./components/PriceListContent";
+import cash from "cash-dom";
+import {onMounted} from "vue";
 
 export default {
     name: "TermsMain",
@@ -51,7 +53,11 @@ export default {
         page: String
     },
     setup(props) {
-
+        onMounted(() => {
+            cash("body")
+                .removeClass("error-page")
+                .removeClass("login")
+        });
         return {
             props
         }

@@ -9,7 +9,7 @@
                         <img
                             alt="DBR77 Platforma Robotów "
                             class="w-2/4"
-                            src="https://dbr77.com/wp-content/uploads/2020/02/logo_dbr_white.png"
+                            src="/logo_dbr_white.png"
                         />
                     </a>
                     <div class="my-auto">
@@ -74,28 +74,24 @@
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                             <button
                                 class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top"
-                                @click="handleSubmit"
-                            >
+                                @click="handleSubmit">
                                 {{$t('login.login')}}
                             </button>
                             <button
                                 @click="$router.replace({name:'register'})"
-                                class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top"
-                            >
+                                class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">
                                 {{$t('login.signup')}}
                             </button>
                         </div>
-                        <div
-                            class="intro-x mt-10 xl:mt-24 text-gray-700 dark:text-gray-600 text-center xl:text-left"
-                        >
+                        <div class="intro-x mt-10 xl:mt-24 text-gray-700 dark:text-gray-600 text-center xl:text-left">
                             {{$t('login.pol1')}} <br/>
-                            <a class="text-theme-1 dark:text-theme-10" href=""
-                            >{{$t('login.pol2')}}</a
-                            >
+                            <a class="text-theme-1 dark:text-theme-10" href="">
+                                {{$t('login.pol2')}}
+                            </a>
                             &
-                            <a class="text-theme-1 dark:text-theme-10" href=""
-                            >{{$t('login.pol3')}}</a
-                            >
+                            <a class="text-theme-1 dark:text-theme-10" href="" @click.prevent="$router.push({path: '/terms/privacy-policy'})">
+                                {{$t('login.pol3')}}
+                            </a>
                         </div>
                     </div>
                 </div>
