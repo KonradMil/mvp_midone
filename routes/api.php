@@ -63,6 +63,9 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
     Route::post('unpublish', [ChallengeController::class, 'unpublish']);
 });
 
+Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('create', [SolutionController::class, 'create']);
+});
 
 Route::post('report/show', [ReportController::class, 'getReport']);
 Route::post('search', [SearchController::class, 'search']);

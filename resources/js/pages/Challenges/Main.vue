@@ -89,9 +89,14 @@
                     <a href="" class="block font-medium text-base mt-5"></a>
                 </div>
                 <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
-                    <Tippy tag="a" href=""
-                        class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 mr-2"
-                        content="Bookmark">
+                    <Tippy v-if="!challenge.followed" tag="a" href="" @click.prevent="follow(challenge.id, index)"
+                        class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10"
+                        content="Follow">
+                        <BookmarkIcon class="w-3 h-3"/>
+                    </Tippy>
+                    <Tippy v-if="challenge.followed" tag="a" href="" @click.prevent="unfollow(challenge.id, index)"
+                           class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white"
+                           content="Unfollow">
                         <BookmarkIcon class="w-3 h-3"/>
                     </Tippy>
                     <div class="intro-x flex mr-2">
@@ -206,6 +211,34 @@ export default {
             }
         });
 
+        const follow = (id, index) => {
+            axios.post('/api/challenge/user/follow', {id: id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        challenges.value.list[index].followed = true;
+                        toast.success('Teraz śledzisz to wyzwanie.');
+                    } else {
+
+                    }
+                })
+        }
+
+        const unfollow = (id, index) => {
+            axios.post('/api/challenge/user/unfollow', {id: id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        console.log(challenges.value);
+                        console.log(challenges.value.list[index]);
+                        challenges.value.list[index].followed  = false;
+                        toast.success('Nie śledzisz już tego wyzwania.');
+                    } else {
+
+                    }
+                })
+        }
+
         const like = async (challenge) => {
             axios.post('api/challenge/user/like', {id: challenge.id})
                 .then(response => {
@@ -247,7 +280,9 @@ export default {
             sels,
             like,
             dislike,
-            getChallengeRepositories
+            getChallengeRepositories,
+            follow,
+            unfollow
         }
     },
     beforeRouteEnter(to, from, next) {

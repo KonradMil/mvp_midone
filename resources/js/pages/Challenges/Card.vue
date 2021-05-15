@@ -100,6 +100,7 @@
                             v-if="challenge.stage == 1"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
+                            @click.prevent="addSolution"
                         >
                             Dodaj rozwiązanie
                         </button>
@@ -129,6 +130,7 @@ import WhatsNext from "./WhatsNext";
 import BasicInformationPanel from "./components/BasicInformationPanel";
 import TechnicalInformationPanel from "./components/TechnicalInformationPanel";
 import QuestionsPanel from "./components/QuestionsPanel";
+import router from "../../router";
 
 export default defineComponent({
     name: 'Card',
@@ -150,6 +152,7 @@ export default defineComponent({
         const activeTab = ref('podstawowe');
         const user = ref({});
         const types = require("../../json/types.json");
+
         const getCardChallengeRepositories = async (id) => {
             await axios.post('/api/challenge/user/get/card', {id: id})
                 .then(response => {
@@ -162,9 +165,6 @@ export default defineComponent({
                     }
                 })
         }
-
-
-
 
         onMounted(function () {
             console.log(props);
@@ -209,6 +209,18 @@ export default defineComponent({
                 })
         }
 
+        const addSolution = () => {
+            axios.post('/api/solution/create', {id: challenge.value.id})
+                .then(response => {
+                    if (response.data.success) {
+                        console.log(response.data.payload);
+                       router.push({name: 'solutionStudio', params: {id: response.data.payload.id, type: 'solution', load: response.data.payload }});
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        };
+
         const prevAnnouncement = () => {
             const el = announcementRef.value;
             el.tns.goTo("prev");
@@ -236,7 +248,8 @@ export default defineComponent({
             activeTab,
             user,
             publish,
-            unpublish
+            unpublish,
+            addSolution
         };
     }
 });

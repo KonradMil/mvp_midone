@@ -112,51 +112,74 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function createSolution(Request $request)
+//    public function createSolution(Request $request)
+//    {
+//        $solution = new Solution();
+//        $technical = new TechnicalDetails();
+//        $financial = new Financial();
+//        $financial->save();
+//
+//        $request = json_decode(json_encode($request->data));
+//
+//        $solution->name = $request->name;
+//        $solution->en_name = $request->en_name;
+//        $solution->description = $request->description;
+//        $solution->en_description = $request->en_description;
+//        $solution->price = $request->price;
+//        $solution->challenge_id = $request->challenge_id;
+//        $solution->installer_id = $request->installer_id;
+//        $solution->solution_deadline = Carbon::createFromFormat('d.m.Y', $request->solution_deadline);
+//        $solution->offer_deadline = Carbon::createFromFormat('d.m.Y', $request->offer_deadline);
+//        $solution->financial_after_id = $financial->id;
+//        $solution->author_id = Auth::user()->id;
+//        $solution->screenshot_path = 'screenshots/dbr_placeholder.jpeg';
+//        $solution->status = 0;
+//        $solution->save();
+//        $financial->solution_id = $solution->id;
+//        $financial->save();
+//
+//        $technical->detail_weight = (string)$request->detail_weight;
+//        $technical->pick_quality = (string)$request->pick_quality;
+//        $technical->detail_material = (string)$request->detail_material;
+//        $technical->detail_size = (string)$request->detail_size;
+//        $technical->detail_pick = (string)$request->detail_pick;
+//        $technical->detail_position = (string)$request->detail_position;
+//        $technical->detail_range = (string)$request->detail_range;
+//        $technical->detail_destination = (string)$request->detail_destination;
+//        $technical->number_of_lines = (string)$request->number_of_lines;
+//        $technical->cycle_time = 0;
+//        $technical->work_shifts = (string)$request->work_shifts;
+//        $technical->solution_id = $solution->id;
+//        $technical->save();
+//
+//        return response()->json([
+//            'success' => true,
+//            'message' => 'Wyzwanie zostao dodane poprawnie',
+//            'payload' => $solution
+//        ]);
+//
+//    }
+
+    public function create(Request $request)
     {
-        $solution = new Solution();
-        $technical = new TechnicalDetails();
         $financial = new Financial();
         $financial->save();
-
-        $request = json_decode(json_encode($request->data));
-
-        $solution->name = $request->name;
-        $solution->en_name = $request->en_name;
-        $solution->description = $request->description;
-        $solution->en_description = $request->en_description;
-        $solution->price = $request->price;
-        $solution->challenge_id = $request->challenge_id;
-        $solution->installer_id = $request->installer_id;
-        $solution->solution_deadline = Carbon::createFromFormat('d.m.Y', $request->solution_deadline);
-        $solution->offer_deadline = Carbon::createFromFormat('d.m.Y', $request->offer_deadline);
-        $solution->financial_after_id = $financial->id;
+        $challenge = Challenge::find($request->input('id'));
+        $solution = new Solution();
         $solution->author_id = Auth::user()->id;
-        $solution->screenshot_path = 'screenshots/dbr_placeholder.jpeg';
+        $solution->challenge_id = $request->input('id');
+        $solution->installer_id = Auth::user()->id;
+        $solution->financial_after_id = $financial->id;
+        $solution->save_json = $challenge->save_json;
+        $solution->published = 0;
         $solution->status = 0;
+        $solution->screenshot_path = 'screenshots/dbr_placeholder.jpeg';
         $solution->save();
-        $financial->solution_id = $solution->id;
-        $financial->save();
-
-        $technical->detail_weight = (string)$request->detail_weight;
-        $technical->pick_quality = (string)$request->pick_quality;
-        $technical->detail_material = (string)$request->detail_material;
-        $technical->detail_size = (string)$request->detail_size;
-        $technical->detail_pick = (string)$request->detail_pick;
-        $technical->detail_position = (string)$request->detail_position;
-        $technical->detail_range = (string)$request->detail_range;
-        $technical->detail_destination = (string)$request->detail_destination;
-        $technical->number_of_lines = (string)$request->number_of_lines;
-        $technical->cycle_time = 0;
-        $technical->work_shifts = (string)$request->work_shifts;
-        $technical->solution_id = $solution->id;
-        $technical->save();
 
         return response()->json([
             'success' => true,
-            'message' => 'Wyzwanie zostao dodane poprawnie',
+            'message' => 'Rozwiązanie zostao dodane poprawnie',
             'payload' => $solution
         ]);
-
     }
 }
