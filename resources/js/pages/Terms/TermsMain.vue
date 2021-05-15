@@ -1,0 +1,64 @@
+<template>
+    <div>
+        <div class="intro-y flex items-center mt-8">
+
+        </div>
+        <div class="grid grid-cols-12 gap-6">
+            <!-- BEGIN: FAQ Menu -->
+            <div class="intro-y col-span-12 lg:col-span-2 xl:col-span-2">
+                <div class="flex-row w-full items-center">
+                    <router-link
+                        :to="{ name: 'dashboard' }"
+                        tag="a"
+                        class="intro-x flex items-center  pt-4 px-12"
+                    >
+                        <img
+                            alt="DBR77 Platforma Robotów "
+                            class="w-full"
+                            src="https://dbr77.com/wp-content/uploads/2020/02/logo_dbr_white.png"
+                        />
+                        <!--          <span class="hidden xl:block text-white text-lg ml-3">-->
+                        <!--            Ru<span class="font-medium">bick</span>-->
+                        <!--          </span>-->
+                    </router-link>
+                </div>
+            </div>
+            <!-- END: FAQ Menu -->
+            <!-- BEGIN: FAQ Content -->
+            <PrivacyPolicyContent v-if="props.page === 'privacy-policy'"></PrivacyPolicyContent>
+            <TermsOfServiceContent v-if="props.page === 'price-list'"></TermsOfServiceContent>
+            <PriceListContent v-if="props.page === 'terms-of-service'"></PriceListContent>
+            <!-- END: FAQ Content -->
+        </div>
+    </div>
+</template>
+
+<script>
+import PrivacyPolicyMenu from "./components/PrivacyPolicyMenu";
+import PrivacyPolicyContent from "./components/PrivacyPolicyContent";
+import PriceListMenu from "./components/PriceListMenu";
+import TermsOfServiceMenu from "./components/TermsOfServiceMenu";
+import TermsOfServiceContent from "./components/TermsOfServiceContent";
+import PriceListContent from "./components/PriceListContent";
+
+export default {
+    name: "TermsMain",
+    components: {
+        PriceListContent,
+        TermsOfServiceContent, TermsOfServiceMenu, PriceListMenu, PrivacyPolicyContent, PrivacyPolicyMenu
+    },
+    props: {
+        page: String
+    },
+    setup(props) {
+
+        return {
+            props
+        }
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

@@ -24,9 +24,7 @@ import ModelEdit from "../pages/Models/ModelEdit";
 import Card from "../pages/Challenges/Card";
 import Communication from "../pages/Communication/Main";
 import ReportReview from "../pages/Communication/ReportReview";
-import PrivacyPolicy from "../pages/Terms/PrivacyPolicy";
-import TermsService from "../pages/Terms/TermsService";
-import PriceList from "../pages/Terms/PriceList";
+import TermsMain from "../pages/Terms/TermsMain";
 
 export const routes = [
     {
@@ -65,19 +63,10 @@ export const routes = [
         props: true
     },
     {
-        name: 'privacyPolicy',
-        path: '/policy',
-        component: PrivacyPolicy,
-    },
-    {
-        name: 'termsService',
-        path: '/terms-service',
-        component: TermsService,
-    },
-    {
-        name: 'priceList',
-        path: '/price-list',
-        component: PriceList,
+        name: 'terms',
+        path: "/terms/:page",
+        component: TermsMain,
+        props: true
     },
     {
         path: "/",
