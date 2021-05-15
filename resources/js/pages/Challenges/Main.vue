@@ -59,23 +59,18 @@
                         <a
                             href="javascript:;"
                             class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300"
-                            aria-expanded="false"
-                        >
+                            aria-expanded="false">
                             <MoreVerticalIcon class="w-5 h-5"/>
                         </a>
                         <div class="dropdown-menu w-40">
                             <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                                <a
-                                    href=""
-                                    class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                                >
+                                <a href=""
+                                    class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                                     <Edit2Icon class="w-4 h-4 mr-2"/>
                                     {{ $t('challengesMain.editPost') }}
                                 </a>
-                                <a
-                                    href=""
-                                    class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                                >
+                                <a href=""
+                                    class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                                     <TrashIcon class="w-4 h-4 mr-2"/>
                                     {{ $t('challengesMain.deletePost') }}
                                 </a>
@@ -93,35 +88,23 @@
                     </div>
                     <a href="" class="block font-medium text-base mt-5"></a>
                 </div>
-                <div
-                    class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5"
-                >
-                    <Tippy
-                        tag="a"
-                        href=""
+                <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
+                    <Tippy tag="a" href=""
                         class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 mr-2"
-                        content="Bookmark"
-                    >
+                        content="Bookmark">
                         <BookmarkIcon class="w-3 h-3"/>
                     </Tippy>
                     <div class="intro-x flex mr-2">
                     </div>
-                    <Tippy v-if="!challenge.liked"
-                           @click.prevent="like(challenge)"
-                           tag="a"
-                           href=""
+                    <Tippy v-if="!challenge.liked" @click.prevent="like(challenge)" tag="a" href=""
                            class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 ml-auto"
-                           content="Like"
-                    >
+                           content="Like">
                         <ThumbsUpIcon class="w-3 h-3"/>
                     </Tippy>
                     <Tippy v-if="challenge.liked"
-                           @click.prevent="dislike(challenge)"
-                           tag="a"
-                           href=""
+                           @click.prevent="dislike(challenge)" tag="a" href=""
                            class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white ml-2 ml-auto"
-                           content="Unlike"
-                    >
+                           content="Unlike">
                         <ThumbsUpIcon class="w-3 h-3"/>
                     </Tippy>
                 </div>
@@ -192,7 +175,6 @@ import {defineComponent, ref, provide, onMounted, getCurrentInstance, watch, onU
 import GetChallenges from "../../compositions/GetChallenges";
 import GetChallengesFollowed from "../../compositions/GetChallengesFollowed";
 import CommentSection from "../../components/social/CommentSection";
-
 
 export default {
     name: "ChallengesMain",

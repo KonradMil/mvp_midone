@@ -150,11 +150,18 @@
 @import "components/ads-box";
 @import "components/full-calendar";
 @import "components/pristine";
+.form-check-input[type=radio] {
+    border-color: #930f68 !important;
+}
+.form-check-input[type=radio]:before {
+    background-color:  #930f68 !important;
+}
 .accordion .accordion-item .accordion-header .accordion-button:not(.collapsed) {
     color: #930f68 !important;
 }
 .form-check-input:focus, .form-control:focus {
     outline: none !important;
+    box-shadow: none !important;
 }
 .form-check-input[type=checkbox] {
     background-color: #930f68 !important;

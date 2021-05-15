@@ -48,7 +48,8 @@
             "Wszystkie": "All",
             "Aktywne": "Active",
             "Archiwalne": "Archival",
-            "Obserwowane": "Watched"
+            "Obserwowane": "Watched",
+            "Śledzone": "Followed"
         },
 
         "challengesMain": {
@@ -273,7 +274,8 @@
             "Wszystkie": "Wszystkie",
             "Aktywne": "Aktywne",
             "Archiwalne": "Archiwalne",
-            "Obserwowane": "Obserwowane"
+            "Obserwowane": "Obserwowane",
+            "Śledzone": "Obserwowane"
         },
         "teams": {
             "teams": "Zespoły",
