@@ -68,14 +68,12 @@ export default {
         const radialMenuLayout = ref([]);
         const animationSave = ref({layers: []});
 
-
         window_height.value = window.innerHeight;
 
         emitter.on('showChallenge', e => {
             challenge.value = e.obj;
             type.value = 'challenge';
         });
-
 
         //RUNS WHEN UNITY IS READY
         emitter.on('onInitialized', e => initalize());
