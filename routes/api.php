@@ -7,6 +7,7 @@ use App\Http\Controllers\Crud\QuestionController;
 use App\Http\Controllers\Crud\SolutionController;
 use App\Http\Controllers\Crud\TeamsController;
 use App\Http\Controllers\Crud\ReportController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\KnowledgebaseController;
 use App\Http\Controllers\CommentsController;
@@ -45,6 +46,8 @@ Route::group(['prefix' => 'question', 'middleware' => 'auth:sanctum'], function(
    Route::post('create', [QuestionController::class, 'create']);
    Route::post('get', [QuestionController::class, 'get']);
 });
+
+Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard']);
 
 Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function () {
     Route::post('user/get', [ChallengeController::class, 'getUserChallengesFiltered']);

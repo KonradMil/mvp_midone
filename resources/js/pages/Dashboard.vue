@@ -23,82 +23,84 @@
                             data-bs-dismiss="alert"
                             aria-label="Close"
                         >
-                            <XIcon class="w-4 h-4" />
+                            <XIcon class="w-4 h-4"/>
                         </button>
                     </div>
                 </div>
                 <!-- BEGIN: Notification -->
                 <!-- BEGIN: General Report -->
-                <div class="col-span-12 lg:col-span-8 xl:col-span-6 mt-2">
-                    <div class="intro-y block sm:flex items-center h-10">
-                        <h2 class="text-lg font-medium truncate mr-5">Finanse</h2>
-                        <select class="sm:ml-auto mt-3 sm:mt-0 sm:w-auto form-select box">
-                            <option value="daily">Dziennie</option>
-                            <option value="weekly">Tygodniowo</option>
-                            <option value="monthly">Miesięcznie</option>
-                            <option value="yearly">Rocznie</option>
-                            <option value="custom-date">Własny zakres</option>
-                        </select>
-                    </div>
-                    <div class="report-box-2 intro-y mt-12 sm:mt-5">
-                        <div class="box sm:flex">
-                            <div class="px-8 py-12 flex flex-col justify-center flex-1">
-                                <ShoppingBagIcon class="w-10 h-10 text-theme-12" />
-                                <div class="relative text-3xl font-bold mt-12 pl-4">
-                                     54.143 <span class="absolute text-xl top-2"> zł</span>
-                                </div>
-                                <div
-                                    class="report-box-2__indicator bg-theme-9 tooltip cursor-pointer"
-                                    title="47% Higher than last month"
-                                >
-                                    47% <ChevronUpIcon class="w-4 h-4 ml-0.5" />
-                                </div>
-                                <div class="mt-4 text-gray-600 dark:text-gray-600">
-                                    Zarobki w danym okresie po odjęciu kosztów oraz podatków.
-                                </div>
-                                <button
-                                    class="btn btn-outline-secondary relative justify-start rounded-full mt-12"
-                                >
-                                    Pobierz raporty
-                                    <span
-                                        class="w-8 h-8 absolute flex justify-center items-center bg-theme-1 text-white rounded-full right-0 top-0 bottom-0 my-auto ml-auto mr-0.5"
-                                    >
-                    <ArrowRightIcon class="w-4 h-4" />
-                  </span>
-                                </button>
-                            </div>
-                            <div
-                                class="px-8 py-12 flex flex-col justify-center flex-1 border-t sm:border-t-0 sm:border-l border-gray-300 dark:border-dark-5 border-dashed"
-                            >
-                                <div class="text-gray-600 dark:text-gray-600 text-xs">
-                                    WSZYSTKICH TRANSAKCJI
-                                </div>
-                                <div class="mt-1.5 flex items-center">
-                                    <div class="text-base">4</div>
-                                    <div
-                                        class="text-theme-6 flex text-xs font-medium tooltip cursor-pointer ml-2"
-                                        title="2% Lower than last month"
-                                    >
-                                        2%
-                                        <ChevronDownIcon class="w-4 h-4 ml-0.5" />
-                                    </div>
-                                </div>
-                                <div class="text-gray-600 dark:text-gray-600 text-xs mt-5">
-                                    NOWYCH TRANSAKCJI
-                                </div>
-                                <div class="mt-1.5 flex items-center">
-                                    <div class="text-base">72.000zł</div>
-                                    <div
-                                        class="text-theme-9 flex text-xs font-medium tooltip cursor-pointer ml-2"
-                                        title="49% Higher than last month"
-                                    >
-                                        49% <ChevronDownIcon class="w-4 h-4 ml-0.5" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="col-span-12 lg:col-span-8 xl:col-span-6 mt-2">-->
+<!--                    <div class="intro-y block sm:flex items-center h-10">-->
+<!--                        <h2 class="text-lg font-medium truncate mr-5">Finanse</h2>-->
+<!--                        <select class="sm:ml-auto mt-3 sm:mt-0 sm:w-auto form-select box">-->
+<!--                            <option value="daily">Dziennie</option>-->
+<!--                            <option value="weekly">Tygodniowo</option>-->
+<!--                            <option value="monthly">Miesięcznie</option>-->
+<!--                            <option value="yearly">Rocznie</option>-->
+<!--                            <option value="custom-date">Własny zakres</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                    <div class="report-box-2 intro-y mt-12 sm:mt-5">-->
+<!--                        <div class="box sm:flex">-->
+<!--                            <div class="px-8 py-12 flex flex-col justify-center flex-1">-->
+<!--                                <ShoppingBagIcon class="w-10 h-10 text-theme-12"/>-->
+<!--                                <div class="relative text-3xl font-bold mt-12 pl-4">-->
+<!--                                    54.143 <span class="absolute text-xl top-2"> zł</span>-->
+<!--                                </div>-->
+<!--                                <div-->
+<!--                                    class="report-box-2__indicator bg-theme-9 tooltip cursor-pointer"-->
+<!--                                    title="47% Higher than last month"-->
+<!--                                >-->
+<!--                                    47%-->
+<!--                                    <ChevronUpIcon class="w-4 h-4 ml-0.5"/>-->
+<!--                                </div>-->
+<!--                                <div class="mt-4 text-gray-600 dark:text-gray-600">-->
+<!--                                    Zarobki w danym okresie po odjęciu kosztów oraz podatków.-->
+<!--                                </div>-->
+<!--                                <button-->
+<!--                                    class="btn btn-outline-secondary relative justify-start rounded-full mt-12"-->
+<!--                                >-->
+<!--                                    Pobierz raporty-->
+<!--                                    <span-->
+<!--                                        class="w-8 h-8 absolute flex justify-center items-center bg-theme-1 text-white rounded-full right-0 top-0 bottom-0 my-auto ml-auto mr-0.5"-->
+<!--                                    >-->
+<!--                    <ArrowRightIcon class="w-4 h-4"/>-->
+<!--                  </span>-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                            <div-->
+<!--                                class="px-8 py-12 flex flex-col justify-center flex-1 border-t sm:border-t-0 sm:border-l border-gray-300 dark:border-dark-5 border-dashed"-->
+<!--                            >-->
+<!--                                <div class="text-gray-600 dark:text-gray-600 text-xs">-->
+<!--                                    WSZYSTKICH TRANSAKCJI-->
+<!--                                </div>-->
+<!--                                <div class="mt-1.5 flex items-center">-->
+<!--                                    <div class="text-base">4</div>-->
+<!--                                    <div-->
+<!--                                        class="text-theme-6 flex text-xs font-medium tooltip cursor-pointer ml-2"-->
+<!--                                        title="2% Lower than last month"-->
+<!--                                    >-->
+<!--                                        2%-->
+<!--                                        <ChevronDownIcon class="w-4 h-4 ml-0.5"/>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="text-gray-600 dark:text-gray-600 text-xs mt-5">-->
+<!--                                    NOWYCH TRANSAKCJI-->
+<!--                                </div>-->
+<!--                                <div class="mt-1.5 flex items-center">-->
+<!--                                    <div class="text-base">72.000zł</div>-->
+<!--                                    <div-->
+<!--                                        class="text-theme-9 flex text-xs font-medium tooltip cursor-pointer ml-2"-->
+<!--                                        title="49% Higher than last month"-->
+<!--                                    >-->
+<!--                                        49%-->
+<!--                                        <ChevronDownIcon class="w-4 h-4 ml-0.5"/>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <!-- END: General Report -->
                 <!-- BEGIN: Recent Activities -->
                 <div
@@ -160,42 +162,42 @@
                                 <div class="text-gray-600">
                                     <div class="mt-1">Dodał ofertę do rozwiązania - Pakowanie słoików</div>
                                 </div>
-<!--                                    <div class="flex mt-2">-->
-<!--                                        <Tippy-->
-<!--                                            tag="div"-->
-<!--                                            class="w-8 h-8 image-fit mr-1 zoom-in"-->
-<!--                                            :content="$f()[0].products[0].name"-->
-<!--                                        >-->
-<!--                                            <img-->
-<!--                                                alt="Icewall Tailwind HTML Admin Template"-->
-<!--                                                class="rounded-md border border-white"-->
-<!--                                                :src="require(`/images/${$f()[8].images[0]}`)"-->
-<!--                                            />-->
-<!--                                        </Tippy>-->
-<!--                                        <Tippy-->
-<!--                                            tag="div"-->
-<!--                                            class="w-8 h-8 image-fit mr-1 zoom-in"-->
-<!--                                            :content="$f()[1].products[0].name"-->
-<!--                                        >-->
-<!--                                            <img-->
-<!--                                                alt="Icewall Tailwind HTML Admin Template"-->
-<!--                                                class="rounded-md border border-white"-->
-<!--                                                :src="require(`/images/${$f()[8].images[1]}`)"-->
-<!--                                            />-->
-<!--                                        </Tippy>-->
-<!--                                        <Tippy-->
-<!--                                            tag="div"-->
-<!--                                            class="w-8 h-8 image-fit mr-1 zoom-in"-->
-<!--                                            :content="$f()[2].products[0].name"-->
-<!--                                        >-->
-<!--                                            <img-->
-<!--                                                alt="Icewall Tailwind HTML Admin Template"-->
-<!--                                                class="rounded-md border border-white"-->
-<!--                                                :src="require(`/images/${$f()[8].images[2]}`)"-->
-<!--                                            />-->
-<!--                                        </Tippy>-->
-<!--                                    </div>-->
-<!--                                </div>-->
+                                <!--                                    <div class="flex mt-2">-->
+                                <!--                                        <Tippy-->
+                                <!--                                            tag="div"-->
+                                <!--                                            class="w-8 h-8 image-fit mr-1 zoom-in"-->
+                                <!--                                            :content="$f()[0].products[0].name"-->
+                                <!--                                        >-->
+                                <!--                                            <img-->
+                                <!--                                                alt="Icewall Tailwind HTML Admin Template"-->
+                                <!--                                                class="rounded-md border border-white"-->
+                                <!--                                                :src="require(`/images/${$f()[8].images[0]}`)"-->
+                                <!--                                            />-->
+                                <!--                                        </Tippy>-->
+                                <!--                                        <Tippy-->
+                                <!--                                            tag="div"-->
+                                <!--                                            class="w-8 h-8 image-fit mr-1 zoom-in"-->
+                                <!--                                            :content="$f()[1].products[0].name"-->
+                                <!--                                        >-->
+                                <!--                                            <img-->
+                                <!--                                                alt="Icewall Tailwind HTML Admin Template"-->
+                                <!--                                                class="rounded-md border border-white"-->
+                                <!--                                                :src="require(`/images/${$f()[8].images[1]}`)"-->
+                                <!--                                            />-->
+                                <!--                                        </Tippy>-->
+                                <!--                                        <Tippy-->
+                                <!--                                            tag="div"-->
+                                <!--                                            class="w-8 h-8 image-fit mr-1 zoom-in"-->
+                                <!--                                            :content="$f()[2].products[0].name"-->
+                                <!--                                        >-->
+                                <!--                                            <img-->
+                                <!--                                                alt="Icewall Tailwind HTML Admin Template"-->
+                                <!--                                                class="rounded-md border border-white"-->
+                                <!--                                                :src="require(`/images/${$f()[8].images[2]}`)"-->
+                                <!--                                            />-->
+                                <!--                                        </Tippy>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
                             </div>
                         </div>
                         <div class="intro-x text-gray-500 text-xs text-center my-4">
@@ -258,16 +260,17 @@
                             href=""
                             class="ml-auto text-theme-1 dark:text-theme-10 truncate flex items-center"
                         >
-                            <PlusIcon class="w-4 h-4 mr-1" /> Dodaj zadanie
+                            <PlusIcon class="w-4 h-4 mr-1"/>
+                            Dodaj zadanie
                         </a>
                     </div>
                     <div class="mt-5">
                         <div class="intro-x box">
                             <div class="p-5">
                                 <div class="flex">
-                                    <ChevronLeftIcon class="w-5 h-5 text-gray-600" />
+                                    <ChevronLeftIcon class="w-5 h-5 text-gray-600"/>
                                     <div class="font-medium text-base mx-auto">Kwiecień</div>
-                                    <ChevronRightIcon class="w-5 h-5 text-gray-600" />
+                                    <ChevronRightIcon class="w-5 h-5 text-gray-600"/>
                                 </div>
                                 <div class="grid grid-cols-7 gap-4 mt-5 text-center">
                                     <div class="font-medium">Su</div>
@@ -356,14 +359,14 @@
                                     ></div>
                                     <span class="font-medium xl:ml-auto">10ty</span>
                                 </div>
-<!--                                <div class="flex items-center mt-4">-->
-<!--                                    <div class="w-2 h-2 bg-theme-12 rounded-full mr-3"></div>-->
-<!--                                    <span class="truncate">Laravel Rest API</span>-->
-<!--                                    <div-->
-<!--                                        class="h-px flex-1 border border-r border-dashed border-gray-300 mx-3 xl:hidden"-->
-<!--                                    ></div>-->
-<!--                                    <span class="font-medium xl:ml-auto">31th</span>-->
-<!--                                </div>-->
+                                <!--                                <div class="flex items-center mt-4">-->
+                                <!--                                    <div class="w-2 h-2 bg-theme-12 rounded-full mr-3"></div>-->
+                                <!--                                    <span class="truncate">Laravel Rest API</span>-->
+                                <!--                                    <div-->
+                                <!--                                        class="h-px flex-1 border border-r border-dashed border-gray-300 mx-3 xl:hidden"-->
+                                <!--                                    ></div>-->
+                                <!--                                    <span class="font-medium xl:ml-auto">31th</span>-->
+                                <!--                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -382,101 +385,104 @@
                             <tr>
                                 <th class="whitespace-nowrap">NAZWA</th>
                                 <th class="text-center whitespace-nowrap">INSTALATOR</th>
-<!--                                <th class="text-center whitespace-nowrap">STATUS</th>-->
+                                <!--                                <th class="text-center whitespace-nowrap">STATUS</th>-->
                                 <th class="text-center whitespace-nowrap">AKCJE</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr
-                                v-for="(faker, fakerKey) in $_.take($f(), 4)"
-                                :key="fakerKey"
+                                v-for="(solution, index) in solutions"
+                                :key="index"
                                 class="intro-x"
                             >
                                 <td>
-                                    <a href="" class="font-medium whitespace-nowrap">{{
-                                        faker.products[0].name
-                                        }}</a>
+                                    <a href="" class="font-medium whitespace-nowrap" v-if="solution.name == '' || solution.name == null">
+                                        {{solution.challenge.name }}
+                                    </a>
+                                    <a href="" class="font-medium whitespace-nowrap" v-if="solution.name != '' && solution.name != null">
+                                        {{solution.name }}
+                                    </a>
                                     <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">
-                                       Pick&Place
+                                        {{types[solution.challenge.type]}}
                                     </div>
                                 </td>
-                                <td class="text-center">RedHawk</td>
-<!--                                <td class="w-40">-->
-<!--                                    <div-->
-<!--                                        class="flex items-center justify-center"-->
-<!--                                        :class="{-->
-<!--                        'text-theme-9': faker.trueFalse[0],-->
-<!--                        'text-theme-6': !faker.trueFalse[0]-->
-<!--                      }"-->
-<!--                                    >-->
-<!--                                        <CheckSquareIcon class="w-4 h-4 mr-2" />-->
-<!--                                        {{ faker.trueFalse[0] ? "Active" : "Inactive" }}-->
-<!--                                    </div>-->
-<!--                                </td>-->
+                                <td class="text-center">    {{solution.author.name }}</td>
+                                <!--                                <td class="w-40">-->
+                                <!--                                    <div-->
+                                <!--                                        class="flex items-center justify-center"-->
+                                <!--                                        :class="{-->
+                                <!--                        'text-theme-9': faker.trueFalse[0],-->
+                                <!--                        'text-theme-6': !faker.trueFalse[0]-->
+                                <!--                      }"-->
+                                <!--                                    >-->
+                                <!--                                        <CheckSquareIcon class="w-4 h-4 mr-2" />-->
+                                <!--                                        {{ faker.trueFalse[0] ? "Active" : "Inactive" }}-->
+                                <!--                                    </div>-->
+                                <!--                                </td>-->
                                 <td class="table-report__action w-56">
                                     <div class="flex justify-center items-center">
                                         <a class="flex items-center mr-3" href="">
-                                            <CheckSquareIcon class="w-4 h-4 mr-1" />
+                                            <CheckSquareIcon class="w-4 h-4 mr-1"/>
                                             Podejrzyj
                                         </a>
-<!--                                        <a class="flex items-center text-theme-6" href="">-->
-<!--                                            <Trash2Icon class="w-4 h-4 mr-1" /> Delete-->
-<!--                                        </a>-->
+                                        <!--                                        <a class="flex items-center text-theme-6" href="">-->
+                                        <!--                                            <Trash2Icon class="w-4 h-4 mr-1" /> Delete-->
+                                        <!--                                        </a>-->
                                     </div>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div
-                        class="intro-y flex flex-wrap sm:flex-row sm:flex-nowrap items-center mt-3"
-                    >
-                        <ul class="pagination">
-                            <li>
-                                <a class="pagination__link" href="">
-                                    <ChevronsLeftIcon class="w-4 h-4" />
-                                </a>
-                            </li>
-                            <li>
-                                <a class="pagination__link" href="">
-                                    <ChevronLeftIcon class="w-4 h-4" />
-                                </a>
-                            </li>
-                            <li>
-                                <a class="pagination__link" href="">...</a>
-                            </li>
-                            <li>
-                                <a class="pagination__link" href="">1</a>
-                            </li>
-                            <li>
-                                <a class="pagination__link pagination__link--active" href=""
-                                >2</a
-                                >
-                            </li>
-                            <li>
-                                <a class="pagination__link" href="">3</a>
-                            </li>
-                            <li>
-                                <a class="pagination__link" href="">...</a>
-                            </li>
-                            <li>
-                                <a class="pagination__link" href="">
-                                    <ChevronRightIcon class="w-4 h-4" />
-                                </a>
-                            </li>
-                            <li>
-                                <a class="pagination__link" href="">
-                                    <ChevronsRightIcon class="w-4 h-4" />
-                                </a>
-                            </li>
-                        </ul>
-                        <select class="w-20 form-select box mt-3 sm:mt-0">
-                            <option>10</option>
-                            <option>25</option>
-                            <option>35</option>
-                            <option>50</option>
-                        </select>
-                    </div>
+<!--                    <div-->
+<!--                        class="intro-y flex flex-wrap sm:flex-row sm:flex-nowrap items-center mt-3"-->
+<!--                    >-->
+<!--                        <ul class="pagination">-->
+<!--                            <li>-->
+<!--                                <a class="pagination__link" href="">-->
+<!--                                    <ChevronsLeftIcon class="w-4 h-4"/>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a class="pagination__link" href="">-->
+<!--                                    <ChevronLeftIcon class="w-4 h-4"/>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a class="pagination__link" href="">...</a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a class="pagination__link" href="">1</a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a class="pagination__link pagination__link&#45;&#45;active" href=""-->
+<!--                                >2</a-->
+<!--                                >-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a class="pagination__link" href="">3</a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a class="pagination__link" href="">...</a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a class="pagination__link" href="">-->
+<!--                                    <ChevronRightIcon class="w-4 h-4"/>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a class="pagination__link" href="">-->
+<!--                                    <ChevronsRightIcon class="w-4 h-4"/>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                        <select class="w-20 form-select box mt-3 sm:mt-0">-->
+<!--                            <option>10</option>-->
+<!--                            <option>25</option>-->
+<!--                            <option>35</option>-->
+<!--                            <option>50</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
                 </div>
                 <!-- END: Weekly Top Products -->
             </div>
@@ -496,7 +502,7 @@
                                 class="tiny-slider-navigator btn px-2 border-gray-400 text-gray-700 dark:text-gray-300 mr-2"
                                 @click="prevImportantNotes"
                             >
-                                <ChevronLeftIcon class="w-4 h-4" />
+                                <ChevronLeftIcon class="w-4 h-4"/>
                             </button>
                             <button
                                 data-carousel="important-notes"
@@ -504,67 +510,13 @@
                                 class="tiny-slider-navigator btn px-2 border-gray-400 text-gray-700 dark:text-gray-300 mr-2"
                                 @click="nextImportantNotes"
                             >
-                                <ChevronRightIcon class="w-4 h-4" />
+                                <ChevronRightIcon class="w-4 h-4"/>
                             </button>
                         </div>
                         <div class="mt-5 intro-x">
                             <div class="box zoom-in">
-                                <TinySlider ref-key="importantNotesRef">
-                                    <div class="p-5">
-                                        <div class="text-base font-medium truncate">
-                                            Lorem Ipsum is simply dummy text
-                                        </div>
-                                        <div class="text-gray-500 mt-1">15 godzin temu</div>
-                                        <div class="text-gray-600 text-justify mt-1">
-                                            Lorem Ipsum is simply dummy text of the printing and
-                                            typesetting industry. Lorem Ipsum has been the industry's
-                                            standard dummy text ever since the 1500s.
-                                        </div>
-                                        <div class="font-medium flex mt-5">
-                                            <button type="button" class="btn btn-secondary py-1 px-2">
-                                                Zobacz
-                                            </button>
-<!--                                            <button-->
-<!--                                                type="button"-->
-<!--                                                class="btn btn-outline-secondary py-1 px-2 ml-auto ml-auto"-->
-<!--                                            >-->
-<!--                                                Dismiss-->
-<!--                                            </button>-->
-                                        </div>
-                                    </div>
-                                    <div class="p-5">
-                                        <div class="text-base font-medium truncate">
-                                            Lorem Ipsum is simply dummy text
-                                        </div>
-                                        <div class="text-gray-500 mt-1">12 godzin temu</div>
-                                        <div class="text-gray-600 text-justify mt-1">
-                                            Lorem Ipsum is simply dummy text of the printing and
-                                            typesetting industry. Lorem Ipsum has been the industry's
-                                            standard dummy text ever since the 1500s.
-                                        </div>
-                                        <div class="font-medium flex mt-5">
-                                            <button type="button" class="btn btn-secondary py-1 px-2">
-                                                Zobacz
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="p-5">
-                                        <div class="text-base font-medium truncate">
-                                            Lorem Ipsum is simply dummy text
-                                        </div>
-                                        <div class="text-gray-500 mt-1">10 godzin temu</div>
-                                        <div class="text-gray-600 text-justify mt-1">
-                                            Lorem Ipsum is simply dummy text of the printing and
-                                            typesetting industry. Lorem Ipsum has been the industry's
-                                            standard dummy text ever since the 1500s.
-                                        </div>
-                                        <div class="font-medium flex mt-5">
-                                            <button type="button" class="btn btn-secondary py-1 px-2">
-                                                Zobacz
-                                            </button>
-
-                                        </div>
-                                    </div>
+                                <TinySlider ref-key="importantNotesRef" v-if="posts.length != 0">
+                                    <WordpressPost v-for="post in posts" :post="post"></WordpressPost>
                                 </TinySlider>
                             </div>
                         </div>
@@ -572,101 +524,24 @@
                     <!-- END: Important Notes -->
                     <!-- BEGIN: Weekly Best Sellers -->
 
-                        <div
-                            class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-3"
-                        >
+                    <div class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-3">
                         <div class="intro-y flex items-center h-10">
                             <h2 class="text-lg font-medium truncate mr-5">
-                                Najpopularniejsi integratorzy
+                                Nasi partnerzy
                             </h2>
                         </div>
                         <div class="mt-5">
-                            <div
-                                v-for="(faker, fakerKey) in $_.take($f(), 4)"
-                                :key="fakerKey"
-                                class="intro-y"
-                            >
+                            <div class="intro-y">
                                 <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                    <div
-                                        class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden"
-                                    >
-                                        <img
-                                            alt="Icewall Tailwind HTML Admin Template"
-                                            :src="'/uploads/1616990649.jpg'"
-                                        />
-                                    </div>
-                                    <div class="ml-4 mr-auto">
-                                        <div class="font-medium">{{ faker.users[0].name }}</div>
-                                        <div class="text-gray-600 text-xs mt-0.5">
-                                            {{ faker.dates[0] }}
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="py-1 px-2 rounded-full text-xs bg-theme-9 text-white cursor-pointer font-medium"
-                                    >
-                                        137 instalacji
-                                    </div>
+                                    <img src="/logos/fanuc_logo.jpeg"/>
+                                </div>
+                                <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
+                                    <img src="/logos/yaskawa_logo.png"/>
                                 </div>
                             </div>
-                            <a
-                                href=""
-                                class="intro-y w-full block text-center rounded-md py-4 border border-dotted border-theme-15 dark:border-dark-5 text-theme-16 dark:text-gray-600"
-                            >Wyświetl wszystkich</a
-                            >
                         </div>
                     </div>
                     <!-- END: Weekly Best Sellers -->
-
-                    <!-- BEGIN: Transactions -->
-                    <div
-                        class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-3"
-                    >
-                        <div class="intro-x flex items-center h-10">
-                            <h2 class="text-lg font-medium truncate mr-5">Transactions</h2>
-                        </div>
-                        <div class="mt-5">
-                            <div
-                                v-for="(faker, fakerKey) in $_.take($f(), 5)"
-                                :key="fakerKey"
-                                class="intro-x"
-                            >
-                                <div class="box px-5 py-3 mb-3 flex items-center zoom-in">
-                                    <div
-                                        class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"
-                                    >
-                                        <img
-                                            alt="Icewall Tailwind HTML Admin Template"
-                                            :src="'/uploads/1616990649.jpg'"
-                                        />
-                                    </div>
-                                    <div class="ml-4 mr-auto">
-                                        <div class="font-medium">
-                                            {{ faker.users[0].name }}
-                                        </div>
-                                        <div class="text-gray-600 text-xs mt-0.5">
-                                            {{ faker.dates[0] }}
-                                        </div>
-                                    </div>
-                                    <div
-                                        :class="{
-                      'text-theme-9': faker.trueFalse[0],
-                      'text-theme-6': !faker.trueFalse[0]
-                    }"
-                                    >
-                                        {{ faker.trueFalse[0] ? "+" : "-" }}${{ faker.totals[0] }}
-                                    </div>
-                                </div>
-                            </div>
-                            <a
-                                href=""
-                                class="intro-x w-full block text-center rounded-md py-3 border border-dotted border-theme-15 dark:border-dark-5 text-theme-16 dark:text-gray-600"
-                            >View More</a
-                            >
-                        </div>
-                    </div>
-                    <!-- END: Transactions -->
-
-
                 </div>
             </div>
         </div>
@@ -674,19 +549,25 @@
 </template>
 
 <script>
-    import { defineComponent, ref, provide } from "vue";
-    import ReportDonutChart from "../components/report-donut-chart/Main.vue";
-    import ReportBarChart from "../components/report-bar-chart/Main.vue";
-    import ReportMap from "../components/report-map/Main.vue";
+import {defineComponent, ref, provide, onMounted} from "vue";
+import ReportDonutChart from "../components/report-donut-chart/Main.vue";
+import ReportBarChart from "../components/report-bar-chart/Main.vue";
+import ReportMap from "../components/report-map/Main.vue";
+import GetDashboard from "../compositions/GetDashboard"
+import WordpressPost from "../components/wordpress-post/WordpressPost";
 
 export default {
     components: {
+        WordpressPost,
         ReportDonutChart,
         ReportBarChart,
         ReportMap
     },
     setup() {
         const importantNotesRef = ref();
+        const posts = ref([]);
+        const solutions = ref([]);
+        const types = require("../json/types.json");
 
         provide("bind[importantNotesRef]", el => {
             importantNotesRef.value = el;
@@ -701,9 +582,26 @@ export default {
             el.tns.goTo("next");
         };
 
+        const GetDashBoardRepository = () => {
+
+            GetDashboard((resp) => {
+                console.log(resp.posts);
+                posts.value = resp.posts;
+                solutions.value = resp.solutions;
+            });
+
+
+        }
+        onMounted(() => {
+            GetDashBoardRepository();
+        });
+
         return {
             prevImportantNotes,
-            nextImportantNotes
+            nextImportantNotes,
+            posts,
+            solutions,
+            types
         };
     },
     name: "Dashboard",

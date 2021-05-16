@@ -35,25 +35,13 @@ class SolutionController extends Controller
     public function getUserSolutionsFiltered(Request $request) {
         $input = $request->input();
         $query = Solution::query();
-        if(Auth::user()->type == 'integrator') {
-            $query->whereIn('stage', [1,2])->where('status', '=', 1);
-        } else {
+//        if(Auth::user()->type == 'integrator') {
             $query->where('author_id', '=', Auth::user()->id);
-        }
+//        }
 
-
-        if(isset($input->status)){
-            $query->where('status', '=', $input->status);
-        }
-        if (isset($input->type)) {
-            $query->where('type', '=', $input->type);
-        }
-        if (isset($input->rating)) {
-            $query->whereIn('rating', [($input->rating - 0.5), $input->rating, ($input->rating + 0.5)]);
-        }
-        if (isset($input->favourite)) {
-            $query->where('favourite', '=', 1);
-        }
+//        if (isset($input->rating)) {
+//            $query->whereIn('rating', [($input->rating - 0.5), $input->rating, ($input->rating + 0.5)]);
+//        }
 
         $solutions = $query->with('comments', 'comments.commentator')->get();
 
