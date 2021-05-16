@@ -23,8 +23,8 @@
             <!-- END: FAQ Menu -->
             <!-- BEGIN: FAQ Content -->
             <PrivacyPolicyContent v-if="props.page === 'privacy-policy'"></PrivacyPolicyContent>
-            <TermsOfServiceContent v-if="props.page === 'price-list'"></TermsOfServiceContent>
-            <PriceListContent v-if="props.page === 'terms-of-service'"></PriceListContent>
+            <TermsOfServiceContent v-if="props.page === 'terms-of-service'"></TermsOfServiceContent>
+            <PriceListContent v-if="props.page === 'price-list'"></PriceListContent>
             <!-- END: FAQ Content -->
         </div>
     </div>
@@ -44,7 +44,11 @@ export default {
     name: "TermsMain",
     components: {
         PriceListContent,
-        TermsOfServiceContent, TermsOfServiceMenu, PriceListMenu, PrivacyPolicyContent, PrivacyPolicyMenu
+        TermsOfServiceContent,
+        TermsOfServiceMenu,
+        PriceListMenu,
+        PrivacyPolicyContent,
+        PrivacyPolicyMenu
     },
     props: {
         page: String
