@@ -3,46 +3,56 @@
         <div class="p-5">
             <a
                 class="flex items-center text-theme-1 dark:text-theme-10 font-medium"
-                href=""
+                href="#faq-accordion-content-1"
             >
-                <ActivityIcon class="w-4 h-4 mr-2" /> About Our Products
+                INFORMACJA O WARUNKACH ŚWIADCZENIA USŁUG
+            </a>
+            <a class="flex items-center mt-5" href="#faq-accordion-content-2">
+                DEFINICJE
             </a>
             <a class="flex items-center mt-5" href="">
-                <BoxIcon class="w-4 h-4 mr-2" /> Related License
+                ZAKRES USŁUG DBR77
             </a>
             <a class="flex items-center mt-5" href="">
-                <LockIcon class="w-4 h-4 mr-2" /> Single Application License
-            </a>
-            <a class="flex items-center mt-5" href="">
-                <SettingsIcon class="w-4 h-4 mr-2" /> Multi Application License
+                REJESTRACJA KONTA UŻYTKOWNIKA
             </a>
         </div>
         <div class="p-5 border-t border-gray-200 dark:border-dark-5">
             <a class="flex items-center" href="">
-                <ActivityIcon class="w-4 h-4 mr-2" /> Term of Use
+                OPŁATY ZA USŁUGI
             </a>
             <a class="flex items-center mt-5" href="">
-                <BoxIcon class="w-4 h-4 mr-2" /> Author Fees
+                WARUNKI SPECYFICZNE DLA INWESTORÓW
             </a>
             <a class="flex items-center mt-5" href="">
-                <LockIcon class="w-4 h-4 mr-2" /> Product Review
+                ZASADY WSPÓŁPRACY INWESTORÓW I INTEGRATORÓW NA PLATFORMIE
             </a>
             <a class="flex items-center mt-5" href="">
-                <SettingsIcon class="w-4 h-4 mr-2" /> Privacy Policy
-            </a>
-        </div>
-        <div class="p-5 border-t border-gray-200 dark:border-dark-5">
-            <a class="flex items-center" href="">
-                <ActivityIcon class="w-4 h-4 mr-2" /> About Our Products
+                OCENY I RECENZJE
             </a>
             <a class="flex items-center mt-5" href="">
-                <BoxIcon class="w-4 h-4 mr-2" /> Related License
+                ZAWARTOŚĆ I PRAWA WŁASNOŚCI INTELEKTUALNEJ UŻYTKOWNIKÓW
             </a>
             <a class="flex items-center mt-5" href="">
-                <LockIcon class="w-4 h-4 mr-2" /> Single Application License
+                ZAWARTOŚĆ I PRAWA WŁASNOŚCI INTELEKTUALNEJ DBR 77
             </a>
             <a class="flex items-center mt-5" href="">
-                <SettingsIcon class="w-4 h-4 mr-2" /> Multi Application License
+                KORZYSTANIE Z OPROGRAMOWANIA DBR 77
+            </a>
+            <a class="flex items-center mt-5" href="">
+                DZIAŁANIA ZABRONIONE
+            </a>
+            <a class="flex items-center mt-5" href="">
+                ODPOWIEDZIALNOŚĆ
+            </a>
+            <a class="flex items-center mt-5" href="">
+                ZAKOŃCZENIE WSPÓŁPRACY, USUNIĘCIE KONTA UŻYTKOWNIKA NA PLATFORMIE
+            </a>
+            <a class="flex items-center mt-5" href="">
+                PRAWO DO SKARGI
+            </a>
+            <a class="flex items-center mt-5" href="">
+                POSTANOWIENIA KOŃCOWE
             </a>
         </div>
     </div>
