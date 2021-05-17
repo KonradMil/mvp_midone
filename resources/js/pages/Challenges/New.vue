@@ -100,21 +100,6 @@
                             <CodeIcon class="w-4 h-4 mr-2"/>
                             Financials
                         </Tippy>
-                        <Tippy
-                            id="meta-title-tab"
-                            tag="a"
-                            content="Adjust the meta title"
-                            data-toggle="tab"
-                            data-target="#meta-title"
-                            href="javascript:;"
-                            class="w-full sm:w-40 py-4 text-center flex justify-center items-center"
-                            role="tab"
-                            aria-selected="false"
-                            @click="tab = 'financials2'"
-                        >
-                            <CodeIcon class="w-4 h-4 mr-2"/>
-                            Financials2
-                        </Tippy>
                     </div>
                     <div class="post__content tab-content">
                         <div
@@ -381,107 +366,7 @@
 
                         </div>
                         <div
-                            v-if="tab === 'financials'"
-                            id="content2"
-                            class="tab-pane p-5 active"
-                            role="tabpanel"
-                            aria-labelledby="content-tab"
-                        >
-                            <div
-                                class="border border-gray-200 dark:border-dark-5 rounded-md p-5"
-                            >
-                                <div class="mt-5">
-                                    <div
-                                        class="px-5 sm:px-10pt-2"
-                                    >
-                                        <!--                <div class="font-medium text-base">Profile Settings</div>-->
-                                        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                                            <div class="intro-y col-span-12 sm:col-span-6" >
-                                                <label for="input-wizard-9" class="form-label">
-                                                    {{$t('challengesNew.days')}}
-                                                </label>
-                                                <input
-                                                    type="number"
-                                                    class="form-control"
-                                                    placeholder="1"
-                                                    v-model="days"
-                                                    :aria-label="$t('challengesNew.numberSupported')"
-                                                />
-                                            </div>
-                                            <div class="intro-y col-span-12 sm:col-span-6" >
-                                                <label for="input-wizard-9" class="form-label">
-                                                    {{$t('challengesNew.shifts')}}
-                                                </label>
-                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-                                            </div>
-                                            <div class="intro-y col-span-12 sm:col-span-6" >
-                                                <label for="input-wizard-9" class="form-label">
-                                                    {{$t('challengesNew.shift_time')}}
-                                                </label>
-                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-                                            </div>
-                                            <div class="intro-y col-span-12 sm:col-span-6" >
-                                                <label for="input-wizard-9" class="form-label">
-                                                    {{$t('challengesNew.weekend_shift')}}
-                                                </label>
-                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-                                            </div>
-                                            <div class="intro-y col-span-12 sm:col-span-6" >
-                                                <label for="input-wizard-9" class="form-label">
-                                                    {{$t('challengesNew.breakfast')}}
-                                                </label>
-                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-                                            </div>
-                                            <div class="intro-y col-span-12 sm:col-span-6" >
-                                                <label for="input-wizard-9" class="form-label">
-                                                    {{$t('challengesNew.stop_time')}}
-                                                </label>
-                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-                                            </div>
-                                            <div class="intro-y col-span-12 sm:col-span-6" >
-                                                <label for="input-wizard-9" class="form-label">
-                                                    {{$t('challengesNew.operator_performance')}}
-                                                </label>
-                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-                                            </div>
-                                            <div class="intro-y col-span-12 sm:col-span-6" >
-                                                <label for="input-wizard-9" class="form-label">
-                                                    {{$t('challengesNew.defective')}}
-                                                </label>
-                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-                                            </div>
-                                            <div class="intro-y col-span-12 sm:col-span-6" >
-                                                <label for="input-wizard-9" class="form-label">
-                                                    {{$t('challengesNew.number_of_operators')}}
-                                                </label>
-                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-                                            </div>
-                                            <div class="intro-y col-span-12 sm:col-span-6" >
-                                                <label for="input-wizard-9" class="form-label">
-                                                    {{$t('challengesNew.operator_cost')}}
-                                                </label>
-                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-                                            </div>
-                                            <div class="intro-y col-span-12 sm:col-span-6" >
-                                                <label for="input-wizard-9" class="form-label">
-                                                    {{$t('challengesNew.absence')}}
-                                                </label>
-                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-                                            </div>
-                                            <div class="intro-y col-span-12 sm:col-span-6" >
-                                                <label for="input-wizard-9" class="form-label">
-                                                    {{$t('challengesNew.cycle_time')}}
-                                                </label>
-                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div
-                            v-if="tab==='financials2'"
+                            v-if="tab==='financials'"
                             class="intro-y box mt-5">
                             <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
                                 <h2 class="font-medium text-base mr-auto">
