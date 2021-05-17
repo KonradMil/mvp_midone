@@ -108,7 +108,7 @@ class ChallengeController extends Controller
             $query->where('favourite', '=', 1);
         }
 
-        $challenges = $query->with(['comments.commentator', 'technicalDetails'])->get();
+        $challenges = $query->with(['comments.commentator', 'technicalDetails', 'financial_before'])->get();
 
         foreach ($challenges as $challenge) {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like')) {
@@ -324,7 +324,7 @@ class ChallengeController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Wyzwanie zostao dodane poprawnie',
+            'message' => 'Wyzwanie zostało dodane poprawnie',
             'payload' => $challenge
         ]);
 
