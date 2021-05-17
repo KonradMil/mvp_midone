@@ -86,6 +86,7 @@ class ChallengeController extends Controller
     public function getUserChallengesFiltered(Request $request)
     {
         $input = $request->input();
+
         $query = Challenge::query();
         if (Auth::user()->type == 'integrator') {
             $query->whereIn('stage', [1, 2])->where('status', '=', 1);
@@ -108,7 +109,10 @@ class ChallengeController extends Controller
             $query->where('favourite', '=', 1);
         }
 
-        $challenges = $query->with(['comments.commentator', 'technicalDetails', 'financial_before'])->get();
+        $financial = Financial::find($input->financial_before_id);
+
+
+        $challenges = $query->with(['comments.commentator', 'technicalDetails'])->get();
 
         foreach ($challenges as $challenge) {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like')) {
@@ -132,7 +136,6 @@ class ChallengeController extends Controller
             'payload' => $challenges
         ]);
     }
-
     public function getUserChallengesFollowed(Request $request)
     {
         $input = $request->input();
@@ -158,6 +161,11 @@ class ChallengeController extends Controller
             $query->where('favourite', '=', 1);
         }
 
+//        $financial = Finnancial::find($input->financial_before_id);
+//        $challenges = financial_before_id = Financial::find($input->financial_before_id);
+//        $query-> Financial::where('financial_before_id', '=' , )
+
+        $financial = Financial::find($input->financial_before_id);
         $challenges = $query->with(['comments.commentator', 'technicalDetails'])->get();
 
         foreach ($challenges as $key => $challenge) {
@@ -179,7 +187,7 @@ class ChallengeController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
-            'payload' => $challenges
+            'payload' => $challenges,$financial
         ]);
     }
 
