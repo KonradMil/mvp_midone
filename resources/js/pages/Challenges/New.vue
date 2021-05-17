@@ -85,6 +85,36 @@
                             <CodeIcon class="w-4 h-4 mr-2"/>
                             {{ $t('challengesNew.details') }}
                         </Tippy>
+                        <Tippy
+                            id="meta-title-tab"
+                            tag="a"
+                            content="Adjust the meta title"
+                            data-toggle="tab"
+                            data-target="#meta-title"
+                            href="javascript:;"
+                            class="w-full sm:w-40 py-4 text-center flex justify-center items-center"
+                            role="tab"
+                            aria-selected="false"
+                            @click="tab = 'financials'"
+                        >
+                            <CodeIcon class="w-4 h-4 mr-2"/>
+                            Financials
+                        </Tippy>
+                        <Tippy
+                            id="meta-title-tab"
+                            tag="a"
+                            content="Adjust the meta title"
+                            data-toggle="tab"
+                            data-target="#meta-title"
+                            href="javascript:;"
+                            class="w-full sm:w-40 py-4 text-center flex justify-center items-center"
+                            role="tab"
+                            aria-selected="false"
+                            @click="tab = 'financials2'"
+                        >
+                            <CodeIcon class="w-4 h-4 mr-2"/>
+                            Financials2
+                        </Tippy>
                     </div>
                     <div class="post__content tab-content">
                         <div
@@ -350,6 +380,284 @@
                             </div>
 
                         </div>
+                        <div
+                            v-if="tab === 'financials'"
+                            id="content2"
+                            class="tab-pane p-5 active"
+                            role="tabpanel"
+                            aria-labelledby="content-tab"
+                        >
+                            <div
+                                class="border border-gray-200 dark:border-dark-5 rounded-md p-5"
+                            >
+                                <div class="mt-5">
+                                    <div
+                                        class="px-5 sm:px-10pt-2"
+                                    >
+                                        <!--                <div class="font-medium text-base">Profile Settings</div>-->
+                                        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                                            <div class="intro-y col-span-12 sm:col-span-6" >
+                                                <label for="input-wizard-9" class="form-label">
+                                                    {{$t('challengesNew.days')}}
+                                                </label>
+                                                <input
+                                                    type="number"
+                                                    class="form-control"
+                                                    placeholder="1"
+                                                    v-model="days"
+                                                    :aria-label="$t('challengesNew.numberSupported')"
+                                                />
+                                            </div>
+                                            <div class="intro-y col-span-12 sm:col-span-6" >
+                                                <label for="input-wizard-9" class="form-label">
+                                                    {{$t('challengesNew.shifts')}}
+                                                </label>
+                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                            </div>
+                                            <div class="intro-y col-span-12 sm:col-span-6" >
+                                                <label for="input-wizard-9" class="form-label">
+                                                    {{$t('challengesNew.shift_time')}}
+                                                </label>
+                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                            </div>
+                                            <div class="intro-y col-span-12 sm:col-span-6" >
+                                                <label for="input-wizard-9" class="form-label">
+                                                    {{$t('challengesNew.weekend_shift')}}
+                                                </label>
+                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                            </div>
+                                            <div class="intro-y col-span-12 sm:col-span-6" >
+                                                <label for="input-wizard-9" class="form-label">
+                                                    {{$t('challengesNew.breakfast')}}
+                                                </label>
+                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                            </div>
+                                            <div class="intro-y col-span-12 sm:col-span-6" >
+                                                <label for="input-wizard-9" class="form-label">
+                                                    {{$t('challengesNew.stop_time')}}
+                                                </label>
+                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                            </div>
+                                            <div class="intro-y col-span-12 sm:col-span-6" >
+                                                <label for="input-wizard-9" class="form-label">
+                                                    {{$t('challengesNew.operator_performance')}}
+                                                </label>
+                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                            </div>
+                                            <div class="intro-y col-span-12 sm:col-span-6" >
+                                                <label for="input-wizard-9" class="form-label">
+                                                    {{$t('challengesNew.defective')}}
+                                                </label>
+                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                            </div>
+                                            <div class="intro-y col-span-12 sm:col-span-6" >
+                                                <label for="input-wizard-9" class="form-label">
+                                                    {{$t('challengesNew.number_of_operators')}}
+                                                </label>
+                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                            </div>
+                                            <div class="intro-y col-span-12 sm:col-span-6" >
+                                                <label for="input-wizard-9" class="form-label">
+                                                    {{$t('challengesNew.operator_cost')}}
+                                                </label>
+                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                            </div>
+                                            <div class="intro-y col-span-12 sm:col-span-6" >
+                                                <label for="input-wizard-9" class="form-label">
+                                                    {{$t('challengesNew.absence')}}
+                                                </label>
+                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                            </div>
+                                            <div class="intro-y col-span-12 sm:col-span-6" >
+                                                <label for="input-wizard-9" class="form-label">
+                                                    {{$t('challengesNew.cycle_time')}}
+                                                </label>
+                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div
+                            v-if="tab==='financials2'"
+                            class="intro-y box mt-5">
+                            <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
+                                <h2 class="font-medium text-base mr-auto">
+                                    Hoverable Table
+                                </h2>
+                                <div class="w-full sm:w-auto flex items-center sm:ml-auto mt-3 sm:mt-0">
+                                    <label class="form-check-label ml-0 sm:ml-2" for="show-example-3">Show example code</label>
+                                    <input data-target="#hoverable-table" class="show-code form-check-switch mr-0 ml-3" type="checkbox" id="show-example-3">
+                                </div>
+                            </div>
+                            <div class="p-5" id="hoverable-table">
+                                <div class="preview">
+                                    <div class="overflow-x-auto">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">#</th>
+                                                <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Przed robotyzacją</th>
+                                                <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Po robotyzacji</th>
+                                                <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Różnica</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="hover:bg-gray-200">
+                                                <td class="border">1</td>
+                                                <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.days')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="1" :placeholder="$t('challengesNew.days')" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">@angelinajolie</td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-200">
+                                                <td class="border">1</td>
+                                                <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.shifts')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">@angelinajolie</td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-200">
+                                                <td class="border">1</td>
+                                                <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.weekend_shift')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">@angelinajolie</td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-200">
+                                                <td class="border">1</td>
+                                                <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.breakfast')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">@angelinajolie</td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-200">
+                                                <td class="border">1</td>
+                                                <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.stop_time')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">@angelinajolie</td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-200">
+                                                <td class="border">1</td>
+                                                <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.operator_performance')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">@angelinajolie</td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-200">
+                                                <td class="border">1</td>
+                                                <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.defective')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">@angelinajolie</td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-200">
+                                                <td class="border">1</td>
+                                                <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.number_of_operators')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">@angelinajolie</td>
+                                            </tr><tr class="hover:bg-gray-200">
+                                                <td class="border">1</td>
+                                                <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.operator_cost')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">@angelinajolie</td>
+                                            </tr><tr class="hover:bg-gray-200">
+                                                <td class="border">1</td>
+                                                <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.absence')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">@angelinajolie</td>
+                                            </tr><tr class="hover:bg-gray-200">
+                                                <td class="border">1</td>
+                                                <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.cycle_time')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">
+                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">@angelinajolie</td>
+                                             </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="source-code hidden">
+                                    <button data-target="#copy-hoverable-table" class="copy-code btn py-1 px-2 btn-outline-secondary"> <i data-feather="file" class="w-4 h-4 mr-2"></i> Copy example code </button>
+                                    <div class="overflow-y-auto mt-3 rounded-md">
+                                        <pre class="source-preview" id="copy-hoverable-table"> <code class="text-xs p-0 rounded-md html pl-5 pt-8 pb-4 -mb-10 -mt-10"> HTMLOpenTagdiv class=&quot;overflow-x-auto&quot;HTMLCloseTag HTMLOpenTagtable class=&quot;table&quot;HTMLCloseTag HTMLOpenTagtheadHTMLCloseTag HTMLOpenTagtrHTMLCloseTag HTMLOpenTagth class=&quot;border border-b-2 dark:border-dark-5 whitespace-nowrap&quot;HTMLCloseTag#HTMLOpenTag/thHTMLCloseTag HTMLOpenTagth class=&quot;border border-b-2 dark:border-dark-5 whitespace-nowrap&quot;HTMLCloseTagFirst NameHTMLOpenTag/thHTMLCloseTag HTMLOpenTagth class=&quot;border border-b-2 dark:border-dark-5 whitespace-nowrap&quot;HTMLCloseTagLast NameHTMLOpenTag/thHTMLCloseTag HTMLOpenTagth class=&quot;border border-b-2 dark:border-dark-5 whitespace-nowrap&quot;HTMLCloseTagUsernameHTMLOpenTag/thHTMLCloseTag HTMLOpenTag/trHTMLCloseTag HTMLOpenTag/theadHTMLCloseTag HTMLOpenTagtbodyHTMLCloseTag HTMLOpenTagtr class=&quot;hover:bg-gray-200&quot;HTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTag1HTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTagAngelinaHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTagJolieHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTag@angelinajolieHTMLOpenTag/tdHTMLCloseTag HTMLOpenTag/trHTMLCloseTag HTMLOpenTagtr class=&quot;hover:bg-gray-200&quot;HTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTag2HTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTagBradHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTagPittHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTag@bradpittHTMLOpenTag/tdHTMLCloseTag HTMLOpenTag/trHTMLCloseTag HTMLOpenTagtr class=&quot;hover:bg-gray-200&quot;HTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTag3HTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTagCharlieHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTagHunnamHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTag@charliehunnamHTMLOpenTag/tdHTMLCloseTag HTMLOpenTag/trHTMLCloseTag HTMLOpenTag/tbodyHTMLCloseTag HTMLOpenTag/tableHTMLCloseTag HTMLOpenTag/divHTMLCloseTag </code> </pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -556,6 +864,19 @@ export default {
         const publish = ref(false);
         const dropzoneSingleRef = ref();
 
+        const days = ref('');
+        const shifts = ref('');
+        const shift_time = ref('');
+        const weekend_shift = ref('');
+        const breakfast = ref('');
+        const stop_time = ref('');
+        const operator_performance = ref('');
+        const defective = ref('');
+        const number_of_operators = ref('');
+        const operator_cost = ref('');
+        const absence = ref('');
+        const cycle_time = ref('');
+
         const types = require("../../json/types.json");
         const tagss = require("../../json/tagsChallenge.json");
         const sels = require("../../json/challenge.json");
@@ -601,7 +922,8 @@ export default {
                     work_shifts: select_work_shifts.value,
                     teams: teamsAllowed.value,
                     tags: tagsSelected.value,
-                    images: images.value
+                    images: images.value,
+
                 }, handleCallback);
                 // emitter.emit('changestudio', {val: 'challenge'});
 
