@@ -4,7 +4,7 @@
             <div
                 class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5"
             >
-                <h2 class="font-medium text-base mr-auto">WARUNKI ŚWIADCZENIA USŁUG PLATFORMY DBR77.COM</h2>
+                <h2 class="font-medium text-base mr-auto">Warunki świadczenia usług Platformy DBR77.COM</h2>
             </div>
             <div id="faq-accordion-1" class="accordion p-5">
                 <div class="accordion-item">
@@ -17,7 +17,7 @@
                             aria-expanded="true"
                             aria-controls="faq-accordion-collapse-1"
                         >
-                            1. INFORMACJA O WARUNKACH ŚWIADCZENIA USŁUG
+                            1. Informacja o warunkach świadczenia usług
                         </button>
                     </div>
                     <div
@@ -50,7 +50,7 @@
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-2"
                         >
-                            2. DEFINICJE
+                            2. Definicje
                         </button>
                     </div>
                     <div
@@ -110,7 +110,7 @@
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-3"
                         >
-                            3. ZAKRES USŁUG DBR77
+                            3. Zakres usług DBR77
                         </button>
                     </div>
                     <div
@@ -184,7 +184,7 @@
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-4"
                         >
-                            4. REJESTRACJA KONTA UŻYTKOWNIKA
+                            4. Rejestracja konta użytkownika
                         </button>
                     </div>
                     <div
@@ -234,7 +234,7 @@
                             data-bs-target="#faq-accordion-collapse-5"
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-5">
-                            5. OPŁATY ZA USŁUGI
+                            5. Opłaty za usługi
                         </button>
                     </div>
                     <div
@@ -267,7 +267,7 @@
                             data-bs-target="#faq-accordion-collapse-6"
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-6">
-                            6. WARUNKI SPECYFICZNE DLA INWESTORÓW
+                            6. Warunki specyficzne dla inwestorów
                         </button>
                     </div>
                     <div
@@ -306,7 +306,7 @@
                             data-bs-target="#faq-accordion-collapse-7"
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-7">
-                            7. WARUNKI SPECYFICZNE DLA INTEGRATORÓW
+                            7. Warunki specyficzne dla integratorów
                         </button>
                     </div>
                     <div
@@ -341,7 +341,7 @@
                             data-bs-target="#faq-accordion-collapse-7"
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-7">
-                            8. ZASADY WSPÓŁPRACY INWESTORÓW I INTEGRATORÓW NA PLATFORMIE
+                            8. Zasady współpracy inwestorów i integratorów na platformie
                         </button>
                     </div>
                     <div
@@ -388,7 +388,7 @@
                             data-bs-target="#faq-accordion-collapse-7"
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-7">
-                            9. OCENY I RECENZJE
+                            9. Oceny i recenzje
                         </button>
                     </div>
                     <div
@@ -421,7 +421,7 @@
                             data-bs-target="#faq-accordion-collapse-7"
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-7">
-                            10. ZAWARTOŚĆ I PRAWA WŁASNOŚCI INTELEKTUALNEJ UŻYTKOWNIKÓW
+                            10. Zawartość i prawa własności intelektualnej użytkowników
                         </button>
                     </div>
                     <div
@@ -459,7 +459,7 @@
                             data-bs-target="#faq-accordion-collapse-7"
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-7">
-                            11.  ZAWARTOŚĆ I PRAWA WŁASNOŚCI INTELEKTUALNEJ DBR 77
+                            11.  Zawartość i prawa własności intelektualnej DBR 77
                         </button>
                     </div>
                     <div
@@ -489,7 +489,7 @@
                             data-bs-target="#faq-accordion-collapse-7"
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-7">
-                            12. KORZYSTANIE Z OPROGRAMOWANIA DBR 77
+                            12. Korzystan z oprogramowania DBR 77
                         </button>
                     </div>
                     <div
@@ -519,7 +519,7 @@
                             data-bs-target="#faq-accordion-collapse-7"
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-7">
-                            13. DZIAŁANIA ZABRONIONE
+                            13. Działania zabronione
                         </button>
                     </div>
                     <div
@@ -603,7 +603,7 @@
                             data-bs-target="#faq-accordion-collapse-7"
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-7">
-                            14. ODPOWIEDZIALNOŚĆ
+                            14. Odpowiedzialność
                         </button>
                     </div>
                     <div
@@ -653,7 +653,7 @@
                             data-bs-target="#faq-accordion-collapse-7"
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-7">
-                            15. ZAKOŃCZENIE WSPÓŁPRACY, USUNIĘCIE KONTA UŻYTKOWNIKA NA PLATFORMIE
+                            15. Zakończenie współpracy, usunięcie konta użytkownika na platformie
                         </button>
                     </div>
                     <div
@@ -705,7 +705,7 @@
                             data-bs-target="#faq-accordion-collapse-7"
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-7">
-                            16. PRAWO DO SKARGI
+                            16. Prawo do skargi
                         </button>
                     </div>
                     <div
@@ -762,7 +762,7 @@
                             data-bs-target="#faq-accordion-collapse-7"
                             aria-expanded="false"
                             aria-controls="faq-accordion-collapse-7">
-                            17. POSTANOWIENIA KOŃCOWE
+                            17. Postanowienia końcowe
                         </button>
                     </div>
                     <div
