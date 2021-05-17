@@ -109,8 +109,9 @@ class ChallengeController extends Controller
             $query->where('favourite', '=', 1);
         }
 
-        $financial = Financial::find($input->financial_before_id);
-        $challenges = $query->with(['comments.commentator', 'technicalDetails'])->where('financial_before_id', '=' , $financial->id)->get();
+//        $financial = Financial::find($input->financial_before_id);
+//        ->where('financial_before_id', '=' , $financial->id)
+        $challenges = $query->with(['comments.commentator', 'technicalDetails'])->get();
 
         foreach ($challenges as $challenge) {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like')) {
@@ -159,11 +160,6 @@ class ChallengeController extends Controller
             $query->where('favourite', '=', 1);
         }
 
-//        $financial = Finnancial::find($input->financial_before_id);
-//        $challenges = financial_before_id = Financial::find($input->financial_before_id);
-//        $query-> Financial::where('financial_before_id', '=' , )
-
-//        $financial = Financial::find($input->financial_before_id);
         $challenges = $query->with(['comments.commentator', 'technicalDetails'])->get();
 
         foreach ($challenges as $key => $challenge) {
