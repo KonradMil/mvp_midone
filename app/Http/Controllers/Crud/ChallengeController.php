@@ -109,7 +109,7 @@ class ChallengeController extends Controller
             $query->where('favourite', '=', 1);
         }
 
-        $financial = Financial::find($input->financial_before_id);
+//        $financial = Financial::find($input->financial_before_id);
 
         $challenges = $query->with(['comments.commentator', 'technicalDetails', 'financial_before'])->get();
 
