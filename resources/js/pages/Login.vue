@@ -85,7 +85,7 @@
                         </div>
                         <div class="intro-x mt-10 xl:mt-24 text-gray-700 dark:text-gray-600 text-center xl:text-left">
                             {{$t('login.pol1')}} <br/>
-                            <a class="text-theme-1 dark:text-theme-10" href="">
+                            <a class="text-theme-1 dark:text-theme-10" href="" @click.prevent="$router.push({path: '/terms/terms-of-service'})">
                                 {{$t('login.pol2')}}
                             </a>
                             &
