@@ -34,9 +34,9 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         ChallengeAdded::class => [
-                AddActivityLog::class,
-                SendChallengeNotification::class
-            ],
+            AddActivityLog::class,
+            SendChallengeNotification::class
+        ],
         SolutionAdded::class => [
             AddActivityLog::class,
             SendSolutionNotification::class

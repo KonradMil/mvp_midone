@@ -3,13 +3,13 @@
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">{{ $t('challengesNew.new') }}</h2>
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                <button
-                    type="button"
-                    class="btn box text-gray-700 dark:text-gray-300 mr-2 flex items-center ml-auto sm:ml-0"
-                >
-                    <EyeIcon class="w-4 h-4 mr-2"/>
-                 {{$t('challengesNew.preview')}}
-                </button>
+<!--                <button-->
+<!--                    type="button"-->
+<!--                    class="btn box text-gray-700 dark:text-gray-300 mr-2 flex items-center ml-auto sm:ml-0"-->
+<!--                >-->
+<!--                    <EyeIcon class="w-4 h-4 mr-2"/>-->
+<!--                 {{$t('challengesNew.preview')}}-->
+<!--                </button>-->
                 <button
                     class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
                     aria-expanded="false"
@@ -368,22 +368,12 @@
                         <div
                             v-if="tab==='financials'"
                             class="intro-y box mt-5">
-                            <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
-                                <h2 class="font-medium text-base mr-auto">
-                                    Hoverable Table
-                                </h2>
-                                <div class="w-full sm:w-auto flex items-center sm:ml-auto mt-3 sm:mt-0">
-                                    <label class="form-check-label ml-0 sm:ml-2" for="show-example-3">Show example code</label>
-                                    <input data-target="#hoverable-table" class="show-code form-check-switch mr-0 ml-3" type="checkbox" id="show-example-3">
-                                </div>
-                            </div>
                             <div class="p-5" id="hoverable-table">
                                 <div class="preview">
                                     <div class="overflow-x-auto">
                                         <table class="table">
                                             <thead>
                                             <tr>
-                                                <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">#</th>
                                                 <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Przed robotyzacją</th>
                                                 <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Po robotyzacji</th>
                                                 <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Różnica</th>
@@ -391,7 +381,6 @@
                                             </thead>
                                             <tbody>
                                             <tr class="hover:bg-gray-200">
-                                                <td class="border">1</td>
                                                 <td class="border">
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.days')}}
@@ -404,7 +393,7 @@
                                                 <td class="border">0</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
-                                                <td class="border">1</td>
+
                                                 <td class="border">
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.shifts')}}
@@ -417,7 +406,7 @@
                                                 <td class="border">0</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
-                                                <td class="border">1</td>
+
                                                 <td class="border">
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.weekend_shift')}}
@@ -430,7 +419,7 @@
                                                 <td class="border">0</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
-                                                <td class="border">1</td>
+
                                                 <td class="border">
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.breakfast')}}
@@ -443,7 +432,7 @@
                                                 <td class="border">0</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
-                                                <td class="border">1</td>
+
                                                 <td class="border">
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.stop_time')}}
@@ -456,7 +445,7 @@
                                                 <td class="border">0</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
-                                                <td class="border">1</td>
+
                                                 <td class="border">
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.operator_performance')}}
@@ -469,7 +458,7 @@
                                                 <td class="border">0</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
-                                                <td class="border">1</td>
+
                                                 <td class="border">
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.defective')}}
@@ -482,7 +471,7 @@
                                                 <td class="border">0</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
-                                                <td class="border">1</td>
+
                                                 <td class="border">
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.number_of_operators')}}
@@ -494,7 +483,7 @@
                                                 </td>
                                                 <td class="border">0</td>
                                             </tr><tr class="hover:bg-gray-200">
-                                                <td class="border">1</td>
+
                                                 <td class="border">
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.operator_cost')}}
@@ -506,7 +495,7 @@
                                                 </td>
                                                 <td class="border">0</td>
                                             </tr><tr class="hover:bg-gray-200">
-                                                <td class="border">1</td>
+
                                                 <td class="border">
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.absence')}}
@@ -518,7 +507,7 @@
                                                 </td>
                                                 <td class="border">0</td>
                                             </tr><tr class="hover:bg-gray-200">
-                                                <td class="border">1</td>
+
                                                 <td class="border">
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.cycle_time')}}
