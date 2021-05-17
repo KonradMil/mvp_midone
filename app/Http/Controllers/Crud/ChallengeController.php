@@ -110,9 +110,8 @@ class ChallengeController extends Controller
         }
 
         $financial = Financial::find($input->financial_before_id);
-
-
-        $challenges = $query->with(['comments.commentator', 'technicalDetails'])->get();
+//        ->where('financial_before_id', '=' , $financial->id)
+        $challenges = $query->with(['comments.commentator', 'technicalDetails', $financial])->get();
 
         foreach ($challenges as $challenge) {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like')) {
@@ -165,8 +164,8 @@ class ChallengeController extends Controller
 //        $challenges = financial_before_id = Financial::find($input->financial_before_id);
 //        $query-> Financial::where('financial_before_id', '=' , )
 
-        $financial = Financial::find($input->financial_before_id);
-        $challenges = $query->with(['comments.commentator', 'technicalDetails'])->where('financial_before_id', '=' , $financial->id)->get();
+//        $financial = Financial::find($input->financial_before_id);
+        $challenges = $query->with(['comments.commentator', 'technicalDetails'])->get();
 
         foreach ($challenges as $key => $challenge) {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Follow', 1)) {
