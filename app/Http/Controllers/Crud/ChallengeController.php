@@ -166,7 +166,7 @@ class ChallengeController extends Controller
 //        $query-> Financial::where('financial_before_id', '=' , )
 
         $financial = Financial::find($input->financial_before_id);
-        $challenges = $query->with(['comments.commentator', 'technicalDetails', $financial])->get();
+        $challenges = $query->with(['comments.commentator', 'technicalDetails'])->where('financial_before_id', '=' , $financial->id)->get();
 
         foreach ($challenges as $key => $challenge) {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Follow', 1)) {
