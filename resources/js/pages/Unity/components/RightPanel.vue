@@ -230,6 +230,11 @@ export default {
             currentTitle.value = 'Dane techiczne';
             showPanel();
         });
+        emitter.on('FinancialAnalysisDialog', e => {
+            content.value = 'financial';
+            currentTitle.value = 'Założenia operacyjne';
+            showPanel();
+        });
         emitter.on('OperationDialog', e => {
 
         });
