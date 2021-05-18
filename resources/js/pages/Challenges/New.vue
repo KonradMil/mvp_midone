@@ -809,6 +809,19 @@ export default {
                     tags: tagsSelected.value,
                     images: images.value,
 
+                    days: days.value,
+                    shifts: shifts.value,
+                    shift_time: shift_time.value,
+                    weekend_shift: weekend_shift.value,
+                    breakfast: breakfast.value,
+                    stop_time: stop_time.value,
+                    operator_performance: operator_performance.value,
+                    defective: defective.value,
+                    number_of_operators: number_of_operators.value,
+                    operator_cost: operator_cost.value,
+                    absence: absence.value,
+                    cycle_time: cycle_time.value,
+
                 }, handleCallback);
                 // emitter.emit('changestudio', {val: 'challenge'});
 
