@@ -180,7 +180,7 @@ class SolutionController extends Controller
 //
 //    }
 
-    public function create(Request $request)
+    public function createSolution(Request $request)
     {
         $financial = new Financial();
         $financial->save();
