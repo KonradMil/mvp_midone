@@ -178,23 +178,10 @@ export default {
     },
     setup(props) {
         const sels = require("../../../../json/challenge.json");
-
-        const t = ref('');
-        // const select_detail_pick = ref();
-        const select_work_shifts = ref();
-        const work = ref();
-
-        console.log('TECHNICAL.ID!!!!' + props.technical.id);
-        const challengeSelects = ref();
         onMounted(() => {
-            challengeSelects.value = sels;
         });
 
         return {
-            sels,
-            select_work_shifts,
-            t,
-            // select_detail_pick,
         }
     }
 }
