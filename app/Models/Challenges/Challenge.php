@@ -40,10 +40,10 @@ class Challenge extends Model implements ReactableInterface
         return $this->belongsTo(User::class);
     }
 
-//    public function teams()
-//    {
-//        return $this->belongsToMany(Team::class, 'teams_challenges');
-//    }
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, 'teams_challenges');
+    }
 
     public function technicalDetails(){
         return $this->hasOne(TechnicalDetails::class);

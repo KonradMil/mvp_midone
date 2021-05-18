@@ -7,7 +7,7 @@
     </div>
     <BottomPanel :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
     <RightButtons :icons="rightIcons"></RightButtons>
-    <RightPanel @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge"></RightPanel>
+    <RightPanel @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
 </template>
 
 <script>
@@ -55,6 +55,8 @@ export default {
         const mousePositionX = ref(0);
         const initialLoad = ref({});
         const challenge = ref({});
+        const solution = ref({});
+
         //EXTERNAL
         const unity_path = ref('/s3/unity/AssemBrot14_05_ver2.json');
         const window_width = ref('100%');
@@ -227,8 +229,11 @@ export default {
                 // handleUnityActionOutgoing({action: 'setHangarAppearance', data: 1});
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
                 console.log('GET ME');
-                getCardChallengeRepositories(id.value);
-
+                if(type.value == 'solution') {
+                    getSolutionRepositories(id.value);
+                } else {
+                    getCardChallengeRepositories(id.value);
+                }
             }, 5000);
         }
 
@@ -250,6 +255,29 @@ export default {
                         console.log(response.data.payload);
                         console.log(JSON.parse(response.data.payload.save_json));
                         challenge.value = response.data.payload;
+                        initialLoad.value = JSON.parse(response.data.payload.save_json);
+                        animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
+                        handleUnityActionOutgoing({
+                            action: 'loadStructure',
+                            data: JSON.parse(response.data.payload.save_json)
+                        });
+                        // console.log('EMIT LOAD');
+                        // emitter.emit('saveLoaded', {save: (response.data.payload)});
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        }
+
+        const getSolutionRepositories = async (id) => {
+            await axios.post('/api/solution/get/unity', {id: id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        console.log("response.data.payload");
+                        console.log(response.data.payload);
+                        console.log(JSON.parse(response.data.payload.save_json));
+                        solution.value = response.data.payload;
                         initialLoad.value = JSON.parse(response.data.payload.save_json);
                         animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
                         handleUnityActionOutgoing({

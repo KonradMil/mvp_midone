@@ -325,6 +325,8 @@ class ChallengeController extends Controller
         $technical->challenge_id = $challenge->id;
         $technical->save();
 
+
+
         return response()->json([
             'success' => true,
             'message' => 'Wyzwanie zostało dodane poprawnie',
@@ -357,6 +359,7 @@ class ChallengeController extends Controller
 
         $challenge->comments_count = $challenge->comments()->count();
         $challenge->likes = $challenge->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
+
 
 
         return response()->json([
