@@ -38,13 +38,13 @@ export default {
                     emitter.emit('SettingsDialog', { val: '' });
                     break;
                 case 'operational':
-                    emitter.emit('DescriptionDialog', { val: '' });
+                    emitter.emit('OperationalDialog', { val: '' });
                     break;
                 case 'operationalanalysis':
-                    emitter.emit('DescriptionDialog', { val: '' });
+                    emitter.emit('OperationalAnalysisDialog', { val: '' });
                     break;
                 case 'financial':
-                    emitter.emit('DescriptionDialog', { val: '' });
+                    emitter.emit('FinancialAnalysisDialog', { val: '' });
                     break;
             }
         }
