@@ -32,7 +32,7 @@
                     <DescriptionDialog v-if="content == 'description'" v-model:object="object"/>
                     <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>
                     <TeamsDialog v-if="content == 'teams'"></TeamsDialog>
-                    <FinancialAnalysisDialog v-if="content == 'financial'" v-model:technical="technical"></FinancialAnalysisDialog>
+                    <FinancialAnalysisDialog v-if="content == 'financial'" v-model:financial="financial"></FinancialAnalysisDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
                     <OperationDialog v-if="content == 'operational'" ></OperationDialog>
                     <SettingsDialog v-if="content == 'settings'" v-model:technical="technical"></SettingsDialog>
@@ -151,6 +151,12 @@ export default {
 
         const technical = computed(() => {
             return props.challenge.technical_details;
+        }, () => {
+
+        });
+
+        const financial = computed(() => {
+           return props.challenge.financial_before;
         }, () => {
 
         });
@@ -275,7 +281,8 @@ export default {
             challenge,
             type,
             object,
-            technical
+            technical,
+            financial
         }
     }
 }
