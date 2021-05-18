@@ -32,7 +32,7 @@
                     <DescriptionDialog v-if="content == 'description'" v-model:object="object"/>
                     <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>
                     <TeamsDialog v-if="content == 'teams'"></TeamsDialog>
-                    <FinancialAnalysisDialog v-if="content == 'financial'"></FinancialAnalysisDialog>
+                    <FinancialAnalysisDialog v-if="content == 'financial'" v-model:financial="financial"></FinancialAnalysisDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
                     <OperationDialog v-if="content == 'operational'" ></OperationDialog>
                     <SettingsDialog v-if="content == 'settings'" v-model:technical="technical" ></SettingsDialog>
@@ -40,7 +40,7 @@
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
                 <div
-                    class="modal-footer text-right w-full absolute bottom-0"
+                    class="modal-footer text-right w-full bottom-0"
                 >
                     <button
                         type="button"
@@ -76,6 +76,7 @@ import OperationDialog from "./right-panel/OperationDialog";
 import SettingsDialog from "./right-panel/SettingsDialog";
 import SaveChallengeDescription from "../../../compositions/SaveChallengeDescription";
 import SaveChallengeDetails from "../../../compositions/SaveChallengeDetails";
+import SaveChallengeFinancials from "../../../compositions/SaveChallengeFinancials";
 
 export default {
     name: "RightPanel",
@@ -124,7 +125,8 @@ export default {
             } else if (content.value === 'operational') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'financial') {
-                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+                // emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+                saveChallengeFinancialsRepo();
             } else if (content.value === 'settings') {
                 // emitter.emit('rightpanelaction', {
                 //     // action: 'updateAnimable', data:animable.value{
@@ -152,6 +154,12 @@ export default {
 
         const technical = computed(() => {
             return props.challenge.technical_details;
+        }, () => {
+
+        });
+
+        const financial = computed(() => {
+           return props.challenge.financial_before;
         }, () => {
 
         });
@@ -231,6 +239,11 @@ export default {
             currentTitle.value = 'Dane techiczne';
             showPanel();
         });
+        emitter.on('FinancialAnalysisDialog', e => {
+            content.value = 'financial';
+            currentTitle.value = 'Założenia operacyjne';
+            showPanel();
+        });
         emitter.on('OperationDialog', e => {
 
         });
@@ -249,6 +262,9 @@ export default {
 
         const saveChallengeDetailsRepo = async () => {
             SaveChallengeDetails(technical.value, technical.value.id);
+        }
+        const saveChallengeFinancialsRepo = async () => {
+            SaveChallengeFinancials(financial.value, financial.value.id);
         }
 
         const addTeam = () => {
@@ -271,7 +287,8 @@ export default {
             challenge,
             type,
             object,
-            technical
+            technical,
+            financial
         }
     }
 }

@@ -16,7 +16,8 @@
             "sharePost" : "Share post",
             "downloadPost" : "Download post",
             "comment" : "Comment...",
-            "select" : "Select"
+            "select" : "Select",
+            "financials" : "Financials"
         },
         "validation": {
             "Value is required": "Value is required.",
@@ -259,7 +260,8 @@
             "sharePost" : "Udostępnij post",
             "downloadPost" : "Pobierz post",
             "comment" : "Skomentuj...",
-            "select" : "Wybierz"
+            "select" : "Wybierz",
+            "financials" : "Założenia operacyjne"
         },
         "topBar": {
             "profil": "Profil",

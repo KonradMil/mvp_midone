@@ -28,19 +28,19 @@
             "src": "\/s3/builder_icons/positioning_simple.png",
             "tooltip": "",
             "alttext": "",
-            "value": 3
+            "value": 4
         },
         "operational": {
             "src": "\/s3/builder_icons/positioning_simple.png",
             "tooltip": "",
             "alttext": "",
-            "value": 3
+            "value": 5
         },
         "operationalanalysis": {
             "src": "\/s3/builder_icons/positioning_simple.png",
             "tooltip": "",
             "alttext": "",
-            "value": 3
+            "value": 6
         }
     }
 }

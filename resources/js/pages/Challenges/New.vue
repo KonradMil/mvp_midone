@@ -98,7 +98,7 @@
                             @click="tab = 'financials'"
                         >
                             <CodeIcon class="w-4 h-4 mr-2"/>
-                            Financials
+                            {{ $t('global.financials') }}
                         </Tippy>
                     </div>
                     <div class="post__content tab-content">
@@ -158,7 +158,7 @@
                                             <div class="flex flex-wrap px-4">
                                                 <Dropzone
                                                     style="position: relative;
-    display: flex;"
+                                                    display: flex;"
                                                     ref-key="dropzoneSingleRef"
                                                     :options="{
                               url: '/api/challenge/images/store',
@@ -363,7 +363,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div
                             v-if="tab==='financials'"
@@ -385,12 +384,15 @@
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.days')}}
                                                     </label>
-                                                    <input type="number" class="form-control" placeholder="1" :placeholder="$t('challengesNew.days')" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <input type="number" v-model="days" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.days')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="260,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{days_diffrence}}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
 
@@ -398,12 +400,31 @@
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.shifts')}}
                                                     </label>
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <input type="number" v-model="shifts" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.shifts')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="30,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{shifts_diffrence}}</td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-200">
+
+                                                <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.shift_time')}}
+                                                    </label>
+                                                    <input type="number" v-model="shift_time" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
+                                                </td>
+                                                <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.shift_time')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="8,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
+                                                </td>
+                                                <td class="border">{{shift_time_diffrence}}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
 
@@ -411,12 +432,15 @@
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.weekend_shift')}}
                                                     </label>
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <input type="number" v-model="weekend_shift" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.weekend_shift')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{weekend_shift_diffrence}}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
 
@@ -424,12 +448,15 @@
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.breakfast')}}
                                                     </label>
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <input type="number" v-model="breakfast" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.breakfast')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="30,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{breakfast_diffrence}}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
 
@@ -437,12 +464,15 @@
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.stop_time')}}
                                                     </label>
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <input type="number" v-model="stop_time" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.stop_time')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="20,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{stop_time_diffrence}}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
 
@@ -450,12 +480,15 @@
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.operator_performance')}}
                                                     </label>
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <input type="number" v-model="operator_performance" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.operator_performance')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="90,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{operator_performance_diffrence}}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
 
@@ -463,12 +496,15 @@
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.defective')}}
                                                     </label>
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <input type="number" v-model="defective" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.defective')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="5,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{defective_diffrence}}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
 
@@ -476,48 +512,60 @@
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.number_of_operators')}}
                                                     </label>
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <input type="number" v-model="number_of_operators" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.number_of_operators')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="2,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{number_of_operators_diffrence}}</td>
                                             </tr><tr class="hover:bg-gray-200">
 
                                                 <td class="border">
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.operator_cost')}}
                                                     </label>
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <input type="number" v-model="operator_cost" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.operator_cost')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="4500,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{operator_cost_diffrence}}</td>
                                             </tr><tr class="hover:bg-gray-200">
 
                                                 <td class="border">
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.absence')}}
                                                     </label>
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <input type="number" v-model="absence" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.absence')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="12,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{absence_diffrence}}</td>
                                             </tr><tr class="hover:bg-gray-200">
 
                                                 <td class="border">
                                                     <label for="input-wizard-9" class="form-label">
                                                         {{$t('challengesNew.cycle_time')}}
                                                     </label>
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <input type="number" v-model="cycle_time" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
-                                                    <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.cycle_time')}}
+                                                    </label>
+                                                    <input type="number" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{cycle_time_diffrence}}</td>
                                              </tr>
                                             </tbody>
                                         </table>
@@ -751,6 +799,19 @@ export default {
         const absence = ref('');
         const cycle_time = ref('');
 
+        const days_diffrence = Math.abs(days.value - 260);
+        const shifts_diffrence = Math.abs(shifts.value - 30);
+        const shift_time_diffrence = Math.abs(shift_time.value - 8);
+        const weekend_shift_diffrence = Math.abs(weekend_shift.value - 0);
+        const breakfast_diffrence = Math.abs(breakfast.value - 30);
+        const stop_time_diffrence = Math.abs(stop_time.value - 20);
+        const operator_performance_diffrence = Math.abs(operator_performance.value - 90);
+        const defective_diffrence = Math.abs(defective.value - 5);
+        const number_of_operators_diffrence = Math.abs(number_of_operators.value - 2);
+        const operator_cost_diffrence = Math.abs(operator_cost.value - 4500);
+        const absence_diffrence = Math.abs(absence.value - 12);
+        const cycle_time_diffrence = Math.abs(cycle_time.value - 0);
+
         const types = require("../../json/types.json");
         const tagss = require("../../json/tagsChallenge.json");
         const sels = require("../../json/challenge.json");
@@ -797,6 +858,19 @@ export default {
                     teams: teamsAllowed.value,
                     tags: tagsSelected.value,
                     images: images.value,
+
+                    days: days.value,
+                    shifts: shifts.value,
+                    shift_time: shift_time.value,
+                    weekend_shift: weekend_shift.value,
+                    breakfast: breakfast.value,
+                    stop_time: stop_time.value,
+                    operator_performance: operator_performance.value,
+                    defective: defective.value,
+                    number_of_operators: number_of_operators.value,
+                    operator_cost: operator_cost.value,
+                    absence: absence.value,
+                    cycle_time: cycle_time.value,
 
                 }, handleCallback);
                 // emitter.emit('changestudio', {val: 'challenge'});
@@ -853,7 +927,31 @@ export default {
             name_lang,
             en_name,
             description_lang,
-            en_description
+            en_description,
+            days,
+            shifts,
+            shift_time,
+            weekend_shift,
+            breakfast,
+            stop_time,
+            operator_performance,
+            defective,
+            number_of_operators,
+            operator_cost,
+            absence,
+            cycle_time,
+            days_diffrence,
+            shifts_diffrence,
+            shift_time_diffrence,
+            weekend_shift_diffrence,
+            breakfast_diffrence,
+            stop_time_diffrence,
+            operator_performance_diffrence,
+            defective_diffrence,
+            number_of_operators_diffrence,
+            operator_cost_diffrence,
+            cycle_time_diffrence,
+            absence_diffrence
         };
     },
     beforeRouteEnter(to, from, next) {
