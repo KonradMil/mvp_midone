@@ -76,6 +76,7 @@ import OperationDialog from "./right-panel/OperationDialog";
 import SettingsDialog from "./right-panel/SettingsDialog";
 import SaveChallengeDescription from "../../../compositions/SaveChallengeDescription";
 import SaveChallengeDetails from "../../../compositions/SaveChallengeDetails";
+import SaveChallengeFinancials from "../../../compositions/SaveChallengeFinancials";
 
 export default {
     name: "RightPanel",
@@ -123,7 +124,8 @@ export default {
             } else if (content.value === 'operational') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'financial') {
-                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+                // emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+                saveChallengeFinancialsRepo();
             } else if (content.value === 'settings') {
                 // emitter.emit('rightpanelaction', {
                 //     // action: 'updateAnimable', data:animable.value{
@@ -259,6 +261,9 @@ export default {
 
         const saveChallengeDetailsRepo = async () => {
             SaveChallengeDetails(technical.value, technical.value.id);
+        }
+        const saveChallengeFinancialsRepo = async () => {
+            SaveChallengeFinancials(financial.value, financial.value.id);
         }
 
         const addTeam = () => {
