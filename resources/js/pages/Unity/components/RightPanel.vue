@@ -40,7 +40,7 @@
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
                 <div
-                    class="modal-footer text-right w-full absolute bottom-0"
+                    class="modal-footer text-right w-full bottom-0"
                 >
                     <button
                         type="button"
