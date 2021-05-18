@@ -224,31 +224,16 @@ export default {
     name: "FinancialAnalysisDialog",
     // components: {Multiselect},
     props: {
-        object: Object,
         financial: Object,
-        id: Number
     },
     setup(props) {
-        const sels = require("../../../../json/challenge.json");
-
-        const t = ref('');
-
-
         console.log('Financial.ID!!!!' + props.financial.id);
-        const challengeSelects = ref();
         onMounted(() => {
-            challengeSelects.value = sels;
-            // t.value = props.technical
-            // select_detail_pick.value = sels.select_detail_pick.find(i => i.value === object.detail_pick).name
-            // c.value = props.object
 
         });
 
         return {
-            sels,
-            select_work_shifts,
-            t,
-            // select_detail_pick,
+
         }
     }
 }
