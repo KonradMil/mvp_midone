@@ -19,6 +19,7 @@ import cash from "cash-dom";
 import LeftButtons from "./components/LeftButtons";
 import LeftPanel from "./components/LeftPanel";
 import SaveChallengeUnity from "../../compositions/SaveChallengeUnity";
+import SaveSolutionUnity from "../../compositions/SaveSolutionUnity";
 import unityActionOutgoing from './composables/ActionsOutgoing';
 import TopButtons from "./components/TopButtons";
 import BottomPanel from "./components/BottomPanel";
@@ -199,7 +200,7 @@ export default {
             if (type.value == 'challenge') {
                 SaveChallengeUnity({save: gameLoad.value, id: id.value});
             } else {
-
+                SaveSolutionUnity({save: gameLoad.value, id: id.value});
             }
             handleUnityActionOutgoing(e);
         });

@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 use phpDocumentor\Reflection\Types\Boolean;
 
 class SolutionController extends Controller
@@ -74,7 +75,38 @@ class SolutionController extends Controller
         ]);
     }
 
+    public function saveSolution(Request $request)
+    {
+        $c = Solution::find($request->data['id']);
+        $j = json_decode($request->data['save']['save_json'], true);
+        if (!empty($j['screenshot'])) {
 
+            $path = $this->processSS($j['screenshot']);
+            $c->screenshot_path = $path['relative'];
+            unset($j['screenshot']);
+            $c->save_json = json_encode($j);
+        }
+
+        $c->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie.',
+            'payload' => $c
+        ]);
+    }
+
+    public function processSS($ss)
+    {
+        $content = base64_decode($ss);
+        $name = uniqid('ss_') . '.jpg';
+        $path = public_path('screenshots/' . $name);
+        \Illuminate\Support\Facades\File::put($path, $content);
+        Image::make($path)->resize(1000, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        })->save($path);
+        return ['absolute_path' => $path, 'relative' => ('screenshots/' . $name)];
+    }
 
     public function storeImage(Request $request)
     {
