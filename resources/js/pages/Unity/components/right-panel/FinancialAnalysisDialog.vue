@@ -232,11 +232,9 @@ export default {
         const sels = require("../../../../json/challenge.json");
 
         const t = ref('');
-        // const select_detail_pick = ref();
-        const select_work_shifts = ref();
-        const work = ref();
 
-        console.log('Financial.ID!!!!' + props.technical.id);
+
+        console.log('Financial.ID!!!!' + props.financial.id);
         const challengeSelects = ref();
         onMounted(() => {
             challengeSelects.value = sels;
