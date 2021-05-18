@@ -158,7 +158,7 @@
                                             <div class="flex flex-wrap px-4">
                                                 <Dropzone
                                                     style="position: relative;
-    display: flex;"
+                                                    display: flex;"
                                                     ref-key="dropzoneSingleRef"
                                                     :options="{
                               url: '/api/challenge/images/store',
@@ -392,7 +392,7 @@
                                                     </label>
                                                     <input type="number" class="form-control" placeholder="260,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{days_diffrence}}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
 
@@ -408,7 +408,7 @@
                                                     </label>
                                                     <input type="number" class="form-control" placeholder="30,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{shifts_diffrence}}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
 
@@ -424,7 +424,7 @@
                                                     </label>
                                                     <input type="number" class="form-control" placeholder="8,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{shift_time_diffrence}}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
 
@@ -440,7 +440,7 @@
                                                     </label>
                                                     <input type="number" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{weekend_shift_diffrence}}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
 
@@ -456,7 +456,7 @@
                                                     </label>
                                                     <input type="number" class="form-control" placeholder="30,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{breakfast_diffrence}}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
 
@@ -472,7 +472,7 @@
                                                     </label>
                                                     <input type="number" class="form-control" placeholder="20,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{stop_time_diffrence}}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
 
@@ -488,7 +488,7 @@
                                                     </label>
                                                     <input type="number" class="form-control" placeholder="90,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{operator_performance_diffrence}}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
 
@@ -504,7 +504,7 @@
                                                     </label>
                                                     <input type="number" class="form-control" placeholder="5,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{defective_diffrence}}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-200">
 
@@ -520,7 +520,7 @@
                                                     </label>
                                                     <input type="number" class="form-control" placeholder="2,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{number_of_operators_diffrence}}</td>
                                             </tr><tr class="hover:bg-gray-200">
 
                                                 <td class="border">
@@ -535,7 +535,7 @@
                                                     </label>
                                                     <input type="number" class="form-control" placeholder="4500,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{operator_cost_diffrence}}</td>
                                             </tr><tr class="hover:bg-gray-200">
 
                                                 <td class="border">
@@ -550,7 +550,7 @@
                                                     </label>
                                                     <input type="number" class="form-control" placeholder="12,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{absence_diffrence}}</td>
                                             </tr><tr class="hover:bg-gray-200">
 
                                                 <td class="border">
@@ -565,7 +565,7 @@
                                                     </label>
                                                     <input type="number" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" disabled/>
                                                 </td>
-                                                <td class="border">0</td>
+                                                <td class="border">{{cycle_time_diffrence}}</td>
                                              </tr>
                                             </tbody>
                                         </table>
@@ -799,6 +799,19 @@ export default {
         const absence = ref('');
         const cycle_time = ref('');
 
+        const days_diffrence = Math.abs(days.value - 260);
+        const shifts_diffrence = Math.abs(shifts.value - 30);
+        const shift_time_diffrence = Math.abs(shift_time.value - 8);
+        const weekend_shift_diffrence = Math.abs(weekend_shift.value - 0);
+        const breakfast_diffrence = Math.abs(breakfast.value - 30);
+        const stop_time_diffrence = Math.abs(stop_time.value - 20);
+        const operator_performance_diffrence = Math.abs(operator_performance.value - 90);
+        const defective_diffrence = Math.abs(defective.value - 5);
+        const number_of_operators_diffrence = Math.abs(number_of_operators.value - 2);
+        const operator_cost_diffrence = Math.abs(operator_cost.value - 4500);
+        const absence_diffrence = Math.abs(absence.value - 12);
+        const cycle_time_diffrence = Math.abs(cycle_time.value - 0);
+
         const types = require("../../json/types.json");
         const tagss = require("../../json/tagsChallenge.json");
         const sels = require("../../json/challenge.json");
@@ -927,6 +940,18 @@ export default {
             operator_cost,
             absence,
             cycle_time,
+            days_diffrence,
+            shifts_diffrence,
+            shift_time_diffrence,
+            weekend_shift_diffrence,
+            breakfast_diffrence,
+            stop_time_diffrence,
+            operator_performance_diffrence,
+            defective_diffrence,
+            number_of_operators_diffrence,
+            operator_cost_diffrence,
+            cycle_time_diffrence,
+            absence_diffrence
         };
     },
     beforeRouteEnter(to, from, next) {
