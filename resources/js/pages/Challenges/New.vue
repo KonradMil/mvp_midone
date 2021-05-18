@@ -388,6 +388,9 @@
                                                     <input type="number" class="form-control" placeholder="1" :placeholder="$t('challengesNew.days')" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.days')}}
+                                                    </label>
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">0</td>
@@ -401,6 +404,9 @@
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.shifts')}}
+                                                    </label>
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">0</td>
@@ -414,6 +420,9 @@
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.weekend_shift')}}
+                                                    </label>
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">0</td>
@@ -427,6 +436,9 @@
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.breakfast')}}
+                                                    </label>
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">0</td>
@@ -440,6 +452,9 @@
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.stop_time')}}
+                                                    </label>
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">0</td>
@@ -453,6 +468,9 @@
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.operator_performance')}}
+                                                    </label>
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">0</td>
@@ -466,6 +484,9 @@
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.defective')}}
+                                                    </label>
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">0</td>
@@ -479,6 +500,9 @@
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.number_of_operators')}}
+                                                    </label>
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">0</td>
@@ -491,6 +515,9 @@
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.operator_cost')}}
+                                                    </label>
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">0</td>
@@ -503,6 +530,9 @@
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.absence')}}
+                                                    </label>
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">0</td>
@@ -515,6 +545,9 @@
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">
+                                                    <label for="input-wizard-9" class="form-label">
+                                                        {{$t('challengesNew.cycle_time')}}
+                                                    </label>
                                                     <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                                 </td>
                                                 <td class="border">0</td>
