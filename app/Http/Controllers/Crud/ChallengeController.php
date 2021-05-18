@@ -18,6 +18,18 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class ChallengeController extends Controller
 {
+    public function saveChallengeFinancials(Request $request, Financial $financial)
+    {
+        $financial->fill($request->input('data'));
+        $financial->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano edycje.',
+            'payload' => $financial
+        ]);
+    }
+
     public function saveChallengeDetails(Request $request, TechnicalDetails $technical)
     {
         $technical->fill($request->input('data'));

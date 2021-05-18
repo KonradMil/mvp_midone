@@ -56,6 +56,7 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
     Route::post('user/create', [ChallengeController::class, 'createChallenge']);
     Route::post('user/save', [ChallengeController::class, 'saveChallenge']);
     Route::post('user/save/details/{technical}', [ChallengeController::class, 'saveChallengeDetails']);
+    Route::post('user/save/details/{financial}', [ChallengeController::class, 'saveChallengeFinancials']);
     Route::post('user/like', [ChallengeController::class, 'likeChallenge']);
     Route::post('user/dislike', [ChallengeController::class, 'dislikeChallenge']);
     Route::post('user/follow', [ChallengeController::class, 'followChallenge']);
