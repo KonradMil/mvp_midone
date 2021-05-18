@@ -98,7 +98,7 @@
                             @click="tab = 'financials'"
                         >
                             <CodeIcon class="w-4 h-4 mr-2"/>
-                            Financials
+                            {{ $t('global.financials') }}
                         </Tippy>
                     </div>
                     <div class="post__content tab-content">
@@ -363,7 +363,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div
                             v-if="tab==='financials'"
