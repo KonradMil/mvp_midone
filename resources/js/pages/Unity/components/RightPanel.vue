@@ -49,11 +49,11 @@
                     >
                         Anuluj
                     </button>
-                    <button type="button" class="btn btn-primary w-20" @click="save">
-                        Zapisz
-                    </button>
                 </div>
                 <!-- END: Slide Over Footer -->
+                <button type="button" class="btn btn-primary w-20" @click="save">
+                    Zapisz
+                </button>
             </div>
         </div>
     </div>
