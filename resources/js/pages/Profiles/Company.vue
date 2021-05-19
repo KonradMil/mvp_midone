@@ -1,13 +1,13 @@
 <template>
 <!--    COMPANIES-->
-      <div id="companies" class="grid grid-cols-12 gap-4 gap-y-5 mt-5" v-for="company in companies" :key="company.id">
+      <div id="companies" class="grid grid-cols-12 gap-4 gap-y-5 mt-5" :key="companies[0].id">
             <div class="intro-y col-span-12 sm:col-span-6">
                 <label for="input-wizard-1" class="form-label">{{$t('profiles.companyName')}}</label>
                 <input
                     id="input-wizard-1"
                     type="text"
                     class="form-control"
-                    v-model="company.company_name"
+                    v-model="companies[0].company_name"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -16,7 +16,7 @@
                     id="input-wizard-2"
                     type="text"
                     class="form-control"
-                    v-model="company.nip"
+                    v-model="companies[0].nip"
                 />
                 <button class="btn btn-primary w-1/4 mt-2" @click="searchNip">{{$t('profiles.searchFor')}} NIP</button>
             </div>
@@ -26,7 +26,7 @@
                     id="input-wizard-3"
                     type="text"
                     class="form-control"
-                    v-model="company.regon"
+                    v-model="companies[0].regon"
                 />
                 <button class="btn btn-primary w-1/3 mt-2" @click="searchRegon">{{$t('profiles.searchFor')}} REGON</button>
             </div>
@@ -36,7 +36,7 @@
                     id="input-wizard-4"
                     type="text"
                     class="form-control"
-                    v-model="company.krs"
+                    v-model="companies[0].krs"
                 />
                 <button class="btn btn-primary w-1/4 mt-2" @click="searchKRS">{{$t('profiles.searchFor')}} KRS</button>
             </div>
@@ -46,7 +46,7 @@
                     id="input-wizard-5"
                     type="text"
                     class="form-control"
-                    v-model="company.city"
+                    v-model="companies[0].city"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -55,7 +55,7 @@
                     id="input-wizard-6"
                     type="text"
                     class="form-control"
-                    v-model="company.street"
+                    v-model="companies[0].street"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -64,7 +64,7 @@
                     id="input-wizard-7"
                     type="text"
                     class="form-control"
-                    v-model="company.house_nr"
+                    v-model="companies[0].house_nr"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -73,7 +73,7 @@
                     id="input-wizard-8"
                     type="text"
                     class="form-control"
-                    v-model="company.loc_nr"
+                    v-model="companies[0].loc_nr"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -82,7 +82,7 @@
                     id="input-wizard-9"
                     type="text"
                     class="form-control"
-                    v-model="company.postcode"
+                    v-model="companies[0].postcode"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -91,7 +91,7 @@
                     id="input-wizard-10"
                     type="text"
                     class="form-control"
-                    v-model="company.loc_nr"
+                    v-model="companies[0].loc_nr"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -100,7 +100,7 @@
                     id="input-wizard-11"
                     type="text"
                     class="form-control"
-                    v-model="company.voivodeship"
+                    v-model="companies[0].voivodeship"
                 />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6">
@@ -109,7 +109,7 @@
                     id="input-wizard-12"
                     type="text"
                     class="form-control"
-                    v-model="company.country"
+                    v-model="companies[0].country"
                 />
             </div>
             <div
@@ -217,16 +217,16 @@ export default {
             })
         },
         searchNip() {
-            if (this.nip != '') {
-                this.search(this.nip);
+            if (this.companies[0].nip != '') {
+                this.search(this.companies[0].nip);
             } else {
                 toast.warning('NIP nie może być pusty');
             }
 
         },
         searchRegon() {
-            if (this.regon != '') {
-                this.search(this.regon);
+            if (this.companies[0].regon != '') {
+                this.search(this.companies[0].regon);
             } else {
                 toast.warning('REGON nie może być pusty');
             }
@@ -234,22 +234,22 @@ export default {
         searchKRS() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post('api/company/search/krs', {
-                    krs: this.krs
+                    krs: this.companies[0].krs
                 })
                     .then(response => {
                         console.log(response.data)
                         if (response.data.success) {
                             if (response.data.success) {
-                                this.regon = response.data.payload[0].regon;
-                                this.nip = response.data.payload[0].nip;
-                                this.city = response.data.payload[0].postalCityName;
-                                this.name = response.data.payload[0].name;
-                                this.street = response.data.payload[0].streetName;
-                                this.loc_nr = response.data.payload[0].flatNr;
-                                this.house_nr = response.data.payload[0].homeNr;
-                                this.postcode = response.data.payload[0].postalCode;
-                                this.voivodeship = response.data.payload[0].voivodshipName;
-                                this.country = 'Polska';
+                                this.companies[0].regon = response.data.payload[0].regon;
+                                this.companies[0].nip = response.data.payload[0].nip;
+                                this.companies[0].city = response.data.payload[0].postalCityName;
+                                this.companies[0].name = response.data.payload[0].name;
+                                this.companies[0].street = response.data.payload[0].streetName;
+                                this.companies[0].loc_nr = response.data.payload[0].flatNr;
+                                this.companies[0].house_nr = response.data.payload[0].homeNr;
+                                this.companies[0].postcode = response.data.payload[0].postalCode;
+                                this.companies[0].voivodeship = response.data.payload[0].voivodshipName;
+                                this.companies[0].country = 'Polska';
                             } else {
                                 toast.error(response.data.message);
                             }

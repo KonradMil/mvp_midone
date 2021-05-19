@@ -1,6 +1,4 @@
 <template>
-
-
     <!-- BEGIN: Content -->
     <div class="content">
         <div class="intro-y flex items-center mt-8">
