@@ -78,7 +78,7 @@ class Challenge extends Model implements ReactableInterface
 //
     public function financial_before()
     {
-        return $this->hasOne(Financial::class, 'financial_before_id');
+        return $this->hasOne(Financial::class, 'challenge_id');
     }
 
 //    public function questions()
