@@ -14,7 +14,7 @@
                     <UnityButton tooltip="Odtwórz" alttext="Odtwórz" path="/s3/builder_icons/play_simple.png" action="play" position="animationbuttonclick"/>
                 </div>
                 <div class="col-span-11 rounded-md mr-5 relative" style=" overflow-y: scroll;">
-                    <div class="grid grid-cols-12 my-3" :class="(activeLineIndex == index)? 'active':''" style="max-height: 200px;" v-for="(line, index) in animation.layers">
+                    <div class="grid grid-cols-12 my-3" :class="(activeLineIndex == index)? 'active-row':''" style="max-height: 200px;" v-for="(line, index) in animation.layers">
                         <div class="col-span-1">
                             <div style="margin-left: 25%; margin-top: calc(25% - 10px);">
                                 <UnityButton tooltip="Ustawienia" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
