@@ -127,7 +127,7 @@
                                 >
                                     <img
                                         alt="Icewall Tailwind HTML Admin Template"
-                                        :src="'/' + log.challenge.screenshot_path"
+                                        :src="'/' + log.subject.screenshot_path"
                                     />
                                 </div>
                             </div>
