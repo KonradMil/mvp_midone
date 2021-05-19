@@ -49,7 +49,7 @@ export default {
         onBeforeMount(() => {
             // if (props.unityLoader) {
                 const script = document.createElement('SCRIPT')
-                script.setAttribute('src', '/s3/unity/AssemBrot19_05_ver2.loader.js')
+                script.setAttribute('src', '/s3/unity/AssemBrot14_05_ver2.loader.js')
                 script.setAttribute('async', '')
                 script.setAttribute('defer', '')
                 document.body.appendChild(script)
@@ -62,9 +62,9 @@ export default {
         const instantiate = () => {
             console.log(document.querySelector('#' + containerId.value));
             createUnityInstance(document.querySelector('#' + containerId.value), {
-                dataUrl: "/s3/unity/AssemBrot19_05_ver2.data.br",
-                frameworkUrl: "/s3/unity/AssemBrot19_05_ver2.framework.js.br",
-                codeUrl: "/s3/unity/AssemBrot19_05_ver2.wasm.br",
+                dataUrl: "/s3/unity/AssemBrot14_05_ver2.data.br",
+                frameworkUrl: "/s3/unity/AssemBrot14_05_ver2.framework.js.br",
+                codeUrl: "/s3/unity/AssemBrot14_05_ver2.wasm.br",
                 streamingAssetsUrl: "StreamingAssets",
                 companyName: "DBR",
                 productName: "platform.dbr77.com",
