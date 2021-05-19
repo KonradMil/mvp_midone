@@ -6,7 +6,7 @@
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
     <BottomPanel  :allowedEdit="allowedEdit" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
-    <RightButtons :allowedEdit="allowedEdit" :icons="rightIcons"></RightButtons>
+    <RightButtons :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>
     <RightPanel  :allowedEdit="allowedEdit" @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
 </template>
 

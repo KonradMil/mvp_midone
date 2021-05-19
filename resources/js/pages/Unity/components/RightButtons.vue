@@ -1,7 +1,7 @@
 <template>
     <div class="flex fixed h-full z-50 pt-14" style="top: 0; right: 0;">
         <div class="flex-1 pt-2 mr-10">
-            <div v-for="(icon, index) in icons" :key="'rightIcon_' + index">
+            <div v-for="(icon, index) in icons" :key="'rightIcon_' + index" v-if="index != 'operationalanalysis' || type == 'solution'">
                 <UnityButton :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="rightbuttonclick" />
             </div>
         </div>
@@ -10,19 +10,26 @@
 
 <script>
 import UnityButton from "./UnityButton";
-import {getCurrentInstance, ref} from "vue";
+import {getCurrentInstance, onMounted, ref} from "vue";
 
 export default {
     name: "RightButtons",
     components: {UnityButton},
     props: {
         icons: Array,
-        allowedEdit: Object
+        allowedEdit: Object,
+        type: String
     },
-    setup() {
+    setup(props) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
+        const type = ref('challenge');
         emitter.on('rightbuttonclick', e =>  handleChange(e.val) );
+
+        onMounted(() => {
+            type.value = props.type;
+        });
+
         const handleChange = (val) => {
             console.log(val);
             switch(val) {
