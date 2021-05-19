@@ -17,6 +17,17 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class SolutionController extends Controller
 {
+    public function saveSolutionFinancials(Request $request, Financial $financial)
+    {
+        $financial->fill($request->input('data'));
+        $financial->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano edycje.',
+            'payload' => $financial
+        ]);
+    }
     public function getUserSolutionUnity(Request $request)
     {
         if (isset($request->id)) {

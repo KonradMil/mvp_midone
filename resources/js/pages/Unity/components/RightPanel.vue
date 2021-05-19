@@ -77,6 +77,7 @@ import SettingsDialog from "./right-panel/SettingsDialog";
 import SaveChallengeDescription from "../../../compositions/SaveChallengeDescription";
 import SaveChallengeDetails from "../../../compositions/SaveChallengeDetails";
 import SaveChallengeFinancials from "../../../compositions/SaveChallengeFinancials";
+import SaveSolutionFinancials from "../../../compositions/SaveSolutionFinancials";
 
 export default {
     name: "RightPanel",
@@ -127,6 +128,7 @@ export default {
             } else if (content.value === 'financial') {
                 // emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
                 saveChallengeFinancialsRepo();
+                saveSolutionFinancialsRepo();
             } else if (content.value === 'settings') {
                 // emitter.emit('rightpanelaction', {
                 //     // action: 'updateAnimable', data:animable.value{
@@ -281,6 +283,9 @@ export default {
         }
         const saveChallengeFinancialsRepo = async () => {
             SaveChallengeFinancials(financial_before.value, financial_before.value.id);
+        }
+        const saveSolutionFinancialsRepo = async () => {
+            SaveSolutionFinancials(financial_after.value, financial_after.value.id);
         }
 
         const addTeam = () => {
