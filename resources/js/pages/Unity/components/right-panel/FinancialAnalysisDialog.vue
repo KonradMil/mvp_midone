@@ -166,13 +166,13 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.absence')}}
                                 </label>
-                                <input type="number" v-model="financial.absence" class="form-control" placeholder="12,00" :aria-label="$t('challengesNew.numberSupported')" />
+                                <input type="number" v-model="financial.absence" class="form-control" placeholder="12,00" :aria-label="$t('challengesNew.numberSupported')" :disabled="type=='solution'"/>
                             </td>
                             <td class="border">
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.absence')}}
                                 </label>
-                                <input type="number" class="form-control" placeholder="12,00" :aria-label="$t('challengesNew.numberSupported')" disabled/>
+                                <input type="number" class="form-control" placeholder="12,00" :aria-label="$t('challengesNew.numberSupported')" />
                             </td>
                         </tr><tr class="hover:bg-gray-200">
 
