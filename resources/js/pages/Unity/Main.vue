@@ -285,6 +285,7 @@ export default {
         onBeforeMount(() => {
             //ADDS LISTENERS
             bridge.value = UnityBridge();
+
         });
 
         emitter.on('updateanimationSave', e => {
@@ -352,7 +353,7 @@ export default {
         };
 
         onMounted(() => {
-
+            checkTeam();
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")
