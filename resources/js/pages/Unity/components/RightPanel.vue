@@ -121,7 +121,7 @@ export default {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'description') {
                 console.log('HEREE');
-                saveChallengeDescriptionRepo({name: challenge.name, description: challenge.description});
+                saveChallengeDescriptionRepo({name: props.challenge.name, description: props.challenge.description, id: props.challenge.id});
             } else if (content.value === 'multiplayer') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'operational') {
