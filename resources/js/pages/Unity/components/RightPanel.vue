@@ -30,7 +30,7 @@
                     <LineDialog v-if="content == 'line'" v-model:modelValue="line"/>
                     <AnimableDialog v-if="content == 'animable'" v-model:animable="animable"/>
                     <DescriptionDialog v-if="content == 'description'" v-model:object="object"/>
-                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>
+<!--                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>-->
                     <TeamsDialog v-if="content == 'teams'"></TeamsDialog>
                     <FinancialAnalysisDialog v-if="content == 'financial'" v-model:financial="financial"></FinancialAnalysisDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
