@@ -180,6 +180,9 @@ export default {
         }
 
         const allowedEdit = computed(() => {
+            console.log('ALLOWED EDIT');
+            console.log(user.id);
+            console.log(challenge.author_id);
             if(type.value == 'challenge') {
                 if(inTeam.value || (user.id == challenge.author_id)) {
                     return true;
@@ -387,6 +390,7 @@ export default {
         });
 
         return {
+            user,
             challenge,
             solution,
             initialLoad,
