@@ -159,7 +159,8 @@ export default {
         });
 
         const financial = computed(() => {
-            return props.challenge.financial_before,props.type;
+            type.value = props.type;
+            return props.challenge.financial_before
         }, () => {
 
         });
