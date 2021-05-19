@@ -1,13 +1,13 @@
 <template>
-    <TopButtons :icons="topIcons"></TopButtons>
-    <LeftButtons :icons="leftIcons" v-if="mode == 'edit'"></LeftButtons>
+    <TopButtons :allowedEdit="allowedEdit" :icons="topIcons"></TopButtons>
+    <LeftButtons :icons="leftIcons" v-if="mode == 'edit' && allowedEdit"></LeftButtons>
     <LeftPanel></LeftPanel>
     <div @contextmenu.prevent="openMenu">
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
-    <BottomPanel :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
-    <RightButtons :icons="rightIcons"></RightButtons>
-    <RightPanel @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
+    <BottomPanel  :allowedEdit="allowedEdit" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
+    <RightButtons :allowedEdit="allowedEdit" :icons="rightIcons"></RightButtons>
+    <RightPanel  :allowedEdit="allowedEdit" @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
 </template>
 
 <script>

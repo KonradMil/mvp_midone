@@ -16,7 +16,8 @@ export default {
     name: "RightButtons",
     components: {UnityButton},
     props: {
-        icons: Array
+        icons: Array,
+        allowedEdit: Object
     },
     setup() {
         const app = getCurrentInstance();

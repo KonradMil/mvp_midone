@@ -158,7 +158,6 @@ import GetModels from "../../../compositions/GetModels";
 
 export default {
     name: "LeftPanel",
-
     setup(props, {emit}) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;

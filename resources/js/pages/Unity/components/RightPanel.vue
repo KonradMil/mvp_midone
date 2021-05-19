@@ -92,7 +92,8 @@ export default {
     props: {
         challenge: Object,
         solution: Object,
-        type: String
+        type: String,
+        allowedEdit: Object
     },
     setup(props) {
         //GLOBAL

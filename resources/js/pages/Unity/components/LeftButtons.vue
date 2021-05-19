@@ -15,7 +15,8 @@ import {getCurrentInstance, ref} from "vue";
 export default {
     name: "LeftButtons",
     props: {
-        icons: Array
+        icons: Array,
+        allowedEdit: Object
     },
     components: {UnityButton},
     setup() {

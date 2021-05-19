@@ -23,7 +23,8 @@ import UnityDropdown from "./UnityDropdown";
 export default {
     name: "TopButtons",
     props: {
-        icons: Array
+        icons: Array,
+        allowedEdit: Object
     },
     components: {UnityDropdown, UnityButton},
     setup() {
