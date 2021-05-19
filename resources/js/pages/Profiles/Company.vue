@@ -1,6 +1,6 @@
 <template>
 <!--    COMPANIES-->
-      <div id="companies" class="grid grid-cols-12 gap-4 gap-y-5 mt-5" v-for="company in companies" :key="company.id">
+      <div id="companies" class="grid grid-cols-12 gap-4 gap-y-5 mt-5" :key="company.id">
             <div class="intro-y col-span-12 sm:col-span-6">
                 <label for="input-wizard-1" class="form-label">{{$t('profiles.companyName')}}</label>
                 <input
@@ -159,7 +159,7 @@ export default {
     },
     data() {
         return {
-            companies: [],
+            company: {},
             name: '',
             krs: '',
             nip: '',
@@ -178,7 +178,7 @@ export default {
          this.$axios.get('/sanctum/csrf-cookie').then(response=>{
            this.$axios.get('api/company/get')
              .then(response => {
-                  this.companies = response.data.payload
+                  this.company= response.data.payload[0]
                   console.log(response.data);
              })
              .catch(function (error){
