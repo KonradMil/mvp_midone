@@ -49,7 +49,7 @@
                     >
                         Anuluj
                     </button>
-                    <button v-if="allowedEdit" type="button" class="btn btn-primary w-20" @click="save">
+                    <button v-if="props.allowedEdit" type="button" class="btn btn-primary w-20" @click="save">
                         Zapisz
                     </button>
                 </div>
@@ -108,11 +108,8 @@ export default {
         const content = ref('');
         const challenge = ref({});
         const type = ref('');
-        const allowedEdit = ref(false);
 
-        watch(props.allowedEdit, (ca, prevLabel) => {
-           allowedEdit.value = props.allowedEdit;
-        }, {deep: true});
+
 
         const save = () => {
             if(content.value === 'label') {
@@ -320,7 +317,7 @@ export default {
             technical,
             financial_before,
             financial_after,
-            allowedEdit
+            props
         }
     }
 }
