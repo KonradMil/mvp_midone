@@ -166,7 +166,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.absence')}}
                                 </label>
-                                <input type="number" v-model="financial.absence" class="form-control" placeholder="12,00" :aria-label="$t('challengesNew.numberSupported')" :disabled="type=='solution'"/>
+                                <input type="number" v-model="financial.absence" class="form-control" placeholder="12,00" :aria-label="$t('challengesNew.numberSupported')" :disabled="type=='challenge'"/>
                             </td>
                             <td class="border">
                                 <label for="input-wizard-9" class="form-label">
