@@ -6,7 +6,7 @@
             <img
                 alt="Icewall Tailwind HTML Admin Template"
                 class="rounded-full"
-                :src="'s3/' + solution.screenshot_path"
+                :src="'/s3/' + solution.screenshot_path"
             />
         </div>
         <div class="ml-3 mr-auto">
@@ -45,7 +45,7 @@
             <img
                 alt="Icewall Tailwind HTML Admin Template"
                 class="rounded-md"
-                :src="'s3/' + solution.screenshot_path"
+                :src="'/s3/' + solution.screenshot_path"
             />
         </div>
         <a href="" class="block font-medium text-base mt-5"></a>
@@ -106,7 +106,7 @@ export default {
         const user = props.user;
 
         const like = async (solution) => {
-            axios.post('api/solution/user/like', {id: solution.id})
+            axios.post('/api/solution/user/like', {id: solution.id})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
