@@ -12,7 +12,7 @@ export default function SaveSolutionFinancials(data,id) {
     const list = ref([]);
 
     async function saveSolutionFinancials(data,id) {
-        axios.post(`/api/challenge/save/financials/${id}`, {data})
+        axios.post(`/api/solution/save/financials/${id}`, {data})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
