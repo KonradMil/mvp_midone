@@ -25,9 +25,11 @@
 <script>
 import {computed, onMounted, reactive, ref} from "vue";
 import {useToast} from "vue-toastification";
+import SingleSolutionPost from "../../../components/SingleSolutionPost";
 
 export default {
     name: "SolutionsPanel",
+    components: {SingleSolutionPost},
     props: {
         challenge: Object
     },
@@ -76,7 +78,8 @@ export default {
             challenge,
             types,
             follow,
-            unfollow
+            unfollow,
+            user
         }
     }
 }
