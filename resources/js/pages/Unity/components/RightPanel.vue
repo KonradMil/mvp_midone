@@ -275,10 +275,8 @@ export default {
         const saveChallengeRepo = async (data) => {
 
         }
-        const saveChallengeDescriptionRepo = async () => {
-            SaveChallengeDescription({
-                name: data.name,
-            })
+        const saveChallengeDescriptionRepo = async (data) => {
+            SaveChallengeDescription(data)
     }
         const saveChallengeDetailsRepo = async () => {
             SaveChallengeDetails(technical.value, technical.value.id);
