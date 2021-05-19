@@ -58,7 +58,7 @@ class Challenge extends Model implements ReactableInterface
 
     public function solutions()
     {
-        return $this->hasMany(Solution::class);
+        return $this->hasMany(Solution::class, 'challenge_id', 'id');
     }
 
 //    public function projects()
