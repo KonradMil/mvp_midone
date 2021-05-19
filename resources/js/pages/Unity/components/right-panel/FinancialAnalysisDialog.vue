@@ -23,7 +23,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.days')}}
                                 </label>
-                                <input type="number" class="form-control" placeholder="260,00" :aria-label="$t('challengesNew.numberSupported')" />
+                                <input type="number" v-model="financial_after.days" class="form-control" placeholder="260,00" :aria-label="$t('challengesNew.numberSupported')" />
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-200">
