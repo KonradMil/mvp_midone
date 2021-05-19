@@ -24,9 +24,9 @@ class TerytController extends Controller
         ]);
     }
 
-    public function searchRegonKrs()
+    public function searchRegonKrs(Request $request)
     {
-        $ss = Request::input('krs');
+        $ss = $request->input('krs');
         $oConfig = new Config([
             'password' => 'd432b081c72a4f3a8863',
         ]);
