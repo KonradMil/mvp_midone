@@ -51,6 +51,7 @@ Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard']
 
 Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function () {
     Route::post('user/get', [ChallengeController::class, 'getUserChallengesFiltered']);
+    Route::post('check-team', [ChallengeController::class, 'checkTeam']);
     Route::post('user/save/description', [ChallengeController::class, 'saveDescription']);
     Route::post('user/get/followed', [ChallengeController::class, 'getUserChallengesFollowed']);
     Route::post('user/get/card', [ChallengeController::class, 'getCardData']);
@@ -85,6 +86,7 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
 
 Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
     Route::post('user/get', [SolutionController::class, 'getUserSolutionsFiltered']);
+    Route::post('check-team', [SolutionController::class, 'checkTeam']);
     Route::post('get/unity', [SolutionController::class, 'getUserSolutionUnity']);
     Route::post('user/create', [SolutionController::class, 'createSolution']);
     Route::post('create', [SolutionController::class, 'create']);

@@ -380,6 +380,25 @@ class ChallengeController extends Controller
         ]);
     }
 
+    public function checkTeam(Request $request)
+    {
+        $check = false;
+        $challenge = Challenge::find($request->challenge_id);
+        foreach ($challenge->teams as $team) {
+            foreach (Auth::user()->teams as $t) {
+                if($t->id == $team->id) {
+                    $check = true;
+                }
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => '',
+            'payload' => $check
+        ]);
+    }
+
     public function getCardData(Request $request)
     {
         if (isset($request->id)) {

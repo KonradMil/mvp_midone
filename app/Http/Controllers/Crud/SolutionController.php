@@ -94,6 +94,25 @@ class SolutionController extends Controller
         ]);
     }
 
+    public function checkTeam(Request $request)
+    {
+        $check = false;
+        $solution = Challenge::find($request->solution_id);
+        foreach ($solution->teams as $team) {
+            foreach (Auth::user()->teams as $t) {
+                if($t->id == $team->id) {
+                    $check = true;
+                }
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => '',
+            'payload' => $check
+        ]);
+    }
+
     public function likeSolution(Request $request) {
         $id = $request->input('id');
         $solution = Solution::find($id);

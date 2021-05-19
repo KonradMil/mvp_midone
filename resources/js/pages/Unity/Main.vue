@@ -12,7 +12,7 @@
 
 <script>
 import Studio from "./Studio";
-import {getCurrentInstance, onBeforeMount, onMounted, reactive, ref} from "vue";
+import {computed, getCurrentInstance, onBeforeMount, onMounted, reactive, ref} from "vue";
 import WindowWatcher from "../../events/WindowWatcher";
 import UnityBridge from "./bridge";
 import cash from "cash-dom";
@@ -56,6 +56,8 @@ export default {
         const initialLoad = ref({});
         const challenge = ref({});
         const solution = ref({});
+        const user = window.Laravel.user;
+        const inTeam = ref(false);
 
         //EXTERNAL
         const unity_path = ref('/s3/unity/AssemBrot14_05_ver2.json');
@@ -147,9 +149,51 @@ export default {
             }
         }
 
+        const checkTeam = async () => {
+            if(type.value == 'challenge') {
+                await axios.post('/api/challenge/check-team', {user_id: user.id, challenge_id: challenge.value.id})
+                    .then(response => {
+                        // console.log(response.data)
+                        if (response.data.success) {
+
+                        } else {
+
+                        }
+                    })
+            } else {
+                await axios.post('/api/solution/check-team', {user_id: user.id, solution_id: solution.value.id})
+                    .then(response => {
+                        // console.log(response.data)
+                        if (response.data.success) {
+
+                        } else {
+
+                        }
+                    })
+            }
+
+        };
+
         const changeMode = (mode) => {
 
         }
+
+        const allowedEdit = computed(() => {
+            if(type.value == 'challenge') {
+                if(inTeam.value || (user.id == challenge.author_id)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                if(inTeam.value || (user.id == solution.author_id)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            });
 
         emitter.on('topbuttonclick', e => {
             console.log(e);
