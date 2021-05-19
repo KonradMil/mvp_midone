@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Crud;
 
+use App\Events\ChallengeAdded;
 use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
 use App\Models\File;
 use App\Models\Financial;
+use App\Models\Team;
 use App\Models\TechnicalDetails;
 use App\Modules\Dbr\Module\Http\UnityController;
 use Carbon\Carbon;
@@ -299,18 +301,18 @@ class ChallengeController extends Controller
         $challenge->stage = 0;
         $challenge->save();
 
-        $financial->days = $request -> days;
-        $financial->shifts = $request -> shifts;
-        $financial->shift_time = $request -> shift_time;
-        $financial->weekend_shift = $request -> weekend_shift;
-        $financial->breakfast = $request -> breakfast;
-        $financial->stop_time = $request -> stop_time;
-        $financial->operator_performance = $request -> operator_performance;
-        $financial->defective = $request -> defective;
-        $financial->number_of_operators = $request -> number_of_operators;
-        $financial->operator_cost = $request -> operator_cost;
-        $financial->absence = $request -> absence;
-        $financial->cycle_time = $request -> cycle_time;
+        $financial->days = $request->days;
+        $financial->shifts = $request->shifts;
+        $financial->shift_time = $request->shift_time;
+        $financial->weekend_shift = $request->weekend_shift;
+        $financial->breakfast = $request->breakfast;
+        $financial->stop_time = $request->stop_time;
+        $financial->operator_performance = $request->operator_performance;
+        $financial->defective = $request->defective;
+        $financial->number_of_operators = $request->number_of_operators;
+        $financial->operator_cost = $request->operator_cost;
+        $financial->absence = $request->absence;
+        $financial->cycle_time = $request->cycle_time;
         $financial->challenge_id = $challenge->id;
         $financial->save();
 
@@ -349,6 +351,13 @@ class ChallengeController extends Controller
         $technical->challenge_id = $challenge->id;
         $technical->save();
 
+        foreach ($request->teams as $team_id) {
+            $team = Team::find($team_id);
+            $challenge->teams()->attach($team);
+        }
+
+        event(new ChallengeAdded($challenge, Auth::user(), 'Wyzwanie ' . $challenge->name . ' zostało dodane.', ['financial' => $financial, 'technical' => $technical]));
+
         return response()->json([
             'success' => true,
             'message' => 'Wyzwanie zostało dodane poprawnie',
@@ -381,6 +390,7 @@ class ChallengeController extends Controller
 
         $challenge->comments_count = $challenge->comments()->count();
         $challenge->likes = $challenge->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
+
 
 
         return response()->json([

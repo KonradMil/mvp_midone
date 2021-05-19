@@ -5,6 +5,7 @@ namespace App\Models\Challenges;
 use App\Models\File;
 use App\Models\Financial;
 use App\Models\Solutions\Solution;
+use App\Models\Team;
 use App\Models\TechnicalDetails;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -40,10 +41,10 @@ class Challenge extends Model implements ReactableInterface
         return $this->belongsTo(User::class);
     }
 
-//    public function teams()
-//    {
-//        return $this->belongsToMany(Team::class, 'teams_challenges');
-//    }
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, 'team_challenge', 'challenge_id', 'team_id');
+    }
 
     public function technicalDetails(){
         return $this->hasOne(TechnicalDetails::class);
@@ -57,7 +58,7 @@ class Challenge extends Model implements ReactableInterface
 
     public function solutions()
     {
-        return $this->hasMany(Solution::class);
+        return $this->hasMany(Solution::class, 'challenge_id', 'id');
     }
 
 //    public function projects()
@@ -77,7 +78,7 @@ class Challenge extends Model implements ReactableInterface
 //
     public function financial_before()
     {
-        return $this->belongsTo(Financial::class, 'financial_before_id');
+        return $this->hasOne(Financial::class, 'id', 'financial_before_id');
     }
 
 //    public function questions()

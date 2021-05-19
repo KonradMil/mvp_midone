@@ -6,15 +6,15 @@
     </div>
     <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-96 bottom-0 bg-white rounded-md bg-opacity-25" v-if="expanded == 1" id="bottom-animation-normal">
         <div class="left flex-1 pt-2 flex-row ml-5">
-            <div class="grid grid-cols-12 w-full">
+            <div class="grid grid-cols-12 w-full h-full">
                 <div class="col-span-1">
                     <UnityButton tooltip="Dodaj linie" alttext="Dodaj linie" path="/s3/builder_icons/add_simple.png" action="addline" position="animationbuttonclick"/>
                     <UnityButton tooltip="Maksymalizuj" alttext="Maksymalizuj" path="/s3/builder_icons/maximize_simple.png" action="maximize" position="animationbuttonclick"/>
                     <UnityButton tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick"/>
                     <UnityButton tooltip="Odtwórz" alttext="Odtwórz" path="/s3/builder_icons/play_simple.png" action="play" position="animationbuttonclick"/>
                 </div>
-                <div class="col-span-11 rounded-md mr-5" style="background-color: rgba(147, 15, 104, 0.25); overflow-y: scroll;">
-                    <div class="grid grid-cols-12 h-full" v-for="(line, index) in animation.layers">
+                <div class="col-span-11 rounded-md mr-5 relative" style=" overflow-y: scroll;">
+                    <div class="grid grid-cols-12 my-3" :class="(activeLineIndex == index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers">
                         <div class="col-span-1">
                             <div style="margin-left: 25%; margin-top: calc(25% - 10px);">
                                 <UnityButton tooltip="Ustawienia" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
@@ -33,7 +33,7 @@
                         </div>
                         <div class="col-span-10 h-full" style="overflow-x: auto; overflow-y: hidden;">
                             <div class="w-full  h-full">
-                                <div class="row flex h-full" :class="(activeLineIndex == index)? 'active':''">
+                                <div class="row flex h-full" >
                                     <div class=" h-full" v-for="(animable, index) in line.animables">
                                         <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;" @click="activeAnimableIndex = index; showAnimableDialog();">
                                             <img class="w-full h-full"
@@ -183,7 +183,7 @@ export default {
                     break;
                 case 'play':
                     // console.log(toRaw(animation));
-                    emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: animation})
+                    emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: {interval: 0, cycles: 0, layers: toRaw(animation)}})
                     break;
                 case 'addline':
                     emitter.emit('unityoutgoingaction', {data: animation.layers.length})

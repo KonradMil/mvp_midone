@@ -30,12 +30,12 @@
                     <LineDialog v-if="content == 'line'" v-model:modelValue="line"/>
                     <AnimableDialog v-if="content == 'animable'" v-model:animable="animable"/>
                     <DescriptionDialog v-if="content == 'description'" v-model:object="object"/>
-                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>
+<!--                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>-->
                     <TeamsDialog v-if="content == 'teams'"></TeamsDialog>
                     <FinancialAnalysisDialog v-if="content == 'financial'" v-model:financial="financial"></FinancialAnalysisDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
                     <OperationDialog v-if="content == 'operational'" ></OperationDialog>
-                    <SettingsDialog v-if="content == 'settings'" v-model:technical="technical"></SettingsDialog>
+                    <SettingsDialog v-if="content == 'settings'" v-model:technical="technical" ></SettingsDialog>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
@@ -90,6 +90,7 @@ export default {
         DescriptionDialog, LayoutDialog, CommentDialog, LabelDialog, LineDialog, AnimableDialog},
     props: {
         challenge: Object,
+        solution: Object,
         type: String
     },
     setup(props) {
@@ -143,7 +144,7 @@ export default {
             if(props.type == 'challenge') {
                 return props.challenge;
             } else if(props.type == 'solution') {
-
+                return props.solution;
             } else {
                 console.log(type.value)
             }
