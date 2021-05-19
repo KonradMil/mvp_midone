@@ -120,7 +120,7 @@
                         <div class="intro-x text-gray-500 text-xs text-center my-4">
                             Dzisiaj
                         </div>
-                        <div class="intro-x relative flex items-center mb-3" v-for="(log, index) in logs">
+                        <div class="intro-x relative flex items-center mb-3" v-for="(log, index) in logs" :key="index + '_activity'" @click="$router.push({path: '/challenges/card/' + log.subject.id})">
                             <div class="report-timeline__image">
                                 <div
                                     class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"
