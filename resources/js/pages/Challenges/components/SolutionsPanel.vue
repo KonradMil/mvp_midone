@@ -9,7 +9,13 @@
                     <h2 class="font-medium text-base mr-auto"> Rozwiązania</h2>
                 </div>
                 <div class="px-5 pt-5">
-
+                    <div
+                        v-for="(solution, index) in challenge.solutions"
+                        :key="index"
+                        class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box"
+                    >
+                        <SingleSolutionPost :user="user" :solution="solution"></SingleSolutionPost>
+                    </div>
                 </div>
             </div>
         </div>
@@ -31,9 +37,12 @@ export default {
         });
         const toast = useToast();
         const types = require("../../../json/types.json");
+        const user = ref({});
 
-        onMounted(() => {
-
+        onMounted(function () {
+            if (window.Laravel.user) {
+                user.value = window.Laravel.user;
+            }
         });
 
         const follow = () => {
