@@ -78,6 +78,7 @@ export default {
             type.value = 'challenge';
         });
 
+
         //RUNS WHEN UNITY IS READY
         emitter.on('onInitialized', e => initalize());
 
@@ -339,6 +340,7 @@ export default {
 
         return {
             challenge,
+            solution,
             initialLoad,
             type,
             id,
