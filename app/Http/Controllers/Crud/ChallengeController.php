@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Crud;
 
 use App\Events\ChallengeAdded;
+use App\Events\ChallengePublished;
 use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
 use App\Models\File;
@@ -435,10 +436,12 @@ class ChallengeController extends Controller
 
     public function publish(Request $request)
     {
-        $challenge = Challenge::with('solutions')->find($request->input('id'));
+        $challenge = Challenge::with('solutions', 'author')->find($request->input('id'));
         $challenge->status = 1;
         $challenge->stage = 1;
         $challenge->save();
+
+        event(new ChallengePublished($challenge, $challenge->author, 'Nowe wyzwanie zostało opublikowane: ' . $challenge->name, []));
 
         return response()->json([
             'success' => true,
