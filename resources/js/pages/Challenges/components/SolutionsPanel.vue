@@ -9,12 +9,14 @@
                     <h2 class="font-medium text-base mr-auto"> Rozwiązania</h2>
                 </div>
                 <div class="px-5 pt-5">
+                    <div class="intro-y grid grid-cols-12 gap-6 mt-5">
                     <div
                         v-for="(solution, index) in challenge.solutions"
                         :key="index"
                         class="intro-y col-span-4 md:col-span-4 xl:col-span-4 box"
                     >
                         <SingleSolutionPost :user="user" :solution="solution"></SingleSolutionPost>
+                    </div>
                     </div>
                 </div>
             </div>
