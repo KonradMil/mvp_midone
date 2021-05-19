@@ -95,8 +95,10 @@
 </template>
 
 <script>
+import CommentSection from "./social/CommentSection";
 export default {
     name: "SingleSolutionPost",
+    components: {CommentSection},
     props: {
         user: Object,
         solution: Object
