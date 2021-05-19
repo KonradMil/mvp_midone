@@ -49,7 +49,7 @@
                     >
                         Anuluj
                     </button>
-                    <button v-if="props.allowedEdit" type="button" class="btn btn-primary w-20" @click="save">
+                    <button v-if="allowedEdit" type="button" class="btn btn-primary w-20" @click="save">
                         Zapisz
                     </button>
                 </div>
@@ -317,7 +317,6 @@ export default {
             technical,
             financial_before,
             financial_after,
-            props
         }
     }
 }
