@@ -285,7 +285,9 @@ export default {
             SaveChallengeFinancials(financial_before.value, financial_before.value.id);
         }
         const saveSolutionFinancialsRepo = async () => {
-            SaveSolutionFinancials(financial_after.value, financial_after.value.id);
+            if(financial_after.value.id != undefined) {
+                SaveSolutionFinancials(financial_after.value, financial_after.value.id);
+            }
         }
 
         const addTeam = () => {
