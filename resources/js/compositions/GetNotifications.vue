@@ -9,7 +9,7 @@ export default function GetNotifications(number = 5) {
     const list = ref(false);
 
     async function getNotifications(number) {
-        axios.post('api/notifications/get', {number : number})
+        axios.post('/api/notifications/get', {number : number})
             .then(response => {
                 if (response.data.success) {
                     // console.log(response.data);

@@ -9,7 +9,7 @@ export default function GetInvites() {
     const list = ref(false);
 
     async function getInvites() {
-        axios.post('api/teams/user/invites/get', {})
+        axios.post('/api/teams/user/invites/get', {})
             .then(response => {
                 if (response.data.success) {
                     // console.log(response.data);
