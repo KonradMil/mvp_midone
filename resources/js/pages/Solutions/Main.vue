@@ -70,8 +70,7 @@ export default {
         return {
             solutions,
             user,
-            types,
-            like
+            types
         }
     },
     beforeRouteEnter(to, from, next) {
