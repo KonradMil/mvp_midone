@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
     public function getDataForDashboard()
     {
-        $logs = Activity::where('subject_type', '=', 'App\Models\Challenges\Challenge')->where('properties', '=', '[]')->get();
+        $logs = Activity::where('subject_type', '=', 'App\\Models\\Challenges\\Challenge')->where('description', 'LIKE', '*opublikowane*')->take(10)->get();
         $posts = Post::where('status', '=', 'publish')->orderBy('created_at', 'DESC')->take(10)->get();
         $solutions = Solution::query()
             ->where('status', '=', '1')->orWhere('published', '=', 1)
