@@ -400,6 +400,8 @@ export default {
             topIcons,
             rightIcons,
             mode,
+            inTeam,
+            allowedEdit,
             openMenu,
             lockInput,
             unlockInput
