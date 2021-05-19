@@ -184,13 +184,13 @@ export default {
             console.log(user.id);
             console.log(challenge.author_id);
             if(type.value == 'challenge') {
-                if(inTeam.value || (user.id == challenge.author_id)) {
+                if(inTeam.value || (user.id == challenge.value.author_id)) {
                     return true;
                 } else {
                     return false;
                 }
             } else {
-                if(inTeam.value || (user.id == solution.author_id)) {
+                if(inTeam.value || (user.id == solution.value.author_id)) {
                     return true;
                 } else {
                     return false;
