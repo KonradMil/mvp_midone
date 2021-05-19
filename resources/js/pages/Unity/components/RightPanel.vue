@@ -164,6 +164,9 @@ export default {
                 type.value = props.type;
                 return props.challenge.financial_before
             }
+            else {
+                return props.solution.challenge.financial_before
+            }
         }, () => {
 
         });
