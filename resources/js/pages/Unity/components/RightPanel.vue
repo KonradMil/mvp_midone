@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import {computed, getCurrentInstance, onMounted, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, ref, watch} from "vue";
 import cash from "cash-dom";
 import LabelDialog from "./right-panel/LabelDialog";
 import CommentDialog from "./right-panel/CommentDialog";
@@ -109,7 +109,9 @@ export default {
         const challenge = ref({});
         const type = ref('');
         const allowedEdit = ref(false);
-
+        watch(props.allowedEdit, (ca, prevLabel) => {
+           allowedEdit.value = props.allowedEdit;
+        }, {deep: true})
         const save = () => {
             if(content.value === 'label') {
                 emitter.emit('unityoutgoingaction', { action: 'updateLabel', data:label, json: true });
