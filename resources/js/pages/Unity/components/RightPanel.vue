@@ -153,13 +153,13 @@ export default {
         });
 
         const technical = computed(() => {
-            return props.challenge.technical_details;
+            return props.challenge.technical_details
         }, () => {
 
         });
 
         const financial = computed(() => {
-            return props.challenge.financial_before;
+            return props.challenge.financial_before,props.type;
         }, () => {
 
         });
