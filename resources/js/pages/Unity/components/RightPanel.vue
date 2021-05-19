@@ -75,6 +75,7 @@ import OperationalAnalysisDialog from "./right-panel/OperationalAnalysisDialog";
 import OperationDialog from "./right-panel/OperationDialog";
 import SettingsDialog from "./right-panel/SettingsDialog";
 import SaveChallengeDescription from "../../../compositions/SaveChallengeDescription";
+import SaveSolutionDescription from "../../../compositions/SaveSolutionDescription";
 import SaveChallengeDetails from "../../../compositions/SaveChallengeDetails";
 import SaveChallengeFinancials from "../../../compositions/SaveChallengeFinancials";
 import SaveSolutionFinancials from "../../../compositions/SaveSolutionFinancials";
@@ -124,7 +125,11 @@ export default {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'description') {
                 console.log('HEREE');
-                saveChallengeDescriptionRepo({name: props.challenge.name, description: props.challenge.description, id: props.challenge.id});
+                if(type.value == 'challenge') {
+                    saveChallengeDescriptionRepo({name: props.challenge.name, description: props.challenge.description, id: props.challenge.id});
+                } else {
+                    saveSolutionDescriptionRepo({name: props.solution.name, description: props.solution.description, id: props.solution.id});
+                }
             } else if (content.value === 'multiplayer') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'operational') {
@@ -279,9 +284,12 @@ export default {
         const saveChallengeRepo = async (data) => {
 
         }
+        const saveSolutionDescriptionRepo = async (data) => {
+            SaveSolutionDescription(data)
+        }
         const saveChallengeDescriptionRepo = async (data) => {
             SaveChallengeDescription(data)
-    }
+        }
         const saveChallengeDetailsRepo = async () => {
             SaveChallengeDetails(technical.value, technical.value.id);
         }

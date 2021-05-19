@@ -94,6 +94,21 @@ class SolutionController extends Controller
         ]);
     }
 
+    public function saveDescription(Request $request)
+    {
+//        dd($request->data);
+        $solution = Solution::find($request->data['id']);
+        $solution->name = $request->data['name'];
+        $solution->description = $request->data['description'];
+        $solution->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Wyzwanie zostało zapisane poprawnie',
+            'payload' => $solution
+        ]);
+    }
+
     public function checkTeam(Request $request)
     {
         $check = false;

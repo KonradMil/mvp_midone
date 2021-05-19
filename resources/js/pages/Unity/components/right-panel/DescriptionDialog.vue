@@ -1,6 +1,6 @@
 <template>
     <div class="flex-initial pl-2">
-        <div class="mt-3 ">
+        <div class="mt-3" v-if="props.type != 'solution'">
             <label for="modal-form-3" class="form-label">Solution deadline</label>
             <input
                 id="modal-form-3"
@@ -10,7 +10,7 @@
                 v-model="c.solution_deadline"
             />
         </div>
-        <div class="mt-3">
+        <div class="mt-3" v-if="props.type != 'solution'">
             <label for="modal-form-4" class="form-label">Offer deadline</label>
             <input
                 id="modal-form-4"
@@ -50,7 +50,8 @@ import cash from "cash-dom";
 export default {
     name: "DescriptionDialog",
     props: {
-        object: Object
+        object: Object,
+        type: String
     },
     setup(props, context) {
         const c = ref({description: '', name: '', solution_deadline: '', offer_deadline: ''});
@@ -64,7 +65,7 @@ export default {
 
         watch(c, (ca, prevLabel) => {
             console.log('CHANGE');
-            context.emit("update:comment", ca);
+            context.emit("update:object", ca);
         }, {deep: true})
         onMounted(() => {
             c.value = props.object
@@ -93,6 +94,7 @@ export default {
         return {
             c,
             types,
+            props
             // select_detail_weight,
         }
     }
