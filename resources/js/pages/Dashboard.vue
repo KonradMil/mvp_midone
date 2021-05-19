@@ -120,133 +120,25 @@
                         <div class="intro-x text-gray-500 text-xs text-center my-4">
                             Dzisiaj
                         </div>
-                        <div class="intro-x relative flex items-center mb-3">
+                        <div class="intro-x relative flex items-center mb-3" v-for="(log, index) in logs">
                             <div class="report-timeline__image">
                                 <div
                                     class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"
                                 >
                                     <img
                                         alt="Icewall Tailwind HTML Admin Template"
-                                        :src="'/uploads/1616990649.jpg'"
+                                        :src="'/' + log.challenge.screenshot_path"
                                     />
                                 </div>
                             </div>
                             <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
                                 <div class="flex items-center">
                                     <div class="font-medium">
-                                        Instalator: RedHawk
+                                        Nowe wyzwanie
                                     </div>
                                     <div class="text-xs text-gray-500 ml-auto">2h temu</div>
                                 </div>
-                                <div class="text-gray-600 mt-1">Dodał rozwiązanie do Twojego wyzwania.</div>
-                            </div>
-                        </div>
-                        <div class="intro-x relative flex items-center mb-3">
-                            <div class="report-timeline__image">
-                                <div
-                                    class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"
-                                >
-                                    <img
-                                        alt="Icewall Tailwind HTML Admin Template"
-                                        :src="'/uploads/1616990649.jpg'"
-                                    />
-                                </div>
-                            </div>
-                            <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
-                                <div class="flex items-center">
-                                    <div class="font-medium">
-                                        Instalator: RedHawk
-                                    </div>
-                                    <div class="text-xs text-gray-500 ml-auto">10h temu</div>
-                                </div>
-                                <div class="text-gray-600">
-                                    <div class="mt-1">Dodał ofertę do rozwiązania - Pakowanie słoików</div>
-                                </div>
-                                <!--                                    <div class="flex mt-2">-->
-                                <!--                                        <Tippy-->
-                                <!--                                            tag="div"-->
-                                <!--                                            class="w-8 h-8 image-fit mr-1 zoom-in"-->
-                                <!--                                            :content="$f()[0].products[0].name"-->
-                                <!--                                        >-->
-                                <!--                                            <img-->
-                                <!--                                                alt="Icewall Tailwind HTML Admin Template"-->
-                                <!--                                                class="rounded-md border border-white"-->
-                                <!--                                                :src="require(`/images/${$f()[8].images[0]}`)"-->
-                                <!--                                            />-->
-                                <!--                                        </Tippy>-->
-                                <!--                                        <Tippy-->
-                                <!--                                            tag="div"-->
-                                <!--                                            class="w-8 h-8 image-fit mr-1 zoom-in"-->
-                                <!--                                            :content="$f()[1].products[0].name"-->
-                                <!--                                        >-->
-                                <!--                                            <img-->
-                                <!--                                                alt="Icewall Tailwind HTML Admin Template"-->
-                                <!--                                                class="rounded-md border border-white"-->
-                                <!--                                                :src="require(`/images/${$f()[8].images[1]}`)"-->
-                                <!--                                            />-->
-                                <!--                                        </Tippy>-->
-                                <!--                                        <Tippy-->
-                                <!--                                            tag="div"-->
-                                <!--                                            class="w-8 h-8 image-fit mr-1 zoom-in"-->
-                                <!--                                            :content="$f()[2].products[0].name"-->
-                                <!--                                        >-->
-                                <!--                                            <img-->
-                                <!--                                                alt="Icewall Tailwind HTML Admin Template"-->
-                                <!--                                                class="rounded-md border border-white"-->
-                                <!--                                                :src="require(`/images/${$f()[8].images[2]}`)"-->
-                                <!--                                            />-->
-                                <!--                                        </Tippy>-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
-                            </div>
-                        </div>
-                        <div class="intro-x text-gray-500 text-xs text-center my-4">
-                            Sobota - 28.03.2021
-                        </div>
-                        <div class="intro-x relative flex items-center mb-3">
-                            <div class="report-timeline__image">
-                                <div
-                                    class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"
-                                >
-                                    <img
-                                        alt="Icewall Tailwind HTML Admin Template"
-                                        :src="'/uploads/1616990649.jpg'"
-                                    />
-                                </div>
-                            </div>
-                            <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
-                                <div class="flex items-center">
-                                    <div class="font-medium">
-                                        Instalator: RedHawk
-                                    </div>
-                                    <div class="text-xs text-gray-500 ml-auto">21:29</div>
-                                </div>
-                                <div class="text-gray-600 mt-1">
-                                    Dodał ofertę do rozwiązania - Pakowanie słoików
-                                </div>
-                            </div>
-                        </div>
-                        <div class="intro-x relative flex items-center mb-3">
-                            <div class="report-timeline__image">
-                                <div
-                                    class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"
-                                >
-                                    <img
-                                        alt="Icewall Tailwind HTML Admin Template"
-                                        :src="'/uploads/1616990649.jpg'"
-                                    />
-                                </div>
-                            </div>
-                            <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
-                                <div class="flex items-center">
-                                    <div class="font-medium">
-                                        Instalator: RedHawk
-                                    </div>
-                                    <div class="text-xs text-gray-500 ml-auto">16:35</div>
-                                </div>
-                                <div class="text-gray-600 mt-1">
-                                    Dodał ofertę do rozwiązania - Pakowanie słoików
-                                </div>
+                                <div class="text-gray-600 mt-1">{{log.description}}</div>
                             </div>
                         </div>
                     </div>
@@ -568,6 +460,7 @@ export default {
         const posts = ref([]);
         const solutions = ref([]);
         const types = require("../json/types.json");
+        const logs = ref([]);
 
         provide("bind[importantNotesRef]", el => {
             importantNotesRef.value = el;
@@ -588,6 +481,7 @@ export default {
                 console.log(resp.posts);
                 posts.value = resp.posts;
                 solutions.value = resp.solutions;
+                logs.value = resp.logs;
             });
 
 
@@ -601,7 +495,8 @@ export default {
             nextImportantNotes,
             posts,
             solutions,
-            types
+            types,
+            logs
         };
     },
     name: "Dashboard",
