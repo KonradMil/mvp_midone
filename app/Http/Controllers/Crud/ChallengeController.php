@@ -367,10 +367,10 @@ class ChallengeController extends Controller
 
     public function saveDescription(Request $request)
     {
-        dd($request->data);
-        $challenge = Challenge::find($request->id);
-        $challenge->name = $request->name;
-        $challenge->description = $request->description;
+//        dd($request->data);
+        $challenge = Challenge::find($request->data['id']);
+        $challenge->name = $request->data['name'];
+        $challenge->description = $request->data['description'];
         $challenge->save();
 
         return response()->json([
