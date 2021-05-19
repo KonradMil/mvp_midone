@@ -20,7 +20,7 @@ class SolutionController extends Controller
     public function getUserSolutionUnity(Request $request)
     {
         if (isset($request->id)) {
-            $solution = Solution::with('challenge', 'author','financial_after')->find($request->id);
+            $solution = Solution::with('challenge', 'author','financial_after', 'challenge.financial_before')->find($request->id);
 
         } else {
             $solution = NULL;
