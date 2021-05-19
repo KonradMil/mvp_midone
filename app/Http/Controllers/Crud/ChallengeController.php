@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Crud;
 
+use App\Events\ChallengeAdded;
 use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
 use App\Models\File;
@@ -355,6 +356,7 @@ class ChallengeController extends Controller
             $challenge->teams()->attach($team);
         }
 
+        event(new ChallengeAdded($challenge, Auth::user(), 'Wyzwanie ' . $challenge->name . ' zostało dodane.', ['financial' => $financial, 'technical' => $technical]));
 
         return response()->json([
             'success' => true,

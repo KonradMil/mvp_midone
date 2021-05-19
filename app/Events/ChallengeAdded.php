@@ -13,15 +13,25 @@ use Illuminate\Queue\SerializesModels;
 class ChallengeAdded
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+    public $subject;
+    public $causer;
+    public $message;
+    public $props;
 
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param $subject
+     * @param $causer
+     * @param $message
+     * @param array $props
      */
-    public function __construct()
+    public function __construct($subject, $causer, $message, $props = [])
     {
-        //
+        $this->subject = $subject;
+        $this->causer = $causer;
+        $this->message = $message;
+        $this->props = $props;
     }
 
     /**

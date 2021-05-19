@@ -8,6 +8,9 @@ use Illuminate\Queue\InteractsWithQueue;
 
 class AddActivityLog
 {
+
+
+
     /**
      * Create the event listener.
      *
@@ -15,7 +18,7 @@ class AddActivityLog
      */
     public function __construct()
     {
-        //
+
     }
 
     /**
@@ -24,8 +27,12 @@ class AddActivityLog
      * @param  SolutionAccepted  $event
      * @return void
      */
-    public function handle(SolutionAccepted $event)
+    public function handle($event)
     {
-        //
+        activity()
+            ->performedOn($event->subject)
+            ->causedBy($event->causer)
+            ->withProperties($event->props)
+            ->log($event->message);
     }
 }
