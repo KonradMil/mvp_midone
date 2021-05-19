@@ -6,7 +6,7 @@
             <img
                 alt="Icewall Tailwind HTML Admin Template"
                 class="rounded-full"
-                :src="'/s3/' + solution.screenshot_path"
+                :src="'/' + solution.screenshot_path"
             />
         </div>
         <div class="ml-3 mr-auto" @click="$router.push({name: 'solutionStudio', params: {id: solution.id, type: 'solution', load: solution }});">
@@ -45,7 +45,7 @@
             <img
                 alt="Icewall Tailwind HTML Admin Template"
                 class="rounded-md"
-                :src="'/s3/' + solution.screenshot_path"
+                :src="'/' + solution.screenshot_path"
             />
         </div>
         <a href="" class="block font-medium text-base mt-5"></a>
