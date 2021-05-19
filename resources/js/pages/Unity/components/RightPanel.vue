@@ -29,7 +29,7 @@
                     <LayoutDialog v-if="content == 'layout'" v-model:layout="layout"/>
                     <LineDialog v-if="content == 'line'" v-model:modelValue="line"/>
                     <AnimableDialog v-if="content == 'animable'" v-model:animable="animable"/>
-                    <DescriptionDialog v-if="content == 'description'" v-model:object="object" :type="type"/>
+                    <DescriptionDialog v-if="content == 'description'" v-model:object="object" :type="props.type"/>
 <!--                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>-->
                     <TeamsDialog v-if="content == 'teams'"></TeamsDialog>
                     <FinancialAnalysisDialog v-if="content == 'financial'" v-model:financial_before="financial_before" v-model:financial_after="financial_after" :type="type"></FinancialAnalysisDialog>
