@@ -136,8 +136,15 @@ export default {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'financial') {
                 // emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
-                saveChallengeFinancialsRepo();
-                saveSolutionFinancialsRepo();
+                if(props.type=='solution')
+                {
+                    saveSolutionFinancialsRepo();
+                }
+                else {
+                    saveSolutionFinancialsRepo();
+                    saveChallengeFinancialsRepo();
+                }
+
             } else if (content.value === 'settings') {
                 // emitter.emit('rightpanelaction', {
                 //     // action: 'updateAnimable', data:animable.value{
