@@ -85,12 +85,12 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
 Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
     Route::post('user/get', [SolutionController::class, 'getUserSolutionsFiltered']);
     Route::post('user/create', [SolutionController::class, 'createSolution']);
+    Route::post('create', [SolutionController::class, 'create']);
     Route::post('save', [SolutionController::class, 'saveSolution']);
     Route::post('user/like', [SolutionController::class, 'likeSolution']);
     Route::post('user/comment', [SolutionController::class, 'commentSolution']);
     Route::post('images/store', [SolutionController::class, 'storeImage']);
 });
-
 
 Route::group(['prefix' => 'knowledgebase/post', 'middleware' => 'auth:sanctum'], function () {
     Route::post('get', [KnowledgebaseController::class, 'getPosts']);
