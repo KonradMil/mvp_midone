@@ -120,7 +120,7 @@ export default {
             } else if (content.value === 'teams') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'description') {
-               saveChallengeRepo({name: challenge.name, description: challenge.description});
+                saveChallengeDescriptionRepo({name: challenge.name, description: challenge.description});
             } else if (content.value === 'multiplayer') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'operational') {
@@ -268,16 +268,17 @@ export default {
 
         onMounted(() => {
             // showPanel();
-            saveChallengeDetailsRepo('');
+            // saveChallengeDetailsRepo('');
         });
 
         const saveChallengeRepo = async (data) => {
+
+        }
+        const saveChallengeDescriptionRepo = async () => {
             SaveChallengeDescription({
                 name: data.name,
-                description: data.description,
-            });
-        }
-
+            })
+    }
         const saveChallengeDetailsRepo = async () => {
             SaveChallengeDetails(technical.value, technical.value.id);
         }
