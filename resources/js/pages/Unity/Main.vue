@@ -303,6 +303,7 @@ export default {
                         challenge.value = response.data.payload;
                         initialLoad.value = JSON.parse(response.data.payload.save_json);
                         animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
+                        checkTeam();
                         handleUnityActionOutgoing({
                             action: 'loadStructure',
                             data: JSON.parse(response.data.payload.save_json)
@@ -326,6 +327,7 @@ export default {
                         solution.value = response.data.payload;
                         initialLoad.value = JSON.parse(response.data.payload.save_json);
                         animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
+                        checkTeam();
                         handleUnityActionOutgoing({
                             action: 'loadStructure',
                             data: JSON.parse(response.data.payload.save_json)
@@ -353,7 +355,7 @@ export default {
         };
 
         onMounted(() => {
-            checkTeam();
+
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")
