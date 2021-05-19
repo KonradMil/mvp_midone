@@ -32,7 +32,7 @@
                     <DescriptionDialog v-if="content == 'description'" v-model:object="object"/>
 <!--                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>-->
                     <TeamsDialog v-if="content == 'teams'"></TeamsDialog>
-                    <FinancialAnalysisDialog v-if="content == 'financial'" v-model:financial="financial" :type="type"></FinancialAnalysisDialog>
+                    <FinancialAnalysisDialog v-if="content == 'financial'" v-model:financial="financial" v-model:financial_after="financial_after" :type="type"></FinancialAnalysisDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
                     <OperationDialog v-if="content == 'operational'" ></OperationDialog>
                     <SettingsDialog v-if="content == 'settings'" v-model:technical="technical" ></SettingsDialog>
@@ -164,6 +164,12 @@ export default {
         }, () => {
 
         });
+        const financial_after = computed(() => {
+            type.value = props.type;
+            return props.solution.financial_after
+        }, () => {
+
+        });
 
 
         const showPanel = () => {
@@ -289,7 +295,8 @@ export default {
             type,
             object,
             technical,
-            financial
+            financial,
+            financial_after
         }
     }
 }
