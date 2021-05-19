@@ -153,6 +153,7 @@ export default {
             if(type.value == 'challenge') {
                 await axios.post('/api/challenge/check-team', {user_id: user.id, challenge_id: challenge.value.id})
                     .then(response => {
+                        console.log("response.data")
                         console.log(response.data)
                         if (response.data.success) {
                             inTeam.value = response.data.payload;
