@@ -49,7 +49,7 @@
                     >
                         Anuluj
                     </button>
-                    <button type="button" class="btn btn-primary w-20" @click="save">
+                    <button v-if="allowedEdit" type="button" class="btn btn-primary w-20" @click="save">
                         Zapisz
                     </button>
                 </div>
@@ -108,6 +108,7 @@ export default {
         const content = ref('');
         const challenge = ref({});
         const type = ref('');
+        const allowedEdit = ref(false);
 
         const save = () => {
             if(content.value === 'label') {
@@ -269,6 +270,7 @@ export default {
         });
 
         onMounted(() => {
+            allowedEdit.value = props.allowedEdit;
             // showPanel();
             // saveChallengeDetailsRepo('');
         });
@@ -313,7 +315,8 @@ export default {
             object,
             technical,
             financial_before,
-            financial_after
+            financial_after,
+            allowedEdit
         }
     }
 }
