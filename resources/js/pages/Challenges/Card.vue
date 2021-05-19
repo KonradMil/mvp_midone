@@ -119,6 +119,7 @@
            <BasicInformationPanel :challenge="challenge" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
             <TechnicalInformationPanel :challenge="challenge" v-if="activeTab == 'techniczne'"></TechnicalInformationPanel>
             <QuestionsPanel v-if="activeTab == 'pytania'" :id="challenge.id"></QuestionsPanel>
+            <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge"></SolutionsPanel>
         </div>
     </div>
 </template>
@@ -131,10 +132,12 @@ import BasicInformationPanel from "./components/BasicInformationPanel";
 import TechnicalInformationPanel from "./components/TechnicalInformationPanel";
 import QuestionsPanel from "./components/QuestionsPanel";
 import router from "../../router";
+import SolutionsPanel from "./components/SolutionsPanel";
 
 export default defineComponent({
     name: 'Card',
     components: {
+        SolutionsPanel,
         QuestionsPanel,
         TechnicalInformationPanel,
         BasicInformationPanel,
