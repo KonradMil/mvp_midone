@@ -213,6 +213,7 @@ export default {
     // components: {Multiselect},
     props: {
         financial: Object,
+        type: String
     },
     setup(props) {
         console.log('Financial.ID!!!!' + props.financial.id);
