@@ -109,9 +109,11 @@ export default {
         const challenge = ref({});
         const type = ref('');
         const allowedEdit = ref(false);
+
         watch(props.allowedEdit, (ca, prevLabel) => {
            allowedEdit.value = props.allowedEdit;
-        }, {deep: true})
+        }, {deep: true});
+
         const save = () => {
             if(content.value === 'label') {
                 emitter.emit('unityoutgoingaction', { action: 'updateLabel', data:label, json: true });

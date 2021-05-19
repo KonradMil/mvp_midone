@@ -17,7 +17,7 @@
 
 <script>
 import UnityButton from "./UnityButton";
-import {getCurrentInstance, onMounted, ref} from "vue";
+import {getCurrentInstance, onMounted, ref, watch} from "vue";
 import UnityDropdown from "./UnityDropdown";
 
 export default {
@@ -29,7 +29,9 @@ export default {
     components: {UnityDropdown, UnityButton},
     setup(props) {
         const allowedEdit = ref(false);
-
+        watch(props.allowedEdit, (ca, prevLabel) => {
+            allowedEdit.value = props.allowedEdit;
+        }, {deep: true});
         onMounted(() => {
            allowedEdit.value = props.allowedEdit;
         });
