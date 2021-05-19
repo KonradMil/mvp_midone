@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Solutions\Solution;
 use Illuminate\Http\Request;
+use Spatie\Activitylog\Models\Activity;
 
 class DashboardController extends Controller
 {
     public function getDataForDashboard()
     {
+        $logs = Activity::where('subject_type', '=', 'App\Models\Challenges\Challenge')->where('properties', '=', '[]')->get();
         $posts = Post::where('status', '=', 'publish')->orderBy('created_at', 'DESC')->take(10)->get();
         $solutions = Solution::query()
             ->where('status', '=', '1')->orWhere('published', '=', 1)
@@ -23,7 +25,8 @@ class DashboardController extends Controller
             'message' => 'Pobrano poprawnie',
             'payload' => [
                 'posts' => $posts,
-                'solutions' => $solutions
+                'solutions' => $solutions,
+                'logs' => $logs
             ]
         ]);
     }
