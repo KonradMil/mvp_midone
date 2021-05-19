@@ -51,7 +51,7 @@ class Solution extends Model implements ReactableInterface
 
     public function financial_after()
     {
-        return $this->belongsTo(Financial::class);
+        return $this->hasOne(Financial::class, 'id' , 'financial_after_id');
     }
 //
 //    public function estimate()

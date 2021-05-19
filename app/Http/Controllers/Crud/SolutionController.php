@@ -17,6 +17,26 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class SolutionController extends Controller
 {
+    public function getUserSolutionUnity(Request $request)
+    {
+        if (isset($request->id)) {
+            $solution = Solution::with('challenge', 'author','financial_after')->find($request->id);
+
+        } else {
+            $solution = NULL;
+        }
+
+//        $challenge->comments_count = $challenge->comments()->count();
+//        $challenge->likes = $challenge->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
+
+
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Rozwiazanie zostało załadowane poprawnie',
+            'payload' => $solution
+        ]);
+    }
     public function getUserSolutions()
     {
 

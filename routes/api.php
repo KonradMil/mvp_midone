@@ -84,6 +84,7 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
 
 Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
     Route::post('user/get', [SolutionController::class, 'getUserSolutionsFiltered']);
+    Route::post('get/unity', [SolutionController::class, 'getUserSolutionUnity']);
     Route::post('user/create', [SolutionController::class, 'createSolution']);
     Route::post('create', [SolutionController::class, 'create']);
     Route::post('save', [SolutionController::class, 'saveSolution']);
