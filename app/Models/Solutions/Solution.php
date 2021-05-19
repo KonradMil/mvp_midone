@@ -4,6 +4,7 @@ namespace App\Models\Solutions;
 
 use App\Models\Challenges\Challenge;
 use App\Models\Financial;
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
@@ -28,10 +29,10 @@ class Solution extends Model implements ReactableInterface
         return $this->belongsTo(User::class);
     }
 
-//    public function teams()
-//    {
-//        return $this->belongsToMany(Team::class, 'teams_solutions');
-//    }
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, 'team_solution', 'solution_id', 'team_id');
+    }
 //
 //    public function installer()
 //    {

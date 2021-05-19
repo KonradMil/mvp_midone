@@ -5,6 +5,7 @@ namespace App\Models\Challenges;
 use App\Models\File;
 use App\Models\Financial;
 use App\Models\Solutions\Solution;
+use App\Models\Team;
 use App\Models\TechnicalDetails;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -42,7 +43,7 @@ class Challenge extends Model implements ReactableInterface
 
     public function teams()
     {
-        return $this->belongsToMany(Team::class, 'teams_challenges');
+        return $this->belongsToMany(Team::class, 'team_challenge', 'challenge_id', 'team_id');
     }
 
     public function technicalDetails(){

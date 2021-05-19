@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
 use App\Models\File;
 use App\Models\Financial;
+use App\Models\Team;
 use App\Models\TechnicalDetails;
 use App\Modules\Dbr\Module\Http\UnityController;
 use Carbon\Carbon;
@@ -349,6 +350,10 @@ class ChallengeController extends Controller
         $technical->challenge_id = $challenge->id;
         $technical->save();
 
+        foreach ($request->input['teams'] as $team_id) {
+            $team = Team::find($team_id);
+            $challenge->teams()->attach($team);
+        }
 
 
         return response()->json([
