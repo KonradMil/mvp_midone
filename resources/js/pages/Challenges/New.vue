@@ -786,21 +786,21 @@ export default {
         const publish = ref(false);
         const dropzoneSingleRef = ref();
 
-        const days = ref('');
-        const shifts = ref('');
-        const shift_time = ref('');
-        const weekend_shift = ref('');
-        const breakfast = ref('');
-        const stop_time = ref('');
-        const operator_performance = ref('');
-        const defective = ref('');
-        const number_of_operators = ref('');
-        const operator_cost = ref('');
-        const absence = ref('');
-        const cycle_time = ref('');
+        const days = ref(260);
+        const shifts = ref(4);
+        const shift_time = ref(8);
+        const weekend_shift = ref(0);
+        const breakfast = ref(30);
+        const stop_time = ref(20);
+        const operator_performance = ref(90);
+        const defective = ref(5);
+        const number_of_operators = ref(2);
+        const operator_cost = ref(4500);
+        const absence = ref(12);
+        const cycle_time = ref(0);
 
         const days_diffrence = Math.abs(days.value - 260);
-        const shifts_diffrence = Math.abs(shifts.value - 30);
+        const shifts_diffrence = Math.abs(shifts.value - 4);
         const shift_time_diffrence = Math.abs(shift_time.value - 8);
         const weekend_shift_diffrence = Math.abs(weekend_shift.value - 0);
         const breakfast_diffrence = Math.abs(breakfast.value - 30);
