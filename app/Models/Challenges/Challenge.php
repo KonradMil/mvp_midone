@@ -47,7 +47,7 @@ class Challenge extends Model implements ReactableInterface
     }
 
     public function technicalDetails(){
-        return $this->hasOne(TechnicalDetails::class, 'challenge_id');
+        return $this->hasOne(TechnicalDetails::class);
     }
 
 
@@ -78,7 +78,7 @@ class Challenge extends Model implements ReactableInterface
 //
     public function financial_before()
     {
-        return $this->hasOne(Financial::class, 'challenge_id');
+        return $this->hasOne(Financial::class);
     }
 
 //    public function questions()
