@@ -23,11 +23,11 @@ class Financial extends Model
 
     public function challenges()
     {
-           return $this->hasMany(Challenge::class);
+           return $this->belongsTo(Challenge::class);
     }
     public function solutions()
     {
-        return $this->hasMany(Solution::class);
+        return $this->belongsTo(Solution::class);
     }
 
 }
