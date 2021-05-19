@@ -363,7 +363,20 @@ class ChallengeController extends Controller
             'message' => 'Wyzwanie zostało dodane poprawnie',
             'payload' => $challenge
         ]);
+    }
 
+    public function saveDescription(Request $request)
+    {
+        $challenge = Challenge::find($request->id);
+        $challenge->name = $request->name;
+        $challenge->description = $request->description;
+        $challenge->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Wyzwanie zostało zapisane poprawnie',
+            'payload' => $challenge
+        ]);
     }
 
     public function getCardData(Request $request)
