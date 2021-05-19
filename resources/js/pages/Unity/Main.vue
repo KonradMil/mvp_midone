@@ -155,7 +155,7 @@ export default {
                     .then(response => {
                         // console.log(response.data)
                         if (response.data.success) {
-
+                            inTeam.value = response.data.payload;
                         } else {
 
                         }
@@ -165,7 +165,7 @@ export default {
                     .then(response => {
                         // console.log(response.data)
                         if (response.data.success) {
-
+                            inTeam.value = response.data.payload;
                         } else {
 
                         }
