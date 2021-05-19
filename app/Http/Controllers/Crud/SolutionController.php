@@ -97,7 +97,7 @@ class SolutionController extends Controller
     public function checkTeam(Request $request)
     {
         $check = false;
-        $solution = Challenge::find($request->solution_id);
+        $solution = Solution::find($request->solution_id);
         foreach ($solution->teams as $team) {
             foreach (Auth::user()->teams as $t) {
                 if($t->id == $team->id) {
