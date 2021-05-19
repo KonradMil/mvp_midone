@@ -47,7 +47,7 @@ class Challenge extends Model implements ReactableInterface
     }
 
     public function technicalDetails(){
-        return $this->belongsTo(TechnicalDetails::class);
+        return $this->hasOne(TechnicalDetails::class, 'id', 'technical_details');
     }
 
 
