@@ -49,7 +49,7 @@ export default {
         onBeforeMount(() => {
             // if (props.unityLoader) {
                 const script = document.createElement('SCRIPT')
-                script.setAttribute('src', 's3/unity/AssemBrot19_05_ver2.loader.js')
+                script.setAttribute('src', '/s3/unity/AssemBrot19_05_ver2.loader.js')
                 script.setAttribute('async', '')
                 script.setAttribute('defer', '')
                 document.body.appendChild(script)
