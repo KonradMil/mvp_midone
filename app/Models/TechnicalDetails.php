@@ -22,6 +22,6 @@ class TechnicalDetails extends Model
 
     public function challenge()
     {
-        return $this->hasOne(Challenge::class, 'id', 'challenge_id');
+        return $this->belongsTo(Challenge::class);
     }
 }
