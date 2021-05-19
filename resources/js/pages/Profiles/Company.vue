@@ -217,16 +217,16 @@ export default {
             })
         },
         searchNip() {
-            if (this.nip != '') {
-                this.search(this.nip);
+            if (this.company.nip != '') {
+                this.search(this.company.nip);
             } else {
                 toast.warning('NIP nie może być pusty');
             }
 
         },
         searchRegon() {
-            if (this.regon != '') {
-                this.search(this.regon);
+            if (this.company.regon != '') {
+                this.search(this.company.regon);
             } else {
                 toast.warning('REGON nie może być pusty');
             }
