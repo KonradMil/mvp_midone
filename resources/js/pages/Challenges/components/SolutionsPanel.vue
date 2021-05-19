@@ -12,7 +12,7 @@
                     <div
                         v-for="(solution, index) in challenge.solutions"
                         :key="index"
-                        class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box"
+                        class="intro-y col-span-4 md:col-span-4 xl:col-span-4 box"
                     >
                         <SingleSolutionPost :user="user" :solution="solution"></SingleSolutionPost>
                     </div>
