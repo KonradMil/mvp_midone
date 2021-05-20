@@ -66,7 +66,7 @@
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Ilość obsługiwanych stanowisk/linii:</span>
-                                <div class="text-gray-600"> {{ details['select_number_of_lines'][challenge.technical_details.number_of_lines].name }} </div>
+                                <div class="text-gray-600"> {{challenge.technical_details.number_of_lines }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
