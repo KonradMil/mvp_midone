@@ -445,6 +445,7 @@ export default {
                 toast.error("Typ stanowiska jest wymagany");
             } else {
                 let resp = await SaveChallenge({
+                    id: props.challenge_id,
                     name: name.value,
                     description: description.value,
                     type: category.value,

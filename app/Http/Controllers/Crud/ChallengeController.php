@@ -297,11 +297,22 @@ class ChallengeController extends Controller
 
     public function createChallenge(Request $request)
     {
-        $challenge = new Challenge();
-        $technical = new TechnicalDetails();
-        $financial = new Financial();
-        $financial->save();
         $request = json_decode(json_encode($request->data));
+        if(isset($request->id)) {
+            $challenge = Challenge::find($request->id);
+            $financial = $challenge->financial;
+            $technical = $challenge->technical_details;
+
+        } else {
+            $challenge = new Challenge();
+            $technical = new TechnicalDetails();
+            $financial = new Financial();
+            $financial->save();
+        }
+
+
+
+
 //    dd($request);
         $challenge->name = $request->name;
 
@@ -312,9 +323,14 @@ class ChallengeController extends Controller
         $challenge->allowed_publishing = $request->allowed_publishing;
         $challenge->financial_before_id = $financial->id;
         $challenge->author_id = Auth::user()->id;
-        $challenge->screenshot_path = 'screenshots/dbr_placeholder.jpeg';
-        $challenge->status = 0;
-        $challenge->stage = 0;
+
+        if(!isset($request->id)) {
+            $challenge->screenshot_path = 'screenshots/dbr_placeholder.jpeg';
+        }
+        if(!isset($request->id)) {
+            $challenge->status = 0;
+            $challenge->stage = 0;
+        }
         $challenge->save();
 
         $financial->days = $request->days;
@@ -362,21 +378,35 @@ class ChallengeController extends Controller
         if (isset($request->work_shifts)) {
             $technical->work_shifts = (string)$request->work_shifts;
         }
-        $technical->cycle_time = 0;
 
-        $technical->challenge_id = $challenge->id;
+        if(!isset($request->id)) {
+            $technical->cycle_time = 0;
+            $technical->challenge_id = $challenge->id;
+        }
+
         $technical->save();
-
+        if(!isset($request->id)) {
+            foreach ($challenge->files as $file) {
+                $challenge->files()->detach($file);
+            }
+        }
         foreach ($request->images as $image) {
             $challenge->files()->attach($image->id);
         }
-
+        if(!isset($request->id)) {
+            foreach ($challenge->teams as $team) {
+                $challenge->teams()->detach($team);
+            }
+        }
         foreach ($request->teams as $team_id) {
             $team = Team::find($team_id);
             $challenge->teams()->attach($team);
         }
 
-        event(new ChallengeAdded($challenge, Auth::user(), 'Wyzwanie ' . $challenge->name . ' zostało dodane.', ['financial' => $financial, 'technical' => $technical]));
+        if(!isset($request->id)) {
+            event(new ChallengeAdded($challenge, Auth::user(), 'Wyzwanie ' . $challenge->name . ' zostało dodane.', ['financial' => $financial, 'technical' => $technical]));
+            $financial->save();
+        }
 
         return response()->json([
             'success' => true,
