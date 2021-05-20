@@ -684,11 +684,11 @@
                             <option v-for="(tag,index) in tags" :value="index">{{ tag }}</option>
                         </TailSelect>
                     </div>
-                    <div class="form-check flex-col items-start mt-3">
-                        <label for="post-form-5" class="form-check-label ml-0 mb-2"
-                        >{{ $t('challengesNew.publish') }}</label>
-                        <input id="post-form-5" class="form-check-switch" v-model="publish" type="checkbox"/>
-                    </div>
+<!--                    <div class="form-check flex-col items-start mt-3">-->
+<!--                        <label for="post-form-5" class="form-check-label ml-0 mb-2"-->
+<!--                        >{{ $t('challengesNew.publish') }}</label>-->
+<!--                        <input id="post-form-5" class="form-check-switch" v-model="publish" type="checkbox"/>-->
+<!--                    </div>-->
                     <div class="form-check flex-col items-start mt-3">
                         <label for="post-form-6" class="form-check-label ml-0 mb-2"
                         >{{ $t('challengesNew.acceptPublic') }}</label
