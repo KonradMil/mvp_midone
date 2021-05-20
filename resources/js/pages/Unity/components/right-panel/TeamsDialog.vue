@@ -1,6 +1,6 @@
 <template>
-    <div class="mt-3">
-        <label v-for="(team,index) in teams_challenge.list" :value="team.id" for="modal-form-1" class="form-label">Zespoły</label>
+    <div class="mt-3" v-for="(team,index) in teams_challenge.list" :value="team.id">
+        <label for="modal-form-1" class="form-label">Zespoły</label>
         <TailSelect
             id="post-form-5"
             v-model="team.name"
