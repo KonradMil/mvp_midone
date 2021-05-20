@@ -109,7 +109,9 @@ export default {
         });
 
         const showImage = (index) => {
-            lightBoxIndex.value = 0;
+            console.log(index);
+            lightboxVisible.value = true;
+            lightBoxIndex.value = index;
         }
 
         const hideLightbox = () => {
