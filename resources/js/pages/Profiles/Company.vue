@@ -103,25 +103,16 @@
                                     />
                                 </div>
                                 <div class="mt-3">
-                                    <label for="input-wizard-6" class="form-label">{{ $t('profiles.flatNumber') }}</label>
-                                    <input
-                                        id="input-wizard-8"
-                                        type="text"
-                                        class="form-control"
-                                        v-model="company.loc_nr"
-                                    />
-                                </div>
-                            </div>
-                            <div class="col-span-12 xxl:col-span-6">
-                                <div class="mt-3">
                                     <label for="input-wizard-5" class="form-label">{{ $t('profiles.province') }}</label>
                                     <input
                                         id="input-wizard-11"
                                         type="text"
                                         class="form-control"
-                                        v-model="company.voivodeship"
+                                        v-model="company.province"
                                     />
                                 </div>
+                            </div>
+                            <div class="col-span-12 xxl:col-span-6">
                                 <div class="mt-3">
                                     <label for="input-wizard-6" class="form-label">{{ $t('profiles.country') }}</label>
                                     <input
@@ -130,6 +121,9 @@
                                         class="form-control"
                                         v-model="company.country"
                                     />
+                                </div>
+                                <div class="mt-3">
+
                                 </div>
                             </div>
                         </div>
@@ -187,7 +181,7 @@ export default {
                                 company.value.loc_nr = response.data.payload[0].flatNr;
                                 company.value.house_nr = response.data.payload[0].homeNr;
                                 company.value.postcode = response.data.payload[0].postalCode;
-                                company.value.voivodeship = response.data.payload[0].voivodshipName;
+                                company.value.province = response.data.payload[0].voivodshipName;
                                 company.value.country = 'Polska';
                             } else {
                                 toast.error(response.data.message);
@@ -217,7 +211,7 @@ export default {
                             company.value.loc_nr = response.data.payload[0].flatNr;
                             company.value.house_nr = response.data.payload[0].homeNr;
                             company.value.postcode = response.data.payload[0].postalCode;
-                            company.value.voivodeship = response.data.payload[0].voivodshipName;
+                            company.value.province = response.data.payload[0].voivodshipName;
                             company.value.country = 'Polska';
                         } else {
                             toast.error(response.data.message);
@@ -241,7 +235,7 @@ export default {
                     flat_nr: company.value.loc_nr,
                     house_nr: company.value.house_nr,
                     postcode: company.value.postcode,
-                    province: company.value.voivodeship,
+                    province: company.value.province,
                     country: company.value.country,
                     krs: company.value.krs
                 })
