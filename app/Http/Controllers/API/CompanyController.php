@@ -27,7 +27,7 @@ class CompanyController extends Controller
     public function saveCompanyEdit(Request $request)
     {
         $input = $request->input();
-        $company = Company::find($input->id);
+        $company = Company::find($input['id']);
         $company->fill($input);
 //        $company->author_id = Auth::user()->id;
         $company->save();
