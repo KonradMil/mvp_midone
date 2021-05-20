@@ -5,36 +5,20 @@
             <input id="crud-form-1"
                    type="text"
                    class="form-control w-full"
-                   placeholder="Input text"
+                   placeholder=""
                    v-model="report.title"
+                   disabled
             >
         </div>
         <div class="mt-3">
             <label for="crud-form-2" class="form-label">Czego dotyczy</label>
-            <TailSelect
-                id="post-form-3"
-                v-model="type"
-                :options="{
-                                     locale: 'pl',
-                                     limit: 'Nie można wybrać więcej',
-                                     search: false,
-                                     hideSelected: false,
-                                     classNames: 'w-16'
-                                     }"
+            <input id="crud-form-2"
+                   type="text"
+                   class="form-control w-full"
+                   placeholder=""
+                   v-model="report.type"
+                   disabled
             >
-                <option value="Wyzwanie">Wyzwanie</option>
-                <option value="Rozwiazanie">Rozwiązanie</option>
-                <option value="Oferta">Oferta</option>
-                <option value="Projekt">Projekt</option>
-                <option value="Stanowisko">Stanowisko</option>
-                <option value="Inne">Inne</option>
-            </TailSelect>
-            <!--                                <input id="crud-form-2"-->
-            <!--                                       type="text"-->
-            <!--                                       class="form-control w-full"-->
-            <!--                                       placeholder="Input text"-->
-            <!--                                       v-model="type"-->
-            <!--                                >-->
         </div>
         <div class="pt-5">
             <div
@@ -43,27 +27,10 @@
                 <div
                     class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"
                 >
-                    <!--                                    <div class="w-22 mr-3">-->
-                    <!--                                        <TailSelect-->
-                    <!--                                            id="input-wizard-2"-->
-                    <!--                                            :options="{-->
-                    <!--                                                locale: 'pl',-->
-                    <!--                                                placeholder: 'Wybierz...',-->
-                    <!--                                                limit: 'Nie można wybrać więcej',-->
-                    <!--                                                search: false,-->
-                    <!--                                                hideSelected: false,-->
-                    <!--                                                classNames: 'w-full'-->
-                    <!--                                            }"-->
-                    <!--                                        >-->
-                    <!--                                            <option value="pl">PL</option>-->
-                    <!--                                            <option value="en">ENG</option>-->
-
-                    <!--                                        </TailSelect>-->
-                    <!--                                    </div>-->
                     {{$t('challengesNew.description')}}
                 </div>
                 <div class="mt-5">
-                    <textarea v-model="report.description" class="w-full h-36 form-control" style="width: 100%;"></textarea>
+                    <textarea v-model="report.description" class="w-full h-36 form-control" style="width: 100%;" disabled></textarea>
                 </div>
             </div>
         </div>
@@ -72,7 +39,7 @@
         >
             <div class="mt-5">
                 <div class="mt-3">
-                    <label class="form-label"> {{ $t('challengesNew.file') }}</label>
+                    <label class="form-label"> {{ $t('global.file') }}</label>
                     <div
                         class="rounded-md pt-4"
                     >
@@ -89,9 +56,6 @@
                 </div>
 
             </div>
-        </div>
-        <div class="modal-footer text-right">
-            <button type="button" class="btn btn-primary w-20">Send</button>
         </div>
     </div>
 </template>

@@ -17,7 +17,8 @@
             "downloadPost" : "Download post",
             "comment" : "Comment...",
             "select" : "Select",
-            "financials" : "Financials"
+            "financials" : "Financials",
+            "file" : "File"
         },
         "validation": {
             "Value is required": "Value is required.",
@@ -261,7 +262,8 @@
             "downloadPost" : "Pobierz post",
             "comment" : "Skomentuj...",
             "select" : "Wybierz",
-            "financials" : "Założenia operacyjne"
+            "financials" : "Założenia operacyjne",
+            "file" : "Plik"
         },
         "topBar": {
             "profil": "Profil",
