@@ -95,13 +95,17 @@ export default {
         const toast = useToast();
         const types = require("../../../json/types.json");
         const lightboxVisible = ref(false);
-        const images = ref([]);
+        const images = computed(() => {
+            let a = [];
+            a.push(props.challenge.screenshot_path);
+            return a;
+        })
         const lightBoxIndex = ref(0);
 
         onMounted(() => {
             console.log("props.challenge");
             console.log(props.challenge);
-            images.value.push('/' + props.challenge.screenshot_path);
+            // images.value.push('/' + props.challenge.screenshot_path);
         });
 
         const showImage = (index) => {
