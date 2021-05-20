@@ -163,11 +163,11 @@ export default {
 
 
         const searchNip = () => {
-            search(company.value.nip);
+            search({nip:company.value.nip});
         };
 
         const searchRegon = () => {
-            search(company.value.regon);
+            search({regon:company.value.regon});
         };
 
         const searchKRS = () => {
@@ -205,9 +205,7 @@ export default {
 
         const search = (val) => {
             axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.post('api/company/search/nip', {
-                    nip: val
-                })
+                axios.post('api/company/search/nip', val)
                     .then(response => {
                         console.log(response.data)
                         if (response.data.success) {
