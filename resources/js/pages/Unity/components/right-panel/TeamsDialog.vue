@@ -48,7 +48,8 @@ import GetTeams from '../../../../compositions/GetTeams'
 export default {
     name: "TeamsDialog",
     props: {
-      comment: Object
+      comment: Object,
+      teams_challenge: Array
     },
     setup(props, context) {
         const teams = ref([]);
