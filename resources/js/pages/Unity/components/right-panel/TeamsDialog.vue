@@ -64,8 +64,6 @@ export default {
             props.teams_unity.forEach((val) => {
                 ts.push(val.id);
             })
-            console.log('ts[0]' + ts[0]);
-            console.log('TSSSS' + ts);
             return ts;
         });
 

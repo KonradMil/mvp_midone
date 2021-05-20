@@ -21,19 +21,34 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class ChallengeController extends Controller
 {
-    public function saveChallengeFinancials(Request $request, Financial $financial)
+    public function saveChallengeFinancials(Request $request,Challenge $challenge)
     {
-        $financial->fill($request->input('data'));
-        $financial->save();
+        foreach ($request->teams as $team_id) {
+            $team = Team::find($team_id);
+            $challenge->teams()->attach($team);
+        }
+
+        $challenge->save();
 
         return response()->json([
             'success' => true,
             'message' => 'Zapisano edycje.',
-            'payload' => $financial
+            'payload' => $challenge
         ]);
     }
 
     public function saveChallengeDetails(Request $request, TechnicalDetails $technical)
+    {
+        $technical->fill($request->input('data'));
+        $technical->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano edycje.',
+            'payload' => $technical
+        ]);
+    }
+    public function saveChallengeTeams(Request $request, TechnicalDetails $technical)
     {
         $technical->fill($request->input('data'));
         $technical->save();

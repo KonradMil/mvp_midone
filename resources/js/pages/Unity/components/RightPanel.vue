@@ -81,6 +81,7 @@ import SaveSolutionDescription from "../../../compositions/SaveSolutionDescripti
 import SaveChallengeDetails from "../../../compositions/SaveChallengeDetails";
 import SaveChallengeFinancials from "../../../compositions/SaveChallengeFinancials";
 import SaveSolutionFinancials from "../../../compositions/SaveSolutionFinancials";
+import SaveChallengeTeams from "../../../compositions/SaveChallengeTeams";
 
 export default {
     name: "RightPanel",
@@ -125,7 +126,10 @@ export default {
             } else if (content.value === 'animable') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'teams') {
-                emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+                // emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
+                if(props.type==='challenge'){
+                    saveChallengeTeamsRepo();
+            }
             } else if (content.value === 'description') {
                 console.log('HEREE');
                 if(type.value == 'challenge') {
@@ -329,6 +333,9 @@ export default {
             if(financial_after.value.id != undefined) {
                 SaveSolutionFinancials(financial_after.value, financial_after.value.id);
             }
+        }
+        const saveChallengeTeamsRepo = async () => {
+            SaveChallengeTeams(teams_unity.value, props.challenge.id);
         }
 
         const addTeam = () => {
