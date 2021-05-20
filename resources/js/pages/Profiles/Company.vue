@@ -5,7 +5,7 @@
                 {{ $t('profiles.personality') }}
             </h2>
         </div>
-        <form @submit.prevent="handleSubmit">
+        <form @submit.prevent="save">
             <div class="p-5">
                 <div class="flex flex-col-reverse xl:flex-row flex-col">
                     <div class="flex-1 mt-6 xl:mt-0">
@@ -17,7 +17,7 @@
                                         id="input-wizard-1"
                                         type="text"
                                         class="form-control"
-                                        v-model="company.company_name"/>
+                                        v-model="company.name"/>
                                 </div>
                                 <div class="mt-3">
                                     <label for="input-wizard-2" class="form-label">NIP</label>
@@ -271,7 +271,8 @@ export default {
             company,
             searchKRS,
             searchNip,
-            searchRegon
+            searchRegon,
+            save
         }
     }
 }
