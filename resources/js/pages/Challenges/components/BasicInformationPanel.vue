@@ -82,11 +82,15 @@
 <script>
 import {computed, onMounted, reactive, ref} from "vue";
 import {useToast} from "vue-toastification";
+import VueEasyLightbox from 'vue-easy-lightbox'
 
 export default {
     name: "BasicInformationPanel",
     props: {
         challenge: Object
+    },
+    components: {
+        VueEasyLightbox
     },
     setup(props) {
         const challenge = computed(() => {
