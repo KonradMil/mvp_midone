@@ -71,6 +71,11 @@
                                 <img :alt="challenge.name" :src="'/' + challenge.screenshot_path"/>
                             </div>
                         </div>
+                        <div class="h-64 px-2" v-for="(file, index) in challenge.files" @click="showImage(index + 1)">
+                            <div class="h-full image-fit rounded-md overflow-hidden">
+                                <img :alt="challenge.name" :src="'/' + file.path"/>
+                            </div>
+                        </div>
                     </TinySlider>
                 </div>
             </div>
