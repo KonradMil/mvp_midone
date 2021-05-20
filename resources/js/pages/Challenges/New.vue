@@ -150,7 +150,7 @@
                                     {{ $t('challengesNew.photo') }}
                                 </div>
                                 <div class="mt-5">
-                                    <div class="mt-3">
+                                    <div class="mt-3" v-if="images.length > 0">
                                         <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>
                                         <div class="rounded-md pt-4">
                                             <div class="row flex h-full" >
