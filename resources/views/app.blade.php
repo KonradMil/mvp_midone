@@ -15,7 +15,7 @@
                'isLoggedin' => true,
                'user' => Auth::user(),
                'notifications' => Auth::user()->notifications,
-               'company' => Auth::user()->companies[0][0],
+               'company' => Auth::user()->companies,
            ])!!}
     </script>
 @else
