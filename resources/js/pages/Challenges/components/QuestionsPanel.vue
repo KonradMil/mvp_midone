@@ -95,6 +95,7 @@ export default {
         const saveQuestion = () => {
             SaveQuestion({challenge_id: props.id, question: question.value}, () => {
                 addingDialog.value = false;
+                getQuestions();
             });
         }
 
