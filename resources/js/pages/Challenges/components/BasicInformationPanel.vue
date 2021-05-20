@@ -104,9 +104,11 @@ export default {
             let a = [];
             a.push('/' + props.challenge.screenshot_path);
             if(props.challenge.files.length > 0) {
-                props.challenge.files.forEach((val) => {
-                   a.push('/' + val.path);
-                });
+                if(props.challenge.files != undefined) {
+                    props.challenge.files.forEach((val) => {
+                        a.push('/' + val.path);
+                    });
+                }
             }
             return a;
         })
