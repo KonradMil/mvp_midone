@@ -111,15 +111,6 @@
                         />
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
-                        <label for="input-wizard-6" class="form-label">Poczta</label>
-                        <input
-                            id="input-wizard-10"
-                            type="text"
-                            class="form-control"
-                            v-model="company.loc_nr"
-                        />
-                    </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
                         <label for="input-wizard-5" class="form-label">Województwo</label>
                         <input
                             id="input-wizard-11"
