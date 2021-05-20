@@ -1,21 +1,21 @@
 <template>
     <div class="mt-3">
-        <label for="modal-form-1" class="form-label">Zespoły</label>
+        <label v-for="(team,index) in teams_challenge.list" :value="team.id" for="modal-form-1" class="form-label">Zespoły</label>
         <TailSelect
             id="post-form-5"
-            v-model="teamsAllowed"
+            v-model="team.name"
             :options="{
-                                locale: 'pl',
-                                placeholder: 'Wybierz zespoły...',
-                                limit: 'Nie można wybrać więcej',
-                                 placeholderMulti: 'Wybierz do :limit zespołów...',
-                       search: false,
-                hideSelected: true,
-                hideDisabled: true,
-                multiLimit: 3,
-                multiShowCount: false,
-                multiContainer: true,
-                classNames: 'w-full'
+             locale: 'pl',
+             placeholder: 'Wybierz zespoły...',
+             limit: 'Nie można wybrać więcej',
+             placeholderMulti: 'Wybierz do :limit zespołów...',
+             search: false,
+             hideSelected: true,
+             hideDisabled: true,
+             multiLimit: 3,
+             multiShowCount: false,
+             multiContainer: true,
+             classNames: 'w-full'
               }"
             multiple
         >
