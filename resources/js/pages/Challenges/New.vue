@@ -516,7 +516,7 @@ export default {
                     if (response.data.success) {
                         name.value = response.data.payload.name;
                         description.value = response.data.payload.description;
-                        category.value = toString(response.data.payload.type);
+                        category.value = String(response.data.payload.type);
                         solution_deadline.value = response.data.payload.solution_deadline;
                         offer_deadline.value = response.data.payload.offer_deadline;
                         allowed_publishing.value = response.data.payload.allowed_publishing;
