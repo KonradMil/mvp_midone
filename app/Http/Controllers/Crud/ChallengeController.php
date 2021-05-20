@@ -423,7 +423,7 @@ class ChallengeController extends Controller
     {
         if (isset($request->id)) {
             $challenge = Challenge::with(
-                'solutions', 'author', 'technicalDetails', 'financial_before', 'teams'
+                'solutions', 'author', 'technicalDetails', 'financial_before', 'teams', 'files'
             )->find($request->id);
 
         } else {
