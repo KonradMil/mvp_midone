@@ -17,7 +17,7 @@
                                         id="input-wizard-1"
                                         type="text"
                                         class="form-control"
-                                        v-model="company.name"/>
+                                        v-model="company.company_name"/>
                                 </div>
                                 <div class="mt-3">
                                     <label for="input-wizard-2" class="form-label">NIP</label>
@@ -182,7 +182,7 @@ export default {
                                 company.value.regon = response.data.payload[0].regon;
                                 company.value.nip = response.data.payload[0].nip;
                                 company.value.city = response.data.payload[0].postalCityName;
-                                company.value.name = response.data.payload[0].name;
+                                company.value.company_name = response.data.payload[0].name;
                                 company.value.street = response.data.payload[0].streetName;
                                 company.value.loc_nr = response.data.payload[0].flatNr;
                                 company.value.house_nr = response.data.payload[0].homeNr;
@@ -212,7 +212,7 @@ export default {
                             company.value.regon = response.data.payload[0].regon;
                             company.value.nip = response.data.payload[0].nip;
                             company.value.city = response.data.payload[0].postalCityName;
-                            company.value.name = response.data.payload[0].name;
+                            company.value.company_name = response.data.payload[0].name;
                             company.value.street = response.data.payload[0].streetName;
                             company.value.loc_nr = response.data.payload[0].flatNr;
                             company.value.house_nr = response.data.payload[0].homeNr;
@@ -235,7 +235,7 @@ export default {
                     id: company.value.id,
                     regon: company.value.regon,
                     nip: company.value.nip,
-                    company_name: company.value.name,
+                    company_name: company.value.company_name,
                     city: company.value.city,
                     street: company.value.street,
                     flat_nr: company.value.loc_nr,
