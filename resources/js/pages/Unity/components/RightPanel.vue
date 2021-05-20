@@ -32,7 +32,7 @@
                     <DescriptionDialog v-if="content == 'description'" v-model:object="object" :type="props.type"/>
 <!--                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>-->
                     <TeamsDialog v-if="content == 'teams'"></TeamsDialog>
-                    <FinancialAnalysisDialog v-if="content == 'financial'" v-model:financial_before="financial_before" v-model:financial_after="financial_after" :type="type"></FinancialAnalysisDialog>
+                    <FinancialAnalysisDialog v-if="content == 'financial-analysis'"></FinancialAnalysisDialog>
                     <FinancialDialog v-if="content == 'financial'" v-model:financial_before="financial_before" v-model:financial_after="financial_after" :type="type"></FinancialDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
                     <OperationDialog v-if="content == 'operational'" ></OperationDialog>
