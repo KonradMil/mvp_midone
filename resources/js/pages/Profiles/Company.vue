@@ -27,7 +27,7 @@
                                         class="form-control"
                                         v-model="company.nip"
                                     />
-                                    <button class="btn btn-primary w-1/4 mt-2" @click="searchNip">{{ $t('profiles.searchFor') }} NIP</button>
+                                    <button class="btn btn-primary w-1/4 mt-2" @click.prevent="searchNip">{{ $t('profiles.searchFor') }} NIP</button>
                                 </div>
                             </div>
                             <div class="col-span-12 xxl:col-span-6">
@@ -39,7 +39,7 @@
                                         class="form-control"
                                         v-model="company.regon"
                                     />
-                                    <button class="btn btn-primary w-1/3 mt-2" @click="searchRegon">{{ $t('profiles.searchFor') }} REGON</button>
+                                    <button class="btn btn-primary w-1/3 mt-2" @click.prevent="searchRegon">{{ $t('profiles.searchFor') }} REGON</button>
                                 </div>
                                 <div class="mt-3">
                                     <label for="input-wizard-4" class="form-label">KRS</label>
@@ -49,7 +49,7 @@
                                         class="form-control"
                                         v-model="company.krs"
                                     />
-                                    <button class="btn btn-primary w-1/4 mt-2" @click="searchKRS">{{ $t('profiles.searchFor') }} KRS</button>
+                                    <button class="btn btn-primary w-1/4 mt-2" @click.prevent="searchKRS">{{ $t('profiles.searchFor') }} KRS</button>
                                 </div>
                             </div>
                             <div class="col-span-12 xxl:col-span-6">
