@@ -1,5 +1,6 @@
 <template>
 <!--    COMPANIES-->
+    <div class="intro-y box lg:mt-5">
       <div id="companies" class="grid grid-cols-12 gap-4 gap-y-5 mt-5" :key="company.id">
             <div class="intro-y col-span-12 sm:col-span-6">
                 <label for="input-wizard-1" class="form-label">{{$t('profiles.companyName')}}</label>
@@ -118,6 +119,7 @@
                 <button class="btn btn-primary w-24 ml-2" @click="saveCompany">{{ $t('global.save') }}</button>
             </div>
         </div>
+    </div>
 </template>
 
 <script>
