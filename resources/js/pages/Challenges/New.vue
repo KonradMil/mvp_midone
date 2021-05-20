@@ -535,17 +535,17 @@ export default {
                         images.value = response.data.payload.files;
 
                         financials.value.days = response.data.payload.financial_before.days;
-                        financials.value.shifts = financials.value.financial_before.shifts;
-                        financials.value.shift_time = financials.value.financial_before.shift_time;
-                        financials.value.weekend_shift = financials.value.financial_before.weekend_shift;
-                        financials.value.breakfast = financials.value.financial_before.breakfast;
-                        financials.value.stop_time = financials.value.financial_before.stop_time;
-                        financials.value.operator_performance = financials.financial_before.operator_performance;
-                        financials.value.defective = financials.value.financial_before.defective;
-                        financials.value.number_of_operators = financials.financial_before.number_of_operators;
-                        financials.value.operator_cost = financials.value.financial_before.operator_cost;
-                        financials.value.absence = financials.value.financial_before.absence;
-                        financials.value.cycle_time = financials.value.financial_before.cycle_time;
+                        financials.value.shifts = response.data.payload.financial_before.shifts;
+                        financials.value.shift_time = response.data.payload.financial_before.shift_time;
+                        financials.value.weekend_shift = response.data.payload.financial_before.weekend_shift;
+                        financials.value.breakfast = response.data.payload.financial_before.breakfast;
+                        financials.value.stop_time = response.data.payload.financial_before.stop_time;
+                        financials.value.operator_performance = response.data.payload.financial_before.operator_performance;
+                        financials.value.defective = response.data.payload.financial_before.defective;
+                        financials.value.number_of_operators = response.data.payload.financial_before.number_of_operators;
+                        financials.value.operator_cost = response.data.payload.financial_before.operator_cost;
+                        financials.value.absence = response.data.payload.financial_before.absence;
+                        financials.value.cycle_time = response.data.payload.financial_before.cycle_time;
                     } else {
                         // toast.error(response.data.message);
                     }
