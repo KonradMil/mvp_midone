@@ -155,6 +155,7 @@ import {defineComponent, onMounted, ref} from "vue";
     import DarkModeSwitcher from "../components/dark-mode-switcher/Main.vue";
     import cash from "cash-dom";
     import {useToast} from "vue-toastification";
+import router from "../router";
 
     const toast = useToast();
 
@@ -266,7 +267,8 @@ import {defineComponent, onMounted, ref} from "vue";
                         .then(response => {
                             console.log(response.data)
                             if (response.data.success) {
-                                toast.success(response.data.message);
+                                router.push({path: 'profile'});
+                                // toast.success(response.data.message);
                             } else {
                                 toast.error(response.data.message);
                             }
