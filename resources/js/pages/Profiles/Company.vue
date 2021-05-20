@@ -17,7 +17,7 @@
                                         id="input-wizard-1"
                                         type="text"
                                         class="form-control"
-                                        v-model="company.name"/>
+                                        v-model="company.company_name"/>
                                 </div>
                                 <div class="mt-3">
                                     <label for="input-wizard-2" class="form-label">NIP</label>
@@ -27,7 +27,7 @@
                                         class="form-control"
                                         v-model="company.nip"
                                     />
-                                    <button class="btn btn-primary w-1/4 mt-2" @click="searchNip">{{ $t('profiles.searchFor') }} NIP</button>
+                                    <button class="btn btn-primary w-1/4 mt-2" @click.prevent="searchNip">{{ $t('profiles.searchFor') }} NIP</button>
                                 </div>
                             </div>
                             <div class="col-span-12 xxl:col-span-6">
@@ -39,7 +39,7 @@
                                         class="form-control"
                                         v-model="company.regon"
                                     />
-                                    <button class="btn btn-primary w-1/3 mt-2" @click="searchRegon">{{ $t('profiles.searchFor') }} REGON</button>
+                                    <button class="btn btn-primary w-1/3 mt-2" @click.prevent="searchRegon">{{ $t('profiles.searchFor') }} REGON</button>
                                 </div>
                                 <div class="mt-3">
                                     <label for="input-wizard-4" class="form-label">KRS</label>
@@ -49,7 +49,7 @@
                                         class="form-control"
                                         v-model="company.krs"
                                     />
-                                    <button class="btn btn-primary w-1/4 mt-2" @click="searchKRS">{{ $t('profiles.searchFor') }} KRS</button>
+                                    <button class="btn btn-primary w-1/4 mt-2" @click.prevent="searchKRS">{{ $t('profiles.searchFor') }} KRS</button>
                                 </div>
                             </div>
                             <div class="col-span-12 xxl:col-span-6">
@@ -133,7 +133,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary w-20 mt-3" @click="saveCompany">{{ $t('global.save') }}</button>
+                        <button class="btn btn-primary w-20 mt-3" type="submit">{{ $t('global.save') }}</button>
                     </div>
                 </div>
             </div>
@@ -182,7 +182,7 @@ export default {
                                 company.value.regon = response.data.payload[0].regon;
                                 company.value.nip = response.data.payload[0].nip;
                                 company.value.city = response.data.payload[0].postalCityName;
-                                company.value.name = response.data.payload[0].name;
+                                company.value.company_name = response.data.payload[0].name;
                                 company.value.street = response.data.payload[0].streetName;
                                 company.value.loc_nr = response.data.payload[0].flatNr;
                                 company.value.house_nr = response.data.payload[0].homeNr;
@@ -212,7 +212,7 @@ export default {
                             company.value.regon = response.data.payload[0].regon;
                             company.value.nip = response.data.payload[0].nip;
                             company.value.city = response.data.payload[0].postalCityName;
-                            company.value.name = response.data.payload[0].name;
+                            company.value.company_name = response.data.payload[0].name;
                             company.value.street = response.data.payload[0].streetName;
                             company.value.loc_nr = response.data.payload[0].flatNr;
                             company.value.house_nr = response.data.payload[0].homeNr;
@@ -231,10 +231,11 @@ export default {
 
         const save = () => {
             axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.post('api/company/create', {
+                axios.post('api/company/save', {
+                    id: company.value.id,
                     regon: company.value.regon,
                     nip: company.value.nip,
-                    company_name: company.value.name,
+                    company_name: company.value.company_name,
                     city: company.value.city,
                     street: company.value.street,
                     flat_nr: company.value.loc_nr,

@@ -24,6 +24,21 @@ class CompanyController extends Controller
             'payload' => $company
         ]);
     }
+    public function saveCompanyEdit(Request $request)
+    {
+        $input = $request->input();
+        $company = Company::find($input['id']);
+        $company->fill($input);
+//        $company->author_id = Auth::user()->id;
+        $company->save();
+//        $company->users()->attach(Auth::user());
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $company
+        ]);
+    }
     public function getUserCompanies()
     {
         return response()->json([
