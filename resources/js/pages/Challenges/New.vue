@@ -349,6 +349,7 @@ import cash from "cash-dom";
 import {useToast} from "vue-toastification";
 import GetTeams from "../../compositions/GetTeams";
 import SaveChallenge from "../../compositions/SaveChallenge";
+import GetCardChallenge from "../../compositions/GetCardChallenge";
 import {useI18n} from 'vue-i18n'
 import Multiselect from '@vueform/multiselect'
 import router from '../../router';
@@ -361,7 +362,10 @@ const toast = useToast();
 export default {
     name: "AddChallenge",
     components: {Financials, Details, Multiselect},
-    setup() {
+    props: {
+        challenge_id: Number
+    },
+    setup(props) {
         const {t, locale} = useI18n({useScope: 'global'})
         const toast = useToast();
         const category = ref();
@@ -499,8 +503,55 @@ export default {
             });
             cash("body")
                 .removeClass("error-page");
+
+            if (props.challenge_id != undefined) {
+                getChallengeCardRepositories();
+            }
         });
         getTeamsRepositories();
+
+        const getChallengeCardRepositories = async () => {
+            await axios.post('/api/challenge/user/get/card', {id: id})
+                .then(response => {
+                    if (response.data.success) {
+                        name.value = response.data.payload.name;
+                        description.value = response.data.payload.description;
+                        category.value = response.data.payload.category;
+                        solution_deadline.value = response.data.payload.solution_deadline;
+                        offer_deadline.value = response.data.payload.offer_deadline;
+                        allowed_publishing.value = response.data.payload.allowed_publishing;
+                        details.value.select_detail_weight = response.data.payload.technical_details.select_detail_weight;
+                        details.value.select_pick_quality = response.data.payload.technical_details.select_pick_quality;
+                        details.value.select_detail_material = response.data.payload.technical_details.select_detail_material;
+                        details.value.select_detail_size = response.data.payload.technical_details.select_detail_size;
+                        details.value.select_detail_pick = response.data.payload.technical_details.select_detail_pick;
+                        details.value.select_detail_position = response.data.payload.technical_details.select_detail_position;
+                        details.value.select_detail_range = response.data.payload.technical_details.select_detail_range;
+                        details.value.select_detail_destination = response.data.payload.technical_details.detail_destination;
+                        details.value.select_number_of_lines = response.data.payload.technical_details.select_number_of_lines;
+                        details.value.select_work_shifts = response.data.payload.technical_details.select_work_shifts;
+                        teams.value = response.data.payload.teams;
+                        // tags: tagsSelected.value,
+                        images.value = response.data.payload.files;
+
+                        financials.value.days = response.data.payload.financial_before.days;
+                        financials.value.shifts = financials.value.financial_before.shifts;
+                        financials.value.shift_time = financials.value.financial_before.shift_time;
+                        financials.value.weekend_shift = financials.value.financial_before.weekend_shift;
+                        financials.value.breakfast = financials.value.financial_before.breakfast;
+                        financials.value.stop_time = financials.value.financial_before.stop_time;
+                        financials.value.operator_performance = financials.financial_before.operator_performance;
+                        financials.value.defective = financials.value.financial_before.defective;
+                        financials.value.number_of_operators = financials.financial_before.number_of_operators;
+                        financials.value.operator_cost = financials.value.financial_before.operator_cost;
+                        financials.value.absence = financials.value.financial_before.absence;
+                        financials.value.cycle_time = financials.value.financial_before.cycle_time;
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        }
+
         return {
             categories,
             category,

@@ -106,7 +106,8 @@ export const routes = [
             {
                 name: 'addChallenge',
                 path: '/challenge/add',
-                component: AddChallenge
+                component: AddChallenge,
+                props: true
             },
             {
                 name: 'challenges',

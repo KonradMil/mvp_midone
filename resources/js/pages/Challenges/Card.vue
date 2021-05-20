@@ -71,7 +71,7 @@
 
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id == user.id">
-                        <button type="button" class="btn btn-primary py-1 px-2">
+                        <button type="button" class="btn btn-primary py-1 px-2" @click="$router.push({path: '/challenge/add', params: {challenge_id: challenge.id}})">
                             Edytuj
                         </button>
                         <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">
