@@ -43,7 +43,7 @@
                             class="form-control"
                             v-model="company.nip"
                         />
-                        <button class="btn btn-primary w-1/4 mt-2" @click="searchNip">Szukaj po NIP</button>
+                        <button class="btn btn-primary w-1/4 mt-2" @click.prevent="searchNip">Szukaj po NIP</button>
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
                         <label for="input-wizard-3" class="form-label">REGON</label>
@@ -53,7 +53,7 @@
                             class="form-control"
                             v-model="company.regon"
                         />
-                        <button class="btn btn-primary w-1/4 mt-2" @click="searchRegon">Szukaj po REGON</button>
+                        <button class="btn btn-primary w-1/4 mt-2" @click.prevent="searchRegon">Szukaj po REGON</button>
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
                         <label for="input-wizard-4" class="form-label">KRS</label>
@@ -63,7 +63,7 @@
                             class="form-control"
                             v-model="company.krs"
                         />
-                        <button class="btn btn-primary w-1/4 mt-2" @click="searchKRS">Szukaj po KRS</button>
+                        <button class="btn btn-primary w-1/4 mt-2" @click.prevent="searchKRS">Szukaj po KRS</button>
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
                         <label for="input-wizard-5" class="form-label">Miejscowość</label>
