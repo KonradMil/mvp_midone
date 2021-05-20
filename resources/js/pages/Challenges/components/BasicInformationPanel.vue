@@ -53,7 +53,7 @@
                     <h2 class="font-medium text-base mr-auto">Zdjęcia</h2>
                 </div>
                 <vue-easy-lightbox
-                    :visible="lightBoxIndex"
+                    :visible="lightboxVisible"
                     :imgs="images"
                     :index="lightBoxIndex"
                     @hide="hideLightbox"
