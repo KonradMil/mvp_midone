@@ -52,13 +52,13 @@
                 >
                     <h2 class="font-medium text-base mr-auto">Zdjęcia</h2>
                 </div>
+                <vue-easy-lightbox
+                    :visible="lightBoxIndex"
+                    :imgs="images"
+                    :index="lightBoxIndex"
+                    @hide="hideLightbox"
+                ></vue-easy-lightbox>
                 <div class="p-10" v-if="challenge.screenshot_path != undefined">
-                    <vue-easy-lightbox
-                        :visible="lightBoxIndex"
-                        :imgs="images"
-                        :index="lightBoxIndex"
-                        @hide="hideLightbox"
-                    ></vue-easy-lightbox>
                     <TinySlider :options="{
                             mode: 'gallery',
                             controls: true,
