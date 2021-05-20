@@ -367,6 +367,10 @@ class ChallengeController extends Controller
         $technical->challenge_id = $challenge->id;
         $technical->save();
 
+        foreach ($request->images as $image) {
+            $challenge->files()->attach($image->id);
+        }
+
         foreach ($request->teams as $team_id) {
             $team = Team::find($team_id);
             $challenge->teams()->attach($team);

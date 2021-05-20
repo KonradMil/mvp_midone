@@ -53,7 +53,7 @@ class Challenge extends Model implements ReactableInterface
 
     public function files()
     {
-        return $this->hasMany(File::class);
+        return $this->belongsToMany(File::class, 'challenge_image', 'challenge_id', 'image_id');
     }
 
     public function solutions()

@@ -26,4 +26,10 @@ class File extends Model
     public function author() {
         return $this->hasMany(User::class);
     }
+
+    public function challenges()
+    {
+        return $this->belongsToMany(File::class, 'challenge_image', 'image_id', 'challenge_id');
+    }
+
 }
