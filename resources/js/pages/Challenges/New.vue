@@ -520,16 +520,16 @@ export default {
                         solution_deadline.value = response.data.payload.solution_deadline;
                         offer_deadline.value = response.data.payload.offer_deadline;
                         allowed_publishing.value = response.data.payload.allowed_publishing;
-                        details.value.select_detail_weight = response.data.payload.technical_details.select_detail_weight;
-                        details.value.select_pick_quality = response.data.payload.technical_details.select_pick_quality;
-                        details.value.select_detail_material = response.data.payload.technical_details.select_detail_material;
-                        details.value.select_detail_size = response.data.payload.technical_details.select_detail_size;
-                        details.value.select_detail_pick = response.data.payload.technical_details.select_detail_pick;
-                        details.value.select_detail_position = response.data.payload.technical_details.select_detail_position;
-                        details.value.select_detail_range = response.data.payload.technical_details.select_detail_range;
+                        details.value.select_detail_weight = response.data.payload.technical_details.detail_weight;
+                        details.value.select_pick_quality = response.data.payload.technical_details.pick_quality;
+                        details.value.select_detail_material = response.data.payload.technical_details.detail_material;
+                        details.value.select_detail_size = response.data.payload.technical_details.detail_size;
+                        details.value.select_detail_pick = response.data.payload.technical_details.detail_pick;
+                        details.value.select_detail_position = response.data.payload.technical_details.detail_position;
+                        details.value.select_detail_range = response.data.payload.technical_details.detail_range;
                         details.value.select_detail_destination = response.data.payload.technical_details.detail_destination;
-                        details.value.select_number_of_lines = response.data.payload.technical_details.select_number_of_lines;
-                        details.value.select_work_shifts = response.data.payload.technical_details.select_work_shifts;
+                        details.value.select_number_of_lines = response.data.payload.technical_details.number_of_lines;
+                        details.value.select_work_shifts = response.data.payload.technical_details.work_shifts;
                         teams.value = response.data.payload.teams;
                         // tags: tagsSelected.value,
                         images.value = response.data.payload.files;
