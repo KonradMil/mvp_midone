@@ -2,7 +2,7 @@
     <div class="search-result__content">
         <div class="search-result__content__title">Wyzwania</div>
         <div class="mb-5">
-            <a href="" v-for="(challenge, index) in results.challenges" :key="'chal_' + index" class="flex items-center">
+            <a href="" @click.prevent="$router.push({ name: 'challengeStudio', params : {id: challenge.id, type: 'challenge', load: challenge}})" v-for="(challenge, index) in results.challenges" :key="'chal_' + index" class="flex items-center">
                 {{challenge.name}}
 <!--                <div-->
 <!--                    class="w-8 h-8 bg-theme-18 text-theme-9 flex items-center justify-center rounded-full"-->
