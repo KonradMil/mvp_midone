@@ -14,12 +14,12 @@
             id="post-form-3"
             v-model="type"
             :options="{
-                                     locale: 'pl',
-                                     limit: 'Nie można wybrać więcej',
-                                     search: false,
-                                     hideSelected: false,
-                                     classNames: 'w-16'
-                                     }"
+             locale: 'pl',
+             limit: 'Nie można wybrać więcej',
+             search: false,
+             hideSelected: false,
+             classNames: 'w-16'
+            }"
         >
             <option value="Wyzwanie">Wyzwanie</option>
             <option value="Rozwiazanie">Rozwiązanie</option>
@@ -57,12 +57,12 @@
                             style="position: relative; display: flex;"
                             ref-key="dropzoneSingleRef"
                             :options="{
-                                                     url: '/api/report/files/store',
-                                                     thumbnailWidth: 150,
-                                                     maxFilesize: 5,
-                                                     maxFiles: 5,
-                                                     previewTemplate: '<div style=\'display: none\'></div>'
-                                                    }"
+                            url: '/api/report/files/store',
+                            thumbnailWidth: 150,
+                            maxFilesize: 5,
+                            maxFiles: 5,
+                            previewTemplate: '<div style=\'display: none\'></div>'
+                            }"
                             class="dropzone">
                             <div
                                 class="px-4 py-4 flex items-center cursor-pointer relative"
