@@ -41,7 +41,7 @@
                     :placeholder="$t('global.search')"
                     @keyup.enter="searchMe"
 
-                    @mouseleave="hideSearchDropdown"
+
                 />
                 <!--                    @focus="showSearchDropdown"-->
                 <SearchIcon class="search__icon dark:text-gray-300" style="color: #fff"/>
@@ -49,7 +49,7 @@
             <a class="notification sm:hidden" href="">
                 <SearchIcon class="notification__icon dark:text-gray-300"/>
             </a>
-            <div class="search-result" :class="{ show: searchDropdown }">
+            <div @mouseleave="hideSearchDropdown" class="search-result" :class="{ show: searchDropdown }">
                 <Results :results="results"/>
             </div>
         </div>
