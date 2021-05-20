@@ -130,7 +130,7 @@
                     <ChangePassword></ChangePassword>
                     <!-- END: Change Password -->
                 </div>
-                <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" v-if="activeTab === 'company'">
+                <div class="col-span-12 lg:col-span-8 xxl:col-span-9" v-if="activeTab === 'company'">
                     <!-- BEGIN: Company -->
                    <Company></Company>
                     <!-- END: Company -->
