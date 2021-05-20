@@ -160,8 +160,9 @@
                                                              :alt="image.original_name"
                                                              :src="'/' + image.path"
                                                         />
-                                                        <div style="width: 94%; bottom: 0; position: relative; margin-top: 85%; margin-left: 10px; font-size: 16px; font-weight: bold;">USUŃ}
-                                                        </div>
+
+                                                    </div>
+                                                    <div style="width: 94%; bottom: 0; position: relative; margin-top: 85%; margin-left: 10px; font-size: 16px; font-weight: bold;">USUŃ
                                                     </div>
                                                 </div>
                                             </div>
