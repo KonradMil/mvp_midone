@@ -133,7 +133,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary w-20 mt-3" @click="saveCompany">{{ $t('global.save') }}</button>
+                        <button class="btn btn-primary w-20 mt-3" type="submit">{{ $t('global.save') }}</button>
                     </div>
                 </div>
             </div>
@@ -231,7 +231,8 @@ export default {
 
         const save = () => {
             axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.post('api/company/create', {
+                axios.post('api/company/save', {
+                    id: company.value.id,
                     regon: company.value.regon,
                     nip: company.value.nip,
                     company_name: company.value.name,
