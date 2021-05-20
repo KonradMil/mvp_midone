@@ -41,7 +41,7 @@
                     :placeholder="$t('global.search')"
                     @keyup.enter="searchMe"
 
-                    @blur="hideSearchDropdown"
+                    @mouseleave="hideSearchDropdown"
                 />
                 <!--                    @focus="showSearchDropdown"-->
                 <SearchIcon class="search__icon dark:text-gray-300" style="color: #fff"/>
