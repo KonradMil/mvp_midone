@@ -25,8 +25,14 @@ import Card from "../pages/Challenges/Card";
 import Communication from "../pages/Communication/Main";
 import ReportReview from "../pages/Communication/ReportReview";
 import TermsMain from "../pages/Terms/TermsMain";
+import ForgotPassword from "../pages/ForgotPassword";
 
 export const routes = [
+    {
+      name: 'reset-password',
+      path: '/reset-password/:token',
+      component: ForgotPassword
+    },
     {
         name: 'login',
         path: '/login',

@@ -20,6 +20,19 @@ use Mpociot\Teamwork\TeamInvite;
 
 class UserController extends Controller
 {
+    public function reset(Request $request)
+    {
+        $pr = \App\Models\PasswordReset::where('token', '=', $request->token);
+        $user = User::where('email', '=', $pr->email)->first();
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Hasło zresetowane poprawnie.',
+            'payload' => $user
+        ]);
+    }
+
     public function getUsers()
     {
         $users = User::all();
@@ -34,7 +47,12 @@ class UserController extends Controller
         $request->validate(['email' => 'required|email']);
 
 //        $token = Str::random(60);
-           $token = sha1(time());
+        $token = sha1(time());
+        $pr = new \App\Models\PasswordReset();
+        $pr->email = $request->email;
+        $pr->token = $token;
+        $pr->save();
+
         Mail::to([$request->email])->send(new ForgotPassword($request->email, $token));
 
         return response()->json([
