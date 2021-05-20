@@ -32,7 +32,7 @@
                             id="input-wizard-1"
                             type="text"
                             class="form-control"
-                            v-model="name"
+                            v-model="company.company_name"
                         />
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
@@ -41,7 +41,7 @@
                             id="input-wizard-2"
                             type="text"
                             class="form-control"
-                            v-model="nip"
+                            v-model="company.nip"
                         />
                         <button class="btn btn-primary w-1/4 mt-2" @click="searchNip">Szukaj po NIP</button>
                     </div>
@@ -51,7 +51,7 @@
                             id="input-wizard-3"
                             type="text"
                             class="form-control"
-                            v-model="regon"
+                            v-model="company.regon"
                         />
                         <button class="btn btn-primary w-1/4 mt-2" @click="searchRegon">Szukaj po REGON</button>
                     </div>
@@ -61,7 +61,7 @@
                             id="input-wizard-4"
                             type="text"
                             class="form-control"
-                            v-model="krs"
+                            v-model="company.krs"
                         />
                         <button class="btn btn-primary w-1/4 mt-2" @click="searchKRS">Szukaj po KRS</button>
                     </div>
@@ -71,7 +71,7 @@
                             id="input-wizard-5"
                             type="text"
                             class="form-control"
-                            v-model="city"
+                            v-model="company.city"
                         />
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
@@ -80,7 +80,7 @@
                             id="input-wizard-6"
                             type="text"
                             class="form-control"
-                            v-model="street"
+                            v-model="company.street"
                         />
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
@@ -89,7 +89,7 @@
                             id="input-wizard-7"
                             type="text"
                             class="form-control"
-                            v-model="house_nr"
+                            v-model="company.house_nr"
                         />
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
@@ -98,7 +98,7 @@
                             id="input-wizard-8"
                             type="text"
                             class="form-control"
-                            v-model="loc_nr"
+                            v-model="company.loc_nr"
                         />
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
@@ -107,7 +107,7 @@
                             id="input-wizard-9"
                             type="text"
                             class="form-control"
-                            v-model="postcode"
+                            v-model="company.postcode"
                         />
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
@@ -116,7 +116,7 @@
                             id="input-wizard-10"
                             type="text"
                             class="form-control"
-                            v-model="loc_nr"
+                            v-model="company.loc_nr"
                         />
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
@@ -125,7 +125,7 @@
                             id="input-wizard-11"
                             type="text"
                             class="form-control"
-                            v-model="voivodeship"
+                            v-model="company.province"
                         />
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
@@ -134,7 +134,7 @@
                             id="input-wizard-12"
                             type="text"
                             class="form-control"
-                            v-model="country"
+                            v-model="company.country"
                         />
                     </div>
                     <div
@@ -151,7 +151,7 @@
 </template>
 
 <script>
-    import {defineComponent, onMounted} from "vue";
+import {defineComponent, onMounted, ref} from "vue";
     import DarkModeSwitcher from "../components/dark-mode-switcher/Main.vue";
     import cash from "cash-dom";
     import {useToast} from "vue-toastification";
@@ -163,92 +163,51 @@
             DarkModeSwitcher
         },
         setup() {
-            onMounted(() => {
-                cash("body")
-                    .removeClass("error-page")
-
-            });
-        },
-        data() {
-            return {
-                name: '',
-                krs: '',
-                nip: '',
+            const user = window.Laravel.user;
+            const teams = ref([]);
+            const company = ref({
                 regon: '',
+                nip: '',
+                company_name: '',
                 city: '',
                 street: '',
-                loc_nr: '',
+                flat_nr: '',
                 house_nr: '',
                 postcode: '',
-                voivodeship: '',
+                province: '',
                 country: '',
-                error: null
-            }
-        },
-        methods: {
-            handleSubmit() {
-                this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                    this.$axios.post('api/company/create', {
-                        regon : this.regon,
-                        nip: this.nip,
-                        company_name: this.name,
-                        city: this.city,
-                        street: this.street,
-                        flat_nr: this.loc_nr,
-                        house_nr: this.house_nr,
-                        postcode: this.postcode,
-                        province: this.voivodeship,
-                        country: this.country,
-                        krs: this.krs
-                    })
-                        .then(response => {
-                            console.log(response.data)
-                            // ??
-                            if (response.data.success) {
-                                this.$router.push('/profiles');
-                            } else {
-                                toast.error(response.data.message);
-                            }
-                        })
-                        .catch(function (error) {
-                            toast.error(error);
-                        });
-                })
-            },
-            searchNip() {
-                if (this.nip != '') {
-                    this.search(this.nip);
-                } else {
-                    toast.warning('NIP nie może być pusty');
-                }
+                krs: ''
+            });
+            // company.value = user.companies[0];
 
-            },
-            searchRegon() {
-                if (this.regon != '') {
-                    this.search(this.regon);
-                } else {
-                    toast.warning('REGON nie może być pusty');
-                }
-            },
-            searchKRS() {
-                this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                    this.$axios.post('api/company/search/krs', {
-                        krs: this.krs
+
+            const searchNip = () => {
+                search({nip:company.value.nip});
+            };
+
+            const searchRegon = () => {
+                search({regon:company.value.regon});
+            };
+
+            const searchKRS = () => {
+                axios.get('/sanctum/csrf-cookie').then(response => {
+                    axios.post('api/company/search/krs', {
+                        krs: company.value.krs
                     })
                         .then(response => {
                             console.log(response.data)
                             if (response.data.success) {
                                 if (response.data.success) {
-                                    this.regon = response.data.payload[0].regon;
-                                    this.nip = response.data.payload[0].nip;
-                                    this.city = response.data.payload[0].postalCityName;
-                                    this.name = response.data.payload[0].name;
-                                    this.street = response.data.payload[0].streetName;
-                                    this.loc_nr = response.data.payload[0].flatNr;
-                                    this.house_nr = response.data.payload[0].homeNr;
-                                    this.postcode = response.data.payload[0].postalCode;
-                                    this.voivodeship = response.data.payload[0].voivodshipName;
-                                    this.country = 'Polska';
+                                    company.value.regon = response.data.payload[0].regon;
+                                    company.value.nip = response.data.payload[0].nip;
+                                    company.value.city = response.data.payload[0].postalCityName;
+                                    company.value.company_name = response.data.payload[0].name;
+                                    company.value.street = response.data.payload[0].streetName;
+                                    company.value.loc_nr = response.data.payload[0].flatNr;
+                                    company.value.house_nr = response.data.payload[0].homeNr;
+                                    company.value.postcode = response.data.payload[0].postalCode;
+                                    company.value.province = response.data.payload[0].voivodshipName;
+                                    company.value.country = 'Polska';
                                 } else {
                                     toast.error(response.data.message);
                                 }
@@ -261,25 +220,24 @@
                             toast.error(error);
                         });
                 })
-            },
-            search(val) {
-                this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                    this.$axios.post('api/company/search/nip', {
-                        nip: val
-                    })
+            };
+
+            const search = (val) => {
+                axios.get('/sanctum/csrf-cookie').then(response => {
+                    axios.post('api/company/search/nip', val)
                         .then(response => {
                             console.log(response.data)
                             if (response.data.success) {
-                                this.regon = response.data.payload[0].regon;
-                                this.nip = response.data.payload[0].nip;
-                                this.city = response.data.payload[0].postalCityName;
-                                this.name = response.data.payload[0].name;
-                                this.street = response.data.payload[0].streetName;
-                                this.loc_nr = response.data.payload[0].flatNr;
-                                this.house_nr = response.data.payload[0].homeNr;
-                                this.postcode = response.data.payload[0].postalCode;
-                                this.voivodeship = response.data.payload[0].voivodshipName;
-                                this.country = 'Polska';
+                                company.value.regon = response.data.payload[0].regon;
+                                company.value.nip = response.data.payload[0].nip;
+                                company.value.city = response.data.payload[0].postalCityName;
+                                company.value.company_name = response.data.payload[0].name;
+                                company.value.street = response.data.payload[0].streetName;
+                                company.value.loc_nr = response.data.payload[0].flatNr;
+                                company.value.house_nr = response.data.payload[0].homeNr;
+                                company.value.postcode = response.data.payload[0].postalCode;
+                                company.value.province = response.data.payload[0].voivodshipName;
+                                company.value.country = 'Polska';
                             } else {
                                 toast.error(response.data.message);
                             }
@@ -289,6 +247,50 @@
                         });
                 })
             }
-        },
+
+            const save = () => {
+                axios.get('/sanctum/csrf-cookie').then(response => {
+                    axios.post('api/company/create', {
+                        regon: company.value.regon,
+                        nip: company.value.nip,
+                        company_name: company.value.company_name,
+                        city: company.value.city,
+                        street: company.value.street,
+                        flat_nr: company.value.loc_nr,
+                        house_nr: company.value.house_nr,
+                        postcode: company.value.postcode,
+                        province: company.value.province,
+                        country: company.value.country,
+                        krs: company.value.krs
+                    })
+                        .then(response => {
+                            console.log(response.data)
+                            if (response.data.success) {
+                                toast.success(response.data.message);
+                            } else {
+                                toast.error(response.data.message);
+                            }
+                        })
+                        .catch(function (error) {
+                            toast.error(error);
+                        });
+                })
+            }
+
+            onMounted(() => {
+                // getCompaniesRepositories('');
+                cash("body")
+                    .removeClass("error-page")
+
+            });
+            return {
+                teams,
+                company,
+                searchKRS,
+                searchNip,
+                searchRegon,
+                save
+            }
+        }
     }
 </script>
