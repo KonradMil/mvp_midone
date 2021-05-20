@@ -3,7 +3,7 @@
         <label for="modal-form-1" class="form-label">Zespoły</label>
         <TailSelect
             id="post-form-5"
-            v-model="team_unity.value"
+            v-model="team_unity"
             :options="{
              locale: 'pl',
              placeholder: 'Wybierz zespoły...',
