@@ -3,7 +3,7 @@
         <label for="modal-form-1" class="form-label">Zespoły</label>
         <TailSelect
             id="post-form-5"
-            v-model="teams"
+            v-model="team_unity.value"
             :options="{
              locale: 'pl',
              placeholder: 'Wybierz zespoły...',
@@ -41,8 +41,9 @@
 </template>
 
 <script>
-import {onMounted, ref, watch} from "vue";
+import {onMounted, ref, watch, computed} from "vue";
 import GetTeams from '../../../../compositions/GetTeams'
+
 
 
 export default {
@@ -58,6 +59,12 @@ export default {
             teams.value = GetTeams();
         }
 
+        const team_unity = computed (() => {
+            let ts = [];
+            props.teams_unity.forEach((val) => {
+                ts.push(val.id);
+            })
+        }) ;
 
         watch(c, (ca, prevLabel) => {
             console.log('CHANGE');
@@ -69,7 +76,8 @@ export default {
 
         return {
             c,
-            teams
+            teams,
+            team_unity
         }
     }
 }
