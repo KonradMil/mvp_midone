@@ -31,7 +31,8 @@ export const routes = [
     {
       name: 'reset-password',
       path: '/reset-password/:token',
-      component: ForgotPassword
+      component: ForgotPassword,
+        props: true
     },
     {
         name: 'login',
