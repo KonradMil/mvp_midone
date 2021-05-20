@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-3" v-for="(team,index) in teams_challenge.list" :value="team.id">
+    <div class="mt-3" >
         <label for="modal-form-1" class="form-label">Zespoły</label>
         <TailSelect
             id="post-form-5"
@@ -20,7 +20,7 @@
             multiple
         >
             <option selected disabled>{{ $t('challengesNew.selectTags') }}</option>
-            <option v-for="(team,index) in teams.list" :value="team.id">{{ team.name }}</option>
+            <option v-for="(team,index) in teams_challenge.list" :value="team.id">{{ team.name }}</option>
         </TailSelect>
 <!--        <input-->
 <!--            id="modal-form-1"-->
