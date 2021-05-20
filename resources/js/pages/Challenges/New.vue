@@ -160,10 +160,10 @@
                                                              :alt="image.original_name"
                                                              :src="'/' + image.path"
                                                         />
-                                                        <div style="width: 94%; bottom: 0; position: relative; margin-top: 85%; margin-left: 10px; font-size: 16px; font-weight: bold;">
+                                                        <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
                                                         </div>
                                                     </div>
-                                                    <div style="width: 94%; bottom: 0; position: relative; margin-top: 85%; margin-left: 10px; font-size: 16px; font-weight: bold;">USUŃ
+                                                    <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteImage(index)">USUŃ
                                                     </div>
                                                 </div>
                                             </div>
@@ -841,7 +841,10 @@ export default {
                 // emitter.emit('changestudio', {val: 'challenge'});
 
             }
+        }
 
+        const deleteImage = (index) => {
+            images.value.splice(index, 1);
         }
 
         onMounted(() => {
@@ -905,6 +908,7 @@ export default {
             operator_cost,
             absence,
             cycle_time,
+            deleteImage
         };
     },
     beforeRouteEnter(to, from, next) {
