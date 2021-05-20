@@ -72,6 +72,7 @@ import DescriptionDialog from "./right-panel/DescriptionDialog";
 import MultiplayerDialog from "./right-panel/TeamsDialog";
 import TeamsDialog from "./right-panel/TeamsDialog";
 import FinancialAnalysisDialog from "./right-panel/FinancialAnalysisDialog";
+import FinancialDialog from "./right-panel/FinancialDialog";
 import OperationalAnalysisDialog from "./right-panel/OperationalAnalysisDialog";
 import OperationDialog from "./right-panel/OperationDialog";
 import SettingsDialog from "./right-panel/SettingsDialog";
