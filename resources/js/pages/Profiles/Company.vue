@@ -1,5 +1,5 @@
 <template>
-    <div class="intro-y box lg:mt-5" v-if="activeTab==='personalia'">
+    <div class="intro-y box">
         <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
             <h2 class="font-medium text-base mr-auto">
                 {{$t('profiles.personality')}}
