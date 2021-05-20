@@ -99,7 +99,7 @@ export default {
         const lightBoxIndex = ref(0);
 
         onMounted(() => {
-            images.value.push('/' + challenge.value.screenshot_path);
+            images.value.push('/' + props.challenge.screenshot_path);
         });
 
         const showImage = (index) => {
