@@ -22,6 +22,7 @@ class UserController extends Controller
 {
     public function reset(Request $request)
     {
+        dd($request);
         $pr = \App\Models\PasswordReset::where('token', '=', $request->token);
         $user = User::where('email', '=', $pr->email)->first();
         $user->password = bcrypt($request->password);
