@@ -511,7 +511,7 @@ export default {
         getTeamsRepositories();
 
         const getChallengeCardRepositories = async () => {
-            await axios.post('/api/challenge/user/get/card', {id: id})
+            await axios.post('/api/challenge/user/get/card', {id: props.challenge_id})
                 .then(response => {
                     if (response.data.success) {
                         name.value = response.data.payload.name;
