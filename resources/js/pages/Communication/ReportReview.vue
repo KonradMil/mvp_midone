@@ -5,7 +5,7 @@
             <input id="crud-form-1"
                    type="text"
                    class="form-control w-full"
-                   placeholder="Input text"
+                   placeholder=""
                    v-model="report.title"
                    disabled
             >
