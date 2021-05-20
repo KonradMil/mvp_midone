@@ -53,13 +53,19 @@
                     <h2 class="font-medium text-base mr-auto">Zdjęcia</h2>
                 </div>
                 <div class="p-10" v-if="challenge.screenshot_path != undefined">
+                    <vue-easy-lightbox
+                        :visible="lightBoxIndex"
+                        :imgs="images"
+                        :index="lightBoxIndex"
+                        @hide="hideLightbox"
+                    ></vue-easy-lightbox>
                     <TinySlider :options="{
                             mode: 'gallery',
                             controls: true,
                             nav: true,
                             speed: 500,
                           }">
-                        <div class="h-64 px-2">
+                        <div class="h-64 px-2" @click="showImage(0)">
                             <div class="h-full image-fit rounded-md overflow-hidden">
                                 <img :alt="challenge.name" :src="'/' + challenge.screenshot_path"/>
                             </div>
@@ -88,10 +94,21 @@ export default {
         });
         const toast = useToast();
         const types = require("../../../json/types.json");
+        const lightboxVisible = ref(false);
+        const images = ref([]);
+        const lightBoxIndex = ref(0);
 
         onMounted(() => {
-
+            images.value.push('/' + challenge.screenshot_path);
         });
+
+        const showImage = (index) => {
+            lightBoxIndex.value = 0;
+        }
+
+        const hideLightbox = () => {
+            lightboxVisible.value = false;
+        }
 
         const follow = () => {
             axios.post('/api/challenge/user/follow', {id: props.challenge.id})
@@ -150,7 +167,12 @@ export default {
             challenge,
             types,
             follow,
-            unfollow
+            unfollow,
+            lightboxVisible,
+            lightBoxIndex,
+            images,
+            showImage,
+            hideLightbox
         }
     }
 }
