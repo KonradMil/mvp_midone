@@ -31,7 +31,7 @@
                     <AnimableDialog v-if="content == 'animable'" v-model:animable="animable"/>
                     <DescriptionDialog v-if="content == 'description'" v-model:object="object" :type="props.type"/>
 <!--                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>-->
-                    <TeamsDialog v-if="content == 'teams'" v-model:teams_challenge="teams_challenge" :type="props.type"></TeamsDialog>
+                    <TeamsDialog v-if="content == 'teams'" v-model:teams="teams" :type="props.type"></TeamsDialog>
                     <FinancialAnalysisDialog v-if="content == 'financial-analysis'"></FinancialAnalysisDialog>
                     <FinancialDialog v-if="content == 'financial'" v-model:financial_before="financial_before" v-model:financial_after="financial_after" :type="type"></FinancialDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
@@ -201,12 +201,17 @@ export default {
 
         });
 
-        const teams_challenge = computed(() => {
+        const teams = computed(() => {
             if(props.type=='challenge')
             {
                 type.value = props.type;
                 return props.challenge.teams
             }
+            // else
+            // {
+            //     type.value = props.type;
+            //     return props.solution.teams
+            // }
         }, () =>{
 
         });
@@ -349,7 +354,7 @@ export default {
             technical,
             financial_before,
             financial_after,
-            teams_challenge,
+            teams,
             props
         }
     }
