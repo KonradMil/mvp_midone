@@ -52,7 +52,7 @@ export default {
                     emitter.emit('OperationalAnalysisDialog', { val: '' });
                     break;
                 case 'financial':
-                    emitter.emit('FinancialAnalysisDialog', { val: '' });
+                    emitter.emit('FinancialDialog', { val: '' });
                     break;
             }
         }

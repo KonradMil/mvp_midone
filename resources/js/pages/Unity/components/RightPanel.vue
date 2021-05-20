@@ -33,6 +33,7 @@
 <!--                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>-->
                     <TeamsDialog v-if="content == 'teams'"></TeamsDialog>
                     <FinancialAnalysisDialog v-if="content == 'financial'" v-model:financial_before="financial_before" v-model:financial_after="financial_after" :type="type"></FinancialAnalysisDialog>
+                    <FinancialDialog v-if="content == 'financial'" v-model:financial_before="financial_before" v-model:financial_after="financial_after" :type="type"></FinancialDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
                     <OperationDialog v-if="content == 'operational'" ></OperationDialog>
                     <SettingsDialog v-if="content == 'settings'" v-model:technical="technical" ></SettingsDialog>
@@ -87,6 +88,7 @@ export default {
         OperationDialog,
         OperationalAnalysisDialog,
         FinancialAnalysisDialog,
+        FinancialDialog,
         TeamsDialog,
         MultiplayerDialog,
         DescriptionDialog, LayoutDialog, CommentDialog, LabelDialog, LineDialog, AnimableDialog},
@@ -274,6 +276,11 @@ export default {
             showPanel();
         });
         emitter.on('FinancialAnalysisDialog', e => {
+            content.value = 'financial-analysis';
+            currentTitle.value = 'Analiza finansowa';
+            showPanel();
+        });
+        emitter.on('FinancialDialog', e => {
             content.value = 'financial';
             currentTitle.value = 'Założenia operacyjne';
             showPanel();
