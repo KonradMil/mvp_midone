@@ -417,7 +417,7 @@ export default {
             absence: 12,
             cycle_time: 0
         });
-
+        const id = ref(null);
         const types = require("../../json/types.json");
         const tagss = require("../../json/tagsChallenge.json");
         const sels = require("../../json/challenge.json");
@@ -445,7 +445,7 @@ export default {
                 toast.error("Typ stanowiska jest wymagany");
             } else {
                 let resp = await SaveChallenge({
-                    id: props.challenge_id,
+                    id: id.value,
                     name: name.value,
                     description: description.value,
                     type: category.value,
@@ -506,6 +506,7 @@ export default {
                 .removeClass("error-page");
 
             if (props.challenge_id != undefined) {
+                id.value = props.challenge_id;
                 getChallengeCardRepositories();
             }
         });
