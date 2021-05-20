@@ -49,7 +49,7 @@ export default {
     name: "TeamsDialog",
     props: {
       comment: Object,
-      teams_challenge: Array
+      teams_unity: Array
     },
     setup(props, context) {
         const teams = ref([]);
