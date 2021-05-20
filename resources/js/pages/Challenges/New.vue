@@ -154,7 +154,7 @@
                                         <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>
                                         <div class="rounded-md pt-4">
                                             <div class="row flex h-full" >
-                                                <div class=" h-full" v-for="(image, index) in images">
+                                                <div class=" h-full" v-for="(image, index) in images" :key="'image_' + index">
                                                     <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
                                                         <img class="w-full h-full"
                                                              :alt="image.original_name"
