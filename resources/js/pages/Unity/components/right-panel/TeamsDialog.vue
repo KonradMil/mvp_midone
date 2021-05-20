@@ -64,6 +64,7 @@ export default {
             props.teams_unity.forEach((val) => {
                 ts.push(val.id);
             })
+            return ts;
         }) ;
 
         watch(c, (ca, prevLabel) => {
