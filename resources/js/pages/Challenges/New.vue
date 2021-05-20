@@ -352,7 +352,7 @@
                                                 <label for="input-wizard-9" class="form-label">
                                                     {{$t('challengesNew.numberSupported')}}
                                                 </label>
-                                                <input type="number" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                                <input type="number" v-model="select_number_of_lines" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                                             </div>
                                             <div class="intro-y col-span-12 sm:col-span-6">
                                                 <label for="input-wizard-10" class="form-label">{{$t('challengesNew.changeNumber')}}</label>
