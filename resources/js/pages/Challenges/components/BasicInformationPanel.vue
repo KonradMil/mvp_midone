@@ -1,4 +1,10 @@
 <template>
+    <vue-easy-lightbox
+        :visible="lightboxVisible"
+        :imgs="images"
+        :index="lightBoxIndex"
+        @hide="hideLightbox"
+    ></vue-easy-lightbox>
     <div class="col-span-12 lg:col-span-8 xxl:col-span-9">
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
@@ -52,12 +58,7 @@
                 >
                     <h2 class="font-medium text-base mr-auto">Zdjęcia</h2>
                 </div>
-                <vue-easy-lightbox
-                    :visible="lightboxVisible"
-                    :imgs="images"
-                    :index="lightBoxIndex"
-                    @hide="hideLightbox"
-                ></vue-easy-lightbox>
+
                 <div class="p-10" v-if="challenge.screenshot_path != undefined">
                     <TinySlider :options="{
                             mode: 'gallery',
@@ -101,7 +102,7 @@ export default {
         const lightboxVisible = ref(false);
         const images = computed(() => {
             let a = [];
-            a.push(props.challenge.screenshot_path);
+            a.push('/' + props.challenge.screenshot_path);
             return a;
         })
         const lightBoxIndex = ref(0);
