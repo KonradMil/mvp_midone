@@ -15,7 +15,7 @@
                         :key="index"
                         class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box"
                     >
-                        <SingleSolutionPost :user="user" :solution="solution"></SingleSolutionPost>
+                        <SingleSolutionPost :user="user" :solution="solution" :canAccept="canAccept"></SingleSolutionPost>
                     </div>
                     </div>
                 </div>
@@ -42,6 +42,13 @@ export default {
         const toast = useToast();
         const types = require("../../../json/types.json");
         const user = ref({});
+        const canAccept = computed(() => {
+            if(user.id === challenge.author_id) {
+                return true;
+            } else {
+                return false;
+            }
+        });
 
         onMounted(function () {
             if (window.Laravel.user) {
@@ -81,7 +88,8 @@ export default {
             types,
             follow,
             unfollow,
-            user
+            user,
+            canAccept
         }
     }
 }
