@@ -52,8 +52,8 @@
                             <a class="text-theme-1 dark:text-theme-10 inline-block truncate" href="">
                                 {{ sels.challenge_statuses[challenge.stage] }}
                             </a>
-                            <span class="mx-1" v-if="challenge.stage == 1">• {{ challenge.solution_deadline }}</span>
-                            <span class="mx-1" v-if="challenge.stage == 2">• {{ challenge.offer_deadline }}</span>
+                            <span class="mx-1" v-if="challenge.stage == 1"><br/>• Rozwiązania do: {{ challenge.solution_deadline }}</span>
+                            <span class="mx-1" v-if="challenge.stage == 2"><br/>• Oferty do: {{ challenge.offer_deadline }}</span>
                         </div>
                     </div>
                     <div class="dropdown ml-3">
