@@ -47,13 +47,14 @@
                         <a href="" class="font-medium">{{ challenge.name }}</a>
                         <div class="flex text-gray-600 truncate text-xs mt-0.5">
                             <a class="text-theme-1 dark:text-theme-10 inline-block truncate" href="">
-                                {{ types[challenge.type] }}
+                                {{ types[challenge.type] }} -  {{ sels.challenge_statuses[challenge.stage]['name'] }}
                             </a><br/>
                             <a class="text-theme-1 dark:text-theme-10 inline-block truncate" href="">
-                                {{ sels.challenge_statuses[challenge.stage]['name'] }}
+
                             </a>
-                            <span class="mx-1" v-if="challenge.stage == 1"><br/>• Rozwiązania do: {{ challenge.solution_deadline }}</span>
-                            <span class="mx-1" v-if="challenge.stage == 2"><br/>• Oferty do: {{ challenge.offer_deadline }}</span>
+                            <br/>
+                            <div class="mx-1" v-if="challenge.stage == 1">• Rozwiązania do: {{ challenge.solution_deadline }}</div>
+                            <div class="mx-1" v-if="challenge.stage == 2">• Oferty do: {{ challenge.offer_deadline }}</div>
                         </div>
                     </div>
                     <div class="dropdown ml-3">
