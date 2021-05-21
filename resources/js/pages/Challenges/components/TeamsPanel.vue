@@ -2,7 +2,7 @@
     <div>
         <div class="grid grid-cols-12 gap-6 mt-5">
             <div class="col-span-12">
-                <h2 class="intro-y text-lg font-medium mt-5">{{$t('teams.teams')}}</h2>
+                <h2 class="intro-y box text-lg font-medium mt-5">{{$t('teams.teams')}}</h2>
                 <div class="grid grid-cols-12 gap-6 mt-5">
                     <div
                         class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2"
