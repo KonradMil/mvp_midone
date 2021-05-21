@@ -8,7 +8,7 @@
                 >
                     <h2 class="font-medium text-base mr-auto">{{$t('teams.teams')}}</h2>
                 </div>
-                <div class="px-5 pt-5">
+                <div class="px-5 pt-5 grid grid-cols-12">
                     <div
                         v-for="(team, index) in teams"
                         :key="'team_' + index"
