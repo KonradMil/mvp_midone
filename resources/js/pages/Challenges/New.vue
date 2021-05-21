@@ -435,7 +435,11 @@ export default {
 
         const handleCallback = (resp) => {
             console.log('RESPPPPPPPP' + resp);
-            router.push({name: 'challengeStudio', params: {id: resp.id, type: 'challenge', load: resp}})
+            if(id.value != undefined && id.value != null) {
+                toast.success('Zapisano poprawnie.');
+            } else {
+                router.push({name: 'challengeStudio', params: {id: resp.id, type: 'challenge', load: resp}})
+            }
         };
 
         const saveChallengeRepo = async () => {
