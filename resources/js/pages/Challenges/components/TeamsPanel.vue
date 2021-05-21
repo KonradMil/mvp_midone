@@ -38,7 +38,7 @@
                             </div>
                             {{showDetails[team.id]}}
                             <div class="flex flex-col lg:flex-row items-center p-5" v-if="showDetails[team.id] === true">
-                                <div class="intro-y box w-full">
+                                <div class="intro-y box w-full pb-3">
                                     <div class="p-5">
                                         <div v-for="(member, index) in team.users" class="relative flex items-center" :key="'member_' + index">
                                             <div class="w-12 h-12 flex-none image-fit">
