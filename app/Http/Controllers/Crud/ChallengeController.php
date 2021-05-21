@@ -14,6 +14,7 @@ use App\Modules\Dbr\Module\Http\UnityController;
 use Carbon\Carbon;
 use Cog\Laravel\Love\Reaction\Models\Reaction;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
@@ -318,8 +319,18 @@ class ChallengeController extends Controller
 
         $challenge->description = $request->description;
         $challenge->type = $request->type;
-        $challenge->solution_deadline = Carbon::createFromFormat('d.m.Y', $request->solution_deadline);
-        $challenge->offer_deadline = Carbon::createFromFormat('d.m.Y', $request->offer_deadline);
+        try {
+            $challenge->solution_deadline = Carbon::createFromFormat('d.m.Y', $request->solution_deadline);
+        } catch (Exception $e) {
+            $challenge->solution_deadline = Carbon::createFromFormat('Y-m-d H:i:s', $request->solution_deadline);
+        }
+        try {
+            $challenge->offer_deadline = Carbon::createFromFormat('d.m.Y', $request->offer_deadline);
+        } catch (Exception $e) {
+            $challenge->offer_deadline = Carbon::createFromFormat('Y-m-d H:i:s', $request->offer_deadline);
+        }
+
+
         $challenge->allowed_publishing = $request->allowed_publishing;
         $challenge->financial_before_id = $financial->id;
         $challenge->author_id = Auth::user()->id;
