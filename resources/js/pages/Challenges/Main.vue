@@ -45,12 +45,12 @@
                     </div>
                     <div class="ml-3 mr-auto" @click="$router.push( {path : '/challenges/card/' + challenge.id})">
                         <a href="" class="font-medium">{{ challenge.name }}</a>
-                        <div class="flex flex-column text-gray-600 truncate text-xs mt-0.5">
+                        <div class="flex text-gray-600 truncate text-xs mt-0.5" style="flex-direction: column;">
                             <a class="text-theme-1 dark:text-theme-10 inline-block truncate" href="">
                                 {{ types[challenge.type] }} -  {{ sels.challenge_statuses[challenge.stage]['name'] }}
                             </a>
-                            <div class="mx-1 w-full" v-if="challenge.stage == 1">• Rozwiązania do: {{ challenge.solution_deadline }}</div>
-                            <div class="mx-1 w-full" v-if="challenge.stage == 2">• Oferty do: {{ challenge.offer_deadline }}</div>
+                            <div class="mx-1 w-full" v-if="challenge.stage == 1">Rozwiązania do: {{ challenge.solution_deadline }}</div>
+                            <div class="mx-1 w-full" v-if="challenge.stage == 2">Oferty do: {{ challenge.offer_deadline }}</div>
                         </div>
                     </div>
                     <div class="dropdown ml-3">
