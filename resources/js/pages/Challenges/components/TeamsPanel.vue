@@ -6,7 +6,7 @@
                 <div class="grid grid-cols-12 gap-6 mt-5">
                     <!-- BEGIN: Users Layout -->
                     <div
-                        v-for="(team, index) in teams.list"
+                        v-for="(team, index) in teams"
                         :key="'team_' + index"
                         class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12"
                     >
