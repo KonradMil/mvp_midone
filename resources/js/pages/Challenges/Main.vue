@@ -46,11 +46,12 @@
                     <div class="ml-3 mr-auto" @click="$router.push( {path : '/challenges/card/' + challenge.id})">
                         <a href="" class="font-medium">{{ challenge.name }}</a>
                         <div class="flex text-gray-600 truncate text-xs mt-0.5">
-                            <a
-                                class="text-theme-1 dark:text-theme-10 inline-block truncate"
-                                href=""
-                            >{{ types[challenge.type] }}</a
-                            >
+                            <a class="text-theme-1 dark:text-theme-10 inline-block truncate" href="">
+                                {{ types[challenge.type] }}
+                            </a>
+                            <a class="text-theme-1 dark:text-theme-10 inline-block truncate" href="">
+                                {{ sels.challenge_statuses[challenge.stage] }}
+                            </a>
                             <span class="mx-1" v-if="challenge.stage == 1">• {{ challenge.solution_deadline }}</span>
                             <span class="mx-1" v-if="challenge.stage == 2">• {{ challenge.offer_deadline }}</span>
                         </div>
