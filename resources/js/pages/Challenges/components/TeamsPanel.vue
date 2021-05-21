@@ -80,15 +80,15 @@ import GetTeams from "../../../compositions/GetTeams";
 export default {
     name: "TeamsPanel",
     props: {
-        challenge: Object
+        teams: Object
     },
     setup(props) {
         const teams = ref([]);
         const user = ref({});
         const showDetails = ref([]);
 
-        watch(props.challenge, (lab, prevLabel) => {
-            teams.value = props.challenge.teams;
+        watch(props.teams, (lab, prevLabel) => {
+            teams.value = props.teams;
         }, {deep: true})
 
         const getTeamsRepositories = async () => {
@@ -97,7 +97,7 @@ export default {
 
         onMounted(function () {
             getTeamsRepositories('');
-
+            teams.value = props.teams;
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }

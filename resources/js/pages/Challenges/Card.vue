@@ -109,7 +109,7 @@
             <TechnicalInformationPanel :challenge="challenge" v-if="activeTab == 'techniczne'"></TechnicalInformationPanel>
             <QuestionsPanel v-if="activeTab == 'pytania'" :id="challenge.id"></QuestionsPanel>
             <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge"></SolutionsPanel>
-            <TeamsPanel v-if="activeTab == 'zespoly'" :challenge="challenge"> </TeamsPanel>
+            <TeamsPanel v-if="activeTab == 'zespoly'" :teams="challenge.teams"> </TeamsPanel>
         </div>
     </div>
 </template>
