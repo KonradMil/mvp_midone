@@ -44,8 +44,8 @@
         <div class="text-gray-700 dark:text-gray-600 mt-2">
             {{ solution.description }}
         </div>
-        <div class="" v-if="canAccept">
-            Ackeptuj
+        <div class="mt-2" v-if="canAccept">
+            <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution">Akceptuj rozwiązanie</button>
         </div>
     </div>
     <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
@@ -113,11 +113,16 @@ export default {
                 })
         }
 
+        const acceptSolution = () => {
+
+        }
+
         return {
             solution,
             user,
             like,
-            props
+            props,
+            acceptSolution
         }
     }
 }
