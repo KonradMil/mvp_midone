@@ -300,9 +300,9 @@ class ChallengeController extends Controller
     {
         $request = json_decode(json_encode($request->data));
         if(isset($request->id)) {
-            $challenge = Challenge::find($request->id);
-            $financial = $challenge->financial;
-            $technical = $challenge->technical_details;
+            $challenge = Challenge::with('financial')find($request->id);
+            $financial = $challenge->financial_before;
+            $technical = $challenge->technicalDetails;
             dd([$technical, $financial, $challenge]);
         } else {
             $challenge = new Challenge();
