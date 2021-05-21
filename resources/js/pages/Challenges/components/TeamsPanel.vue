@@ -4,19 +4,6 @@
             <div class="col-span-12">
                 <h2 class="intro-y box text-lg font-medium mt-5">{{$t('teams.teams')}}</h2>
                 <div class="grid grid-cols-12 gap-6 mt-5">
-                    <div
-                        class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2"
-                    >
-                        <div class="w-56 relative text-gray-700 dark:text-gray-300 mr-4">
-
-                        </div>
-
-                        <div class="hidden md:block mx-auto text-gray-600">
-
-                        </div>
-                        <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
-                        </div>
-                    </div>
                     <!-- BEGIN: Users Layout -->
                     <div
                         v-for="(team, index) in teams.list"
@@ -76,12 +63,14 @@
 <script>
 import {computed, onMounted, reactive, ref, watch} from "vue";
 import GetTeams from "../../../compositions/GetTeams";
+import Avatar from "../../../components/avatar/Avatar";
 
 export default {
     name: "TeamsPanel",
     props: {
         teams: Object
     },
+    components: {Avatar},
     setup(props) {
         const teams = ref([]);
         const user = ref({});
