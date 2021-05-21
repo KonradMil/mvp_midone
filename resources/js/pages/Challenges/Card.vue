@@ -5,9 +5,7 @@
         </div>
         <div class="grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Profile Menu -->
-            <div
-                class="col-span-12 lg:col-span-4 xxl:col-span-3 flex lg:block flex-col-reverse"
-            >
+            <div class="col-span-12 lg:col-span-4 xxl:col-span-3 flex lg:block flex-col-reverse">
                 <div class="intro-y box mt-5 lg:mt-0">
                     <div class="relative flex items-center p-5">
                         <div class="w-12 h-12 image-fit">
@@ -29,46 +27,42 @@
                             class="flex items-center"
                             href=""
                             @click.prevent="activeTab = 'podstawowe'"
-                            :class="(activeTab == 'podstawowe')? ' text-theme-1 dark:text-theme-10 font-medium' : ''"
-                        >
+                            :class="(activeTab == 'podstawowe')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
                             <ActivityIcon class="w-4 h-4 mr-2"/>
                             Informacje podstawowe
                         </a>
                         <a class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'techniczne'"
-                           :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'"
-                        >
+                           :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <BoxIcon class="w-4 h-4 mr-2"/>
                             Szczegóły techniczne
                         </a>
                         <a class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'rozwiazania'"
-                           :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'"
-                        >
+                           :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <LockIcon class="w-4 h-4 mr-2"/>
                             Rozwiązania
                         </a>
                         <a class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'oferty'"
-                           :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'"
-                        >
+                           :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <SettingsIcon class="w-4 h-4 mr-2"/>
                             Oferty
                         </a>
                         <a class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'pytania'"
-                           :class="(activeTab == 'pytania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'"
-                        >
+                           :class="(activeTab == 'pytania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <SettingsIcon class="w-4 h-4 mr-2"/>
                             Pytania
                         </a>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
-                        <a class="flex items-center" href="">
+                        <a class="flex items-center" href=""
+                           @click.prevent="activeTab = 'zespoly'"
+                           :class="(activeTab == 'zespoly')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <ActivityIcon class="w-4 h-4 mr-2"/>
                             Zespoły
                         </a>
-
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id == user.id">
                         <button type="button" class="btn btn-primary py-1 px-2" @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
@@ -81,34 +75,29 @@
                             v-if="challenge.status == 0"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
-                            @click="publish(challenge.id)"
-                        >
+                            @click="publish(challenge.id)">
                             Opublikuj
                         </button>
                         <button
                             v-if="challenge.status == 1 && challenge.solutions.length == 0"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
-                            @click="unpublish(challenge.id)"
-                        >
+                            @click="unpublish(challenge.id)">
                             Odpublikuj
                         </button>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id != user.id && user.type == 'integrator'">
-
                         <button
                             v-if="challenge.stage == 1"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
-                            @click.prevent="addSolution"
-                        >
+                            @click.prevent="addSolution">
                             Dodaj rozwiązanie
                         </button>
                         <button
                             v-if="challenge.stage == 2"
                             type="button"
-                            class="btn btn-outline-secondary py-1 px-2 ml-auto"
-                        >
+                            class="btn btn-outline-secondary py-1 px-2 ml-auto">
                             Złóż ofertę
                         </button>
                     </div>
@@ -120,6 +109,7 @@
             <TechnicalInformationPanel :challenge="challenge" v-if="activeTab == 'techniczne'"></TechnicalInformationPanel>
             <QuestionsPanel v-if="activeTab == 'pytania'" :id="challenge.id"></QuestionsPanel>
             <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge"></SolutionsPanel>
+            <TeamsPanel v-if="activeTab == 'zespoly'"> </TeamsPanel>
         </div>
     </div>
 </template>
@@ -133,10 +123,12 @@ import TechnicalInformationPanel from "./components/TechnicalInformationPanel";
 import QuestionsPanel from "./components/QuestionsPanel";
 import router from "../../router";
 import SolutionsPanel from "./components/SolutionsPanel";
+import TeamsPanel from "./components/TeamsPanel";
 
 export default defineComponent({
     name: 'Card',
     components: {
+        TeamsPanel,
         SolutionsPanel,
         QuestionsPanel,
         TechnicalInformationPanel,
