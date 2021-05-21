@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import {computed, onMounted, reactive, ref} from "vue";
+import {computed, onMounted, reactive, ref, watch} from "vue";
 import GetTeams from "../../../compositions/GetTeams";
 
 export default {
@@ -87,13 +87,17 @@ export default {
         const user = ref({});
         const showDetails = ref([]);
 
+        watch(props.challenge, (lab, prevLabel) => {
+            teams.value = props.challenge.teams;
+        }, {deep: true})
+
         const getTeamsRepositories = async () => {
             // teams.value = GetTeams();
         }
 
         onMounted(function () {
             getTeamsRepositories('');
-            teams.value = props.challenge.teams;
+
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
