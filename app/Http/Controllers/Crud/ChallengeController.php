@@ -303,7 +303,7 @@ class ChallengeController extends Controller
             $challenge = Challenge::find($request->id);
             $financial = $challenge->financial_before;
             $technical = $challenge->technicalDetails;
-            dd([$technical, $financial, $challenge]);
+//            dd([$technical, $financial, $challenge]);
         } else {
             $challenge = new Challenge();
             $technical = new TechnicalDetails();
