@@ -335,6 +335,7 @@ export default {
             }
         }
         const saveChallengeTeamsRepo = async () => {
+            console.log(props.challenge.id + '- PROPS CHALLENGE ID')
             SaveChallengeTeams(teams_unity.value, props.challenge.id);
         }
 
