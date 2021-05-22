@@ -128,6 +128,7 @@ export default {
             } else if (content.value === 'teams') {
                 // emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
                 if(props.type==='challenge'){
+                    console.log(props.challenge.id + '- PROPS CHALLENGE ID')
                     saveChallengeTeamsRepo();
             }
             } else if (content.value === 'description') {
@@ -335,7 +336,6 @@ export default {
             }
         }
         const saveChallengeTeamsRepo = async () => {
-            console.log(props.challenge.id + '- PROPS CHALLENGE ID')
             SaveChallengeTeams(teams_unity.value, props.challenge.id);
         }
 
