@@ -16,7 +16,6 @@
     "require": {
         "php": "^7.3|^8.0",
         "beyondcode/laravel-comments": "^1.2",
-        "beyondcode/laravel-websockets": "^1.11",
         "cybercog/laravel-love": "^8.7",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -31,7 +30,7 @@
         "league/flysystem-aws-s3-v3": "~1.0",
         "mpociot/teamwork": "^6.1",
         "mrcnpdlk/regon-api": "^2.0",
-        "pusher/pusher-php-server": "~3.0",
+        "pusher/pusher-php-server": "^7.0.0",
         "spatie/laravel-activitylog": "^3.17",
         "spatie/laravel-tags": "^3.1",
         "willvincent/laravel-rateable": "^2.3"
