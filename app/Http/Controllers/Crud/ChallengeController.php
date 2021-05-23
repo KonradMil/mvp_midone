@@ -24,8 +24,6 @@ class ChallengeController extends Controller
 {
     public function saveChallengeFinancials(Request $request,Challenge $challenge)
     {
-        $challenge ->teams()->delete();
-
         foreach ($request->teams as $team_id) {
             $team = Team::find($team_id);
             $challenge->teams()->attach($team);
