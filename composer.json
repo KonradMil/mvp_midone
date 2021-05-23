@@ -6,6 +6,12 @@
         "framework",
         "laravel"
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Edgarborras94/laravel-comments.git"
+        }
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
