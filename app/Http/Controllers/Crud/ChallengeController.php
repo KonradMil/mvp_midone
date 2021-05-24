@@ -47,7 +47,7 @@ class ChallengeController extends Controller
     }
     public function saveChallengeTeams(Request $request, Challenge $challenge)
     {
-        foreach ($request->teams as $team_id) {
+        foreach ((array)$request->teams as $team_id) {
             $team = Team::find($team_id);
             $challenge->teams()->attach($team);
         }
@@ -271,9 +271,9 @@ class ChallengeController extends Controller
 
     public function storeImage(Request $request)
     {
-//        $request->validate([
-//            'file' => 'required|mimes:jpg,png,JPG,jpeg|max:4096',
-//        ]);
+        $request->validate([
+            'file' => 'required|mimes:jpg,png,JPG,jpeg|max:4096',
+        ]);
         $ext = $request->file->extension();
         $fileName = time() . '.' . $ext;
 
@@ -288,7 +288,7 @@ class ChallengeController extends Controller
 //        $challenge->files()->attach($file);
         return response()->json([
             'success' => true,
-            'message' => 'Awatar został wgrany poprawnie',
+            'message' => 'Zdjecie zostało wgrane poprawnie',
             'payload' => $file
         ]);
     }

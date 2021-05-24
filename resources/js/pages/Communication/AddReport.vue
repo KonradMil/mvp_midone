@@ -80,7 +80,7 @@
         </div>
     </div>
     <div class="modal-footer text-right">
-        <button type="button" class="btn btn-primary w-20" @click="saveReportRepo">Send</button>
+        <button type="button" :disabled="isDisabled" class="btn btn-primary w-20" @click="saveReportRepo">Send</button>
     </div>
 
 </template>
@@ -97,6 +97,7 @@ export default {
       Dropzone
     },
     setup() {
+        const isDisabled = ref(false);
         const title = ref('');
         const type = ref('');
         const description = ref('');
@@ -130,17 +131,30 @@ export default {
         };
 
         const saveReportRepo = async () => {
-           let resp = await SaveReport({
-                title: title.value,
-                description: description.value,
-                type: type.value,
-                file_id : file.value.id
-            }, handleCallback);
-            console.log(resp);
-            emitter.emit('changetab', {val: 'reports'});
+            if(title.value === '' || description.value === '' || type.value==='' || file.value.id ==='')
+            {
+               toast.warning('Uzupełnij wszystkie pola!');
+               isDisabled.value = true;
+            }
+            else
+                {
+                    let resp = await SaveReport({
+                        title: title.value,
+                        description: description.value,
+                        type: type.value,
+                        file_id : file.value.id
+                    }, handleCallback);
+                    isDisabled.value = true;
+                    console.log(resp);
+                    emitter.emit('changetab', {val: 'reports'});
+                }
+            setTimeout(()=>{
+               isDisabled.value = false;
+            }, 2000);
         }
 
         return {
+            isDisabled,
             title,
             type,
             description,
