@@ -40,7 +40,11 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
         'privacy_policy',
         'pricing',
         'terms',
-        'company_id'
+        'company_id',
+        'authy_id',
+        'new_answer',
+        'solution_accepted',
+        'offer_accepted'
     ];
 
     /**
@@ -77,11 +81,13 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
         return $this->belongsTo(Solution::class, 'author_id');
     }
 
-    public function own_company() {
+    public function own_company()
+    {
         return $this->hasOne(Company::class, 'author_id');
     }
 
-    public function companies() {
+    public function companies()
+    {
         return $this->belongsToMany(Company::class, 'user_companies', 'company_id', 'user_id')->withTimestamps();
     }
 

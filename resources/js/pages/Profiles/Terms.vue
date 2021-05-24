@@ -59,46 +59,42 @@
                 >.
             </div>
             <div class="border-b border-gray-200 dark:border-dark-5"></div>
-            <div
-                class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
-            >
+            <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
+                v-if="user.type == 'integrator'">
                 <input
                     id="1"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
+                    :checked="user.new_questions"
                 />
-                <label class="cursor-pointer select-none" for="rodo2"
-                >{{$t('profiles.notifyQuestion')}}</label
-                >
+                <label class="cursor-pointer select-none" for="rodo2">
+                    {{$t('profiles.notifyQuestion')}}
+                </label>
             </div>
-            <div
-                class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
-            >
+            <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
+                v-if="user.type == 'integrator'">
                 <input
                     id="2"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                />
-                <label class="cursor-pointer select-none" for="rodo2"
-                >{{$t('profiles.informSolution')}}</label
-                >
+                    :checked="user.solution_accepted"/>
+                <label class="cursor-pointer select-none" for="rodo2">
+                    {{$t('profiles.informSolution')}}
+                </label>
             </div>
-            <div
-                class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
-            >
+            <div v-if="user.type == 'integrator'"
+                class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                 <input
                     id="3"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                />
-                <label class="cursor-pointer select-none" for="rodo2"
-                >{{$t('profiles.informService')}}</label
-                >
+                    :checked="user.offer_accepted"/>
+                <label class="cursor-pointer select-none" for="rodo2">
+                    {{$t('profiles.informService')}}
+                </label>
             </div>
             <button class="btn btn-primary w-20 mt-3" @click="save">{{$t('profiles.save')}}</button>
         </div>
-
-
     </div>
 </template>
 
@@ -111,7 +107,15 @@ export default {
     },
     setup() {
         const user = window.Laravel.user;
+
+        const save = () => {
+            axios.post('/api/user/terms/save', {user: user})
+                .then(response => {
+
+                })
+        }
         return {
+            save,
             user,
         };
     },
