@@ -15,7 +15,7 @@
                                 v-model="new_team_name"
                             />
                         </div>
-                        <button class="btn btn-primary shadow-md mr-2" @click="addTeam">{{$t('teams.addTeam')}}</button>
+                        <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addTeam">{{$t('teams.addTeam')}}</button>
 
                         <div class="hidden md:block mx-auto text-gray-600">
 
@@ -191,7 +191,7 @@
                     placeholder="Email"
                     v-model="new_team_member_email"
                 />
-                <button class="btn btn-primary shadow-md mr-2" @click="addMember">{{ $t('teams.invite') }}</button>
+                <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addMember">{{ $t('teams.invite') }}</button>
             </div>
 
         </div>
@@ -216,6 +216,7 @@ export default {
     components: {Avatar, Modal},
     setup(props, {emit}) {
         const showDetails = ref([]);
+        const isDisabled = ref(false);
         const teams = ref([]);
         const invites = ref([]);
         const user = ref({});
@@ -252,8 +253,10 @@ export default {
         const addTeam = async () => {
             if(new_team_name.value === '') {
                 toast.error('Nazwa nie może być pusta');
+                isDisabled.value=true;
             } else if (new_team_name.value.length < 3) {
                 toast.error('Nazwa nie może mieć mniej niż 3 znaki');
+                isDisabled.value=true;
             } else {
                 await AddTeam(new_team_name.value)
                     setTimeout(function () {
@@ -262,15 +265,22 @@ export default {
                         modalClosed();
                     }, 1000);
                 toast.success('Success!')
+                isDisabled.value=true;
             }
+            setTimeout(()=>{
+                isDisabled.value=false;
+            },5000);
         }
 
         const addMember = async () => {
             if(new_team_member_email.value === '') {
+                isDisabled.value = true;
                 toast.error('Email nie może być pusty');
             } else if (new_team_member_email.value.length < 3) {
+                isDisabled.value = true;
                 toast.error('Email nie może mieć mniej niż 3 znaki');
             } else {
+                isDisabled.value = true;
                 await AddTeamMember(new_team_member_email.value, temporary_team_id.value)
                 setTimeout(function () {
                     getTeamsRepositories(search.value);
@@ -278,8 +288,10 @@ export default {
                 }, 1000);
                 toast.success('Success!')
             }
+            setTimeout(() =>{
+               isDisabled.value = false;
+            }, 2000);
         }
-
         const acceptInvite = async (id) => {
                 await AcceptInvite(id)
                 setTimeout(function () {
@@ -309,7 +321,8 @@ export default {
             addMember,
             invites,
             acceptInvite,
-            showDetails
+            showDetails,
+            isDisabled
         }
     },
     beforeRouteEnter(to, from, next) {

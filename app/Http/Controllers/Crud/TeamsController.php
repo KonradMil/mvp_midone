@@ -49,6 +49,15 @@ class TeamsController extends Controller
             'payload' => $team
         ]);
     }
+    public function deleteTeam(Request $request)
+    {
+        Team::destroy($request->id);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Usunięto poprawnie',
+        ]);
+    }
 
     public function addUserToTeam(Request $request)
     {
