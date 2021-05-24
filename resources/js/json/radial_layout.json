@@ -1,6 +1,6 @@
 [
     {
-        "icon": "https://devsys.appworks-dev.pl/s3/builder_icons/edit_radial.png",
+        "icon": "https://two.appworks-dev.pl/s3/builder_icons/edit_radial.png",
         "name": "BeginLayoutEdit",
         "label": "Edycja",
         "buttonColors": {
@@ -13,7 +13,7 @@
         }
     },
     {
-        "icon": "https://devsys.appworks-dev.pl/s3/builder_icons/copy_radial.png",
+        "icon": "https://two.appworks-dev.pl/s3/builder_icons/copy_radial.png",
         "name": "CopyLayoutElement",
         "label": "Kopiuj",
         "buttonColors": {
@@ -26,7 +26,7 @@
         }
     },
     {
-        "icon": "https://devsys.appworks-dev.pl/s3/builder_icons/paste_radial.png",
+        "icon": "https://two.appworks-dev.pl/s3/builder_icons/paste_radial.png",
         "name": "PasteLayoutElement",
         "label": "Wklej",
         "buttonColors": {
@@ -39,7 +39,7 @@
         }
     },
     {
-        "icon": "https://devsys.appworks-dev.pl/s3/builder_icons/add_layout_radial.png",
+        "icon": "https://two.appworks-dev.pl/s3/builder_icons/add_layout_radial.png",
         "name": "BeginLayoutDraw",
         "label": "Dodaj obszar",
         "buttonColors": {
@@ -52,7 +52,7 @@
         }
     },
     {
-        "icon": "https://devsys.appworks-dev.pl/s3/builder_icons/add_label_radial.png",
+        "icon": "https://two.appworks-dev.pl/s3/builder_icons/add_label_radial.png",
         "name": "BeginLayoutLabel",
         "label": "Dodaj etykiete",
         "buttonColors": {
@@ -65,7 +65,7 @@
         }
     },
     {
-        "icon": "https://devsys.appworks-dev.pl/s3/builder_icons/delete_radial.png",
+        "icon": "https://two.appworks-dev.pl/s3/builder_icons/delete_radial.png",
         "name": "RemoveLayout",
         "label": "Usuń",
         "buttonColors": {
@@ -78,7 +78,7 @@
         }
     },
     {
-        "icon": "https://devsys.appworks-dev.pl/s3/builder_icons/settings_radial.png",
+        "icon": "https://two.appworks-dev.pl/s3/builder_icons/settings_radial.png",
         "name": "SettingsLayout",
         "label": "Właściwości",
         "buttonColors": {
