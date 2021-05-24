@@ -60,36 +60,8 @@ class UserController extends Controller
             'message' => 'Wysłano poprawnie',
             'payload' => $token
         ]);
-
-
-//        $status = Password::sendResetLink(
-//            $request->only('email')
-//            );
-//
-//        return $status === Password::RESET_LINK_SENT
-//            ? back()->with(['status' => __($status)])
-//            : back()->withErrors(['email' => __($status)]);
-
-
-
-//        if($status===Password::RESET_LINK_SENT){
-//            Mail::to([$request->email])->send(new ForgotPassword($request->email));
-//            return response()->json([
-//                'success' => true,
-//                'message' => 'Wysłano poprawnie',
-//                'payload' => $request
-//            ]);
-//        }
-//        else
-//        {
-//            return response()->json([
-//               'success' => false,
-//               'message' => 'Error email',
-//               'payload' => $request
-//            ]);
-//        }
-
     }
+
     public function resetPasswordToken(Request $request)
     {
         $request->validate([

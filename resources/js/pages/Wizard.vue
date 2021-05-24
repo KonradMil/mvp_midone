@@ -24,19 +24,19 @@
                     Aby zacząć uzupełnij podstawowe dane.
                 </div>
             </div>
-<!--            <div-->
-<!--                class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"-->
-<!--            >-->
-<!--                <GoogleMap-->
-<!--                    api-key="AIzaSyBsKJBCpnTAnjhzE1psl0yIUO3YDWny2Ew"-->
-<!--                    style="width: 100%; height: 500px"-->
-<!--                    :center="{ lat: 53.0510715, lng: 18.6029603 }"-->
-<!--                    :zoom="15"-->
-<!--                >-->
-<!--                    <Marker v-for="marker in markers" :options="{ position: marker }"/>-->
-<!--                </GoogleMap>-->
+            <div
+                class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"
+            >
+                <GoogleMap
+                    api-key="AIzaSyBsKJBCpnTAnjhzE1psl0yIUO3YDWny2Ew"
+                    style="width: 100%; height: 500px"
+                    :center="{ lat: 53.0510715, lng: 18.6029603 }"
+                    :zoom="15"
+                >
+                    <Marker v-for="marker in markers" :options="{ position: marker }"/>
+                </GoogleMap>
 
-<!--            </div>-->
+            </div>
             <div
                 class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"
             >

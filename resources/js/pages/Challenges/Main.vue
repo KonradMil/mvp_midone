@@ -49,8 +49,8 @@
                             <a class="text-theme-1 dark:text-theme-10 inline-block truncate" href="">
                                 {{ types[challenge.type] }} -  {{ sels.challenge_statuses[challenge.stage]['name'] }}
                             </a>
-                            <div class="mx-1 w-full" v-if="challenge.stage == 1">Rozwiązania do: {{ challenge.solution_deadline }}</div>
-                            <div class="mx-1 w-full" v-if="challenge.stage == 2">Oferty do: {{ challenge.offer_deadline }}</div>
+                            <div class="w-full" v-if="challenge.stage == 1">Rozwiązania do: {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY')  }}</div>
+                            <div class="w-full" v-if="challenge.stage == 2">Oferty do: {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY')  }}</div>
                         </div>
                     </div>
                     <div class="dropdown ml-3">
