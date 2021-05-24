@@ -49,7 +49,7 @@ class ChallengeController extends Controller
     {
         foreach ((array)$request->teams as $team_id) {
             $team = Team::find($team_id);
-            $challenge->teams()->attach($team);
+            $challenge->teams()->sync($team);
         }
         return response()->json([
             'success' => true,
