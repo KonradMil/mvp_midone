@@ -24,9 +24,9 @@
                     Aby zacząć uzupełnij podstawowe dane.
                 </div>
             </div>
-<!--            <div-->
-<!--                class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"-->
-<!--            >-->
+            <div
+                class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"
+            >
 <!--                <GoogleMap-->
 <!--                    api-key="AIzaSyBsKJBCpnTAnjhzE1psl0yIUO3YDWny2Ew"-->
 <!--                    style="width: 100%; height: 500px"-->
@@ -36,7 +36,7 @@
 <!--                    <Marker v-for="marker in markers" :options="{ position: marker }"/>-->
 <!--                </GoogleMap>-->
 
-<!--            </div>-->
+            </div>
             <div
                 class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"
             >
@@ -181,19 +181,19 @@
             }
         },
         methods: {
-            // getMarkers() {
-            //     this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            //         this.$axios.post('api/locations/get')
-            //             .then(response => {
-            //                 let m = [];
-            //                 response.data.forEach(function (item) {
-            //                     m.push({lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
-            //                 });
-            //                 console.log(m);
-            //                 this.markers = m;
-            //             })
-            //     })
-            // },
+            getMarkers() {
+                this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                    this.$axios.post('api/locations/get')
+                        .then(response => {
+                            let m = [];
+                            response.data.forEach(function (item) {
+                                m.push({lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
+                            });
+                            console.log(m);
+                            this.markers = m;
+                        })
+                })
+            },
             next() {
                 if( (this.lastname == '' || this.lastname == null) || (this.name == '' || this.name == null)) {
                     toast.warning('Imię i nazwisko nie mogą być puste.');

@@ -43,6 +43,10 @@ Route::group(['prefix' => 'company', 'middleware' => 'auth:sanctum'], function (
     Route::get('get', '\App\Http\Controllers\API\CompanyController@getUserCompanies');
 });
 
+Route::group(['prefix' => 'user', 'middleware' => 'auth:sanctum'], function() {
+
+     Route::post('terms/save', [UserController::class, 'saveTerms']);
+});
 Route::group(['prefix' => 'question', 'middleware' => 'auth:sanctum'], function() {
    Route::post('create', [QuestionController::class, 'create']);
    Route::post('get', [QuestionController::class, 'get']);
