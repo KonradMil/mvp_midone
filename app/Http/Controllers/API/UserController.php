@@ -156,9 +156,9 @@ class UserController extends Controller
     public function storeAvatar(Request $request)
     {
 
-        $request->validate([
-            'file' => 'required|mimes:jpg,png,JPG,jpeg|max:4096',
-        ]);
+//        $request->validate([
+//            'file' => 'required|mimes:jpg,png,JPG,jpeg|max:4096',
+//        ]);
 
         $fileName = time().'.'.$request->file->extension();
 

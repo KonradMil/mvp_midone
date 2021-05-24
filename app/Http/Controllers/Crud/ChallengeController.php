@@ -271,9 +271,10 @@ class ChallengeController extends Controller
 
     public function storeImage(Request $request)
     {
-        $request->validate([
-            'file' => 'required|mimes:jpg,png,JPG,jpeg|max:4096',
-        ]);
+//        $request->validate([
+//            'file' => 'required|mimes:jpg,png,JPG,jpeg|max:4096',
+//        ]);
+
         $ext = $request->file->extension();
         $fileName = time() . '.' . $ext;
 
