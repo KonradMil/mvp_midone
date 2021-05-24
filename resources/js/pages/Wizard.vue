@@ -163,7 +163,7 @@
             console.log(store.state);
             this.name = store.state.login.user.name;
             this.lastname = store.state.login.user.lastname;
-            // this.getMarkers();
+            this.getMarkers();
         },
         data() {
             return {
@@ -181,19 +181,19 @@
             }
         },
         methods: {
-            // getMarkers() {
-            //     this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            //         this.$axios.post('api/locations/get')
-            //             .then(response => {
-            //                 let m = [];
-            //                 response.data.forEach(function (item) {
-            //                     m.push({lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
-            //                 });
-            //                 console.log(m);
-            //                 this.markers = m;
-            //             })
-            //     })
-            // },
+            getMarkers() {
+                this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                    this.$axios.post('api/locations/get')
+                        .then(response => {
+                            let m = [];
+                            response.data.forEach(function (item) {
+                                m.push({lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
+                            });
+                            console.log(m);
+                            this.markers = m;
+                        })
+                })
+            },
             next() {
                 if( (this.lastname == '' || this.lastname == null) || (this.name == '' || this.name == null)) {
                     toast.warning('Imię i nazwisko nie mogą być puste.');
