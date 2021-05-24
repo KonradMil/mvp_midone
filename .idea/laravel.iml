@@ -153,6 +153,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/spiral/roadrunner-cli" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spiral/roadrunner-worker" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/spiral/roadrunner-http" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/flysystem-cached-adapter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/cache" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

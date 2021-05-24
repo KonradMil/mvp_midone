@@ -145,6 +145,8 @@
       <path value="$PROJECT_DIR$/vendor/spiral/roadrunner-cli" />
       <path value="$PROJECT_DIR$/vendor/spiral/roadrunner-worker" />
       <path value="$PROJECT_DIR$/vendor/spiral/roadrunner-http" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem-cached-adapter" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
