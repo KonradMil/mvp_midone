@@ -248,6 +248,9 @@ export default {
         emitter.on('deletereport', e => {
            reports.value.list.splice(e.index, 1);
         });
+        emitter.on('deleteteam', e => {
+            teams.value.list.splice(e.index, 1);
+        });
 
         emitter.on('addreport', e => {
             reports.value.list.push(e.obj);

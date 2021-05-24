@@ -125,6 +125,7 @@ Route::group(['prefix' => 'teams', 'middleware' => 'auth:sanctum'], function () 
     Route::post('user/invites/get', [TeamsController::class, 'getUserInvites']);
     Route::post('user/invite/accept', [TeamsController::class, 'acceptInvite']);
     Route::post('user/get', [TeamsController::class, 'getUserTeamsFiltered']);
+    Route::post('user/delete', [TeamsController::class, 'deleteTeam']);
 });
 
 Route::post('model/edit/{model}', [ModelController::class, 'editModel']);

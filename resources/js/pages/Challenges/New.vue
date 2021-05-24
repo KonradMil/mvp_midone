@@ -13,7 +13,8 @@
                 <button
                     class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
                     aria-expanded="false"
-                    @click="saveChallengeRepo"
+                    @click.prevent="saveChallengeRepo"
+                    :disabled="isDisabled"
                 >
                     <SaveIcon class="w-4 h-4 mr-2"/>
                     {{ $t('global.save') }}
@@ -368,6 +369,7 @@ export default {
     setup(props) {
         const {t, locale} = useI18n({useScope: 'global'})
         const toast = useToast();
+        const isDisabled = ref(false);
         const category = ref();
         const showModal = ref(false);
         const tab = ref('desc');
@@ -444,9 +446,12 @@ export default {
 
         const saveChallengeRepo = async () => {
             if (name.value == undefined || name.value == '') {
+                isDisabled.value = true;
                 toast.error("Nazwa jest wymagana.");
+
             } else if (category.value == undefined || category.value == null) {
                 toast.error("Typ stanowiska jest wymagany");
+                isDisabled.value = true;
             } else {
                 let resp = await SaveChallenge({
                     id: id.value,
@@ -483,10 +488,14 @@ export default {
                     absence: financials.value.absence,
                     cycle_time: financials.value.cycle_time,
 
+
                 }, handleCallback);
                 // emitter.emit('changestudio', {val: 'challenge'});
-
+                isDisabled.value = true;
             }
+            setTimeout(()=>{
+                isDisabled.value=false;
+            },5000);
         }
 
         const deleteImage = (index) => {
@@ -501,7 +510,7 @@ export default {
             console.log(elDropzoneSingleRef);
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
                 images.value.push(JSON.parse(resp.xhr.response).payload);
-
+                toast.success(response.data.message);
             });
             elDropzoneSingleRef.dropzone.on("error", () => {
                 toast.error("Błąd");
@@ -583,7 +592,8 @@ export default {
             en_description,
             financials,
             deleteImage,
-            tagsSelected
+            tagsSelected,
+            isDisabled
         };
     },
     beforeRouteEnter(to, from, next) {
