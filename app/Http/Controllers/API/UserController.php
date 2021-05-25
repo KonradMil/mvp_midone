@@ -274,13 +274,13 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $input = $request->input();
-        if(isset($input['user']['offer_accepted'])) {
+        if(isset($input['offer_accepted'])) {
             $user->offer_accepted = $input['user']['offer_accepted'];
         }
-        if(isset($input['user']['solution_accepted'])) {
+        if(isset($input['solution_accepted'])) {
             $user->solution_accepted = $input['user']['solution_accepted'];
         }
-        if(isset($input['user']['new_answer'])) {
+        if(isset($input['new_answer'])) {
             $user->new_answer = $input['user']['new_answer'];
         }
 

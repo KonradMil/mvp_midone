@@ -65,7 +65,7 @@
                     id="1"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    :checked="user.new_questions"
+                    :checked="new_questions"
                 />
                 <label class="cursor-pointer select-none" for="rodo2">
                     {{$t('profiles.notifyQuestion')}}
@@ -77,7 +77,7 @@
                     id="2"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    :checked="user.solution_accepted"/>
+                    :checked="solution_accepted"/>
                 <label class="cursor-pointer select-none" for="rodo2">
                     {{$t('profiles.informSolution')}}
                 </label>
@@ -88,7 +88,7 @@
                     id="3"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    :checked="user.offer_accepted"/>
+                    :checked="offer_accepted"/>
                 <label class="cursor-pointer select-none" for="rodo2">
                     {{$t('profiles.informService')}}
                 </label>
@@ -100,16 +100,23 @@
 
 <script>
 import DarkModeSwitcher from "../../components/dark-mode-switcher/Main";
+import {ref} from "vue";
 
 export default {
     components: {
         DarkModeSwitcher,
     },
     setup() {
+        const new_answer = ref(false);
+        const solution_accepted = ref(false);
+        const offer_accepted = ref(false);
         const user = window.Laravel.user;
+        new_answer.value = user.new_answer;
+        offer_accepted.value = user.offer_accepted;
+        solution_accepted.value = user.solution_accepted;
 
         const save = () => {
-            axios.post('/api/user/terms/save', {user: user})
+            axios.post('/api/user/terms/save', {new_answer: new_answer.value, solution_accepted: solution_accepted.value, offer_accepted: offer_accepted.value})
                 .then(response => {
 
                 })
@@ -117,6 +124,9 @@ export default {
         return {
             save,
             user,
+            new_answer,
+            offer_accepted,
+            solution_accepted
         };
     },
     data() {
