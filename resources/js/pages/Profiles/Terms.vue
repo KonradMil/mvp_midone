@@ -65,6 +65,7 @@
                     id="1"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
+                    v-model="user.new_questions"
                     :checked="user.new_questions"
                 />
                 <label class="cursor-pointer select-none" for="rodo2">
@@ -77,6 +78,7 @@
                     id="2"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
+                    v-model="user.solution_accepted"
                     :checked="user.solution_accepted"/>
                 <label class="cursor-pointer select-none" for="rodo2">
                     {{$t('profiles.informSolution')}}
@@ -88,6 +90,7 @@
                     id="3"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
+                    v-model="user.offer_accepted"
                     :checked="user.offer_accepted"/>
                 <label class="cursor-pointer select-none" for="rodo2">
                     {{$t('profiles.informService')}}
