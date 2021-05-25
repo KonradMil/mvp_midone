@@ -75,6 +75,10 @@
                                                 <div class="text-gray-600 mr-5 sm:mr-5" v-if="member.companies.length != 0">
                                                      {{member.companies[0].company_name}}
                                                 </div>
+
+                                            </div>
+                                            <div class="flex justify-center items-center">{{member.id}} {{ team.id}}
+                                                <a :disabled="isDisabled" @click.prevent="del(member.id,team.id)" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
                                             </div>
                                             <div class="font-medium text-gray-700 dark:text-gray-600">
 
@@ -214,6 +218,9 @@ import Modal from "../../components/Modal";
 export default {
     name: "Teams",
     components: {Avatar, Modal},
+    props: {
+        team: Object
+    },
     setup(props, {emit}) {
         const showDetails = ref([]);
         const isDisabled = ref(false);
@@ -226,6 +233,7 @@ export default {
         const toast = useToast();
         const show = ref(false);
         const temporary_team_id = ref(null);
+
 
         const getTeamsRepositories = async () => {
             teams.value = GetTeams();
@@ -248,6 +256,28 @@ export default {
         const modalClosed = () => {
             show.value = false;
             temporary_team_id.value = null;
+        }
+
+
+        const del = async (member_id,team_id) => {
+            axios.post('api/teams/user/member/delete', {member_id: member_id, team_id: team_id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        toast.success(response.data.message);
+                        // emitter.emit('deleteteam', {index: props.ind});
+                        isDisabled.value = true;
+
+                    } else {
+                        // toast.error(response.data.message);
+                        toast.error(response.data.message);
+                        isDisabled.value = true;
+                    }
+                    setTimeout(() =>{
+                        isDisabled.value = false;
+                    }, 2000);
+                })
+            await getTeamsRepositories();
         }
 
         const addTeam = async () => {
@@ -322,7 +352,8 @@ export default {
             invites,
             acceptInvite,
             showDetails,
-            isDisabled
+            isDisabled,
+            del
         }
     },
     beforeRouteEnter(to, from, next) {
