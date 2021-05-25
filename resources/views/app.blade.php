@@ -15,6 +15,7 @@
         window.Laravel = {!!json_encode([
                'isLoggedin' => true,
                'user' => Auth::user(),
+               'teams' => Auth::user()->teams,
                'notifications' => Auth::user()->notifications,
                'company' => Auth::user()->companies,
            ])!!}
