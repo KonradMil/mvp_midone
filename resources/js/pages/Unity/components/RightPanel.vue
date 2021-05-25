@@ -113,7 +113,7 @@ export default {
         const content = ref('');
         const challenge = ref({});
         const type = ref('');
-        const user = window.Laravel.user;
+        const user = ref({});
 
 
         const save = () => {
@@ -310,6 +310,7 @@ export default {
         });
 
         onMounted(() => {
+            user.value = window.Laravel.user;
             // allowedEdit.value = props.allowedEdit;
             // showPanel();
             // saveChallengeDetailsRepo('');
