@@ -264,14 +264,18 @@ export default {
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
-                        toast.success(response.data.message);
-                        // emitter.emit('deleteteam', {index: props.ind});
                         isDisabled.value = true;
+                        toast.success(response.data.message);
+                        setTimeout(() =>{
+                            isDisabled.value = false;
+                        }, 2000);
 
                     } else {
-                        // toast.error(response.data.message);
-                        toast.error(response.data.message);
                         isDisabled.value = true;
+                        toast.error(response.data.message);
+                        setTimeout(() =>{
+                            isDisabled.value = false;
+                        }, 2000);
                     }
                     setTimeout(() =>{
                         isDisabled.value = false;
