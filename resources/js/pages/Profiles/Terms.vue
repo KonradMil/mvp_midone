@@ -14,7 +14,7 @@
                     id="rodo"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    :checked="user.privacy_policy"
+                    v-model="user.privacy_policy"
                 />
                 <label class="cursor-pointer select-none" for="rodo"
                 >{{$t('profiles.acceptProvisions')}}</label
@@ -31,7 +31,7 @@
                     id="rodo3"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    :checked="user.terms"
+                    v-model="user.terms"
                 />
                 <label class="cursor-pointer select-none" for="rodo3"
                 >{{$t('profiles.accept')}}</label
@@ -48,7 +48,7 @@
                     id="rodo2"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    :checked="user.pricing"
+                    v-model="user.pricing"
                 />
                 <label class="cursor-pointer select-none" for="rodo2"
                 >{{$t('profiles.accept')}}</label
@@ -65,7 +65,7 @@
                     id="q1"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    :checked="new_answer"
+                    v-model="new_answer"
                 />
                 <label class="cursor-pointer select-none" for="q1">
                     {{$t('profiles.notifyQuestion')}}
@@ -77,7 +77,7 @@
                     id="q2"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    :checked="solution_accepted"/>
+                    v-model="solution_accepted"/>
                 <label class="cursor-pointer select-none" for="q2">
                     {{$t('profiles.informSolution')}}
                 </label>
@@ -88,7 +88,7 @@
                     id="q3"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    :checked="offer_accepted"/>
+                    v-model="offer_accepted"/>
                 <label class="cursor-pointer select-none" for="q3">
                     {{$t('profiles.informService')}}
                 </label>
