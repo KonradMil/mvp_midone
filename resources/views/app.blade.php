@@ -11,7 +11,7 @@
 <body>
 @if (Auth::check())
     <script>
-        window.unity_path = {{env('UNITY_PATH')}}
+        window.unity_path = '{{env('UNITY_PATH')}}';
         window.Laravel = {!!json_encode([
                'isLoggedin' => true,
                'user' => Auth::user(),

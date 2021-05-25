@@ -63,9 +63,9 @@ export default {
         const instantiate = () => {
             console.log(document.querySelector('#' + containerId.value));
             createUnityInstance(document.querySelector('#' + containerId.value), {
-                dataUrl: "/s3/unity/' + unity_path + '.data.br",
-                frameworkUrl: "/s3/unity/' + unity_path + '.framework.js.br",
-                codeUrl: "/s3/unity/' + unity_path + '.wasm.br",
+                dataUrl: "/s3/unity/" + unity_path + ".data.br",
+                frameworkUrl: "/s3/unity/" + unity_path + ".framework.js.br",
+                codeUrl: "/s3/unity/" + unity_path + ".wasm.br",
                 streamingAssetsUrl: "StreamingAssets",
                 companyName: "DBR",
                 productName: "platform.dbr77.com",
