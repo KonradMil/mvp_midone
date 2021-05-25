@@ -275,17 +275,17 @@ class UserController extends Controller
         $user = Auth::user();
         $input = $request->input();
         if(isset($input['offer_accepted'])) {
-            $user->offer_accepted = $input['offer_accepted'];
+            $user->offer_accepted = (int)$input['offer_accepted'];
         }
         if(isset($input['solution_accepted'])) {
-            $user->solution_accepted = $input['solution_accepted'];
+            $user->solution_accepted = (int)$input['solution_accepted'];
         }
         if(isset($input['new_answer'])) {
-            $user->new_answer = $input['new_answer'];
+            $user->new_answer = (int)$input['new_answer'];
         }
-        dd($input);
-        $user->save();
 
+        $user->save();
+        dd([$user,$input]);
         return response()->json([
             'success' => true,
             'message' => 'Zgody zostały zapisane',
