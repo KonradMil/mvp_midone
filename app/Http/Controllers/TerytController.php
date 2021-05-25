@@ -2,39 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use GusApi\GusApi;
 use Illuminate\Http\Request;
-use Mrcnpdlk\Api\Regon\Api;
-use Mrcnpdlk\Api\Regon\Config;
+
 
 class TerytController extends Controller
 {
+    public $client;
+
+    public function __construct()
+    {
+        $this->client = new GusApi('d432b081c72a4f3a8863');
+        $this->client->login();
+
+    }
+
     public function searchRegonNip(Request $request)
     {
         $nip = $request->input('nip');
         if(isset($nip)) {
-            $oConfig = new Config([
-                'password' => 'd432b081c72a4f3a8863',
-            ]);
 
-            $oApi = new Api($oConfig);
-            $resp = $oApi->searchByNip($nip);
+            $resp = $this->client->getByNip($nip);
+
             return response()->json([
                 'success' => true,
                 'message' => 'Zapisano poprawnie',
-                'payload' => $resp
+                'payload' => $resp[0]
             ]);
         } else {
             $regon = $request->input('regon');
-            $oConfig = new Config([
-                'password' => 'd432b081c72a4f3a8863',
-            ]);
-
-            $oApi = new Api($oConfig);
-            $resp = $oApi->searchByRegon($regon);
+            $resp = $this->client->getByRegon($regon);
             return response()->json([
                 'success' => true,
                 'message' => 'Zapisano poprawnie',
-                'payload' => $resp
+                'payload' => $resp[0]
             ]);
         }
 
@@ -43,16 +44,11 @@ class TerytController extends Controller
     public function searchRegonKrs(Request $request)
     {
         $ss = $request->input('krs');
-        $oConfig = new Config([
-            'password' => 'd432b081c72a4f3a8863',
-        ]);
-
-        $oApi = new Api($oConfig);
-        $resp = $oApi->searchByKrs($ss);
+        $resp = $this->client->getByKrs($ss);
         return response()->json([
             'success' => true,
             'message' => 'Zapisano poprawnie',
-            'payload' => $resp
+            'payload' => $resp[0]
         ]);
     }
 }

@@ -199,8 +199,13 @@ class UserController extends Controller
             $success = true;
             $message = 'User register successfully';
         } catch (\Illuminate\Database\QueryException $ex) {
-            $success = false;
-            $message = $ex->getMessage();
+            if(strpos($ex->getMessage(), 'Dupli') !== false){
+                $success = false;
+                $message = 'Ten email jest już zarejestrowany.';
+            } else{
+                $success = false;
+                $message = $ex->getMessage();
+            }
         }
         Auth::login($user);
 

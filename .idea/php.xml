@@ -112,15 +112,7 @@
       <path value="$PROJECT_DIR$/vendor/aws/aws-sdk-php" />
       <path value="$PROJECT_DIR$/vendor/mtdowling/jmespath.php" />
       <path value="$PROJECT_DIR$/vendor/league/flysystem-aws-s3-v3" />
-      <path value="$PROJECT_DIR$/vendor/laminas/laminas-json" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-zendframework-bridge" />
-      <path value="$PROJECT_DIR$/vendor/gregwar/cache" />
-      <path value="$PROJECT_DIR$/vendor/myclabs/php-enum" />
-      <path value="$PROJECT_DIR$/vendor/netresearch/jsonmapper" />
-      <path value="$PROJECT_DIR$/vendor/mrcnpdlk/lib-configuration" />
-      <path value="$PROJECT_DIR$/vendor/mrcnpdlk/regon-api" />
-      <path value="$PROJECT_DIR$/vendor/mrcnpdlk/lib-exception" />
-      <path value="$PROJECT_DIR$/vendor/mrcnpdlk/lib-mapper" />
       <path value="$PROJECT_DIR$/vendor/laravel/telescope" />
       <path value="$PROJECT_DIR$/vendor/cybercog/laravel-love" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-tags" />
@@ -147,6 +139,7 @@
       <path value="$PROJECT_DIR$/vendor/spiral/roadrunner-http" />
       <path value="$PROJECT_DIR$/vendor/league/flysystem-cached-adapter" />
       <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/gusapi/gusapi" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

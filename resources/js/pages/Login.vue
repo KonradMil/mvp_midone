@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import {defineComponent, onMounted, ref} from "vue";
+    import {onMounted, ref} from "vue";
     import DarkModeSwitcher from "../components/dark-mode-switcher/Main.vue";
     import cash from "cash-dom";
     import { useToast } from "vue-toastification";

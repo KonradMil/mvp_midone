@@ -120,55 +120,6 @@
                 </div>
             </div>
             <!-- END: Blog Layout -->
-            <!-- BEGIN: Pagination -->
-<!--            <div-->
-<!--                class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center"-->
-<!--            >-->
-<!--                <ul class="pagination">-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">-->
-<!--                            <ChevronsLeftIcon class="w-4 h-4"/>-->
-<!--                        </a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">-->
-<!--                            <ChevronLeftIcon class="w-4 h-4"/>-->
-<!--                        </a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">...</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">1</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link pagination__link&#45;&#45;active" href="">2</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">3</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">...</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">-->
-<!--                            <ChevronRightIcon class="w-4 h-4"/>-->
-<!--                        </a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">-->
-<!--                            <ChevronsRightIcon class="w-4 h-4"/>-->
-<!--                        </a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--                <select class="w-20 form-select box mt-3 sm:mt-0">-->
-<!--                    <option>10</option>-->
-<!--                    <option>25</option>-->
-<!--                    <option>35</option>-->
-<!--                    <option>50</option>-->
-<!--                </select>-->
-<!--            </div>-->
-            <!-- END: Pagination -->
         </div>
     </div>
 </template>
