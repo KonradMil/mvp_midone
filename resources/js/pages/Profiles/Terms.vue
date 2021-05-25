@@ -31,7 +31,7 @@
                     id="rodo3"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    v-model="user.terms"
+                    :checked="user.terms"
                 />
                 <label class="cursor-pointer select-none" for="rodo3"
                 >{{$t('profiles.accept')}}</label
@@ -48,7 +48,7 @@
                     id="rodo2"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    v-model="user.pricing"
+                    :checked="user.pricing"
                 />
                 <label class="cursor-pointer select-none" for="rodo2"
                 >{{$t('profiles.accept')}}</label
@@ -65,7 +65,7 @@
                     id="q1"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    v-model="new_answer"
+                    :checked="new_answer"
                 />
                 <label class="cursor-pointer select-none" for="q1">
                     {{$t('profiles.notifyQuestion')}}
@@ -77,7 +77,7 @@
                     id="q2"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    v-model="solution_accepted"/>
+                    :checked="solution_accepted"/>
                 <label class="cursor-pointer select-none" for="q2">
                     {{$t('profiles.informSolution')}}
                 </label>
@@ -88,7 +88,7 @@
                     id="q3"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    v-model="offer_accepted"/>
+                    :checked="offer_accepted"/>
                 <label class="cursor-pointer select-none" for="q3">
                     {{$t('profiles.informService')}}
                 </label>
@@ -101,6 +101,7 @@
 <script>
 import DarkModeSwitcher from "../../components/dark-mode-switcher/Main";
 import {ref} from "vue";
+import {useToast} from "vue-toastification";
 
 export default {
     components: {
@@ -114,11 +115,15 @@ export default {
         new_answer.value = user.new_answer;
         offer_accepted.value = user.offer_accepted;
         solution_accepted.value = user.solution_accepted;
-
+        const toast = useToast();
         const save = () => {
             axios.post('/api/user/terms/save', {new_answer: new_answer.value, solution_accepted: solution_accepted.value, offer_accepted: offer_accepted.value})
                 .then(response => {
-
+                    if(response.data.success) {
+                        toast.success('Zapisano poprawnie.');
+                    } else {
+                        toast.error('Błąd');
+                    }
                 })
         }
         return {
