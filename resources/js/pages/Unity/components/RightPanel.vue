@@ -113,7 +113,7 @@ export default {
         const content = ref('');
         const challenge = ref({});
         const type = ref('');
-        const user = window.user;
+        const user = window.Laravel.user;
 
 
         const save = () => {
