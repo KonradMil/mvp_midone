@@ -62,7 +62,7 @@
             <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
                 v-if="user.type == 'integrator'">
                 <input
-                    id="1"
+                    id="q1"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
                     :checked="new_questions"
@@ -74,7 +74,7 @@
             <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
                 v-if="user.type == 'integrator'">
                 <input
-                    id="2"
+                    id="q2"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
                     :checked="solution_accepted"/>
@@ -85,7 +85,7 @@
             <div v-if="user.type == 'integrator'"
                 class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                 <input
-                    id="3"
+                    id="q3"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
                     :checked="offer_accepted"/>
