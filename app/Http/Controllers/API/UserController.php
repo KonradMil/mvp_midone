@@ -283,7 +283,7 @@ class UserController extends Controller
         if(isset($input['new_answer'])) {
             $user->new_answer = $input['new_answer'];
         }
-
+        dd($input);
         $user->save();
 
         return response()->json([
