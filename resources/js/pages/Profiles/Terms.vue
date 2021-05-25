@@ -67,7 +67,7 @@
                     class="form-check-input border mr-2 ring-0"
                     :checked="new_questions"
                 />
-                <label class="cursor-pointer select-none" for="rodo2">
+                <label class="cursor-pointer select-none" for="q1">
                     {{$t('profiles.notifyQuestion')}}
                 </label>
             </div>
@@ -78,7 +78,7 @@
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
                     :checked="solution_accepted"/>
-                <label class="cursor-pointer select-none" for="rodo2">
+                <label class="cursor-pointer select-none" for="q2">
                     {{$t('profiles.informSolution')}}
                 </label>
             </div>
@@ -89,7 +89,7 @@
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
                     :checked="offer_accepted"/>
-                <label class="cursor-pointer select-none" for="rodo2">
+                <label class="cursor-pointer select-none" for="q3">
                     {{$t('profiles.informService')}}
                 </label>
             </div>
