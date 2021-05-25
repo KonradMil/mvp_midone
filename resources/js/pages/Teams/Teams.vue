@@ -77,7 +77,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="flex justify-center items-center">{{member.id}} {{ team.id}}
+                                            <div class="flex justify-center items-center">
                                                 <a :disabled="isDisabled" @click.prevent="del(member.id,team.id)" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
                                             </div>
                                             <div class="font-medium text-gray-700 dark:text-gray-600">
