@@ -269,4 +269,11 @@ class UserController extends Controller
         ];
         return response()->json($response);
     }
+
+    public function saveTerms(Request $request)
+    {
+        $user = Auth::user();
+        $input = $request->input();
+        if(isset($input['']))
+    }
 }
