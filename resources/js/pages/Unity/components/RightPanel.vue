@@ -31,7 +31,7 @@
                     <AnimableDialog v-if="content == 'animable'" v-model:animable="animable"/>
                     <DescriptionDialog v-if="content == 'description'" v-model:object="object" :type="props.type"/>
 <!--                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>-->
-                    <TeamsDialog v-model:teams_unity="teams_unity" :type="props.type" v-if="content == 'teams' && allowedEdit && (user.user_teams.length > 0)"></TeamsDialog>
+                    <TeamsDialog v-model:teams_unity="teams_unity" :type="props.type" v-if="content == 'teams' && allowedEdit && (user_teams.length > 0)"></TeamsDialog>
                     <FinancialAnalysisDialog v-if="content == 'financial-analysis'"></FinancialAnalysisDialog>
                     <FinancialDialog v-if="content == 'financial'" v-model:financial_before="financial_before" v-model:financial_after="financial_after" :type="type"></FinancialDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
