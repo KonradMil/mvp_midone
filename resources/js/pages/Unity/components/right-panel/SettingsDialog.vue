@@ -27,7 +27,6 @@
                     {{ $t('challengesNew.quality') }}
                 </label>
                 <TailSelect
-
                     id="input-wizard-2"
                     v-model="technical.pick_quality"
                     :options="{locale: 'pl', placeholder: sels.select_pick_quality[technical.pick_quality].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
@@ -115,14 +114,13 @@
                     {{ $t('challengesNew.distance') }}
                 </label>
                 <TailSelect
-
                     id="input-wizard-7"
                     v-model="technical.detail_range"
                     :options="{locale: 'pl', placeholder: sels.select_detail_range[technical.detail_range].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                 >
                     <option selected disabled> {{ $t('challengesNew.select') }}</option>
-                    :disabled="user.type === 'integrator'"
-                    <option v-for="(det,index) in sels.select_detail_range"
+
+                    <option v-for="(det,index) in sels.select_detail_range" :disabled="user.type === 'integrator'"
                             :value="det.value">{{ det.name }}
                     </option>
 
@@ -169,13 +167,14 @@
             <div class="intro-y col-span-12">
                 <label for="input-wizard-10" class="form-label">{{ $t('challengesNew.changeNumber') }}</label>
                 <TailSelect
-                    :disabled="user.type === 'integrator'"
+
                     id="input-wizard-10"
                     v-model="technical.work_shifts"
                     :options="{locale: 'pl', placeholder: sels.select_work_shifts[technical.work_shifts].name, limit: 'Nie można wybrać więcej', openAbove: false, search: false, hideSelected: false, classNames: 'w-full' }"
                 >
                     <option selected disabled>{{ $t('challengesNew.select') }}</option>
                     <option
+                        :disabled="user.type === 'integrator'"
                         v-for="(det,index) in sels.select_work_shifts"
                         :value="det.value">{{ det.name }}
                     </option>
