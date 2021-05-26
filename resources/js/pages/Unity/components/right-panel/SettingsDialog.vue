@@ -9,6 +9,7 @@
                     Max waga
                 </label>
                 <TailSelect
+                    :disabled="user.type === 'integrator'"
                     id="input-wizard-1"
                     v-model="technical.detail_weight"
                     :options="{locale: 'pl', placeholder: sels.select_detail_weight[technical.detail_weight].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
@@ -25,6 +26,7 @@
                     {{ $t('challengesNew.quality') }}
                 </label>
                 <TailSelect
+                    :disabled="user.type === 'integrator'"
                     id="input-wizard-2"
                     v-model="technical.pick_quality"
                     :options="{locale: 'pl', placeholder: sels.select_pick_quality[technical.pick_quality].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
@@ -40,6 +42,7 @@
             <div class="intro-y col-span-12">
                 <label for="input-wizard-3" class="form-label">{{ $t('challengesNew.detail') }}</label>
                 <TailSelect
+                    :disabled="user.type === 'integrator'"
                     id="input-wizard-3"
                     v-model="technical.detail_material"
                     :options="{locale: 'pl', placeholder: sels.select_detail_material[technical.detail_material].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
@@ -55,6 +58,7 @@
             <div class="intro-y col-span-12">
                 <label for="input-wizard-4" class="form-label">{{ $t('challengesNew.size') }}</label>
                 <TailSelect
+                    :disabled="user.type === 'integrator'"
                     id="input-wizard-4"
                     v-model="technical.detail_size"
                     :options="{locale: 'pl', placeholder: sels.select_detail_size[technical.detail_size].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
@@ -71,6 +75,7 @@
                     {{ $t('challengesNew.way') }}
                 </label>
                 <TailSelect
+                    :disabled="user.type === 'integrator'"
                     id="input-wizard-5"
                     v-model="technical.detail_pick"
                     :options="{locale: 'pl', placeholder: sels.select_detail_pick[technical.detail_pick].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
@@ -87,6 +92,7 @@
                     {{ $t('challengesNew.position') }}
                 </label>
                 <TailSelect
+                    :disabled="user.type === 'integrator'"
                     id="input-wizard-6"
                     v-model="technical.detail_position"
                     :options="{locale: 'pl', placeholder: sels.select_detail_position[technical.detail_position].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
@@ -103,6 +109,7 @@
                     {{ $t('challengesNew.distance') }}
                 </label>
                 <TailSelect
+                    :disabled="user.type === 'integrator'"
                     id="input-wizard-7"
                     v-model="technical.detail_range"
                     :options="{locale: 'pl', placeholder: sels.select_detail_range[technical.detail_range].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
@@ -119,6 +126,7 @@
                     {{ $t('challengesNew.place') }}
                 </label>
                 <TailSelect
+                    :disabled="user.type === 'integrator'"
                     id="input-wizard-8"
                     v-model="technical.detail_destination"
                     :options="{locale: 'pl', placeholder: sels.select_detail_destination[technical.detail_destination].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
@@ -135,7 +143,8 @@
                 <label for="input-wizard-9" class="form-label">
                     {{ $t('challengesNew.numberSupported') }}
                 </label>
-                <div>{{technical.number_of_lines}}</div>
+<!--                <div>{{technical.number_of_lines}}</div>-->
+                <input class="form-control" :value="technical.number_of_lines" placeholder="1"/>
 <!--                <TailSelect-->
 <!--                    id="input-wizard-9"-->
 <!--                    v-model="technical.number_of_lines"-->
@@ -152,6 +161,7 @@
             <div class="intro-y col-span-12">
                 <label for="input-wizard-10" class="form-label">{{ $t('challengesNew.changeNumber') }}</label>
                 <TailSelect
+                    :disabled="user.type === 'integrator'"
                     id="input-wizard-10"
                     v-model="technical.work_shifts"
                     :options="{locale: 'pl', placeholder: sels.select_work_shifts[technical.work_shifts].name, limit: 'Nie można wybrać więcej', openAbove: false, search: false, hideSelected: false, classNames: 'w-full' }"
@@ -178,12 +188,14 @@ export default {
         technical: Object,
     },
     setup(props) {
+        const user = window.Laravel.user;
         const sels = require("../../../../json/challenge.json");
         onMounted(() => {
         });
 
         return {
-            sels
+            sels,
+            user
         }
     }
 }
