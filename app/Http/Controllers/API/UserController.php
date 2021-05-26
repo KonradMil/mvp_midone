@@ -160,7 +160,7 @@ class UserController extends Controller
         $fileName = time().'.'.$request->file->extension();
         dump($fileName);
 //        Storage::disk('s3')->put('avatars/' .  $fileName, $request->file, 'public');
-        $request->file->move(storage_path('uploads'), $fileName);
+        $request->file->move(asset('uploads'), $fileName);
         $u = Auth::user();
         $u->avatar = $fileName;
         $u->save();
