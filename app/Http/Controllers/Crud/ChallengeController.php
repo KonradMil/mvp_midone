@@ -152,12 +152,10 @@ class ChallengeController extends Controller
         $c = Challenge::whereHas('teams', function ($query) use ($ars) {
             $query->whereIn('teams.id', $ars);
         })->get();
-//        foreach ($c as $cc) {
-//           dump($cc);
-//        }
 
-        $challenges->merge($c);
-//        dump($challenges);
+
+        $merged = $challenges->merge($c);
+
         foreach ($challenges as $challenge) {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like')) {
                 $challenge->liked = true;
@@ -177,7 +175,7 @@ class ChallengeController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
-            'payload' => $challenges
+            'payload' => $merged->all()
         ]);
     }
     public function getUserChallengesFollowed(Request $request)
