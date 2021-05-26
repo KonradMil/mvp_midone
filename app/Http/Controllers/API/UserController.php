@@ -158,8 +158,8 @@ class UserController extends Controller
     {
 
         $fileName = time().'.'.$request->file->extension();
-        dump($fileName);
-        Storage::disk('s3')->put('avatars/' .  $fileName, $request->file, 'public');
+//        dump($fileName);
+        Storage::disk('s3')->putFile('avatars/' .  $fileName, $request->file);
 //        $request->file->move('public/uploads' , $fileName);
         $u = Auth::user();
         $u->avatar = $fileName;
