@@ -58,6 +58,40 @@ class TeamsController extends Controller
             'message' => 'Usunięto poprawnie',
         ]);
     }
+    public function deleteMember(Request $request)
+    {
+        $team = Team::find($request->team_id);
+        $owner = Auth::user();
+        if($owner->id === $team->owner_id)
+        {
+            $user = User::where('id', '=', $request->member_id)->first();
+            if($owner->id != $user->id)
+            {
+                $team -> users()->detach($user);
+                $team->save();
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Usunięto poprawnie!',
+                    'payload' => []
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Nie możesz usunąć samego siebie z zespołu!',
+                    'payload' => []
+                ]);
+            }
+        }
+        else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Brak uprawnień!',
+                'payload' => []
+            ]);
+        }
+    }
 
     public function addUserToTeam(Request $request)
     {

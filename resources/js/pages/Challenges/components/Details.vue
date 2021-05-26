@@ -12,8 +12,8 @@
                             id="input-wizard-1"
                             v-model="details.select_detail_weight"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option selected disabled>Wybierz...</option>
-                            <option v-for="(det,index) in props.selects.select_detail_weight"
+                            <option  :selected="details.select_detail_weight === '' ? '' : 'selected'" disabled>Wybierz...</option>
+                            <option :selected="det.value === details.select_detail_weight ? '' : 'selected'" v-for="(det,index) in props.selects.select_detail_weight"
                                     :value="det.value">{{ det.name }}
                             </option>
                         </TailSelect>
@@ -26,8 +26,8 @@
                             id="input-wizard-2"
                             v-model="details.select_pick_quality"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option selected disabled>Wybierz...</option>
-                            <option v-for="(det,index) in props.selects.select_pick_quality"
+                            <option :selected="details.select_pick_quality === '' ? '' : 'selected'" disabled>Wybierz...</option>
+                            <option :selected="det.value === details.select_pick_quality ? '' : 'selected'" v-for="(det,index) in props.selects.select_pick_quality"
                                     :value="det.value">{{ det.name }}
                             </option>
                         </TailSelect>
@@ -38,8 +38,8 @@
                             id="input-wizard-3"
                             v-model="details.select_detail_material"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', openAbove: false,search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option selected disabled>{{$t('challengesNew.select')}}</option>
-                            <option
+                            <option :selected="details.select_detail_material === '' ? '' : 'selected'" disabled>{{$t('challengesNew.select')}}</option>
+                            <option :selected="det.value === details.select_detail_material ? '' : 'selected'"
                                 v-for="(det,index) in props.selects.select_detail_material"
                                 :value="det.value">{{ det.name }}
                             </option>
@@ -51,8 +51,8 @@
                             id="input-wizard-4"
                             v-model="details.select_detail_size"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej',openAbove: false, search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option selected disabled>{{$t('challengesNew.select')}}</option>
-                            <option v-for="(det,index) in props.selects.select_detail_size"
+                            <option :selected="details.select_detail_size === '' ? '' : 'selected'" disabled>{{$t('challengesNew.select')}}</option>
+                            <option :selected="det.value === details.select_detail_size ? '' : 'selected'" v-for="(det,index) in props.selects.select_detail_size"
                                     :value="det.value">{{ det.name }}
                             </option>
                         </TailSelect>
@@ -65,8 +65,8 @@
                             id="input-wizard-5"
                             v-model="details.select_detail_pick"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej',openAbove: false, search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option selected disabled> {{$t('challengesNew.select')}}</option>
-                            <option v-for="(det,index) in props.selects.select_detail_pick"
+                            <option  :selected="details.select_detail_pick === '' ? '' : 'selected'" disabled> {{$t('challengesNew.select')}}</option>
+                            <option :selected="det.value === details.select_detail_pick ? '' : 'selected'" v-for="(det,index) in props.selects.select_detail_pick"
                                     :value="det.value">{{ det.name }}
                             </option>
                         </TailSelect>
@@ -79,8 +79,8 @@
                             id="input-wizard-6"
                             v-model="details.select_detail_position"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej',openAbove: false, search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option selected disabled> {{$t('challengesNew.select')}}</option>
-                            <option
+                            <option :selected="details.select_detail_position === '' ? '' : 'selected'" disabled> {{$t('challengesNew.select')}}</option>
+                            <option :selected="det.value === details.select_detail_position ? '' : 'selected'"
                                 v-for="(det,index) in props.selects.select_detail_position"
                                 :value="det.value">{{ det.name }}
                             </option>
@@ -94,8 +94,8 @@
                             id="input-wizard-7"
                             v-model="details.select_detail_range"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', openAbove: false, search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option selected disabled> {{$t('challengesNew.select')}}</option>
-                            <option v-for="(det,index) in props.selects.select_detail_range"
+                            <option :selected="details.select_detail_range === '' ? '' : 'selected'" disabled> {{$t('challengesNew.select')}}</option>
+                            <option :selected="det.value === details.select_detail_range ? '' : 'selected'" v-for="(det,index) in props.selects.select_detail_range"
                                     :value="det.value">{{ det.name }}
                             </option>
                         </TailSelect>
@@ -108,8 +108,8 @@
                             id="input-wizard-8"
                             v-model="details.select_detail_destination"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option selected disabled> {{$t('challengesNew.select')}}</option>
-                            <option
+                            <option  :selected="details.select_detail_destination === '' ? '' : 'selected'" disabled> {{$t('challengesNew.select')}}</option>
+                            <option  :selected="det.value === details.select_detail_destination ? '' : 'selected'"
                                 v-for="(det,index) in props.selects.select_detail_destination"
                                 :value="det.value">{{ det.name }}
                             </option>
@@ -127,8 +127,8 @@
                             id="input-wizard-9"
                             v-model="details.select_work_shifts"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', openAbove: false, animate: false, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option selected disabled>{{$t('challengesNew.select')}}</option>
-                            <option
+                            <option :selected="details.select_work_shifts === '' ? '' : 'selected'" disabled>{{$t('challengesNew.select')}}</option>
+                            <option :selected="det.value === details.select_work_shifts ? '' : 'selected'"
                                 v-for="(det,index) in props.selects.select_work_shifts"
                                 :value="det.value">{{ det.name }}
                             </option>
@@ -148,14 +148,14 @@ name: "Details",
     props: {
         details: Object,
         types: Array,
-        selects: Array
+        selects: Object
     },
     emits: ["update:details"],
     setup(props, context) {
         const details = ref({});
 
         watch(details, (lab, prevLabel) => {
-            console.log('CHANGE');
+            console.log('CHANGE 2');
             context.emit("update:details", lab);
         }, {deep: true});
 

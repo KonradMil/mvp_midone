@@ -44,9 +44,9 @@ Route::group(['prefix' => 'company', 'middleware' => 'auth:sanctum'], function (
 });
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth:sanctum'], function() {
-
      Route::post('terms/save', [UserController::class, 'saveTerms']);
 });
+
 Route::group(['prefix' => 'question', 'middleware' => 'auth:sanctum'], function() {
    Route::post('create', [QuestionController::class, 'create']);
    Route::post('get', [QuestionController::class, 'get']);
@@ -126,6 +126,7 @@ Route::group(['prefix' => 'teams', 'middleware' => 'auth:sanctum'], function () 
     Route::post('user/invite/accept', [TeamsController::class, 'acceptInvite']);
     Route::post('user/get', [TeamsController::class, 'getUserTeamsFiltered']);
     Route::post('user/delete', [TeamsController::class, 'deleteTeam']);
+    Route::post('user/member/delete', [TeamsController::class, 'deleteMember']);
 });
 
 Route::post('model/edit/{model}', [ModelController::class, 'editModel']);

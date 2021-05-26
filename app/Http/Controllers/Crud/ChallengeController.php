@@ -141,6 +141,21 @@ class ChallengeController extends Controller
 
         $challenges = $query->with(['comments.commentator', 'technicalDetails', 'financial_before'])->get();
 
+        $ars = [];
+
+        $ts = Auth::user()->teams;
+
+        foreach ($ts as $tt) {
+            array_push($ars, $tt->id);
+        }
+
+        $c = Challenge::whereHas('teams', function ($query) use ($ars) {
+            $query->whereIn('teams.id', $ars);
+        })->get();
+
+
+        $merged = $challenges->merge($c);
+
         foreach ($challenges as $challenge) {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like')) {
                 $challenge->liked = true;
@@ -160,7 +175,7 @@ class ChallengeController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
-            'payload' => $challenges
+            'payload' => $merged->all()
         ]);
     }
     public function getUserChallengesFollowed(Request $request)
@@ -271,9 +286,10 @@ class ChallengeController extends Controller
 
     public function storeImage(Request $request)
     {
-        $request->validate([
-            'file' => 'required|mimes:jpg,png,JPG,jpeg|max:4096',
-        ]);
+//        $request->validate([
+//            'file' => 'required|mimes:jpg,png,JPG,jpeg|max:4096',
+//        ]);
+
         $ext = $request->file->extension();
         $fileName = time() . '.' . $ext;
 

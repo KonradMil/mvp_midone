@@ -34,6 +34,7 @@
                     <div class="p-5 flex flex-col-reverse sm:flex-row text-gray-600 border-b border-gray-200 dark:border-dark-1">
                         <div class="flex items-center mt-3 sm:mt-0 border-t sm:border-0 border-gray-200 pt-5 sm:pt-0 mt-5 sm:mt-0 -mx-5 sm:mx-0 px-5 sm:px-0">
                             <button
+                                v-if="user.type == 'integrator'"
                                 type="button"
                                 class="btn text-gray-700 dark:text-gray-300 w-full bg-white dark:bg-theme-1 mt-1"
                                 @click="addingDialog = true"
@@ -41,15 +42,6 @@
                                 <Edit3Icon class="w-4 h-4 mr-2" /> Dodaj pytanie
                             </button>
                         </div>
-<!--                        <div class="flex items-center sm:ml-auto">-->
-<!--                            <div class="dark:text-gray-300">1 - 50 of 5,238</div>-->
-<!--                            <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300">-->
-<!--                                <ChevronLeftIcon class="w-4 h-4"/>-->
-<!--                            </a>-->
-<!--                            <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300">-->
-<!--                                <ChevronRightIcon class="w-4 h-4"/>-->
-<!--                            </a>-->
-<!--                        </div>-->
                     </div>
                     <div class="overflow-x-auto sm:overflow-x-visible">
                         <div
@@ -66,6 +58,9 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div v-if="questions.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+                            Nie ma jeszcze żadnych pytań.
                         </div>
                     </div>
                 </div>
@@ -91,6 +86,7 @@ export default {
         const addingDialog = ref(false);
         const question = ref('');
         const questions = ref([]);
+        const user = window.Laravel.user;
 
         const saveQuestion = () => {
             SaveQuestion({challenge_id: props.id, question: question.value}, () => {
@@ -119,7 +115,8 @@ export default {
             saveQuestion,
             question,
             questions,
-            close
+            close,
+            user
         }
     }
 }

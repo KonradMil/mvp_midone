@@ -35,19 +35,13 @@
                         </div>
                     </div>
                     <!-- BEGIN: Users Layout -->
-                    <div
-                        v-for="(team, index) in teams.list"
-                        :key="'team_' + index"
-                        class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12"
-                    >
+                    <div v-for="(team, index) in teams.list" :key="'team_' + index" class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12">
                         <div class="box">
                             <div class="flex flex-col lg:flex-row items-center p-5">
                                 <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
                                     <Avatar :username="team.name" color="#FFF" background-color="#930f68"/>
                                 </div>
-                                <div
-                                    class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0"
-                                >
+                                <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
                                     <a href="" class="font-medium">{{ team.name }}</a>
                                     <div class="text-gray-600 text-xs mt-0.5">
                                         {{$t('teams.created')}}: {{ $dayjs(team.created_at).format('DD.MM.YYYY HH:mm') }}
@@ -76,8 +70,10 @@
                                                      {{member.companies[0].company_name}}
                                                 </div>
                                             </div>
+                                            <div class="flex justify-center items-center" v-if="member.id != user.id">
+                                                <a :disabled="isDisabled" @click.prevent="del(member.id,team.id)" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
+                                            </div>
                                             <div class="font-medium text-gray-700 dark:text-gray-600">
-
                                             </div>
                                         </div>
                                     </div>
@@ -90,19 +86,11 @@
             <div class="col-span-3">
                 <h2 class="intro-y text-lg font-medium mt-5">{{$t('teams.invitations')}}</h2>
                 <div class="grid-cols-12 grid">
-                    <div
-                        class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-2"
-                    >
+                    <div class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-2">
                         <div class="mt-5">
-                            <div
-                                v-for="(invite, index) in invites.list"
-                                :key="'invite_' + index"
-                                class="intro-y"
-                            >
+                            <div v-for="(invite, index) in invites.list" :key="'invite_' + index" class="intro-y">
                                 <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                    <div
-                                        class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden"
-                                    >
+                                    <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                         <Avatar :src="'uploads/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" size="40" color="#FFF" background-color="#930f68"/>
                                     </div>
                                     <div class="ml-4 mr-auto">
@@ -111,10 +99,7 @@
                                             Od: {{invite.inviter.name + ' ' + invite.inviter.lastname}}
                                         </div>
                                     </div>
-                                    <div
-                                        class="py-1 px-2 rounded-full text-xs text-center bg-theme-9 text-white cursor-pointer font-medium"
-                                        @click="acceptInvite(invite.id)"
-                                    >
+                                    <div class="py-1 px-2 rounded-full text-xs text-center bg-theme-9 text-white cursor-pointer font-medium" @click="acceptInvite(invite.id)">
                                         {{$t('teams.acceptInvite')}}
                                     </div>
                                 </div>
@@ -123,57 +108,7 @@
                     </div>
                 </div>
             </div>
-
             <!-- BEGIN: Users Layout -->
-            <!-- END: Pagination -->
-<!--            <div-->
-<!--                class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center"-->
-<!--            >-->
-<!--                <ul class="pagination">-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">-->
-<!--                            <ChevronsLeftIcon class="w-4 h-4" />-->
-<!--                        </a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">-->
-<!--                            <ChevronLeftIcon class="w-4 h-4" />-->
-<!--                        </a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">...</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">1</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link pagination__link&#45;&#45;active" href="">2</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">3</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">...</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">-->
-<!--                            <ChevronRightIcon class="w-4 h-4" />-->
-<!--                        </a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a class="pagination__link" href="">-->
-<!--                            <ChevronsRightIcon class="w-4 h-4" />-->
-<!--                        </a>-->
-<!--                    </li>-->
-<!--                </ul>-->
-<!--                <select class="w-20 form-select box mt-3 sm:mt-0">-->
-<!--                    <option>10</option>-->
-<!--                    <option>25</option>-->
-<!--                    <option>35</option>-->
-<!--                    <option>50</option>-->
-<!--                </select>-->
-<!--            </div>-->
-            <!-- END: Pagination -->
         </div>
     </div>
     <Modal :show="show" @closed="modalClosed">
@@ -185,17 +120,10 @@
         </div>
         <div class="intro-y box p-5 mt-12 sm:mt-5">
             <div class="relative text-gray-700 dark:text-gray-300 mr-4">
-                <input
-                    type="text"
-                    class="form-control w-56 box pr-10 placeholder-theme-13"
-                    placeholder="Email"
-                    v-model="new_team_member_email"
-                />
+                <input type="text" class="form-control w-56 box pr-10 placeholder-theme-13" placeholder="Email" v-model="new_team_member_email"/>
                 <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addMember">{{ $t('teams.invite') }}</button>
             </div>
-
         </div>
-
     </Modal>
 </template>
 
@@ -210,10 +138,12 @@ import {useToast} from "vue-toastification";
 import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
 
-
 export default {
     name: "Teams",
     components: {Avatar, Modal},
+    props: {
+        team: Object
+    },
     setup(props, {emit}) {
         const showDetails = ref([]);
         const isDisabled = ref(false);
@@ -241,13 +171,37 @@ export default {
             } else {
                 show.value = true;
             }
-
             temporary_team_id.value =  id;
         }
 
         const modalClosed = () => {
             show.value = false;
             temporary_team_id.value = null;
+        }
+
+        const del = async (member_id,team_id) => {
+            axios.post('api/teams/user/member/delete', {member_id: member_id, team_id: team_id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        isDisabled.value = true;
+                        toast.success(response.data.message);
+                        setTimeout(() =>{
+                            isDisabled.value = false;
+                        }, 2000);
+
+                    } else {
+                        isDisabled.value = true;
+                        toast.error(response.data.message);
+                        setTimeout(() =>{
+                            isDisabled.value = false;
+                        }, 2000);
+                    }
+                    setTimeout(() =>{
+                        isDisabled.value = false;
+                    }, 2000);
+                })
+            await getTeamsRepositories();
         }
 
         const addTeam = async () => {
@@ -322,7 +276,8 @@ export default {
             invites,
             acceptInvite,
             showDetails,
-            isDisabled
+            isDisabled,
+            del
         }
     },
     beforeRouteEnter(to, from, next) {

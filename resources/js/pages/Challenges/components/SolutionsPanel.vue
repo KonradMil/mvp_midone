@@ -3,21 +3,20 @@
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12 xxl:col-span-12">
-                <div
-                    class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5"
-                >
+                <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto"> Rozwiązania</h2>
                 </div>
                 <div class="px-5 pt-5">
+                    <div v-if="challenge.solutions.length == 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+                        Nie ma jeszcze żadnych rozwiązań.
+                    </div>
                     <div class="intro-y grid grid-cols-12 gap-6 mt-5">
-                    <div
-                        v-for="(solution, index) in challenge.solutions"
-                        :key="index"
-                        class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box"
-                    >
+                    <div v-for="(solution, index) in challenge.solutions" :key="index"
+                        class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box">
                         <SingleSolutionPost :user="user" :solution="solution" :canAccept="canAccept"></SingleSolutionPost>
                     </div>
                     </div>
+
                 </div>
             </div>
         </div>

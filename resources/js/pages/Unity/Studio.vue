@@ -30,6 +30,7 @@ export default {
         const loaded = ref(false);
         const progress = ref();
         const error = ref(null);
+        const unity_path = window.unity_path;
         containerId.value = 'unity-container-' + Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
         const setFullscreen = () => {
             gameInstance.value.SetFullscreen(1);
@@ -49,7 +50,7 @@ export default {
         onBeforeMount(() => {
             // if (props.unityLoader) {
                 const script = document.createElement('SCRIPT')
-                script.setAttribute('src', '/s3/unity/AssemBrot19_05_ver2.loader.js')
+                script.setAttribute('src', '/s3/unity/' + unity_path + '.loader.js')
                 script.setAttribute('async', '')
                 script.setAttribute('defer', '')
                 document.body.appendChild(script)
@@ -62,9 +63,9 @@ export default {
         const instantiate = () => {
             console.log(document.querySelector('#' + containerId.value));
             createUnityInstance(document.querySelector('#' + containerId.value), {
-                dataUrl: "/s3/unity/AssemBrot19_05_ver2.data.br",
-                frameworkUrl: "/s3/unity/AssemBrot19_05_ver2.framework.js.br",
-                codeUrl: "/s3/unity/AssemBrot19_05_ver2.wasm.br",
+                dataUrl: "/s3/unity/" + unity_path + ".data.br",
+                frameworkUrl: "/s3/unity/" + unity_path + ".framework.js.br",
+                codeUrl: "/s3/unity/" + unity_path + ".wasm.br",
                 streamingAssetsUrl: "StreamingAssets",
                 companyName: "DBR",
                 productName: "platform.dbr77.com",

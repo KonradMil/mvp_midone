@@ -64,6 +64,12 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'new_answer' => 'boolean',
+        'solution_accepted' => 'boolean',
+        'offer_accepted' => 'boolean',
+        'terms' => 'boolean',
+        'pricing' => 'boolean',
+        'privacy_policy' => 'boolean',
     ];
 
     public function reports()

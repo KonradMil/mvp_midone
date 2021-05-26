@@ -14,7 +14,7 @@
                     id="rodo"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    :checked="user.privacy_policy"
+                    v-model="user.privacy_policy"
                 />
                 <label class="cursor-pointer select-none" for="rodo"
                 >{{$t('profiles.acceptProvisions')}}</label
@@ -62,34 +62,34 @@
             <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
                 v-if="user.type == 'integrator'">
                 <input
-                    id="1"
+                    id="q1"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    :checked="user.new_questions"
+                    :checked="new_answer"
                 />
-                <label class="cursor-pointer select-none" for="rodo2">
+                <label class="cursor-pointer select-none" for="q1">
                     {{$t('profiles.notifyQuestion')}}
                 </label>
             </div>
             <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
                 v-if="user.type == 'integrator'">
                 <input
-                    id="2"
+                    id="q2"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    :checked="user.solution_accepted"/>
-                <label class="cursor-pointer select-none" for="rodo2">
+                    :checked="solution_accepted"/>
+                <label class="cursor-pointer select-none" for="q2">
                     {{$t('profiles.informSolution')}}
                 </label>
             </div>
             <div v-if="user.type == 'integrator'"
                 class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                 <input
-                    id="3"
+                    id="q3"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    :checked="user.offer_accepted"/>
-                <label class="cursor-pointer select-none" for="rodo2">
+                    :checked="offer_accepted"/>
+                <label class="cursor-pointer select-none" for="q3">
                     {{$t('profiles.informService')}}
                 </label>
             </div>
@@ -100,23 +100,38 @@
 
 <script>
 import DarkModeSwitcher from "../../components/dark-mode-switcher/Main";
+import {ref} from "vue";
+import {useToast} from "vue-toastification";
 
 export default {
     components: {
         DarkModeSwitcher,
     },
     setup() {
+        const new_answer = ref(false);
+        const solution_accepted = ref(false);
+        const offer_accepted = ref(false);
         const user = window.Laravel.user;
-
+        new_answer.value = user.new_answer;
+        offer_accepted.value = user.offer_accepted;
+        solution_accepted.value = user.solution_accepted;
+        const toast = useToast();
         const save = () => {
-            axios.post('/api/user/terms/save', {user: user})
+            axios.post('/api/user/terms/save', {new_answer: new_answer.value, solution_accepted: solution_accepted.value, offer_accepted: offer_accepted.value})
                 .then(response => {
-
+                    if(response.data.success) {
+                        toast.success('Zapisano poprawnie.');
+                    } else {
+                        toast.error('Błąd');
+                    }
                 })
         }
         return {
             save,
             user,
+            new_answer,
+            offer_accepted,
+            solution_accepted
         };
     },
     data() {

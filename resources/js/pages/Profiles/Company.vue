@@ -173,15 +173,15 @@ export default {
                         console.log(response.data)
                         if (response.data.success) {
                             if (response.data.success) {
-                                company.value.regon = response.data.payload[0].regon;
-                                company.value.nip = response.data.payload[0].nip;
-                                company.value.city = response.data.payload[0].postalCityName;
-                                company.value.company_name = response.data.payload[0].name;
-                                company.value.street = response.data.payload[0].streetName;
-                                company.value.loc_nr = response.data.payload[0].flatNr;
-                                company.value.house_nr = response.data.payload[0].homeNr;
-                                company.value.postcode = response.data.payload[0].postalCode;
-                                company.value.province = response.data.payload[0].voivodshipName;
+                                company.value.regon = response.data.payload.regon;
+                                company.value.nip = response.data.payload.nip;
+                                company.value.city = response.data.payload.postCity;
+                                company.value.company_name = response.data.payload.name;
+                                company.value.street = response.data.payload.street;
+                                company.value.loc_nr = response.data.payload.apartmentNumber;
+                                company.value.house_nr = response.data.payload.propertyNumber;
+                                company.value.postcode = response.data.payload.zipCode;
+                                company.value.province = response.data.payload.province;
                                 company.value.country = 'Polska';
                             } else {
                                 toast.error(response.data.message);
@@ -203,15 +203,15 @@ export default {
                     .then(response => {
                         console.log(response.data)
                         if (response.data.success) {
-                            company.value.regon = response.data.payload[0].regon;
-                            company.value.nip = response.data.payload[0].nip;
-                            company.value.city = response.data.payload[0].postalCityName;
-                            company.value.company_name = response.data.payload[0].name;
-                            company.value.street = response.data.payload[0].streetName;
-                            company.value.loc_nr = response.data.payload[0].flatNr;
-                            company.value.house_nr = response.data.payload[0].homeNr;
-                            company.value.postcode = response.data.payload[0].postalCode;
-                            company.value.province = response.data.payload[0].voivodshipName;
+                            company.value.regon = response.data.payload.regon;
+                            company.value.nip = response.data.payload.nip;
+                            company.value.city = response.data.payload.postCity;
+                            company.value.company_name = response.data.payload.name;
+                            company.value.street = response.data.payload.street;
+                            company.value.loc_nr = response.data.payload.apartmentNumber;
+                            company.value.house_nr = response.data.payload.propertyNumber;
+                            company.value.postcode = response.data.payload.zipCode;
+                            company.value.province = response.data.payload.province;
                             company.value.country = 'Polska';
                         } else {
                             toast.error(response.data.message);

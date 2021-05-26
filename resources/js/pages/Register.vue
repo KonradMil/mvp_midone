@@ -389,9 +389,8 @@
                                     user
                                 });
                                 window.location.replace('/kreator');
-                                // this.$router.replace('kreator');
                             } else {
-                                this.error = response.data.message
+                                toast.warning(response.data.message);
                             }
                         })
                         .catch(function (error) {
