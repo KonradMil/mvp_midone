@@ -150,7 +150,7 @@ class ChallengeController extends Controller
         }
 
         $c = Challenge::whereHas('teams', function ($query) use ($ars) {
-            $query->whereIn('id', $ars);
+            $query->whereIn('teams.id', $ars);
         })->get();
 
         $challenges->merge($c);
