@@ -84,6 +84,7 @@ Route::post('search', [SearchController::class, 'search']);
 
 Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function () {
     Route::post('user/get', [ReportController::class, 'getUserReports']);
+    Route::post('user/get', [ReportController::class, 'getUserReports']);
     Route::post('user/show', [ReportController::class, 'getReport']);
     Route::post('user/create', [ReportController::class, 'createReport']);
     Route::post('user/delete', [ReportController::class, 'deleteReport']);

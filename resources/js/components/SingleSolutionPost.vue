@@ -114,7 +114,17 @@ export default {
         }
 
         const acceptSolution = () => {
-
+            axios.post('/api/solution/accept', {id: solution.id})
+                .then(response => {
+                    if (response.data.success) {
+                        // solution.liked = true;
+                        // console.log(solution);
+                        // emitter.emit('liked', {id: solution.id})
+                        // getChallengeRepositories();
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
         }
 
         return {
