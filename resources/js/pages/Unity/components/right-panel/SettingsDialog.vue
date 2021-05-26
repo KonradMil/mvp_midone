@@ -138,7 +138,7 @@
                 <TailSelect
                     id="input-wizard-9"
                     v-model="technical.number_of_lines"
-                    :options="{locale: 'pl', placeholder: sels.select_number_of_lines.find(i => i.value === technical.number_of_lines).name, openAbove: false, animate: false, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
+                    :options="{locale: 'pl', placeholder: 1, openAbove: false, animate: false, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                 >
                     <option selected disabled>{{ $t('challengesNew.select') }}</option>
                     <option
