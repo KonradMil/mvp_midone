@@ -76,7 +76,7 @@
                         @click="goTo(notification.data.link)"
                     >
                         <div class="w-12 h-12 flex-none image-fit mr-1">
-                            <Avatar :src="'uploads/' + notification.data.author.avatar"
+                            <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
                                     :username="notification.data.author.name + ' ' + notification.data.author.lastname"
                                     size="50" color="#FFF" background-color="#930f68"/>
 
@@ -144,7 +144,7 @@
                 role="button"
                 aria-expanded="false"
             >
-                <Avatar :src="'uploads/' + user.avatar" :username="user.name + ' ' + user.lastname" size="30"
+                <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" size="30"
                         color="#FFF" background-color="#930f68"/>
             </div>
             <div class="dropdown-menu w-56">

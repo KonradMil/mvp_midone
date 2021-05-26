@@ -12,7 +12,7 @@
                 <div class="intro-y box mt-5">
                     <div class="relative flex items-center p-5">
                         <div class="w-14 h-14 image-fit">
-                            <Avatar :src="'uploads/' + user.avatar" :username="user.name + ' ' + user.lastname" size="60"
+                            <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" size="60"
                                     color="#FFF" background-color="#930f68"/>
                         </div>
                         <div class="ml-4 mr-auto">
@@ -29,7 +29,7 @@
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
 <!--                        <a class="flex items-center" href=""> <i data-feather="activity" class="w-4 h-4 mr-2"></i> Email Settings </a>-->
                         <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'terms') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'terms'"> <i data-feather="box" class="w-4 h-4 mr-2"></i> {{$t('profiles.agreements')}} </a>
-                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'socials') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'socials'" > <i data-feather="lock" class="w-4 h-4 mr-2"></i> {{$t('profiles.socialMedia')}} </a>
+<!--                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'socials') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'socials'" > <i data-feather="lock" class="w-4 h-4 mr-2"></i> {{$t('profiles.socialMedia')}} </a>-->
 <!--                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'bidders-list') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'bidders-list'"> <i data-feather="settings" class="w-4 h-4 mr-2"></i> {{$t('profiles.biddersList')}} </a>-->
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                             <div class="w-52 mx-auto xl:mr-0 xl:ml-6">
                                 <div class="border-2 border-dashed shadow-sm border-gray-200 dark:border-dark-5 rounded-md p-5">
                                     <div class="h-40 relative image-fit cursor-pointer zoom-in mx-auto">
-                                        <Avatar :src="'uploads/' + avatar_path" :username="user.name + ' ' + user.lastname" size="160"
+                                        <Avatar :src="'/s3/avatars/' + avatar_path" :username="user.name + ' ' + user.lastname" size="160"
                                                 color="#FFF" background-color="#930f68"/>
                                     </div>
                                     <Dropzone

@@ -186,10 +186,10 @@ export default {
                     emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: {interval: 0, cycles: 0, layers: toRaw(animation)}})
                     break;
                 case 'addline':
-                    emitter.emit('unityoutgoingaction', {data: animation.layers.length})
+                    emitter.emit('unityoutgoingaction', {action: 'addLine',data: animation.layers.length})
                     break;
                 case 'removeline':
-                    emitter.emit('unityoutgoingaction', {data: activeLineIndex.value})
+                    emitter.emit('unityoutgoingaction', {action: 'removeLine', data: activeLineIndex.value})
                     break;
                 case 'settingsanimable':
                     emitter.emit('UnityAnimableSettings', {action: 'settingsanimable', data: animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value]})

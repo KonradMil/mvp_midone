@@ -41,7 +41,7 @@
                                     <div class="p-5">
                                         <div v-for="(member, index) in team.users" class="relative flex items-center" :key="'member_' + index">
                                             <div class="w-12 h-12 flex-none image-fit">
-                                                <Avatar :src="'uploads/' + member.avatar" :username="member.name + ' ' + member.lastname" size="40" color="#FFF" background-color="#930f68"/>
+                                                <Avatar :src="'/s3/avatars/' + member.avatar" :username="member.name + ' ' + member.lastname" size="40" color="#FFF" background-color="#930f68"/>
                                             </div>
                                             <div class="ml-4 mr-auto">
                                                 <a href="" class="font-medium">{{ member.name + ' ' + member.lastname }}</a>
