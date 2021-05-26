@@ -141,6 +141,20 @@ class ChallengeController extends Controller
 
         $challenges = $query->with(['comments.commentator', 'technicalDetails', 'financial_before'])->get();
 
+        $ars = [];
+
+        $ts = Auth::user()->teams;
+
+        foreach ($ts as $tt) {
+            array_push($ars, $tt->id);
+        }
+
+        $c = Challenge::whereHas('teams', function ($query) use ($ars) {
+            $query->whereIn('id', $ars);
+        })->get();
+
+        $challenges->merge($c);
+
         foreach ($challenges as $challenge) {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like')) {
                 $challenge->liked = true;
