@@ -78,7 +78,7 @@
                     id="q2"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    @click="solution_accepted != solution_accepted"
+                    @click="solution_accepted = !solution_accepted"
                     :checked="solution_accepted"/>
                 <label class="cursor-pointer select-none" for="q2">
                     {{$t('profiles.informSolution')}}

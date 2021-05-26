@@ -29,7 +29,7 @@
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
 <!--                        <a class="flex items-center" href=""> <i data-feather="activity" class="w-4 h-4 mr-2"></i> Email Settings </a>-->
                         <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'terms') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'terms'"> <i data-feather="box" class="w-4 h-4 mr-2"></i> {{$t('profiles.agreements')}} </a>
-                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'socials') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'socials'" > <i data-feather="lock" class="w-4 h-4 mr-2"></i> {{$t('profiles.socialMedia')}} </a>
+<!--                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'socials') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'socials'" > <i data-feather="lock" class="w-4 h-4 mr-2"></i> {{$t('profiles.socialMedia')}} </a>-->
 <!--                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'bidders-list') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'bidders-list'"> <i data-feather="settings" class="w-4 h-4 mr-2"></i> {{$t('profiles.biddersList')}} </a>-->
                     </div>
                 </div>
