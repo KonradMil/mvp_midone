@@ -153,7 +153,7 @@ class ChallengeController extends Controller
             $query->whereIn('teams.id', $ars);
         })->get();
         foreach ($c as $cc) {
-            dump($cc);
+            var_dump($cc);
         }
         die;
         $challenges->merge($c);
