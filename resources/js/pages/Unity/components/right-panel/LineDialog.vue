@@ -53,7 +53,7 @@ export default {
         const l = ref({interval: 10, delay: 0, model_name: '', cargo: {
                 model_name: "9195a37a-9a13-12e3-8591-012165a3a613",
                 model_id: "Karton średni",
-                prefab_url: "https://devsys.appworks-dev.pl/models/carton_sredni",
+                prefab_url: "https://two.appworks-dev.pl/models/carton_sredni",
                 additional_data: ""
             }, animables: []});
         const selected = ref(0);
