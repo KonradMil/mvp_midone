@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Mpociot\Teamwork\Facades\Teamwork;
 use Mpociot\Teamwork\TeamInvite;
@@ -156,13 +157,10 @@ class UserController extends Controller
     public function storeAvatar(Request $request)
     {
 
-//        $request->validate([
-//            'file' => 'required|mimes:jpg,png,JPG,jpeg|max:4096',
-//        ]);
-
         $fileName = time().'.'.$request->file->extension();
         dump($fileName);
-        $request->file->move(public_path('uploads'), $fileName);
+        Storage::disk('public')->put('uploads/' .  $fileName, $request->file, 'public');
+//        $request->file->move(public_path('uploads'), $fileName);
         $u = Auth::user();
         $u->avatar = $fileName;
         $u->save();
