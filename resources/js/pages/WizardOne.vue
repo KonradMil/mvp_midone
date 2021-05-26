@@ -198,7 +198,8 @@ import router from "../router";
                         .then(response => {
                             console.log(response.data)
                             if (response.data.success) {
-                                router.push({path: 'profiles'});
+                                window.location.href = '/profiles';
+                                // router.push({path: 'profiles'});
                                 // toast.success(response.data.message);
                             } else {
                                 toast.error(response.data.message);
