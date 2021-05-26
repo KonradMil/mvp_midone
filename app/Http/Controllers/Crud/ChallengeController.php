@@ -155,7 +155,7 @@ class ChallengeController extends Controller
         foreach ($c as $cc) {
             dump($cc);
         }
-        dd($c);
+        die;
         $challenges->merge($c);
 
         foreach ($challenges as $challenge) {
