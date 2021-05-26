@@ -161,7 +161,7 @@ class UserController extends Controller
 //        ]);
 
         $fileName = time().'.'.$request->file->extension();
-
+        dump($fileName);
         $request->file->move(public_path('uploads'), $fileName);
         $u = Auth::user();
         $u->avatar = $fileName;

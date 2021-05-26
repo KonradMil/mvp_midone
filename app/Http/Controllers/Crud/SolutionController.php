@@ -17,6 +17,11 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class SolutionController extends Controller
 {
+    public function acceptSolution () {
+
+
+    }
+
     public function saveSolutionFinancials(Request $request, Financial $financial)
     {
         $financial->fill($request->input('data'));
