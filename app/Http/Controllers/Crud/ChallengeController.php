@@ -157,7 +157,7 @@ class ChallengeController extends Controller
 //        }
 
         $challenges->merge($c);
-
+        dump($challenges);
         foreach ($challenges as $challenge) {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like')) {
                 $challenge->liked = true;
