@@ -12,7 +12,7 @@
                 <div class="intro-y box mt-5">
                     <div class="relative flex items-center p-5">
                         <div class="w-14 h-14 image-fit">
-                            <Avatar :src="'uploads/' + user.avatar" :username="user.name + ' ' + user.lastname" size="60"
+                            <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" size="60"
                                     color="#FFF" background-color="#930f68"/>
                         </div>
                         <div class="ml-4 mr-auto">
@@ -90,7 +90,7 @@
                             <div class="w-52 mx-auto xl:mr-0 xl:ml-6">
                                 <div class="border-2 border-dashed shadow-sm border-gray-200 dark:border-dark-5 rounded-md p-5">
                                     <div class="h-40 relative image-fit cursor-pointer zoom-in mx-auto">
-                                        <Avatar :src="'/s3/uploads/' + avatar_path" :username="user.name + ' ' + user.lastname" size="160"
+                                        <Avatar :src="'/s3/avatars/' + avatar_path" :username="user.name + ' ' + user.lastname" size="160"
                                                 color="#FFF" background-color="#930f68"/>
                                     </div>
                                     <Dropzone

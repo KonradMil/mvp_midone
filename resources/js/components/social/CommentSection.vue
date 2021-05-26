@@ -24,7 +24,7 @@
     </div>
     <div class="w-full flex items-center mt-3">
         <div class="w-8 h-8 flex-none image-fit mr-3">
-            <Avatar :src="'uploads/' + user.avatar" :username="user.name + ' ' + user.lastname" size="40" color="#FFF"
+            <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" size="40" color="#FFF"
                     background-color="#930f68"/>
         </div>
         <div class="flex-1 relative text-gray-700">
