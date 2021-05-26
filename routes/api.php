@@ -83,6 +83,7 @@ Route::post('report/show', [ReportController::class, 'getReport']);
 Route::post('search', [SearchController::class, 'search']);
 
 Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function () {
+
     Route::post('user/get', [ReportController::class, 'getUserReports']);
     Route::post('user/show', [ReportController::class, 'getReport']);
     Route::post('user/create', [ReportController::class, 'createReport']);
@@ -91,6 +92,7 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
 });
 
 Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('accept', [SolutionController::class, 'acceptSolution']);
     Route::post('user/get', [SolutionController::class, 'getUserSolutionsFiltered']);
     Route::post('save/description', [SolutionController::class, 'saveDescription']);
     Route::post('check-team', [SolutionController::class, 'checkTeam']);

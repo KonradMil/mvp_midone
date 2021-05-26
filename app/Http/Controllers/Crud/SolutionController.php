@@ -17,6 +17,22 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class SolutionController extends Controller
 {
+    public function acceptSolution (Request $request) {
+        $id = $request->input('id');
+        $solution = Solution::find($id);
+        $challenge = Challenge::find($solution->challenge_id);
+        $challenge->stage = 2;
+        $challenge->save();
+        $solution->selected = true;
+        $solution->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zatwierdzono rozwiązanie.',
+            'payload' => $solution
+        ]);
+    }
+
     public function saveSolutionFinancials(Request $request, Financial $financial)
     {
         $financial->fill($request->input('data'));
@@ -31,7 +47,7 @@ class SolutionController extends Controller
     public function getUserSolutionUnity(Request $request)
     {
         if (isset($request->id)) {
-            $solution = Solution::with('challenge', 'author','financial_after', 'challenge.financial_before')->find($request->id);
+            $solution = Solution::with('challenge', 'author','financial_after', 'challenge.financial_before', 'challenge.technicalDetails')->find($request->id);
 
         } else {
             $solution = NULL;

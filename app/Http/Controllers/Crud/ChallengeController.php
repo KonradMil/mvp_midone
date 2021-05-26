@@ -17,6 +17,7 @@ use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use phpDocumentor\Reflection\Types\Boolean;
 
@@ -292,12 +293,12 @@ class ChallengeController extends Controller
 
         $ext = $request->file->extension();
         $fileName = time() . '.' . $ext;
-
-        $request->file->move(public_path('uploads'), $fileName);
+        Storage::disk('s3')->putFileAs('screenshots' , $request->file,  $fileName);
+//        $request->file->move(public_path('uploads'), $fileName);
         $file = new File();
         $file->name = $fileName;
         $file->ext = $ext;
-        $file->path = 'uploads/' . $fileName;
+        $file->path = 's3/screenshots/' . $fileName;
         $file->original_name = $request->file->getClientOriginalName();
         $file->save();
 //        $challenge = Challenge::find($request->challenge_id);

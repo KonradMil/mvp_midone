@@ -183,7 +183,15 @@ export default {
         });
 
         const technical = computed(() => {
-            return props.challenge.technical_details
+            if(props.type=='challenge')
+            {
+                return props.challenge.technical_details
+            }
+            else
+            {
+                return props.solution.challenge.technical_details
+            }
+
         }, () => {
 
         });

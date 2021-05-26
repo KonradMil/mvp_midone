@@ -145,7 +145,7 @@
                 console.log(elDropzoneSingleRef);
                 elDropzoneSingleRef.dropzone.on("success", (resp) => {
                     console.log(resp.xhr.response);
-                    avatar_path.value = '/uploads/' + JSON.parse(resp.xhr.response).payload;
+                    avatar_path.value = '/s3/avatars/' + JSON.parse(resp.xhr.response).payload;
                     toast.success('Success!');
                 });
                 elDropzoneSingleRef.dropzone.on("error", () => {
@@ -210,15 +210,12 @@
                                     store.dispatch('login/login', {
                                         user
                                     });
-                                    toast.success('Pomyślnie przeszedłeś do kolejnego kroku!')
-                                    this.$router.push('/kreator-krok-jeden');
+                                    toast.success('Pomyślnie przeszedłeś do kolejnego kroku!');
+                                    window.location.href = '/kreator-krok-jeden';
                                 } else {
                                     toast.error(response.data.message);
                                 }
                             })
-                        // .catch(function (error) {
-                        //     this.toast.error(error);
-                        // });
                     })
                 }
 
