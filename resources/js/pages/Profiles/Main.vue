@@ -90,7 +90,7 @@
                             <div class="w-52 mx-auto xl:mr-0 xl:ml-6">
                                 <div class="border-2 border-dashed shadow-sm border-gray-200 dark:border-dark-5 rounded-md p-5">
                                     <div class="h-40 relative image-fit cursor-pointer zoom-in mx-auto">
-                                        <Avatar :src="'uploads/' + avatar_path" :username="user.name + ' ' + user.lastname" size="160"
+                                        <Avatar :src="'/s3/uploads/' + avatar_path" :username="user.name + ' ' + user.lastname" size="160"
                                                 color="#FFF" background-color="#930f68"/>
                                     </div>
                                     <Dropzone

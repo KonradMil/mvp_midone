@@ -70,7 +70,7 @@
     max-height: 120px;
     top: 15px;
     overflow: hidden;">
-                            <div :style="'background-image: url(' + avatar_path + ');     width: 200px;\n'+
+                            <div :style="'background-image: url(s3/uploads/' + avatar_path + ');     width: 200px;\n'+
 '    height: 120px;\n'+
 '    background-size: contain;\n'+
 '    background-repeat: no-repeat;\n'+
@@ -145,7 +145,7 @@
                 console.log(elDropzoneSingleRef);
                 elDropzoneSingleRef.dropzone.on("success", (resp) => {
                     console.log(resp.xhr.response);
-                    avatar_path.value = '/uploads/' + JSON.parse(resp.xhr.response).payload;
+                    avatar_path.value = '/s3/uploads/' + JSON.parse(resp.xhr.response).payload;
                     toast.success('Success!');
                 });
                 elDropzoneSingleRef.dropzone.on("error", () => {
