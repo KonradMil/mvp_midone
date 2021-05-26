@@ -210,8 +210,9 @@
                                     store.dispatch('login/login', {
                                         user
                                     });
-                                    toast.success('Pomyślnie przeszedłeś do kolejnego kroku!')
-                                    this.$router.push('/kreator-krok-jeden');
+                                    toast.success('Pomyślnie przeszedłeś do kolejnego kroku!');
+                                    window.location.href = '/kreator-krok-jeden';
+                                    // this.$router.push('/kreator-krok-jeden');
                                 } else {
                                     toast.error(response.data.message);
                                 }
