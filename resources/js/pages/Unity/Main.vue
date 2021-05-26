@@ -283,6 +283,7 @@ export default {
                 } else {
                     getCardChallengeRepositories(id.value);
                 }
+                handleUnityActionOutgoing({action: 'prefix', data: 'https://devsys.appworks-dev.pl'});
             }, 5000);
         }
 

@@ -150,7 +150,12 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function addLine(val) {
-        outgoing(game, 'SetNewAnimationLayer', val)
+        game.message('NetworkBridge', 'SetNewAnimationLayer', 1);
+        // outgoing(game, '', val)
+    }
+
+    function prefix(val) {
+        game.message('NetworkBridge', 'SetDefaultUrlPrefix', val);
     }
 
     function removeLine(val) {
