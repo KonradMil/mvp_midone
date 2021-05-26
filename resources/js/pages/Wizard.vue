@@ -216,9 +216,6 @@
                                     toast.error(response.data.message);
                                 }
                             })
-                        // .catch(function (error) {
-                        //     this.toast.error(error);
-                        // });
                     })
                 }
 
