@@ -12,6 +12,7 @@ use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\KnowledgebaseController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\WorkshopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,11 @@ Route::group(['prefix' => 'company', 'middleware' => 'auth:sanctum'], function (
     Route::post('create', 'App\Http\Controllers\API\CompanyController@saveCompany');
     Route::post('save', 'App\Http\Controllers\API\CompanyController@saveCompanyEdit');
     Route::get('get', '\App\Http\Controllers\API\CompanyController@getUserCompanies');
+});
+
+Route::group(['prefix' => 'workshop', 'middleware' => 'auth:sanctum'], function() {
+    Route::post('objects/get', [WorkshopController::class, 'getObjects']);
+    Route::post('object/like', [WorkshopController::class, 'likeObject']);
 });
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth:sanctum'], function() {

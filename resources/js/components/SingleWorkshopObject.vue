@@ -74,51 +74,29 @@ export default {
     name: "SingleSolutionPost",
     components: {CommentSection},
     props: {
-        user: Object,
-        solution: Object,
-        canAccept: Boolean
+       object: Object
     },
     setup(props) {
-        const solution = props.solution;
-        const user = props.user;
+        const object = props.object;
+        const user = window.Laravel.user;
 
         const like = async (solution) => {
-            axios.post('/api/solution/user/like', {id: solution.id})
+            axios.post('/api/workshop/object/like', {id: solution.id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
-                        // console.log(response.data);
-                        // challenge.likes = challenge.likes + 1;
                         solution.liked = true;
                         console.log(solution);
-                        emitter.emit('liked', {id: solution.id})
-                        // getChallengeRepositories();
                     } else {
-                        // toast.error(response.data.message);
-                    }
-                })
-        }
 
-        const acceptSolution = () => {
-            axios.post('/api/solution/accept', {id: solution.id})
-                .then(response => {
-                    if (response.data.success) {
-                        // solution.liked = true;
-                        // console.log(solution);
-                        // emitter.emit('liked', {id: solution.id})
-                        // getChallengeRepositories();
-                    } else {
-                        // toast.error(response.data.message);
                     }
                 })
         }
 
         return {
-            solution,
+            object,
             user,
             like,
             props,
-            acceptSolution
         }
     }
 }

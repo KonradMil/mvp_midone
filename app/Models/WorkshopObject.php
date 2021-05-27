@@ -12,7 +12,7 @@ class WorkshopObject extends Model
     public $table = 'workshop_objects';
 
     protected $fillable = [
-        'save', 'name', 'author_id', 'screenshot'
+        'save', 'name', 'author_id', 'screenshot', 'public'
     ];
 
     public function users()
