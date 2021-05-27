@@ -6,6 +6,7 @@
             "bundled": false,
             "type": ""
         },
+        "name": "StartAnimationButton",
         "label": "Odtwórz",
         "buttonColors": {
             "selectedColor": "#edbaf5",
@@ -23,6 +24,7 @@
             "bundled": false,
             "type": ""
         },
+        "name": "PauseAnimation",
         "label": "Pauza",
         "buttonColors": {
             "selectedColor": "#edbaf5",
@@ -40,6 +42,7 @@
             "bundled": false,
             "type": ""
         },
+        "name": "StopAnimation",
         "label": "Zatrzymaj",
         "buttonColors": {
             "selectedColor": "#edbaf5",
@@ -57,6 +60,7 @@
             "bundled": false,
             "type": ""
         },
+        "name": "ShowVisualRanges",
         "label": "Pokaż zasięgi",
         "buttonColors": {
             "selectedColor": "#edbaf5",
