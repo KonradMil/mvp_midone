@@ -425,13 +425,13 @@
                         <div class="mt-5">
                             <div class="intro-y">
                                 <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                    <img src="/logos/fanuc_logo.jpeg"/>
+                                    <img src="/s3/logos/fanuc_logo.jpeg"/>
                                 </div>
                                 <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                    <img src="/logos/yaskawa_logo.png"/>
+                                    <img src="/s3/logos/yaskawa_logo.png"/>
                                 </div>
                                 <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                    <img src="/logos/tfm_robotics.png"/>
+                                    <img src="/s3/logos/tfm_robotics.png"/>
                                 </div>
                             </div>
                         </div>
