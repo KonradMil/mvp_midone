@@ -57,11 +57,6 @@ export const routes = [
         path: '/studio',
         component: Main,
         props: true
-    }, {
-        name: 'workshop',
-        path: '/workshop',
-        component: Workshop,
-        props: true
     },
     {
         name: 'challengeStudio',
@@ -85,6 +80,12 @@ export const routes = [
         path: "/",
         component: SideMenu,
         children: [
+            {
+                name: 'workshop',
+                path: '/workshop',
+                component: Workshop,
+                props: true
+            },
             {
                 name: 'models',
                 path: '/models',
