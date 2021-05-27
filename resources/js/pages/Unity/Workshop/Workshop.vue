@@ -35,6 +35,7 @@
 import WorkshopPanel from "./panels/WorkshopPanel";
 import Marketplace from "./panels/Marketplace";
 import OwnObjects from "./panels/OwnObjects";
+import {ref} from "vue";
 export default {
 name: "Workshop",
     components: {OwnObjects, Marketplace, WorkshopPanel},
