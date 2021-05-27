@@ -10,7 +10,6 @@ use App\Models\File;
 use App\Models\Financial;
 use App\Models\Team;
 use App\Models\TechnicalDetails;
-use App\Modules\Dbr\Module\Http\UnityController;
 use Carbon\Carbon;
 use Cog\Laravel\Love\Reaction\Models\Reaction;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
@@ -19,7 +18,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use phpDocumentor\Reflection\Types\Boolean;
 
 class ChallengeController extends Controller
 {
@@ -46,12 +44,14 @@ class ChallengeController extends Controller
             'payload' => $technical
         ]);
     }
+
     public function saveChallengeTeams(Request $request, Challenge $challenge)
     {
         foreach ((array)$request->teams as $team_id) {
             $team = Team::find($team_id);
             $challenge->teams()->sync($team);
         }
+
         return response()->json([
             'success' => true,
             'message' => 'Zapisano edycje.',
@@ -61,7 +61,7 @@ class ChallengeController extends Controller
 
     public function saveChallenge(Request $request)
     {
-//        dd($request->data);
+
         $c = Challenge::find($request->data['id']);
 
         $j = json_decode($request->data['save']['save_json'], true);
@@ -91,6 +91,7 @@ class ChallengeController extends Controller
             $constraint->aspectRatio();
             $constraint->upsize();
         })->save($path);
+
         return ['absolute_path' => $path, 'relative' => ('screenshots/' . $name)];
     }
 
@@ -137,8 +138,6 @@ class ChallengeController extends Controller
         if (isset($input->favourite)) {
             $query->where('favourite', '=', 1);
         }
-
-//        $financial = Financial::find($input->financial_before_id);
 
         $challenges = $query->with(['comments.commentator', 'technicalDetails', 'financial_before'])->get();
 
@@ -220,7 +219,6 @@ class ChallengeController extends Controller
             $challenge->comments_count = $challenge->comments()->count();
             $challenge->likes = $challenge->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
         }
-
 
         return response()->json([
             'success' => true,
