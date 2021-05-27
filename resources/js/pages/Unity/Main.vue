@@ -129,7 +129,7 @@ export default {
             if (loaded.value) {
                 if (doubleClick.value) {
                     if ((mousePositionX.value > (e.clientX - 10) && mousePositionX.value < (e.clientX + 10)) && (mousePositionY.value > (e.clientY - 10) && mousePositionY.value < (e.clientY + 19))) {
-                        let data = JSON.stringify({menu: currentRadialMenu.value});
+                        let data = JSON.stringify(currentRadialMenu.value);
                         console.log(data);
                         console.log('RIGHT CLICK SHOW');
                         handleUnityActionOutgoing({action: 'showRadialMenu', data: data});

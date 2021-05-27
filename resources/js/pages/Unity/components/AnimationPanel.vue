@@ -183,6 +183,7 @@ export default {
                     break;
                 case 'play':
                     // console.log(toRaw(animation));
+                    expanded.value = 0;
                     emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: {interval: 0, cycles: 0, layers: toRaw(animation)}})
                     break;
                 case 'addline':
