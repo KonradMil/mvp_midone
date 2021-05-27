@@ -26,6 +26,7 @@ import Communication from "../pages/Communication/Main";
 import ReportReview from "../pages/Communication/ReportReview";
 import TermsMain from "../pages/Terms/TermsMain";
 import ForgotPassword from "../pages/ForgotPassword";
+import Workshop from "../pages/Unity/Workshop/Workshop";
 
 export const routes = [
     {
@@ -55,6 +56,11 @@ export const routes = [
         name: 'studio',
         path: '/studio',
         component: Main,
+        props: true
+    }, {
+        name: 'workshop',
+        path: '/workshop',
+        component: Workshop,
         props: true
     },
     {
