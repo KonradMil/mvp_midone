@@ -45,7 +45,7 @@
                             :key="'question_' + index"
                             class="intro-y">
                             <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
-                                <div class="flex px-5 py-3">
+                                <div class="flex px-5 py-3" @click="expand[index] = !expand[index]">
                                     <div class="w-64 sm:w-auto truncate">
                                         <strong>Pytanie: </strong> {{q.question}}
                                     </div>
@@ -55,6 +55,11 @@
                                     <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">
                                         <button class="btn btn-primary" @click="answer(q.id)">Odpowiedz</button>
                                     </div>
+                                </div>
+                                <div v-if="expand[index] === true">
+                                        <div v-for="(a, i) in q.answers">
+                                            {{a.question}}
+                                        </div>
                                 </div>
                             </div>
                         </div>
@@ -83,6 +88,7 @@ export default {
         const addingDialog = ref(false);
         const question = ref('');
         const questions = ref([]);
+        const expand = ref([]);
         const user = window.Laravel.user;
         const isAnswer = ref(false);
         const questionId = ref(null);
@@ -123,7 +129,8 @@ export default {
             user,
             isAnswer,
             answer,
-            questionId
+            questionId,
+            expand
         }
     }
 }
