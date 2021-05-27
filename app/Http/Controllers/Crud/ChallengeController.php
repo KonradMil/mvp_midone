@@ -61,7 +61,6 @@ class ChallengeController extends Controller
 
     public function saveChallenge(Request $request)
     {
-
         $c = Challenge::find($request->data['id']);
 
         $j = json_decode($request->data['save']['save_json'], true);
@@ -97,7 +96,6 @@ class ChallengeController extends Controller
 
     public function getUserChallenges()
     {
-
         if (Auth::user()->type == 'integrator') {
             $challenges = Challenge::whereIn('stage', [1, 2])->where('status', '=', 1)->get();
         } else if (Auth::user()->type == 'inwestor') {

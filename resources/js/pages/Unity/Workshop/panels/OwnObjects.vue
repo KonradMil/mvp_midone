@@ -1,5 +1,7 @@
 <template>
-
+<div v-for="(object, index) in objects">
+    1
+</div>
 </template>
 
 <script>
