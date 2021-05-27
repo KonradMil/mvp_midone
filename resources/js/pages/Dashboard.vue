@@ -430,6 +430,9 @@
                                 <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
                                     <img src="/logos/yaskawa_logo.png"/>
                                 </div>
+                                <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
+                                    <img src="/logos/tfm_robotics.png"/>
+                                </div>
                             </div>
                         </div>
                     </div>
