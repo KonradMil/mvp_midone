@@ -185,8 +185,10 @@ export default defineComponent({
                     if (response.data.success) {
                         console.log(response.data.payload);
                         challenge.value = response.data.payload;
+                        toast.success('Opublikowano.');
                     } else {
                         // toast.error(response.data.message);
+                        toast.error('Błąd.');
                     }
                 })
         }
@@ -198,8 +200,9 @@ export default defineComponent({
                     if (response.data.success) {
                         console.log(response.data.payload);
                         challenge.value = response.data.payload;
+                        toast.success('Wyzwanie nie jest już publiczne.');
                     } else {
-                        // toast.error(response.data.message);
+                        toast.error('Błąd.');
                     }
                 })
         }

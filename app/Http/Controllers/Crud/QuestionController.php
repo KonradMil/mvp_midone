@@ -16,6 +16,9 @@ class QuestionController extends Controller
         $question->question = $input['data']['question'];
         $question->challenge_id = $input['data']['challenge_id'];
         $question->author_id = Auth::user()->id;
+        if(!empty($input['data']['isAnswer'])) {
+            $question->answer = $input['data']['isAnswer'];
+        }
         $question->save();
 
         return response()->json([
@@ -26,7 +29,7 @@ class QuestionController extends Controller
     }
 
     public function get(Request $request) {
-          $questions = Question::where('challenge_id', '=', $request->input('id'))->get();
+          $questions = Question::where('challenge_id', '=', $request->input('id'))->with('answers')->get();
 
         return response()->json([
             'success' => true,
