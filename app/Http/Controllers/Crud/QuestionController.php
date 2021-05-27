@@ -29,7 +29,7 @@ class QuestionController extends Controller
     }
 
     public function get(Request $request) {
-          $questions = Question::where('challenge_id', '=', $request->input('id'))->with('answers')->get();
+          $questions = Question::where('challenge_id', '=', $request->input('id'))->where('answer', '=', null)->with('answers')->get();
 
         return response()->json([
             'success' => true,
