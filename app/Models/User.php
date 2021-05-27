@@ -97,4 +97,9 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
         return $this->belongsToMany(Company::class, 'user_companies', 'company_id', 'user_id')->withTimestamps();
     }
 
+    public function objects()
+    {
+        return $this->belongsToMany(WorkshopObject::class, 'user_workshop_objects', 'author_id', 'workshop_object_id');
+    }
+
 }

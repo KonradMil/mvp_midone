@@ -57,8 +57,8 @@
                                     </div>
                                 </div>
                                 <div v-if="expand[index] === true">
-                                        <div v-for="(a, i) in q.answers">
-                                            {{a.question}}
+                                        <div class="border px-5 py-2" v-for="(a, i) in q.answers">
+                                            Odpowiedź: {{a.question}}
                                         </div>
                                 </div>
                             </div>
