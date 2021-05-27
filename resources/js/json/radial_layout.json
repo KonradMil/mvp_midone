@@ -1,6 +1,11 @@
 [
     {
-        "icon": "https://two.appworks-dev.pl/s3/builder_icons/edit_radial.png",
+        "icon": {
+            "name": "BeginLayoutEdit",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/edit_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "BeginLayoutEdit",
         "label": "Edycja",
         "buttonColors": {
@@ -13,7 +18,12 @@
         }
     },
     {
-        "icon": "https://two.appworks-dev.pl/s3/builder_icons/copy_radial.png",
+        "icon": {
+            "name": "CopyLayoutElement",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/copy_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "CopyLayoutElement",
         "label": "Kopiuj",
         "buttonColors": {
@@ -26,7 +36,12 @@
         }
     },
     {
-        "icon": "https://two.appworks-dev.pl/s3/builder_icons/paste_radial.png",
+        "icon": {
+            "name": "PasteLayoutElement",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/paste_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "PasteLayoutElement",
         "label": "Wklej",
         "buttonColors": {
@@ -39,7 +54,12 @@
         }
     },
     {
-        "icon": "https://two.appworks-dev.pl/s3/builder_icons/add_layout_radial.png",
+        "icon": {
+            "name": "BeginLayoutDraw",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/add_layout_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "BeginLayoutDraw",
         "label": "Dodaj obszar",
         "buttonColors": {
@@ -52,7 +72,12 @@
         }
     },
     {
-        "icon": "https://two.appworks-dev.pl/s3/builder_icons/add_label_radial.png",
+        "icon": {
+            "name": "BeginLayoutLabel",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/add_label_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "BeginLayoutLabel",
         "label": "Dodaj etykiete",
         "buttonColors": {
@@ -65,7 +90,12 @@
         }
     },
     {
-        "icon": "https://two.appworks-dev.pl/s3/builder_icons/delete_radial.png",
+        "icon": {
+            "name": "RemoveLayout",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/delete_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "RemoveLayout",
         "label": "Usuń",
         "buttonColors": {
@@ -78,7 +108,12 @@
         }
     },
     {
-        "icon": "https://two.appworks-dev.pl/s3/builder_icons/settings_radial.png",
+        "icon": {
+            "name": "SettingsLayout",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/settings_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "SettingsLayout",
         "label": "Właściwości",
         "buttonColors": {

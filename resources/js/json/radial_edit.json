@@ -1,6 +1,11 @@
 [
     {
-        "icon": "https://two.appworks-dev.pl/s3/builder_icons/radial_bin2.png",
+        "icon": {
+            "name": "DeleteCurrentSelection",
+            "url":  "https://two.appworks-dev.pl/s3/builder_icons/radial_bin2.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "DeleteCurrentSelection",
         "label": "Usuń",
         "buttonColors": {
@@ -13,7 +18,12 @@
         }
     },
     {
-        "icon": "https://two.appworks-dev.pl/s3/builder_icons/copy_radial.png",
+        "icon": {
+            "name": "CopySelection",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/copy_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "CopySelection",
         "label": "Kopiuj",
         "buttonColors": {
@@ -26,7 +36,12 @@
         }
     },
     {
-        "icon": "https://two.appworks-dev.pl/s3/builder_icons/paste_radial.png",
+        "icon": {
+            "name": "PasteSelection",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/paste_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "PasteSelection",
         "label": "Wklej",
         "buttonColors": {
@@ -39,7 +54,12 @@
         }
     },
     {
-        "icon": "https://two.appworks-dev.pl/s3/builder_icons/group_radial.png",
+        "icon": {
+            "name": "MergeGroups",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/group_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "MergeGroups",
         "label": "Grupuj",
         "buttonColors": {
@@ -52,7 +72,12 @@
         }
     },
     {
-        "icon": "https://two.appworks-dev.pl/s3/builder_icons/ungroup_radial.png",
+        "icon": {
+            "name": "SplitGroups",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/ungroup_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "SplitGroups",
         "label": "Rozgrupuj",
         "buttonColors": {
@@ -65,7 +90,12 @@
         }
     },
     {
-        "icon": "https://two.appworks-dev.pl/s3/builder_icons/confine_radial.png",
+        "icon": {
+            "name": "BuildOnlyWithinLayouts",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/confine_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "BuildOnlyWithinLayouts",
         "label": "Ogranicz do layoutu",
         "buttonColors": {
@@ -78,7 +108,12 @@
         }
     },
     {
-        "icon": "https://two.appworks-dev.pl/s3/builder_icons/settings_radial2.png",
+        "icon": {
+            "name": "SettingsEdit",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/settings_radial2.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "SettingsEdit",
         "label": "Właściwości",
         "buttonColors": {

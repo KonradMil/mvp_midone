@@ -56,7 +56,7 @@
     {
         "icon": {
             "name": "ShowVisualRanges",
-            "icon": "https://two.appworks-dev.pl/s3/builder_icons/ranges_radial.png",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/ranges_radial.png",
             "bundled": false,
             "type": ""
         },
