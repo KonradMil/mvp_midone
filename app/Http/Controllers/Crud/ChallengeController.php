@@ -485,18 +485,24 @@ class ChallengeController extends Controller
             $challenge = NULL;
         }
 
+        try {
+            if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like', 1)) {
+                $challenge->liked = true;
+            } else {
+                $challenge->liked = false;
+            }
 
-        if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like', 1)) {
-            $challenge->liked = true;
-        } else {
+            if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Follow', 1)) {
+                $challenge->followed = true;
+            } else {
+                $challenge->followed = false;
+            }
+        }catch (Exception $e) {
             $challenge->liked = false;
-        }
-
-        if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Follow', 1)) {
-            $challenge->followed = true;
-        } else {
             $challenge->followed = false;
         }
+
+
 
         $challenge->comments_count = $challenge->comments()->count();
         $challenge->likes = $challenge->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
