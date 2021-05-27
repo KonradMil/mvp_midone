@@ -37,7 +37,14 @@ import Marketplace from "./panels/Marketplace";
 import OwnObjects from "./panels/OwnObjects";
 export default {
 name: "Workshop",
-    components: {OwnObjects, Marketplace, WorkshopPanel}
+    components: {OwnObjects, Marketplace, WorkshopPanel},
+    setup() {
+        const activeTab = ref('obiekty');
+
+        return {
+            activeTab
+        }
+    }
 }
 </script>
 
