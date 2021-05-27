@@ -131,7 +131,7 @@ export default {
         };
 
         const saveReportRepo = async () => {
-            if(title.value === '' || description.value === '' || type.value==='' || file.value.id ==='')
+            if(title.value === '' || description.value === '' || type.value==='' || file.value == undefined)
             {
                toast.warning('Uzupełnij wszystkie pola!');
                isDisabled.value = true;
