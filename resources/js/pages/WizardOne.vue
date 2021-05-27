@@ -6,7 +6,10 @@
         <!-- BEGIN: Wizard Layout -->
         <div class="intro-y box py-10 sm:py-20 mt-5">
             <div class="flex justify-center">
-                <button class="intro-y w-10 h-10 rounded-full btn btn-primary mx-2">
+                <button
+                    @click="$router.push('/kreator')"
+                    class="intro-y w-10 h-10 rounded-full btn bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2">
+
                     1
                 </button>
                 <button class="intro-y w-10 h-10 rounded-full btn btn-primary mx-2">
@@ -71,7 +74,7 @@
                     </div>
                     <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
                         <button class="btn btn-secondary w-24" @click="$router.push('kreator')">Wstecz</button>
-                        <button class="btn btn-primary w-24 ml-2" @click="save">Dalej</button>
+                        <button class="btn btn-primary w-24 ml-2" @click="save">Zapisz</button>
                     </div>
                 </div>
             </div>

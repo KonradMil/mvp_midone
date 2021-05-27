@@ -2,8 +2,30 @@
     <div class="mt-3">
         <label for="modal-form-1" class="form-label">Zespoły</label>
         <TailSelect
+            v-if="props.type==='challenge'"
             id="post-form-5"
             v-model="team_unity"
+            :options="{
+             locale: 'pl',
+             placeholder: 'Wybierz zespoły...',
+             limit: 'Nie można wybrać więcej',
+             placeholderMulti: 'Wybierz do :limit zespołów...',
+             search: false,
+             hideSelected: true,
+             hideDisabled: true,
+             multiLimit: 3,
+             multiShowCount: false,
+             multiContainer: true,
+             classNames: 'w-full'
+              }"
+            multiple
+        >
+
+        </TailSelect>
+        <TailSelect
+            v-if="props.type==='solution'"
+            id="post-form-5"
+            v-model="teamsSolution.teamsAllowed"
             :options="{
              locale: 'pl',
              placeholder: 'Wybierz zespoły...',
@@ -49,9 +71,12 @@ import GetTeams from '../../../../compositions/GetTeams'
 export default {
     name: "TeamsDialog",
     props: {
-      comment: Object,
-      teams_unity: Array
+       comment: Object,
+       teams_unity: Array,
+        type: String,
+        solution: Object
     },
+    emits: ["update:teamsSolution"],
     setup(props, context) {
         const teams = ref([]);
         const c = ref({message: '', addedTeams: [], teams: []});
@@ -59,13 +84,28 @@ export default {
             teams.value = GetTeams();
         }
 
+        const teamsSolution = ref({});
+
+        watch(teamsSolution, (lab, prevLabel) => {
+            console.log('CHANGE 2');
+            context.emit("update:teamsSolution", lab);
+        }, {deep: true});
+
         const team_unity = computed (() => {
-            let ts = [];
-            props.teams_unity.forEach((val) => {
-                ts.push(val.id);
-            })
-            return ts;
-        });
+            if(props.type === 'challenge') {
+                let ts = [];
+                props.teams_unity.forEach((val) => {
+                    ts.push(val.id);
+                })
+                return ts;
+            }
+            else{
+                console.log('Brak team unity');
+            }
+            });
+
+
+
 
         watch(c, (ca, prevLabel) => {
             console.log('CHANGE');
@@ -78,7 +118,10 @@ export default {
         return {
             c,
             teams,
-            team_unity
+            team_unity,
+            props,
+            teamsAllowed,
+            teamsSolution
         }
     }
 }
