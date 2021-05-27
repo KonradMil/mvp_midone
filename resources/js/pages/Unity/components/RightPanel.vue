@@ -85,6 +85,7 @@ import SaveChallengeDetails from "../../../compositions/SaveChallengeDetails";
 import SaveChallengeFinancials from "../../../compositions/SaveChallengeFinancials";
 import SaveSolutionFinancials from "../../../compositions/SaveSolutionFinancials";
 import SaveChallengeTeams from "../../../compositions/SaveChallengeTeams";
+import SaveSolutionTeams from "../../../compositions/SaveSolutionTeams";
 
 export default {
     name: "RightPanel",
@@ -119,6 +120,10 @@ export default {
         const user = ref({});
         const user_teams = ref({});
 
+        const teamsSolution = ref({
+            teamsAllowed: '',
+        });
+
 
         const save = () => {
             if(content.value === 'label') {
@@ -134,7 +139,11 @@ export default {
                 if(props.type==='challenge'){
                     console.log(props.challenge.id + '- PROPS CHALLENGE ID')
                     saveChallengeTeamsRepo();
-            }
+               }
+                else
+                {
+                    saveSolutionTeamsRepo();
+                }
             } else if (content.value === 'description') {
                 console.log('HEREE');
                 if(type.value == 'challenge') {
@@ -224,11 +233,10 @@ export default {
                 type.value = props.type;
                 return props.challenge.teams
             }
-            // else
-            // {
-            //     type.value = props.type;
-            //     return props.solution.teams
-            // }
+            else {
+                type.value = props.type;
+                return props.solution
+            }
         }, () =>{
 
         });
@@ -352,6 +360,9 @@ export default {
         const saveChallengeTeamsRepo = async () => {
             SaveChallengeTeams(teams_unity.value, props.challenge.id);
         }
+        const saveSolutionTeamsRepo = async () => {
+            SaveSolutionTeams(teamsSolution.value.teamsAllowed, props.solution.id);
+        }
 
         const addTeam = () => {
 
@@ -379,7 +390,8 @@ export default {
             teams_unity,
             props,
             user,
-            user_teams
+            user_teams,
+            teamsSolution
         }
     }
 }

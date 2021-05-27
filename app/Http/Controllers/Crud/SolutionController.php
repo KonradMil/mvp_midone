@@ -7,6 +7,7 @@ use App\Models\Challenges\Challenge;
 use App\Models\Solutions\Solution;
 use App\Models\File;
 use App\Models\Financial;
+use App\Models\Team;
 use App\Models\TechnicalDetails;
 use Carbon\Carbon;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
@@ -17,6 +18,19 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class SolutionController extends Controller
 {
+    public function saveSolutionTeams(Request $request, Solution $solution)
+    {
+        foreach ($request->teams as $team_id) {
+            $team = Team::find($team_id);
+            $solution->teams()->sync($team);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano edycje zespołów!.',
+            'payload' => $solution
+        ]);
+    }
+
     public function acceptSolution (Request $request) {
         $id = $request->input('id');
         $solution = Solution::find($id);
