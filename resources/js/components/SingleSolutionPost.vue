@@ -121,6 +121,7 @@ export default {
                         // console.log(solution);
                         // emitter.emit('liked', {id: solution.id})
                         // getChallengeRepositories();
+                        toast.success('Wyzwanie zostało zaakceptowane');
                     } else {
                         // toast.error(response.data.message);
                     }
