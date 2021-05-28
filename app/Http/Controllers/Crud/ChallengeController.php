@@ -496,15 +496,15 @@ class ChallengeController extends Controller
 
             foreach ($challenge->solutions as $sol) {
                 if (Auth::user()->viaLoveReacter()->hasReactedTo($sol, 'Like', 1)) {
-                    $challenge->liked = true;
+                    $sol->liked = true;
                 } else {
-                    $challenge->liked = false;
+                    $sol->liked = false;
                 }
 
                 if (Auth::user()->viaLoveReacter()->hasReactedTo($sol, 'Follow', 1)) {
-                    $challenge->followed = true;
+                    $sol->followed = true;
                 } else {
-                    $challenge->followed = false;
+                    $sol->followed = false;
                 }
                 $sol->comments_count = $sol->comments()->count();
                 $sol->likes = $sol->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
