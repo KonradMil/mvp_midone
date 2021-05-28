@@ -31,6 +31,20 @@ class SolutionController extends Controller
         ]);
     }
 
+    public function rejectSolution(Request $request)
+    {
+        $id = $request->input('id');
+        $solution = Solution::find($id);
+        $solution->rejected = true;
+        $solution->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Odrzucono rozwiązanie.',
+            'payload' => $solution
+        ]);
+    }
+
     public function acceptSolution (Request $request) {
         $id = $request->input('id');
         $solution = Solution::find($id);

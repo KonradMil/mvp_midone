@@ -99,6 +99,7 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
 
 Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
     Route::post('accept', [SolutionController::class, 'acceptSolution']);
+    Route::post('reject', [SolutionController::class, 'rejectSolution']);
     Route::post('user/get', [SolutionController::class, 'getUserSolutionsFiltered']);
     Route::post('save/description', [SolutionController::class, 'saveDescription']);
     Route::post('check-team', [SolutionController::class, 'checkTeam']);

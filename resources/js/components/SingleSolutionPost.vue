@@ -46,6 +46,7 @@
         </div>
         <div class="mt-2" v-if="canAccept">
             <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution">Akceptuj rozwiązanie</button>
+            <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution">Odrzuć rozwiązanie</button>
         </div>
         <div class="mt-2" v-if="canEdit">
             <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'solutionStudio', params: {id: solution.id, type: 'solution', load: solution }});">Edytuj</button>
@@ -157,6 +158,17 @@ export default {
                 })
         }
 
+        const rejectSolution = () => {
+            axios.post('/api/solution/reject', {id: solution.id})
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Rozwiązanie zostało odrzucone');
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        }
+
         const unpublishSolution = () => {
             axios.post('/api/solution/unpublish', {id: solution.id})
                 .then(response => {
@@ -177,7 +189,8 @@ export default {
             acceptSolution,
             deleteSolution,
             unpublishSolution,
-            publishSolution
+            publishSolution,
+            rejectSolution
         }
     }
 }
