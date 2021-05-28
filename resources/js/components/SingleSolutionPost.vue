@@ -41,7 +41,7 @@
             />
         </div>
         <a href="" class="block font-medium text-base mt-5"></a>
-        <div class="text-gray-700 dark:text-gray-600 mt-2">
+        <div class="text-gray-700 dark:text-gray-600 mt-2" style="word-break: break-all; max-height: 100px; overflow-y: scroll;">
             {{ solution.description }}
         </div>
         <div class="mt-2" v-if="canAccept">
