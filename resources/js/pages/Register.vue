@@ -159,8 +159,8 @@
                             <label class="cursor-pointer select-none" for="rodo"
                             >Akceptuję postanowienia </label
                             >
-                            <div class="text-theme-1 dark:text-theme-10 ml-1" href=""
-                            @click.prevent="$router.push({name: 'privacyPolicy'})"
+                            <div class="text-theme-1 dark:text-theme-10 ml-1"
+                            @click.prevent="window.location.href = '/terms/privacy-policy'"
                             >polityki prywatności.</div
                             >.
                         </div>
@@ -185,8 +185,8 @@
                             <label class="cursor-pointer select-none" for="rodo3"
                             >Akceptuję </label
                             >
-                            <div class="text-theme-1 dark:text-theme-10 ml-1" href=""
-                               @click.prevent="$router.push({name: 'termsService'})"
+                            <div class="text-theme-1 dark:text-theme-10 ml-1"
+                                 @click.prevent="window.location.href = '/terms/terms-of-service'"
                             >warunki świadczenia </div
                             > usług na platformie DBR77.com.
                         </div>
@@ -211,8 +211,8 @@
                             <label class="cursor-pointer select-none" for="rodo2"
                             >Akceptuję </label
                             >
-                            <div class="text-theme-1 dark:text-theme-10 ml-1" href=""
-                               @click.prevent="$router.push({name: 'priceList'})"
+                            <div class="text-theme-1 dark:text-theme-10 ml-1"
+                                 @click.prevent="$router.push({path: '/terms/price-list'})"
                             >cennik usług</div
                             >.
                         </div>
