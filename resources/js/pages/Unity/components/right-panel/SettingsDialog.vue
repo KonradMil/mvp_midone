@@ -9,17 +9,15 @@
                     Max waga
                 </label>
                 <TailSelect
-
                     id="input-wizard-1"
                     v-model="technical.detail_weight"
-                    :options="{locale: 'pl', placeholder: sels.select_detail_weight[technical.detail_weight].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
-                >
+                    :options="{locale: 'pl', placeholder: sels.select_detail_weight[technical.detail_weight].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                     <option selected disabled>Wybierz...</option>
                     <option v-for="(det,index) in sels.select_detail_weight"
-                            :value="det.value">{{ det.name }}
-                        :disabled="user.type === 'integrator'"
+                            :value="det.value"
+                            :disabled="user.type === 'integrator'">
+                        {{ det.name }}
                     </option>
-
                 </TailSelect>
             </div>
             <div class="intro-y col-span-12">
@@ -29,21 +27,18 @@
                 <TailSelect
                     id="input-wizard-2"
                     v-model="technical.pick_quality"
-                    :options="{locale: 'pl', placeholder: sels.select_pick_quality[technical.pick_quality].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
-                >
+                    :options="{locale: 'pl', placeholder: sels.select_pick_quality[technical.pick_quality].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                     <option selected disabled>Wybierz...</option>
                     <option v-for="(det,index) in sels.select_pick_quality"
-                            :value="det.value">{{ det.name }}
-                        :disabled="user.type === 'integrator'"
+                            :value="det.value"
+                            :disabled="user.type === 'integrator'">
+                        {{ det.name }}
                     </option>
-
                 </TailSelect>
-
             </div>
             <div class="intro-y col-span-12">
                 <label for="input-wizard-3" class="form-label">{{ $t('challengesNew.detail') }}</label>
                 <TailSelect
-
                     id="input-wizard-3"
                     v-model="technical.detail_material"
                     :options="{locale: 'pl', placeholder: sels.select_detail_material[technical.detail_material].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
@@ -51,26 +46,25 @@
                     <option selected disabled>{{ $t('challengesNew.select') }}</option>
                     <option
                         v-for="(det,index) in sels.select_detail_material"
-                        :value="det.value">{{ det.name }}
-                        :disabled="user.type === 'integrator'"
+                        :value="det.value"
+                        :disabled="user.type === 'integrator'">
+                        {{ det.name }}
                     </option>
-
                 </TailSelect>
             </div>
             <div class="intro-y col-span-12">
                 <label for="input-wizard-4" class="form-label">{{ $t('challengesNew.size') }}</label>
                 <TailSelect
-
                     id="input-wizard-4"
                     v-model="technical.detail_size"
                     :options="{locale: 'pl', placeholder: sels.select_detail_size[technical.detail_size].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
                 >
                     <option selected disabled>{{ $t('challengesNew.select') }}</option>
                     <option v-for="(det,index) in sels.select_detail_size"
-                            :value="det.value">{{ det.name }}
-                        :disabled="user.type === 'integrator'"
+                            :value="det.value"
+                            :disabled="user.type === 'integrator'">
+                        {{ det.name }}
                     </option>
-
                 </TailSelect>
             </div>
             <div class="intro-y col-span-12">
@@ -85,10 +79,10 @@
                 >
                     <option selected disabled> {{ $t('challengesNew.select') }}</option>
                     <option v-for="(det,index) in sels.select_detail_pick"
-                            :value="det.value">{{ det.name }}
-                        :disabled="user.type === 'integrator'"
+                            :value="det.value"
+                            :disabled="user.type === 'integrator'">
+                        {{ det.name }}
                     </option>
-
                 </TailSelect>
             </div>
             <div class="intro-y col-span-12">
@@ -120,7 +114,8 @@
                 >
                     <option selected disabled> {{ $t('challengesNew.select') }}</option>
 
-                    <option v-for="(det,index) in sels.select_detail_range" :disabled="user.type === 'integrator'"
+                    <option v-for="(det,index) in sels.select_detail_range"
+                            :disabled="user.type === 'integrator'"
                             :value="det.value">{{ det.name }}
                     </option>
 
@@ -140,9 +135,9 @@
                     <option
                         :disabled="user.type === 'integrator'"
                         v-for="(det,index) in sels.select_detail_destination"
-                        :value="det.value">{{ det.name }}
+                        :value="det.value">
+                        {{ det.name }}
                     </option>
-
                 </TailSelect>
             </div>
             <div class="intro-y col-span-12">
