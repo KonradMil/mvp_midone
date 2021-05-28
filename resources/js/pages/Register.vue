@@ -159,9 +159,9 @@
                             <label class="cursor-pointer select-none" for="rodo"
                             >Akceptuję postanowienia </label
                             >
-                            <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
+                            <div class="text-theme-1 dark:text-theme-10 ml-1" href=""
                             @click.prevent="$router.push({name: 'privacyPolicy'})"
-                            >polityki prywatności.</a
+                            >polityki prywatności.</div
                             >.
                         </div>
                         <template v-if="validate.rodo.$error">
@@ -185,9 +185,9 @@
                             <label class="cursor-pointer select-none" for="rodo3"
                             >Akceptuję </label
                             >
-                            <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
+                            <div class="text-theme-1 dark:text-theme-10 ml-1" href=""
                                @click.prevent="$router.push({name: 'termsService'})"
-                            >warunki świadczenia </a
+                            >warunki świadczenia </div
                             > usług na platformie DBR77.com.
                         </div>
                         <template v-if="validate.rodo3.$error">
@@ -211,9 +211,9 @@
                             <label class="cursor-pointer select-none" for="rodo2"
                             >Akceptuję </label
                             >
-                            <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
+                            <div class="text-theme-1 dark:text-theme-10 ml-1" href=""
                                @click.prevent="$router.push({name: 'priceList'})"
-                            >cennik usług</a
+                            >cennik usług</div
                             >.
                         </div>
                         <template v-if="validate.rodo2.$error">
@@ -337,6 +337,11 @@
                     toast.warning('Hasła muszą być takie same');
                     return false;
                 }
+                if(formData.rodo && formData.rodo2 && formData.rodo3) {
+                    toast.error('Wszystkie zgody muszą być zaznaczone.');
+                    return false;
+                }
+
                 else if(formData.email === '')
                 {
                     toast.error('Email nie może byc pusty');
