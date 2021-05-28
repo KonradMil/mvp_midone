@@ -186,7 +186,7 @@
             <!-- END: Post Content -->
             <!-- BEGIN: Post Info -->
             <div class="col-span-12 lg:col-span-4">
-                <div class="intro-y box p-5" v-if="teams.list != undefined">
+                <div class="intro-y box p-5">
                     <div>
                         <label class="form-label">{{ $t('challengesNew.teamAccess') }}</label>
                         <TailSelect
