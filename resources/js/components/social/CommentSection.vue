@@ -68,6 +68,7 @@ export default {
         const obj = ref([]);
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
+        const user = window.Laravel.user;
 
         onMounted(function () {
             console.log(props.object);
@@ -125,7 +126,8 @@ export default {
             current_object_focus_showComments,
             showComments,
             comments,
-            obj
+            obj,
+            user
         }
     }
 }
