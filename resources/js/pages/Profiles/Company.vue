@@ -5,7 +5,7 @@
                 {{ $t('profiles.personality') }}
             </h2>
         </div>
-        <form @submit.prevent="save">
+
             <div class="p-5">
                 <div class="flex flex-col-reverse xl:flex-row flex-col">
                     <div class="flex-1 mt-6 xl:mt-0">
@@ -127,11 +127,11 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary w-20 mt-3" type="submit">{{ $t('global.save') }}</button>
+                        <button v-if="!isUndefined" class="btn btn-primary w-20 mt-3" type="submit" @click.prevent="save">{{ $t('global.save') }}</button>
+                        <button v-if="isUndefined"  class="btn btn-primary w-20 mt-3" type="submit" @click.prevent="create">{{ $t('global.save') }}</button>
                     </div>
                 </div>
             </div>
-        </form>
     </div>
 </template>
 
@@ -152,11 +152,30 @@ export default {
     setup() {
         const user = window.Laravel.user;
         const teams = ref([]);
-        const company = ref({});
-        company.value = user.companies[0];
+        const company = ref({
+            regon: '',
+            nip: '',
+            company_name: '',
+            city: '',
+            street: '',
+            flat_nr: '',
+            house_nr: '',
+            postcode: '',
+            province: '',
+            country: '',
+            krs: ''
+        });
+        const isUndefined = ref(false);
 
+        if(user.companies[0] === undefined)
+         {
+             isUndefined.value = true;
+         }
+         else{
+             company.value = user.companies[0];
+         }
 
-        const searchNip = () => {
+         const searchNip = () => {
             search({nip:company.value.nip});
         };
 
@@ -205,12 +224,12 @@ export default {
                         if (response.data.success) {
                             company.value.regon = response.data.payload.regon;
                             company.value.nip = response.data.payload.nip;
-                            company.value.city = response.data.payload.postCity;
+                            company.value.city = response.data.payload.city;
                             company.value.company_name = response.data.payload.name;
                             company.value.street = response.data.payload.street;
-                            company.value.loc_nr = response.data.payload.apartmentNumber;
-                            company.value.house_nr = response.data.payload.propertyNumber;
-                            company.value.postcode = response.data.payload.zipCode;
+                            company.value.loc_nr = response.data.payload.loc_nr;
+                            company.value.house_nr = response.data.payload.house_nr;
+                            company.value.postcode = response.data.payload.postcode;
                             company.value.province = response.data.payload.province;
                             company.value.country = 'Polska';
                         } else {
@@ -223,6 +242,35 @@ export default {
             })
         }
 
+        const create = () => {
+            axios.get('/sanctum/csrf-cookie').then(response => {
+                axios.post('api/company/create', {
+                    regon: company.value.regon,
+                    nip: company.value.nip,
+                    company_name: company.value.company_name,
+                    city: company.value.city,
+                    street: company.value.street,
+                    flat_nr: company.value.flat_nr,
+                    house_nr: company.value.house_nr,
+                    postcode: company.value.postcode,
+                    province: company.value.province,
+                    country: company.value.country,
+                    krs: company.value.krs
+                })
+                    .then(response => {
+                        console.log(response.data)
+                        if (response.data.success) {
+                            router.push({path: 'profiles'});
+                            // toast.success(response.data.message);
+                        } else {
+                            toast.error(response.data.message);
+                        }
+                    })
+                    .catch(function (error) {
+                        toast.error(error);
+                    });
+            })
+        }
         const save = () => {
             axios.get('/sanctum/csrf-cookie').then(response => {
                 axios.post('api/company/save', {
@@ -232,7 +280,7 @@ export default {
                     company_name: company.value.company_name,
                     city: company.value.city,
                     street: company.value.street,
-                    flat_nr: company.value.loc_nr,
+                    flat_nr: company.value.flat_nr,
                     house_nr: company.value.house_nr,
                     postcode: company.value.postcode,
                     province: company.value.province,
@@ -265,7 +313,9 @@ export default {
             searchKRS,
             searchNip,
             searchRegon,
-            save
+            save,
+            create,
+            isUndefined
         }
     }
 }
