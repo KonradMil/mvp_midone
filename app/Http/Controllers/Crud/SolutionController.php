@@ -314,7 +314,7 @@ class SolutionController extends Controller
     public function publish(Request $request)
     {
         $solution = Solution::find($request->input('id'));
-        $solution->publish = 1;
+        $solution->status = 1;
         $solution->save();
 
         return response()->json([
@@ -327,7 +327,7 @@ class SolutionController extends Controller
     public function unpublish(Request $request)
     {
         $solution = Solution::find($request->input('id'));
-        $solution->publish = 0;
+        $solution->status = 0;
         $solution->save();
 
         return response()->json([

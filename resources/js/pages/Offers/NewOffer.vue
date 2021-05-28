@@ -24,12 +24,22 @@
                             <div class="flex flex-col-reverse xl:flex-row flex-col">
                                 <div class="flex-1 mt-6 xl:mt-0">
                                     <div class="grid grid-cols-12 gap-x-5">
-                                        <div class="col-span-12 xxl:col-span-6">
-
+                                        <div class="intro-y col-span-12 sm:col-span-6">
+                                            <label for="input-wizard-1" class="form-label">
+                                                {{$t('challengesNew.maxWeight')}}
+                                            </label>
+                                            <TailSelect
+                                                id="input-wizard-1"
+                                                v-model="details.select_detail_weight"
+                                                :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                                <option  :selected="details.select_detail_weight === '' ? '' : 'selected'" disabled>Wybierz...</option>
+                                                <option :selected="det.value === details.select_detail_weight ? '' : 'selected'" v-for="(det,index) in props.selects.select_detail_weight"
+                                                        :value="det.value">{{ det.name }}
+                                                </option>
+                                            </TailSelect>
                                         </div>
-
                                     </div>
-                                    <button class="btn btn-primary w-20 mt-3" @click="">{{$t('profiles.save')}}</button>
+                                    <button class="btn btn-primary w-20 mt-3" @click="save">{{$t('profiles.save')}}</button>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +89,8 @@ name: "NewOffer",
             reaction_time,
             intervention_price,
             work_hour_price,
-            period_of_support
+            period_of_support,
+            save
         }
     }
 }
