@@ -80,8 +80,7 @@ export default {
             types,
             follow,
             unfollow,
-            user,
-            canAccept
+            user
         }
     }
 }
