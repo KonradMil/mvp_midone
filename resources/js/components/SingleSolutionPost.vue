@@ -149,7 +149,7 @@ export default {
             axios.post('/api/solution/publish', {id: solution.id})
                 .then(response => {
                     if (response.data.success) {
-                        solution.published = 1;
+                        solution.status = 1;
                         toast.success('Rozwiązanie zostało opublikowane');
                     } else {
                         // toast.error(response.data.message);
@@ -161,7 +161,7 @@ export default {
             axios.post('/api/solution/unpublish', {id: solution.id})
                 .then(response => {
                     if (response.data.success) {
-                        solution.published = 0;
+                        solution.status = 0;
                         toast.success('Rozwiązanie jest teraz prywatne');
                     } else {
                         // toast.error(response.data.message);
