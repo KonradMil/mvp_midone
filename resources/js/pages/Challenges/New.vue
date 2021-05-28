@@ -206,7 +206,7 @@
                 classNames: 'w-full'
               }" multiple>
                             <option selected disabled>{{ $t('challengesNew.selectTags') }}</option>
-                            <option v-for="(team,index) in teams.list" :value="team.id">{{ team.name }}</option>
+                            <option v-for="(team,index) in user.teams" :value="team.id">{{ team.name }}</option>
                         </TailSelect>
                     </div>
                     <div class="mt-3">
@@ -367,6 +367,7 @@ export default {
         const allowed_publishing = ref(false);
         const publish = ref(false);
         const dropzoneSingleRef = ref();
+        const user = window.Laravel.user;
         const financials = ref({
             days: 260,
             shifts: 4,
@@ -557,7 +558,8 @@ export default {
             financials,
             deleteImage,
             tagsSelected,
-            isDisabled
+            isDisabled,
+            user
         };
     },
     beforeRouteEnter(to, from, next) {
