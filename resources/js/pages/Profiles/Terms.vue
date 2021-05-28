@@ -15,6 +15,7 @@
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
                     v-model="user.privacy_policy"
+                    disabled
                 />
                 <label class="cursor-pointer select-none" for="rodo"
                 >{{$t('profiles.acceptProvisions')}}</label
@@ -32,6 +33,7 @@
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
                     :checked="user.terms"
+                    disabled
                 />
                 <label class="cursor-pointer select-none" for="rodo3"
                 >{{$t('profiles.accept')}}</label
@@ -49,6 +51,8 @@
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
                     :checked="user.pricing"
+                    disabled
+
                 />
                 <label class="cursor-pointer select-none" for="rodo2"
                 >{{$t('profiles.accept')}}</label
