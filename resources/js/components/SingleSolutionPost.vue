@@ -84,6 +84,7 @@
 
 <script>
 import CommentSection from "./social/CommentSection";
+import {getCurrentInstance} from "vue";
 export default {
     name: "SingleSolutionPost",
     components: {CommentSection},
@@ -95,7 +96,8 @@ export default {
     setup(props) {
         const solution = props.solution;
         const user = props.user;
-
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const like = async (solution) => {
             axios.post('/api/solution/user/like', {id: solution.id})
                 .then(response => {
