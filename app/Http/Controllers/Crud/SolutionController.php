@@ -97,9 +97,7 @@ class SolutionController extends Controller
     public function getUserSolutionsFiltered(Request $request) {
         $input = $request->input();
         $query = Solution::query();
-//        if(Auth::user()->type == 'integrator') {
-            $query->where('author_id', '=', Auth::user()->id);
-//        }
+        $query->where('author_id', '=', Auth::user()->id);
 
 //        if (isset($input->rating)) {
 //            $query->whereIn('rating', [($input->rating - 0.5), $input->rating, ($input->rating + 0.5)]);

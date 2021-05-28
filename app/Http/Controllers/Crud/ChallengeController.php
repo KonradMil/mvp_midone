@@ -474,7 +474,7 @@ class ChallengeController extends Controller
     {
         if (isset($request->id)) {
             $challenge = Challenge::with(
-                'solutions', 'author', 'technicalDetails', 'financial_before', 'teams', 'files', 'teams.users', 'teams.users.companies'
+                'solutions', 'author', 'technicalDetails', 'financial_before', 'teams', 'files', 'teams.users', 'teams.users.companies', 'solutions.comments'
             )->find($request->id);
 
         } else {
@@ -492,6 +492,22 @@ class ChallengeController extends Controller
                 $challenge->followed = true;
             } else {
                 $challenge->followed = false;
+            }
+
+            foreach ($challenge->solutions as $sol) {
+                if (Auth::user()->viaLoveReacter()->hasReactedTo($sol, 'Like', 1)) {
+                    $challenge->liked = true;
+                } else {
+                    $challenge->liked = false;
+                }
+
+                if (Auth::user()->viaLoveReacter()->hasReactedTo($sol, 'Follow', 1)) {
+                    $challenge->followed = true;
+                } else {
+                    $challenge->followed = false;
+                }
+                $sol->comments_count = $sol->comments()->count();
+                $sol->likes = $sol->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
             }
         }catch (Exception $e) {
             $challenge->liked = false;

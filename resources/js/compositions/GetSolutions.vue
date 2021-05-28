@@ -9,7 +9,7 @@ export default function GetSolutions() {
     const list = ref([]);
 
     async function getSolutions() {
-        axios.post('api/solution/user/get', {})
+        axios.post('/api/solution/user/get', {})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
