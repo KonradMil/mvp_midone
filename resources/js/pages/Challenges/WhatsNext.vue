@@ -12,14 +12,14 @@
           {{text}}
         </div>
         <div class="font-medium flex mt-5">
-            <button
-                v-if="buttonText != ''"
-                @click="action"
-                type="button"
-                class="btn py-1 px-2 border-white text-white dark:border-gray-700 dark:text-gray-300"
-            >
-                Przejdź
-            </button>
+<!--            <button-->
+<!--                v-if="buttonText != ''"-->
+<!--                @click="action"-->
+<!--                type="button"-->
+<!--                class="btn py-1 px-2 border-white text-white dark:border-gray-700 dark:text-gray-300"-->
+<!--            >-->
+<!--                Przejdź-->
+<!--            </button>-->
 <!--            <button-->
 <!--                type="button"-->
 <!--                class="btn py-1 px-2 border-transparent text-white dark:text-gray-500 ml-auto"-->

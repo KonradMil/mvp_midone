@@ -111,7 +111,6 @@
                                     <th class="whitespace-nowrap">Plik</th>
                                     <th class="whitespace-nowrap">Tytuł</th>
                                     <th class="text-center whitespace-nowrap">Zgłoszono dnia</th>
-                                    <th class="text-center whitespace-nowrap">STATUS</th>
                                     <th class="text-center whitespace-nowrap">ACTIONS</th>
                                 </tr>
                                 </thead>
@@ -145,7 +144,6 @@
                                     <th class="whitespace-nowrap">Nazwa zespołu</th>
                                     <th class="text-center whitespace-nowrap">Założono</th>
                                     <th class="text-center whitespace-nowrap">Liczba członków</th>
-                                    <th class="text-center whitespace-nowrap">ACTIONS</th>
                                 </tr>
                                 </thead>
                                 <tbody>
