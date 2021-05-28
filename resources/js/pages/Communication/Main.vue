@@ -145,7 +145,6 @@
                                     <th class="whitespace-nowrap">Nazwa zespołu</th>
                                     <th class="text-center whitespace-nowrap">Założono</th>
                                     <th class="text-center whitespace-nowrap">Liczba członków</th>
-                                    <th class="text-center whitespace-nowrap">ACTIONS</th>
                                 </tr>
                                 </thead>
                                 <tbody>
