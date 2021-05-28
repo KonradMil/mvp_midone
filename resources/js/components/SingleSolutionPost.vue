@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <div class="p-5" >
+    <div class="p-5 border-t border-gray-200 dark:border-dark-5" >
         <div class="h-40 xxl:h-56 image-fit">
             <img @click="$router.push({name: 'solutionStudio', params: {id: solution.id, type: 'solution', load: solution }});"
                 alt="Icewall Tailwind HTML Admin Template"
@@ -92,6 +92,8 @@
 import CommentSection from "./social/CommentSection";
 import {getCurrentInstance} from "vue";
 import router from "../router";
+import {useToast} from "vue-toastification";
+
 export default {
     name: "SingleSolutionPost",
     components: {CommentSection},
@@ -102,6 +104,7 @@ export default {
         canEdit: Boolean,
     },
     setup(props) {
+        const toast = useToast();
         const solution = props.solution;
         const user = props.user;
         const app = getCurrentInstance();
@@ -146,7 +149,7 @@ export default {
             axios.post('/api/solution/publish', {id: solution.id})
                 .then(response => {
                     if (response.data.success) {
-                        solution.published = true;
+                        solution.published = 1;
                         toast.success('Rozwiązanie zostało opublikowane');
                     } else {
                         // toast.error(response.data.message);
@@ -158,7 +161,7 @@ export default {
             axios.post('/api/solution/unpublish', {id: solution.id})
                 .then(response => {
                     if (response.data.success) {
-                        solution.published = false;
+                        solution.published = 0;
                         toast.success('Rozwiązanie jest teraz prywatne');
                     } else {
                         // toast.error(response.data.message);
