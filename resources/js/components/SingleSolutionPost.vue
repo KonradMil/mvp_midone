@@ -50,8 +50,8 @@
         <div class="mt-2" v-if="canEdit">
             <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'solutionStudio', params: {id: solution.id, type: 'solution', load: solution }});">Edytuj</button>
             <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution">Usuń</button>
-            <button class="btn btn-primary shadow-md mr-2" v-if="!solution.published" @click="publishSolution">Publikuj</button>
-            <button class="btn btn-primary shadow-md mr-2" v-if="solution.published" @click="unpublishSolution">Odpublikuj</button>
+            <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0" @click="publishSolution">Publikuj</button>
+            <button class="btn btn-primary shadow-md mr-2" v-if="solution.published == 1" @click="unpublishSolution">Odpublikuj</button>
         </div>
     </div>
     <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
