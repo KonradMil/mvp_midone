@@ -44,8 +44,12 @@
         <div class="text-gray-700 dark:text-gray-600 mt-2" style="word-break: break-all; max-height: 100px; overflow-y: scroll;">
             {{ solution.description }}
         </div>
-        <div class="mt-2" v-if="canAccept">
+        <div class="mt-2" v-if="canAccept && solution.stage == 1">
             <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution">Akceptuj rozwiązanie</button>
+        </div>
+        <div class="mt-2" v-if="canEdit">
+            <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'solutionStudio', params: {id: solution.id, type: 'solution', load: solution }});">Edytuj</button>
+            <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution">Usuń</button>
         </div>
     </div>
     <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
@@ -85,13 +89,15 @@
 <script>
 import CommentSection from "./social/CommentSection";
 import {getCurrentInstance} from "vue";
+import router from "../router";
 export default {
     name: "SingleSolutionPost",
     components: {CommentSection},
     props: {
         user: Object,
         solution: Object,
-        canAccept: Boolean
+        canAccept: Boolean,
+        canEdit: Boolean,
     },
     setup(props) {
         const solution = props.solution;
@@ -101,14 +107,10 @@ export default {
         const like = async (solution) => {
             axios.post('/api/solution/user/like', {id: solution.id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
-                        // console.log(response.data);
-                        // challenge.likes = challenge.likes + 1;
                         solution.liked = true;
                         console.log(solution);
                         emitter.emit('liked', {id: solution.id})
-                        // getChallengeRepositories();
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -119,10 +121,43 @@ export default {
             axios.post('/api/solution/accept', {id: solution.id})
                 .then(response => {
                     if (response.data.success) {
-                        // solution.liked = true;
-                        // console.log(solution);
-                        // emitter.emit('liked', {id: solution.id})
-                        // getChallengeRepositories();
+                        toast.success('Rozwiązanie zostało zaakceptowane');
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        }
+
+        const deleteSolution = () => {
+            axios.post('/api/solution/delete', {id: solution.id})
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Rozwiązanie zostało usunięte');
+                        router.push({name: 'challenges'});
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        }
+
+        const publishSolution = () => {
+            axios.post('/api/solution/publish', {id: solution.id})
+                .then(response => {
+                    if (response.data.success) {
+                        solution.published = true;
+                        toast.success('Rozwiązanie zostało opublikowane');
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        }
+
+        const unpublishSolution = () => {
+            axios.post('/api/solution/unpublish', {id: solution.id})
+                .then(response => {
+                    if (response.data.success) {
+                        solution.published = false;
+                        toast.success('Rozwiązanie jest teraz prywatne');
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -134,7 +169,10 @@ export default {
             user,
             like,
             props,
-            acceptSolution
+            acceptSolution,
+            deleteSolution,
+            unpublishSolution,
+            publishSolution
         }
     }
 }

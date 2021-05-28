@@ -12,8 +12,8 @@
                     </div>
                     <div class="intro-y grid grid-cols-12 gap-6 mt-5">
                         <div v-for="(solution, index) in challenge.solutions" :key="index"
-                             class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box">
-                            <SingleSolutionPost :user="user" :solution="solution" :canAccept="user.id === challenge.author_id"></SingleSolutionPost>
+                             class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected)? 'solution-selected': ''">
+                            <SingleSolutionPost :user="user" :solution="solution" :canAccept="user.id === challenge.author_id" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
                         </div>
                     </div>
                 </div>

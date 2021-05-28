@@ -310,4 +310,42 @@ class SolutionController extends Controller
             'payload' => $solution
         ]);
     }
+
+    public function publish(Request $request)
+    {
+        $solution = Solution::find($request->input('id'));
+        $solution->publish = 1;
+        $solution->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Opublikowano poprawnie',
+            'payload' => $solution
+        ]);
+    }
+
+    public function unpublish(Request $request)
+    {
+        $solution = Solution::find($request->input('id'));
+        $solution->publish = 0;
+        $solution->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Rozwiązanie jest teraz prywatne',
+            'payload' => $solution
+        ]);
+    }
+
+    public function delete(Request $request)
+    {
+        $solution = Solution::find($request->input('id'));
+        $solution->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Usunięto poprawnie',
+            'payload' => ''
+        ]);
+    }
 }
