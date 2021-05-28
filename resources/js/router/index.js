@@ -27,6 +27,7 @@ import ReportReview from "../pages/Communication/ReportReview";
 import TermsMain from "../pages/Terms/TermsMain";
 import ForgotPassword from "../pages/ForgotPassword";
 import Workshop from "../pages/Unity/Workshop/Workshop";
+import NewOffer from "../pages/Offers/NewOffer";
 
 export const routes = [
     {
@@ -84,6 +85,12 @@ export const routes = [
                 name: 'workshop',
                 path: '/workshop',
                 component: Workshop,
+                props: true
+            },
+            {
+                name: 'offer-add',
+                path: '/offer/add',
+                component: NewOffer,
                 props: true
             },
             {

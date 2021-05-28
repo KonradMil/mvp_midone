@@ -33,8 +33,8 @@
         </div>
     </div>
     <div class="p-5" >
-        <div class="h-40 xxl:h-56 image-fit" @click="$router.push({name: 'solutionStudio', params: {id: solution.id, type: 'solution', load: solution }});">
-            <img
+        <div class="h-40 xxl:h-56 image-fit">
+            <img @click="$router.push({name: 'solutionStudio', params: {id: solution.id, type: 'solution', load: solution }});"
                 alt="Icewall Tailwind HTML Admin Template"
                 class="rounded-md"
                 :src="'/' + solution.screenshot_path"

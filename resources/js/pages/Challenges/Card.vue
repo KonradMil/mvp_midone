@@ -96,6 +96,7 @@
                         </button>
                         <button
                             v-if="challenge.stage == 2"
+                            @click="$router.push({name: 'offer-add', params: {challenge: challenge}})"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto">
                             Złóż ofertę
