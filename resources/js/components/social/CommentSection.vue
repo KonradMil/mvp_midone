@@ -99,7 +99,7 @@ export default {
 
         const addCommentObject = async (id) => {
             current_object_focus.value = id;
-            axios.post('api/user/comment', {id: id, message: message.value, type: props.type})
+            axios.post('/api/user/comment', {id: id, message: message.value, type: props.type})
                 .then(response => {
                     if (response.data.success) {
                         comments.value = response.data.payload.comments;
