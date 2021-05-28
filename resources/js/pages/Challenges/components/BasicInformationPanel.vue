@@ -21,7 +21,7 @@
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
                         <strong>Typ:</strong> {{ types[challenge.type] }}
                     </div>
-                    <div class="text-gray-700 dark:text-gray-600 mt-2">
+                    <div class="text-gray-700 dark:text-gray-600 mt-2" style="word-break: break-all; max-height: 100px; overflow-y: scroll;">
                         <strong>Opis:</strong> {{ challenge.description }}
                     </div>
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
