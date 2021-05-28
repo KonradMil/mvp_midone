@@ -118,6 +118,7 @@ import QuestionsPanel from "./components/QuestionsPanel";
 import router from "../../router";
 import SolutionsPanel from "./components/SolutionsPanel";
 import TeamsPanel from "./components/TeamsPanel";
+import {useToast} from "vue-toastification";
 
 export default defineComponent({
     name: 'Card',
@@ -133,6 +134,7 @@ export default defineComponent({
         id: Number
     },
     setup(props, {emit}) {
+        const toast = useToast();
         const announcementRef = ref();
         const newProjectsRef = ref();
         const challenge = ref({});
