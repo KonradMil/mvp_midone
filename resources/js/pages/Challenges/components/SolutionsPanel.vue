@@ -42,6 +42,9 @@ export default {
         const types = require("../../../json/types.json");
         const user = ref({});
         const canAccept = computed(() => {
+            console.log('USER ID');
+            console.log(user.id);
+            console.log(challenge.author_id);
             if(user.id === challenge.author_id) {
                 return true;
             } else {
