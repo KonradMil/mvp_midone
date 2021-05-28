@@ -9,11 +9,7 @@
                 <div class="intro-y box mt-5 lg:mt-0">
                     <div class="relative flex items-center p-5">
                         <div class="w-12 h-12 image-fit">
-                            <img
-                                v-if="challenge.screenshot_path != undefined"
-                                class="rounded-full"
-                                :alt="challenge.name" :src="'/' + challenge.screenshot_path"
-                            />
+                            <img v-if="challenge.screenshot_path != undefined" class="rounded-full" :alt="challenge.name" :src="'/' + challenge.screenshot_path"/>
                         </div>
                         <div class="ml-4 mr-auto">
                             <div class="font-medium text-base">
@@ -23,8 +19,7 @@
                         </div>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
-                        <a
-                            class="flex items-center"
+                        <a class="flex items-center"
                             href=""
                             @click.prevent="activeTab = 'podstawowe'"
                             :class="(activeTab == 'podstawowe')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
@@ -87,15 +82,13 @@
                         </button>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id != user.id && user.type == 'integrator'">
-                        <button
-                            v-if="challenge.stage == 1"
+                        <button v-if="challenge.stage == 1"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
                             @click.prevent="addSolution">
                             Dodaj rozwiązanie
                         </button>
-                        <button
-                            v-if="challenge.stage == 2"
+                        <button v-if="challenge.stage == 2"
                             @click="$router.push({name: 'offer-add', params: {challenge: challenge}})"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto">

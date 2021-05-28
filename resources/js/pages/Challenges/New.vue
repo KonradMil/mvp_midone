@@ -483,10 +483,10 @@ export default {
             if (props.challenge_id != undefined) {
                 id.value = props.challenge_id;
                 getChallengeCardRepositories();
+                getTeamsRepositories();
             }
         });
 
-        getTeamsRepositories();
 
         const getChallengeCardRepositories = async () => {
             await axios.post('/api/challenge/user/get/card', {id: props.challenge_id})
