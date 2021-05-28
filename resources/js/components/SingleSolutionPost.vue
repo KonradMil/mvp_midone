@@ -44,7 +44,7 @@
         <div class="text-gray-700 dark:text-gray-600 mt-2" style="word-break: break-all; max-height: 100px; overflow-y: scroll;">
             {{ solution.description }}
         </div>
-        <div class="mt-2" v-if="canAccept && solution.stage == 1">
+        <div class="mt-2" v-if="canAccept">
             <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution">Akceptuj rozwiązanie</button>
         </div>
         <div class="mt-2" v-if="canEdit">
