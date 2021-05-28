@@ -150,7 +150,9 @@
 @import "components/ads-box";
 @import "components/full-calendar";
 @import "components/pristine";
-
+.vue-avatar--wrapper {
+    background-color:  #930f68 !important;
+}
 .active-row {
     background-color: rgba(147, 15, 104, 0.4);
 }
