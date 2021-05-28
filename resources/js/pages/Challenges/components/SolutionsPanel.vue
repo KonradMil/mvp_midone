@@ -11,12 +11,11 @@
                         Nie ma jeszcze żadnych rozwiązań.
                     </div>
                     <div class="intro-y grid grid-cols-12 gap-6 mt-5">
-                    <div v-for="(solution, index) in challenge.solutions" :key="index"
-                        class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box">
-                        <SingleSolutionPost :user="user" :solution="solution" :canAccept="canAccept"></SingleSolutionPost>
+                        <div v-for="(solution, index) in challenge.solutions" :key="index"
+                             class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box">
+                            <SingleSolutionPost :user="user" :solution="solution" :canAccept="user.id === challenge.author_id"></SingleSolutionPost>
+                        </div>
                     </div>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -41,16 +40,7 @@ export default {
         const toast = useToast();
         const types = require("../../../json/types.json");
         const user = ref({});
-        const canAccept = computed(() => {
-            console.log('USER ID');
-            console.log(user.id);
-            console.log(challenge.author_id);
-            if(user.id === challenge.author_id) {
-                return true;
-            } else {
-                return false;
-            }
-        });
+
 
         onMounted(function () {
             if (window.Laravel.user) {
