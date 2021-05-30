@@ -1,8 +1,8 @@
 <template>
     <div class="flex fixed h-full z-50 pt-14" style="top: 0; right: 0; pointer-events: none;">
         <div class="flex-1 pt-2 mr-10">
-            <div v-for="(icon, index) in icons" :key="'rightIcon_' + index" v-if="index != 'operationalanalysis' || type == 'solution'">
-                <UnityButton :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="rightbuttonclick" class="unity-button" />
+            <div v-for="(icon, index) in icons" :key="'rightIcon_' + index" v-if="index != 'operationalanalysis' || type == 'solution'" class="unity-button">
+                <UnityButton :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="rightbuttonclick"  />
             </div>
         </div>
     </div>
