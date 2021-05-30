@@ -1,11 +1,5 @@
 <template>
-    <div
-        id="right-panel"
-        class="modal modal-slide-over"
-
-        tabindex="-1"
-        aria-hidden="true"
-    >
+    <div id="right-panel" class="modal modal-slide-over" tabindex="-1" aria-hidden="true" style="overflow: hidden;">
         <!--        data-backdrop="static"-->
         <div class="modal-dialog">
             <div class="modal-content">
@@ -17,10 +11,9 @@
                     <h2 class="font-medium text-base mr-auto">
                         {{currentTitle}}
                     </h2>
-<!--                    <button class="btn btn-outline-secondary hidden sm:flex">-->
-<!--                        <FileIcon class="w-4 h-4 mr-2" />-->
-<!--                        Download Docs-->
-<!--                    </button>-->
+                    <button class="btn btn-outline-secondary hidden sm:flex"  data-dismiss="modal">
+                      Zamknij
+                    </button>
                 </div>
                 <!-- END: Slide Over Header -->
                 <!-- BEGIN: Slide Over Body -->
