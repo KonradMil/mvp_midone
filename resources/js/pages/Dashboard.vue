@@ -110,11 +110,11 @@
                         <h2 class="text-lg font-medium truncate mr-5">
                             Ostatnie aktywności
                         </h2>
-                        <a
-                            href=""
-                            class="ml-auto text-theme-1 dark:text-theme-10 truncate"
-                        >Więcej</a
-                        >
+<!--                        <a-->
+<!--                            href=""-->
+<!--                            class="ml-auto text-theme-1 dark:text-theme-10 truncate"-->
+<!--                        >Więcej</a-->
+<!--                        >-->
                     </div>
                     <div class="report-timeline mt-5 relative">
                         <div class="intro-x text-gray-500 text-xs text-center my-4">
@@ -136,7 +136,7 @@
                                     <div class="font-medium">
                                         Nowe wyzwanie
                                     </div>
-                                    <div class="text-xs text-gray-500 ml-auto">2h temu</div>
+                                    <div class="text-xs text-gray-500 ml-auto">{{$dayjs(log.created_at).fromNow()}}</div>
                                 </div>
                                 <div class="text-gray-600 mt-1">{{log.description}}</div>
                             </div>

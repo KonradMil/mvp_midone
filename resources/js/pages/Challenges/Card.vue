@@ -51,7 +51,7 @@
                             Pytania
                         </a>
                     </div>
-                    <div class="p-5 border-t border-gray-200 dark:border-dark-5">
+                    <div class="p-5 border-t border-gray-200 dark:border-dark-5" v-if="(challenge.author_id == user.id)">
                         <a class="flex items-center" href=""
                            @click.prevent="activeTab = 'zespoly'"
                            :class="(activeTab == 'zespoly')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
@@ -103,7 +103,7 @@
             <TechnicalInformationPanel :challenge="challenge" v-if="activeTab == 'techniczne'"></TechnicalInformationPanel>
             <QuestionsPanel v-if="activeTab == 'pytania'" :id="challenge.id"></QuestionsPanel>
             <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge"></SolutionsPanel>
-            <TeamsPanel v-if="activeTab == 'zespoly'" :teams="challenge.teams"> </TeamsPanel>
+            <TeamsPanel v-if="activeTab == 'zespoly' && (challenge.author_id == user.id)" :teams="challenge.teams"> </TeamsPanel>
         </div>
     </div>
 </template>

@@ -150,6 +150,9 @@
 @import "components/ads-box";
 @import "components/full-calendar";
 @import "components/pristine";
+.unity-button {
+    pointer-events: auto;
+}
 .vue-avatar--wrapper {
     background-color:  #930f68 !important;
 }

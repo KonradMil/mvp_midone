@@ -46,6 +46,7 @@ window.Echo = new Echo({
 const app = createApp(App)
 globalComponents(app);
 utils(app);
+dayjs.extend(relativeTime);
 app.config.globalProperties.$dayjs = dayjs;
 app.config.globalProperties.$axios = axios;
 app.config.globalProperties.cash = cash;

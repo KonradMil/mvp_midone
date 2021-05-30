@@ -27,7 +27,7 @@
 <!--            <div  v-if="mode == 'animation'" v-for="(icon, index) in animation_icons" :key="'animationIcon_' + index" class="bot-i w-30 pl-6">-->
 <!--                <UnityButton    :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="animationbuttonclick" />-->
 <!--            </div>-->
-            <div  v-if="mode == 'layout'" v-for="(icon, index) in layout_icons" :key="'layoutIcon_' + index" class="bot-i w-30 pl-6">
+            <div  v-if="mode == 'layout'" v-for="(icon, index) in layout_icons" :key="'layoutIcon_' + index" class="bot-i w-30 pl-6 unity-button">
                 <UnityButton    :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="layoutbuttonclick" />
             </div>
         </div>
