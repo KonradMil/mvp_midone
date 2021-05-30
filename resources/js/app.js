@@ -17,6 +17,7 @@ import Echo from 'laravel-echo';
 import mitt from 'mitt'
 import lazyPlugin from 'vue3-lazy'
 import VueCookies from 'vue3-cookies'
+import relativeTime from 'dayjs/esm/plugin/relativeTime';
 
 const emitter = mitt();
 const options = {
