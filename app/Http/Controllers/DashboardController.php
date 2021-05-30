@@ -13,7 +13,9 @@ class DashboardController extends Controller
     public function getDataForDashboard()
     {
         $logs = Activity::where('description', 'LIKE', '%opublikowane%')->take(10)->get();
-        foreach ($logs as $log) {
+        $uniqueLogs = $logs->unique('description');
+        $uniqueLogs->values()->all();
+        foreach ($uniqueLogs as $log) {
             $challenge = Challenge::find($log->subject->id);
             $logs->challenge = $challenge;
         }
