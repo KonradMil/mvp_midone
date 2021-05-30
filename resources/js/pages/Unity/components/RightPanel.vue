@@ -2,10 +2,11 @@
     <div
         id="right-panel"
         class="modal modal-slide-over"
-        data-backdrop="static"
+
         tabindex="-1"
         aria-hidden="true"
     >
+        <!--        data-backdrop="static"-->
         <div class="modal-dialog">
             <div class="modal-content">
                 <a data-dismiss="modal" href="javascript:;">

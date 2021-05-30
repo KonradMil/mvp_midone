@@ -150,6 +150,15 @@
 @import "components/ads-box";
 @import "components/full-calendar";
 @import "components/pristine";
+#right-panel {
+    pointer-events: none;
+}
+.modal-content {
+    pointer-events: auto !important;
+}
+#right-panel .modal {
+    background: transparent !important;
+}
 .unity-button {
     pointer-events: auto;
 }
