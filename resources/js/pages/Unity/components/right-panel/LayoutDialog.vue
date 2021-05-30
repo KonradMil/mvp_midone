@@ -2,7 +2,7 @@
     <div class="mt-3">
         <label for="modal-form-2" class="form-label">Kolor tła</label>
         <div class="vue-swatches" tabindex="-1" id="modal-form-2"  modelvalue="#222F3D" data-v-530b672a=""><!-- Trigger --><!--v-if-->
-            <div class="vue-swatches__container vue-swatches--inline" style="background-color: rgb(255, 255, 255);"><!-- The wrapper handles the internal spacing -->
+            <div class="vue-swatches__container vue-swatches--inline" style="background-color: transparent;"><!-- The wrapper handles the internal spacing -->
                 <div class="vue-swatches__wrapper"><!-- for nested distribution --><!-- for normal distribution -->
                     <div class="vue-swatches__swatch" aria-label="#1FBC9C" @click="l.fillColor = '#1FBC9C'" role="button" tabindex="0" style="width: 42px; height: 42px; border-radius: 11px; background-color: rgb(31, 188, 156); cursor: pointer; margin-right: 11px; margin-bottom: 11px;"><!--v-if-->
                         <div class="vue-swatches__check__wrapper vue-swatches--has-children-centered" style="display: none;">
@@ -138,7 +138,7 @@
     <div class="mt-3">
         <label for="modal-form-2" class="form-label">Kolor tła</label>
         <div class="vue-swatches" tabindex="-1" id="modal-form-33"  modelvalue="#222F3D" data-v-530b672a=""><!-- Trigger --><!--v-if-->
-            <div class="vue-swatches__container vue-swatches--inline" style="background-color: rgb(255, 255, 255);"><!-- The wrapper handles the internal spacing -->
+            <div class="vue-swatches__container vue-swatches--inline" style="background-color: transparent);"><!-- The wrapper handles the internal spacing -->
                 <div class="vue-swatches__wrapper"><!-- for nested distribution --><!-- for normal distribution -->
                     <div class="vue-swatches__swatch" aria-label="#1FBC9C" @click="l.lineColor = '#1FBC9C'" role="button" tabindex="0" style="width: 42px; height: 42px; border-radius: 11px; background-color: rgb(31, 188, 156); cursor: pointer; margin-right: 11px; margin-bottom: 11px;"><!--v-if-->
                         <div class="vue-swatches__check__wrapper vue-swatches--has-children-centered" style="display: none;">
