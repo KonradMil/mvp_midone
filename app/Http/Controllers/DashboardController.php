@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $uniqueLogs->values()->all();
         foreach ($uniqueLogs as $log) {
             $challenge = Challenge::find($log->subject->id);
-            $logs->challenge = $challenge;
+            $log->challenge = $challenge;
         }
         $posts = Post::where('status', '=', 'publish')->orderBy('created_at', 'DESC')->take(10)->get();
         $solutions = Solution::query()
@@ -33,7 +33,7 @@ class DashboardController extends Controller
             'payload' => [
                 'posts' => $posts,
                 'solutions' => $solutions,
-                'logs' => $logs
+                'logs' => $uniqueLogs
             ]
         ]);
     }
