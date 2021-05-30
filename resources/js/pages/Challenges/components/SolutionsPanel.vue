@@ -9,6 +9,13 @@
                 <div class="px-5 pt-5">
                     <div v-if="challenge.solutions.length == 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
                         Nie ma jeszcze żadnych rozwiązań.
+                        <div v-if="user.type == 'integrator'">
+                            <p>
+                                W tej chwili nie ma żadnych wyzwań, poinformujemy Cię jak tylko jakieś będą dostępne.
+                            </p>
+                            <button class="btn btn-primary shadow-md mr-2" @click="addSolution">{{$t('challengesMain.addChallenge')}}</button>
+                        </div>
+
                     </div>
                     <div class="intro-y grid grid-cols-12 gap-6 mt-5">
                         <div v-for="(solution, index) in challenge.solutions" :key="index"
@@ -21,7 +28,6 @@
                                     <SingleSolutionPost v-if="solution.status === 1" :user="user" :solution="solution" :canAccept="user.id === challenge.author_id" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
                                 </div>
                             </div>
-
                             </div>
                     </div>
                 </div>
@@ -34,6 +40,7 @@
 import {computed, onMounted, reactive, ref} from "vue";
 import {useToast} from "vue-toastification";
 import SingleSolutionPost from "../../../components/SingleSolutionPost";
+import router from "../../../router";
 
 export default {
     name: "SolutionsPanel",
@@ -49,12 +56,23 @@ export default {
         const types = require("../../../json/types.json");
         const user = ref({});
 
-
         onMounted(function () {
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
         });
+
+        const addSolution = () => {
+            axios.post('/api/solution/create', {id: challenge.value.id})
+                .then(response => {
+                    if (response.data.success) {
+                        console.log(response.data.payload);
+                        router.push({name: 'solutionStudio', params: {id: response.data.payload.id, type: 'solution', load: response.data.payload }});
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        };
 
         const follow = () => {
             axios.post('/api/solution/follow', {id: props.challenge.id})
@@ -86,7 +104,8 @@ export default {
             types,
             follow,
             unfollow,
-            user
+            user,
+            addSolution
         }
     }
 }

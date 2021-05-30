@@ -12,12 +12,22 @@
 @if (Auth::check())
     <script>
         window.unity_path = '{{env('UNITY_PATH')}}';
+        @php
+        if(empty(Auth::user()->companies->toArray())) {
+               $company = new App\Models\Company();
+               $company->author_id = Auth::user()->id;
+                $company->save();
+                $company->users()->attach(Auth::user());
+        } else {
+            $company = Auth::user()->companies->toArray()[0];
+        }
+        @endphp
         window.Laravel = {!!json_encode([
                'isLoggedin' => true,
                'user' => Auth::user(),
                'teams' => Auth::user()->teams,
                'notifications' => Auth::user()->notifications,
-               'company' => Auth::user()->companies,
+               'company' => $company,
            ])!!}
     </script>
 @else

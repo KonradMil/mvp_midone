@@ -28,20 +28,23 @@
         </div>
         <div class="intro-y grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Blog Layout -->
-            <div
-                v-for="(challenge, index) in challenges.list"
-                :key="index"
-                class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box"
-            >
-                <div
-                    class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4"
-                >
+            <div class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium">
+                <div v-if="challenges.list == undefined || challenges.list.length == 0">
+                    <p v-if="user.type == 'integrator'">
+                        W tej chwili nie ma żadnych wyzwań, poinformujemy Cię jak tylko jakieś będą dostępne.
+                    </p>
+                    <div v-if="user.type === 'investor'">
+                        <p>
+                            Nie dodałeś jeszcze żadnych wyzwań.
+                        </p>
+                        <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
+                    </div>
+                </div>
+            </div>
+            <div v-for="(challenge, index) in challenges.list" :key="index" class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+                <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
                     <div class="w-10 h-10 flex-none image-fit">
-                        <img
-                            alt="Icewall Tailwind HTML Admin Template"
-                            class="rounded-full"
-                            :src="'/' + challenge.screenshot_path"
-                        />
+                        <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" :src="'/' + challenge.screenshot_path"/>
                     </div>
                     <div class="ml-3 mr-auto" @click="$router.push( {path : '/challenges/card/' + challenge.id})">
                         <a href="" class="font-medium">{{ challenge.name }}</a>
