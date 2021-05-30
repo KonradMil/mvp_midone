@@ -113,6 +113,14 @@ export default {
             }
         });
 
+        emitter.on('lockState', e => {
+            if(e.action == 'lock') {
+                lockInput();
+            } else {
+                unlockInput();
+            }
+        });
+
         const lockInput = () => {
             console.log('LOCK');
             handleUnityActionOutgoing({action: "lockInput", data: ''});
