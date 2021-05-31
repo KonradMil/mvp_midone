@@ -105,6 +105,7 @@
             <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge"></SolutionsPanel>
             <TeamsPanel v-if="activeTab == 'zespoly' && (challenge.author_id == user.id)" :teams="challenge.teams"> </TeamsPanel>
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :offer_id="temp_offer_id"></OfferAdd>
+            <Offers v-if="activeTab == 'oferty'"></Offers>
         </div>
     </div>
 </template>
@@ -121,10 +122,12 @@ import SolutionsPanel from "./components/SolutionsPanel";
 import TeamsPanel from "./components/TeamsPanel";
 import {useToast} from "vue-toastification";
 import OfferAdd from "./components/OfferAdd";
+import Offers from "./components/Offers";
 
 export default defineComponent({
     name: 'Card',
     components: {
+        Offers,
         OfferAdd,
         TeamsPanel,
         SolutionsPanel,
@@ -151,7 +154,9 @@ export default defineComponent({
         const selected_solution_id = ref(null);
         const types = require("../../json/types.json");
 
-
+        emitter.on('changeToOfferAdd', e => () => {
+           activeTab.value = 'addingoffer';
+        });
 
         const getCardChallengeRepositories = async (id) => {
             await axios.post('/api/challenge/user/get/card', {id: id})

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Offer;
 use App\Models\Solutions\Solution;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OfferController extends Controller
 {
@@ -17,6 +18,17 @@ class OfferController extends Controller
             'success' => true,
             'message' => 'Pobrano ofertę poprawnie.',
             'payload' => $offer
+        ]);
+    }
+
+    public function getAll(Request $request)
+    {
+        $offers = Offer::where('installer_id', '=', Auth::user()->id)->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano oferty poprawnie.',
+            'payload' => $offers
         ]);
     }
 

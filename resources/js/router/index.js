@@ -28,6 +28,7 @@ import TermsMain from "../pages/Terms/TermsMain";
 import ForgotPassword from "../pages/ForgotPassword";
 import Workshop from "../pages/Unity/Workshop/Workshop";
 import NewOffer from "../pages/Offers/NewOffer";
+import Offers from "../pages/Challenges/components/Offers";
 
 export const routes = [
     {
@@ -91,6 +92,12 @@ export const routes = [
                 name: 'offer-add',
                 path: '/offer/add',
                 component: NewOffer,
+                props: true
+            },
+            {
+                name: 'offers',
+                path: '/offers',
+                component: Offers,
                 props: true
             },
             {
