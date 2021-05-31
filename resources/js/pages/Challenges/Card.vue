@@ -162,7 +162,7 @@ export default defineComponent({
            activeTab.value = 'addingoffer';
         });
 
-        emitter.on('changeToTeamsSolution', e => () => {
+        emitter.on('update:activeTab', e => () => {
             activeTab.value = 'teamsSolution';
         });
 

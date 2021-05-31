@@ -106,6 +106,7 @@ export default {
         canAccept: Boolean,
         canEdit: Boolean,
     },
+    emits: ["update:activeTab"],
     setup(props,context) {
         const toast = useToast();
         const solution = props.solution;
