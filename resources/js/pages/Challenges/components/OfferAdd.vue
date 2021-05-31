@@ -193,7 +193,7 @@ name: "OfferAdd",
         });
 
         const save = () => {
-            axios.post('/api/offers/save', {
+            axios.post('/api/offer/save', {
                 id: props.offer_id,
                 solution_id: props.solution_id,
                 price_of_delivery: price_of_delivery.value,
