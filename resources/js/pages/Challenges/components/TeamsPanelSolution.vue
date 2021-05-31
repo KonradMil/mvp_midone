@@ -15,7 +15,7 @@
                                 v-model="new_team_name"
                             />
                         </div>
-                        <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addTeam">{{$t('teams.addTeam')}}</button>
+                        <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addSolutionTeam">{{$t('teams.addTeam')}}</button>
                     </div>
                     <!-- BEGIN: Users Layout -->
                     <div v-for="(team, index) in teams.list" :key="'team_' + index" class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12">
@@ -116,6 +116,7 @@ import GetTeams from '../../../compositions/GetTeams'
 import GetInvites from '../../../compositions/GetInvites'
 import AcceptInvite from '../../../compositions/AcceptInvite'
 import AddTeam from '../../../compositions/AddTeam'
+import AddSolutionTeam from '../../../compositions/AddSolutionTeam'
 import AddTeamMember from '../../../compositions/AddTeamMember'
 import {useToast} from "vue-toastification";
 import Avatar from "../../../components/avatar/Avatar";
@@ -125,7 +126,8 @@ export default {
     name: "Teams",
     components: {Avatar, Modal},
     props: {
-        team: Object
+        team: Object,
+        solution: Object
     },
     setup(props, {emit}) {
         const showDetails = ref([]);
@@ -187,7 +189,7 @@ export default {
             await getTeamsRepositories();
         }
 
-        const addTeam = async () => {
+        const addSolutionTeam = async () => {
             if(new_team_name.value === '') {
                 toast.error('Nazwa nie może być pusta');
                 isDisabled.value=true;
@@ -195,12 +197,12 @@ export default {
                 toast.error('Nazwa nie może mieć mniej niż 3 znaki');
                 isDisabled.value=true;
             } else {
-                await AddTeam(new_team_name.value)
-                setTimeout(function () {
-                    getTeamsRepositories(search.value);
-                    new_team_name.value = '';
-                    modalClosed();
-                }, 1000);
+                await AddSolutionTeam(new_team_name.value, props.solution.id)
+                // setTimeout(function () {
+                //     getTeamsRepositories(search.value);
+                //     new_team_name.value = '';
+                //     modalClosed();
+                // }, 1000);
                 toast.success('Success!')
                 isDisabled.value=true;
             }
@@ -248,7 +250,7 @@ export default {
         return {
             user,
             teams,
-            addTeam,
+            addSolutionTeam,
             search,
             new_team_name,
             show,

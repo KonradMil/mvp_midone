@@ -114,6 +114,7 @@ Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function 
     Route::post('create', [SolutionController::class, 'create']);
     Route::post('save/financials/{financial}', [SolutionController::class, 'saveSolutionFinancials']);
     Route::post('user/save/teams/{solution}', [SolutionController::class, 'saveSolutionTeams']);
+    Route::post('user/add/team/{solution}', [SolutionController::class, 'addSolutionTeam']);
     Route::post('save', [SolutionController::class, 'saveSolution']);
     Route::post('user/like', [SolutionController::class, 'likeSolution']);
     Route::post('user/comment', [SolutionController::class, 'commentSolution']);

@@ -88,7 +88,7 @@
             type="solution"
         />
     </div>
-    <TeamsPanelSolution v-if="activeTab === 'zespoly' && (solution.author_id === user.id)" v-model:teams="teams"/>
+    <TeamsPanelSolution v-if="activeTab === 'zespoly' && (solution.author_id === user.id)" :solution="solution"/>
 </template>
 
 <script>
