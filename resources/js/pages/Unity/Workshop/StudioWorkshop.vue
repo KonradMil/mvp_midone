@@ -27,6 +27,7 @@ export default {
         const progress = ref();
         const error = ref(null);
         const unity_workshop_path = window.unity_workshop_path;
+        const unity_path = window.unity_path;
         containerId.value = 'unity-container-' + Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
         const setFullscreen = () => {
             gameInstance.value.SetFullscreen(1);
@@ -46,7 +47,7 @@ export default {
         onBeforeMount(() => {
             // if (props.unityLoader) {
                 const script = document.createElement('SCRIPT')
-            script.setAttribute('src', '/s3/unity/UnityLoader.js')
+             script.setAttribute('src', '/s3/unity/' + unity_path + '.loader.js')
                 script.setAttribute('async', '')
                 script.setAttribute('defer', '')
                 document.body.appendChild(script)
