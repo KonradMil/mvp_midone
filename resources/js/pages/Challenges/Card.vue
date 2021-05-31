@@ -219,16 +219,34 @@ export default defineComponent({
         }
 
         const addSolution = () => {
+
             axios.post('/api/solution/create', {id: challenge.value.id})
                 .then(response => {
                     if (response.data.success) {
                         console.log(response.data.payload);
+                        delete_cookie('type');
+                        delete_cookie('id');
                        router.push({name: 'solutionStudio', params: {id: response.data.payload.id, type: 'solution', load: response.data.payload }});
                     } else {
                         // toast.error(response.data.message);
                     }
                 })
         };
+
+        const delete_cookie = ( name, path = '/', domain ) => {
+            if( get_cookie( name ) ) {
+                document.cookie = name + "=" +
+                    ((path) ? ";path="+path:"")+
+                    ((domain)?";domain="+domain:"") +
+                    ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+            }
+        }
+
+        const get_cookie = (name) => {
+            return document.cookie.split(';').some(c => {
+                return c.trim().startsWith(name + '=');
+            });
+        }
 
         const prevAnnouncement = () => {
             const el = announcementRef.value;
