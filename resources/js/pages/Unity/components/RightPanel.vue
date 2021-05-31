@@ -18,8 +18,8 @@
                 <!-- END: Slide Over Header -->
                 <!-- BEGIN: Slide Over Body -->
                 <div class="modal-body" @mouseenter="lock" @mouseleave="unlock">
-                    <LabelDialog v-if="content == 'label'" v-model:label="label"/>
-                    <CommentDialog v-if="content == 'comment'" v-model:comment="comment"/>
+                    <LabelDialog v-if="content == 'label'" :key="temp_label_id" v-model:label="label"/>
+                    <CommentDialog v-if="content == 'comment'" :key="temp_comment_id" v-model:comment="comment"/>
                     <LayoutDialog v-if="content == 'layout'" v-model:layout="layout"/>
                     <LineDialog v-if="content == 'line'" v-model:modelValue="line"/>
                     <AnimableDialog v-if="content == 'animable'" v-model:animable="animable"/>
@@ -33,7 +33,7 @@
                     <FinancialDialog v-if="content == 'financial'" v-model:financial_before="financial_before" v-model:financial_after="financial_after" :type="type"></FinancialDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
                     <OperationDialog v-if="content == 'operational'" ></OperationDialog>
-                    <SettingsDialog v-if="content == 'settings'" v-model:technical="technical" ></SettingsDialog>
+                    <SettingsDialog v-if="content == 'settings'" v-model:technical="technical"  ></SettingsDialog>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
