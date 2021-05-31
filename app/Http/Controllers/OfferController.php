@@ -41,8 +41,10 @@ class OfferController extends Controller
         }
 
         $check->fill($request->input());
-        $solution = Solution::find($request->input('solution_id'));
-        $check->challenge_id = $solution->challenge_id;
+
+//        $solution = Solution::find($request->input('solution_id'));
+//        $check->challenge_id = $solution->challenge_id;
+
         $check->save();
 
         return response()->json([
