@@ -50,6 +50,7 @@ export default {
         const user = window.Laravel.user;
 
         const switchTab = () => {
+            console.log('dsadsadasddas231');
             emitter.emit('changeToOfferAdd', {id: 0})
         }
 
