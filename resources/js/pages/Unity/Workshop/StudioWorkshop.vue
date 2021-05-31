@@ -46,7 +46,7 @@ export default {
         onBeforeMount(() => {
             // if (props.unityLoader) {
                 const script = document.createElement('SCRIPT')
-                script.setAttribute('src', '/s3/unity/' + unity_workshop_path + '.loader.js')
+                script.setAttribute('src', '/s3/' + unity_workshop_path + '.loader.js')
                 script.setAttribute('async', '')
                 script.setAttribute('defer', '')
                 document.body.appendChild(script)
@@ -57,6 +57,7 @@ export default {
         })
 
         const instantiate = () => {
+            console.log('INST');
             console.log(document.querySelector('#' + containerId.value));
             createUnityInstance(document.querySelector('#' + containerId.value), {
                 dataUrl: "/s3/" + unity_workshop_path + ".data.br",
