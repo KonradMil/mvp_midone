@@ -105,7 +105,7 @@
             <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge"></SolutionsPanel>
             <TeamsPanel v-if="activeTab == 'zespoly' && (challenge.author_id == user.id)" :teams="challenge.teams"> </TeamsPanel>
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :offer_id="temp_offer_id"></OfferAdd>
-            <Offers v-if="activeTab == 'oferty'"></Offers>
+            <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab"></Offers>
         </div>
     </div>
 </template>

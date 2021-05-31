@@ -41,17 +41,17 @@ import {getCurrentInstance, onMounted, ref} from "vue";
 export default {
     name: "Offers",
     props: {
-
+        activeTab: String
     },
-    setup(props) {
+    emits: ["update:activeTab"],
+    setup(props, context) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const offers = ref([]);
         const user = window.Laravel.user;
 
         const switchTab = () => {
-            console.log('dsadsadasddas231');
-            emitter.emit('changeToOfferAdd', {id: 0})
+            context.emit("update:activeTab", 'addingoffer');
         }
 
         const getOffers = () => {
