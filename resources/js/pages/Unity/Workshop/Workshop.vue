@@ -24,7 +24,7 @@
                 </div>
             </div>
             <!-- END: Profile Menu -->
-<!--            <WorkshopPanel v-if="activeTab = 'workshop'"></WorkshopPanel>-->
+            <WorkshopPanel v-if="activeTab = 'workshop'"></WorkshopPanel>
 <!--            <Marketplace v-if="activeTab = 'marketplace'"></Marketplace>-->
 <!--            <OwnObjects v-if="activeTab = 'obiekty'"></OwnObjects>-->
         </div>
