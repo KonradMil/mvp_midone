@@ -106,7 +106,7 @@ export default {
         canAccept: Boolean,
         canEdit: Boolean,
     },
-    setup(props) {
+    setup(props,context) {
         const toast = useToast();
         const solution = props.solution;
         const user = props.user;
