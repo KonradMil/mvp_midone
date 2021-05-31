@@ -168,6 +168,8 @@ name: "OfferAdd",
         offer_id: Number
     },
     setup(props) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const price_of_delivery = ref('');
         const weeks_to_start = ref('');
         const time_to_start = ref('');

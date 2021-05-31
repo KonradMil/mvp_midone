@@ -45,8 +45,6 @@ export default {
     },
     emits: ["update:activeTab"],
     setup(props, context) {
-        const app = getCurrentInstance();
-        const emitter = app.appContext.config.globalProperties.emitter;
         const offers = ref([]);
         const user = window.Laravel.user;
 
