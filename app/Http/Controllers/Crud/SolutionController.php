@@ -18,6 +18,20 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class SolutionController extends Controller
 {
+    public function addSolutionTeam(Request $request, Solution $solution)
+    {
+        foreach ((array)$request->teams as $team_id) {
+            $team = Team::find($team_id);
+            $solution->teams()->sync($team);
+        }
+        $solution->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Dodano zespół!',
+            'payload' => $solution
+        ]);
+    }
+
     public function saveSolutionTeams(Request $request, Solution $solution)
     {
         foreach ($request->teams as $team_id) {

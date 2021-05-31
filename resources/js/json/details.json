@@ -3,7 +3,7 @@
         "value": "carton",
         "model_name": "Karton duży",
         "model_id": "9195a37a-9e13-11e3-8591-034165a3a613",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/carton",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/carton",
         "attributes": [
             {}
         ]
@@ -12,7 +12,7 @@
         "value": "carton_sredni",
         "model_name": "Karton średni",
         "model_id": "9195a37a-9a13-12e3-8591-012165a3a613",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/carton_sredni",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/carton_sredni",
         "attributes": [
             {}
         ]
@@ -21,7 +21,7 @@
         "value": "carton_maly",
         "model_name": "Karton mały",
         "model_id": "9195a37a-9c25-11e3-2191-034165v3a613",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/carton_maly",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/carton_maly",
         "attributes": [
             {}
         ]
@@ -30,7 +30,7 @@
         "value": "cyllinder_big",
         "model_name": "Cylinder duży",
         "model_id": "9135a37a-9a13-12e3-8561-012165a3a613",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/cyllinder_big",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/cyllinder_big",
         "attributes": [
             {}
         ]
@@ -39,7 +39,7 @@
         "value": "cyllinder_medium",
         "model_name": "Cylinder średni",
         "model_id": "9195a37a-4a13-14e3-8591-012165a3a613",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/cyllinder_medium",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/cyllinder_medium",
         "attributes": [
             {}
         ]
@@ -48,7 +48,7 @@
         "value": "cyllinder_small",
         "model_name": "Cylinder mały",
         "model_id": "9195a32a-3a13-12e3-8591-012165a3a613",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/cyllinder_small",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/cyllinder_small",
         "attributes": [
             {}
         ]
@@ -57,7 +57,7 @@
         "value": "bag_small",
         "model_name": "Worek mały",
         "model_id": "9195a37a-9a11-12e3-8591-012165a1a613",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/bag_small",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/bag_small",
         "attributes": [
             {}
         ]
@@ -66,7 +66,7 @@
         "value": "bag_medium",
         "model_name": "Worek średni",
         "model_id": "9125a37a-9c25-11e3-2191-034165v2a613",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/bag_medium",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/bag_medium",
         "attributes": [
             {}
         ]
@@ -75,7 +75,7 @@
         "value": "bag_big",
         "model_name": "Worek duży",
         "model_id": "9195a33a-9a13-12e3-3591-012165a3a613",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/bag_big",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/bag_big",
         "attributes": [
             {}
         ]
@@ -84,7 +84,7 @@
         "value": "detal",
         "model_name": "Profil",
         "model_id": "92281cb1-a011-4bf7-a1b1-1372ff5e1afd",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/profil",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/profil",
         "attributes": [
             {}
         ]
@@ -93,7 +93,7 @@
         "value": "angle_steel",
         "model_name": "Kątownik",
         "model_id": "92231cb1-9d35-43be-bbbb-1c913b7b7d22",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/angle_steel",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/angle_steel",
         "attributes": [
             {}
         ]
@@ -102,7 +102,7 @@
         "value": "h_steel",
         "model_name": "Stalówka H",
         "model_id": "92241cb1-5d31-43be-bbbb-7c913b7b7d26",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/h_steel",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/h_steel",
         "attributes": [
             {}
         ]
@@ -111,7 +111,7 @@
         "value": "muffler",
         "model_name": "Wydech",
         "model_id": "92211cb1-9d35-43be-bbbb-5c913b7b7d26",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/muffler",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/muffler",
         "attributes": [
             {}
         ]
@@ -120,7 +120,7 @@
         "value": "muffler_with_jig",
         "model_name": "Wydech z zaciskiem",
         "model_id": "92213cb4-9d35-43be-bbbb-5c913b7b7d26",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/muffler_with_jig",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/muffler_with_jig",
         "attributes": [
             {}
         ]
@@ -129,7 +129,7 @@
         "value": "pipe",
         "model_name": "Rura",
         "model_id": "92211cb1-9d35-43be-bbbb-1c213b7b7d26",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/pipe",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/pipe",
         "attributes": [
             {}
         ]
@@ -138,7 +138,7 @@
         "value": "pommel_pipe",
         "model_name": "Rura Głowicy",
         "model_id": "92281cb1-9d35-13be-bbbb-1c913b7b7d26",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/pommel_pipe",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/pommel_pipe",
         "attributes": [
             {}
         ]
@@ -147,7 +147,7 @@
         "value": "sphere",
         "model_name": "Kula",
         "model_id": "92281cb1-9d35-12be-bbbb-7c913b7b7d26",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/sphere",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/sphere",
         "attributes": [
             {}
         ]
@@ -156,7 +156,7 @@
         "value": "bryla",
         "model_name": "Bryła",
         "model_id": "92212cb1-9d35-43be-bbbb-5c913b7b7d26",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/bryla",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/bryla",
         "attributes": [
             {}
         ]
@@ -165,7 +165,7 @@
         "value": "ekran_telewizora_1400_800_30",
         "model_name": "Ekran telewizora 140x80",
         "model_id": "97523cb4-9d35-43be-bbbb-5c913b7b7d26",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/ekran_telewizora_1400_800_30",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/ekran_telewizora_1400_800_30",
         "attributes": [
             {}
         ]
@@ -174,7 +174,7 @@
         "value": "ekran_telewizora_3840_2180_30",
         "model_name": "Ekran telewizora 384x218",
         "model_id": "92412cb1-2d35-43be-bbbb-5c913b7b7d26",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/ekran_telewizora_3840_2180_30",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/ekran_telewizora_3840_2180_30",
         "attributes": [
             {}
         ]
@@ -183,7 +183,7 @@
         "value": "productbin",
         "model_name": "Karton duży",
         "model_id": "92281cad-3d64-4d07-9134-9a3a90af33f7",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/productbin",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/productbin",
         "attributes": [
             {}
         ]
@@ -192,7 +192,7 @@
         "value": "productbin_long",
         "model_name": "Karton duży długi",
         "model_id": "91921cad-3d64-4d07-9134-9a3f90af33f7",
-        "prefab_url": "https://two.appworks-dev.pl/s3/models/productbin_long",
+        "prefab_url": "https://devsys.appworks-dev.pl/s3/models/productbin_long",
         "attributes": [
             {}
         ]

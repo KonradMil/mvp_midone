@@ -160,12 +160,14 @@
 
 <script>
 import {getCurrentInstance, onMounted, ref} from "vue";
+import {useToast} from "vue-toastification";
 
 export default {
 name: "OfferAdd",
     props: {
         solution_id: Number,
-        offer_id: Number
+        offer_id: Number,
+        challenge_id: Number
     },
     setup(props) {
         const app = getCurrentInstance();
@@ -185,6 +187,7 @@ name: "OfferAdd",
         const work_hour_price = ref('');
         const period_of_support = ref('');
 
+        const toast = useToast();
         const values = require('../../../json/offer_values.json');
 
         emitter.on('offerSelected', e =>  () => {
@@ -195,6 +198,7 @@ name: "OfferAdd",
         const save = () => {
             axios.post('/api/offer/save', {
                 id: props.offer_id,
+                challenge_id: props.challenge_id,
                 solution_id: props.solution_id,
                 price_of_delivery: price_of_delivery.value,
                 weeks_to_start: weeks_to_start.value,
