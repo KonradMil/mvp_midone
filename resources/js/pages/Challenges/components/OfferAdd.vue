@@ -160,6 +160,7 @@
 
 <script>
 import {getCurrentInstance, onMounted, ref} from "vue";
+import {useToast} from "vue-toastification";
 
 export default {
 name: "OfferAdd",
@@ -186,6 +187,7 @@ name: "OfferAdd",
         const work_hour_price = ref('');
         const period_of_support = ref('');
 
+        const toast = useToast();
         const values = require('../../../json/offer_values.json');
 
         emitter.on('offerSelected', e =>  () => {
