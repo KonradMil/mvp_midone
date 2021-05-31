@@ -174,6 +174,7 @@ export default {
         }, {deep: true})
 
         onMounted(() => {
+            console.log('MOUNTED');
             if (props.label.message != undefined && props.label.message != '') {
                 l.value.message = props.label.message;
             } else {
