@@ -106,6 +106,7 @@
             <TeamsPanel v-if="activeTab == 'zespoly' && (challenge.author_id == user.id)" :teams="challenge.teams"> </TeamsPanel>
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :offer_id="temp_offer_id"></OfferAdd>
             <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab"></Offers>
+            <TeamsPanelSolution v-if="activeTab == 'teamsSolution'" ></TeamsPanelSolution>
         </div>
     </div>
 </template>
@@ -123,10 +124,12 @@ import TeamsPanel from "./components/TeamsPanel";
 import {useToast} from "vue-toastification";
 import OfferAdd from "./components/OfferAdd";
 import Offers from "./components/Offers";
+import TeamsPanelSolution from "./components/TeamsPanelSolution";
 
 export default defineComponent({
     name: 'Card',
     components: {
+        TeamsPanelSolution,
         Offers,
         OfferAdd,
         TeamsPanel,
@@ -157,6 +160,10 @@ export default defineComponent({
         emitter.on('changeToOfferAdd', e => () => {
             console.log('BOLLOCKS');
            activeTab.value = 'addingoffer';
+        });
+
+        emitter.on('changeToTeamsSolution', e => () => {
+            activeTab.value = 'teamsSolution';
         });
 
         const getCardChallengeRepositories = async (id) => {
