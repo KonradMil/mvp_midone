@@ -23,7 +23,7 @@
                             </option>
                         </TailSelect>
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
+                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-3" class="form-label">
                             Czas realizacji uruchomienia u klienta (tygodni)
                         </label>
@@ -37,7 +37,7 @@
                             </option>
                         </TailSelect>
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
+                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-4" class="form-label">
                             Wysokość zaliczki (%) płatnej po podpisaniu umowy
                         </label>
@@ -51,7 +51,7 @@
                             </option>
                         </TailSelect>
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
+                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-5" class="form-label">
                             Wyskość zaliczki (%) płatnej przy odbiorze wstępnym dokonywanym u Integratora
                         </label>
@@ -65,7 +65,7 @@
                             </option>
                         </TailSelect>
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
+                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-6" class="form-label">
                             Wysokość zaliczki płatnej po uruchomieniu i finalnym odbiorze stanowiska
                         </label>
@@ -79,7 +79,7 @@
                             </option>
                         </TailSelect>
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
+                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-6" class="form-label">
                             Okres gwarancji w latach
                         </label>
@@ -93,19 +93,19 @@
                             </option>
                         </TailSelect>
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
+                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-7" class="form-label">
                             Częstotliwość przeglądów gwarancyjnych w roku
                         </label>
                         <input type="text" class="form-control" v-model="maintenance_frequency"/>
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
+                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-8" class="form-label">
                             Koszt roczny przeglądu gwaranycjnego
                         </label>
                         <input type="number" class="form-control" v-model="price_of_maintenance"/>
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
+                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-9" class="form-label">
                             Czas reakcji na zgłoszenie awarii w godzinach
                         </label>
@@ -119,7 +119,7 @@
                             </option>
                         </TailSelect>
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
+                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-10" class="form-label">
                             Czas przywrócenia stanowiska do sprawności po awarii
                         </label>
@@ -133,19 +133,19 @@
                             </option>
                         </TailSelect>
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
+                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-11" class="form-label">
                             Koszt interwencji w wypadku awarii nie podlegającej gwarancji
                         </label>
                         <input type="number" class="form-control" v-model="intervention_price"/>
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
+                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-12" class="form-label">
                             Koszt roboczo godziny pracy wsparcia / prac rozwojowych
                         </label>
                         <input type="number" class="form-control" v-model="work_hour_price"/>
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
+                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-13" class="form-label">
                             Okres wsparcia technicznego poza zakresem gwarancji w latach
                         </label>
