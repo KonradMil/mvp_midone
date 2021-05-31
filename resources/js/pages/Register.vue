@@ -321,7 +321,7 @@
                 console.log(formData.rodo);
                 console.log(formData.rodo2);
                 console.log(formData.rodo3);
-                if(formData.rodo && formData.rodo2 && formData.rodo3) {
+                if(!(formData.rodo && formData.rodo2 && formData.rodo3)) {
                     toast.error('Wszystkie zgody muszą być zaznaczone.');
                     return false;
                 }
