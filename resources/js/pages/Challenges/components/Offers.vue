@@ -8,12 +8,11 @@
                 </div>
                 <div class="px-5 pt-5">
                     <div v-if="offers.length == 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
-                        Nie ma jeszcze żadnych rozwiązań.
                         <div v-if="user.type == 'integrator'">
                             <p>
                                 W tej chwili nie dodałeś żadnej oferty.
                             </p>
-                            <button class="btn btn-primary shadow-md mr-2" @click="switchTab">Złóż ofertę</button>
+                            <button class="btn btn-primary shadow-md mr-2 pt-2" @click="switchTab">Złóż ofertę</button>
                         </div>
 
                     </div>
