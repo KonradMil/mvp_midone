@@ -18,7 +18,7 @@
                         <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addSolutionTeam">{{$t('teams.addTeam')}}</button>
                     </div>
                     <!-- BEGIN: Users Layout -->
-                    <div v-for="(team, index) in teams.list" :key="'team_' + index" class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12">
+                    <div v-for="(team, index) in teamsSolution" :key="'team_' + index" class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12">
                         <div class="box">
                             <div class="flex flex-col lg:flex-row items-center p-5">
                                 <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
@@ -126,7 +126,6 @@ export default {
     name: "Teams",
     components: {Avatar, Modal},
     props: {
-        team: Object,
         solution: Object
     },
     setup(props, {emit}) {
@@ -141,6 +140,7 @@ export default {
         const toast = useToast();
         const show = ref(false);
         const temporary_team_id = ref(null);
+        const teamsSolution = props.solution.teams;
 
         const getTeamsRepositories = async () => {
             teams.value = GetTeams();
@@ -262,7 +262,8 @@ export default {
             acceptInvite,
             showDetails,
             isDisabled,
-            del
+            del,
+            teamsSolution
         }
     },
     beforeRouteEnter(to, from, next) {
