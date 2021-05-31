@@ -165,7 +165,8 @@ export default {
 name: "OfferAdd",
     props: {
         solution_id: Number,
-        offer_id: Number
+        offer_id: Number,
+        challenge_id: Number
     },
     setup(props) {
         const app = getCurrentInstance();
@@ -195,6 +196,7 @@ name: "OfferAdd",
         const save = () => {
             axios.post('/api/offer/save', {
                 id: props.offer_id,
+                challenge_id: props.challenge_id,
                 solution_id: props.solution_id,
                 price_of_delivery: price_of_delivery.value,
                 weeks_to_start: weeks_to_start.value,
