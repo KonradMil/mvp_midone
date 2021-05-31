@@ -170,7 +170,8 @@ export default {
         const l = ref({fontSize: 36, message: '', textColor: '', index: 0});
         watch(l, (lab, prevLabel) => {
             console.log('CHANGE');
-            context.emit("update:label", lab);
+            console.log(l);
+            context.emit("update:label", l);
         }, {deep: true})
 
         onMounted(() => {
