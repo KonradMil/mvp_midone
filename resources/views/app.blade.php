@@ -6,18 +6,29 @@
     <meta name="csrf-token" value="{{ csrf_token() }}"/>
     <title>{{env('APP_NAME')}}</title>
     <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
-    <link rel="icon" href="/favicon.ico">
+    <link rel='shortcut icon' type='image/x-icon' href="/s3/favicon.ico">
 </head>
 <body>
 @if (Auth::check())
     <script>
         window.unity_path = '{{env('UNITY_PATH')}}';
+        window.unity_workshop_path = '{{env('UNITY_WORKSHOP_PATH')}}';
+        @php
+        if(empty(Auth::user()->companies->toArray())) {
+               $company = new App\Models\Company();
+               $company->author_id = Auth::user()->id;
+                $company->save();
+                $company->users()->attach(Auth::user());
+        } else {
+            $company = Auth::user()->companies->toArray()[0];
+        }
+        @endphp
         window.Laravel = {!!json_encode([
                'isLoggedin' => true,
                'user' => Auth::user(),
                'teams' => Auth::user()->teams,
                'notifications' => Auth::user()->notifications,
-               'company' => Auth::user()->companies,
+               'company' => $company,
            ])!!}
     </script>
 @else

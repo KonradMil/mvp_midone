@@ -24,12 +24,8 @@
         </div>
         <div class="intro-y grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Blog Layout -->
-            <div
-                v-for="(solution, index) in solutions.list"
-                :key="index"
-                class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box"
-            >
-            <SingleSolutionPost :user="user" :solution="solution"></SingleSolutionPost>
+            <div v-for="(solution, index) in solutions.list" :key="index" class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+                <SingleSolutionPost :user="user" :solution="solution"></SingleSolutionPost>
             </div>
         </div>
     </div>

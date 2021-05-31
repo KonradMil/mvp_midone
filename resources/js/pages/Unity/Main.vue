@@ -72,6 +72,7 @@ export default {
         const radialMenuAnimation = ref([]);
         const radialMenuLayout = ref([]);
         const animationSave = ref({layers: []});
+        const saving = ref(false);
 
         window_height.value = window.innerHeight;
 
@@ -109,6 +110,14 @@ export default {
                 case "notatka":
                     handleUnityActionOutgoing({action: "beginLayoutComment", data: ''});
                     break;
+            }
+        });
+
+        emitter.on('lockState', e => {
+            if(e.action == 'lock') {
+                lockInput();
+            } else {
+                unlockInput();
             }
         });
 
@@ -247,13 +256,22 @@ export default {
 
 
         emitter.on('UnitySave', e => {
-            gameLoad.value.save_json = e.saveGame;
-            if (type.value == 'challenge') {
-                SaveChallengeUnity({save: gameLoad.value, id: id.value});
-            } else {
-                SaveSolutionUnity({save: gameLoad.value, id: id.value});
+            if(!saving.value) {
+                saving.value = true;
+                gameLoad.value.save_json = e.saveGame;
+                if (type.value == 'challenge') {
+                    SaveChallengeUnity({save: gameLoad.value, id: id.value}, () => {
+                        saving.value = false;
+                    });
+                } else {
+                    SaveSolutionUnity({save: gameLoad.value, id: id.value}, (sol) => {
+                        id.value = sol.id;
+                        saving.value = false;
+                    });
+                }
+                emitter.emit('UnitySaved', { val: '' });
+                handleUnityActionOutgoing(e);
             }
-            handleUnityActionOutgoing(e);
         });
 
         const handleUnityActionOutgoing = (e) => {
@@ -283,7 +301,7 @@ export default {
                 } else {
                     getCardChallengeRepositories(id.value);
                 }
-                handleUnityActionOutgoing({action: 'prefix', data: 'https://devsys.appworks-dev.pl'});
+                handleUnityActionOutgoing({action: 'prefix', data: 'https://two.appworks-dev.pl'});
             }, 5000);
         }
 

@@ -9,11 +9,7 @@
                 <div class="intro-y box mt-5 lg:mt-0">
                     <div class="relative flex items-center p-5">
                         <div class="w-12 h-12 image-fit">
-                            <img
-                                v-if="challenge.screenshot_path != undefined"
-                                class="rounded-full"
-                                :alt="challenge.name" :src="'/' + challenge.screenshot_path"
-                            />
+                            <img v-if="challenge.screenshot_path != undefined" class="rounded-full" :alt="challenge.name" :src="'/' + challenge.screenshot_path"/>
                         </div>
                         <div class="ml-4 mr-auto">
                             <div class="font-medium text-base">
@@ -23,8 +19,7 @@
                         </div>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
-                        <a
-                            class="flex items-center"
+                        <a class="flex items-center"
                             href=""
                             @click.prevent="activeTab = 'podstawowe'"
                             :class="(activeTab == 'podstawowe')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
@@ -56,7 +51,7 @@
                             Pytania
                         </a>
                     </div>
-                    <div class="p-5 border-t border-gray-200 dark:border-dark-5">
+                    <div class="p-5 border-t border-gray-200 dark:border-dark-5" v-if="(challenge.author_id == user.id)">
                         <a class="flex items-center" href=""
                            @click.prevent="activeTab = 'zespoly'"
                            :class="(activeTab == 'zespoly')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
@@ -87,15 +82,14 @@
                         </button>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id != user.id && user.type == 'integrator'">
-                        <button
-                            v-if="challenge.stage == 1"
+                        <button v-if="challenge.stage == 1"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
                             @click.prevent="addSolution">
                             Dodaj rozwiązanie
                         </button>
-                        <button
-                            v-if="challenge.stage == 2"
+                        <button v-if="challenge.stage == 2"
+                            @click="$router.push({name: 'offer-add', params: {challenge: challenge}})"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto">
                             Złóż ofertę
@@ -109,13 +103,15 @@
             <TechnicalInformationPanel :challenge="challenge" v-if="activeTab == 'techniczne'"></TechnicalInformationPanel>
             <QuestionsPanel v-if="activeTab == 'pytania'" :id="challenge.id"></QuestionsPanel>
             <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge"></SolutionsPanel>
-            <TeamsPanel v-if="activeTab == 'zespoly'" :teams="challenge.teams"> </TeamsPanel>
+            <TeamsPanel v-if="activeTab == 'zespoly' && (challenge.author_id == user.id)" :teams="challenge.teams"> </TeamsPanel>
+            <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :offer_id="temp_offer_id"></OfferAdd>
+            <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab"></Offers>
         </div>
     </div>
 </template>
 
 <script>
-import {defineComponent, ref, provide, onMounted, unref, toRaw, computed} from "vue";
+import {defineComponent, ref, provide, onMounted, unref, toRaw, computed, getCurrentInstance} from "vue";
 import GetCardChallenge from "../../compositions/GetCardChallenge";
 import WhatsNext from "./WhatsNext";
 import BasicInformationPanel from "./components/BasicInformationPanel";
@@ -124,10 +120,15 @@ import QuestionsPanel from "./components/QuestionsPanel";
 import router from "../../router";
 import SolutionsPanel from "./components/SolutionsPanel";
 import TeamsPanel from "./components/TeamsPanel";
+import {useToast} from "vue-toastification";
+import OfferAdd from "./components/OfferAdd";
+import Offers from "./components/Offers";
 
 export default defineComponent({
     name: 'Card',
     components: {
+        Offers,
+        OfferAdd,
         TeamsPanel,
         SolutionsPanel,
         QuestionsPanel,
@@ -139,14 +140,24 @@ export default defineComponent({
         id: Number
     },
     setup(props, {emit}) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
+        const toast = useToast();
         const announcementRef = ref();
         const newProjectsRef = ref();
         const challenge = ref({});
         const solutions = ref({});
         const questions = ref({});
+        const temp_offer_id = ref(null);
         const activeTab = ref('podstawowe');
         const user = ref({});
+        const selected_solution_id = ref(null);
         const types = require("../../json/types.json");
+
+        emitter.on('changeToOfferAdd', e => () => {
+            console.log('BOLLOCKS');
+           activeTab.value = 'addingoffer';
+        });
 
         const getCardChallengeRepositories = async (id) => {
             await axios.post('/api/challenge/user/get/card', {id: id})
@@ -185,8 +196,10 @@ export default defineComponent({
                     if (response.data.success) {
                         console.log(response.data.payload);
                         challenge.value = response.data.payload;
+                        toast.success('Opublikowano.');
                     } else {
                         // toast.error(response.data.message);
+                        toast.error('Błąd.');
                     }
                 })
         }
@@ -198,8 +211,9 @@ export default defineComponent({
                     if (response.data.success) {
                         console.log(response.data.payload);
                         challenge.value = response.data.payload;
+                        toast.success('Wyzwanie nie jest już publiczne.');
                     } else {
-                        // toast.error(response.data.message);
+                        toast.error('Błąd.');
                     }
                 })
         }
@@ -234,6 +248,8 @@ export default defineComponent({
         };
 
         return {
+            temp_offer_id,
+            selected_solution_id,
             prevAnnouncement,
             nextAnnouncement,
             prevNewProjects,

@@ -17,6 +17,7 @@ import Echo from 'laravel-echo';
 import mitt from 'mitt'
 import lazyPlugin from 'vue3-lazy'
 import VueCookies from 'vue3-cookies'
+import relativeTime from 'dayjs/esm/plugin/relativeTime';
 
 const emitter = mitt();
 const options = {
@@ -46,6 +47,7 @@ window.Echo = new Echo({
 const app = createApp(App)
 globalComponents(app);
 utils(app);
+dayjs.extend(relativeTime);
 app.config.globalProperties.$dayjs = dayjs;
 app.config.globalProperties.$axios = axios;
 app.config.globalProperties.cash = cash;

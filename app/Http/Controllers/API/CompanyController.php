@@ -29,6 +29,7 @@ class CompanyController extends Controller
         $input = $request->input();
         $company = Company::find($input['id']);
         $company->fill($input);
+        $company->flat_nr = $input['flat_nr'];
 //        $company->author_id = Auth::user()->id;
         $company->save();
 //        $company->users()->attach(Auth::user());

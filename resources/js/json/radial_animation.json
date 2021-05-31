@@ -1,6 +1,11 @@
 [
     {
-        "icon": "https://devsys.appworks-dev.pl/s3/builder_icons/play_radial.png",
+        "icon": {
+            "name": "StartAnimationButton",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/play_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "StartAnimationButton",
         "label": "Odtwórz",
         "buttonColors": {
@@ -13,7 +18,12 @@
         }
     },
     {
-        "icon": "https://devsys.appworks-dev.pl/s3/builder_icons/pause_radial.png",
+        "icon": {
+            "name": "PauseAnimation",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/pause_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "PauseAnimation",
         "label": "Pauza",
         "buttonColors": {
@@ -26,7 +36,12 @@
         }
     },
     {
-        "icon": "https://devsys.appworks-dev.pl/s3/builder_icons/stop_radial.png",
+        "icon": {
+            "name": "StopAnimation",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/stop_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "StopAnimation",
         "label": "Zatrzymaj",
         "buttonColors": {
@@ -39,7 +54,12 @@
         }
     },
     {
-        "icon": "https://devsys.appworks-dev.pl/s3/builder_icons/ranges_radial.png",
+        "icon": {
+            "name": "ShowVisualRanges",
+            "url": "https://two.appworks-dev.pl/s3/builder_icons/ranges_radial.png",
+            "bundled": false,
+            "type": ""
+        },
         "name": "ShowVisualRanges",
         "label": "Pokaż zasięgi",
         "buttonColors": {

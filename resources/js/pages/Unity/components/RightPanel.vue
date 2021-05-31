@@ -1,11 +1,6 @@
 <template>
-    <div
-        id="right-panel"
-        class="modal modal-slide-over"
-        data-backdrop="static"
-        tabindex="-1"
-        aria-hidden="true"
-    >
+    <div id="right-panel" class="modal modal-slide-over" tabindex="-1" aria-hidden="true" style="overflow: hidden;">
+        <!--        data-backdrop="static"-->
         <div class="modal-dialog">
             <div class="modal-content">
                 <a data-dismiss="modal" href="javascript:;">
@@ -16,14 +11,13 @@
                     <h2 class="font-medium text-base mr-auto">
                         {{currentTitle}}
                     </h2>
-<!--                    <button class="btn btn-outline-secondary hidden sm:flex">-->
-<!--                        <FileIcon class="w-4 h-4 mr-2" />-->
-<!--                        Download Docs-->
-<!--                    </button>-->
+                    <button class="btn btn-outline-secondary hidden sm:flex"  data-dismiss="modal">
+                      Zamknij
+                    </button>
                 </div>
                 <!-- END: Slide Over Header -->
                 <!-- BEGIN: Slide Over Body -->
-                <div class="modal-body">
+                <div class="modal-body" @mouseenter="lock" @mouseleave="unlock">
                     <LabelDialog v-if="content == 'label'" v-model:label="label"/>
                     <CommentDialog v-if="content == 'comment'" v-model:comment="comment"/>
                     <LayoutDialog v-if="content == 'layout'" v-model:layout="layout"/>
@@ -190,6 +184,14 @@ export default {
         }, () => {
 
         });
+
+        const lock = () => {
+            emitter.emit('lockState', {action: 'lock'});
+        }
+
+        const unlock = () => {
+            emitter.emit('lockState', {action: 'unlock'});
+        }
 
         const technical = computed(() => {
             if(props.type=='challenge')
@@ -391,7 +393,9 @@ export default {
             props,
             user,
             user_teams,
-            teamsSolution
+            teamsSolution,
+            lock,
+            unlock
         }
     }
 }

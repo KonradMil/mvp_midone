@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import {onMounted, onBeforeMount, ref, getCurrentInstance} from "vue";
+import {onMounted, onBeforeMount, ref, getCurrentInstance, onBeforeUnmount} from "vue";
 import cash from "cash-dom/dist/cash";
 
 export default {
@@ -59,6 +59,14 @@ export default {
                 }
             // }
         })
+
+            onBeforeUnmount(() => {
+                try {
+                    gameInstance.value.Quit();
+                } catch (e) {
+
+                }
+            });
 
         const instantiate = () => {
             console.log(document.querySelector('#' + containerId.value));

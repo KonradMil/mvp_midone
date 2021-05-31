@@ -24,7 +24,7 @@
     </div>
     <div class="w-full flex items-center mt-3">
         <div class="w-8 h-8 flex-none image-fit mr-3">
-            <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" size="40" color="#FFF"
+            <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" :size="35" color="#FFF"
                     background-color="#930f68"/>
         </div>
         <div class="flex-1 relative text-gray-700">
@@ -68,6 +68,7 @@ export default {
         const obj = ref([]);
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
+        const user = window.Laravel.user;
 
         onMounted(function () {
             console.log(props.object);
@@ -99,7 +100,7 @@ export default {
 
         const addCommentObject = async (id) => {
             current_object_focus.value = id;
-            axios.post('api/user/comment', {id: id, message: message.value, type: props.type})
+            axios.post('/api/user/comment', {id: id, message: message.value, type: props.type})
                 .then(response => {
                     if (response.data.success) {
                         comments.value = response.data.payload.comments;
@@ -125,7 +126,8 @@ export default {
             current_object_focus_showComments,
             showComments,
             comments,
-            obj
+            obj,
+            user
         }
     }
 }

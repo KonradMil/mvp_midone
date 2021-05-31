@@ -1,8 +1,8 @@
 {
     "icons": {
         "left": {
-            "animation_mode": {
-                "src": "\/s3/builder_icons/animation_mode_simple2.png",
+            "layout": {
+                "src": "\/s3/builder_icons/layoute_mode_simple2.png",
                 "tooltip": "",
                 "alttext": "",
                 "type": "button",
@@ -15,8 +15,8 @@
                 "type": "button",
                 "position": "left"
             },
-            "layout": {
-                "src": "\/s3/builder_icons/layoute_mode_simple2.png",
+            "animation_mode": {
+                "src": "\/s3/builder_icons/animation_mode_simple2.png",
                 "tooltip": "",
                 "alttext": "",
                 "type": "button",

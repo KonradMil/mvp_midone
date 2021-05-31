@@ -159,62 +159,42 @@
                             <label class="cursor-pointer select-none" for="rodo"
                             >Akceptuję postanowienia </label
                             >
-                            <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
-                            @click.prevent="$router.push({name: 'privacyPolicy'})"
-                            >polityki prywatności.</a
-                            >.
+                            <div class="text-theme-1 dark:text-theme-10 ml-1"
+                            @click.prevent="$router.push({path: '/terms/privacy-policy'})"> polityki prywatności.</div>.
                         </div>
                         <template v-if="validate.rodo.$error">
                             <div
                                 v-for="(error, index) in validate.rodo.$errors"
                                 :key="index"
-                                class="text-theme-6 mt-2"
-                            >
+                                class="text-theme-6 mt-2">
                                 {{ $t('validation.' + error.$message) }}
                             </div>
                         </template>
-                        <div
-                            class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
-                        >
-                            <input
-                                id="rodo3"
-                                type="checkbox"
-                                class="form-check-input border mr-2"
-                                v-model="validate.rodo3.$model"
-                            />
-                            <label class="cursor-pointer select-none" for="rodo3"
-                            >Akceptuję </label
-                            >
-                            <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
-                               @click.prevent="$router.push({name: 'termsService'})"
-                            >warunki świadczenia </a
-                            > usług na platformie DBR77.com.
+                        <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
+                            <input id="rodo3" type="checkbox" class="form-check-input border mr-2" v-model="validate.rodo3.$model"/>
+                            <label class="cursor-pointer select-none" for="rodo3">Akceptuję </label>
+                            <div class="text-theme-1 dark:text-theme-10 ml-1" @click.prevent="$router.push({path: '/terms/terms-of-service'})"> warunki świadczenia </div> usług na platformie DBR77.com.
                         </div>
                         <template v-if="validate.rodo3.$error">
                             <div
                                 v-for="(error, index) in validate.rodo3.$errors"
                                 :key="index"
-                                class="text-theme-6 mt-2"
-                            >
+                                class="text-theme-6 mt-2">
                                 {{ $t('validation.' + error.$message) }}
                             </div>
                         </template>
-                        <div
-                            class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
-                        >
+                        <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                             <input
                                 id="rodo2"
                                 type="checkbox"
                                 class="form-check-input border mr-2"
-                                v-model="validate.rodo2.$model"
-                            />
+                                v-model="validate.rodo2.$model"/>
                             <label class="cursor-pointer select-none" for="rodo2"
-                            >Akceptuję </label
                             >
-                            <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
-                               @click.prevent="$router.push({name: 'priceList'})"
-                            >cennik usług</a
-                            >.
+                                Akceptuję
+                            </label>
+                            <div class="text-theme-1 dark:text-theme-10 ml-1"
+                                 @click.prevent="$router.push({path: '/terms/price-list'})"> cennik usług</div>.
                         </div>
                         <template v-if="validate.rodo2.$error">
                             <div
@@ -337,6 +317,15 @@
                     toast.warning('Hasła muszą być takie same');
                     return false;
                 }
+                console.log((formData.rodo && formData.rodo2 && formData.rodo3));
+                console.log(formData.rodo);
+                console.log(formData.rodo2);
+                console.log(formData.rodo3);
+                if(!(formData.rodo && formData.rodo2 && formData.rodo3)) {
+                    toast.error('Wszystkie zgody muszą być zaznaczone.');
+                    return false;
+                }
+
                 else if(formData.email === '')
                 {
                     toast.error('Email nie może byc pusty');

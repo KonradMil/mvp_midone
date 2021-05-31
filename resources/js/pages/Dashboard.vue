@@ -110,11 +110,11 @@
                         <h2 class="text-lg font-medium truncate mr-5">
                             Ostatnie aktywności
                         </h2>
-                        <a
-                            href=""
-                            class="ml-auto text-theme-1 dark:text-theme-10 truncate"
-                        >Więcej</a
-                        >
+<!--                        <a-->
+<!--                            href=""-->
+<!--                            class="ml-auto text-theme-1 dark:text-theme-10 truncate"-->
+<!--                        >Więcej</a-->
+<!--                        >-->
                     </div>
                     <div class="report-timeline mt-5 relative">
                         <div class="intro-x text-gray-500 text-xs text-center my-4">
@@ -136,7 +136,7 @@
                                     <div class="font-medium">
                                         Nowe wyzwanie
                                     </div>
-                                    <div class="text-xs text-gray-500 ml-auto">2h temu</div>
+                                    <div class="text-xs text-gray-500 ml-auto">{{$dayjs(log.created_at).fromNow()}}</div>
                                 </div>
                                 <div class="text-gray-600 mt-1">{{log.description}}</div>
                             </div>
@@ -425,10 +425,13 @@
                         <div class="mt-5">
                             <div class="intro-y">
                                 <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                    <img src="/logos/fanuc_logo.jpeg"/>
+                                    <img src="/s3/logos/fanuc_logo.jpeg"/>
                                 </div>
                                 <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                    <img src="/logos/yaskawa_logo.png"/>
+                                    <img src="/s3/logos/yaskawa_logo.png"/>
+                                </div>
+                                <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
+                                    <img src="/s3/logos/tfm_robotics.png"/>
                                 </div>
                             </div>
                         </div>

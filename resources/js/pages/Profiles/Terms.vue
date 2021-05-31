@@ -15,6 +15,7 @@
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
                     v-model="user.privacy_policy"
+                    disabled
                 />
                 <label class="cursor-pointer select-none" for="rodo"
                 >{{$t('profiles.acceptProvisions')}}</label
@@ -32,6 +33,7 @@
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
                     :checked="user.terms"
+                    disabled
                 />
                 <label class="cursor-pointer select-none" for="rodo3"
                 >{{$t('profiles.accept')}}</label
@@ -41,22 +43,20 @@
                 > {{$t('profiles.termsService')}} </a
                 > {{$t('profiles.servicesPlatform')}}
             </div>
-            <div
-                class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5"
-            >
+            <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
                 <input
                     id="rodo2"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
                     :checked="user.pricing"
-                />
-                <label class="cursor-pointer select-none" for="rodo2"
-                >{{$t('profiles.accept')}}</label
-                >
+                    disabled/>
+                <label class="cursor-pointer select-none" for="rodo2">
+                    {{$t('profiles.accept')}}
+                </label>
                 <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
-                   @click.prevent="$router.push({path: '/terms/price-list'})"
-                >{{$t('profiles.priceList')}}</a
-                >.
+                   @click.prevent="$router.push({path: '/terms/price-list'})">
+                    {{$t('profiles.priceList')}}
+                </a>.
             </div>
             <div class="border-b border-gray-200 dark:border-dark-5"></div>
             <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"

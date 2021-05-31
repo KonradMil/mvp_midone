@@ -26,6 +26,9 @@ import Communication from "../pages/Communication/Main";
 import ReportReview from "../pages/Communication/ReportReview";
 import TermsMain from "../pages/Terms/TermsMain";
 import ForgotPassword from "../pages/ForgotPassword";
+import Workshop from "../pages/Unity/Workshop/Workshop";
+import NewOffer from "../pages/Offers/NewOffer";
+import Offers from "../pages/Challenges/components/Offers";
 
 export const routes = [
     {
@@ -79,6 +82,24 @@ export const routes = [
         path: "/",
         component: SideMenu,
         children: [
+            {
+                name: 'workshop',
+                path: '/workshop',
+                component: Workshop,
+                props: true
+            },
+            {
+                name: 'offer-add',
+                path: '/offer/add',
+                component: NewOffer,
+                props: true
+            },
+            {
+                name: 'offers',
+                path: '/offers',
+                component: Offers,
+                props: true
+            },
             {
                 name: 'models',
                 path: '/models',

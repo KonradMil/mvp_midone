@@ -150,7 +150,32 @@
 @import "components/ads-box";
 @import "components/full-calendar";
 @import "components/pristine";
+.slider-tooltip {
+    border: 1px solid #930f68 !important;
+    background: #930f68 !important;
+}
+.modal.modal-slide-over .modal-dialog .modal-content {
+    border-radius: 0px;
+    min-height: 100vh;
+    height: 90vh;
+    overflow-y: scroll !important;
+}
+#right-panel {
+    pointer-events: none;
+    background: transparent !important;
+}
+.modal-content {
+    pointer-events: auto !important;
+}
+#right-panel .modal {
 
+}
+.unity-button {
+    pointer-events: auto;
+}
+.vue-avatar--wrapper {
+    background-color:  #930f68 !important;
+}
 .active-row {
     background-color: rgba(147, 15, 104, 0.4);
 }

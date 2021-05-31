@@ -14,8 +14,7 @@
                     class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
                     aria-expanded="false"
                     @click.prevent="saveChallengeRepo"
-                    :disabled="isDisabled"
-                >
+                    :disabled="isDisabled">
                     <SaveIcon class="w-4 h-4 mr-2"/>
                     {{ $t('global.save') }}
                 </button>
@@ -29,8 +28,7 @@
                         <TailSelect
                             id="input-wizard-2"
                             v-model="name_lang"
-                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }"
-                        >
+                            :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                             <option value="pl">PL</option>
                             <option value="en">ENG</option>
 
@@ -40,21 +38,15 @@
                            type="text"
                            class="intro-y form-control py-3 px-4 box pr-10 placeholder-theme-13"
                            :placeholder="$t('global.name') + '*'"
-                           v-model="name"
-                    />
+                           v-model="name"/>
                     <input v-if="name_lang == 'en'"
                            type="text"
                            class="intro-y form-control py-3 px-4 box pr-10 placeholder-theme-13"
                            :placeholder="$t('global.name') + '*'"
-                           v-model="en_name"
-                    />
+                           v-model="en_name"/>
                 </div>
-
                 <div class="post intro-y box mt-5">
-                    <div
-                        class="post__tabs nav nav-tabs flex-col sm:flex-row bg-gray-300 dark:bg-dark-2 text-gray-600"
-                        role="tablist"
-                    >
+                    <div class="post__tabs nav nav-tabs flex-col sm:flex-row bg-gray-300 dark:bg-dark-2 text-gray-600" role="tablist">
                         <Tippy
                             id="content-tab"
                             tag="a"
@@ -66,8 +58,7 @@
                             role="tab"
                             aria-controls="content"
                             aria-selected="true"
-                            @click="tab = 'desc'"
-                        >
+                            @click="tab = 'desc'">
                             <FileTextIcon class="w-4 h-4 mr-2"/>
                             {{ $t('challengesNew.description') }}
                         </Tippy>
@@ -81,8 +72,7 @@
                             class="w-full sm:w-40 py-4 text-center flex justify-center items-center"
                             role="tab"
                             aria-selected="false"
-                            @click="tab = 'details'"
-                        >
+                            @click="tab = 'details'">
                             <CodeIcon class="w-4 h-4 mr-2"/>
                             {{ $t('challengesNew.details') }}
                         </Tippy>
@@ -96,26 +86,15 @@
                             class="w-full sm:w-40 py-4 text-center flex justify-center items-center"
                             role="tab"
                             aria-selected="false"
-                            @click="tab = 'financials'"
-                        >
+                            @click="tab = 'financials'">
                             <CodeIcon class="w-4 h-4 mr-2"/>
                             {{ $t('global.financials') }}
                         </Tippy>
                     </div>
                     <div class="post__content tab-content">
-                        <div
-                            v-if="tab === 'desc'"
-                            id="content"
-                            class="tab-pane p-5 active"
-                            role="tabpanel"
-                            aria-labelledby="content-tab"
-                        >
-                            <div
-                                class="border border-gray-200 dark:border-dark-5 rounded-md p-5"
-                            >
-                                <div
-                                    class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"
-                                >
+                        <div v-if="tab === 'desc'" id="content" class="tab-pane p-5 active" role="tabpanel" aria-labelledby="content-tab">
+                            <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5">
+                                <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
                                     <div class="w-22 mr-3">
                                         <TailSelect
                                             id="input-wizard-2"
@@ -127,8 +106,7 @@
                                                 search: false,
                                                 hideSelected: false,
                                                 classNames: 'w-full'
-                                            }"
-                                        >
+                                            }">
                                             <option value="pl">PL</option>
                                             <option value="en">ENG</option>
 
@@ -141,12 +119,8 @@
                                     <textarea v-if="description_lang == 'en'" v-model="en_description" class="w-full h-36 form-control" style="width: 100%;"></textarea>
                                 </div>
                             </div>
-                            <div
-                                class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5"
-                            >
-                                <div
-                                    class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"
-                                >
+                            <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
+                                <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
                                     <ChevronDownIcon class="w-4 h-4 mr-2"/>
                                     {{ $t('challengesNew.photo') }}
                                 </div>
@@ -172,9 +146,7 @@
                                     </div>
                                     <div class="mt-3">
                                         <label class="form-label"> {{ $t('challengesNew.uploadPhoto') }}</label>
-                                        <div
-                                            class="rounded-md pt-4"
-                                        >
+                                        <div class="rounded-md pt-4">
                                             <div class="flex flex-wrap px-4">
                                                 <Dropzone
                                                     style="position: relative;
@@ -188,18 +160,15 @@
                               previewTemplate: '<div style=\'display: none\'></div>'
                             }"
                                                     class="dropzone">
-                                                    <div
-                                                        class="px-4 py-4 flex items-center cursor-pointer relative"
-                                                    >
+                                                    <div class="px-4 py-4 flex items-center cursor-pointer relative">
                                                         <ImageIcon class="w-4 h-4 mr-2"/>
-                                                        <span class="text-theme-1 dark:text-theme-10 mr-1"
-                                                        >{{ $t('challengesNew.file') }}</span
-                                                        >
+                                                        <span class="text-theme-1 dark:text-theme-10 mr-1">
+                                                            {{ $t('challengesNew.file') }}
+                                                        </span>
                                                         {{ $t('challengesNew.fileUpload') }}
                                                     </div>
                                                 </Dropzone>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -235,11 +204,9 @@
                 multiShowCount: false,
                 multiContainer: true,
                 classNames: 'w-full'
-              }"
-                            multiple
-                        >
+              }" multiple>
                             <option selected disabled>{{ $t('challengesNew.selectTags') }}</option>
-                            <option v-for="(team,index) in teams.list" :value="team.id">{{ team.name }}</option>
+                            <option v-for="(team,index) in user.teams" :value="team.id">{{ team.name }}</option>
                         </TailSelect>
                     </div>
                     <div class="mt-3">
@@ -259,9 +226,7 @@
                   months: true,
                   years: true
                 }
-              }"
-                            class="form-control"
-                        />
+              }" class="form-control"/>
                     </div>
                     <div class="mt-3">
                         <label for="post-form-21" class="form-label">{{ $t('challengesNew.deadlineOffer') }}</label>
@@ -281,9 +246,7 @@
                   months: true,
                   years: true
                 }
-              }"
-                            class="form-control"
-                        />
+              }" class="form-control"/>
                     </div>
                     <div class="mt-3">
                         <label for="post-form-3" class="form-label">{{ $t('challengesNew.categories') }}*</label>
@@ -319,9 +282,7 @@
                 multiShowCount: false,
                 multiContainer: true,
                 classNames: 'w-full'
-              }"
-                            multiple
-                        >
+              }" multiple>
                             <option selected disabled>{{ $t('challengesNew.selectTags') }}.</option>
                             <option v-for="(tag,index) in tags" :value="index">{{ tag }}</option>
                         </TailSelect>
@@ -356,6 +317,7 @@ import Multiselect from '@vueform/multiselect'
 import router from '../../router';
 import Details from "./components/Details";
 import Financials from "./components/Financials";
+import dayjs from "dayjs";
 
 
 const toast = useToast();
@@ -405,6 +367,7 @@ export default {
         const allowed_publishing = ref(false);
         const publish = ref(false);
         const dropzoneSingleRef = ref();
+        const user = window.Laravel.user;
         const financials = ref({
             days: 260,
             shifts: 4,
@@ -433,6 +396,7 @@ export default {
         }
         const getTeamsRepositories = async () => {
             teams.value = GetTeams();
+
         }
 
         const handleCallback = (resp) => {
@@ -521,9 +485,10 @@ export default {
             if (props.challenge_id != undefined) {
                 id.value = props.challenge_id;
                 getChallengeCardRepositories();
+                getTeamsRepositories();
             }
         });
-        getTeamsRepositories();
+
 
         const getChallengeCardRepositories = async () => {
             await axios.post('/api/challenge/user/get/card', {id: props.challenge_id})
@@ -532,8 +497,8 @@ export default {
                         name.value = response.data.payload.name;
                         description.value = response.data.payload.description;
                         category.value = String(response.data.payload.type);
-                        solution_deadline.value = response.data.payload.solution_deadline;
-                        offer_deadline.value = response.data.payload.offer_deadline;
+                        solution_deadline.value = dayjs(response.data.payload.solution_deadline).format('DD.MM.YYYY');
+                        offer_deadline.value = dayjs(response.data.payload.offer_deadline).format('DD.MM.YYYY');
                         allowed_publishing.value = response.data.payload.allowed_publishing;
                         details.value.select_detail_weight = response.data.payload.technical_details.detail_weight;
                         details.value.select_pick_quality = response.data.payload.technical_details.pick_quality;
@@ -593,7 +558,8 @@ export default {
             financials,
             deleteImage,
             tagsSelected,
-            isDisabled
+            isDisabled,
+            user
         };
     },
     beforeRouteEnter(to, from, next) {

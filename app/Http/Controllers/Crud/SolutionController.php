@@ -31,6 +31,20 @@ class SolutionController extends Controller
         ]);
     }
 
+    public function rejectSolution(Request $request)
+    {
+        $id = $request->input('id');
+        $solution = Solution::find($id);
+        $solution->rejected = true;
+        $solution->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Odrzucono rozwiązanie.',
+            'payload' => $solution
+        ]);
+    }
+
     public function acceptSolution (Request $request) {
         $id = $request->input('id');
         $solution = Solution::find($id);
@@ -97,9 +111,7 @@ class SolutionController extends Controller
     public function getUserSolutionsFiltered(Request $request) {
         $input = $request->input();
         $query = Solution::query();
-//        if(Auth::user()->type == 'integrator') {
-            $query->where('author_id', '=', Auth::user()->id);
-//        }
+        $query->where('author_id', '=', Auth::user()->id);
 
 //        if (isset($input->rating)) {
 //            $query->whereIn('rating', [($input->rating - 0.5), $input->rating, ($input->rating + 0.5)]);
@@ -310,6 +322,44 @@ class SolutionController extends Controller
             'success' => true,
             'message' => 'Rozwiązanie zostao dodane poprawnie',
             'payload' => $solution
+        ]);
+    }
+
+    public function publish(Request $request)
+    {
+        $solution = Solution::find($request->input('id'));
+        $solution->status = 1;
+        $solution->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Opublikowano poprawnie',
+            'payload' => $solution
+        ]);
+    }
+
+    public function unpublish(Request $request)
+    {
+        $solution = Solution::find($request->input('id'));
+        $solution->status = 0;
+        $solution->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Rozwiązanie jest teraz prywatne',
+            'payload' => $solution
+        ]);
+    }
+
+    public function delete(Request $request)
+    {
+        $solution = Solution::find($request->input('id'));
+        $solution->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Usunięto poprawnie',
+            'payload' => ''
         ]);
     }
 }

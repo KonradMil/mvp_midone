@@ -12,7 +12,7 @@
                 <div class="intro-y box mt-5">
                     <div class="relative flex items-center p-5">
                         <div class="w-14 h-14 image-fit">
-                            <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" size="60"
+                            <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" :size="60"
                                     color="#FFF" background-color="#930f68"/>
                         </div>
                         <div class="ml-4 mr-auto">
