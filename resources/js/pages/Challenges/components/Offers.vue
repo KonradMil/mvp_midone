@@ -54,7 +54,7 @@ export default {
         }
 
         const getOffers = () => {
-            axios.post('/api/offers/get/all', {})
+            axios.post('/api/offer/get/all', {})
                 .then(response => {
                     if (response.data.success) {
                         offers.value = response.data.payload;

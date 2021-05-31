@@ -155,6 +155,7 @@ export default defineComponent({
         const types = require("../../json/types.json");
 
         emitter.on('changeToOfferAdd', e => () => {
+            console.log('BOLLOCKS');
            activeTab.value = 'addingoffer';
         });
 
