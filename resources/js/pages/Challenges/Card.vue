@@ -104,12 +104,13 @@
             <QuestionsPanel v-if="activeTab == 'pytania'" :id="challenge.id"></QuestionsPanel>
             <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge"></SolutionsPanel>
             <TeamsPanel v-if="activeTab == 'zespoly' && (challenge.author_id == user.id)" :teams="challenge.teams"> </TeamsPanel>
+            <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :offer_id="temp_offer_id"></OfferAdd>
         </div>
     </div>
 </template>
 
 <script>
-import {defineComponent, ref, provide, onMounted, unref, toRaw, computed} from "vue";
+import {defineComponent, ref, provide, onMounted, unref, toRaw, computed, getCurrentInstance} from "vue";
 import GetCardChallenge from "../../compositions/GetCardChallenge";
 import WhatsNext from "./WhatsNext";
 import BasicInformationPanel from "./components/BasicInformationPanel";
@@ -119,10 +120,12 @@ import router from "../../router";
 import SolutionsPanel from "./components/SolutionsPanel";
 import TeamsPanel from "./components/TeamsPanel";
 import {useToast} from "vue-toastification";
+import OfferAdd from "./components/OfferAdd";
 
 export default defineComponent({
     name: 'Card',
     components: {
+        OfferAdd,
         TeamsPanel,
         SolutionsPanel,
         QuestionsPanel,
@@ -134,15 +137,21 @@ export default defineComponent({
         id: Number
     },
     setup(props, {emit}) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const toast = useToast();
         const announcementRef = ref();
         const newProjectsRef = ref();
         const challenge = ref({});
         const solutions = ref({});
         const questions = ref({});
+        const temp_offer_id = ref(null);
         const activeTab = ref('podstawowe');
         const user = ref({});
+        const selected_solution_id = ref(null);
         const types = require("../../json/types.json");
+
+
 
         const getCardChallengeRepositories = async (id) => {
             await axios.post('/api/challenge/user/get/card', {id: id})
@@ -233,6 +242,8 @@ export default defineComponent({
         };
 
         return {
+            temp_offer_id,
+            selected_solution_id,
             prevAnnouncement,
             nextAnnouncement,
             prevNewProjects,

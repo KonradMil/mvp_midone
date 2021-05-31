@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\KnowledgebaseController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WorkshopController;
 use Illuminate\Http\Request;
@@ -88,8 +89,12 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
 Route::post('report/show', [ReportController::class, 'getReport']);
 Route::post('search', [SearchController::class, 'search']);
 
-Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => 'offer', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('get', [OfferController::class, 'get']);
+    Route::post('save', [OfferController::class, 'save']);
+});
 
+Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function () {
     Route::post('user/get', [ReportController::class, 'getUserReports']);
     Route::post('user/show', [ReportController::class, 'getReport']);
     Route::post('user/create', [ReportController::class, 'createReport']);

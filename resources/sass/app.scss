@@ -151,8 +151,8 @@
 @import "components/full-calendar";
 @import "components/pristine";
 .slider-tooltip {
-    border: 1px solid #930f68;
-    background: #930f68;
+    border: 1px solid #930f68 !important;
+    background: #930f68 !important;
 }
 .modal.modal-slide-over .modal-dialog .modal-content {
     border-radius: 0px;
