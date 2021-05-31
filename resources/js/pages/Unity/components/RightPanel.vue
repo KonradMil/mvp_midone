@@ -277,6 +277,8 @@ export default {
 
         emitter.on('UnityLabelSelected', e => {
             console.log(e);
+            console.log("e");
+            console.log(e.labelSelected);
             content.value = 'label';
             label.value = e.labelSelected;
             currentTitle.value = 'Ustawienia etykiety';
