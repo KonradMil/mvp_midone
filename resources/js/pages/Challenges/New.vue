@@ -403,6 +403,9 @@ export default {
             console.log('RESPPPPPPPP' + resp);
             if(id.value != undefined && id.value != null) {
                 toast.success('Zapisano poprawnie.');
+                setTimeout(()=>{
+                    isDisabled.value=false;
+                },5000);
             } else {
                 router.push({name: 'challengeStudio', params: {id: resp.id, type: 'challenge', load: resp}})
             }
@@ -457,9 +460,7 @@ export default {
                 // emitter.emit('changestudio', {val: 'challenge'});
                 isDisabled.value = true;
             }
-            setTimeout(()=>{
-                isDisabled.value=false;
-            },5000);
+
         }
 
         const deleteImage = (index) => {
