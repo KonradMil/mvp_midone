@@ -159,7 +159,7 @@
 </template>
 
 <script>
-import {onMounted, ref} from "vue";
+import {getCurrentInstance, onMounted, ref} from "vue";
 
 export default {
 name: "OfferAdd",
