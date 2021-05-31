@@ -24,6 +24,7 @@ class SolutionController extends Controller
             $team = Team::find($team_id);
             $solution->teams()->sync($team);
         }
+        $solution->save();
         return response()->json([
             'success' => true,
             'message' => 'Dodano zespół!',
