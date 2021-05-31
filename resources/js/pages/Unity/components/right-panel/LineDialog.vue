@@ -71,7 +71,7 @@ export default {
             console.log( l.value.cargo);
 
             l.value.cargo.model_name = detailsAr.value[lab].model_id;
-            l.value.cargo.prefab_url = detailsAr.value[lab].prefab_url;
+            l.value.cargo.prefab_url = 'https://two.appworks-dev.pl' + detailsAr.value[lab].prefab_url;
             context.emit("update:line", lab);
 
         }, {deep: true})
