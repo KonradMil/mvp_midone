@@ -26,7 +26,7 @@ class SolutionController extends Controller
         }
         return response()->json([
             'success' => true,
-            'message' => 'Zapisano edycje zespołów!.',
+            'message' => 'Dodano zespół!',
             'payload' => $solution
         ]);
     }
