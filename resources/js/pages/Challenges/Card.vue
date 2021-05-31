@@ -106,7 +106,7 @@
             <TeamsPanel v-if="activeTab == 'zespoly' && (challenge.author_id == user.id)" :teams="challenge.teams"> </TeamsPanel>
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :offer_id="temp_offer_id"></OfferAdd>
             <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab"></Offers>
-            <TeamsPanelSolution v-if="activeTab == 'teamsSolution'" ></TeamsPanelSolution>
+            <TeamsPanelSolution v-if="activeTab == 'teamsSolution'" :solution="solution" ></TeamsPanelSolution>
         </div>
     </div>
 </template>
@@ -159,6 +159,7 @@ export default defineComponent({
         const types = require("../../json/types.json");
 
         emitter.on('changeTeamsSolution', e => () =>{
+            console.log('ChangeTeamsSolution' + e.solution);
             activeTab.value = 'teamsSolution'
             solution.value = e.solution;
         });

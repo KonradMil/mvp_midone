@@ -118,6 +118,7 @@ export default {
 
         const switchTab = () => {
             emitter.emit("changeTeamsSolution", {solution: props.solution});
+            console.log('SwitchTab ' + props.solution);
         }
 
         const teams = computed(() => {
