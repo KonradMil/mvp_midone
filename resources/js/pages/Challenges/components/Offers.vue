@@ -12,7 +12,7 @@
                             <p>
                                 W tej chwili nie dodałeś żadnej oferty.
                             </p>
-                            <button class="btn btn-primary shadow-md mr-2 pt-2" @click="switchTab">Złóż ofertę</button>
+                            <button class="btn btn-primary shadow-md mr-2 mt-2" @click="switchTab">Złóż ofertę</button>
                         </div>
 
                     </div>
@@ -50,7 +50,7 @@ export default {
         const user = window.Laravel.user;
 
         const switchTab = () => {
-            emitter.emit('changeToOfferAdd', {});
+            emitter.emit('changeToOfferAdd', {id: 0})
         }
 
         const getOffers = () => {
