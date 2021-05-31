@@ -97,6 +97,7 @@ import {computed, getCurrentInstance, ref} from "vue";
 import router from "../router";
 import {useToast} from "vue-toastification";
 import TeamsPanelSolution from "../pages/Challenges/components/TeamsPanelSolution";
+
 export default {
     name: "SingleSolutionPost",
     components: {CommentSection, TeamsPanelSolution},
@@ -116,7 +117,7 @@ export default {
         const activeTab = ref(false);
 
         const switchTab = () => {
-            context.emit("update:activeTab", 'teamsSolution');
+            emitter.emit("changeTeamsSolution", {solution: props.solution});
         }
 
         const teams = computed(() => {

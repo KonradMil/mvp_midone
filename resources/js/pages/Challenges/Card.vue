@@ -150,6 +150,7 @@ export default defineComponent({
         const newProjectsRef = ref();
         const challenge = ref({});
         const solutions = ref({});
+        const solution = ref({});
         const questions = ref({});
         const temp_offer_id = ref(null);
         const activeTab = ref('podstawowe');
@@ -157,13 +158,15 @@ export default defineComponent({
         const selected_solution_id = ref(null);
         const types = require("../../json/types.json");
 
+        emitter.on('changeTeamsSolution', e => () =>{
+            activeTab.value = 'teamsSolution'
+            solution.value = e.solution;
+        });
+
+
         emitter.on('changeToOfferAdd', e => () => {
             console.log('BOLLOCKS');
            activeTab.value = 'addingoffer';
-        });
-
-        emitter.on('update:activeTab', e => () => {
-            activeTab.value = 'teamsSolution';
         });
 
         const getCardChallengeRepositories = async (id) => {
@@ -267,7 +270,8 @@ export default defineComponent({
             user,
             publish,
             unpublish,
-            addSolution
+            addSolution,
+            solution
         };
     }
 });
