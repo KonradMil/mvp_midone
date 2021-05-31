@@ -20,7 +20,7 @@ class SolutionController extends Controller
 {
     public function addSolutionTeam(Request $request, Solution $solution)
     {
-        foreach ($request->teams as $team_id) {
+        foreach ((array)$request->teams as $team_id) {
             $team = Team::find($team_id);
             $solution->teams()->sync($team);
         }
