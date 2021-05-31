@@ -20,9 +20,9 @@
                 <div class="modal-body" @mouseenter="lock" @mouseleave="unlock">
                     <LabelDialog v-if="content == 'label'" :key="temp_label_id" v-model:label="label"/>
                     <CommentDialog v-if="content == 'comment'" :key="temp_comment_id" v-model:comment="comment"/>
-                    <LayoutDialog v-if="content == 'layout'" v-model:layout="layout"/>
-                    <LineDialog v-if="content == 'line'" v-model:modelValue="line"/>
-                    <AnimableDialog v-if="content == 'animable'" v-model:animable="animable"/>
+                    <LayoutDialog v-if="content == 'layout'" :key="temp_layout_id" v-model:layout="layout"/>
+                    <LineDialog v-if="content == 'line'" :key="temp_line_id" v-model:modelValue="line"/>
+                    <AnimableDialog v-if="content == 'animable'" :key="temp_animable_id" v-model:animable="animable"/>
                     <DescriptionDialog v-if="content == 'description'" v-model:object="object" :type="props.type"/>
 <!--                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>-->
                     <TeamsDialog v-model:teams_unity="teams_unity" :type="props.type" v-if="(content == 'teams' && allowedEdit && (user_teams.length > 0))"></TeamsDialog>
@@ -115,6 +115,10 @@ export default {
         const user_teams = ref({});
         const temp_label_id = ref(0);
         const temp_comment_id = ref(0);
+        const temp_line_id = ref(0);
+        const temp_setting_id = ref(0);
+        const temp_layout_id = ref(0);
+        const temp_animable_id = ref(0);
 
         const teamsSolution = ref({
             teamsAllowed: '',
@@ -258,6 +262,7 @@ export default {
         emitter.on('UnityLineSettings', e => {
             content.value = 'line';
             console.log(e);
+            temp_setting_id.value = e.index;
             line.value = e;
             currentTitle.value = 'Ustawienia lini animacji';
             emitter.emit('changeprop', { data:line, json: true });
@@ -265,6 +270,7 @@ export default {
         });
 
         emitter.on('UnityAnimableSettings', e => {
+            temp_animable_id.value = e.data.index;
             content.value = 'animable';
             console.log(e);
             animable.value = e.data;
@@ -274,6 +280,7 @@ export default {
 
         emitter.on('UnityLayoutSelected', e => {
             content.value = 'layout';
+            temp_layout_id.value = e.layoutSelected.index;
             layout.value = e.layoutSelected;
 
             showPanel();
@@ -405,7 +412,11 @@ export default {
             lock,
             unlock,
             temp_label_id,
-            temp_comment_id
+            temp_comment_id,
+            temp_setting_id,
+            temp_layout_id,
+            temp_animable_id,
+            temp_line_id
 
         }
     }
