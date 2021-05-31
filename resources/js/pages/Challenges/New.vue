@@ -13,6 +13,12 @@
                 <button
                     class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
                     aria-expanded="false"
+                    @click.prevent="$router.push({path: 'challenges'})">
+                    Powrót
+                </button>
+                <button
+                    class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
+                    aria-expanded="false"
                     @click.prevent="saveChallengeRepo"
                     :disabled="isDisabled">
                     <SaveIcon class="w-4 h-4 mr-2"/>
