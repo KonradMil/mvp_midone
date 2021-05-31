@@ -403,7 +403,10 @@ export default {
             user_teams,
             teamsSolution,
             lock,
-            unlock
+            unlock,
+            temp_label_id,
+            temp_comment_id
+
         }
     }
 }
