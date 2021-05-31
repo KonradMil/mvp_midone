@@ -17,7 +17,7 @@ import cash from "cash-dom/dist/cash";
 
 export default {
     props: ['src', 'module', 'width', 'height', 'externalProgress', 'unityLoader', 'hideFooter'],
-    name: 'Studio',
+    name: 'StudioWorkshop',
     setup(props,{emit}) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
