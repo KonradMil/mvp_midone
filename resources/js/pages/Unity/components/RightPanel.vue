@@ -113,6 +113,8 @@ export default {
         const type = ref('');
         const user = ref({});
         const user_teams = ref({});
+        const temp_label_id = ref(0);
+        const temp_comment_id = ref(0);
 
         const teamsSolution = ref({
             teamsAllowed: '',
@@ -121,10 +123,12 @@ export default {
 
         const save = () => {
             if(content.value === 'label') {
+                comment.value.index = temp_label_id.value;
                 emitter.emit('unityoutgoingaction', { action: 'updateLabel', data:label, json: true });
             } else if(content.value === 'layout') {
                 emitter.emit('unityoutgoingaction', { action: 'updateLayout', data:layout, json: true });
             } else if (content.value === 'comment') {
+                comment.value.index = temp_comment_id.value;
                 emitter.emit('unityoutgoingaction', { action: 'updateComment', data:comment, json: true });
             } else if (content.value === 'animable') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
@@ -279,6 +283,7 @@ export default {
             console.log(e);
             console.log("e");
             console.log(e.labelSelected);
+            temp_label_id.value = e.labelSelected.index;
             content.value = 'label';
             label.value = e.labelSelected;
             currentTitle.value = 'Ustawienia etykiety';
@@ -287,6 +292,7 @@ export default {
 
         emitter.on('UnityCommentSelected', e => {
             console.log(e);
+            temp_comment_id.value = e.commentSelected.index;
             comment.value = e.commentSelected;
             content.value = 'comment';
             currentTitle.value = 'Ustawienia komentarza';
