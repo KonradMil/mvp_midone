@@ -19,7 +19,7 @@ class ModelController extends Controller
     }
 
     public function isempty(&$var) {
-        return empty($var) || $var === '0';
+        return !empty($var) || $var === '0';
     }
 
     public function getModels(Request  $request)
@@ -27,10 +27,8 @@ class ModelController extends Controller
 //        dd($request->search);
         $se = $request->search;
         if(!empty($se)) {
-            if(is_array($se)){
-                if(!empty($se['brand'])) {
-                    $models = UnityModel::where('brand', '=', $se['brand'])->get();
-                } elseif ($this->isempty($se['category']) && $this->isempty($se['subcategory'])) {
+//            if(is_array($se)){
+                if ($this->isempty($se['category']) && $this->isempty($se['subcategory'])) {
                     $models = UnityModel::where('category', '=', $se['category'])->where('subcategory', '=', $se['subcategory'])->get();
                 } elseif ($this->isempty($se['category'])) {
                     $models = UnityModel::where('category', '=', $se['category'])->get();
@@ -39,10 +37,9 @@ class ModelController extends Controller
                 } else {
                     $models = UnityModel::take(10)->get();
                 }
-
-            } else {
-                $models = UnityModel::where('name', 'LIKE', '%'. $request->search . '%')->take(10)->get();
-            }
+//            } else {
+//                $models = UnityModel::where('name', 'LIKE', '%'. $request->search . '%')->take(10)->get();
+//            }
         } else {
             $models = UnityModel::take(10)->get();
         }
