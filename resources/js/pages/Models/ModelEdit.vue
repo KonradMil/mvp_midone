@@ -240,7 +240,7 @@
                                 classNames: 'w-full'
                                 }">
                             <option disabled>{{ $t('challengesNew.selectCategories') }}</option>
-                            <option v-for="(category,index) in categories.categories" :value="category.value">{{ category.name }}</option>
+                            <option v-for="(category2,index) in categories.categories" :selected="(category2 == category)? 'selected': ''" :value="category2.value">{{ category2.name }}</option>
                         </TailSelect>
                     </div>
                 </div>
@@ -259,7 +259,7 @@
                                 classNames: 'w-full'
                                 }">
                             <option disabled>{{ $t('challengesNew.selectCategories') }}</option>
-                            <option v-for="(cat,index) in categories.categories[category].subcategories" :value="cat.value">{{ cat.name }}</option>
+                            <option v-for="(cat,index) in categories.categories[category].subcategories"  :selected="(cat == subcategory)? 'selected': ''" :value="cat.value">{{ cat.name }}</option>
                         </TailSelect>
                     </div>
                 </div>
