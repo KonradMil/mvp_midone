@@ -77,7 +77,8 @@ class ModelController extends Controller
     }
     public function deleteModel(Request $request)
     {
-        UnityModel::delete($request->id);
+        $m = UnityModel::find($request->id);
+        $m->delete();
         return response()->json([
            'success' => true,
            'message' => 'Usunięto poprawnie',
