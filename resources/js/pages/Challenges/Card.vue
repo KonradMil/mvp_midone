@@ -116,7 +116,7 @@
             <TeamsPanel v-if="activeTab == 'zespoly' && (challenge.author_id == user.id)" :teams="challenge.teams"> </TeamsPanel>
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :offer_id="temp_offer_id"></OfferAdd>
             <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab"></Offers>
-            <ChallengeOffers v-if="(activeTab == 'all-offers') && (challenge.author_id == user.id)" v-model:activeTab="activeTab"></ChallengeOffers>
+            <ChallengeOffers v-if="(activeTab == 'all-offers') && (challenge.author_id == user.id)" v-model:activeTab="activeTab" :id="challenge.id"></ChallengeOffers>
             <TeamsPanelSolution v-if="activeTab == 'teamsSolution'" :solution="solution" ></TeamsPanelSolution>
         </div>
     </div>
