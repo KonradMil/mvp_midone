@@ -80,7 +80,7 @@ class OfferController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Zaktualizowano oferte poprawnie.',
+            'message' => 'Dodano oferte poprawnie.',
             'payload' => $check
         ]);
     }
