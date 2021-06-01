@@ -125,6 +125,7 @@
                                     {{$t('models.edit')}}
                                 </a>
                                 <a
+                                    @click="temp_model_id = model.id"
                                     class="flex items-center text-theme-6"
                                     href="javascript:;"
                                     data-toggle="modal"
@@ -216,7 +217,7 @@
                             >
                                 {{ $t('models.cancel') }}
                             </button>
-                            <button @click="del(model)" type="button" class="btn btn-danger w-24">{{ $t('models.delete') }}</button>
+                            <button @click="del(temp_model_id)" type="button" class="btn btn-danger w-24">{{ $t('models.delete') }}</button>
                         </div>
                     </div>
                 </div>
@@ -247,6 +248,7 @@ export default {
         const types = require("../../json/model_categories.json");
         const category = ref('');
         const subcategory = ref('');
+        const temp_model_id = ref(null);
         const del = async(model) => {
             await axios.post('/api/model/delete', {id: model.id})
                 .then(response => {
@@ -278,7 +280,8 @@ export default {
             del,
             category,
             subcategory,
-            getModelRepositories
+            getModelRepositories,
+            temp_model_id
         }
     }
 }
