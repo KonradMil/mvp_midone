@@ -217,6 +217,7 @@ name: "OfferAdd",
             }).then(response => {
                     if (response.data.success) {
                         console.log(response.data + '-> OFFER SAVE !!');
+                        console.log(advance_upon_delivery.value + '-> delivery');
                         toast.success(response.data.message);
 
                     } else {
