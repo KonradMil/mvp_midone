@@ -118,7 +118,7 @@ export default {
         const activeTab = ref(false);
 
         const switchTab = () => {
-            context.emit("update:activeTab", 'teamsSolution');
+           emitter.emit("activeTab", {name: 'teamsSolution'});
         }
 
         const teams = computed(() => {
