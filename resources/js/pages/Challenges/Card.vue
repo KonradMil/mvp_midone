@@ -32,11 +32,10 @@
                             <BoxIcon class="w-4 h-4 mr-2"/>
                             Szczegóły techniczne
                         </a>
-                        <a class="flex items-center mt-5" href=""
+                        <a class="flex items-center mt-5" href="" v-if="challenge != undefined"
                            @click.prevent="activeTab = 'rozwiazania'"
                            :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <LockIcon class="w-4 h-4 mr-2"/>
-                            {{challenge.selected.author_id}}
                             <div v-if="challenge.selected.author_id != undefined">Wybrane rozwiązanie</div><div v-if="challenge.selected.author_id == undefined">Rozwiązania</div>
                         </a>
                         <a v-if="(challenge.author_id != user.id) && user.type == 'integrator'"
