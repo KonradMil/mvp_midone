@@ -37,6 +37,7 @@
 
 <script>
 import {getCurrentInstance, onMounted, ref} from "vue";
+import GetOffersChallenge from "../../../compositions/GetChallengeOffers";
 
 export default {
     name: "Offers",
@@ -51,6 +52,8 @@ export default {
         const switchTab = () => {
             context.emit("update:activeTab", 'addingoffer');
         }
+
+
 
         const getOffers = () => {
             axios.post('/api/offer/get/all', {})

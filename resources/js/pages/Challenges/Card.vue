@@ -44,6 +44,13 @@
                             <SettingsIcon class="w-4 h-4 mr-2"/>
                             Oferty
                         </a>
+                        <a v-if="(challenge.author_id == user.id)"
+                            class="flex items-center mt-5" href=""
+                           @click.prevent="activeTab = 'all-offers'"
+                           :class="(activeTab == 'all-offers')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                            <SettingsIcon class="w-4 h-4 mr-2"/>
+                            Wszystkie oferty
+                        </a>
                         <a class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'pytania'"
                            :class="(activeTab == 'pytania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
@@ -109,6 +116,7 @@
             <TeamsPanel v-if="activeTab == 'zespoly' && (challenge.author_id == user.id)" :teams="challenge.teams"> </TeamsPanel>
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :offer_id="temp_offer_id"></OfferAdd>
             <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab"></Offers>
+            <ChallengeOffers v-if="activeTab == 'all-offers'" v-model:activeTab="activeTab" v-if="(challenge.author_id == user.id)"></ChallengeOffers>
             <TeamsPanelSolution v-if="activeTab == 'teamsSolution'" :solution="solution" ></TeamsPanelSolution>
         </div>
     </div>
