@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
+    <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4" :class="(solution.selected == 1)? 'selected-solution': '' ">
         <div class="w-10 h-10 flex-none image-fit">
             <img
                 alt="Icewall Tailwind HTML Admin Template"
@@ -10,12 +10,12 @@
         <div class="ml-3 mr-auto" @click="$router.push({name: 'solutionStudio', params: {id: solution.id, type: 'solution', load: solution }});">
             <a href="" class="font-medium">{{ solution.name }}</a>
         </div>
-        <div class="dropdown ml-3">
-            <a href="javascript:;"
-                class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300"
-                aria-expanded="false">
-                <MoreVerticalIcon class="w-5 h-5"/>
-            </a>
+<!--        <div class="dropdown ml-3">-->
+<!--            <a href="javascript:;"-->
+<!--                class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300"-->
+<!--                aria-expanded="false">-->
+<!--                <MoreVerticalIcon class="w-5 h-5"/>-->
+<!--            </a>-->
 <!--            <div class="dropdown-menu w-40">-->
 <!--                <div class="dropdown-menu__content box dark:bg-dark-1 p-2">-->
 <!--                    <a href=""-->
@@ -30,7 +30,7 @@
 <!--                    </a>-->
 <!--                </div>-->
 <!--            </div>-->
-        </div>
+<!--        </div>-->
     </div>
     <div class="p-5 border-t border-gray-200 dark:border-dark-5" >
         <div class="h-40 xxl:h-56 image-fit">
