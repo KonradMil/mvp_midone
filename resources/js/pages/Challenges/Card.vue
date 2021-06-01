@@ -184,6 +184,8 @@ export default defineComponent({
         });
 
         emitter.on('activeTab', e => () => {
+            console.log('Switch');
+            console.log(e);
            activeTab.value = e.name;
         });
 
