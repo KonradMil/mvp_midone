@@ -181,19 +181,15 @@ export default defineComponent({
         emitter.on('*', (type, e) => {
             console.log(type, e);
             console.log('HERE212');
-
+                if(type == 'activeTab') {
+                    activeTab.value = e.name;
+                }
         } );
 
 
         emitter.on('changeToOfferAdd', e => () => {
             console.log('BOLLOCKS');
            activeTab.value = 'addingoffer';
-        });
-
-        emitter.on('activeTabaa', e => () => {
-            console.log('Switch');
-            console.log(e);
-           activeTab.value = e.name;
         });
 
         const getCardChallengeRepositories = async (id) => {

@@ -20,7 +20,7 @@ import VueCookies from 'vue3-cookies'
 import relativeTime from 'dayjs/esm/plugin/relativeTime';
 
 const emitter = mitt();
-emitter.on('*', (type, e) => console.log(type, e) )
+// emitter.on('*', (type, e) => console.log(type, e) )
 
 const options = {
 

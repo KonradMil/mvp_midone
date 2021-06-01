@@ -118,7 +118,7 @@ export default {
 
         const switchTab = () => {
             console.log('Switch22');
-            emitter.emit("activeTabaa", {name: 'teamsSolution'});
+            emitter.emit("activeTab", {name: 'teamsSolution'});
         }
 
         const teams = computed(() => {
