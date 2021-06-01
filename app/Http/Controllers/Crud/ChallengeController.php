@@ -481,6 +481,8 @@ class ChallengeController extends Controller
             $challenge = NULL;
         }
 
+        $challenge->selected = $challenge->solutions()->where('selected', '=', 1)->first();
+
         try {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like', 1)) {
                 $challenge->liked = true;
