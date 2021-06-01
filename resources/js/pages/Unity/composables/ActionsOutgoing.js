@@ -200,6 +200,7 @@ export default function unityActionOutgoing(gameWindow) {
         pauseAnimation,
         addLine,
         removeLine,
-        updateCurrentAnimation
+        updateCurrentAnimation,
+        prefix
     };
 }
