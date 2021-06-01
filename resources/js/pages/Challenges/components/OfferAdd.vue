@@ -8,6 +8,7 @@
                             Cena za dostawę oraz uruchomienie stanowiska (netto)
                         </label>
                         <input type="number" class="form-control" v-model="price_of_delivery"/>
+                        <div id="input-group-price" class="input-group-text">zł</div>
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
                         <label for="input-wizard-2" class="form-label">
@@ -46,7 +47,7 @@
                             v-model="advance_upon_agreement"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                             <option selected disabled>Wybierz...</option>
-                            <option :selected="index === advance_upon_agreement ? 'selected' : ''" v-for="(det,index) in values['percent']"
+                            <option v-for="(det,index) in values['percent']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -143,7 +144,10 @@
                         <label for="input-wizard-12" class="form-label">
                             Koszt roboczo godziny pracy wsparcia / prac rozwojowych
                         </label>
+                        <div class="input-group">
                         <input type="number" class="form-control" v-model="work_hour_price"/>
+                        <div id="input-group-price2" class="input-group-text">zł</div>
+                        </div>
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-13" class="form-label">
