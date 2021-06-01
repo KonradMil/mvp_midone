@@ -88,7 +88,7 @@
             "loginTitle": "Sign In",
             "forgot": "Forgot Password?",
             "pol1": "By signin up, you agree to our",
-            "pol2": "Terms and Conditions",
+            "pol2": "Terms and Conditions ",
             "pol3": "Privacy policy"
         },
         "darkmode": {
@@ -334,7 +334,7 @@
             "loginTitle": "Zaloguj się",
             "forgot": "Zapomniałeś hasła?",
             "pol1": "Logując się akceptujesz nasze",
-            "pol2": "Warunki świadczenia usług",
+            "pol2": "Warunki świadczenia usług ",
             "pol3": "Politykę prywatności"
         },
         "darkmode": {
