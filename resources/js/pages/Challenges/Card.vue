@@ -184,7 +184,7 @@ export default defineComponent({
            activeTab.value = 'addingoffer';
         });
 
-        emitter.on('activeTab', e => () => {
+        emitter.on('activeTabaa', e => () => {
             console.log('Switch');
             console.log(e);
            activeTab.value = e.name;

@@ -108,7 +108,6 @@ export default {
         canEdit: Boolean,
         activeTab: String
     },
-    emits: ["update:activeTab"],
     setup(props,context) {
         const toast = useToast();
         const solution = props.solution;
@@ -119,7 +118,7 @@ export default {
 
         const switchTab = () => {
             console.log('Switch22');
-           emitter.emit("activeTab", {name: 'teamsSolution'});
+            emitter.emit("activeTabaa", {name: 'teamsSolution'});
         }
 
         const teams = computed(() => {
