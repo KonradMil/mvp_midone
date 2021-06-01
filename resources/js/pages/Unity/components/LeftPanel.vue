@@ -177,8 +177,8 @@ export default {
 
         const getModelRepositories = async () => {
             models.value = GetModels({
-                category_id: category.value,
-                subcategory_id: subcategory.value,
+                category: category.value,
+                subcategory: subcategory.value,
                 brand: selectedBrand.value
             });
         }

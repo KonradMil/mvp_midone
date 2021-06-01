@@ -231,7 +231,11 @@ export default {
                     gameWindow.value.setFullscreen();
                     break;
                 case 'logout':
-                    router.push('/challenges')
+                    if(type.value == 'solution') {
+                       window.location.href = 'https://two.appworks-dev.pl/challenges/card/' + solution.value.challenge_id;
+                    } else {
+                        window.location.href = 'https://two.appworks-dev.pl/challenges/card/' + challenge.value.id;
+                    }
                     break;
                 case 'orto':
                     handleUnityActionOutgoing({action: 'ChangeCamera', data: 2});
