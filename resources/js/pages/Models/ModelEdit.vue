@@ -20,7 +20,7 @@
                 </button>
             </div>
         </div>
-        <div class="pos intro-y grid grid-cols-12 gap-5 mt-5">
+        <div class="pos intro-y grid grid-cols-12 gap-5 mt-5" v-if="model.name != undefined">
             <!-- BEGIN: Post Content -->
             <div class="intro-y col-span-12 lg:col-span-8">
                 <div class="input-group mt-2">
@@ -322,9 +322,10 @@ export default {
         }
         const getModelRepositiories = async () => {
             GetModel(model_id.value, (res) => {
-                model.value = res.payload[0];
-                category.value = res.payload[0].category;
-                subcategory.value = res.payload[0].subcategory;
+                console.log(res);
+                model.value = res.payload;
+                category.value = res.payload.category;
+                subcategory.value = res.payload.subcategory;
             })
         }
         // const saveModelRepo = async () => {
