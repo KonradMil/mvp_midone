@@ -321,7 +321,7 @@ export default {
             showModal.value = false;
         }
         const getModelRepositiories = async () => {
-            GetModel(model_id, (res) => {
+            GetModel(model_id.value, (res) => {
                 model.value = res.payload[0];
                 category.value = res.payload[0].category;
                 subcategory.value = res.payload[0].subcategory;
