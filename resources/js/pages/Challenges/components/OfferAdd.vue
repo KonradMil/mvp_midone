@@ -18,7 +18,7 @@
                             v-model="weeks_to_start"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                             <option selected disabled>Wybierz...</option>
-                            <option :selected="index === weeks_to_start ? 'selected' : ''" v-for="(det,index) in values['weeks']"
+                            <option v-for="(det,index) in values['weeks']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -32,7 +32,7 @@
                             v-model="time_to_start"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                             <option selected disabled>Wybierz...</option>
-                            <option :selected="index === time_to_start ? 'selected' : ''" v-for="(det,index) in values['weeks-short']"
+                            <option v-for="(det,index) in values['weeks-short']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -60,7 +60,7 @@
                             v-model="advance_upon_delivery"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                             <option selected disabled>Wybierz...</option>
-                            <option :selected="index === advance_upon_delivery ? 'selected' : ''" v-for="(det,index) in values['percent']"
+                            <option v-for="(det,index) in values['percent']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -74,7 +74,7 @@
                             v-model="advance_upon_start"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                             <option selected disabled>Wybierz...</option>
-                            <option :selected="index === advance_upon_start ? 'selected' : ''" v-for="(det,index) in values['percent']"
+                            <option v-for="(det,index) in values['percent']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -88,7 +88,7 @@
                             v-model="years_of_guarantee"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                             <option selected disabled>Wybierz...</option>
-                            <option :selected="index === years_of_guarantee ? 'selected' : ''" v-for="(det,index) in values['years-short']"
+                            <option v-for="(det,index) in values['years-short']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -114,7 +114,7 @@
                             v-model="reaction_time"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                             <option selected disabled>Wybierz...</option>
-                            <option :selected="index === reaction_time ? 'selected' : ''" v-for="(det,index) in values['hours']"
+                            <option v-for="(det,index) in values['hours']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -128,7 +128,7 @@
                             v-model="time_to_fix"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                             <option selected disabled>Wybierz...</option>
-                            <option :selected="index === time_to_fix ? 'selected' : ''" v-for="(det,index) in values['hours']"
+                            <option v-for="(det,index) in values['hours']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -172,19 +172,19 @@ name: "OfferAdd",
     setup(props) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
-        const price_of_delivery = ref('');
-        const weeks_to_start = ref('');
-        const time_to_start = ref('');
-        const advance_upon_agreement = ref('');
-        const advance_upon_delivery = ref('');
-        const advance_upon_start = ref('');
-        const years_of_guarantee = ref('');
+        const price_of_delivery = ref(0);
+        const weeks_to_start = ref(null);
+        const time_to_start = ref(null);
+        const advance_upon_agreement = ref(null);
+        const advance_upon_delivery = ref(null);
+        const advance_upon_start = ref(null);
+        const years_of_guarantee = ref(null);
         const maintenance_frequency = ref('');
-        const price_of_maintenance = ref('');
-        const reaction_time = ref('');
-        const time_to_fix = ref('');
-        const intervention_price = ref('');
-        const work_hour_price = ref('');
+        const price_of_maintenance = ref(0);
+        const reaction_time = ref(null);
+        const time_to_fix = ref(null);
+        const intervention_price = ref(0);
+        const work_hour_price = ref(0);
         const period_of_support = ref('');
 
         const toast = useToast();
