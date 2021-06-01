@@ -184,6 +184,12 @@ export default defineComponent({
            activeTab.value = 'addingoffer';
         });
 
+        emitter.on('activeTab', e => () => {
+            console.log('Switch');
+            console.log(e);
+           activeTab.value = e.name;
+        });
+
         const getCardChallengeRepositories = async (id) => {
             await axios.post('/api/challenge/user/get/card', {id: id})
                 .then(response => {
