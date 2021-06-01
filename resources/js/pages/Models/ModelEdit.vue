@@ -348,6 +348,8 @@ export default {
         //     });
         // }
         const editModelRepo = async () => {
+            model.value.subcategory = subcategory.value;
+            model.value.category = category.value;
             EditModel(model.value, model.value.id );
         }
 
