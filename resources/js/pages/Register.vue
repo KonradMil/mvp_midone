@@ -173,7 +173,7 @@
                         <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                             <input id="rodo3" type="checkbox" class="form-check-input border mr-2" v-model="validate.rodo3.$model"/>
                             <label class="cursor-pointer select-none" for="rodo3">Akceptuję </label>
-                            <div class="text-theme-1 dark:text-theme-10 ml-1" @click.prevent="$router.push({path: '/terms/terms-of-service'})"> warunki świadczenia </div> usług na platformie DBR77.com.
+                            <div class="text-theme-1 dark:text-theme-10 ml-1" @click.prevent="$router.push({path: '/terms/terms-of-service'})"> warunki świadczenia  </div>  usług na platformie DBR77.com.
                         </div>
                         <template v-if="validate.rodo3.$error">
                             <div
