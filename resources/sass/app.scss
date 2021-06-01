@@ -150,8 +150,10 @@
 @import "components/ads-box";
 @import "components/full-calendar";
 @import "components/pristine";
+
 .selected-solution {
     border: 3px solid #930f68;
+    border-radius: 10px;
 }
 #bottom {
     pointer-events: none !important;
