@@ -92,7 +92,7 @@
                             Dodaj rozwiązanie
                         </button>
                         <button v-if="challenge.stage == 2"
-                            @click="$router.push({name: 'offer-add', params: {challenge: challenge}})"
+                            @click.prevent="activeTab = 'addingoffer'"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto">
                             Złóż ofertę
@@ -161,10 +161,9 @@ export default defineComponent({
         const selected_solution_id = ref(null);
         const types = require("../../json/types.json");
 
-        emitter.on('changeTeamsSolution', e => () =>{
-            console.log('ChangeTeamsSolution' + e.solution);
+        emitter.on('changeTeamsSolution', e => () => {
+            console.log('ChangeTeamsSolution');
             activeTab.value = 'teamsSolution'
-            solution.value = e.solution;
         });
 
 

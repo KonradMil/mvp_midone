@@ -106,6 +106,7 @@ export default {
         solution: Object,
         canAccept: Boolean,
         canEdit: Boolean,
+        activeTab: String
     },
     emits: ["update:activeTab"],
     setup(props,context) {
@@ -117,8 +118,7 @@ export default {
         const activeTab = ref(false);
 
         const switchTab = () => {
-            emitter.emit("changeTeamsSolution", {solution: props.solution});
-            console.log('SwitchTab ' + props.solution);
+            context.emit("update:activeTab", 'teamsSolution');
         }
 
         const teams = computed(() => {
