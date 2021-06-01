@@ -6,7 +6,7 @@
                     <UnityDropdown v-if="icon.type === 'dropdown'" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"></UnityDropdown>
                 </div>
             </div>
-            <div class="right flex  pt-2 mr-24 flex-row" style="margin-left: auto;">
+            <div class="right flex  pt-2 mr-24 flex-row" style="margin-left: auto;" v-if="icons.right != undefined">
                 <div :key="'topIcon_fullscreen'" class="top-i w-30 pl-6 unity-button">
                     <UnityButton :tooltip="''" :alttext="''" :path="'/s3/builder_icons/fullscreen_simple.png'" :action="'fullscreen'" position="topbuttonclick"/>
 <!--                    <UnityDropdown v-if="icon.type === 'dropdown'" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick" :options="icon.options"></UnityDropdown>-->
