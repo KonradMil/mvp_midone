@@ -12,7 +12,12 @@ class CompanyController extends Controller
     public function saveCompany(Request $request)
     {
         $input = $request->input();
-        $company = new Company();
+        if(isset(Auth::user()->companies[0])) {
+            $company = Auth::user()->companies[0];
+        } else {
+            $company = new Company();
+        }
+
         $company->fill($input);
         $company->author_id = Auth::user()->id;
         $company->save();
