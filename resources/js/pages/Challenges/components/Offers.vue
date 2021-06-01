@@ -1,5 +1,5 @@
 <template>
-    <div class="col-span-12 lg:col-span-12 xxl:col-span-12">
+    <div class="col-span-9 lg:col-span-9 xxl:col-span-9">
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-6 xxl:col-span-6" v-for="(offer, index) in offers.list" :key="index">
@@ -11,7 +11,7 @@
                         <div class="flex items-center">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Cena za dostawę oraz uruchomienie stanowiska (netto):</span>
-                                <div class="text-gray-600"> {{ offer.price_of_delivery }}</div>
+                                <div class="text-gray-600"> {{ offer.price_of_delivery }}zł</div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
