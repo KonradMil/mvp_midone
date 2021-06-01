@@ -4,7 +4,7 @@
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12 xxl:col-span-12">
                 <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-                    <h2 class="font-medium text-base mr-auto"> Oferty</h2>
+                    <h2 class="font-medium text-base mr-auto"> Wszystkie oferty</h2>
                 </div>
                 <div class="px-5 pt-5">
                     <div v-if="offers.length == 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
@@ -39,7 +39,7 @@ import {getCurrentInstance, onMounted, ref} from "vue";
 import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
 
 export default {
-    name: "Offers",
+    name: "ChallengeOffers",
     props: {
         id: Number,
         activeTab: String

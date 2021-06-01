@@ -60,6 +60,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         offers.value = response.data.payload;
+                        console.log(response.data.payload + ' -> OFFERS VALUE')
                     } else {
                         // toast.error(response.data.message);
                     }
