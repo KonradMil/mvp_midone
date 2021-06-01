@@ -13,15 +13,14 @@
                             <p>
                                 W tej chwili nie ma żadnych wyzwań, poinformujemy Cię jak tylko jakieś będą dostępne.
                             </p>
-                            <button class="btn btn-primary shadow-md mr-2" @click="addSolution">{{$t('challengesMain.addChallenge')}}</button>
+                            <button class="btn btn-primary shadow-md mr-2" @click="addSolution">{{ $t('challengesMain.addChallenge') }}</button>
                         </div>
-
                     </div>
                     <div class="intro-y grid grid-cols-12 gap-6 mt-5">
                         <div v-if="challenge.status >= 2" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(challenge.selected)? 'solution-selected': ''">
                             <SingleSolutionPost :user="user" :solution="challenge.selected" :canAccept="false" :canEdit="false"></SingleSolutionPost>
                         </div>
-                        <div v-for="(solution, index) in challenge.solutions" :key="index" v-if="challenge.status > 2"
+                        <div v-for="(solution, index) in challenge.solutions" :key="index" v-if="challenge.status < 2"
                              class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected)? 'solution-selected': ''">
                             <div v-if="!solution.rejected">
                                 <div v-if="user.type == 'integrator'">
@@ -31,7 +30,7 @@
                                     <SingleSolutionPost v-if="solution.status === 1" :user="user" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
                                 </div>
                             </div>
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -72,7 +71,10 @@ export default {
                         delete_cookie('type');
                         delete_cookie('id');
                         console.log(response.data.payload);
-                        router.push({name: 'solutionStudio', params: {id: response.data.payload.id, type: 'solution', load: response.data.payload }});
+                        router.push({
+                            name: 'solutionStudio',
+                            params: {id: response.data.payload.id, type: 'solution', load: response.data.payload}
+                        });
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -80,11 +82,11 @@ export default {
         };
 
 
-        const delete_cookie = ( name, path = '/', domain ) => {
-            if( get_cookie( name ) ) {
+        const delete_cookie = (name, path = '/', domain) => {
+            if (get_cookie(name)) {
                 document.cookie = name + "=" +
-                    ((path) ? ";path="+path:"")+
-                    ((domain)?";domain=two.appworks-dev.pl":"") +
+                    ((path) ? ";path=" + path : "") +
+                    ((domain) ? ";domain=two.appworks-dev.pl" : "") +
                     ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
             }
         }
