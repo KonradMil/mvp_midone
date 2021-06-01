@@ -250,7 +250,7 @@ export default {
         const subcategory = ref('');
         const temp_model_id = ref(null);
         const del = async(model) => {
-            await axios.post('/api/model/delete', {id: temp_model_id})
+            await axios.post('/api/model/delete', {id: temp_model_id.value})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
