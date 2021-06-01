@@ -178,6 +178,12 @@ export default defineComponent({
             activeTab.value = 'teamsSolution'
         });
 
+        emitter.on('*', (type, e) => {
+            console.log(type, e);
+            console.log('HERE212');
+
+        } );
+
 
         emitter.on('changeToOfferAdd', e => () => {
             console.log('BOLLOCKS');
