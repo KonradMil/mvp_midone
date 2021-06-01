@@ -56,7 +56,7 @@
                             <div class="w-full" v-if="challenge.stage == 2">Oferty do: {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY')  }}</div>
                         </div>
                     </div>
-                    <div class="dropdown ml-3">
+                    <div class="dropdown ml-3"  v-if="challenge.author_id == user.id">
                         <a
                             href="javascript:;"
                             class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300"
@@ -65,12 +65,12 @@
                         </a>
                         <div class="dropdown-menu w-40">
                             <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                                <a href=""
+                                <a href="" @click.prevent="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});"
                                     class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                                     <Edit2Icon class="w-4 h-4 mr-2"/>
                                     {{ $t('challengesMain.editPost') }}
                                 </a>
-                                <a href=""
+                                <a href="" @click.prevent="deleteChallenge"
                                     class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                                     <TrashIcon class="w-4 h-4 mr-2"/>
                                     {{ $t('challengesMain.deletePost') }}
@@ -163,6 +163,19 @@ export default {
             }
         });
 
+        const deleteChallenge = (id) => {
+            axios.post('/api/challenge/delete', {id: id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        toast.success('Wyzwanie usunięte');
+                        window.location.reload();
+                    } else {
+
+                    }
+                })
+        }
+
         const follow = (id, index) => {
             axios.post('/api/challenge/user/follow', {id: id})
                 .then(response => {
@@ -234,7 +247,8 @@ export default {
             dislike,
             getChallengeRepositories,
             follow,
-            unfollow
+            unfollow,
+            deleteChallenge
         }
     },
     beforeRouteEnter(to, from, next) {

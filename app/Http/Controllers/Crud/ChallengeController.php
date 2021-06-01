@@ -470,6 +470,19 @@ class ChallengeController extends Controller
         ]);
     }
 
+    public function delete(Request $request)
+    {
+        $challenge = Challenge::find($request->id);
+        $challenge->author_id = 0;
+        $challenge->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => '',
+            'payload' => ''
+        ]);
+    }
+
     public function getCardData(Request $request)
     {
         if (isset($request->id)) {
