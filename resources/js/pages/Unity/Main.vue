@@ -122,12 +122,12 @@ export default {
         });
 
         const lockInput = () => {
-            console.log('LOCK');
+            // console.log('LOCK');
             handleUnityActionOutgoing({action: "lockInput", data: ''});
         }
 
         const unlockInput = () => {
-            console.log('UNLOCK');
+            // console.log('UNLOCK');
             handleUnityActionOutgoing({action: "unlockInput", data: ''});
         }
 
@@ -301,7 +301,7 @@ export default {
                 } else {
                     getCardChallengeRepositories(id.value);
                 }
-                handleUnityActionOutgoing({action: 'prefix', data: 'https://devsys.appworks-dev.pl'});
+                handleUnityActionOutgoing({action: 'prefix', data: 'https://two.appworks-dev.pl'});
             }, 5000);
         }
 
@@ -367,7 +367,7 @@ export default {
             var d = new Date();
             d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
             var expires = "expires="+d.toUTCString();
-            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            // document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
 
         const getCookies = (name) => {
@@ -395,17 +395,20 @@ export default {
             radialMenuLayout.value = require("../../json/radial_layout.json");
             currentRadialMenu.value = radialMenuEdit.value;
             mode.value = 'edit';
-            if(props.type == undefined) {
-                console.log(document.cookie);
-                type.value = getCookies('type');
-                id.value = getCookies('id');
-                console.log(getCookies('id'));
-            } else {
-                type.value = props.type;
-                id.value = props.id;
-                setCookie('type', props.type, 1);
-                setCookie('id', props.id, 1);
-            }
+            setTimeout(() => {
+                if(props.type == undefined) {
+                    console.log('BIORE Z CIASTKA');
+                    type.value = getCookies('type');
+                    id.value = getCookies('id');
+                    console.log(getCookies('id'));
+                } else {
+                    type.value = props.type;
+                    id.value = props.id;
+                    setCookie('type', props.type, 1);
+                    setCookie('id', props.id, 1);
+                }
+            }, 2000)
+
         });
 
         return {

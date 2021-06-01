@@ -167,13 +167,17 @@ export default {
     },
     emits: ["update:label"],
     setup(props, context) {
-        const l = ref({fontSize: 36, message: '', textColor: ''});
+        const l = ref({fontSize: 36, message: '', textColor: '', index: 0});
+
         watch(l, (lab, prevLabel) => {
             console.log('CHANGE');
-            context.emit("update:label", lab);
+            console.log(l.value);
+            console.log(lab);
+            context.emit("update:label", l.value);
         }, {deep: true})
 
         onMounted(() => {
+            console.log('MOUNTED');
             if (props.label.message != undefined && props.label.message != '') {
                 l.value.message = props.label.message;
             } else {

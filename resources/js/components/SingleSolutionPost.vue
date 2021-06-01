@@ -16,20 +16,20 @@
                 aria-expanded="false">
                 <MoreVerticalIcon class="w-5 h-5"/>
             </a>
-            <div class="dropdown-menu w-40">
-                <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                    <a href=""
-                        class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                        <Edit2Icon class="w-4 h-4 mr-2"/>
-                        {{$t('challengesMain.editPost')}}
-                    </a>
-                    <a href=""
-                        class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                        <TrashIcon class="w-4 h-4 mr-2"/>
-                        {{$t('challengesMain.deletePost')}}
-                    </a>
-                </div>
-            </div>
+<!--            <div class="dropdown-menu w-40">-->
+<!--                <div class="dropdown-menu__content box dark:bg-dark-1 p-2">-->
+<!--                    <a href=""-->
+<!--                        class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">-->
+<!--                        <Edit2Icon class="w-4 h-4 mr-2"/>-->
+<!--                        {{$t('challengesMain.editPost')}}-->
+<!--                    </a>-->
+<!--                    <a href=""-->
+<!--                        class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">-->
+<!--                        <TrashIcon class="w-4 h-4 mr-2"/>-->
+<!--                        {{$t('challengesMain.deletePost')}}-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
     <div class="p-5 border-t border-gray-200 dark:border-dark-5" >

@@ -150,6 +150,9 @@
 @import "components/ads-box";
 @import "components/full-calendar";
 @import "components/pristine";
+#bottom {
+    pointer-events: none !important;
+}
 .slider-tooltip {
     border: 1px solid #930f68 !important;
     background: #930f68 !important;

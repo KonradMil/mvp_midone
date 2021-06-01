@@ -1,6 +1,6 @@
 import {watch, unref, onUnmounted} from 'vue';
 function outgoing(game, action, data, json) {
-    console.log('ADASD');
+    // console.log('ADASD');
 
     let finalData = '';
     if(json) {

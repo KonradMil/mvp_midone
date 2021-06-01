@@ -13,6 +13,12 @@
                 <button
                     class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
                     aria-expanded="false"
+                    @click.prevent="$router.push({path: 'challenges'})">
+                    Powrót
+                </button>
+                <button
+                    class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
+                    aria-expanded="false"
                     @click.prevent="saveChallengeRepo"
                     :disabled="isDisabled">
                     <SaveIcon class="w-4 h-4 mr-2"/>
@@ -403,6 +409,9 @@ export default {
             console.log('RESPPPPPPPP' + resp);
             if(id.value != undefined && id.value != null) {
                 toast.success('Zapisano poprawnie.');
+                setTimeout(()=>{
+                    isDisabled.value=false;
+                },5000);
             } else {
                 router.push({name: 'challengeStudio', params: {id: resp.id, type: 'challenge', load: resp}})
             }
@@ -457,9 +466,7 @@ export default {
                 // emitter.emit('changestudio', {val: 'challenge'});
                 isDisabled.value = true;
             }
-            setTimeout(()=>{
-                isDisabled.value=false;
-            },5000);
+
         }
 
         const deleteImage = (index) => {

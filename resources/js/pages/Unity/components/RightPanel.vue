@@ -18,11 +18,11 @@
                 <!-- END: Slide Over Header -->
                 <!-- BEGIN: Slide Over Body -->
                 <div class="modal-body" @mouseenter="lock" @mouseleave="unlock">
-                    <LabelDialog v-if="content == 'label'" v-model:label="label"/>
-                    <CommentDialog v-if="content == 'comment'" v-model:comment="comment"/>
-                    <LayoutDialog v-if="content == 'layout'" v-model:layout="layout"/>
-                    <LineDialog v-if="content == 'line'" v-model:modelValue="line"/>
-                    <AnimableDialog v-if="content == 'animable'" v-model:animable="animable"/>
+                    <LabelDialog v-if="content == 'label'" :key="temp_label_id" v-model:label="label"/>
+                    <CommentDialog v-if="content == 'comment'" :key="temp_comment_id" v-model:comment="comment"/>
+                    <LayoutDialog v-if="content == 'layout'" :key="temp_layout_id" v-model:layout="layout"/>
+                    <LineDialog v-if="content == 'line'" :key="temp_line_id" v-model:modelValue="line"/>
+                    <AnimableDialog v-if="content == 'animable'" :key="temp_animable_id" v-model:animable="animable"/>
                     <DescriptionDialog v-if="content == 'description'" v-model:object="object" :type="props.type"/>
 <!--                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>-->
                     <TeamsDialog v-model:teams_unity="teams_unity" :type="props.type" v-if="(content == 'teams' && allowedEdit && (user_teams.length > 0))"></TeamsDialog>
@@ -33,7 +33,7 @@
                     <FinancialDialog v-if="content == 'financial'" v-model:financial_before="financial_before" v-model:financial_after="financial_after" :type="type"></FinancialDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
                     <OperationDialog v-if="content == 'operational'" ></OperationDialog>
-                    <SettingsDialog v-if="content == 'settings'" v-model:technical="technical" ></SettingsDialog>
+                    <SettingsDialog v-if="content == 'settings'" v-model:technical="technical"  ></SettingsDialog>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
@@ -113,6 +113,12 @@ export default {
         const type = ref('');
         const user = ref({});
         const user_teams = ref({});
+        const temp_label_id = ref(0);
+        const temp_comment_id = ref(0);
+        const temp_line_id = ref(0);
+        const temp_setting_id = ref(0);
+        const temp_layout_id = ref(0);
+        const temp_animable_id = ref(0);
 
         const teamsSolution = ref({
             teamsAllowed: '',
@@ -121,10 +127,12 @@ export default {
 
         const save = () => {
             if(content.value === 'label') {
+                comment.value.index = temp_label_id.value;
                 emitter.emit('unityoutgoingaction', { action: 'updateLabel', data:label, json: true });
             } else if(content.value === 'layout') {
                 emitter.emit('unityoutgoingaction', { action: 'updateLayout', data:layout, json: true });
             } else if (content.value === 'comment') {
+                comment.value.index = temp_comment_id.value;
                 emitter.emit('unityoutgoingaction', { action: 'updateComment', data:comment, json: true });
             } else if (content.value === 'animable') {
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
@@ -254,6 +262,7 @@ export default {
         emitter.on('UnityLineSettings', e => {
             content.value = 'line';
             console.log(e);
+            temp_setting_id.value = e.index;
             line.value = e;
             currentTitle.value = 'Ustawienia lini animacji';
             emitter.emit('changeprop', { data:line, json: true });
@@ -261,6 +270,7 @@ export default {
         });
 
         emitter.on('UnityAnimableSettings', e => {
+            temp_animable_id.value = e.data.index;
             content.value = 'animable';
             console.log(e);
             animable.value = e.data;
@@ -270,6 +280,7 @@ export default {
 
         emitter.on('UnityLayoutSelected', e => {
             content.value = 'layout';
+            temp_layout_id.value = e.layoutSelected.index;
             layout.value = e.layoutSelected;
 
             showPanel();
@@ -277,6 +288,9 @@ export default {
 
         emitter.on('UnityLabelSelected', e => {
             console.log(e);
+            console.log("e");
+            console.log(e.labelSelected);
+            temp_label_id.value = e.labelSelected.index;
             content.value = 'label';
             label.value = e.labelSelected;
             currentTitle.value = 'Ustawienia etykiety';
@@ -285,6 +299,7 @@ export default {
 
         emitter.on('UnityCommentSelected', e => {
             console.log(e);
+            temp_comment_id.value = e.commentSelected.index;
             comment.value = e.commentSelected;
             content.value = 'comment';
             currentTitle.value = 'Ustawienia komentarza';
@@ -395,7 +410,14 @@ export default {
             user_teams,
             teamsSolution,
             lock,
-            unlock
+            unlock,
+            temp_label_id,
+            temp_comment_id,
+            temp_setting_id,
+            temp_layout_id,
+            temp_animable_id,
+            temp_line_id
+
         }
     }
 }

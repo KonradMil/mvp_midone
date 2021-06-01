@@ -22,10 +22,10 @@
                              class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected)? 'solution-selected': ''">
                             <div v-if="!solution.rejected">
                                 <div v-if="user.type == 'integrator'">
-                                    <SingleSolutionPost v-if="solution.author_id === user.id" :user="user" :solution="solution" :canAccept="user.id === challenge.author_id" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
+                                    <SingleSolutionPost v-if="(solution.author_id === user.id) || solution.selected == 1" :user="user" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
                                 </div>
                                 <div v-if="user.type == 'investor'">
-                                    <SingleSolutionPost v-if="solution.status === 1" :user="user" :solution="solution" :canAccept="user.id === challenge.author_id" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
+                                    <SingleSolutionPost v-if="solution.status === 1" :user="user" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
                                 </div>
                             </div>
                             </div>
@@ -66,6 +66,8 @@ export default {
             axios.post('/api/solution/create', {id: challenge.value.id})
                 .then(response => {
                     if (response.data.success) {
+                        delete_cookie('type');
+                        delete_cookie('id');
                         console.log(response.data.payload);
                         router.push({name: 'solutionStudio', params: {id: response.data.payload.id, type: 'solution', load: response.data.payload }});
                     } else {
@@ -73,6 +75,22 @@ export default {
                     }
                 })
         };
+
+
+        const delete_cookie = ( name, path = '/', domain ) => {
+            if( get_cookie( name ) ) {
+                document.cookie = name + "=" +
+                    ((path) ? ";path="+path:"")+
+                    ((domain)?";domain=two.appworks-dev.pl":"") +
+                    ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+            }
+        }
+
+        const get_cookie = (name) => {
+            return document.cookie.split(';').some(c => {
+                return c.trim().startsWith(name + '=');
+            });
+        }
 
         const follow = () => {
             axios.post('/api/solution/follow', {id: props.challenge.id})
