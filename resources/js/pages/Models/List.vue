@@ -37,6 +37,7 @@
                         <option selected disabled>{{ $t('challengesNew.selectCategories') }}</option>
                         <option v-for="(cat,index) in categories[category].subcategories" :value="cat.value">{{ cat.name }}</option>
                     </TailSelect>
+                    <button type="button" class="byn btn-primary" @click="getModelRepositories">Szukaj</button>
                 </div>
             </div>
         </div>
@@ -276,7 +277,8 @@ export default {
             DeleteModel,
             del,
             category,
-            subcategory
+            subcategory,
+            getModelRepositories
         }
     }
 }
