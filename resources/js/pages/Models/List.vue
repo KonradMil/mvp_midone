@@ -1,5 +1,45 @@
 <template>
     <div>
+        <div class="col-span-12 lg:col-span-4">
+            <div class="intro-y box p-5">
+                <div class="mt-3">
+                    <label for="post-form-3" class="form-label">{{ $t('models.cat') }}</label>
+                    <TailSelect
+                        id="post-form-3"
+                        v-model="category"
+                        :options="{
+                                locale: 'pl',
+                                placeholder: 'Wybierz kategorie...',
+                                limit: 'Nie można wybrać więcej',
+                                search: false,
+                                hideSelected: false,
+                                classNames: 'w-full'
+                                }">
+                        <option selected disabled>{{ $t('challengesNew.selectCategories') }}</option>
+                        <option v-for="(category,index) in categories.categories" :value="category.value">{{ category.name }}</option>
+                    </TailSelect>
+                </div>
+            </div>
+            <div class="intro-y box p-5" v-if="category != ''">
+                <div class="mt-3">
+                    <label for="post-form-3" class="form-label">{{ $t('models.subcat') }}</label>
+                    <TailSelect
+                        id="post-form-3"
+                        v-model="subcategory"
+                        :options="{
+                                locale: 'pl',
+                                placeholder: 'Wybierz kategorie...',
+                                limit: 'Nie można wybrać więcej',
+                                search: false,
+                                hideSelected: false,
+                                classNames: 'w-full'
+                                }">
+                        <option selected disabled>{{ $t('challengesNew.selectCategories') }}</option>
+                        <option v-for="(cat,index) in categories.categories[category].subcategories" :value="cat.value">{{ cat.name }}</option>
+                    </TailSelect>
+                </div>
+            </div>
+        </div>
         <h2 class="intro-y text-lg font-medium mt-10">{{$t('models.models')}}</h2>
         <div class="grid grid-cols-12 gap-6 mt-5">
             <div
@@ -204,7 +244,8 @@ export default {
         const models = ref([]);
         const categories = ref([]);
         const types = require("../../json/model_categories.json");
-
+        const category = ref('');
+        const subcategory = ref('');
         const del = async(model) => {
             await axios.post('/api/model/delete', {id: model.id})
                 .then(response => {
@@ -218,7 +259,7 @@ export default {
                 })
         }
         const getModelRepositories = async () => {
-            models.value = GetModels();
+            models.value = GetModels({category: category.value, subcategory: subcategory.value});
         }
 
         onMounted(() => {
@@ -233,7 +274,9 @@ export default {
             models,
             categories,
             DeleteModel,
-            del
+            del,
+            category,
+            subcategory
         }
     }
 }
