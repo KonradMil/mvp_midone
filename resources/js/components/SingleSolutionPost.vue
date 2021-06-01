@@ -53,7 +53,7 @@
             <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution">Usuń</button>
             <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0" @click="publishSolution">Publikuj</button>
             <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1" @click="unpublishSolution">Odpublikuj</button>
-            <button class="btn btn-primary shadow-md mr-2" @click.prevent="switchTab">Zespoły</button>
+            <button class="btn btn-primary shadow-md mr-2" @click="switchTab">Zespoły</button>
         </div>
     </div>
     <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
@@ -118,6 +118,7 @@ export default {
         const activeTab = ref(false);
 
         const switchTab = () => {
+            console.log('Switch22');
            emitter.emit("activeTab", {name: 'teamsSolution'});
         }
 
