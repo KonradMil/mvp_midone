@@ -20,12 +20,18 @@ class ModelController extends Controller
     public function getModels(Request  $request)
     {
 //        dd($request->search);
-        if(isset($request->search)) {
+        if(!empty($request->search)) {
             if(is_array($request->search)){
                 if(!empty($request->search['brand'])) {
-                    $models = UnityModel::where('category', '=', $request->search['category_id'])->where('subcategory', '=', $request->search['subcategory_id'])->where('brand', '=', $request->search['brand'])->take(10)->get();
+                    $models = UnityModel::where('brand', '=', $request->search['brand'])->get();
+                } elseif (!empty($request->search['category`_id']) && !empty($request->search['subcategory_id'])) {
+                    $models = UnityModel::where('category', '=', $request->search['category_id'])->where('subcategory', '=', $request->search['subcategory_id'])->get();
+                } elseif (!empty($request->search['category_id'])) {
+                    $models = UnityModel::where('category', '=', $request->search['category_id'])->get();
+                } elseif(!empty($request->search['subcategory_id'])) {
+                    $models = UnityModel::where('subcategory', '=', $request->search['subcategory_id'])->get();
                 } else {
-                    $models = UnityModel::where('category', '=', $request->search['category_id'])->where('subcategory', '=', $request->search['subcategory_id'])->take(10)->get();
+                    $models = UnityModel::take(10)->get();
                 }
 
             } else {
