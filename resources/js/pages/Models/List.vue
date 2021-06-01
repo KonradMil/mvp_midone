@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="col-span-12 lg:col-span-4">
-            <div class="intro-y box p-5">
+            <div class="intro-y box p-5" style="z-index: 99999;">
                 <div class="mt-3">
                     <label for="post-form-3" class="form-label">{{ $t('models.cat') }}</label>
                     <TailSelect
@@ -20,7 +20,7 @@
                     </TailSelect>
                 </div>
             </div>
-            <div class="intro-y box p-5" v-if="category != ''">
+            <div class="intro-y box p-5" v-if="category != ''" style="z-index: 99999;">
                 <div class="mt-3">
                     <label for="post-form-3" class="form-label">{{ $t('models.subcat') }}</label>
                     <TailSelect
@@ -217,7 +217,7 @@
                             >
                                 {{ $t('models.cancel') }}
                             </button>
-                            <button @click="del(temp_model_id)" type="button" class="btn btn-danger w-24">{{ $t('models.delete') }}</button>
+                            <button @click="del(temp_model_id)" type="button" class="btn btn-danger w-24" data-dismiss="modal">{{ $t('models.delete') }}</button>
                         </div>
                     </div>
                 </div>
@@ -255,6 +255,7 @@ export default {
                     // console.log(response.data)
                     if (response.data.success) {
                         console.log(response.data);
+                        getModelRepositories();
                         toast.success(response.data.message);
                     } else {
                         toast.error('Ups! Coś poszło nie tak!');
