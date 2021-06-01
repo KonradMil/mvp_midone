@@ -93,7 +93,7 @@ Route::group(['prefix' => 'offer', 'middleware' => 'auth:sanctum'], function () 
     Route::post('get', [OfferController::class, 'get']);
     Route::post('save', [OfferController::class, 'save']);
     Route::post('get/all', [OfferController::class, 'getAll']);
-    Route::post('get/challenge/offers', [OfferController::class, 'getAllChallengeOffers']);
+    Route::post('get/challenge/offers/{challenge}', [OfferController::class, 'getAllChallengeOffers']);
 });
 
 Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function () {
