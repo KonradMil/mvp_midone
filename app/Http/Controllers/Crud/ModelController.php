@@ -19,7 +19,7 @@ class ModelController extends Controller
     }
     public function getModels(Request  $request)
     {
-//        dd($request->search);
+        dd($request->search);
         if(!empty($request->search)) {
             if(is_array($request->search)){
                 if(!empty($request->search['brand'])) {
