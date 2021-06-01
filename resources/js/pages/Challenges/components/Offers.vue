@@ -51,49 +51,49 @@
                     >
                         <div class="flex items-center">
                             <div class="border-l-2 border-theme-1 pl-4">
-                                <span class="font-medium dark:text-theme-10 text-theme-1">Maksymalna waga detalu:</span>
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Cena za dostawę oraz uruchomienie stanowiska (netto):</span>
                                 <div class="text-gray-600"> {{ offer.price_of_delivery }}</div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
-                                <span class="font-medium dark:text-theme-10 text-theme-1">Jakość chwytania detalu:</span>
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Ilość tygodni do uruchomienia, liczona od podpisania umowy:</span>
                                 <div class="text-gray-600"> {{ offer.weeks_to_start }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
-                                <span class="font-medium dark:text-theme-10 text-theme-1">Materiał detalu:</span>
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Czas realizacji uruchomienia u klienta (tygodni):</span>
                                 <div class="text-gray-600"> {{ offer.time_to_start }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
-                                <span class="font-medium dark:text-theme-10 text-theme-1">Wielkość detalu:</span>
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Czas przywrócenia stanowiska do sprawności po awarii:</span>
                                 <div class="text-gray-600"> {{ offer.time_to_fix }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
-                                <span class="font-medium dark:text-theme-10 text-theme-1">Sposób pobierania metalu:</span>
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Wysokość zaliczki płatnej po uruchomieniu i finalnym odbiorze stanowiska:</span>
                                 <div class="text-gray-600"> {{ offer.advance_upon_start }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
-                                <span class="font-medium dark:text-theme-10 text-theme-1">Czy detal jest pozycjonowany do pobrania?</span>
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Wyskość zaliczki (%) płatnej przy odbiorze wstępnym dokonywanym u Integratora:</span>
                                 <div class="text-gray-600"> {{ offer.advance_upon_delivery }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
-                                <span class="font-medium dark:text-theme-10 text-theme-1">Odległość pomiędzy miejscem pobrania i odkładania detalu:</span>
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Wysokość zaliczki (%) płatnej po podpisaniu umowy:</span>
                                 <div class="text-gray-600"> {{ offer.advance_upon_agreement }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
-                                <span class="font-medium dark:text-theme-10 text-theme-1">Miejsce odłożenia detalu:</span>
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Okres gwarancji w latach:</span>
                                 <div class="text-gray-600"> {{ offer.years_of_guarantee }} </div>
                             </div>
                         </div>
@@ -105,37 +105,37 @@
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
-                                <span class="font-medium dark:text-theme-10 text-theme-1">Liczba zmian:</span>
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Częstotliwość przeglądów gwarancyjnych w roku:</span>
                                 <div class="text-gray-600"> {{ offer.maintenance_frequency }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
-                                <span class="font-medium dark:text-theme-10 text-theme-1">Liczba zmian:</span>
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Koszt roczny przeglądu gwaranycjnego:</span>
                                 <div class="text-gray-600"> {{ offer.price_of_maintenance }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
-                                <span class="font-medium dark:text-theme-10 text-theme-1">Liczba zmian:</span>
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Czas reakcji na zgłoszenie awarii w godzinach:</span>
                                 <div class="text-gray-600"> {{ offer.reaction_time }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
-                                <span class="font-medium dark:text-theme-10 text-theme-1">Liczba zmian:</span>
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Koszt interwencji w wypadku awarii nie podlegającej gwarancji:</span>
                                 <div class="text-gray-600"> {{ offer.intervention_price }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
-                                <span class="font-medium dark:text-theme-10 text-theme-1">Liczba zmian:</span>
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Koszt roboczo godziny pracy wsparcia / prac rozwojowych:</span>
                                 <div class="text-gray-600"> {{ offer.work_hour_price }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
-                                <span class="font-medium dark:text-theme-10 text-theme-1">Liczba zmian:</span>
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Okres wsparcia technicznego poza zakresem gwarancji w latach:</span>
                                 <div class="text-gray-600"> {{ offer.period_of_support }} </div>
                             </div>
                         </div>
