@@ -36,9 +36,10 @@
                            @click.prevent="activeTab = 'rozwiazania'"
                            :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <LockIcon class="w-4 h-4 mr-2"/>
-                            Rozwiązania
+                            {{challenge.selected.author_id}}
+                            <div v-if="challenge.selected.author_id != undefined">Wybrane rozwiązanie</div><div v-if="challenge.selected.author_id == undefined">Rozwiązania</div>
                         </a>
-                        <a v-if="(challenge.author_id != user.id)"
+                        <a v-if="(challenge.author_id != user.id) && user.type == 'integrator'"
                             class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'oferty'"
                            :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
