@@ -38,11 +38,12 @@
                             <LockIcon class="w-4 h-4 mr-2"/>
                             Rozwiązania
                         </a>
-                        <a class="flex items-center mt-5" href=""
+                        <a v-if="(challenge.author_id != user.id)"
+                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'oferty'"
                            :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <SettingsIcon class="w-4 h-4 mr-2"/>
-                            Oferty
+                            Moje Oferty
                         </a>
                         <a v-if="(challenge.author_id == user.id)"
                             class="flex items-center mt-5" href=""
