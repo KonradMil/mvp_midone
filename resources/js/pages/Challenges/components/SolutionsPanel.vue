@@ -39,8 +39,8 @@
 <script>
 import {computed, onMounted, reactive, ref} from "vue";
 import {useToast} from "vue-toastification";
-import SingleSolutionPost from "../../../components/SingleSolutionPost";
 import router from "../../../router";
+import SingleSolutionPost from "../../../components/SingleSolutionPost";
 
 export default {
     name: "SolutionsPanel",

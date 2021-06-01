@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Challenges\Challenge;
 use App\Models\Offer;
 use App\Models\Solutions\Solution;
 use Illuminate\Http\Request;
@@ -18,6 +19,17 @@ class OfferController extends Controller
             'success' => true,
             'message' => 'Pobrano ofertę poprawnie.',
             'payload' => $offer
+        ]);
+    }
+
+    public function getAllChallengeOffers(Challenge $challenge)
+    {
+        $offers = Offer::where('challenge_id', '=', $challenge->id)->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano oferty poprawnie.',
+            'payload' => $offers
         ]);
     }
 
@@ -68,7 +80,7 @@ class OfferController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Zaktualizowano oferte poprawnie.',
+            'message' => 'Dodano oferte poprawnie.',
             'payload' => $check
         ]);
     }

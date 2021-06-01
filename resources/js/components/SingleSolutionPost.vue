@@ -53,7 +53,7 @@
             <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution">Usuń</button>
             <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0" @click="publishSolution">Publikuj</button>
             <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1" @click="unpublishSolution">Odpublikuj</button>
-            <button class="btn btn-primary shadow-md mr-2" @click.prevent="activeTab = 'zespoly'">Zespoły</button>
+            <button class="btn btn-primary shadow-md mr-2" @click.prevent="switchTab">Zespoły</button>
         </div>
     </div>
     <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
@@ -88,7 +88,7 @@
             type="solution"
         />
     </div>
-    <TeamsPanelSolution v-if="activeTab === 'zespoly' && (solution.author_id === user.id)" :solution="solution"/>
+<!--    <TeamsPanelSolution v-if="activeTab && (solution.author_id === user.id)" :solution="solution"/>-->
 </template>
 
 <script>
@@ -97,6 +97,7 @@ import {computed, getCurrentInstance, ref} from "vue";
 import router from "../router";
 import {useToast} from "vue-toastification";
 import TeamsPanelSolution from "../pages/Challenges/components/TeamsPanelSolution";
+
 export default {
     name: "SingleSolutionPost",
     components: {CommentSection, TeamsPanelSolution},
@@ -105,15 +106,20 @@ export default {
         solution: Object,
         canAccept: Boolean,
         canEdit: Boolean,
+        activeTab: String
     },
-    setup(props) {
+    emits: ["update:activeTab"],
+    setup(props,context) {
         const toast = useToast();
         const solution = props.solution;
         const user = props.user;
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
-        const activeTab = ref(null);
+        const activeTab = ref(false);
 
+        const switchTab = () => {
+            context.emit("update:activeTab", 'teamsSolution');
+        }
 
         const teams = computed(() => {
             return props.solution.teams
@@ -193,6 +199,7 @@ export default {
         }
 
         return {
+            switchTab,
             teams,
             activeTab,
             solution,

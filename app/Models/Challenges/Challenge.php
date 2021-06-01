@@ -4,6 +4,7 @@ namespace App\Models\Challenges;
 
 use App\Models\File;
 use App\Models\Financial;
+use App\Models\Offer;
 use App\Models\Solutions\Solution;
 use App\Models\Team;
 use App\Models\TechnicalDetails;
@@ -71,11 +72,11 @@ class Challenge extends Model implements ReactableInterface
 //        return $this->hasMany(WorkStation::class);
 //    }
 
-//    public function offers()
-//    {
-//        return $this->hasMany(Offer::class);
-//    }
-//
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
+
     public function financial_before()
     {
         return $this->hasOne(Financial::class, 'id', 'financial_before_id');

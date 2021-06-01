@@ -123,7 +123,7 @@ import Avatar from "../../../components/avatar/Avatar";
 import Modal from "../../../components/Modal";
 
 export default {
-    name: "Teams",
+    name: "TeamsPanelSolution",
     components: {Avatar, Modal},
     props: {
         solution: Object

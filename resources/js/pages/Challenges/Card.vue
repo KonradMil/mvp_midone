@@ -38,9 +38,17 @@
                             <LockIcon class="w-4 h-4 mr-2"/>
                             Rozwiązania
                         </a>
-                        <a class="flex items-center mt-5" href=""
+                        <a v-if="(challenge.author_id != user.id)"
+                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'oferty'"
                            :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                            <SettingsIcon class="w-4 h-4 mr-2"/>
+                            Moje Oferty
+                        </a>
+                        <a v-if="(challenge.author_id == user.id)"
+                            class="flex items-center mt-5" href=""
+                           @click.prevent="activeTab = 'all-offers'"
+                           :class="(activeTab == 'all-offers')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <SettingsIcon class="w-4 h-4 mr-2"/>
                             Oferty
                         </a>
@@ -93,7 +101,7 @@
                             Dodaj rozwiązanie
                         </button>
                         <button v-if="challenge.stage == 2"
-                            @click="$router.push({name: 'offer-add', params: {challenge: challenge}})"
+                            @click.prevent="activeTab = 'addingoffer'"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto">
                             Złóż ofertę
@@ -110,6 +118,8 @@
             <TeamsPanel v-if="activeTab == 'zespoly' && (challenge.author_id == user.id)" :teams="challenge.teams"> </TeamsPanel>
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :offer_id="temp_offer_id"></OfferAdd>
             <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab"></Offers>
+            <ChallengeOffers v-if="(activeTab == 'all-offers') && (challenge.author_id == user.id)" v-model:activeTab="activeTab" :id="challenge.id"></ChallengeOffers>
+            <TeamsPanelSolution v-if="activeTab == 'teamsSolution'" :solution="solution" ></TeamsPanelSolution>
         </div>
     </div>
 </template>
@@ -127,12 +137,16 @@ import TeamsPanel from "./components/TeamsPanel";
 import {useToast} from "vue-toastification";
 import OfferAdd from "./components/OfferAdd";
 import Offers from "./components/Offers";
+import TeamsPanelSolution from "./components/TeamsPanelSolution";
+import ChallengeOffers from "./components/ChallengeOffers";
 
 export default defineComponent({
     name: 'Card',
     components: {
+        TeamsPanelSolution,
         Offers,
         OfferAdd,
+        ChallengeOffers,
         TeamsPanel,
         SolutionsPanel,
         QuestionsPanel,
@@ -151,12 +165,19 @@ export default defineComponent({
         const newProjectsRef = ref();
         const challenge = ref({});
         const solutions = ref({});
+        const solution = ref({});
         const questions = ref({});
         const temp_offer_id = ref(null);
         const activeTab = ref('podstawowe');
         const user = ref({});
         const selected_solution_id = ref(null);
         const types = require("../../json/types.json");
+
+        emitter.on('changeTeamsSolution', e => () => {
+            console.log('ChangeTeamsSolution');
+            activeTab.value = 'teamsSolution'
+        });
+
 
         emitter.on('changeToOfferAdd', e => () => {
             console.log('BOLLOCKS');
@@ -282,7 +303,8 @@ export default defineComponent({
             user,
             publish,
             unpublish,
-            addSolution
+            addSolution,
+            solution
         };
     }
 });
