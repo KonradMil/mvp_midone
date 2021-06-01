@@ -216,8 +216,9 @@ name: "OfferAdd",
                 period_of_support: period_of_support.value
             }).then(response => {
                     if (response.data.success) {
-                        console.log(response.data);
+                        console.log(response.data + '-> OFFER SAVE !!');
                         toast.success(response.data.message);
+
                     } else {
                         toast.error('Ups! Coś poszło nie tak!');
                     }
