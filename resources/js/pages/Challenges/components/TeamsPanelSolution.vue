@@ -140,7 +140,7 @@ export default {
         const toast = useToast();
         const show = ref(false);
         const temporary_team_id = ref(null);
-        const teamsSolution = props.solution.teams;
+        const teamsSolution = ref([]);
 
         const getTeamsRepositories = async () => {
             teams.value = GetTeams();
@@ -243,6 +243,7 @@ export default {
         }
 
         onMounted(function () {
+            teamsSolution.value = props.solution.teams;
             getTeamsRepositories('');
             getInvitesRepositories('');
             if (window.Laravel.user) {
