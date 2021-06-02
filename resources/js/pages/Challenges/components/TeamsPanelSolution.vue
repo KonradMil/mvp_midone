@@ -28,7 +28,7 @@
                                     <div class="text-gray-600 text-xs mt-0.5">
                                         {{$t('teams.created')}}: {{ $dayjs(team.created_at).format('DD.MM.YYYY HH:mm') }}
                                     </div>
-                                    <div class="text-gray-600 text-xs mt-0.5">
+                                    <div class="text-gray-600 text-xs mt-0.5" v-if="team.users != undefined">
                                         {{ $t('teams.members')}}: {{ team.users.length }}
                                     </div>
                                 </div>
