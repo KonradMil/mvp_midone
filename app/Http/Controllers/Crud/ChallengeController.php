@@ -476,7 +476,7 @@ class ChallengeController extends Controller
             $challenge = Challenge::with(
                 'solutions', 'author', 'technicalDetails',
                 'financial_before', 'teams', 'files', 'teams.users',
-                'teams.users.companies', 'solutions.comments', 'solutions.comments.commentator', 'solutions.teams'
+                'teams.users.companies', 'solutions.comments', 'solutions.comments.commentator', 'solutions.teams' , 'solutions.teams.users'
             )->find($request->id);
 
         } else {
