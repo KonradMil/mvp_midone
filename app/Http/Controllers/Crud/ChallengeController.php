@@ -499,7 +499,7 @@ class ChallengeController extends Controller
             $technical = new TechnicalDetails();
             $technical->challenge_id = $challenge->id;
             $technical->save();
-            $challenge->technicalDetails = $technical;
+            $challenge->technical_details = $technical;
         }
 
         $challenge->selected = $challenge->solutions()->where('selected', '=', 1)->first();
