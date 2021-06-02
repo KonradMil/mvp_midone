@@ -181,7 +181,8 @@ export default defineComponent({
         emitter.on('*', (type, e) => {
             console.log(type, e);
             console.log('HERE212');
-            console.log(e.solution + '-> e.solution')
+            console.log('e solution');
+            console.log(e.solution + '-> e.solution');
              if(type == 'activeTab') {
                     activeTab.value = e.name;
                     solution.value = e.solution;
