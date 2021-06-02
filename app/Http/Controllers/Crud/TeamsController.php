@@ -40,13 +40,16 @@ class TeamsController extends Controller
         $team->owner_id = Auth::user()->id;
         $team->name = $name;
         $team->save();
-//        dd($team);
         Auth::user()->attachTeam($team);
+        $t = Team::where('id', '=', $team->id)->with('users', 'users.companies')->first();
+//        dd($team);
+
+//        $team->users = $team->users;
 
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
-            'payload' => $team
+            'payload' => $t
         ]);
     }
     public function deleteTeam(Request $request)

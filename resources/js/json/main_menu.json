@@ -86,11 +86,7 @@
             "pageName": "teams",
             "title": "Zespoły"
         },
-        {
-            "icon": "InboxIcon",
-            "pageName": "studio",
-            "title": "3D Studio"
-        },
+
         {
             "icon": "InboxIcon",
             "pageName": "knowledgebase",

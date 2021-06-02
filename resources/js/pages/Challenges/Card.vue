@@ -1,5 +1,5 @@
 <template>
-it     <div>
+    <div>
         <div class="intro-y flex items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">Wyzwanie</h2>
         </div>
@@ -183,7 +183,9 @@ export default defineComponent({
             console.log('HERE212');
                 if(type == 'activeTab') {
                     activeTab.value = e.name;
+                    solution.value = e.solution;
                 }
+
         } );
 
 

@@ -124,6 +124,7 @@ export default {
                 .then(response => {
                     if(response.data.success) {
                         toast.success('Zapisano poprawnie.');
+                        window.location.reload();
                     } else {
                         toast.error('Błąd');
                     }

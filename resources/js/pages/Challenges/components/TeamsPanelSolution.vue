@@ -28,7 +28,7 @@
                                     <div class="text-gray-600 text-xs mt-0.5">
                                         {{$t('teams.created')}}: {{ $dayjs(team.created_at).format('DD.MM.YYYY HH:mm') }}
                                     </div>
-                                    <div class="text-gray-600 text-xs mt-0.5">
+                                    <div class="text-gray-600 text-xs mt-0.5" v-if="team.users != undefined">
                                         {{ $t('teams.members')}}: {{ team.users.length }}
                                     </div>
                                 </div>
@@ -53,7 +53,7 @@
                                                 </div>
                                             </div>
                                             <div class="flex justify-center items-center" v-if="member.id != user.id">
-                                                <a :disabled="isDisabled" @click.prevent="del(member.id,team.id)" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
+                                                <a :disabled="isDisabled" @click.prevent="del(member.id,team.id, index)" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
                                             </div>
                                             <div class="font-medium text-gray-700 dark:text-gray-600">
                                             </div>
@@ -168,13 +168,14 @@ export default {
             temporary_team_id.value = null;
         }
 
-        const del = async (member_id,team_id) => {
+        const del = async (member_id,team_id, index) => {
             axios.post('api/teams/user/member/delete', {member_id: member_id, team_id: team_id})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
                         isDisabled.value = true;
                         toast.success(response.data.message);
+                        teamsSolution[team_id].users.splice(index,1);
                         setTimeout(() =>{
                             isDisabled.value = false;
                         }, 2000);
@@ -190,7 +191,7 @@ export default {
                         isDisabled.value = false;
                     }, 2000);
                 })
-            await getTeamsRepositories();
+            // await getTeamsRepositories();
         }
 
         const addSolutionTeam = async () => {
@@ -201,7 +202,9 @@ export default {
                 toast.error('Nazwa nie może mieć mniej niż 3 znaki');
                 isDisabled.value=true;
             } else {
-                await AddSolutionTeam(new_team_name.value, props.solution.id)
+                await AddSolutionTeam(new_team_name.value, props.solution.id, (res) => {
+                   teamsSolution.value.push(res);
+                })
                 // setTimeout(function () {
                 //     getTeamsRepositories(search.value);
                 //     new_team_name.value = '';

@@ -492,6 +492,20 @@ class ChallengeController extends Controller
         ]);
     }
 
+    public function delete(Request $request)
+    {
+        $challenge = Challenge::where('id', '=', $request->input('id'))->first();
+//        dd($challenge);
+        $challenge->author_id = 0;
+        $challenge->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => '',
+            'payload' => ''
+        ]);
+    }
+
     public function getCardData(Request $request)
     {
         if (isset($request->id)) {
@@ -505,6 +519,13 @@ class ChallengeController extends Controller
         } else {
             $challenge = NULL;
         }
+
+//        if(empty($challenge->technicalDetails)) {
+//            $technical = new TechnicalDetails();
+//            $technical->challenge_id = $challenge->id;
+//            $technical->save();
+//            $challenge->technical_details = $technical;
+//        }
 
         $challenge->selected = $challenge->solutions()->where('selected', '=', 1)->first();
 
