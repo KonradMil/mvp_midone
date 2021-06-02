@@ -29,9 +29,9 @@
                                     <div class="text-gray-600 text-xs mt-0.5">
                                         {{$t('teams.created')}}: {{ $dayjs(team.created_at).format('DD.MM.YYYY HH:mm') }}
                                     </div>
-                                    <div class="text-gray-600 text-xs mt-0.5">
-                                        {{ $t('teams.members')}}: {{ team.users.length }}
-                                    </div>
+<!--                                    <div class="text-gray-600 text-xs mt-0.5">-->
+<!--                                        {{ $t('teams.members')}}: {{ team.users.length }}-->
+<!--                                    </div>-->
                                 </div>
                                 <div class="flex mt-4 lg:mt-0">
                                     <button class="btn btn-primary py-1 px-2 mr-2" @click="showAddToTeamModal(team.id)" v-if="team.owner_id === user.id">{{$t('teams.add')}}</button>
