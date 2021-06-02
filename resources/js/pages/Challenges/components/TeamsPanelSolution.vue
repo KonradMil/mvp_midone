@@ -43,22 +43,22 @@
                             <div class="flex flex-col lg:flex-row items-center p-5" v-if="showDetails[team.id] === true">
                                 <div class="intro-y box w-full">
                                     <div class="p-5">
-                                        <div v-for="(member, index) in team.users" class="relative flex items-center" :key="'member_' + index">
-                                            <div class="w-12 h-12 flex-none image-fit">
-                                                <Avatar :src="'/s3/avatars/' + member.avatar" :username="member.name + ' ' + member.lastname" :size="40" color="#FFF" background-color="#930f68"/>
-                                            </div>
-                                            <div class="ml-4 mr-auto">
-                                                <a href="" class="font-medium">{{ member.name + ' ' + member.lastname }}</a>
-                                                <div class="text-gray-600 mr-5 sm:mr-5" v-if="member.companies.length != 0">
-                                                    {{member.companies[0].company_name}}
-                                                </div>
-                                            </div>
-                                            <div class="flex justify-center items-center" v-if="member.id != user.id">
-                                                <a :disabled="isDisabled" @click.prevent="del(member.id,team.id)" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
-                                            </div>
-                                            <div class="font-medium text-gray-700 dark:text-gray-600">
-                                            </div>
-                                        </div>
+<!--                                        <div v-for="(member, index) in team.users" class="relative flex items-center" :key="'member_' + index">-->
+<!--                                            <div class="w-12 h-12 flex-none image-fit">-->
+<!--                                                <Avatar :src="'/s3/avatars/' + member.avatar" :username="member.name + ' ' + member.lastname" :size="40" color="#FFF" background-color="#930f68"/>-->
+<!--                                            </div>-->
+<!--                                            <div class="ml-4 mr-auto">-->
+<!--                                                <a href="" class="font-medium">{{ member.name + ' ' + member.lastname }}</a>-->
+<!--                                                <div class="text-gray-600 mr-5 sm:mr-5" v-if="member.companies.length != 0">-->
+<!--                                                    {{member.companies[0].company_name}}-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="flex justify-center items-center" v-if="member.id != user.id">-->
+<!--                                                <a :disabled="isDisabled" @click.prevent="del(member.id,team.id)" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>-->
+<!--                                            </div>-->
+<!--                                            <div class="font-medium text-gray-700 dark:text-gray-600">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
                                     </div>
                                 </div>
                             </div>
