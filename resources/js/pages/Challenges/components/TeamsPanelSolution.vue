@@ -206,7 +206,6 @@ export default {
                 //     new_team_name.value = '';
                 //     modalClosed();
                 // }, 1000);
-                toast.success('Success!')
                 isDisabled.value=true;
             }
             setTimeout(()=>{
@@ -243,6 +242,7 @@ export default {
         }
 
         onMounted(function () {
+            teamsSolution.value = props.solution.teams;
             getTeamsRepositories('');
             getInvitesRepositories('');
             if (window.Laravel.user) {
