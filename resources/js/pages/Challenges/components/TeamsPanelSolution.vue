@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import GetTeams from '../../../compositions/GetTeams'
 import GetInvites from '../../../compositions/GetInvites'
 import AcceptInvite from '../../../compositions/AcceptInvite'
@@ -138,6 +138,10 @@ export default {
         const toast = useToast();
         const show = ref(false);
         const temporary_team_id = ref(null);
+
+        watch(props.solution.teams, (lab, prevLabel) => {
+            teamsSolution.value = props.solution.teams;
+        }, {deep: true})
 
         const teamsSolution = computed(() => {
             return props.solution.teams;
