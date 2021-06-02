@@ -22,7 +22,7 @@ class SolutionController extends Controller
     {
         $name = $request -> input('name');
         $team = new Team();
-        $team-> owner_id = Auth::user();
+        $team-> owner_id = Auth::user()->id;
         $team-> name = $name;
         $team -> save();
         $solution->teams()->sync($team);
