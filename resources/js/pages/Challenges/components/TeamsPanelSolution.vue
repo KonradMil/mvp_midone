@@ -242,7 +242,7 @@ export default {
         }
 
         onMounted(function () {
-            teamsSolution.value = props.solution.teams;
+            teamsSolution.value = new_team_name.value;
             getTeamsRepositories('');
             getInvitesRepositories('');
             if (window.Laravel.user) {
