@@ -62,7 +62,7 @@
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                             <option selected disabled>Wybierz...</option>
                             <option v-for="(det,index) in values['percent']"
-                                    :value="index">{{ det }}
+                                    :value="index">{{ det.value }}
                             </option>
                         </TailSelect>
                     </div>
