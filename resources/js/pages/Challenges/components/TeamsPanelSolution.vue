@@ -1,6 +1,6 @@
 <template>
-    <div class="grid grid-cols-12 gap-6 mt-5">
-            <div class="col-span-9">
+    <div class="grid grid-cols-12 gap-6 mt-5 col-span-8">
+            <div class="col-span-12">
                 <h2 class="intro-y text-lg font-medium mt-5">{{$t('teams.teams')}}</h2>
                 <div class="grid grid-cols-12 gap-6 mt-5">
                     <div
