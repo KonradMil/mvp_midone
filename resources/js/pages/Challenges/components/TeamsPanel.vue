@@ -156,6 +156,7 @@ import Avatar from "../../../components/avatar/Avatar";
 import AddTeamMember from '../../../compositions/AddTeamMember'
 import AddChallengeTeam from "../../../compositions/AddChallengeTeam";
 import Modal from "../../../components/Modal";
+import {useToast} from "vue-toastification";
 
 export default {
     name: "TeamsPanel",
@@ -173,6 +174,9 @@ export default {
         const temporary_team_id = ref(null);
         const show = ref(false);
         const isDisabled = ref(false);
+        const toast = useToast();
+        const search = ref('');
+
 
         const showAddToTeamModal = (id) => {
             if(temporary_team_id == null || temporary_team_id === id) {
@@ -245,6 +249,7 @@ export default {
         });
 
         return {
+            search,
             isDisabled,
             user,
             teams,
