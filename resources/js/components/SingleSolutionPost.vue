@@ -120,6 +120,7 @@ export default {
 
         const switchTab = () => {
             console.log('Switch22');
+            console.log(props.solution + ' its props solution');
             emitter.emit("activeTab", {name: 'teamsSolution', solution: props.solution});
         }
 
