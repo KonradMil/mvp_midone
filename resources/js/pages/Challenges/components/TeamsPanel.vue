@@ -200,6 +200,31 @@ export default {
             // teams.value = GetTeams();
         }
 
+        const del = async (member_id,team_id) => {
+            axios.post('api/teams/user/member/delete', {member_id: member_id, team_id: team_id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        isDisabled.value = true;
+                        toast.success(response.data.message);
+                        setTimeout(() =>{
+                            isDisabled.value = false;
+                        }, 2000);
+
+                    } else {
+                        isDisabled.value = true;
+                        toast.error(response.data.message);
+                        setTimeout(() =>{
+                            isDisabled.value = false;
+                        }, 2000);
+                    }
+                    setTimeout(() =>{
+                        isDisabled.value = false;
+                    }, 2000);
+                })
+            await getTeamsRepositories();
+        }
+
         const addChallengeTeam = async () => {
             if(new_team_name.value === '') {
                 toast.error('Nazwa nie może być pusta');
@@ -260,7 +285,8 @@ export default {
             addChallengeTeam,
             addMember,
             showAddToTeamModal,
-            modalClosed
+            modalClosed,
+            del
         }
     }
 }
