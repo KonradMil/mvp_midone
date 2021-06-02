@@ -201,7 +201,9 @@ export default {
                 toast.error('Nazwa nie może mieć mniej niż 3 znaki');
                 isDisabled.value=true;
             } else {
-                await AddSolutionTeam(new_team_name.value, props.solution.id)
+                await AddSolutionTeam(new_team_name.value, props.solution.id, () => {
+                    getTeamsRepositories();
+                })
                 // setTimeout(function () {
                 //     getTeamsRepositories(search.value);
                 //     new_team_name.value = '';
