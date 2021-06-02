@@ -8,11 +8,11 @@ import {useToast} from "vue-toastification";
 
 const toast = useToast();
 
-export default function AddSolutionTeam(data,id) {
+export default function AddSolutionTeam(name,id) {
     const list = ref([]);
 
-    async function addSolutionTeam(data,id) {
-        axios.post(`/api/solution/user/add/team/${id}`, {data})
+    async function addSolutionTeam(name,id) {
+        axios.post(`/api/solution/user/add/team/${id}`, {name})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
@@ -25,7 +25,7 @@ export default function AddSolutionTeam(data,id) {
             })
     }
 
-    addSolutionTeam(data,id);
+    addSolutionTeam(name,id);
 
     return {
         list
