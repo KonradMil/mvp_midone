@@ -180,7 +180,7 @@ export default defineComponent({
 
         emitter.on('*', (type, e) => {
             console.log(type, e);
-            console.log('HERE212');
+            console.log('HERE21255555555' + e.solution);
             console.log('e solution');
             console.log(e.solution + '-> e.solution');
              if(type == 'activeTab') {
