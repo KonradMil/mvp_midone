@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <div class="grid grid-cols-12 gap-6 mt-5">
+    <div class="grid grid-cols-12 gap-6 mt-5">
             <div class="col-span-9">
                 <h2 class="intro-y text-lg font-medium mt-5">{{$t('teams.teams')}}</h2>
                 <div class="grid grid-cols-12 gap-6 mt-5">
@@ -93,7 +92,6 @@
             </div>
             <!-- BEGIN: Users Layout -->
         </div>
-    </div>
     <Modal :show="show" @closed="modalClosed">
         <h3 class="intro-y text-lg font-medium mt-5">{{$t('teams.addMember')}}</h3>
         <div class="intro-y box p-5 mt-12 sm:mt-5">
