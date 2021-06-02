@@ -495,12 +495,12 @@ class ChallengeController extends Controller
             $challenge = NULL;
         }
 
-        if(empty($challenge->technicalDetails)) {
-            $technical = new TechnicalDetails();
-            $technical->challenge_id = $challenge->id;
-            $technical->save();
-            $challenge->technical_details = $technical;
-        }
+//        if(empty($challenge->technicalDetails)) {
+//            $technical = new TechnicalDetails();
+//            $technical->challenge_id = $challenge->id;
+//            $technical->save();
+//            $challenge->technical_details = $technical;
+//        }
 
         $challenge->selected = $challenge->solutions()->where('selected', '=', 1)->first();
 
