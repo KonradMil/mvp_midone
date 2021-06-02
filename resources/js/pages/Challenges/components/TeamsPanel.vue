@@ -248,6 +248,7 @@ export default {
             isDisabled,
             user,
             teams,
+            show,
             showDetails,
             new_team_name,
             new_team_member_email,
