@@ -172,7 +172,7 @@ export default {
         const showDetails = ref([]);
         const temporary_team_id = ref(null);
         const show = ref(false);
-
+        const isDisabled = ref(false);
 
         const showAddToTeamModal = (id) => {
             if(temporary_team_id == null || temporary_team_id === id) {
@@ -245,6 +245,7 @@ export default {
         });
 
         return {
+            isDisabled,
             user,
             teams,
             showDetails,
