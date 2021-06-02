@@ -34,19 +34,19 @@ import {ref} from "vue";
 export default {
 name: "NewOffer",
     setup(props) {
-        const price_of_delivery = ref('');
-        const weeks_to_start = ref('');
-        const time_to_start = ref('');
-        const advance_upon_agreement = ref('');
-        const advance_upon_delivery = ref('');
-        const advance_upon_start = ref('');
-        const years_of_guarantee = ref('');
+        const price_of_delivery = ref(0);
+        const weeks_to_start = ref(null);
+        const time_to_start = ref(null);
+        const advance_upon_agreement = ref(null);
+        const advance_upon_delivery = ref(null);
+        const advance_upon_start = ref(null);
+        const years_of_guarantee = ref(null);
         const maintenance_frequency = ref('');
-        const price_of_maintenance = ref('');
-        const reaction_time = ref('');
-        const time_to_fix = ref('');
-        const intervention_price = ref('');
-        const work_hour_price = ref('');
+        const price_of_maintenance = ref(0);
+        const reaction_time = ref(null);
+        const time_to_fix = ref(null);
+        const intervention_price = ref(0);
+        const work_hour_price = ref(0);
         const period_of_support = ref('');
 
         const values = require('../../json/offer_values.json');

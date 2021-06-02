@@ -1,7 +1,6 @@
 <template>
-    <div>
-        <div class="grid grid-cols-12 gap-6 mt-5">
-            <div class="col-span-9">
+    <div class="grid grid-cols-12 gap-6 mt-5 col-span-8">
+            <div class="col-span-12">
                 <h2 class="intro-y text-lg font-medium mt-5">{{$t('teams.teams')}}</h2>
                 <div class="grid grid-cols-12 gap-6 mt-5">
                     <div
@@ -93,7 +92,6 @@
             </div>
             <!-- BEGIN: Users Layout -->
         </div>
-    </div>
     <Modal :show="show" @closed="modalClosed">
         <h3 class="intro-y text-lg font-medium mt-5">{{$t('teams.addMember')}}</h3>
         <div class="intro-y box p-5 mt-12 sm:mt-5">
@@ -111,7 +109,7 @@
 </template>
 
 <script>
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import GetTeams from '../../../compositions/GetTeams'
 import GetInvites from '../../../compositions/GetInvites'
 import AcceptInvite from '../../../compositions/AcceptInvite'
@@ -140,8 +138,14 @@ export default {
         const toast = useToast();
         const show = ref(false);
         const temporary_team_id = ref(null);
-        const teamsSolution = props.solution.teams;
 
+        watch(props.solution.teams, (lab, prevLabel) => {
+            teamsSolution.value = props.solution.teams;
+        }, {deep: true})
+
+        const teamsSolution = computed(() => {
+            return props.solution.teams;
+        });
         const getTeamsRepositories = async () => {
             teams.value = GetTeams();
         }
@@ -203,7 +207,6 @@ export default {
                 //     new_team_name.value = '';
                 //     modalClosed();
                 // }, 1000);
-                toast.success('Success!')
                 isDisabled.value=true;
             }
             setTimeout(()=>{
@@ -240,6 +243,7 @@ export default {
         }
 
         onMounted(function () {
+            teamsSolution.value = new_team_name.value;
             getTeamsRepositories('');
             getInvitesRepositories('');
             if (window.Laravel.user) {

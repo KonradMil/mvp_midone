@@ -20,10 +20,19 @@ class SolutionController extends Controller
 {
     public function addSolutionTeam(Request $request, Solution $solution)
     {
-        foreach ((array)$request->teams as $team_id) {
-            $team = Team::find($team_id);
-            $solution->teams()->sync($team);
-        }
+        $name = $request -> input('name');
+        $team = new Team();
+        $team-> owner_id = Auth::user()->id;
+        $team-> name = $name;
+        $team -> save();
+        $solution->teams()->attach($team);
+        Auth::user()->attachTeam($team);
+
+//        foreach ((array)$request->teams as $team_id) {
+//            $team = Team::find($team_id);
+//            $solution->teams()->sync($team);
+//        }
+
         $solution->save();
         return response()->json([
             'success' => true,

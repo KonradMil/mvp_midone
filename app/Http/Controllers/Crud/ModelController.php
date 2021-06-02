@@ -17,20 +17,29 @@ class ModelController extends Controller
             'payload' => $model
         ]);
     }
+
+    public function isempty(&$var) {
+        return !empty($var) || $var === '0';
+    }
+
     public function getModels(Request  $request)
     {
 //        dd($request->search);
-        if(isset($request->search)) {
-            if(is_array($request->search)){
-                if(!empty($request->search['brand'])) {
-                    $models = UnityModel::where('category', '=', $request->search['category_id'])->where('subcategory', '=', $request->search['subcategory_id'])->where('brand', '=', $request->search['brand'])->take(10)->get();
+        $se = $request->search;
+        if(!empty($se)) {
+//            if(is_array($se)){
+                if ($this->isempty($se['category']) && $this->isempty($se['subcategory'])) {
+                    $models = UnityModel::where('category', '=', $se['category'])->where('subcategory', '=', $se['subcategory'])->get();
+                } elseif ($this->isempty($se['category'])) {
+                    $models = UnityModel::where('category', '=', $se['category'])->get();
+                } elseif($this->isempty($se['subcategory'])) {
+                    $models = UnityModel::where('subcategory', '=', $se['subcategory'])->get();
                 } else {
-                    $models = UnityModel::where('category', '=', $request->search['category_id'])->where('subcategory', '=', $request->search['subcategory_id'])->take(10)->get();
+                    $models = UnityModel::take(10)->get();
                 }
-
-            } else {
-                $models = UnityModel::where('name', 'LIKE', '%'. $request->search . '%')->take(10)->get();
-            }
+//            } else {
+//                $models = UnityModel::where('name', 'LIKE', '%'. $request->search . '%')->take(10)->get();
+//            }
         } else {
             $models = UnityModel::take(10)->get();
         }
@@ -68,7 +77,8 @@ class ModelController extends Controller
     }
     public function deleteModel(Request $request)
     {
-        UnityModel::destroy($request->id);
+        $m = UnityModel::find($request->id);
+        $m->delete();
         return response()->json([
            'success' => true,
            'message' => 'Usunięto poprawnie',

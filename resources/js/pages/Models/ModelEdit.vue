@@ -20,7 +20,7 @@
                 </button>
             </div>
         </div>
-        <div class="pos intro-y grid grid-cols-12 gap-5 mt-5">
+        <div class="pos intro-y grid grid-cols-12 gap-5 mt-5" v-if="model.name != undefined">
             <!-- BEGIN: Post Content -->
             <div class="intro-y col-span-12 lg:col-span-8">
                 <div class="input-group mt-2">
@@ -240,7 +240,7 @@
                                 classNames: 'w-full'
                                 }">
                             <option disabled>{{ $t('challengesNew.selectCategories') }}</option>
-                            <option v-for="(category,index) in categories.categories" :value="category.value">{{ category.name }}</option>
+                            <option v-for="(category2,index) in categories.categories" :selected="(category2 == category)? 'selected': ''" :value="category2.value">{{ category2.name }}</option>
                         </TailSelect>
                     </div>
                 </div>
@@ -259,7 +259,7 @@
                                 classNames: 'w-full'
                                 }">
                             <option disabled>{{ $t('challengesNew.selectCategories') }}</option>
-                            <option v-for="(cat,index) in categories.categories[category].subcategories" :value="cat.value">{{ cat.name }}</option>
+                            <option v-for="(cat,index) in categories.categories[category].subcategories"  :selected="(cat == subcategory)? 'selected': ''" :value="cat.value">{{ cat.name }}</option>
                         </TailSelect>
                     </div>
                 </div>
@@ -321,10 +321,11 @@ export default {
             showModal.value = false;
         }
         const getModelRepositiories = async () => {
-            GetModel(model_id, (res) => {
-                model.value = res.payload[0];
-                category.value = res.payload[0].category;
-                subcategory.value = res.payload[0].subcategory;
+            GetModel(model_id.value, (res) => {
+                console.log(res);
+                model.value = res.payload;
+                category.value = res.payload.category;
+                subcategory.value = res.payload.subcategory;
             })
         }
         // const saveModelRepo = async () => {
@@ -347,6 +348,8 @@ export default {
         //     });
         // }
         const editModelRepo = async () => {
+            model.value.subcategory = subcategory.value;
+            model.value.category = category.value;
             EditModel(model.value, model.value.id );
         }
 

@@ -47,12 +47,12 @@
                             <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
                                 <div class="flex px-5 py-3" @click="expand[index] = !expand[index]">
                                     <div class="w-64 sm:w-auto truncate">
-                                        <strong>Pytanie: </strong> {{q.question}}
+                                        <strong>Pytanie: </strong> {{q.question}} - (Odpowiedzi: {{q.answers.length}})
                                     </div>
                                     <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">
                                         {{ $dayjs(q.created_at).format('DD.MM.YYYY HH:mm') }}
                                     </div>
-                                    <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">
+                                    <div class="inbox__item--time whitespace-nowrap ml-auto pl-10" v-if="authorId == user.id">
                                         <button class="btn btn-primary" @click="answer(q.id)">Odpowiedz</button>
                                     </div>
                                 </div>
@@ -82,7 +82,8 @@ import GetQuestions from "../../../compositions/GetQuestions";
 export default {
     name: "QuestionsPanel",
     props: {
-      id: Number
+      id: Number,
+        author_id: Number
     },
     setup(props) {
         const addingDialog = ref(false);
@@ -92,6 +93,7 @@ export default {
         const user = window.Laravel.user;
         const isAnswer = ref(false);
         const questionId = ref(null);
+        const authorId = ref(0);
 
         const saveQuestion = () => {
             SaveQuestion({challenge_id: props.id, question: question.value, isAnswer: questionId.value}, () => {
@@ -117,6 +119,7 @@ export default {
        }
 
         onMounted(() => {
+            authorId.value = props.author_id;
             getQuestions();
         });
 
@@ -130,7 +133,8 @@ export default {
             isAnswer,
             answer,
             questionId,
-            expand
+            expand,
+            authorId
         }
     }
 }

@@ -1,5 +1,46 @@
 <template>
     <div>
+        <div class="col-span-12 lg:col-span-4">
+            <div class="intro-y box p-5" style="z-index: 99999;">
+                <div class="mt-3">
+                    <label for="post-form-3" class="form-label">{{ $t('models.cat') }}</label>
+                    <TailSelect
+                        id="post-form-3"
+                        v-model="category"
+                        :options="{
+                                locale: 'pl',
+                                placeholder: 'Wybierz kategorie...',
+                                limit: 'Nie można wybrać więcej',
+                                search: false,
+                                hideSelected: false,
+                                classNames: 'w-full'
+                                }">
+                        <option selected disabled>{{ $t('challengesNew.selectCategories') }}</option>
+                        <option v-for="(category,index) in categories" :value="category.value">{{ category.name }}</option>
+                    </TailSelect>
+                </div>
+            </div>
+            <div class="intro-y box p-5" v-if="category != ''" style="z-index: 99999;">
+                <div class="mt-3">
+                    <label for="post-form-3" class="form-label">{{ $t('models.subcat') }}</label>
+                    <TailSelect
+                        id="post-form-3"
+                        v-model="subcategory"
+                        :options="{
+                                locale: 'pl',
+                                placeholder: 'Wybierz kategorie...',
+                                limit: 'Nie można wybrać więcej',
+                                search: false,
+                                hideSelected: false,
+                                classNames: 'w-full'
+                                }">
+                        <option selected disabled>{{ $t('challengesNew.selectCategories') }}</option>
+                        <option v-for="(cat,index) in categories[category].subcategories" :value="cat.value">{{ cat.name }}</option>
+                    </TailSelect>
+                    <button type="button" class="btn btn-primary shadow-md mr-2" @click="getModelRepositories">Szukaj</button>
+                </div>
+            </div>
+        </div>
         <h2 class="intro-y text-lg font-medium mt-10">{{$t('models.models')}}</h2>
         <div class="grid grid-cols-12 gap-6 mt-5">
             <div
@@ -84,6 +125,7 @@
                                     {{$t('models.edit')}}
                                 </a>
                                 <a
+                                    @click="temp_model_id = model.id"
                                     class="flex items-center text-theme-6"
                                     href="javascript:;"
                                     data-toggle="modal"
@@ -175,7 +217,7 @@
                             >
                                 {{ $t('models.cancel') }}
                             </button>
-                            <button @click="del(model)" type="button" class="btn btn-danger w-24">{{ $t('models.delete') }}</button>
+                            <button @click="del(temp_model_id)" type="button" class="btn btn-danger w-24" data-dismiss="modal">{{ $t('models.delete') }}</button>
                         </div>
                     </div>
                 </div>
@@ -204,13 +246,16 @@ export default {
         const models = ref([]);
         const categories = ref([]);
         const types = require("../../json/model_categories.json");
-
+        const category = ref('');
+        const subcategory = ref('');
+        const temp_model_id = ref(null);
         const del = async(model) => {
-            await axios.post('/api/model/delete', {id: model.id})
+            await axios.post('/api/model/delete', {id: temp_model_id.value})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
                         console.log(response.data);
+                        getModelRepositories();
                         toast.success(response.data.message);
                     } else {
                         toast.error('Ups! Coś poszło nie tak!');
@@ -218,7 +263,7 @@ export default {
                 })
         }
         const getModelRepositories = async () => {
-            models.value = GetModels();
+            models.value = GetModels({category: category.value, subcategory: subcategory.value});
         }
 
         onMounted(() => {
@@ -233,7 +278,11 @@ export default {
             models,
             categories,
             DeleteModel,
-            del
+            del,
+            category,
+            subcategory,
+            getModelRepositories,
+            temp_model_id
         }
     }
 }

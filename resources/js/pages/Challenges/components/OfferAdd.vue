@@ -8,6 +8,7 @@
                             Cena za dostawę oraz uruchomienie stanowiska (netto)
                         </label>
                         <input type="number" class="form-control" v-model="price_of_delivery"/>
+                        <div id="input-group-price" class="input-group-text">zł</div>
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
                         <label for="input-wizard-2" class="form-label">
@@ -17,8 +18,8 @@
                             id="input-wizard-2"
                             v-model="weeks_to_start"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option  :selected="weeks_to_start === '' ? 'selected' : ''" disabled>Wybierz...</option>
-                            <option :selected="index === weeks_to_start ? 'selected' : ''" v-for="(det,index) in values['weeks']"
+                            <option selected disabled>Wybierz...</option>
+                            <option v-for="(det,index) in values['weeks']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -31,8 +32,8 @@
                             id="input-wizard-3"
                             v-model="time_to_start"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option  :selected="time_to_start === '' ? 'selected' : ''" disabled>Wybierz...</option>
-                            <option :selected="index === time_to_start ? 'selected' : ''" v-for="(det,index) in values['weeks-short']"
+                            <option selected disabled>Wybierz...</option>
+                            <option v-for="(det,index) in values['weeks-short']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -45,8 +46,8 @@
                             id="input-wizard-4"
                             v-model="advance_upon_agreement"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option  :selected="advance_upon_agreement === '' ? 'selected' : ''" disabled>Wybierz...</option>
-                            <option :selected="index === advance_upon_agreement ? 'selected' : ''" v-for="(det,index) in values['percent']"
+                            <option selected disabled>Wybierz...</option>
+                            <option v-for="(det,index) in values['percent']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -59,9 +60,9 @@
                             id="input-wizard-5"
                             v-model="advance_upon_delivery"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option  :selected="advance_upon_delivery === '' ? 'selected' : ''" disabled>Wybierz...</option>
-                            <option :selected="index === advance_upon_delivery ? 'selected' : ''" v-for="(det,index) in values['percent']"
-                                    :value="index">{{ det }}
+                            <option selected disabled>Wybierz...</option>
+                            <option v-for="(det,index) in values['percent']"
+                                    :value="index">{{ det.value }}
                             </option>
                         </TailSelect>
                     </div>
@@ -73,8 +74,8 @@
                             id="input-wizard-6"
                             v-model="advance_upon_start"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option  :selected="advance_upon_start === '' ? 'selected' : ''" disabled>Wybierz...</option>
-                            <option :selected="index === advance_upon_start ? 'selected' : ''" v-for="(det,index) in values['percent']"
+                            <option selected disabled>Wybierz...</option>
+                            <option v-for="(det,index) in values['percent']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -87,8 +88,8 @@
                             id="input-wizard-6"
                             v-model="years_of_guarantee"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option  :selected="years_of_guarantee === '' ? 'selected' : ''" disabled>Wybierz...</option>
-                            <option :selected="index === years_of_guarantee ? 'selected' : ''" v-for="(det,index) in values['years-short']"
+                            <option selected disabled>Wybierz...</option>
+                            <option v-for="(det,index) in values['years-short']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -113,8 +114,8 @@
                             id="input-wizard-9"
                             v-model="reaction_time"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option  :selected="reaction_time === '' ? 'selected' : ''" disabled>Wybierz...</option>
-                            <option :selected="index === reaction_time ? 'selected' : ''" v-for="(det,index) in values['hours']"
+                            <option selected disabled>Wybierz...</option>
+                            <option v-for="(det,index) in values['hours']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -127,8 +128,8 @@
                             id="input-wizard-10"
                             v-model="time_to_fix"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option  :selected="time_to_fix === '' ? 'selected' : ''" disabled>Wybierz...</option>
-                            <option :selected="index === time_to_fix ? 'selected' : ''" v-for="(det,index) in values['hours']"
+                            <option selected disabled>Wybierz...</option>
+                            <option v-for="(det,index) in values['hours']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -143,7 +144,10 @@
                         <label for="input-wizard-12" class="form-label">
                             Koszt roboczo godziny pracy wsparcia / prac rozwojowych
                         </label>
+                        <div class="input-group">
                         <input type="number" class="form-control" v-model="work_hour_price"/>
+                        <div id="input-group-price2" class="input-group-text">zł</div>
+                        </div>
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-13" class="form-label">
@@ -172,19 +176,19 @@ name: "OfferAdd",
     setup(props) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
-        const price_of_delivery = ref('');
-        const weeks_to_start = ref('');
-        const time_to_start = ref('');
-        const advance_upon_agreement = ref('');
-        const advance_upon_delivery = ref('');
-        const advance_upon_start = ref('');
-        const years_of_guarantee = ref('');
+        const price_of_delivery = ref(0);
+        const weeks_to_start = ref(null);
+        const time_to_start = ref(null);
+        const advance_upon_agreement = ref(null);
+        const advance_upon_delivery = ref(null);
+        const advance_upon_start = ref(null);
+        const years_of_guarantee = ref(null);
         const maintenance_frequency = ref('');
-        const price_of_maintenance = ref('');
-        const reaction_time = ref('');
-        const time_to_fix = ref('');
-        const intervention_price = ref('');
-        const work_hour_price = ref('');
+        const price_of_maintenance = ref(0);
+        const reaction_time = ref(null);
+        const time_to_fix = ref(null);
+        const intervention_price = ref(0);
+        const work_hour_price = ref(0);
         const period_of_support = ref('');
 
         const toast = useToast();
