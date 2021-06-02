@@ -27,7 +27,7 @@ class SolutionController extends Controller
         $team -> save();
         $solution->teams()->attach($team);
         Auth::user()->attachTeam($team);
-
+        $t = Team::where('id', '=', $team->id)->with('users', 'users.companies')->first();
 //        foreach ((array)$request->teams as $team_id) {
 //            $team = Team::find($team_id);
 //            $solution->teams()->sync($team);
@@ -37,7 +37,7 @@ class SolutionController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Dodano zespół!',
-            'payload' => $solution
+            'payload' => $t
         ]);
     }
 
