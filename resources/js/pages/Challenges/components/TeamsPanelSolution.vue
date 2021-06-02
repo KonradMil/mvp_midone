@@ -140,7 +140,7 @@ export default {
         const temporary_team_id = ref(null);
 
         watch(props.solution.teams, (lab, prevLabel) => {
-            teamsSolution.value = new_team_name.value;
+            teamsSolution.value = props.solution.teams;
         }, {deep: true})
 
         const teamsSolution = computed(() => {
