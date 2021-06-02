@@ -183,6 +183,7 @@ export default defineComponent({
             console.log('HERE212');
                 if(type == 'activeTab') {
                     activeTab.value = e.name;
+                    solution.value = e.solution;
                 }
         } );
 
