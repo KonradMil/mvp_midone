@@ -14,7 +14,7 @@
                             v-model="new_team_name"
                         />
                     </div>
-                    <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addSolutionTeam">{{$t('teams.addTeam')}}</button>
+                    <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addChallengeTeam">{{$t('teams.addTeam')}}</button>
                 </div>
                 <!-- BEGIN: Users Layout -->
                 <div v-for="(team, index) in teams" :key="'team_' + index" class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12">
@@ -153,7 +153,9 @@
 import {computed, onMounted, reactive, ref, watch} from "vue";
 import GetTeams from "../../../compositions/GetTeams";
 import Avatar from "../../../components/avatar/Avatar";
+import AddTeamMember from '../../../compositions/AddTeamMember'
 import AddChallengeTeam from "../../../compositions/AddChallengeTeam";
+import Modal from "../../../components/Modal";
 
 export default {
     name: "TeamsPanel",
@@ -161,12 +163,30 @@ export default {
         teams: Object,
         id: Number
     },
-    components: {Avatar},
+    components: {Avatar, Modal},
     setup(props) {
+        const new_team_member_email = ref('');
         const new_team_name = ref('');
         const teams = ref([]);
         const user = ref({});
         const showDetails = ref([]);
+        const temporary_team_id = ref(null);
+        const show = ref(false);
+
+
+        const showAddToTeamModal = (id) => {
+            if(temporary_team_id == null || temporary_team_id === id) {
+                show.value = !show.value;
+            } else {
+                show.value = true;
+            }
+            temporary_team_id.value =  id;
+        }
+
+        const modalClosed = () => {
+            show.value = false;
+            temporary_team_id.value = null;
+        }
 
         watch(props.teams, (lab, prevLabel) => {
             teams.value = props.teams;
@@ -199,6 +219,26 @@ export default {
                 isDisabled.value=false;
             },5000);
         }
+        const addMember = async () => {
+            if(new_team_member_email.value === '') {
+                isDisabled.value = true;
+                toast.error('Email nie może być pusty');
+            } else if (new_team_member_email.value.length < 3) {
+                isDisabled.value = true;
+                toast.error('Email nie może mieć mniej niż 3 znaki');
+            } else {
+                isDisabled.value = true;
+                await AddTeamMember(new_team_member_email.value, temporary_team_id.value)
+                setTimeout(function () {
+                    getTeamsRepositories(search.value);
+                    new_team_member_email.value = '';
+                }, 1000);
+                toast.success('Success!')
+            }
+            setTimeout(() =>{
+                isDisabled.value = false;
+            }, 2000);
+        }
         onMounted(function () {
             getTeamsRepositories('');
             teams.value = props.teams;
@@ -211,7 +251,12 @@ export default {
             user,
             teams,
             showDetails,
-            new_team_name
+            new_team_name,
+            new_team_member_email,
+            addChallengeTeam,
+            addMember,
+            showAddToTeamModal,
+            modalClosed
         }
     }
 }
