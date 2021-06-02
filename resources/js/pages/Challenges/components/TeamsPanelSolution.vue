@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import GetTeams from '../../../compositions/GetTeams'
 import GetInvites from '../../../compositions/GetInvites'
 import AcceptInvite from '../../../compositions/AcceptInvite'
@@ -140,8 +140,10 @@ export default {
         const toast = useToast();
         const show = ref(false);
         const temporary_team_id = ref(null);
-        const teamsSolution = ref([]);
 
+        const teamsSolution = computed(() => {
+            return props.solution.teams;
+        });
         const getTeamsRepositories = async () => {
             teams.value = GetTeams();
         }
@@ -243,7 +245,6 @@ export default {
         }
 
         onMounted(function () {
-            teamsSolution.value = props.solution.teams;
             getTeamsRepositories('');
             getInvitesRepositories('');
             if (window.Laravel.user) {
