@@ -191,7 +191,7 @@ export default {
                         isDisabled.value = false;
                     }, 2000);
                 })
-            await getTeamsRepositories();
+            // await getTeamsRepositories();
         }
 
         const addSolutionTeam = async () => {
