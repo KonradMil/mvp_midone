@@ -21,6 +21,28 @@ use Intervention\Image\Facades\Image;
 
 class ChallengeController extends Controller
 {
+    public function addChallengeTeam(Request $request, Challenge $challenge)
+    {
+        $name = $request -> input('name');
+        $team = new Team();
+        $team-> owner_id = Auth::user()->id;
+        $team-> name = $name;
+        $team -> save();
+        $challenge->teams()->attach($team);
+        Auth::user()->attachTeam($team);
+
+//        foreach ((array)$request->teams as $team_id) {
+//            $team = Team::find($team_id);
+//            $solution->teams()->sync($team);
+//        }
+
+        $challenge->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Dodano zespół!',
+            'payload' => $challenge
+        ]);
+    }
     public function saveChallengeFinancials(Request $request,Financial $financial)
     {
         $financial->fill($request->input('data'));
