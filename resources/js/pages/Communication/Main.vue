@@ -24,7 +24,6 @@
                     <div class="intro-y flex flex-col-reverse sm:flex-row items-center">
                         <div class="w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
                             <i class="w-4 h-4 absolute my-auto inset-y-0 ml-3 left-0 z-10 text-gray-700 dark:text-gray-300" data-feather="search"></i>
-                            <input type="text" class="form-control w-full sm:w-64 box px-10 text-gray-700 dark:text-gray-300 placeholder-theme-13" placeholder="Search mail">
                             <div class="inbox-filter dropdown absolute inset-y-0 mr-3 right-0 flex items-center" data-placement="bottom-start">
                                 <i class="dropdown-toggle w-4 h-4 cursor-pointer text-gray-700 dark:text-gray-300" role="button" aria-expanded="false" data-feather="chevron-down"></i>
                                 <div class="inbox-filter__dropdown-menu dropdown-menu pt-2">
