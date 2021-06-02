@@ -1,5 +1,5 @@
 <template>
-    <div v-if="challenge != undefined">
+it     <div>
         <div class="intro-y flex items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">Wyzwanie</h2>
         </div>
@@ -32,20 +32,20 @@
                             <BoxIcon class="w-4 h-4 mr-2"/>
                             Szczegóły techniczne
                         </a>
-                        <a class="flex items-center mt-5" href=""
+                        <a class="flex items-center mt-5" href="" v-if="challenge != undefined"
                            @click.prevent="activeTab = 'rozwiazania'"
                            :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <LockIcon class="w-4 h-4 mr-2"/>
-                            Rozwiązania
+                            <div v-if="challenge.selected != undefined">Wybrane rozwiązanie</div><div v-if="challenge.selected == undefined">Rozwiązania</div>
                         </a>
-                        <a v-if="(challenge.author_id != user.id)"
+                        <a v-if="(challenge.author_id != user.id) && user.type == 'integrator' && challenge.status >= 2"
                             class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'oferty'"
                            :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <SettingsIcon class="w-4 h-4 mr-2"/>
                             Moje Oferty
                         </a>
-                        <a v-if="(challenge.author_id == user.id)"
+                        <a v-if="(challenge.author_id == user.id) && challenge.status >= 2"
                             class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'all-offers'"
                            :class="(activeTab == 'all-offers')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
@@ -67,16 +67,14 @@
                             Zespoły
                         </a>
                     </div>
-                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex">
-                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">
-                            Studio 3D
-                        </button>
-                    </div>
+
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id == user.id">
                         <button type="button" class="btn btn-primary py-1 px-2" @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
                             Edytuj
                         </button>
-
+                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">
+                            Studio 3D
+                        </button>
                         <button
                             v-if="challenge.status == 0"
                             type="button"
@@ -93,6 +91,9 @@
                         </button>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id != user.id && user.type == 'integrator'">
+                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">
+                            Studio 3D
+                        </button>
                         <button v-if="challenge.stage == 1"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
@@ -110,9 +111,9 @@
                 <WhatsNext :user="user" :challenge="challenge"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
-           <BasicInformationPanel :challenge="challenge" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
+            <BasicInformationPanel :challenge="challenge" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
             <TechnicalInformationPanel :challenge="challenge" v-if="activeTab == 'techniczne'"></TechnicalInformationPanel>
-            <QuestionsPanel v-if="activeTab == 'pytania'" :id="challenge.id"></QuestionsPanel>
+            <QuestionsPanel v-if="activeTab == 'pytania'" :author_id="challenge.author_id" :id="challenge.id"></QuestionsPanel>
             <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge"></SolutionsPanel>
             <TeamsPanel v-if="activeTab == 'zespoly' && (challenge.author_id == user.id)" :teams="challenge.teams"> </TeamsPanel>
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :offer_id="temp_offer_id"></OfferAdd>
@@ -177,16 +178,18 @@ export default defineComponent({
             activeTab.value = 'teamsSolution'
         });
 
+        emitter.on('*', (type, e) => {
+            console.log(type, e);
+            console.log('HERE212');
+                if(type == 'activeTab') {
+                    activeTab.value = e.name;
+                }
+        } );
+
 
         emitter.on('changeToOfferAdd', e => () => {
             console.log('BOLLOCKS');
            activeTab.value = 'addingoffer';
-        });
-
-        emitter.on('activeTab', e => () => {
-            console.log('Switch');
-            console.log(e);
-           activeTab.value = e.name;
         });
 
         const getCardChallengeRepositories = async (id) => {
