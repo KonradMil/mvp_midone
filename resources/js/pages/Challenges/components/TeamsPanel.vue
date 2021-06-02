@@ -65,31 +65,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-span-3">
-            <h2 class="intro-y text-lg font-medium mt-5">{{$t('teams.invitations')}}</h2>
-            <div class="grid-cols-12 grid">
-                <div class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-2">
-                    <div class="mt-5">
-                        <div v-for="(invite, index) in invites.list" :key="'invite_' + index" class="intro-y">
-                            <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                    <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#930f68"/>
-                                </div>
-                                <div class="ml-4 mr-auto">
-                                    <div class="font-medium">{{invite.team.name}}</div>
-                                    <div class="text-gray-600 text-xs mt-0.5">
-                                        Od: {{invite.inviter.name + ' ' + invite.inviter.lastname}}
-                                    </div>
-                                </div>
-                                <div class="py-1 px-2 rounded-full text-xs text-center bg-theme-9 text-white cursor-pointer font-medium" @click="acceptInvite(invite.id)">
-                                    {{$t('teams.acceptInvite')}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- BEGIN: Users Layout -->
     </div>
     <Modal :show="show" @closed="modalClosed">
