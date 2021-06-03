@@ -10,9 +10,6 @@
     <div v-if="object != undefined">
         <Comment v-if="(current_object_focus == obj.id && current_object_focus_showComments)"
                  v-for="comment in comments" :user="user" :comment="comment"/>
-        <div class="flex justify-center items-center" v-if="comment.commentator.id == user.id">
-            <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
-        </div>
     </div>
     <div v-if="comments != undefined && obj != undefined && comments.length != 0" >
         <a
