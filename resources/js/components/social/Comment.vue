@@ -11,8 +11,7 @@
         <div class="flex-1 relative text-dark-700" v-if="comment.commentator.id == user.id">
             <div class="form-control form-control-rounded border-transparent bg-gray-400 pr-10 placeholder-theme-13">
                 {{ comment.comment }}
-                <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal">
-                    <TrashIcon></TrashIcon></a>
+                    <TrashIcon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0"></TrashIcon>
             </div>
 
         </div>
