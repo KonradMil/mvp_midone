@@ -12,8 +12,8 @@
             <div class="form-control form-control-rounded border-transparent bg-gray-400 pr-10 placeholder-theme-13">
                 {{ comment.comment }}
             </div>
-                <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
         </div>
+        <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
         <div class="w-8 h-8 flex-none image-fit ml-3" v-if="comment.commentator.id == user.id">
             <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" :size="35" color="#FFF" background-color="#930f68"/>
             </div>
