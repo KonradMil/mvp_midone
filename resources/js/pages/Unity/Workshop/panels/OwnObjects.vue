@@ -1,14 +1,16 @@
 <template>
 <div v-for="(object, index) in objects">
-    1
+<SingleWorkshopObject :object="object" :key="'obiket_' + index"/>
 </div>
 </template>
 
 <script>
 import {ref} from "vue";
+import SingleWorkshopObject from "../../../../components/SingleWorkshopObject";
 
 export default {
     name: "OwnObjects",
+    components: {SingleWorkshopObject},
     setup() {
         const objects = ref([]);
 
