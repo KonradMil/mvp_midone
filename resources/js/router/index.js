@@ -60,9 +60,15 @@ export const routes = [
         component: Main,
         props: true
     },
+    // {
+    //     name: 'challengeStudio',
+    //     path: '/studio/challenge',
+    //     component: Main,
+    //     props: true
+    // },
     {
         name: 'challengeStudio',
-        path: '/studio/challenge',
+        path: '/studio/:type/:id',
         component: Main,
         props: true
     },

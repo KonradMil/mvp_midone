@@ -72,7 +72,8 @@
                         <button type="button" class="btn btn-primary py-1 px-2" @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
                             Edytuj
                         </button>
-                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">
+<!--                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">-->
+                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({path: '/studio/challenge/' + challenge.id})">
                             Studio 3D
                         </button>
                         <button
@@ -91,7 +92,8 @@
                         </button>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id != user.id && user.type == 'integrator'">
-                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">
+<!--                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">-->
+                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({path: '/studio/challenge/' + challenge.id})">
                             Studio 3D
                         </button>
                         <button v-if="challenge.stage == 1"

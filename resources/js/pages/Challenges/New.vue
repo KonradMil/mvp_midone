@@ -413,7 +413,7 @@ export default {
                     isDisabled.value=false;
                 },5000);
             } else {
-                router.push({name: 'challengeStudio', params: {id: resp.id, type: 'challenge', load: resp}})
+                router.push({path: '/studio/challenge/' + resp.id})
             }
         };
 

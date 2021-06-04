@@ -34,7 +34,6 @@ export default {
     name: "Main",
     props: {
         type: String,
-        load: Object,
         id: Number
     },
     components: {RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
@@ -306,7 +305,7 @@ export default {
                     getCardChallengeRepositories(id.value);
                 }
                 handleUnityActionOutgoing({action: 'prefix', data: 'https://two.appworks-dev.pl/s3'});
-            }, 5000);
+            }, 1000);
         }
 
         onBeforeMount(() => {
@@ -367,19 +366,19 @@ export default {
                 })
         }
 
-        const setCookie = (cname, cvalue, exdays) => {
-            var d = new Date();
-            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            var expires = "expires="+d.toUTCString();
-            // document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-        }
-
-        const getCookies = (name) => {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            console.log(parts);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-        };
+        // const setCookie = (cname, cvalue, exdays) => {
+        //     var d = new Date();
+        //     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        //     var expires = "expires="+d.toUTCString();
+        //     // document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        // }
+        //
+        // const getCookies = (name) => {
+        //     const value = `; ${document.cookie}`;
+        //     const parts = value.split(`; ${name}=`);
+        //     console.log(parts);
+        //     if (parts.length === 2) return parts.pop().split(';').shift();
+        // };
 
         onMounted(() => {
 
@@ -399,20 +398,8 @@ export default {
             radialMenuLayout.value = require("../../json/radial_layout.json");
             currentRadialMenu.value = radialMenuEdit.value;
             mode.value = 'edit';
-            setTimeout(() => {
-                if(props.type == undefined) {
-                    console.log('BIORE Z CIASTKA');
-                    type.value = getCookies('type');
-                    id.value = getCookies('id');
-                    console.log(getCookies('id'));
-                } else {
-                    type.value = props.type;
-                    id.value = props.id;
-                    setCookie('type', props.type, 1);
-                    setCookie('id', props.id, 1);
-                }
-            }, 2000)
-
+            type.value = props.type;
+            id.value = props.id;
         });
 
         return {
