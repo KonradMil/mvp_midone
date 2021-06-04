@@ -1,11 +1,11 @@
 <template>
 <div v-for="(object, index) in objects">
-<SingleWorkshopObject :object="object" :key="'obiket_' + index"/>
+<SingleWorkshopObject :object="object" :key="'obiekt_' + index"/>
 </div>
 </template>
 
 <script>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import SingleWorkshopObject from "../../../../components/SingleWorkshopObject";
 
 export default {
@@ -28,9 +28,12 @@ export default {
                 });
         }
 
+        onMounted(() => {
+            getObjects();
+        });
+
         return {
             objects,
-            getObjects
         }
     }
 }

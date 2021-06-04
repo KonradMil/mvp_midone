@@ -48,7 +48,7 @@ name: "Workshop",
 
         onBeforeMount(() => {
             //ADDS LISTENERS
-            bridge.value = UnityBridge();
+            bridge.value = UnityBridgeWorkshop();
 
         });
 
