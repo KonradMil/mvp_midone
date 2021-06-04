@@ -35,7 +35,7 @@
         </div>
         <div class="p-5 border-t border-gray-200 dark:border-dark-5" >
             <div class="h-40 xxl:h-56 image-fit">
-                <img @click="$router.push({path: 'studio/solution/' + solution.id});"
+                <img @click="$router.push({path: '/studio/solution/' + solution.id});"
                      alt="Icewall Tailwind HTML Admin Template"
                      class="rounded-md"
                      :src="'/' + solution.screenshot_path"
