@@ -391,6 +391,7 @@ export default {
                     getCardChallengeRepositories(id.value);
                 }
                 handleUnityActionOutgoing({action: 'prefix', data: 'https://two.appworks-dev.pl/s3'});
+                unlockInput();
             }, 2000);
         }
 

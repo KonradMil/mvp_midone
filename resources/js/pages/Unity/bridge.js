@@ -65,7 +65,7 @@ const UnityBridge = () => {
             emitter.emit('UnityObjectPlaced', { partsPlaced: JSON.parse(str).models })
         };
         window.UnityObjectDestroyed = function UnityObjectDestroyed(str) {
-            console.log('PART DESTROYED');
+            cursor-pointerconsole.log('PART DESTROYED');
             console.log(str);
             emitter.emit('UnityObjectDestroyed', { partDestroyed: JSON.parse(str) })
         };
