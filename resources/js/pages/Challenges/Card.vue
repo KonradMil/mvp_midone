@@ -303,7 +303,7 @@ export default defineComponent({
         };
 
         return {
-            type,
+            who,
             temp_offer_id,
             selected_solution_id,
             prevAnnouncement,
