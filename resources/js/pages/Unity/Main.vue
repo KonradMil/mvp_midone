@@ -14,7 +14,7 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-body p-10 text-center">
-                    <h3 class="intro-y text-lg font-medium mt-5">{{$t('teams.addMember')}}</h3>
+                    <h3 class="intro-y text-lg font-medium mt-5">Pomoc</h3>
                     <div class="grid grid-cols-12 gap-6 mt-5">
                         <!-- BEGIN: Profile Menu -->
                         <div class="col-span-12 lg:col-span-4 xxl:col-span-3 flex lg:block flex-col-reverse">
@@ -39,7 +39,6 @@
                                         <SettingsIcon class="w-4 h-4 mr-2"/>
                                         Tutorial
                                     </a>
-
                                 </div>
                             </div>
                         </div>
@@ -50,8 +49,8 @@
                             </div>
                             <div class="grid grid-cols-12 gap-6">
                                 <!-- BEGIN: Announcement -->
-                                <div class="intro-y box col-span-6 xxl:col-span-6">
-                                    <img src="/s3/images/klawiszologia.jpeg" class="img-fluid"/>
+                                <div class="intro-y box col-span-12 xxl:col-span-12">
+                                    <img src="/s3/images/klawiszologia.jpeg" class="img-fluid cursor-pointer" @click="window.open('/s3/images/klawiszologia.jpeg', '_blank').focus();"/>
                                 </div>
                                 <!-- END: Announcement -->
                             </div>
@@ -62,7 +61,7 @@
                             </div>
                             <div class="grid grid-cols-12 gap-6">
                                 <!-- BEGIN: Announcement -->
-                                <div class="intro-y box col-span-6 xxl:col-span-6">
+                                <div class="intro-y box col-span-12 xxl:col-span-12">
 
                                 </div>
                                 <!-- END: Announcement -->
