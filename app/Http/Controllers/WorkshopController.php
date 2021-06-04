@@ -36,7 +36,8 @@ class WorkshopController extends Controller
             $object->author_id = Auth::user()->id;
         }
 
-        $j = json_decode($request->data['save']['save_json'], true);
+        $j = $request->input('object')['data'];
+
         if (!empty($j['screenshot'])) {
 
             $path = $this->processSS($j['screenshot']);
