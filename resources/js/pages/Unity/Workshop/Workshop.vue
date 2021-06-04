@@ -25,8 +25,8 @@
             </div>
             <!-- END: Profile Menu -->
             <WorkshopPanel v-if="activeTab = 'workshop'"></WorkshopPanel>
-<!--            <Marketplace v-if="activeTab = 'marketplace'"></Marketplace>-->
-<!--            <OwnObjects v-if="activeTab = 'obiekty'"></OwnObjects>-->
+            <Marketplace v-if="activeTab = 'marketplace'"></Marketplace>
+            <OwnObjects v-if="activeTab = 'obiekty'"></OwnObjects>
         </div>
     </div>
 </template>
@@ -35,12 +35,22 @@
 import WorkshopPanel from "./panels/WorkshopPanel";
 import Marketplace from "./panels/Marketplace";
 import OwnObjects from "./panels/OwnObjects";
-import {ref} from "vue";
+import UnityBridgeWorkshop from "./bridge_workshop";
+
+import {onBeforeMount, ref} from "vue";
+import UnityBridge from "../bridge";
 export default {
 name: "Workshop",
     components: {OwnObjects, Marketplace, WorkshopPanel},
     setup() {
         const activeTab = ref('obiekty');
+        const bridge = ref();
+
+        onBeforeMount(() => {
+            //ADDS LISTENERS
+            bridge.value = UnityBridge();
+
+        });
 
         return {
             activeTab
