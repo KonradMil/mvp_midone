@@ -130,7 +130,7 @@ export default {
         const user = window.Laravel.user;
         const inTeam = ref(false);
         const modalShow = ref(false);
-        const modalClose = () => {
+        const modalClosed = () => {
             modalShow.value = !modalShow.value;
         }
 
@@ -149,6 +149,8 @@ export default {
         const animationSave = ref({layers: []});
         const saving = ref(false);
 
+
+
         window_height.value = window.innerHeight;
 
         emitter.on('showChallenge', e => {
@@ -156,6 +158,9 @@ export default {
             type.value = 'challenge';
         });
 
+        const startTutorial = () => {
+
+        }
 
         //RUNS WHEN UNITY IS READY
         emitter.on('onInitialized', e => initalize());
