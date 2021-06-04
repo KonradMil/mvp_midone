@@ -94,7 +94,7 @@ export default {
 
         emitter.on('deletecomment', e => {
             console.log(comments.value + '-> comments.value');
-            comments.value.splice(e.index, 1);
+            comments.value[e.index].splice(e.index, 1);
         });
         emitter.on('disliked', e =>  dislike(e.id) )
 
