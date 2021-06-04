@@ -45,13 +45,11 @@ export default defineComponent({
         const del = async (id) => {
             axios.post('api/user/comment/delete', {id: id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
                         toast.success(response.data.message);
                         emitter.emit('deletecomment', {index: props.ind});
                         isDisabled.value = true;
                     } else {
-                        // toast.error(response.data.message);
                         toast.warning('Nie możesz usunąć!');
                         isDisabled.value = true;
                     }
