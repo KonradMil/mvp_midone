@@ -1,11 +1,15 @@
 <template>
     <div class="col-span-12 lg:col-span-8 xxl:col-span-9 flex lg:block flex-col-reverse">
-    <div v-if="objects.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+        <div v-if="objects.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie masz jeszcze żadnych zapisanych obiektów.
-    </div>
-<div v-for="(object, index) in objects" v-if="objects.length != 0">
-<SingleWorkshopObject :object="object" :key="'obiekt_' + index"/>
-</div>
+        </div>
+        <div class="grid grid-cols-12 gap-6 mt-5">
+            <div v-for="(object, index) in objects" v-if="objects.length != 0">
+                <div class="col-span-12 lg:col-span-4 xxl:col-span-4 flex lg:block flex-col-reverse">
+                <SingleWorkshopObject :object="object" :key="'obiekt_' + index"/>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -25,7 +29,7 @@ export default {
             axios.post('/api/workshop/models/get/all', {own: true})
                 .then(response => {
                     if (response.data.success) {
-                      objects.value = response.data.payload;
+                        objects.value = response.data.payload;
                     } else {
                         console.log(response)
                     }
