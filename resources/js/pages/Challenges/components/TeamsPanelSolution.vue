@@ -181,7 +181,16 @@ export default {
                 toast.error('Nazwa nie może mieć mniej niż 3 znaki');
                 isDisabled.value=true;
             } else {
-                await AddObjectTeam(props.who, new_team_name.value, props.solution.id, (res) => {
+                let id;
+                if(props.who === 'challenge')
+                {
+                    id = props.challenge.id;
+                }
+                else
+                {
+                    id = props.solution.id;
+                }
+                await AddObjectTeam(props.who, new_team_name.value, id, (res) => {
                     teamsSolution.value.push(res);
                 })
                 isDisabled.value=true;
