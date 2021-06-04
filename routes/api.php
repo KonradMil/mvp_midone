@@ -151,6 +151,7 @@ Route::group(['prefix' => 'teams', 'middleware' => 'auth:sanctum'], function () 
     Route::post('user/get', [TeamsController::class, 'getUserTeamsFiltered']);
     Route::post('user/delete', [TeamsController::class, 'deleteTeam']);
     Route::post('user/member/delete', [TeamsController::class, 'deleteMember']);
+    Route::post('user/add/team', [TeamsController::class, 'addObjectTeam']);
 });
 
 Route::post('model/edit/{model}', [ModelController::class, 'editModel']);

@@ -14,7 +14,7 @@
                                 v-model="new_team_name"
                             />
                         </div>
-                        <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addSolutionTeam">{{$t('teams.addTeam')}}</button>
+                        <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addObjectTeam">{{$t('teams.addTeam')}}</button>
                     </div>
                     <!-- BEGIN: Users Layout -->
                     <div v-for="(team, index) in teamsSolution" :key="'team_' + index" class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12">
@@ -90,6 +90,7 @@ import GetInvites from '../../../compositions/GetInvites'
 import AcceptInvite from '../../../compositions/AcceptInvite'
 import AddTeam from '../../../compositions/AddTeam'
 import AddSolutionTeam from '../../../compositions/AddSolutionTeam'
+import AddObjectTeam from '../../../compositions/AddSolutionTeam'
 import AddTeamMember from '../../../compositions/AddTeamMember'
 import {useToast} from "vue-toastification";
 import Avatar from "../../../components/avatar/Avatar";
@@ -172,6 +173,25 @@ export default {
                 })
         }
 
+        const addObjectTeam = async () => {
+            if(new_team_name.value === '') {
+                toast.error('Nazwa nie może być pusta');
+                isDisabled.value=true;
+            } else if (new_team_name.value.length < 3) {
+                toast.error('Nazwa nie może mieć mniej niż 3 znaki');
+                isDisabled.value=true;
+            } else {
+                await AddObjectTeam(props.who, new_team_name.value, props.solution.id, (res) => {
+                    teamsSolution.value.push(res);
+                })
+                isDisabled.value=true;
+            }
+            setTimeout(()=>{
+                isDisabled.value=false;
+            },5000);
+        }
+
+
         const addSolutionTeam = async () => {
             if(new_team_name.value === '') {
                 toast.error('Nazwa nie może być pusta');
@@ -222,6 +242,7 @@ export default {
         return {
             user,
             teams,
+            addObjectTeam,
             addSolutionTeam,
             search,
             new_team_name,
