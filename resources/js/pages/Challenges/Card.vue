@@ -73,9 +73,9 @@
                             Edytuj
                         </button>
 <!--                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">-->
-                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({path: '/studio/challenge/' + challenge.id})">
-                            Studio 3D
-                        </button>
+<!--                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({path: '/studio/challenge/' + challenge.id})">-->
+<!--                            Studio 3D-->
+<!--                        </button>-->
                         <button
                             v-if="challenge.status == 0"
                             type="button"
