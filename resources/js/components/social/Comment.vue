@@ -24,6 +24,10 @@
 <script>
 import {defineComponent, computed, ref} from "vue";
 import Avatar from "../avatar/Avatar";
+import {useToast} from "vue-toastification";
+
+const toast = useToast();
+
 export default defineComponent({
     components: {
         Avatar
