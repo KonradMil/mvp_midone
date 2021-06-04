@@ -38,20 +38,17 @@ export default {
     name: "TopButtons",
     props: {
         icons: Array,
-        allowedEdit: Object
+        allowedEdit: Boolean
     },
     components: {UnityDropdown, UnityButton},
     setup(props) {
-        const allowedEdit = ref(false);
-        watch(props.allowedEdit, (ca, prevLabel) => {
-            allowedEdit.value = props.allowedEdit;
-        }, {deep: true});
+
+
         onMounted(() => {
-           allowedEdit.value = props.allowedEdit;
         });
 
         return {
-            allowedEdit
+
         }
     }
 }
