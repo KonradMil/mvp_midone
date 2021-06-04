@@ -170,6 +170,10 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'LoadStructure', val, true);
     }
 
+    function setNewAnimationLayer (val) {
+        outgoing(game, 'SetNewAnimationLayer', val);
+    }
+
     return {
         loadStructure,
         updateComment,

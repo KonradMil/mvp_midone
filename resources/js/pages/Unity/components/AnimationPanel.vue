@@ -14,7 +14,7 @@
                     <UnityButton tooltip="Odtwórz" alttext="Odtwórz" path="/s3/builder_icons/play_simple.png" action="play" position="animationbuttonclick"/>
                 </div>
                 <div class="col-span-11 rounded-md mr-5 relative" style=" overflow-y: scroll;">
-                    <div class="grid grid-cols-12 my-3" @click="activeLineIndex = index;" :class="(activeLineIndex == index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + index">
+                    <div class="grid grid-cols-12 my-3" @click="activeLineIndex = index; setNewAnimationLayer();" :class="(activeLineIndex == index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + index">
                         <div class="col-span-1">
                             <div style="margin-left: 25%; margin-top: calc(25% - 10px);">
                                 <UnityButton tooltip="Ustawienia" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
@@ -106,6 +106,11 @@ export default {
 
         const showAnimableDialog = () => {
             emitter.emit('animationbuttonclick', {val: 'settingsanimable', data: activeAnimableIndex.value});
+        }
+
+
+        const setNewAnimationLayer = () => {
+            emitter.emit('unityoutgoingaction', {action: 'setNewAnimationLayer', data: activeLineIndex.value});
         }
 
         const activeLineIndex = ref(0);
@@ -222,7 +227,8 @@ export default {
             animation,
             expanded,
             activeLineIndex,
-            activeAnimableIndex
+            activeAnimableIndex,
+            setNewAnimationLayer
         }
     }
 }
