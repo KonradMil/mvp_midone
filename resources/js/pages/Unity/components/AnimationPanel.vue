@@ -187,14 +187,15 @@ export default {
                     emitter.emit('unityoutgoingaction', {action: 'pauseAnimation', data: ''});
                     break;
                 case 'play':
-                    // console.log(toRaw(animation));
                     expanded.value = 0;
                     emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: {interval: 0, cycles: 0, layers: toRaw(animation)}})
                     break;
                 case 'addline':
-                    console.log('LENGTH AL');
-                    console.log(animation.layers.length);
-                    emitter.emit('unityoutgoingaction', {action: 'addLine',data: animation.layers.length})
+                    // console.log('LENGTH AL');
+                    // console.log(animation.layers.length);
+                    emitter.emit('unityoutgoingaction', {action: 'addLine',data: animation.layers.length});
+                    activeLineIndex.value = animation.layers.length;
+                    setNewAnimationLayer();
                     break;
                 case 'removeline':
                     emitter.emit('unityoutgoingaction', {action: 'removeLine', data: activeLineIndex.value})
