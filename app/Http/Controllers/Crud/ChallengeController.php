@@ -442,7 +442,10 @@ class ChallengeController extends Controller
         }
 
         if(!isset($request->id)) {
-            event(new ChallengeAdded($challenge, Auth::user(), 'Wyzwanie ' . $challenge->name . ' zostało dodane.', ['financial' => $financial, 'technical' => $technical]));
+            if($challenge->status == 1) {
+
+            }
+//            event(new ChallengeAdded($challenge, Auth::user(), 'Wyzwanie ' . $challenge->name . ' zostało dodane.', ['financial' => $financial, 'technical' => $technical]));
             $financial->save();
         }
 
