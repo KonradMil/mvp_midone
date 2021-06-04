@@ -162,7 +162,7 @@ Route::group(['prefix' => 'models', 'middleware' => 'auth:sanctum'], function ()
     Route::post('add', [ModelController::class, 'addModel']);
 });
 
-Route::group(['prefix' => 'workshop/model', 'middleware' => 'auth.sanctum'], function () {
+Route::group(['prefix' => 'workshop/model', 'middleware' => 'auth:sanctum'], function () {
     Route::post('get/all', [WorkshopController::class, 'getWorkshopModels']);
     Route::post('get', [WorkshopController::class, 'getWorkshopModel']);
     Route::post('save', [WorkshopController::class, 'saveWorkshopModel']);
