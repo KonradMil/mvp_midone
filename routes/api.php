@@ -169,7 +169,7 @@ Route::group(['prefix' => 'workshop/models', 'middleware' => 'auth:sanctum'], fu
 });
 
 Route::group(['prefix' => 'offer', 'middleware' => 'auth:sanctum'], function () {
-    Route::post('add/new', [OfferController::class, 'addNew']);
+    Route::post('add/new', [OfferController::class, 'addOffer']);
 });
 
 

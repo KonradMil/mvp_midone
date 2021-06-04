@@ -100,6 +100,5 @@ class OfferController extends Controller
             'message' => 'Dodano oferte poprawnie.',
             'payload' => $offer
         ]);
-
     }
 }
