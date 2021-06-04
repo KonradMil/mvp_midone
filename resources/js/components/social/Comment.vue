@@ -11,7 +11,7 @@
         <div class="flex-1 relative text-dark-700" v-if="comment.commentator.id == user.id">
             <div class="form-control form-control-rounded border-transparent bg-gray-400 pr-10 placeholder-theme-13">
                 {{ comment.comment }}
-                    <TrashIcon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0 text-red-500"></TrashIcon>
+                   <a :disabled="isDisabled" @click.prevent="del(member.id,team.id)"><TrashIcon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0 text-red-500"></TrashIcon></a>
             </div>
 
         </div>
@@ -33,7 +33,11 @@ export default defineComponent({
         comment: Object
     },
     setup() {
+        const isDisabled = ref('');
 
+        return {
+            isDisabled
+        }
     }
 });
 </script>
