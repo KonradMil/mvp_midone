@@ -201,23 +201,23 @@ export default {
         }
 
 
-        // const addSolutionTeam = async () => {
-        //     if(new_team_name.value === '') {
-        //         toast.error('Nazwa nie może być pusta');
-        //         isDisabled.value=true;
-        //     } else if (new_team_name.value.length < 3) {
-        //         toast.error('Nazwa nie może mieć mniej niż 3 znaki');
-        //         isDisabled.value=true;
-        //     } else {
-        //         await AddSolutionTeam(new_team_name.value, props.solution.id, (res) => {
-        //            teamsSolution.value.push(res);
-        //         })
-        //         isDisabled.value=true;
-        //     }
-        //     setTimeout(()=>{
-        //         isDisabled.value=false;
-        //     },5000);
-        // }
+        const addSolutionTeam = async () => {
+            if(new_team_name.value === '') {
+                toast.error('Nazwa nie może być pusta');
+                isDisabled.value=true;
+            } else if (new_team_name.value.length < 3) {
+                toast.error('Nazwa nie może mieć mniej niż 3 znaki');
+                isDisabled.value=true;
+            } else {
+                await AddSolutionTeam(new_team_name.value, props.solution.id, (res) => {
+                   teamsSolution.value.push(res);
+                })
+                isDisabled.value=true;
+            }
+            setTimeout(()=>{
+                isDisabled.value=false;
+            },5000);
+        }
 
         const addMember = async () => {
             if(new_team_member_email.value === '') {
