@@ -25,15 +25,16 @@ class TeamsController extends Controller
         $team -> save();
         Auth::user()->attachTeam($team);
         $who = $request -> input('who');
+        $id = $request -> input('id');
         if($who == 'challenge')
         {
-            $challenge = Challenge::find($request->id);
+            $challenge = Challenge::find($id);
             $challenge->teams()->attach($team);
             $challenge->save();
         }
         else
         {
-            $solution = Solution::find($request->id);
+            $solution = Solution::find($id);
             $solution->teams()->attach($team);
             $solution->save();
         }

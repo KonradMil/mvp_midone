@@ -12,7 +12,7 @@ export default function AddObjectTeam(who,name,id, handle) {
     const list = ref([]);
 
     async function addObjectTeam(who,name,id, handle) {
-        axios.post(`/api/teams/user/add/team/${id}`, {who: who,name: name})
+        axios.post('/api/teams/user/add/team', {who: who,name: name,id: id})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
