@@ -1,7 +1,7 @@
 <template>
     <div class="w-full flex text-gray-600 text-xs sm:text-sm">
         <div class="mr-2" v-if="obj != undefined">
-            {{ $t('CommentSection.comments') }}: <span class="font-medium">{{ comments_count }}</span>
+            {{ $t('CommentSection.comments') }}: <span class="font-medium">{{ obj.comments_count }}</span>
         </div>
         <div class="ml-auto" v-if="obj != undefined">
             {{$t('CommentSection.likes')}}: <span class="font-medium">{{ obj.likes }}</span>
@@ -69,7 +69,6 @@ export default {
         const current_object_focus_showComments = ref(false);
         const message = ref('');
         const comments = ref([]);
-        const comments_count = ref('');
         const obj = ref([]);
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
@@ -79,7 +78,6 @@ export default {
             console.log(props.object);
             comments.value = props.object.comments;
             obj.value = props.object;
-            comments_count.value = props.object.comments_count;
         });
 
 
@@ -98,6 +96,7 @@ export default {
             if(Array.isArray(comments.value))
             {
                 comments.value.splice(e.index, 1);
+                obj.value.comments_count = obj.value.comments_count - 1;
             }
         });
         emitter.on('disliked', e =>  dislike(e.id) )
@@ -138,7 +137,6 @@ export default {
             current_object_focus_showComments,
             showComments,
             comments,
-            comments_count,
             obj,
             user
         }
