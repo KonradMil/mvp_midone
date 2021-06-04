@@ -1,11 +1,6 @@
 <template>
     <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
         <div class="w-10 h-10 flex-none image-fit">
-            <img
-                alt="Icewall Tailwind HTML Admin Template"
-                class="rounded-full"
-                :src="'/' + object.screenshot_path"
-            />
         </div>
         <div class="ml-3 mr-auto">
             <a href="" class="font-medium">{{ object.name }}</a>
@@ -18,15 +13,15 @@
             </a>
             <div class="dropdown-menu w-40">
                 <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                    <a href=""
+                    <a href="" @click.prevent="editObject"
                         class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                         <Edit2Icon class="w-4 h-4 mr-2"/>
-                        {{$t('challengesMain.editPost')}}
+                        Edytuj obiekt
                     </a>
-                    <a href=""
+                    <a href="" @click.prevent="deleteObject"
                         class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                         <TrashIcon class="w-4 h-4 mr-2"/>
-                        {{$t('challengesMain.deletePost')}}
+                        Usuń obiekt
                     </a>
                 </div>
             </div>
@@ -67,6 +62,7 @@
 
 <script>
 import CommentSection from "./social/CommentSection";
+import {getCurrentInstance} from "vue";
 export default {
     name: "SingleWorkshopObject",
     props: {
@@ -75,7 +71,8 @@ export default {
     setup(props) {
         const object = props.object;
         const user = window.Laravel.user;
-
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const like = async (solution) => {
             axios.post('/api/workshop/object/like', {id: object.id})
                 .then(response => {
@@ -88,11 +85,21 @@ export default {
                 })
         }
 
+        const editObject = () => {
+            emitter.emit('singleworkshopobject', {action: 'edit', id: object.id})
+        }
+
+        const deleteObject = () => {
+            emitter.emit('singleworkshopobject', {action: 'delete', id: object.id})
+        }
+
         return {
             object,
             user,
             like,
             props,
+            editObject,
+            deleteObject
         }
     }
 }

@@ -9,77 +9,85 @@
     <RightButtons :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>
     <RightPanel  :allowedEdit="allowedEdit" @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
 
-    <Modal :show="modalShow" @closed="modalClosed">
-        <h3 class="intro-y text-lg font-medium mt-5">{{$t('teams.addMember')}}</h3>
-        <div class="grid grid-cols-12 gap-6 mt-5">
-            <!-- BEGIN: Profile Menu -->
-            <div class="col-span-12 lg:col-span-4 xxl:col-span-3 flex lg:block flex-col-reverse">
-                <div class="intro-y box mt-5 lg:mt-0">
-                    <div class="p-5 border-t border-gray-200 dark:border-dark-5">
-                        <a class="flex items-center"
-                           href=""
-                           @click.prevent="modelActiveTab = 'klawiszologia'"
-                           :class="(modelActiveTab == 'klawiszologia')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
-                            <ActivityIcon class="w-4 h-4 mr-2"/>
-                           Klawiszologia
-                        </a>
-                        <a class="flex items-center mt-5" href=""
-                           @click.prevent="modelActiveTab = 'faq'"
-                           :class="(modelActiveTab == 'faq')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <BoxIcon class="w-4 h-4 mr-2"/>
-                           FAQ
-                        </a>
-                        <a class="flex items-center mt-5" href=""
-                           @click.prevent="modelActiveTab = 'tutorial'"
-                           :class="(modelActiveTab == 'tutorial')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <SettingsIcon class="w-4 h-4 mr-2"/>
-                           Tutorial
-                        </a>
 
-                    </div>
-                </div>
-            </div>
-            <!-- END: Profile Menu -->
-            <div class="col-span-9 lg:col-span-9 xxl:col-span-9" v-if="modelActiveTab == 'klawiszologia'">
-                <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-                    <h2 class="font-medium text-base mr-auto"> Klawiszologia</h2>
-                </div>
-                <div class="grid grid-cols-12 gap-6">
-                    <!-- BEGIN: Announcement -->
-                    <div class="intro-y box col-span-6 xxl:col-span-6">
-                        <img src="/s3/images/klawiszologia.jpeg" class="img-fluid"/>
-                    </div>
-                    <!-- END: Announcement -->
-                </div>
-            </div>
-            <div class="col-span-9 lg:col-span-9 xxl:col-span-9" v-if="modelActiveTab == 'faq'">
-                <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-                    <h2 class="font-medium text-base mr-auto">FAQ</h2>
-                </div>
-                <div class="grid grid-cols-12 gap-6">
-                    <!-- BEGIN: Announcement -->
-                    <div class="intro-y box col-span-6 xxl:col-span-6">
+    <div id="help-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-body p-10 text-center">
+                    <h3 class="intro-y text-lg font-medium mt-5">{{$t('teams.addMember')}}</h3>
+                    <div class="grid grid-cols-12 gap-6 mt-5">
+                        <!-- BEGIN: Profile Menu -->
+                        <div class="col-span-12 lg:col-span-4 xxl:col-span-3 flex lg:block flex-col-reverse">
+                            <div class="intro-y box mt-5 lg:mt-0">
+                                <div class="p-5 border-t border-gray-200 dark:border-dark-5">
+                                    <a class="flex items-center"
+                                       href=""
+                                       @click.prevent="modelActiveTab = 'klawiszologia'"
+                                       :class="(modelActiveTab == 'klawiszologia')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
+                                        <ActivityIcon class="w-4 h-4 mr-2"/>
+                                        Klawiszologia
+                                    </a>
+                                    <a class="flex items-center mt-5" href=""
+                                       @click.prevent="modelActiveTab = 'faq'"
+                                       :class="(modelActiveTab == 'faq')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                        <BoxIcon class="w-4 h-4 mr-2"/>
+                                        FAQ
+                                    </a>
+                                    <a class="flex items-center mt-5" href=""
+                                       @click.prevent="modelActiveTab = 'tutorial'"
+                                       :class="(modelActiveTab == 'tutorial')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                        <SettingsIcon class="w-4 h-4 mr-2"/>
+                                        Tutorial
+                                    </a>
 
-                    </div>
-                    <!-- END: Announcement -->
-                </div>
-            </div>
-            <div class="col-span-9 lg:col-span-9 xxl:col-span-9" v-if="modelActiveTab == 'tutorial'">
-                <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-                    <h2 class="font-medium text-base mr-auto">Tutorial</h2>
-                </div>
-                <div class="grid grid-cols-12 gap-6">
-                    <!-- BEGIN: Announcement -->
-                    <div class="intro-y box col-span-6 xxl:col-span-6">
-                        <div class="px-15 py-15">
-                            <button class="btn btn-primary" type="button" @click="startTutorial">Rozpocznij tutorial</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END: Profile Menu -->
+                        <div class="col-span-9 lg:col-span-9 xxl:col-span-9" v-if="modelActiveTab == 'klawiszologia'">
+                            <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+                                <h2 class="font-medium text-base mr-auto"> Klawiszologia</h2>
+                            </div>
+                            <div class="grid grid-cols-12 gap-6">
+                                <!-- BEGIN: Announcement -->
+                                <div class="intro-y box col-span-6 xxl:col-span-6">
+                                    <img src="/s3/images/klawiszologia.jpeg" class="img-fluid"/>
+                                </div>
+                                <!-- END: Announcement -->
+                            </div>
+                        </div>
+                        <div class="col-span-9 lg:col-span-9 xxl:col-span-9" v-if="modelActiveTab == 'faq'">
+                            <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+                                <h2 class="font-medium text-base mr-auto">FAQ</h2>
+                            </div>
+                            <div class="grid grid-cols-12 gap-6">
+                                <!-- BEGIN: Announcement -->
+                                <div class="intro-y box col-span-6 xxl:col-span-6">
+
+                                </div>
+                                <!-- END: Announcement -->
+                            </div>
+                        </div>
+                        <div class="col-span-9 lg:col-span-9 xxl:col-span-9" v-if="modelActiveTab == 'tutorial'">
+                            <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+                                <h2 class="font-medium text-base mr-auto">Tutorial</h2>
+                            </div>
+                            <div class="grid grid-cols-12 gap-6">
+                                <!-- BEGIN: Announcement -->
+                                <div class="intro-y box col-span-6 xxl:col-span-6">
+                                    <div class="px-15 py-15">
+                                        <button class="btn btn-primary" type="button" @click="startTutorial">Rozpocznij tutorial</button>
+                                    </div>
+                                </div>
+                                <!-- END: Announcement -->
+                            </div>
                         </div>
                     </div>
-                    <!-- END: Announcement -->
                 </div>
             </div>
         </div>
-    </Modal>
+    </div>
+
 </template>
 
 <script>
@@ -97,6 +105,7 @@ import TopButtons from "./components/TopButtons";
 import BottomPanel from "./components/BottomPanel";
 import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
+
 import router from "../../router";
 // import { VueCookies as $cookies } from 'vue3-cookies'
 import {VueCookies as $cookies} from 'vue3-cookies'
@@ -333,7 +342,7 @@ export default {
                     handleUnityActionOutgoing({action: 'save', data: ''});
                     break;
                 case 'help':
-                    modalShow.value = true;
+                    cash("#help-modal").modal("show");
                     break;
             }
         });

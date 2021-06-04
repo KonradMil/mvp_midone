@@ -61,6 +61,14 @@ name: "Workshop",
                 })
         });
 
+        emitter.on('singleworkshopobject', e => {
+            if(e.action == 'delete') {
+
+            } else if (e.action == 'edit'){
+
+            }
+        });
+
         onBeforeMount(() => {
             //ADDS LISTENERS
             bridge.value = UnityBridgeWorkshop();
