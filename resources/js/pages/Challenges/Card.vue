@@ -68,7 +68,7 @@
                         </a>
                     </div>
 
-                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id == user.id">
+                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id == user.id || allowedEdit">
                         <button type="button" class="btn btn-primary py-1 px-2" @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
                             Edytuj
                         </button>
@@ -177,6 +177,33 @@ export default defineComponent({
         const user = ref({});
         const selected_solution_id = ref(null);
         const types = require("../../json/types.json");
+        const inTeam = ref(false);
+
+        const allowedEdit = computed(() => {
+            console.log('ALLOWED EDIT');
+            console.log(user.id);
+            console.log(challenge.author_id);
+                if(inTeam.value || (user.id == challenge.value.author_id)) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+
+        });
+
+        const checkTeam = () => {
+            axios.post('/api/challenge/check-team', {user_id: user.id, challenge_id: challenge.value.id})
+                .then(response => {
+                    console.log("response.data")
+                    console.log(response.data)
+                    if (response.data.success) {
+                        inTeam.value = response.data.payload;
+                    } else {
+
+                    }
+                })
+        }
 
         emitter.on('changeTeamsSolution', e => () => {
             console.log('ChangeTeamsSolution');
@@ -190,13 +217,12 @@ export default defineComponent({
                     activeTab.value = e.name;
                     solution.value = e.solution;
                 }
-
         } );
 
 
         emitter.on('changeToOfferAdd', e => () => {
             console.log('BOLLOCKS');
-           activeTab.value = 'addingoffer';
+            activeTab.value = 'addingoffer';
         });
 
         const getCardChallengeRepositories = async (id) => {
@@ -218,6 +244,7 @@ export default defineComponent({
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
+            checkTeam();
         })
 
 
@@ -319,7 +346,8 @@ export default defineComponent({
             publish,
             unpublish,
             addSolution,
-            solution
+            solution,
+            allowedEdit
         };
     }
 });
