@@ -8,7 +8,7 @@
                     :src="'/' + solution.screenshot_path"
                 />
             </div>
-            <div class="ml-3 mr-auto" @click="$router.push({path: 'studio/solution/' + solution.id});">
+            <div class="ml-3 mr-auto" @click="$router.push({path: '/studio/solution/' + solution.id});">
                 <a href="" class="font-medium">{{ solution.name }}</a>
             </div>
             <!--        <div class="dropdown ml-3">-->
