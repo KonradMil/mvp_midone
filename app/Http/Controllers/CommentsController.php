@@ -11,6 +11,17 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentsController extends Controller
 {
+    public function commentDelete(Request $request)
+    {
+        $id = $request->input('id');
+        Comment::destroy($id);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Usunięto poprawnie',
+        ]);
+    }
+
     public function comment(Request $request)
     {
         $id = $request->input('id');

@@ -135,6 +135,7 @@ Route::group(['prefix' => 'knowledgebase/post', 'middleware' => 'auth:sanctum'],
 });
 
 Route::post('user/comment', [CommentsController::class, 'comment']);
+Route::post('user/comment/delete', [CommentsController::class, 'commentDelete']);
 
 Route::group(['prefix' => 'notifications', 'middleware' => 'auth:sanctum'], function () {
     Route::post('get', [NotificationsController::class, 'getNotifications']);

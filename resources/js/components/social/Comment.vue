@@ -11,7 +11,7 @@
         <div class="flex-1 relative text-dark-700" v-if="comment.commentator.id == user.id">
             <div class="form-control form-control-rounded border-transparent bg-gray-400 pr-10 placeholder-theme-13">
                 {{ comment.comment }}
-                   <a :disabled="isDisabled" @click.prevent="del(member.id,team.id)"><TrashIcon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0 text-red-500"></TrashIcon></a>
+                   <a :disabled="isDisabled" @click.prevent="del(comment.id)"><TrashIcon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0 text-red-500"></TrashIcon></a>
             </div>
 
         </div>
@@ -35,8 +35,29 @@ export default defineComponent({
     setup() {
         const isDisabled = ref('');
 
+        const del = async (id) => {
+            axios.post('api/user/comment/delete', {id: id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        toast.success(response.data.message);
+                        isDisabled.value = true;
+                    } else {
+                        // toast.error(response.data.message);
+                        toast.warning('Nie możesz usunąć!');
+                        isDisabled.value = true;
+                    }
+                    setTimeout(() =>{
+                        isDisabled.value = false;
+                    }, 2000);
+                })
+
+        }
+
         return {
-            isDisabled
+            isDisabled,
+            id,
+            del
         }
     }
 });
