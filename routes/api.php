@@ -73,7 +73,6 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
     Route::post('user/save/details/{technical}', [ChallengeController::class, 'saveChallengeDetails']);
     Route::post('user/save/financials/{financial}', [ChallengeController::class, 'saveChallengeFinancials']);
     Route::post('user/save/teams/{challenge}', [ChallengeController::class, 'saveChallengeTeams']);
-    Route::post('user/add/team/{challenge}', [ChallengeController::class, 'addChallengeTeam']);
     Route::post('user/like', [ChallengeController::class, 'likeChallenge']);
     Route::post('user/dislike', [ChallengeController::class, 'dislikeChallenge']);
     Route::post('user/follow', [ChallengeController::class, 'followChallenge']);
@@ -117,7 +116,6 @@ Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function 
     Route::post('create', [SolutionController::class, 'create']);
     Route::post('save/financials/{financial}', [SolutionController::class, 'saveSolutionFinancials']);
     Route::post('user/save/teams/{solution}', [SolutionController::class, 'saveSolutionTeams']);
-    Route::post('user/add/team/{solution}', [SolutionController::class, 'addSolutionTeam']);
     Route::post('save', [SolutionController::class, 'saveSolution']);
     Route::post('user/like', [SolutionController::class, 'likeSolution']);
     Route::post('user/comment', [SolutionController::class, 'commentSolution']);

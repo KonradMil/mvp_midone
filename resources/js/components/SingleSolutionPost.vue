@@ -98,7 +98,7 @@ import CommentSection from "./social/CommentSection";
 import {computed, getCurrentInstance, ref} from "vue";
 import router from "../router";
 import {useToast} from "vue-toastification";
-import TeamsPanelSolution from "../pages/Challenges/components/TeamsPanelSolution";
+import TeamsPanelSolution from "../pages/Challenges/components/TeamsPanel";
 
 export default {
     name: "SingleSolutionPost",

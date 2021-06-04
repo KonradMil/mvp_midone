@@ -115,11 +115,10 @@
             <TechnicalInformationPanel :challenge="challenge" v-if="activeTab == 'techniczne'"></TechnicalInformationPanel>
             <QuestionsPanel v-if="activeTab == 'pytania'" :author_id="challenge.author_id" :id="challenge.id"></QuestionsPanel>
             <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge"></SolutionsPanel>
-            <TeamsPanel v-if="activeTab == 'zespoly' && (challenge.author_id == user.id)" :teams="challenge.teams"> </TeamsPanel>
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :offer_id="temp_offer_id"></OfferAdd>
             <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab"></Offers>
             <ChallengeOffers v-if="(activeTab == 'all-offers') && (challenge.author_id == user.id)" v-model:activeTab="activeTab" :id="challenge.id"></ChallengeOffers>
-            <TeamsPanelSolution v-if="activeTab == 'teams'" :solution="solution" :challenge="challenge" :who="who" ></TeamsPanelSolution>
+            <TeamsPanel v-if="(activeTab == 'teams') && ((challenge.author_id == user.id) || (solution.author_id == user.id))" :solution="solution" :challenge="challenge" :who="who" ></TeamsPanel>
         </div>
     </div>
 </template>
@@ -133,17 +132,15 @@ import TechnicalInformationPanel from "./components/TechnicalInformationPanel";
 import QuestionsPanel from "./components/QuestionsPanel";
 import router from "../../router";
 import SolutionsPanel from "./components/SolutionsPanel";
-import TeamsPanel from "./components/TeamsPanel";
 import {useToast} from "vue-toastification";
 import OfferAdd from "./components/OfferAdd";
 import Offers from "./components/Offers";
-import TeamsPanelSolution from "./components/TeamsPanelSolution";
+import TeamsPanel from "./components/TeamsPanel";
 import ChallengeOffers from "./components/ChallengeOffers";
 
 export default defineComponent({
     name: 'Card',
     components: {
-        TeamsPanelSolution,
         Offers,
         OfferAdd,
         ChallengeOffers,
