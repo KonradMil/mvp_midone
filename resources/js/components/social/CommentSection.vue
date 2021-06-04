@@ -99,8 +99,6 @@ export default {
             {
                 comments.value.splice(e.index, 1);
             }
-            obj.comments_count.value -= 1;
-
         });
         emitter.on('disliked', e =>  dislike(e.id) )
 
