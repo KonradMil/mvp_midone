@@ -1,6 +1,6 @@
 <template>
-    <div class="flex fixed w-full z-50 pb-2 h-24 bottom-0 h-28" v-if="expanded == 0" id="bottom-animation-minimalized">
-        <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto;">
+    <div class="flex fixed w-full z-50 pb-2 h-24 bottom-0 h-28" v-if="expanded == 0" id="bottom-animation-minimalized" style="pointer-events: none;">
+        <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto; pointer-events: none;">
             <AnimationButtons :icons="icons"></AnimationButtons>
         </div>
     </div>

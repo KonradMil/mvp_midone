@@ -150,6 +150,9 @@
 @import "components/ads-box";
 @import "components/full-calendar";
 @import "components/pristine";
+.bot-i {
+    pointer-events: auto !important;
+}
 
 .selected-solution {
     border: 3px solid #930f68;
