@@ -192,6 +192,8 @@ export default defineComponent({
 
         emitter.on('selectedSolution', e => {
             selected_solution_id.value = e.id;
+            temp_offer_id.value = e.offer_id;
+            activeTab.value = 'addingoffer';
         });
 
         const checkTeam = () => {

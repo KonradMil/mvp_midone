@@ -195,7 +195,6 @@ name: "OfferAdd",
         const values = require('../../../json/offer_values.json');
 
         emitter.on('offerSelected', e =>  () => {
-
             getOffer(e.offer_id);
         });
 
