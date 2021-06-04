@@ -15,7 +15,7 @@ export default {
         const objects = ref([]);
 
         const getObjects = () => {
-            this.$axios.post('/api/workshop/objects/get')
+            axios.post('/api/workshop/objects/get')
                 .then(response => {
                     if (response.data.success) {
                       objects.value = response.data.payload;
