@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\WorkshopObject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class WorkshopController extends Controller
 {
@@ -55,6 +56,20 @@ class WorkshopController extends Controller
             'message' => 'Pobrano poprawnie.',
             'payload' => $object
         ]);
+    }
+
+    public function processSS($ss)
+    {
+        $content = base64_decode($ss);
+        $name = uniqid('ss_') . '.jpg';
+        $path = public_path('screenshots/' . $name);
+        \Illuminate\Support\Facades\File::put($path, $content);
+        Image::make($path)->resize(1000, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        })->save($path);
+
+        return ['absolute_path' => $path, 'relative' => ('screenshots/' . $name)];
     }
 
     public function likeObject(Request $request)
