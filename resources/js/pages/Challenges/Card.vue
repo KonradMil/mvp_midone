@@ -291,9 +291,7 @@ export default defineComponent({
                 .then(response => {
                     if (response.data.success) {
                         console.log(response.data.payload);
-                        delete_cookie('type');
-                        delete_cookie('id');
-                        router.push({path: 'studio/solution/' + response.data.id});
+                        router.push({path: '/studio/solution/' + response.data.payload.id});
                     } else {
                         // toast.error(response.data.message);
                     }
