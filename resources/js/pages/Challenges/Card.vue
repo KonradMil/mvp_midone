@@ -193,6 +193,7 @@ export default defineComponent({
         });
 
         const checkTeam = () => {
+            console.log({user_id: user.id, challenge_id: challenge.value.id});
             axios.post('/api/challenge/check-team', {user_id: user.id, challenge_id: challenge.value.id})
                 .then(response => {
                     console.log("response.data")
@@ -232,6 +233,7 @@ export default defineComponent({
                     if (response.data.success) {
                         console.log(response.data.payload);
                         challenge.value = response.data.payload;
+                        checkTeam();
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -244,7 +246,7 @@ export default defineComponent({
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
-            checkTeam();
+
         })
 
 
