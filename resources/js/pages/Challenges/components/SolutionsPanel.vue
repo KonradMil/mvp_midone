@@ -17,8 +17,8 @@
                         </div>
                     </div>
                     <div class="intro-y grid grid-cols-12 gap-6 mt-5">
-                        <div v-if="challenge.stage >= 2" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(challenge.selected)? 'solution-selected': ''">
-                            <SingleSolutionPost :user="user" :solution="challenge.selected" :canAccept="false" :canEdit="false"></SingleSolutionPost>
+                        <div v-if="challenge.stage >= 2" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box solution-selected">
+                            <SingleSolutionPost v-for="(solution, index) in challenge.selected" :user="user" :key="'selected_' + index" :solution="solution" :canAccept="false" :canEdit="false"></SingleSolutionPost>
                         </div>
                         <div v-for="(solution, index) in challenge.solutions" :key="index" v-if="challenge.stage < 2" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected)? 'solution-selected': ''">
                                      <span v-if="user.type == 'integrator'">
