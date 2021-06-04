@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import {getCurrentInstance, onMounted, ref} from "vue";
+import {onMounted, ref} from "vue";
 import SingleWorkshopObject from "../../../../components/SingleWorkshopObject";
 
 export default {
@@ -22,7 +22,7 @@ export default {
 
 
         const getObjects = () => {
-            axios.post('/api/workshop/models/get/all')
+            axios.post('/api/workshop/models/get/all', {own: true})
                 .then(response => {
                     if (response.data.success) {
                       objects.value = response.data.payload;
