@@ -56,6 +56,9 @@
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1" @click="unpublishSolution">Odpublikuj</button>
                 <button class="btn btn-primary shadow-md mr-2" @click="switchTab">Zespoły</button>
             </div>
+            <div class="mt-2">
+                <button class="btn btn-primary shadow-md mr-2" @click="addOffer">Dodaj ofertę</button>
+            </div>
         </div>
         <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
             <Tippy
@@ -129,6 +132,17 @@ export default {
         }, () => {
 
         });
+
+        const addOffer = () => {
+            axios.post('/api/offer/add/new', {solution_id: props.solution.id})
+                .then(response => {
+                    if (response.data.success) {
+                        emitter.emit('selected_solution_id', {id: solution.id, offer_id: response.data.payload.id});
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        }
 
         const like = async (solution) => {
             axios.post('/api/solution/user/like', {id: solution.id})
@@ -213,7 +227,8 @@ export default {
             deleteSolution,
             unpublishSolution,
             publishSolution,
-            rejectSolution
+            rejectSolution,
+            addOffer
         }
     }
 }

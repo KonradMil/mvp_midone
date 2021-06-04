@@ -84,4 +84,22 @@ class OfferController extends Controller
             'payload' => $check
         ]);
     }
+
+    public function addOffer(Request $request)
+    {
+        $offer = new Offer();
+        $sol = Solution::find($request->solution_id);
+        $ch = Challenge::find($sol->challenge_id);
+        $offer->challenge_id = $ch->id;
+        $offer->solution_id = $request->solution_id;
+        $offer->installer_id = Auth::user()->id;
+        $offer->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Dodano oferte poprawnie.',
+            'payload' => $offer
+        ]);
+
+    }
 }
