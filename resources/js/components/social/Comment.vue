@@ -37,7 +37,7 @@ export default defineComponent({
         comment: Object,
         ind: Number,
     },
-    setup() {
+    setup(props) {
         const isDisabled = ref('');
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
