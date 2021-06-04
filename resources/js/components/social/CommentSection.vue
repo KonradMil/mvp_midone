@@ -79,7 +79,7 @@ export default {
             console.log(props.object);
             comments.value = props.object.comments;
             obj.value = props.object;
-            comments_count.value = props.obj.comments_count.value;
+            comments_count.value = props.obj.comments_count;
         });
 
 
