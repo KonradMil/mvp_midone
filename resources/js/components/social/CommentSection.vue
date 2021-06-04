@@ -9,7 +9,11 @@
     </div>
     <div v-if="object != undefined">
         <Comment v-if="(current_object_focus == obj.id && current_object_focus_showComments)"
-                 v-for="comment in comments" :user="user" :comment="comment"/>
+                 v-for="(comment, index) in comments"
+                 :key="'comment_' + index"
+                 :user="user"
+                 :comment="comment"
+                 :ind="index"/>
     </div>
     <div v-if="comments != undefined && obj != undefined && comments.length != 0" >
         <a
@@ -88,6 +92,9 @@ export default {
             }
         }
 
+        emitter.on('deletecomment', e => {
+            comments.value.list.splice(e.index, 1);
+        });
         emitter.on('disliked', e =>  dislike(e.id) )
 
         const dislike = (id) => {

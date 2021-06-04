@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import {defineComponent, computed, ref} from "vue";
+import {defineComponent, computed, ref, getCurrentInstance} from "vue";
 import Avatar from "../avatar/Avatar";
 import {useToast} from "vue-toastification";
 
@@ -34,10 +34,13 @@ export default defineComponent({
     },
     props: {
         user: Object,
-        comment: Object
+        comment: Object,
+        ind: Number,
     },
     setup() {
         const isDisabled = ref('');
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
 
         const del = async (id) => {
             axios.post('api/user/comment/delete', {id: id})
@@ -45,6 +48,7 @@ export default defineComponent({
                     // console.log(response.data)
                     if (response.data.success) {
                         toast.success(response.data.message);
+                        emitter.emit('deletecomment', {index: props.ind});
                         isDisabled.value = true;
                     } else {
                         // toast.error(response.data.message);
