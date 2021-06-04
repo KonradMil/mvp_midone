@@ -138,10 +138,7 @@ export default {
         const solution = ref({});
         const user = window.Laravel.user;
         const inTeam = ref(false);
-        const modalShow = ref(false);
-        const modalClosed = () => {
-            modalShow.value = !modalShow.value;
-        }
+        const modelActiveTab = ref('klawiszologia');
 
         //EXTERNAL
         const unity_path = ref('/s3/unity/AssemBrot14_05_ver2.json');
@@ -456,20 +453,6 @@ export default {
                 })
         }
 
-        // const setCookie = (cname, cvalue, exdays) => {
-        //     var d = new Date();
-        //     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-        //     var expires = "expires="+d.toUTCString();
-        //     // document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-        // }
-        //
-        // const getCookies = (name) => {
-        //     const value = `; ${document.cookie}`;
-        //     const parts = value.split(`; ${name}=`);
-        //     console.log(parts);
-        //     if (parts.length === 2) return parts.pop().split(';').shift();
-        // };
-
         onMounted(() => {
 
             //REMOVES PADDING
@@ -513,8 +496,7 @@ export default {
             openMenu,
             lockInput,
             unlockInput,
-            modalShow,
-            modalClosed,
+            modelActiveTab,
             startTutorial
         }
     }
