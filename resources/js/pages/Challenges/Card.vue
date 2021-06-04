@@ -68,7 +68,7 @@
                         </a>
                     </div>
 
-                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id == user.id || allowedEdit">
+                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id == user.id || inTeam">
                         <button type="button" class="btn btn-primary py-1 px-2" @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
                             Edytuj
                         </button>
@@ -179,18 +179,16 @@ export default defineComponent({
         const types = require("../../json/types.json");
         const inTeam = ref(false);
 
-        const allowedEdit = computed(() => {
-            console.log('ALLOWED EDIT');
-            console.log(user.id);
-            console.log(challenge.author_id);
-                if(inTeam.value || (user.id == challenge.value.author_id)) {
-                    return true;
-                } else {
-                    return false;
-                }
-
-
-        });
+        // const allowedEdit = computed(() => {
+        //     console.log('ALLOWED EDIT');
+        //     console.log(user.id);
+        //     console.log(challenge.author_id);
+        //         if(inTeam.value ) {
+        //             return true;
+        //         } else {
+        //             return false;
+        //         }
+        // });
 
         const checkTeam = () => {
             console.log({user_id: user.id, challenge_id: challenge.value.id});
@@ -199,7 +197,7 @@ export default defineComponent({
                     console.log("response.data")
                     console.log(response.data)
                     if (response.data.success) {
-                        inTeam.value = response.data.payload;
+                        inTeam.value = response.data.payload || (user.id == challenge.value.author_id);
                     } else {
 
                     }
@@ -349,7 +347,7 @@ export default defineComponent({
             unpublish,
             addSolution,
             solution,
-            allowedEdit
+            inTeam
         };
     }
 });
