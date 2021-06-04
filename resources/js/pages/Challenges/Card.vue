@@ -105,12 +105,12 @@
                             @click.prevent="addSolution">
                             Dodaj rozwiązanie
                         </button>
-                        <button v-if="challenge.stage == 2"
-                            @click.prevent="activeTab = 'addingoffer'"
-                            type="button"
-                            class="btn btn-outline-secondary py-1 px-2 ml-auto">
-                            Złóż ofertę
-                        </button>
+<!--                        <button v-if="challenge.stage == 2"-->
+<!--                            @click.prevent="activeTab = 'addingoffer'"-->
+<!--                            type="button"-->
+<!--                            class="btn btn-outline-secondary py-1 px-2 ml-auto">-->
+<!--                            Złóż ofertę-->
+<!--                        </button>-->
                     </div>
                 </div>
                 <WhatsNext :user="user" :challenge="challenge"></WhatsNext>
@@ -131,7 +131,6 @@
 
 <script>
 import {defineComponent, ref, provide, onMounted, unref, toRaw, computed, getCurrentInstance} from "vue";
-import GetCardChallenge from "../../compositions/GetCardChallenge";
 import WhatsNext from "./WhatsNext";
 import BasicInformationPanel from "./components/BasicInformationPanel";
 import TechnicalInformationPanel from "./components/TechnicalInformationPanel";
