@@ -101,6 +101,7 @@ export default {
     props: {
         solution: Object,
         challenge: Object,
+        type: String
     },
     setup(props, {emit}) {
         const showDetails = ref([]);
@@ -120,7 +121,7 @@ export default {
         // }, {deep: true})
 
         const teamsSolution = computed(() => {
-            if(props.challenge!==undefined)
+            if(props.type==='challenge')
             {
                 return props.challenge.teams;
             }
