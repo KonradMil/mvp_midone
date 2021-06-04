@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import {defineComponent, computed} from "vue";
+import {defineComponent, computed, ref} from "vue";
 import Avatar from "../avatar/Avatar";
 export default defineComponent({
     components: {
