@@ -48,7 +48,6 @@ export default defineComponent({
                     // console.log(response.data)
                     if (response.data.success) {
                         toast.success(response.data.message);
-                        console.log(props.ind + '-> props.ind')
                         emitter.emit('deletecomment', {index: props.ind});
                         isDisabled.value = true;
                     } else {

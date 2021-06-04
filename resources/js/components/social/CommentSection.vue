@@ -93,7 +93,6 @@ export default {
         }
 
         emitter.on('deletecomment', e => {
-            console.log(comments.value + '-> comments.value');
             if(Array.isArray(comments.value))
             {
                 comments.value.splice(e.index, 1);
