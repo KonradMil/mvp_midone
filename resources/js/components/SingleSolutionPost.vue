@@ -8,7 +8,7 @@
                     :src="'/' + solution.screenshot_path"
                 />
             </div>
-            <div class="ml-3 mr-auto" @click="$router.push({name: 'solutionStudio', params: {id: solution.id, type: 'solution', load: solution }});">
+            <div class="ml-3 mr-auto" @click="$router.push({path: 'studio/solution/' + solution.id});">
                 <a href="" class="font-medium">{{ solution.name }}</a>
             </div>
             <!--        <div class="dropdown ml-3">-->
@@ -35,7 +35,7 @@
         </div>
         <div class="p-5 border-t border-gray-200 dark:border-dark-5" >
             <div class="h-40 xxl:h-56 image-fit">
-                <img @click="$router.push({name: 'solutionStudio', params: {id: solution.id, type: 'solution', load: solution }});"
+                <img @click="$router.push({path: 'studio/solution/' + solution.id});"
                      alt="Icewall Tailwind HTML Admin Template"
                      class="rounded-md"
                      :src="'/' + solution.screenshot_path"
@@ -50,7 +50,7 @@
                 <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution">Odrzuć rozwiązanie</button>
             </div>
             <div class="mt-2" v-if="canEdit">
-                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'solutionStudio', params: {id: solution.id, type: 'solution', load: solution }});">Edytuj</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: 'studio/solution/' + solution.id});">Edytuj</button>
                 <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution">Usuń</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0" @click="publishSolution">Publikuj</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1" @click="unpublishSolution">Odpublikuj</button>

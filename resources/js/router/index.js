@@ -72,12 +72,12 @@ export const routes = [
         component: Main,
         props: true
     },
-    {
-        name: 'solutionStudio',
-        path: '/studio/solution',
-        component: Main,
-        props: true
-    },
+    // {
+    //     name: 'solutionStudio',
+    //     path: '/studio/solution',
+    //     component: Main,
+    //     props: true
+    // },
     {
         name: 'terms',
         path: "/terms/:page",

@@ -91,11 +91,14 @@
                             Odpublikuj
                         </button>
                     </div>
-                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id != user.id && user.type == 'integrator'">
-<!--                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">-->
+                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex">
                         <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({path: '/studio/challenge/' + challenge.id})">
                             Studio 3D
                         </button>
+                    </div>
+                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id != user.id && user.type == 'integrator'">
+<!--                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">-->
+
                         <button v-if="challenge.stage == 1"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
@@ -263,7 +266,7 @@ export default defineComponent({
                         console.log(response.data.payload);
                         delete_cookie('type');
                         delete_cookie('id');
-                       router.push({name: 'solutionStudio', params: {id: response.data.payload.id, type: 'solution', load: response.data.payload }});
+                        router.push({path: 'studio/solution/' + response.data.id});
                     } else {
                         // toast.error(response.data.message);
                     }

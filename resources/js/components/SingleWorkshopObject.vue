@@ -7,7 +7,7 @@
                 :src="'/' + solution.screenshot_path"
             />
         </div>
-        <div class="ml-3 mr-auto" @click="$router.push({name: 'solutionStudio', params: {id: solution.id, type: 'solution', load: solution }});">
+        <div class="ml-3 mr-auto" @click="$router.push({path: 'studio/solution/' + solution.id});">
             <a href="" class="font-medium">{{ solution.name }}</a>
         </div>
         <div class="dropdown ml-3">
@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <div class="p-5" @click="$router.push({name: 'solutionStudio', params: {id: solution.id, type: 'solution', load: solution }});">
+    <div class="p-5" @click="$router.push({path: 'studio/solution/' + solution.id});">
         <div class="h-40 xxl:h-56 image-fit">
             <img
                 alt="Icewall Tailwind HTML Admin Template"
