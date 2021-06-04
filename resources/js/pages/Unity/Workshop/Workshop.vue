@@ -51,7 +51,7 @@ name: "Workshop",
         const loadedObjectId = ref(null);
 
         emitter.on('UnityWorkshopSave', e => {
-            axios.post('/api/workshop/model/save', {object: e, id: loadedObjectId})
+            axios.post('/api/workshop/models/save', {object: e, id: loadedObjectId})
                 .then(response => {
                     if (response.data.success) {
 
