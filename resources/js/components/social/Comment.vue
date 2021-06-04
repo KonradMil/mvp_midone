@@ -11,7 +11,9 @@
         <div class="flex-1 relative text-dark-700" v-if="comment.commentator.id == user.id">
             <div class="form-control form-control-rounded border-transparent bg-gray-400 pr-10 placeholder-theme-13">
                 {{ comment.comment }}
+                    <TrashIcon class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0 text-red-500"></TrashIcon>
             </div>
+
         </div>
         <div class="w-8 h-8 flex-none image-fit ml-3" v-if="comment.commentator.id == user.id">
             <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" :size="35" color="#FFF" background-color="#930f68"/>
