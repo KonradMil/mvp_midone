@@ -56,7 +56,6 @@ export default defineComponent({
 
         return {
             isDisabled,
-            id,
             del
         }
     }
