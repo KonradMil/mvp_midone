@@ -22,6 +22,30 @@ class ModelController extends Controller
         return !empty($var) || $var === '0';
     }
 
+    public function getModelsUnity (Request  $request)
+    {
+        if(isset($request->search)) {
+            if(is_array($request->search)){
+                if(!empty($request->search['brand'])) {
+                    $models = UnityModel::where('category', '=', $request->search['category'])->where('subcategory', '=', $request->search['subcategory'])->where('brand', '=', $request->search['brand'])->take(30)->get();
+                } else {
+                    $models = UnityModel::where('category', '=', $request->search['category'])->where('subcategory', '=', $request->search['subcategory'])->take(30)->get();
+                }
+
+            } else {
+                $models = UnityModel::where('name', 'LIKE', '%'. $request->search . '%')->take(10)->get();
+            }
+        } else {
+            $models = UnityModel::take(10)->get();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => $models
+        ]);
+    }
+
     public function getModels(Request  $request)
     {
 //        dd($request->search);

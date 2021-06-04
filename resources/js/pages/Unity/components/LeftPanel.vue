@@ -153,7 +153,7 @@
 
 <script>
 import {getCurrentInstance, onMounted, ref, watch} from "vue";
-import GetModels from "../../../compositions/GetModels";
+import GetModelsUnity from "../../../compositions/GetModelsUnity";
 
 
 export default {
@@ -176,7 +176,7 @@ export default {
 
 
         const getModelRepositories = async () => {
-            models.value = GetModels({
+            models.value = GetModelsUnity({
                 category: category.value,
                 subcategory: subcategory.value,
                 brand: selectedBrand.value
