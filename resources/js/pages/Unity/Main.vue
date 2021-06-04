@@ -305,7 +305,7 @@ export default {
                     getCardChallengeRepositories(id.value);
                 }
                 handleUnityActionOutgoing({action: 'prefix', data: 'https://two.appworks-dev.pl/s3'});
-            }, 1000);
+            }, 2000);
         }
 
         onBeforeMount(() => {
