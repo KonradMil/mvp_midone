@@ -1,18 +1,23 @@
 <template>
-<div v-for="(object, index) in objects">
+    <div v-if="objects.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+            Nie masz jeszcze żadnych zapisanych obiektów.
+    </div>
+<div v-for="(object, index) in objects" v-if="objects.length != 0">
 <SingleWorkshopObject :object="object" :key="'obiekt_' + index"/>
 </div>
 </template>
 
 <script>
-import {onMounted, ref} from "vue";
+import {getCurrentInstance, onMounted, ref} from "vue";
 import SingleWorkshopObject from "../../../../components/SingleWorkshopObject";
 
 export default {
     name: "OwnObjects",
     components: {SingleWorkshopObject},
     setup() {
+
         const objects = ref([]);
+
 
         const getObjects = () => {
             axios.post('/api/workshop/objects/get')

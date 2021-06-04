@@ -37,14 +37,29 @@ import Marketplace from "./panels/Marketplace";
 import OwnObjects from "./panels/OwnObjects";
 import UnityBridgeWorkshop from "./bridge_workshop";
 
-import {onBeforeMount, ref} from "vue";
+import {getCurrentInstance, onBeforeMount, ref} from "vue";
 import UnityBridge from "../bridge";
+import dayjs from "dayjs";
 export default {
 name: "Workshop",
     components: {OwnObjects, Marketplace, WorkshopPanel},
     setup() {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const activeTab = ref('obiekty');
         const bridge = ref();
+        const loadedObjectId = ref(null);
+
+        emitter.on('UnityWorkshopSave', e => {
+            axios.post('/api/workshop/model/save', {object: e, id: loadedObjectId})
+                .then(response => {
+                    if (response.data.success) {
+
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        });
 
         onBeforeMount(() => {
             //ADDS LISTENERS
