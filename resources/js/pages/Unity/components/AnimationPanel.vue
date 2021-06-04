@@ -192,6 +192,8 @@ export default {
                     emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: {interval: 0, cycles: 0, layers: toRaw(animation)}})
                     break;
                 case 'addline':
+                    console.log('LENGTH AL');
+                    console.log(animation.layers.length);
                     emitter.emit('unityoutgoingaction', {action: 'addLine',data: animation.layers.length})
                     break;
                 case 'removeline':
