@@ -121,7 +121,7 @@ export default {
         const switchTab = () => {
             console.log('Switch2244444');
             console.log(props.solution + ' its props solution');
-            emitter.emit("activeTab", {name: 'teams', type: 'solution', solution: props.solution});
+            emitter.emit("activeTab", {name: 'teams', who: 'solution', solution: props.solution});
         }
 
         const teams = computed(() => {

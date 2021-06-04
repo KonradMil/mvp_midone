@@ -119,7 +119,7 @@
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :offer_id="temp_offer_id"></OfferAdd>
             <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab"></Offers>
             <ChallengeOffers v-if="(activeTab == 'all-offers') && (challenge.author_id == user.id)" v-model:activeTab="activeTab" :id="challenge.id"></ChallengeOffers>
-            <TeamsPanelSolution v-if="activeTab == 'teams'" :solution="solution" :challenge="challenge" :type="type" ></TeamsPanelSolution>
+            <TeamsPanelSolution v-if="activeTab == 'teams'" :solution="solution" :challenge="challenge" :who="who" ></TeamsPanelSolution>
         </div>
     </div>
 </template>
@@ -172,7 +172,7 @@ export default defineComponent({
         const user = ref({});
         const selected_solution_id = ref(null);
         const types = require("../../json/types.json");
-        const type = ref('challenge');
+        const who = ref('challenge');
 
         emitter.on('changeTeamsSolution', e => () => {
             console.log('ChangeTeamsSolution');
@@ -185,7 +185,7 @@ export default defineComponent({
                 if(type == 'activeTab') {
                     activeTab.value = e.name;
                     solution.value = e.solution;
-                    type.value = e.type;
+                    who.value = who.type;
                 }
 
         } );
