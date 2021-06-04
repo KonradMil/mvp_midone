@@ -82,7 +82,7 @@
                                     <div class="pos-image__preview image-fit h-24 w-full">
                                         <img
                                             class="w-full p-4 "
-                                            v-lazy="'s3/models_images/' + model.model_file + '.png'"
+                                            v-lazy="'/s3/models_images/' + model.model_file + '.png'"
                                             :alt="model.name"
                                         />
                                     </div>
