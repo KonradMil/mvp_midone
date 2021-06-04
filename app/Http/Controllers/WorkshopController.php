@@ -29,15 +29,16 @@ class WorkshopController extends Controller
 
     public function saveWorkshopModel(Request $request)
     {
-        $id = $request->input('id');
-        if(isset($id)) {
-            $object  = WorkshopObject::find($id);
+//        $id = $request->input('id');
+        $j = $request->input('object')['data'];
+        if(!empty($j['id'])) {
+            $object = WorkshopObject::find($j['id']);
         } else {
             $object = new WorkshopObject();
             $object->author_id = Auth::user()->id;
         }
 
-        $j = $request->input('object')['data'];
+
 
         if (!empty($j['screenshot'])) {
 
