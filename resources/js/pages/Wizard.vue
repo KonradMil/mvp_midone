@@ -6,15 +6,11 @@
         <!-- BEGIN: Wizard Layout -->
         <div class="intro-y box py-10 sm:py-20 mt-5">
             <div class="flex justify-center">
-                <button
-                    @click="$router.push('/kreator')"
-                    class="intro-y w-10 h-10 rounded-full btn btn-primary mx-2">
+                <button class="intro-y w-10 h-10 rounded-full btn btn-primary mx-2">
                     1
                 </button>
                 <button
-                    @click="$router.push('/kreator-krok-jeden')"
-                    class="intro-y w-10 h-10 rounded-full btn bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2"
-                >
+                    class="intro-y w-10 h-10 rounded-full btn bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2">
                     2
                 </button>
             </div>

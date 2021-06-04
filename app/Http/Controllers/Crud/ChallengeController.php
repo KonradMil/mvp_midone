@@ -343,10 +343,6 @@ class ChallengeController extends Controller
             $financial->save();
         }
 
-
-
-
-//    dd($request);
         $challenge->name = $request->name;
 
         $challenge->description = $request->description;
@@ -361,7 +357,6 @@ class ChallengeController extends Controller
         } catch (Exception $e) {
             $challenge->offer_deadline = Carbon::createFromFormat('Y-m-d H:i:s', $request->offer_deadline);
         }
-
 
         $challenge->allowed_publishing = $request->allowed_publishing;
         $challenge->financial_before_id = $financial->id;
