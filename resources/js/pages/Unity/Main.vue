@@ -391,8 +391,10 @@ export default {
                     getCardChallengeRepositories(id.value);
                 }
                 handleUnityActionOutgoing({action: 'prefix', data: 'https://two.appworks-dev.pl/s3'});
-                unlockInput();
             }, 2000);
+            setTimeout(() => {
+                unlockInput();
+            }, 5000);
         }
 
         onBeforeMount(() => {
@@ -421,6 +423,7 @@ export default {
                             action: 'loadStructure',
                             data: JSON.parse(response.data.payload.save_json)
                         });
+                        unlockInput();
                         // console.log('EMIT LOAD');
                         // emitter.emit('saveLoaded', {save: (response.data.payload)});
                     } else {
@@ -445,6 +448,7 @@ export default {
                             action: 'loadStructure',
                             data: JSON.parse(response.data.payload.save_json)
                         });
+                        unlockInput();
                         // console.log('EMIT LOAD');
                         // emitter.emit('saveLoaded', {save: (response.data.payload)});
                     } else {
