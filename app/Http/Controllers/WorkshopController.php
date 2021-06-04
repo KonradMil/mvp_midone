@@ -44,6 +44,7 @@ class WorkshopController extends Controller
             $path = $this->processSS($j['screenshot']);
             $object->screenshot_path = $path['relative'];
             unset($j['screenshot']);
+            dump($j);
             $object->save = json_encode($request->input('object')['data']);
             $object->name = $j['name'];
             $object->description = $j['description'];
