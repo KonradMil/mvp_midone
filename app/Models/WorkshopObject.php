@@ -17,7 +17,7 @@ class WorkshopObject extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_workshop_objects', 'workshop_object_id', 'author_id');
+        return $this->belongsToMany(User::class, 'user_workshop_objects', 'workshop_object_id', 'user_id');
     }
 
     public function author()
