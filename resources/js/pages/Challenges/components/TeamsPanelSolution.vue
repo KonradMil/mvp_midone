@@ -99,7 +99,8 @@ export default {
     name: "TeamsPanelSolution",
     components: {Avatar, Modal},
     props: {
-        solution: Object
+        solution: Object,
+        challenge: Object,
     },
     setup(props, {emit}) {
         const showDetails = ref([]);
@@ -114,21 +115,23 @@ export default {
         const show = ref(false);
         const temporary_team_id = ref(null);
 
-        watch(props.solution.teams, (lab, prevLabel) => {
-            teamsSolution.value = props.solution.teams;
-        }, {deep: true})
+        // watch(props.solution.teams, (lab, prevLabel) => {
+        //     teamsSolution.value = props.solution.teams;
+        // }, {deep: true})
 
         const teamsSolution = computed(() => {
-            return props.solution.teams;
+            if(props.challenge!==undefined)
+            {
+                return props.challenge.teams;
+            }
+            else
+            {
+                return props.solution.teams;
+            }
         });
         const getTeamsRepositories = async () => {
             teams.value = GetTeams();
         }
-
-        const getInvitesRepositories = async () => {
-            invites.value = GetInvites();
-        }
-
         const showAddToTeamModal = (id) => {
             if(temporary_team_id == null || temporary_team_id === id) {
                 show.value = !show.value;
@@ -166,7 +169,6 @@ export default {
                         isDisabled.value = false;
                     }, 2000);
                 })
-            // await getTeamsRepositories();
         }
 
         const addSolutionTeam = async () => {
@@ -180,11 +182,6 @@ export default {
                 await AddSolutionTeam(new_team_name.value, props.solution.id, (res) => {
                    teamsSolution.value.push(res);
                 })
-                // setTimeout(function () {
-                //     getTeamsRepositories(search.value);
-                //     new_team_name.value = '';
-                //     modalClosed();
-                // }, 1000);
                 isDisabled.value=true;
             }
             setTimeout(()=>{
@@ -212,18 +209,10 @@ export default {
                 isDisabled.value = false;
             }, 2000);
         }
-        const acceptInvite = async (id) => {
-            await AcceptInvite(id)
-            setTimeout(function () {
-                getTeamsRepositories(search.value);
-                getInvitesRepositories(search.value);
-            }, 1000);
-        }
 
         onMounted(function () {
             teamsSolution.value = new_team_name.value;
             getTeamsRepositories('');
-            getInvitesRepositories('');
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
@@ -241,7 +230,6 @@ export default {
             new_team_member_email,
             addMember,
             invites,
-            acceptInvite,
             showDetails,
             isDisabled,
             del,
