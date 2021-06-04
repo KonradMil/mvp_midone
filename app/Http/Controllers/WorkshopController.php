@@ -47,7 +47,7 @@ class WorkshopController extends Controller
             dump($j);
             $object->save = json_encode($request->input('object')['data']);
             $object->name = $j['item_name'];
-            $object->description = $j['item_description'];
+            $object->description = $j['item_descreption'];
             $object->type = $j['item_type'];
             $object->save();
         }
