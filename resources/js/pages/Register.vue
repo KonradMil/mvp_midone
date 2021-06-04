@@ -159,7 +159,7 @@
                             <label class="cursor-pointer select-none" for="rodo"
                             >Akceptuję postanowienia </label
                             >
-                            <div class="text-theme-1 dark:text-theme-10 ml-1"
+                            <div class="text-theme-1 dark:text-theme-10 ml-1 cursor-pointer"
                             @click.prevent="$router.push({path: '/terms/privacy-policy'})"> polityki prywatności.</div>.
                         </div>
                         <template v-if="validate.rodo.$error">
@@ -173,7 +173,7 @@
                         <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                             <input id="rodo3" type="checkbox" class="form-check-input border mr-2" v-model="validate.rodo3.$model"/>
                             <label class="cursor-pointer select-none" for="rodo3">Akceptuję </label>
-                            <div class="text-theme-1 dark:text-theme-10 mx-1" @click.prevent="$router.push({path: '/terms/terms-of-service'})"> warunki świadczenia  &#32;</div>  usług na platformie DBR77.com.
+                            <div class="text-theme-1 dark:text-theme-10 mx-1 cursor-pointer" @click.prevent="$router.push({path: '/terms/terms-of-service'})"> warunki świadczenia  &#32;</div>  usług na platformie DBR77.com.
                         </div>
                         <template v-if="validate.rodo3.$error">
                             <div
@@ -193,7 +193,7 @@
                             >
                                 Akceptuję
                             </label>
-                            <div class="text-theme-1 dark:text-theme-10 ml-1"
+                            <div class="text-theme-1 dark:text-theme-10 ml-1 cursor-pointer"
                                  @click.prevent="$router.push({path: '/terms/price-list'})"> cennik usług</div>.
                         </div>
                         <template v-if="validate.rodo2.$error">
