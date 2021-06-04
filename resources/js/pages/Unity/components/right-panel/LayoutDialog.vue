@@ -136,7 +136,7 @@
         </div>
     </div>
     <div class="mt-3">
-        <label for="modal-form-2" class="form-label">Kolor tła</label>
+        <label for="modal-form-2" class="form-label">Kolor lini</label>
         <div class="vue-swatches" tabindex="-1" id="modal-form-33"  modelvalue="#222F3D" data-v-530b672a=""><!-- Trigger --><!--v-if-->
             <div class="vue-swatches__container vue-swatches--inline" style="background-color: transparent);"><!-- The wrapper handles the internal spacing -->
                 <div class="vue-swatches__wrapper"><!-- for nested distribution --><!-- for normal distribution -->
