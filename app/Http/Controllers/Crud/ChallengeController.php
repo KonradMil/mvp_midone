@@ -473,12 +473,12 @@ class ChallengeController extends Controller
 
     public function delete(Request $request)
     {
-          $id = $request -> input('id');
-          Challenge::destroy($id);
-//        $challenge = Challenge::where('id', '=', $request->input('id'))->first();
-//        dd($challenge);
-//        $challenge->author_id = 0;
-//        $challenge->save();
+//          $id = $request -> input('id');
+//          Challenge::destroy($id);
+        $challenge = Challenge::where('id', '=', $request->input('id'))->first();
+        dd($challenge);
+        $challenge->author_id = 0;
+        $challenge->save();
 
         return response()->json([
             'success' => true,

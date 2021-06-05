@@ -70,7 +70,7 @@
                                     <Edit2Icon class="w-4 h-4 mr-2"/>
                                     Edytuj
                                 </a>
-                                <a href="" @click.prevent="deleteChallenge"
+                                <a href="" @click.prevent="deleteChallenge(challenge.id)"
                                     class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                                     <TrashIcon class="w-4 h-4 mr-2"/>
                                     Usuń
