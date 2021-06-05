@@ -24,7 +24,7 @@ class OfferController extends Controller
 
     public function getAllChallengeOffers(Challenge $challenge)
     {
-        $offers = Offer::where('challenge_id', '=', $challenge->id)->get();
+        $offers = Offer::where('challenge_id', '=', $challenge->id)->with('solution')->get();
 
         return response()->json([
             'success' => true,
