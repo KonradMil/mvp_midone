@@ -165,7 +165,7 @@ export default {
             }
         });
 
-        const deleteChallenge = (id) => {
+        const deleteChallenge = async(id) => {
             axios.post('/api/challenge/delete', {id: id})
                 .then(response => {
                     // console.log(response.data)
