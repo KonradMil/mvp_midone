@@ -33,22 +33,20 @@
 <!--        </div>-->
 <!--    </div>-->
     <div class="col-span-12 lg:col-span-8 xxl:col-span-9" >
-        <div
-        class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5"
-    >
+        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
         <h2 class="font-medium text-base mr-auto"> Moje oferty</h2>
     </div>
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12 xxl:col-span-6" v-for="(offer, index) in offers.list" :key="index">
-
-                <div class="px-5 py-5"  >
-                    <div
-                        id="latest-tasks-new"
-                        class="tab-pane active"
-                        role="tabpanel"
-                        aria-labelledby="latest-tasks-new-tab"
-                    >
+                <div class="px-5 py-5" >
+                    <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
+                        <div class="flex items-center">
+                            <div class="border-l-2 border-theme-1 pl-4">
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
+                                <div class="ark:text-theme-10 text-theme-1" style="font-size: 16px;"> {{ offer.solution.name }}zł</div>
+                            </div>
+                        </div>
                         <div class="flex items-center">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Cena za dostawę oraz uruchomienie stanowiska (netto):</span>
