@@ -481,7 +481,7 @@ export default {
             console.log(elDropzoneSingleRef);
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
                 images.value.push(JSON.parse(resp.xhr.response).payload);
-                toast.success(response.data.message);
+                toast.success('Zdjecie zostało wgrane poprawnie!');
             });
             elDropzoneSingleRef.dropzone.on("error", () => {
                 toast.error("Błąd");
