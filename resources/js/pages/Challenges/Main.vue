@@ -132,6 +132,7 @@ import {defineComponent, ref, provide, onMounted, getCurrentInstance, watch, onU
 import GetChallenges from "../../compositions/GetChallenges";
 import GetChallengesFollowed from "../../compositions/GetChallengesFollowed";
 import CommentSection from "../../components/social/CommentSection";
+import {useToast} from "vue-toastification";
 
 export default {
     name: "ChallengesMain",
@@ -144,6 +145,7 @@ export default {
         const user = ref({});
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
+        const toast = useToast();
 
         const getChallengeRepositories = async () => {
             if(props.type == 'followed') {
