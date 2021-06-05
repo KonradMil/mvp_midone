@@ -12,6 +12,12 @@
                     <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
                         <div class="flex items-center">
                             <div class="border-l-2 border-theme-1 pl-4">
+                                <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
+                                <div class="ark:text-theme-10 text-theme-1" style="font-size: 16px;"> {{ offer.solution.name }}zł</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Cena za dostawę oraz uruchomienie stanowiska (netto):</span>
                                 <div class="text-gray-600"> {{ offer.price_of_delivery }}zł</div>
                             </div>
