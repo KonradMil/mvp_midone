@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <!-- BEGIN: Users Layout -->
-                    <div v-for="(team, index) in teams.list" :key="'team_' + index" class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12">
+                    <div v-for="(team, index) in teams" :key="'team_' + index" class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12">
                         <div class="box">
                             <div class="flex flex-col lg:flex-row items-center p-5">
                                 <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
