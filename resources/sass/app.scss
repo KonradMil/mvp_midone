@@ -153,7 +153,9 @@
 .bot-i {
     pointer-events: auto !important;
 }
-
+.dropzone.dz-started .dz-message {
+    display: initial !important;
+}
 .selected-solution {
     border: 3px solid #930f68;
     border-radius: 10px;

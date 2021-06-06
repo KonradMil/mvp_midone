@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Crud;
 
 use App\Http\Controllers\Controller;
 use App\Mail\TeamInvitation;
+use App\Models\Challenges\Challenge;
+use App\Models\Solutions\Solution;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,6 +16,37 @@ use Mpociot\Teamwork\TeamInvite;
 
 class TeamsController extends Controller
 {
+    public function addObjectTeam(Request $request)
+    {
+        $name = $request -> input('name');
+        $team = new Team();
+        $team-> owner_id = Auth::user()->id;
+        $team-> name = $name;
+        $team -> save();
+        Auth::user()->attachTeam($team);
+        $who = $request -> input('who');
+        $id = $request -> input('id');
+        if($who == 'challenge')
+        {
+            $challenge = Challenge::find($id);
+            $challenge->teams()->attach($team);
+            $challenge->save();
+        }
+        else
+        {
+            $solution = Solution::find($id);
+            $solution->teams()->attach($team);
+            $solution->save();
+        }
+
+        $t = Team::where('id', '=', $team->id)->with('users', 'users.companies')->first();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Dodano zespół!',
+            'payload' => $t
+        ]);
+    }
     public function getUserTeamsFiltered(Request $request)
     {
         $input = $request->input();

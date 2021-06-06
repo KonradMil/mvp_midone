@@ -36,16 +36,16 @@
                            @click.prevent="activeTab = 'rozwiazania'"
                            :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <LockIcon class="w-4 h-4 mr-2"/>
-                            <div v-if="challenge.stage >= 2">Wybrane rozwiązanie</div><div v-if="challenge.stage < 2">Rozwiązania</div>
+                            <div v-if="challenge.selected != undefined">Wybrane rozwiązanie</div><div v-if="challenge.selected == undefined">Rozwiązania</div>
                         </a>
-                        <a v-if="(challenge.author_id != user.id) && challenge.stage >= 2"
+                        <a v-if="(challenge.author_id != user.id) && user.type == 'integrator' && challenge.status >= 2"
                             class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'oferty'"
                            :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <SettingsIcon class="w-4 h-4 mr-2"/>
                             Moje Oferty
                         </a>
-                        <a v-if="(challenge.author_id == user.id) && challenge.stage >= 2"
+                        <a v-if="(challenge.author_id == user.id) && challenge.status >= 2"
                             class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'all-offers'"
                            :class="(activeTab == 'all-offers')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
@@ -68,14 +68,13 @@
                         </a>
                     </div>
 
-                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id == user.id || inTeam">
+                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id == user.id">
                         <button type="button" class="btn btn-primary py-1 px-2" @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
                             Edytuj
                         </button>
-<!--                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">-->
-<!--                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({path: '/studio/challenge/' + challenge.id})">-->
-<!--                            Studio 3D-->
-<!--                        </button>-->
+                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">
+                            Studio 3D
+                        </button>
                         <button
                             v-if="challenge.status == 0"
                             type="button"
@@ -91,26 +90,22 @@
                             Odpublikuj
                         </button>
                     </div>
-                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex">
-                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({path: '/studio/challenge/' + challenge.id})">
+                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id != user.id && user.type == 'integrator'">
+                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">
                             Studio 3D
                         </button>
-                    </div>
-                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="challenge.author_id != user.id && user.type == 'integrator'">
-<!--                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">-->
-
                         <button v-if="challenge.stage == 1"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
                             @click.prevent="addSolution">
                             Dodaj rozwiązanie
                         </button>
-<!--                        <button v-if="challenge.stage == 2"-->
-<!--                            @click.prevent="activeTab = 'addingoffer'"-->
-<!--                            type="button"-->
-<!--                            class="btn btn-outline-secondary py-1 px-2 ml-auto">-->
-<!--                            Złóż ofertę-->
-<!--                        </button>-->
+                        <button v-if="challenge.stage == 2"
+                            @click.prevent="activeTab = 'addingoffer'"
+                            type="button"
+                            class="btn btn-outline-secondary py-1 px-2 ml-auto">
+                            Złóż ofertę
+                        </button>
                     </div>
                 </div>
                 <WhatsNext :user="user" :challenge="challenge"></WhatsNext>
@@ -131,23 +126,22 @@
 
 <script>
 import {defineComponent, ref, provide, onMounted, unref, toRaw, computed, getCurrentInstance} from "vue";
+import GetCardChallenge from "../../compositions/GetCardChallenge";
 import WhatsNext from "./WhatsNext";
 import BasicInformationPanel from "./components/BasicInformationPanel";
 import TechnicalInformationPanel from "./components/TechnicalInformationPanel";
 import QuestionsPanel from "./components/QuestionsPanel";
 import router from "../../router";
 import SolutionsPanel from "./components/SolutionsPanel";
-import TeamsPanel from "./components/TeamsPanel";
 import {useToast} from "vue-toastification";
 import OfferAdd from "./components/OfferAdd";
 import Offers from "./components/Offers";
-import TeamsPanelSolution from "./components/TeamsPanelSolution";
+import TeamsPanel from "./components/TeamsPanel";
 import ChallengeOffers from "./components/ChallengeOffers";
 
 export default defineComponent({
     name: 'Card',
     components: {
-        TeamsPanelSolution,
         Offers,
         OfferAdd,
         ChallengeOffers,
@@ -176,18 +170,8 @@ export default defineComponent({
         const user = ref({});
         const selected_solution_id = ref(null);
         const types = require("../../json/types.json");
+        const who = ref('challenge');
         const inTeam = ref(false);
-
-        // const allowedEdit = computed(() => {
-        //     console.log('ALLOWED EDIT');
-        //     console.log(user.id);
-        //     console.log(challenge.author_id);
-        //         if(inTeam.value ) {
-        //             return true;
-        //         } else {
-        //             return false;
-        //         }
-        // });
 
         emitter.on('selectedSolution', e => {
             selected_solution_id.value = e.id;
@@ -220,7 +204,9 @@ export default defineComponent({
                 if(type == 'activeTab') {
                     activeTab.value = e.name;
                     solution.value = e.solution;
+                    who.value = who.type;
                 }
+
         } );
 
 
@@ -249,7 +235,6 @@ export default defineComponent({
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
-
         })
 
 
@@ -336,6 +321,7 @@ export default defineComponent({
         };
 
         return {
+            who,
             temp_offer_id,
             selected_solution_id,
             prevAnnouncement,

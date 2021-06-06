@@ -101,7 +101,7 @@ import CommentSection from "./social/CommentSection";
 import {computed, getCurrentInstance, ref} from "vue";
 import router from "../router";
 import {useToast} from "vue-toastification";
-import TeamsPanelSolution from "../pages/Challenges/components/TeamsPanelSolution";
+import TeamsPanelSolution from "../pages/Challenges/components/TeamsPanel";
 
 export default {
     name: "SingleSolutionPost",
@@ -124,7 +124,7 @@ export default {
         const switchTab = () => {
             console.log('Switch2244444');
             console.log(props.solution + ' its props solution');
-            emitter.emit("activeTab", {name: 'teamsSolution', solution: props.solution});
+            emitter.emit("activeTab", {name: 'teams', who: 'solution', solution: props.solution});
         }
 
         const teams = computed(() => {

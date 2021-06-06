@@ -73,7 +73,6 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
     Route::post('user/save/details/{technical}', [ChallengeController::class, 'saveChallengeDetails']);
     Route::post('user/save/financials/{financial}', [ChallengeController::class, 'saveChallengeFinancials']);
     Route::post('user/save/teams/{challenge}', [ChallengeController::class, 'saveChallengeTeams']);
-    Route::post('user/add/team/{challenge}', [ChallengeController::class, 'addChallengeTeam']);
     Route::post('user/like', [ChallengeController::class, 'likeChallenge']);
     Route::post('user/dislike', [ChallengeController::class, 'dislikeChallenge']);
     Route::post('user/follow', [ChallengeController::class, 'followChallenge']);
@@ -117,7 +116,6 @@ Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function 
     Route::post('create', [SolutionController::class, 'create']);
     Route::post('save/financials/{financial}', [SolutionController::class, 'saveSolutionFinancials']);
     Route::post('user/save/teams/{solution}', [SolutionController::class, 'saveSolutionTeams']);
-    Route::post('user/add/team/{solution}', [SolutionController::class, 'addSolutionTeam']);
     Route::post('save', [SolutionController::class, 'saveSolution']);
     Route::post('user/like', [SolutionController::class, 'likeSolution']);
     Route::post('user/comment', [SolutionController::class, 'commentSolution']);
@@ -135,6 +133,7 @@ Route::group(['prefix' => 'knowledgebase/post', 'middleware' => 'auth:sanctum'],
 });
 
 Route::post('user/comment', [CommentsController::class, 'comment']);
+Route::post('user/comment/delete', [CommentsController::class, 'commentDelete']);
 
 Route::group(['prefix' => 'notifications', 'middleware' => 'auth:sanctum'], function () {
     Route::post('get', [NotificationsController::class, 'getNotifications']);
@@ -150,6 +149,7 @@ Route::group(['prefix' => 'teams', 'middleware' => 'auth:sanctum'], function () 
     Route::post('user/get', [TeamsController::class, 'getUserTeamsFiltered']);
     Route::post('user/delete', [TeamsController::class, 'deleteTeam']);
     Route::post('user/member/delete', [TeamsController::class, 'deleteMember']);
+    Route::post('user/add/team', [TeamsController::class, 'addObjectTeam']);
 });
 
 Route::post('model/edit/{model}', [ModelController::class, 'editModel']);

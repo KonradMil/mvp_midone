@@ -37,7 +37,7 @@
                         <p>
                             Nie dodałeś jeszcze żadnych wyzwań.
                         </p>
-                        <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
+                        <button class="btn btn-primary shadow-md mr-2 mt-2" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                                     <Edit2Icon class="w-4 h-4 mr-2"/>
                                     Edytuj
                                 </a>
-                                <a href="" @click.prevent="deleteChallenge"
+                                <a href="" @click.prevent="deleteChallenge(challenge.id)"
                                     class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                                     <TrashIcon class="w-4 h-4 mr-2"/>
                                     Usuń
@@ -132,6 +132,7 @@ import {defineComponent, ref, provide, onMounted, getCurrentInstance, watch, onU
 import GetChallenges from "../../compositions/GetChallenges";
 import GetChallengesFollowed from "../../compositions/GetChallengesFollowed";
 import CommentSection from "../../components/social/CommentSection";
+import {useToast} from "vue-toastification";
 
 export default {
     name: "ChallengesMain",
@@ -144,6 +145,7 @@ export default {
         const user = ref({});
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
+        const toast = useToast();
 
         const getChallengeRepositories = async () => {
             if(props.type == 'followed') {
@@ -163,7 +165,7 @@ export default {
             }
         });
 
-        const deleteChallenge = (id) => {
+        const deleteChallenge = async(id) => {
             axios.post('/api/challenge/delete', {id: id})
                 .then(response => {
                     // console.log(response.data)
