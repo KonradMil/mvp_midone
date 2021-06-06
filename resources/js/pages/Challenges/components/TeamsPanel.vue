@@ -37,7 +37,7 @@
                                         </div>
                                     </div>
                                     <div class="flex mt-4 lg:mt-0">
-                                        <button class="btn btn-primary py-1 px-2 mr-2" @click="addToSelected">{{ $t('teams.add') }}</button>
+                                        <button class="btn btn-primary py-1 px-2 mr-2" @click="addToSelected(team.id)">{{ $t('teams.add') }}</button>
                                         <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
                                             {{ $t('teams.details') }}
                                         </button>
@@ -96,7 +96,7 @@
                                         </div>
                                     </div>
                                     <div class="flex mt-4 lg:mt-0">
-                                        <button class="btn btn-primary py-1 px-2 mr-2" @click="removeFromSelected">Usuń</button>
+                                        <button class="btn btn-primary py-1 px-2 mr-2" @click="removeFromSelected(team.id)">Usuń</button>
                                         <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
                                             {{ $t('teams.details') }}
                                         </button>
@@ -217,7 +217,7 @@ export default {
         }
 
         const removeFromSelected = (id) => {
-            axios.post('api/teams/remove-from-selected', {team_id: id, type: props.who, object_id: object.id})
+            axios.post('/api/teams/remove-from-selected', {team_id: id, type: props.who, object_id: object.id})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
@@ -230,7 +230,7 @@ export default {
         }
 
         const addToSelected = (id) => {
-            axios.post('api/teams/add-to-selected', {team_id: id, type: props.who, object_id: object.id})
+            axios.post('/api/teams/add-to-selected', {team_id: id, type: props.who, object_id: object.id})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
@@ -336,7 +336,8 @@ export default {
             del,
             teamsObject,
             addToSelected,
-            removeFromSelected
+            removeFromSelected,
+            object
         }
     },
     beforeRouteEnter(to, from, next) {
