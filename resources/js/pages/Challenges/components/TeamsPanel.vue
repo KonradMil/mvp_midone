@@ -217,7 +217,13 @@ export default {
         }
 
         const removeFromSelected = (id) => {
-            axios.post('/api/teams/remove-from-selected', {team_id: id, type: props.who, object_id: object.value.id})
+            let obj = {};
+            if(props.who == 'challenge') {
+                obj = props.challenge;
+            } else {
+                obj = props.solution;
+            }
+            axios.post('/api/teams/remove-from-selected', {team_id: id, type: props.who, object_id: obj.id})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
@@ -230,7 +236,13 @@ export default {
         }
 
         const addToSelected = (id) => {
-            axios.post('/api/teams/add-to-selected', {team_id: id, type: props.who, object_id: object.id})
+             let obj = {};
+            if(props.who == 'challenge') {
+                obj = props.challenge;
+            } else {
+                obj = props.solution;
+            }
+            axios.post('/api/teams/add-to-selected', {team_id: id, type: props.who, object_id: obj.id})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
