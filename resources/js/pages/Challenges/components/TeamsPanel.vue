@@ -113,12 +113,9 @@ export default {
         const temporary_team_id = ref(null);
 
         const teamsObject = computed(() => {
-            if(props.who==='challenge')
-            {
+            if(props.who==='challenge') {
                 return props.challenge.teams;
-            }
-            else
-            {
+            } else {
                 return props.solution.teams;
             }
         });
