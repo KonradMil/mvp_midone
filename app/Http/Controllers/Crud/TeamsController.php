@@ -214,7 +214,7 @@ class TeamsController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Dodano poprawnie.',
-            'payload' => $object->with('teams', 'teams.users', 'teams.users.company')->get()
+            'payload' => $object->with('teams', 'teams.users', 'teams.users.companies')->get()
         ]);
     }
 
