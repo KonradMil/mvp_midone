@@ -49,7 +49,7 @@
                 <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution">Akceptuj rozwiązanie</button>
                 <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution">Odrzuć rozwiązanie</button>
             </div>
-            <div class="mt-2" v-if="canEdit">
+            <div class="mt-2" v-if="canEdit || inTeam">
                 <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: 'studio/solution/' + solution.id});">Edytuj</button>
                 <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution">Usuń</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0" @click="publishSolution">Publikuj</button>
@@ -98,7 +98,7 @@
 
 <script>
 import CommentSection from "./social/CommentSection";
-import {computed, getCurrentInstance, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, ref} from "vue";
 import router from "../router";
 import {useToast} from "vue-toastification";
 import TeamsPanelSolution from "../pages/Challenges/components/TeamsPanel";
@@ -120,7 +120,7 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const activeTab = ref(false);
-
+        const inTeam = ref(false);
         const switchTab = () => {
             console.log('Switch2244444');
             console.log(props.solution + ' its props solution');
@@ -133,6 +133,10 @@ export default {
 
         });
 
+        onMounted(() => {
+            checkTeam();
+        });
+
         const addOffer = () => {
             axios.post('/api/offer/add/new', {solution_id: props.solution.id})
                 .then(response => {
@@ -140,6 +144,20 @@ export default {
                         emitter.emit('selectedSolution', {id: solution.id, offer_id: response.data.payload.id});
                     } else {
                         // toast.error(response.data.message);
+                    }
+                })
+        }
+
+        const checkTeam = () => {
+            console.log({user_id: user.id, challenge_id: solution.value.id});
+            axios.post('/api/solution/check-team', {user_id: user.id, solution_id: solution.value.id})
+                .then(response => {
+                    console.log("response.data")
+                    console.log(response.data)
+                    if (response.data.success) {
+                        inTeam.value = response.data.payload || (user.id == solution.value.author_id);
+                    } else {
+
                     }
                 })
         }
@@ -228,7 +246,8 @@ export default {
             unpublishSolution,
             publishSolution,
             rejectSolution,
-            addOffer
+            addOffer,
+            inTeam
         }
     }
 }
