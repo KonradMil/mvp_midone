@@ -193,28 +193,28 @@
             <!-- BEGIN: Post Info -->
             <div class="col-span-12 lg:col-span-4">
                 <div class="intro-y box p-5">
-                    <div>
-                        <label class="form-label">{{ $t('challengesNew.teamAccess') }}</label>
-                        <TailSelect
-                            id="post-form-5"
-                            v-model="teamsAllowed"
-                            :options="{
-                                locale: 'pl',
-                                placeholder: 'Wybierz zespoły...',
-                                limit: 'Nie można wybrać więcej',
-                                 placeholderMulti: 'Wybierz do :limit zespołów...',
-                search: false,
-                hideSelected: true,
-                hideDisabled: true,
-                multiLimit: 15,
-                multiShowCount: false,
-                multiContainer: true,
-                classNames: 'w-full'
-              }" multiple>
-                            <option selected disabled>{{ $t('challengesNew.selectTags') }}</option>
-                            <option v-for="(team,index) in user.teams" :value="team.id">{{ team.name }}</option>
-                        </TailSelect>
-                    </div>
+<!--                    <div>-->
+<!--                        <label class="form-label">{{ $t('challengesNew.teamAccess') }}</label>-->
+<!--                        <TailSelect-->
+<!--                            id="post-form-5"-->
+<!--                            v-model="teamsAllowed"-->
+<!--                            :options="{-->
+<!--                                locale: 'pl',-->
+<!--                                placeholder: 'Wybierz zespoły...',-->
+<!--                                limit: 'Nie można wybrać więcej',-->
+<!--                                 placeholderMulti: 'Wybierz do :limit zespołów...',-->
+<!--                search: false,-->
+<!--                hideSelected: true,-->
+<!--                hideDisabled: true,-->
+<!--                multiLimit: 15,-->
+<!--                multiShowCount: false,-->
+<!--                multiContainer: true,-->
+<!--                classNames: 'w-full'-->
+<!--              }" multiple>-->
+<!--                            <option selected disabled>{{ $t('challengesNew.selectTags') }}</option>-->
+<!--                            <option v-for="(team,index) in user.teams" :value="team.id">{{ team.name }}</option>-->
+<!--                        </TailSelect>-->
+<!--                    </div>-->
                     <div class="mt-3">
                         <label for="post-form-2" class="form-label">{{ $t('challengesNew.deadlineSolutions') }}</label>
                         <Litepicker
@@ -400,10 +400,10 @@ export default {
         const modalClosed = () => {
             showModal.value = false;
         }
-        const getTeamsRepositories = async () => {
-            teams.value = GetTeams();
-
-        }
+        // const getTeamsRepositories = async () => {
+        //     teams.value = GetTeams();
+        //
+        // }
 
         const handleCallback = (resp) => {
             console.log('RESPPPPPPPP' + resp);
@@ -444,7 +444,7 @@ export default {
                     detail_destination: details.value.select_detail_destination,
                     number_of_lines: details.value.select_number_of_lines,
                     work_shifts: details.value.select_work_shifts,
-                    teams: teamsAllowed.value,
+                    // teams: teamsAllowed.value,
                     tags: tagsSelected.value,
                     images: images.value,
 
@@ -492,7 +492,7 @@ export default {
             if (props.challenge_id != undefined) {
                 id.value = props.challenge_id;
                 getChallengeCardRepositories();
-                getTeamsRepositories();
+                // getTeamsRepositories();
             }
         });
 
@@ -517,7 +517,7 @@ export default {
                         details.value.select_detail_destination = response.data.payload.technical_details.detail_destination;
                         details.value.select_number_of_lines = response.data.payload.technical_details.number_of_lines;
                         details.value.select_work_shifts = response.data.payload.technical_details.work_shifts;
-                        teams.value = response.data.payload.teams;
+                        // teams.value = response.data.payload.teams;
                         // tags: tagsSelected.value,
                         images.value = response.data.payload.files;
 
