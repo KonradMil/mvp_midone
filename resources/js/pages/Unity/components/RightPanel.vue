@@ -25,10 +25,10 @@
                     <AnimableDialog v-if="content == 'animable'" :key="temp_animable_id" v-model:animable="animable"/>
                     <DescriptionDialog v-if="content == 'description'" v-model:object="object" :type="props.type"/>
 <!--                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>-->
-                    <TeamsDialog v-model:teams_unity="teams_unity" :type="props.type" v-if="(content == 'teams' && allowedEdit && (user_teams.length > 0))"></TeamsDialog>
-                    <p v-if="(content == 'teams' && allowedEdit && (user_teams.length > 0))">
-                        Nie możesz edytować zespołów.
-                    </p>
+<!--                    <TeamsDialog v-model:teams_unity="teams_unity" :type="props.type" v-if="(content == 'teams' && allowedEdit && (user_teams.length > 0))"></TeamsDialog>-->
+<!--                    <p v-if="(content == 'teams' && allowedEdit && (user_teams.length > 0))">-->
+<!--                        Nie możesz edytować zespołów.-->
+<!--                    </p>-->
                     <FinancialAnalysisDialog v-if="content == 'financial-analysis'"></FinancialAnalysisDialog>
                     <FinancialDialog v-if="content == 'financial'" v-model:financial_before="financial_before" v-model:financial_after="financial_after" :type="type"></FinancialDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
@@ -37,17 +37,11 @@
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
-                <div
-                    class="modal-footer text-right w-full bottom-0"
-                >
-                    <button
-                        type="button"
-                        data-dismiss="modal"
-                        class="btn btn-outline-secondary w-20 mr-1"
-                    >
+                <div class="modal-footer text-right w-full bottom-0">
+                    <button type="button" data-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1">
                         Anuluj
                     </button>
-                    <button v-if="props.allowedEdit" type="button" class="btn btn-primary w-20" @click="save">
+                    <button v-if="props.allowedEdit && !(content == 'settings' && type == 'solution')" type="button" class="btn btn-primary w-20" @click="save">
                         Zapisz
                     </button>
                 </div>
