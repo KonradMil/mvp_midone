@@ -209,7 +209,7 @@ class TeamsController extends Controller
             $object = Solution::find($input['object_id']);
         }
 
-        $object->teams()->attach($input['id']);
+        $object->teams()->attach($input['team_id']);
 
         return response()->json([
             'success' => true,
@@ -227,7 +227,7 @@ class TeamsController extends Controller
             $object = Solution::find($input['object_id']);
         }
 
-        $object->teams()->detach($input['id']);
+        $object->teams()->detach($input['team_id']);
 
         return response()->json([
             'success' => true,
