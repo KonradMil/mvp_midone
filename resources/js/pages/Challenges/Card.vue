@@ -61,7 +61,7 @@
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5" v-if="(challenge.author_id == user.id)">
                         <a class="flex items-center" href=""
-                           @click.prevent="activeTab = 'zespoly'"
+                           @click.prevent="activeTab = 'teams'"
                            :class="(activeTab == 'teams')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
                             <ActivityIcon class="w-4 h-4 mr-2"/>
                             Zespoły
