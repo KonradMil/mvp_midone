@@ -16,9 +16,12 @@
                     </div>
                     <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addObjectTeam">{{ $t('teams.addTeam') }}</button>
                 </div>
-                <div class="col-span-6">
+                <div class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12">
+                    <h5>
+                        Dostępne zespoły
+                    </h5>
                     <div class="grid grid-cols-12 gap-6 mt-2">
-                        <div v-for="(team, index) in teams" :key="'team_' + index" class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12">
+                        <div v-for="(team, index) in teams" :key="'team_' + index" class="intro-y col-span-12 xl:col-span-12 md:col-span-12 sm:col-span-12">
                             <div class="box">
                                 <div class="flex flex-col lg:flex-row items-center p-5">
                                     <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
@@ -77,7 +80,7 @@
                         Zespoły dodane do rozwiązania
                     </h5>
                     <div class="grid grid-cols-12 gap-6 mt-2">
-                        <div v-for="(team, index) in teamsObject" :key="'team_' + index" class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12">
+                        <div v-for="(team, index) in teamsObject" :key="'team_' + index" class="intro-y col-span-12 xl:col-span-12 md:col-span-12 sm:col-span-12">
                             <div class="box">
                                 <div class="flex flex-col lg:flex-row items-center p-5">
                                     <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
