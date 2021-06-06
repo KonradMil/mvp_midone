@@ -96,7 +96,7 @@
                                         </div>
                                     </div>
                                     <div class="flex mt-4 lg:mt-0">
-                                        <button class="btn btn-primary py-1 px-2 mr-2" @click="removeFromSelected(team.id)">Usuń</button>
+                                        <button class="btn btn-primary py-1 px-2 mr-2" @click="removeFromSelected(team.id, index)">Usuń</button>
                                         <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
                                             {{ $t('teams.details') }}
                                         </button>
@@ -216,7 +216,7 @@ export default {
             temporary_team_id.value = null;
         }
 
-        const removeFromSelected = (id) => {
+        const removeFromSelected = (id, index) => {
             let obj = {};
             if(props.who == 'challenge') {
                 obj = props.challenge;
@@ -227,8 +227,8 @@ export default {
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
-                        toast.error('Rozłączono pomyślnie');
-
+                        toast.success('Rozłączono pomyślnie');
+                        teamsObject.value.splice(index, 1);
                     } else {
                         toast.error('Błąd!');
                     }
@@ -246,7 +246,7 @@ export default {
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
-                        toast.error('Połączono pomyślnie');
+                        toast.success('Połączono pomyślnie');
 
                     } else {
                         toast.error('Błąd!');
