@@ -240,10 +240,10 @@ export default {
                     setTimeout(function () {
                         getTeamsRepositories(search.value);
                         new_team_name.value = '';
-                        modalClosed();
                     }, 1000);
                 toast.success('Success!')
                 isDisabled.value=true;
+
             }
             setTimeout(()=>{
                 isDisabled.value=false;
@@ -262,7 +262,9 @@ export default {
                 await AddTeamMember(new_team_member_email.value, temporary_team_id.value)
                 setTimeout(function () {
                     getTeamsRepositories(search.value);
+                    getInvitesRepositories();
                     new_team_member_email.value = '';
+                    modalClosed();
                 }, 1000);
                 toast.success('Success!')
             }
