@@ -5,22 +5,23 @@
 <script>
 import {ref} from 'vue';
 
-export default function GetInvites() {
+export default function GetInvites(handle) {
     const list = ref(false);
 
-    async function getInvites() {
+    async function getInvites(handle) {
         axios.post('/api/teams/user/invites/get', {})
             .then(response => {
                 if (response.data.success) {
                     // console.log(response.data);
                     list.value = response.data.payload;
+                    handle(response.data);
                 } else {
                     // toast.error(response.data.message);
                 }
             })
     }
 
-    getInvites();
+    getInvites(handle);
 
     return {
         list

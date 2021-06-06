@@ -88,7 +88,10 @@
                 <div class="grid-cols-12 grid">
                     <div class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-2">
                         <div class="mt-5">
-                            <div v-for="(invite, index) in invites.list" :key="'invite_' + index" class="intro-y">
+                            <div v-if="invites.length == 0">
+                                Nie otrzymałeś jeszcze żadnych zaproszeń.
+                            </div>
+                            <div v-for="(invite, index) in invites" :key="'invite_' + index" class="intro-y">
                                 <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
                                     <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                         <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#930f68"/>
@@ -101,6 +104,22 @@
                                     </div>
                                     <div class="py-1 px-2 rounded-full text-xs text-center bg-theme-9 text-white cursor-pointer font-medium" @click="acceptInvite(invite.id)">
                                         {{$t('teams.acceptInvite')}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-for="(invite, index) in invitesSent" :key="'invite_' + index" class="intro-y">
+                                <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
+                                    <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
+                                        <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#930f68"/>
+                                    </div>
+                                    <div class="ml-4 mr-auto">
+                                        <div class="font-medium">{{invite.team.name}}</div>
+                                        <div class="text-gray-600 text-xs mt-0.5">
+                                            Do: {{invite.inviter.name + ' ' + invite.inviter.lastname}}
+                                        </div>
+                                    </div>
+                                    <div class="py-1 px-2 rounded-full text-xs text-center bg-theme-9 text-white cursor-pointer font-medium">
+                                        Wysłano
                                     </div>
                                 </div>
                             </div>
@@ -149,6 +168,7 @@ export default {
         const isDisabled = ref(false);
         const teams = ref([]);
         const invites = ref([]);
+        const invitesSent = ref([]);
         const user = ref({});
         const new_team_name = ref('');
         const new_team_member_email = ref('');
@@ -162,7 +182,10 @@ export default {
         }
 
         const getInvitesRepositories = async () => {
-            invites.value = GetInvites();
+           GetInvites((res) => {
+               invites.value = res.payload;
+               invitesSent.value = res.sent;
+           });
         }
 
         const showAddToTeamModal = (id) => {
@@ -277,7 +300,8 @@ export default {
             acceptInvite,
             showDetails,
             isDisabled,
-            del
+            del,
+            invitesSent
         }
     },
     beforeRouteEnter(to, from, next) {
