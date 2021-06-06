@@ -22,7 +22,7 @@
                         </div>
                         <div v-for="(solution, index) in challenge.solutions" :key="index" v-if="challenge.stage < 2" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected)? 'solution-selected': ''">
                                 <span v-if="user.type == 'integrator'">
-                                    <SingleSolutionPost v-if="(solution.author_id === user.id)" :user="user" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
+                                    <SingleSolutionPost :user="user" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
                                 </span>
                                 <span v-if="user.type == 'investor'">
                                     <SingleSolutionPost v-if="solution.status === 1" :user="user" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
