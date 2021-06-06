@@ -194,7 +194,9 @@ export default {
             }
         });
         const getTeamsRepositories = async () => {
-            teams.value = GetTeams();
+            let l = GetTeams();
+            console.log(l);
+            teams.value = l;
         }
         const showAddToTeamModal = (id) => {
             if (temporary_team_id == null || temporary_team_id === id) {
