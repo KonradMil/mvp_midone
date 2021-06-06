@@ -199,4 +199,40 @@ class TeamsController extends Controller
             'payload' => []
         ]);
     }
+
+    public function addToSelected(Request $request)
+    {
+        $input = $request->input();
+        if($input['type'] == 'challenge') {
+            $object = Challenge::find($input['object_id']);
+        } else if ($input['type'] == 'solution') {
+            $object = Solution::find($input['object_id']);
+        }
+
+        $object->teams()->attach($input['id']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Dodano poprawnie.',
+            'payload' => $object->with('teams', 'teams.user', 'teams.inviter')->get()
+        ]);
+    }
+
+    public function removeFromSelected(Request $request)
+    {
+        $input = $request->input();
+        if($input['type'] == 'challenge') {
+            $object = Challenge::find($input['object_id']);
+        } else if ($input['type'] == 'solution') {
+            $object = Solution::find($input['object_id']);
+        }
+
+        $object->teams()->detach($input['id']);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Rozłączono poprawnie.',
+            'payload' => []
+        ]);
+    }
 }

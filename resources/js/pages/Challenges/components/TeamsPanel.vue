@@ -3,19 +3,19 @@
         <div class="col-span-12">
             <h2 class="intro-y text-lg font-medium mt-5">{{ $t('teams.teams') }}</h2>
             <div class="grid grid-cols-12 gap-6 mt-5">
-                <div
-                    class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2"
-                >
-                    <div class="w-56 relative text-gray-700 dark:text-gray-300 mr-4">
-                        <input
-                            type="text"
-                            class="form-control w-56 box pr-10 placeholder-theme-13"
-                            :placeholder="$t('teams.name')"
-                            v-model="new_team_name"
-                        />
-                    </div>
-                    <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addObjectTeam">{{ $t('teams.addTeam') }}</button>
-                </div>
+<!--                <div-->
+<!--                    class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2"-->
+<!--                >-->
+<!--                    <div class="w-56 relative text-gray-700 dark:text-gray-300 mr-4">-->
+<!--                        <input-->
+<!--                            type="text"-->
+<!--                            class="form-control w-56 box pr-10 placeholder-theme-13"-->
+<!--                            :placeholder="$t('teams.name')"-->
+<!--                            v-model="new_team_name"-->
+<!--                        />-->
+<!--                    </div>-->
+<!--                    <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addObjectTeam">{{ $t('teams.addTeam') }}</button>-->
+<!--                </div>-->
                 <div class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12">
                     <h5>
                         Dostępne zespoły
@@ -37,7 +37,7 @@
                                         </div>
                                     </div>
                                     <div class="flex mt-4 lg:mt-0">
-                                        <button class="btn btn-primary py-1 px-2 mr-2" @click="showAddToTeamModal(team.id)" v-if="team.owner_id === user.id">{{ $t('teams.add') }}</button>
+                                        <button class="btn btn-primary py-1 px-2 mr-2" @click="addToSelected">{{ $t('teams.add') }}</button>
                                         <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
                                             {{ $t('teams.details') }}
                                         </button>
@@ -57,9 +57,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex justify-center items-center" v-if="member.id != user.id">
-                                                    <a :disabled="isDisabled" @click.prevent="del(member.id,team.id, index)" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal">
-                                                        <TrashIcon></TrashIcon>
-                                                        Delete </a>
+<!--                                                    <a :disabled="isDisabled" @click.prevent="del(member.id,team.id, index)" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal">-->
+<!--                                                        <TrashIcon></TrashIcon>-->
+<!--                                                        Delete </a>-->
                                                 </div>
                                                 <div class="font-medium text-gray-700 dark:text-gray-600">
                                                 </div>
@@ -96,7 +96,7 @@
                                         </div>
                                     </div>
                                     <div class="flex mt-4 lg:mt-0">
-                                        <button class="btn btn-primary py-1 px-2 mr-2" @click="showAddToTeamModal(team.id)" v-if="team.owner_id === user.id">{{ $t('teams.add') }}</button>
+                                        <button class="btn btn-primary py-1 px-2 mr-2" @click="removeFromSelected">Usuń</button>
                                         <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
                                             {{ $t('teams.details') }}
                                         </button>
@@ -116,9 +116,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex justify-center items-center" v-if="member.id != user.id">
-                                                    <a :disabled="isDisabled" @click.prevent="del(member.id,team.id, index)" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal">
-                                                        <TrashIcon></TrashIcon>
-                                                        Delete </a>
+<!--                                                    <a :disabled="isDisabled" @click.prevent="del(member.id,team.id, index)" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal">-->
+<!--                                                        <TrashIcon></TrashIcon>-->
+<!--                                                        Delete </a>-->
                                                 </div>
                                                 <div class="font-medium text-gray-700 dark:text-gray-600">
                                                 </div>
@@ -188,6 +188,15 @@ export default {
                 return props.solution.teams;
             }
         });
+
+        const object = computed(() => {
+            if (props.who === 'challenge') {
+                return props.challenge;
+            } else {
+                return props.solution;
+            }
+        });
+
         const getTeamsRepositories = async () => {
             GetTeams('', (res) => {
                 teams.value = res;
@@ -205,6 +214,32 @@ export default {
         const modalClosed = () => {
             show.value = false;
             temporary_team_id.value = null;
+        }
+
+        const removeFromSelected = (id) => {
+            axios.post('api/teams/remove-from-selected', {team_id: id, type: props.who, object_id: object.id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        toast.error('Rozłączono pomyślnie');
+
+                    } else {
+                        toast.error('Błąd!');
+                    }
+                })
+        }
+
+        const addToSelected = (id) => {
+            axios.post('api/teams/add-to-selected', {team_id: id, type: props.who, object_id: object.id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        toast.error('Połączono pomyślnie');
+
+                    } else {
+                        toast.error('Błąd!');
+                    }
+                })
         }
 
         const del = async (member_id, team_id, index) => {
@@ -299,7 +334,9 @@ export default {
             showDetails,
             isDisabled,
             del,
-            teamsObject
+            teamsObject,
+            addToSelected,
+            removeFromSelected
         }
     },
     beforeRouteEnter(to, from, next) {

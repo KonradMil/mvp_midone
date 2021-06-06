@@ -150,6 +150,8 @@ Route::group(['prefix' => 'teams', 'middleware' => 'auth:sanctum'], function () 
     Route::post('user/delete', [TeamsController::class, 'deleteTeam']);
     Route::post('user/member/delete', [TeamsController::class, 'deleteMember']);
     Route::post('user/add/team', [TeamsController::class, 'addObjectTeam']);
+    Route::post('remove-from-selected', [TeamsController::class, 'removeFromSelected']);
+    Route::post('add-to-selected', [TeamsController::class, 'addToSelected']);
 });
 
 Route::post('model/edit/{model}', [ModelController::class, 'editModel']);
