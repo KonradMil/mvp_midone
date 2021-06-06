@@ -210,11 +210,11 @@ class TeamsController extends Controller
         }
 
         $object->teams()->attach($input['team_id']);
-
+        $team = Team::with('users', 'users.companies')->find($input['team_id']);
         return response()->json([
             'success' => true,
             'message' => 'Dodano poprawnie.',
-            'payload' => $object->with('teams', 'teams.users', 'teams.users.companies')->get()
+            'payload' => $team
         ]);
     }
 
