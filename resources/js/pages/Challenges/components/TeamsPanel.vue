@@ -217,7 +217,7 @@ export default {
         }
 
         const removeFromSelected = (id) => {
-            axios.post('/api/teams/remove-from-selected', {team_id: id, type: props.who, object_id: object.id})
+            axios.post('/api/teams/remove-from-selected', {team_id: id, type: props.who, object_id: object.value.id})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
