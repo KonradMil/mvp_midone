@@ -88,7 +88,7 @@
                 <div class="grid-cols-12 grid">
                     <div class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-2">
                         <div class="mt-5">
-                            <div v-if="invites.length == 0">
+                            <div v-if="invites.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
                                 Nie otrzymałeś jeszcze żadnych zaproszeń.
                             </div>
                             <div v-for="(invite, index) in invites" :key="'invite_' + index" class="intro-y">
@@ -107,6 +107,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="divide-x-2"></div>
                             <div v-for="(invite, index) in invitesSent" :key="'invite_' + index" class="intro-y">
                                 <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
                                     <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
@@ -118,7 +119,7 @@
                                             Do: {{invite.inviter.name + ' ' + invite.inviter.lastname}}
                                         </div>
                                     </div>
-                                    <div class="py-1 px-2 rounded-full text-xs text-center bg-theme-9 text-white cursor-pointer font-medium">
+                                    <div class="py-1 px-2 rounded-full text-xs text-center bg-theme-27 text-white cursor-pointer font-medium">
                                         Wysłano
                                     </div>
                                 </div>
