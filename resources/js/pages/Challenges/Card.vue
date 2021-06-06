@@ -36,7 +36,7 @@
                            @click.prevent="activeTab = 'rozwiazania'"
                            :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <LockIcon class="w-4 h-4 mr-2"/>
-                            <div v-if="challenge.selected != undefined">Wybrane rozwiązanie</div><div v-if="challenge.selected == undefined">Rozwiązania</div>
+                            <div v-if="challenge.selected != undefined && challenge.selected != []">Wybrane rozwiązanie</div><div v-if="challenge.selected == undefined">Rozwiązania</div>
                         </a>
                         <a v-if="(challenge.author_id != user.id) && user.type == 'integrator' && challenge.status >= 2"
                             class="flex items-center mt-5" href=""
