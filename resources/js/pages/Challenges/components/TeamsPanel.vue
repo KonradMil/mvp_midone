@@ -247,7 +247,11 @@ export default {
                     // console.log(response.data)
                     if (response.data.success) {
                         toast.success('Połączono pomyślnie');
-
+                        if (props.who === 'challenge') {
+                            props.challenge.teams.push(response.data.payload);
+                        } else {
+                            props.solution.teams.push(response.data.payload);
+                        }
                     } else {
                         toast.error('Błąd!');
                     }

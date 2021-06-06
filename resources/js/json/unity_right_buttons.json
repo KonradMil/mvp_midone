@@ -6,12 +6,6 @@
             "alttext": "",
             "value": 2
         },
-        "teams": {
-            "src": "\/s3/builder_icons/chair_simple.png",
-            "tooltip": "",
-            "alttext": "",
-            "value": 0
-        },
         "settings": {
             "src": "\/s3/builder_icons/dane_simple.png",
             "tooltip": "",
