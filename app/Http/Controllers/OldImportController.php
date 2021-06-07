@@ -15,8 +15,8 @@ class OldImportController extends Controller
         $oldUser = OldUser::get();
         foreach ($oldUser as $old) {
             $user = new User();
-            $l = explode(' ', $user->name);
-            dd($l);
+            $l = explode(' ', $old->name);
+//            dd($l);
             $user->name = $l[0];
             $user->lastname = (isset($l[1]))?$old:'';
             $user->email = $old->email;
