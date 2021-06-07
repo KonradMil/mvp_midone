@@ -62,9 +62,12 @@ export default {
         });
 
         const solutions = computed(() => {
+            console.log(props.challenge.solutions + ' props challenge solution ');
             if (!props.challenge.solutions) {
+                console.log('PUSTE');
                 return [];
             }
+            console.log('coś jest');
             return props.challenge.solutions.filter((solution) => (((user.type === 'integrator') && (user.id === solution.author_id)) || user.type === 'investor'));
         });
 
