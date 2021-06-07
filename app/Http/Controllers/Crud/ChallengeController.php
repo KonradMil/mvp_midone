@@ -415,10 +415,10 @@ class ChallengeController extends Controller
                 $challenge->teams()->detach($team);
             }
         }
-        foreach ($request->teams as $team_id) {
-            $team = Team::find($team_id);
-            $challenge->teams()->attach($team);
-        }
+//        foreach ($request->teams as $team_id) {
+//            $team = Team::find($team_id);
+//            $challenge->teams()->attach($team);
+//        }
 
         if(!isset($request->id)) {
             if($challenge->status == 1) {
