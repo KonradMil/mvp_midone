@@ -33,18 +33,26 @@ class OldImportController extends Controller
 //            $user->save();
 //        }
 
-        $oldTeam = OldTeam::get();
-        foreach ($oldTeam as $oteam) {
-            $tm = new Team();
-            $tm->name = $oteam->name;
-            $uu = OldUser::where('id', '=', $oteam->author_id)->first();
-            if($uu != null) {
-                $u = User::where('email', '=', $uu->email)->first();
+//        $oldTeam = OldTeam::get();
+//        foreach ($oldTeam as $oteam) {
+//            $tm = new Team();
+//            $tm->name = $oteam->name;
+//            $uu = OldUser::where('id', '=', $oteam->author_id)->first();
+//            if($uu != null) {
+//                $u = User::where('email', '=', $uu->email)->first();
+//
+//                $tm->owner_id = $u->id;
+//                $tm->save();
+//            }
+//        }
 
-                $tm->owner_id = $u->id;
-                $tm->save();
+        foreach ($oldUser as $u) {
+            foreach ($u->teams as $t) {
+                $nt = Team::where('name', '=', $t->name)->first();
+                $nu = User::where('email', '=', $u->email)->first();
+                $nu->teams()->attach($nt);
             }
-
         }
+
     }
 }
