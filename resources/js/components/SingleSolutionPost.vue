@@ -149,13 +149,13 @@ export default {
         }
 
         const checkTeam = () => {
-            console.log({user_id: user.id, challenge_id: props.solution.value.id});
-            axios.post('/api/solution/check-team', {user_id: user.id, solution_id: props.solution.value.id})
+            console.log({user_id: user.id, challenge_id: props.solution.id});
+            axios.post('/api/solution/check-team', {user_id: user.id, solution_id: props.solution.id})
                 .then(response => {
                     console.log("response.data")
                     console.log(response.data)
                     if (response.data.success) {
-                        inTeam.value = response.data.payload || (user.id == props.solution.value.author_id);
+                        inTeam.value = response.data.payload || (user.id == props.solution.author_id);
                     } else {
 
                     }
