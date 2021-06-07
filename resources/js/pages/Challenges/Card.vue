@@ -45,7 +45,7 @@
                             <SettingsIcon class="w-4 h-4 mr-2"/>
                             Moje Oferty
                         </a>
-                        <a v-if="(challenge.author_id == user.id) && challenge.stage >= 2"
+                        <a v-if="inTeam && challenge.stage >= 2"
                             class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'all-offers'"
                            :class="(activeTab == 'all-offers')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
