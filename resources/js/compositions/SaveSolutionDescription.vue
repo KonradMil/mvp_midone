@@ -19,7 +19,7 @@ export default function SaveSolutionDescription(data) {
                 if (response.data.success) {
                     // console.log(response.data);
                     list.value = response.data.payload;
-                    toast.success('Zapisano poprawnie!');
+                    toast.success('Zapisano edycje');
                 } else {
                     toast.error('Błąd podczas zapisu!');
                 }

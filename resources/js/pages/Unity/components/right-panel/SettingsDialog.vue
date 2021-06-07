@@ -145,7 +145,7 @@
                     {{ $t('challengesNew.numberSupported') }}
                 </label>
 <!--                <div>{{technical.number_of_lines}}</div>-->
-                <input :disabled="user.type === 'integrator'" class="form-control" :value="technical.number_of_lines" placeholder="1"/>
+                <input :disabled="user.type === 'integrator'" class="form-control" v-model="technical.number_of_lines" :placeholder="technical.number_of_lines"/>
 <!--                <TailSelect-->
 <!--                    id="input-wizard-9"-->
 <!--                    v-model="technical.number_of_lines"-->
