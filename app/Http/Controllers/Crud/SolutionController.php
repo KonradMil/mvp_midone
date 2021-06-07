@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Crud;
 
+use App\Events\SolutionAccepted;
+use App\Events\SolutionPublished;
 use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
 use App\Models\Solutions\Solution;
@@ -54,6 +56,8 @@ class SolutionController extends Controller
         $challenge->save();
         $solution->selected = true;
         $solution->save();
+
+        event(new SolutionAccepted($solution, $challenge->author, 'Rozwiązanie zostało zaakceptowane: ' . $solution->name, []));
 
         return response()->json([
             'success' => true,
@@ -331,6 +335,8 @@ class SolutionController extends Controller
         $solution = Solution::find($request->input('id'));
         $solution->status = 1;
         $solution->save();
+
+        event(new SolutionPublished($solution, $solution->author, 'Nowe rozwiązanie zostało opublikowane: ' . $solution->name, []));
 
         return response()->json([
             'success' => true,

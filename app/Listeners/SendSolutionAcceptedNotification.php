@@ -3,6 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\SolutionAccepted;
+use App\Models\Challenges\Challenge;
+use App\Notifications\SolutionAcceptedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -26,6 +28,8 @@ class SendSolutionAcceptedNotification
      */
     public function handle(SolutionAccepted $event)
     {
-        //
+        $user = $event->subject->author;
+        $challenge = Challenge::find($event->subject->challenge_id);
+        $user->notify(new SolutionAcceptedNotification($challenge, $event->subject));
     }
 }
