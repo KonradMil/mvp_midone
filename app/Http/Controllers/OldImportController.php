@@ -37,7 +37,9 @@ class OldImportController extends Controller
         foreach ($oldTeam as $oteam) {
             $tm = new Team();
             $tm->name = $oteam->name;
-            $tm->owner_id = User::where('email', '=', OldUser::where('id', '=', $oteam->author_id)->first())->first()->id;
+            $uu = OldUser::where('id', '=', $oteam->author_id)->first();
+            $u = User::where('email', '=', $uu->id)->first();
+            $tm->owner_id = $u->id;
             $tm->save();
         }
     }
