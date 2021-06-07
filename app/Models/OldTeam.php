@@ -15,6 +15,6 @@ class OldTeam extends Model
 
     public function users()
     {
-        return $this->belongsTo(OldUser::class);
+        return $this->belongsToMany(OldUser::class, 'dbr_team_users');
     }
 }
