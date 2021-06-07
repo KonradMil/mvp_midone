@@ -25,7 +25,7 @@
                                     <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
                                 </span>
                                 <span v-if="user.type == 'investor'">
-                                    <SingleSolutionPost v-if="solution.status === 1" :challenge="challenge" :user="user" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
+                                    <SingleSolutionPost v-if="solution.status === 1" :challenge="challenge" :user="user" :solution="solution" :canAccept="(inTeam) && challenge.status == 1" :canEdit="false"></SingleSolutionPost>
                                 </span>
                         </div>
                     </div>
@@ -45,7 +45,8 @@ export default {
     name: "SolutionsPanel",
     components: {SingleSolutionPost},
     props: {
-        challenge: Object
+        challenge: Object,
+        inTeam: Boolean
     },
     setup(props) {
         const challenge = computed(() => {

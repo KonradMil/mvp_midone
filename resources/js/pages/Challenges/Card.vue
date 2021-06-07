@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="inTeam">
-                        <button type="button" class="btn btn-primary py-1 px-2" @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
+                        <button type="button" class="btn btn-primary py-1 px-2" v-if="challenge.solutions.length == 0" @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
                             Edytuj
                         </button>
                         <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">
@@ -114,7 +114,7 @@
             <BasicInformationPanel :challenge="challenge" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
             <TechnicalInformationPanel :challenge="challenge" v-if="activeTab == 'techniczne'"></TechnicalInformationPanel>
             <QuestionsPanel v-if="activeTab == 'pytania'" :author_id="challenge.author_id" :id="challenge.id"></QuestionsPanel>
-            <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge"></SolutionsPanel>
+            <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge" :inTeam="inTeam"></SolutionsPanel>
             <TeamsPanel v-if="(activeTab == 'teams') && ((challenge.author_id == user.id) || (solution.author_id == user.id))" :solution="solution" :challenge="challenge" :who="who" ></TeamsPanel>
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :offer_id="temp_offer_id"></OfferAdd>
             <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab"></Offers>
