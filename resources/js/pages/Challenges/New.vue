@@ -412,6 +412,7 @@ export default {
                     isDisabled.value=false;
                 },5000);
             } else {
+                toast.success('Nie udało się zapisać!.');
                 router.push({path: '/studio/challenge/' + resp.id})
             }
         };
