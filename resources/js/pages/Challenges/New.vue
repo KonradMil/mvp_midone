@@ -408,6 +408,7 @@ export default {
             console.log('RESPPPPPPPP' + resp);
             if(id.value != undefined && id.value != null) {
                 toast.success('Zapisano poprawnie.');
+                router.push({path: '/challenges'})
                 setTimeout(()=>{
                     isDisabled.value=false;
                 },5000);
