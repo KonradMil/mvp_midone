@@ -50,10 +50,10 @@
                 <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution">Odrzuć rozwiązanie</button>
             </div>
             <div class="mt-2" v-if="canEdit || inTeam">
-                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: 'studio/solution/' + solution.id});">Edytuj</button>
-                <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution">Usuń</button>
-                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0" @click="publishSolution">Publikuj</button>
-                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1" @click="unpublishSolution">Odpublikuj</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: 'studio/solution/' + solution.id});" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1)">Edytuj</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution" v-if="challenge.stage == 1">Usuń</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0 && challenge.stage == 1" @click="publishSolution">Publikuj</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1)" @click="unpublishSolution">Odpublikuj</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="canEdit" @click="switchTab">Zespoły</button>
             </div>
             <div class="mt-2" v-if="user.type == 'integrator' && challenge.stage == 2">
@@ -117,7 +117,7 @@ export default {
     setup(props,context) {
         const toast = useToast();
         const solution = props.solution;
-        const user = props.user;
+        const user = window.Laravel.user;
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const activeTab = ref(false);
