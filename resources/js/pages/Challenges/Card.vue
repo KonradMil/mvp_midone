@@ -203,7 +203,7 @@ export default defineComponent({
                 if(type == 'activeTab') {
                     activeTab.value = e.name;
                     solution.value = e.solution;
-                    who.value = e.type;
+                    who.value = e.who;
                 }
 
         } );
