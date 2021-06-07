@@ -177,7 +177,10 @@ Route::group(['prefix' => 'offer', 'middleware' => 'auth:sanctum'], function () 
 
 Route::get('test123', function () {
    $oldUser = \App\Models\OldUser::get();
-   $oldTeam = \App\Models\OldTeam::get();
-   dd([$oldTeam, $oldUser]);
+    foreach ($oldUser as $item) {
+        dump($item->teams);
+   }
+//   $oldTeam = \App\Models\OldTeam::get();
+//   dd([$oldTeam, $oldUser]);
 });
 
