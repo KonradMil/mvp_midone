@@ -52,8 +52,8 @@ class SolutionController extends Controller
         $id = $request->input('id');
         $solution = Solution::find($id);
         $challenge = Challenge::find($solution->challenge_id);
-        $challenge->stage = 2;
-        $challenge->save();
+//        $challenge->stage = 2;
+//        $challenge->save();
         $solution->selected = true;
         $solution->save();
 
