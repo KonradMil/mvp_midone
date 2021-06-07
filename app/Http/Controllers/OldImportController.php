@@ -40,7 +40,7 @@ class OldImportController extends Controller
             $uu = OldUser::where('id', '=', $oteam->author_id)->first();
             dump($uu);
             $u = User::where('email', '=', $uu->email)->first();
-            dump($u);
+
             $tm->owner_id = $u->id;
             $tm->save();
         }
