@@ -11,9 +11,9 @@
                 <div class="px-5 py-5">
                     <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
                         <div class="flex items-center">
-                            <div class="border-l-2 border-theme-1 pl-4 my-3">
+                            <div class="pl-4 my-2">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
-                                <div class="ark:text-theme-10 text-theme-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
+                                <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
                             </div>
                         </div>
                         <div class="flex items-center">
