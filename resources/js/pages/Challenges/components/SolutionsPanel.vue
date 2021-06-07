@@ -62,13 +62,10 @@ export default {
         });
 
         const solutions = computed(() => {
-            console.log(props.challenge.solutions + ' props challenge solution ');
-            if (!props.challenge.solutions) {
-                console.log('PUSTE');
+            if (!props.challenge.solutions || !user.value.id) {
                 return [];
             }
-            console.log('coś jest');
-            return props.challenge.solutions.filter((solution) => (((user.type === 'integrator') && (user.id === solution.author_id)) || user.type === 'investor'));
+            return props.challenge.solutions.filter((solution) => (((user.value.type === 'integrator') && (user.value.id === solution.author_id)) || user.value.type === 'investor'));
         });
 
         const addSolution = () => {
