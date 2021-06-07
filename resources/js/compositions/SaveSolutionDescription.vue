@@ -4,6 +4,9 @@
 
 <script>
 import {ref} from 'vue';
+import {useToast} from "vue-toastification";
+
+const toast = useToast();
 
 export default function SaveSolutionDescription(data) {
     const list = ref([]);
@@ -16,8 +19,9 @@ export default function SaveSolutionDescription(data) {
                 if (response.data.success) {
                     // console.log(response.data);
                     list.value = response.data.payload;
+                    toast.success('Zapisano poprawnie!');
                 } else {
-                    // toast.error(response.data.message);
+                    toast.error('Błąd podczas zapisu!');
                 }
             })
     }
