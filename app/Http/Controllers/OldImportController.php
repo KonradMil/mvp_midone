@@ -18,7 +18,7 @@ class OldImportController extends Controller
             $l = explode(' ', $old->name);
 //            dd($l);
             $user->name = $l[0];
-            $user->lastname = (isset($l[1]))?$old:'';
+            $user->lastname = (isset($l[1]))?$l[1]:'';
             $user->email = $old->email;
             if($old->role_id == '912a5b9c-0e16-42fd-9175-55215812f310') {
                 $user->type = 'investor';
