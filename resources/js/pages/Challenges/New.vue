@@ -332,7 +332,7 @@ export default {
     name: "AddChallenge",
     components: {Financials, Details, Multiselect},
     props: {
-        challenge_id: Number
+        challenge_id: Number,
     },
     setup(props) {
         const {t, locale} = useI18n({useScope: 'global'})
@@ -393,7 +393,6 @@ export default {
         const tagss = require("../../json/tagsChallenge.json");
         const sels = require("../../json/challenge.json");
 
-
         provide("bind[dropzoneSingleRef]", el => {
             dropzoneSingleRef.value = el;
         });
@@ -427,7 +426,7 @@ export default {
                 isDisabled.value = true;
             } else {
                 let resp = await SaveChallenge({
-                    id: id.value,
+                    id: props.challenge_id,
                     name: name.value,
                     description: description.value,
                     type: category.value,
@@ -540,6 +539,7 @@ export default {
         }
 
         return {
+            challenge,
             categories,
             category,
             tags,
