@@ -539,7 +539,6 @@ export default {
         }
 
         return {
-            challenge,
             categories,
             category,
             tags,
