@@ -38,7 +38,7 @@
                             <LockIcon class="w-4 h-4 mr-2"/>
                             <div v-if="challenge.selected != undefined && challenge.selected.length != 0">Wybrane rozwiązanie</div><div v-if="challenge.selected == undefined || challenge.selected.length == 0">Rozwiązania</div>
                         </a>
-                        <a v-if="(challenge.author_id != user.id) && user.type == 'integrator' && challenge.status >= 2"
+                        <a v-if="!inTeam && challenge.status >= 2"
                             class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'oferty'"
                            :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
