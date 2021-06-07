@@ -100,12 +100,6 @@
                             @click.prevent="addSolution">
                             Dodaj rozwiązanie
                         </button>
-                        <button v-if="challenge.stage == 2"
-                            @click.prevent="activeTab = 'addingoffer'"
-                            type="button"
-                            class="btn btn-outline-secondary py-1 px-2 ml-auto">
-                            Złóż ofertę
-                        </button>
                     </div>
                 </div>
                 <WhatsNext :user="user" :challenge="challenge"></WhatsNext>

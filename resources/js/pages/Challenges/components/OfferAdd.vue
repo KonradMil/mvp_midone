@@ -7,8 +7,10 @@
                         <label for="input-wizard-1" class="form-label">
                             Cena za dostawę oraz uruchomienie stanowiska (netto)
                         </label>
-                        <input type="number" class="form-control" v-model="price_of_delivery"/>
-                        <div id="input-group-price" class="input-group-text">zł</div>
+                        <div class="input-group">
+                            <input type="number" class="form-control" v-model="price_of_delivery"/>
+                            <div id="input-group-price4" class="input-group-text">zł</div>
+                        </div>
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
                         <label for="input-wizard-2" class="form-label">
@@ -104,7 +106,10 @@
                         <label for="input-wizard-8" class="form-label">
                             Koszt roczny przeglądu gwaranycjnego
                         </label>
-                        <input type="number" class="form-control" v-model="price_of_maintenance"/>
+                        <div class="input-group">
+                            <input type="number" class="form-control" v-model="price_of_maintenance"/>
+                            <div id="input-group-price5" class="input-group-text">zł</div>
+                        </div>
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-9" class="form-label">
@@ -138,15 +143,18 @@
                         <label for="input-wizard-11" class="form-label">
                             Koszt interwencji w wypadku awarii nie podlegającej gwarancji
                         </label>
-                        <input type="number" class="form-control" v-model="intervention_price"/>
+                        <div class="input-group">
+                            <input type="number" class="form-control" v-model="intervention_price"/>
+                            <div id="input-group-price3" class="input-group-text">zł</div>
+                        </div>
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6 mt-2">
                         <label for="input-wizard-12" class="form-label">
                             Koszt roboczo godziny pracy wsparcia / prac rozwojowych
                         </label>
                         <div class="input-group">
-                        <input type="number" class="form-control" v-model="work_hour_price"/>
-                        <div id="input-group-price2" class="input-group-text">zł</div>
+                            <input type="number" class="form-control" v-model="work_hour_price"/>
+                            <div id="input-group-price2" class="input-group-text">zł</div>
                         </div>
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6 mt-2">
@@ -156,7 +164,7 @@
                         <input type="text" class="form-control" v-model="period_of_support"/>
                     </div>
                 </div>
-                <button class="btn btn-primary w-20 mt-3" @click="save">{{$t('profiles.save')}}</button>
+                <button class="btn btn-primary w-20 mt-3" @click="save">{{ $t('profiles.save') }}</button>
             </div>
         </div>
     </div>
@@ -167,7 +175,7 @@ import {getCurrentInstance, onMounted, ref} from "vue";
 import {useToast} from "vue-toastification";
 
 export default {
-name: "OfferAdd",
+    name: "OfferAdd",
     props: {
         solution_id: Number,
         offer_id: Number,
@@ -194,7 +202,7 @@ name: "OfferAdd",
         const toast = useToast();
         const values = require('../../../json/offer_values.json');
 
-        emitter.on('offerSelected', e =>  () => {
+        emitter.on('offerSelected', e => () => {
             getOffer(e.offer_id);
         });
 
@@ -218,45 +226,45 @@ name: "OfferAdd",
                 work_hour_price: work_hour_price.value,
                 period_of_support: period_of_support.value
             }).then(response => {
-                    if (response.data.success) {
-                        console.log(response.data + '-> OFFER SAVE !!');
-                        console.log(advance_upon_delivery.value + '-> delivery');
-                        toast.success(response.data.message);
+                if (response.data.success) {
+                    console.log(response.data + '-> OFFER SAVE !!');
+                    console.log(advance_upon_delivery.value + '-> delivery');
+                    toast.success(response.data.message);
 
-                    } else {
-                        toast.error('Ups! Coś poszło nie tak!');
-                    }
-                })
+                } else {
+                    toast.error('Ups! Coś poszło nie tak!');
+                }
+            })
         }
 
         onMounted(() => {
-           if(props.offer_id != undefined) {
-               getOffer();
-           }
+            if (props.offer_id != undefined) {
+                getOffer();
+            }
         });
 
         const getOffer = (val = 0) => {
             let c = props.offer_id;
-            if(val != 0) {
+            if (val != 0) {
                 c = val;
             }
             axios.post('/api/offers/get', {id: c})
                 .then(response => {
                     if (response.data.success) {
-                            price_of_delivery.value = response.data.payload.price_of_delivery;
-                            weeks_to_start.value = response.data.payload.weeks_to_start;
-                            time_to_start.value = response.data.payload.time_to_start;
-                            time_to_fix.value = response.data.payload.time_to_fix;
-                            advance_upon_start.value = response.data.payload.advance_upon_start;
-                            advance_upon_delivery.value = response.data.payload.advance_upon_delivery;
-                            advance_upon_agreement.value = response.data.payload.advance_upon_agreement;
-                            years_of_guarantee.value = response.data.payload.years_of_guarantee;
-                            maintenance_frequency.value = response.data.payload.maintenance_frequency;
-                            price_of_maintenance.value = response.data.payload.price_of_maintenance;
-                            reaction_time.value = response.data.payload.reaction_time;
-                            intervention_price.value = response.data.payload.intervention_price;
-                            work_hour_price.value = response.data.payload.work_hour_price;
-                            period_of_support.value = response.data.payload.period_of_support;
+                        price_of_delivery.value = response.data.payload.price_of_delivery;
+                        weeks_to_start.value = response.data.payload.weeks_to_start;
+                        time_to_start.value = response.data.payload.time_to_start;
+                        time_to_fix.value = response.data.payload.time_to_fix;
+                        advance_upon_start.value = response.data.payload.advance_upon_start;
+                        advance_upon_delivery.value = response.data.payload.advance_upon_delivery;
+                        advance_upon_agreement.value = response.data.payload.advance_upon_agreement;
+                        years_of_guarantee.value = response.data.payload.years_of_guarantee;
+                        maintenance_frequency.value = response.data.payload.maintenance_frequency;
+                        price_of_maintenance.value = response.data.payload.price_of_maintenance;
+                        reaction_time.value = response.data.payload.reaction_time;
+                        intervention_price.value = response.data.payload.intervention_price;
+                        work_hour_price.value = response.data.payload.work_hour_price;
+                        period_of_support.value = response.data.payload.period_of_support;
                     } else {
                         toast.error('Ups! Coś poszło nie tak!');
                     }
