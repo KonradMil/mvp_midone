@@ -175,7 +175,7 @@ Route::group(['prefix' => 'offer', 'middleware' => 'auth:sanctum'], function () 
     Route::post('add/new', [OfferController::class, 'addOffer']);
 });
 
-Route::post('import-old', [OldImportController::class, 'import']);
+Route::get('import-old', [OldImportController::class, 'import']);
 Route::get('test123', function () {
    $oldUser = \App\Models\OldUser::get();
     foreach ($oldUser as $item) {
