@@ -23,7 +23,7 @@
                     <LayoutDialog v-if="content == 'layout'" :key="temp_layout_id" v-model:layout="layout"/>
                     <LineDialog v-if="content == 'line'" :key="temp_line_id" v-model:modelValue="line"/>
                     <AnimableDialog v-if="content == 'animable'" :key="temp_animable_id" v-model:animable="animable"/>
-                    <DescriptionDialog v-if="content == 'description'" v-model:object="object" :type="type"/>
+                    <DescriptionDialog v-if="content == 'description'" v-model:object="object" :type="props.type"/>
 <!--                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>-->
 <!--                    <TeamsDialog v-model:teams_unity="teams_unity" :type="props.type" v-if="(content == 'teams' && allowedEdit && (user_teams.length > 0))"></TeamsDialog>-->
 <!--                    <p v-if="(content == 'teams' && allowedEdit && (user_teams.length > 0))">-->

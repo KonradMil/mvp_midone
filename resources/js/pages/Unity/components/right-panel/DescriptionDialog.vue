@@ -1,6 +1,6 @@
 <template>
     <div class="flex-initial pl-2">
-        <div class="mt-3" v-if="type !== 'solution'">
+        <div class="mt-3" v-if="props.type != 'solution'">
             <label for="modal-form-3" class="form-label">Solution deadline</label>
             <input
                 id="modal-form-3"
@@ -10,7 +10,7 @@
                 v-model="c.solution_deadline"
             />
         </div>
-        <div class="mt-3" v-if="type !== 'solution'">
+        <div class="mt-3" v-if="props.type != 'solution'">
             <label for="modal-form-4" class="form-label">Offer deadline</label>
             <input
                 id="modal-form-4"
@@ -28,7 +28,6 @@
                 class="form-control"
                 placeholder=""
                 v-model="c.name"
-                :disabled="(type==='solution' && user.type==='investor')"
             />
         </div>
         <div class="mt-3">
@@ -37,7 +36,6 @@
                 id="modal-form-2"
                 class="form-control"
                 v-model="c.description"
-                :disabled="(type==='solution' && user.type==='investor')"
             />
         </div>
     </div>
