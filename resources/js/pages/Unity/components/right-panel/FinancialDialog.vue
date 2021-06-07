@@ -23,7 +23,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.days')}}
                                 </label>
-                                <input v-if="financial_after!=undefined" type="number" v-model="financial_after.days" class="form-control" placeholder="260,00" :aria-label="$t('challengesNew.numberSupported')" />
+                                <input v-if="(financial_after!=undefined) " type="number" v-model="financial_after.days" class="form-control" placeholder="260,00" :aria-label="$t('challengesNew.numberSupported')" :disabled="user.type=='investor'"/>
                                 <input v-if="financial_after==undefined" type="number" class="form-control" placeholder="260,00" :aria-label="$t('challengesNew.numberSupported')" />
                             </td>
                         </tr>
@@ -39,7 +39,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.shifts')}}
                                 </label>
-                                <input v-if="financial_after!=undefined"  type="number"  v-model="financial_after.shifts" class="form-control" placeholder="30,00" :aria-label="$t('challengesNew.numberSupported')" />
+                                <input v-if="financial_after!=undefined"  type="number"  v-model="financial_after.shifts" class="form-control" placeholder="30,00" :aria-label="$t('challengesNew.numberSupported')" :disabled="user.type=='investor'" />
                                 <input v-if="financial_after ==undefined"  type="number"  class="form-control" placeholder="30,00" :aria-label="$t('challengesNew.numberSupported')" />
                             </td>
                         </tr>
@@ -228,13 +228,15 @@ export default {
         type: String
     },
     setup(props) {
+        const user = window.Laravel.user;
+
         console.log('Financial.ID!!!!' + props.financial_before.id);
         onMounted(() => {
 
         });
 
         return {
-
+            user
         }
     }
 }
