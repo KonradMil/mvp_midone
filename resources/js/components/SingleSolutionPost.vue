@@ -54,9 +54,9 @@
                 <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution">Usuń</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0" @click="publishSolution">Publikuj</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1" @click="unpublishSolution">Odpublikuj</button>
-                <button class="btn btn-primary shadow-md mr-2" @click="switchTab">Zespoły</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="canEdit" @click="switchTab">Zespoły</button>
             </div>
-            <div class="mt-2">
+            <div class="mt-2" v-if="user.type == 'integrator' && challenge.stage == 2">
                 <button class="btn btn-primary shadow-md mr-2" @click="addOffer">Dodaj ofertę</button>
             </div>
         </div>
@@ -107,6 +107,7 @@ export default {
     name: "SingleSolutionPost",
     components: {CommentSection, TeamsPanelSolution},
     props: {
+        challenge: Object,
         user: Object,
         solution: Object,
         canAccept: Boolean,
