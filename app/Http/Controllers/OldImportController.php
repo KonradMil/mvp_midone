@@ -38,11 +38,13 @@ class OldImportController extends Controller
             $tm = new Team();
             $tm->name = $oteam->name;
             $uu = OldUser::where('id', '=', $oteam->author_id)->first();
-            dump($uu);
-            $u = User::where('email', '=', $uu->email)->first();
+            if($uu != null) {
+                $u = User::where('email', '=', $uu->email)->first();
 
-            $tm->owner_id = $u->id;
-            $tm->save();
+                $tm->owner_id = $u->id;
+                $tm->save();
+            }
+
         }
     }
 }
