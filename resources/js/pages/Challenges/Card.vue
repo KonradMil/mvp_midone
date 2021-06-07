@@ -160,7 +160,7 @@ export default defineComponent({
         const questions = ref({});
         const temp_offer_id = ref(null);
         const activeTab = ref('podstawowe');
-        const user = ref({});
+        const user = window.Laravel.user;
         const selected_solution_id = ref(null);
         const types = require("../../json/types.json");
         const who = ref('challenge');
@@ -179,6 +179,9 @@ export default defineComponent({
                     console.log("response.data")
                     console.log(response.data)
                     if (response.data.success) {
+                        console.log("user.id");
+                        console.log(user.id);
+                        console.log(challenge.value.author_id);
                         inTeam.value = response.data.payload || (user.id == challenge.value.author_id);
                     } else {
 
@@ -225,9 +228,7 @@ export default defineComponent({
         onMounted(function () {
             console.log(props);
             getCardChallengeRepositories(props.id);
-            if (window.Laravel.user) {
-                user.value = window.Laravel.user;
-            }
+
         })
 
 
