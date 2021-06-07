@@ -12,6 +12,7 @@ use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\KnowledgebaseController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\OldImportController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WorkshopController;
 use Illuminate\Http\Request;
@@ -174,7 +175,7 @@ Route::group(['prefix' => 'offer', 'middleware' => 'auth:sanctum'], function () 
     Route::post('add/new', [OfferController::class, 'addOffer']);
 });
 
-
+Route::post('import-old', [OldImportController::class, 'import']);
 Route::get('test123', function () {
    $oldUser = \App\Models\OldUser::get();
     foreach ($oldUser as $item) {
