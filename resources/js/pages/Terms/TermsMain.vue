@@ -40,7 +40,7 @@ import PriceListContent from "./components/PriceListContent";
 import cash from "cash-dom";
 import {onMounted} from "vue";
 
-export default {
+export default  {
     name: "TermsMain",
     components: {
         PriceListContent,
@@ -57,7 +57,6 @@ export default {
         onMounted(() => {
             cash("body")
                 .removeClass("error-page")
-                .removeClass("login")
         });
         return {
             props

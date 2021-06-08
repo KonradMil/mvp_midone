@@ -60,7 +60,7 @@ app.use(lazyPlugin, {
 })
 router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
-    const publicPages = ['/login', '/register'];
+    const publicPages = ['/login', '/register', '/terms/terms-of-service', '/terms/privacy-policy'];
     const authRequired = !publicPages.includes(to.path);
     console.log(to.path);
     console.log(store.state.login.isLoggedIn);
