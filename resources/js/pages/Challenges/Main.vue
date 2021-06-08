@@ -56,7 +56,7 @@
                             <div class="w-full" v-if="challenge.stage == 2">Oferty do: {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY')  }}</div>
                         </div>
                     </div>
-                    <div class="dropdown ml-3"  v-if="challenge.author_id == user.id">
+                    <div class="dropdown ml-3"  v-if="challenge.author_id == user.id && challenge.status != 1">
                         <a
                             href="javascript:;"
                             class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300"
@@ -64,7 +64,7 @@
                             <MoreVerticalIcon class="w-5 h-5"/>
                         </a>
                         <div class="dropdown-menu w-40">
-                            <div class="dropdown-menu__content box dark:bg-dark-1 p-2" v-if="challenge.status != 1">
+                            <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
                                 <a href="" @click.prevent="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});"
                                     class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                                     <Edit2Icon class="w-4 h-4 mr-2"/>
