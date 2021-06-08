@@ -1,5 +1,5 @@
 <template>
-    <TopButtons :allowedEdit="allowedEdit && (readOnly != false)" :icons="topIcons"></TopButtons>
+    <TopButtons :allowedEdit="allowedEdit && (challenge.published != 1)" :icons="topIcons"></TopButtons>
     <LeftButtons :icons="leftIcons" v-if="mode == 'edit' && allowedEdit"></LeftButtons>
     <LeftPanel></LeftPanel>
     <div @contextmenu.prevent="openMenu">
