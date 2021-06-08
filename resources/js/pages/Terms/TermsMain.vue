@@ -57,7 +57,6 @@ export default {
         onMounted(() => {
             cash("body")
                 .removeClass("error-page")
-                .removeClass("login")
         });
         return {
             props

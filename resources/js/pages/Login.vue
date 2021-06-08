@@ -89,7 +89,7 @@
                                 {{$t('login.pol2')}}
                             </a>
                             &
-                            <a class="text-theme-1 dark:text-theme-10" href="" @click.prevent="$router.push({path: '/terms/privacy-policy'})" target="_blank">
+                            <a class="text-theme-1 dark:text-theme-10" href="/terms/privacy-policy" @click.prevent="$router.push({path: '/terms/privacy-policy'})">
                                 {{$t('login.pol3')}}
                             </a>
                         </div>
