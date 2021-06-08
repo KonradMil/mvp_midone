@@ -1,6 +1,6 @@
 <template>
     <div  :class="(solution.selected == 1)? 'selected-solution': '' ">
-        <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
+        <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4" :class="(solution.rejected == 1)? 'rejected-solution': '' ">
             <div class="w-10 h-10 flex-none image-fit">
                 <img
                     alt="Icewall Tailwind HTML Admin Template"
