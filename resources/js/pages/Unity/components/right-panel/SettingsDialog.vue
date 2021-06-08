@@ -15,7 +15,7 @@
                     <option selected disabled>Wybierz...</option>
                     <option v-for="(det,index) in sels.select_detail_weight"
                             :value="det.value"
-                            :disabled="user.type === 'integrator'">
+                            :disabled="((user.type === 'integrator') || ((type==='solution') && (user.type==='investor')))">
                         {{ det.name }}
                     </option>
                 </TailSelect>
@@ -31,7 +31,7 @@
                     <option selected disabled>Wybierz...</option>
                     <option v-for="(det,index) in sels.select_pick_quality"
                             :value="det.value"
-                            :disabled="user.type === 'integrator'">
+                            :disabled="((user.type === 'integrator') || ((type==='solution') && (user.type==='investor')))">
                         {{ det.name }}
                     </option>
                 </TailSelect>
@@ -47,7 +47,7 @@
                     <option
                         v-for="(det,index) in sels.select_detail_material"
                         :value="det.value"
-                        :disabled="user.type === 'integrator'">
+                        :disabled="((user.type === 'integrator') || ((type==='solution') && (user.type==='investor')))">
                         {{ det.name }}
                     </option>
                 </TailSelect>
@@ -62,7 +62,7 @@
                     <option selected disabled>{{ $t('challengesNew.select') }}</option>
                     <option v-for="(det,index) in sels.select_detail_size"
                             :value="det.value"
-                            :disabled="user.type === 'integrator'">
+                            :disabled="((user.type === 'integrator') || ((type==='solution') && (user.type==='investor')))">
                         {{ det.name }}
                     </option>
                 </TailSelect>
@@ -80,7 +80,7 @@
                     <option selected disabled> {{ $t('challengesNew.select') }}</option>
                     <option v-for="(det,index) in sels.select_detail_pick"
                             :value="det.value"
-                            :disabled="user.type === 'integrator'">
+                            :disabled="((user.type === 'integrator') || ((type==='solution') && (user.type==='investor')))">
                         {{ det.name }}
                     </option>
                 </TailSelect>
@@ -97,7 +97,7 @@
                 >
                     <option selected disabled> {{ $t('challengesNew.select') }}</option>
                     <option
-                        :disabled="user.type === 'integrator'"
+                        :disabled="((user.type === 'integrator') || ((type==='solution') && (user.type==='investor')))"
                         v-for="(det,index) in sels.select_detail_position"
                         :value="det.value">{{ det.name }}
                     </option>
@@ -115,7 +115,7 @@
                     <option selected disabled> {{ $t('challengesNew.select') }}</option>
 
                     <option v-for="(det,index) in sels.select_detail_range"
-                            :disabled="user.type === 'integrator'"
+                            :disabled="((user.type === 'integrator') || ((type==='solution') && (user.type==='investor')))"
                             :value="det.value">{{ det.name }}
                     </option>
 
@@ -133,7 +133,7 @@
                 >
                     <option selected disabled> {{ $t('challengesNew.select') }}</option>
                     <option
-                        :disabled="user.type === 'integrator'"
+                        :disabled="((user.type === 'integrator') || ((type==='solution') && (user.type==='investor')))"
                         v-for="(det,index) in sels.select_detail_destination"
                         :value="det.value">
                         {{ det.name }}
@@ -145,7 +145,7 @@
                     {{ $t('challengesNew.numberSupported') }}
                 </label>
 <!--                <div>{{technical.number_of_lines}}</div>-->
-                <input :disabled="user.type === 'integrator'" class="form-control" :value="technical.number_of_lines" placeholder="1"/>
+                <input :disabled="((user.type === 'integrator') || ((type==='solution') && (user.type==='investor')))" class="form-control" v-model="technical.number_of_lines" :placeholder="technical.number_of_lines"/>
 <!--                <TailSelect-->
 <!--                    id="input-wizard-9"-->
 <!--                    v-model="technical.number_of_lines"-->
@@ -169,7 +169,7 @@
                 >
                     <option selected disabled>{{ $t('challengesNew.select') }}</option>
                     <option
-                        :disabled="user.type === 'integrator'"
+                        :disabled="((user.type === 'integrator') || ((type==='solution') && (user.type==='investor')))"
                         v-for="(det,index) in sels.select_work_shifts"
                         :value="det.value">{{ det.name }}
                     </option>
@@ -188,6 +188,7 @@ export default {
     // components: {Multiselect},
     props: {
         technical: Object,
+        type: String
     },
     setup(props) {
         const user = window.Laravel.user;

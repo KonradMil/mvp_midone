@@ -43,7 +43,7 @@ export default defineComponent({
         const emitter = app.appContext.config.globalProperties.emitter;
 
         const del = async (id) => {
-            axios.post('api/user/comment/delete', {id: id})
+            axios.post('/api/user/comment/delete', {id: id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success(response.data.message);

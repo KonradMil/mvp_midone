@@ -17,14 +17,14 @@
                         </div>
                     </div>
                     <div class="intro-y grid grid-cols-12 gap-6 mt-5">
-                        <div v-if="challenge.stage >= 2" v-for="(solution, index) in challenge.selected" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box solution-selected">
-                            <SingleSolutionPost  :challenge="challenge" :user="user" :key="'selected_' + index" :solution="solution" :canAccept="false" :canEdit="false"></SingleSolutionPost>
-                        </div>
-                        <div v-for="(solution, index) in challenge.solutions" :key="index" v-if="challenge.stage < 2" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected)? 'solution-selected': ''">
-                                <span v-if="user.type == 'integrator'">
+<!--                        <div v-if="challenge.stage >= 2" v-for="(solution, index) in challenge.selected" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box solution-selected">-->
+<!--                            <SingleSolutionPost  :challenge="challenge" :user="user" :key="'selected_' + index" :solution="solution" :canAccept="false" :canEdit="false"></SingleSolutionPost>-->
+<!--                        </div>-->
+                        <div v-for="(solution, index) in solutions" :key="index" v-if="challenge.stage < 2" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected)? 'solution-selected': ''">
+                                <span v-if="((user.type === 'integrator') && (user.id === solution.author_id))">
                                     <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
                                 </span>
-                                <span v-if="user.type == 'investor'">
+                                <span v-if="user.type === 'investor'">
                                     <SingleSolutionPost v-if="solution.status === 1" :challenge="challenge" :user="user" :solution="solution" :canAccept="(inTeam) && challenge.status == 1" :canEdit="false"></SingleSolutionPost>
                                 </span>
                         </div>
@@ -55,11 +55,17 @@ export default {
         const toast = useToast();
         const types = require("../../../json/types.json");
         const user = ref({});
-
         onMounted(function () {
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
+        });
+
+        const solutions = computed(() => {
+            if (!props.challenge.solutions || !user.value.id) {
+                return [];
+            }
+            return props.challenge.solutions.filter((solution) => (((user.value.type === 'integrator') && (user.value.id === solution.author_id)) || user.value.type === 'investor'));
         });
 
         const addSolution = () => {
@@ -121,6 +127,7 @@ export default {
                 })
         }
         return {
+            solutions,
             challenge,
             types,
             follow,

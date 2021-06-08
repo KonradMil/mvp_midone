@@ -23,7 +23,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.days')}}
                                 </label>
-                                <input v-if="financial_after!=undefined" type="number" v-model="financial_after.days" class="form-control" placeholder="260,00" :aria-label="$t('challengesNew.numberSupported')" />
+                                <input v-if="(financial_after!=undefined) " type="number" v-model="financial_after.days" class="form-control" placeholder="260,00" :aria-label="$t('challengesNew.numberSupported')" :disabled="user.type=='investor'"/>
                                 <input v-if="financial_after==undefined" type="number" class="form-control" placeholder="260,00" :aria-label="$t('challengesNew.numberSupported')" />
                             </td>
                         </tr>
@@ -39,7 +39,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.shifts')}}
                                 </label>
-                                <input v-if="financial_after!=undefined"  type="number"  v-model="financial_after.shifts" class="form-control" placeholder="30,00" :aria-label="$t('challengesNew.numberSupported')" />
+                                <input v-if="financial_after!=undefined"  type="number"  v-model="financial_after.shifts" class="form-control" placeholder="30,00" :aria-label="$t('challengesNew.numberSupported')" :disabled="user.type=='investor'" />
                                 <input v-if="financial_after ==undefined"  type="number"  class="form-control" placeholder="30,00" :aria-label="$t('challengesNew.numberSupported')" />
                             </td>
                         </tr>
@@ -55,7 +55,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.shift_time')}}
                                 </label>
-                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.shift_time" class="form-control" placeholder="8,00" :aria-label="$t('challengesNew.numberSupported')"/>
+                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.shift_time" class="form-control" placeholder="8,00" :aria-label="$t('challengesNew.numberSupported')" :disabled="user.type=='investor'"/>
                                 <input v-if="financial_after==undefined" type="number"  class="form-control" placeholder="8,00" :aria-label="$t('challengesNew.numberSupported')"/>
                             </td>
                         </tr>
@@ -71,7 +71,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.weekend_shift')}}
                                 </label>
-                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.weekend_shift" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
+                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.weekend_shift" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" :disabled="user.type=='investor'" />
                                 <input v-if="financial_after==undefined" type="number" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
                             </td>
                         </tr>
@@ -87,7 +87,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.breakfast')}}
                                 </label>
-                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.breakfast" class="form-control" placeholder="30,00" :aria-label="$t('challengesNew.numberSupported')"/>
+                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.breakfast" class="form-control" placeholder="30,00" :aria-label="$t('challengesNew.numberSupported')" :disabled="user.type=='investor'"/>
                                 <input v-if="financial_after==undefined" type="number"  class="form-control" placeholder="30,00" :aria-label="$t('challengesNew.numberSupported')"/>
                             </td>
                         </tr>
@@ -103,7 +103,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.stop_time')}}
                                 </label>
-                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.stop_time" class="form-control" placeholder="20,00" :aria-label="$t('challengesNew.numberSupported')" />
+                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.stop_time" class="form-control" placeholder="20,00" :aria-label="$t('challengesNew.numberSupported')" :disabled="user.type=='investor'"/>
                                 <input v-if="financial_after==undefined" type="number" class="form-control" placeholder="20,00" :aria-label="$t('challengesNew.numberSupported')" />
                             </td>
                         </tr>
@@ -119,7 +119,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.operator_performance')}}
                                 </label>
-                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.operator_performance" class="form-control" placeholder="90,00" :aria-label="$t('challengesNew.numberSupported')" />
+                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.operator_performance" class="form-control" placeholder="90,00" :aria-label="$t('challengesNew.numberSupported')" :disabled="user.type=='investor'"/>
                                 <input v-if="financial_after==undefined" type="number" class="form-control" placeholder="90,00" :aria-label="$t('challengesNew.numberSupported')" />
                             </td>
                         </tr>
@@ -135,7 +135,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.defective')}}
                                 </label>
-                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.defective" class="form-control" placeholder="5,00" :aria-label="$t('challengesNew.numberSupported')" />
+                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.defective" class="form-control" placeholder="5,00" :aria-label="$t('challengesNew.numberSupported')" :disabled="user.type=='investor'"/>
                                 <input v-if="financial_after==undefined"  type="number" class="form-control" placeholder="5,00" :aria-label="$t('challengesNew.numberSupported')" />
                             </td>
                         </tr>
@@ -151,7 +151,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.number_of_operators')}}
                                 </label>
-                                <input v-if="financial_after!=undefined" type="number" v-model="financial_after.number_of_operators" class="form-control" placeholder="2,00" :aria-label="$t('challengesNew.numberSupported')" />
+                                <input v-if="financial_after!=undefined" type="number" v-model="financial_after.number_of_operators" class="form-control" placeholder="2,00" :aria-label="$t('challengesNew.numberSupported')" :disabled="user.type=='investor'"/>
                                 <input v-if="financial_after==undefined" type="number" class="form-control" placeholder="2,00" :aria-label="$t('challengesNew.numberSupported')" />
                             </td>
                         </tr><tr class="hover:bg-gray-200">
@@ -166,7 +166,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.operator_cost')}}
                                 </label>
-                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.operator_cost" class="form-control" placeholder="4500,00" :aria-label="$t('challengesNew.numberSupported')" />
+                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.operator_cost" class="form-control" placeholder="4500,00" :aria-label="$t('challengesNew.numberSupported')" :disabled="user.type=='investor'"/>
                                 <input v-if="financial_after==undefined" type="number"   class="form-control" placeholder="4500,00" :aria-label="$t('challengesNew.numberSupported')" />
                             </td>
                         </tr><tr class="hover:bg-gray-200">
@@ -181,7 +181,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.absence')}}
                                 </label>
-                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.absence" class="form-control" placeholder="12,00" :aria-label="$t('challengesNew.numberSupported')" />
+                                <input v-if="financial_after!=undefined" type="number"  v-model="financial_after.absence" class="form-control" placeholder="12,00" :aria-label="$t('challengesNew.numberSupported')" :disabled="user.type=='investor'"/>
                                 <input v-if="financial_after==undefined" type="number"  class="form-control" placeholder="12,00" :aria-label="$t('challengesNew.numberSupported')" />
                             </td>
                         </tr><tr class="hover:bg-gray-200">
@@ -196,7 +196,7 @@
                                 <label for="input-wizard-9" class="form-label">
                                     {{$t('challengesNew.cycle_time')}}
                                 </label>
-                                <input v-if="financial_after!=undefined" type="number" v-model="financial_after.cycle_time" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
+                                <input v-if="financial_after!=undefined" type="number" v-model="financial_after.cycle_time" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" :disabled="user.type=='investor'"/>
                                 <input v-if="financial_after==undefined" type="number"  class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
                             </td>
                         </tr>
@@ -228,13 +228,15 @@ export default {
         type: String
     },
     setup(props) {
+        const user = window.Laravel.user;
+
         console.log('Financial.ID!!!!' + props.financial_before.id);
         onMounted(() => {
 
         });
 
         return {
-
+            user
         }
     }
 }

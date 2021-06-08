@@ -19,9 +19,7 @@ export default function SaveChallenge(data, handle) {
                     // console.log(response.data);
                     list.value = response.data.payload;
                     handle(response.data.payload);
-                    toast.success(response.data.message)
                 } else {
-                    toast.error(response.data.message);
                 }
             })
     }
