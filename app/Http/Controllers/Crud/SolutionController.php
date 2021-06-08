@@ -39,6 +39,7 @@ class SolutionController extends Controller
         $id = $request->input('id');
         $solution = Solution::find($id);
         $solution->rejected = true;
+        $solution->accepted = false;
         $solution->save();
 
         return response()->json([
