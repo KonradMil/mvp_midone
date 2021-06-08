@@ -414,18 +414,16 @@ export default {
                 },5000);
             } else {
                 toast.success('Nie udało się zapisać!.');
+                isDisabled.value=false;
                 router.push({path: '/studio/challenge/' + resp.id})
             }
         };
 
         const saveChallengeRepo = async () => {
             if (name.value == undefined || name.value == '') {
-                isDisabled.value = true;
                 toast.error("Nazwa jest wymagana.");
-
             } else if (category.value == undefined || category.value == null) {
                 toast.error("Typ stanowiska jest wymagany");
-                isDisabled.value = true;
             } else {
                 let resp = await SaveChallenge({
                     id: props.challenge_id,

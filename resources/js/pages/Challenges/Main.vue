@@ -64,7 +64,7 @@
                             <MoreVerticalIcon class="w-5 h-5"/>
                         </a>
                         <div class="dropdown-menu w-40">
-                            <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                            <div class="dropdown-menu__content box dark:bg-dark-1 p-2" v-if="challenge.published != 1">
                                 <a href="" @click.prevent="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});"
                                     class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                                     <Edit2Icon class="w-4 h-4 mr-2"/>
