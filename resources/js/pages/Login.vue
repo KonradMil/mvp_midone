@@ -5,7 +5,7 @@
             <div class="block xl:grid grid-cols-2 gap-4">
                 <!-- BEGIN: Login Info -->
                 <div class="hidden xl:flex flex-col min-h-screen">
-                    <a href="" class="-intro-x flex items-center pt-5">
+                    <a target="_blank" href="" class="-intro-x flex items-center pt-5">
                         <img
                             alt="DBR77 Platforma Robotów "
                             class="w-2/4"
