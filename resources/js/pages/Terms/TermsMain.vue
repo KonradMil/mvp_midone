@@ -54,10 +54,10 @@ export default {
         page: String
     },
     setup(props) {
-        onMounted(() => {
-            cash("body")
-                .removeClass("error-page")
-        });
+        // onMounted(() => {
+        //     cash("body")
+        //         .removeClass("error-page")
+        // });
         return {
             props
         }
