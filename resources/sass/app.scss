@@ -150,6 +150,9 @@
 @import "components/ads-box";
 @import "components/full-calendar";
 @import "components/pristine";
+.rejected-solution {
+    opacity: 0.8;
+}
 .bot-i {
     pointer-events: auto !important;
 }

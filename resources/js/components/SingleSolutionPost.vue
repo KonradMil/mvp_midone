@@ -1,6 +1,6 @@
 <template>
     <div  :class="(solution.selected == 1)? 'selected-solution': '' ">
-        <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
+        <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4" :class="(solution.rejected == 1)? 'rejected-solution': '' ">
             <div class="w-10 h-10 flex-none image-fit">
                 <img
                     alt="Icewall Tailwind HTML Admin Template"
@@ -46,8 +46,8 @@
                 {{ solution.description }}
             </div>
             <div class="mt-2" v-if="canAccept">
-                <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution">Akceptuj rozwiązanie</button>
-                <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution">Odrzuć rozwiązanie</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1">Akceptuj rozwiązanie</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1">Odrzuć rozwiązanie</button>
             </div>
             <div class="mt-2" v-if="canEdit || inTeam">
                 <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: '/studio/solution/' + solution.id});" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1)">Edytuj</button>

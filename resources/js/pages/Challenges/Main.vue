@@ -56,7 +56,7 @@
                             <div class="w-full" v-if="challenge.stage == 2">Oferty do: {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY')  }}</div>
                         </div>
                     </div>
-                    <div class="dropdown ml-3"  v-if="challenge.author_id == user.id">
+                    <div class="dropdown ml-3"  v-if="challenge.author_id == user.id && challenge.status != 1">
                         <a
                             href="javascript:;"
                             class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300"

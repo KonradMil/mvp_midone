@@ -1,5 +1,5 @@
 <template>
-    <TopButtons :allowedEdit="allowedEdit" :icons="topIcons"></TopButtons>
+    <TopButtons :allowedEdit="allowedEdit && (challenge.status != 1)" :icons="topIcons"></TopButtons>
     <LeftButtons :icons="leftIcons" v-if="mode == 'edit' && allowedEdit"></LeftButtons>
     <LeftPanel></LeftPanel>
     <div @contextmenu.prevent="openMenu">
@@ -114,7 +114,11 @@ export default {
     name: "Main",
     props: {
         type: String,
-        id: Number
+        id: Number,
+        readOnly: {
+            default: false,
+            type: Boolean
+        }
     },
     components: {RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
     setup(props, {emit}) {
