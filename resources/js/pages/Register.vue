@@ -193,7 +193,7 @@
                             >
                                 Akceptuję
                             </label>
-                            <a href="/terms/terms-of-service" class="text-theme-1 dark:text-theme-10 ml-1 cursor-pointer"
+                            <a href="/terms/price-list" class="text-theme-1 dark:text-theme-10 ml-1 cursor-pointer"
                                  @click.prevent="$router.push({path: '/terms/price-list'})"> cennik usług</a>.
                         </div>
                         <template v-if="validate.rodo2.$error">
