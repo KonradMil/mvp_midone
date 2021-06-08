@@ -56,7 +56,7 @@
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1)" @click="unpublishSolution">Odpublikuj</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="canEdit" @click="switchTab">Zespoły</button>
             </div>
-            <div class="mt-2" v-if="user.type == 'integrator' && challenge.stage == 2">
+            <div class="mt-2" v-if="user.type == 'integrator' && solution.selected == 1">
                 <button class="btn btn-primary shadow-md mr-2" @click="addOffer">Dodaj ofertę</button>
             </div>
         </div>
