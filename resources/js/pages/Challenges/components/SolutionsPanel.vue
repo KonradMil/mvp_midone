@@ -76,13 +76,10 @@ export default {
                         console.log('Changeeeee');
                         return true;
                     }
-                    else if(guard.value !== true)
-                    {
-                        console.log('Noo Changeeeee');
-                        return false;
-                    }
                 })
-            })
+            });
+            console.log('Noo Changeeeee');
+            return false;
         }
 
         // const checkMember = async(id) => {
@@ -105,7 +102,9 @@ export default {
             if (!props.challenge.solutions || !user.value.id) {
                 return [];
             }
-
+            console.log('dasdasdsada');
+            console.log(((user.value.type === 'integrator') && (checkMemberTeam(solution) === true)));
+            console.log((user.value.id === solution.author_id));
             return props.challenge.solutions.filter((solution) =>
                 (((user.value.type === 'integrator') && (checkMemberTeam(solution) === true)) || (user.value.id === solution.author_id)));
         });
