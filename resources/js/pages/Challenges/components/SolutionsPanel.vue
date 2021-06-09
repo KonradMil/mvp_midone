@@ -21,7 +21,7 @@
 <!--                            <SingleSolutionPost  :challenge="challenge" :user="user" :key="'selected_' + index" :solution="solution" :canAccept="false" :canEdit="false"></SingleSolutionPost>-->
 <!--                        </div>-->
                         <div v-for="(solution, index) in solutions" :key="index" v-if="challenge.stage < 2" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected)? 'solution-selected': ''">
-                                <span v-if="((user.type === 'integrator') && ((user.id === solution.author_id) || (checkMember(solution.id))))">
+                                <span v-if="((user.type === 'integrator') && ((user.id === solution.author_id) || (checkMemberTeam(solution))))">
                                     <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
                                 </span>
                                 <span v-if="user.type === 'investor'">
@@ -62,22 +62,38 @@ export default {
             }
         });
 
-
-        const checkMember = async(id) => {
-            console.log({id: id});
-            axios.post('/api/solution/check-team', {id: id})
-                .then(response => {
-                    console.log('CHEEEEEEEEEECK MEMBER');
-                    console.log(id + ' -> ID')
-                    console.log("response.data")
-                    console.log(response.data);
-                    console.log(response.data.success + ' -> success');
-                    console.log(response.data.payload + '-> payload');
-                    if (response.data.success) {
-                        return response.data.payload;
+        const checkMemberTeam = async(solution) => {
+            console.log(solution.teams + '-> solution.teams')
+            solution.teams.forEach((team) => {
+                console.log(team.users + '-> team.users')
+                team.users.forEach((member) => {
+                    if(user.value.id === member.id)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
                     }
                 })
+            })
         }
+
+        // const checkMember = async(id) => {
+        //     console.log({id: id});
+        //     axios.post('/api/solution/check-team', {id: id})
+        //         .then(response => {
+        //             console.log('CHEEEEEEEEEECK MEMBER');
+        //             console.log(id + ' -> ID')
+        //             console.log("response.data")
+        //             console.log(response.data);
+        //             console.log(response.data.success + ' -> success');
+        //             console.log(response.data.payload + '-> payload');
+        //             if (response.data.success) {
+        //                 return response.data.payload;
+        //             }
+        //         })
+        // }
 
         const solutions = computed(() => {
             if (!props.challenge.solutions || !user.value.id) {
@@ -152,7 +168,7 @@ export default {
             unfollow,
             user,
             addSolution,
-            checkMember
+            checkMemberTeam
         }
     }
 }
