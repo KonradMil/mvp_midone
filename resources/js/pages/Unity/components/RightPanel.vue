@@ -21,7 +21,7 @@
                     <LabelDialog v-if="content == 'label'" :key="temp_label_id" v-model:label="label"/>
                     <CommentDialog v-if="content == 'comment'" :key="temp_comment_id" v-model:comment="comment"/>
                     <LayoutDialog v-if="content == 'layout'" :key="temp_layout_id" v-model:layout="layout"/>
-                    <LineDialog v-if="content == 'line'" :key="temp_line_id" v-model:modelValue="line"/>
+                    <LineDialog v-if="content == 'line'" :key="'linia_' + temp_line_id" v-model:modelValue="line"/>
                     <AnimableDialog v-if="content == 'animable'" :key="'animable_id_' + temp_animable_id" v-model:animable="animable"/>
                     <DescriptionDialog v-if="content == 'description'" v-model:object="object" :type="props.type"/>
 <!--                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>-->
@@ -252,6 +252,7 @@ export default {
 
         emitter.on('UnityLineSettings', e => {
             content.value = 'line';
+            console.log('LINE SETING UPDATE');
             console.log(e);
             temp_line_id.value = e.index;
             line.value = e;
