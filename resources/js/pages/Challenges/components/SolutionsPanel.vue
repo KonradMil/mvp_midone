@@ -21,7 +21,7 @@
 <!--                            <SingleSolutionPost  :challenge="challenge" :user="user" :key="'selected_' + index" :solution="solution" :canAccept="false" :canEdit="false"></SingleSolutionPost>-->
 <!--                        </div>-->
                         <div v-for="(solution, index) in solutions" :key="index" v-if="challenge.stage < 2" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected)? 'solution-selected': ''">
-                                <span v-if="((user.type === 'integrator') && ((user.id === solution.author_id) || (member)))">
+                                <span v-if="((user.type === 'integrator') && ((user.id === solution.author_id) || (checkMember(solution.id))))">
                                     <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
                                 </span>
                                 <span v-if="user.type === 'investor'">
@@ -61,6 +61,19 @@ export default {
                 user.value = window.Laravel.user;
             }
         });
+
+        const checkMember = async(id) => {
+            console.log({id: id});
+            axios.post('/api/solution/check-team', {id: id})
+                .then(response => {
+                    console.log("response.data")
+                    console.log(response.data)
+                    if (response.data.success) {
+                        return response.data.payload;
+                    }
+                })
+        }
+
 
         const member = computed( () => {
             if (!props.challenge.solutions.teams.users || !user.value.id) {
@@ -143,6 +156,7 @@ export default {
             unfollow,
             user,
             addSolution,
+            checkMember
         }
     }
 }
