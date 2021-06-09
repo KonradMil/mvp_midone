@@ -55,6 +55,7 @@ export default {
         const toast = useToast();
         const types = require("../../../json/types.json");
         const user = ref({});
+        const guard = ref(false);
 
         onMounted(function () {
             if (window.Laravel.user) {
@@ -67,16 +68,15 @@ export default {
             solution.teams.forEach((team) => {
                 console.log(team.users + '-> team.users')
                 team.users.forEach((member) => {
-                    let guard = false;
                     console.log(user.value.id + '-> user.value.id')
                     console.log(member.id + '-> member.id')
                     if(user.value.id === member.id)
                     {
-                        guard = true;
+                        guard.value = true;
                         console.log('Changeeeee');
                         return true;
                     }
-                    else if(guard !== true)
+                    else if(guard.value !== true)
                     {
                         console.log('Noo Changeeeee');
                         return false;
@@ -169,6 +169,7 @@ export default {
                 })
         }
         return {
+            guard,
             solutions,
             challenge,
             types,
