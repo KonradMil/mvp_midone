@@ -102,9 +102,7 @@ export default {
             if (!props.challenge.solutions || !user.value.id) {
                 return [];
             }
-            console.log('dasdasdsada');
-            console.log(((user.value.type === 'integrator') && (checkMemberTeam(solution) === true)));
-            console.log((user.value.id === solution.author_id));
+
             return props.challenge.solutions.filter((solution) =>
                 (((user.value.type === 'integrator') && (checkMemberTeam(solution) === true)) || (user.value.id === solution.author_id)));
         });
