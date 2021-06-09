@@ -67,6 +67,7 @@ export default {
             console.log({id: id});
             axios.post('/api/solution/check-team', {id: id})
                 .then(response => {
+                    console.log('CHEEEEEEEEEECK MEMBER');
                     console.log(id + ' -> ID')
                     console.log("response.data")
                     console.log(response.data);
