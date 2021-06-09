@@ -67,6 +67,8 @@ export default {
             solution.teams.forEach((team) => {
                 console.log(team.users + '-> team.users')
                 team.users.forEach((member) => {
+                    console.log(user.value.id + '-> user.value.id')
+                    console.log(member.id + '-> member.id')
                     if(user.value.id === member.id)
                     {
                         return true;
