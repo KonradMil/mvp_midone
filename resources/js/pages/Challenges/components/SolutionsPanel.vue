@@ -67,7 +67,7 @@ export default {
             if (!props.challenge.solutions.teams.users || !user.value.id) {
                 return [];
             }
-            if(props.challenge.solutions.teams.users.filter((user) => ((user.value.type === 'integrator') && (user.value.id === user.id))))
+            if(props.challenge.solutions.teams.users.filter((member) => ((user.value.type === 'integrator') && (user.value.id === member.id))))
             {
                 check.value = true;
             };
