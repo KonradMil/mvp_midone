@@ -21,7 +21,7 @@
 <!--                            <SingleSolutionPost  :challenge="challenge" :user="user" :key="'selected_' + index" :solution="solution" :canAccept="false" :canEdit="false"></SingleSolutionPost>-->
 <!--                        </div>-->
                         <div v-for="(solution, index) in solutions" :key="index" v-if="challenge.stage < 2" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected)? 'solution-selected': ''">
-                                <span v-if="((user.type === 'integrator') && ((user.id === solution.author_id) || (check)))">
+                                <span v-if="((user.type === 'integrator') && ((user.id === solution.author_id) || (member)))">
                                     <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
                                 </span>
                                 <span v-if="user.type === 'investor'">
@@ -55,7 +55,6 @@ export default {
         const toast = useToast();
         const types = require("../../../json/types.json");
         const user = ref({});
-        const check = ref(false);
 
         onMounted(function () {
             if (window.Laravel.user) {
@@ -63,14 +62,11 @@ export default {
             }
         });
 
-        const users = computed( () => {
+        const member = computed( () => {
             if (!props.challenge.solutions.teams.users || !user.value.id) {
                 return [];
             }
-            if(props.challenge.solutions.teams.users.filter((member) => ((user.value.type === 'integrator') && (user.value.id === member.id))))
-            {
-                check.value = true;
-            };
+            return props.challenge.solutions.teams.users.filter((member) => ((user.value.type === 'integrator') && (user.value.id === member.id)))
         })
 
         const solutions = computed(() => {
@@ -140,8 +136,7 @@ export default {
         }
         return {
             solutions,
-            users,
-            check,
+            member,
             challenge,
             types,
             follow,
