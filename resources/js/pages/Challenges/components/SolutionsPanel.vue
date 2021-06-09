@@ -105,7 +105,7 @@ export default {
             }
 
             return props.challenge.solutions.filter((solution) =>
-                (((user.value.type === 'integrator') && (checkMemberTeam(solution))) || user.value.type === 'investor'));
+                (((user.value.type === 'integrator') && (checkMemberTeam(solution) === true)) || user.value.type === 'investor'));
         });
 
         const addSolution = () => {
