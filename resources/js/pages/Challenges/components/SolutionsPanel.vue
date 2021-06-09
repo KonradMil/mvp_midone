@@ -63,7 +63,7 @@ export default {
             }
         });
 
-        const inTeamSolution = computed( () => {
+        const users = computed( () => {
             if (!props.challenge.solutions.teams.users || !user.value.id) {
                 return [];
             }
@@ -139,8 +139,8 @@ export default {
                 })
         }
         return {
-            inTeamSolution,
             solutions,
+            users,
             check,
             challenge,
             types,
