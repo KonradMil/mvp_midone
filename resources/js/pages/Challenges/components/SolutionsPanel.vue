@@ -74,14 +74,6 @@ export default {
                 })
         }
 
-
-        const member = computed( () => {
-            if (!props.challenge.solutions.teams.users || !user.value.id) {
-                return [];
-            }
-            return props.challenge.solutions.teams.users.filter((member) => ((user.value.type === 'integrator') && (user.value.id === member.id)))
-        })
-
         const solutions = computed(() => {
             if (!props.challenge.solutions || !user.value.id) {
                 return [];
