@@ -21,8 +21,8 @@
                     <LabelDialog v-if="content == 'label'" :key="temp_label_id" v-model:label="label"/>
                     <CommentDialog v-if="content == 'comment'" :key="temp_comment_id" v-model:comment="comment"/>
                     <LayoutDialog v-if="content == 'layout'" :key="temp_layout_id" v-model:layout="layout"/>
-                    <LineDialog v-if="content == 'line'" :key="temp_line_id" v-model:modelValue="line"/>
-                    <AnimableDialog v-if="content == 'animable'" :key="temp_animable_id" v-model:animable="animable"/>
+                    <LineDialog v-if="content == 'line'" :key="'linia_' + temp_line_id" v-model:modelValue="line"/>
+                    <AnimableDialog v-if="content == 'animable'" :key="'animable_id_' + temp_animable_id" v-model:animable="animable"/>
                     <DescriptionDialog v-if="content == 'description'" v-model:object="object" :type="props.type"/>
 <!--                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>-->
 <!--                    <TeamsDialog v-model:teams_unity="teams_unity" :type="props.type" v-if="(content == 'teams' && allowedEdit && (user_teams.length > 0))"></TeamsDialog>-->
@@ -135,9 +135,7 @@ export default {
                 if(props.type==='challenge'){
                     console.log(props.challenge.id + '- PROPS CHALLENGE ID')
                     saveChallengeTeamsRepo();
-               }
-                else
-                {
+               } else {
                     saveSolutionTeamsRepo();
                 }
             } else if (content.value === 'description') {
@@ -156,8 +154,7 @@ export default {
                 if(props.type=='solution')
                 {
                     saveSolutionFinancialsRepo();
-                }
-                else {
+                } else {
                     saveSolutionFinancialsRepo();
                     saveChallengeFinancialsRepo();
                 }
@@ -255,8 +252,9 @@ export default {
 
         emitter.on('UnityLineSettings', e => {
             content.value = 'line';
+            console.log('LINE SETING UPDATE');
             console.log(e);
-            temp_setting_id.value = e.index;
+            temp_line_id.value = e.data.index;
             line.value = e;
             currentTitle.value = 'Ustawienia lini animacji';
             emitter.emit('changeprop', { data:line, json: true });
@@ -264,6 +262,7 @@ export default {
         });
 
         emitter.on('UnityAnimableSettings', e => {
+            console.log('I CAME');
             temp_animable_id.value = e.data.index;
             content.value = 'animable';
             console.log(e);

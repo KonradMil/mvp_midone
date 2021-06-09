@@ -62,6 +62,8 @@ export default {
 
         watch(l, (lab, prevLabel) => {
             console.log('CHANGE');
+            console.log(l);
+            console.log(lab);
             context.emit("update:modelValue", lab);
         }, {deep: true})
 

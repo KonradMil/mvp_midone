@@ -63,25 +63,23 @@ export default {
             }
         });
 
-        const checkMemberTeam = (solution) => {
+        const checkMemberTeam = async(solution) => {
             console.log(solution.teams + '-> solution.teams')
             solution.teams.forEach((team) => {
                 console.log(team.users + '-> team.users')
                 team.users.forEach((member) => {
                     console.log(user.value.id + '-> user.value.id')
                     console.log(member.id + '-> member.id')
-                    if(user.value.id === member.id) {
+                    if(user.value.id === member.id)
+                    {
                         guard.value = true;
                         console.log('Changeeeee');
                         return true;
                     }
                 })
-            })
-            if(guard.value === false)
-            {
-                console.log('No changee');
-                return false;
-            }
+            });
+            console.log('Noo Changeeeee');
+            return false;
         }
 
         // const checkMember = async(id) => {
@@ -104,6 +102,7 @@ export default {
             if (!props.challenge.solutions || !user.value.id) {
                 return [];
             }
+
             return props.challenge.solutions.filter((solution) =>
                 (((user.value.type === 'integrator') && (checkMemberTeam(solution) === true)) || (user.value.id === solution.author_id)));
         });

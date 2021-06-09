@@ -181,6 +181,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Rozwiązanie zostało zaakceptowane');
+                        props.solution.selected = 1;
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -216,6 +217,8 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Rozwiązanie zostało odrzucone');
+                        props.solution.rejected = 1;
+                        props.solution.selected = 0;
                     } else {
                         // toast.error(response.data.message);
                     }
