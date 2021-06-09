@@ -71,10 +71,12 @@ export default {
                     console.log(member.id + '-> member.id')
                     if(user.value.id === member.id)
                     {
+                        console.log('Changeeeee');
                         return true;
                     }
                     else
                     {
+                        console.log('Noo Changeeeee');
                         return false;
                     }
                 })
