@@ -240,7 +240,7 @@ export default defineComponent({
             newProjectsRef.value = el;
         });
 
-        const publish = (id) => {
+        const publish = async(id) => {
             axios.post('/api/challenge/publish', {id: id})
                 .then(response => {
                     // console.log(response.data)
@@ -255,7 +255,7 @@ export default defineComponent({
                 })
         }
 
-        const unpublish = (id) => {
+        const unpublish = async(id) => {
             axios.post('/api/challenge/unpublish', {id: id})
                 .then(response => {
                     // console.log(response.data)

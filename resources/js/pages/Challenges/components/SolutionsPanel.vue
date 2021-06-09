@@ -78,8 +78,11 @@ export default {
                     }
                 })
             });
-            console.log('Noo Changeeeee');
-            return false;
+            if(guard.value === false)
+            {
+                console.log('Noo Changeeeee');
+                return false;
+            }
         }
 
         // const checkMember = async(id) => {
@@ -104,7 +107,8 @@ export default {
             }
 
             return props.challenge.solutions.filter((solution) =>
-                (((user.value.type === 'integrator') && (checkMemberTeam(solution) === true)) || (user.value.id === solution.author_id)));
+                (((user.value.type === 'integrator') && (checkMemberTeam(solution) === true))
+                    || (user.value.id === solution.author_id) || (user.value.id === props.challenge.author_id)));
         });
 
         const addSolution = () => {
