@@ -63,7 +63,7 @@ export default {
             }
         });
 
-        const checkMemberTeam = async(solution) => {
+        const checkMemberTeam = (solution) => {
             console.log(solution.teams + '-> solution.teams')
             solution.teams.forEach((team) => {
                 console.log(team.users + '-> team.users')
@@ -81,6 +81,7 @@ export default {
             {
                 return false;
             }
+
         }
 
         // const checkMember = async(id) => {
