@@ -21,7 +21,7 @@
 <!--                            <SingleSolutionPost  :challenge="challenge" :user="user" :key="'selected_' + index" :solution="solution" :canAccept="false" :canEdit="false"></SingleSolutionPost>-->
 <!--                        </div>-->
                         <div v-for="(solution, index) in solutions" :key="index" v-if="challenge.stage < 2" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected)? 'solution-selected': ''">
-                                <span v-if="((user.type === 'integrator') && (user.id === solution.author_id))">
+                                <span v-if="user.type === 'integrator'">
                                     <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
                                 </span>
                                 <span v-if="user.type === 'investor'">
@@ -55,17 +55,59 @@ export default {
         const toast = useToast();
         const types = require("../../../json/types.json");
         const user = ref({});
+        const guard = ref(false);
+
         onMounted(function () {
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
         });
 
+        const checkMemberTeam = async(solution) => {
+            console.log(solution.teams + '-> solution.teams')
+            solution.teams.forEach((team) => {
+                console.log(team.users + '-> team.users')
+                team.users.forEach((member) => {
+                    console.log(user.value.id + '-> user.value.id')
+                    console.log(member.id + '-> member.id')
+                    if(user.value.id === member.id)
+                    {
+                        guard.value = true;
+                        console.log('Changeeeee');
+                        return true;
+                    }
+                    else if(guard.value !== true)
+                    {
+                        console.log('Noo Changeeeee');
+                        return false;
+                    }
+                })
+            })
+        }
+
+        // const checkMember = async(id) => {
+        //     console.log({id: id});
+        //     axios.post('/api/solution/check-team', {id: id})
+        //         .then(response => {
+        //             console.log('CHEEEEEEEEEECK MEMBER');
+        //             console.log(id + ' -> ID')
+        //             console.log("response.data")
+        //             console.log(response.data);
+        //             console.log(response.data.success + ' -> success');
+        //             console.log(response.data.payload + '-> payload');
+        //             if (response.data.success) {
+        //                 return response.data.payload;
+        //             }
+        //         })
+        // }
+
         const solutions = computed(() => {
             if (!props.challenge.solutions || !user.value.id) {
                 return [];
             }
-            return props.challenge.solutions.filter((solution) => (((user.value.type === 'integrator') && (user.value.id === solution.author_id)) || user.value.type === 'investor'));
+
+            return props.challenge.solutions.filter((solution) =>
+                (((user.value.type === 'integrator') && (checkMemberTeam(solution) === true)) || (user.value.id === solution.author_id)));
         });
 
         const addSolution = () => {
@@ -127,13 +169,15 @@ export default {
                 })
         }
         return {
+            guard,
             solutions,
             challenge,
             types,
             follow,
             unfollow,
             user,
-            addSolution
+            addSolution,
+            checkMemberTeam
         }
     }
 }
