@@ -79,9 +79,9 @@ export default {
             })
             if(guard.value === false)
             {
+                console.log('No changee');
                 return false;
             }
-
         }
 
         // const checkMember = async(id) => {
@@ -104,7 +104,6 @@ export default {
             if (!props.challenge.solutions || !user.value.id) {
                 return [];
             }
-
             return props.challenge.solutions.filter((solution) =>
                 (((user.value.type === 'integrator') && (checkMemberTeam(solution) === true)) || (user.value.id === solution.author_id)));
         });
