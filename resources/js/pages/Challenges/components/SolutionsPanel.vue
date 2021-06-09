@@ -77,6 +77,10 @@ export default {
                     }
                 })
             })
+            if(guard.value === false)
+            {
+                return false;
+            }
         }
 
         // const checkMember = async(id) => {
