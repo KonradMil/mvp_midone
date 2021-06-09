@@ -141,7 +141,6 @@ export default {
         }
         return {
             solutions,
-            member,
             challenge,
             types,
             follow,
