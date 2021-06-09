@@ -70,16 +70,10 @@ export default {
                 team.users.forEach((member) => {
                     console.log(user.value.id + '-> user.value.id')
                     console.log(member.id + '-> member.id')
-                    if(user.value.id === member.id)
-                    {
+                    if(user.value.id === member.id) {
                         guard.value = true;
                         console.log('Changeeeee');
                         return true;
-                    }
-                    else if(guard.value !== true)
-                    {
-                        console.log('Noo Changeeeee');
-                        return false;
                     }
                 })
             })
