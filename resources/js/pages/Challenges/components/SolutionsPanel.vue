@@ -21,7 +21,7 @@
 <!--                            <SingleSolutionPost  :challenge="challenge" :user="user" :key="'selected_' + index" :solution="solution" :canAccept="false" :canEdit="false"></SingleSolutionPost>-->
 <!--                        </div>-->
                         <div v-for="(solution, index) in solutions" :key="index" v-if="challenge.stage < 2" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected)? 'solution-selected': ''">
-                                <span v-if="((user.type === 'integrator') && ((user.id === solution.author_id) || (checkMemberTeam(solution))))">
+                                <span v-if="((user.type === 'integrator') && (checkMemberTeam(solution)))">
                                     <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id"></SingleSolutionPost>
                                 </span>
                                 <span v-if="user.type === 'investor'">
@@ -101,7 +101,7 @@ export default {
             if (!props.challenge.solutions || !user.value.id) {
                 return [];
             }
-            return props.challenge.solutions.filter((solution) => (((user.value.type === 'integrator') || (user.value.id === solution.author_id)) || user.value.type === 'investor'));
+            return props.challenge.solutions.filter((solution) => (((user.value.type === 'integrator') || (checkMemberTeam(solution))) || user.value.type === 'investor'));
         });
 
         const addSolution = () => {
