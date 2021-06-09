@@ -62,12 +62,16 @@ export default {
             }
         });
 
+
         const checkMember = async(id) => {
             console.log({id: id});
             axios.post('/api/solution/check-team', {id: id})
                 .then(response => {
+                    console.log(id + ' -> ID')
                     console.log("response.data")
-                    console.log(response.data)
+                    console.log(response.data);
+                    console.log(response.data.success + ' -> success');
+                    console.log(response.data.payload + '-> payload');
                     if (response.data.success) {
                         return response.data.payload;
                     }
