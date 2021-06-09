@@ -67,14 +67,16 @@ export default {
             solution.teams.forEach((team) => {
                 console.log(team.users + '-> team.users')
                 team.users.forEach((member) => {
+                    let guard = false;
                     console.log(user.value.id + '-> user.value.id')
                     console.log(member.id + '-> member.id')
                     if(user.value.id === member.id)
                     {
+                        guard = true;
                         console.log('Changeeeee');
                         return true;
                     }
-                    else
+                    else if(guard !== true)
                     {
                         console.log('Noo Changeeeee');
                         return false;
