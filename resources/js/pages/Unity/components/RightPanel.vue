@@ -253,7 +253,7 @@ export default {
         emitter.on('UnityLineSettings', e => {
             content.value = 'line';
             console.log(e);
-            temp_setting_id.value = e.index;
+            temp_line_id.value = e.index;
             line.value = e;
             currentTitle.value = 'Ustawienia lini animacji';
             emitter.emit('changeprop', { data:line, json: true });
@@ -261,6 +261,7 @@ export default {
         });
 
         emitter.on('UnityAnimableSettings', e => {
+            console.log('I CAME');
             temp_animable_id.value = e.data.index;
             content.value = 'animable';
             console.log(e);
