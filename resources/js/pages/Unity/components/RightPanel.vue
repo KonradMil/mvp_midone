@@ -22,7 +22,7 @@
                     <CommentDialog v-if="content == 'comment'" :key="temp_comment_id" v-model:comment="comment"/>
                     <LayoutDialog v-if="content == 'layout'" :key="temp_layout_id" v-model:layout="layout"/>
                     <LineDialog v-if="content == 'line'" :key="temp_line_id" v-model:modelValue="line"/>
-                    <AnimableDialog v-if="content == 'animable'" :key="temp_animable_id" v-model:animable="animable"/>
+                    <AnimableDialog v-if="content == 'animable'" :key="'animable_id_' + temp_animable_id" v-model:animable="animable"/>
                     <DescriptionDialog v-if="content == 'description'" v-model:object="object" :type="props.type"/>
 <!--                    <MultiplayerDialog v-if="content == 'multiplayer'"></MultiplayerDialog>-->
 <!--                    <TeamsDialog v-model:teams_unity="teams_unity" :type="props.type" v-if="(content == 'teams' && allowedEdit && (user_teams.length > 0))"></TeamsDialog>-->
@@ -135,9 +135,7 @@ export default {
                 if(props.type==='challenge'){
                     console.log(props.challenge.id + '- PROPS CHALLENGE ID')
                     saveChallengeTeamsRepo();
-               }
-                else
-                {
+               } else {
                     saveSolutionTeamsRepo();
                 }
             } else if (content.value === 'description') {
@@ -156,8 +154,7 @@ export default {
                 if(props.type=='solution')
                 {
                     saveSolutionFinancialsRepo();
-                }
-                else {
+                } else {
                     saveSolutionFinancialsRepo();
                     saveChallengeFinancialsRepo();
                 }
