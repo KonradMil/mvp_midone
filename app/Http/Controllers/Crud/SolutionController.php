@@ -56,6 +56,7 @@ class SolutionController extends Controller
 //        $challenge->stage = 2;
 //        $challenge->save();
         $solution->selected = true;
+        $solution->rejected = false;
         $solution->save();
 
         event(new SolutionAccepted($solution, $challenge->author, 'Rozwiązanie zostało zaakceptowane: ' . $solution->name, []));

@@ -184,6 +184,7 @@ export default {
                     if (response.data.success) {
                         toast.success('Rozwiązanie zostało zaakceptowane');
                         offer.selected = 1;
+                        offer.rejected = 0;
                     } else {
                         // toast.error(response.data.message);
                     }
