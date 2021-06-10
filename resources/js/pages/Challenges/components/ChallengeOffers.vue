@@ -47,8 +47,8 @@
                                 <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
                             </div>
                             <div class="mt-2 pl-9 pb-6" v-if="user.id === challenge.author_id">
-                                <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer" >Akceptuj ofertę</button>
-                                <button class="btn btn-primary shadow-md mr-2" @click="rejectOffer" >Odrzuć ofertę</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" >Akceptuj ofertę</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="rejectOffer(offer)" >Odrzuć ofertę</button>
                             </div>
                         </div>
                         <div class="flex items-center">
@@ -176,25 +176,25 @@ export default {
             offers.value = GetChallengeOffers(props.challenge.id);
         }
 
-        const acceptOffer = () => {
-            axios.post('/api/solution/accept', {id: solution.id})
+        const acceptOffer = async(offer) => {
+            axios.post('/api/offer/accept', {id: offer.id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Rozwiązanie zostało zaakceptowane');
-                        props.solution.selected = 1;
+                        offer.value.selected = 1;
                     } else {
                         // toast.error(response.data.message);
                     }
                 })
         }
 
-        const rejectOffer = () => {
-            axios.post('/api/solution/reject', {id: solution.id})
+        const rejectOffer = async(offer) => {
+            axios.post('/api/solution/reject', {id: offer.id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Rozwiązanie zostało odrzucone');
-                        props.solution.rejected = 1;
-                        props.solution.selected = 0;
+                        offer.value.rejected = 1;
+                        offer.value.selected = 0;
                     } else {
                         // toast.error(response.data.message);
                     }
