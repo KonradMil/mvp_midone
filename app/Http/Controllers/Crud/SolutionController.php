@@ -164,20 +164,20 @@ class SolutionController extends Controller
 
         $query = Solution::query();
 
-//        foreach($challenge->solutions as $solution){
-//            foreach($solution->teams as $team) {
-//                foreach(Auth::user()->teams as $t) {
-//                    if($t->id == $team->id) {
-//                       $query = $solution;
-//                    }
-//                }
-//            }
-//       }
+        foreach($challenge->solutions as $solution){
+            foreach($solution->teams as $team) {
+                foreach(Auth::user()->teams as $t) {
+                    if($t->id == $team->id) {
+                       $query = $solution;
+                    }
+                }
+            }
+       }
 
         return response()->json([
             'success' => true,
             'message' => '',
-            'payload' => $challenge
+            'payload' => $query
         ]);
     }
 
