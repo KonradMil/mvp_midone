@@ -46,9 +46,9 @@
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
                                 <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
                             </div>
-                            <div class="mt-2" v-if="canAccept">
-                                <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1">Akceptuj rozwiązanie</button>
-                                <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1">Odrzuć rozwiązanie</button>
+                            <div class="mt-2" >
+                                <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" >Akceptuj rozwiązanie</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" >Odrzuć rozwiązanie</button>
                             </div>
                         </div>
                         <div class="flex items-center">
