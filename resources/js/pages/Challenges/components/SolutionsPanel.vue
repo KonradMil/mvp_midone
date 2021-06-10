@@ -56,6 +56,7 @@ export default {
         const types = require("../../../json/types.json");
         const user = ref({});
         const guard = ref(false);
+        const solutions = ref([]);
 
         onMounted(function () {
             if (window.Laravel.user) {
@@ -96,7 +97,7 @@ export default {
                     console.log(response.data.payload + '-> payload');
                     if (response.data.success) {
                         console.log(response.data.payload + '-> data.payload   ')
-                        return response.data.payload;
+                        solutions.value = response.data.payload;
                     }
                 })
         }
@@ -118,15 +119,15 @@ export default {
         //         })
         // }
 
-        const solutions = computed(() => {
-            if (!props.challenge.solutions || !user.value.id) {
-                return [];
-            }
-
-            return props.challenge.solutions.filter((solution) =>
-                (((user.value.type === 'integrator') && (checkMember(solution.id) === true))
-                    || (user.value.id === solution.author_id) || (user.value.id === props.challenge.author_id)));
-        });
+        // const solutions = computed(() => {
+        //     if (!props.challenge.solutions || !user.value.id) {
+        //         return [];
+        //     }
+        //
+        //     return props.challenge.solutions.filter((solution) =>
+        //         (((user.value.type === 'integrator') && (checkMember(solution.id) === true))
+        //             || (user.value.id === solution.author_id) || (user.value.id === props.challenge.author_id)));
+        // });
 
         const addSolution = () => {
             axios.post('/api/solution/create', {id: challenge.value.id})
