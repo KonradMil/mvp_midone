@@ -183,7 +183,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Rozwiązanie zostało zaakceptowane');
-                        offer.value.selected = 1;
+                        offer.selected = 1;
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -195,8 +195,8 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Rozwiązanie zostało odrzucone');
-                        offer.value.rejected = 1;
-                        offer.value.selected = 0;
+                        offer.rejected = 1;
+                        offer.selected = 0;
                     } else {
                         // toast.error(response.data.message);
                     }
