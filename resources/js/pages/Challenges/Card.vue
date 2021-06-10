@@ -243,7 +243,8 @@ export default defineComponent({
         const publish = async(id) => {
             axios.post('/api/challenge/publish', {id: id})
                 .then(response => {
-                    // console.log(response.data)
+                    console.log(response.data)
+                    console.log(response.data.success + '-> heeeeeeeeeeere')
                     if (response.data.success) {
                         console.log(response.data.payload);
                         challenge.value = response.data.payload;
