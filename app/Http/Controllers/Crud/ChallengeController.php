@@ -562,7 +562,7 @@ class ChallengeController extends Controller
         $challenge->stage = 1;
         $challenge->save();
 
-        event(new ChallengePublished($challenge, $challenge->author, 'Nowe wyzwanie zostało opublikowane: ' . $challenge->name, []));
+//        event(new ChallengePublished($challenge, $challenge->author, 'Nowe wyzwanie zostało opublikowane: ' . $challenge->name, []));
 
         return response()->json([
             'success' => true,
