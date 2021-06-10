@@ -164,7 +164,7 @@ class SolutionController extends Controller
 
         $query = [];
 
-        if(isset($challenge->author_id))
+        if($challenge->author_id !== null)
         {
             if(Auth::user()->id === $challenge -> author_id) {
                 return response()->json([
