@@ -164,15 +164,12 @@ class SolutionController extends Controller
 
         $query = [];
 
-        if($challenge->author_id !== null)
-        {
-            if(Auth::user()->id === $challenge -> author_id) {
-                return response()->json([
-                    'success' => true,
-                    'message' => '',
-                    'payload' => $challenge -> solutions,
-                ]);
-            }
+        if(Auth::user()->id === $challenge -> author_id) {
+            return response()->json([
+                'success' => true,
+                'message' => '',
+                'payload' => $challenge -> solutions,
+            ]);
         }
         else {
             foreach ($challenge->solutions as $solution) {
