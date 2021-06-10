@@ -159,7 +159,7 @@ class SolutionController extends Controller
 
     public function checkTeam(Request $request)
     {
-        $id = $request-> input('id');
+        $id = $request-> input('challenge_id');
         $challenge = Challenge::find($id);
 
         $query = Solution::query();
