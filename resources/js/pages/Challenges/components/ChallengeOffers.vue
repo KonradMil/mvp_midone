@@ -56,43 +56,43 @@
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Ilość tygodni do uruchomienia, liczona od podpisania umowy:</span>
-                                <div class="text-gray-600"> {{ offer.weeks_to_start }} </div>
+                                <div class="text-gray-600"> {{ values['weeks'][offer.weeks_to_start] }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Czas realizacji uruchomienia u klienta (tygodni):</span>
-                                <div class="text-gray-600"> {{ offer.time_to_start }} </div>
+                                <div class="text-gray-600"> {{ values['weeks-short'][offer.time_to_start] }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Czas przywrócenia stanowiska do sprawności po awarii:</span>
-                                <div class="text-gray-600"> {{ offer.time_to_fix }} </div>
+                                <div class="text-gray-600"> {{ values['hours'][offer.time_to_fix] }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Wysokość zaliczki płatnej po uruchomieniu i finalnym odbiorze stanowiska:</span>
-                                <div class="text-gray-600"> {{ offer.advance_upon_start }} </div>
+                                <div class="text-gray-600"> {{ values['percent'][offer.advance_upon_start] }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Wyskość zaliczki (%) płatnej przy odbiorze wstępnym dokonywanym u Integratora:</span>
-                                <div class="text-gray-600"> {{ offer.advance_upon_delivery }} </div>
+                                <div class="text-gray-600"> {{ values['percent'][offer.advance_upon_delivery] }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Wysokość zaliczki (%) płatnej po podpisaniu umowy:</span>
-                                <div class="text-gray-600"> {{ offer.advance_upon_agreement }} </div>
+                                <div class="text-gray-600"> {{ values['percent'][offer.advance_upon_agreement] }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Okres gwarancji w latach:</span>
-                                <div class="text-gray-600"> {{ offer.years_of_guarantee }} </div>
+                                <div class="text-gray-600"> {{ values['years-short'][offer.years_of_guarantee] }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
@@ -116,7 +116,7 @@
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Czas reakcji na zgłoszenie awarii w godzinach:</span>
-                                <div class="text-gray-600"> {{ offer.reaction_time }} </div>
+                                <div class="text-gray-600"> {{ values['hours'][offer.reaction_time] }} </div>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
@@ -161,6 +161,8 @@ export default {
     setup(props, context) {
         const offers = ref([]);
         const user = window.Laravel.user;
+        const values = require('../../../json/offer_values.json');
+
 
         const switchTab = () => {
             context.emit("update:activeTab", 'addingoffer');
@@ -178,7 +180,8 @@ export default {
         return {
             switchTab,
             offers,
-            user
+            user,
+            values
         }
     }
 }
