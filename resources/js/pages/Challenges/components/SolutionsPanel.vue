@@ -96,6 +96,7 @@ export default {
                     console.log(response.data.success + ' -> success');
                     console.log(response.data.payload + '-> payload');
                     if (response.data.success) {
+                        console.log(response.data.payload + '-> data.payload   ')
                         return response.data.payload;
                     }
                 })
