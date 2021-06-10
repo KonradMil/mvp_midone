@@ -182,7 +182,7 @@ export default {
             axios.post('/api/offer/accept', {id: offer.id})
                 .then(response => {
                     if (response.data.success) {
-                        toast.success('Rozwiązanie zostało zaakceptowane');
+                        toast.success('Oferta zostało zaakceptowane');
                         offer.selected = 1;
                         offer.rejected = 0;
                     } else {
@@ -195,7 +195,7 @@ export default {
             axios.post('/api/solution/reject', {id: offer.id})
                 .then(response => {
                     if (response.data.success) {
-                        toast.success('Rozwiązanie zostało odrzucone');
+                        toast.success('Oferta zostało odrzucone');
                         offer.rejected = 1;
                         offer.selected = 0;
                     } else {
