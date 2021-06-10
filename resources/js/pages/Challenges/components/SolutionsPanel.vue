@@ -59,16 +59,16 @@ export default {
         const solutions = ref([]);
 
         onMounted(function () {
-            checkMember();
+            filterMember();
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
         });
 
 
-        const checkMember = () => {
+        const filterMember = () => {
             console.log({challenge_id: challenge.value.id});
-            axios.post('/api/solution/check-team', {challenge_id: challenge.value.id})
+            axios.post('/api/solution/filter-member', {challenge_id: challenge.value.id})
                 .then(response => {
                     console.log('CHEEEEEEEEEECK MEMBER');
                     console.log("response.data")
@@ -150,7 +150,7 @@ export default {
             unfollow,
             user,
             addSolution,
-            checkMember
+            filterMember
         }
     }
 }
