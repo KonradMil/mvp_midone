@@ -165,7 +165,7 @@ class SolutionController extends Controller
         $query = [];
 
         if(Auth::user()->id === $challenge -> author_id) {
-            $query[] = $challenge -> solutions;
+            return $challenge -> solutions;
         }
         else {
             foreach ($challenge->solutions as $solution) {
