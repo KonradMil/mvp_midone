@@ -87,7 +87,7 @@ export default {
 
         const checkMember = async(id) => {
             console.log({id: id});
-            axios.post('/api/solution/check-team', {id: id})
+            await axios.post('/api/solution/check-team', {id: id})
                 .then(response => {
                     console.log('CHEEEEEEEEEECK MEMBER');
                     console.log(id + ' -> ID')
