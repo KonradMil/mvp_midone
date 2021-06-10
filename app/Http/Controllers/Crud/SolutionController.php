@@ -170,7 +170,6 @@ class SolutionController extends Controller
                 'message' => '',
                 'payload' => $challenge -> solutions,
             ]);
-//            $query[] = $challenge -> solutions;
         }
         else {
             foreach ($challenge->solutions as $solution) {
