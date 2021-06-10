@@ -16,7 +16,7 @@
                             <button class="btn btn-primary shadow-md mr-2" @click="addSolution">{{ $t('challengesMain.addChallenge') }}</button>
                         </div>
                     </div>
-                    <div class="intro-y grid grid-cols-12 gap-6 mt-5" v-if="solutions">
+                    <div class="intro-y grid grid-cols-12 gap-6 mt-5">
 <!--                        <div v-if="challenge.stage >= 2" v-for="(solution, index) in challenge.selected" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box solution-selected">-->
 <!--                            <SingleSolutionPost  :challenge="challenge" :user="user" :key="'selected_' + index" :solution="solution" :canAccept="false" :canEdit="false"></SingleSolutionPost>-->
 <!--                        </div>-->
