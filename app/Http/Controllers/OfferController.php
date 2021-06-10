@@ -108,6 +108,10 @@ class OfferController extends Controller
 //        $challenge->stage = 2;
 //        $challenge->save();
         $offer->selected = true;
+        if($offer->rejected==true)
+        {
+            $offer->rejected = false;
+        }
         $offer->save();
 
 //        event(new SolutionAccepted($solution, $challenge->author, 'Rozwiązanie zostało zaakceptowane: ' . $solution->name, []));
