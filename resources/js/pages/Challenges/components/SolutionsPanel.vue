@@ -77,7 +77,7 @@ export default {
                     console.log(response.data.payload + '-> payload');
                     if (response.data.success) {
                         console.log(response.data.payload + '-> data.payload   ')
-
+                        solutions.value = response.data.payload;
                     }
                 })
         }
