@@ -59,6 +59,7 @@ export default {
         const solutions = ref([]);
 
         onMounted(function () {
+            checkMember();
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
