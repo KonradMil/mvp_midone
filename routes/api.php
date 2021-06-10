@@ -174,6 +174,8 @@ Route::group(['prefix' => 'workshop/models', 'middleware' => 'auth:sanctum'], fu
 
 Route::group(['prefix' => 'offer', 'middleware' => 'auth:sanctum'], function () {
     Route::post('add/new', [OfferController::class, 'addOffer']);
+    Route::post('accept', [OfferController::class, 'acceptOffer']);
+    Route::post('reject', [OfferController::class, 'rejectOffer']);
 });
 
 Route::get('import-old', [OldImportController::class, 'import']);

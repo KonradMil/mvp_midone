@@ -101,4 +101,35 @@ class OfferController extends Controller
             'payload' => $offer
         ]);
     }
+    public function acceptOffer (Request $request) {
+        $id = $request->input('id');
+        $offer = Offer::find($id);
+        $challenge = Challenge::find($offer->challenge_id);
+//        $challenge->stage = 2;
+//        $challenge->save();
+        $offer->selected = true;
+        $offer->save();
+
+//        event(new SolutionAccepted($solution, $challenge->author, 'Rozwiązanie zostało zaakceptowane: ' . $solution->name, []));
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zatwierdzono ofertę.',
+            'payload' => $offer
+        ]);
+    }
+    public function rejectOffer(Request $request)
+    {
+        $id = $request->input('id');
+        $offer = Offer::find($id);
+        $offer->rejected = true;
+        $offer->selected = false;
+        $offer->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Odrzucono ofertę.',
+            'payload' => $offer
+        ]);
+    }
 }
