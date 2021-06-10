@@ -85,9 +85,9 @@ export default {
         //     }
         // }
 
-        const checkMember = async(id) => {
-            console.log({id: id});
-            await axios.post('/api/solution/check-team', {id: id})
+        const checkMember = () => {
+            console.log({challenge_id: challenge.value.id});
+            axios.post('/api/solution/check-team', {challenge_id: challenge.value.id})
                 .then(response => {
                     console.log('CHEEEEEEEEEECK MEMBER');
                     console.log(id + ' -> ID')
@@ -102,13 +102,30 @@ export default {
                 })
         }
 
+        // const checkMember = async(id) => {
+        //     console.log({id: id});
+        //     await axios.post('/api/solution/check-team', {id: id})
+        //         .then(response => {
+        //             console.log('CHEEEEEEEEEECK MEMBER');
+        //             console.log(id + ' -> ID')
+        //             console.log("response.data")
+        //             console.log(response.data);
+        //             console.log(response.data.success + ' -> success');
+        //             console.log(response.data.payload + '-> payload');
+        //             if (response.data.success) {
+        //                 console.log(response.data.payload + '-> data.payload   ')
+        //                 return true;
+        //             }
+        //         })
+        // }
+
         const solutions = computed(() => {
             if (!props.challenge.solutions || !user.value.id) {
                 return [];
             }
 
             return props.challenge.solutions.filter((solution) =>
-                (((user.value.type === 'integrator') && (checkMember(solution.id) === "true"))
+                (((user.value.type === 'integrator') && (checkMember(solution.id) === true))
                     || (user.value.id === solution.author_id) || (user.value.id === props.challenge.author_id)));
         });
 
