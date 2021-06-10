@@ -195,7 +195,7 @@ export default {
             axios.post('/api/solution/reject', {id: offer.id})
                 .then(response => {
                     if (response.data.success) {
-                        toast.success('Oferta zostało odrzucone');
+                        toast.success('Oferta zostało odrzucona');
                         offer.rejected = 1;
                         offer.selected = 0;
                     } else {
