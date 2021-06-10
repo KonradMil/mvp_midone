@@ -162,22 +162,23 @@ class SolutionController extends Controller
         $id = $request-> input('challenge_id');
         $challenge = Challenge::find($id);
 
-        $query = Solution::query();
+        $query = [];
 
         foreach($challenge->solutions as $solution){
             foreach($solution->teams as $team) {
                 foreach(Auth::user()->teams as $t) {
                     if($t->id == $team->id) {
-                       $query = $solution;
+                       $query[] = $solution;
                     }
                 }
             }
        }
 
+
         return response()->json([
             'success' => true,
             'message' => '',
-            'payload' => $query
+            'payload' => $query,
         ]);
     }
 
