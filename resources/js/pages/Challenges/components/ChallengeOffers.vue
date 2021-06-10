@@ -154,6 +154,7 @@
 <script>
 import {getCurrentInstance, onMounted, ref} from "vue";
 import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
+import {useToast} from "vue-toastification";
 
 export default {
     name: "ChallengeOffers",
@@ -163,6 +164,7 @@ export default {
     },
     emits: ["update:activeTab"],
     setup(props, context) {
+        const toast = useToast();
         const offers = ref([]);
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
