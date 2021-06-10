@@ -90,7 +90,6 @@ export default {
             axios.post('/api/solution/check-team', {challenge_id: challenge.value.id})
                 .then(response => {
                     console.log('CHEEEEEEEEEECK MEMBER');
-                    console.log(id + ' -> ID')
                     console.log("response.data")
                     console.log(response.data);
                     console.log(response.data.success + ' -> success');
