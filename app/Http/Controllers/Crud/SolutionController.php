@@ -164,16 +164,23 @@ class SolutionController extends Controller
 
         $query = [];
 
-        foreach($challenge->solutions as $solution){
-            foreach($solution->teams as $team) {
-                foreach(Auth::user()->teams as $t) {
-                    if($t->id == $team->id) {
-                       $query[] = $solution;
-                    }
+        if(Auth::user()->id === $challenge -> author_id) {
+            $query[] = $challenge -> solutions;
+        }
+        else {
+            foreach ($challenge->solutions as $solution) {
+                if (Auth::user()->id === $solution->author_id) {
+                    $query[] = $solution;
+                  }
+                foreach ($solution->teams as $team) {
+                      foreach (Auth::user()->teams as $t) {
+                              if (($t->id == $team->id) && (Auth::user()->id != $solution->author_id) ) {
+                                      $query[] = $solution;
+                                  }
+                      }
                 }
             }
-       }
-
+        }
 
         return response()->json([
             'success' => true,
