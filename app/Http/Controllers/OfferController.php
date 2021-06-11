@@ -37,7 +37,7 @@ class OfferController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Pobrano oferty poprawnie.',
-            'payload' => $array
+            'payload' => $offers
         ]);
     }
 
