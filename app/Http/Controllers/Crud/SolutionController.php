@@ -40,7 +40,7 @@ class SolutionController extends Controller
         $solution = Solution::find($id);
         $solution->rejected = true;
         $solution->selected = false;
-        $solution->offers()->detach();
+        $solution->offers()->delete();
         $solution->save();
 
         return response()->json([
