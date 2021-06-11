@@ -277,38 +277,38 @@ export default {
         // }
 
         onMounted(() => {
-            if (props.offer_id != undefined) {
-                getOffer();
-            }
+            // if (props.offer_id != undefined) {
+            //     getOffer();
+            // }
         });
 
-        const getOffer = (val = 0) => {
-            let c = props.offer_id;
-            if (val != 0) {
-                c = val;
-            }
-            axios.post('/api/offers/get', {id: c})
-                .then(response => {
-                    if (response.data.success) {
-                        price_of_delivery.value = response.data.payload.price_of_delivery;
-                        weeks_to_start.value = response.data.payload.weeks_to_start;
-                        time_to_start.value = response.data.payload.time_to_start;
-                        time_to_fix.value = response.data.payload.time_to_fix;
-                        advance_upon_start.value = response.data.payload.advance_upon_start;
-                        advance_upon_delivery.value = response.data.payload.advance_upon_delivery;
-                        advance_upon_agreement.value = response.data.payload.advance_upon_agreement;
-                        years_of_guarantee.value = response.data.payload.years_of_guarantee;
-                        maintenance_frequency.value = response.data.payload.maintenance_frequency;
-                        price_of_maintenance.value = response.data.payload.price_of_maintenance;
-                        reaction_time.value = response.data.payload.reaction_time;
-                        intervention_price.value = response.data.payload.intervention_price;
-                        work_hour_price.value = response.data.payload.work_hour_price;
-                        period_of_support.value = response.data.payload.period_of_support;
-                    } else {
-                        toast.error('Ups! Coś poszło nie tak!');
-                    }
-                })
-        }
+        // const getOffer = (val = 0) => {
+        //     let c = props.offer_id;
+        //     if (val != 0) {
+        //         c = val;
+        //     }
+        //     axios.post('/api/offers/get', {id: c})
+        //         .then(response => {
+        //             if (response.data.success) {
+        //                 price_of_delivery.value = response.data.payload.price_of_delivery;
+        //                 weeks_to_start.value = response.data.payload.weeks_to_start;
+        //                 time_to_start.value = response.data.payload.time_to_start;
+        //                 time_to_fix.value = response.data.payload.time_to_fix;
+        //                 advance_upon_start.value = response.data.payload.advance_upon_start;
+        //                 advance_upon_delivery.value = response.data.payload.advance_upon_delivery;
+        //                 advance_upon_agreement.value = response.data.payload.advance_upon_agreement;
+        //                 years_of_guarantee.value = response.data.payload.years_of_guarantee;
+        //                 maintenance_frequency.value = response.data.payload.maintenance_frequency;
+        //                 price_of_maintenance.value = response.data.payload.price_of_maintenance;
+        //                 reaction_time.value = response.data.payload.reaction_time;
+        //                 intervention_price.value = response.data.payload.intervention_price;
+        //                 work_hour_price.value = response.data.payload.work_hour_price;
+        //                 period_of_support.value = response.data.payload.period_of_support;
+        //             } else {
+        //                 toast.error('Ups! Coś poszło nie tak!');
+        //             }
+        //         })
+        // }
 
         return {
             price_of_delivery,
