@@ -25,11 +25,19 @@ class OfferController extends Controller
     public function getAllChallengeOffers(Challenge $challenge)
     {
         $offers = Offer::where('challenge_id', '=', $challenge->id)->with('solution')->get();
+        $array = [];
+
+        foreach($offers as $offer) {
+            $solution = Solution::find($offer->solution_id);
+            if($solution->rejected == true){
+                 $array[] = $offer;
+            }
+        }
 
         return response()->json([
             'success' => true,
             'message' => 'Pobrano oferty poprawnie.',
-            'payload' => $offers
+            'payload' => $array
         ]);
     }
 
