@@ -164,7 +164,7 @@
                         <input type="text" class="form-control" v-model="period_of_support"/>
                     </div>
                 </div>
-                <button class="btn btn-primary w-20 mt-3" @click="save">{{ $t('profiles.save') }}</button>
+                <button class="btn btn-primary w-20 mt-3" @click="saveOfferRepo">{{ $t('profiles.save') }}</button>
             </div>
         </div>
     </div>
