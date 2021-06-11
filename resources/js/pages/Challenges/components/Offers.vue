@@ -13,7 +13,7 @@
                         <div class="flex items-center">
                             <div class="pl-4 my-2">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
-                                <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;" v-if="offer.solution.name != undefined"> {{ offer.solution.name }}</div>
+                                <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;" v-if="offer[index].solution.name != undefined"> {{ offer[index].solution.name }}</div>
                             </div>
                         </div>
                         <div class="flex items-center">
