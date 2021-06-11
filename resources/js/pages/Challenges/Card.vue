@@ -189,6 +189,11 @@ export default defineComponent({
                 })
         }
 
+        emitter.on('showOffer', e => () => {
+            console.log('showOffer');
+            activeTab.value = 'all-offers'
+        });
+
         emitter.on('changeTeamsSolution', e => () => {
             console.log('ChangeTeamsSolution');
             activeTab.value = 'teamsSolution'
