@@ -183,7 +183,7 @@ export default {
         challenge_id: Number
     },
     emits: ["update:activeTab"],
-    setup(props) {
+    setup(props,context) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const price_of_delivery = ref(0);
@@ -234,7 +234,7 @@ export default {
                             period_of_support: period_of_support.value
                 }, handleCallback);
                 console.log(resp);
-                context.emit("update:activeTab", 'all-offers');
+                emitter.emit('showOffer', {val: 'all-offers'});
                 // emitter.emit('showOffers', {val: 'all-offers'});
 
         }
