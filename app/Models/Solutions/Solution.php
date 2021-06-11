@@ -4,6 +4,7 @@ namespace App\Models\Solutions;
 
 use App\Models\Challenges\Challenge;
 use App\Models\Financial;
+use App\Models\Offer;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
