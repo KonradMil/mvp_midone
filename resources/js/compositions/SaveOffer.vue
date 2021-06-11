@@ -12,7 +12,7 @@ export default function SaveOffer(data, handle) {
     const list = ref([]);
 
     async function saveOffer(data, handle) {
-        axios.post('/api/challenge/user/create', {data})
+        axios.post('/api/offer/save', {data})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
