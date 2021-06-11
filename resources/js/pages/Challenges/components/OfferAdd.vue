@@ -214,13 +214,7 @@ export default {
         };
 
         const saveOfferRepo = async () => {
-            if(title.value === '' || description.value === '' || type.value==='' || file.value == undefined)
-            {
-                toast.warning('Uzupełnij wszystkie pola!');
-            }
-            else
-            {
-                let resp = await SaveOffer({
+            let resp = await SaveOffer({
                             id: props.offer_id,
                             challenge_id: props.challenge_id,
                             solution_id: props.solution_id,
@@ -242,7 +236,7 @@ export default {
                 console.log(resp);
                 context.emit("update:activeTab", 'all-offers');
                 // emitter.emit('showOffers', {val: 'all-offers'});
-            }
+
         }
 
         // const save = () => {
