@@ -44,10 +44,10 @@ class Solution extends Model implements ReactableInterface
         return $this->belongsTo(Challenge::class, 'challenge_id');
     }
 
-//    public function offers()
-//    {
-//        return $this->hasMany(Offer::class);
-//    }
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
 
     public function financial_after()
     {
