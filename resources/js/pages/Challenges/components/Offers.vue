@@ -125,13 +125,14 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const values = require('../../../json/offer_values.json');
+
         const switchTab = () => {
             context.emit("update:activeTab", 'addingoffer');
         }
 
-        emitter.on('addoffer', e => {
-            offers.value.list.push(e.obj);
-        });
+        // emitter.on('addoffer', e => {
+        //     offers.value.list.push(e.obj);
+        // });
 
         const getOffersRepositories = async () => {
             offers.value = GetOffers();
