@@ -203,9 +203,9 @@ export default {
         const toast = useToast();
         const values = require('../../../json/offer_values.json');
 
-        emitter.on('offerSelected', e => () => {
-            getOffer(e.offer_id);
-        });
+        // emitter.on('offerSelected', e => () => {
+        //     getOffer(e.offer_id);
+        // });
 
         const handleCallback = (resp) => {
             console.log(resp);
