@@ -37,6 +37,12 @@
         <h2 class="font-medium text-base mr-auto"> Moje oferty</h2>
     </div>
         <div class="grid grid-cols-12 gap-6">
+            <div v-if="offers.length == 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+                Nie ma jeszcze żadnych rozwiązań.
+                    <p>
+                        W tej chwili nie ma żadnych wyzwań, poinformujemy Cię jak tylko jakieś będą dostępne.
+                    </p>
+            </div>
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12 xxl:col-span-6" v-for="(offer, index) in offers.list" :key="index">
                 <div class="px-5 py-5" >
