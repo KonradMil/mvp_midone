@@ -13,7 +13,7 @@
                         <div class="flex items-center">
                             <div class="pl-4 my-2">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
-                                <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> Solution name</div>
+                                <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
                             </div>
                         </div>
                         <div class="flex items-center">
@@ -127,26 +127,26 @@ export default {
             context.emit("update:activeTab", 'addingoffer');
         }
 
-        const getOffersRepositories = async () => {
-            offers.value = GetOffers();
-        }
+        // const getOffersRepositories = async () => {
+        //     offers.value = GetOffers();
+        // }
 
 
-        // const getOffers = () => {
-        //     axios.post('/api/offer/get/all', {})
-        //         .then(response => {
-        //             if (response.data.success) {
-        //                 offers.value = response.data.payload;
-        //                 console.log(response.data.payload + ' -> OFFERS VALUE')
-        //             } else {
-        //                 // toast.error(response.data.message);
-        //             }
-        //         })
-        // };
+        const getOffers = () => {
+            axios.post('/api/offer/get/all', {})
+                .then(response => {
+                    if (response.data.success) {
+                        offers.value = response.data.payload;
+                        console.log(response.data.payload + ' -> OFFERS VALUE')
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        };
 
         onMounted(() => {
-            // getOffers();
-            getOffersRepositories('');
+            getOffers();
+            // getOffersRepositories('');
         });
 
         return {
