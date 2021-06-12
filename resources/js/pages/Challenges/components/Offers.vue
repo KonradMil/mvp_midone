@@ -127,26 +127,26 @@ export default {
             context.emit("update:activeTab", 'addingoffer');
         }
 
-        // const getOffersRepositories = async () => {
-        //     offers.value = GetOffers();
-        // }
+        const getOffersRepositories = async () => {
+            offers.value = GetOffers();
+        }
 
 
-        const getOffers = () => {
-            axios.post('/api/offer/get/all', {})
-                .then(response => {
-                    if (response.data.success) {
-                        offers.value = response.data.payload;
-                        console.log(response.data.payload + ' -> OFFERS VALUE')
-                    } else {
-                        // toast.error(response.data.message);
-                    }
-                })
-        };
+        // const getOffers = () => {
+        //     axios.post('/api/offer/get/all', {})
+        //         .then(response => {
+        //             if (response.data.success) {
+        //                 offers.value = response.data.payload;
+        //                 console.log(response.data.payload + ' -> OFFERS VALUE')
+        //             } else {
+        //                 // toast.error(response.data.message);
+        //             }
+        //         })
+        // };
 
         onMounted(() => {
-            getOffers();
-            // getOffersRepositories('');
+            // getOffers();
+            getOffersRepositories('');
         });
 
         return {
