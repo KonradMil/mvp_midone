@@ -27,13 +27,12 @@ class OfferController extends Controller
         $offers = Offer::where('challenge_id', '=', $challenge->id)->with('solution')->get();
         $array = [];
 
-        foreach($offers as $offer) {
+        foreach($offers as $offer){
             $solution = Solution::find($offer->solution_id);
-            if($solution->accepted == true){
-                 $array[] = $offer;
+            if($solution->selected == true){
+                $array[] = $offer;
             }
         }
-
         return response()->json([
             'success' => true,
             'message' => 'Pobrano oferty poprawnie.',
