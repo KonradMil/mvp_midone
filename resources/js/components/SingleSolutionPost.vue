@@ -176,7 +176,7 @@ export default {
                 })
         }
         const dislike = async (solution) => {
-            axios.post('api/solution/user/dislike', {id: solution.id})
+            axios.post('/api/solution/user/dislike', {id: solution.id})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
