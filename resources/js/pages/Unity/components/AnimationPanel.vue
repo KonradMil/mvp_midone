@@ -206,7 +206,7 @@ export default {
                 case 'settingsline':
                     console.log(animation);
                     console.log('IMPORTANT');
-                    // console.log( lines.value[activeLineIndex.value]);
+                    console.log( lines.value[activeLineIndex.value]);
                     emitter.emit('UnityLineSettings', {action: 'settingsline', data: animation.layers[activeLineIndex.value]})
                     break;
                 case 'line':
