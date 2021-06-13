@@ -16,11 +16,11 @@
                 <div class="col-span-11 rounded-md mr-5 relative" style=" overflow-y: scroll;">
                     <div class="grid grid-cols-12 my-3" @click="activeLineIndex = index; setNewAnimationLayer();" :class="(activeLineIndex == index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + index">
                         <div class="col-span-1">
-                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);">
-                                <UnityButton tooltip="Ustawienia" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" @click="activeLineIndex = index" position="animationbuttonclick"/>
+                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);" @click="activeLineIndex = index; setNewAnimationLayer();">
+                                <UnityButton tooltip="Ustawienia" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
                             </div>
-                            <div style="margin-left: 25%; margin-top: calc(25% - 10px)">
-                                <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" @click="activeLineIndex = index" position="animationbuttonclick"/>
+                            <div style="margin-left: 25%; margin-top: calc(25% - 10px)" @click="activeLineIndex = index; setNewAnimationLayer();">
+                                <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline"  position="animationbuttonclick"/>
                             </div>
                         </div>
                         <div class="col-span-1">
