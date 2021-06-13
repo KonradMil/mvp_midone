@@ -195,7 +195,7 @@ export default {
         }
 
         const rejectOffer = async(offer) => {
-            axios.post('/api/solution/reject', {id: offer.id})
+            axios.post('/api/offer/reject', {id: offer.id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Oferta zostało odrzucona');
