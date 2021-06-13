@@ -17,7 +17,7 @@
                     <div class="grid grid-cols-12 my-3" @click="activeLineIndex = index; setNewAnimationLayer();" :class="(activeLineIndex == index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + index">
                         <div class="col-span-1">
                             <div style="margin-left: 25%; margin-top: calc(25% - 10px);" @click="activeLineIndex = index; setNewAnimationLayer();">
-                                <UnityButton tooltip="" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
+<!--                                <UnityButton tooltip="" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>-->
 
                                 <Tippy
                                     id="meta-title-tab"
