@@ -17,7 +17,22 @@
                     <div class="grid grid-cols-12 my-3" @click="activeLineIndex = index; setNewAnimationLayer();" :class="(activeLineIndex == index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + index">
                         <div class="col-span-1">
                             <div style="margin-left: 25%; margin-top: calc(25% - 10px);" @click="activeLineIndex = index; setNewAnimationLayer();">
-                                <UnityButton tooltip="Ustawienia" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
+                                <UnityButton tooltip="" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
+
+                                <Tippy
+                                    id="meta-title-tab"
+                                    tag="span"
+                                    :content="'Ustawienia'"
+                                    href="javascript:;"
+                                    class="w-14 py-2 text-center flex justify-center items-center"
+                                    aria-selected="false">
+                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="settingsLine(index)">
+                                        <img class=""
+                                             :alt="'Ustawienia'"
+                                             :src="'/s3/builder_icons/settings_simple.png'"
+                                        />
+                                    </div>
+                                </Tippy>
                             </div>
                             <div style="margin-left: 25%; margin-top: calc(25% - 10px)" @click="activeLineIndex = index; setNewAnimationLayer();">
                                 <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline"  position="animationbuttonclick"/>
@@ -126,6 +141,11 @@ export default {
         //     animation.layers = JSON.parse(e.save.save_json).layers;
         // })
 
+        const settingsLine = (i) => {
+            activeLineIndex.value = i;
+            handleClick('settingsline');
+        }
+
         emitter.on('rightpanelaction', e => {
             console.log(e);
             if(e.action === 'updateLine' ) {
@@ -231,7 +251,8 @@ export default {
             expanded,
             activeLineIndex,
             activeAnimableIndex,
-            setNewAnimationLayer
+            setNewAnimationLayer,
+            settingsLine
         }
     }
 }
