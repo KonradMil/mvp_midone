@@ -35,7 +35,21 @@
                                 </Tippy>
                             </div>
                             <div style="margin-left: 25%; margin-top: calc(25% - 10px)" @click="activeLineIndex = index; setNewAnimationLayer();">
-                                <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline"  position="animationbuttonclick"/>
+<!--                                <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline"  position="animationbuttonclick"/>-->
+                                <Tippy
+                                    id="meta-title-tab"
+                                    tag="span"
+                                    :content="'Usuń linie'"
+                                    href="javascript:;"
+                                    class="w-14 py-2 text-center flex justify-center items-center"
+                                    aria-selected="false">
+                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="removeLine(index)">
+                                        <img class=""
+                                             :alt="'Usuń linie'"
+                                             :src="'/s3/builder_icons/bin_simple.png'"
+                                        />
+                                    </div>
+                                </Tippy>
                             </div>
                         </div>
                         <div class="col-span-1">
@@ -140,6 +154,11 @@ export default {
         //     console.log(JSON.parse(e.save.save_json));
         //     animation.layers = JSON.parse(e.save.save_json).layers;
         // })
+
+        const removeLine = (i) => {
+            activeLineIndex.value = i;
+            handleClick('removeline');
+        }
 
         const settingsLine = (i) => {
             activeLineIndex.value = i;
@@ -252,7 +271,8 @@ export default {
             activeLineIndex,
             activeAnimableIndex,
             setNewAnimationLayer,
-            settingsLine
+            settingsLine,
+            removeLine
         }
     }
 }
