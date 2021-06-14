@@ -166,8 +166,8 @@ export default {
         const like = async (solution) => {
             console.log(solution);
             console.log('-> solution');
-            console.log(solution.value);
             console.log('DZIALA?');
+            console.log(solution.id);
             axios.post('/api/solution/user/like', {id: solution.id})
                 .then(response => {
                     console.log(response.data);
