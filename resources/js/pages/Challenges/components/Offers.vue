@@ -129,7 +129,7 @@ export default {
         }
 
         const getOffersRepositories = async () => {
-            offers.value = GetOffers(props.id);
+            offers.value = GetOchfers(props.id);
         }
 
 
