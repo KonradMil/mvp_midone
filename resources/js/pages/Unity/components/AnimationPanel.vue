@@ -14,9 +14,9 @@
                     <UnityButton tooltip="Odtwórz" alttext="Odtwórz" path="/s3/builder_icons/play_simple.png" action="play" position="animationbuttonclick"/>
                 </div>
                 <div class="col-span-11 rounded-md mr-5 relative" style=" overflow-y: scroll;">
-                    <div class="grid grid-cols-12 my-3" @click="activeLineIndex = line.index; setNewAnimationLayer();" :class="(activeLineIndex == line.index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + index">
+                    <div class="grid grid-cols-12 my-3" @click="activeLineIndex = index; setNewAnimationLayer();" :class="(activeLineIndex == index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + index">
                         <div class="col-span-1">
-                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);" @click="activeLineIndex = line.index; setNewAnimationLayer();">
+                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);" @click="activeLineIndex = index; setNewAnimationLayer();">
 <!--                                <UnityButton tooltip="" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>-->
 
                                 <Tippy
@@ -34,7 +34,7 @@
                                     </div>
                                 </Tippy>
                             </div>
-                            <div style="margin-left: 25%; margin-top: calc(25% - 10px)" @click="activeLineIndex = line.index; setNewAnimationLayer();">
+                            <div style="margin-left: 25%; margin-top: calc(25% - 10px)" @click="activeLineIndex = index; setNewAnimationLayer();">
 <!--                                <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline"  position="animationbuttonclick"/>-->
                                 <Tippy
                                     id="meta-title-tab"
@@ -237,7 +237,7 @@ export default {
                     setNewAnimationLayer();
                     break;
                 case 'removeline':
-                    emitter.emit('unityoutgoingaction', {action: 'removeLine', data: activeLineIndex.value})
+                    emitter.emit('unityoutgoingaction', {action: 'removeLine', data: animation.layers[activeLineIndex.value].index})
                     break;
                 case 'settingsanimable':
                     emitter.emit('UnityAnimableSettings', {action: 'settingsanimable', data: animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value]})
