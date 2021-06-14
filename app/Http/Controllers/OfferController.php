@@ -42,7 +42,9 @@ class OfferController extends Controller
 
     public function getAll(Request $request)
     {
-        $offers = Offer::where('installer_id', '=', Auth::user()->id)->with('solution')->get();
+        $id = $request->input('id');
+        $challenge = Challenge::find($id);
+        $offers = Offer::where('installer_id', '=', Auth::user()->id)->where('challenge_id', '=', $challenge->id)->with('solution')->get();
 
         return response()->json([
             'success' => true,

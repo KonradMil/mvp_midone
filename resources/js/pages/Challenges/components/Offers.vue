@@ -6,7 +6,7 @@
         <div class="grid grid-cols-12 gap-6">
 
             <!-- BEGIN: Announcement -->
-            <div class="intro-y box col-span-6 xxl:col-span-6" v-for="(offer, index) in offers.list" :key="index" v-if="offer.challenge_id === id">
+            <div class="intro-y box col-span-6 xxl:col-span-6" v-for="(offer, index) in offers.list" :key="index">
 
                 <div class="px-5 py-5">
                     <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
@@ -129,7 +129,7 @@ export default {
         }
 
         const getOffersRepositories = async () => {
-            offers.value = GetOffers();
+            offers.value = GetOffers(props.id);
         }
 
 
