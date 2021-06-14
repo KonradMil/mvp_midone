@@ -14,9 +14,9 @@
                     <UnityButton tooltip="Odtwórz" alttext="Odtwórz" path="/s3/builder_icons/play_simple.png" action="play" position="animationbuttonclick"/>
                 </div>
                 <div class="col-span-11 rounded-md mr-5 relative" style=" overflow-y: scroll;">
-                    <div class="grid grid-cols-12 my-3" @click="activeLineIndex = index; setNewAnimationLayer();" :class="(activeLineIndex == index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + index">
+                    <div class="grid grid-cols-12 my-3" @click="activeLineIndex = line.index; setNewAnimationLayer();" :class="(activeLineIndex == line.index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + index">
                         <div class="col-span-1">
-                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);" @click="activeLineIndex = index; setNewAnimationLayer();">
+                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);" @click="activeLineIndex = line.index; setNewAnimationLayer();">
 <!--                                <UnityButton tooltip="" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>-->
 
                                 <Tippy
@@ -26,7 +26,7 @@
                                     href="javascript:;"
                                     class="w-14 py-2 text-center flex justify-center items-center"
                                     aria-selected="false">
-                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="settingsLine(index)">
+                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="settingsLine(line.index)">
                                         <img class=""
                                              :alt="'Ustawienia'"
                                              :src="'/s3/builder_icons/settings_simple.png'"
@@ -34,7 +34,7 @@
                                     </div>
                                 </Tippy>
                             </div>
-                            <div style="margin-left: 25%; margin-top: calc(25% - 10px)" @click="activeLineIndex = index; setNewAnimationLayer();">
+                            <div style="margin-left: 25%; margin-top: calc(25% - 10px)" @click="activeLineIndex = line.index; setNewAnimationLayer();">
 <!--                                <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline"  position="animationbuttonclick"/>-->
                                 <Tippy
                                     id="meta-title-tab"
@@ -43,7 +43,7 @@
                                     href="javascript:;"
                                     class="w-14 py-2 text-center flex justify-center items-center"
                                     aria-selected="false">
-                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="removeLine(index)">
+                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="removeLine(line.index)">
                                         <img class=""
                                              :alt="'Usuń linie'"
                                              :src="'/s3/builder_icons/bin_simple.png'"
@@ -64,7 +64,7 @@
                             <div class="w-full  h-full">
                                 <div class="row flex h-full" >
                                     <div class=" h-full" v-for="(animable, index) in line.animables" :key="'obiekt_' + index">
-                                        <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;" @click="activeAnimableIndex = index; showAnimableDialog();">
+                                        <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;" @click="activeAnimableIndex = line.index; showAnimableDialog();">
                                             <img class="w-full h-full"
                                                  :alt="animable.name.replace('models', 'models_images') + '.png'"
                                                  :src="animable.name.replace('models', 'models_images') + '.png'"
