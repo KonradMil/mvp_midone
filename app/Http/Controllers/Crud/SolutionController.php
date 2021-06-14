@@ -216,8 +216,9 @@ class SolutionController extends Controller
     }
 
     public function likeSolution(Request $request) {
-        dd($request);
+
         $id = $request->input('id');
+        dd($id);
         $solution = Solution::find($id);
         Auth::user()->viaLoveReacter()->reactTo($solution, 'Like');
 
