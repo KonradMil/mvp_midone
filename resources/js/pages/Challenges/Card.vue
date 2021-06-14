@@ -253,7 +253,9 @@ export default defineComponent({
                         // toast.error(response.data.message);
                         toast.error('Błąd.');
                     }
-                })
+                }).catch(function (error) {
+                console.error(error);
+            });
         }
 
         const unpublish = async(id) => {
