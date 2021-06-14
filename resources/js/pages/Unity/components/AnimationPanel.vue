@@ -26,7 +26,7 @@
                                     href="javascript:;"
                                     class="w-14 py-2 text-center flex justify-center items-center"
                                     aria-selected="false">
-                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="settingsLine(line.index)">
+                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="settingsLine(index)">
                                         <img class=""
                                              :alt="'Ustawienia'"
                                              :src="'/s3/builder_icons/settings_simple.png'"
@@ -43,7 +43,7 @@
                                     href="javascript:;"
                                     class="w-14 py-2 text-center flex justify-center items-center"
                                     aria-selected="false">
-                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in">
+                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in"  @click.native="removeLine(line.index)">
                                         <img class=""
                                              :alt="'Usuń linie'"
                                              :src="'/s3/builder_icons/bin_simple.png'"
@@ -162,8 +162,9 @@ export default {
         // })
 
         const removeLine = (i) => {
-            activeLineIndex.value = i;
-            handleClick('removeline');
+            // activeLineIndex.value = i;
+            emitter.emit('unityoutgoingaction', {action: 'removeLine', data: i})
+            // handleClick('removeline');
         }
 
         const settingsLine = (i) => {
@@ -244,7 +245,7 @@ export default {
                     setNewAnimationLayer();
                     break;
                 case 'removeline':
-                    emitter.emit('unityoutgoingaction', {action: 'removeLine', data: animation.layers[activeLineIndex.value].index})
+
                     break;
                 case 'settingsanimable':
                     emitter.emit('UnityAnimableSettings', {action: 'settingsanimable', data: animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value]})
