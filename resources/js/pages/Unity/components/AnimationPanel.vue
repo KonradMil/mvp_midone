@@ -162,14 +162,13 @@ export default {
         // })
 
         const removeLine = (i) => {
-            // activeLineIndex.value = i;
             emitter.emit('unityoutgoingaction', {action: 'removeLine', data: i})
-            // handleClick('removeline');
         }
 
         const settingsLine = (i) => {
             activeLineIndex.value = i;
-            handleClick('settingsline');
+            animation.layers[activeLineIndex.value].temp_index = i;
+            emitter.emit('UnityLineSettings', {action: 'settingsline', data: animation.layers[activeLineIndex.value]})
         }
 
         emitter.on('rightpanelaction', e => {
@@ -254,7 +253,7 @@ export default {
                     console.log(animation);
                     console.log('IMPORTANT');
                     console.log( activeLineIndex.value);
-                    emitter.emit('UnityLineSettings', {action: 'settingsline', data: animation.layers[activeLineIndex.value]})
+
                     break;
                 case 'line':
                     emitter.emit('UnityAnimableSettings', {
