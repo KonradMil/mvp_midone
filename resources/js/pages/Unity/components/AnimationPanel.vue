@@ -139,7 +139,13 @@ export default {
 
 
         const setNewAnimationLayer = () => {
-            emitter.emit('unityoutgoingaction', {action: 'addLine', data: animation.layers[activeLineIndex.value].index});
+            console.log(activeLineIndex.value);
+            if(animation.layers[activeLineIndex.value] == undefined) {
+                emitter.emit('unityoutgoingaction', {action: 'addLine', data: activeLineIndex.value});
+            } else {
+                emitter.emit('unityoutgoingaction', {action: 'addLine', data: animation.layers[activeLineIndex.value].index});
+            }
+
         }
 
         const activeLineIndex = ref(0);
