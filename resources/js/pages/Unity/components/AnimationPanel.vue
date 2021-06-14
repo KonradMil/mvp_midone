@@ -16,7 +16,7 @@
                 <div class="col-span-11 rounded-md mr-5 relative" style=" overflow-y: scroll;">
                     <div class="grid grid-cols-12 my-3" @click="activeLineIndex = index; setNewAnimationLayer();" :class="(activeLineIndex == index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + index">
                         <div class="col-span-1">
-                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);" @click="activeLineIndex = index; setNewAnimationLayer();">
+                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);">
 <!--                                <UnityButton tooltip="" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>-->
 
                                 <Tippy
@@ -34,7 +34,7 @@
                                     </div>
                                 </Tippy>
                             </div>
-                            <div style="margin-left: 25%; margin-top: calc(25% - 10px)" @click="activeLineIndex = index; setNewAnimationLayer();">
+                            <div style="margin-left: 25%; margin-top: calc(25% - 10px)">
 <!--                                <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline"  position="animationbuttonclick"/>-->
                                 <Tippy
                                     id="meta-title-tab"
@@ -43,7 +43,7 @@
                                     href="javascript:;"
                                     class="w-14 py-2 text-center flex justify-center items-center"
                                     aria-selected="false">
-                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="removeLine(line.index)">
+                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in">
                                         <img class=""
                                              :alt="'Usuń linie'"
                                              :src="'/s3/builder_icons/bin_simple.png'"
