@@ -16,11 +16,40 @@
                 <div class="col-span-11 rounded-md mr-5 relative" style=" overflow-y: scroll;">
                     <div class="grid grid-cols-12 my-3" @click="activeLineIndex = index; setNewAnimationLayer();" :class="(activeLineIndex == index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + index">
                         <div class="col-span-1">
-                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);">
-                                <UnityButton tooltip="Ustawienia" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>
+                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);" @click="activeLineIndex = index; setNewAnimationLayer();">
+<!--                                <UnityButton tooltip="" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>-->
+
+                                <Tippy
+                                    id="meta-title-tab"
+                                    tag="span"
+                                    :content="'Ustawienia'"
+                                    href="javascript:;"
+                                    class="w-14 py-2 text-center flex justify-center items-center"
+                                    aria-selected="false">
+                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="settingsLine(index)">
+                                        <img class=""
+                                             :alt="'Ustawienia'"
+                                             :src="'/s3/builder_icons/settings_simple.png'"
+                                        />
+                                    </div>
+                                </Tippy>
                             </div>
-                            <div style="margin-left: 25%; margin-top: calc(25% - 10px)">
-                                <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline" position="animationbuttonclick"/>
+                            <div style="margin-left: 25%; margin-top: calc(25% - 10px)" @click="activeLineIndex = index; setNewAnimationLayer();">
+<!--                                <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline"  position="animationbuttonclick"/>-->
+                                <Tippy
+                                    id="meta-title-tab"
+                                    tag="span"
+                                    :content="'Usuń linie'"
+                                    href="javascript:;"
+                                    class="w-14 py-2 text-center flex justify-center items-center"
+                                    aria-selected="false">
+                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="removeLine(index)">
+                                        <img class=""
+                                             :alt="'Usuń linie'"
+                                             :src="'/s3/builder_icons/bin_simple.png'"
+                                        />
+                                    </div>
+                                </Tippy>
                             </div>
                         </div>
                         <div class="col-span-1">
@@ -126,6 +155,16 @@ export default {
         //     animation.layers = JSON.parse(e.save.save_json).layers;
         // })
 
+        const removeLine = (i) => {
+            activeLineIndex.value = i;
+            handleClick('removeline');
+        }
+
+        const settingsLine = (i) => {
+            activeLineIndex.value = i;
+            handleClick('settingsline');
+        }
+
         emitter.on('rightpanelaction', e => {
             console.log(e);
             if(e.action === 'updateLine' ) {
@@ -206,7 +245,7 @@ export default {
                 case 'settingsline':
                     console.log(animation);
                     console.log('IMPORTANT');
-                    // console.log( lines.value[activeLineIndex.value]);
+                    console.log( activeLineIndex.value);
                     emitter.emit('UnityLineSettings', {action: 'settingsline', data: animation.layers[activeLineIndex.value]})
                     break;
                 case 'line':
@@ -231,7 +270,9 @@ export default {
             expanded,
             activeLineIndex,
             activeAnimableIndex,
-            setNewAnimationLayer
+            setNewAnimationLayer,
+            settingsLine,
+            removeLine
         }
     }
 }
