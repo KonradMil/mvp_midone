@@ -232,7 +232,7 @@ export default {
                 case 'addline':
                     // console.log('LENGTH AL');
                     // console.log(animation.layers.length);
-                    emitter.emit('unityoutgoingaction', {action: 'addLine',data: animation.layers.length});
+                    emitter.emit('unityoutgoingaction', {action: 'addLine',data: (animation.layers.length + Math.floor(Math.random() * 55))});
                     activeLineIndex.value = animation.layers.length;
                     setNewAnimationLayer();
                     break;
