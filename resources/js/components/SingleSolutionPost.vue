@@ -167,6 +167,9 @@ export default {
             axios.post('/api/solution/user/like', {id: solution.id})
                 .then(response => {
                     if (response.data.success) {
+                        console.log('LIKEEEEEEES')
+                        console.log(solution.value);
+                        console.log(solution.id);
                         solution.liked = true;
                         console.log(solution);
                         emitter.emit('liked', {id: solution.id})
@@ -180,6 +183,7 @@ export default {
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
+                        console.log('DISLIKEEEEEEE');
                         solution.liked = false;
                         emitter.emit('disliked', {id: solution.id})
                     } else {
