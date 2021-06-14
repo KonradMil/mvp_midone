@@ -37,7 +37,7 @@
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
         <h2 class="font-medium text-base mr-auto"> Moje oferty</h2>
     </div>
-        <div v-if="offers.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+        <div v-if="offers.list.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie ma jeszcze żadnych ofert.
         </div>
         <div class="grid grid-cols-12 gap-6">
