@@ -236,10 +236,11 @@ export default {
                     emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: {interval: 0, cycles: 0, layers: toRaw(animation)}})
                     break;
                 case 'addline':
-                    // console.log('LENGTH AL');
-                    // console.log(animation.layers.length);
-                    emitter.emit('unityoutgoingaction', {action: 'addLine',data: (animation.layers.length + Math.floor(Math.random() * 55))});
-                    activeLineIndex.value = animation.layers.length;
+                    console.log('LENGTH AL');
+                    const l = animation.layers.length + Math.floor(Math.random() * 55);
+                    console.log(l);
+                    emitter.emit('unityoutgoingaction', {action: 'addLine',data: l});
+                    activeLineIndex.value = l;
                     setNewAnimationLayer();
                     break;
                 case 'removeline':
