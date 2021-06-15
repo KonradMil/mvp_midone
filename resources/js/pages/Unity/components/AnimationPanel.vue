@@ -179,13 +179,14 @@ export default {
         }
 
         const settingsLine = (i) => {
-            activeLineIndex.value = i;
+            // activeLineIndex.value = i;
             // animation.layers.forEach((obj) => {
             //     if(obj.index === activeLineIndex.value) {
             //         obj.temp_index = i;
             //     }
             // });
-
+            console.log('HEREEE');
+            console.log(getLineByInternalIndex);
             emitter.emit('UnityLineSettings', {action: 'settingsline', data: getLineByInternalIndex})
         }
 
@@ -297,7 +298,8 @@ export default {
             activeAnimableIndex,
             setNewAnimationLayer,
             settingsLine,
-            removeLine
+            removeLine,
+            getLineByInternalIndex
         }
     }
 }
