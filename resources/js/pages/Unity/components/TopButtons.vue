@@ -15,7 +15,7 @@
                     <UnityButton :tooltip="''" :alttext="''" :path="'/s3/builder_icons/logout_simple.png'" :action="'logout'" position="topbuttonclick"/>
 <!--                    <UnityDropdown v-if="icon.type === 'dropdown'" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick" :options="icon.options"></UnityDropdown>-->
                 </div>
-                <div :key="'topIcon_eye'" class="top-i w-30 pl-6 unity-button" v-if="allowedEdit">
+                <div :key="'topIcon_eye'" class="top-i w-30 pl-6 unity-button">
 <!--                    <UnityButton  v-if="icon.type === 'button'" :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"/>-->
                     <UnityDropdown :alttext="''" :path="'/s3/builder_icons/eye_simple3.png'" :action="'eye'" position="topbuttonclick" :options="icons.right['eye'].options"></UnityDropdown>
                 </div>
