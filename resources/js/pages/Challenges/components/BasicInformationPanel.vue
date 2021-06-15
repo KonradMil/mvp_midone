@@ -202,7 +202,7 @@ export default {
         }
 
         const saveDate = () => {
-            axios.post('/api/challenge/change/dates', {offer_deadline: challenge.offer_deadline, solution_deadline: challenge.solution_deadline})
+            axios.post('/api/challenge/change/dates', {id: challenge.id, offer_deadline: challenge.offer_deadline, solution_deadline: challenge.solution_deadline})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {

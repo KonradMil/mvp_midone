@@ -14,7 +14,7 @@
                     <UnityButton tooltip="Odtwórz" alttext="Odtwórz" path="/s3/builder_icons/play_simple.png" action="play" position="animationbuttonclick"/>
                 </div>
                 <div class="col-span-11 rounded-md mr-5 relative" style=" overflow-y: scroll;">
-                    <div class="grid grid-cols-12 my-3" @click="activeLineIndex = index; setNewAnimationLayer();" :class="(activeLineIndex == index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + index">
+                    <div class="grid grid-cols-12 my-3" @click="activeLineIndex = line.index; setNewAnimationLayer();" :class="(activeLineIndex == line.index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + line.index">
                         <div class="col-span-1">
                             <div style="margin-left: 25%; margin-top: calc(25% - 10px);">
 <!--                                <UnityButton tooltip="" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>-->
@@ -26,7 +26,7 @@
                                     href="javascript:;"
                                     class="w-14 py-2 text-center flex justify-center items-center"
                                     aria-selected="false">
-                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="settingsLine(index)">
+                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="settingsLine(line.index)">
                                         <img class=""
                                              :alt="'Ustawienia'"
                                              :src="'/s3/builder_icons/settings_simple.png'"
@@ -114,17 +114,27 @@ export default {
             // console.log('END IMPORTANT NOW: ');
         }
 
+        function getLineByInternalIndex(index) {
+            animation.layers.forEach((obj) => {
+               if(obj.index === index) {
+                   return obj;
+               }
+            });
+        }
+
         function swapAnimableObjectByIndex(object) {
             console.log('IMPORTANT NOW: ');
-            console.log(animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value]);
+            console.log(getLineByInternalIndex(activeLineIndex.value).animables[activeAnimableIndex.value]);
             console.log(object);
-            animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value].duration = object.duration;
+            animation.layers.forEach((obj) => {
+                if(obj.index === activeLineIndex.value) {
+                    obj.duration = object.duration;
+                }
+            });
+            // animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value].duration = object.duration;
             // console.log('END IMPORTANT NOW: ');
         }
 
-        function addLine() {
-            animation.layers[animation.layers.length + 1] = {};
-        }
 
         function updateAnimationUnity() {
             console.log('FINAL EMIT IMP: ');
@@ -143,7 +153,7 @@ export default {
             if(animation.layers[activeLineIndex.value] == undefined) {
                 emitter.emit('unityoutgoingaction', {action: 'addLine', data: activeLineIndex.value});
             } else {
-                emitter.emit('unityoutgoingaction', {action: 'addLine', data: animation.layers[activeLineIndex.value].index});
+                emitter.emit('unityoutgoingaction', {action: 'addLine', data: getLineByInternalIndex(activeLineIndex.value).index});
             }
 
         }
@@ -167,8 +177,8 @@ export default {
 
         const settingsLine = (i) => {
             activeLineIndex.value = i;
-            animation.layers[activeLineIndex.value].temp_index = i;
-            emitter.emit('UnityLineSettings', {action: 'settingsline', data: animation.layers[activeLineIndex.value]})
+            getLineByInternalIndex(activeLineIndex.value).temp_index = i;
+            emitter.emit('UnityLineSettings', {action: 'settingsline', data: getLineByInternalIndex(activeLineIndex.value)})
         }
 
         emitter.on('rightpanelaction', e => {
@@ -247,7 +257,7 @@ export default {
 
                     break;
                 case 'settingsanimable':
-                    emitter.emit('UnityAnimableSettings', {action: 'settingsanimable', data: animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value]})
+                    emitter.emit('UnityAnimableSettings', {action: 'settingsanimable', data: getLineByInternalIndex(activeLineIndex.value).animables[activeAnimableIndex.value]})
                     break;
                 case 'settingsline':
                     console.log(animation);
@@ -258,7 +268,7 @@ export default {
                 case 'line':
                     emitter.emit('UnityAnimableSettings', {
                         action: 'removeLine',
-                        data: animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value]
+                        data: getLineByInternalIndex(activeLineIndex.value).animables[activeAnimableIndex.value]
                     })
                     break;
                 case 'minimalize':

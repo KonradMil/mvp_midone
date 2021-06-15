@@ -577,7 +577,22 @@ class ChallengeController extends Controller
     public function changeDates(Request $request)
     {
         $challenge = Challenge::find($request->input('id'));
-
+        try {
+            $challenge->solution_deadline = Carbon::createFromFormat('d.m.Y', $request->solution_deadline);
+        } catch (Exception $e) {
+            $challenge->solution_deadline = Carbon::createFromFormat('Y-m-d H:i:s', $request->solution_deadline);
+        }
+        try {
+            $challenge->offer_deadline = Carbon::createFromFormat('d.m.Y', $request->offer_deadline);
+        } catch (Exception $e) {
+            $challenge->offer_deadline = Carbon::createFromFormat('Y-m-d H:i:s', $request->offer_deadline);
+        }
+        $challenge->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'Opublikowano poprawnie.',
+            'payload' => $challenge
+        ]);
     }
 
     public function unpublish(Request $request)
