@@ -129,6 +129,8 @@ export default {
                 comment.value.index = temp_comment_id.value;
                 emitter.emit('unityoutgoingaction', { action: 'updateComment', data:comment, json: true });
             } else if (content.value === 'animable') {
+                console.log('animable.value');
+                console.log(animable.value);
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'teams') {
                 // emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });

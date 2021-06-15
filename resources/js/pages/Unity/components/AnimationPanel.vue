@@ -145,7 +145,7 @@ export default {
             // console.log(getLineByInternalIndex.animables[activeAnimableIndex.value]);
             console.log(object);
             animation.layers.forEach((obj) => {
-                if(obj.index === activeLineIndex.value) {
+                if(obj.index === activeAnimableIndex.value) {
                     obj.duration = object.duration;
                 }
             });
