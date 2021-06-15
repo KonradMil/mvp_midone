@@ -177,7 +177,12 @@ export default {
 
         const settingsLine = (i) => {
             activeLineIndex.value = i;
-            getLineByInternalIndex(activeLineIndex.value).temp_index = i;
+            animation.layers.forEach((obj) => {
+                if(obj.index === activeLineIndex.value) {
+                    obj.temp_index = i;
+                }
+            });
+
             emitter.emit('UnityLineSettings', {action: 'settingsline', data: getLineByInternalIndex(activeLineIndex.value)})
         }
 
