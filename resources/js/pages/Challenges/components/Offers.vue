@@ -13,7 +13,7 @@
                         <div class="flex items-center">
                             <div class="pl-4 my-2">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
-                                <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }} </div>
+                                <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}<span v-if="offer.selected == 1" style="color: #930f68;"> - Wybrane</span><span v-if="offer.rejected == 1" style="color: #1a202c;"> - Odrzucone</span> </div>
                             </div>
                         </div>
                         <div class="flex items-center">
