@@ -111,7 +111,7 @@ export default {
         function swapObjectByIndex(index, object) {
             // console.log('IMPORTANT NOW: ');
 
-            animation.layers.every((obj, index) => {
+            animation.layers.forEach((obj, index) => {
                 console.log('INDISE');
                 console.log(obj);
                 console.log(index);
@@ -119,7 +119,6 @@ export default {
                 console.log(activeLineIndex.value);
                 if(obj.index == activeLineIndex.value) {
                     animation.layers[index] = toRaw(object.layers);
-                    return false;
                 }
             })
             // console.log('END IMPORTANT NOW: ');
