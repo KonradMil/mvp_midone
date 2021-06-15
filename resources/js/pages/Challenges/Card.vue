@@ -175,6 +175,7 @@ export default defineComponent({
         emitter.on('changeToOffers', e => {
             activeTab.value = 'oferty';
         });
+
         emitter.on('updateOffers', e => {
             activeTab.value = 'all-offers';
         });
