@@ -203,9 +203,7 @@ export default {
         }
 
         const removeOffer = (offer) => {
-            offers.value = offers.value.filter(function(x){
-                return x.id !== offer.id;
-            });
+            offers.value = offers.value.filter(x => x.id !== offer.id)
         }
 
 
