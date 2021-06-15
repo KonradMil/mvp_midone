@@ -146,7 +146,7 @@ class OfferController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Zatwierdzono ofertę.',
-            'payload' => $offer, $solution
+            'payload' => $offer, $solution, $challenge
         ]);
     }
     public function rejectOffer(Request $request)
@@ -156,7 +156,10 @@ class OfferController extends Controller
         $offer->rejected = true;
         $offer->selected = false;
         $challenge = Challenge::find($offer->challenge_id);
-        $challenge->selected_offer_id = 0;
+        if($challenge->selected_offer_id == $offer->id){
+            $challenge->selected_offer_id = 0;
+        }
+
         $solution = Solution::find($offer->solution_id);
         $solution->selected_offer_id = 0;
         $challenge->save();
