@@ -114,19 +114,20 @@ export default {
             // console.log('END IMPORTANT NOW: ');
         }
 
-        const getLineByInternalIndex = computed((index) => {
+        const getLineByInternalIndex = computed(() => {
             animation.layers.forEach((obj) => {
-               if(obj.index === index) {
+               if(obj.index === activeLineIndex.value) {
                    console.log('obj');
                    console.log(toRaw(obj));
                    return toRaw(obj);
                }
             });
+            return undefined;
         });
 
         function swapAnimableObjectByIndex(object) {
             console.log('IMPORTANT NOW: ');
-            console.log(getLineByInternalIndex(activeLineIndex.value).animables[activeAnimableIndex.value]);
+            console.log(getLineByInternalIndex.animables[activeAnimableIndex.value]);
             console.log(object);
             animation.layers.forEach((obj) => {
                 if(obj.index === activeLineIndex.value) {
@@ -152,10 +153,10 @@ export default {
 
         const setNewAnimationLayer = () => {
             console.log(activeLineIndex.value);
-            if(animation.layers[activeLineIndex.value] == undefined) {
+            if(getLineByInternalIndex == undefined) {
                 emitter.emit('unityoutgoingaction', {action: 'addLine', data: activeLineIndex.value});
             } else {
-                emitter.emit('unityoutgoingaction', {action: 'addLine', data: getLineByInternalIndex(activeLineIndex.value).index});
+                emitter.emit('unityoutgoingaction', {action: 'addLine', data: getLineByInternalIndex.index});
             }
 
         }
@@ -185,7 +186,7 @@ export default {
             //     }
             // });
 
-            emitter.emit('UnityLineSettings', {action: 'settingsline', data: getLineByInternalIndex(activeLineIndex.value)})
+            emitter.emit('UnityLineSettings', {action: 'settingsline', data: getLineByInternalIndex})
         }
 
         emitter.on('rightpanelaction', e => {
@@ -264,7 +265,7 @@ export default {
 
                     break;
                 case 'settingsanimable':
-                    emitter.emit('UnityAnimableSettings', {action: 'settingsanimable', data: getLineByInternalIndex(activeLineIndex.value).animables[activeAnimableIndex.value]})
+                    emitter.emit('UnityAnimableSettings', {action: 'settingsanimable', data: getLineByInternalIndex.animables[activeAnimableIndex.value]})
                     break;
                 case 'settingsline':
                     console.log(animation);
@@ -275,7 +276,7 @@ export default {
                 case 'line':
                     emitter.emit('UnityAnimableSettings', {
                         action: 'removeLine',
-                        data: getLineByInternalIndex(activeLineIndex.value).animables[activeAnimableIndex.value]
+                        data: getLineByInternalIndex.animables[activeAnimableIndex.value]
                     })
                     break;
                 case 'minimalize':
