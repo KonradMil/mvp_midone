@@ -63,7 +63,7 @@
                             <div class="w-full  h-full">
                                 <div class="row flex h-full" >
                                     <div class=" h-full" v-for="(animable, index) in line.animables" :key="'obiekt_' + index">
-                                        <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;" @click="activeAnimableIndex = line.index; showAnimableDialog();">
+                                        <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;" @click="activeAnimableIndex = index; showAnimableDialog();">
                                             <img class="w-full h-full"
                                                  :alt="animable.name.replace('models', 'models_images') + '.png'"
                                                  :src="animable.name.replace('models', 'models_images') + '.png'"
