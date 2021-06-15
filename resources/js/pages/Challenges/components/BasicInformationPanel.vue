@@ -44,7 +44,6 @@
                 }
               }" class="form-control"/>
                         <span v-if="!inTeam"> {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }} </span>
-
                     </div>
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
                         <strong>Deadline składania ofert:</strong>
@@ -53,18 +52,18 @@
                             v-model="challenge.offer_deadline"
                             v-if="inTeam"
                             :options="{
-                autoApply: false,
-                lang: 'pl',
-                format: 'DD.MM.YYYY',
-                showWeekNumbers: true,
-                 buttonText: {'apply':'OK','cancel':'Anuluj'},
-                dropdowns: {
-                  minYear: 2021,
-                  maxYear: null,
-                  months: true,
-                  years: true
-                }
-              }" class="form-control"/>
+                                autoApply: false,
+                                lang: 'pl',
+                                format: 'DD.MM.YYYY',
+                                showWeekNumbers: true,
+                                buttonText: {'apply':'OK','cancel':'Anuluj'},
+                                dropdowns: {
+                                minYear: 2021,
+                                maxYear: null,
+                                months: true,
+                                years: true
+                            }
+                        }" class="form-control"/>
                         <span v-if="!inTeam"> {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }} </span>
                     </div>
                     <button v-if="inTeam" class="btn btn-secondary ml-auto" @click="saveDate">
@@ -202,7 +201,7 @@ export default {
         }
 
         const saveDate = () => {
-            axios.post('/api/challenge/change/dates', {id: challenge.id, offer_deadline: challenge.offer_deadline, solution_deadline: challenge.solution_deadline})
+            axios.post('/api/challenge/change/dates', {id: challenge.value.id, offer_deadline: challenge.value.offer_deadline, solution_deadline: challenge.value.solution_deadline})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
