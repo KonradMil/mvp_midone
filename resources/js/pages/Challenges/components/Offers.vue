@@ -20,7 +20,7 @@
                             </div>
                             <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                             <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Odrzucono </div>
-                            <div class="flex items-center mr-3" v-if="(offer.rejected != 1) && (offer.selected != 1)"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Oczekuje na akceptację </div>
+                            <div class="flex items-center mr-3" v-if="(offer.rejected != 1) && (offer.selected != 1) && (offer.status = 1)"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Oczekuje na akceptację </div>
                         </div>
                         <div class="flex items-center">
                             <div class="border-l-2 border-theme-1 pl-4">
