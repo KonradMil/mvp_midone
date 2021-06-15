@@ -118,6 +118,9 @@
 import {getCurrentInstance, onMounted, ref} from "vue";
 import GetOffers from "../../../compositions/GetOffers";
 import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
+import {useToast} from "vue-toastification";
+
+const toast = useToast();
 
 export default {
     name: "Offers",
