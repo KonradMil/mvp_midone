@@ -110,6 +110,20 @@ class OfferController extends Controller
             'payload' => $offer
         ]);
     }
+
+    public function publishOffer(Request $request){
+        $id = $request->input('id');
+        $offer = Offer::find($id);
+        $offer->status = 1;
+        $offer->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Opublikowano oferte poprawnie.',
+            'payload' => $offer
+        ]);
+    }
+
     public function acceptOffer (Request $request) {
         $id = $request->input('id');
         $offer = Offer::find($id);

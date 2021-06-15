@@ -194,10 +194,7 @@ export default {
                         toast.success('Oferta zostało zaakceptowane');
                         offer.selected = 1;
                         offer.rejected = 0;
-                        solution.value = offer.solution;
-                        solution.selected_offer_id = offer.id;
-                        // offer.solution.selected_offer_id = offer.id;
-                        emitter.emit('updateOffers', {action: 'go'});
+                        offer.solution.selected_offer_id = offer.id;
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -211,10 +208,7 @@ export default {
                         toast.success('Oferta zostało odrzucona');
                         offer.rejected = 1;
                         offer.selected = 0;
-                        solution.value = offer.solution;
-                        solution.selected_offer_id = 0;
-                        // offer.solution.selected_offer_id = 0;
-                        emitter.emit('updateOffers', {action: 'go'});
+                        offer.solution.selected_offer_id = 0;
                     } else {
                         // toast.error(response.data.message);
                     }
