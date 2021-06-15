@@ -202,6 +202,13 @@ export default {
                 })
         }
 
+        const removeOffer = (offer) => {
+            offers.value = offers.value.filter(function(x){
+                return x.id !== offer.id;
+            });
+        }
+
+
         const rejectOffer = async(offer) => {
             axios.post('/api/offer/reject', {id: offer.id})
                 .then(response => {
@@ -211,10 +218,11 @@ export default {
                         offer.selected = 0;
                         offer.solution.selected_offer_id = 0;
                         props.challenge.selected_offer_id = 0;
+                        removeOffer(offer);
                         // offers.value = offers.value.filter(x => x.id !== offer.id)
-                        offers.value = offers.value.filter(function(x){
-                            return x.id !== offer.id;
-                        });
+                        // offers.value = offers.value.filter(function(x){
+                        //     return x.id !== offer.id;
+                        // });
                         // offers.value.splice(index, 1);
                     } else {
                         // toast.error(response.data.message);
@@ -227,6 +235,7 @@ export default {
         });
 
         return {
+            removeOffer,
             rejectOffer,
             acceptOffer,
             switchTab,
