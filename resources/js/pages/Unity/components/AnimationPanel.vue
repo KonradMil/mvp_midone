@@ -117,6 +117,8 @@ export default {
         function getLineByInternalIndex(index) {
             animation.layers.forEach((obj) => {
                if(obj.index === index) {
+                   console.log('obj');
+                   console.log(obj);
                    return obj;
                }
             });
