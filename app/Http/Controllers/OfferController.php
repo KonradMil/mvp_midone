@@ -116,12 +116,13 @@ class OfferController extends Controller
         $challenge = Challenge::find($offer->challenge_id);
         $solution = Solution::find($offer->solution_id);
         $solution -> selected_offer_id = $offer->id;
-        $solution -> save();
+
         $offer->selected = true;
-        if($offer->rejected==true)
-        {
+
+        if($offer->rejected==true) {
             $offer->rejected = false;
         }
+        $solution -> save();
         $offer->save();
 
 //        event(new SolutionAccepted($solution, $challenge->author, 'Rozwiązanie zostało zaakceptowane: ' . $solution->name, []));
