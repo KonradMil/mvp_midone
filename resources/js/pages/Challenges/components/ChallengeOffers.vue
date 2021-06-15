@@ -211,10 +211,11 @@ export default {
                         offer.selected = 0;
                         offer.solution.selected_offer_id = 0;
                         props.challenge.selected_offer_id = 0;
-                        const offerIndex = offers.value.list.findIndex(a => a.id === offer.id);
-                        if (offerIndex !== -1) {
-                            offers.value.list.splice(offerIndex,1);
-                        }
+                        getChallengeOffersRepositories('');
+                        // const offerIndex = offers.value.list.findIndex(a => a.id === offer.id);
+                        // if (offerIndex !== -1) {
+                        //     offers.value.list.splice(offerIndex,1);
+                        // }
                     } else {
                         // toast.error(response.data.message);
                     }
