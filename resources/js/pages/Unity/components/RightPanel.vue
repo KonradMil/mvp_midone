@@ -263,7 +263,7 @@ export default {
 
         emitter.on('UnityAnimableSettings', e => {
             console.log('I CAME');
-            temp_animable_id.value = e.data.index;
+            temp_animable_id.value = e.data.layer_id;
             content.value = 'animable';
             console.log(e);
             animable.value = e.data;
