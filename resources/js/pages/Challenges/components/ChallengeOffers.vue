@@ -52,7 +52,7 @@
                             </div>
                             <div class="mt-2 pl-9 pb-6" v-if="(user.id === challenge.author_id)">
                                 <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="(offer.selected == 0) && (offer.solution.selected_offer_id === 0)" >Akceptuj ofertę</button>
-                                <button class="btn btn-primary shadow-md mr-2" @click="rejectOffer(offer)" v-if="(offer.selected == 1) || (offer.solution.selected_offer_id > 0)">Odrzuć ofertę</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="rejectOffer(offer)" v-if="(offer.selected == 1) && (offer.solution.selected_offer_id > 0)">Odrzuć ofertę</button>
                             </div>
                         </div>
                         <div class="flex items-center">
