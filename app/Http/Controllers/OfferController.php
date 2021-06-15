@@ -129,7 +129,7 @@ class OfferController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Zatwierdzono ofertę.',
-            'payload' => $offer
+            'payload' => $offer, $solution
         ]);
     }
     public function rejectOffer(Request $request)
