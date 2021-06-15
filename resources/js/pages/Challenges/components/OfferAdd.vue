@@ -230,7 +230,7 @@ export default {
                     console.log(response.data + '-> OFFER SAVE !!');
                     console.log(advance_upon_delivery.value + '-> delivery');
                     toast.success(response.data.message);
-
+                    emitter.emit('changeToOffers', {action: 'go'});
                 } else {
                     toast.error('Ups! Coś poszło nie tak!');
                 }

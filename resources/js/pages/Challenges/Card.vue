@@ -172,6 +172,10 @@ export default defineComponent({
             activeTab.value = 'addingoffer';
         });
 
+        emitter.on('changeToOffers', e => {
+            activeTab.value = 'oferty';
+        });
+
         const checkTeam = () => {
             console.log({user_id: user.id, challenge_id: challenge.value.id});
             axios.post('/api/challenge/check-team', {user_id: user.id, challenge_id: challenge.value.id})

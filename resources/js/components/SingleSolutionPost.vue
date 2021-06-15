@@ -203,7 +203,7 @@ export default {
                     if (response.data.success) {
                         toast.success('Rozwiązanie zostało zaakceptowane');
                         props.solution.selected = 1;
-                        props.solution.rejected = 1;
+                        props.solution.rejected = 0;
                     } else {
                         // toast.error(response.data.message);
                     }
