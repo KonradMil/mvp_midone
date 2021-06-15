@@ -115,6 +115,7 @@ export default {
         }
 
         const getLineByInternalIndex = computed(() => {
+            let c = undefined;
             animation.layers.forEach((obj) => {
                 console.log('obj');
                 console.log(toRaw(obj));
@@ -124,11 +125,10 @@ export default {
                 console.log(activeLineIndex.value);
                 console.log('activeLineIndex.value');
                if(obj.index == activeLineIndex.value) {
-                   console.log(toRaw(obj));
-                   return toRaw(obj);
+                   c = toRaw(obj);
                }
             });
-            return undefined;
+            return c;
         });
 
         function swapAnimableObjectByIndex(object) {
@@ -155,7 +155,6 @@ export default {
         const showAnimableDialog = () => {
             emitter.emit('animationbuttonclick', {val: 'settingsanimable', data: activeAnimableIndex.value});
         }
-
 
         const setNewAnimationLayer = () => {
             console.log(activeLineIndex.value);
@@ -235,6 +234,13 @@ export default {
             console.log(props.animationSave);
             console.log(props.animationSave.layers);
             animation.layers = props.animationSave.layers;
+            if(toRaw(animation.layers).length > 0) {
+                animation.layers.every((obj) => {
+                    activeLineIndex.value = obj.index;
+                    return false;
+                })
+                // activeLineIndex.value = animation.layers[0]
+            }
         });
 
         const handleClick = (val) => {
