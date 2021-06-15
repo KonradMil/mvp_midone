@@ -66,10 +66,10 @@
                         }" class="form-control"/>
                         <span v-if="!inTeam"> {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }} </span>
                     </div>
-                    <button v-if="inTeam" class="btn btn-secondary ml-auto" @click="saveDate">
+                    <button v-if="inTeam" class="btn btn-secondary ml-auto my-1" @click="saveDate">
                         Zmień daty
                     </button>
-                    <div class="flex items-center mt-5">
+                    <div class="flex items-center my-5">
                         <div
                             class="px-3 py-2 bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 rounded font-medium"
                             v-if="$dayjs().isBefore($dayjs(challenge.offer_deadline))"
