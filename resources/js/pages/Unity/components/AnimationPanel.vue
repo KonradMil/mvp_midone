@@ -115,20 +115,20 @@ export default {
         }
 
         const getLineByInternalIndex = computed(() => {
-            let c = undefined;
-            animation.layers.forEach((obj) => {
-                console.log('obj');
-                console.log(toRaw(obj));
-                console.log(toRaw(obj).index);
-                console.log(obj);
-                console.log(obj.index);
-                console.log(activeLineIndex.value);
-                console.log('activeLineIndex.value');
-               if(obj.index == activeLineIndex.value) {
-                   c = toRaw(obj);
-               }
-            });
-            return c;
+           return animation.layers.find(x => x.index == activeLineIndex.value);
+            // animation.layers.forEach((obj) => {
+            //     console.log('obj');
+            //     console.log(toRaw(obj));
+            //     console.log(toRaw(obj).index);
+            //     console.log(obj);
+            //     console.log(obj.index);
+            //     console.log(activeLineIndex.value);
+            //     console.log('activeLineIndex.value');
+            //    if(obj.index == activeLineIndex.value) {
+            //        c = toRaw(obj);
+            //    }
+            // });
+
         });
 
         function swapAnimableObjectByIndex(object) {
