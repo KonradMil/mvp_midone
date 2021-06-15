@@ -210,7 +210,7 @@ export default {
                         offer.rejected = 1;
                         offer.selected = 0;
                         offer.solution.selected_offer_id = 0;
-                        props.challenge.selected_offer_id = offer.id;
+                        props.challenge.selected_offer_id = 0;
                     } else {
                         // toast.error(response.data.message);
                     }
