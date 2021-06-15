@@ -32,10 +32,14 @@
 <!--            </div>-->
 <!--        </div>-->
 <!--    </div>-->
-    <div class="col-span-12 lg:col-span-8 xxl:col-span-9" >
+
+    <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" >
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-        <h2 class="font-medium text-base mr-auto"> Moje oferty</h2>
+        <h2 class="font-medium text-base mr-auto"> Moje oferty {{offers.length}}</h2>
     </div>
+        <div v-if="offers.length==0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+            Nie ma jeszcze żadnych ofert.
+        </div>
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12 xxl:col-span-6" v-for="(offer, index) in offers.list" :key="index">
@@ -47,7 +51,7 @@
                                 <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
                             </div>
                             <div class="mt-2 pl-9 pb-6" v-if="user.id === challenge.author_id">
-                                <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1" >Akceptuj ofertę</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && offer.solution.selected_offer_id < 1" >Akceptuj ofertę</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="rejectOffer(offer)" v-if="offer.rejected != 1" >Odrzuć ofertę</button>
                             </div>
                         </div>
@@ -144,9 +148,7 @@
                     </div>
                 </div>
             </div>
-<!--            <div v-if="offers.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">-->
-<!--                Nie ma jeszcze żadnych ofert.-->
-<!--            </div>-->
+
             <!-- END: Announcement -->
             <!-- BEGIN: Daily Sales -->
             <!-- END: Daily Sales -->
@@ -171,7 +173,6 @@ export default {
         const offers = ref([]);
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
-
 
         const switchTab = () => {
             context.emit("update:activeTab", 'addingoffer');

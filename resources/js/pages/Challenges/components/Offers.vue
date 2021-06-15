@@ -116,7 +116,8 @@ import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
 export default {
     name: "Offers",
     props: {
-        activeTab: String
+        activeTab: String,
+        id: Number,
     },
     emits: ["update:activeTab"],
     setup(props, context) {
@@ -128,7 +129,7 @@ export default {
         }
 
         const getOffersRepositories = async () => {
-            offers.value = GetOffers();
+            offers.value = GetOffers(props.id);
         }
 
 

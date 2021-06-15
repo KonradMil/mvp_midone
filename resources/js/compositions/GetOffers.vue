@@ -5,11 +5,11 @@
 <script>
 import {ref} from 'vue';
 
-export default function GetOffers() {
+export default function GetOffers(id) {
     const list = ref([]);
 
-    async function getOffers() {
-        axios.post('/api/offer/get/all', {})
+    async function getOffers(id) {
+        axios.post('/api/offer/get/all', {id: id})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
@@ -21,7 +21,7 @@ export default function GetOffers() {
             })
     }
 
-    getOffers();
+    getOffers(id);
 
     return {
         list

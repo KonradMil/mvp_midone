@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Symfony\Contracts\Service;
 
 class ChallengeController extends Controller
 {
@@ -562,13 +563,17 @@ class ChallengeController extends Controller
         $challenge->stage = 1;
         $challenge->save();
 
-        event(new ChallengePublished($challenge, $challenge->author, 'Nowe wyzwanie zostało opublikowane: ' . $challenge->name, []));
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Opublikowano poprawnie.',
-            'payload' => $challenge
-        ]);
+        try {
+            event(new ChallengePublished($challenge, $challenge->author, 'Nowe wyzwanie zostało opublikowane: ' . $challenge->name, []));
+        } catch(Exception $e) {
+                  throw new Exception('Event jest w trakcie publikacji!');
+        } finally {
+            return response()->json([
+                'success' => true,
+                'message' => 'Opublikowano poprawnie.',
+                'payload' => $challenge
+            ]);
+        }
     }
 
     public function unpublish(Request $request)

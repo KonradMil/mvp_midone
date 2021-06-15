@@ -87,6 +87,7 @@ export default {
         const like = (id) => {
             console.log('LIKED EVENT ON');
             console.log([id, obj.value]);
+            console.log(obj.value.likes);
             if(obj.value.id === id) {
                 obj.value.likes = obj.value.likes + 1;
             }
@@ -102,8 +103,9 @@ export default {
         emitter.on('disliked', e =>  dislike(e.id) )
 
         const dislike = (id) => {
-            console.log('LIKED EVENT ON');
+            console.log('DISLIKED EVENT ON');
             console.log([id, obj.value]);
+            console.log(obj.value.likes);
             if(obj.value.id === id) {
                 obj.value.likes = obj.value.likes - 1;
             }

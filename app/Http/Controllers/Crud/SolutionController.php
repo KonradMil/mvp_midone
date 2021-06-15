@@ -216,6 +216,7 @@ class SolutionController extends Controller
     }
 
     public function likeSolution(Request $request) {
+
         $id = $request->input('id');
         $solution = Solution::find($id);
         Auth::user()->viaLoveReacter()->reactTo($solution, 'Like');
@@ -223,6 +224,19 @@ class SolutionController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Polajkowano.',
+            'payload' => ''
+        ]);
+    }
+
+    public function dislikeSolution(Request $request)
+    {
+        $id = $request->input('id');
+        $solution= Solution::find($id);
+        Auth::user()->viaLoveReacter()->unreactTo($solution, 'Like');
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Odlajkowane.',
             'payload' => ''
         ]);
     }

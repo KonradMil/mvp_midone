@@ -42,7 +42,9 @@ class OfferController extends Controller
 
     public function getAll(Request $request)
     {
-        $offers = Offer::where('installer_id', '=', Auth::user()->id)->with('solution')->get();
+        $id = $request->input('id');
+        $challenge = Challenge::find($id);
+        $offers = Offer::where('installer_id', '=', Auth::user()->id)->where('challenge_id', '=', $challenge->id)->with('solution')->get();
 
         return response()->json([
             'success' => true,
@@ -112,8 +114,9 @@ class OfferController extends Controller
         $id = $request->input('id');
         $offer = Offer::find($id);
         $challenge = Challenge::find($offer->challenge_id);
-//        $challenge->stage = 2;
-//        $challenge->save();
+        $solution = Solution::find($offer->solution_id);
+        $solution -> selected_offer_id = $offer->id;
+        $solution -> save();
         $offer->selected = true;
         if($offer->rejected==true)
         {
@@ -135,6 +138,9 @@ class OfferController extends Controller
         $offer = Offer::find($id);
         $offer->rejected = true;
         $offer->selected = false;
+        $solution = Solution::find($offer->solution_id);
+        $solution -> selected_offer_id = 0;
+        $solution -> save();
         $offer->save();
 
         return response()->json([

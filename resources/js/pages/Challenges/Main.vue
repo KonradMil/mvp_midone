@@ -230,7 +230,7 @@ export default {
                     if (response.data.success) {
                         // console.log(response.data);
                         // challenge.likes = challenge.likes + 1;
-                        challenge.liked = true;
+                        challenge.liked = false;
                         console.log(challenge);
                         emitter.emit('disliked', {id: challenge.id})
                         // getChallengeRepositories();

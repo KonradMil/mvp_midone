@@ -74,14 +74,14 @@
                    @click.prevent="like(solution)"
                    tag="a" href=""
                    class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 ml-auto"
-                   content="Share">
+                   content="Like">
                 <ThumbsUpIcon class="w-3 h-3"/>
             </Tippy>
             <Tippy v-if="solution.liked"
-                   @click.prevent=""
+                   @click.prevent="dislike(solution)"
                    tag="a" href=""
                    class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white ml-2 ml-auto"
-                   content="Like">
+                   content="Unlike">
                 <ThumbsUpIcon class="w-3 h-3"/>
             </Tippy>
         </div>
@@ -164,9 +164,17 @@ export default {
         }
 
         const like = async (solution) => {
+            console.log(solution);
+            console.log('-> solution');
+            console.log('DZIALA?');
+            console.log(solution.id);
             axios.post('/api/solution/user/like', {id: solution.id})
                 .then(response => {
+                    console.log(response.data);
                     if (response.data.success) {
+                        console.log('LIKEEEEEEES')
+                        console.log(solution.value);
+                        console.log(solution.id);
                         solution.liked = true;
                         console.log(solution);
                         emitter.emit('liked', {id: solution.id})
@@ -175,6 +183,19 @@ export default {
                     }
                 })
         }
+        const dislike = async (solution) => {
+            axios.post('/api/solution/user/dislike', {id: solution.id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        console.log('DISLIKEEEEEEE');
+                        solution.liked = false;
+                        emitter.emit('disliked', {id: solution.id})
+                    } else {
+                    }
+                })
+        }
+
 
         const acceptSolution = () => {
             axios.post('/api/solution/accept', {id: solution.id})
@@ -245,6 +266,7 @@ export default {
             solution,
             user,
             like,
+            dislike,
             props,
             acceptSolution,
             deleteSolution,
