@@ -110,7 +110,12 @@ export default {
         //ANIMATION CONTROLLER
         function swapObjectByIndex(index, object) {
             // console.log('IMPORTANT NOW: ');
-            animation.layers[index] = toRaw(object.layers);
+
+            animation.layers.every((obj, index) => {
+                if(obj.index == activeLineIndex.value) {
+                    animation.layers[index] = toRaw(object.layers);
+                }
+            })
             // console.log('END IMPORTANT NOW: ');
         }
 
