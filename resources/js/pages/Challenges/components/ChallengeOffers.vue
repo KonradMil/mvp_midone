@@ -50,9 +50,9 @@
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
                                 <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
                             </div>
-                            <div class="mt-2 pl-9 pb-6" v-if="user.id === challenge.author_id">
-                                <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && offer.solution.selected_offer_id < 1" >Akceptuj ofertę</button>
-                                <button class="btn btn-primary shadow-md mr-2" @click="rejectOffer(offer)" v-if="offer.rejected != 1" >Odrzuć ofertę</button>
+                            <div class="mt-2 pl-9 pb-6" v-if="(user.id === challenge.author_id) && (offer.solution.selected_offer_id === 0)">
+                                <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected == 0" >Akceptuj ofertę</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="rejectOffer(offer)" v-if="offer.selected == 1" >Odrzuć ofertę</button>
                             </div>
                         </div>
                         <div class="flex items-center">
@@ -173,6 +173,7 @@ export default {
         const offers = ref([]);
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
+        const solution = ref();
 
         const switchTab = () => {
             context.emit("update:activeTab", 'addingoffer');
@@ -181,6 +182,7 @@ export default {
         const getChallengeOffersRepositories = async () => {
             offers.value = GetChallengeOffers(props.challenge.id);
         }
+
 
         const acceptOffer = async(offer) => {
             axios.post('/api/offer/accept', {id: offer.id})
@@ -218,7 +220,8 @@ export default {
             switchTab,
             offers,
             user,
-            values
+            values,
+            solution
         }
     }
 }
