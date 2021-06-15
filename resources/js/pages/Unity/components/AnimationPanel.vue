@@ -153,7 +153,7 @@ export default {
 
         const setNewAnimationLayer = () => {
             console.log(activeLineIndex.value);
-            if(getLineByInternalIndex == undefined) {
+            if(Boolean(getLineByInternalIndex)) {
                 emitter.emit('unityoutgoingaction', {action: 'addLine', data: activeLineIndex.value});
             } else {
                 emitter.emit('unityoutgoingaction', {action: 'addLine', data: getLineByInternalIndex.index});
