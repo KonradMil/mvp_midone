@@ -29,7 +29,7 @@ class OfferController extends Controller
 
         foreach($offers as $offer){
             $solution = Solution::find($offer->solution_id);
-            if(($solution->selected == true) && ($offer->rejected != 1) && ($offer->status = 1)){
+            if(($solution->selected == true) && ($offer->rejected != 1) && ($offer->status == 1)){
                 $array[] = $offer;
             }
         }
