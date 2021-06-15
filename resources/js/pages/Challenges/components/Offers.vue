@@ -13,15 +13,11 @@
                         <div class="flex items-center">
                             <div class="pl-4 my-2">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
-                                <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}
-
-                                    <!--                                    <span v-if="offer.selected == 1" style="color: #930f68;"> - Zaakceptowano</span>-->
-<!--                                    <span v-if="offer.rejected == 1" style="color: #1a202c;"> - Odrzucone</span>-->
-                                </div>
-                                <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
-                                <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Odrzucono </div>
-                                <div class="flex items-center justify-center text-theme-6" v-else> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Oczekuje na akceptację </div>
+                                <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
                             </div>
+                            <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
+                            <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Odrzucono </div>
+                            <div class="flex items-center justify-center text-theme-6" v-else> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Oczekuje na akceptację </div>
                         </div>
                         <div class="flex items-center">
                             <div class="border-l-2 border-theme-1 pl-4">
