@@ -25,7 +25,7 @@
                         <div class="flex items-center">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Okres ważności oferty w dniach:</span>
-                                <div class="text-gray-600"> {{ offer.offer_expires_in }}zł</div>
+                                <div class="text-gray-600"> {{ offer.offer_expires_in }} dni</div>
                             </div>
                         </div>
                         <div class="flex items-center">
