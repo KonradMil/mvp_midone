@@ -144,11 +144,14 @@ export default {
             console.log('IMPORTANT NOW: ');
             // console.log(getLineByInternalIndex.animables[activeAnimableIndex.value]);
             console.log(object);
-            animation.layers.forEach((obj) => {
-                if(obj.index === activeAnimableIndex.value) {
-                    obj.duration = object.duration;
-                }
-            });
+
+            getLineByInternalIndex.value.animables[activeAnimableIndex.value].duration = object.duration;
+
+            // .forEach((obj) => {
+            //     if(obj.index === activeAnimableIndex.value) {
+            //         obj.duration = object.duration;
+            //     }
+            // });
             // animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value].duration = object.duration;
             // console.log('END IMPORTANT NOW: ');
         }
