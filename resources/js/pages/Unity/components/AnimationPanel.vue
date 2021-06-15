@@ -291,6 +291,10 @@ export default {
 
                     break;
                 case 'settingsanimable':
+                    console.log('settingsanimable');
+                    console.log(getLineByInternalIndex);
+                    console.log(getLineByInternalIndex.animables);
+                    console.log(activeAnimableIndex.value);
                     emitter.emit('UnityAnimableSettings', {action: 'settingsanimable', data: getLineByInternalIndex.animables[activeAnimableIndex.value]})
                     break;
                 case 'settingsline':
