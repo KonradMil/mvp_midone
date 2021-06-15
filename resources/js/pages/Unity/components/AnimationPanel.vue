@@ -293,7 +293,8 @@ export default {
                 case 'settingsanimable':
                     console.log('settingsanimable');
                     console.log(getLineByInternalIndex);
-                    console.log(getLineByInternalIndex.animables);
+                    console.log(toRaw(getLineByInternalIndex));
+                    console.log(getLineByInternalIndex.value.animables);
                     console.log(activeAnimableIndex.value);
                     emitter.emit('UnityAnimableSettings', {action: 'settingsanimable', data: toRaw(getLineByInternalIndex).animables[activeAnimableIndex.value]})
                     break;
