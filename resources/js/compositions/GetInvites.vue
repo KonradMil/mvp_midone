@@ -15,7 +15,12 @@ export default function GetInvites(handle) {
                     // console.log(response.data);
                     list.value = response.data.payload;
                     console.log(handle);
-                    handle(response.data);
+                    try {
+                        handle(response.data);
+                    }catch (e) {
+
+                    }
+
                 } else {
                     // toast.error(response.data.message);
                 }

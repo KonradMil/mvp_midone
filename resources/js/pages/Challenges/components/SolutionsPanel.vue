@@ -54,15 +54,17 @@ export default {
         });
         const toast = useToast();
         const types = require("../../../json/types.json");
-        const user = ref({});
+        const user = window.Laravel.user;
         const guard = ref(false);
         const solutions = ref([]);
 
         onMounted(function () {
-            filterMember();
-            if (window.Laravel.user) {
-                user.value = window.Laravel.user;
-            }
+           if(user.type == 'investor' && props.inTeam) {
+               solutions.value = challenge.solutions;
+           } else {
+               filterMember();
+           }
+
         });
 
 
