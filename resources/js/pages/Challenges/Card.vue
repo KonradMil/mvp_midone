@@ -105,7 +105,7 @@
                 <WhatsNext :user="user" :challenge="challenge"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
-            <BasicInformationPanel :challenge="challenge" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
+            <BasicInformationPanel :challenge="challenge" :inTeam="inTeam" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
             <TechnicalInformationPanel :challenge="challenge" v-if="activeTab == 'techniczne'"></TechnicalInformationPanel>
             <QuestionsPanel v-if="activeTab == 'pytania'" :author_id="challenge.author_id" :id="challenge.id"></QuestionsPanel>
             <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge" :inTeam="inTeam"></SolutionsPanel>

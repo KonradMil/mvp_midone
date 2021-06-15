@@ -25,10 +25,47 @@
                         <strong>Opis:</strong> {{ challenge.description }}
                     </div>
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
-                        <strong>Deadline składania rozwiązań:</strong> {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }}
+                        <strong>Deadline składania rozwiązań:</strong>
+                        <Litepicker
+                            id="post-form-2"
+                            v-model="challenge.solution_deadline"
+                            v-if="inTeam"
+                            :options="{
+                autoApply: false,
+                lang: 'pl',
+                format: 'DD.MM.YYYY',
+                showWeekNumbers: true,
+                 buttonText: {'apply':'OK','cancel':'Anuluj'},
+                dropdowns: {
+                  minYear: 2021,
+                  maxYear: null,
+                  months: true,
+                  years: true
+                }
+              }" class="form-control"/>
+                        <span v-if="!inTeam"> {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }} </span>
+
                     </div>
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
-                        <strong>Deadline składania ofert:</strong> {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }}
+                        <strong>Deadline składania ofert:</strong>
+                        <Litepicker
+                            id="post-form-2"
+                            v-model="challenge.offer_deadline"
+                            v-if="inTeam"
+                            :options="{
+                autoApply: false,
+                lang: 'pl',
+                format: 'DD.MM.YYYY',
+                showWeekNumbers: true,
+                 buttonText: {'apply':'OK','cancel':'Anuluj'},
+                dropdowns: {
+                  minYear: 2021,
+                  maxYear: null,
+                  months: true,
+                  years: true
+                }
+              }" class="form-control"/>
+                        <span v-if="!inTeam"> {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }} </span>
                     </div>
 
                     <div class="flex items-center mt-5">
@@ -93,7 +130,8 @@ import VueEasyLightbox from 'vue-easy-lightbox'
 export default {
     name: "BasicInformationPanel",
     props: {
-        challenge: Object
+        challenge: Object,
+        inTeam: Boolean
     },
     components: {
         VueEasyLightbox
