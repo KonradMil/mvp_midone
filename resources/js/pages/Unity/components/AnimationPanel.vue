@@ -112,8 +112,14 @@ export default {
             // console.log('IMPORTANT NOW: ');
 
             animation.layers.every((obj, index) => {
+                console.log('INDISE');
+                console.log(obj);
+                console.log(index);
+                console.log(obj.index);
+                console.log(activeLineIndex.value);
                 if(obj.index == activeLineIndex.value) {
                     animation.layers[index] = toRaw(object.layers);
+                    return false;
                 }
             })
             // console.log('END IMPORTANT NOW: ');
