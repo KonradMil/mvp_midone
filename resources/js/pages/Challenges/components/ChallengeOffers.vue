@@ -211,6 +211,7 @@ export default {
                         offer.selected = 0;
                         offer.solution.selected_offer_id = 0;
                         props.challenge.selected_offer_id = 0;
+                        offers.value.splice(offer, 1);
                     } else {
                         // toast.error(response.data.message);
                     }
