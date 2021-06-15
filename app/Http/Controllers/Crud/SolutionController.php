@@ -41,6 +41,7 @@ class SolutionController extends Controller
         $solution->rejected = true;
         $solution->selected = false;
         $solution->offers()->delete();
+        $solution->selected_offer_id = 0;
         $solution->save();
 
         return response()->json([

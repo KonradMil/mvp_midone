@@ -35,7 +35,7 @@
 
     <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" >
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-        <h2 class="font-medium text-base mr-auto"> Moje oferty {{offers.length}}</h2>
+        <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
         <div v-if="offers.length==0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie ma jeszcze żadnych ofert.
@@ -50,10 +50,11 @@
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
                                 <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
                             </div>
-                            <div class="mt-2 pl-9 pb-6" v-if="user.id === challenge.author_id">
-                                <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && offer.solution.selected_offer_id < 1" >Akceptuj ofertę</button>
+                            <div class="mt-2 pl-9 pb-6" v-if="(user.id === challenge.author_id)">
+                                <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && offer.solution.selected_offer_id < 1">Akceptuj ofertę</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="rejectOffer(offer)" v-if="offer.rejected != 1" >Odrzuć ofertę</button>
                             </div>
+                            <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                         </div>
                         <div class="flex items-center">
                             <div class="border-l-2 border-theme-1 pl-4">
@@ -169,10 +170,13 @@ export default {
     },
     emits: ["update:activeTab"],
     setup(props, context) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const toast = useToast();
         const offers = ref([]);
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
+        const solution = ref();
 
         const switchTab = () => {
             context.emit("update:activeTab", 'addingoffer');
@@ -182,6 +186,7 @@ export default {
             offers.value = GetChallengeOffers(props.challenge.id);
         }
 
+
         const acceptOffer = async(offer) => {
             axios.post('/api/offer/accept', {id: offer.id})
                 .then(response => {
@@ -189,6 +194,7 @@ export default {
                         toast.success('Oferta zostało zaakceptowane');
                         offer.selected = 1;
                         offer.rejected = 0;
+                        offer.solution.selected_offer_id = offer.id;
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -202,6 +208,7 @@ export default {
                         toast.success('Oferta zostało odrzucona');
                         offer.rejected = 1;
                         offer.selected = 0;
+                        offer.solution.selected_offer_id = 0;
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -218,7 +225,8 @@ export default {
             switchTab,
             offers,
             user,
-            values
+            values,
+            solution
         }
     }
 }

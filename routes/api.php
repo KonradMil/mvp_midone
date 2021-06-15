@@ -96,6 +96,7 @@ Route::group(['prefix' => 'offer', 'middleware' => 'auth:sanctum'], function () 
     Route::post('get', [OfferController::class, 'get']);
     Route::post('save', [OfferController::class, 'save']);
     Route::post('get/all', [OfferController::class, 'getAll']);
+    Route::post('publish', [OfferController::class, 'publishOffer']);
     Route::post('get/challenge/offers/{challenge}', [OfferController::class, 'getAllChallengeOffers']);
 });
 

@@ -13,8 +13,14 @@
                         <div class="flex items-center">
                             <div class="pl-4 my-2">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
-                                <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }} </div>
+                                <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
                             </div>
+                            <div class="mt-2 pl-9 pb-6" v-if="(user.id === offer.installer_id)">
+                                <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status != 1">Opublikuj ofertę</button>
+                            </div>
+                            <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
+                            <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Odrzucono </div>
+                            <div class="flex items-center mr-3" v-if="(offer.rejected != 1) && (offer.selected != 1)"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Oczekuje na akceptację </div>
                         </div>
                         <div class="flex items-center">
                             <div class="border-l-2 border-theme-1 pl-4">
@@ -112,6 +118,9 @@
 import {getCurrentInstance, onMounted, ref} from "vue";
 import GetOffers from "../../../compositions/GetOffers";
 import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
+import {useToast} from "vue-toastification";
+
+const toast = useToast();
 
 export default {
     name: "Offers",
@@ -132,6 +141,17 @@ export default {
             offers.value = GetOffers(props.id);
         }
 
+        const publishOffer = async(offer) => {
+            axios.post('/api/offer/publish', {id: offer.id})
+                .then(response => {
+                    if (response.data.success) {
+                        offer.status = 1;
+                        toast.success('Oferta zostało opublikowane');
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        }
 
         // const getOffers = () => {
         //     axios.post('/api/offer/get/all', {})
@@ -151,6 +171,7 @@ export default {
         });
 
         return {
+            publishOffer,
             switchTab,
             offers,
             user,
