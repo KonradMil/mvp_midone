@@ -142,7 +142,7 @@ export default {
 
         function swapAnimableObjectByIndex(object) {
             console.log('IMPORTANT NOW: ');
-            console.log(getLineByInternalIndex.animables[activeAnimableIndex.value]);
+            // console.log(getLineByInternalIndex.animables[activeAnimableIndex.value]);
             console.log(object);
             animation.layers.forEach((obj) => {
                 if(obj.index === activeLineIndex.value) {
