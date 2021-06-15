@@ -118,8 +118,8 @@ export default {
             animation.layers.forEach((obj) => {
                if(obj.index === index) {
                    console.log('obj');
-                   console.log(obj);
-                   return obj;
+                   console.log(toRaw(obj));
+                   return toRaw(obj);
                }
             });
         }
