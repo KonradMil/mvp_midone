@@ -10,13 +10,13 @@
             <div class="unity-button">
                 <UnityButton :tooltip="'Settings'" :alttext="'settings'" :path="'s3/builder_icons/dane_simple.png'" :action="'settings'" position="rightbuttonclick"  />
             </div>
-            <div class="unity-button" v-if="allowedEdit && type == 'solution'">
+            <div class="unity-button" v-if="type == 'solution'">
                 <UnityButton :tooltip="'financial'" :alttext="'financial'" :path="'s3/builder_icons/assum_simple.png'" :action="'financial'" position="rightbuttonclick"  />
             </div>
-            <div class="unity-button" v-if="allowedEdit && type == 'solution'">
+            <div class="unity-button" v-if="type == 'solution'">
                 <UnityButton :tooltip="'operational'" :alttext="'operational'" :path="'s3/builder_icons/analiza_finansowa.png'" :action="'operational'" position="rightbuttonclick"  />
             </div>
-            <div class="unity-button" v-if="allowedEdit && type == 'solution'">
+            <div class="unity-button" v-if="type == 'solution'">
                 <UnityButton :tooltip="'Analiza operacyjna'" :alttext="'operationalanalysis'" :path="'s3/builder_icons/analiza_operacyjna_simple.png'" :action="'operationalanalysis'" position="rightbuttonclick"  />
             </div>
         </div>
