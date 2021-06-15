@@ -17,6 +17,7 @@
                             </div>
                             <div class="mt-2 pl-9 pb-6" v-if="(user.id === offer.installer_id)">
                                 <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status != 1">Opublikuj ofertę</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status != 1">Edytuj</button>
                             </div>
                             <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                             <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Odrzucono </div>

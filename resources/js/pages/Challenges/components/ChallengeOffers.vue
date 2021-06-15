@@ -50,7 +50,7 @@
                                 <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
                                 <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
                             </div>
-                            <div class="mt-2 pl-9 pb-6" v-if="(user.id === challenge.author_id)">
+                            <div class="mt-2 pl-9 pb-6" v-if="inTeam">
                                 <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && challenge.selected_offer_id < 1">Akceptuj ofertę</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="rejectOffer(offer)" v-if="offer.rejected != 1" >Odrzuć ofertę</button>
                             </div>
@@ -172,7 +172,8 @@ export default {
     name: "ChallengeOffers",
     props: {
         challenge: Object,
-        activeTab: String
+        activeTab: String,
+        inTeam: Boolean
     },
     emits: ["update:activeTab"],
     setup(props, context) {
