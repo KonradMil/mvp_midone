@@ -217,6 +217,7 @@ export default {
                         offer.solution.selected_offer_id = 0;
                         props.challenge.selected_offer_id = 0;
                         removeOffer(offer);
+                        window.location.reload();
                         // offers.value = offers.value.filter(x => x.id !== offer.id)
                         // offers.value = offers.value.filter(function(x){
                         //     return x.id !== offer.id;
