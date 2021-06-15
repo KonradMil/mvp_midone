@@ -43,7 +43,7 @@
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12 xxl:col-span-6" v-for="(offer, index) in offers.list" :key="index">
-                <div class="px-5 py-5" >
+                <div class="px-5 py-5" v-if="challenge.selected_offer_id < 1 || offer.selected == 1">
                     <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
                         <div class="flex items-center">
                             <div class="pl-4 my-2">
