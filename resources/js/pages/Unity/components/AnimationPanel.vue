@@ -90,7 +90,7 @@
 
 <script>
 import AnimationButtons from "./AnimationButtons";
-import {getCurrentInstance, onMounted, reactive, ref, toRaw, unref} from "vue";
+import {computed, getCurrentInstance, onMounted, reactive, ref, toRaw, unref} from "vue";
 import UnityButton from "./UnityButton";
 
 
@@ -114,7 +114,7 @@ export default {
             // console.log('END IMPORTANT NOW: ');
         }
 
-        function getLineByInternalIndex(index) {
+        const getLineByInternalIndex = computed((index) => {
             animation.layers.forEach((obj) => {
                if(obj.index === index) {
                    console.log('obj');
@@ -122,7 +122,7 @@ export default {
                    return toRaw(obj);
                }
             });
-        }
+        });
 
         function swapAnimableObjectByIndex(object) {
             console.log('IMPORTANT NOW: ');
@@ -179,11 +179,11 @@ export default {
 
         const settingsLine = (i) => {
             activeLineIndex.value = i;
-            animation.layers.forEach((obj) => {
-                if(obj.index === activeLineIndex.value) {
-                    obj.temp_index = i;
-                }
-            });
+            // animation.layers.forEach((obj) => {
+            //     if(obj.index === activeLineIndex.value) {
+            //         obj.temp_index = i;
+            //     }
+            // });
 
             emitter.emit('UnityLineSettings', {action: 'settingsline', data: getLineByInternalIndex(activeLineIndex.value)})
         }
