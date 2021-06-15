@@ -115,7 +115,7 @@ export default {
         }
 
         const getLineByInternalIndex = computed(() => {
-           return animation.layers.find(x => x.index == activeLineIndex.value);
+           return toRaw(animation.layers).find(x => x.index == activeLineIndex.value);
             // animation.layers.forEach((obj) => {
             //     console.log('obj');
             //     console.log(toRaw(obj));
