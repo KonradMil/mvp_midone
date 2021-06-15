@@ -23,7 +23,7 @@ class Challenge extends Model implements ReactableInterface
     protected $fillable = [
         'type',
         'name', 'en_name', 'solution_deadline', 'offer_deadline', 'status', 'stage', 'save_json', 'screenshot_path',
-        'client_id', 'author_id', 'financial_before_id', 'description', 'en_description', 'allowed_publishing'
+        'client_id', 'author_id', 'financial_before_id', 'description', 'en_description', 'allowed_publishing', 'selected_offer_id'
     ];
 
 
