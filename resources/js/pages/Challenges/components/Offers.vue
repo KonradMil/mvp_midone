@@ -19,7 +19,8 @@
 <!--                                    <span v-if="offer.rejected == 1" style="color: #1a202c;"> - Odrzucone</span>-->
                                 </div>
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
-                                <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Inactive </div>
+                                <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Odrzucono </div>
+                                <div class="flex items-center justify-center text-theme-6" v-else> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Oczekuje na akceptację </div>
                             </div>
                         </div>
                         <div class="flex items-center">

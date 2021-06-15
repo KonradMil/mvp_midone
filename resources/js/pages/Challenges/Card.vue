@@ -175,6 +175,9 @@ export default defineComponent({
         emitter.on('changeToOffers', e => {
             activeTab.value = 'oferty';
         });
+        emitter.on('updateOffers', e => {
+            activeTab.value = 'all-offers';
+        });
 
         const checkTeam = () => {
             console.log({user_id: user.id, challenge_id: challenge.value.id});
