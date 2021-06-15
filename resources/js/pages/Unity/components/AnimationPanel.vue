@@ -148,6 +148,7 @@ export default {
         function updateAnimationUnity() {
             console.log('FINAL EMIT IMP: ');
             console.log(animation);
+            animation.layers = animation.layers.filter(value => Object.keys(value).length !== 0);
             emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: animation});
         }
         //END OF ANIMATION CONTROLLER
