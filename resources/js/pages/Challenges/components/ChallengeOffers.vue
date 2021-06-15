@@ -51,8 +51,8 @@
                                 <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
                             </div>
                             <div class="mt-2 pl-9 pb-6" v-if="(user.id === challenge.author_id)">
-                                <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && offer.solution.selected_offer_id < 1">Akceptuj ofertę</button>
-                                <button class="btn btn-primary shadow-md mr-2" @click="rejectOffer(offer)" v-if="offer.rejected != 1" >Odrzuć ofertę</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && challenge.selected_offer_id < 1">Akceptuj ofertę</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="rejectOffer(offer,index)" v-if="offer.rejected != 1" >Odrzuć ofertę</button>
                             </div>
                             <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                         </div>
@@ -191,24 +191,27 @@ export default {
             axios.post('/api/offer/accept', {id: offer.id})
                 .then(response => {
                     if (response.data.success) {
-                        toast.success('Oferta zostało zaakceptowane');
+                        toast.success('Oferta została zaakceptowane');
                         offer.selected = 1;
                         offer.rejected = 0;
                         offer.solution.selected_offer_id = offer.id;
+                        props.challenge.selected_offer_id = offer.id;
                     } else {
                         // toast.error(response.data.message);
                     }
                 })
         }
 
-        const rejectOffer = async(offer) => {
+        const rejectOffer = async(offer,index) => {
             axios.post('/api/offer/reject', {id: offer.id})
                 .then(response => {
                     if (response.data.success) {
-                        toast.success('Oferta zostało odrzucona');
+                        toast.success('Oferta została odrzucona');
                         offer.rejected = 1;
                         offer.selected = 0;
                         offer.solution.selected_offer_id = 0;
+                        props.challenge.selected_offer_id = 0;
+                        offers.value.splice(index, 1);
                     } else {
                         // toast.error(response.data.message);
                     }

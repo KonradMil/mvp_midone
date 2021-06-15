@@ -29,7 +29,7 @@ class OfferController extends Controller
 
         foreach($offers as $offer){
             $solution = Solution::find($offer->solution_id);
-            if(($solution->selected == true) && ($offer->rejected != 1) && ($offer->status = 1)){
+            if(($solution->selected == true) && ($offer->rejected != 1) && ($offer->status == 1)){
                 $array[] = $offer;
             }
         }
@@ -128,15 +128,17 @@ class OfferController extends Controller
         $id = $request->input('id');
         $offer = Offer::find($id);
         $challenge = Challenge::find($offer->challenge_id);
+        $challenge->selected_offer_id = $offer->id;
         $solution = Solution::find($offer->solution_id);
-        $solution -> selected_offer_id = $offer->id;
+        $solution->selected_offer_id = $offer->id;
 
         $offer->selected = true;
 
         if($offer->rejected==true) {
             $offer->rejected = false;
         }
-        $solution -> save();
+        $challenge->save();
+        $solution->save();
         $offer->save();
 
 //        event(new SolutionAccepted($solution, $challenge->author, 'Rozwiązanie zostało zaakceptowane: ' . $solution->name, []));
@@ -153,9 +155,12 @@ class OfferController extends Controller
         $offer = Offer::find($id);
         $offer->rejected = true;
         $offer->selected = false;
+        $challenge = Challenge::find($offer->challenge_id);
+        $challenge->selected_offer_id = 0;
         $solution = Solution::find($offer->solution_id);
-        $solution -> selected_offer_id = 0;
-        $solution -> save();
+        $solution->selected_offer_id = 0;
+        $challenge->save();
+        $solution->save();
         $offer->save();
 
         return response()->json([
