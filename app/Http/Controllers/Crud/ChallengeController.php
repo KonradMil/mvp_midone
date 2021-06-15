@@ -563,17 +563,15 @@ class ChallengeController extends Controller
         $challenge->stage = 1;
         $challenge->save();
 
-        try {
-            event(new ChallengePublished($challenge, $challenge->author, 'Nowe wyzwanie zostało opublikowane: ' . $challenge->name, []));
-        } catch(Exception $e) {
-                  throw new Exception('Event jest w trakcie publikacji!');
-        } finally {
-            return response()->json([
-                'success' => true,
-                'message' => 'Opublikowano poprawnie.',
-                'payload' => $challenge
-            ]);
-        }
+
+//            event(new ChallengePublished($challenge, $challenge->author, 'Nowe wyzwanie zostało opublikowane: ' . $challenge->name, []));
+
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Opublikowano poprawnie.',
+            'payload' => $challenge
+        ]);
     }
 
     public function unpublish(Request $request)
