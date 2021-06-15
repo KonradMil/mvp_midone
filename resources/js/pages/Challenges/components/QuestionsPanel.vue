@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
                                 <div v-if="expand[index] === true">
-                                        <div class="border px-5 py-2" v-for="(a, i) in q.answers">
+                                        <div class="border px-5 py-2" v-for="(a, i) in q.answers" style="word-break: break-all;">
                                             Odpowiedź: {{a.question}}
                                         </div>
                                 </div>
