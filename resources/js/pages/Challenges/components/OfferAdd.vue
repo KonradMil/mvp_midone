@@ -163,6 +163,12 @@
                         </label>
                         <input type="text" class="form-control" v-model="period_of_support"/>
                     </div>
+                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">
+                        <label for="input-wizard-13" class="form-label">
+                          Okres ważności oferty w dniach
+                        </label>
+                        <input type="number" class="form-control" v-model="offer_expires_in"/>
+                    </div>
                 </div>
                 <button class="btn btn-primary w-20 mt-3" @click="save">{{ $t('profiles.save') }}</button>
             </div>
@@ -197,6 +203,7 @@ export default {
         const time_to_fix = ref(0);
         const intervention_price = ref(0);
         const work_hour_price = ref(0);
+        const offer_expires_in = ref(30);
         const period_of_support = ref('');
 
         const toast = useToast();
@@ -224,7 +231,8 @@ export default {
                 reaction_time: reaction_time.value,
                 intervention_price: intervention_price.value,
                 work_hour_price: work_hour_price.value,
-                period_of_support: period_of_support.value
+                period_of_support: period_of_support.value,
+                offer_expires_in: offer_expires_in.value
             }).then(response => {
                 if (response.data.success) {
                     console.log(response.data + '-> OFFER SAVE !!');
@@ -265,6 +273,7 @@ export default {
                         intervention_price.value = response.data.payload.intervention_price;
                         work_hour_price.value = response.data.payload.work_hour_price;
                         period_of_support.value = response.data.payload.period_of_support;
+                        offer_expires_in.value = response.data.payload.offer_expires_in;
                     } else {
                         toast.error('Ups! Coś poszło nie tak!');
                     }
@@ -287,7 +296,8 @@ export default {
             work_hour_price,
             period_of_support,
             save,
-            values
+            values,
+            offer_expires_in
         }
     }
 }

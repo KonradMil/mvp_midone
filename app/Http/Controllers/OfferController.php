@@ -80,6 +80,7 @@ class OfferController extends Controller
         $check->intervention_price = $request->intervention_price;
         $check->work_hour_price = $request->work_hour_price;
         $check->period_of_support = $request->period_of_support;
+        $check->offer_expires_in = $request->offer_expires_in;
 
 
 //        $solution = Solution::find($request->input('solution_id'));
