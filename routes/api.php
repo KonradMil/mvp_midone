@@ -82,6 +82,7 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
     Route::post('images/store', [ChallengeController::class, 'storeImage']);
     Route::post('publish', [ChallengeController::class, 'publish']);
     Route::post('unpublish', [ChallengeController::class, 'unpublish']);
+    Route::post('change/dates', [ChallengeController::class, 'changeDates']);
 });
 
 //Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {

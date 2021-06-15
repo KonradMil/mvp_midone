@@ -67,7 +67,9 @@
               }" class="form-control"/>
                         <span v-if="!inTeam"> {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }} </span>
                     </div>
-
+                    <button v-if="inTeam" class="btn btn-secondary ml-auto" @click="saveDate">
+                        Zmień daty
+                    </button>
                     <div class="flex items-center mt-5">
                         <div
                             class="px-3 py-2 bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 rounded font-medium"
@@ -199,6 +201,18 @@ export default {
                 })
         }
 
+        const saveDate = () => {
+            axios.post('/api/challenge/change/dates', {offer_deadline: challenge.offer_deadline, solution_deadline: challenge.solution_deadline})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        toast.success('Daty zmienione.');
+                    } else {
+
+                    }
+                })
+        }
+
         const stage = computed(function () {
             switch (challenge.value.stage) {
                 case 0:
@@ -235,7 +249,8 @@ export default {
             lightBoxIndex,
             images,
             showImage,
-            hideLightbox
+            hideLightbox,
+            saveDate
         }
     }
 }

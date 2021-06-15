@@ -574,6 +574,12 @@ class ChallengeController extends Controller
         ]);
     }
 
+    public function changeDates(Request $request)
+    {
+        $challenge = Challenge::find($request->input('id'));
+
+    }
+
     public function unpublish(Request $request)
     {
         $challenge = Challenge::with('solutions')->find($request->input('id'));
