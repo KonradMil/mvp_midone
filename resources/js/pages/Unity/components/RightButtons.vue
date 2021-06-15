@@ -1,8 +1,23 @@
 <template>
     <div class="flex fixed h-full z-50 pt-14" style="top: 0; right: 0; pointer-events: none;">
         <div class="flex-1 pt-2 mr-10">
-            <div v-for="(icon, index) in icons" :key="'rightIcon_' + index" v-if="index != 'operationalanalysis' || type == 'solution'" class="unity-button">
-                <UnityButton :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="rightbuttonclick"  />
+<!--            <div v-for="(icon, index) in icons" :key="'rightIcon_' + index" v-if="index != 'operationalanalysis' && type == 'solution'" class="unity-button">-->
+<!--                <UnityButton :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="rightbuttonclick"  />-->
+<!--            </div>-->
+            <div class="unity-button">
+                <UnityButton :tooltip="'Description'" :alttext="'description'" :path="'s3/builder_icons/notatka_simple.png'" :action="'description'" position="rightbuttonclick"  />
+            </div>
+            <div class="unity-button">
+                <UnityButton :tooltip="'Settings'" :alttext="'settings'" :path="'s3/builder_icons/dane_simple.png'" :action="'settings'" position="rightbuttonclick"  />
+            </div>
+            <div class="unity-button" v-if="allowedEdit && type == 'solution'">
+                <UnityButton :tooltip="'financial'" :alttext="'financial'" :path="'s3/builder_icons/assum_simple.png'" :action="'financial'" position="rightbuttonclick"  />
+            </div>
+            <div class="unity-button" v-if="allowedEdit && type == 'solution'">
+                <UnityButton :tooltip="'operational'" :alttext="'operational'" :path="'s3/builder_icons/analiza_finansowa.png'" :action="'operational'" position="rightbuttonclick"  />
+            </div>
+            <div class="unity-button" v-if="allowedEdit && type == 'solution'">
+                <UnityButton :tooltip="'Analiza operacyjna'" :alttext="'operationalanalysis'" :path="'s3/builder_icons/analiza_operacyjna_simple.png'" :action="'operationalanalysis'" position="rightbuttonclick"  />
             </div>
         </div>
     </div>

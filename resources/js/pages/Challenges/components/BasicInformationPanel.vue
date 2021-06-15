@@ -49,7 +49,7 @@
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
                         <strong>Deadline składania ofert:</strong>
                         <Litepicker
-                            id="post-form-2"
+                            id="post-form-3"
                             v-model="challenge.offer_deadline"
                             v-if="inTeam"
                             :options="{
