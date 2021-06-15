@@ -254,7 +254,7 @@ export default {
             content.value = 'line';
             console.log('LINE SETING UPDATE');
             console.log(e);
-            temp_line_id.value = e.data.index;
+            temp_line_id.value = Math.floor(Math.random() * 99) + 1;
             line.value = e;
             currentTitle.value = 'Ustawienia lini animacji';
             emitter.emit('changeprop', { data:line, json: true });
