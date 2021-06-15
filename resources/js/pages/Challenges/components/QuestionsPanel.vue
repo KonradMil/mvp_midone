@@ -46,7 +46,7 @@
                             class="intro-y">
                             <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
                                 <div class="flex px-5 py-3" @click="expand[index] = !expand[index]">
-                                    <div class="w-64 sm:w-auto truncate">
+                                    <div class="w-64 sm:w-auto truncate" style="word-break: break-all;">
                                         <strong>Pytanie: </strong> {{q.question}} - (Odpowiedzi: {{q.answers.length}})
                                     </div>
                                     <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">

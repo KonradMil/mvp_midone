@@ -18,7 +18,6 @@
                         <div class="col-span-1">
                             <div style="margin-left: 25%; margin-top: calc(25% - 10px);">
 <!--                                <UnityButton tooltip="" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>-->
-
                                 <Tippy
                                     id="meta-title-tab"
                                     tag="span"
@@ -203,7 +202,10 @@ export default {
             // });
             console.log('HEREEE');
             console.log(getLineByInternalIndex);
-            emitter.emit('UnityLineSettings', {action: 'settingsline', data: getLineByInternalIndex})
+            setTimeout(() => {
+                emitter.emit('UnityLineSettings', {action: 'settingsline', data: getLineByInternalIndex});
+            }, 200)
+
         }
 
         emitter.on('rightpanelaction', e => {
