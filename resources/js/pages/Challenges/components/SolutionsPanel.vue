@@ -13,7 +13,7 @@
                             <p>
                                 W tej chwili nie ma żadnych wyzwań, poinformujemy Cię jak tylko jakieś będą dostępne.
                             </p>
-                            <button class="btn btn-primary shadow-md mr-2" @click="addSolution">{{ $t('challengesMain.addChallenge') }}</button>
+                            <button class="btn btn-primary shadow-md mr-2" @click="addSolution">Dodaj nowe rozwiązanie</button>
                         </div>
                     </div>
                     <div class="intro-y grid grid-cols-12 gap-6 mt-5">
