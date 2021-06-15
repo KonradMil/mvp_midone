@@ -123,10 +123,7 @@ export default {
                 console.log(obj.index);
                 console.log(activeLineIndex.value);
                 console.log('activeLineIndex.value');
-
-
-               if(obj.index === activeLineIndex.value) {
-
+               if(obj.index == activeLineIndex.value) {
                    console.log(toRaw(obj));
                    return toRaw(obj);
                }
