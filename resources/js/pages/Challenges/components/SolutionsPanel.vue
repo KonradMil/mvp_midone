@@ -60,7 +60,7 @@ export default {
 
         onMounted(function () {
            if(user.type == 'investor' && props.inTeam) {
-               solutions.value = challenge.solutions;
+               solutions.value = props.challenge.solutions;
            } else {
                filterMember();
            }
