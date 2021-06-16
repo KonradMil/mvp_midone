@@ -18,7 +18,7 @@
                             <div class="mt-2 pl-9 pb-6" v-if="(user.id === offer.installer_id)">
                                 <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status != 1">Opublikuj ofertę</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="editOffer(offer.id)" v-if="offer.status != 1">Edytuj</button>
-                                <button class="btn btn-primary shadow-md mr-2" @click="deleteOffer(offer.id)" v-if="offer.status != 1">Usuń</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click.prevent="deleteOffer(offer.id,index)" v-if="offer.status != 1">Usuń</button>
                             </div>
                             <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                             <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Odrzucono </div>
@@ -173,18 +173,18 @@ export default {
                 })
         }
 
-        const deleteOffer = async(id) => {
+        const deleteOffer = async(id,index) => {
             axios.post('/api/offer/delete', {id: id})
                 .then(response => {
                     console.log(id + '-> id offer delete')
                     console.log(response.data + '->response.data');
                     if (response.data.success) {
                         toast.success(response.data.message);
+                        offers.value.list.splice(index,1);
                     } else {
                     }
                 })
            await getOffersRepositories('');
-
         }
 
         // const getOffers = () => {

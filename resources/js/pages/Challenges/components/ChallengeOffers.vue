@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="mt-2 pl-9 pb-6" v-if="inTeam">
                                     <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && challenge.selected_offer_id < 1">Akceptuj ofertę</button>
-                                    <button class="btn btn-primary shadow-md mr-2" @click="rejectOffer(offer)" v-if="offer.rejected != 1 && challenge.selected_offer_id < 1" >Odrzuć ofertę</button>
+                                    <button class="btn btn-primary shadow-md mr-2" @click="rejectOffer(offer,index)" v-if="offer.rejected != 1 && challenge.selected_offer_id < 1" >Odrzuć ofertę</button>
                                 </div>
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                             </div>
@@ -222,7 +222,7 @@ export default {
                         if(offer.id === props.challenge.selected_offer_id){
                             props.challenge.selected_offer_id = 0;
                         }
-
+                        offers.value.list.splice(index,1);
                         // const offerIndex = offers.value.list.findIndex(a => a.id === offer.id);
                         // if (offerIndex !== -1) {
                         //     offers.value.list.splice(offerIndex,1);
