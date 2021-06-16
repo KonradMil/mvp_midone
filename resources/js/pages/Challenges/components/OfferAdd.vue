@@ -252,11 +252,9 @@ export default {
         }
 
         onMounted(() => {
-            if (props.offer_id != undefined) {
                 getOffer();
-            }
-            // if(props.edit_offer_id != undefined){
-            //     getOffer();
+                // if(props.edit_offer_id != undefined){
+               //     getOffer();
             // }
         });
 
@@ -268,6 +266,9 @@ export default {
             //     c = val;
             // }
             let id = props.offer_id;
+            if(id==null){
+                id = props.edit_offer_id;
+            }
             console.log(id + '-> edit offer id');
             axios.post('/api/offer/get', {id: id})
                 .then(response => {
