@@ -185,7 +185,6 @@ export default {
     props: {
         edit_offer_id: Number,
         solution_id: Number,
-        offer_id: Number,
         challenge_id: Number
     },
     setup(props) {
@@ -220,7 +219,6 @@ export default {
 
         const save = () => {
             axios.post('/api/offer/save', {
-                id: props.offer_id,
                 edit_id: props.edit_offer_id,
                 challenge_id: props.challenge_id,
                 solution_id: props.solution_id,

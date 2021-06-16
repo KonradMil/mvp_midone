@@ -139,14 +139,7 @@ export default {
         });
 
         const addOffer = () => {
-            axios.post('/api/offer/add/new', {solution_id: props.solution.id})
-                .then(response => {
-                    if (response.data.success) {
-                        emitter.emit('selectedSolution', {id: solution.id, offer_id: response.data.payload.id});
-                    } else {
-                        // toast.error(response.data.message);
-                    }
-                })
+            emitter.emit('selectedSolution', {id: solution.id});
         }
 
         const checkTeam = () => {
