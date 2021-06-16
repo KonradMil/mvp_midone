@@ -13,7 +13,7 @@ class OfferController extends Controller
     public function delete(Request $request)
     {
         $id = $request->input('id');
-        Offer::find($id)->destroy();
+        Offer::destroy($id);
 
         return response()->json([
             'success' => true,
