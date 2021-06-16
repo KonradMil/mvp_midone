@@ -106,8 +106,7 @@ import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
 
 import router from "../../router";
-// import { VueCookies as $cookies } from 'vue3-cookies'
-import {VueCookies as $cookies} from 'vue3-cookies'
+
 const ww = WindowWatcher();
 
 export default {

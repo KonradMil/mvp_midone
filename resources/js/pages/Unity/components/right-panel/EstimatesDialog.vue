@@ -16,10 +16,10 @@ export default {
     name: "EstimatesDialog",
 
     props: {
-        challenge: Object,
-        solution: String
+        solution: Object
     },
     setup(props) {
+        const challenge = ref({});
         const user = window.Laravel.user;
         const basicDataValues = require("../../../../json/challenge.json");
         const modelCategories = require("../../../../json/model_categories.json");
@@ -37,16 +37,28 @@ export default {
         });
 
         const additionalCosts = ref([]);
-
-
         const partPrices = ref([]);
 
         const finalPartsList = computed(() => {
-            return props.solution.save_json.parts.filter(part => props.challenge.save_json.parts.every(part2 => !part2.unity_id.includes(part.unity_id)));
+            return JSON.parse(props.solution.save_json).parts.filter(part => JSON.parse(props.challenge.save_json).parts.every(part2 => !part2.unity_id.includes(part.unity_id)));
         });
 
-        onMounted(() => {
+        const getChallenge = () => {
+            axios.post('/api/challenge/user/get/card', {id: props.solution.challenge_id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        console.log("response.data.payload");
+                        console.log(response.data.payload);
+                        console.log(JSON.parse(response.data.payload.save_json));
+                        challenge.value = response.data.payload;
 
+                    }
+                })
+        }
+
+        onMounted(() => {
+            getChallenge();
         });
 
         return {
