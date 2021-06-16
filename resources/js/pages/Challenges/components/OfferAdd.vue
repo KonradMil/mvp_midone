@@ -255,9 +255,9 @@ export default {
             if (props.offer_id != undefined) {
                 getOffer();
             }
-            if(props.edit_offer_id != undefined){
-                getOffer();
-            }
+            // if(props.edit_offer_id != undefined){
+            //     getOffer();
+            // }
         });
 
 
