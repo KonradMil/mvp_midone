@@ -40,7 +40,9 @@ export default {
         const partPrices = ref([]);
 
         const finalPartsList = computed(() => {
-            return JSON.parse(props.solution.save_json).parts.filter(part => JSON.parse(props.challenge.save_json).parts.every(part2 => !part2.unity_id.includes(part.unity_id)));
+            if(challenge.value.save_json != undefined) {
+                return JSON.parse(props.solution.save_json).parts.filter(part => JSON.parse(challenge.value.save_json).parts.every(part2 => !part2.unity_id.includes(part.unity_id)));
+            }
         });
 
         const getChallenge = () => {
