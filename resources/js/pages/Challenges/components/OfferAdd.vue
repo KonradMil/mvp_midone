@@ -255,6 +255,7 @@ export default {
                 getOffer();
             }
             if(props.edit_offer_id != undefined){
+                props.offer_id = props.edit_offer_id;
                 getOffer()
             }
         });
@@ -267,6 +268,7 @@ export default {
             //     c = val;
             // }
             let id = props.edit_offer_id;
+            console.log(id + '-> edit offer id');
             axios.post('/api/offer/get', {id: id})
                 .then(response => {
                     if (response.data.success) {

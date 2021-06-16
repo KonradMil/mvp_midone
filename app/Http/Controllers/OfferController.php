@@ -15,7 +15,6 @@ class OfferController extends Controller
         $id = $request->input('id');
         Offer::find($id)->destroy();
 
-
         return response()->json([
             'success' => true,
             'message' => 'Usunięto ofertę poprawnie.',
