@@ -172,6 +172,11 @@ export default defineComponent({
             activeTab.value = 'addingoffer';
         });
 
+        emitter.on('changeToEditOffer', e => {
+            temp_offer_id.value = e.offer_id;
+            activeTab.value = 'addingoffer';
+        });
+
         emitter.on('changeToOffers', e => {
             activeTab.value = 'oferty';
         });
