@@ -121,7 +121,7 @@ class OfferController extends Controller
 
 
 
-        if($check == NULL){
+        if($offer == NULL){
             return response()->json([
                 'success' => true,
                 'message' => 'Dodano oferte poprawnie.',
