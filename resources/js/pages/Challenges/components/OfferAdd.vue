@@ -256,7 +256,7 @@ export default {
                 getOffer();
             }
             if(props.edit_offer_id != undefined){
-                getOffer()
+                getOffer();
             }
         });
 

@@ -153,8 +153,8 @@ export default {
             context.emit("update:activeTab", 'addingoffer');
         }
 
-        const editOffer = async(offer_id) => {
-            emitter.emit('changeToEditOffer', {edit_offer_id: offer_id});
+        const editOffer = async(edit_offer_id) => {
+            emitter.emit('changeToEditOffer', {edit_offer_id: edit_offer_id});
         }
 
         const getOffersRepositories = async () => {
