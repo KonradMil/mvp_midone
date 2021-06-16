@@ -69,8 +69,6 @@ class OfferController extends Controller
         if($request->edit_id != null){
             $offer = Offer::find($request->edit_id);
         }
-//        $check = Offer::find($request->input('id'));
-
         if($offer == NULL) {
             $check = new Offer();
             $check->challenge_id = $request->challenge_id;
