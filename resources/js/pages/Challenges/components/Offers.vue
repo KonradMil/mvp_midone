@@ -17,7 +17,8 @@
                             </div>
                             <div class="mt-2 pl-9 pb-6" v-if="(user.id === offer.installer_id)">
                                 <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status != 1">Opublikuj ofertę</button>
-<!--                                <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status != 1">Edytuj</button>-->
+                                <button class="btn btn-primary shadow-md mr-2" @click="editOffer(offer.id)" v-if="offer.status != 1">Edytuj</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="deleteOffer(offer)" v-if="offer.status != 1">Usuń</button>
                             </div>
                             <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                             <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Odrzucono </div>
@@ -116,6 +117,7 @@
                     </div>
                 </div>
             </div>
+            <OfferAdd v-if="activeTab == 'editOffer'" :offer_id="offer_id"></OfferAdd>
             <!-- END: Announcement -->
         </div>
     </div>
@@ -126,22 +128,37 @@ import {getCurrentInstance, onMounted, ref} from "vue";
 import GetOffers from "../../../compositions/GetOffers";
 import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
 import {useToast} from "vue-toastification";
+import OfferAdd from "./OfferAdd";
 
 const toast = useToast();
 
 export default {
     name: "Offers",
+    components :{
+      OfferAdd
+    },
     props: {
         activeTab: String,
         id: Number,
     },
     emits: ["update:activeTab"],
     setup(props, context) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const offers = ref([]);
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
+        const offer_id = ref();
+        const activeTab = ref(null);
+
         const switchTab = () => {
             context.emit("update:activeTab", 'addingoffer');
+        }
+
+        const editOffer = async(id) => {
+            // emitter.emit('changeToOfferAdd', {id: id});
+            offer_id.value = id;
+            activeTab.value = 'editOffer'
         }
 
         const getOffersRepositories = async () => {
@@ -178,6 +195,9 @@ export default {
         });
 
         return {
+            offer_id,
+            activeTab,
+            editOffer,
             publishOffer,
             switchTab,
             offers,
