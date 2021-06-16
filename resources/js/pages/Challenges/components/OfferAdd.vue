@@ -292,7 +292,6 @@ export default {
         }
 
         return {
-            editOffer,
             price_of_delivery,
             weeks_to_start,
             time_to_fix,
