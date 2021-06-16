@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class OfferController extends Controller
 {
+    public function delete(Request $request)
+    {
+        $id = $request->input('id');
+        Offer::find($id)->destroy();
+
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Usunięto ofertę poprawnie.',
+            'payload' => ''
+        ]);
+    }
     public function get(Request $request)
     {
         $id = $request->input('id');

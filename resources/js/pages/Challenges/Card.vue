@@ -110,7 +110,7 @@
             <QuestionsPanel v-if="activeTab == 'pytania'" :author_id="challenge.author_id" :id="challenge.id"></QuestionsPanel>
             <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge" :inTeam="inTeam"></SolutionsPanel>
             <TeamsPanel v-if="(activeTab == 'teams') && ((challenge.author_id == user.id) || (solution.author_id == user.id))" :solution="solution" :challenge="challenge" :who="who" ></TeamsPanel>
-            <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :offer_id="temp_offer_id"></OfferAdd>
+            <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :offer_id="temp_offer_id" :edit_offer_id="edit_offer_id"></OfferAdd>
             <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab" :id="challenge.id" :inTeam="inTeam"></Offers>
             <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam" :challenge="challenge"></ChallengeOffers>
         </div>
@@ -159,6 +159,7 @@ export default defineComponent({
         const solution = ref({});
         const questions = ref({});
         const temp_offer_id = ref(null);
+        const edit_offer_id = ref(null);
         const activeTab = ref('podstawowe');
         const user = window.Laravel.user;
         const selected_solution_id = ref(null);
@@ -173,7 +174,7 @@ export default defineComponent({
         });
 
         emitter.on('changeToEditOffer', e => {
-            temp_offer_id.value = e.offer_id;
+            edit_offer_id.value = e.offer_id;
             activeTab.value = 'addingoffer';
         });
 
@@ -331,6 +332,7 @@ export default defineComponent({
         };
 
         return {
+            edit_offer_id,
             who,
             temp_offer_id,
             selected_solution_id,

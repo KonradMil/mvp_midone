@@ -183,6 +183,7 @@ import {useToast} from "vue-toastification";
 export default {
     name: "OfferAdd",
     props: {
+        edit_offer_id: Number,
         solution_id: Number,
         offer_id: Number,
         challenge_id: Number
@@ -253,14 +254,20 @@ export default {
             if (props.offer_id != undefined) {
                 getOffer();
             }
+            if(props.edit_offer_id != undefined){
+                getOffer()
+            }
         });
 
-        const getOffer = (val = 0) => {
-            let c = props.offer_id;
-            if (val != 0) {
-                c = val;
-            }
-            axios.post('/api/offer/get', {id: c})
+
+        const getOffer = () => {
+
+            // let c = props.offer_id;
+            // if (val != 0) {
+            //     c = val;
+            // }
+            let id = props.edit_offer_id;
+            axios.post('/api/offer/get', {id: id})
                 .then(response => {
                     if (response.data.success) {
                         price_of_delivery.value = response.data.payload.price_of_delivery;
@@ -285,6 +292,7 @@ export default {
         }
 
         return {
+            editOffer,
             price_of_delivery,
             weeks_to_start,
             time_to_fix,

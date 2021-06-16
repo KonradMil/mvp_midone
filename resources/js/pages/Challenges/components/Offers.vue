@@ -117,7 +117,6 @@
                     </div>
                 </div>
             </div>
-            <OfferAdd v-if="activeTab == 'editOffer'" :offer_id="offer_id"></OfferAdd>
             <!-- END: Announcement -->
         </div>
     </div>
@@ -149,7 +148,6 @@ export default {
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
         const offer_id = ref();
-        const activeTab = ref(null);
 
         const switchTab = () => {
             context.emit("update:activeTab", 'addingoffer');
@@ -175,6 +173,23 @@ export default {
                 })
         }
 
+        const deleteOffer = async (id) => {
+            axios.post('/api/offer/delete', {id: id})
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success(response.data.message);
+                        isDisabled.value = true;
+                    } else {
+                        isDisabled.value = true;
+                    }
+                    setTimeout(() =>{
+                        isDisabled.value = false;
+                    }, 2000);
+                })
+           await getOffersRepositories('');
+
+        }
+
         // const getOffers = () => {
         //     axios.post('/api/offer/get/all', {})
         //         .then(response => {
@@ -193,8 +208,8 @@ export default {
         });
 
         return {
+            deleteOffer,
             offer_id,
-            activeTab,
             editOffer,
             publishOffer,
             switchTab,
