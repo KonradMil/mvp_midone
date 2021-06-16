@@ -180,13 +180,8 @@ export default {
                     console.log(response.data + '->response.data');
                     if (response.data.success) {
                         toast.success(response.data.message);
-                        isDisabled.value = true;
                     } else {
-                        isDisabled.value = true;
                     }
-                    setTimeout(() =>{
-                        isDisabled.value = false;
-                    }, 2000);
                 })
            await getOffersRepositories('');
 
