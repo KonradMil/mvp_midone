@@ -180,7 +180,7 @@ export default {
                     console.log(response.data + '->response.data');
                     if (response.data.success) {
                         toast.success(response.data.message);
-                        offers.value.splice(index,1);
+                        offers.value.list.splice(index,1);
                     } else {
                     }
                 })
