@@ -260,7 +260,7 @@ export default {
             if (val != 0) {
                 c = val;
             }
-            axios.post('/api/offers/get', {id: c})
+            axios.post('/api/offer/get', {id: c})
                 .then(response => {
                     if (response.data.success) {
                         price_of_delivery.value = response.data.payload.price_of_delivery;
