@@ -41,7 +41,7 @@
                 <a class="text-theme-1 dark:text-theme-10 ml-1" href="/terms/terms-of-service"
                    @click.prevent="$router.push({path: '/terms/terms-of-service'})"
                 > {{$t('profiles.termsService')}} </a
-                > {{$t(' profiles.servicesPlatform')}}
+                > {{$t('profiles.servicesPlatform')}}
             </div>
             <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
                 <input
