@@ -66,8 +66,8 @@ class OfferController extends Controller
 
     public function save(Request $request)
     {
-        if($request->edit_id != null){
-            $offer = Offer::find($request->edit_id);
+        if($request->id != null){
+            $offer = Offer::find($request->id);
 
             $offer->price_of_delivery = $request->price_of_delivery;
             $offer->weeks_to_start = $request->weeks_to_start;
@@ -156,6 +156,7 @@ class OfferController extends Controller
         $offer = Offer::find($id);
         $challenge = Challenge::find($offer->challenge_id);
         $challenge->selected_offer_id = $offer->id;
+        $challenge->stage = 3;
         $solution = Solution::find($offer->solution_id);
         $solution->selected_offer_id = $offer->id;
 
