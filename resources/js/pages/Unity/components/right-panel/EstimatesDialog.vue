@@ -41,6 +41,7 @@ export default {
 
         const finalPartsList = computed(() => {
             if(challenge.value.save_json != undefined) {
+                console.log( JSON.parse(challenge.value.save_json).parts);
                 return JSON.parse(props.solution.save_json).parts.filter(part => JSON.parse(challenge.value.save_json).parts.every(part2 => !part2.unity_id.includes(part.unity_id)));
             }
         });
