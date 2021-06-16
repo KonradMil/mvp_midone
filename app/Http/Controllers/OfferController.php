@@ -71,6 +71,9 @@ class OfferController extends Controller
         if($check == NULL) {
             $check = new Offer();
         }
+        else {
+
+        }
 
 //        $check->fill($request->input());
         $check->challenge_id = $request->challenge_id;
@@ -99,11 +102,20 @@ class OfferController extends Controller
 
         $check->save();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Dodano oferte poprawnie.',
-            'payload' => $check
-        ]);
+        if($check == NULL){
+            return response()->json([
+                'success' => true,
+                'message' => 'Dodano oferte poprawnie.',
+                'payload' => $check
+            ]);
+        } else {
+            return response()->json([
+                'success' => true,
+                'message' => 'Edytowano oferte poprawnie.',
+                'payload' => $check
+            ]);
+        }
+
     }
 
     public function addOffer(Request $request)
