@@ -5,19 +5,22 @@
 <!--                <UnityButton :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="rightbuttonclick"  />-->
 <!--            </div>-->
             <div class="unity-button">
-                <UnityButton :tooltip="'Description'" :alttext="'description'" :path="'/s3/builder_icons/notatka_simple.png'" :action="'description'" position="rightbuttonclick"  />
+                <UnityButton :tooltip="'Opis'" :alttext="'description'" :path="'/s3/builder_icons/notatka_simple.png'" :action="'description'" position="rightbuttonclick"  />
             </div>
             <div class="unity-button">
-                <UnityButton :tooltip="'Settings'" :alttext="'settings'" :path="'/s3/builder_icons/dane_simple.png'" :action="'settings'" position="rightbuttonclick"  />
+                <UnityButton :tooltip="'Dane techniczne'" :alttext="'settings'" :path="'/s3/builder_icons/dane_simple.png'" :action="'settings'" position="rightbuttonclick"  />
+            </div>
+            <div class="unity-button">
+                <UnityButton :tooltip="'Założenia finansowe'" :alttext="'financial'" :path="'/s3/builder_icons/assum_simple.png'" :action="'financial'" position="rightbuttonclick"  />
+            </div>
+            <div class="unity-button">
+                <UnityButton :tooltip="'Kosztorys'" :alttext="'financial'" :path="'/s3/builder_icons/assum_simple.png'" :action="'estimates'" position="rightbuttonclick"  />
             </div>
             <div class="unity-button" v-if="type == 'solution'">
-                <UnityButton :tooltip="'financial'" :alttext="'financial'" :path="'/s3/builder_icons/assum_simple.png'" :action="'financial'" position="rightbuttonclick"  />
+                <UnityButton :tooltip="'Analiza operacyjna'" :alttext="'operational'" :path="'/s3/builder_icons/analiza_finansowa.png'" :action="'financialanalysis'" position="rightbuttonclick"  />
             </div>
             <div class="unity-button" v-if="type == 'solution'">
-                <UnityButton :tooltip="'operational'" :alttext="'operational'" :path="'/s3/builder_icons/analiza_finansowa.png'" :action="'operational'" position="rightbuttonclick"  />
-            </div>
-            <div class="unity-button" v-if="type == 'solution'">
-                <UnityButton :tooltip="'Analiza operacyjna'" :alttext="'operationalanalysis'" :path="'/s3/builder_icons/analiza_operacyjna_simple.png'" :action="'operationalanalysis'" position="rightbuttonclick"  />
+                <UnityButton :tooltip="'Analiza finansowa'" :alttext="'operationalanalysis'" :path="'/s3/builder_icons/analiza_operacyjna_simple.png'" :action="'operationalanalysis'" position="rightbuttonclick"  />
             </div>
         </div>
     </div>
@@ -60,14 +63,17 @@ export default {
                 case 'settings':
                     emitter.emit('SettingsDialog', { val: '' });
                     break;
-                case 'operational':
-                    emitter.emit('OperationalDialog', { val: '' });
+                case 'financialanalysis':
+                    emitter.emit('FinancialAnalysisDialog', { val: '' });
                     break;
                 case 'operationalanalysis':
                     emitter.emit('OperationalAnalysisDialog', { val: '' });
                     break;
                 case 'financial':
                     emitter.emit('FinancialDialog', { val: '' });
+                    break;
+                case 'estimates':
+                    emitter.emit('EstimatesDialog', { val: '' });
                     break;
             }
         }

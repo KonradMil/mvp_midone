@@ -34,6 +34,7 @@
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
                     <OperationDialog v-if="content == 'operational'" ></OperationDialog>
                     <SettingsDialog v-if="content == 'settings'" v-model:technical="technical" :type="type"></SettingsDialog>
+                    <EstimatesDialog v-if="content == 'estimates'" :solution="solution" :challenge="challenge"></EstimatesDialog>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
@@ -74,10 +75,12 @@ import SaveChallengeFinancials from "../../../compositions/SaveChallengeFinancia
 import SaveSolutionFinancials from "../../../compositions/SaveSolutionFinancials";
 import SaveChallengeTeams from "../../../compositions/SaveChallengeTeams";
 import SaveSolutionTeams from "../../../compositions/SaveSolutionTeams";
+import EstimatesDialog from "./right-panel/EstimatesDialog";
 
 export default {
     name: "RightPanel",
     components: {
+        EstimatesDialog,
         SettingsDialog,
         OperationDialog,
         OperationalAnalysisDialog,
@@ -316,6 +319,12 @@ export default {
         emitter.on('DescriptionDialog', e => {
             content.value = 'description';
             currentTitle.value = 'Ustawienia podstawowe';
+            showPanel();
+        });
+
+        emitter.on('EstimatesDialog', e => {
+            content.value = 'estimates';
+            currentTitle.value = 'Kosztorys';
             showPanel();
         });
 
