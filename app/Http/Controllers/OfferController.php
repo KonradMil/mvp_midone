@@ -68,8 +68,30 @@ class OfferController extends Controller
     {
         if($request->edit_id != null){
             $offer = Offer::find($request->edit_id);
-        }
-        if($offer == NULL) {
+
+            $offer->price_of_delivery = $request->price_of_delivery;
+            $offer->weeks_to_start = $request->weeks_to_start;
+            $offer->time_to_start = $request->time_to_start;
+            $offer->time_to_fix = $request->time_to_fix;
+            $offer->advance_upon_start = $request->advance_upon_start;
+            $offer->advance_upon_delivery = $request->advance_upon_delivery;
+            $offer->advance_upon_agreement = $request->advance_upon_agreement;
+            $offer->years_of_guarantee = $request->years_of_guarantee;
+            $offer->service_support_scope = $request->service_support_scope;
+            $offer->maintenance_frequency = $request->maintenance_frequency;
+            $offer->price_of_maintenance = $request->price_of_maintenance;
+            $offer->reaction_time = $request->reaction_time;
+            $offer->intervention_price = $request->intervention_price;
+            $offer->work_hour_price = $request->work_hour_price;
+            $offer->period_of_support = $request->period_of_support;
+            $offer->offer_expires_in = $request->offer_expires_in;
+            $offer->save();
+            return response()->json([
+                'success' => true,
+                'message' => 'Edytowano oferte poprawnie.',
+                'payload' => $offer
+            ]);
+        } else {
             $check = new Offer();
             $check->challenge_id = $request->challenge_id;
             $check->solution_id = $request->solution_id;
@@ -91,45 +113,10 @@ class OfferController extends Controller
             $check->period_of_support = $request->period_of_support;
             $check->offer_expires_in = $request->offer_expires_in;
             $check->save();
-        }
-        else {
-            $offer->price_of_delivery = $request->price_of_delivery;
-            $offer->weeks_to_start = $request->weeks_to_start;
-            $offer->time_to_start = $request->time_to_start;
-            $offer->time_to_fix = $request->time_to_fix;
-            $offer->advance_upon_start = $request->advance_upon_start;
-            $offer->advance_upon_delivery = $request->advance_upon_delivery;
-            $offer->advance_upon_agreement = $request->advance_upon_agreement;
-            $offer->years_of_guarantee = $request->years_of_guarantee;
-            $offer->service_support_scope = $request->service_support_scope;
-            $offer->maintenance_frequency = $request->maintenance_frequency;
-            $offer->price_of_maintenance = $request->price_of_maintenance;
-            $offer->reaction_time = $request->reaction_time;
-            $offer->intervention_price = $request->intervention_price;
-            $offer->work_hour_price = $request->work_hour_price;
-            $offer->period_of_support = $request->period_of_support;
-            $offer->offer_expires_in = $request->offer_expires_in;
-            $offer->save();
-        }
-
-//        $check->fill($request->input());
-//        $solution = Solution::find($request->input('solution_id'));
-//        $check->challenge_id = $solution->challenge_id;
-
-
-
-
-        if($offer == NULL){
             return response()->json([
                 'success' => true,
                 'message' => 'Dodano oferte poprawnie.',
                 'payload' => $check
-            ]);
-        } else {
-            return response()->json([
-                'success' => true,
-                'message' => 'Edytowano oferte poprawnie.',
-                'payload' => $offer
             ]);
         }
     }
