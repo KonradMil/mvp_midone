@@ -173,7 +173,7 @@ export default {
                 })
         }
 
-        const deleteOffer = async (id) => {
+        const deleteOffer = async(id) => {
             axios.post('/api/offer/delete', {id: id})
                 .then(response => {
                     console.log(id + '-> id offer delete')

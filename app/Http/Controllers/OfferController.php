@@ -66,13 +66,33 @@ class OfferController extends Controller
 
     public function save(Request $request)
     {
+        if($request->edit_id != null){
+            $offer = Offer::find($request->edit_id);
+        }
         $check = Offer::find($request->input('id'));
 
         if($check == NULL) {
             $check = new Offer();
         }
-        else {
 
+        if($offer != NULL)
+        {
+            $offer->price_of_delivery = $request->price_of_delivery;
+            $offer->weeks_to_start = $request->weeks_to_start;
+            $offer->time_to_start = $request->time_to_start;
+            $offer->time_to_fix = $request->time_to_fix;
+            $offer->advance_upon_start = $request->advance_upon_start;
+            $offer->advance_upon_delivery = $request->advance_upon_delivery;
+            $offer->advance_upon_agreement = $request->advance_upon_agreement;
+            $offer->years_of_guarantee = $request->years_of_guarantee;
+            $offer->service_support_scope = $request->service_support_scope;
+            $offer->maintenance_frequency = $request->maintenance_frequency;
+            $offer->price_of_maintenance = $request->price_of_maintenance;
+            $offer->reaction_time = $request->reaction_time;
+            $offer->intervention_price = $request->intervention_price;
+            $offer->work_hour_price = $request->work_hour_price;
+            $offer->period_of_support = $request->period_of_support;
+            $offer->offer_expires_in = $request->offer_expires_in;
         }
 
 //        $check->fill($request->input());
@@ -101,6 +121,7 @@ class OfferController extends Controller
 //        $check->challenge_id = $solution->challenge_id;
 
         $check->save();
+        $offer->save();
 
         if($check == NULL){
             return response()->json([
@@ -112,10 +133,9 @@ class OfferController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Edytowano oferte poprawnie.',
-                'payload' => $check
+                'payload' => $offer
             ]);
         }
-
     }
 
     public function addOffer(Request $request)
