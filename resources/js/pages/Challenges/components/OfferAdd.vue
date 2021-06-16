@@ -258,11 +258,8 @@ export default {
         });
 
 
-        const getOffer = (val = 0) => {
+        const getOffer = () => {
             let id = props.edit_offer_id;
-            if (val != 0) {
-                id = val;
-            }
             console.log(id + '-> edit offer id');
             axios.post('/api/offer/get', {id: id})
                 .then(response => {
