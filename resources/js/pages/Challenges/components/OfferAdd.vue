@@ -252,7 +252,7 @@ export default {
         }
 
         onMounted(() => {
-            if (props.offer_id != undefined) {
+            if (props.edit_offer_id != undefined) {
                 getOffer();
             }
         });
