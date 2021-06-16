@@ -20,7 +20,7 @@
                 <label class="cursor-pointer select-none" for="rodo"
                 >{{$t('profiles.acceptProvisions')}}</label
                 >
-                <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
+                <a class="text-theme-1 dark:text-theme-10 ml-1" href="/terms/privacy-policy"
                    @click.prevent="$router.push({path: '/terms/privacy-policy'})"
                 >{{$t('profiles.privacyPolicy')}}</a
                 >.
@@ -38,10 +38,9 @@
                 <label class="cursor-pointer select-none" for="rodo3"
                 >{{$t('profiles.accept')}}</label
                 >
-                <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
-                   @click.prevent="$router.push({path: '/terms/terms-of-service'})"
-                > {{$t('profiles.termsService')}} </a
-                > {{$t('profiles.servicesPlatform')}}
+                <a class="text-theme-1 dark:text-theme-10 ml-1" href="/terms/terms-of-service"
+                   @click.prevent="$router.push({path: '/terms/terms-of-service'})">
+                    {{$t('profiles.termsService')}}</a> {{$t('profiles.servicesPlatform')}}
             </div>
             <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
                 <input
@@ -53,9 +52,9 @@
                 <label class="cursor-pointer select-none" for="rodo2">
                     {{$t('profiles.accept')}}
                 </label>
-                <a class="text-theme-1 dark:text-theme-10 ml-1" href=""
+                <a class="text-theme-1 dark:text-theme-10 ml-1" href="/terms/price-list"
                    @click.prevent="$router.push({path: '/terms/price-list'})">
-                    {{$t('profiles.priceList')}}
+                    {{ $t('profiles.priceList')}}
                 </a>.
             </div>
             <div class="border-b border-gray-200 dark:border-dark-5"></div>
