@@ -154,7 +154,7 @@ export default {
         }
 
         const editOffer = async(offer_id) => {
-            emitter.emit('changeToEditOffer', {offer_id: offer_id});
+            emitter.emit('changeToEditOffer', {edit_offer_id: offer_id});
         }
 
         const getOffersRepositories = async () => {
