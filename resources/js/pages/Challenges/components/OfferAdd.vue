@@ -213,9 +213,10 @@ export default {
             getOffer(e.offer_id);
         });
 
-        emitter.on('changeToOfferAdd', e => () => {
+        emitter.on('changeToEditOffer', e => () => {
             getOffer(e.offer_id);
         });
+
 
         const save = () => {
             axios.post('/api/offer/save', {
