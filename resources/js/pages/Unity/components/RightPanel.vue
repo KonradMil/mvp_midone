@@ -124,6 +124,7 @@ export default {
 
         emitter.on('UnityObjectPlaced', e => {
             console.log('PARTS PLACED INSIDE');
+            console.log(e.partsPlaced);
             parts.value = e.partsPlaced;
         });
 
