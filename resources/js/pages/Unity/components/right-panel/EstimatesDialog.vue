@@ -46,15 +46,17 @@ export default {
 
         const finalPartsList = computed(() => {
                 let c = props.parts;
+                if(c.length != 0) {
 
-                JSON.parse(challenge.value.save_json).parts.forEach((obj, indx) => {
-                    c.every((obj2) => {
-                        if(obj.model.model_name == obj2.model_name) {
-                            c.splice(indx, 1);
-                            return false;
-                        }
-                    });
+                }JSON.parse(challenge.value.save_json).parts.forEach((obj, indx) => {
+                c.every((obj2) => {
+                    if(obj.model.model_name == obj2.model_name) {
+                        c.splice(indx, 1);
+                        return false;
+                    }
                 });
+            });
+
 
                 return c;
         });
