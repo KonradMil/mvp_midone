@@ -51,9 +51,15 @@ export default {
                 let tempChallenge = JSON.parse(challenge.value.save_json);
                 if(c.length != undefined) {
                     c.forEach((obj) => {
-                       tempChallenge.parts.every((objC) => {
+                       tempChallenge.parts.every((objC, index) => {
                             if(objC.model.model_name == obj.model_name) {
+                                tempChallenge.splice(index, 1);
+                                return false;
+                            } else {
+                                partsAr.value.push({
 
+                                });
+                                return true;
                             }
                        })
                     });
