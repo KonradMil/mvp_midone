@@ -71,7 +71,8 @@ export default {
         function comparer(otherArray){
             return function(current){
                 return otherArray.filter(function(other){
-                    return other.unity_id == current.unity_id
+                    console.log(other, current);
+                    return other.unity_id != current.unity_id
                 }).length == 0;
             }
         }
