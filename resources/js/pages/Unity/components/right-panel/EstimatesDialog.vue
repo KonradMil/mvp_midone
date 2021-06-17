@@ -53,8 +53,8 @@ export default {
         emitter.on('UnityObjectPlaced', e => {
             console.log(e);
             finalPartsList.value = e.partsPlaced;
-            console.log(e.partsPlaced.filter(comparer(JSON.parse(challenge.value.save_json))));
-            console.log(JSON.parse(challenge.value.save_json).filter(comparer(e.partsPlaced)));
+            console.log(e.partsPlaced.filter(comparer(JSON.parse(challenge.value.save_json).parts)));
+            console.log(JSON.parse(challenge.value.save_json).parts.filter(comparer(e.partsPlaced)));
         });
 
         function comparer(otherArray){
