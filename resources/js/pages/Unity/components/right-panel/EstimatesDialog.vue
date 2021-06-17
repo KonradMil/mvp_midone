@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import {computed, onMounted, reactive, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, reactive, ref} from "vue";
 
 
 export default {
@@ -19,6 +19,9 @@ export default {
         solution: Object
     },
     setup(props) {
+        //GLOBAL
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const challenge = ref({});
         const user = window.Laravel.user;
         const basicDataValues = require("../../../../json/challenge.json");
