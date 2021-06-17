@@ -62,7 +62,7 @@
                         />
                     </div>
                     <div class="p-5 w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
-                        <button class="btn btn-primary shadow-md w-1/2" @click="subcategory = null; selectedBrand == null; console.log('BACK');">Powrót</button>
+                        <button class="btn btn-primary shadow-md w-1/2" @click="takeMeBack">Powrót</button>
                     </div>
                     <div class="p-5 w-full"  v-if="category == 1 && subcategory == 0 && selectedBrand == null" v-for="(brand, index) in brands" :key="'subcat_' + index" @click="selectedBrand = brand.brand; getModelRepositories();">
                         <div class="flex-none pos-image relative block w-full">
@@ -208,6 +208,11 @@ export default {
             categories.value = c.categories;
         });
 
+        const takeMeBack = () => {
+            subcategory.value = null;
+            selectedBrand.value = null;
+            console.log('BACK');
+        }
 
         return {
             search,
@@ -220,7 +225,8 @@ export default {
             brands,
             getModelRepositories,
             selectedBrand,
-            selectModel
+            selectModel,
+            takeMeBack
         }
     }
 }
