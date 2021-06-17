@@ -41,31 +41,26 @@ export default {
             margin: 0,
         });
 
+        const partsAr = ref([]);
+
         const additionalCosts = ref([]);
         const partPrices = ref([]);
 
-        // const finalPartsList = computed(() => {
-        //         let c = props.parts;
-        //         let tempChallenge = JSON.parse(challenge.value.save_json);
-        //         if(c.length != undefined) {
-        //             console.log(JSON.parse(challenge.value.save_json).parts);
-        //             tempChallenge.parts.forEach((obj, indx) => {
-        //             console.log(indx);
-        //             c.forEach((obj2) => {
-        //                 console.log(obj.model.model_name);
-        //                 console.log(obj2.model_name);
-        //                 if (obj.model.model_name == obj2.model_name) {
-        //                     c.splice(indx, 1);
-        //                     return false;
-        //                 } else {
-        //                     return true;
-        //                 }
-        //             });
-        //     });
-        //         }
-        //
-        //         return c;
-        // });
+        const finalPartsList = computed(() => {
+                let c = props.parts;
+                let tempChallenge = JSON.parse(challenge.value.save_json);
+                if(c.length != undefined) {
+                    c.forEach((obj) => {
+                       tempChallenge.parts.every((objC) => {
+                            if(objC.model.model_name == obj.model_name) {
+
+                            }
+                       })
+                    });
+                }
+
+                return c;
+        });
         //
         // function comparer(otherArray){
         //     return function(current){
