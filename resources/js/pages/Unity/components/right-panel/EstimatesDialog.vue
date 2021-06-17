@@ -57,7 +57,7 @@ export default {
                                 return false;
                             } else {
                                 partsAr.value.push({
-
+                                
                                 });
                                 return true;
                             }
