@@ -47,6 +47,7 @@ export default {
         const finalPartsList = computed(() => {
                 let c = props.parts;
                 if(c.length != undefined) {
+                    console.log(JSON.parse(challenge.value.save_json).parts);
                 JSON.parse(challenge.value.save_json).parts.forEach((obj, indx) => {
                     console.log(indx);
                     c.every((obj2) => {
@@ -97,7 +98,8 @@ export default {
             additionalCosts,
             basicCosts,
             basicDataValues,
-            modelCategories
+            modelCategories,
+            challenge
         }
     }
 }
