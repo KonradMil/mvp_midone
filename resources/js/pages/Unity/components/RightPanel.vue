@@ -424,8 +424,8 @@ export default {
             temp_setting_id,
             temp_layout_id,
             temp_animable_id,
-            temp_line_id
-
+            temp_line_id,
+            parts
         }
     }
 }
