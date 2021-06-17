@@ -55,19 +55,19 @@ const UnityBridge = () => {
             // window.v.unity.layoutSelected = l;
             // window.v.unity.labelSelected = {};
 
-            emitter.emit('UnityLayoutSelected', { layoutSelected: JSON.parse(str) })
+            emitter.emit('UnityLayoutSelected', { layoutSelected: JSON.parse(str) });
         };
         window.UnityObjectPlaced = function UnityObjectPlaced(str) {
             console.log('PART PLACED');
             // window.v.unity.partsPlaced = JSON.parse(str).models;
             // window.v.unity.getCategoriesForPartsPlaced();
 
-            emitter.emit('UnityObjectPlaced', { partsPlaced: JSON.parse(str).models })
+            emitter.emit('UnityObjectPlaced', { partsPlaced: JSON.parse(str).models });
         };
         window.UnityObjectDestroyed = function UnityObjectDestroyed(str) {
-            cursor-pointerconsole.log('PART DESTROYED');
+            console.log('PART DESTROYED');
             console.log(str);
-            emitter.emit('UnityObjectDestroyed', { partDestroyed: JSON.parse(str) })
+            emitter.emit('UnityObjectDestroyed', { partDestroyed: JSON.parse(str) });
         };
         window.EnterBuildMode = function EnterBuildMode() {
             console.log('EnterBuildMode');

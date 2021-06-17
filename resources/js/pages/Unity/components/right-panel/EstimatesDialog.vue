@@ -23,6 +23,7 @@ export default {
         const user = window.Laravel.user;
         const basicDataValues = require("../../../../json/challenge.json");
         const modelCategories = require("../../../../json/model_categories.json");
+        const finalPartsList = ref([]);
 
         const basicCosts = reactive({
             mechanical_integration: 0,
@@ -39,11 +40,16 @@ export default {
         const additionalCosts = ref([]);
         const partPrices = ref([]);
 
-        const finalPartsList = computed(() => {
-            if(challenge.value.save_json != undefined) {
-                console.log( JSON.parse(challenge.value.save_json).parts);
-                return JSON.parse(challenge.value.save_json).parts.filter(comparer(JSON.parse(props.solution.save_json).parts));
-            }
+        // const finalPartsList = computed(() => {
+        //     if(challenge.value.save_json != undefined) {
+        //         console.log( JSON.parse(challenge.value.save_json).parts);
+        //         return JSON.parse(challenge.value.save_json).parts.filter(comparer(JSON.parse(props.solution.save_json).parts));
+        //     }
+        // });
+
+        emitter.on('UnityObjectPlaced', e => {
+            console.log(e);
+            // finalPartsList.value.push(JSON.parse(str).models)
         });
 
         function comparer(otherArray){
