@@ -52,7 +52,7 @@ export default {
 
         emitter.on('UnityObjectPlaced', e => {
             console.log(e);
-            // finalPartsList.value.push(JSON.parse(str).models)
+            finalPartsList.value = e.partsPlaced;
         });
 
         function comparer(otherArray){
