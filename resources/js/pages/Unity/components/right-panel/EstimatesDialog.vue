@@ -54,13 +54,13 @@ export default {
             console.log(e);
             finalPartsList.value = e.partsPlaced;
             try {
-                console.log(e.partsPlaced.filter(comparer(JSON.parse(challenge.value.save_json).parts)));
+                console.log(e.partsPlaced.filter(comparer(JSON.parse(props.solution.save_json).parts)));
             }catch (e) {
                 console.log('ERROR 1');
             }
 
             try {
-                console.log(JSON.parse(challenge.value.save_json).parts.filter(comparer(e.partsPlaced)));
+                console.log(JSON.parse(props.solution.save_json).parts.filter(comparer(e.partsPlaced)));
             }catch (e) {
                 console.log('ERROR 2');
             }
