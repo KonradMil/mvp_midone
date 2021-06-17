@@ -46,7 +46,7 @@ export default {
 
         const finalPartsList = computed(() => {
                 let c = props.parts;
-                if(c.length != 0) {
+                if(c.length != undefined) {
 
                 }JSON.parse(challenge.value.save_json).parts.forEach((obj, indx) => {
                 c.every((obj2) => {
