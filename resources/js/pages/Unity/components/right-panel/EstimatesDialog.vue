@@ -16,7 +16,8 @@ export default {
     name: "EstimatesDialog",
 
     props: {
-        solution: Object
+        solution: Object,
+        parts: Array
     },
     setup(props) {
         //GLOBAL
@@ -26,7 +27,7 @@ export default {
         const user = window.Laravel.user;
         const basicDataValues = require("../../../../json/challenge.json");
         const modelCategories = require("../../../../json/model_categories.json");
-        const finalPartsList = ref([]);
+        // const finalPartsList = ref([]);
 
         const basicCosts = reactive({
             mechanical_integration: 0,
@@ -43,29 +44,19 @@ export default {
         const additionalCosts = ref([]);
         const partPrices = ref([]);
 
-        // const finalPartsList = computed(() => {
-        //     if(challenge.value.save_json != undefined) {
-        //         console.log( JSON.parse(challenge.value.save_json).parts);
-        //         return JSON.parse(challenge.value.save_json).parts.filter(comparer(JSON.parse(props.solution.save_json).parts));
-        //     }
-        // });
+        const finalPartsList = computed(() => {
+                let c = props.parts;
 
-        emitter.on('UnityObjectPlaced', e => {
-            console.log(e);
-            finalPartsList.value = e.partsPlaced;
-            try {
-                console.log(e.partsPlaced.filter(comparer(JSON.parse(props.solution.save_json).parts)));
-            }catch (e) {
-                console.log('ERROR 1');
-            }
+                challenge.value.forEach((obj, indx) => {
+                    c.every((obj2) => {
+                        if(obj.model.model_name == obj2.model_name) {
+                            c.splice(indx, 1);
+                            return false;
+                        }
+                    });
+                });
 
-            try {
-                console.log(JSON.parse(props.solution.save_json).parts.filter(comparer(e.partsPlaced)));
-            }catch (e) {
-                console.log('ERROR 2');
-            }
-
-
+                return c;
         });
 
         function comparer(otherArray){

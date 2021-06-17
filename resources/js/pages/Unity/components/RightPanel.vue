@@ -34,7 +34,7 @@
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
                     <OperationDialog v-if="content == 'operational'" ></OperationDialog>
                     <SettingsDialog v-if="content == 'settings'" v-model:technical="technical" :type="type"></SettingsDialog>
-                    <EstimatesDialog v-if="content == 'estimates'" :solution="solution" :challenge="challenge"></EstimatesDialog>
+                    <EstimatesDialog v-if="content == 'estimates'" :solution="solution" :parts="parts"></EstimatesDialog>
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
@@ -116,11 +116,15 @@ export default {
         const temp_setting_id = ref(0);
         const temp_layout_id = ref(0);
         const temp_animable_id = ref(0);
+        const parts = ref([]);
 
         const teamsSolution = ref({
             teamsAllowed: '',
         });
 
+        emitter.on('UnityObjectPlaced', e => {
+            parts.value = e.partsPlaced;
+        });
 
         const save = () => {
             if(content.value === 'label') {
