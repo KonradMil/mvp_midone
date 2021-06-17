@@ -42,9 +42,17 @@ export default {
         const finalPartsList = computed(() => {
             if(challenge.value.save_json != undefined) {
                 console.log( JSON.parse(challenge.value.save_json).parts);
-                return JSON.parse(props.solution.save_json).parts.filter(part => JSON.parse(challenge.value.save_json).parts.forEach(part2 => !(part2.unity_id == part.unity_id)));
+                return JSON.parse(challenge.value.save_json).parts.filter(comparer(JSON.parse(props.solution.save_json).parts));
             }
         });
+
+        function comparer(otherArray){
+            return function(current){
+                return otherArray.filter(function(other){
+                    return other.unity_id == current.unity_id
+                }).length == 0;
+            }
+        }
 
         const getChallenge = () => {
             axios.post('/api/challenge/user/get/card', {id: props.solution.challenge_id})
