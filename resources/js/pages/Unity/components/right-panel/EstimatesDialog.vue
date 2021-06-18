@@ -51,6 +51,8 @@ export default {
                 let tempChallenge = JSON.parse(challenge.value.save_json);
                 if(c.length != undefined) {
                     c.forEach((obj) => {
+                        console.log('OBJ');
+                        console.log(obj);
                        tempChallenge.parts.every((objC, index) => {
                            console.log('EVERY');
                            console.log(objC);
