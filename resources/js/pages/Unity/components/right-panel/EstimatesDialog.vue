@@ -56,9 +56,26 @@ export default {
                                 tempChallenge.splice(index, 1);
                                 return false;
                             } else {
-                                partsAr.value.push({
-                                
-                                });
+                                if(partPrices[objC.model.model_name] != undefined) {
+                                    if(partsAr.value[objC.model.model_name] != undefined) {
+
+                                    } else {
+                                        partsAr.value[objC.model.model_name] = {
+                                            amount: 1,
+                                            price: partPrices[objC.model.model_name],
+                                        };
+                                    }
+                                } else {
+                                    if(partsAr.value[objC.model.model_name] != undefined) {
+                                        partsAr.value[objC.model.model_name].count += 1;
+                                    } else {
+                                        partsAr.value[objC.model.model_name] = {
+                                            amount: 1,
+                                            price: 0,
+                                        };
+                                    }
+                                }
+
                                 return true;
                             }
                        })
