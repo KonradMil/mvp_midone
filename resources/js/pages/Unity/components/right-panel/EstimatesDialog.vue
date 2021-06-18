@@ -81,8 +81,6 @@ export default {
                        })
                     });
                 }
-
-                return c;
         });
         //
         // function comparer(otherArray){
