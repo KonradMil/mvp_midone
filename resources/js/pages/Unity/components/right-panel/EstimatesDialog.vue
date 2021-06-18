@@ -52,6 +52,8 @@ export default {
                 if(c.length != undefined) {
                     c.forEach((obj) => {
                        tempChallenge.parts.every((objC, index) => {
+                           console.log('EVERY');
+                           console.log(objC);
                             if(objC.model.model_name == obj.model_name) {
                                 tempChallenge.parts.splice(index, 1);
                                 return false;
@@ -75,7 +77,6 @@ export default {
                                         };
                                     }
                                 }
-
                                 return true;
                             }
                        })
