@@ -53,34 +53,31 @@ export default {
                     c.forEach((obj) => {
                         console.log('OBJ');
                         console.log(obj);
+                        if(partPrices[objC.model.model_name] != undefined) {
+                            if(partsAr.value[objC.model.model_name] != undefined) {
+                                partsAr.value[objC.model.model_name].count += 1;
+                            } else {
+                                partsAr.value[objC.model.model_name] = {
+                                    count: 1,
+                                    price: partPrices[objC.model.model_name],
+                                };
+                            }
+                        } else {
+                            if(partsAr.value[objC.model.model_name] != undefined) {
+                                partsAr.value[objC.model.model_name].count += 1;
+                            } else {
+                                partsAr.value[objC.model.model_name] = {
+                                    count: 1,
+                                    price: 0,
+                                };
+                            }
+                        }
                        tempChallenge.parts.every((objC, index) => {
                            console.log('EVERY');
                            console.log(objC);
-                            if(objC.model.model_name == obj.model_name) {
-                                tempChallenge.parts.splice(index, 1);
-                                return false;
-                            } else {
-                                if(partPrices[objC.model.model_name] != undefined) {
-                                    if(partsAr.value[objC.model.model_name] != undefined) {
-                                        partsAr.value[objC.model.model_name].count += 1;
-                                    } else {
-                                        partsAr.value[objC.model.model_name] = {
-                                            count: 1,
-                                            price: partPrices[objC.model.model_name],
-                                        };
-                                    }
-                                } else {
-                                    if(partsAr.value[objC.model.model_name] != undefined) {
-                                        partsAr.value[objC.model.model_name].count += 1;
-                                    } else {
-                                        partsAr.value[objC.model.model_name] = {
-                                            count: 1,
-                                            price: 0,
-                                        };
-                                    }
-                                }
-                                return true;
-                            }
+                           if(partsAr.value[objC.model.model_name] != undefined) {
+                               partsAr.value[objC.model.model_name].count -= 1;
+                           }
                        })
                     });
                 }
