@@ -41,7 +41,7 @@ export default {
             margin: 0,
         });
 
-        const partsAr = ref([]);
+        const partsAr = [];
 
         const additionalCosts = ref([]);
         const partPrices = ref([]);
@@ -54,19 +54,19 @@ export default {
                         console.log('OBJ');
                         console.log(obj);
                         if(partPrices[objC.model.model_name] != undefined) {
-                            if(partsAr.value[objC.model.model_name] != undefined) {
-                                partsAr.value[objC.model.model_name].count += 1;
+                            if(partsAr[objC.model.model_name] != undefined) {
+                                partsAr[objC.model.model_name].count += 1;
                             } else {
-                                partsAr.value[objC.model.model_name] = {
+                                partsAr[objC.model.model_name] = {
                                     count: 1,
                                     price: partPrices[objC.model.model_name],
                                 };
                             }
                         } else {
-                            if(partsAr.value[objC.model.model_name] != undefined) {
-                                partsAr.value[objC.model.model_name].count += 1;
+                            if(partsAr[objC.model.model_name] != undefined) {
+                                partsAr[objC.model.model_name].count += 1;
                             } else {
-                                partsAr.value[objC.model.model_name] = {
+                                partsAr[objC.model.model_name] = {
                                     count: 1,
                                     price: 0,
                                 };
@@ -75,8 +75,8 @@ export default {
                        tempChallenge.parts.every((objC, index) => {
                            console.log('EVERY');
                            console.log(objC);
-                           if(partsAr.value[objC.model.model_name] != undefined) {
-                               partsAr.value[objC.model.model_name].count -= 1;
+                           if(partsAr[objC.model.model_name] != undefined) {
+                               partsAr[objC.model.model_name].count -= 1;
                            }
                        })
                     });
