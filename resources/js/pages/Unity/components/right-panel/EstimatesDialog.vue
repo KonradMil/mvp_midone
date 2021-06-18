@@ -58,8 +58,12 @@ export default {
             console.log('PROP PARTS');
             console.log(props.parts);
             console.log(props.parts.length);
+            props.parts.forEach((obj) => {
+               console.log('FUK U');
+               console.log(obj);
+            });
                 if(props.parts.length != undefined) {
-                    props.parts.map((obj) => {
+                    props.parts.forEach((obj) => {
                         console.log('OBJ');
                         console.log(obj);
                         if(partPrices.value[obj.model.model_name] != undefined) {
