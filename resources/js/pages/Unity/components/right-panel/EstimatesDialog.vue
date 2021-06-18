@@ -62,13 +62,13 @@ export default {
                         console.log('OBJ');
                         console.log(obj);
                         console.log(obj.value);
-                        if(partPrices[obj.model.model_name] != undefined) {
+                        if(partPrices.value[obj.model.model_name] != undefined) {
                             if(partsAr[obj.model.model_name] != undefined) {
                                 partsAr[obj.model.model_name].count += 1;
                             } else {
                                 partsAr[obj.model.model_name] = {
                                     count: 1,
-                                    price: partPrices[obj.model.model_name],
+                                    price: partPrices.value[obj.model.model_name],
                                 };
                             }
                         } else {
