@@ -57,10 +57,11 @@ export default {
 
             console.log('PROP PARTS');
             console.log(props.parts.value);
-                if(props.parts.value.length != undefined) {
-                    props.parts.value.forEach((obj) => {
+                if(props.parts.length != undefined) {
+                    props.parts.forEach((obj) => {
                         console.log('OBJ');
                         console.log(obj);
+                        console.log(obj.value);
                         if(partPrices[obj.model.model_name] != undefined) {
                             if(partsAr[obj.model.model_name] != undefined) {
                                 partsAr[obj.model.model_name].count += 1;
