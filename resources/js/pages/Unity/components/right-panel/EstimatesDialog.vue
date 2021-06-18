@@ -56,12 +56,12 @@ export default {
                 let tempChallenge = JSON.parse(challenge.value.save_json);
 
             console.log('PROP PARTS');
-            console.log(props.parts.value);
+            console.log(props.parts);
+            console.log(props.parts.length);
                 if(props.parts.length != undefined) {
-                    props.parts.forEach((obj) => {
+                    props.parts.map((obj) => {
                         console.log('OBJ');
                         console.log(obj);
-                        console.log(obj.value);
                         if(partPrices.value[obj.model.model_name] != undefined) {
                             if(partsAr[obj.model.model_name] != undefined) {
                                 partsAr[obj.model.model_name].count += 1;
