@@ -75,14 +75,14 @@ export default {
                                 };
                             }
                         }
-                       tempChallenge.parts.forEach((objC, index) => {
-                           console.log('EVERY');
-                           console.log(objC);
-                           if(partsAr.value[objC.model.model_name] != undefined) {
-                               partsAr.value[objC.model.model_name].count -= 1;
-                           }
-                       })
                     });
+                    tempChallenge.parts.forEach((objC, index) => {
+                        console.log('EVERY');
+                        console.log(objC);
+                        if(partsAr.value[objC.model.model_name] != undefined) {
+                            partsAr.value[objC.model.model_name].count -= 1;
+                        }
+                    })
                 }
         });
         //
