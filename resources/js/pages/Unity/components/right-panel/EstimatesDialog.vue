@@ -44,13 +44,21 @@ export default {
         const partsAr = [];
 
         const additionalCosts = ref([]);
-        const partPrices = ref([]);
+        const partPrices = ref([
+            {
+                model13: {
+                    price: 10
+                }
+            }
+        ]);
 
         const finalPartsList = computed(() => {
-                let c = props.parts;
                 let tempChallenge = JSON.parse(challenge.value.save_json);
-                if(c.length != undefined) {
-                    c.forEach((obj) => {
+
+            console.log('PROP PARTS');
+            console.log(props.parts);
+                if(props.parts.length != undefined) {
+                    props.parts.forEach((obj) => {
                         console.log('OBJ');
                         console.log(obj);
                         if(partPrices[objC.model.model_name] != undefined) {
@@ -72,7 +80,7 @@ export default {
                                 };
                             }
                         }
-                       tempChallenge.parts.every((objC, index) => {
+                       tempChallenge.parts.forEach((objC, index) => {
                            console.log('EVERY');
                            console.log(objC);
                            if(partsAr[objC.model.model_name] != undefined) {
