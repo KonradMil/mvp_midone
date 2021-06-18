@@ -48,10 +48,10 @@ export default {
 
         const finalPartsList = computed(() => {
                 let c = props.parts;
-                let tempChallenge = JSON.parse(challenge.value.save_json);
+                let tempChallenge = JSON.parse(challenge.value.save_json).parts;
                 if(c.length != undefined) {
                     c.forEach((obj) => {
-                       tempChallenge.parts.every((objC, index) => {
+                       tempChallenge.every((objC, index) => {
                             if(objC.model.model_name == obj.model_name) {
                                 tempChallenge.splice(index, 1);
                                 return false;
