@@ -48,12 +48,12 @@ export default {
 
         const finalPartsList = computed(() => {
                 let c = props.parts;
-                let tempChallenge = JSON.parse(challenge.value.save_json).parts;
+                let tempChallenge = JSON.parse(challenge.value.save_json);
                 if(c.length != undefined) {
                     c.forEach((obj) => {
-                       tempChallenge.every((objC, index) => {
+                       tempChallenge.parts.every((objC, index) => {
                             if(objC.model.model_name == obj.model_name) {
-                                tempChallenge.splice(index, 1);
+                                tempChallenge.parts.splice(index, 1);
                                 return false;
                             } else {
                                 if(partPrices[objC.model.model_name] != undefined) {
