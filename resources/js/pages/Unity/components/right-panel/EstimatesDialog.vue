@@ -58,10 +58,10 @@ export default {
                             } else {
                                 if(partPrices[objC.model.model_name] != undefined) {
                                     if(partsAr.value[objC.model.model_name] != undefined) {
-
+                                        partsAr.value[objC.model.model_name].count += 1;
                                     } else {
                                         partsAr.value[objC.model.model_name] = {
-                                            amount: 1,
+                                            count: 1,
                                             price: partPrices[objC.model.model_name],
                                         };
                                     }
@@ -70,7 +70,7 @@ export default {
                                         partsAr.value[objC.model.model_name].count += 1;
                                     } else {
                                         partsAr.value[objC.model.model_name] = {
-                                            amount: 1,
+                                            count: 1,
                                             price: 0,
                                         };
                                     }
