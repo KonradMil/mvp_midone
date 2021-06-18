@@ -66,20 +66,20 @@ export default {
                     props.parts.forEach((obj) => {
                         console.log('OBJ');
                         console.log(obj);
-                        if(partPrices.value[obj.model.model_name] != undefined) {
-                            if(partsAr[obj.model.model_name] != undefined) {
-                                partsAr[obj.model.model_name].count += 1;
+                        if(partPrices.value[obj.model_name] != undefined) {
+                            if(partsAr[obj.model_name] != undefined) {
+                                partsAr[obj.model_name].count += 1;
                             } else {
-                                partsAr[obj.model.model_name] = {
+                                partsAr[obj.model_name] = {
                                     count: 1,
-                                    price: partPrices.value[obj.model.model_name],
+                                    price: partPrices.value[obj.model_name],
                                 };
                             }
                         } else {
-                            if(partsAr[obj.model.model_name] != undefined) {
-                                partsAr[obj.model.model_name].count += 1;
+                            if(partsAr[obj.model_name] != undefined) {
+                                partsAr[obj.model_name].count += 1;
                             } else {
-                                partsAr[obj.model.model_name] = {
+                                partsAr[obj.model_name] = {
                                     count: 1,
                                     price: 0,
                                 };
