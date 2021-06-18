@@ -41,16 +41,10 @@ export default {
             margin: 0,
         });
 
-        const partsAr = [];
+        const partsAr = ref({});
 
         const additionalCosts = ref([]);
-        const partPrices = ref([
-            {
-                model13: {
-                    price: 10
-                }
-            }
-        ]);
+        const partPrices = ref({});
 
         const finalPartsList = computed(() => {
                 let tempChallenge = JSON.parse(challenge.value.save_json);
@@ -58,28 +52,24 @@ export default {
             console.log('PROP PARTS');
             console.log(props.parts);
             console.log(props.parts.length);
-            props.parts.forEach((obj) => {
-               console.log('FUK U');
-               console.log(obj);
-            });
                 if(props.parts.length != undefined) {
                     props.parts.forEach((obj) => {
                         console.log('OBJ');
                         console.log(obj);
                         if(partPrices.value[obj.model_name] != undefined) {
-                            if(partsAr[obj.model_name] != undefined) {
-                                partsAr[obj.model_name].count += 1;
+                            if(partsAr.value[obj.model_name] != undefined) {
+                                partsAr.value[obj.model_name].count += 1;
                             } else {
-                                partsAr[obj.model_name] = {
+                                partsAr.value[obj.model_name] = {
                                     count: 1,
                                     price: partPrices.value[obj.model_name],
                                 };
                             }
                         } else {
-                            if(partsAr[obj.model_name] != undefined) {
-                                partsAr[obj.model_name].count += 1;
+                            if(partsAr.value[obj.model_name] != undefined) {
+                                partsAr.value[obj.model_name].count += 1;
                             } else {
-                                partsAr[obj.model_name] = {
+                                partsAr.value[obj.model_name] = {
                                     count: 1,
                                     price: 0,
                                 };
@@ -88,8 +78,8 @@ export default {
                        tempChallenge.parts.forEach((objC, index) => {
                            console.log('EVERY');
                            console.log(objC);
-                           if(partsAr[objC.model.model_name] != undefined) {
-                               partsAr[objC.model.model_name].count -= 1;
+                           if(partsAr.value[objC.model.model_name] != undefined) {
+                               partsAr.value[objC.model.model_name].count -= 1;
                            }
                        })
                     });
