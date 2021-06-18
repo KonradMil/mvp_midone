@@ -120,7 +120,8 @@ export default {
             basicCosts,
             basicDataValues,
             modelCategories,
-            challenge
+            challenge,
+            partsAr
         }
     }
 }
