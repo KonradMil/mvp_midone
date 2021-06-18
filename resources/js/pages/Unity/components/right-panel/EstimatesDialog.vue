@@ -56,25 +56,25 @@ export default {
                 let tempChallenge = JSON.parse(challenge.value.save_json);
 
             console.log('PROP PARTS');
-            console.log(props.parts);
-                if(props.parts.length != undefined) {
-                    props.parts.forEach((obj) => {
+            console.log(props.parts.value);
+                if(props.parts.value.length != undefined) {
+                    props.parts.value.forEach((obj) => {
                         console.log('OBJ');
                         console.log(obj);
-                        if(partPrices[objC.model.model_name] != undefined) {
-                            if(partsAr[objC.model.model_name] != undefined) {
-                                partsAr[objC.model.model_name].count += 1;
+                        if(partPrices[obj.model.model_name] != undefined) {
+                            if(partsAr[obj.model.model_name] != undefined) {
+                                partsAr[obj.model.model_name].count += 1;
                             } else {
-                                partsAr[objC.model.model_name] = {
+                                partsAr[obj.model.model_name] = {
                                     count: 1,
-                                    price: partPrices[objC.model.model_name],
+                                    price: partPrices[obj.model.model_name],
                                 };
                             }
                         } else {
-                            if(partsAr[objC.model.model_name] != undefined) {
-                                partsAr[objC.model.model_name].count += 1;
+                            if(partsAr[obj.model.model_name] != undefined) {
+                                partsAr[obj.model.model_name].count += 1;
                             } else {
-                                partsAr[objC.model.model_name] = {
+                                partsAr[obj.model.model_name] = {
                                     count: 1,
                                     price: 0,
                                 };
