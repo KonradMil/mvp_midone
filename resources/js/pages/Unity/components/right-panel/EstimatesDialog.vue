@@ -12,7 +12,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <template v-for="(part, index) in finalPartsList">
+                        <template v-for="(part, index) in partsAr">
                             <tr>
                                 <td>
                                     {{index}}
