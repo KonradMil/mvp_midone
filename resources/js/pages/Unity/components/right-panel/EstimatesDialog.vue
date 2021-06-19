@@ -6,7 +6,7 @@
                 <div class="intro-y col-span-12 sm:col-span-12" >
                     <h4>Części i urządzenia</h4>
                 </div>
-                <button class="btn btn-primary hidden sm:flex mt-2"  @click="refreshMe">
+                <button class="btn btn-primary hidden sm:flex my-2"  @click="refreshMe">
                     Aktualizuj części
                 </button>
 

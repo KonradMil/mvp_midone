@@ -175,7 +175,9 @@ export default {
                 //     // action: 'updateAnimable', data:animable.value{
                 // });
                 saveChallengeDetailsRepo();
-            } else if (content.value === 'line') {
+            }  else if (content.value === 'estimates') {
+
+             } else if (content.value === 'line') {
                 console.log('HERE IMPORTA');
                 console.log({layers: line.value});
                 emitter.emit('rightpanelaction', { action: 'updateLine', data:{layers: line.value}, json: true });
