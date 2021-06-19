@@ -237,11 +237,6 @@ export default {
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
-                        console.log("response.data.payload");
-                        console.log(response.data.payload);
-                        console.log(JSON.parse(response.data.payload.save_json));
-                        challenge.value = response.data.payload;
-                        finalPartsList();
                     }
                 })
         });
@@ -263,10 +258,15 @@ export default {
                             }
                         } else {
                             if(partsAr.value[obj.model_name] != undefined) {
-                                partPrices.value[obj.model_name] = 0;
+                                if(partPrices.value[obj.model_name] == undefined) {
+                                    partPrices.value[obj.model_name] = 0;
+                                }
+
                                 partsAr.value[obj.model_name].count += 1;
                             } else {
-                                partPrices.value[obj.model_name] = 0;
+                                if(partPrices.value[obj.model_name] == undefined) {
+                                    partPrices.value[obj.model_name] = 0;
+                                }
                                 partsAr.value[obj.model_name] = {
                                     count: 1,
                                     price: 0,
