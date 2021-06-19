@@ -6,11 +6,11 @@
                     <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
                     <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
                     <div class="w-6 h-6 flex-none image-fit relative ml-5">
-                        <Avatar :src="(not.data.author != undefined)? '/s3/avatars/' + not.data.author.avatar : ''" :username="not.data.author.name + ' ' + not.data.author.lastname" :size="30" color="#FFF" background-color="#930f68"/>
+                        <Avatar :src="(not.list != undefined)? '/s3/avatars/' + not.list.author.avatar : ''" :username="not.list.author.name + ' ' + not.list.author.lastname" :size="30" color="#FFF" background-color="#930f68"/>
                     </div>
-                    <div class="inbox__item--sender truncate ml-3">{{not.data.author.name + ' ' + not.data.author.lastname}}</div>
+                    <div class="inbox__item--sender truncate ml-3">{{not.list.author.name + ' ' + not.list.author.lastname}}</div>
                 </div>
-                <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">{{not.data.message}}</span> <button v-if="not.data.link != undefined" type="button" class="btn ml-5" @click="$router.push({path: not.data.link})">{{$t('communication.goTo')}}</button> </div>
+                <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">{{not.list.message}}</span> <button v-if="not.list.link != undefined" type="button" class="btn ml-5" @click="$router.push({path: not.list.link})">{{$t('communication.goTo')}}</button> </div>
                 <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">{{$dayjs(not.created_at).format('DD.MM.YYYY HH:mm')}}</div>
             </div>
         </div>
