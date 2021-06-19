@@ -232,6 +232,20 @@ export default {
             emitter.emit('unityoutgoingaction', {action: 'getParts'});
         }
 
+        emitter.on(' estimatesave', e => {
+            axios.post('/api/solution/estimate/save', {solution_id: props.solution.id, basicCosts: basicCosts, additionalCosts: additionalCosts.value, partPrices: partPrices, partsCost:partsCost, integrationCost: integrationCost })
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        console.log("response.data.payload");
+                        console.log(response.data.payload);
+                        console.log(JSON.parse(response.data.payload.save_json));
+                        challenge.value = response.data.payload;
+                        finalPartsList();
+                    }
+                })
+        });
+
         const finalPartsList = () => {
             partsAr.value = {};
                 if(props.parts.length != undefined) {
@@ -275,26 +289,11 @@ export default {
 
                 }
         };
-        //
-        // function comparer(otherArray){
-        //     return function(current){
-        //         return otherArray.filter(function(other){
-        //             console.log(other, current);
-        //             return other.unity_id != current.unity_id
-        //         }).length == 0;
-        //     }
-        // }
 
         const partsCost = computed(() => {
             let sum = 0;
             console.log(partsAr.value);
-            // try {
-            //     partsAr.value.forEach((obj) => {
-            //
-            //     }) ;
-            // }catch (e) {
-            //
-            // }
+
             for (let key in partsAr.value) {
                     sum += partsAr.value[key].price * partsAr.value[key].count;
             }

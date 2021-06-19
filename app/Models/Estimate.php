@@ -25,7 +25,8 @@ class Estimate extends Model
       'training',
       'project',
       'margin',
-      'parts_prices'
+      'parts_prices',
+        'additionalCosts'
     ];
 
     public function solution()

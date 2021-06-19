@@ -28,6 +28,7 @@ class CreateEstimatesTable extends Migration
             $table->float('project');
             $table->float('margin');
             $table->json('parts_prices');
+            $table->json('additional_costs');
             $table->timestamps();
         });
     }

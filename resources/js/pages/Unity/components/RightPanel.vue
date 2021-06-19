@@ -176,7 +176,9 @@ export default {
                 // });
                 saveChallengeDetailsRepo();
             }  else if (content.value === 'estimates') {
+                emitter.emit('estimatesave', {
 
+                });
              } else if (content.value === 'line') {
                 console.log('HERE IMPORTA');
                 console.log({layers: line.value});

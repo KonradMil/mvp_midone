@@ -6,6 +6,7 @@ use App\Events\SolutionAccepted;
 use App\Events\SolutionPublished;
 use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
+use App\Models\Estimate;
 use App\Models\Solutions\Solution;
 use App\Models\File;
 use App\Models\Financial;
@@ -17,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use phpDocumentor\Reflection\Types\Boolean;
+use Psr\Log\NullLogger;
 
 class SolutionController extends Controller
 {
@@ -157,6 +159,38 @@ class SolutionController extends Controller
             'success' => true,
             'message' => 'Wyzwanie zostało zapisane poprawnie',
             'payload' => $solution
+        ]);
+    }
+
+    public function estimateSave(Request $request)
+    {
+        $solution = Solution::find($request->input('solution_id'));
+        if($solution->estimate != Null) {
+            $estimate = $solution->estimate;
+        } else {
+            $estimate = new Estimate();
+            $estimate->solution_id = $request->input('solution_id');
+        }
+        $input = $request->input();
+        $estimate->integration_cost = $input['integrationCost'];
+        $estimate->parts_cost =  $input['partsCost'];
+        $estimate->mechanical_integration = $input['basicCosts']['mechanical_integration'];
+        $estimate->electrical_integration = $input['basicCosts']['electrical_integration'];
+        $estimate->workstation_integration = $input['basicCosts']['workstation_integration'];
+        $estimate->programming_robot = $input['basicCosts']['programming_robot'];
+        $estimate->programming_plc = $input['basicCosts']['programming_plc'];
+        $estimate->documentation_ce = $input['basicCosts']['documentation_ce'];
+        $estimate->training = $input['basicCosts']['training'];
+        $estimate->project = $input['basicCosts']['project'];
+        $estimate->margin = $input['basicCosts']['margin'];
+        $estimate->parts_prices = $input['partPrices'];
+        $estimate->additionalCosts = $input['additionalCosts'];
+        $estimate->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisane poprawnie',
+            'payload' => $estimate
         ]);
     }
 
