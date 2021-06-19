@@ -285,7 +285,7 @@ export default {
 
         const partsCost = computed(() => {
             let sum = 0;
-            partsAr.value.forEach((obj) => {
+            partsAr.value.map((obj) => {
                 sum += obj.price * obj.count;
             }) ;
             return sum;
