@@ -330,7 +330,7 @@ export default {
                         } catch (e) {
 
                         }
-
+                        console.log(partPrices.value);
                         try {
 
                         } catch (e) {
