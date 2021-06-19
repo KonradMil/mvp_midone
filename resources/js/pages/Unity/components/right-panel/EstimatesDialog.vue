@@ -316,7 +316,25 @@ export default {
             return sum;
         });
 
-
+        const getEstimate = () => {
+            axios.post('/api/solution/estimate/get', { solution_id: props.solution.id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        partPrices.value = response.data.payload.part_prices;
+                        additionalCosts.value = response.data.payload.additonal_costs;
+                        basicCosts.mechanical_integration = response.data.payload.mechanical_integration;
+                            basicCosts.electrical_integration = response.data.payload.electrical_integration;
+                            basicCosts.workstation_integration = response.data.payload.workstation_integration;
+                            basicCosts.programming_robot = response.data.payload.programming_robot;
+                            basicCosts.programming_plc = response.data.payload.programming_plc;
+                            basicCosts.documentation_ce = response.data.payload.documentation_ce;
+                            basicCosts.training = response.data.payload.training;
+                            basicCosts.project = response.data.payload.project;
+                            basicCosts.margin = response.data.payload.margin;
+                    }
+                })
+        }
 
 
         const refreshMe = () => {

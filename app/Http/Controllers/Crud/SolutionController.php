@@ -230,6 +230,24 @@ class SolutionController extends Controller
         ]);
     }
 
+    public function estimateGet(Request $request)
+    {
+        $solution = Solution::find($request->input('solution_id'));
+        if($solution->estimate != null) {
+            return response()->json([
+                'success' => true,
+                'message' => '',
+                'payload' => $solution->estimate
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => '',
+                'payload' => ''
+            ]);
+        }
+    }
+
     public function checkTeam(Request $request)
     {
         $check = false;

@@ -130,6 +130,7 @@ Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function 
     Route::post('unpublish', [SolutionController::class, 'unpublish']);
     Route::post('delete', [SolutionController::class, 'delete']);
     Route::post('estimate/save', [SolutionController::class, 'estimateSave']);
+    Route::post('estimate/get', [SolutionController::class, 'estimateGet']);
 });
 
 Route::group(['prefix' => 'knowledgebase/post', 'middleware' => 'auth:sanctum'], function () {
