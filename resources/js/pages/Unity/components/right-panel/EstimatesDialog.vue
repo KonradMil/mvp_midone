@@ -77,8 +77,10 @@
                 <label for="input-wizard-0" class="form-label">
                     Projekt wykonawczy
                 </label>
+                <div class="input-group">
                 <input type="text" v-model="basicCosts.project" class="form-control" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price63247" class="input-group-text">zł</div>
+                </div>
             </div>
             <div class="intro-y col-span-12 sm:col-span-6" >
                 <label for="input-wizard-4" class="form-label">
@@ -231,27 +233,7 @@ export default {
 
         }
 
-        watch(additionalCosts, () => {
-            let c = sum;
-            let i =  integrationCost;
-        }, {
-            deep: true
-        });
 
-        watch(partsAr, () => {
-            let c = sum;
-            let i =  integrationCost;
-            let p =  partsAr;
-        }, {
-            deep: true
-        });
-
-        watch(basicCosts, () => {
-            let c = sum;
-            let i =  integrationCost;
-        }, {
-            deep: true
-        });
 
         const finalPartsList = () => {
             partsAr.value = {};
