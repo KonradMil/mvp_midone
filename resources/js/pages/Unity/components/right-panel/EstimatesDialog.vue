@@ -325,15 +325,12 @@ export default {
                     console.log(pay);
                     if (response.data.success) {
                         try {
-                            if(pay.length > 0) {
+
 
                                 partPrices.value = pay;
                                 console.log('partPrices.value11');
                                 console.log(partPrices.value);
-                                for(let key in pay) {
-                                    partPrices.value[key] = pay[key];
-                                }
-                            }
+
                         } catch (e) {
                             console.log('ERROREK');
                             console.log(e);
