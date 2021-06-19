@@ -39,12 +39,14 @@
             </div>
             <div class="divide-gray-200"></div>
             <h4>Koszty podstawowe</h4>
-            <div class="intro-y col-span-12 sm:col-span-12 input-group" >
+            <div class="intro-y col-span-12 sm:col-span-12" >
                 <label for="input-wizard-1" class="form-label">
                     Integracja mechaniczna + materiały
                 </label>
-                <input type="number" v-model="basicCosts.mechanical_integration" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-                <div id="input-group-price63242" class="input-group-text">zł</div>
+                <div class="input-group">
+                    <input type="number" v-model="basicCosts.mechanical_integration" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                    <div id="input-group-price63242" class="input-group-text">zł</div>
+                </div>
             </div>
             <div class="intro-y col-span-12 sm:col-span-12" >
                 <label for="input-wizard-2" class="form-label">
