@@ -365,7 +365,6 @@ export default {
             partsAr,
             addCost,
             refreshMe,
-            sum,
             integrationCost,
             partsCost
         }
