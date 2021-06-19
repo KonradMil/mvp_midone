@@ -186,7 +186,8 @@ class SolutionController extends Controller
         $estimate->parts_prices = $input['partPrices'];
         $estimate->additionalCosts = $input['additionalCosts'];
         dump($estimate);
-        $estimate->save();
+        dd($estimate);
+//        $estimate->save();
 
         return response()->json([
             'success' => true,
