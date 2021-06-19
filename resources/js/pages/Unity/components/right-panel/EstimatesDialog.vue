@@ -338,7 +338,7 @@ export default {
                         console.log('partPrices.value');
                         console.log(partPrices.value);
                         try {
-                            additionalCosts.value = JSON.parse(response.data.payload.additonal_costs);
+                            additionalCosts.value = JSON.parse(response.data.payload.additional_costs);
                         } catch (e) {
 
                         }
