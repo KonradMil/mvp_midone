@@ -303,16 +303,16 @@ export default {
         const integrationCost = computed(() => {
             let sum = 0;
             additionalCosts.value.forEach((obj) => {
-                sum += obj.price;
+                sum += parseFloat(obj.price);
             });
             for (let key in basicCosts.value) {
-                sum += basicCosts.value[key];
+                sum += parseFloat(basicCosts.value[key]);
             }
             return sum;
         });
 
         const sum = computed(() => {
-            return partsCost + integrationCost;
+            return (parseFloat(partsCost) + parseFloat(integrationCost));
         });
 
 
