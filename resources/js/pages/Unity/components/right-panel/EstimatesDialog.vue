@@ -29,7 +29,7 @@
                                     {{part.count}}
                                 </td>
                                 <td class="border">
-                                    <input type="text" v-if="partPrices[index] != undefined" class="form-control" pattern="(0\.((0[1-9]{1})|([1-9]{1}([0-9]{1})?)))|(([1-9]+[0-9]*)(\.([0-9]{1,2}))?)" v-model="partPrices[index]">
+                                    <input type="text" v-if="partPrices[index] != undefined" class="form-control"   pattern="[0-9]+([\.,][0-9]+)?" step="0.01" v-model="partPrices[index]">
                                 </td>
                                 <td class="border">
                                     <span v-if="partPrices[index] != undefined">
@@ -51,7 +51,7 @@
                     Integracja mechaniczna + materiały
                 </label>
                 <div class="input-group">
-                    <input type="number" v-model="basicCosts.mechanical_integration" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                    <input type="text" v-model="basicCosts.mechanical_integration" class="form-control" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                     <div id="input-group-price63242" class="input-group-text">zł</div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                     Integracja elektryczna + materiały
                 </label>
                 <div class="input-group">
-                <input type="number" v-model="basicCosts.electrical_integration" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                <input type="text" v-model="basicCosts.electrical_integration" class="form-control" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price623422" class="input-group-text">zł</div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                     Integracja stanowiska z linią
                 </label>
                 <div class="input-group">
-                <input type="number" v-model="basicCosts.workstation_integration" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                <input type="text" v-model="basicCosts.workstation_integration" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price6234" class="input-group-text">zł</div>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                 <label for="input-wizard-0" class="form-label">
                     Projekt wykonawczy
                 </label>
-                <input type="number" v-model="basicCosts.project" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                <input type="text" v-model="basicCosts.project" class="form-control" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price63247" class="input-group-text">zł</div>
             </div>
             <div class="intro-y col-span-12 sm:col-span-6" >
@@ -85,7 +85,7 @@
                     Programowanie robota
                 </label>
                 <div class="input-group">
-                <input type="number" v-model="basicCosts.programming_robot" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                <input type="text" v-model="basicCosts.programming_robot" class="form-control" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price6324" class="input-group-text">zł</div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                     Programowanie PLC
                 </label>
                 <div class="input-group">
-                <input type="number" v-model="basicCosts.programming_plc" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                <input type="text" v-model="basicCosts.programming_plc" class="form-control" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price634" class="input-group-text">zł</div>
                 </div>
             </div>
@@ -103,7 +103,7 @@
                     Dokumentacja CE
                 </label>
                 <div class="input-group">
-                <input type="number" v-model="basicCosts.documentation_ce" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                <input type="text" v-model="basicCosts.documentation_ce" class="form-control" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price234" class="input-group-text">zł</div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                     Szkolenie
                 </label>
                 <div class="input-group">
-                <input type="number" v-model="basicCosts.training" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                <input type="text" v-model="basicCosts.training" class="form-control" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price34" class="input-group-text">zł</div>
                 </div>
             </div>
@@ -121,7 +121,7 @@
                    Marża
                 </label>
                 <div class="input-group">
-                <input type="number" v-model="basicCosts.margin" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                <input type="text" v-model="basicCosts.margin" class="form-control" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price90" class="input-group-text">zł</div>
                 </div>
             </div>
@@ -135,7 +135,7 @@
                         <input type="text" class="form-control" v-model="obj.name"/>
                     </label>
                     <div class="input-group">
-                    <input type="number" v-model="obj.price" class="form-control w-1/2" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                    <input type="text" v-model="obj.price" class="form-control w-1/2" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                     <div class="input-group-text">zł</div>
                     </div>
                 </div>
@@ -151,6 +151,19 @@
               </span>
 
             </a>
+            </div>
+            <div class="divide-gray-200"></div>
+            <div class="intro-y col-span-12 sm:col-span-12" >
+                <h4>Sumy</h4>
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-12" >
+                <label for="input-wizard-2" class="form-label">
+                    Integracja elektryczna + materiały
+                </label>
+                <div class="input-group">
+                    <input type="text" v-model="basicCosts.electrical_integration" class="form-control" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                    <div id="input-group-price623422" class="input-group-text">zł</div>
+                </div>
             </div>
         </div>
     </div>
