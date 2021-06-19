@@ -34,11 +34,77 @@
                 </table>
             </div>
             <div class="intro-y col-span-12 sm:col-span-6" >
+                <label for="input-wizard-0" class="form-label">
+                    Projekt wykonawczy
+                </label>
+                <input type="number" v-model="basicCosts.project" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-6" >
                 <label for="input-wizard-1" class="form-label">
-
+                    Integracja mechaniczna + materiały
                 </label>
                 <input type="number" v-model="basicCosts.mechanical_integration" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
             </div>
+            <div class="intro-y col-span-12 sm:col-span-6" >
+                <label for="input-wizard-2" class="form-label">
+                    Integracja elektryczna + materiały
+                </label>
+                <input type="number" v-model="basicCosts.electrical_integration" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-6" >
+                <label for="input-wizard-3" class="form-label">
+                    Integracja stanowiska z linią
+                </label>
+                <input type="number" v-model="basicCosts.workstation_integration" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-6" >
+                <label for="input-wizard-4" class="form-label">
+                    Programowanie robota
+                </label>
+                <input type="number" v-model="basicCosts.programming_robot" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-6" >
+                <label for="input-wizard-5" class="form-label">
+                    Programowanie PLC
+                </label>
+                <input type="number" v-model="basicCosts.programming_plc" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-6" >
+                <label for="input-wizard-6" class="form-label">
+                    Dokumentacja CE
+                </label>
+                <input type="number" v-model="basicCosts.documentation_ce" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-6" >
+                <label for="input-wizard-7" class="form-label">
+                    Szkolenie
+                </label>
+                <input type="number" v-model="basicCosts.training" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-6" >
+                <label for="input-wizard-8" class="form-label">
+                   Marża
+                </label>
+                <input type="number" v-model="basicCosts.margin" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+            </div>
+            <template v-for="(obj, index) in additionalCosts">
+                <div class="intro-y col-span-12 sm:col-span-6" >
+                    <label :for="'input-wizard-' + index" class="form-label">
+                        <input type="text" class="form-control" v-model="obj.name"/>
+                    </label>
+                    <input type="number" v-model="obj.price" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                </div>
+            </template>
+            <a
+                @click.prevent="addCost"
+                href=""
+                class="intro-x w-full block text-center rounded-md py-3 mt-3 border border-dotted border-theme-15 dark:border-dark-5 text-theme-16 dark:text-gray-600">
+
+              <span>
+                  Dodaj koszt
+              </span>
+
+            </a>
         </div>
     </div>
 </template>
@@ -150,6 +216,13 @@ export default {
                 })
         }
 
+        const addCost = () => {
+            additionalCosts.value.push({
+                name: 'Nowy koszt',
+                price: 0
+            });
+        }
+
         onMounted(() => {
             getChallenge();
         });
@@ -163,7 +236,8 @@ export default {
             basicDataValues,
             modelCategories,
             challenge,
-            partsAr
+            partsAr,
+            addCost
         }
     }
 }
