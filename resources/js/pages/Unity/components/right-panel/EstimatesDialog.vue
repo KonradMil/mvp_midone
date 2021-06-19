@@ -2,10 +2,14 @@
     <div class="px-5 sm:px-10pt-2">
         <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
             <div class="intro-y col-span-12">
+
+                <div class="intro-y col-span-12 sm:col-span-12" >
+                    <h4>Części i urządzenia</h4>
+                </div>
                 <button class="btn btn-outline-secondary hidden sm:flex"  @click="refreshMe">
                     Aktualizuj części
                 </button>
-                <h4>Części i urządzenia</h4>
+
                 <table class="table">
                     <thead>
                     <tr>
@@ -38,7 +42,10 @@
                 </table>
             </div>
             <div class="divide-gray-200"></div>
-            <h4>Koszty podstawowe</h4>
+            <div class="intro-y col-span-12 sm:col-span-12" >
+                <h4>Koszty podstawowe</h4>
+            </div>
+
             <div class="intro-y col-span-12 sm:col-span-12" >
                 <label for="input-wizard-1" class="form-label">
                     Integracja mechaniczna + materiały
@@ -52,15 +59,19 @@
                 <label for="input-wizard-2" class="form-label">
                     Integracja elektryczna + materiały
                 </label>
+                <div class="input-group">
                 <input type="number" v-model="basicCosts.electrical_integration" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price623422" class="input-group-text">zł</div>
+                </div>
             </div>
             <div class="intro-y col-span-12 sm:col-span-12" >
                 <label for="input-wizard-3" class="form-label">
                     Integracja stanowiska z linią
                 </label>
+                <div class="input-group">
                 <input type="number" v-model="basicCosts.workstation_integration" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price6234" class="input-group-text">zł</div>
+                </div>
             </div>
             <div class="intro-y col-span-12 sm:col-span-6" >
                 <label for="input-wizard-0" class="form-label">
@@ -73,46 +84,60 @@
                 <label for="input-wizard-4" class="form-label">
                     Programowanie robota
                 </label>
+                <div class="input-group">
                 <input type="number" v-model="basicCosts.programming_robot" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price6324" class="input-group-text">zł</div>
+                </div>
             </div>
             <div class="intro-y col-span-12 sm:col-span-6" >
                 <label for="input-wizard-5" class="form-label">
                     Programowanie PLC
                 </label>
+                <div class="input-group">
                 <input type="number" v-model="basicCosts.programming_plc" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price634" class="input-group-text">zł</div>
+                </div>
             </div>
             <div class="intro-y col-span-12 sm:col-span-6" >
                 <label for="input-wizard-6" class="form-label">
                     Dokumentacja CE
                 </label>
+                <div class="input-group">
                 <input type="number" v-model="basicCosts.documentation_ce" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price234" class="input-group-text">zł</div>
+                </div>
             </div>
             <div class="intro-y col-span-12 sm:col-span-6" >
                 <label for="input-wizard-7" class="form-label">
                     Szkolenie
                 </label>
+                <div class="input-group">
                 <input type="number" v-model="basicCosts.training" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price34" class="input-group-text">zł</div>
+                </div>
             </div>
             <div class="intro-y col-span-12 sm:col-span-6" >
                 <label for="input-wizard-8" class="form-label">
                    Marża
                 </label>
+                <div class="input-group">
                 <input type="number" v-model="basicCosts.margin" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 <div id="input-group-price90" class="input-group-text">zł</div>
+                </div>
             </div>
             <div class="divide-gray-200"></div>
+            <div class="intro-y col-span-12 sm:col-span-12" >
             <h4>Pozostałe koszty</h4>
+            </div>
             <template v-for="(obj, index) in additionalCosts">
                 <div class="intro-y col-span-12 sm:col-span-12" >
                     <label :for="'input-wizard-' + index" class="form-label w-1/2">
                         <input type="text" class="form-control" v-model="obj.name"/>
                     </label>
+                    <div class="input-group">
                     <input type="number" v-model="obj.price" class="form-control w-1/2" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                     <div class="input-group-text">zł</div>
+                    </div>
                 </div>
             </template>
             <div class="intro-y col-span-12 sm:col-span-12" >
