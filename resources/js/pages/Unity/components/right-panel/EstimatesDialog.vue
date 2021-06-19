@@ -338,11 +338,9 @@ export default {
                         console.log('partPrices.value');
                         console.log(partPrices.value);
                         try {
-
+                            additionalCosts.value = JSON.parse(response.data.payload.additonal_costs);
                         } catch (e) {
-                            if(JSON.parse(response.data.payload.additonal_costs).length > 0) {
-                                additionalCosts.value = JSON.parse(response.data.payload.additonal_costs);
-                            }
+
                         }
 
                         basicCosts.mechanical_integration = response.data.payload.mechanical_integration;
