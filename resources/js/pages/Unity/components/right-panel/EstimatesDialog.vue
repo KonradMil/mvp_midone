@@ -230,10 +230,7 @@ export default {
 
         const getParts = () => {
             emitter.emit('unityoutgoingaction', {action: 'getParts'});
-
         }
-
-
 
         const finalPartsList = () => {
             partsAr.value = {};

@@ -3,6 +3,7 @@
 namespace App\Models\Solutions;
 
 use App\Models\Challenges\Challenge;
+use App\Models\Estimate;
 use App\Models\Financial;
 use App\Models\Offer;
 use App\Models\Team;
@@ -34,11 +35,11 @@ class Solution extends Model implements ReactableInterface
     {
         return $this->belongsToMany(Team::class, 'team_solution', 'solution_id', 'team_id');
     }
-//
-//    public function installer()
-//    {
-//        return $this->belongsTo(User::class);
-//    }
+
+    public function estimate()
+    {
+        return $this->hasOne(Estimate::class, 'solution_id');
+    }
 
     public function challenge()
     {
