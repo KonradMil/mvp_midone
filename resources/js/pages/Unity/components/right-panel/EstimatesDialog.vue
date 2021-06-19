@@ -2,6 +2,7 @@
     <div class="px-5 sm:px-10pt-2">
         <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
             <div class="intro-y col-span-12">
+                <h4>Części i urządzenia</h4>
                 <table class="table">
                     <thead>
                     <tr>
@@ -33,7 +34,8 @@
                     </tbody>
                 </table>
             </div>
-
+            <div class="divide-gray-200"></div>
+            <h4>Koszty podstawowe</h4>
             <div class="intro-y col-span-12 sm:col-span-12" >
                 <label for="input-wizard-1" class="form-label">
                     Integracja mechaniczna + materiały
@@ -88,8 +90,10 @@
                 </label>
                 <input type="number" v-model="basicCosts.margin" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
             </div>
+            <div class="divide-gray-200"></div>
+            <h4>Pozostałe koszty</h4>
             <template v-for="(obj, index) in additionalCosts">
-                <div class="intro-y col-span-12 sm:col-span-6" >
+                <div class="intro-y col-span-12 sm:col-span-12" >
                     <label :for="'input-wizard-' + index" class="form-label">
                         <input type="text" class="form-control" v-model="obj.name"/>
                     </label>
