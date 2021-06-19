@@ -319,6 +319,9 @@ export default {
         const getEstimate = () => {
             axios.post('/api/solution/estimate/get', { solution_id: props.solution.id})
                 .then(response => {
+                    console.log('ests');
+                    console.log(response);
+                    console.log(JSON.parse(response.data.payload.parts_prices));
                     if (response.data.success) {
                         try {
                             if(JSON.parse(response.data.payload.parts_prices).length > 0) {
