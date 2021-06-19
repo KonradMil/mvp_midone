@@ -321,11 +321,18 @@ export default {
                 .then(response => {
                     console.log('ests');
                     console.log(response);
-                    console.log(JSON.parse(response.data.payload.parts_prices));
+                    let pay = JSON.parse(response.data.payload.parts_prices);
+                    console.log(pay);
                     if (response.data.success) {
                         try {
-                            if(JSON.parse(response.data.payload.parts_prices).length > 0) {
-                                partPrices.value = JSON.parse(response.data.payload.parts_prices);
+                            if(pay.length > 0) {
+
+                                partPrices.value = pay;
+                                console.log('partPrices.value11');
+                                console.log(partPrices.value);
+                                for(let key in pay) {
+                                    partPrices.value[key] = pay[key];
+                                }
                             }
                         } catch (e) {
                             console.log('ERROREK');
