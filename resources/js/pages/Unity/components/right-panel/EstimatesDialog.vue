@@ -367,6 +367,7 @@ export default {
 
         onMounted(() => {
             getChallenge();
+            getEstimate();
         });
 
         return {
