@@ -99,11 +99,11 @@ class ChallengeController extends Controller
     public function getUserChallenges()
     {
         if (Auth::user()->type == 'integrator') {
-            $challenges = Challenge::whereIn('stage', [1, 2])->where('status', '=', 1)->get();
+            $challenges = Challenge::whereIn('stage', [1, 2])->where('status', '=', 1)->orderBy('created_at', 'DESC')->get();
         } else if (Auth::user()->type == 'inwestor') {
-            $challenges = Auth::user()->challenges()->get();
+            $challenges = Auth::user()->challenges()->orderBy('created_at', 'DESC')->get();
         } else {
-            $challenges = Auth::user()->challenges()->with('technicalDetails')->get();
+            $challenges = Auth::user()->challenges()->with('technicalDetails')->orderBy('created_at', 'DESC')->get();
         }
 
         return response()->json([
@@ -151,7 +151,7 @@ class ChallengeController extends Controller
 
         $c = Challenge::whereHas('teams', function ($query) use ($ars) {
             $query->whereIn('teams.id', $ars);
-        })->get();
+        })->orderBy('created_at', 'DESC')->get();
 
 
         $merged = $challenges->merge($c);
@@ -203,7 +203,7 @@ class ChallengeController extends Controller
             $query->where('favourite', '=', 1);
         }
 
-        $challenges = $query->with(['comments.commentator', 'technicalDetails'])->get();
+        $challenges = $query->with(['comments.commentator', 'technicalDetails'])->orderBy('created_at', 'DESC')->get();
 
         foreach ($challenges as $key => $challenge) {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Follow', 1)) {

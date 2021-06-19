@@ -321,8 +321,13 @@ export default {
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
-                        partPrices.value = response.data.payload.part_prices;
-                        additionalCosts.value = response.data.payload.additonal_costs;
+                        if(response.data.payload.part_prices.length > 0) {
+                            partPrices.value = response.data.payload.part_prices;
+                        }
+                        if(response.data.payload.additonal_costs.length > 0) {
+                            additionalCosts.value = response.data.payload.additonal_costs;
+                        }
+
                         basicCosts.mechanical_integration = response.data.payload.mechanical_integration;
                             basicCosts.electrical_integration = response.data.payload.electrical_integration;
                             basicCosts.workstation_integration = response.data.payload.workstation_integration;
