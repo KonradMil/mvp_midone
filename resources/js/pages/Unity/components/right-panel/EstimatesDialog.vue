@@ -319,15 +319,14 @@ export default {
         const getEstimate = () => {
             axios.post('/api/solution/estimate/get', { solution_id: props.solution.id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
-                        if(response.data.payload.part_prices.length > 0) {
-                            partPrices.value = response.data.payload.part_prices;
-                        }
-                        if(response.data.payload.additonal_costs.length > 0) {
-                            additionalCosts.value = response.data.payload.additonal_costs;
-                        }
 
+                        if(JSON.parse(response.data.payload.parts_prices).length > 0) {
+                            partPrices.value = JSON.parse(response.data.payload.parts_prices);
+                        }
+                        if(JSON.parse(response.data.payload.additonal_costs).length > 0) {
+                            additionalCosts.value = JSON.parse(response.data.payload.additonal_costs);
+                        }
                         basicCosts.mechanical_integration = response.data.payload.mechanical_integration;
                             basicCosts.electrical_integration = response.data.payload.electrical_integration;
                             basicCosts.workstation_integration = response.data.payload.workstation_integration;
