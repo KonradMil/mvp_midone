@@ -33,29 +33,30 @@
                     </tbody>
                 </table>
             </div>
-            <div class="intro-y col-span-12 sm:col-span-6" >
-                <label for="input-wizard-0" class="form-label">
-                    Projekt wykonawczy
-                </label>
-                <input type="number" v-model="basicCosts.project" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-            </div>
-            <div class="intro-y col-span-12 sm:col-span-6" >
+
+            <div class="intro-y col-span-12 sm:col-span-12" >
                 <label for="input-wizard-1" class="form-label">
                     Integracja mechaniczna + materiały
                 </label>
                 <input type="number" v-model="basicCosts.mechanical_integration" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
             </div>
-            <div class="intro-y col-span-12 sm:col-span-6" >
+            <div class="intro-y col-span-12 sm:col-span-12" >
                 <label for="input-wizard-2" class="form-label">
                     Integracja elektryczna + materiały
                 </label>
                 <input type="number" v-model="basicCosts.electrical_integration" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
             </div>
-            <div class="intro-y col-span-12 sm:col-span-6" >
+            <div class="intro-y col-span-12 sm:col-span-12" >
                 <label for="input-wizard-3" class="form-label">
                     Integracja stanowiska z linią
                 </label>
                 <input type="number" v-model="basicCosts.workstation_integration" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-6" >
+                <label for="input-wizard-0" class="form-label">
+                    Projekt wykonawczy
+                </label>
+                <input type="number" v-model="basicCosts.project" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
             </div>
             <div class="intro-y col-span-12 sm:col-span-6" >
                 <label for="input-wizard-4" class="form-label">
