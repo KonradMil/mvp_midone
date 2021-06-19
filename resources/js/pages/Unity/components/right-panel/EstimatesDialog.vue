@@ -13,17 +13,17 @@
                     </thead>
                     <tbody>
                         <template v-for="(part, index) in partsAr">
-                            <tr>
-                                <td>
+                            <tr class="hover:bg-gray-200">
+                                <td class="border">
                                     {{index}}
                                 </td>
-                                <td>
+                                <td class="border">
                                     {{part.count}}
                                 </td>
-                                <td>
-                                    <input type="text" v-if="partPrices[index] != undefined" pattern="(0\.((0[1-9]{1})|([1-9]{1}([0-9]{1})?)))|(([1-9]+[0-9]*)(\.([0-9]{1,2}))?)" v-model="partPrices[index].price">
+                                <td class="border">
+                                    <input type="text" v-if="partPrices[index] != undefined" class="form-control" pattern="(0\.((0[1-9]{1})|([1-9]{1}([0-9]{1})?)))|(([1-9]+[0-9]*)(\.([0-9]{1,2}))?)" v-model="partPrices[index].price">
                                 </td>
-                                <td>
+                                <td class="border">
                                     <span v-if="partPrices[index] != undefined">
                                         {{part.count * partPrices[index].price}}
                                     </span>
@@ -32,7 +32,12 @@
                         </template>
                     </tbody>
                 </table>
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-6" >
+                <label for="input-wizard-1" class="form-label">
 
+                </label>
+                <input type="number" v-model="basicCosts.mechanical_integration" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
             </div>
         </div>
     </div>
@@ -95,8 +100,10 @@ export default {
                             }
                         } else {
                             if(partsAr.value[obj.model_name] != undefined) {
+                                partPrices.value[obj.model_name] = 0;
                                 partsAr.value[obj.model_name].count += 1;
                             } else {
+                                partPrices.value[obj.model_name] = 0;
                                 partsAr.value[obj.model_name] = {
                                     count: 1,
                                     price: 0,
