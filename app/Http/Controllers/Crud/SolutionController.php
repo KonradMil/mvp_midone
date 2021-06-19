@@ -172,22 +172,20 @@ class SolutionController extends Controller
             $estimate->solution_id = $request->input('solution_id');
         }
         $input = $request->input();
-        $estimate->integration_cost = $input['integrationCost'];
-        $estimate->parts_cost =  $input['partsCost'];
-        $estimate->mechanical_integration = $input['basicCosts']['mechanical_integration'];
-        $estimate->electrical_integration = $input['basicCosts']['electrical_integration'];
-        $estimate->workstation_integration = $input['basicCosts']['workstation_integration'];
-        $estimate->programming_robot = $input['basicCosts']['programming_robot'];
-        $estimate->programming_plc = $input['basicCosts']['programming_plc'];
-        $estimate->documentation_ce = $input['basicCosts']['documentation_ce'];
-        $estimate->training = $input['basicCosts']['training'];
-        $estimate->project = $input['basicCosts']['project'];
-        $estimate->margin = $input['basicCosts']['margin'];
-        $estimate->parts_prices = $input['partPrices'];
-        $estimate->additionalCosts = $input['additionalCosts'];
-        dump($estimate);
-        dd($estimate);
-//        $estimate->save();
+        $estimate->integration_cost = (float)$input['integrationCost'];
+        $estimate->parts_cost =  (float)$input['partsCost'];
+        $estimate->mechanical_integration = (float)$input['basicCosts']['mechanical_integration'];
+        $estimate->electrical_integration = (float)$input['basicCosts']['electrical_integration'];
+        $estimate->workstation_integration = (float)$input['basicCosts']['workstation_integration'];
+        $estimate->programming_robot = (float)$input['basicCosts']['programming_robot'];
+        $estimate->programming_plc = (float)$input['basicCosts']['programming_plc'];
+        $estimate->documentation_ce = (float)$input['basicCosts']['documentation_ce'];
+        $estimate->training = (float)$input['basicCosts']['training'];
+        $estimate->project = (float)$input['basicCosts']['project'];
+        $estimate->margin = (float)$input['basicCosts']['margin'];
+        $estimate->parts_prices = json_encode($input['partPrices']);
+        $estimate->additionalCosts = json_encode($input['additionalCosts']);
+        $estimate->save();
 
         return response()->json([
             'success' => true,
