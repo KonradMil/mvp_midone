@@ -157,12 +157,30 @@
                 <h4>Sumy</h4>
             </div>
             <div class="intro-y col-span-12 sm:col-span-12" >
-                <label for="input-wizard-2" class="form-label">
-                    Integracja elektryczna + materiały
+                <label for="input-wizard-11242" class="form-label">
+                    Koszty części
                 </label>
                 <div class="input-group">
-                    <input type="text" v-model="basicCosts.electrical_integration" class="form-control" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-                    <div id="input-group-price623422" class="input-group-text">zł</div>
+                    <input type="text" v-model="partsCost" class="form-control"  disabled :aria-label="$t('challengesNew.numberSupported')" />
+                    <div id="input-group-price512123422" class="input-group-text">zł</div>
+                </div>
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-12" >
+                <label for="input-wizard-12412" class="form-label">
+                    Koszty integracji
+                </label>
+                <div class="input-group">
+                    <input type="text" v-model="integrationCost" class="form-control"  disabled :aria-label="$t('challengesNew.numberSupported')" />
+                    <div id="input-group-price6551422" class="input-group-text">zł</div>
+                </div>
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-12" >
+                <label for="input-wizard-24124412" class="form-label">
+                    Razem
+                </label>
+                <div class="input-group">
+                    <input type="text" v-model="sum" class="form-control" disabled :aria-label="$t('challengesNew.numberSupported')" />
+                    <div id="input-group-price62342211" class="input-group-text">zł</div>
                 </div>
             </div>
         </div>
@@ -265,6 +283,30 @@ export default {
         //     }
         // }
 
+        const partsCost = computed(() => {
+            let sum = 0;
+            partsAr.value.forEach((obj) => {
+                sum += obj.price * obj.count;
+            }) ;
+            return sum;
+        });
+
+        const integrationCost = computed(() => {
+            let sum = 0;
+            additionalCosts.value.forEach((obj) => {
+                sum += obj.price;
+            });
+            basicCosts.value.forEach((obj) => {
+                sum += obj;
+            });
+            return sum;
+        });
+
+        const sum = computed(() => {
+            return partsCost + integrationCost;
+        });
+
+
         const refreshMe = () => {
             getParts();
             setTimeout(() => {
@@ -308,7 +350,10 @@ export default {
             challenge,
             partsAr,
             addCost,
-            refreshMe
+            refreshMe,
+            sum,
+            integrationCost,
+            partsCost
         }
     }
 }
