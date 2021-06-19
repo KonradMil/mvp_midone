@@ -233,7 +233,7 @@ export default {
         }
 
         emitter.on('estimatesave', e => {
-            axios.post('/api/solution/estimate/save', {solution_id: props.solution.id, basicCosts: basicCosts, additionalCosts: additionalCosts.value, partPrices: partPrices, partsCost:partsCost, integrationCost: integrationCost })
+            axios.post('/api/solution/estimate/save', {solution_id: props.solution.id, basicCosts: basicCosts, additionalCosts: additionalCosts.value, partPrices: partPrices.value, partsCost:partsCost.value, integrationCost: integrationCost.value })
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
