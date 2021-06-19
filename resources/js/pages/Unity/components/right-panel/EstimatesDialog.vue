@@ -188,7 +188,8 @@
 </template>
 
 <script>
-import {computed, getCurrentInstance, onMounted, reactive, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, reactive, ref, watch} from "vue";
+import {helper as $h} from "../../../../utils/helper";
 
 
 export default {
@@ -229,6 +230,28 @@ export default {
             emitter.emit('unityoutgoingaction', {action: 'getParts'});
 
         }
+
+        watch(additionalCosts, () => {
+            let c = sum;
+            let i =  integrationCost;
+        }, {
+            deep: true
+        });
+
+        watch(partsAr, () => {
+            let c = sum;
+            let i =  integrationCost;
+            let p =  partsAr;
+        }, {
+            deep: true
+        });
+
+        watch(basicCosts, () => {
+            let c = sum;
+            let i =  integrationCost;
+        }, {
+            deep: true
+        });
 
         const finalPartsList = () => {
             partsAr.value = {};
