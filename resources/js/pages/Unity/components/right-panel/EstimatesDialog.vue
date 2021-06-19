@@ -305,9 +305,9 @@ export default {
             additionalCosts.value.forEach((obj) => {
                 sum += obj.price;
             });
-            basicCosts.value.forEach((obj) => {
-                sum += obj;
-            });
+            for (let key in basicCosts.value) {
+                sum += basicCosts.value[key];
+            }
             return sum;
         });
 
