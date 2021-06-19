@@ -181,7 +181,7 @@
                     Razem
                 </label>
                 <div class="input-group">
-                    <input type="text" v-model="sum" class="form-control" disabled :aria-label="$t('challengesNew.numberSupported')" />
+                    <input type="text" :value="(parseFloat(partsCost) + parseFloat(integrationCost))" class="form-control" disabled :aria-label="$t('challengesNew.numberSupported')" />
                     <div id="input-group-price62342211" class="input-group-text">zł</div>
                 </div>
             </div>
@@ -311,14 +311,14 @@ export default {
                 sum += parseFloat(obj.price);
             });
             for (let key in basicCosts.value) {
+                console.log('basicCosts.value[key]');
+                console.log(basicCosts.value[key]);
                 sum += parseFloat(basicCosts.value[key]);
             }
             return sum;
         });
 
-        const sum = computed(() => {
-            return (parseFloat(partsCost) + parseFloat(integrationCost));
-        });
+
 
 
         const refreshMe = () => {
