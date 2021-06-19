@@ -310,11 +310,15 @@ export default {
             additionalCosts.value.forEach((obj) => {
                 sum += parseFloat(obj.price);
             });
-            for (let key in basicCosts.value) {
-                console.log('basicCosts.value[key]');
-                console.log(basicCosts.value[key]);
-                sum += parseFloat(basicCosts.value[key]);
-            }
+            console.log(basicCosts);
+            basicCosts.forEach((obj) => {
+                sum += parseFloat(obj);
+            })
+            // for (let key in basicCosts) {
+            //     console.log('basicCosts.value[key]');
+            //     console.log(basicCosts[key]);
+            //
+            // }
             return sum;
         });
 
