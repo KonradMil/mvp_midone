@@ -2,7 +2,34 @@
     <div class="px-5 sm:px-10pt-2">
         <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
             <div class="intro-y col-span-12">
-
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Ilość</th>
+                        <th>Cena</th>
+                        <th>Suma</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <template v-for="(part, index) in finalPartsList">
+                            <tr>
+                                <td>
+                                    {{index}}
+                                </td>
+                                <td>
+                                    {{part.count}}
+                                </td>
+                                <td>
+                                    <input type="text" pattern="(0\.((0[1-9]{1})|([1-9]{1}([0-9]{1})?)))|(([1-9]+[0-9]*)(\.([0-9]{1,2}))?)" v-model="partPrices[index].price">
+                                </td>
+                                <td>
+                                    {{part.count * partPrices[index].price}}
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
