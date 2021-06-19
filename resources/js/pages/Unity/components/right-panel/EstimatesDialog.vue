@@ -21,11 +21,11 @@
                                     {{part.count}}
                                 </td>
                                 <td class="border">
-                                    <input type="text" v-if="partPrices[index] != undefined" class="form-control" pattern="(0\.((0[1-9]{1})|([1-9]{1}([0-9]{1})?)))|(([1-9]+[0-9]*)(\.([0-9]{1,2}))?)" v-model="partPrices[index].price">
+                                    <input type="text" v-if="partPrices[index] != undefined" class="form-control" pattern="(0\.((0[1-9]{1})|([1-9]{1}([0-9]{1})?)))|(([1-9]+[0-9]*)(\.([0-9]{1,2}))?)" v-model="partPrices[index]">
                                 </td>
                                 <td class="border">
                                     <span v-if="partPrices[index] != undefined">
-                                        {{part.count * partPrices[index].price}}
+                                        {{part.count * partPrices[index]}}
                                     </span>
                                 </td>
                             </tr>
