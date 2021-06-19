@@ -328,7 +328,8 @@ export default {
                                 partPrices.value = JSON.parse(response.data.payload.parts_prices);
                             }
                         } catch (e) {
-
+                            console.log('ERROREK');
+                            console.log(e);
                         }
                         console.log('partPrices.value');
                         console.log(partPrices.value);
