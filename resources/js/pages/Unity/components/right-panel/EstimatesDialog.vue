@@ -96,6 +96,7 @@
                     <input type="number" v-model="obj.price" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 </div>
             </template>
+            <div class="intro-y col-span-12 sm:col-span-12" >
             <a
                 @click.prevent="addCost"
                 href=""
@@ -106,6 +107,7 @@
               </span>
 
             </a>
+            </div>
         </div>
     </div>
 </template>
