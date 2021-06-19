@@ -184,7 +184,7 @@ class SolutionController extends Controller
         $estimate->project = (float)$input['basicCosts']['project'];
         $estimate->margin = (float)$input['basicCosts']['margin'];
         $estimate->parts_prices = json_encode($input['partPrices']);
-        $estimate->additionalCosts = json_encode($input['additionalCosts']);
+        $estimate->additional_costs = json_encode($input['additionalCosts']);
         $estimate->save();
 
         return response()->json([
