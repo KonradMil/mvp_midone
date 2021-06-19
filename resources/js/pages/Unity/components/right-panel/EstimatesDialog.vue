@@ -74,11 +74,9 @@ export default {
         const partPrices = ref({});
 
         const finalPartsList = computed(() => {
-                let tempChallenge = JSON.parse(challenge.value.save_json);
 
-            console.log('PROP PARTS');
-            console.log(props.parts);
-            console.log(props.parts.length);
+
+
                 if(props.parts.length != undefined) {
                     props.parts.forEach((obj) => {
                         console.log('OBJ');
@@ -103,13 +101,19 @@ export default {
                             }
                         }
                     });
-                    tempChallenge.parts.forEach((objC, index) => {
-                        console.log('EVERY');
-                        console.log(objC);
-                        if(partsAr.value[objC.model.model_name] != undefined) {
-                            partsAr.value[objC.model.model_name].count -= 1;
-                        }
-                    })
+                    try {
+                        let tempChallenge = JSON.parse(challenge.value.save_json);
+                        tempChallenge.parts.forEach((objC, index) => {
+                            console.log('EVERY');
+                            console.log(objC);
+                            if(partsAr.value[objC.model.model_name] != undefined) {
+                                partsAr.value[objC.model.model_name].count -= 1;
+                            }
+                        })
+                    }catch (e) {
+
+                    }
+
                 }
         });
         //
