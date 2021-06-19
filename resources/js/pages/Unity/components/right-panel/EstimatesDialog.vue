@@ -320,13 +320,22 @@ export default {
             axios.post('/api/solution/estimate/get', { solution_id: props.solution.id})
                 .then(response => {
                     if (response.data.success) {
+                        try {
+                            if(JSON.parse(response.data.payload.parts_prices).length > 0) {
+                                partPrices.value = JSON.parse(response.data.payload.parts_prices);
+                            }
+                        } catch (e) {
 
-                        if(JSON.parse(response.data.payload.parts_prices).length > 0) {
-                            partPrices.value = JSON.parse(response.data.payload.parts_prices);
                         }
-                        if(JSON.parse(response.data.payload.additonal_costs).length > 0) {
-                            additionalCosts.value = JSON.parse(response.data.payload.additonal_costs);
+
+                        try {
+
+                        } catch (e) {
+                            if(JSON.parse(response.data.payload.additonal_costs).length > 0) {
+                                additionalCosts.value = JSON.parse(response.data.payload.additonal_costs);
+                            }
                         }
+
                         basicCosts.mechanical_integration = response.data.payload.mechanical_integration;
                             basicCosts.electrical_integration = response.data.payload.electrical_integration;
                             basicCosts.workstation_integration = response.data.payload.workstation_integration;
@@ -357,7 +366,9 @@ export default {
                         console.log(response.data.payload);
                         console.log(JSON.parse(response.data.payload.save_json));
                         challenge.value = response.data.payload;
+
                         finalPartsList();
+
                     }
                 })
         }
@@ -370,8 +381,16 @@ export default {
         }
 
         onMounted(() => {
-            getChallenge();
-            getEstimate();
+            if(props.solution == undefined) {
+                setTimeout(() => {
+                    getChallenge();
+                    getEstimate();
+                }, 1000);
+            } else {
+                getChallenge();
+                getEstimate();
+            }
+
         });
 
         return {
