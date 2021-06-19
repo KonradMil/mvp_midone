@@ -2,6 +2,9 @@
     <div class="px-5 sm:px-10pt-2">
         <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
             <div class="intro-y col-span-12">
+                <button class="btn btn-outline-secondary hidden sm:flex"  @click="refreshMe">
+                    Aktualizuj części
+                </button>
                 <h4>Części i urządzenia</h4>
                 <table class="table">
                     <thead>
@@ -94,10 +97,10 @@
             <h4>Pozostałe koszty</h4>
             <template v-for="(obj, index) in additionalCosts">
                 <div class="intro-y col-span-12 sm:col-span-12" >
-                    <label :for="'input-wizard-' + index" class="form-label">
+                    <label :for="'input-wizard-' + index" class="form-label w-1/2">
                         <input type="text" class="form-control" v-model="obj.name"/>
                     </label>
-                    <input type="number" v-model="obj.price" class="form-control" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                    <input type="number" v-model="obj.price" class="form-control w-1/2" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
                 </div>
             </template>
             <div class="intro-y col-span-12 sm:col-span-12" >
@@ -154,10 +157,8 @@ export default {
         const additionalCosts = ref([]);
         const partPrices = ref({});
 
-        const finalPartsList = computed(() => {
-
-
-
+        const finalPartsList = () => {
+            partsAr.value = {};
                 if(props.parts.length != undefined) {
                     props.parts.forEach((obj) => {
                         console.log('OBJ');
@@ -198,7 +199,7 @@ export default {
                     }
 
                 }
-        });
+        };
         //
         // function comparer(otherArray){
         //     return function(current){
@@ -209,6 +210,10 @@ export default {
         //     }
         // }
 
+        const refreshMe = () => {
+            finalPartsList();
+        };
+
         const getChallenge = () => {
             axios.post('/api/challenge/user/get/card', {id: props.solution.challenge_id})
                 .then(response => {
@@ -218,7 +223,7 @@ export default {
                         console.log(response.data.payload);
                         console.log(JSON.parse(response.data.payload.save_json));
                         challenge.value = response.data.payload;
-
+                        finalPartsList();
                     }
                 })
         }
@@ -244,7 +249,8 @@ export default {
             modelCategories,
             challenge,
             partsAr,
-            addCost
+            addCost,
+            refreshMe
         }
     }
 }
