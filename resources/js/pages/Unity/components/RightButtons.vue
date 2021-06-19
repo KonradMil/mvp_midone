@@ -13,7 +13,7 @@
             <div class="unity-button">
                 <UnityButton :tooltip="'Założenia finansowe'" :alttext="'financial'" :path="'/s3/builder_icons/assum_simple.png'" :action="'financial'" position="rightbuttonclick"  />
             </div>
-            <div class="unity-button">
+            <div class="unity-button" v-if="type == 'solution'">
                 <UnityButton :tooltip="'Kosztorys'" :alttext="'financial'" :path="'/s3/builder_icons/assum_simple.png'" :action="'estimates'" position="rightbuttonclick"  />
             </div>
             <div class="unity-button" v-if="type == 'solution'">

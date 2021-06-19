@@ -185,8 +185,9 @@ class SolutionController extends Controller
         $estimate->margin = $input['basicCosts']['margin'];
         $estimate->parts_prices = $input['partPrices'];
         $estimate->additionalCosts = $input['additionalCosts'];
-        $estimate->save();
         dd($estimate);
+        $estimate->save();
+
         return response()->json([
             'success' => true,
             'message' => 'Zapisane poprawnie',
