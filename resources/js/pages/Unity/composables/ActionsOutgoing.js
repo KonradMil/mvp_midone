@@ -170,11 +170,16 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'LoadStructure', val, true);
     }
 
+    function getParts () {
+        outgoing(game, 'GetPartsInfo', '');
+    }
+
     // function setNewAnimationLayer (val) {
     //     outgoing(game, 'SetNewAnimationLayer', val);
     // }
 
     return {
+        getParts,
         loadStructure,
         updateComment,
         updateLabel,
