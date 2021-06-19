@@ -6,7 +6,7 @@
                 <div class="intro-y col-span-12 sm:col-span-12" >
                     <h4>Części i urządzenia</h4>
                 </div>
-                <button class="btn btn-outline-secondary hidden sm:flex"  @click="refreshMe">
+                <button class="btn btn-primary hidden sm:flex mt-2"  @click="refreshMe">
                     Aktualizuj części
                 </button>
 
@@ -143,20 +143,20 @@
                 </div>
             </template>
             <div class="intro-y col-span-12 sm:col-span-12" >
-            <a
-                @click.prevent="addCost"
-                href=""
-                class="intro-x w-full block text-center rounded-md py-3 mt-3 border border-dotted border-theme-15 dark:border-dark-5 text-theme-16 dark:text-gray-600">
-
+            <a @click.prevent="addCost" href="" class="intro-x w-full block text-center rounded-md py-3 mt-3 border border-dotted border-theme-15 dark:border-dark-5 text-theme-16 dark:text-gray-600">
               <span>
                   Dodaj koszt
               </span>
-
             </a>
             </div>
             <div class="divide-gray-200"></div>
             <div class="intro-y col-span-12 sm:col-span-12" >
                 <h4>Sumy</h4>
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-12" >
+            <button class="btn btn-primary hidden sm:flex mt-2"  @click="refreshMe">
+                Aktualizuj części
+            </button>
             </div>
             <div class="intro-y col-span-12 sm:col-span-12" >
                 <label for="input-wizard-11242" class="form-label">
