@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class OldChallenge extends Model
+{
+    use HasFactory;
+    protected $table = 'dbr_challenges';
+
+    protected $connection = 'old';
+
+    public function client()
+    {
+        return $this->belongsTo(OldUser::class);
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(OldUser::class);
+    }
+
+    public function teams()
+    {
+        return $this->belongsToMany(OldTeam::class, 'teams_challenges');
+    }
+
+    public function financial_before()
+    {
+        return $this->belongsTo(Financial::class);
+    }
+
+    public function solutions()
+    {
+        return $this->hasMany(OldSolution::class);
+    }
+}

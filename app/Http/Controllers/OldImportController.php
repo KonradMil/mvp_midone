@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Challenges\Challenge;
+use App\Models\Financial;
+use App\Models\OldChallenge;
 use App\Models\OldTeam;
 use App\Models\OldUser;
+use App\Models\Solutions\Solution;
 use App\Models\Team;
+use App\Models\TechnicalDetails;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -46,14 +51,65 @@ class OldImportController extends Controller
 //            }
 //        }
 
-        $oldTeam = OldTeam::get();
+//        $oldTeam = OldTeam::get();
+//
+//        foreach ($oldTeam as $team) {
+//            foreach ($team->users as $user) {
+//                $nt = Team::where('name', '=', $team->name)->first();
+//                $nu = User::where('email', '=', $user->email)->first();
+//                $nu->teams()->attach($nt);
+//            }
+//        }
 
-        foreach ($oldTeam as $team) {
-            foreach ($team->users as $user) {
-                $nt = Team::where('name', '=', $team->name)->first();
-                $nu = User::where('email', '=', $user->email)->first();
-                $nu->teams()->attach($nt);
+        $oldChallenges = OldChallenge::get();
+
+        foreach ($oldChallenges as $oc) {
+            $ou = OldUser::where('id', '=', $oc->author_id)->first();
+            $nu = User::where('email', '=', $ou->email)->first();
+
+            $newChallenge = new Challenge();
+            $newChallenge->name = $oc->name;
+            $newChallenge->save_json = $oc->save_json;
+            $newChallenge->screenshot_path = $oc->screenshot_path;
+            $newChallenge->status = $oc->status;
+            $newChallenge->stage = $oc->stage + 1;
+            $newChallenge->description = $oc->description;
+            $newChallenge->author_id = $nu->id;
+            $fi = new Financial();
+            $fi->save();
+            $technical = new TechnicalDetails();
+            $newChallenge->save();
+            $technical->challenge_id = $newChallenge->id;
+            $technical->save();
+
+            $newChallenge->financial_before_id = $fi->id;
+
+            foreach ($oc->teams as $ot) {
+                $nt = Team::where('name', '=', $ot->name)->first();
+                $newChallenge->teams()->attach($nt);
             }
+
+            foreach ($oc->solutions as $so) {
+                $ns = new Solution();
+                $ns->challenge_id = $newChallenge->id;
+                $ns->selected = $so->selected;
+                $ns->rejected = $so->rejected;
+                $ns->save_json = $so->save_json;
+                $ns->name = $so->name;
+                $ns->description = '';
+                $ns->screenshot_path = $so->screenshot_path;
+                $ns->status = $so->status;
+                $oldInst = OldUser::where('id', '=', $so->installer_id)->first();
+                $newUser = User::where('email', '=', $oldInst->email)->first();
+                $ns->installer_id = $newUser->id;
+                $ns->author_id = $nu->id;
+                $ns->save();
+                $fis = new Financial();
+                $fis->solution_id = $ns->id;
+                $fis->save();
+            }
+
+
         }
 
     }
