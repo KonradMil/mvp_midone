@@ -179,7 +179,7 @@ class ChallengeController extends Controller
 
             $c = Challenge::whereHas('teams', function ($query) use ($ars) {
                 $query->whereIn('teams.id', $ars);
-            })->orderBy('created_at', 'DESC')->get();
+            })->orderBy('created_at', 'DESC')->where('stage', '=', 3)->where('status', '=', 1)->get();
 
 
             $merged = $challenges->merge($c);
