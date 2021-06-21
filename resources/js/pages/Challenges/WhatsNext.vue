@@ -93,7 +93,7 @@ name: "WhatsNext",
         }
 
         onMounted(() => {
-            if(user.type == 'integrator') {
+            if(props.user.type == 'integrator') {
                 getSolutionRepositories('');
             }
             console.log("props");
