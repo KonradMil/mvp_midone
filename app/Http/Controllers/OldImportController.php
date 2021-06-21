@@ -71,7 +71,7 @@ class OldImportController extends Controller
             $fi->save();
             $newChallenge = new Challenge();
             $newChallenge->name = $oc->name;
-            $newChallenge->save_json = $oc->save_json;
+            $newChallenge->save_json = str_replace('platfrom.dbr77.com', 'two.appworks-dev.pl', $oc->save_json);
             $newChallenge->screenshot_path = $oc->screenshot_path;
             $newChallenge->status = $oc->status;
             $newChallenge->stage = $oc->stage + 1;
@@ -85,8 +85,8 @@ class OldImportController extends Controller
             $newChallenge->save();
             $technical->challenge_id = $newChallenge->id;
             $technical->save();
-
-
+            $fi->challenge_id = $newChallenge->id;
+            $fi->save();
 
             foreach ($oc->teams as $ot) {
                 $nt = Team::where('name', '=', $ot->name)->first();
@@ -99,7 +99,7 @@ class OldImportController extends Controller
                 $ns->challenge_id = $newChallenge->id;
                 $ns->selected = $so->selected;
                 $ns->rejected = $so->rejected;
-                $ns->save_json = $so->save_json;
+                $ns->save_json = str_replace('platfrom.dbr77.com', 'two.appworks-dev.pl', $so->save_json);
                 $ns->name = $so->name;
                 $ns->description = '';
                 $ns->screenshot_path = $so->screenshot_path;
