@@ -76,8 +76,8 @@ class OldImportController extends Controller
             $newChallenge->stage = $oc->stage + 1;
             $newChallenge->description = $oc->description;
             $newChallenge->author_id = $nu->id;
-            $newChallenge->solution_deadline = Carbon::now();
-            $newChallenge->offer_deadline = Carbon::now();
+            $newChallenge->solution_deadline = $oc->solution_deadline;
+            $newChallenge->offer_deadline = $oc->offer_deadline;
             $newChallenge->type = 0;
             $fi = new Financial();
             $fi->save();
