@@ -323,7 +323,7 @@
         },
         "validation": {
             "Value is required": "To pole jest obowiązkowe.",
-            "This field should be at least 6 long": "Hasło musi zawierać conajmniej 6 znaków.",
+            "This field should be at least 6 long": "Hasło musi zawierać co najmniej 6 znaków.",
             "Value is not a valid email address": "To nie jest poprawny adres email.",
             "The value must be equal to the other value": "Ta wartość musi być taka sama jak hasło"
         },
