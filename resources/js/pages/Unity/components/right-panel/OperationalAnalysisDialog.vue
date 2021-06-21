@@ -9,6 +9,7 @@
                         <tr>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Przed robotyzacją</th>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Po robotyzacji</th>
+                            <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Zmiana</th>
                         </tr>
                         </thead>
                         <tbody v-if="challenge.financial_before != undefined">
