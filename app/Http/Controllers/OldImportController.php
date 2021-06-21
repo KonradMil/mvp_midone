@@ -104,9 +104,15 @@ class OldImportController extends Controller
                 $ns->description = '';
                 $ns->screenshot_path = $so->screenshot_path;
                 $ns->status = $so->status;
-                $oldInst = OldUser::where('id', '=', $so->installer_id)->first();
-                $newUser = User::where('email', '=', $oldInst->email)->first();
-                $ns->installer_id = $newUser->id;
+                try {
+                    $oldInst = OldUser::where('id', '=', $so->installer_id)->first();
+                    $newUser = User::where('email', '=', $oldInst->email)->first();
+                    $ns->installer_id = $newUser->id;
+                } catch (\Exception $e){
+                    $ns->installer_id = 1;
+                }
+
+
                 $ns->author_id = $nu->id;
                 $fis = new Financial();
                 $fis->challenge_id = NULL;
