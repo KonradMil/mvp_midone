@@ -250,7 +250,7 @@ export default {
                         getTeamsRepositories(search.value);
                         new_team_name.value = '';
                     }, 1000);
-                toast.success('Success!')
+                toast.success('Dodałeś zespół!')
                 isDisabled.value=true;
 
             }
@@ -275,7 +275,7 @@ export default {
                     new_team_member_email.value = '';
                     modalClosed();
                 }, 1000);
-                toast.success('Success!')
+                toast.success('Wysłano zaproszenie do zespołu!')
             }
             setTimeout(() =>{
                isDisabled.value = false;

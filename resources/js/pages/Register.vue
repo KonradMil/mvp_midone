@@ -59,7 +59,7 @@
                                             <label
                                                 class="form-check-label"
                                                 for="radio-switch-4"
-                                                title="Dodaj linie">
+                                                title="Podmiot świadczący usługi związane z automatyzacją stanowisk przemysłowych w zakładzie produkcyjnym.">
                                                 {{$t('common.integratorem')}}
                                             </label>
                                             </div>
@@ -72,7 +72,7 @@
                                                    value="investor"/>
                                             <label class="form-check-label"
                                                    for="radio-switch-5"
-                                                   title="Dodaj linie">
+                                                   title="Przedsiębiorca zamierzający zautomatyzować stanowisko przemysłowe w zakładzie produkcyjnym">
                                                 {{$t('common.investorem')}}
                                             </label>
                                         </div>

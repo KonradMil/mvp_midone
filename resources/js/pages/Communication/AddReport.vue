@@ -120,7 +120,7 @@ export default {
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
                 console.log(resp.xhr.response);
                 file.value = JSON.parse(resp.xhr.response).payload;
-                toast.success('Success!');
+                toast.success('Pomyślnie dodano plik!');
             });
             elDropzoneSingleRef.dropzone.on("error", () => {
                 toast.error("Błąd");
