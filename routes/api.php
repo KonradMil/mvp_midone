@@ -65,6 +65,7 @@ Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard']
 Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function () {
     Route::post('delete', [ChallengeController::class, 'delete']);
     Route::post('user/get', [ChallengeController::class, 'getUserChallengesFiltered']);
+    Route::post('user/get/projects', [ChallengeController::class, 'getUserChallengesProjects']);
     Route::post('check-team', [ChallengeController::class, 'checkTeam']);
     Route::post('user/save/description', [ChallengeController::class, 'saveDescription']);
     Route::post('user/get/followed', [ChallengeController::class, 'getUserChallengesFollowed']);
