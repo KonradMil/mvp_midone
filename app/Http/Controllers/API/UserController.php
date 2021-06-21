@@ -235,10 +235,10 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $success = true;
-            $message = 'User login successfully';
+            $message = 'Pomyślnie zalogowano!';
         } else {
             $success = false;
-            $message = 'Unauthorised';
+            $message = 'Niepoprawny email lub hasło!';
         }
 
         // response
@@ -258,7 +258,7 @@ class UserController extends Controller
         try {
             Session::flush();
             $success = true;
-            $message = 'Successfully logged out';
+            $message = 'Pomyślne wylogowanie';
         } catch (\Illuminate\Database\QueryException $ex) {
             $success = false;
             $message = $ex->getMessage();

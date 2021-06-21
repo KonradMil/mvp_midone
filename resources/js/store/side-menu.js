@@ -136,7 +136,7 @@ const state = () => {
             {
                 icon: "InboxIcon",
                 pageName: "communication",
-                title: "Komunikacja"
+                title: "Pomoc"
             },
         ]
     };
