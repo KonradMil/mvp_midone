@@ -25,7 +25,7 @@ class DashboardController extends Controller
             ->joinReactionCounterOfType('Like')
             ->orderBy('reaction_like_count', 'desc')
             ->with('author', 'challenge')
-            ->take(10)
+            ->take(6)
             ->get();
         return response()->json([
             'success' => true,
