@@ -53,9 +53,12 @@ name: "WhatsNext",
         const doMe = () => {
             if(props.user.type == 'integrator') {
                 if(props.challenge.stage == 1) {
-                    text.value = 'Ten etap polega na zebraniu ofert robotyzacji opisanego stanowiska. Jeżeli jesteś zainteresowany, pokaż swoje rozwiązanie.';
+                    text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
                     action.value = {redirect: ''}
-                } else if(props.challenge.stage == 2) {
+                } else if(props.user.solutions.length > 0 && props.challenge.stage < 2) {
+                    text.value = 'Po opublikowaniu rozwiązania będzie ono widoczne dla Inwestora.';
+                    action.value = {redirect: ''}
+                }else if(props.challenge.stage == 2) {
                     text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';
                     action.value = {redirect: ''}
                 }

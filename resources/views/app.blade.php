@@ -29,6 +29,8 @@
                'teams' => Auth::user()->teams,
                'notifications' => Auth::user()->notifications,
                'company' => $company,
+               'solutions' => Auth::user()->solutions
+
            ])!!}
     </script>
 @else
