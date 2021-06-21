@@ -254,7 +254,7 @@ export default {
                 window.location.href = "/";
             }
             next((vm) => {
-                vm.getChallengeRepositories();
+
             });
         }
 }

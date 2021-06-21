@@ -121,8 +121,8 @@ class ChallengeController extends Controller
         $query = Challenge::query();
         $challengesProject = Challenge::where('stage', '=', 3)->where('status', '=', 1)->get();
         if($challengesProject != NULL){
-
-            if (Auth::user()->type == 'integrator' && $challengesProject != NULL) {
+            $check = false;
+            if (Auth::user()->type == 'integrator') {
                 foreach ($challengesProject as $challenge) {
                     $offer = Offer::find($challenge->selected_offer_id);
                     $solution = Solution::find($offer->solution_id);
@@ -131,13 +131,25 @@ class ChallengeController extends Controller
                         foreach (Auth::user()->teams as $t) {
                             if ($t->id == $team->id) {
                                 $query->where('stage', '=', 3)->where('status', '=', 1);
+                                $check = true;
                             }
                         }
                     }
                 }
 
             } else if (Auth::user()->type == 'investor') {
-                $query->where('author_id', '=', Auth::user()->id)->where('stage', '=', 3);
+
+                foreach ($challengesProject as $challenge) {
+                    foreach ($challenge->teams as $team) {
+                        foreach (Auth::user()->teams as $t) {
+                            if ($t->id == $team->id) {
+                                $query->where('author_id', '=', Auth::user()->id)->where('stage', '=', 3);
+                                $check = true;
+                            }
+                        }
+                    }
+                }
+
             }
 
 
@@ -187,12 +199,15 @@ class ChallengeController extends Controller
                     $challenge->followed = false;
                 }
             }
-
-            return response()->json([
+         if($check === false) {
+             $challengesProject = NULL;
+         }
+             return response()->json([
                     'success' => true,
                     'message' => 'Pobrano poprawnie.',
                     'payload' => $merged->all()
                 ]);
+
 
         } else {
             return response()->json([
