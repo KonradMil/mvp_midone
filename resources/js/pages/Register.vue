@@ -72,7 +72,7 @@
                                                    value="investor"/>
                                             <label class="form-check-label"
                                                    for="radio-switch-5"
-                                                   title="Przedsiębiorca zamierzający zautomatyzować stanowisko przemysłowe w zakładzie produkcyjnym">
+                                                   title="Przedsiębiorca zamierzający zautomatyzować stanowisko przemysłowe w zakładzie produkcyjnym.">
                                                 {{$t('common.investorem')}}
                                             </label>
                                         </div>
