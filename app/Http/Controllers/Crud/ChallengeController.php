@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
 use App\Models\File;
 use App\Models\Financial;
+use App\Models\Offer;
+use App\Models\Solutions\Solution;
 use App\Models\Team;
 use App\Models\TechnicalDetails;
 use Carbon\Carbon;
@@ -116,10 +118,18 @@ class ChallengeController extends Controller
     public function getUserChallengesProjects(Request $request)
     {
         $input = $request->input();
-
         $query = Challenge::query();
         if (Auth::user()->type == 'integrator') {
-            $query->where('stage', '=', 3)->where('status', '=', 1);
+            $offer =  Offer::find($query->selected_offer_id);
+            $solution = Solution::find($offer->solution_id);
+
+            foreach ($solution->teams as $team) {
+                foreach (Auth::user()->teams as $t) {
+                    if($t->id == $team->id)  {
+                        $query->where('stage', '=', 3)->where('status', '=', 1);
+                    }
+                }
+            }
         } else if (Auth::user()->type == 'investor') {
             $query->where('author_id', '=', Auth::user()->id)->where('stage', '=', 3);
         } else {
@@ -157,6 +167,7 @@ class ChallengeController extends Controller
         $merged = $challenges->merge($c);
 
         foreach ($challenges as $challenge) {
+
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like')) {
                 $challenge->liked = true;
             } else {
@@ -171,6 +182,7 @@ class ChallengeController extends Controller
                 $challenge->followed = false;
             }
         }
+
 
         return response()->json([
             'success' => true,
