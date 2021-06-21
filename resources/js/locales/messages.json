@@ -44,7 +44,8 @@
             "3D Studio": "3D Studio",
             "Baza wiedzy": "Knowledge base",
             "Marketplace obiektów": "Objects marketplace",
-            "Komunikacja": "Communication"
+            "Komunikacja": "Communication",
+            "Pomoc" : "Pomoc"
         },
         "subMenu": {
             "Wszystkie": "All",
@@ -284,7 +285,8 @@
             "3D Studio": "3D Studio",
             "Baza wiedzy": "Baza wiedzy",
             "Marketplace obiektów": "Marketplace obiektów",
-            "Komunikacja": "Komunikacja"
+            "Komunikacja": "Komunikacja",
+            "Pomoc" : "Pomoc"
         },
 
         "subMenu": {
