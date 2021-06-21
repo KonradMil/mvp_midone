@@ -60,22 +60,10 @@
                                                 class="form-check-label"
                                                 for="radio-switch-4"
                                                 title="Dodaj linie">
-                                                <Tippy
-                                                    id="meta-title-tab"
-                                                    tag="a"
-                                                    content="tooltip"
-                                                    href="javascript:;"
-                                                    class="w-14 py-2 text-center flex justify-center items-center"
-                                                    aria-selected="false"
-                                                    @click=""
-                                                >
                                                 {{$t('common.integratorem')}}
-                                                </Tippy>
                                             </label>
                                             </div>
-
-
-                                        <div class="form-check mr-2 mt-2 sm:mt-0">
+                                    <div class="form-check mr-2 mt-2 sm:mt-0">
                                             <input id="radio-switch-5"
                                                    v-model="validate.type.$model"
                                                    class="form-check-input"
@@ -85,17 +73,7 @@
                                             <label class="form-check-label"
                                                    for="radio-switch-5"
                                                    title="Dodaj linie">
-                                                <Tippy
-                                                    id="meta-title-tab"
-                                                    tag="a"
-                                                    content="tooltip"
-                                                    href="javascript:;"
-                                                    class="w-14 py-2 text-center flex justify-center items-center"
-                                                    aria-selected="false"
-                                                    @click=""
-                                                >
                                                 {{$t('common.investorem')}}
-                                                </Tippy>
                                             </label>
                                         </div>
                                 </div>
