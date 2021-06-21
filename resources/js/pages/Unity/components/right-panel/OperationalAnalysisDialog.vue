@@ -1,6 +1,5 @@
 <template>
-    <div
-        class="mt-2">
+    <div class="mt-2">
         <div class="" id="fintable">
             <div class="preview">
                 <div class="overflow-x-auto">
