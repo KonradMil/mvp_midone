@@ -16,7 +16,7 @@ class S3Controller extends Controller
         } else {
             if (strpos($path, 'workshop') !== false) {
                 $path = 'workshop/' .$path;
-            } elseif ((strpos($path, '_images') !== false) || (strpos($path, 'screenshots') !== false)) {
+            } elseif ((strpos($path, '_images') !== false) || (strpos($path, 'screenshots') !== false) || (strpos($path, 'models') !== false)) {
                 $path = $path;
             }  else {
                     $path = 'unity/' .$path;
