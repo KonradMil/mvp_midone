@@ -55,11 +55,22 @@
                                                type="radio"
                                                name="horizontal_radio_button"
                                                value="integrator"/>
-                                        <label
-                                               class="form-check-label"
-                                               for="radio-switch-4"
-                                               title="Dodaj linie">
-                                             {{$t('common.integratorem')}}</label>
+                                        <Tippy
+                                            id="meta-title-tab"
+                                            tag="a"
+                                            content="tooltip"
+                                            href="javascript:;"
+                                            class="w-14 py-2 text-center flex justify-center items-center"
+                                            aria-selected="false"
+                                            @click=""
+                                        >
+                                            <label
+                                                class="form-check-label"
+                                                for="radio-switch-4"
+                                                title="Dodaj linie">
+                                                {{$t('common.integratorem')}}</label>
+                                        </Tippy>
+
                                     </div>
                                     <div class="form-check mr-2 mt-2 sm:mt-0">
                                         <input id="radio-switch-5"
