@@ -12,45 +12,46 @@ class OldImportController extends Controller
 {
     public function import(Request $request)
     {
-        $oldUser = OldUser::get();
-        foreach ($oldUser as $old) {
-            $user = new User();
-            $l = explode(' ', $old->name);
-//            dd($l);
-            $user->name = $l[0];
-            $user->lastname = (isset($l[1]))?$l[1]:'';
-            $user->email = $old->email;
-            if($old->role_id == '912a5b9c-0e16-42fd-9175-55215812f310') {
-                $user->type = 'investor';
-            } else if ($old->role_id == '912a5bbf-3789-4a3a-a0fe-304efd7bfe6d') {
-                $user->type = 'integrator';
-            } else {
-                $user->type = 'admin';
-            }
-            $user->privacy_policy = 1;
-            $user->pricing = 1;
-            $user->terms = 1;
-            $user->password =  $old->password;
-            $user->save();
-        }
+//        $oldUser = OldUser::get();
+//        foreach ($oldUser as $old) {
+//            $user = new User();
+//            $l = explode(' ', $old->name);
+//            $user->name = $l[0];
+//            $user->lastname = (isset($l[1]))?$l[1]:'';
+//            $user->email = $old->email;
+//            if($old->role_id == '912a5b9c-0e16-42fd-9175-55215812f310') {
+//                $user->type = 'investor';
+//            } else if ($old->role_id == '912a5bbf-3789-4a3a-a0fe-304efd7bfe6d') {
+//                $user->type = 'integrator';
+//            } else {
+//                $user->type = 'admin';
+//            }
+//            $user->privacy_policy = 1;
+//            $user->pricing = 1;
+//            $user->terms = 1;
+//            $user->password =  $old->password;
+//            $user->save();
+//        }
+//
+//        $oldTeam = OldTeam::get();
+//        foreach ($oldTeam as $oteam) {
+//            $tm = new Team();
+//            $tm->name = $oteam->name;
+//            $uu = OldUser::where('id', '=', $oteam->author_id)->first();
+//            if($uu != null) {
+//                $u = User::where('email', '=', $uu->email)->first();
+//
+//                $tm->owner_id = $u->id;
+//                $tm->save();
+//            }
+//        }
 
         $oldTeam = OldTeam::get();
-        foreach ($oldTeam as $oteam) {
-            $tm = new Team();
-            $tm->name = $oteam->name;
-            $uu = OldUser::where('id', '=', $oteam->author_id)->first();
-            if($uu != null) {
-                $u = User::where('email', '=', $uu->email)->first();
 
-                $tm->owner_id = $u->id;
-                $tm->save();
-            }
-        }
-
-        foreach ($oldUser as $u) {
-            foreach ($u->teams as $t) {
-                $nt = Team::where('name', '=', $t->name)->first();
-                $nu = User::where('email', '=', $u->email)->first();
+        foreach ($oldTeam as $team) {
+            foreach ($team->users as $user) {
+                $nt = Team::where('name', '=', $team->name)->first();
+                $nu = User::where('email', '=', $user->email)->first();
                 $nu->teams()->attach($nt);
             }
         }
