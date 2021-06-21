@@ -23,7 +23,7 @@ class OldSolution extends Model
 
     public function teams()
     {
-        return $this->belongsToMany(OldTeam::class, 'teams_solutions', 'solution_id', 'team_id');
+        return $this->belongsToMany(OldTeam::class, 'teams_solutions', 'team_id', 'solution_id');
     }
 
     public function installer()
