@@ -119,6 +119,7 @@ class ChallengeController extends Controller
     {
         $input = $request->input();
         $query = Challenge::query();
+        $query->where('stage', '=', 3)->where('status', '=', 1);
         $challengesProject = Challenge::where('stage', '=', 3)->where('status', '=', 1)->get();
         if($challengesProject != NULL){
             $check = false;
