@@ -150,6 +150,14 @@
 @import "components/ads-box";
 @import "components/full-calendar";
 @import "components/pristine";
+.finclass{
+    padding-left: 0;
+    padding-right: 0;
+    background-color: transparent !important;
+    border: none;
+    box-shadow: none;
+    font-size: 15px;
+}
 .rejected-solution {
     opacity: 0.8;
 }

@@ -20,8 +20,8 @@
                             id="input-wizard-2"
                             v-model="weeks_to_start"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option :selected="weeks_to_start === '' ? '' : 'selected'" disabled>Wybierz...</option>
-                            <option :selected="det.value === weeks_to_start ? '' : 'selected'" v-for="(det,index) in values['weeks']"
+                            <option :selected="weeks_to_start === '' ? 'selected' : ''" disabled>Wybierz...</option>
+                            <option :selected="index === weeks_to_start ? 'selected' : ''" v-for="(det,index) in values['weeks']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -34,8 +34,8 @@
                             id="input-wizard-3"
                             v-model="time_to_start"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option  :selected="time_to_start === '' ? '' : 'selected'" disabled>Wybierz...</option>
-                            <option :selected="det.value === time_to_start ? '' : 'selected'" v-for="(det,index) in values['weeks-short']"
+                            <option  :selected="time_to_start === '' ? 'selected' : ''" disabled>Wybierz...</option>
+                            <option :selected="index === time_to_start ? '' : 'selected'" v-for="(det,index) in values['weeks-short']" :data-det="det" :data-index="index" :data-jeden="time_to_start"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -48,8 +48,8 @@
                             id="input-wizard-4"
                             v-model="advance_upon_agreement"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option :selected="advance_upon_agreement === '' ? '' : 'selected'" disabled>Wybierz...</option>
-                            <option :selected="det.value === advance_upon_agreement ? '' : 'selected'" v-for="(det,index) in values['percent']"
+                            <option :selected="advance_upon_agreement === '' ? 'selected' : ''" disabled>Wybierz...</option>
+                            <option :selected="index === advance_upon_agreement ? '' : 'selected'" v-for="(det,index) in values['percent']" :data-det="det" :data-index="index" :data-jeden="advance_upon_agreement"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -62,8 +62,8 @@
                             id="input-wizard-5"
                             v-model="advance_upon_delivery"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option :selected="advance_upon_delivery === '' ? '' : 'selected'" disabled>Wybierz...</option>
-                            <option :selected="det.value === advance_upon_delivery ? '' : 'selected'" v-for="(det,index) in values['percent']"
+                            <option :selected="advance_upon_delivery === '' ? 'selected' : ''" disabled>Wybierz...</option>
+                            <option :selected="index === advance_upon_delivery ? 'selected' : ''" v-for="(det,index) in values['percent']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -76,8 +76,8 @@
                             id="input-wizard-6"
                             v-model="advance_upon_start"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option :selected="advance_upon_start === '' ? '' : 'selected'" disabled>Wybierz...</option>
-                            <option :selected="det.value === advance_upon_start ? '' : 'selected'" v-for="(det,index) in values['percent']"
+                            <option :selected="advance_upon_start === '' ? 'selected' : ''" disabled>Wybierz...</option>
+                            <option :selected="index === advance_upon_start ? 'selected' : ''" v-for="(det,index) in values['percent']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -90,8 +90,8 @@
                             id="input-wizard-6"
                             v-model="years_of_guarantee"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option :selected="years_of_guarantee === '' ? '' : 'selected'" disabled>Wybierz...</option>
-                            <option :selected="det.value === years_of_guarantee ? '' : 'selected'" v-for="(det,index) in values['years-short']"
+                            <option :selected="years_of_guarantee === '' ? 'selected' : ''" disabled>Wybierz...</option>
+                            <option :selected="index === years_of_guarantee ? 'selected' : ''" v-for="(det,index) in values['years-short']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -119,8 +119,8 @@
                             id="input-wizard-9"
                             v-model="reaction_time"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option :selected="reaction_time === '' ? '' : 'selected'" disabled>Wybierz...</option>
-                            <option :selected="det.value === reaction_time ? '' : 'selected'" v-for="(det,index) in values['hours']"
+                            <option :selected="reaction_time === '' ? 'selected' : ''" disabled>Wybierz...</option>
+                            <option :selected="index === reaction_time ? 'selected' : ''" v-for="(det,index) in values['hours']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -133,8 +133,8 @@
                             id="input-wizard-10"
                             v-model="time_to_fix"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                            <option :selected="time_to_fix === '' ? '' : 'selected'" disabled>Wybierz...</option>
-                            <option :selected="det.value === time_to_fix ? '' : 'selected'" v-for="(det,index) in values['hours']"
+                            <option :selected="time_to_fix === '' ? 'selected' : ''" disabled>Wybierz...</option>
+                            <option :selected="index === time_to_fix ? 'selected' : ''" v-for="(det,index) in values['hours']"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>

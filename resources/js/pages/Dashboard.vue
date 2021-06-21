@@ -276,7 +276,7 @@
                             <thead>
                             <tr>
                                 <th class="whitespace-nowrap">NAZWA</th>
-                                <th class="text-center whitespace-nowrap">INSTALATOR</th>
+                                <th class="text-center whitespace-nowrap">INTEGRATOR</th>
                                 <!--                                <th class="text-center whitespace-nowrap">STATUS</th>-->
                                 <th class="text-center whitespace-nowrap">AKCJE</th>
                             </tr>

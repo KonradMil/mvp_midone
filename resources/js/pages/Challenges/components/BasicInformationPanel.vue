@@ -75,8 +75,8 @@
                             v-if="$dayjs().isBefore($dayjs(challenge.offer_deadline))"
                         >
                             Następny deadline:
-                            <span v-if="$dayjs().isAfter($dayjs(challenge.solution_deadline))">Składanie rozwiązań do: {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }}</span>
-                            <span v-if="$dayjs().isBefore($dayjs(challenge.solution_deadline))">Składanie ofert do: {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }}</span>
+                            <span v-if="$dayjs().isAfter($dayjs(challenge.solution_deadline))">Składanie rozwiązań do: {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }}</span>
+                            <span v-if="$dayjs().isBefore($dayjs(challenge.solution_deadline))">Składanie ofert do: {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }}</span>
                         </div>
                         <button v-if="!challenge.followed" class="btn btn-secondary ml-auto" @click="follow">
                             Śledź

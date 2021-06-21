@@ -16,7 +16,7 @@ class S3Controller extends Controller
         } else {
             if (strpos($path, 'workshop') !== false) {
                 $path = 'workshop/' .$path;
-            } elseif ((strpos($path, '_images') !== false) || (strpos($path, 'screenshots') !== false)) {
+            } elseif ((strpos($path, '_images') !== false) || (strpos($path, 'screenshots') !== false) || (strpos($path, 'models') !== false)) {
                 $path = $path;
             }  else {
                     $path = 'unity/' .$path;
@@ -47,6 +47,38 @@ class S3Controller extends Controller
             $headers);
     }
 
+    public function reRoutes(Request $request, $path)
+    {
+
+        if(Storage::disk('s3')->exists($path)){
+
+        } else {
+                $path = 'models/' . $path;
+        }
+
+        $getMimeType = Storage::disk('s3')->getMimetype($path);
+
+        $headers = [
+
+            'Content-Disposition'=>sprintf('attachment; filename="%s"', array_reverse(explode('/', $path))[0])
+        ];
+        Log::error($path);
+        if (strpos($path, 'unityweb') !== false || strpos($path, 'wasm') !== false|| strpos($path, '.br') !== false ) {
+            $getMimeType = 'application/wasm';
+            $headers['Content-Encoding'] = 'br';
+        }
+        $headers['Content-type'] = $getMimeType;
+
+        $fs = Storage::disk('s3')->getDriver();
+        $stream = $fs->readStream($path);
+        Log::error($headers);
+        return response()->stream(
+            function() use($stream) {
+                fpassthru($stream);
+            },
+            200,
+            $headers);
+    }
 
     public function mime2ext($mime) {
         $mime_map = [
