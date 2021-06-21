@@ -11,7 +11,7 @@
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Po robotyzacji</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody v-if="challenge.financial_before != undefined">
                         <tr class="hover:bg-gray-200">
                             <td class="border">
                                 <label for="input-wizard-1" class="form-label">
