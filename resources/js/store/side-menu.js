@@ -96,7 +96,7 @@ const state = () => {
             },
             {
                 icon: "BoxIcon",
-                pageName: "projects",
+                pageName: "#",
                 title: "Projekty",
                 subMenu: [
                     {
