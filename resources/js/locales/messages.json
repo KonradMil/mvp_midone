@@ -30,7 +30,7 @@
             "profil": "Profile",
             "addAccount": "Add account",
             "resetPassword": "Reset password",
-            "help": "Help",
+            "help": "Support",
             "logout": "Logout"
         },
         "menu": {
@@ -45,7 +45,7 @@
             "Baza wiedzy": "Knowledge base",
             "Marketplace obiektów": "Objects marketplace",
             "Komunikacja": "Communication",
-            "Pomoc" : "Pomoc"
+            "Pomoc" : "Support"
         },
         "subMenu": {
             "Wszystkie": "All",
