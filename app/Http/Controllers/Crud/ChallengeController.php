@@ -124,14 +124,13 @@ class ChallengeController extends Controller
 
             if (Auth::user()->type == 'integrator' && $challengesProject != NULL) {
                 foreach ($challengesProject as $challenge) {
-                    $offer = Offer::find($challengesProject->selected_offer_id);
+                    $offer = Offer::find($challenge->selected_offer_id);
                     $solution = Solution::find($offer->solution_id);
 
                     foreach ($solution->teams as $team) {
                         foreach (Auth::user()->teams as $t) {
                             if ($t->id == $team->id) {
                                 $query->challenge;
-
                             }
                         }
                     }
