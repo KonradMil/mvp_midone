@@ -25,7 +25,7 @@ use Symfony\Contracts\Service;
 class ChallengeController extends Controller
 {
 
-    public function saveChallengeFinancials(Request $request,Financial $financial)
+    public function saveChallengeFinancials(Request $request, Financial $financial)
     {
         $financial->fill($request->input('data'));
         $financial->save();
@@ -121,12 +121,12 @@ class ChallengeController extends Controller
         $query = Challenge::query();
         $query->where('stage', '=', 3)->where('status', '=', 1);
         $challengesProject = Challenge::where('stage', '=', 3)->where('status', '=', 1)->get();
-        if($challengesProject != NULL){
+        if ($challengesProject != NULL) {
             $check = false;
             if (Auth::user()->type == 'integrator') {
                 foreach ($challengesProject as $challenge) {
                     $offer = Offer::find($challenge->selected_offer_id);
-                    if($offer != NULL) {
+                    if ($offer != NULL) {
                         $solution = Solution::find($offer->solution_id);
 
                         foreach ($solution->teams as $team) {
@@ -193,13 +193,13 @@ class ChallengeController extends Controller
                     $challenge->followed = false;
                 }
             }
-         if($check === true) {
-             return response()->json([
-                 'success' => true,
-                 'message' => 'Pobrano poprawnie.',
-                 'payload' => $merged->all()
-             ]);
-         }
+//            if ($check === true) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Pobrano poprawnie.',
+                    'payload' => $merged->all()
+                ]);
+//            }
         } else {
             return response()->json([
                 'success' => true,
@@ -276,6 +276,7 @@ class ChallengeController extends Controller
             'payload' => $merged->all()
         ]);
     }
+
     public function getUserChallengesFollowed(Request $request)
     {
         $input = $request->input();
@@ -389,7 +390,7 @@ class ChallengeController extends Controller
 
         $ext = $request->file->extension();
         $fileName = time() . '.' . $ext;
-        Storage::disk('s3')->putFileAs('screenshots' , $request->file,  $fileName);
+        Storage::disk('s3')->putFileAs('screenshots', $request->file, $fileName);
 //        $request->file->move(public_path('uploads'), $fileName);
         $file = new File();
         $file->name = $fileName;
@@ -409,7 +410,7 @@ class ChallengeController extends Controller
     public function createChallenge(Request $request)
     {
         $request = json_decode(json_encode($request->data));
-        if(isset($request->id)) {
+        if (isset($request->id)) {
             $challenge = Challenge::find($request->id);
             $financial = $challenge->financial_before;
             $technical = $challenge->technicalDetails;
@@ -440,10 +441,10 @@ class ChallengeController extends Controller
         $challenge->financial_before_id = $financial->id;
         $challenge->author_id = Auth::user()->id;
 
-        if(!isset($request->id)) {
+        if (!isset($request->id)) {
             $challenge->screenshot_path = 'screenshots/dbr_placeholder.jpeg';
         }
-        if(!isset($request->id)) {
+        if (!isset($request->id)) {
             $challenge->status = 0;
             $challenge->stage = 0;
         }
@@ -495,13 +496,13 @@ class ChallengeController extends Controller
             $technical->work_shifts = (string)$request->work_shifts;
         }
 
-        if(!isset($request->id)) {
+        if (!isset($request->id)) {
             $technical->cycle_time = 0;
             $technical->challenge_id = $challenge->id;
         }
 
         $technical->save();
-        if(!isset($request->id)) {
+        if (!isset($request->id)) {
             foreach ($challenge->files as $file) {
                 $challenge->files()->detach($file);
             }
@@ -509,7 +510,7 @@ class ChallengeController extends Controller
         foreach ($request->images as $image) {
             $challenge->files()->attach($image->id);
         }
-        if(!isset($request->id)) {
+        if (!isset($request->id)) {
             foreach ($challenge->teams as $team) {
                 $challenge->teams()->detach($team);
             }
@@ -519,8 +520,8 @@ class ChallengeController extends Controller
 //            $challenge->teams()->attach($team);
 //        }
 
-        if(!isset($request->id)) {
-            if($challenge->status == 1) {
+        if (!isset($request->id)) {
+            if ($challenge->status == 1) {
 
             }
 //            event(new ChallengeAdded($challenge, Auth::user(), 'Wyzwanie ' . $challenge->name . ' zostało dodane.', ['financial' => $financial, 'technical' => $technical]));
@@ -555,7 +556,7 @@ class ChallengeController extends Controller
         $challenge = Challenge::find($request->challenge_id);
         foreach ($challenge->teams as $team) {
             foreach (Auth::user()->teams as $t) {
-                if($t->id == $team->id) {
+                if ($t->id == $team->id) {
                     $check = true;
                 }
             }
@@ -570,8 +571,8 @@ class ChallengeController extends Controller
 
     public function delete(Request $request)
     {
-          $id = $request -> input('id');
-          Challenge::destroy($id);
+        $id = $request->input('id');
+        Challenge::destroy($id);
 //        $challenge = Challenge::where('id', '=', $request->input('id'))->first();
 //        dd($challenge);
 //        $challenge->author_id = 0;
@@ -590,8 +591,8 @@ class ChallengeController extends Controller
             $challenge = Challenge::with(
                 'solutions', 'author', 'technicalDetails',
                 'financial_before', 'teams', 'files', 'teams.users',
-                'teams.users.companies', 'solutions.comments', 'solutions.comments.commentator', 'solutions.teams' ,
-                'solutions.teams.users' , 'solutions.teams.users.companies'
+                'teams.users.companies', 'solutions.comments', 'solutions.comments.commentator', 'solutions.teams',
+                'solutions.teams.users', 'solutions.teams.users.companies'
             )->find($request->id);
 
         } else {
@@ -635,16 +636,14 @@ class ChallengeController extends Controller
                 $sol->comments_count = $sol->comments()->count();
                 $sol->likes = $sol->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
             }
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             $challenge->liked = false;
             $challenge->followed = false;
         }
 
 
-
         $challenge->comments_count = $challenge->comments()->count();
         $challenge->likes = $challenge->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
-
 
 
         return response()->json([
