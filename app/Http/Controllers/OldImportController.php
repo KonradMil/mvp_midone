@@ -75,7 +75,7 @@ class OldImportController extends Controller
             $newChallenge->save_json = str_replace('platfrom.dbr77.com', 'two.appworks-dev.pl', $oc->save_json);
             $newChallenge->screenshot_path = 's3/' . $oc->screenshot_path;
             $newChallenge->status = $oc->status;
-            $newChallenge->stage = $oc->stage + 1;
+            $newChallenge->stage = $oc->stage;
             $newChallenge->description = $oc->description;
             $newChallenge->author_id = $nu->id;
             $newChallenge->solution_deadline = $oc->solution_deadline;
