@@ -9,7 +9,7 @@ export default function GetChallengesProjects() {
     const list = ref([]);
 
     async function getChallengesProjects() {
-        axios.post('/api/challenge/user/get', {})
+        axios.post('/api/challenge/user/get/projects', {})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
