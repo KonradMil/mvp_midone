@@ -55,11 +55,6 @@ name: "WhatsNext",
 
         const getSolutionRepositories = async () => {
             solutions.value = GetSolutions();
-            solutions.value.forEach((solution)=>{
-                if(solution.status === 1){
-                    guard.value = true;
-                }
-            });
         }
 
 
