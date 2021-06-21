@@ -31,7 +31,7 @@
 <!--                    </p>-->
                     <FinancialAnalysisDialog v-if="content == 'financial-analysis'"></FinancialAnalysisDialog>
                     <FinancialDialog v-if="content == 'financial'" v-model:financial_before="financial_before" v-model:financial_after="financial_after" :type="type"></FinancialDialog>
-                    <OperationalAnalysisDialog v-if="content == 'operationalanalysis'"></OperationalAnalysisDialog>
+                    <OperationalAnalysisDialog v-if="content == 'operationalanalysis'" :solution="solution" ></OperationalAnalysisDialog>
                     <OperationDialog v-if="content == 'operational'" ></OperationDialog>
                     <SettingsDialog v-if="content == 'settings'" v-model:technical="technical" :type="type"></SettingsDialog>
                     <EstimatesDialog v-if="content == 'estimates'" :solution="solution" :parts="parts"></EstimatesDialog>
