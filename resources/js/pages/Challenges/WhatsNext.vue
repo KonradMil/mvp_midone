@@ -52,6 +52,7 @@ name: "WhatsNext",
            doMe();
         });
 
+
         const getSolutionRepositories = async () => {
             solutions.value = GetSolutions();
         }
@@ -92,6 +93,9 @@ name: "WhatsNext",
         }
 
         onMounted(() => {
+            if(user.type == 'integrator') {
+                getSolutionRepositories('');
+            }
             console.log("props");
             console.log(props);
             console.log(props.challenge);

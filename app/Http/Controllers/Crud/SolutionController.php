@@ -22,7 +22,6 @@ use Psr\Log\NullLogger;
 
 class SolutionController extends Controller
 {
-
     public function saveSolutionTeams(Request $request, Solution $solution)
     {
         foreach ($request->teams as $team_id) {
