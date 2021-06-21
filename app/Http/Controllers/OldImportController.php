@@ -11,6 +11,7 @@ use App\Models\Solutions\Solution;
 use App\Models\Team;
 use App\Models\TechnicalDetails;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OldImportController extends Controller
@@ -75,6 +76,8 @@ class OldImportController extends Controller
             $newChallenge->stage = $oc->stage + 1;
             $newChallenge->description = $oc->description;
             $newChallenge->author_id = $nu->id;
+            $newChallenge->solution_deadline = Carbon::now();
+            $newChallenge->offer_deadline = Carbon::now();
             $newChallenge->type = 0;
             $fi = new Financial();
             $fi->save();
