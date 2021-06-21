@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Challenges\Challenge;
 use App\Models\Financial;
 use App\Models\OldChallenge;
+use App\Models\OldQuestion;
 use App\Models\OldTeam;
 use App\Models\OldUser;
+use App\Models\Question;
 use App\Models\Solutions\Solution;
 use App\Models\Team;
 use App\Models\TechnicalDetails;
@@ -62,74 +64,91 @@ class OldImportController extends Controller
 //            }
 //        }
 
-        $oldChallenges = OldChallenge::with('teams')->get();
-//        dd($oldChallenges);
-        foreach ($oldChallenges as $oc) {
+//        $oldChallenges = OldChallenge::with('teams')->get();
+////        dd($oldChallenges);
+//        foreach ($oldChallenges as $oc) {
+//
+//            $ou = OldUser::where('id', '=', $oc->author_id)->first();
+//            $nu = User::where('email', '=', $ou->email)->first();
+//            $fi = new Financial();
+//            $fi->save();
+//            $newChallenge = new Challenge();
+//            $newChallenge->name = $oc->name;
+//            $newChallenge->save_json = str_replace('platfrom.dbr77.com', 'two.appworks-dev.pl', $oc->save_json);
+//            $newChallenge->screenshot_path = 's3/' . $oc->screenshot_path;
+//            $newChallenge->status = $oc->status;
+//            $newChallenge->stage = $oc->stage;
+//            $newChallenge->description = $oc->description;
+//            $newChallenge->author_id = $nu->id;
+//            $newChallenge->solution_deadline = $oc->solution_deadline;
+//            $newChallenge->offer_deadline = $oc->offer_deadline;
+//            $newChallenge->type = 0;
+//            $newChallenge->financial_before_id = $fi->id;
+//            $technical = new TechnicalDetails();
+//            $newChallenge->save();
+//            $technical->challenge_id = $newChallenge->id;
+//            $technical->save();
+//            $fi->challenge_id = $newChallenge->id;
+//            $fi->save();
+////            dd([$oc, $oc->teams]);
+//            $a = $oc->teams()->get();
+//            foreach ($a as $ot) {
+//
+//                $nt = Team::where('name', '=', $ot->name)->first();
+//                $newChallenge->teams()->attach($nt);
+//            }
+//
+//            foreach ($oc->solutions as $so) {
+//                $ns = new Solution();
+//                $ns->published = 0;
+//                $ns->challenge_id = $newChallenge->id;
+//                $ns->selected = $so->selected;
+//                $ns->rejected = $so->rejected;
+//                $ns->save_json = str_replace('platfrom.dbr77.com', 'two.appworks-dev.pl', $so->save_json);
+//                $ns->name = $so->name;
+//                $ns->description = '';
+//                $ns->screenshot_path = 's3/' . $so->screenshot_path;
+//                $ns->status = $so->status;
+//                try {
+//                    $oldInst = OldUser::where('id', '=', $so->installer_id)->first();
+//                    $newUser = User::where('email', '=', $oldInst->email)->first();
+//                    $ns->installer_id = $newUser->id;
+//                    $ns->author_id = $newUser->id;
+//                } catch (\Exception $e){
+//                    $ns->installer_id = 1;
+//                    $ns->author_id = 1;
+//                }
+//
+//
+//
+//                $fis = new Financial();
+//                $fis->challenge_id = NULL;
+//                $fis->save();
+//                $fis->financial_after_id = $fis->id;
+//                $ns->save();
+//                foreach ($so->teams as $st) {
+//                    $nt = Team::where('name', '=', $st->name)->first();
+//                    $ns->teams()->attach($nt);
+//                }
+//            }
+//        }
 
-            $ou = OldUser::where('id', '=', $oc->author_id)->first();
+
+        $oldQ = OldQuestion::get();
+
+        foreach ($oldQ as $q) {
+            $ou = OldUser::where('id', '=', $q->author_id)->first();
+            $oc = OldChallenge::where('id', '=', $q->challenge_id)->first();
+
             $nu = User::where('email', '=', $ou->email)->first();
-            $fi = new Financial();
-            $fi->save();
-            $newChallenge = new Challenge();
-            $newChallenge->name = $oc->name;
-            $newChallenge->save_json = str_replace('platfrom.dbr77.com', 'two.appworks-dev.pl', $oc->save_json);
-            $newChallenge->screenshot_path = 's3/' . $oc->screenshot_path;
-            $newChallenge->status = $oc->status;
-            $newChallenge->stage = $oc->stage;
-            $newChallenge->description = $oc->description;
-            $newChallenge->author_id = $nu->id;
-            $newChallenge->solution_deadline = $oc->solution_deadline;
-            $newChallenge->offer_deadline = $oc->offer_deadline;
-            $newChallenge->type = 0;
-            $newChallenge->financial_before_id = $fi->id;
-            $technical = new TechnicalDetails();
-            $newChallenge->save();
-            $technical->challenge_id = $newChallenge->id;
-            $technical->save();
-            $fi->challenge_id = $newChallenge->id;
-            $fi->save();
-//            dd([$oc, $oc->teams]);
-            $a = $oc->teams()->get();
-            foreach ($a as $ot) {
+            $nc = Challenge::where('name', '=', $oc->name)->first();
 
-                $nt = Team::where('name', '=', $ot->name)->first();
-                $newChallenge->teams()->attach($nt);
-            }
-
-            foreach ($oc->solutions as $so) {
-                $ns = new Solution();
-                $ns->published = 0;
-                $ns->challenge_id = $newChallenge->id;
-                $ns->selected = $so->selected;
-                $ns->rejected = $so->rejected;
-                $ns->save_json = str_replace('platfrom.dbr77.com', 'two.appworks-dev.pl', $so->save_json);
-                $ns->name = $so->name;
-                $ns->description = '';
-                $ns->screenshot_path = 's3/' . $so->screenshot_path;
-                $ns->status = $so->status;
-                try {
-                    $oldInst = OldUser::where('id', '=', $so->installer_id)->first();
-                    $newUser = User::where('email', '=', $oldInst->email)->first();
-                    $ns->installer_id = $newUser->id;
-                    $ns->author_id = $newUser->id;
-                } catch (\Exception $e){
-                    $ns->installer_id = 1;
-                    $ns->author_id = 1;
-                }
-
-
-
-                $fis = new Financial();
-                $fis->challenge_id = NULL;
-                $fis->save();
-                $fis->financial_after_id = $fis->id;
-                $ns->save();
-                foreach ($so->teams as $st) {
-                    $nt = Team::where('name', '=', $st->name)->first();
-                    $ns->teams()->attach($nt);
-                }
-            }
+            $nq = new Question();
+            $nq->question = $q->question;
+            $nq->answer = $q->answer;
+            $nq->author_id = $nu->id;
+            $nq->challenge_id = $nc->id;
+            $nq->save();
         }
-
     }
 }
