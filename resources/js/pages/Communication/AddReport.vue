@@ -1,5 +1,5 @@
 <template>
-    <div class="pb-2">
+    <div class="pb-4">
     <span class="font-medium dark:text-theme-10 text-theme-1">Jeśli masz problem z obsługą platformy lub pojawił się błąd w którymś z widoków prześlij do nas zgłoszenie. Dodaj do niego zrzut ekranu z widocznym  błędem, aby ułatwić nam jego identyfikację i rozwiązanie. Postaramy się odpowiedzieć jak najszybciej.</span>
     </div>
     <div>

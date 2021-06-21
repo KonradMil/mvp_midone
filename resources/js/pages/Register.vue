@@ -49,19 +49,29 @@
                             <div class="mt-3"><label>{{$t('register.iam')}}</label>
                                 <div class="flex flex-col sm:flex-row mt-2">
                                     <div class="form-check mr-2">
-                                        <input id="radio-switch-4" v-model="validate.type.$model" class="form-check-input"
-                                                                        type="radio" name="horizontal_radio_button"
-                                                                        value="integrator"/> <label
-                                        class="form-check-label"
-                                        for="radio-switch-4">{{$t('common.integratorem')}}</label></div>
+                                        <input id="radio-switch-4"
+                                               v-model="validate.type.$model"
+                                               class="form-check-input"
+                                               type="radio"
+                                               name="horizontal_radio_button"
+                                               value="integrator"/>
+                                        <label
+                                               class="form-check-label"
+                                               for="radio-switch-4"
+                                               tooltip="Dodaj linie">
+                                             {{$t('common.integratorem')}}</label>
+                                    </div>
                                     <div class="form-check mr-2 mt-2 sm:mt-0">
-                                        <input id="radio-switch-5"  v-model="validate.type.$model"
-                                                                                     class="form-check-input"
-                                                                                     type="radio"
-                                                                                     name="horizontal_radio_button"
-                                                                                     value="investor"/>
+                                        <input id="radio-switch-5"
+                                               v-model="validate.type.$model"
+                                               class="form-check-input"
+                                               type="radio"
+                                               name="horizontal_radio_button"
+                                               value="investor"/>
                                         <label class="form-check-label"
-                                               for="radio-switch-5">{{$t('common.investorem')}}</label></div>
+                                               for="radio-switch-5"
+                                               tooltip="Dodaj linie">
+                                            {{$t('common.investorem')}}</label></div>
                                 </div>
                                 <template v-if="validate.type.$error">
                                     <div
