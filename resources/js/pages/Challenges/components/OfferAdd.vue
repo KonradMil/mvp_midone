@@ -35,7 +35,7 @@
                             v-model="time_to_start"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                             <option  :selected="time_to_start === '' ? 'selected' : ''" disabled>Wybierz...</option>
-                            <option :selected="index === time_to_start ? 'selected' : ''" v-for="(det,index) in values['weeks-short']"
+                            <option :selected="index === time_to_start ? 'selected' : ''" v-for="(det,index) in values['weeks-short']" :data-det="det" :data-index="index" :data-jeden="time_to_start"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
@@ -49,7 +49,7 @@
                             v-model="advance_upon_agreement"
                             :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                             <option :selected="advance_upon_agreement === '' ? 'selected' : ''" disabled>Wybierz...</option>
-                            <option :selected="index === advance_upon_agreement ? 'selected' : ''" v-for="(det,index) in values['percent']"
+                            <option :selected="index === advance_upon_agreement ? 'selected' : ''" v-for="(det,index) in values['percent']" :data-det="det" :data-index="index" :data-jeden="advance_upon_agreement"
                                     :value="index">{{ det }}
                             </option>
                         </TailSelect>
