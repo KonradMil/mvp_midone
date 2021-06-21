@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class OldQuestion extends Model
 {
     public $table = 'dbr_questions';
+    protected $connection = 'old';
     protected $fillable = [
         'question', 'answer',
         'author_id', 'challenge_id'
