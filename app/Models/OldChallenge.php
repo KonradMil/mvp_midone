@@ -24,7 +24,7 @@ class OldChallenge extends Model
 
     public function teams()
     {
-        return $this->belongsToMany(OldTeam::class, 'teams_challenges', 'team_id', 'challenge_id');
+        return $this->belongsToMany(OldTeam::class, 'teams_challenges', 'challenge_id', 'team_id');
     }
 
     public function financial_before()
