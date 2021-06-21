@@ -87,9 +87,10 @@ class OldImportController extends Controller
 //            $technical->save();
 //            $fi->challenge_id = $newChallenge->id;
 //            $fi->save();
-            dd([$oc, $oc->teams]);
-            foreach ($oc->teams as $ot) {
-                dd($ot);
+//            dd([$oc, $oc->teams]);
+            $a = $oc->teams()->get();
+            foreach ($a as $ot) {
+                dump($ot);
                 $nt = Team::where('name', '=', $ot->name)->first();
 //                $newChallenge->teams()->attach($nt);
             }
