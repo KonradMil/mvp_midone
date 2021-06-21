@@ -137,18 +137,23 @@ class OldImportController extends Controller
         $oldQ = OldQuestion::get();
 
         foreach ($oldQ as $q) {
-            $ou = OldUser::where('id', '=', $q->author_id)->first();
-            $oc = OldChallenge::where('id', '=', $q->challenge_id)->first();
+            try {
+                $ou = OldUser::where('id', '=', $q->author_id)->first();
+                $oc = OldChallenge::where('id', '=', $q->challenge_id)->first();
 
-            $nu = User::where('email', '=', $ou->email)->first();
-            $nc = Challenge::where('name', '=', $oc->name)->first();
+                $nu = User::where('email', '=', $ou->email)->first();
+                $nc = Challenge::where('name', '=', $oc->name)->first();
 
-            $nq = new Question();
-            $nq->question = $q->question;
-            $nq->answer = $q->answer;
-            $nq->author_id = $nu->id;
-            $nq->challenge_id = $nc->id;
-            $nq->save();
+                $nq = new Question();
+                $nq->question = $q->question;
+                $nq->answer = $q->answer;
+                $nq->author_id = $nu->id;
+                $nq->challenge_id = $nc->id;
+                $nq->save();
+            } catch (\Exception $e) {
+
+            }
+
         }
     }
 }
