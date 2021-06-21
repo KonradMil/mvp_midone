@@ -142,7 +142,7 @@
                 elDropzoneSingleRef.dropzone.on("success", (resp) => {
                     console.log(resp.xhr.response);
                     avatar_path.value = '/s3/avatars/' + JSON.parse(resp.xhr.response).payload;
-                    toast.success('Success!');
+                    toast.success('Avatar został załadowany poprawnie!');
                 });
                 elDropzoneSingleRef.dropzone.on("error", () => {
                     toast.error("Błąd");

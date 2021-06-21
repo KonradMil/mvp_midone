@@ -153,7 +153,7 @@
                     toast.error('Email nie może być pusty');
                 } else {
                     await ResetPassword(emailNew.value)
-                    toast.success('Success!')
+                    toast.success('Link do zmiany hasła został wysłany na twojego maila!')
                 }
             }
 

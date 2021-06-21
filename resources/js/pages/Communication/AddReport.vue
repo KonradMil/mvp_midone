@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="pb-4">
     <span class="font-medium dark:text-theme-10 text-theme-1">Jeśli masz problem z obsługą platformy lub pojawił się błąd w którymś z widoków prześlij do nas zgłoszenie. Dodaj do niego zrzut ekranu z widocznym  błędem, aby ułatwić nam jego identyfikację i rozwiązanie. Postaramy się odpowiedzieć jak najszybciej.</span>
     </div>
     <div>
@@ -120,7 +120,7 @@ export default {
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
                 console.log(resp.xhr.response);
                 file.value = JSON.parse(resp.xhr.response).payload;
-                toast.success('Success!');
+                toast.success('Pomyślnie dodano plik!');
             });
             elDropzoneSingleRef.dropzone.on("error", () => {
                 toast.error("Błąd");

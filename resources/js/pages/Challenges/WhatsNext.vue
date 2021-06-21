@@ -69,7 +69,8 @@ name: "WhatsNext",
                     buttonText.value = '';
                     action.value = {redirect: ''}
                 } else if(props.challenge.stage == 0) {
-                    text.value = 'Aby zacząć zbierać oferty opublikuj rozwiązanie.';
+                    text.value = 'Uzupełnij wyzwanie o zdjęcia i kluczowe informacje związane ze stanowiskiem i Twoimi oczekiwaniami, a następnie opublikuj swoje wyzwanie. \n' +
+                        'Im bardziej szczegółowy opis wyzwania, tym bardziej sprecyzowane koncepcje rozwiązań zostaną dla niego przygotowane.';
                     action.value = {redirect: ''}
                 }
             }
