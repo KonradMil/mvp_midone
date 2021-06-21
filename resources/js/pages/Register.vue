@@ -58,7 +58,7 @@
                                         <label
                                                class="form-check-label"
                                                for="radio-switch-4"
-                                               tooltip="Dodaj linie">
+                                               title="Dodaj linie">
                                              {{$t('common.integratorem')}}</label>
                                     </div>
                                     <div class="form-check mr-2 mt-2 sm:mt-0">
@@ -70,7 +70,7 @@
                                                value="investor"/>
                                         <label class="form-check-label"
                                                for="radio-switch-5"
-                                               tooltip="Dodaj linie">
+                                               title="Dodaj linie">
                                             {{$t('common.investorem')}}</label></div>
                                 </div>
                                 <template v-if="validate.type.$error">
