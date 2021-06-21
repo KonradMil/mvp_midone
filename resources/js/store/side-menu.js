@@ -96,12 +96,12 @@ const state = () => {
             },
             {
                 icon: "BoxIcon",
-                pageName: "projects",
+                pageName: "#",
                 title: "Projekty",
                 subMenu: [
                     {
                         icon: "",
-                        pageName: "projects-active",
+                        pageName: "projects",
                         title: "Aktywne",
                         ignore: true
                     },
@@ -136,7 +136,7 @@ const state = () => {
             {
                 icon: "InboxIcon",
                 pageName: "communication",
-                title: "Komunikacja"
+                title: "Pomoc"
             },
         ]
     };

@@ -1,7 +1,7 @@
 <template>
     <div class="intro-y box p-5">
         <div>
-            <label for="crud-form-1" class="form-label">Title</label>
+            <label for="crud-form-1" class="form-label">Tytuł wiadomości</label>
             <input id="crud-form-1"
                    type="text"
                    class="form-control w-full"

@@ -8,6 +8,7 @@ import Wizard from "../pages/Wizard";
 import Profile from "../pages/Wizard";
 import WizardOne from "../pages/WizardOne";
 import Challenges from "../pages/Challenges/Main";
+import Projects from "../pages/Projects/Main";
 import AddChallenge from "../pages/Challenges/New";
 import Solutions from "../pages/Solutions/Main";
 import AddSolution from "../pages/Solutions/New";
@@ -129,6 +130,11 @@ export const routes = [
                 path: '/report/show/:id',
                 component: ReportReview,
                 props: true
+            },
+            {
+                name: 'projects',
+                path: '/projects',
+                component: Projects
             },
             {
                 name: 'addChallenge',
