@@ -49,12 +49,6 @@
                             <div class="mt-3"><label>{{$t('register.iam')}}</label>
                                 <div class="flex flex-col sm:flex-row mt-2">
                                     <div class="form-check mr-2">
-                                        <input id="radio-switch-4"
-                                               v-model="validate.type.$model"
-                                               class="form-check-input"
-                                               type="radio"
-                                               name="horizontal_radio_button"
-                                               value="integrator"/>
                                         <Tippy
                                             id="meta-title-tab"
                                             tag="a"
@@ -64,6 +58,12 @@
                                             aria-selected="false"
                                             @click=""
                                         >
+                                            <input id="radio-switch-4"
+                                                   v-model="validate.type.$model"
+                                                   class="form-check-input"
+                                                   type="radio"
+                                                   name="horizontal_radio_button"
+                                                   value="integrator"/>
                                             <label
                                                 class="form-check-label"
                                                 for="radio-switch-4"
