@@ -339,7 +339,9 @@ export default {
         });
 
         emitter.on('OperationalAnalysisDialog', e => {
-
+            content.value = 'operationalanalysis';
+            currentTitle.value = 'Analiza operacyjna';
+            showPanel();
         });
         emitter.on('SettingsDialog', e => {
             content.value = 'settings';
