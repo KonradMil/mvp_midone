@@ -101,11 +101,11 @@ class ChallengeController extends Controller
     public function getUserChallenges()
     {
         if (Auth::user()->type == 'integrator') {
-            $challenges = Challenge::whereIn('stage', [1, 2])->where('status', '=', 1)->orderBy('created_at', 'ASC')->get();
+            $challenges = Challenge::whereIn('stage', [1, 2])->where('status', '=', 1)->orderBy('created_at', 'DESC')->get();
         } else if (Auth::user()->type == 'inwestor') {
             $challenges = Auth::user()->challenges()->orderBy('created_at', 'ASC')->get();
         } else {
-            $challenges = Auth::user()->challenges()->with('technicalDetails')->orderBy('created_at', 'ASC')->get();
+            $challenges = Auth::user()->challenges()->with('technicalDetails')->orderBy('created_at', 'DESC')->get();
         }
 
         return response()->json([
