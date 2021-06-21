@@ -101,7 +101,7 @@ const state = () => {
                 subMenu: [
                     {
                         icon: "",
-                        pageName: "Projects",
+                        pageName: "projects",
                         title: "Aktywne",
                         ignore: true
                     },
