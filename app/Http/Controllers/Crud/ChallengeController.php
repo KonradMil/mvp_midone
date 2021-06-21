@@ -132,7 +132,7 @@ class ChallengeController extends Controller
                         foreach ($solution->teams as $team) {
                             foreach (Auth::user()->teams as $t) {
                                 if ($t->id == $team->id) {
-                                    $query->where('stage', '=', 3)->where('status', '=', 1);
+//                                    $query->where('stage', '=', 3)->where('status', '=', 1);
                                     $check = true;
                                 }
                             }
@@ -152,15 +152,10 @@ class ChallengeController extends Controller
                 }
             }
 
-            if (isset($input->status)) {
-                $query->where('status', '=', $input->status);
-            }
             if (isset($input->type)) {
                 $query->where('type', '=', $input->type);
             }
-            if (isset($input->rating)) {
-                $query->whereIn('rating', [($input->rating - 0.5), $input->rating, ($input->rating + 0.5)]);
-            }
+
             if (isset($input->favourite)) {
                 $query->where('favourite', '=', 1);
             }
