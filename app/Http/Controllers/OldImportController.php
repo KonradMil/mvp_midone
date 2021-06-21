@@ -89,7 +89,7 @@ class OldImportController extends Controller
 //            $fi->save();
 
             foreach ($oc->teams as $ot) {
-                dump($ot);
+                dd($ot);
                 $nt = Team::where('name', '=', $ot->name)->first();
 //                $newChallenge->teams()->attach($nt);
             }
