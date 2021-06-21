@@ -48,7 +48,7 @@
                         <div class="intro-x mt-8">
                             <div class="mt-3"><label>{{$t('register.iam')}}</label>
                                 <div class="flex flex-col sm:flex-row mt-2">
-                                    <div class="form-check mr-2">
+
                                         <Tippy
                                             id="meta-title-tab"
                                             tag="a"
@@ -58,6 +58,7 @@
                                             aria-selected="false"
                                             @click=""
                                         >
+                                            <div class="form-check mr-2">
                                             <input id="radio-switch-4"
                                                    v-model="validate.type.$model"
                                                    class="form-check-input"
@@ -69,9 +70,8 @@
                                                 for="radio-switch-4"
                                                 title="Dodaj linie">
                                                 {{$t('common.integratorem')}}</label>
+                                            </div>
                                         </Tippy>
-
-                                    </div>
                                     <div class="form-check mr-2 mt-2 sm:mt-0">
                                         <input id="radio-switch-5"
                                                v-model="validate.type.$model"
