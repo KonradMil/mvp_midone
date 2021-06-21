@@ -62,7 +62,7 @@ class OldImportController extends Controller
 //            }
 //        }
 
-        $oldChallenges = OldChallenge::get();
+        $oldChallenges = OldChallenge::with('teams')->get();
 
         foreach ($oldChallenges as $oc) {
 //            $ou = OldUser::where('id', '=', $oc->author_id)->first();
