@@ -53,7 +53,7 @@ class S3Controller extends Controller
         if(Storage::disk('s3')->exists($path)){
 
         } else {
-                $path = $path;
+                $path = 'models/' . $path;
         }
 
         $getMimeType = Storage::disk('s3')->getMimetype($path);
