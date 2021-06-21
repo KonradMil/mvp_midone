@@ -199,16 +199,13 @@ class ChallengeController extends Controller
                     $challenge->followed = false;
                 }
             }
-         if($check === false) {
-             $challengesProject = NULL;
-         }
+         if($check === true) {
              return response()->json([
-                    'success' => true,
-                    'message' => 'Pobrano poprawnie.',
-                    'payload' => $merged->all()
-                ]);
-
-
+                 'success' => true,
+                 'message' => 'Pobrano poprawnie.',
+                 'payload' => $merged->all()
+             ]);
+         }
         } else {
             return response()->json([
                 'success' => true,
