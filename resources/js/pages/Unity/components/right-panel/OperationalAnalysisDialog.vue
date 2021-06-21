@@ -20,10 +20,11 @@
                                 <input type="number" :value="challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                             <td class="border">
-                                <label for="input-wizard-2" class="form-label">
-                                    {{$t('challengesNew.days')}}
+                                <label for="input-wizard-1" class="form-label">
+
                                 </label>
-                               </td>
+                                <input type="number" :value="solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60" class="form-control" placeholder="0" disabled="disabled"/>
+                            </td>
                         </tr>
                         <tr class="hover:bg-gray-200">
 
@@ -34,10 +35,10 @@
                                 <input type="number" :value="(challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time))" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                             <td class="border">
-                                <label for="input-wizard-9" class="form-label">
-                                    {{$t('challengesNew.shifts')}}
-                                </label>
+                                <label for="input-wizard-1" class="form-label">
 
+                                </label>
+                                <input type="number" :value="(solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time))" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-200">
@@ -49,10 +50,10 @@
                                 <input type="number" :value="(challenge.financial_before.operator_performance / 100) * ((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time)))" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                             <td class="border">
-                                <label for="input-wizard-9" class="form-label">
-                                    {{$t('challengesNew.shift_time')}}
-                                </label>
+                                <label for="input-wizard-1" class="form-label">
 
+                                </label>
+                                <input type="number" :value="(solution.financial_after.operator_performance / 100) * ((solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time)))" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-200">
@@ -64,10 +65,10 @@
                                 <input type="number" :value="((challenge.financial_before.operator_performance / 100) * ((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time)))) * (1 - (challenge.financial_before.defective / 100 ))" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                             <td class="border">
-                                <label for="input-wizard-9" class="form-label">
-                                    {{$t('challengesNew.weekend_shift')}}
-                                </label>
+                                <label for="input-wizard-1" class="form-label">
 
+                                </label>
+                                <input type="number" :value="((solution.financial_after.operator_performance / 100) * ((solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time)))) * (1 - (solution.financial_after.defective / 100 ))" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-200">
@@ -79,10 +80,10 @@
                                 <input type="number" :value="((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time))) / (challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60)" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                             <td class="border">
-                                <label for="input-wizard-9" class="form-label">
-                                    {{$t('challengesNew.breakfast')}}
-                                </label>
+                                <label for="input-wizard-1" class="form-label">
 
+                                </label>
+                                <input type="number" :value="((solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time))) / (solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60)" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-200">
@@ -94,10 +95,10 @@
                                 <input type="number" :value="((challenge.financial_before.operator_performance / 100) * ((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time)))) / ((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time)))" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                             <td class="border">
-                                <label for="input-wizard-9" class="form-label">
-                                    {{$t('challengesNew.stop_time')}}
-                                </label>
+                                <label for="input-wizard-1" class="form-label">
 
+                                </label>
+                                <input type="number" :value="((solution.financial_after.operator_performance / 100) * ((solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time)))) / ((solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time)))" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-200">
@@ -109,10 +110,10 @@
                                 <input type="number" :value="(((challenge.financial_before.operator_performance / 100) * ((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time)))) * (1 - (challenge.financial_before.defective / 100 ))) / ((challenge.financial_before.operator_performance / 100) * ((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time))))" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                             <td class="border">
-                                <label for="input-wizard-9" class="form-label">
-                                    {{$t('challengesNew.stop_time')}}
-                                </label>
+                                <label for="input-wizard-1" class="form-label">
 
+                                </label>
+                                <input type="number" :value="(((solution.financial_after.operator_performance / 100) * ((solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time)))) * (1 - (solution.financial_after.defective / 100 ))) / ((solution.financial_after.operator_performance / 100) * ((solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time))))" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-200">
@@ -123,10 +124,10 @@
                                 <input type="number" :value="(((challenge.financial_before.operator_performance / 100) * ((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time)))) * (1 - (challenge.financial_before.defective / 100 ))) / (challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60)" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                             <td class="border">
-                                <label for="input-wizard-9" class="form-label">
-                                    {{$t('challengesNew.stop_time')}}
-                                </label>
+                                <label for="input-wizard-1" class="form-label">
 
+                                </label>
+                                <input type="number" :value="(((solution.financial_after.operator_performance / 100) * ((solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time)))) * (1 - (solution.financial_after.defective / 100 ))) / (solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60)" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-200">
@@ -137,10 +138,10 @@
                                 <input type="number" :value="(((challenge.financial_before.operator_performance / 100) * ((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time)))) * (1 - (challenge.financial_before.defective / 100 ))) * 60 / (challenge.financial_before.cycle_time)" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                             <td class="border">
-                                <label for="input-wizard-9" class="form-label">
-                                    {{$t('challengesNew.stop_time')}}
-                                </label>
+                                <label for="input-wizard-1" class="form-label">
 
+                                </label>
+                                <input type="number" :value="(((solution.financial_after.operator_performance / 100) * ((solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time)))) * (1 - (solution.financial_after.defective / 100 ))) * 60 / (solution.financial_after.cycle_time)" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-200">
@@ -151,10 +152,10 @@
                                 <input type="number" :value="(((((challenge.financial_before.operator_performance / 100) * ((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time)))) * (1 - (challenge.financial_before.defective / 100 ))) * 60 / (challenge.financial_before.cycle_time))/((challenge.financial_before.days)*(challenge.financial_before.shifts)+(challenge.financial_before.weekend_shift)*50))/(challenge.financial_before.number_of_operators)" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                             <td class="border">
-                                <label for="input-wizard-9" class="form-label">
-                                    {{$t('challengesNew.stop_time')}}
-                                </label>
+                                <label for="input-wizard-1" class="form-label">
 
+                                </label>
+                                <input type="number" :value="(((((solution.financial_after.operator_performance / 100) * ((solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time)))) * (1 - (solution.financial_after.defective / 100 ))) * 60 / (solution.financial_after.cycle_time))/((solution.financial_after.days)*(solution.financial_after.shifts)+(solution.financial_after.weekend_shift)*50))/(solution.financial_after.number_of_operators)" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                         </tr>
                         </tbody>
