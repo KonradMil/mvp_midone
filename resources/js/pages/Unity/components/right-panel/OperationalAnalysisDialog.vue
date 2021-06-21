@@ -20,7 +20,7 @@
                                 <input type="number" :value="challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60" class="form-control" placeholder="0" disabled="disabled"/>
                             </td>
                             <td class="border">
-                                <label for="input-wizard-9" class="form-label">
+                                <label for="input-wizard-2" class="form-label">
                                     {{$t('challengesNew.days')}}
                                 </label>
                                </td>
