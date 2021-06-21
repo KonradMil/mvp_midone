@@ -113,7 +113,10 @@ class OldImportController extends Controller
                 $fis->save();
                 $fis->financial_after_id = $fis->id;
                 $ns->save();
-
+                foreach ($so->teams as $st) {
+                    $nt = Team::where('name', '=', $st->name)->first();
+                    $ns->teams()->attach($nt);
+                }
             }
         }
 
