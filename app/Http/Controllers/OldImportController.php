@@ -111,12 +111,14 @@ class OldImportController extends Controller
                     $oldInst = OldUser::where('id', '=', $so->installer_id)->first();
                     $newUser = User::where('email', '=', $oldInst->email)->first();
                     $ns->installer_id = $newUser->id;
+                    $ns->author_id = $newUser->id;
                 } catch (\Exception $e){
                     $ns->installer_id = 1;
+                    $ns->author_id = 1;
                 }
 
 
-                $ns->author_id = $nu->id;
+
                 $fis = new Financial();
                 $fis->challenge_id = NULL;
                 $fis->save();
