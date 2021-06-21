@@ -120,16 +120,21 @@ class ChallengeController extends Controller
         $input = $request->input();
         $query = Challenge::query();
         if (Auth::user()->type == 'integrator') {
-            $offer =  Offer::find($query->selected_offer_id);
-            $solution = Solution::find($offer->solution_id);
+            $challenges = Challenges::get();
+            foreach($challenges as $challenge)
+            {
+                $offer =  Offer::find($challenge->selected_offer_id);
+                $solution = Solution::find($offer->solution_id);
 
-            foreach ($solution->teams as $team) {
-                foreach (Auth::user()->teams as $t) {
-                    if($t->id == $team->id)  {
-                        $query->where('stage', '=', 3)->where('status', '=', 1);
+                foreach ($solution->teams as $team) {
+                    foreach (Auth::user()->teams as $t) {
+                        if($t->id == $team->id)  {
+                            $query->where('stage', '=', 3)->where('status', '=', 1);
+                        }
                     }
                 }
             }
+
         } else if (Auth::user()->type == 'investor') {
             $query->where('author_id', '=', Auth::user()->id)->where('stage', '=', 3);
         } else {
