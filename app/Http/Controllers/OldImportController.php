@@ -95,6 +95,7 @@ class OldImportController extends Controller
 
             foreach ($oc->solutions as $so) {
                 $ns = new Solution();
+                $ns->published = 0;
                 $ns->challenge_id = $newChallenge->id;
                 $ns->selected = $so->selected;
                 $ns->rejected = $so->rejected;
