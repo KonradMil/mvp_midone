@@ -32,6 +32,7 @@
 
 <script>
 import {computed, onMounted, ref, watch} from "vue";
+import GetSolutions from "../../compositions/GetSolutions";
 
 export default {
 name: "WhatsNext",
@@ -44,18 +45,29 @@ name: "WhatsNext",
         const text = ref('');
         const action = ref({});
         const buttonText = ref('Przejdź');
+        const solutions = ref([]);
+        const guard = ref(false);
 
         watch(() => props.challenge, (first, second) => {
            doMe();
         });
 
+        const getSolutionRepositories = async () => {
+            solutions.value = GetSolutions();
+        }
+
+        solutions.value.forEach((solution)=>{
+             if(solution.status === 1){
+                 guard.value = true;
+             }
+        });
 
         const doMe = () => {
             if(props.user.type == 'integrator') {
                 if(props.challenge.stage == 1) {
                     text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
                     action.value = {redirect: ''}
-                } else if(props.user.solutions.length > 0 && props.challenge.stage < 2) {
+                } else if(guard !== true && props.challenge.stage < 2) {
                     text.value = 'Po opublikowaniu rozwiązania będzie ono widoczne dla Inwestora.';
                     action.value = {redirect: ''}
                 }else if(props.challenge.stage == 2) {
@@ -88,10 +100,13 @@ name: "WhatsNext",
         });
 
         return {
+            guard,
+            solutions,
             title,
             text,
             action,
-            buttonText
+            buttonText,
+            getSolutionRepositories
         }
     }
 }
