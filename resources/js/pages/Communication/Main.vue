@@ -5,7 +5,6 @@
             <div class="grid grid-cols-12 gap-6 mt-8">
                 <div class="col-span-12 lg:col-span-3 xxl:col-span-2">
                     <h2 class="intro-y text-lg font-medium mr-auto mt-2">
-                        Inbox
                     </h2>
                     <!-- BEGIN: Inbox Menu -->
                     <div class="intro-y box bg-theme-1 p-5 mt-6">
@@ -63,20 +62,6 @@
                                                 <button class="btn btn-primary w-32 ml-2">Search</button>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-full sm:w-auto flex">
-<!--                            <button class="btn btn-primary shadow-md mr-2">Start a Video Call</button>-->
-                            <div class="dropdown">
-                                <button class="dropdown-toggle btn px-2 box text-gray-700 dark:text-gray-300" aria-expanded="false">
-                                    <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
-                                </button>
-                                <div class="dropdown-menu w-40">
-                                    <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="user" class="w-4 h-4 mr-2"></i> Contacts </a>
-                                        <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="settings" class="w-4 h-4 mr-2"></i> Settings </a>
                                     </div>
                                 </div>
                             </div>

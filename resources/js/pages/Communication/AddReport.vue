@@ -1,6 +1,6 @@
 <template>
     <div>
-        <label for="crud-form-1" class="form-label">Title</label>
+        <label for="crud-form-1" class="form-label">Tytuł wiadomości</label>
         <input id="crud-form-1"
                type="text"
                class="form-control w-full"
@@ -80,7 +80,7 @@
         </div>
     </div>
     <div class="modal-footer text-right">
-        <button type="button" :disabled="isDisabled" class="btn btn-primary w-20" @click="saveReportRepo">Send</button>
+        <button type="button" :disabled="isDisabled" class="btn btn-primary w-20" @click="saveReportRepo">Wyślij zgłoszenie</button>
     </div>
 
 </template>
