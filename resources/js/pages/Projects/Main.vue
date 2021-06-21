@@ -3,7 +3,6 @@
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">Projekty</h2>
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                <button class="btn btn-primary shadow-md mr-2" v-if="user.type == 'investor'" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
                 <div class="dropdown ml-auto sm:ml-0">
                     <div class="dropdown-menu w-40">
                         <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
@@ -31,13 +30,12 @@
             <div class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium" v-if="challenges.list == undefined || challenges.list.length == 0">
                 <div>
                     <p v-if="user.type == 'integrator'">
-                        W tej chwili nie ma żadnych wyzwań, poinformujemy Cię jak tylko jakieś będą dostępne.
+                        Brak aktywnych projektów.
                     </p>
                     <div v-if="user.type === 'investor'">
                         <p>
-                            Nie dodałeś jeszcze żadnych wyzwań.
+                            Brak aktywnych projektów.
                         </p>
-                        <button class="btn btn-primary shadow-md mr-2 mt-2" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
                     </div>
                 </div>
             </div>
