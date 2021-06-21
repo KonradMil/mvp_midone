@@ -130,7 +130,7 @@ class ChallengeController extends Controller
                     foreach ($solution->teams as $team) {
                         foreach (Auth::user()->teams as $t) {
                             if ($t->id == $team->id) {
-                                $query->where('stage', '=', 3)->where('status', '=', 1);
+                                $query->challenge;
 
                             }
                         }
