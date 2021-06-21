@@ -1,7 +1,7 @@
 <template>
     <div
         class="mt-2">
-        <div class="" id="hoverable-table">
+        <div class="" id="fintable">
             <div class="preview">
                 <div class="overflow-x-auto">
                     <table class="table">
