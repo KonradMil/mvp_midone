@@ -134,8 +134,7 @@ export const routes = [
             {
                 name: 'projects',
                 path: '/projects',
-                component: Projects,
-                props: { type: 'normal' }
+                component: Projects
             },
             {
                 name: 'addChallenge',
