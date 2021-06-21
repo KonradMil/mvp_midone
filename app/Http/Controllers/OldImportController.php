@@ -67,7 +67,8 @@ class OldImportController extends Controller
         foreach ($oldChallenges as $oc) {
             $ou = OldUser::where('id', '=', $oc->author_id)->first();
             $nu = User::where('email', '=', $ou->email)->first();
-
+            $fi = new Financial();
+            $fi->save();
             $newChallenge = new Challenge();
             $newChallenge->name = $oc->name;
             $newChallenge->save_json = $oc->save_json;
@@ -79,14 +80,13 @@ class OldImportController extends Controller
             $newChallenge->solution_deadline = $oc->solution_deadline;
             $newChallenge->offer_deadline = $oc->offer_deadline;
             $newChallenge->type = 0;
-            $fi = new Financial();
-            $fi->save();
+            $newChallenge->financial_before_id = $fi->id;
             $technical = new TechnicalDetails();
             $newChallenge->save();
             $technical->challenge_id = $newChallenge->id;
             $technical->save();
 
-            $newChallenge->financial_before_id = $fi->id;
+
 
             foreach ($oc->teams as $ot) {
                 $nt = Team::where('name', '=', $ot->name)->first();
