@@ -4,6 +4,10 @@ const UnityBridge = () => {
     const emitter = app.appContext.config.globalProperties.emitter;
 
     onMounted(() => {
+        window.UnityPerformanceIssue = function UnityPerformanceIssue(str) {
+            console.log('UnityPerformanceIssue');
+            console.log(str);
+        }
         window.UnityAnimationChainUpdate = function UnityAnimationChainUpdate(str) {
             console.log('ODEBRANE LAYERY');
             console.log(str);
