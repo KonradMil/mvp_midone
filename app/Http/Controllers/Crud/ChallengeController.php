@@ -120,7 +120,7 @@ class ChallengeController extends Controller
         $input = $request->input();
         $query = Challenge::query();
         if (Auth::user()->type == 'integrator') {
-            $challenges = Challenge::get();
+            $challenges = Challenge::where('stage', '=', 3)->where('status', '=', 1)->get();
             foreach($challenges as $challenge)
             {
                 $offer =  Offer::find($challenge->selected_offer_id);
