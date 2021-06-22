@@ -58,14 +58,18 @@ class OldImportController extends Controller
 
         foreach ($oldTeam as $team) {
             if($team->name == 'Agatka + Michał') {
-                dd($team->users[0]);
-            }
-            foreach ($team->users as $user) {
-                $nt = Team::where('name', '=', $team->name)->first();
 
-                $nu = User::where('email', '=', $user->email)->first();
-                $nu->teams()->attach($nt);
+                foreach ($team->users as $user) {
+                    $ou = OldUser::where('email', '=', $user->email)->first();
+                    dd($ou->teams);
+//                    $nt = Team::where('name', '=', $team->name)->first();
+//
+//                    $nu = User::where('email', '=', $user->email)->first();
+//                    $nu->teams()->attach($nt);
+                }
+
             }
+
         }
 
 //        $oldChallenges = OldChallenge::with('teams')->get();
