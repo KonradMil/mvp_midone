@@ -91,11 +91,11 @@ name: "WhatsNext",
         const doMe = () => {
             console.log('filter is coming');
             if(props.user.type === 'integrator') {
-                if(props.solutions.length === 0 && props.challenge.stage === 1) {
+                if(props.challenge.solutions.length === 0 && props.challenge.stage === 1) {
                     console.log('HERE');
                     text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
                     action.value = {redirect: ''}
-                } else if(props.solutions.length > 0 && props.challenge.stage === 1 && isPublic.value===false) {
+                } else if(props.challenge.solutions.length > 0 && props.challenge.stage === 1 && isPublic.value===false) {
                     text.value = 'Po opublikowaniu rozwiązania będzie ono widoczne dla Inwestora.';
                     action.value = {redirect: ''}
                 }else if(props.challenge.stage === 1 && isPublic.value === true) {
