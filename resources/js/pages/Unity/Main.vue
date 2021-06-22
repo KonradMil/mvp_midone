@@ -417,10 +417,18 @@ export default {
                     if (response.data.success) {
                         console.log("response.data.payload");
                         console.log(response.data.payload);
-                        console.log(JSON.parse(response.data.payload.save_json));
-                        challenge.value = response.data.payload;
-                        initialLoad.value = JSON.parse(response.data.payload.save_json);
-                        animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
+                        try {
+                            console.log(JSON.parse(response.data.payload.save_json));
+                            challenge.value = response.data.payload;
+                            initialLoad.value = JSON.parse(response.data.payload.save_json);
+                            animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
+                        }catch (e) {
+                            console.log(response.data.payload.save_json);
+                            challenge.value = response.data.payload;
+                            initialLoad.value = response.data.payload.save_json;
+                            animationSave.value = response.data.payload.save_json.animation_layers;
+                        }
+
                         checkTeam();
                         handleUnityActionOutgoing({
                             action: 'loadStructure',
