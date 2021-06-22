@@ -123,7 +123,7 @@
                         <tr>
                             <td colspan="3" class="border">
                                 <label for="input-wizard-9" class="form-label">
-                                    Capex (całość kosztów składowych albo oferta instalatora)
+                                    Capex
                                 </label>
                             </td>
                         </tr>
@@ -159,16 +159,13 @@
                         <tr>
                             <td colspan="3" class="border">
                                 <label for="input-wizard-9" class="form-label">
-                                    Średnia oszczędność miesięczna (wyliczona w analizie fin)
+                                    Średnia oszczędność miesięczna
                                 </label>
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-200">
-                            <td class="border">
-                            </td>
-                            <td class="border">
-                           </td>
-                            <td class="border">
+                            <td class="border" colspan="3">
+                                <input type="number" :value="((((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100))) - (((solution.financial_after.days)*(solution.financial_after.shifts)*(solution.financial_after.shift_time)+(solution.financial_after.weekend_shift)*50*(solution.financial_after.shift_time))*(solution.financial_after.operator_cost / 160)*(solution.financial_after.number_of_operators)*(1+(solution.financial_after.absence / 100))))/12" class="form-control finclass" placeholder="0" disabled="disabled"/>
                             </td>
                         </tr>
                         <tr>
@@ -179,11 +176,8 @@
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-200">
-                            <td class="border">
-                             </td>
-                            <td class="border">
-                            </td>
-                            <td class="border">
+                            <td class="border" colspan="3">
+                                {{okresZwrotuProsty}}
                             </td>
                         </tr>
                         <tr>
@@ -194,12 +188,10 @@
                             </td>
                         </tr>
                         <tr class="hover:bg-gray-200">
-                            <td class="border">
+                            <td class="border" colspan="3">
+                                {{npv}}
                             </td>
-                            <td class="border">
-                            </td>
-                            <td class="border">
-                            </td>
+
                         </tr>
                         </tbody>
                     </table>
@@ -315,7 +307,10 @@ export default {
             challenge,
             timeframe,
             capex,
-            capitalCost
+            capitalCost,
+            okresZwrotuProsty,
+            okresZwrotuZdyskontowany,
+            npv
         }
     }
 }
