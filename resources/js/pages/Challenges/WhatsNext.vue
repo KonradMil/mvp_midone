@@ -55,7 +55,7 @@ name: "WhatsNext",
             return props.challenge.solutions;
         });
 
-        solutions.forEach(function (solution) {
+        solutions.value.forEach(function (solution) {
             if(solution.author_id.value === props.user.id) {
                 isSolutions.value = true;
             } else if((solution.published.value === 1) && (solution.author.id.value === props.user.id)) {
