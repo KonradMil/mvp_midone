@@ -92,7 +92,7 @@ export default {
                         delete_cookie('id');
                         console.log(response.data.payload);
                         router.push({
-                            name: 'solutionStudio',
+                            name: 'challengeStudio',
                             params: {id: response.data.payload.id, type: 'solution', load: response.data.payload}
                         });
                     } else {
