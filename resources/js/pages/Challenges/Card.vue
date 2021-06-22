@@ -191,9 +191,9 @@ export default defineComponent({
             console.log(challenge.value.solutions + '->  solutions.value');
             challenge.value.solutions.forEach(function (solution) {
                 console.log(solution.author_id+ 'author_id');
-                if(solution.author_id=== props.user.id) {
+                if(solution.author_id=== user.value.id) {
                     isSolutions.value = true;
-                } else if((solution.published === 1) && (solution.author.id === props.user.id)) {
+                } else if((solution.published === 1) && (solution.author.id === user.value.id)) {
                     isPublic.value = true;
                 }
             });
