@@ -48,7 +48,8 @@ name: "WhatsNext",
         const text = ref('');
         const action = ref({});
         const buttonText = ref('Przejdź');
-
+        const isPublic = ref(false);
+        const isSolutions = ref(false);
         // const isSolutions = ref(false);
         // const isPublic = ref(false);
         watch(() => props.challenge, (first, second) => {
@@ -59,17 +60,17 @@ name: "WhatsNext",
             return props.solutions;
         });
 
-        // const filter = () => {
-        //     console.log(solutions.value + '->  solutions.value');
-        //     solutions.value.forEach(function (solution) {
-        //         console.log(solution.author_id.value + 'author_id');
-        //         if(solution.author_id.value === props.user.id) {
-        //             isSolutions.value = true;
-        //         } else if((solution.published.value === 1) && (solution.author.id.value === props.user.id)) {
-        //             isPublic.value = true;
-        //         }
-        //     });
-        // }
+        const filter = () => {
+            console.log(solutions.value + '->  solutions.value');
+            solutions.value.forEach(function (solution) {
+                console.log(solution.author_id.value + 'author_id');
+                if(solution.author_id.value === props.user.id) {
+                    isSolutions.value = true;
+                } else if((solution.published.value === 1) && (solution.author.id.value === props.user.id)) {
+                    isPublic.value = true;
+                }
+            });
+        }
 
         // const getSolutionRepositories = async () => {
         //     console.log(props.challenge.id);
@@ -108,6 +109,7 @@ name: "WhatsNext",
         }
 
         onMounted(() => {
+            filter();
             // if(props.user.type == 'integrator') {
             //     getSolutionRepositories('');
             // }
@@ -119,8 +121,9 @@ name: "WhatsNext",
         });
 
         return {
-            // isPublic,
-            // isSolutions,
+            filter,
+            isPublic,
+            isSolutions,
             solutions,
             title,
             text,
