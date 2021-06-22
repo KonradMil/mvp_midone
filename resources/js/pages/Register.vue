@@ -56,12 +56,13 @@
                                                    type="radio"
                                                    name="horizontal_radio_button"
                                                    value="integrator"/>
-                                            <label
-                                                class="form-check-label"
-                                                for="radio-switch-4"
-                                                title="Podmiot świadczący usługi związane z automatyzacją stanowisk przemysłowych w zakładzie produkcyjnym.">
-                                                {{$t('common.integratorem')}}
-                                            </label>
+                                                <Tippy
+                                                    tag="a"
+                                                    href=""
+                                                    class="dark:text-gray-300 text-gray-600"
+                                                    content="Podmiot świadczący usługi związane z automatyzacją stanowisk przemysłowych w zakładzie produkcyjnym.">
+                                                   <label class="form-check-label" for="radio-switch-4">{{$t('common.integratorem')}}</label>
+                                                </Tippy>
                                             </div>
                                     <div class="form-check mr-2 mt-2 sm:mt-0">
                                             <input id="radio-switch-5"
@@ -75,11 +76,7 @@
                                             href=""
                                             class="dark:text-gray-300 text-gray-600"
                                             content="Przedsiębiorca zamierzający zautomatyzować stanowisko przemysłowe w zakładzie produkcyjnym.">
-                                            <label class="form-check-label"
-                                                   for="radio-switch-5"
-                                                   >
-                                                {{$t('common.investorem')}}
-                                            </label>
+                                            <label class="form-check-label"  for="radio-switch-5">{{$t('common.investorem')}}</label>
                                         </Tippy>
                                         </div>
                                 </div>
