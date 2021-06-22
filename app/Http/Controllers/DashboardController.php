@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     public function getDataForDashboard()
     {
-        $logs = Activity::where('description', 'LIKE', '%opublikowane%')->take(10)->get();
+        $logs = Activity::where('description', 'LIKE', '%wyzwanie zostało opublikowane%')->take(10)->get();
         $uniqueLogs = $logs->unique('description');
         $uniqueLogs->values()->all();
         foreach ($uniqueLogs as $log) {
