@@ -50,11 +50,10 @@ name: "WhatsNext",
         const buttonText = ref('Przejdź');
         const isPublic = ref(false);
         const isSolutions = ref(false);
-        // const isSolutions = ref(false);
-        // const isPublic = ref(false);
+
         watch(() => props.challenge, (first, second) => {
            doMe();
-        });
+        }, {deep: true});
 
         const solutions = computed(() => {
             if (props.challenge.solutions !== undefined) {
