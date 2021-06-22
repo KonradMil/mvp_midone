@@ -54,8 +54,10 @@ name: "WhatsNext",
 
 
         const getSolutionRepositories = async () => {
+            console.log(props.challenge.id);
             solutions.value = GetUserSolutionsChallenge(props.challenge.id);
         }
+
 
 
 
@@ -64,7 +66,7 @@ name: "WhatsNext",
                 if(props.challenge.stage == 1) {
                     text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
                     action.value = {redirect: ''}
-                } else if(guard !== true && props.challenge.stage < 2) {
+                } else if(props.challenge.solutions.length > 0 && props.challenge.stage == 1) {
                     text.value = 'Po opublikowaniu rozwiązania będzie ono widoczne dla Inwestora.';
                     action.value = {redirect: ''}
                 }else if(props.challenge.stage == 2) {
