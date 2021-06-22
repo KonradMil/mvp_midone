@@ -91,7 +91,7 @@ name: "WhatsNext",
         const doMe = () => {
             console.log('filter is coming');
             if(props.user.type === 'integrator') {
-                if(props.challenge.solutions.length === 0 && props.challenge.stage === 1) {
+                if(isSolutions === false && props.challenge.stage === 1) {
                     console.log('HERE');
                     text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
                     action.value = {redirect: ''}
