@@ -102,7 +102,7 @@
                         </button>
                     </div>
                 </div>
-                <WhatsNext :user="user" :challenge="challenge"></WhatsNext>
+                <WhatsNext :user="user" :challenge="challenge" :isPublic="isPublic" :isSolutions="isSolutions"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
             <BasicInformationPanel :challenge="challenge" :inTeam="inTeam" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
@@ -166,6 +166,8 @@ export default defineComponent({
         const types = require("../../json/types.json");
         const who = ref('challenge');
         const inTeam = ref(false);
+        const isSolutions = ref(false);
+        const isPublic = ref(false);
 
         emitter.on('selectedSolution', e => {
             selected_solution_id.value = e.id;
@@ -184,6 +186,19 @@ export default defineComponent({
         emitter.on('updateOffers', e => {
             activeTab.value = 'all-offers';
         });
+
+        const filter = () => {
+            console.log(challenge.solutions.value + '->  solutions.value');
+            challenge.solutions.value.forEach(function (solution) {
+                console.log(solution.author_id.value + 'author_id');
+                if(solution.author_id.value === props.user.id) {
+                    isSolutions.value = true;
+                } else if((solution.published.value === 1) && (solution.author.id.value === props.user.id)) {
+                    isPublic.value = true;
+                }
+            });
+        }
+
 
         const checkTeam = () => {
             console.log({user_id: user.id, challenge_id: challenge.value.id});
@@ -331,6 +346,7 @@ export default defineComponent({
         };
 
         return {
+            filter,
             edit_offer_id,
             who,
             temp_offer_id,
@@ -347,7 +363,9 @@ export default defineComponent({
             unpublish,
             addSolution,
             solution,
-            inTeam
+            inTeam,
+            isSolutions,
+            isPublic
         };
     }
 });

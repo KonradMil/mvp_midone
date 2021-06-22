@@ -38,36 +38,36 @@ export default {
 name: "WhatsNext",
     props: {
         challenge: Object,
-        user: Object
+        user: Object,
+        isSolution: Boolean,
+        isPublic: Boolean
     },
     setup(props) {
         const title = ref('Następny krok');
         const text = ref('');
         const action = ref({});
         const buttonText = ref('Przejdź');
-        const isSolutions = ref(false);
-        const isPublic = ref(false);
+        // const isSolutions = ref(false);
+        // const isPublic = ref(false);
         watch(() => props.challenge, (first, second) => {
            doMe();
-           console.log('filter is coming first');
-            filter();
         });
 
-        const solutions = computed(() => {
-            return props.challenge.solutions;
-        });
+        // const solutions = computed(() => {
+        //     return props.challenge.solutions;
+        // });
 
-        const filter = () => {
-            console.log(solutions.value + '->  solutions.value');
-            solutions.value.forEach(function (solution) {
-                console.log(solution.author_id.value + 'author_id');
-                if(solution.author_id.value === props.user.id) {
-                    isSolutions.value = true;
-                } else if((solution.published.value === 1) && (solution.author.id.value === props.user.id)) {
-                    isPublic.value = true;
-                }
-            });
-        }
+        // const filter = () => {
+        //     console.log(solutions.value + '->  solutions.value');
+        //     solutions.value.forEach(function (solution) {
+        //         console.log(solution.author_id.value + 'author_id');
+        //         if(solution.author_id.value === props.user.id) {
+        //             isSolutions.value = true;
+        //         } else if((solution.published.value === 1) && (solution.author.id.value === props.user.id)) {
+        //             isPublic.value = true;
+        //         }
+        //     });
+        // }
 
         // const getSolutionRepositories = async () => {
         //     console.log(props.challenge.id);
@@ -118,9 +118,9 @@ name: "WhatsNext",
         });
 
         return {
-            isPublic,
-            isSolutions,
-            solutions,
+            // isPublic,
+            // isSolutions,
+            // solutions,
             title,
             text,
             action,
