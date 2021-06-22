@@ -38,6 +38,7 @@ export default {
 name: "WhatsNext",
     props: {
         challenge: Object,
+        solutions: Array,
         user: Object,
         isSolution: Boolean,
         isPublic: Boolean
