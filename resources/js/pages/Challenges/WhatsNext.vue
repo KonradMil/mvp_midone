@@ -66,7 +66,6 @@ name: "WhatsNext",
                 })
         }
 
-
         const solutions = computed(() => {
             if (props.challenge.solutions !== undefined) {
                 if (props.challenge.solutions.length > 0) {
@@ -147,9 +146,9 @@ name: "WhatsNext",
 
         onMounted(() => {
             // filter();
-            // if(props.user.type == 'integrator') {
-            //     getSolutionRepositories('');
-            // }
+            if(props.user.type == 'integrator') {
+                isOffer();
+            }
             console.log("props");
             console.log(props);
             console.log(props.challenge);

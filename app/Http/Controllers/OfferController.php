@@ -19,9 +19,14 @@ class OfferController extends Controller
         foreach($solutions as $solution) {
             $offers = $solution->offers;
             foreach($offers as $offer){
-                if($offer->installer_id === Auth::user()->id && $offer->status === 0){
+                if($offer->installer_id === Auth::user()->id && $offer->status === 0 && Auth::user()->type=='integrator'){
                     $check = true;
+                } else if(Auth::user()->type == 'investor'){
+                    if($offer->selected == 0){
+                        $check = true;
+                    }
                 }
+
             }
         }
         return response()->json([
