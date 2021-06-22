@@ -9,7 +9,7 @@
     <RightButtons  v-if="loaded" :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>
     <RightPanel  :allowedEdit="allowedEdit" @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
     <div v-if="!loaded" id="loader">
-        <LoadingIcon icon="circles" class="w-8 h-8" />
+        <LoadingIcon icon="grid" class="w-8 h-8" />
     </div>
 
     <div id="help-modal" class="modal" tabindex="-1" aria-hidden="true">
