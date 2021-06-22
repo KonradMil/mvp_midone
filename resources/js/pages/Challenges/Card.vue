@@ -188,12 +188,12 @@ export default defineComponent({
         });
 
         const filter = () => {
-            console.log(challenge.solutions.value + '->  solutions.value');
-            challenge.solutions.value.forEach(function (solution) {
-                console.log(solution.author_id.value + 'author_id');
-                if(solution.author_id.value === props.user.id) {
+            console.log(challenge.value.solutions + '->  solutions.value');
+            challenge.value.solutions.forEach(function (solution) {
+                console.log(solution.value.author_id+ 'author_id');
+                if(solution.value .author_id=== props.user.id) {
                     isSolutions.value = true;
-                } else if((solution.published.value === 1) && (solution.author.id.value === props.user.id)) {
+                } else if((solution.value.published === 1) && (solution.value.author.id === props.user.id)) {
                     isPublic.value = true;
                 }
             });
