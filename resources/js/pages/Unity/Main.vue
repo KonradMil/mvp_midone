@@ -1,14 +1,16 @@
 <template>
-    <TopButtons :allowedEdit="allowedEdit && (challenge.status != 1)" :icons="topIcons"></TopButtons>
-    <LeftButtons :icons="leftIcons" v-if="mode == 'edit' && allowedEdit"></LeftButtons>
+    <TopButtons v-if="loaded" :allowedEdit="allowedEdit && (challenge.status != 1)" :icons="topIcons"></TopButtons>
+    <LeftButtons :icons="leftIcons" v-if="mode == 'edit' && allowedEdit && loaded"></LeftButtons>
     <LeftPanel></LeftPanel>
     <div @contextmenu.prevent="openMenu">
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
-    <BottomPanel  :allowedEdit="allowedEdit" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
-    <RightButtons :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>
+    <BottomPanel  v-if="loaded" :allowedEdit="allowedEdit" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
+    <RightButtons  v-if="loaded" :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>
     <RightPanel  :allowedEdit="allowedEdit" @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
-
+    <div v-if="!loaded" id="loader">
+        <LoadingIcon icon="circles" class="w-8 h-8" />
+    </div>
 
     <div id="help-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl">
@@ -511,7 +513,8 @@ export default {
             lockInput,
             unlockInput,
             modelActiveTab,
-            startTutorial
+            startTutorial,
+            loaded
         }
     }
 }
