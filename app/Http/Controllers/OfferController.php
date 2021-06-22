@@ -10,6 +10,27 @@ use Illuminate\Support\Facades\Auth;
 
 class OfferController extends Controller
 {
+    public function check(Request $request)
+    {
+        $id = $request->input('id');
+        $challenge = Challenge::find($id);
+        $solutions = $challenge->solutions;
+        $check = false;
+        foreach($solutions as $solution) {
+            $offers = $solution->offers;
+            foreach($offers as $offer){
+                if($offer->installer_id === Auth::user()->id && $offer->status === 0){
+                    $check = true;
+                }
+            }
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Usunięto poprawnie',
+            'payload' => $check,
+        ]);
+    }
+
     public function delete(Request $request)
     {
         $id = $request->input('id');

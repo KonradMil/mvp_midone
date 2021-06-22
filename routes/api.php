@@ -94,6 +94,7 @@ Route::post('report/show', [ReportController::class, 'getReport']);
 Route::post('search', [SearchController::class, 'search']);
 
 Route::group(['prefix' => 'offer', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('user/check', [OfferController::class, 'check']);
     Route::post('get', [OfferController::class, 'get']);
     Route::post('delete', [OfferController::class, 'delete']);
     Route::post('save', [OfferController::class, 'save']);

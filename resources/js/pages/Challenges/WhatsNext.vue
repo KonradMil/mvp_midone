@@ -49,10 +49,23 @@ name: "WhatsNext",
         const isPublic = ref(false);
         const isSolutions = ref(false);
         const isSelected = ref(false);
+        const check = ref(false);
 
         watch(() => props.challenge, (first, second) => {
            doMe();
         }, {deep: true});
+
+        const isOffer = async () => {
+            axios.post('/api/offer/user/check', {id: props.challenge.id})
+                .then(response => {
+                    if (response.data.success) {
+                        check.value = response.data.payload;
+                    } else {
+
+                    }
+                })
+        }
+
 
         const solutions = computed(() => {
             if (props.challenge.solutions !== undefined) {
@@ -105,6 +118,9 @@ name: "WhatsNext",
                 }else if(props.challenge.stage === 2 && isSelected.value=== true && isSolutions.value === true) {
                     text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';
                     action.value = {redirect: ''}
+                } else if(props.challenge.stage === 2 && isSolutions.value === true && check.value === true) {
+                    text.value = 'Opublikuj przygotowaną ofertę.';
+                    action.value = {redirect: ''}
                 }
             } else {
                 if(props.challenge.stage === 1 && props.challenge.solutions === 0) {
@@ -142,6 +158,8 @@ name: "WhatsNext",
         });
 
         return {
+            check,
+            isOffer,
             isSelected,
             isPublic,
             isSolutions,
