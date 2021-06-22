@@ -32,65 +32,122 @@
 
 <script>
 import {computed, onMounted, ref, watch} from "vue";
-import GetSolutions from "../../compositions/GetSolutions";
+import GetUserSolutionsChallenge from "../../compositions/GetUserSolutionsChallenge";
 
 export default {
 name: "WhatsNext",
     props: {
         challenge: Object,
-        user: Object
+        user: Object,
+        solutions: Array,
     },
     setup(props) {
         const title = ref('Następny krok');
         const text = ref('');
         const action = ref({});
         const buttonText = ref('Przejdź');
-        const solutions = ref([]);
-        const guard = ref(false);
+        const isPublic = ref(false);
+        const isSolutions = ref(false);
+        const isSelected = ref(false);
+        const check = ref(false);
 
         watch(() => props.challenge, (first, second) => {
            doMe();
-        });
+        }, {deep: true});
 
+        const isOffer = async () => {
+            axios.post('/api/offer/user/check', {id: props.challenge.id})
+                .then(response => {
+                    if (response.data.success) {
+                        check.value = response.data.payload;
+                    } else {
 
-        const getSolutionRepositories = async () => {
-            solutions.value = GetSolutions();
+                    }
+                })
         }
 
+        const solutions = computed(() => {
+            if (props.challenge.solutions !== undefined) {
+                if (props.challenge.solutions.length > 0) {
+                    props.challenge.solutions.forEach((val) => {
+                        if(val.author_id === props.user.id){
+                            isSolutions.value = true;
+                                if(val.status === 1) {
+                                   isPublic.value = true;
+                               } else if(val.selected === 1) {
+                                   isSelected.value = true;
+                                 }
+                        }
+                    });
+                }
+            }
+            return props.challenge.solutions;
+        });
 
+        // const filter = () => {
+        //     console.log(solutions.value + '->  solutions.value');
+        //     solutions.value.forEach(function (solution) {
+        //         console.log(solution.author_id.value + 'author_id');
+        //         if(solution.author_id.value === props.user.id) {
+        //             isSolutions.value = true;
+        //         } else if((solution.published.value === 1) && (solution.author.id.value === props.user.id)) {
+        //             isPublic.value = true;
+        //         }
+        //     });
+        // }
+
+        // const getSolutionRepositories = async () => {
+        //     console.log(props.challenge.id);
+        //     solutions.value = GetUserSolutionsChallenge(props.challenge.id);
+        // }
 
         const doMe = () => {
-            if(props.user.type == 'integrator') {
-                if(props.challenge.stage == 1) {
+            console.log('filter is coming');
+            if(props.user.type === 'integrator') {
+                if(isSolutions.value === false && props.challenge.stage === 1) {
+                    console.log('HERE');
                     text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
                     action.value = {redirect: ''}
-                } else if(guard !== true && props.challenge.stage < 2) {
+                } else if(props.challenge.stage === 1 && isPublic.value===false && isSolutions.value === true) {
                     text.value = 'Po opublikowaniu rozwiązania będzie ono widoczne dla Inwestora.';
                     action.value = {redirect: ''}
-                }else if(props.challenge.stage == 2) {
+                }else if(props.challenge.stage === 1 && isPublic.value === true && isSolutions.value === true) {
+                    text.value = 'Jedno z twoich rozwiązań jest opublikowane! Jeśli inwestor je zaakceptuje będziesz mógł złożyć ofertę.';
+                    action.value = {redirect: ''}
+                }else if(props.challenge.stage === 2 && isSelected.value=== true && isSolutions.value === true) {
                     text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';
+                    action.value = {redirect: ''}
+                } else if(props.challenge.stage === 2 && isSolutions.value === true && check.value === true) {
+                    text.value = 'Opublikuj przygotowaną ofertę.';
                     action.value = {redirect: ''}
                 }
             } else {
-                if(props.challenge.stage == 1) {
-                    text.value = 'Ten etap polega na zebraniu ofert robotyzacji opisanego stanowiska. Oczekuj na nowe rozwiązania.';
+                if(props.challenge.stage === 1 && props.challenge.solutions === 0) {
+                    text.value = 'Oczekuj na nowe rozwiązania.';
                     buttonText.value = '';
                     action.value = {redirect: ''}
-                } else if(props.challenge.stage == 2) {
+                } else if(props.challenge.stage === 2 && props.challenge.solutions.offers.length === 0) {
                     text.value = 'Ten etap polega na zebraniu ofert finansowych do opisanego stanowiska. Oczekuj na nowe oferty.';
                     buttonText.value = '';
                     action.value = {redirect: ''}
-                } else if(props.challenge.stage == 0) {
+                } else if(props.challenge.stage === 0) {
                     text.value = 'Uzupełnij wyzwanie o zdjęcia i kluczowe informacje związane ze stanowiskiem i Twoimi oczekiwaniami, a następnie opublikuj swoje wyzwanie. \n' +
                         'Im bardziej szczegółowy opis wyzwania, tym bardziej sprecyzowane koncepcje rozwiązań zostaną dla niego przygotowane.';
+                    action.value = {redirect: ''}
+                } else if(props.challenge.solutions.length > 0) {
+                    text.value = 'Zaakceptuj rozwiązania, aby otrzymać oferty.';
+                    action.value = {redirect: ''}
+                } else if(check.value === true){
+                    text.value = 'Zaakceptuj ofertę, która spełnia wszystkie Twoje oczekiwania.';
                     action.value = {redirect: ''}
                 }
             }
         }
 
         onMounted(() => {
+            // filter();
             if(props.user.type == 'integrator') {
-                getSolutionRepositories('');
+                isOffer();
             }
             console.log("props");
             console.log(props);
@@ -100,13 +157,16 @@ name: "WhatsNext",
         });
 
         return {
-            guard,
+            check,
+            isOffer,
+            isSelected,
+            isPublic,
+            isSolutions,
             solutions,
             title,
             text,
             action,
             buttonText,
-            getSolutionRepositories
         }
     }
 }

@@ -132,7 +132,7 @@ class ChallengeController extends Controller
                         foreach ($solution->teams as $team) {
                             foreach (Auth::user()->teams as $t) {
                                 if ($t->id == $team->id) {
-//                                    $query->where('stage', '=', 3)->where('status', '=', 1);
+                                    $query->where('stage', '=', 3)->where('status', '=', 1);
                                     $check = true;
                                 }
                             }
@@ -193,13 +193,13 @@ class ChallengeController extends Controller
                     $challenge->followed = false;
                 }
             }
-//            if ($check === true) {
+            if ($check === true) {
                 return response()->json([
                     'success' => true,
                     'message' => 'Pobrano poprawnie.',
                     'payload' => $merged->all()
                 ]);
-//            }
+            }
         } else {
             return response()->json([
                 'success' => true,
@@ -592,7 +592,7 @@ class ChallengeController extends Controller
                 'solutions', 'author', 'technicalDetails',
                 'financial_before', 'teams', 'files', 'teams.users',
                 'teams.users.companies', 'solutions.comments', 'solutions.comments.commentator', 'solutions.teams',
-                'solutions.teams.users', 'solutions.teams.users.companies'
+                'solutions.teams.users', 'solutions.teams.users.companies' , 'solutions.offers'
             )->find($request->id);
 
         } else {

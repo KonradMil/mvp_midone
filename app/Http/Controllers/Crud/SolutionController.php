@@ -22,6 +22,27 @@ use Psr\Log\NullLogger;
 
 class SolutionController extends Controller
 {
+    public function getUserSolutionsProject(Request $request)
+    {
+        $id = $request->input('id');
+        $solutions = Solution::where('author_id', '=', Auth::user()->id)->where('challenge_id', '=', $id)->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano rozwiązania poprawnie.',
+            'payload' => $solutions
+        ]);
+    }
+
+    public function getUserSolutionsChallenge(Challenge $challenge)
+    {
+        $solutions = $challenge->solutions->where('author_id', '=', Auth::user()->id);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano rozwiązania poprawnie.',
+            'payload' => $solutions
+        ]);
+    }
     public function saveSolutionTeams(Request $request, Solution $solution)
     {
         foreach ($request->teams as $team_id) {

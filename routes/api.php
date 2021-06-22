@@ -94,6 +94,7 @@ Route::post('report/show', [ReportController::class, 'getReport']);
 Route::post('search', [SearchController::class, 'search']);
 
 Route::group(['prefix' => 'offer', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('user/check', [OfferController::class, 'check']);
     Route::post('get', [OfferController::class, 'get']);
     Route::post('delete', [OfferController::class, 'delete']);
     Route::post('save', [OfferController::class, 'save']);
@@ -122,6 +123,8 @@ Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function 
     Route::post('create', [SolutionController::class, 'create']);
     Route::post('save/financials/{financial}', [SolutionController::class, 'saveSolutionFinancials']);
     Route::post('user/save/teams/{solution}', [SolutionController::class, 'saveSolutionTeams']);
+    Route::post('user/get/solutions/challenge/{challenge}', [SolutionController::class, 'getUserSolutionsChallenge']);
+    Route::post('user/get/solutions/project', [SolutionController::class, 'getUserSolutionsProject']);
     Route::post('save', [SolutionController::class, 'saveSolution']);
     Route::post('user/like', [SolutionController::class, 'likeSolution']);
     Route::post('user/dislike', [SolutionController::class, 'dislikeSolution']);

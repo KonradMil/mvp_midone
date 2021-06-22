@@ -102,7 +102,7 @@
                         </button>
                     </div>
                 </div>
-                <WhatsNext :user="user" :challenge="challenge"></WhatsNext>
+                <WhatsNext :user="user" :challenge="challenge" :solutions="challenge.solutions"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
             <BasicInformationPanel :challenge="challenge" :inTeam="inTeam" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
@@ -166,6 +166,8 @@ export default defineComponent({
         const types = require("../../json/types.json");
         const who = ref('challenge');
         const inTeam = ref(false);
+        const isSolutions = ref(false);
+        const isPublic = ref(false);
 
         emitter.on('selectedSolution', e => {
             selected_solution_id.value = e.id;
@@ -184,6 +186,18 @@ export default defineComponent({
         emitter.on('updateOffers', e => {
             activeTab.value = 'all-offers';
         });
+
+        const filter = () => {
+            console.log(challenge.value.solutions + '->  solutions.value');
+            challenge.value.solutions.forEach(function (solution) {
+                console.log(solution.author_id + 'author_id');
+                if(solution.author_id=== user.id) {
+                    isSolutions.value = true;
+                } else if((solution.published === 1) && (solution.author.id === user.id)) {
+                    isPublic.value = true;
+                }
+            });
+        }
 
         const checkTeam = () => {
             console.log({user_id: user.id, challenge_id: challenge.value.id});
@@ -232,6 +246,7 @@ export default defineComponent({
                         console.log(response.data.payload);
                         challenge.value = response.data.payload;
                         checkTeam();
+                        filter();
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -331,6 +346,7 @@ export default defineComponent({
         };
 
         return {
+            filter,
             edit_offer_id,
             who,
             temp_offer_id,
@@ -347,7 +363,9 @@ export default defineComponent({
             unpublish,
             addSolution,
             solution,
-            inTeam
+            inTeam,
+            isSolutions,
+            isPublic
         };
     }
 });
