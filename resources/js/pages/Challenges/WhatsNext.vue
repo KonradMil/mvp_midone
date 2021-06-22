@@ -59,7 +59,7 @@ name: "WhatsNext",
                     props.challenge.solutions.forEach((val) => {
                         if(val.author_id === props.user.id){
                             isSolutions.value = true;
-                                if(val.published === 1) {
+                                if(val.status === 1) {
                                    isPublic.value = true;
                                } else if(val.selected === 1) {
                                    isSelected.value = true;
