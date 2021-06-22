@@ -13,7 +13,7 @@
                 <button
                     class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
                     aria-expanded="false"
-                    @click.prevent="$router.push({path: '/challenges'})">
+                    @click.prevent="$router.push({path: '/challenges/card/' + challenge_id})">
                     Powrót
                 </button>
                 <button

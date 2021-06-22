@@ -102,46 +102,51 @@ name: "WhatsNext",
         // }
 
         const doMe = () => {
-            console.log('filter is coming');
-            if(props.user.type === 'integrator') {
-                if(isSolutions.value === false && props.challenge.stage === 1) {
-                    console.log('HERE');
-                    text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
-                    action.value = {redirect: ''}
-                } else if(props.challenge.stage === 1 && isPublic.value===false && isSolutions.value === true) {
-                    text.value = 'Po opublikowaniu rozwiązania będzie ono widoczne dla Inwestora.';
-                    action.value = {redirect: ''}
-                }else if(props.challenge.stage === 1 && isPublic.value === true && isSolutions.value === true) {
-                    text.value = 'Jedno z twoich rozwiązań jest opublikowane! Jeśli inwestor je zaakceptuje będziesz mógł złożyć ofertę.';
-                    action.value = {redirect: ''}
-                }else if(props.challenge.stage === 2 && isSelected.value=== true && isSolutions.value === true) {
-                    text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';
-                    action.value = {redirect: ''}
-                } else if(props.challenge.stage === 2 && isSolutions.value === true && check.value === true) {
-                    text.value = 'Opublikuj przygotowaną ofertę.';
-                    action.value = {redirect: ''}
+            try {
+                console.log('filter is coming');
+                if(props.user.type === 'integrator') {
+                    if(isSolutions.value === false && props.challenge.stage === 1) {
+                        console.log('HERE');
+                        text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
+                        action.value = {redirect: ''}
+                    } else if(props.challenge.stage === 1 && isPublic.value===false && isSolutions.value === true) {
+                        text.value = 'Po opublikowaniu rozwiązania będzie ono widoczne dla Inwestora.';
+                        action.value = {redirect: ''}
+                    }else if(props.challenge.stage === 1 && isPublic.value === true && isSolutions.value === true) {
+                        text.value = 'Jedno z twoich rozwiązań jest opublikowane! Jeśli inwestor je zaakceptuje będziesz mógł złożyć ofertę.';
+                        action.value = {redirect: ''}
+                    }else if(props.challenge.stage === 2 && isSelected.value=== true && isSolutions.value === true) {
+                        text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';
+                        action.value = {redirect: ''}
+                    } else if(props.challenge.stage === 2 && isSolutions.value === true && check.value === true) {
+                        text.value = 'Opublikuj przygotowaną ofertę.';
+                        action.value = {redirect: ''}
+                    }
+                } else {
+                    if(props.challenge.stage === 1 && props.challenge.solutions === 0) {
+                        text.value = 'Oczekuj na nowe rozwiązania.';
+                        buttonText.value = '';
+                        action.value = {redirect: ''}
+                    } else if(props.challenge.stage === 2 && props.challenge.solutions.offers.length === 0) {
+                        text.value = 'Ten etap polega na zebraniu ofert finansowych do opisanego stanowiska. Oczekuj na nowe oferty.';
+                        buttonText.value = '';
+                        action.value = {redirect: ''}
+                    } else if(props.challenge.stage === 0) {
+                        text.value = 'Uzupełnij wyzwanie o zdjęcia i kluczowe informacje związane ze stanowiskiem i Twoimi oczekiwaniami, a następnie opublikuj swoje wyzwanie. \n' +
+                            'Im bardziej szczegółowy opis wyzwania, tym bardziej sprecyzowane koncepcje rozwiązań zostaną dla niego przygotowane.';
+                        action.value = {redirect: ''}
+                    } else if(props.challenge.solutions.length > 0) {
+                        text.value = 'Zaakceptuj rozwiązania, aby otrzymać oferty.';
+                        action.value = {redirect: ''}
+                    } else if(check.value === true){
+                        text.value = 'Zaakceptuj ofertę, która spełnia wszystkie Twoje oczekiwania.';
+                        action.value = {redirect: ''}
+                    }
                 }
-            } else {
-                if(props.challenge.stage === 1 && props.challenge.solutions === 0) {
-                    text.value = 'Oczekuj na nowe rozwiązania.';
-                    buttonText.value = '';
-                    action.value = {redirect: ''}
-                } else if(props.challenge.stage === 2 && props.challenge.solutions.offers.length === 0) {
-                    text.value = 'Ten etap polega na zebraniu ofert finansowych do opisanego stanowiska. Oczekuj na nowe oferty.';
-                    buttonText.value = '';
-                    action.value = {redirect: ''}
-                } else if(props.challenge.stage === 0) {
-                    text.value = 'Uzupełnij wyzwanie o zdjęcia i kluczowe informacje związane ze stanowiskiem i Twoimi oczekiwaniami, a następnie opublikuj swoje wyzwanie. \n' +
-                        'Im bardziej szczegółowy opis wyzwania, tym bardziej sprecyzowane koncepcje rozwiązań zostaną dla niego przygotowane.';
-                    action.value = {redirect: ''}
-                } else if(props.challenge.solutions.length > 0) {
-                    text.value = 'Zaakceptuj rozwiązania, aby otrzymać oferty.';
-                    action.value = {redirect: ''}
-                } else if(check.value === true){
-                    text.value = 'Zaakceptuj ofertę, która spełnia wszystkie Twoje oczekiwania.';
-                    action.value = {redirect: ''}
-                }
+            } catch (e) {
+
             }
+
         }
 
         onMounted(() => {
