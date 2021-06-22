@@ -62,7 +62,7 @@ name: "WhatsNext",
 
         const filter = () => {
             console.log(solutions.value + '->  solutions.value');
-            solutions.forEach(function (solution) {
+            solutions.value.forEach(function (solution) {
                 console.log(solution.author_id.value + 'author_id');
                 if(solution.author_id.value === props.user.id) {
                     isSolutions.value = true;
