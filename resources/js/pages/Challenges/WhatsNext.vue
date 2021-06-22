@@ -45,18 +45,21 @@ name: "WhatsNext",
         const text = ref('');
         const action = ref({});
         const buttonText = ref('Przejdź');
-        const solutions = ref([]);
         const guard = ref(false);
 
         watch(() => props.challenge, (first, second) => {
            doMe();
         });
 
+        const solutions = computed(() => {
+            return props.challenge.solutions;
+        });
 
-        const getSolutionRepositories = async () => {
-            console.log(props.challenge.id);
-            solutions.value = GetUserSolutionsChallenge(props.challenge.id);
-        }
+
+        // const getSolutionRepositories = async () => {
+        //     console.log(props.challenge.id);
+        //     solutions.value = GetUserSolutionsChallenge(props.challenge.id);
+        // }
 
 
 
@@ -91,9 +94,9 @@ name: "WhatsNext",
         }
 
         onMounted(() => {
-            if(props.user.type == 'integrator') {
-                getSolutionRepositories('');
-            }
+            // if(props.user.type == 'integrator') {
+            //     getSolutionRepositories('');
+            // }
             console.log("props");
             console.log(props);
             console.log(props.challenge);
@@ -108,7 +111,7 @@ name: "WhatsNext",
             text,
             action,
             buttonText,
-            getSolutionRepositories
+            // getSolutionRepositories
         }
     }
 }
