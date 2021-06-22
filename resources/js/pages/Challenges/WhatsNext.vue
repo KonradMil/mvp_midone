@@ -32,7 +32,7 @@
 
 <script>
 import {computed, onMounted, ref, watch} from "vue";
-import GetSolutions from "../../compositions/GetSolutions";
+import GetUserSolutionsChallenge from "../../compositions/GetUserSolutionsChallenge";
 
 export default {
 name: "WhatsNext",
@@ -54,7 +54,7 @@ name: "WhatsNext",
 
 
         const getSolutionRepositories = async () => {
-            solutions.value = GetSolutions();
+            solutions.value = GetUserSolutionsChallenge(props.challenge.id);
         }
 
 
