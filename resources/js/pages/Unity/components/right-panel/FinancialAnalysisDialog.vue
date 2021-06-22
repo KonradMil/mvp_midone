@@ -58,7 +58,7 @@
                         <tr class="hover:bg-gray-200">
                             <td class="border">
                                 {{(((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100)))}}
-                                {{challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60}}
+                                {{ (challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60) + (challenge.financial_before.weekend_shift * 50 * 60)}}
                                 <input type="number" :value="((((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100))) / (challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60))" class="form-control finclass" placeholder="0" disabled="disabled"/>
                             </td>
                             <td class="border">
