@@ -102,7 +102,7 @@
                         </button>
                     </div>
                 </div>
-                <WhatsNext :user="user" :challenge="challenge" :offers="challenge.solutions"></WhatsNext>
+                <WhatsNext :user="user" :challenge="challenge" :offers="challenge.solutions.offers"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
             <BasicInformationPanel :challenge="challenge" :inTeam="inTeam" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
@@ -154,6 +154,7 @@ export default defineComponent({
         const toast = useToast();
         const announcementRef = ref();
         const newProjectsRef = ref();
+        const offers = ref([]);
         const challenge = ref({});
         const solutions = ref({});
         const solution = ref({});
@@ -245,6 +246,7 @@ export default defineComponent({
                     if (response.data.success) {
                         console.log(response.data.payload);
                         challenge.value = response.data.payload;
+                        offers.value = challenge.value.solutions.offers;
                         checkTeam();
                         filter();
                     } else {
@@ -346,6 +348,7 @@ export default defineComponent({
         };
 
         return {
+            offers,
             filter,
             edit_offer_id,
             who,
