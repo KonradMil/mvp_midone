@@ -128,15 +128,20 @@ class ChallengeController extends Controller
                     $offer = Offer::find($challenge->selected_offer_id);
                     if ($offer != NULL) {
                         $solution = Solution::find($offer->solution_id);
-
-                        foreach ($solution->teams as $team) {
-                            foreach (Auth::user()->teams as $t) {
-                                if ($t->id == $team->id) {
-                                    $query->where('stage', '=', 3)->where('status', '=', 1);
-                                    $check = true;
+                        if($solution->author_id == Auth::user()->id) {
+                            $query->where('stage', '=', 3)->where('status', '=', 1);
+                            $check = true;
+                        } else {
+                            foreach ($solution->teams as $team) {
+                                foreach (Auth::user()->teams as $t) {
+                                    if ($t->id == $team->id) {
+                                        $query->where('stage', '=', 3)->where('status', '=', 1);
+                                        $check = true;
+                                    }
                                 }
                             }
                         }
+
                     }
                 }
             } else if (Auth::user()->type == 'investor') {
