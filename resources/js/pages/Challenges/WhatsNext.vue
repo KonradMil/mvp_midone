@@ -49,7 +49,6 @@ name: "WhatsNext",
         const isPublic = ref(false);
         watch(() => props.challenge, (first, second) => {
            doMe();
-           filter();
         });
 
         const solutions = computed(() => {
@@ -71,10 +70,8 @@ name: "WhatsNext",
         //     solutions.value = GetUserSolutionsChallenge(props.challenge.id);
         // }
 
-
-
-
         const doMe = () => {
+            filter();
             if(props.user.type == 'integrator') {
                 if(props.challenge.stage == 1) {
                     text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
