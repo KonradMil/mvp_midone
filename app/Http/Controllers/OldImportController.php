@@ -54,15 +54,15 @@ class OldImportController extends Controller
 //            }
 //        }
 
-//        $oldTeam = OldTeam::get();
-//
-//        foreach ($oldTeam as $team) {
-//            foreach ($team->users as $user) {
-//                $nt = Team::where('name', '=', $team->name)->first();
-//                $nu = User::where('email', '=', $user->email)->first();
-//                $nu->teams()->attach($nt);
-//            }
-//        }
+        $oldTeam = OldTeam::get();
+
+        foreach ($oldTeam as $team) {
+            foreach ($team->users as $user) {
+                $nt = Team::where('name', '=', $team->name)->first();
+                $nu = User::where('email', '=', $user->email)->first();
+                $nu->teams()->sync($nt);
+            }
+        }
 
 //        $oldChallenges = OldChallenge::with('teams')->get();
 ////        dd($oldChallenges);
@@ -134,26 +134,26 @@ class OldImportController extends Controller
 //        }
 
 
-        $oldQ = OldQuestion::get();
-
-        foreach ($oldQ as $q) {
-            try {
-                $ou = OldUser::where('id', '=', $q->author_id)->first();
-                $oc = OldChallenge::where('id', '=', $q->challenge_id)->first();
-
-                $nu = User::where('email', '=', $ou->email)->first();
-                $nc = Challenge::where('name', '=', $oc->name)->first();
-
-                $nq = new Question();
-                $nq->question = $q->question;
-                $nq->answer = $q->answer;
-                $nq->author_id = $nu->id;
-                $nq->challenge_id = $nc->id;
-                $nq->save();
-            } catch (\Exception $e) {
-
-            }
-
-        }
+//        $oldQ = OldQuestion::get();
+//
+//        foreach ($oldQ as $q) {
+//            try {
+//                $ou = OldUser::where('id', '=', $q->author_id)->first();
+//                $oc = OldChallenge::where('id', '=', $q->challenge_id)->first();
+//
+//                $nu = User::where('email', '=', $ou->email)->first();
+//                $nc = Challenge::where('name', '=', $oc->name)->first();
+//
+//                $nq = new Question();
+//                $nq->question = $q->question;
+//                $nq->answer = $q->answer;
+//                $nq->author_id = $nu->id;
+//                $nq->challenge_id = $nc->id;
+//                $nq->save();
+//            } catch (\Exception $e) {
+//
+//            }
+//
+//        }
     }
 }
