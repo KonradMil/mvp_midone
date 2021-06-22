@@ -56,6 +56,8 @@ name: "WhatsNext",
         });
 
         const filter = () => {
+            console.log(solutions.value + '->  solutions.value');
+            console.log(solutions.author_id.value + 'author_id');
             solutions.value.forEach(function (solution) {
                 if(solution.author_id.value === props.user.id) {
                     isSolutions.value = true;
