@@ -38,10 +38,7 @@ export default {
 name: "WhatsNext",
     props: {
         challenge: Object,
-        solutions: Array,
         user: Object,
-        isSolution: Boolean,
-        isPublic: Boolean
     },
     setup(props) {
         const title = ref('Następny krok');
@@ -50,6 +47,7 @@ name: "WhatsNext",
         const buttonText = ref('Przejdź');
         const isPublic = ref(false);
         const isSolutions = ref(false);
+        const isSelected = ref(false);
 
         watch(() => props.challenge, (first, second) => {
            doMe();
@@ -61,8 +59,11 @@ name: "WhatsNext",
                     props.challenge.solutions.forEach((val) => {
                         if(val.author_id === props.user.id){
                             isSolutions.value = true;
-                        } else if(val.published === 1) {
-                            isPublic.value = true;
+                                if(val.published === 1) {
+                                   isPublic.value = true;
+                               } else if(val.selected === 1) {
+                                   isSelected.value = true;
+                                 }
                         }
                     });
                 }
@@ -89,28 +90,31 @@ name: "WhatsNext",
 
         const doMe = () => {
             console.log('filter is coming');
-            if(props.user.type == 'integrator') {
-                if(props.solutions.length == 0 && props.challenge.stage == 1) {
+            if(props.user.type === 'integrator') {
+                if(props.solutions.length === 0 && props.challenge.stage === 1) {
                     console.log('HERE');
                     text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
                     action.value = {redirect: ''}
-                } else if(props.solutions.length > 0 && props.challenge.stage == 1) {
+                } else if(props.solutions.length > 0 && props.challenge.stage === 1 && isPublic.value===false) {
                     text.value = 'Po opublikowaniu rozwiązania będzie ono widoczne dla Inwestora.';
                     action.value = {redirect: ''}
-                }else if(props.challenge.stage == 2) {
+                }else if(props.challenge.stage === 1 && isPublic.value === true) {
+                    text.value = 'Jedno z twoich rozwiązań jest opublikowane! Jeśli inwestor je zaakceptuje będziesz mógł złożyć ofertę.';
+                    action.value = {redirect: ''}
+                }else if(props.challenge.stage === 2 && isSelected=== true) {
                     text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';
                     action.value = {redirect: ''}
                 }
             } else {
-                if(props.challenge.stage == 1) {
-                    text.value = 'Ten etap polega na zebraniu ofert robotyzacji opisanego stanowiska. Oczekuj na nowe rozwiązania.';
+                if(props.challenge.stage === 1) {
+                    text.value = 'Oczekuj na nowe rozwiązania.';
                     buttonText.value = '';
                     action.value = {redirect: ''}
-                } else if(props.challenge.stage == 2) {
+                } else if(props.challenge.stage === 2) {
                     text.value = 'Ten etap polega na zebraniu ofert finansowych do opisanego stanowiska. Oczekuj na nowe oferty.';
                     buttonText.value = '';
                     action.value = {redirect: ''}
-                } else if(props.challenge.stage == 0) {
+                } else if(props.challenge.stage === 0) {
                     text.value = 'Uzupełnij wyzwanie o zdjęcia i kluczowe informacje związane ze stanowiskiem i Twoimi oczekiwaniami, a następnie opublikuj swoje wyzwanie. \n' +
                         'Im bardziej szczegółowy opis wyzwania, tym bardziej sprecyzowane koncepcje rozwiązań zostaną dla niego przygotowane.';
                     action.value = {redirect: ''}
@@ -131,7 +135,7 @@ name: "WhatsNext",
         });
 
         return {
-            // filter,
+            isSelected,
             isPublic,
             isSolutions,
             solutions,
@@ -139,7 +143,6 @@ name: "WhatsNext",
             text,
             action,
             buttonText,
-            // getSolutionRepositories
         }
     }
 }

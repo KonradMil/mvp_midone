@@ -102,7 +102,7 @@
                         </button>
                     </div>
                 </div>
-                <WhatsNext :user="user" :challenge="challenge" :isPublic="isPublic" :isSolutions="isSolutions" :solutions="challenge.solutions"></WhatsNext>
+                <WhatsNext :user="user" :challenge="challenge"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
             <BasicInformationPanel :challenge="challenge" :inTeam="inTeam" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
