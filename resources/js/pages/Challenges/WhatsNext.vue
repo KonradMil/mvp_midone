@@ -55,9 +55,9 @@ name: "WhatsNext",
            doMe();
         });
 
-        // const solutions = computed(() => {
-        //     return props.challenge.solutions;
-        // });
+        const solutions = computed(() => {
+            return props.solutions;
+        });
 
         // const filter = () => {
         //     console.log(solutions.value + '->  solutions.value');
@@ -121,7 +121,7 @@ name: "WhatsNext",
         return {
             // isPublic,
             // isSolutions,
-            // solutions,
+            solutions,
             title,
             text,
             action,
