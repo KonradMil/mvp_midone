@@ -16,7 +16,7 @@ class DashboardController extends Controller
         $uniqueLogs = $logs->unique('description');
         $uniqueLogs->values()->all();
         foreach ($uniqueLogs as $log) {
-            if($log->subject == 'App\Models\Solutions\Solution') {
+            if($log->subject_type == 'App\Models\Solutions\Solution') {
                 $solution = Solution::find($log->subject->id);
                 $challenge = Challenge::find($solution->challenge_id);
                 $log->subject_id = $challenge->id;
