@@ -240,7 +240,7 @@ export default {
             })
         );
 
-        const trigger = (capex, capitalCost, timeframe) => {
+        function trigger (obj) {
             npvFunction();
         }
 
