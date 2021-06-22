@@ -39,7 +39,7 @@ name: "WhatsNext",
     props: {
         challenge: Object,
         user: Object,
-        offers: Array,
+        solutions: Array,
     },
     setup(props) {
         const title = ref('Następny krok');
