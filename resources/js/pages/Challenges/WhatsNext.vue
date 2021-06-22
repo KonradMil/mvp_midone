@@ -57,20 +57,31 @@ name: "WhatsNext",
         });
 
         const solutions = computed(() => {
+            if (props.challenge.solutions !== undefined) {
+                if (props.challenge.solutions.length > 0) {
+                    props.challenge.solutions.forEach((val) => {
+                        if(val.author_id === props.user.id){
+                            isSolutions.value = true;
+                        } else if(val.published === 1) {
+                            isPublic.value = true;
+                        }
+                    });
+                }
+            }
             return props.challenge.solutions;
         });
 
-        const filter = () => {
-            console.log(solutions.value + '->  solutions.value');
-            solutions.value.forEach(function (solution) {
-                console.log(solution.author_id.value + 'author_id');
-                if(solution.author_id.value === props.user.id) {
-                    isSolutions.value = true;
-                } else if((solution.published.value === 1) && (solution.author.id.value === props.user.id)) {
-                    isPublic.value = true;
-                }
-            });
-        }
+        // const filter = () => {
+        //     console.log(solutions.value + '->  solutions.value');
+        //     solutions.value.forEach(function (solution) {
+        //         console.log(solution.author_id.value + 'author_id');
+        //         if(solution.author_id.value === props.user.id) {
+        //             isSolutions.value = true;
+        //         } else if((solution.published.value === 1) && (solution.author.id.value === props.user.id)) {
+        //             isPublic.value = true;
+        //         }
+        //     });
+        // }
 
         // const getSolutionRepositories = async () => {
         //     console.log(props.challenge.id);
@@ -109,7 +120,7 @@ name: "WhatsNext",
         }
 
         onMounted(() => {
-            filter();
+            // filter();
             // if(props.user.type == 'integrator') {
             //     getSolutionRepositories('');
             // }
@@ -121,7 +132,7 @@ name: "WhatsNext",
         });
 
         return {
-            filter,
+            // filter,
             isPublic,
             isSolutions,
             solutions,
