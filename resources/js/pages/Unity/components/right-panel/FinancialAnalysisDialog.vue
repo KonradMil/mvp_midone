@@ -210,7 +210,7 @@
 </template>
 
 <script>
-import {onMounted, ref, watchEffect} from "vue";
+import {onMounted, ref, watch, watchEffect} from "vue";
 
 export default {
     name: "FinancialAnalysisDialog",
@@ -232,19 +232,14 @@ export default {
             getChallenge();
         });
 
-        watchEffect(() =>
-            trigger({
-                capex: capex.value,
-                capitalCost: capitalCost.value,
-                timeframe: timeframe.value,
-            })
-        );
 
-        function trigger (obj) {
+        watch([capitalCost, capex, timeframe], (newValues, prevValues) => {
             npvFunction();
-        }
+        })
 
-        function npvFunction() {
+
+
+        const npvFunction = () =>  {
             const cashFlow = [];
             const wacc = [];
             const dcf = [];
