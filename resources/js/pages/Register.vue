@@ -70,11 +70,17 @@
                                                    type="radio"
                                                    name="horizontal_radio_button"
                                                    value="investor"/>
+                                        <Tippy
+                                            tag="a"
+                                            href=""
+                                            class="dark:text-gray-300 text-gray-600"
+                                            content="Przedsiębiorca zamierzający zautomatyzować stanowisko przemysłowe w zakładzie produkcyjnym.">
                                             <label class="form-check-label"
                                                    for="radio-switch-5"
-                                                   title="Przedsiębiorca zamierzający zautomatyzować stanowisko przemysłowe w zakładzie produkcyjnym.">
+                                                   title="">
                                                 {{$t('common.investorem')}}
                                             </label>
+                                        </Tippy>
                                         </div>
                                 </div>
                                 <template v-if="validate.type.$error">
