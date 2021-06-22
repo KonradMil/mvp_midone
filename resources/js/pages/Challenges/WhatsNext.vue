@@ -45,8 +45,8 @@ name: "WhatsNext",
         const text = ref('');
         const action = ref({});
         const buttonText = ref('Przejdź');
-        const guard = ref(false);
-
+        const isSolutions = ref(false);
+        const isPublic = ref(false);
         watch(() => props.challenge, (first, second) => {
            doMe();
         });
@@ -55,6 +55,13 @@ name: "WhatsNext",
             return props.challenge.solutions;
         });
 
+        solutions.forEach(function (solution) {
+            if(solution.author_id.value === props.user.id) {
+                isSolutions.value = true;
+            } else if((solution.published.value === 1) && (solution.author.id.value === props.user.id)) {
+                isPublic.value = true;
+            }
+        });
 
         // const getSolutionRepositories = async () => {
         //     console.log(props.challenge.id);
@@ -105,7 +112,8 @@ name: "WhatsNext",
         });
 
         return {
-            guard,
+            isPublic,
+            isSolutions,
             solutions,
             title,
             text,
