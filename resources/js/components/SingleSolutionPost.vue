@@ -51,9 +51,9 @@
                     href=""
                     class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 mr-2"
                     content="Po zaakceptowaniu oferty staje się ona wiążąca dla obu stron.">
-                    <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1">Akceptuj rozwiązanie</button>
+                    <button class="btn btn-primary shadow-md mr-2" title="Po zaakceptowaniu oferty staje się ona wiążąca dla obu stron." @click="acceptSolution" v-if="solution.selected != 1">Akceptuj rozwiązanie</button>
                 </Tippy>
-                <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1">Odrzuć rozwiązanie</button>
+                <button class="btn btn-primary shadowb-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1">Odrzuć rozwiązanie</button>
             </div>
             <div class="mt-2" v-if="canEdit || inTeam">
                 <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: '/studio/solution/' + solution.id});" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1)">Edytuj</button>
