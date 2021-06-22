@@ -247,6 +247,7 @@ export default defineComponent({
                         console.log(response.data.payload);
                         challenge.value = response.data.payload;
                         checkTeam();
+                        filter();
                     } else {
                         // toast.error(response.data.message);
                     }
