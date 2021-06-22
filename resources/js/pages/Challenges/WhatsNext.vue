@@ -76,7 +76,6 @@ name: "WhatsNext",
 
         const doMe = () => {
             console.log('filter is coming');
-            filter();
             if(props.user.type == 'integrator') {
                 if(props.challenge.stage == 1) {
                     console.log('HERE');
