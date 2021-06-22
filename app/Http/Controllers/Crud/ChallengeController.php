@@ -121,6 +121,7 @@ class ChallengeController extends Controller
         $query = Challenge::query();
         $query->where('stage', '=', 3)->where('status', '=', 1);
         $challengesProject = Challenge::where('stage', '=', 3)->where('status', '=', 1)->get();
+        $ar = [];
         if ($challengesProject != NULL) {
             $check = false;
             if (Auth::user()->type == 'integrator') {
@@ -131,12 +132,14 @@ class ChallengeController extends Controller
                         if($solution->author_id == Auth::user()->id) {
                             $query->where('stage', '=', 3)->where('status', '=', 1);
                             $check = true;
+                            array_push($ar, $challenge->id);
                         } else {
                             foreach ($solution->teams as $team) {
                                 foreach (Auth::user()->teams as $t) {
                                     if ($t->id == $team->id) {
                                         $query->where('stage', '=', 3)->where('status', '=', 1);
                                         $check = true;
+                                        array_push($ar, $challenge->id);
                                     }
                                 }
                             }
@@ -151,6 +154,7 @@ class ChallengeController extends Controller
                             if ($t->id == $team->id) {
                                 $query->where('author_id', '=', Auth::user()->id)->where('stage', '=', 3);
                                 $check = true;
+                                array_push($ar, $challenge->id);
                             }
                         }
                     }
@@ -165,7 +169,7 @@ class ChallengeController extends Controller
                 $query->where('favourite', '=', 1);
             }
 
-            $challenges = $query->with(['comments.commentator', 'technicalDetails', 'financial_before'])->get();
+            $challenges = $query->with(['comments.commentator', 'technicalDetails', 'financial_before'])->whereIn('id', $ar)->get();
 
             $ars = [];
 
