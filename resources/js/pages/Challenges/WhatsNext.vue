@@ -57,12 +57,12 @@ name: "WhatsNext",
         });
 
         const solutions = computed(() => {
-            return props.solutions;
+            return props.challenge.solutions;
         });
 
         const filter = () => {
             console.log(solutions.value + '->  solutions.value');
-            solutions.value.forEach(function (solution) {
+            solutions.forEach(function (solution) {
                 console.log(solution.author_id.value + 'author_id');
                 if(solution.author_id.value === props.user.id) {
                     isSolutions.value = true;
