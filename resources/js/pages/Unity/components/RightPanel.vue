@@ -29,7 +29,7 @@
 <!--                    <p v-if="(content == 'teams' && allowedEdit && (user_teams.length > 0))">-->
 <!--                        Nie możesz edytować zespołów.-->
 <!--                    </p>-->
-                    <FinancialAnalysisDialog v-if="content == 'financial-analysis'"></FinancialAnalysisDialog>
+                    <FinancialAnalysisDialog v-if="content == 'financial-analysis'" :solution="solution"></FinancialAnalysisDialog>
                     <FinancialDialog v-if="content == 'financial'" v-model:financial_before="financial_before" v-model:financial_after="financial_after" :type="type"></FinancialDialog>
                     <OperationalAnalysisDialog v-if="content == 'operationalanalysis'" :solution="solution" ></OperationalAnalysisDialog>
                     <OperationDialog v-if="content == 'operational'" ></OperationDialog>

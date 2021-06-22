@@ -230,7 +230,6 @@ export default {
 
         const challenge = ref({});
 
-
         onMounted(() => {
             getChallenge();
         });
