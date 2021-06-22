@@ -16,8 +16,14 @@ class DashboardController extends Controller
         $uniqueLogs = $logs->unique('description');
         $uniqueLogs->values()->all();
         foreach ($uniqueLogs as $log) {
-            $challenge = Challenge::find($log->subject->id);
-            $log->challenge = $challenge;
+            if($log->subject == 'App\Models\Solutions\Solution') {
+                $solution = Solution::find($log->subject->id);
+                $challenge = Challenge::find($solution->challenge_id);
+                $log->challenge = $challenge;
+            } else {
+                $challenge = Challenge::find($log->subject->id);
+                $log->challenge = $challenge;
+            }
         }
         $posts = Post::where('status', '=', 'publish')->orderBy('created_at', 'DESC')->take(10)->get();
         $solutions = Solution::query()
