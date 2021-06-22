@@ -101,7 +101,7 @@ name: "WhatsNext",
                 }else if(props.challenge.stage === 1 && isPublic.value === true) {
                     text.value = 'Jedno z twoich rozwiązań jest opublikowane! Jeśli inwestor je zaakceptuje będziesz mógł złożyć ofertę.';
                     action.value = {redirect: ''}
-                }else if(props.challenge.stage === 2 && isSelected=== true) {
+                }else if(props.challenge.stage === 2 && isSelected.value=== true) {
                     text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';
                     action.value = {redirect: ''}
                 }
@@ -117,6 +117,9 @@ name: "WhatsNext",
                 } else if(props.challenge.stage === 0) {
                     text.value = 'Uzupełnij wyzwanie o zdjęcia i kluczowe informacje związane ze stanowiskiem i Twoimi oczekiwaniami, a następnie opublikuj swoje wyzwanie. \n' +
                         'Im bardziej szczegółowy opis wyzwania, tym bardziej sprecyzowane koncepcje rozwiązań zostaną dla niego przygotowane.';
+                    action.value = {redirect: ''}
+                } else if(props.challenge.solutions.length > 0) {
+                    text.value = 'Zaakceptuj rozwiązania, aby otrzymać oferty.';
                     action.value = {redirect: ''}
                 }
             }
