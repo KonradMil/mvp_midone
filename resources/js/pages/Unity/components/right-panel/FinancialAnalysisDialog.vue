@@ -244,7 +244,7 @@ export default {
             npvFunction();
         }
 
-        const npvFunction = () => {
+        function npvFunction() {
             const cashFlow = [];
             const wacc = [];
             const dcf = [];
