@@ -417,7 +417,10 @@ export default {
                     if (response.data.success) {
                         console.log("response.data.payload");
                         console.log(response.data.payload);
-                        try {
+                        if(response.data.payload.save_json == "") {
+                            checkTeam();
+                            unlockInput();
+                        } else {
                             console.log(JSON.parse(response.data.payload.save_json));
                             challenge.value = response.data.payload;
                             initialLoad.value = JSON.parse(response.data.payload.save_json);
@@ -427,20 +430,9 @@ export default {
                                 action: 'loadStructure',
                                 data: JSON.parse(response.data.payload.save_json)
                             });
-                        }catch (e) {
-                            console.log(response.data.payload.save_json);
-                            challenge.value = response.data.payload;
-                            initialLoad.value = response.data.payload.save_json;
-                            animationSave.value = response.data.payload.save_json.animation_layers;
-                            checkTeam();
-                            handleUnityActionOutgoing({
-                                action: 'loadStructure',
-                                data: response.data.payload.save_json
-                            });
+                            unlockInput();
                         }
 
-
-                        unlockInput();
                         // console.log('EMIT LOAD');
                         // emitter.emit('saveLoaded', {save: (response.data.payload)});
                     } else {
