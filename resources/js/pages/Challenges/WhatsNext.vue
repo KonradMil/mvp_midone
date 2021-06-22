@@ -39,6 +39,7 @@ name: "WhatsNext",
     props: {
         challenge: Object,
         user: Object,
+        offers: Array,
     },
     setup(props) {
         const title = ref('Następny krok');
@@ -91,7 +92,7 @@ name: "WhatsNext",
         const doMe = () => {
             console.log('filter is coming');
             if(props.user.type === 'integrator') {
-                if(isSolutions === false && props.challenge.stage === 1) {
+                if(isSolutions.value === false && props.challenge.stage === 1) {
                     console.log('HERE');
                     text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
                     action.value = {redirect: ''}
@@ -106,11 +107,11 @@ name: "WhatsNext",
                     action.value = {redirect: ''}
                 }
             } else {
-                if(props.challenge.stage === 1) {
+                if(props.challenge.stage === 1 && props.challenge.solutions === 0) {
                     text.value = 'Oczekuj na nowe rozwiązania.';
                     buttonText.value = '';
                     action.value = {redirect: ''}
-                } else if(props.challenge.stage === 2) {
+                } else if(props.challenge.stage === 2 && props.challenge.solutions.offers.length === 0) {
                     text.value = 'Ten etap polega na zebraniu ofert finansowych do opisanego stanowiska. Oczekuj na nowe oferty.';
                     buttonText.value = '';
                     action.value = {redirect: ''}
@@ -120,6 +121,9 @@ name: "WhatsNext",
                     action.value = {redirect: ''}
                 } else if(props.challenge.solutions.length > 0) {
                     text.value = 'Zaakceptuj rozwiązania, aby otrzymać oferty.';
+                    action.value = {redirect: ''}
+                } else if(props.challenge.solutions.offers.length > 0){
+                    text.value = 'Zaakceptuj ofertę, która spełnia wszystkie Twoje oczekiwania.';
                     action.value = {redirect: ''}
                 }
             }
