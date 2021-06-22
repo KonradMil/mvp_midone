@@ -49,6 +49,8 @@ name: "WhatsNext",
         const isPublic = ref(false);
         watch(() => props.challenge, (first, second) => {
            doMe();
+           console.log('filter is coming first');
+            filter();
         });
 
         const solutions = computed(() => {
@@ -73,6 +75,7 @@ name: "WhatsNext",
         // }
 
         const doMe = () => {
+            console.log('filter is coming');
             filter();
             if(props.user.type == 'integrator') {
                 if(props.challenge.stage == 1) {
