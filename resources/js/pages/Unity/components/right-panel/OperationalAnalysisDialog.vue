@@ -12,7 +12,7 @@
                         </tr>
                         </thead>
                         <tbody v-if="challenge.financial_before != undefined">
-                        Czas produkcji sztuk dobrych  (min)    <tr>
+                           <tr>
                             <td colspan="3" class="border">
                                 <label for="input-wizard-1" class="form-label">
                                     Czas dostępny (min)
