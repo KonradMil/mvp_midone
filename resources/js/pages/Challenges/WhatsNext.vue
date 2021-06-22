@@ -48,6 +48,7 @@ name: "WhatsNext",
         const text = ref('');
         const action = ref({});
         const buttonText = ref('Przejdź');
+
         // const isSolutions = ref(false);
         // const isPublic = ref(false);
         watch(() => props.challenge, (first, second) => {
@@ -78,7 +79,7 @@ name: "WhatsNext",
         const doMe = () => {
             console.log('filter is coming');
             if(props.user.type == 'integrator') {
-                if(props.challenge.stage == 1) {
+                if(props.solutions.length == 0 && props.challenge.stage == 1) {
                     console.log('HERE');
                     text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
                     action.value = {redirect: ''}
