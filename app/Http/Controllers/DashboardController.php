@@ -19,6 +19,7 @@ class DashboardController extends Controller
             if($log->subject == 'App\Models\Solutions\Solution') {
                 $solution = Solution::find($log->subject->id);
                 $challenge = Challenge::find($solution->challenge_id);
+                $log->subject_id = $challenge->id;
                 $log->challenge = $challenge;
             } else {
                 $challenge = Challenge::find($log->subject->id);
