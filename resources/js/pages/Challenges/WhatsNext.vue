@@ -95,13 +95,13 @@ name: "WhatsNext",
                     console.log('HERE');
                     text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
                     action.value = {redirect: ''}
-                } else if(props.challenge.stage === 1 && isPublic.value===false) {
+                } else if(props.challenge.stage === 1 && isPublic.value===false && isSolutions.value === true) {
                     text.value = 'Po opublikowaniu rozwiązania będzie ono widoczne dla Inwestora.';
                     action.value = {redirect: ''}
-                }else if(props.challenge.stage === 1 && isPublic.value === true) {
+                }else if(props.challenge.stage === 1 && isPublic.value === true && isSolutions.value === true) {
                     text.value = 'Jedno z twoich rozwiązań jest opublikowane! Jeśli inwestor je zaakceptuje będziesz mógł złożyć ofertę.';
                     action.value = {redirect: ''}
-                }else if(props.challenge.stage === 2 && isSelected.value=== true) {
+                }else if(props.challenge.stage === 2 && isSelected.value=== true && isSolutions.value === true) {
                     text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';
                     action.value = {redirect: ''}
                 }
