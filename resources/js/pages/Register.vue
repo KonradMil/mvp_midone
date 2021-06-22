@@ -77,7 +77,7 @@
                                             content="Przedsiębiorca zamierzający zautomatyzować stanowisko przemysłowe w zakładzie produkcyjnym.">
                                             <label class="form-check-label"
                                                    for="radio-switch-5"
-                                                   title="">
+                                                   >
                                                 {{$t('common.investorem')}}
                                             </label>
                                         </Tippy>
