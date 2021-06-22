@@ -49,19 +49,22 @@ name: "WhatsNext",
         const isPublic = ref(false);
         watch(() => props.challenge, (first, second) => {
            doMe();
+           filter();
         });
 
         const solutions = computed(() => {
             return props.challenge.solutions;
         });
 
-        solutions.value.forEach(function (solution) {
-            if(solution.author_id.value === props.user.id) {
-                isSolutions.value = true;
-            } else if((solution.published.value === 1) && (solution.author.id.value === props.user.id)) {
-                isPublic.value = true;
-            }
-        });
+        const filter = () => {
+            solutions.value.forEach(function (solution) {
+                if(solution.author_id.value === props.user.id) {
+                    isSolutions.value = true;
+                } else if((solution.published.value === 1) && (solution.author.id.value === props.user.id)) {
+                    isPublic.value = true;
+                }
+            });
+        }
 
         // const getSolutionRepositories = async () => {
         //     console.log(props.challenge.id);
