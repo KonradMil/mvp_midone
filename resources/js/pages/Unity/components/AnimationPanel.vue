@@ -207,7 +207,7 @@ export default {
             console.log(getLineByInternalIndex);
             setTimeout(() => {
                 emitter.emit('UnityLineSettings', {action: 'settingsline', data: getLineByInternalIndex});
-            }, 200)
+            }, 500)
 
         }
 
