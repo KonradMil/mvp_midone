@@ -60,7 +60,7 @@ class OldImportController extends Controller
             foreach ($team->users as $user) {
                 $nt = Team::where('name', '=', $team->name)->first();
                 $nu = User::where('email', '=', $user->email)->first();
-                $nu->teams()->sync($nt);
+                $nu->teams()->attach($nt);
             }
         }
 
