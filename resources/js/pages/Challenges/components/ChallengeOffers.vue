@@ -55,7 +55,7 @@
                                     <Tippy
                                         tag="a"
                                         href=""
-                                        class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 mr-2"
+                                        class="dark:text-gray-300 text-gray-600"
                                         content="Po zaakceptowaniu oferty staje się ona wiążąca dla obu stron.">
                                     <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && challenge.selected_offer_id < 1">Akceptuj ofertę</button>
                                     </Tippy>
