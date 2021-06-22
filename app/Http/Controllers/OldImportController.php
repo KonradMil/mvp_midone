@@ -58,7 +58,7 @@ class OldImportController extends Controller
 
         foreach ($oldTeam as $team) {
             if($team->name == 'Agatka + Michał') {
-                dd($team->users);
+                dd($team->users[0]);
             }
             foreach ($team->users as $user) {
                 $nt = Team::where('name', '=', $team->name)->first();
