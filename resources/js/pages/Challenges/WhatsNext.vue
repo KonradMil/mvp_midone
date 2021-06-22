@@ -137,7 +137,7 @@ name: "WhatsNext",
                 } else if(props.challenge.solutions.length > 0) {
                     text.value = 'Zaakceptuj rozwiązania, aby otrzymać oferty.';
                     action.value = {redirect: ''}
-                } else if(props.challenge.solutions.offers.length > 0){
+                } else if(check.value === true){
                     text.value = 'Zaakceptuj ofertę, która spełnia wszystkie Twoje oczekiwania.';
                     action.value = {redirect: ''}
                 }
