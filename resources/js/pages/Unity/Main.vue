@@ -418,6 +418,7 @@ export default {
                         console.log("response.data.payload");
                         console.log(response.data.payload);
                         if(response.data.payload.save_json == "") {
+                            challenge.value = response.data.payload;
                             checkTeam();
                             unlockInput();
                         } else {
