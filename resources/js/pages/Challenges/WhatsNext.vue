@@ -55,6 +55,16 @@ name: "WhatsNext",
            doMe();
         }, {deep: true});
 
+        watch(() => isPublic.value, (first, second) => {
+            doMe();
+        }, {});
+        watch(() => isSolutions.value, (first, second) => {
+            doMe();
+        }, {});
+        watch(() => isSelected.value, (first, second) => {
+            doMe();
+        }, {});
+
         const isOffer = async () => {
             axios.post('/api/offer/user/check', {id: props.challenge.id})
                 .then(response => {
@@ -165,7 +175,6 @@ name: "WhatsNext",
         });
 
         return {
-            doMe,
             check,
             isOffer,
             isSelected,
