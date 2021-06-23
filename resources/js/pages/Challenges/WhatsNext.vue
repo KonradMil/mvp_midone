@@ -67,7 +67,6 @@ name: "WhatsNext",
         }, {});
         watch(() => check.value, (first, second) => {
             doMe();
-            isOffer();
         }, {});
 
         const isOffer = async () => {
