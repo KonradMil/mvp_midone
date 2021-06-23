@@ -74,12 +74,17 @@ class OldImportController extends Controller
         $a = DB::connection('old')->table('dbr_team_users')->select('*')->get();
 
         foreach ($a as $rel) {
-            $ot = OldTeam::where('id', '=', $rel->team_id)->first();
-            $ou = OldUser::where('id', '=', $rel->user_id)->first();
-            $nt = Team::where('name', '=', $ot->name)->first();
+            try {
+                $ot = OldTeam::where('id', '=', $rel->team_id)->first();
+                $ou = OldUser::where('id', '=', $rel->user_id)->first();
+                $nt = Team::where('name', '=', $ot->name)->first();
 
-            $nu = User::where('email', '=', $ou->email)->first();
-            $nu->teams()->attach($nt);
+                $nu = User::where('email', '=', $ou->email)->first();
+                $nu->teams()->attach($nt);
+            }catch (\Exception $e) {
+
+            }
+
         }
 //        dd($a);
 //
