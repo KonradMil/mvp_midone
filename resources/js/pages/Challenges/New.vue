@@ -10,10 +10,16 @@
                 <!--                    <EyeIcon class="w-4 h-4 mr-2"/>-->
                 <!--                 {{$t('challengesNew.preview')}}-->
                 <!--                </button>-->
-                <button
+                <button v-if="challenge_id != undefined"
                     class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
                     aria-expanded="false"
                     @click.prevent="$router.push({path: '/challenges/card/' + challenge_id})">
+                    Powrót
+                </button>
+                <button v-if="challenge_id == undefined"
+                        class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
+                        aria-expanded="false"
+                        @click.prevent="$router.push({path: '/challenges'})">
                     Powrót
                 </button>
                 <button
