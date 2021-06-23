@@ -94,11 +94,11 @@ class OldImportController extends Controller
                 $ou = OldUser::where('id', '=', $team->author_id)->first();
                 $nt = Team::where('name', '=', $team->name)->first();
                 $nu = User::where('email', '=', $ou->email)->first();
-//            $nu->teams()->attach($nt);
+            $nu->teams()->attach($nt);
                 $nt->owner_id = $nu->id;
                 $nt->save();
             }catch (\Exception $e) {
-
+                dd($e);
             }
 
         }
