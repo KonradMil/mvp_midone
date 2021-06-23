@@ -57,7 +57,7 @@ class OldImportController extends Controller
         $oldTeam = OldTeam::get();
 
         foreach ($oldTeam as $team) {
-           dd($team->users);
+           dump($team->users);
         }
 
 //        $oldUser = OldUser::get();
