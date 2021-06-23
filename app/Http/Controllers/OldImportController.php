@@ -108,11 +108,16 @@ class OldImportController extends Controller
 //
         $challenges = OldChallenge::get();
         foreach ($challenges as $challenge) {
-            $nc = Challenge::where('name', '=', $challenge->name)->get();
-            foreach ($challenge->teams as $t) {
-                $nt = Team::where('name', '=', $t->name)->first();
-                $nc->teams()->attach($nt);
+            try {
+                $nc = Challenge::where('name', '=', $challenge->name)->get();
+                foreach ($challenge->teams as $t) {
+                    $nt = Team::where('name', '=', $t->name)->first();
+                    $nc->teams()->attach($nt);
+                }
+            }catch (\Exception $e) {
+                dump($e);
             }
+
         }
 //        $oldTeam = OldTeam::get();
 //
