@@ -71,37 +71,37 @@ class OldImportController extends Controller
 //            }
 //        }
 //
-//        $a = DB::connection('old')->table('dbr_team_users')->select('*')->get();
+        $a = DB::connection('old')->table('dbr_team_users')->select('*')->get();
 
-//        foreach ($a as $rel) {
-//            try {
-//                $ot = OldTeam::where('id', '=', $rel->team_id)->first();
-//                $ou = OldUser::where('id', '=', $rel->user_id)->first();
-//                $nt = Team::where('name', '=', $ot->name)->first();
-//
-//                $nu = User::where('email', '=', $ou->email)->first();
-//                $nu->teams()->attach($nt);
-//            }catch (\Exception $e) {
-//
-//            }
-//
-//        }
-
-        $oldTeam = OldTeam::get();
-
-        foreach ($oldTeam as $team) {
+        foreach ($a as $rel) {
             try {
-                $ou = OldUser::where('id', '=', $team->author_id)->first();
-                $nt = Team::where('name', '=', $team->name)->first();
+                $ot = OldTeam::where('id', '=', $rel->team_id)->first();
+                $ou = OldUser::where('id', '=', $rel->user_id)->first();
+                $nt = Team::where('name', '=', $ot->name)->first();
+
                 $nu = User::where('email', '=', $ou->email)->first();
-            $nu->teams()->attach($nt);
-                $nt->owner_id = $nu->id;
-                $nt->save();
+                $nu->teams()->attach($nt);
             }catch (\Exception $e) {
-                dd([$ou, $team, $team->author_id]);
+                dd([$ou, $ot, $rel]);
             }
 
         }
+
+//        $oldTeam = OldTeam::get();
+//
+//        foreach ($oldTeam as $team) {
+//            try {
+//                $ou = OldUser::where('id', '=', $team->author_id)->first();
+//                $nt = Team::where('name', '=', $team->name)->first();
+//                $nu = User::where('email', '=', $ou->email)->first();
+//            $nu->teams()->attach($nt);
+//                $nt->owner_id = $nu->id;
+//                $nt->save();
+//            }catch (\Exception $e) {
+//                dd([$ou, $team, $team->author_id]);
+//            }
+//
+//        }
 
 //        dd($a);
 //
