@@ -109,7 +109,7 @@ class OldImportController extends Controller
         $challenges = OldChallenge::get();
         foreach ($challenges as $challenge) {
             try {
-                $nc = Challenge::where('name', '=', $challenge->name)->get();
+                $nc = Challenge::where('name', '=', $challenge->name)->first();
                 dump($challenge->teams);
                 foreach ($challenge->teams as $t) {
                     $nt = Team::where('name', '=', $t->name)->first();
