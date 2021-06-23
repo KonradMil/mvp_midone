@@ -134,7 +134,7 @@ name: "WhatsNext",
                     }else if(isSelected.value !== true && isPublic.value === true && isSolutions.value === true) {
                         text.value = 'Jedno z twoich rozwiązań jest opublikowane! Jeśli inwestor je zaakceptuje będziesz mógł złożyć ofertę.';
                         action.value = {redirect: ''}
-                    }else if(check.value !== true && isSelected.value=== true && isSolutions.value === true) {
+                    }else if(props.challenge.stage === 2 && isSelected.value=== true && isSolutions.value === true) {
                         text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';
                         action.value = {redirect: ''}
                     } else if(props.challenge.stage === 2 && isSolutions.value === true && check.value === true) {
