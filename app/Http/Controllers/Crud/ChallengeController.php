@@ -228,7 +228,7 @@ class ChallengeController extends Controller
         if (Auth::user()->type == 'integrator') {
             $query->whereIn('stage', [1, 2])->where('status', '=', 1);
         } else if (Auth::user()->type == 'investor') {
-            $query->where('author_id', '=', Auth::user()->id)->where('stage', '<', '3');
+            $query->whereIn('stage', [0,1,2])->where('author_id', '=', Auth::user()->id);
         } else {
 
         }
