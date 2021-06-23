@@ -89,21 +89,20 @@ class OldImportController extends Controller
 //
 //        }
 
-        $oldTeam = OldTeam::get();
-
-        foreach ($oldTeam as $team) {
-            try {
-                $ou = OldUser::where('id', '=', $team->author_id)->first();
-                $nt = Team::where('name', '=', $team->name)->first();
-                $nu = User::where('email', '=', $ou->email)->first();
-                $nu->teams()->attach($nt);
-                $nt->owner_id = $nu->id;
-                $nt->save();
-            }catch (\Exception $e) {
-                dd([$ou, $team, $team->author_id]);
-            }
-
-        }
+//        $oldTeam = OldTeam::get();
+//
+//        foreach ($oldTeam as $team) {
+//            try {
+//                $ou = OldUser::where('id', '=', $team->author_id)->first();
+//                $nt = Team::where('name', '=', $team->name)->first();
+//                $nu = User::where('email', '=', $ou->email)->first();
+//                $nu->teams()->attach($nt);
+//                $nt->owner_id = $nu->id;
+//                $nt->save();
+//            }catch (\Exception $e) {
+//                dd([$ou, $team, $team->author_id]);
+//            }
+//        }
 
 //        dd($a);
 //
