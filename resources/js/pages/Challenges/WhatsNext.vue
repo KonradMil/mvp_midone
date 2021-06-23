@@ -70,7 +70,7 @@ name: "WhatsNext",
             if (props.challenge.solutions !== undefined) {
                 if (props.challenge.solutions.length > 0) {
                     props.challenge.solutions.forEach((val) => {
-                        if(val.author_id === props.user.id){
+                        if((val.author_id === props.user.id) || (props.user.id === props.challenge.author_id)){
                             isSolutions.value = true;
                                 if(val.status === 1) {
                                    isPublic.value = true;
