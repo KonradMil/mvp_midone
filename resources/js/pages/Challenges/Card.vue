@@ -36,7 +36,7 @@
                            @click.prevent="activeTab = 'rozwiazania'"
                            :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <LockIcon class="w-4 h-4 mr-2"/>
-                            <div v-if="challenge.selected != undefined && challenge.selected.length != 0">Wybrane rozwiązanie</div><div v-if="challenge.selected == undefined || challenge.selected.length == 0">Rozwiązania</div>
+                            <div v-if="challenge.selected != undefined && challenge.selected.length != 0">Rozwiązania</div><div v-if="challenge.selected == undefined || challenge.selected.length == 0">Rozwiązania</div>
                         </a>
                         <a v-if="!inTeam && challenge.stage >= 1"
                             class="flex items-center mt-5" href=""
