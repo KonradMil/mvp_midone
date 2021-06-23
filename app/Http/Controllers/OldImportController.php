@@ -110,6 +110,10 @@ class OldImportController extends Controller
         foreach ($challenges as $challenge) {
             try {
                 $nc = Challenge::where('name', '=', $challenge->name)->first();
+                if($challenge->published_at != NULL) {
+                    $nc->status = 1;
+                    $nc->save();
+                }
 //                dump($challenge->teams);
 //                foreach ($challenge->teams as $t) {
 //                    $nt = Team::where('name', '=', $t->name)->first();
