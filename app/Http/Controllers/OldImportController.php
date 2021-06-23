@@ -15,6 +15,7 @@ use App\Models\TechnicalDetails;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OldImportController extends Controller
 {
@@ -70,6 +71,9 @@ class OldImportController extends Controller
 //            }
 //        }
 //
+        $a = DB::connection('old')->table('team_challenge')->select('*');
+        dd($a);
+
         $oldTeam = OldTeam::get();
 
         foreach ($oldTeam as $team) {
