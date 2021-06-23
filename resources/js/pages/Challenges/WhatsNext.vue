@@ -151,7 +151,7 @@ name: "WhatsNext",
                         text.value = 'Uzupełnij wyzwanie o zdjęcia i kluczowe informacje związane ze stanowiskiem i Twoimi oczekiwaniami, a następnie opublikuj swoje wyzwanie. \n' +
                             'Im bardziej szczegółowy opis wyzwania, tym bardziej sprecyzowane koncepcje rozwiązań zostaną dla niego przygotowane.';
                         action.value = {redirect: ''}
-                    } else if(isPublic.value === true && isSelected.value === false) {
+                    } else if(isPublic.value === true && isSelected.value === false && props.challenge.selected.length < 1) {
                         text.value = 'Zaakceptuj rozwiązania, aby otrzymać oferty.';
                         action.value = {redirect: ''}
                     } else if(check.value === true){
