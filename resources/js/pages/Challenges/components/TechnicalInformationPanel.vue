@@ -82,12 +82,188 @@
             <!-- BEGIN: Daily Sales -->
             <div class="intro-y box col-span-12 xxl:col-span-6">
                 <div
-                    class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5"
+                    class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5"
                 >
-<!--                    <h2 class="font-medium text-base mr-auto">Zdjęcia</h2>-->
+                    <h2 class="font-medium text-base mr-auto"> Szczegóły finansowe</h2>
                 </div>
-                <div class="p-10">
+                <div class="px-5 py-5">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Przed robotyzacją</th>
+                            <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Po robotyzacji</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="hover:bg-gray-200">
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+                                    {{$t('challengesNew.days')}}
+                                </label>
+                                <input type="number" v-model="challenge.financial_before.days" class="form-control" disabled placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
+                            </td>
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+                                    {{$t('challengesNew.days')}}
+                                </label>
 
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-200">
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+                                    {{$t('challengesNew.shifts')}}
+                                </label>
+                                <input type="number" disabled v-model="challenge.financial_before.shifts" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
+                            </td>
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+
+                                </label>
+
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-200">
+
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+                                    {{$t('challengesNew.shift_time')}}
+                                </label>
+                                <input type="number" disabled v-model="challenge.financial_before.shift_time" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
+                            </td>
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+
+                                </label>
+
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-200">
+
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+                                    {{$t('challengesNew.weekend_shift')}}
+                                </label>
+                                <input type="number" v-model="challenge.financial_before.weekend_shift" class="form-control"  disabled placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
+                            </td>
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+
+                                </label>
+                                </td>
+                        </tr>
+                        <tr class="hover:bg-gray-200">
+
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+                                    {{$t('challengesNew.breakfast')}}
+                                </label>
+                                <input type="number" v-model="challenge.financial_before.breakfast" class="form-control" placeholder="0"  disabled :aria-label="$t('challengesNew.numberSupported')" />
+                            </td>
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+
+                                </label>
+                                </td>
+                        </tr>
+                        <tr class="hover:bg-gray-200">
+
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+                                    {{$t('challengesNew.stop_time')}}
+                                </label>
+                                <input type="number" v-model="challenge.financial_before.stop_time" class="form-control" placeholder="0"  disabled :aria-label="$t('challengesNew.numberSupported')" />
+                            </td>
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+
+                                </label>
+                                </td>
+                        </tr>
+                        <tr class="hover:bg-gray-200">
+
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+                                    {{$t('challengesNew.operator_performance')}}
+                                </label>
+                                <input type="number" v-model="challenge.financial_before.operator_performance"  disabled class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
+                            </td>
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+
+                                </label>
+                             </td>
+                        </tr>
+                        <tr class="hover:bg-gray-200">
+
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+                                    {{$t('challengesNew.defective')}}
+                                </label>
+                                <input type="number" v-model="challenge.financial_before.defective" class="form-control"  disabled placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
+                            </td>
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+
+                                </label>
+                               </td>
+                        </tr>
+                        <tr class="hover:bg-gray-200">
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+                                    {{$t('challengesNew.number_of_operators')}}
+                                </label>
+                                <input type="number" v-model="challenge.financial_before.number_of_operators" class="form-control"  disabled placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
+                            </td>
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+
+                                </label>
+                               </td>
+                        </tr>
+                        <tr class="hover:bg-gray-200">
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+                                    {{$t('challengesNew.operator_cost')}}
+                                </label>
+                                <input type="number" v-model="challenge.financial_before.operator_cost" class="form-control"  disabled placeholder="0" :aria-label="$t('challengesNew.numberSupported')" />
+                            </td>
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+
+                                </label>
+
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-200">
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+                                    {{$t('challengesNew.absence')}}
+                                </label>
+                                <input type="number" v-model="challenge.financial_before.absence" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" disabled />
+                            </td>
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+
+                                </label>
+                                 </td>
+                        </tr>
+                        <tr class="hover:bg-gray-200">
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+                                    {{$t('challengesNew.cycle_time')}}
+                                </label>
+                                <input type="number" v-model="challenge.financial_before.cycle_time" class="form-control" placeholder="0" :aria-label="$t('challengesNew.numberSupported')" disabled/>
+                            </td>
+                            <td class="border">
+                                <label for="input-wizard-9" class="form-label">
+
+                                </label>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <!-- END: Daily Sales -->
