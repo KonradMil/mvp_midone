@@ -21,7 +21,7 @@ class OfferController extends Controller
             foreach($offers as $offer){
                 if($offer->installer_id === Auth::user()->id && $offer->status === 0 && Auth::user()->type=='integrator'){
                     $check = true;
-                } else if(Auth::user()->type == 'investor' && $offer->rejected != 1 && $offer->status != 1){
+                } else if(Auth::user()->type == 'investor' && $offer->rejected != 1){
                     if($offer->selected == 0){
                         $check = true;
                     }
