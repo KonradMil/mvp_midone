@@ -143,7 +143,7 @@ name: "WhatsNext",
                         text.value = 'Oczekuj na nowe rozwiązania.';
                         buttonText.value = '';
                         action.value = {redirect: ''}
-                    } else if(props.challenge.selected.length > 0) {
+                    } else if(props.challenge.selected.length > 0 && check.value === false) {
                         text.value = 'Ten etap polega na zebraniu ofert finansowych do opisanego stanowiska. Oczekuj na nowe oferty.';
                         buttonText.value = '';
                         action.value = {redirect: ''}
