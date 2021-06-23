@@ -136,7 +136,7 @@ name: "WhatsNext",
                     }else if(props.challenge.stage === 2 && isSelected.value=== true && isSolutions.value === true) {
                         text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';
                         action.value = {redirect: ''}
-                    } else if(props.challenge.stage === 2 && isSolutions.value === true && check.value === true) {
+                    } else if(check.value === true) {
                         text.value = 'Opublikuj przygotowaną ofertę.';
                         action.value = {redirect: ''}
                     }
