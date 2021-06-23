@@ -202,6 +202,9 @@ export default {
             offers.value = GetChallengeOffers(props.challenge.id);
         }
 
+        const handleCallback = () => {
+            router.push({path: '/projects'})
+        }
 
         const acceptOffer = async(offer) => {
             axios.post('/api/offer/accept', {id: offer.id})
@@ -216,7 +219,7 @@ export default {
                     } else {
                         // toast.error(response.data.message);
                     }
-                })
+                },handleCallback)
         }
 
         const rejectOffer = async(offer) => {
