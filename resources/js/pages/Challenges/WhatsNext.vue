@@ -53,6 +53,7 @@ name: "WhatsNext",
 
         watch(() => props.challenge, (first, second) => {
            doMe();
+           isOffer();
         }, {deep: true});
 
         watch(() => isPublic.value, (first, second) => {
@@ -165,10 +166,7 @@ name: "WhatsNext",
         }
 
         onMounted(() => {
-            // filter();
-            if(props.user.type == 'integrator') {
                 isOffer();
-            }
             console.log("props");
             console.log(props);
             console.log(props.challenge);
