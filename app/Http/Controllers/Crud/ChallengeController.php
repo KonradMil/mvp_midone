@@ -144,7 +144,6 @@ class ChallengeController extends Controller
                                 }
                             }
                         }
-
                     }
                 }
             } else if (Auth::user()->type == 'investor') {
