@@ -224,7 +224,7 @@ class ChallengeController extends Controller
     {
         $input = $request->input();
 
-        $query = Challenge::query();
+        $query = Challenge::query()->where('stage', '<', '3');
         if (Auth::user()->type == 'integrator') {
             $query->whereIn('stage', [1, 2])->where('status', '=', 1);
         } else if (Auth::user()->type == 'investor') {
