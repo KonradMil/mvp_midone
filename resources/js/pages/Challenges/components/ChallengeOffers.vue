@@ -175,6 +175,7 @@
 import {getCurrentInstance, onMounted, ref} from "vue";
 import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
 import {useToast} from "vue-toastification";
+import router from "../../../router";
 
 export default {
     name: "ChallengeOffers",
@@ -211,6 +212,7 @@ export default {
                         offer.rejected = 0;
                         offer.solution.selected_offer_id = offer.id;
                         props.challenge.selected_offer_id = offer.id;
+                        router.push({path: '/projects'});
                     } else {
                         // toast.error(response.data.message);
                     }
