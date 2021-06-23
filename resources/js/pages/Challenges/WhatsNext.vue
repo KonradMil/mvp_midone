@@ -90,10 +90,10 @@ name: "WhatsNext",
                             isSolutions.value = true;
                                 if(val.status === 1) {
                                    isPublic.value = true;
-                                    if(val.selected === 1) {
-                                        isSelected.value = true;
-                                    }
                                }
+                                if(val.selected === 1) {
+                                   isSelected.value = true;
+                                 }
                         }
                     });
                 }
@@ -129,7 +129,7 @@ name: "WhatsNext",
                     } else if(props.challenge.stage === 1 && isPublic.value===false && isSolutions.value === true) {
                         text.value = 'Po opublikowaniu rozwiązania będzie ono widoczne dla Inwestora.';
                         action.value = {redirect: ''}
-                    }else if(props.challenge.stage === 1 && isPublic.value === true && isSolutions.value === true && isSelected.value === false) {
+                    }else if(props.challenge.stage === 1 && isPublic.value === true && isSolutions.value === true) {
                         text.value = 'Jedno z twoich rozwiązań jest opublikowane! Jeśli inwestor je zaakceptuje będziesz mógł złożyć ofertę.';
                         action.value = {redirect: ''}
                     }else if(props.challenge.stage === 2 && isSelected.value=== true && isSolutions.value === true) {
