@@ -63,9 +63,11 @@ name: "WhatsNext",
         }, {});
         watch(() => isSelected.value, (first, second) => {
             doMe();
+            isOffer();
         }, {});
         watch(() => check.value, (first, second) => {
             doMe();
+            isOffer();
         }, {});
 
         const isOffer = async () => {
