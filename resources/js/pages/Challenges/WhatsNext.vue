@@ -165,6 +165,7 @@ name: "WhatsNext",
         });
 
         return {
+            doMe,
             check,
             isOffer,
             isSelected,
