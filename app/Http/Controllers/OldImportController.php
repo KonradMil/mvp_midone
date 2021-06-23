@@ -71,7 +71,7 @@ class OldImportController extends Controller
 //            }
 //        }
 //
-        $a = DB::connection('old')->table('dbr_team_users')->select('*')->get();
+//        $a = DB::connection('old')->table('dbr_team_users')->select('*')->get();
 
 //        foreach ($a as $rel) {
 //            try {
