@@ -82,6 +82,8 @@ class OldImportController extends Controller
                 $nu = User::where('email', '=', $ou->email)->first();
                 $nu->teams()->attach($nt);
             }catch (\Exception $e) {
+                dump($e);
+                die;
                 dd([$ou, $ot, $rel]);
             }
 
