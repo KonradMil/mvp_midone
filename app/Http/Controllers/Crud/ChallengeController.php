@@ -149,6 +149,10 @@ class ChallengeController extends Controller
                 }
             } else if (Auth::user()->type == 'investor') {
                 foreach ($challengesProject as $challenge) {
+                    if(Auth::user()->id == $challenge->author_id){
+                        $query->where('author_id', '=', Auth::user()->id)->where('stage', '=', 3);
+                         $check = true;
+                    }
                     foreach ($challenge->teams as $team) {
                         foreach (Auth::user()->teams as $t) {
                             if ($t->id == $team->id) {
