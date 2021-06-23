@@ -90,9 +90,10 @@ name: "WhatsNext",
                             isSolutions.value = true;
                                 if(val.status === 1) {
                                    isPublic.value = true;
-                               } else if(val.selected === 1) {
-                                   isSelected.value = true;
-                                 }
+                                    if(val.selected === 1) {
+                                        isSelected.value = true;
+                                    }
+                               }
                         }
                     });
                 }
