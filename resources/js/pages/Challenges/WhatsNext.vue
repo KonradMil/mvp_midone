@@ -64,6 +64,9 @@ name: "WhatsNext",
         watch(() => isSelected.value, (first, second) => {
             doMe();
         }, {});
+        watch(() => check.value, (first, second) => {
+            doMe();
+        }, {});
 
         const isOffer = async () => {
             axios.post('/api/offer/user/check', {id: props.challenge.id})
@@ -137,7 +140,7 @@ name: "WhatsNext",
                         text.value = 'Oczekuj na nowe rozwiązania.';
                         buttonText.value = '';
                         action.value = {redirect: ''}
-                    } else if(props.challenge.stage === 2 && props.challenge.solutions.offers.length === 0) {
+                    } else if(props.challenge.stage === 2 && isSelected.value === true) {
                         text.value = 'Ten etap polega na zebraniu ofert finansowych do opisanego stanowiska. Oczekuj na nowe oferty.';
                         buttonText.value = '';
                         action.value = {redirect: ''}
@@ -145,14 +148,11 @@ name: "WhatsNext",
                         text.value = 'Uzupełnij wyzwanie o zdjęcia i kluczowe informacje związane ze stanowiskiem i Twoimi oczekiwaniami, a następnie opublikuj swoje wyzwanie. \n' +
                             'Im bardziej szczegółowy opis wyzwania, tym bardziej sprecyzowane koncepcje rozwiązań zostaną dla niego przygotowane.';
                         action.value = {redirect: ''}
-                    } else if(props.challenge.solutions.length > 0 && isPublic.value === true) {
+                    } else if(isPublic.value === true && isSelected.value === false) {
                         text.value = 'Zaakceptuj rozwiązania, aby otrzymać oferty.';
                         action.value = {redirect: ''}
                     } else if(check.value === true){
                         text.value = 'Zaakceptuj ofertę, która spełnia wszystkie Twoje oczekiwania.';
-                        action.value = {redirect: ''}
-                    } else {
-                        text.value = 'Nie umiem w ify';
                         action.value = {redirect: ''}
                     }
                 }
