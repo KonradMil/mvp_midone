@@ -72,24 +72,33 @@ class OldImportController extends Controller
 //        }
 //
         $a = DB::connection('old')->table('dbr_team_users')->select('*')->get();
-        dd($a);
 
-        $oldTeam = OldTeam::get();
+        foreach ($a as $rel) {
+            $ot = OldTeam::where('id', '=', $rel->team_id)->first();
+            $ou = OldUser::where('id', '=', $rel->user_id)->first();
+            $nt = Team::where('name', '=', $ot->name)->first();
 
-        foreach ($oldTeam as $team) {
-                foreach ($team->users as $user) {
-                    if($team->author_id == $user->id) {
-
-                    } else {
-                        $nt = Team::where('name', '=', $team->name)->first();
-
-                        $nu = User::where('email', '=', $user->email)->first();
-                        $nu->teams()->attach($nt);
-                    }
-
-                }
-
+            $nu = User::where('email', '=', $ou->email)->first();
+            $nu->teams()->attach($nt);
         }
+//        dd($a);
+//
+//        $oldTeam = OldTeam::get();
+//
+//        foreach ($oldTeam as $team) {
+//                foreach ($team->users as $user) {
+//                    if($team->author_id == $user->id) {
+//
+//                    } else {
+//                        $nt = Team::where('name', '=', $team->name)->first();
+//
+//                        $nu = User::where('email', '=', $user->email)->first();
+//                        $nu->teams()->attach($nt);
+//                    }
+//
+//                }
+//
+//        }
 
 //        $oldChallenges = OldChallenge::with('teams')->get();
 ////        dd($oldChallenges);
