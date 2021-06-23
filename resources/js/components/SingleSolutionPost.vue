@@ -9,7 +9,7 @@
                 />
             </div>
             <div class="ml-3 mr-auto" @click="$router.push({path: '/studio/solution/' + solution.id});">
-                <a href="" class="font-medium">{{ solution.name }} <span v-if="solution.selected == 1" style="color: #930f68;"> - Wybrane</span><span v-if="solution.rejected == 1" style="color: #1a202c;"> - Odrzucone</span></a>
+                <a href="" class="font-medium">{{ solution.name }} <span v-if="solution.selected == 1" style="color: #930f68;"> - Zaakceptowane</span><span v-if="solution.rejected == 1" style="color: #1a202c;"> - Odrzucone</span></a>
             </div>
             <!--        <div class="dropdown ml-3">-->
             <!--            <a href="javascript:;"-->
