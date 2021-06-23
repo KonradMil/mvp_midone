@@ -54,12 +54,12 @@ class OldImportController extends Controller
 //            }
 //        }
 
-        $oldTeam = OldTeam::get();
-
-        foreach ($oldTeam as $team) {
-           dump($team->users);
-        }
-
+//        $oldTeam = OldTeam::get();
+//
+//        foreach ($oldTeam as $team) {
+//           dump($team->users);
+//        }
+//
 //        $oldUser = OldUser::get();
 //        foreach ($oldUser as $user) {
 //            foreach ($user->teams as $team) {
@@ -70,22 +70,17 @@ class OldImportController extends Controller
 //            }
 //        }
 //
-//        $oldTeam = OldTeam::get();
-//
-//        foreach ($oldTeam as $team) {
-//            if($team->name == 'Agatka + Michał') {
-//
-//                foreach ($team->users as $user) {
-//
-////                    $nt = Team::where('name', '=', $team->name)->first();
-////
-////                    $nu = User::where('email', '=', $user->email)->first();
-////                    $nu->teams()->attach($nt);
-//                }
-//
-//            }
-//
-//        }
+        $oldTeam = OldTeam::get();
+
+        foreach ($oldTeam as $team) {
+                foreach ($team->users as $user) {
+                    $nt = Team::where('name', '=', $team->name)->first();
+
+                    $nu = User::where('email', '=', $user->email)->first();
+                    $nu->teams()->attach($nt);
+                }
+
+        }
 
 //        $oldChallenges = OldChallenge::with('teams')->get();
 ////        dd($oldChallenges);
