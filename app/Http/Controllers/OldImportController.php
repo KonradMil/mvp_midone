@@ -98,7 +98,7 @@ class OldImportController extends Controller
                 $nt->owner_id = $nu->id;
                 $nt->save();
             }catch (\Exception $e) {
-                dd($ou->email);
+                dd([$ou, $team, $team->author_id]);
             }
 
         }
