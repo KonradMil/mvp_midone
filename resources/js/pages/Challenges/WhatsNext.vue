@@ -121,7 +121,10 @@ name: "WhatsNext",
             try {
                 console.log('filter is coming');
                 if(props.user.type === 'integrator') {
-                    if(isSolutions.value === false && props.challenge.stage === 1) {
+                    if(isSelected.value === true && check.value === false){
+                        text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';
+                        action.value = {redirect: ''}
+                    } else if(isSolutions.value === false && props.challenge.stage === 1) {
                         console.log('HERE');
                         text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
                         action.value = {redirect: ''}
