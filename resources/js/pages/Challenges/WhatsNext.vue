@@ -141,6 +141,9 @@ name: "WhatsNext",
                     } else if(check.value === true){
                         text.value = 'Zaakceptuj ofertę, która spełnia wszystkie Twoje oczekiwania.';
                         action.value = {redirect: ''}
+                    } else {
+                        text.value = 'Nie umiem w ify';
+                        action.value = {redirect: ''}
                     }
                 }
             } catch (e) {
