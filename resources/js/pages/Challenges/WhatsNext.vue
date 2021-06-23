@@ -166,7 +166,6 @@ name: "WhatsNext",
         }
 
         onMounted(() => {
-                isOffer();
             console.log("props");
             console.log(props);
             console.log(props.challenge);
@@ -176,7 +175,6 @@ name: "WhatsNext",
 
         return {
             check,
-            isOffer,
             isSelected,
             isPublic,
             isSolutions,
