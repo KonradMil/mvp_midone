@@ -56,8 +56,8 @@ class OldImportController extends Controller
 
         $oldUser = OldUser::get();
         foreach ($oldUser as $user) {
-
             foreach ($user->teams as $team) {
+                dd($user->teams);
                 $nu = User::where('email', '=', $user->email)->first();
                 $nt = Team::where('name', '=', $team->name)->first();
                 $nu->teams()->attach($nt);
