@@ -83,7 +83,7 @@ class OldImportController extends Controller
                 $nu->teams()->attach($nt);
             }catch (\Exception $e) {
                 dump($e);
-                die;
+
                 dd([$ou, $ot, $rel]);
             }
 
