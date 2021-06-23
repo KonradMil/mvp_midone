@@ -208,7 +208,13 @@ class ChallengeController extends Controller
                     'message' => 'Pobrano poprawnie.',
                     'payload' => $merged->all()
                 ]);
-            }
+            } else {
+
+            }return response()->json([
+                'success' => true,
+                'message' => 'Brak projektów. Check minus',
+                'payload' => ''
+            ]);
         } else {
             return response()->json([
                 'success' => true,
