@@ -71,7 +71,7 @@ class OldImportController extends Controller
 //            }
 //        }
 //
-        $a = DB::connection('old')->table('team_challenge')->select('*');
+        $a = DB::connection('old')->table('team_challenge')->select('*')->get();
         dd($a);
 
         $oldTeam = OldTeam::get();
