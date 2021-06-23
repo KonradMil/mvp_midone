@@ -71,21 +71,33 @@ class OldImportController extends Controller
 //            }
 //        }
 //
-        $a = DB::connection('old')->table('dbr_team_users')->select('*')->get();
+//        $a = DB::connection('old')->table('dbr_team_users')->select('*')->get();
 
-        foreach ($a as $rel) {
-            try {
-                $ot = OldTeam::where('id', '=', $rel->team_id)->first();
-                $ou = OldUser::where('id', '=', $rel->user_id)->first();
-                $nt = Team::where('name', '=', $ot->name)->first();
+//        foreach ($a as $rel) {
+//            try {
+//                $ot = OldTeam::where('id', '=', $rel->team_id)->first();
+//                $ou = OldUser::where('id', '=', $rel->user_id)->first();
+//                $nt = Team::where('name', '=', $ot->name)->first();
+//
+//                $nu = User::where('email', '=', $ou->email)->first();
+//                $nu->teams()->attach($nt);
+//            }catch (\Exception $e) {
+//
+//            }
+//
+//        }
 
-                $nu = User::where('email', '=', $ou->email)->first();
-                $nu->teams()->attach($nt);
-            }catch (\Exception $e) {
+        $oldTeam = OldTeam::get();
 
-            }
-
+        foreach ($oldTeam as $team) {
+            $ou = OldUser::where('id', '=', $team->author_id)->first();
+            $nt = Team::where('name', '=', $team->name)->first();
+            $nu = User::where('email', '=', $ou->email)->first();
+            $nu->teams()->attach($nt);
+            $nt->author_id = $nu->id;
+            $nt->save();
         }
+
 //        dd($a);
 //
 //        $oldTeam = OldTeam::get();
