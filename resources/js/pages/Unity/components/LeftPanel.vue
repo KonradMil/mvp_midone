@@ -49,7 +49,7 @@
                         placeholder="Szukaj..."
                     />
                 </div>
-                <div class="w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
+                <div class="w-full sm:w-auto relative mr-auto mt-3 sm:mt-0" style="overflow-y: scroll; height: 97vh;">
                     <div class="w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
                         <SearchIcon
                             class="w-4 h-1 absolute my-auto inset-y-0 ml-3 left-0 z-10 text-gray-700 dark:text-gray-300" style="visibility: hidden"
@@ -64,7 +64,7 @@
                     <div class="p-5 w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
                         <button class="btn btn-primary shadow-md w-1/2" @click="takeMeBack">Powrót</button>
                     </div>
-                    <div class="p-5 w-full" style="overflow-y: scroll; height: 97vh;"  v-if="category == 1 && subcategory == 0 && selectedBrand == null" v-for="(brand, index) in brands" :key="'subcat_' + index" @click="selectedBrand = brand.brand; getModelRepositories();">
+                    <div class="p-5 w-full"  v-if="category == 1 && subcategory == 0 && selectedBrand == null" v-for="(brand, index) in brands" :key="'subcat_' + index" @click="selectedBrand = brand.brand; getModelRepositories();">
                         <div class="flex-none pos-image relative block w-full">
                             <div class="pos-image__preview image-fit h-24 w-full shadow-md rounded-md zoom-in">
                                 <img
