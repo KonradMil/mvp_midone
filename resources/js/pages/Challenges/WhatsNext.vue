@@ -123,7 +123,7 @@ name: "WhatsNext",
                         action.value = {redirect: ''}
                     }
                 } else {
-                    if(props.challenge.stage === 1 && props.challenge.solutions.length === 0) {
+                    if(props.challenge.stage === 1 && isPublic.value === false) {
                         text.value = 'Oczekuj na nowe rozwiązania.';
                         buttonText.value = '';
                         action.value = {redirect: ''}
