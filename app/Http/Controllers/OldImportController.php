@@ -71,25 +71,73 @@ class OldImportController extends Controller
 //            }
 //        }
 //
-        $a = DB::connection('old')->table('dbr_team_users')->select('*')->get();
-        dd($a);
+//        $a = DB::connection('old')->table('dbr_team_users')->select('*')->get();
 
-        $oldTeam = OldTeam::get();
+//        foreach ($a as $rel) {
+//            try {
+//                $ot = OldTeam::where('id', '=', $rel->team_id)->first();
+//                $ou = OldUser::where('id', '=', $rel->user_id)->first();
+//                $nt = Team::where('name', '=', $ot->name)->first();
+//
+//                $nu = User::where('email', '=', $ou->email)->first();
+//                $nu->teams()->attach($nt);
+//            }catch (\Exception $e) {
+//                dump($e);
+//
+//                dd([$ou, $ot, $rel]);
+//            }
+//
+//        }
 
-        foreach ($oldTeam as $team) {
-                foreach ($team->users as $user) {
-                    if($team->author_id == $user->id) {
+//        $oldTeam = OldTeam::get();
+//
+//        foreach ($oldTeam as $team) {
+//            try {
+//                $ou = OldUser::where('id', '=', $team->author_id)->first();
+//                $nt = Team::where('name', '=', $team->name)->first();
+//                $nu = User::where('email', '=', $ou->email)->first();
+//                $nu->teams()->attach($nt);
+//                $nt->owner_id = $nu->id;
+//                $nt->save();
+//            }catch (\Exception $e) {
+//                dd([$ou, $team, $team->author_id]);
+//            }
+//        }
 
-                    } else {
-                        $nt = Team::where('name', '=', $team->name)->first();
-
-                        $nu = User::where('email', '=', $user->email)->first();
-                        $nu->teams()->attach($nt);
-                    }
-
+//        dd($a);
+//
+        $challenges = OldChallenge::get();
+        foreach ($challenges as $challenge) {
+            try {
+                $nc = Challenge::where('name', '=', $challenge->name)->first();
+                if($challenge->published_at != NULL) {
+                    $nc->status = 1;
+                    $nc->save();
                 }
-
+//                dump($challenge->teams);
+//                foreach ($challenge->teams as $t) {
+//                    $nt = Team::where('name', '=', $t->name)->first();
+//                    $nc->teams()->attach($nt);
+//                }
+            }catch (\Exception $e) {
+                dump($e);
+            }
         }
+//        $oldTeam = OldTeam::get();
+//
+//        foreach ($oldTeam as $team) {
+//
+//                foreach ($team->users as $user) {
+//                    if($team->author_id == $user->id) {
+//
+//                    } else {
+//                        $nt = Team::where('name', '=', $team->name)->first();
+//
+//                        $nu = User::where('email', '=', $user->email)->first();
+//                        $nu->teams()->attach($nt);
+//                    }
+//                }
+//        }
 
 //        $oldChallenges = OldChallenge::with('teams')->get();
 ////        dd($oldChallenges);
@@ -101,7 +149,7 @@ class OldImportController extends Controller
 //            $fi->save();
 //            $newChallenge = new Challenge();
 //            $newChallenge->name = $oc->name;
-//            $newChallenge->save_json = str_replace('platfrom.dbr77.com', 'two.appworks-dev.pl', $oc->save_json);
+//            $newChallenge->save_json = str_replace('platfrom.dbr77.com', 'platform.dbr77.com', $oc->save_json);
 //            $newChallenge->screenshot_path = 's3/' . $oc->screenshot_path;
 //            $newChallenge->status = $oc->status;
 //            $newChallenge->stage = $oc->stage;
@@ -131,7 +179,7 @@ class OldImportController extends Controller
 //                $ns->challenge_id = $newChallenge->id;
 //                $ns->selected = $so->selected;
 //                $ns->rejected = $so->rejected;
-//                $ns->save_json = str_replace('platfrom.dbr77.com', 'two.appworks-dev.pl', $so->save_json);
+//                $ns->save_json = str_replace('platfrom.dbr77.com', 'platform.dbr77.com', $so->save_json);
 //                $ns->name = $so->name;
 //                $ns->description = '';
 //                $ns->screenshot_path = 's3/' . $so->screenshot_path;

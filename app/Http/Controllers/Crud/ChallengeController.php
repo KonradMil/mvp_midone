@@ -144,7 +144,6 @@ class ChallengeController extends Controller
                                 }
                             }
                         }
-
                     }
                 }
             } else if (Auth::user()->type == 'investor') {
@@ -213,7 +212,13 @@ class ChallengeController extends Controller
                     'message' => 'Pobrano poprawnie.',
                     'payload' => $merged->all()
                 ]);
-            }
+            } else {
+
+            }return response()->json([
+                'success' => true,
+                'message' => 'Brak projektów. Check minus',
+                'payload' => ''
+            ]);
         } else {
             return response()->json([
                 'success' => true,

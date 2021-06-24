@@ -22,5 +22,9 @@
     {
         "brand": "Kuka",
         "image": "/s3/brand_logos/kuka_logo.png"
+    },
+    {
+        "brand": "TFM ROBOTICS",
+        "image": "/s3/brand_logos/tfm_robotics_brand.png"
     }
 ]
