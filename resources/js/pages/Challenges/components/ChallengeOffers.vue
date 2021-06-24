@@ -215,7 +215,7 @@ export default {
                         offer.rejected = 0;
                         offer.solution.selected_offer_id = offer.id;
                         props.challenge.selected_offer_id = offer.id;
-                        router.push({name: 'projects'})
+                        router.push({name: 'projects'});
                     } else {
                         // toast.error(response.data.message);
                     }
