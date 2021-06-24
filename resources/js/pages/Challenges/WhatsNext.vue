@@ -40,6 +40,7 @@ name: "WhatsNext",
         challenge: Object,
         user: Object,
         solutions: Array,
+        notPublic: Boolean
     },
     setup(props) {
         const app = getCurrentInstance();
@@ -75,6 +76,9 @@ name: "WhatsNext",
             doMe();
         }, {});
         watch(() => check.value, (first, second) => {
+            doMe();
+        }, {})
+        watch(() => props.notPublic, (first, second) => {
             doMe();
         }, {});
 
@@ -146,7 +150,7 @@ name: "WhatsNext",
                         console.log('HERE');
                         text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
                         action.value = {redirect: ''}
-                    } else if(props.challenge.stage === 1 && isPublic.value===false && isSolutions.value === true) {
+                    } else if(props.notPublic === true && isSolutions.value === true) {
                         text.value = 'Po opublikowaniu rozwiązania będzie ono widoczne dla Inwestora.';
                         action.value = {redirect: ''}
                     }else if(isSelected.value !== true && isPublic.value === true && isSolutions.value === true) {
