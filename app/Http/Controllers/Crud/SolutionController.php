@@ -28,7 +28,7 @@ class SolutionController extends Controller
         foreach($solutions as $solution){
             $challenge = Challenge::find($solution->challenge_id);
             if($challenge==NULL){
-                $solutions->destroy();
+                $solutions->delete();
             }
         }
         return response()->json([
