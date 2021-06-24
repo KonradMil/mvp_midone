@@ -93,12 +93,12 @@ name: "WhatsNext",
             if(type == 'isPublic' && (e.isPublic === true)) {
                 isPublic.value = e.isPublic;
             }
-        } );
+        });
         emitter.on('*', (type, e) => {
             if(type == 'check' && e.check === true) {
                 check.value = e.check;
             }
-        } );
+        });
 
         emitter.on('changeToOffers', e => {
             if(e.check===true){
@@ -172,7 +172,7 @@ name: "WhatsNext",
                         action.value = {redirect: ''}
                     }
                 } else {
-                    if(props.challenge.stage === 1 && isPublic.value === false) {
+                    if(props.challenge.solutions === 0) {
                         text.value = 'Oczekuj na nowe rozwiązania.';
                         buttonText.value = '';
                         action.value = {redirect: ''}
