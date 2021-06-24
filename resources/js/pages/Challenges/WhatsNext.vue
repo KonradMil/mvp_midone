@@ -154,7 +154,7 @@ name: "WhatsNext",
                         console.log('HERE');
                         text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
                         action.value = {redirect: ''}
-                    } else if(props.notPublic === true && isSolutions.value === true) {
+                    } else if(isPublic.value === false && isSolutions.value === true) {
                         text.value = 'Po opublikowaniu rozwiązania będzie ono widoczne dla Inwestora.';
                         action.value = {redirect: ''}
                     }else if(isSelected.value !== true && isPublic.value === true && isSolutions.value === true) {
