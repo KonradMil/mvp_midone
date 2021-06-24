@@ -200,6 +200,7 @@ export default {
 
         const getChallengeOffersRepositories = async () => {
             offers.value = GetChallengeOffers(props.challenge.id);
+            console.log(offers.value.length + 'offers length');
         }
 
         const handleCallback = () => {
