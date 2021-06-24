@@ -22,7 +22,7 @@ use Psr\Log\NullLogger;
 
 class SolutionController extends Controller
 {
-    public function deleteSolutionsNull(Request $request)
+    public function deleteSolutionsNull()
     {
         $solutions = Solution::all();
         foreach($solutions as $solution){
