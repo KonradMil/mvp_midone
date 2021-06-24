@@ -245,7 +245,7 @@ export default {
         }
 
         onMounted(() => {
-            console.log(offers.length + '-> offers length');
+            console.log(offers.list.length + '-> offers length');
             getChallengeOffersRepositories('');
         });
 
