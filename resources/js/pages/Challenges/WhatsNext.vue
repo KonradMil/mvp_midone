@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, getCurrentInstance, onMounted, ref, watch} from "vue";
 import GetUserSolutionsChallenge from "../../compositions/GetUserSolutionsChallenge";
 
 export default {
@@ -42,6 +42,8 @@ name: "WhatsNext",
         solutions: Array,
     },
     setup(props) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const title = ref('Następny krok');
         const text = ref('');
         const action = ref({});
@@ -50,6 +52,13 @@ name: "WhatsNext",
         const isSolutions = ref(false);
         const isSelected = ref(false);
         const check = ref(false);
+
+        const first = ref(false);
+        const second = ref(false);
+        const third = ref(false);
+        const fourth = ref(false);
+        const fifth = ref(false);
+
 
         watch(() => props.challenge, (first, second) => {
            doMe();
@@ -79,6 +88,12 @@ name: "WhatsNext",
                     }
                 })
         }
+
+        emitter.on('*', (type, e) => {
+            if(type == 'isPublic') {
+                isPublic.value = e.isPublic;
+            }
+        } );
 
         const solutions = computed(() => {
             if (props.challenge.solutions !== undefined) {
@@ -176,6 +191,11 @@ name: "WhatsNext",
         });
 
         return {
+            first,
+            second,
+            third,
+            fourth,
+            fifth,
             check,
             isSelected,
             isPublic,

@@ -221,6 +221,7 @@ export default {
                     if (response.data.success) {
                         solution.status = 1;
                         toast.success('Rozwiązanie zostało opublikowane');
+                        emitter.emit("isPublic", {isPublic: true});
                     } else {
                         // toast.error(response.data.message);
                     }
