@@ -85,9 +85,6 @@ export default {
                     }
                 })
         }
-        const handleCallback = () => {
-            emitter.emit('isSolutions', {isSolutions: true});
-        }
 
         const addSolution = () => {
             axios.post('/api/solution/create', {id: challenge.value.id})
@@ -103,7 +100,7 @@ export default {
                     } else {
                         // toast.error(response.data.message);
                     }
-                }, handleCallback)
+                })
         };
 
 
