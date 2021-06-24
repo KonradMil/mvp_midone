@@ -203,7 +203,7 @@ export default {
         }
 
         const handleCallback = () => {
-            router.push({name: 'projects'})
+            router.push({name: 'projects'});
         }
 
         const acceptOffer = async(offer) => {
@@ -245,6 +245,7 @@ export default {
         }
 
         onMounted(() => {
+            console.log(offers.length + '-> offers length');
             getChallengeOffersRepositories('');
         });
 
