@@ -43,7 +43,7 @@ class ChallengePublishedNotification extends Notification
     {
         return (new MailMessage)
                     ->line('Nowe wyzwanie zostało opublikowane.')
-                    ->action('Sprawdź', url('https://two.appworks-dev.pl/challenges/card/' . $this->challenge->id))
+                    ->action('Sprawdź', url('https://platform.dbr77.com/challenges/card/' . $this->challenge->id))
                     ->line('Dziękujemy za korzystanie z platformy DBR77!');
     }
 
