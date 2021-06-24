@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import {computed, onMounted, reactive, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, reactive, ref} from "vue";
 import {useToast} from "vue-toastification";
 import router from "../../../router";
 import SingleSolutionPost from "../../../components/SingleSolutionPost";
@@ -49,6 +49,8 @@ export default {
         inTeam: Boolean
     },
     setup(props) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const challenge = computed(() => {
             return props.challenge;
         });
@@ -83,6 +85,9 @@ export default {
                     }
                 })
         }
+        const handleCallback = () => {
+            emitter.emit('isSolutions', {isSolutions: true});
+        }
 
         const addSolution = () => {
             axios.post('/api/solution/create', {id: challenge.value.id})
@@ -98,7 +103,7 @@ export default {
                     } else {
                         // toast.error(response.data.message);
                     }
-                })
+                }, handleCallback)
         };
 
 

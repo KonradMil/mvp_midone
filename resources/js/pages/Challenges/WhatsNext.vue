@@ -102,6 +102,9 @@ name: "WhatsNext",
         emitter.on('changeToOffers', e => {
             check.value = e.check;
         });
+        emitter.on('isSolutions', e => {
+            isSolutions.value = e.isSolutions;
+        });
 
         const solutions = computed(() => {
             if (props.challenge.solutions !== undefined) {
