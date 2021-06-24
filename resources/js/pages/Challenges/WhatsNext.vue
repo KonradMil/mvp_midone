@@ -90,21 +90,25 @@ name: "WhatsNext",
         }
 
         emitter.on('*', (type, e) => {
-            if(type == 'isPublic') {
+            if(type == 'isPublic' && (e.isPublic === true)) {
                 isPublic.value = e.isPublic;
             }
         } );
         emitter.on('*', (type, e) => {
-            if(type == 'check') {
+            if(type == 'check' && e.check === true) {
                 check.value = e.check;
             }
         } );
 
         emitter.on('changeToOffers', e => {
-            check.value = e.check;
+            if(e.check===true){
+                check.value = e.check;
+            }
         });
         emitter.on('isSolutions', e => {
-            isSolutions.value = e.isSolutions;
+            if(e.isSolutions===true){
+                isSolutions.value = e.isSolutions;
+            }
         });
 
         const solutions = computed(() => {
