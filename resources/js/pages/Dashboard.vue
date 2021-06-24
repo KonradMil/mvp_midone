@@ -473,6 +473,14 @@ export default {
             el.tns.goTo("next");
         };
 
+        const deleteSolutionsOnNull = () => {
+            axios.post('/api/solution/filter', {})
+                .then(response => {
+                    if (response.data.success) {
+                    } else {
+                    }
+                })
+        }
         const GetDashBoardRepository = () => {
 
             GetDashboard((resp) => {
@@ -485,6 +493,7 @@ export default {
 
         }
         onMounted(() => {
+            deleteSolutionsOnNull();
             GetDashBoardRepository();
         });
 
