@@ -197,6 +197,7 @@ export default {
                         toast.success('Rozwiązanie zostało zaakceptowane');
                         props.solution.selected = 1;
                         props.solution.rejected = 0;
+                        emitter.emit("check", {check: true});
                     } else {
                         // toast.error(response.data.message);
                     }

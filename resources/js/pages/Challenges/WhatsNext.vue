@@ -98,6 +98,11 @@ name: "WhatsNext",
                 isPublic.value = e.isPublic;
             }
         } );
+        emitter.on('*', (type, e) => {
+            if(type == 'check') {
+                check.value = e.check;
+            }
+        } );
 
         emitter.on('changeToOffers', e => {
             check.value = e.check;
