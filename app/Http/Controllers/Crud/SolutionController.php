@@ -22,6 +22,22 @@ use Psr\Log\NullLogger;
 
 class SolutionController extends Controller
 {
+    public function deleteSolutionsNull(Request $request)
+    {
+        $solutions = Solution::get();
+        foreach($solutions as $solution){
+            $challenge = Challenge::find($solutions->challenge_id);
+            if($challenge==NULL){
+                $solutions->destroy();
+            }
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano rozwiązania poprawnie.',
+            'payload' => $solutions
+        ]);
+    }
+
     public function getUserSolutionsProject(Request $request)
     {
         $id = $request->input('id');

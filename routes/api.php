@@ -112,6 +112,7 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
 });
 
 Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('filter', [SolutionController::class, 'deleteSolutionsNull']);
     Route::post('accept', [SolutionController::class, 'acceptSolution']);
     Route::post('reject', [SolutionController::class, 'rejectSolution']);
     Route::post('user/get', [SolutionController::class, 'getUserSolutionsFiltered']);
