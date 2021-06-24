@@ -202,9 +202,9 @@ export default {
             offers.value = GetChallengeOffers(props.challenge.id);
         }
 
-        // const handleCallback = () => {
-        //     router.push({name: 'projects'})
-        // }
+        const handleCallback = () => {
+            router.push({name: 'projects'})
+        }
 
         const acceptOffer = async(offer) => {
             axios.post('/api/offer/accept', {id: offer.id})
@@ -215,11 +215,10 @@ export default {
                         offer.rejected = 0;
                         offer.solution.selected_offer_id = offer.id;
                         props.challenge.selected_offer_id = offer.id;
-                        router.push({name: 'projects'});
                     } else {
                         // toast.error(response.data.message);
                     }
-                })
+                },handleCallback)
         }
 
         const rejectOffer = async(offer) => {
