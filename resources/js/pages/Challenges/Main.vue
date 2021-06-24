@@ -147,15 +147,6 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         const toast = useToast();
 
-        const deleteSolutionsOnNull = () => {
-            axios.post('/api/solution/filter', {})
-                .then(response => {
-                    if (response.data.success) {
-                    } else {
-                    }
-                })
-        }
-
         const getChallengeRepositories = async () => {
             if(props.type == 'followed') {
                 challenges.value = GetChallengesFollowed();
@@ -168,7 +159,6 @@ export default {
         const sels = require("../../json/challenge.json");
 
         onMounted(function () {
-            deleteSolutionsOnNull();
             getChallengeRepositories();
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
