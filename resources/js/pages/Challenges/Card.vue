@@ -102,7 +102,7 @@
                         </button>
                     </div>
                 </div>
-                <WhatsNext :user="user" :challenge="challenge" :solutions="challenge.solutions" :notPublic="notPublic"></WhatsNext>
+                <WhatsNext :user="user" :challenge="challenge" :solutions="challenge.solutions"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
             <BasicInformationPanel :challenge="challenge" :inTeam="inTeam" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
@@ -168,7 +168,6 @@ export default defineComponent({
         const inTeam = ref(false);
         const isSolutions = ref(false);
         const isPublic = ref(false);
-        const notPublic = ref(false);
 
         emitter.on('selectedSolution', e => {
             selected_solution_id.value = e.id;
@@ -302,11 +301,9 @@ export default defineComponent({
         }
 
         const addSolution = () => {
-
             axios.post('/api/solution/create', {id: challenge.value.id})
                 .then(response => {
                     if (response.data.success) {
-                        notPublic.value = true;
                         console.log(response.data.payload);
                         router.push({path: '/studio/solution/' + response.data.payload.id});
                     } else {
@@ -368,7 +365,6 @@ export default defineComponent({
             inTeam,
             isSolutions,
             isPublic,
-            notPublic
         };
     }
 });

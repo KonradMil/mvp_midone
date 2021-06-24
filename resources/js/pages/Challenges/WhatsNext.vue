@@ -39,8 +39,7 @@ name: "WhatsNext",
     props: {
         challenge: Object,
         user: Object,
-        solutions: Array,
-        notPublic: Boolean
+        solutions: Array
     },
     setup(props) {
         const app = getCurrentInstance();
@@ -78,9 +77,6 @@ name: "WhatsNext",
         watch(() => check.value, (first, second) => {
             doMe();
         }, {})
-        watch(() => props.notPublic, (first, second) => {
-            doMe();
-        }, {});
 
         const isOffer = async () => {
             axios.post('/api/offer/user/check', {id: props.challenge.id})
