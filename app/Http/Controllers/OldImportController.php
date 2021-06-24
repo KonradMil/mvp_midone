@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Challenges\Challenge;
+use App\Models\File;
 use App\Models\Financial;
 use App\Models\OldChallenge;
 use App\Models\OldQuestion;
@@ -16,6 +17,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class OldImportController extends Controller
 {
@@ -106,23 +108,49 @@ class OldImportController extends Controller
 
 //        dd($a);
 //
+
+        $challenges = Challenge::get();
+        foreach ($challenges as $challenge) {
+            $tech = new TechnicalDetails();
+            $tech->challenge_id = $challenge->id;
+            $tech->save();
+        }
+
         $challenges = OldChallenge::get();
         foreach ($challenges as $challenge) {
-            try {
-                $nc = Challenge::where('name', '=', $challenge->name)->first();
-                if($challenge->published_at != NULL) {
-                    $nc->status = 1;
-                    $nc->save();
-                }
-//                dump($challenge->teams);
-//                foreach ($challenge->teams as $t) {
-//                    $nt = Team::where('name', '=', $t->name)->first();
-//                    $nc->teams()->attach($nt);
-//                }
-            }catch (\Exception $e) {
-                dump($e);
+            $nc = Challenge::where('name', '=', $challenge->name)->first();
+            foreach ($challenge->files as $ofile) {
+                $file = new File();
+                $name = $ofile->name . '.' .$ofile->ext;
+                $file->name = $name;
+                $file->ext = $ofile->ext;
+                $file->path = 's3/screenshots/' . $name;
+                $file->original_name = $ofile->name;
+                $file->save();
+                $nc->files()->attach($file);
             }
+//            Storage::disk('s3')->putFileAs('screenshots', $request->file, $fileName);
+//        $request->file->move(public_path('uploads'), $fileName);
+
+
         }
+//        $challenges = OldChallenge::get();
+//        foreach ($challenges as $challenge) {
+//            try {
+//                $nc = Challenge::where('name', '=', $challenge->name)->first();
+//                if($challenge->published_at != NULL) {
+//                    $nc->status = 1;
+//                    $nc->save();
+//                }
+////                dump($challenge->teams);
+////                foreach ($challenge->teams as $t) {
+////                    $nt = Team::where('name', '=', $t->name)->first();
+////                    $nc->teams()->attach($nt);
+////                }
+//            }catch (\Exception $e) {
+//                dump($e);
+//            }
+//        }
 //        $oldTeam = OldTeam::get();
 //
 //        foreach ($oldTeam as $team) {

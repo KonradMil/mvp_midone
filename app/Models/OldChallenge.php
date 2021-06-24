@@ -36,4 +36,9 @@ class OldChallenge extends Model
     {
         return $this->hasMany(OldSolution::class, 'challenge_id', 'id');
     }
+
+    public function files()
+    {
+        return $this->hasMany(OldFile::class, 'file_id', 'challenge_id');
+    }
 }
