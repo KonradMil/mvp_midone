@@ -95,6 +95,10 @@ name: "WhatsNext",
             }
         } );
 
+        emitter.on('changeToOffers', e => {
+            check.value = e.check;
+        });
+
         const solutions = computed(() => {
             if (props.challenge.solutions !== undefined) {
                 if (props.challenge.solutions.length > 0) {
