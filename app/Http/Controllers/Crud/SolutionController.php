@@ -24,7 +24,7 @@ class SolutionController extends Controller
 {
     public function deleteSolutionsNull(Request $request)
     {
-        $solutions = Solution::get();
+        $solutions = Solution::all();
         foreach($solutions as $solution){
             $challenge = Challenge::find($solutions->challenge_id);
             if($challenge==NULL){
