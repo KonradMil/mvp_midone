@@ -103,7 +103,7 @@
                                     />
                                 </div>
                                 <div class="mt-3">
-                                    <label for="input-wizard-5" class="form-label">{{ $t('profiles.province') }}</label>
+                                    <label class="form-label">{{ $t('profiles.province') }}</label>
 <!--                                    <input-->
 <!--                                        id="input-wizard-11"-->
 <!--                                        type="text"-->
