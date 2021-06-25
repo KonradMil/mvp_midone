@@ -195,7 +195,8 @@ export default {
         const solution = ref();
         const check = ref(false);
 
-        watch(() => offers.value, (first, second) => {
+        watch(() => offer.rejected, (first, second) => {
+            getChallengeOffersRepositories();
         }, {})
 
         const switchTab = () => {
