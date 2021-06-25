@@ -172,7 +172,7 @@
 </template>
 
 <script>
-import {getCurrentInstance, onMounted, ref} from "vue";
+import {getCurrentInstance, onMounted, ref, watch} from "vue";
 import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
 import {useToast} from "vue-toastification";
 import router from "../../../router";
@@ -194,6 +194,9 @@ export default {
         const values = require('../../../json/offer_values.json');
         const solution = ref();
         const check = ref(false);
+
+        watch(() => offers.value, (first, second) => {
+        }, {})
 
         const switchTab = () => {
             context.emit("update:activeTab", 'addingoffer');
@@ -222,7 +225,7 @@ export default {
                 },handleCallback)
         }
 
-        const rejectOffer = async(offer) => {
+        const rejectOffer = async(offer,index) => {
             axios.post('/api/offer/reject', {id: offer.id})
                 .then(response => {
                     if (response.data.success) {
