@@ -174,7 +174,7 @@ export default defineComponent({
         Socials
     },
     props: {
-      activeTab: String,
+      check: String,
     },
     setup(props) {
         const activeTab = ref('personalia');
@@ -271,7 +271,7 @@ export default defineComponent({
         };
 
         onMounted(function () {
-            if(props.activeTab === 'change_password'){
+            if(props.check === 'change_password'){
                 activeTab.value = 'change_password';
             }
             lang.value = store.state.main.currentLang;
