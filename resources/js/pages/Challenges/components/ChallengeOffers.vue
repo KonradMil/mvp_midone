@@ -195,7 +195,7 @@ export default {
         const solution = ref();
         const check = ref(false);
 
-        watch(() => rejectOffer(), (first, second) => {
+        watch(() => offers.value.list, (first, second) => {
             getChallengeOffersRepositories();
         }, {})
 
