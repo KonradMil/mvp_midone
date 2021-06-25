@@ -1,5 +1,5 @@
 <template>
-    <div class="col-span-12 lg:col-span-8 xxl:col-span-9 flex lg:block flex-col-reverse">
+    <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9 flex lg:block flex-col-reverse">
         <div v-if="objects.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie masz jeszcze żadnych zapisanych obiektów.
         </div>

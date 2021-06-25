@@ -201,7 +201,8 @@ export default {
 
         const getChallengeOffersRepositories = async () => {
             offers.value = GetChallengeOffers(props.challenge.id);
-            if(offers.value.length === undefined){
+            console.log(offers.length + '-> offers.length');
+            if(offers.length === undefined){
                 check.value = true;
             }
             console.log(offers.value.length + 'offers length');
