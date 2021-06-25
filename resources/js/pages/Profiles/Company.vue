@@ -104,12 +104,21 @@
                                 </div>
                                 <div class="mt-3">
                                     <label for="input-wizard-5" class="form-label">{{ $t('profiles.province') }}</label>
-                                    <input
-                                        id="input-wizard-11"
-                                        type="text"
-                                        class="form-control"
+<!--                                    <input-->
+<!--                                        id="input-wizard-11"-->
+<!--                                        type="text"-->
+<!--                                        class="form-control"-->
+<!--                                        v-model="company.province"-->
+<!--                                    />-->
+                                    <TailSelect
+                                        id="input-wizard-10"
                                         v-model="company.province"
-                                    />
+                                        :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                        <option :selected="company.province === '' ? 'selected' : ''" disabled>Wybierz...</option>
+                                        <option :selected="index === company.province ? 'selected' : ''" v-for="(det,index) in provinces"
+                                                :value="index">{{ det }}
+                                        </option>
+                                    </TailSelect>
                                 </div>
                             </div>
                             <div class="col-span-12 xxl:col-span-6">
@@ -150,6 +159,7 @@ export default {
         DarkModeSwitcher
     },
     setup() {
+        const provinces = require('../../json/provinces.json');
         const user = window.Laravel.user;
         const teams = ref([]);
         const company = ref({
@@ -308,6 +318,7 @@ export default {
 
         });
         return {
+            provinces,
             teams,
             company,
             searchKRS,
