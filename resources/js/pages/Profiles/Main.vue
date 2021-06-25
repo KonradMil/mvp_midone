@@ -271,6 +271,7 @@ export default defineComponent({
         };
 
         onMounted(function () {
+            console.log(props.check + 'props check');
             if(props.check === 'change_password'){
                 activeTab.value = 'change_password';
             }

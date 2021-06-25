@@ -172,7 +172,7 @@ name: "WhatsNext",
                         action.value = {redirect: ''}
                     }
                 } else {
-                    if(props.challenge.solutions === 0) {
+                    if(props.challenge.solutions < 1 && props.challenge.stage === 1) {
                         text.value = 'Oczekuj na nowe rozwiązania.';
                         buttonText.value = '';
                         action.value = {redirect: ''}
