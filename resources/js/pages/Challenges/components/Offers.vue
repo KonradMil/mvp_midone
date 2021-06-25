@@ -180,15 +180,12 @@ export default {
         const deleteOffer = async(id,index) => {
             axios.post('/api/offer/delete', {id: id})
                 .then(response => {
-                    console.log(id + '-> id offer delete')
-                    console.log(response.data + '->response.data');
                     if (response.data.success) {
                         toast.success(response.data.message);
                         offers.value.list.splice(index,1);
                     } else {
                     }
                 })
-           // await getOffersRepositories('');
         }
 
         // const getOffers = () => {

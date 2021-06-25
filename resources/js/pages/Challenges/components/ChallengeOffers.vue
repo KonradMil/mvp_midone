@@ -245,7 +245,6 @@ export default {
                         // toast.error(response.data.message);
                     }
                 })
-            await getChallengeOffersRepositories('');
         }
 
         onMounted(() => {
