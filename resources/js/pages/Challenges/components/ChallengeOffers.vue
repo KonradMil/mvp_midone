@@ -196,7 +196,6 @@ export default {
         const check = ref(false);
 
         watch(() => offers.value, (first, second) => {
-            getChallengeOffersRepositories();
         }, {})
 
         const switchTab = () => {
