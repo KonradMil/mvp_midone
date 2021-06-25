@@ -173,7 +173,10 @@ export default defineComponent({
         Terms,
         Socials
     },
-    setup() {
+    props: {
+      activeTab: String,
+    },
+    setup(props) {
         const activeTab = ref('personalia');
         const toast = useToast();
         const dropzoneSingleRef = ref();
@@ -268,6 +271,9 @@ export default defineComponent({
         };
 
         onMounted(function () {
+            if(props.activeTab === 'change_password'){
+                activeTab.value = 'change_password';
+            }
             lang.value = store.state.main.currentLang;
             notifications.value = user.notifications;
             avatar_path.value = user.avatar;

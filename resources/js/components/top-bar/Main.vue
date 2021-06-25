@@ -169,7 +169,7 @@
                         <a
                             href=""
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
-                            @click.prevent="$router.push({path: '/profiles'})"
+                            @click.prevent="$router.push({path: '/profiles', params: {activeTab: 'change_password'}})"
                         >
                             <LockIcon class="w-4 h-4 mr-2"/>
                             {{$t('topBar.resetPassword')}}
@@ -177,6 +177,7 @@
                         <a
                             href=""
                             class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"
+                            @click.prevent="$router.push({path: '/communication'})"
                         >
                             <HelpCircleIcon class="w-4 h-4 mr-2"/>
                             {{$t('topBar.help')}}
