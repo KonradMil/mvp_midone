@@ -150,7 +150,7 @@ export default {
         const values = require('../../../json/offer_values.json');
         const offer_id = ref();
 
-        watch(() => offers.value, (first, second) => {
+        watch(() => offers.value.list, (first, second) => {
         }, {})
 
         const switchTab = () => {
@@ -188,7 +188,7 @@ export default {
                     } else {
                     }
                 })
-           await getOffersRepositories('');
+           // await getOffersRepositories('');
         }
 
         // const getOffers = () => {
