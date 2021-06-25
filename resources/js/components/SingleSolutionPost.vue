@@ -157,19 +157,12 @@ export default {
         }
 
         const like = async (solution) => {
-            console.log(solution);
-            console.log('-> solution');
-            console.log('DZIALA?');
-            console.log(solution.id);
             axios.post('/api/solution/user/like', {id: solution.id})
                 .then(response => {
                     console.log(response.data);
                     if (response.data.success) {
-                        console.log('LIKEEEEEEES')
-                        console.log(solution.value);
-                        console.log(solution.id);
                         solution.liked = true;
-                        console.log(solution);
+                        console.log('HOW MANY LIKES');
                         emitter.emit('liked', {id: solution.id})
                     } else {
                         // toast.error(response.data.message);
@@ -181,8 +174,8 @@ export default {
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
-                        console.log('DISLIKEEEEEEE');
                         solution.liked = false;
+                        console.log('HOW MANY DISLIKES');
                         emitter.emit('disliked', {id: solution.id})
                     } else {
                     }
