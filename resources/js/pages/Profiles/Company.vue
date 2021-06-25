@@ -102,8 +102,8 @@
                                         v-model="company.postcode"
                                     />
                                 </div>
-                                <div class="mt-3">
-                                    <label class="form-label">{{ $t('profiles.province') }}</label>
+                                <div class="col-span-12 sm:col-span-6 mt-3">
+                                    <label for="input-wizard-5" class="form-label">{{ $t('profiles.province') }}</label>
 <!--                                    <input-->
 <!--                                        id="input-wizard-11"-->
 <!--                                        type="text"-->
