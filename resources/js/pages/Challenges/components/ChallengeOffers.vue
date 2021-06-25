@@ -201,7 +201,7 @@ export default {
 
         const getChallengeOffersRepositories = async () => {
             offers.value = GetChallengeOffers(props.challenge.id);
-            if(offers.value.list === undefined){
+            if(offers.value.list === 0){
                 check.value = true;
             }
         }
