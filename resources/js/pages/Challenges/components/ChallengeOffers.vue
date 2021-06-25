@@ -37,7 +37,7 @@
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
         <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
-        <div v-if="offers===undefined" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+        <div v-if="check===true" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie ma jeszcze żadnych ofert.
         </div>
         <div class="grid grid-cols-12 gap-6">
@@ -193,6 +193,7 @@ export default {
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
         const solution = ref();
+        const check = ref(false);
 
         const switchTab = () => {
             context.emit("update:activeTab", 'addingoffer');
@@ -200,6 +201,9 @@ export default {
 
         const getChallengeOffersRepositories = async () => {
             offers.value = GetChallengeOffers(props.challenge.id);
+            if(offers.value.length === undefined){
+                check.value = true;
+            }
             console.log(offers.value.length + 'offers length');
         }
 
@@ -250,6 +254,7 @@ export default {
         });
 
         return {
+            check,
             rejectOffer,
             acceptOffer,
             switchTab,
