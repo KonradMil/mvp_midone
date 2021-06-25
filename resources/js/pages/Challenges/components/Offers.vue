@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import {getCurrentInstance, onMounted, ref} from "vue";
+import {getCurrentInstance, onMounted, ref, watch} from "vue";
 import GetOffers from "../../../compositions/GetOffers";
 import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
 import {useToast} from "vue-toastification";
@@ -141,6 +141,7 @@ export default {
         id: Number,
     },
     emits: ["update:activeTab"],
+
     setup(props, context) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
@@ -148,6 +149,9 @@ export default {
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
         const offer_id = ref();
+
+        watch(() => offers.value, (first, second) => {
+        }, {})
 
         const switchTab = () => {
             context.emit("update:activeTab", 'addingoffer');
