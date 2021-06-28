@@ -126,7 +126,7 @@
                                         mode="single"
                                         label="name"
                                         max="1"
-                                        :placeholder="company.province"
+                                        :placeholder="company.province === '' ? 'select' : company.province"
                                         valueProp="value"
                                         :options="provinces['province']"
                                     />
