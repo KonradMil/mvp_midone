@@ -56,6 +56,14 @@
         },
 
         "challengesMain": {
+            "unFollow" : "Unfollow",
+            "follow" : "Follow",
+            "nextDeadline" : "Next deadline",
+            "changeDates" : "Change dates",
+            "deadlineSubmissionSolutions" : "Deadline submission of solutions",
+            "deadlineSubmissionOffers" : "Deadline submission of offers",
+            "type" : "Type",
+            "basicData" : "Basic Data",
             "basicInformation" : "Basic Information",
             "technicalDetails" : "Technical Details",
             "challenge" : "Challenge",
@@ -321,6 +329,14 @@
             "description" : "Jeśli podany mail jest powziązany z już zarejestrowanym użytkownikiem będzie on musiał jedynie potwierdzić chęć dołączenia."
         },
         "challengesMain": {
+            "unFollow" : "Przestań śledzić",
+            "follow" : "Śledź",
+            "nextDeadline" : "Następny deadline",
+            "changeDates" : "Zmień daty",
+            "deadlineSubmissionSolutions" : "Deadline składania rozwiązań",
+            "deadlineSubmissionOffers" : "Deadline składania ofert",
+            "type" : "Typ",
+            "basicData" : "Dane podstawowe",
             "basicInformation" : "Informacje podstawowe",
             "challenge" : "Wyzwanie",
             "challenges": "Wyzwania",

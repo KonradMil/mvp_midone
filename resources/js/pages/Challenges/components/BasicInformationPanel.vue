@@ -12,20 +12,20 @@
                 <div
                     class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5"
                 >
-                    <h2 class="font-medium text-base mr-auto"> Dane podstawowe</h2>
+                    <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.basicData')}}</h2>
                 </div>
                 <div class="px-5 pt-5">
-                    <div class="font-medium text-lg"><strong>Nazwa:</strong> {{ challenge.name }}</div>
+                    <div class="font-medium text-lg"><strong>{{$t('global.name')}}</strong> {{ challenge.name }}</div>
                     <div class="font-medium text-lg dark:text-theme-10 text-theme-1"><strong>Etap:</strong> {{ stage }}
                     </div>
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
-                        <strong>Typ:</strong> {{ types[challenge.type] }}
+                        <strong>{{$t('challengesMain.basicInformation')}}:</strong> {{ types[challenge.type] }}
                     </div>
                     <div class="text-gray-700 dark:text-gray-600 mt-2" style="word-break: break-all; max-height: 100px; overflow-y: scroll;">
-                        <strong>Opis:</strong> {{ challenge.description }}
+                        <strong>{{$t('challengesNew.description')}}:</strong> {{ challenge.description }}
                     </div>
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
-                        <strong>Deadline składania rozwiązań:</strong>
+                        <strong>{{$t('challengesNew.deadlineSubmissionSolutions')}}:</strong>
                         <Litepicker
                             id="post-form-2"
                             v-model="challenge.solution_deadline"
@@ -46,7 +46,7 @@
                         <span v-if="!inTeam"> {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }} </span>
                     </div>
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
-                        <strong>Deadline składania ofert:</strong>
+                        <strong>{{$t('challengesMain.deadlineSubmissionOffers')}}:</strong>
                         <Litepicker
                             id="post-form-3"
                             v-model="challenge.offer_deadline"
@@ -67,23 +67,23 @@
                         <span v-if="!inTeam"> {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }} </span>
                     </div>
                     <button v-if="inTeam" class="btn btn-secondary ml-auto my-1" @click="saveDate">
-                        Zmień daty
+                        {{$t('challengesMain.changeDates')}}
                     </button>
                     <div class="flex items-center my-5">
                         <div
                             class="px-3 py-2 bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 rounded font-medium"
                             v-if="$dayjs().isBefore($dayjs(challenge.offer_deadline))"
                         >
-                            Następny deadline:
+                            {{$t('challengesMain.nextDeadline')}}:
                             <span v-if="$dayjs().isAfter($dayjs(challenge.solution_deadline))">Składanie rozwiązań do: {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }}</span>
                             <span v-if="$dayjs().isBefore($dayjs(challenge.solution_deadline))">Składanie ofert do: {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }}</span>
                         </div>
                         <button v-if="!challenge.followed" class="btn btn-secondary ml-auto" @click="follow">
-                            Śledź
+                            {{$t('challengesMain.follow')}}
                         </button>
 
                         <button v-if="challenge.followed" class="btn btn-secondary ml-auto" @click="unfollow">
-                            Przestań śledzić
+                            {{$t('challengesMain.unFollow')}}
                         </button>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                 <div
                     class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5"
                 >
-                    <h2 class="font-medium text-base mr-auto">Zdjęcia</h2>
+                    <h2 class="font-medium text-base mr-auto">{{$t('challengesNew.photo')}}</h2>
                 </div>
 
                 <div class="p-10" v-if="challenge.screenshot_path != undefined">
