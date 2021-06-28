@@ -56,7 +56,7 @@
         },
 
         "challengesMain": {
-            "noSolutionsInform" : "There are no solutions at the moment, we'll let you know as soon as  if they are available",
+            "noSolutionsInform" : "There are no solutions at the moment, we'll let you know as soon as  if they we'll be available",
             "noSolutions" : "There are no solutions yet",
             "financialDetails" : "Financial Details",
             "nextStep" : "Next step",
