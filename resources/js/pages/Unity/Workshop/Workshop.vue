@@ -82,6 +82,15 @@ name: "Workshop",
 
                         }
                     })
+            }else if (e.action == 'copy'){
+                axios.post('/api/workshop/models/copy', {id: e.id})
+                    .then(response => {
+                        if (response.data.success) {
+                            emitter.emit('singleobjectcopied', {id: e.id});
+                        } else {
+
+                        }
+                    })
             }
         });
 

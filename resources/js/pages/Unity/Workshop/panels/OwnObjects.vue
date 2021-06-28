@@ -32,6 +32,10 @@ export default {
            });
         });
 
+        emitter.on('singleobjectcopied', e => {
+            getObjects();
+        });
+
         const getObjects = () => {
             axios.post('/api/workshop/models/get/all', {own: true})
                 .then(response => {

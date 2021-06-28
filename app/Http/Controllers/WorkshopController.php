@@ -103,4 +103,19 @@ class WorkshopController extends Controller
             'payload' => $model
         ]);
     }
+
+    public function copy(Request $request)
+    {
+        $model = WorkshopObject::find($request->input('id'));
+        $modelNew = $model->replicate();
+        $modelNew->author_id = Auth::user()->id;
+        $modelNew->public = 0;
+        $modelNew->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Opublikowano poprawnie.',
+            'payload' => $model
+        ]);
+    }
 }

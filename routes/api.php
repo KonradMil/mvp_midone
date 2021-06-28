@@ -184,6 +184,7 @@ Route::group(['prefix' => 'workshop/models', 'middleware' => 'auth:sanctum'], fu
     Route::post('delete', [WorkshopController::class, 'delete']);
     Route::post('publish', [WorkshopController::class, 'publish']);
     Route::post('like', [WorkshopController::class, 'likeObject']);
+    Route::post('copy', [WorkshopController::class, 'copy']);
 });
 
 Route::group(['prefix' => 'offer', 'middleware' => 'auth:sanctum'], function () {

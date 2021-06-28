@@ -12,7 +12,7 @@
                 <MoreVerticalIcon class="w-5 h-5"/>
             </a>
             <div class="dropdown-menu w-40">
-                <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                <div class="dropdown-menu__content box dark:bg-dark-1 p-2" v-if="own">
                     <a href="" @click.prevent="editObject"
                         class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                         <Edit2Icon class="w-4 h-4 mr-2"/>
@@ -27,6 +27,13 @@
                        class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                         <SendIcon class="w-4 h-4 mr-2"/>
                         Opublikuj
+                    </a>
+                </div>
+                <div class="dropdown-menu__content box dark:bg-dark-1 p-2" v-if="!own">
+                    <a href="" @click.prevent="copyObject"
+                       class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                        <DownloadIcon class="w-4 h-4 mr-2"/>
+                        Importuj do swoich
                     </a>
                 </div>
             </div>
@@ -45,7 +52,7 @@
             {{ object.description }}
         </div>
     </div>
-    <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
+    <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5" v-if="!own">
         <div class="intro-x flex mr-2">
         </div>
         <Tippy v-if="!object.liked"
@@ -71,7 +78,8 @@ import {getCurrentInstance} from "vue";
 export default {
     name: "SingleWorkshopObject",
     props: {
-       object: Object
+       object: Object,
+        own: Boolean
     },
     setup(props) {
         const object = props.object;
@@ -101,6 +109,9 @@ export default {
         const publishObject = () => {
             emitter.emit('singleworkshopobject', {action: 'publish', id: object.id})
         }
+        const copyObject = () => {
+            emitter.emit('singleworkshopobject', {action: 'copy', id: object.id})
+        }
 
         return {
             object,
@@ -109,7 +120,8 @@ export default {
             props,
             editObject,
             deleteObject,
-            publishObject
+            publishObject,
+            copyObject
         }
     }
 }
