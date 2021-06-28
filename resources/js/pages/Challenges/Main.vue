@@ -36,6 +36,9 @@
                     <p v-if="user.type == 'integrator' && type==='followed'">
                         Nie obserwujesz jeszcze żadnych wyzwań.
                     </p>
+                    <p v-if="user.type == 'integrator' && type==='archive'">
+                        Nie masz jeszcze żadnych archiwalnych wyzwań.
+                    </p>
                     <div v-if="user.type === 'investor'">
                         <p v-if="type === 'normal'">
                             Nie dodałeś jeszcze żadnych wyzwań.
