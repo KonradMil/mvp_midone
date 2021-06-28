@@ -56,6 +56,8 @@
         },
 
         "challengesMain": {
+            "noSolutionsInform" : "There are no solutions at the moment, we'll let you know as soon as  if they are available",
+            "noSolutions" : "There are no solutions yet",
             "financialDetails" : "Financial Details",
             "nextStep" : "Next step",
             "unFollow" : "Unfollow",
@@ -331,6 +333,8 @@
             "description" : "Jeśli podany mail jest powziązany z już zarejestrowanym użytkownikiem będzie on musiał jedynie potwierdzić chęć dołączenia."
         },
         "challengesMain": {
+            "noSolutionsInform" : "W tej chwili nie ma żadnych rozwiązań, poinformujemy Cię jak tylko jakieś będą dostępne",
+            "noSolutions" : "Nie ma jeszcze żadnych rozwiązań",
             "financialDetails" : "Szczegóły finansowe",
             "nextStep" : "Następny krok",
             "unFollow" : "Przestań śledzić",
