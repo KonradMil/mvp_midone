@@ -126,7 +126,7 @@
                                         mode="single"
                                         label="name"
                                         max="1"
-                                        :placeholder="$t('global.select')"
+                                        :placeholder="company.province"
                                         valueProp="value"
                                         :options="provinces['province']"
                                     />
