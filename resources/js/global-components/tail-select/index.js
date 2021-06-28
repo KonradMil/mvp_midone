@@ -4,9 +4,10 @@ import _ from "lodash";
 const setValue = (el, props) => {
   if (props.modelValue.length) {
       try {
+          console.log('props.modelValue.length ->' + props.modelValue.length);
           cash(el).val(props.modelValue);
       } catch(error) {
-          console.log(error);
+          console.log('errorrrrrrrrrrrrr->' + error);
       }
   }
 };
