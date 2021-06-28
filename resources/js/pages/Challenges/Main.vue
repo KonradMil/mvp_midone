@@ -30,14 +30,23 @@
             <!-- BEGIN: Blog Layout -->
             <div class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium" v-if="challenges.list == undefined || challenges.list.length == 0">
                 <div>
-                    <p v-if="user.type == 'integrator'">
+                    <p v-if="user.type == 'integrator' && type===undefined">
                         W tej chwili nie ma żadnych wyzwań, poinformujemy Cię jak tylko jakieś będą dostępne.
                     </p>
+                    <p v-if="type==='followed'">
+                        Nie obserwujesz jeszcze żadnych wyzwań.
+                    </p>
                     <div v-if="user.type === 'investor'">
-                        <p>
+                        <p v-if="type===undefined">
                             Nie dodałeś jeszcze żadnych wyzwań.
                         </p>
-                        <button class="btn btn-primary shadow-md mr-2 mt-2" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
+                        <p v-if="type==='followed'">
+                            Nie obserwujesz jeszcze żadnych wyzwań.
+                        </p>
+                        <p v-if="type==='archive'">
+                            Nie dodałeś jeszcze żadnych wyzwań.
+                        </p>
+                        <button v-if="type===undefined" class="btn btn-primary shadow-md mr-2 mt-2" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
                     </div>
                 </div>
             </div>
