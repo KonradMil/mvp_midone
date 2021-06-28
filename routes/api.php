@@ -69,6 +69,7 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
     Route::post('check-team', [ChallengeController::class, 'checkTeam']);
     Route::post('user/save/description', [ChallengeController::class, 'saveDescription']);
     Route::post('user/get/followed', [ChallengeController::class, 'getUserChallengesFollowed']);
+    Route::post('user/get/archive', [ChallengeController::class, 'getUserChallengesArchive']);
     Route::post('user/get/card', [ChallengeController::class, 'getCardData']);
     Route::post('user/create', [ChallengeController::class, 'createChallenge']);
     Route::post('user/save', [ChallengeController::class, 'saveChallenge']);

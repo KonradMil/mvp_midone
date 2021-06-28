@@ -131,6 +131,7 @@
 import {defineComponent, ref, provide, onMounted, getCurrentInstance, watch, onUpdated} from "vue";
 import GetChallenges from "../../compositions/GetChallenges";
 import GetChallengesFollowed from "../../compositions/GetChallengesFollowed";
+import GetChallengesArchive from "../../compositions/GetChallengesArchive";
 import CommentSection from "../../components/social/CommentSection";
 import {useToast} from "vue-toastification";
 
@@ -150,7 +151,10 @@ export default {
         const getChallengeRepositories = async () => {
             if(props.type == 'followed') {
                 challenges.value = GetChallengesFollowed();
-            } else {
+            } else if(props.type ==='archive' && user.value.type==='investor'){
+                challenges.value = GetChallengesArchive();
+            }
+            else {
                 challenges.value = GetChallenges();
             }
 

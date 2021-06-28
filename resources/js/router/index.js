@@ -155,6 +155,12 @@ export const routes = [
                 props: { type: 'followed' }
             },
             {
+                name: 'challengesArchive',
+                path: '/challenges/archive',
+                component: Challenges,
+                props: { type: 'archive' }
+            },
+            {
                 name: 'internalChallenegeCard',
                 path: '/challenges/card/:id',
                 component: Card,

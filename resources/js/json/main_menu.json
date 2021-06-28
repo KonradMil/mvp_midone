@@ -27,6 +27,12 @@
                     "pageName": "challengesFollowed",
                     "title": "Śledzone",
                     "ignore": true
+                },
+                {
+                    "icon": "",
+                    "pageName": "challengesArchive",
+                    "title": "Archiwalne",
+                    "ignore": true
                 }
             ]
         },
