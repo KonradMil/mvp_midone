@@ -2,16 +2,17 @@ import TailSelect from "tail.select";
 import _ from "lodash";
 
 const setValue = (el, props) => {
-  if (props.modelValue.length) {
-      try {
-          console.log('props.modelValue.length ->' + props.modelValue.length);
-          cash(el).val(props.modelValue);
-      } catch(error) {
-          console.log('errorrrrrrrrrrrrr->' + error);
-      }
-  } else {
-      console.log('whats uPPPPPPP');
-  }
+    cash(el).val(props.modelValue);
+  // if (props.modelValue.length) {
+  //     try {
+  //         console.log('props.modelValue.length ->' + props.modelValue.length);
+  //         cash(el).val(props.modelValue);
+  //     } catch(error) {
+  //         console.log('errorrrrrrrrrrrrr->' + error);
+  //     }
+  // } else {
+  //     console.log('whats uPPPPPPP');
+  // }
 };
 
 const init = (el, props, emit) => {
