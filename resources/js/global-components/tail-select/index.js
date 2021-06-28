@@ -3,7 +3,11 @@ import _ from "lodash";
 
 const setValue = (el, props) => {
   if (props.modelValue.length) {
-    cash(el).val(props.modelValue);
+      try {
+          cash(el).val(props.modelValue);
+      } catch(error) {
+          console.log(error);
+      }
   }
 };
 
