@@ -65,97 +65,97 @@
                             </div>
                             <div class="flex items-center">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Okres ważności oferty w dniach:</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.offerExpires')}}:</span>
                                     <div class="text-gray-600"> {{ offer.offer_expires_in }} dni</div>
                                 </div>
                             </div>
                             <div class="flex items-center">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Cena za dostawę oraz uruchomienie stanowiska (netto):</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.priceDelivery')}}:</span>
                                     <div class="text-gray-600"> {{ offer.price_of_delivery }}</div>
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Ilość tygodni do uruchomienia, liczona od podpisania umowy:</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.weeksToStart')}}:</span>
                                     <div class="text-gray-600"> {{ values['weeks'][offer.weeks_to_start] }} </div>
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Czas realizacji uruchomienia u klienta (tygodni):</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.timeToStart')}}:</span>
                                     <div class="text-gray-600"> {{ values['weeks-short'][offer.time_to_start] }} </div>
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Czas przywrócenia stanowiska do sprawności po awarii:</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.timeToFix')}}:</span>
                                     <div class="text-gray-600"> {{ values['hours'][offer.time_to_fix] }} </div>
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Wysokość zaliczki płatnej po uruchomieniu i finalnym odbiorze stanowiska:</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.advanceUponStart')}}:</span>
                                     <div class="text-gray-600"> {{ values['percent'][offer.advance_upon_start] }} </div>
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Wyskość zaliczki (%) płatnej przy odbiorze wstępnym dokonywanym u Integratora:</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.advanceUponDelivery')}}:</span>
                                     <div class="text-gray-600"> {{ values['percent'][offer.advance_upon_delivery] }} </div>
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Wysokość zaliczki (%) płatnej po podpisaniu umowy:</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.advanceUponAgreement')}}:</span>
                                     <div class="text-gray-600"> {{ values['percent'][offer.advance_upon_agreement] }} </div>
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Okres gwarancji w latach:</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.yearsGuarantee')}}:</span>
                                     <div class="text-gray-600"> {{ values['years-short'][offer.years_of_guarantee] }} </div>
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Ilość obsługiwanych stanowisk/linii:</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesNew.numberSupported')}}:</span>
                                     <div class="text-gray-600"> {{offer.service_support_scope }} </div>
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Częstotliwość przeglądów gwarancyjnych w roku:</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.maintenanceFrequency')}}:</span>
                                     <div class="text-gray-600"> {{ offer.maintenance_frequency }} </div>
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Koszt roczny przeglądu gwaranycjnego:</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.priceMaintenance')}}:</span>
                                     <div class="text-gray-600"> {{ offer.price_of_maintenance }} </div>
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Czas reakcji na zgłoszenie awarii w godzinach:</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.reactionTime')}}:</span>
                                     <div class="text-gray-600"> {{ values['hours'][offer.reaction_time] }} </div>
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Koszt interwencji w wypadku awarii nie podlegającej gwarancji:</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.interventionPrice')}}:</span>
                                     <div class="text-gray-600"> {{ offer.intervention_price }} </div>
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Koszt roboczo godziny pracy wsparcia / prac rozwojowych:</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.workHourPrice')}}:</span>
                                     <div class="text-gray-600"> {{ offer.work_hour_price }} </div>
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
-                                    <span class="font-medium dark:text-theme-10 text-theme-1">Okres wsparcia technicznego poza zakresem gwarancji w latach:</span>
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.periodSupport')}}:</span>
                                     <div class="text-gray-600"> {{ offer.period_of_support }} </div>
                                 </div>
                             </div>
