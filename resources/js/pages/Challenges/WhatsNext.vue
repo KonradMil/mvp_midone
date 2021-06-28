@@ -45,7 +45,7 @@ name: "WhatsNext",
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         // const title = ref('Następny krok');
-        const title = ref($t('challengesMain.next'))
+        const title = ref($t('challengesMain.nextStep'))
         const text = ref('');
         const action = ref({});
         const buttonText = ref('Przejdź');
