@@ -128,7 +128,7 @@
                                         max="1"
                                         :placeholder="$t('global.select')"
                                         valueProp="value"
-                                        :options="provincesSelects"
+                                        :options="provinces['province']"
                                     />
                                 </div>
                             </div>
