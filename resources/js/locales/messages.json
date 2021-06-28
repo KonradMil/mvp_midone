@@ -56,6 +56,7 @@
         },
 
         "challengesMain": {
+            "nextStep" : "Next step",
             "unFollow" : "Unfollow",
             "follow" : "Follow",
             "nextDeadline" : "Next deadline",
@@ -329,6 +330,7 @@
             "description" : "Jeśli podany mail jest powziązany z już zarejestrowanym użytkownikiem będzie on musiał jedynie potwierdzić chęć dołączenia."
         },
         "challengesMain": {
+            "nextStep" : "Następny krok",
             "unFollow" : "Przestań śledzić",
             "follow" : "Śledź",
             "nextDeadline" : "Następny deadline",
