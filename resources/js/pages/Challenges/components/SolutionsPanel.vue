@@ -4,16 +4,16 @@
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12 xxl:col-span-12">
                 <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-                    <h2 class="font-medium text-base mr-auto"> Rozwiązania</h2>
+                    <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.solutions')}}</h2>
                 </div>
                 <div class="px-5 py-5">
                     <div v-if="challenge.solutions.length == 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
-                        Nie ma jeszcze żadnych rozwiązań.
+                        {{$t('challengesMain.noSolutions')}}.
                         <div v-if="user.type == 'integrator'">
                             <p>
-                                W tej chwili nie ma żadnych wyzwań, poinformujemy Cię jak tylko jakieś będą dostępne.
+                                {{$t('challengesMain.noSolutionsInform')}}.
                             </p>
-                            <button class="btn btn-primary shadow-md mr-2" @click="addSolution">Dodaj nowe rozwiązanie</button>
+                            <button class="btn btn-primary shadow-md mr-2" @click="addSolution">{{$t('challengesMain.addSolution')}}</button>
                         </div>
                     </div>
                     <div class="intro-y grid grid-cols-12 gap-6 mt-5">
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import {computed, onMounted, reactive, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, reactive, ref} from "vue";
 import {useToast} from "vue-toastification";
 import router from "../../../router";
 import SingleSolutionPost from "../../../components/SingleSolutionPost";
@@ -49,6 +49,8 @@ export default {
         inTeam: Boolean
     },
     setup(props) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const challenge = computed(() => {
             return props.challenge;
         });

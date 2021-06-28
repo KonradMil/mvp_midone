@@ -37,7 +37,7 @@
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
         <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
-        <div v-if="offers.length==0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+        <div v-if="offers.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie ma jeszcze żadnych ofert.
         </div>
         <div class="grid grid-cols-12 gap-6">
@@ -59,7 +59,7 @@
                                         content="Po zaakceptowaniu oferty staje się ona wiążąca dla obu stron.">
                                     <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && challenge.selected_offer_id < 1">Akceptuj ofertę</button>
                                     </Tippy>
-                                    <button class="btn shadow-md mr-2 bg-gray-400" @click="rejectOffer(offer,index)" v-if="offer.rejected != 1 && challenge.selected_offer_id < 1" >Odrzuć ofertę</button>
+                                    <button class="btn shadow-md mr-2 bg-gray-400" @click.prevent="rejectOffer(offer,index)" v-if="offer.rejected != 1 && challenge.selected_offer_id < 1" >Odrzuć ofertę</button>
                                 </div>
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                             </div>
@@ -172,9 +172,10 @@
 </template>
 
 <script>
-import {getCurrentInstance, onMounted, ref} from "vue";
+import {getCurrentInstance, onMounted, ref, watch} from "vue";
 import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
 import {useToast} from "vue-toastification";
+import router from "../../../router";
 
 export default {
     name: "ChallengeOffers",
@@ -192,6 +193,10 @@ export default {
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
         const solution = ref();
+        const check = ref(false);
+
+        watch(() => offers.value.list, (first, second) => {
+        }, {})
 
         const switchTab = () => {
             context.emit("update:activeTab", 'addingoffer');
@@ -201,6 +206,9 @@ export default {
             offers.value = GetChallengeOffers(props.challenge.id);
         }
 
+        const handleCallback = () => {
+            router.push({name: 'projects'});
+        }
 
         const acceptOffer = async(offer) => {
             axios.post('/api/offer/accept', {id: offer.id})
@@ -214,10 +222,10 @@ export default {
                     } else {
                         // toast.error(response.data.message);
                     }
-                })
+                },handleCallback)
         }
 
-        const rejectOffer = async(offer) => {
+        const rejectOffer = async(offer,index) => {
             axios.post('/api/offer/reject', {id: offer.id})
                 .then(response => {
                     if (response.data.success) {
@@ -237,7 +245,6 @@ export default {
                         // toast.error(response.data.message);
                     }
                 })
-            await getChallengeOffersRepositories('');
         }
 
         onMounted(() => {
@@ -245,6 +252,7 @@ export default {
         });
 
         return {
+            check,
             rejectOffer,
             acceptOffer,
             switchTab,

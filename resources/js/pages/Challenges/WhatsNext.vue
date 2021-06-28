@@ -1,7 +1,7 @@
 <template>
     <div class="intro-y box p-5 bg-theme-1 text-white mt-5">
         <div class="flex items-center">
-            <div class="font-medium text-lg">{{ title }}</div>
+            <div class="font-medium text-lg">{{$t('challengesMain.nextStep')}}</div>
 <!--            <div-->
 <!--                class="text-xs bg-white dark:bg-theme-1 dark:text-white text-gray-800 px-1 rounded-md ml-auto"-->
 <!--            >-->
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, getCurrentInstance, onMounted, ref, watch} from "vue";
 import GetUserSolutionsChallenge from "../../compositions/GetUserSolutionsChallenge";
 
 export default {
@@ -39,9 +39,11 @@ name: "WhatsNext",
     props: {
         challenge: Object,
         user: Object,
-        solutions: Array,
+        solutions: Array
     },
     setup(props) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const title = ref('Następny krok');
         const text = ref('');
         const action = ref({});
@@ -50,6 +52,13 @@ name: "WhatsNext",
         const isSolutions = ref(false);
         const isSelected = ref(false);
         const check = ref(false);
+
+        const first = ref(false);
+        const second = ref(false);
+        const third = ref(false);
+        const fourth = ref(false);
+        const fifth = ref(false);
+
 
         watch(() => props.challenge, (first, second) => {
            doMe();
@@ -67,7 +76,7 @@ name: "WhatsNext",
         }, {});
         watch(() => check.value, (first, second) => {
             doMe();
-        }, {});
+        }, {})
 
         const isOffer = async () => {
             axios.post('/api/offer/user/check', {id: props.challenge.id})
@@ -79,6 +88,28 @@ name: "WhatsNext",
                     }
                 })
         }
+
+        emitter.on('*', (type, e) => {
+            if(type == 'isPublic' && (e.isPublic === true)) {
+                isPublic.value = e.isPublic;
+            }
+        });
+        emitter.on('*', (type, e) => {
+            if(type == 'check' && e.check === true) {
+                check.value = e.check;
+            }
+        });
+
+        emitter.on('changeToOffers', e => {
+            if(e.check===true){
+                check.value = e.check;
+            }
+        });
+        emitter.on('isSolutions', e => {
+            if(e.isSolutions===true){
+                isSolutions.value = e.isSolutions;
+            }
+        });
 
         const solutions = computed(() => {
             if (props.challenge.solutions !== undefined) {
@@ -127,7 +158,7 @@ name: "WhatsNext",
                         console.log('HERE');
                         text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
                         action.value = {redirect: ''}
-                    } else if(props.challenge.stage === 1 && isPublic.value===false && isSolutions.value === true) {
+                    } else if(isPublic.value === false && isSolutions.value === true) {
                         text.value = 'Po opublikowaniu rozwiązania będzie ono widoczne dla Inwestora.';
                         action.value = {redirect: ''}
                     }else if(isSelected.value !== true && isPublic.value === true && isSolutions.value === true) {
@@ -141,7 +172,7 @@ name: "WhatsNext",
                         action.value = {redirect: ''}
                     }
                 } else {
-                    if(props.challenge.stage === 1 && isPublic.value === false) {
+                    if(props.challenge.solutions < 1 && props.challenge.stage === 1) {
                         text.value = 'Oczekuj na nowe rozwiązania.';
                         buttonText.value = '';
                         action.value = {redirect: ''}
@@ -176,6 +207,11 @@ name: "WhatsNext",
         });
 
         return {
+            first,
+            second,
+            third,
+            fourth,
+            fifth,
             check,
             isSelected,
             isPublic,

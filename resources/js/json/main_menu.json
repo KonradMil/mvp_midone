@@ -45,25 +45,6 @@
         },
         {
             "icon": "BoxIcon",
-            "pageName": "offers",
-            "title": "Oferty",
-            "subMenu": [
-                {
-                    "icon": "",
-                    "pageName": "offers-active",
-                    "title": "Aktywne",
-                    "ignore": true
-                },
-                {
-                    "icon": "",
-                    "pageName": "offers-archived",
-                    "title": "Archiwalne",
-                    "ignore": true
-                }
-            ]
-        },
-        {
-            "icon": "BoxIcon",
             "pageName": "#",
             "title": "Projekty",
             "subMenu": [

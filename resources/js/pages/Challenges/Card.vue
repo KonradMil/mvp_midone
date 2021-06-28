@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="intro-y flex items-center mt-8">
-            <h2 class="text-lg font-medium mr-auto">Wyzwanie</h2>
+            <h2 class="text-lg font-medium mr-auto">{{$t('challengesMain.challenge')}}</h2>
         </div>
         <div class="grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Profile Menu -->
@@ -24,39 +24,39 @@
                             @click.prevent="activeTab = 'podstawowe'"
                             :class="(activeTab == 'podstawowe')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
                             <ActivityIcon class="w-4 h-4 mr-2"/>
-                            Informacje podstawowe
+                            {{$t('challengesMain.basicInformation')}}
                         </a>
                         <a class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'techniczne'"
                            :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <BoxIcon class="w-4 h-4 mr-2"/>
-                            Szczegóły techniczne
-                        </a>
+                            {{$t('challengesMain.technicalDetails')}}                        </a>
                         <a class="flex items-center mt-5" href="" v-if="challenge != undefined"
                            @click.prevent="activeTab = 'rozwiazania'"
                            :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <LockIcon class="w-4 h-4 mr-2"/>
-                            <div v-if="challenge.selected != undefined && challenge.selected.length != 0">Rozwiązania</div><div v-if="challenge.selected == undefined || challenge.selected.length == 0">Rozwiązania</div>
+                            <div v-if="challenge.selected != undefined && challenge.selected.length != 0">{{$t('challengesMain.solutions')}}</div><div v-if="challenge.selected == undefined || challenge.selected.length == 0">{{$t('challengesMain.solutions')}}
+                        </div>
                         </a>
                         <a v-if="!inTeam && challenge.stage >= 1"
                             class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'oferty'"
                            :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <SettingsIcon class="w-4 h-4 mr-2"/>
-                            Moje Oferty
+                            {{$t('challengesMain.myOffers')}}
                         </a>
                         <a v-if="inTeam && challenge.stage >= 1"
                             class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'all-offers'"
                            :class="(activeTab == 'all-offers')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <SettingsIcon class="w-4 h-4 mr-2"/>
-                            Oferty
+                            {{$t('challengesMain.offers')}}
                         </a>
                         <a class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'pytania'"
                            :class="(activeTab == 'pytania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <SettingsIcon class="w-4 h-4 mr-2"/>
-                            Pytania
+                            {{$t('communication.questions')}}
                         </a>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5" v-if="(challenge.author_id == user.id)">
@@ -64,13 +64,13 @@
                            @click.prevent="activeTab = 'teams'"
                            :class="(activeTab == 'teams')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
                             <ActivityIcon class="w-4 h-4 mr-2"/>
-                            Zespoły
+                            {{$t('teams.teams')}}
                         </a>
                     </div>
 
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="inTeam">
                         <button type="button" class="btn btn-primary py-1 px-2" v-if="challenge.solutions.length == 0" @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
-                            Edytuj
+                            {{$t('models.edit')}}
                         </button>
                         <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge}})">
                             Studio 3D
@@ -80,14 +80,14 @@
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
                             @click="publish(challenge.id)">
-                            Opublikuj
+                            {{$t('challengesMain.publish')}}
                         </button>
                         <button
                             v-if="challenge.status == 1 && challenge.solutions.length == 0"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
                             @click="unpublish(challenge.id)">
-                            Odpublikuj
+                            {{$t('challengesMain.unpublish')}}
                         </button>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="!inTeam && user.type == 'integrator'">
@@ -98,7 +98,7 @@
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
                             @click.prevent="addSolution">
-                            Dodaj rozwiązanie
+                            {{$t('challengesMain.addSolution')}}
                         </button>
                     </div>
                 </div>
@@ -301,7 +301,6 @@ export default defineComponent({
         }
 
         const addSolution = () => {
-
             axios.post('/api/solution/create', {id: challenge.value.id})
                 .then(response => {
                     if (response.data.success) {
@@ -365,7 +364,7 @@ export default defineComponent({
             solution,
             inTeam,
             isSolutions,
-            isPublic
+            isPublic,
         };
     }
 });

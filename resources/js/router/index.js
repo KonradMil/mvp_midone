@@ -218,7 +218,8 @@ export const routes = [
             {
                 name: 'profiles',
                 path: '/profiles',
-                component: Profiles
+                component: Profiles,
+                props: true
             },
             {
                 name: 'change-password',
