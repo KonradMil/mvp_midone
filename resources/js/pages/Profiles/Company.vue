@@ -205,7 +205,7 @@ export default {
                             if (response.data.success) {
                                 company.value.regon = response.data.payload.regon;
                                 company.value.nip = response.data.payload.nip;
-                                company.value.city = response.data.payload.postCity;
+                                company.value.city = response.data.payload.city;
                                 company.value.company_name = response.data.payload.name;
                                 company.value.street = response.data.payload.street;
                                 company.value.loc_nr = response.data.payload.apartmentNumber;
@@ -238,9 +238,9 @@ export default {
                             company.value.city = response.data.payload.city;
                             company.value.company_name = response.data.payload.name;
                             company.value.street = response.data.payload.street;
-                            company.value.loc_nr = response.data.payload.loc_nr;
-                            company.value.house_nr = response.data.payload.house_nr;
-                            company.value.postcode = response.data.payload.postcode;
+                            company.value.loc_nr = response.data.payload.apartmentNumber;
+                            company.value.house_nr = response.data.payload.propertyNumber;
+                            company.value.postcode = response.data.payload.zipCode;
                             company.value.province = response.data.payload.province;
                             company.value.country = 'Polska';
                         } else {
