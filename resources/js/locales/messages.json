@@ -56,6 +56,7 @@
         },
 
         "challengesMain": {
+            "financialDetails" : "Financial Details",
             "nextStep" : "Next step",
             "unFollow" : "Unfollow",
             "follow" : "Follow",
@@ -330,6 +331,7 @@
             "description" : "Jeśli podany mail jest powziązany z już zarejestrowanym użytkownikiem będzie on musiał jedynie potwierdzić chęć dołączenia."
         },
         "challengesMain": {
+            "financialDetails" : "Szczegóły finansowe",
             "nextStep" : "Następny krok",
             "unFollow" : "Przestań śledzić",
             "follow" : "Śledź",
