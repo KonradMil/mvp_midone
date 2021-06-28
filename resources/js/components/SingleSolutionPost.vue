@@ -9,7 +9,7 @@
                 />
             </div>
             <div class="ml-3 mr-auto" @click="$router.push({path: '/studio/solution/' + solution.id});">
-                <a href="" class="font-medium">{{ solution.name }} <span v-if="solution.selected == 1" style="color: #930f68;"> - Zaakceptowane</span><span v-if="solution.rejected == 1" style="color: #1a202c;"> - Odrzucone</span></a>
+                <a href="" class="font-medium">{{ solution.name }} <span v-if="solution.selected == 1" style="color: #930f68;"> - {{$t('challengesMain.accepted')}}</span><span v-if="solution.rejected == 1" style="color: #1a202c;"> - {{$t('challengesMain.rejected')}}</span></a>
             </div>
             <!--        <div class="dropdown ml-3">-->
             <!--            <a href="javascript:;"-->
@@ -46,18 +46,18 @@
                 {{ solution.description }}
             </div>
             <div class="mt-2" v-if="canAccept">
-                <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1">Akceptuj rozwiązanie</button>
-                <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1">Odrzuć rozwiązanie</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1">{{$t('challengesMain.acceptSolution')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1">{{$t('challengesMain.rejectSolution')}}</button>
             </div>
             <div class="mt-2" v-if="canEdit || inTeam">
-                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: '/studio/solution/' + solution.id});" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1)">Edytuj</button>
-                <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution" v-if="challenge.stage == 1 && solution.selected != 1">Usuń</button>
-                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0 && challenge.stage == 1" @click="publishSolution">Publikuj</button>
-                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1)" @click="unpublishSolution">Odpublikuj</button>
-                <button class="btn btn-primary shadow-md mr-2" v-if="canEdit" @click="switchTab">Zespoły</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: '/studio/solution/' + solution.id});" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1)">{{$t('models.edit')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution" v-if="challenge.stage == 1 && solution.selected != 1">{{$t('models.delete')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0 && challenge.stage == 1" @click="publishSolution">{{$t('challengesMain.publish')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1)" @click="unpublishSolution">{{$t('challengesMain.unPublish')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="canEdit" @click="switchTab">{{$t('teams.teams')}}</button>
             </div>
             <div class="mt-2" v-if="user.type == 'integrator' && solution.selected == 1">
-                <button class="btn btn-primary shadow-md mr-2" @click="addOffer">Dodaj ofertę</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="addOffer">{{$t('challengesMain.addOffer')}}</button>
             </div>
         </div>
         <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">

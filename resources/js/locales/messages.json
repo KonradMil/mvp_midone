@@ -84,6 +84,8 @@
             "unpublish" : "Unpublish",
             "publishOffer" : "Publish offer",
             "accepted" : "Accepted",
+            "acceptSolution" : "Accept solution",
+            "rejectSolution" : "Reject solution",
             "rejected" : "Rejected",
             "waitingApproval" : "Waiting for approval",
             "offerExpires" : "Offer expires in",
@@ -100,7 +102,8 @@
             "reactionTime" : "Response time to report a failure in hours",
             "interventionPrice" : "Cost of intervention in case of non-warranty failure",
             "workHourPrice" : "Man-hour cost of support/development work",
-            "periodSupport" : "Technical support period out of warranty in years"
+            "periodSupport" : "Technical support period out of warranty in years",
+            "addOffer" : "Add offer"
 
 
         },
@@ -383,6 +386,8 @@
             "unpublish" : "Odpublikuj",
             "publishOffer" : "Opublikuj ofertę",
             "accepted" : "Zaakceptowano",
+            "acceptSolution" : "Akceptuj rozwiązanie",
+            "rejectSolution" : "Odrzuć rozwiązanie",
             "rejected" : "Odrzucono",
             "waitingApproval" : "Oczekuje na akceptację",
             "offerExpires" : "Okres ważności oferty w dniach",
@@ -399,8 +404,8 @@
             "reactionTime" : "Czas reakcji na zgłoszenie awarii w godzinach",
             "interventionPrice" : "Koszt interwencji w wypadku awarii nie podlegającej gwarancji",
             "workHourPrice" : "Koszt roboczo godziny pracy wsparcia / prac rozwojowych",
-            "periodSupport" : "Okres wsparcia technicznego poza zakresem gwarancji w latach"
-
+            "periodSupport" : "Okres wsparcia technicznego poza zakresem gwarancji w latach",
+            "addOffer" : "Dodaj ofertę"
         },
         "CommentSection": {
             "comments": "Komentarzy",
