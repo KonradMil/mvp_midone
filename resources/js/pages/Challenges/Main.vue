@@ -33,11 +33,11 @@
                     <p v-if="user.type == 'integrator' && type===undefined">
                         W tej chwili nie ma żadnych wyzwań, poinformujemy Cię jak tylko jakieś będą dostępne.
                     </p>
-                    <p v-if="type==='followed'">
+                    <p v-if="user.type == 'integrator' && type==='followed'">
                         Nie obserwujesz jeszcze żadnych wyzwań.
                     </p>
                     <div v-if="user.type === 'investor'">
-                        <p v-if="type===undefined">
+                        <p v-if="type != 'followed' && type != 'archive'">
                             Nie dodałeś jeszcze żadnych wyzwań.
                         </p>
                         <p v-if="type==='followed'">
