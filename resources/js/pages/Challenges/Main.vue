@@ -151,7 +151,7 @@ export default {
         const getChallengeRepositories = async () => {
             if(props.type == 'followed') {
                 challenges.value = GetChallengesFollowed();
-            } else if(props.type ==='archive' && user.type==='investor'){
+            } else if(props.type ==='archive'){
                 challenges.value = GetChallengesArchive();
             } else {
                 challenges.value = GetChallenges();
