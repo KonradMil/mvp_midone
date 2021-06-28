@@ -56,10 +56,19 @@
         },
 
         "challengesMain": {
+            "basicInformation" : "Basic Information",
+            "technicalDetails" : "Technical Details",
+            "challenge" : "Challenge",
             "challenges": "Challenges",
             "addChallenge": "Add new challenge",
             "editPost" : "Edit Post",
-            "deletePost" : "Delete Post"
+            "deletePost" : "Delete Post",
+            "myOffers" : "My Offers",
+            "offers" : "Offers",
+            "solutions" : "Solutions",
+            "addSolution" : "Add solution",
+            "publish" : "Publish",
+            "unpublish" : "Unpublish"
         },
         "teams": {
             "teams": "Teams",
@@ -312,10 +321,19 @@
             "description" : "Jeśli podany mail jest powziązany z już zarejestrowanym użytkownikiem będzie on musiał jedynie potwierdzić chęć dołączenia."
         },
         "challengesMain": {
+            "basicInformation" : "Informacje podstawowe",
+            "challenge" : "Wyzwanie",
             "challenges": "Wyzwania",
             "addChallenge": "Dodaj nowe wyzwanie",
             "editPost" : "Edytuj Post",
-            "deletePost" : "Usuń Post"
+            "deletePost" : "Usuń Post",
+            "technicalDetails" : "Szczegóły techniczne",
+            "myOffers" : "Moje Oferty",
+            "solutions" : "Rozwiązania",
+            "addSolution" : "Dodaj rozwiązanie",
+            "offers" : "Oferty",
+            "publish" : "Publikuj",
+            "unpublish" : "Odpublikuj"
         },
         "CommentSection": {
             "comments": "Komentarzy",
