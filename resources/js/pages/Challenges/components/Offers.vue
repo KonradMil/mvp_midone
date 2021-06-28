@@ -1,7 +1,7 @@
 <template>
     <div class="col-span-9 lg:col-span-9 xxl:col-span-9">
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-            <h2 class="font-medium text-base mr-auto"> Moje oferty</h2>
+            <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.myOffers')}}</h2>
         </div>
         <div class="grid grid-cols-12 gap-6">
 
@@ -12,16 +12,16 @@
                     <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
                         <div class="flex items-center">
                             <div class="pl-4 my-2">
-                                <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
+                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.solution')}}</span>
                                 <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
                             </div>
                             <div class="mt-2 pl-9 pb-6" v-if="(user.id === offer.installer_id)">
-                                <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status != 1">Opublikuj ofertę</button>
-                                <button class="btn btn-primary shadow-md mr-2" @click="editOffer(offer.id)" v-if="offer.status != 1">Edytuj</button>
-                                <button class="btn btn-primary shadow-md mr-2" @click.prevent="deleteOffer(offer.id,index)" v-if="offer.status != 1">Usuń</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status != 1">{{$t('challengesMain.publishOffer')}}</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="editOffer(offer.id)" v-if="offer.status != 1">{{$t('models.edit')}}</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click.prevent="deleteOffer(offer.id,index)" v-if="offer.status != 1">{{$t('models.delete')}}</button>
                             </div>
-                            <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
-                            <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Odrzucono </div>
+                            <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
+                            <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
                             <div class="flex items-center mr-3" v-if="(offer.rejected != 1) && (offer.selected != 1) && (offer.status == 1)"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Oczekuje na akceptację </div>
                         </div>
                         <div class="flex items-center">

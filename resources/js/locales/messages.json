@@ -56,7 +56,7 @@
         },
 
         "challengesMain": {
-            "noSolutionsInform" : "There are no solutions at the moment, we'll let you know as soon as  if they we'll be available",
+            "noSolutionsInform" : "There are no solutions at the moment,if they we'll be available, we'll let you know as soon as",
             "noSolutions" : "There are no solutions yet",
             "financialDetails" : "Financial Details",
             "nextStep" : "Next step",
@@ -78,9 +78,13 @@
             "myOffers" : "My Offers",
             "offers" : "Offers",
             "solutions" : "Solutions",
+            "solution" : "Solution",
             "addSolution" : "Add solution",
             "publish" : "Publish",
-            "unpublish" : "Unpublish"
+            "unpublish" : "Unpublish",
+            "publishOffer" : "Publish offer",
+            "accepted" : "Accepted",
+            "rejected" : "Rejected"
         },
         "teams": {
             "teams": "Teams",
@@ -354,10 +358,14 @@
             "technicalDetails" : "Szczegóły techniczne",
             "myOffers" : "Moje Oferty",
             "solutions" : "Rozwiązania",
+            "solution" : "Rozwiązanie",
             "addSolution" : "Dodaj rozwiązanie",
             "offers" : "Oferty",
             "publish" : "Publikuj",
-            "unpublish" : "Odpublikuj"
+            "unpublish" : "Odpublikuj",
+            "publishOffer" : "Opublikuj ofertę",
+            "accepted" : "Zaakceptowano",
+            "rejected" : "Odrzucono"
         },
         "CommentSection": {
             "comments": "Komentarzy",
