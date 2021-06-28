@@ -78,4 +78,29 @@ class WorkshopController extends Controller
     {
 
     }
+
+    public function delete(Request $request)
+    {
+        $model = WorkshopObject::find($request->input('id'));
+        $model->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Usunięto poprawnie.',
+            'payload' => ''
+        ]);
+    }
+
+    public function publish(Request $request)
+    {
+        $model = WorkshopObject::find($request->input('id'));
+        $model->public = 1;
+        $model->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Opublikowano poprawnie.',
+            'payload' => $model
+        ]);
+    }
 }

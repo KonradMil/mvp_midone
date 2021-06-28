@@ -23,6 +23,11 @@
                         <TrashIcon class="w-4 h-4 mr-2"/>
                         Usuń obiekt
                     </a>
+                    <a href="" @click.prevent="publishObject"
+                       class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                        <SendIcon class="w-4 h-4 mr-2"/>
+                        Opublikuj
+                    </a>
                 </div>
             </div>
         </div>
@@ -93,13 +98,18 @@ export default {
             emitter.emit('singleworkshopobject', {action: 'delete', id: object.id})
         }
 
+        const publishObject = () => {
+            emitter.emit('singleworkshopobject', {action: 'publish', id: object.id})
+        }
+
         return {
             object,
             user,
             like,
             props,
             editObject,
-            deleteObject
+            deleteObject,
+            publishObject
         }
     }
 }
