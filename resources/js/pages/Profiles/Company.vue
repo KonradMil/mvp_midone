@@ -162,12 +162,15 @@ import cash from "cash-dom";
 import GetTeams from "../../compositions/GetTeams";
 import {useToast} from "vue-toastification";
 import router from "../../router";
+import Multiselect from '@vueform/multiselect';
+
 
 const toast = useToast();
 
 export default {
     components: {
-        DarkModeSwitcher
+        DarkModeSwitcher,
+        Multiselect
     },
     setup() {
         const provincesSelects = ref();
