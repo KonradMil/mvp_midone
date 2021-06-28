@@ -114,7 +114,6 @@
                                         id="input-wizard-5"
                                         class="form-control"
                                         v-model="company.province"
-                                        :placeholder="company.province"
                                         :options="{locale: 'pl', placeholder: company.province, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                                         <option :selected="company.province === '' ? 'selected' : ''" disabled>Wybierz...</option>
                                         <option :selected="index === company.province ? 'selected' : ''" v-for="(det,index) in provinces['province']"
