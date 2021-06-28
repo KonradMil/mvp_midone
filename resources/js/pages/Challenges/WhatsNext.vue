@@ -1,7 +1,7 @@
 <template>
     <div class="intro-y box p-5 bg-theme-1 text-white mt-5">
         <div class="flex items-center">
-            <div class="font-medium text-lg">{{ title }}</div>
+            <div class="font-medium text-lg">{{$t('challengesMain.nextStep')}}</div>
 <!--            <div-->
 <!--                class="text-xs bg-white dark:bg-theme-1 dark:text-white text-gray-800 px-1 rounded-md ml-auto"-->
 <!--            >-->
@@ -44,8 +44,7 @@ name: "WhatsNext",
     setup(props) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
-        // const title = ref('Następny krok');
-        const title = ref($t('challengesMain.nextStep'))
+        const title = ref('Następny krok');
         const text = ref('');
         const action = ref({});
         const buttonText = ref('Przejdź');
