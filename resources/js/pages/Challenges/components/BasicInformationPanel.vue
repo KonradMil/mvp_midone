@@ -25,7 +25,7 @@
                         <strong>{{$t('challengesNew.description')}}:</strong> {{ challenge.description }}
                     </div>
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
-                        <strong>{{$t('challengesNew.deadlineSubmissionSolutions')}}:</strong>
+                        <strong>{{$t('challengesMain.deadlineSubmissionSolutions')}}:</strong>
                         <Litepicker
                             id="post-form-2"
                             v-model="challenge.solution_deadline"
