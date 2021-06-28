@@ -44,7 +44,7 @@
                             Nie obserwujesz jeszcze żadnych wyzwań.
                         </p>
                         <p v-if="type==='archive'">
-                            Nie dodałeś jeszcze żadnych wyzwań.
+                            Nie masz jeszcze żadnych archiwalnych wyzwań.
                         </p>
                         <button v-if="type===undefined" class="btn btn-primary shadow-md mr-2 mt-2" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
                     </div>
