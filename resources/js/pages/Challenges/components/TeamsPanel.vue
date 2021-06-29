@@ -96,7 +96,7 @@
                                         </div>
                                     </div>
                                     <div class="flex mt-4 lg:mt-0">
-                                        <button class="btn btn-primary py-1 px-2 mr-2" @click="removeFromSelected(team.id, index)">Usuń</button>
+                                        <button v-if="challenge.stage !== 3" class="btn btn-primary py-1 px-2 mr-2" @click="removeFromSelected(team.id, index)">Usuń</button>
                                         <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
                                             {{ $t('teams.details') }}
                                         </button>
