@@ -185,6 +185,7 @@ class OfferController extends Controller
         $archiveSolutions = $challenge->solutions;
         foreach($archiveSolutions as $archiveSolution){
             $archiveSolution->archive = 1;
+            $archiveSolution->save();
         }
         $solution = Solution::find($offer->solution_id);
         $solution->selected_offer_id = $offer->id;
