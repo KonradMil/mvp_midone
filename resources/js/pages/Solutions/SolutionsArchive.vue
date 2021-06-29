@@ -21,10 +21,10 @@
                         <!--                        </div>-->
                         <div v-for="(solution, index) in solutions" :key="index" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box">
                                 <span v-if="user.type === 'integrator'">
-                                    <SingleSolutionPost :user="user" :solution="solution"></SingleSolutionPost>
+                                    <SingleSolutionPost :user="user" :solution="solution" :challenge_stage="challenge_stage"></SingleSolutionPost>
                                 </span>
                             <span v-if="user.type === 'investor'">
-                                    <SingleSolutionPost :user="user" :solution="solution"></SingleSolutionPost>
+                                    <SingleSolutionPost :user="user" :solution="solution" :challenge_stage="challenge_stage"></SingleSolutionPost>
                                 </span>
                         </div>
                     </div>
@@ -50,6 +50,7 @@ export default {
         const types = require("../../json/types.json");
         const user = window.Laravel.user;
         const solutions = ref([]);
+        const challenge_stage = ref(3);
         const filterSolutions = () => {
             axios.post('/api/solution/user/get/archive', {})
                 .then(response => {
@@ -78,6 +79,7 @@ export default {
             solutions,
             types,
             user,
+            challenge_stage
         }
     },
     // beforeRouteEnter(to, from, next) {

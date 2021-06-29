@@ -46,13 +46,13 @@
                 {{ solution.description }}
             </div>
             <div class="mt-2" v-if="canAccept">
-                <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1 && challenge.stage !== 3 && solution.archive != 1">{{$t('challengesMain.acceptSolution')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1 && challenge.stage !== 3 && solution.archive != 1">{{$t('challengesMain.rejectSolution')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1 && challenge_stage.value !== 3 && solution.archive != 1">{{$t('challengesMain.acceptSolution')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1 && challenge_stage.value !== 3 && solution.archive != 1">{{$t('challengesMain.rejectSolution')}}</button>
             </div>
             <div class="mt-2" v-if="canEdit || inTeam">
-                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: '/studio/solution/' + solution.id});" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1">{{$t('models.edit')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution" v-if="challenge.stage == 1 && solution.selected != 1 && solution.archive != 1">{{$t('models.delete')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0 && challenge.stage == 1" @click="publishSolution && solution.archive != 1">{{$t('challengesMain.publish')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: '/studio/solution/' + solution.id});" v-if="challenge_stage.value == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1">{{$t('models.edit')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution" v-if="challenge_stage.value == 1 && solution.selected != 1 && solution.archive != 1">{{$t('models.delete')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0 && challenge_stage.value == 1" @click="publishSolution && solution.archive != 1">{{$t('challengesMain.publish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1" @click="unpublishSolution">{{$t('challengesMain.unpublish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive != 1" @click="switchTab">{{$t('teams.teams')}}</button>
             </div>
@@ -70,14 +70,14 @@
             </Tippy>
             <div class="intro-x flex mr-2">
             </div>
-            <Tippy v-if="!solution.liked && challenge.stage !== 3 && solution.archive != 1"
+            <Tippy v-if="!solution.liked && challenge_stage.value !== 3 && solution.archive != 1"
                    @click.prevent="like(solution)"
                    tag="a" href=""
                    class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 ml-auto"
                    content="Like">
                 <ThumbsUpIcon class="w-3 h-3"/>
             </Tippy>
-            <Tippy v-if="solution.liked && challenge.stage !== 3 && solution.archive != 1"
+            <Tippy v-if="solution.liked && challenge_stage.value !== 3 && solution.archive != 1"
                    @click.prevent="dislike(solution)"
                    tag="a" href=""
                    class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white ml-2 ml-auto"
@@ -89,7 +89,7 @@
             <CommentSection
                 :object="solution"
                 :user="user"
-                :challenge_stage="challenge.stage"
+                :challenge_stage="challenge_stage.value"
                 type="solution"
             />
         </div>
@@ -113,7 +113,8 @@ export default {
         solution: Object,
         canAccept: Boolean,
         canEdit: Boolean,
-        activeTab: String
+        activeTab: String,
+        challenge_stage: Number,
     },
     setup(props,context) {
         const toast = useToast();
@@ -123,6 +124,7 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         const activeTab = ref(false);
         const inTeam = ref(false);
+        const challenge_stage = ref();
         const switchTab = () => {
             console.log('Switch2244444');
             console.log(props.solution + ' its props solution');
@@ -136,6 +138,11 @@ export default {
         });
 
         onMounted(() => {
+            if(props.challenge == undefined){
+                challenge_stage.value = props.challenge_stage;
+            } else {
+                challenge_stage.value = props.challenge.stage;
+            }
             checkTeam();
         });
 
@@ -263,7 +270,8 @@ export default {
             publishSolution,
             rejectSolution,
             addOffer,
-            inTeam
+            inTeam,
+            challenge_stage
         }
     }
 }
