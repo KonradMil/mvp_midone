@@ -8,15 +8,12 @@
                 </div>
                 <div class="px-5 py-5">
                     <div v-if="solutions.length == 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
-                        {{$t('challengesMain.noSolutions')}}.
+                        Nie ma jeszcze żadnych archiwalnych rozwiązań.
                         <div v-if="user.type == 'integrator'">
                             <p>
                                 {{$t('challengesMain.noSolutionsInform')}}.
                             </p>
                         </div>
-                    </div>
-                    <div v-if="user.type == 'investor'" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
-                        {{$t('challengesMain.noSolutions')}}.
                     </div>
                     <div class="intro-y grid grid-cols-12 gap-6 mt-5" v-if="user.type =='integrator'">
                         <!--                        <div v-if="challenge.stage >= 2" v-for="(solution, index) in challenge.selected" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box solution-selected">-->
