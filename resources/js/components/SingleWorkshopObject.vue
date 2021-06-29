@@ -107,7 +107,7 @@ export default {
         }
 
         const publishObject = () => {
-            emitter.emit('singleworkshopobject', {action: 'publish', id: object.id})
+            emitter.emit('singleworkshopobject', {action: 'publish', object: object})
         }
         const copyObject = () => {
             emitter.emit('singleworkshopobject', {action: 'copy', id: object.id})
