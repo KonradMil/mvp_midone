@@ -53,7 +53,7 @@
                                         {{ $dayjs(q.created_at).format('DD.MM.YYYY HH:mm') }}
                                     </div>
                                     <div class="inbox__item--time whitespace-nowrap ml-auto pl-10" v-if="authorId == user.id">
-                                        <button class="btn btn-primary" @click="answer(q.id)">Odpowiedz</button>
+                                        <button v-if="challenge_stage!==3" class="btn btn-primary" @click="answer(q.id)">Odpowiedz</button>
                                     </div>
                                 </div>
                                 <div v-if="expand[index] === true">
@@ -83,7 +83,8 @@ export default {
     name: "QuestionsPanel",
     props: {
       id: Number,
-        author_id: Number
+        author_id: Number,
+        challenge_stage: Number,
     },
     setup(props) {
         const addingDialog = ref(false);

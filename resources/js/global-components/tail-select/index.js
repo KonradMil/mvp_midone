@@ -2,10 +2,9 @@ import TailSelect from "tail.select";
 import _ from "lodash";
 
 const setValue = (el, props) => {
-    cash(el).val(props.modelValue);
-  // if (props.modelValue.length) {
-  //         cash(el).val(props.modelValue);
-  //     }
+  if (props.modelValue.length) {
+          cash(el).val(props.modelValue);
+      }
 };
 
 const init = (el, props, emit) => {

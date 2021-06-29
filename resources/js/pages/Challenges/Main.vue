@@ -3,7 +3,7 @@
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">{{$t('challengesMain.challenges')}}</h2>
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                <button class="btn btn-primary shadow-md mr-2" v-if="user.type == 'investor'" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="user.type == 'investor' && type==='normal'" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
                 <div class="dropdown ml-auto sm:ml-0">
                     <div class="dropdown-menu w-40">
                         <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
@@ -30,14 +30,26 @@
             <!-- BEGIN: Blog Layout -->
             <div class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium" v-if="challenges.list == undefined || challenges.list.length == 0">
                 <div>
-                    <p v-if="user.type == 'integrator'">
+                    <p v-if="user.type == 'integrator' && type==='normal'">
                         W tej chwili nie ma żadnych wyzwań, poinformujemy Cię jak tylko jakieś będą dostępne.
                     </p>
+                    <p v-if="user.type == 'integrator' && type==='followed'">
+                        Nie obserwujesz jeszcze żadnych wyzwań.
+                    </p>
+                    <p v-if="user.type == 'integrator' && type==='archive'">
+                        Nie masz jeszcze żadnych archiwalnych wyzwań.
+                    </p>
                     <div v-if="user.type === 'investor'">
-                        <p>
+                        <p v-if="type === 'normal'">
                             Nie dodałeś jeszcze żadnych wyzwań.
                         </p>
-                        <button class="btn btn-primary shadow-md mr-2 mt-2" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
+                        <p v-if="type==='followed'">
+                            Nie obserwujesz jeszcze żadnych wyzwań.
+                        </p>
+                        <p v-if="type==='archive'">
+                            Nie masz jeszcze żadnych archiwalnych wyzwań.
+                        </p>
+                        <button v-if="type==='normal'" class="btn btn-primary shadow-md mr-2 mt-2" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
                     </div>
                 </div>
             </div>
@@ -118,6 +130,7 @@
                     <CommentSection
                         :object="challenge"
                         :user="user"
+                        :challenge_stage="challenge.stage"
                         type="challenge"
                     />
                 </div>
@@ -131,6 +144,7 @@
 import {defineComponent, ref, provide, onMounted, getCurrentInstance, watch, onUpdated} from "vue";
 import GetChallenges from "../../compositions/GetChallenges";
 import GetChallengesFollowed from "../../compositions/GetChallengesFollowed";
+import GetChallengesArchive from "../../compositions/GetChallengesArchive";
 import CommentSection from "../../components/social/CommentSection";
 import {useToast} from "vue-toastification";
 
@@ -150,10 +164,11 @@ export default {
         const getChallengeRepositories = async () => {
             if(props.type == 'followed') {
                 challenges.value = GetChallengesFollowed();
+            } else if(props.type ==='archive'){
+                challenges.value = GetChallengesArchive();
             } else {
                 challenges.value = GetChallenges();
             }
-
         }
         const types = require("../../json/types.json");
         const sels = require("../../json/challenge.json");

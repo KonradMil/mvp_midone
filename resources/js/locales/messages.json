@@ -52,7 +52,8 @@
             "Aktywne": "Active",
             "Archiwalne": "Archival",
             "Obserwowane": "Watched",
-            "Śledzone": "Followed"
+            "Śledzone": "Followed",
+            "Archiwalne": "Archiwalne"
         },
 
         "challengesMain": {
@@ -84,7 +85,28 @@
             "unpublish" : "Unpublish",
             "publishOffer" : "Publish offer",
             "accepted" : "Accepted",
-            "rejected" : "Rejected"
+            "acceptSolution" : "Accept solution",
+            "rejectSolution" : "Reject solution",
+            "rejected" : "Rejected",
+            "waitingApproval" : "Waiting for approval",
+            "offerExpires" : "Offer expires in",
+            "priceDelivery" : "Price for delivery and commissioning of the stand (net)",
+            "weeksToStart" : "Number of weeks to start, counted from signing the contract",
+            "timeToStart" : "Time of commissioning at the customer's site (weeks)",
+            "timeToFix" : "Time of restoring the station to working order after failure",
+            "advanceUponAgreement" : "The amount of the advance payment (%) payable after signing the contract",
+            "advanceUponDelivery" : "The amount of the advance payment (%) payable upon initial acceptance at the Integrator",
+            "advanceUponStart" : "The amount of the advance payment payable after commissioning and final acceptance of the station",
+            "yearsGuarantee" : "Warranty period in years",
+            "maintenanceFrequency" : "Frequency of warranty inspections per year",
+            "priceMaintenance" : "Annual warranty inspection cost",
+            "reactionTime" : "Response time to report a failure in hours",
+            "interventionPrice" : "Cost of intervention in case of non-warranty failure",
+            "workHourPrice" : "Man-hour cost of support/development work",
+            "periodSupport" : "Technical support period out of warranty in years",
+            "addOffer" : "Add offer"
+
+
         },
         "teams": {
             "teams": "Teams",
@@ -319,7 +341,8 @@
             "Aktywne": "Aktywne",
             "Archiwalne": "Archiwalne",
             "Obserwowane": "Obserwowane",
-            "Śledzone": "Obserwowane"
+            "Śledzone": "Obserwowane",
+            "Archiwalne": "Archiwalne"
         },
         "teams": {
             "teams": "Zespoły",
@@ -365,7 +388,26 @@
             "unpublish" : "Odpublikuj",
             "publishOffer" : "Opublikuj ofertę",
             "accepted" : "Zaakceptowano",
-            "rejected" : "Odrzucono"
+            "acceptSolution" : "Akceptuj rozwiązanie",
+            "rejectSolution" : "Odrzuć rozwiązanie",
+            "rejected" : "Odrzucono",
+            "waitingApproval" : "Oczekuje na akceptację",
+            "offerExpires" : "Okres ważności oferty w dniach",
+            "priceDelivery" : "Cena za dostawę oraz uruchomienie stanowiska (netto)",
+            "weeksToStart" : "Ilość tygodni do uruchomienia, liczona od podpisania umowy",
+            "timeToStart" : "Czas realizacji uruchomienia u klienta (tygodni)",
+            "timeToFix" : "Czas przywrócenia stanowiska do sprawności po awarii",
+            "advanceUponAgreement" : "Wysokość zaliczki (%) płatnej po podpisaniu umowy",
+            "advanceUponDelivery" : "Wyskość zaliczki (%) płatnej przy odbiorze wstępnym dokonywanym u Integratora",
+            "advanceUponStart" : "Wysokość zaliczki płatnej po uruchomieniu i finalnym odbiorze stanowiska",
+            "yearsGuarantee" : "Okres gwarancji w latach",
+            "maintenanceFrequency" : "Częstotliwość przeglądów gwarancyjnych w roku",
+            "priceMaintenance" : "Koszt roczny przeglądu gwaranycjnego",
+            "reactionTime" : "Czas reakcji na zgłoszenie awarii w godzinach",
+            "interventionPrice" : "Koszt interwencji w wypadku awarii nie podlegającej gwarancji",
+            "workHourPrice" : "Koszt roboczo godziny pracy wsparcia / prac rozwojowych",
+            "periodSupport" : "Okres wsparcia technicznego poza zakresem gwarancji w latach",
+            "addOffer" : "Dodaj ofertę"
         },
         "CommentSection": {
             "comments": "Komentarzy",
@@ -394,7 +436,7 @@
         },
         "register": {
             "signup": "Zarejestruj",
-            "safepassword": "Czym jest bezpieczne hasło?",
+            "safepassword": "Czy to hasło jest bezpieczne?",
             "passwordConfirm": "Potwierdź hasło",
             "pol1": "Zapoznałem się, zgadzem się i rozumiem ",
             "iam": "Jestem:"

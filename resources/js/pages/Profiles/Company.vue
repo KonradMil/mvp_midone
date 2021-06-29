@@ -110,16 +110,26 @@
 <!--                                        class="form-control"-->
 <!--                                        v-model="company.province"-->
 <!--                                    />-->
-                                    <TailSelect
-                                        id="input-wizard-5"
+<!--                                    <TailSelect-->
+<!--                                        id="input-wizard-5"-->
+<!--                                        class="form-control"-->
+<!--                                        v-model="company.province"-->
+<!--                                        :options="{locale: 'pl', placeholder: company.province, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">-->
+<!--                                        <option :selected="company.province === '' ? 'selected' : ''" disabled>Wybierz...</option>-->
+<!--                                        <option :selected="index === company.province ? 'selected' : ''" v-for="(det,index) in provinces['province']"-->
+<!--                                                :value="index">{{ det }}-->
+<!--                                        </option>-->
+<!--                                    </TailSelect>-->
+                                    <Multiselect
                                         class="form-control"
                                         v-model="company.province"
-                                        :options="{locale: 'pl', placeholder: company.province, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                                        <option :selected="company.province === '' ? 'selected' : ''" disabled>Wybierz...</option>
-                                        <option :selected="index === company.province ? 'selected' : ''" v-for="(det,index) in provinces['province']"
-                                                :value="index">{{ det }}
-                                        </option>
-                                    </TailSelect>
+                                        mode="single"
+                                        label="name"
+                                        max="1"
+                                        :placeholder="company.province === '' ? 'select' : company.province"
+                                        valueProp="value"
+                                        :options="provinces['province']"
+                                    />
                                 </div>
                             </div>
                             <div class="col-span-12 xxl:col-span-6">
@@ -152,14 +162,18 @@ import cash from "cash-dom";
 import GetTeams from "../../compositions/GetTeams";
 import {useToast} from "vue-toastification";
 import router from "../../router";
+import Multiselect from '@vueform/multiselect';
+
 
 const toast = useToast();
 
 export default {
     components: {
-        DarkModeSwitcher
+        DarkModeSwitcher,
+        Multiselect
     },
     setup() {
+        const provincesSelects = ref();
         const provinces = require('../../json/provinces.json');
         const user = window.Laravel.user;
         const teams = ref([]);
@@ -235,7 +249,7 @@ export default {
                         if (response.data.success) {
                             company.value.regon = response.data.payload.regon;
                             company.value.nip = response.data.payload.nip;
-                            company.value.city = response.data.payload.city;
+                            company.value.city = response.data.payload.postCity;
                             company.value.company_name = response.data.payload.name;
                             company.value.street = response.data.payload.street;
                             company.value.loc_nr = response.data.payload.apartmentNumber;
@@ -313,12 +327,14 @@ export default {
         }
 
         onMounted(() => {
+            provincesSelects.value = provinces;
             // getCompaniesRepositories('');
             cash("body")
                 .removeClass("error-page")
 
         });
         return {
+            provincesSelects,
             provinces,
             teams,
             company,

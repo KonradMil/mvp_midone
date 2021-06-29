@@ -30,6 +30,8 @@ import ForgotPassword from "../pages/ForgotPassword";
 import Workshop from "../pages/Unity/Workshop/Workshop";
 import NewOffer from "../pages/Offers/NewOffer";
 import Offers from "../pages/Challenges/components/Offers";
+import SolutionsPanel from "../pages/Challenges/components/SolutionsPanel";
+import SolutionsArchive from "../pages/Solutions/SolutionsArchive";
 
 export const routes = [
     {
@@ -155,6 +157,12 @@ export const routes = [
                 props: { type: 'followed' }
             },
             {
+                name: 'challengesArchive',
+                path: '/challenges/archive',
+                component: Challenges,
+                props: { type: 'archive' }
+            },
+            {
                 name: 'internalChallenegeCard',
                 path: '/challenges/card/:id',
                 component: Card,
@@ -169,6 +177,12 @@ export const routes = [
                 name: 'solutions',
                 path: '/solutions',
                 component: Solutions
+            },
+            {
+                name: 'solutionsArchive',
+                path: '/solutions/archive',
+                component: SolutionsArchive,
+                props: true
             },
             {
                 name: 'knowledgebase',

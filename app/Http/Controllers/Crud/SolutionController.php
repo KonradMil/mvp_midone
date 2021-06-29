@@ -22,6 +22,29 @@ use Psr\Log\NullLogger;
 
 class SolutionController extends Controller
 {
+    public function getUserSolutionsArchive()
+    {
+        $solutions = Solution::where('archive', '=' , 1)->get();
+        $filterSolutions = [];
+
+        foreach($solutions as $solution){
+            foreach($solution->teams as $team){
+                foreach(Auth::user()->teams as $t){
+                    if($team->id == $t->id){
+                        $filterSolutions[] = $solution;
+                    }
+                }
+            }
+            if($solution->author_id == Auth::user()->id){
+                $filterSolutions[] = $solution;
+            }
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano archiwalne rozwiązania poprawnie.',
+            'payload' => $filterSolutions
+        ]);
+    }
     public function deleteSolutionsNull()
     {
         $solutions = Solution::all();

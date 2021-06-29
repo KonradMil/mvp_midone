@@ -33,7 +33,8 @@
         </div>
         <div class="flex-1 relative text-gray-700">
             <form role="form" @submit.prevent>
-                <input @keyup.enter="addCommentObject(object.id)"
+                <input v-if="guard !==3"
+                       @keyup.enter="addCommentObject(object.id)"
                        type="text"
                        v-model="message"
                        class="form-control form-control-rounded border-transparent bg-gray-200 pr-10 placeholder-theme-13"
@@ -58,7 +59,9 @@ export default {
     props: {
         object: Object,
         user: Object,
-        type: String
+        type: String,
+        challenge_stage: Number,
+        solution_archive: Number,
     },
     components: {
         Avatar,
@@ -73,8 +76,14 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const user = window.Laravel.user;
-
+        const guard = ref();
         onMounted(function () {
+            if(props.object.stage===undefined){
+                guard.value = props.object.archive + 2;
+            }else{
+                guard.value = props.object.stage;
+            }
+            console.log(guard.value);
             console.log(props.object);
             comments.value = props.object.comments;
             obj.value = props.object;
@@ -140,7 +149,8 @@ export default {
             showComments,
             comments,
             obj,
-            user
+            user,
+            guard
         }
     }
 }

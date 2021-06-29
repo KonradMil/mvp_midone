@@ -27,18 +27,24 @@
                     "pageName": "challengesFollowed",
                     "title": "Śledzone",
                     "ignore": true
+                },
+                {
+                    "icon": "",
+                    "pageName": "challengesArchive",
+                    "title": "Archiwalne",
+                    "ignore": true
                 }
             ]
         },
         {
             "icon": "BoxIcon",
-            "pageName": "solutions",
+            "pageName": "#",
             "title": "Rozwiązania",
             "subMenu": [
                 {
                     "icon": "",
-                    "pageName": "solutions",
-                    "title": "Wszystkie",
+                    "pageName": "solutionsArchive",
+                    "title": "Archiwalne",
                     "ignore": true
                 }
             ]
