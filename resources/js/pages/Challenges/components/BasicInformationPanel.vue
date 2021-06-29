@@ -78,11 +78,11 @@
                             <span v-if="$dayjs().isAfter($dayjs(challenge.solution_deadline))">Składanie rozwiązań do: {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }}</span>
                             <span v-if="$dayjs().isBefore($dayjs(challenge.solution_deadline))">Składanie ofert do: {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }}</span>
                         </div>
-                        <button v-if="!challenge.followed" class="btn btn-secondary ml-auto" @click="follow">
+                        <button v-if="!challenge.followed && challenge.stage < 3" class="btn btn-secondary ml-auto" @click="follow">
                             {{$t('challengesMain.follow')}}
                         </button>
 
-                        <button v-if="challenge.followed" class="btn btn-secondary ml-auto" @click="unfollow">
+                        <button v-if="challenge.followed && challenge.stage < 3" class="btn btn-secondary ml-auto" @click="unfollow">
                             {{$t('challengesMain.unFollow')}}
                         </button>
                     </div>
