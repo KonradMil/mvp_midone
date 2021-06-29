@@ -24,7 +24,7 @@ class SolutionController extends Controller
 {
     public function getUserSolutionsArchive()
     {
-        $solutions = Solution::where('archive', '=' , 1);
+        $solutions = Solution::where('archive', '=' , 1)->get();
         $filterSolutions = [];
 
         foreach($solutions as $solution){
@@ -42,7 +42,7 @@ class SolutionController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Pobrano archiwalne rozwiązania poprawnie.',
-            'payload' => $solutions
+            'payload' => $filterSolutions
         ]);
     }
     public function deleteSolutionsNull()
