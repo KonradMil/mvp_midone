@@ -50,7 +50,7 @@ export default {
         const types = require("../../json/types.json");
         const user = window.Laravel.user;
         const solutions = ref([]);
-
+        const type = ref('archive');
         const getSolutionRepositories = async() => {
             solutions.value = GetSolutionsArchive();
         }
