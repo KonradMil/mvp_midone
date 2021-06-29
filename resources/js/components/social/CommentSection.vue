@@ -78,10 +78,10 @@ export default {
         const user = window.Laravel.user;
         const guard = ref();
         onMounted(function () {
-            if(props.challenge_stage===undefined){
-                guard.value = props.solution.archive + 2;
+            if(props.object.stage===undefined){
+                guard.value = props.object.archive + 2;
             }else{
-                guard.value = props.challenge.stage;
+                guard.value = props.object.stage;
             }
             console.log(props.object);
             comments.value = props.object.comments;
