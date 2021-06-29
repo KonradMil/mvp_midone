@@ -33,7 +33,7 @@
         </div>
         <div class="flex-1 relative text-gray-700">
             <form role="form" @submit.prevent>
-                <input v-if="guard.value !==3"
+                <input v-if="guard !==3"
                        @keyup.enter="addCommentObject(object.id)"
                        type="text"
                        v-model="message"
@@ -83,6 +83,7 @@ export default {
             }else{
                 guard.value = props.object.stage;
             }
+            console.log(guard.value);
             console.log(props.object);
             comments.value = props.object.comments;
             obj.value = props.object;
