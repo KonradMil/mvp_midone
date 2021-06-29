@@ -15,7 +15,10 @@
                             </p>
                         </div>
                     </div>
-                    <div class="intro-y grid grid-cols-12 gap-6 mt-5">
+                    <div v-if="user.type == 'investor'" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+                        {{$t('challengesMain.noSolutions')}}.
+                    </div>
+                    <div class="intro-y grid grid-cols-12 gap-6 mt-5" v-if="user.type =='integrator'">
                         <!--                        <div v-if="challenge.stage >= 2" v-for="(solution, index) in challenge.selected" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box solution-selected">-->
                         <!--                            <SingleSolutionPost  :challenge="challenge" :user="user" :key="'selected_' + index" :solution="solution" :canAccept="false" :canEdit="false"></SingleSolutionPost>-->
                         <!--                        </div>-->
