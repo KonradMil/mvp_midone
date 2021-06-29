@@ -130,6 +130,7 @@
                     <CommentSection
                         :object="challenge"
                         :user="user"
+                        :challenge_stage="challenge.stage"
                         type="challenge"
                     />
                 </div>
