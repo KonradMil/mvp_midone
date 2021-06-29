@@ -46,8 +46,8 @@
                 {{ solution.description }}
             </div>
             <div class="mt-2" v-if="canAccept">
-                <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1">{{$t('challengesMain.acceptSolution')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1">{{$t('challengesMain.rejectSolution')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1 && challenge.stage !== 3">{{$t('challengesMain.acceptSolution')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1 && challenge.stage !== 3">{{$t('challengesMain.rejectSolution')}}</button>
             </div>
             <div class="mt-2" v-if="canEdit || inTeam">
                 <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: '/studio/solution/' + solution.id});" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1)">{{$t('models.edit')}}</button>
@@ -70,14 +70,14 @@
             </Tippy>
             <div class="intro-x flex mr-2">
             </div>
-            <Tippy v-if="!solution.liked"
+            <Tippy v-if="!solution.liked && challenge.stage !== 3"
                    @click.prevent="like(solution)"
                    tag="a" href=""
                    class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 ml-auto"
                    content="Like">
                 <ThumbsUpIcon class="w-3 h-3"/>
             </Tippy>
-            <Tippy v-if="solution.liked"
+            <Tippy v-if="solution.liked && challenge.stage !== 3"
                    @click.prevent="dislike(solution)"
                    tag="a" href=""
                    class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white ml-2 ml-auto"
@@ -89,6 +89,7 @@
             <CommentSection
                 :object="solution"
                 :user="user"
+                :challenge_stage="challenge.stage"
                 type="solution"
             />
         </div>
