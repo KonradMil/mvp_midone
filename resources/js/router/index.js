@@ -31,6 +31,7 @@ import Workshop from "../pages/Unity/Workshop/Workshop";
 import NewOffer from "../pages/Offers/NewOffer";
 import Offers from "../pages/Challenges/components/Offers";
 import SolutionsPanel from "../pages/Challenges/components/SolutionsPanel";
+import SolutionsArchive from "../pages/Solutions/SolutionsArchive";
 
 export const routes = [
     {
@@ -180,8 +181,7 @@ export const routes = [
             {
                 name: 'solutionsArchive',
                 path: '/solutions/archive',
-                component: SolutionsPanel,
-                props: { type: 'archive' }
+                component: SolutionsArchive,
             },
             {
                 name: 'knowledgebase',
