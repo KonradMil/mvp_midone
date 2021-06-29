@@ -46,7 +46,6 @@ export default {
     name: "solutionsArchive",
     components: {SingleSolutionPost},
     setup(props) {
-        const emitter = app.appContext.config.globalProperties.emitter;
         const toast = useToast();
         const types = require("../../json/types.json");
         const user = window.Laravel.user;
