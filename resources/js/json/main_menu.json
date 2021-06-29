@@ -38,13 +38,13 @@
         },
         {
             "icon": "BoxIcon",
-            "pageName": "solutions",
+            "pageName": "#",
             "title": "Rozwiązania",
             "subMenu": [
                 {
                     "icon": "",
-                    "pageName": "solutions",
-                    "title": "Wszystkie",
+                    "pageName": "solutionsArchive",
+                    "title": "Archiwalne",
                     "ignore": true
                 }
             ]
