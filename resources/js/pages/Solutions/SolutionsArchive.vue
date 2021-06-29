@@ -21,10 +21,10 @@
                         <!--                        </div>-->
                         <div v-for="(solution, index) in solutions" :key="index" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box">
                                 <span v-if="user.type === 'integrator'">
-                                    <SingleSolutionPost :user="user" :solution="solution" :challenge_stage="challenge_stage"></SingleSolutionPost>
+                                    <SingleSolutionPost :user="user" :solution="solution" :challenge_stage="challenge_stage.value"></SingleSolutionPost>
                                 </span>
                             <span v-if="user.type === 'investor'">
-                                    <SingleSolutionPost :user="user" :solution="solution" :challenge_stage="challenge_stage"></SingleSolutionPost>
+                                    <SingleSolutionPost :user="user" :solution="solution" :challenge_stage="challenge_stage.value"></SingleSolutionPost>
                                 </span>
                         </div>
                     </div>
