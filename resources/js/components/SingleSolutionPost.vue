@@ -56,7 +56,7 @@
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1" @click="unpublishSolution">{{$t('challengesMain.unpublish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive != 1" @click="switchTab">{{$t('teams.teams')}}</button>
             </div>
-            <div class="mt-2" v-if="user.type == 'integrator' && solution.selected == 1">
+            <div class="mt-2" v-if="user.type == 'integrator' && solution.selected == 1 && type!=='archive'">
                 <button class="btn btn-primary shadow-md mr-2" @click="addOffer">{{$t('challengesMain.addOffer')}}</button>
             </div>
         </div>
