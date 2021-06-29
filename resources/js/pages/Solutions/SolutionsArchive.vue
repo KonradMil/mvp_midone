@@ -50,7 +50,6 @@ export default {
         const types = require("../../json/types.json");
         const user = window.Laravel.user;
         const solutions = ref([]);
-        const challenge_stage = ref(3);
         const filterSolutions = () => {
             axios.post('/api/solution/user/get/archive', {})
                 .then(response => {
@@ -79,7 +78,6 @@ export default {
             solutions,
             types,
             user,
-            challenge_stage
         }
     },
     // beforeRouteEnter(to, from, next) {

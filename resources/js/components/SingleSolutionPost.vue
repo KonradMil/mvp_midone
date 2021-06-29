@@ -124,7 +124,6 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         const activeTab = ref(false);
         const inTeam = ref(false);
-        const challenge_stage = ref();
         const switchTab = () => {
             console.log('Switch2244444');
             console.log(props.solution + ' its props solution');
@@ -266,7 +265,6 @@ export default {
             rejectSolution,
             addOffer,
             inTeam,
-            challenge_stage
         }
     }
 }
