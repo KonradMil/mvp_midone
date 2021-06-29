@@ -30,6 +30,7 @@ import ForgotPassword from "../pages/ForgotPassword";
 import Workshop from "../pages/Unity/Workshop/Workshop";
 import NewOffer from "../pages/Offers/NewOffer";
 import Offers from "../pages/Challenges/components/Offers";
+import SolutionsPanel from "../pages/Challenges/components/SolutionsPanel";
 
 export const routes = [
     {
@@ -175,6 +176,12 @@ export const routes = [
                 name: 'solutions',
                 path: '/solutions',
                 component: Solutions
+            },
+            {
+                name: 'solutionsArchive',
+                path: '/solutions/archive',
+                component: SolutionsPanel,
+                props: { type: 'archive' }
             },
             {
                 name: 'knowledgebase',

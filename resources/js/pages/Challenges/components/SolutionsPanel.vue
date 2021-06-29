@@ -46,7 +46,8 @@ export default {
     components: {SingleSolutionPost},
     props: {
         challenge: Object,
-        inTeam: Boolean
+        inTeam: Boolean,
+        type: String,
     },
     setup(props) {
         const app = getCurrentInstance();
