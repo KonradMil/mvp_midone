@@ -169,7 +169,6 @@ export default {
             } else {
                 challenges.value = GetChallenges();
             }
-
         }
         const types = require("../../json/types.json");
         const sels = require("../../json/challenge.json");

@@ -182,6 +182,10 @@ class OfferController extends Controller
         $challenge = Challenge::find($offer->challenge_id);
         $challenge->selected_offer_id = $offer->id;
         $challenge->stage = 3;
+        $archiveSolutions = $challenge->solutions;
+        foreach($archiveSolutions as $archiveSolution){
+            $archiveSolution->archive = 1;
+        }
         $solution = Solution::find($offer->solution_id);
         $solution->selected_offer_id = $offer->id;
 
