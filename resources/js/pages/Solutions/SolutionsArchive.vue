@@ -44,14 +44,14 @@ import GetSolutionsArchive from "../../compositions/GetSolutionsArchive";
 
 export default {
     name: "solutionsArchive",
-    components: {SingleSolutionPost},
+    components: {SingleSolutionPost, GetSolutionsArchive},
     setup(props) {
         const toast = useToast();
         const types = require("../../json/types.json");
         const user = window.Laravel.user;
         const solutions = ref([]);
 
-        const getSolutionRepositories = () => {
+        const getSolutionRepositories = async() => {
             solutions.value = GetSolutionsArchive();
         }
 
@@ -61,10 +61,19 @@ export default {
 
 
         return {
+            getSolutionRepositories,
             solutions,
             types,
             user,
         }
+    },
+    beforeRouteEnter(to, from, next) {
+        if (!window.Laravel.isLoggedin) {
+            window.location.href = "/";
+        }
+        next((vm) => {
+            vm.getSolutionRepositories();
+        });
     }
 }
 </script>
