@@ -50,14 +50,23 @@ export default {
         const types = require("../../json/types.json");
         const user = window.Laravel.user;
         const solutions = ref([]);
-        const type = ref('archive');
-        const getSolutionRepositories = async() => {
-            solutions.value = GetSolutionsArchive();
+        const filterSolutions = () => {
+            axios.post('/api/solution/user/get/archive', {})
+                .then(response => {
+                    if (response.data.success) {
+                        solutions.value = response.data.payload;
+                    }
+                })
         }
 
+        // const getSolutionRepositories = async() => {
+        //     solutions.value = GetSolutionsArchive();
+        // }
+
         onMounted(function () {
+            filterSolutions();
             console.log('SolutionsArchiveMounted');
-            getSolutionRepositories();
+            // getSolutionRepositories();
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
@@ -65,20 +74,20 @@ export default {
 
 
         return {
-            getSolutionRepositories,
+            // getSolutionRepositories,
             solutions,
             types,
             user,
         }
     },
-    beforeRouteEnter(to, from, next) {
-        if (!window.Laravel.isLoggedin) {
-            window.location.href = "/";
-        }
-        next((vm) => {
-            vm.getSolutionRepositories();
-        });
-    }
+    // beforeRouteEnter(to, from, next) {
+    //     if (!window.Laravel.isLoggedin) {
+    //         window.location.href = "/";
+    //     }
+    //     next((vm) => {
+    //         vm.getSolutionRepositories();
+    //     });
+    // }
 }
 </script>
 

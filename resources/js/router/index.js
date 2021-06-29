@@ -182,6 +182,7 @@ export const routes = [
                 name: 'solutionsArchive',
                 path: '/solutions/archive',
                 component: SolutionsArchive,
+                props: true
             },
             {
                 name: 'knowledgebase',
