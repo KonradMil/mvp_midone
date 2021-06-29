@@ -33,7 +33,7 @@
         </div>
         <div class="flex-1 relative text-gray-700">
             <form role="form" @submit.prevent>
-                <input v-if="challenge_stage !==3 || solution_archive!==1"
+                <input v-if="challenge_stage !==3"
                        @keyup.enter="addCommentObject(object.id)"
                        type="text"
                        v-model="message"
@@ -78,6 +78,9 @@ export default {
         const user = window.Laravel.user;
 
         onMounted(function () {
+            if(props.challenge_stage===undefined){
+                props.challenge_stage = props.solution.archive + 2;
+            }
             console.log(props.object);
             comments.value = props.object.comments;
             obj.value = props.object;
