@@ -21,10 +21,10 @@
                         <!--                        </div>-->
                         <div v-for="(solution, index) in solutions" :key="index" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box">
                                 <span v-if="user.type === 'integrator'">
-                                    <SingleSolutionPost :user="user"></SingleSolutionPost>
+                                    <SingleSolutionPost :user="user" :solution="solution"></SingleSolutionPost>
                                 </span>
                             <span v-if="user.type === 'investor'">
-                                    <SingleSolutionPost></SingleSolutionPost>
+                                    <SingleSolutionPost :user="user" :solution="solution"></SingleSolutionPost>
                                 </span>
                         </div>
                     </div>
@@ -57,6 +57,9 @@ export default {
 
         onMounted(function () {
             getSolutionRepositories();
+            if (window.Laravel.user) {
+                user.value = window.Laravel.user;
+            }
         });
 
 
