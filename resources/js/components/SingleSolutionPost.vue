@@ -89,7 +89,7 @@
             <CommentSection
                 :object="solution"
                 :user="user"
-                :challenge_stage="challenge.stage"
+                :solution_archive="solution.archive"
                 type="solution"
             />
         </div>

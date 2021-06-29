@@ -33,7 +33,7 @@
         </div>
         <div class="flex-1 relative text-gray-700">
             <form role="form" @submit.prevent>
-                <input v-if="challenge_stage !==3"
+                <input v-if="challenge_stage !==3 || solution_archive!==1"
                        @keyup.enter="addCommentObject(object.id)"
                        type="text"
                        v-model="message"
@@ -60,7 +60,8 @@ export default {
         object: Object,
         user: Object,
         type: String,
-        challenge_stage: Number
+        challenge_stage: Number,
+        solution_archive: Number,
     },
     components: {
         Avatar,
