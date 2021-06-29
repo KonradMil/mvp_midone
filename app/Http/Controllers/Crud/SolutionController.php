@@ -42,7 +42,7 @@ class SolutionController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Pobrano archiwalne rozwiązania poprawnie.',
-            'payload' => $filterSolutions
+            'payload' => $solutions
         ]);
     }
     public function deleteSolutionsNull()
