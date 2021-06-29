@@ -149,7 +149,7 @@ class OldImportController extends Controller
 //            $fi->save();
 //            $newChallenge = new Challenge();
 //            $newChallenge->name = $oc->name;
-//            $newChallenge->save_json = str_replace('platfrom.dbr77.com', 'platform.dbr77.com', $oc->save_json);
+//            $newChallenge->save_json = str_replace('platfrom.dbr77.com', 'devsys.appworks-dev.pl', $oc->save_json);
 //            $newChallenge->screenshot_path = 's3/' . $oc->screenshot_path;
 //            $newChallenge->status = $oc->status;
 //            $newChallenge->stage = $oc->stage;
@@ -179,7 +179,7 @@ class OldImportController extends Controller
 //                $ns->challenge_id = $newChallenge->id;
 //                $ns->selected = $so->selected;
 //                $ns->rejected = $so->rejected;
-//                $ns->save_json = str_replace('platfrom.dbr77.com', 'platform.dbr77.com', $so->save_json);
+//                $ns->save_json = str_replace('platfrom.dbr77.com', 'devsys.appworks-dev.pl', $so->save_json);
 //                $ns->name = $so->name;
 //                $ns->description = '';
 //                $ns->screenshot_path = 's3/' . $so->screenshot_path;
