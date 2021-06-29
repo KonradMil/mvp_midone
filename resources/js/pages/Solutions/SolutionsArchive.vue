@@ -24,7 +24,7 @@
                                     <SingleSolutionPost :user="user"></SingleSolutionPost>
                                 </span>
                             <span v-if="user.type === 'investor'">
-                                    <SingleSolutionPost v-if="solution.status === 1"></SingleSolutionPost>
+                                    <SingleSolutionPost></SingleSolutionPost>
                                 </span>
                         </div>
                     </div>
