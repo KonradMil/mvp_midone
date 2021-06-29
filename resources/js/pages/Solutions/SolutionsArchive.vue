@@ -51,7 +51,7 @@ export default {
         const user = window.Laravel.user;
         const solutions = ref([]);
 
-        const getSolutionRepositories = async () => {
+        const getSolutionRepositories = () => {
             solutions.value = GetSolutionsArchive();
         }
 
