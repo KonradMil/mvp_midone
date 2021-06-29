@@ -32,7 +32,7 @@
                             <!-- BEGIN: Second Child -->
                             <transition @enter="enter" @leave="leave">
                                 <ul v-if="menu.subMenu && menu.activeDropdown">
-                                    <li v-for="(subMenu, subMenuKey) in menu.subMenu" :key="subMenuKey">
+                                    <li v-for="(subMenu, subMenuKey) in menu.subMenu" :key="subMenuKey" v-if="!(subMenu.pageName == 'challengesArchive' && user.type == 'integrator') && !(subMenu.pageName == 'solutionsArchive' && user.type == 'investor')">
                                         <SideMenuTooltip tag="a" :content="subMenu.title" href="javascript:;" class="side-menu" :class="{ 'side-menu--active': subMenu.active }" @click="linkTo(subMenu, router)">
                                             <div class="side-menu__icon">
                                                 <ActivityIcon/>
