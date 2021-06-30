@@ -6,6 +6,7 @@ use App\Events\SolutionAccepted;
 use App\Events\SolutionRejected;
 use App\Models\Challenges\Challenge;
 use App\Notifications\SolutionAcceptedNotification;
+use App\Notifications\SolutionRejectedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -31,6 +32,6 @@ class SendSolutionRejectedNotification
     {
         $user = $event->subject->author;
         $challenge = Challenge::find($event->subject->challenge_id);
-        $user->notify(new SolutionAcceptedNotification($challenge, $event->subject));
+        $user->notify(new SolutionRejectedNotification($challenge, $event->subject));
     }
 }
