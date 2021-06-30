@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\OfferPublished;
 use App\Events\SolutionPublished;
 use App\Models\Challenges\Challenge;
+use App\Models\Solutions\Solution;
 use App\Models\User;
 use App\Notifications\ChallengePublishedNotification;
 use App\Notifications\OfferPublishedNotification;
@@ -34,6 +35,7 @@ class SendOfferPublishedNotification
     {
         $user = $event->subject->author;
         $challenge = Challenge::find($event->subject->challenge_id);
-        $user->notify(new OfferPublishedNotification($challenge, $event->subject));
+        $solution = Solution::find($event->subject->solution_id);
+        $user->notify(new OfferPublishedNotification($challenge, $solution));
     }
 }
