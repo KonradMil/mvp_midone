@@ -24,7 +24,7 @@
                 </div>
             </div>
             <!-- END: Profile Menu -->
-            <WorkshopPanel v-if="activeTab == 'workshop'"></WorkshopPanel>
+            <WorkshopPanel :class="(activeTab == 'workshop')? '' : 'hidden'"></WorkshopPanel>
             <Marketplace v-if="activeTab == 'marketplace'"></Marketplace>
             <OwnObjects v-if="activeTab == 'obiekty'"></OwnObjects>
         </div>
@@ -72,7 +72,7 @@ name: "Workshop",
                         }
                     })
             } else if (e.action == 'edit'){
-
+                emitter.emit('LoadWorkshopItems', e.object);
             } else if (e.action == 'publish'){
                 axios.post('/api/workshop/models/publish', {id: e.id})
                     .then(response => {

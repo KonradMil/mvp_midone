@@ -44,6 +44,10 @@ export default {
             }
         }
 
+        emitter.on('loadObjectWorkshop', (e) => {
+            gameInstance.value.SendMessage(gameObject, 'LoadWorkshopItems', e.object.save_json);
+        });
+
         onBeforeMount(() => {
             // if (props.unityLoader) {
                 const script = document.createElement('SCRIPT')
