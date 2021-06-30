@@ -18,7 +18,7 @@
                         <li v-if="menu == 'devider'" :key="menu + menuKey" class="side-nav__devider my-6">
                         </li>
                         <li v-else :key="menu + menuKey" v-if="menu.admin == undefined || (user.role == 'admin')">
-                            <SideMenuTooltip tag="a" v-if="user.role != 'investor' && menu.pageName != 'solutions'" :content="menu.title" href="javascript:;" class="side-menu" :class="{'side-menu--active': menu.active,'side-menu--open': menu.activeDropdown}" @click="linkTo(menu, router)">
+                            <SideMenuTooltip tag="a" v-if="user.role != 'investor' && menu.pageName != 'solutions' && !(menu.title == 'Rozwiązania' && user.type == 'investor')" :content="menu.title" href="javascript:;" class="side-menu" :class="{'side-menu--active': menu.active,'side-menu--open': menu.activeDropdown}" @click="linkTo(menu, router)">
                                 <div class="side-menu__icon">
                                     <component :is="menu.icon"/>
                                 </div>
