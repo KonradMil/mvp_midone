@@ -128,7 +128,7 @@ export default {
             progress,
             error,
             setFullscreen,
-            message,
+            message
         }
     },
 

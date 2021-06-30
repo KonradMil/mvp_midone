@@ -382,6 +382,8 @@ export default {
                 loaded.value = true;
                 // gameWindow.value.message('NetworkBridge', 'SetHangarApperance', 1);
                 // gameWindow.value.message('NetworkBridge', 'UnlockUnityInput');
+                console.log('gameWindow.value');
+                console.log(gameWindow.value);
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
                 handleUnityActionOutgoing({
                     action: 'setSessionId',
