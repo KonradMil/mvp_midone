@@ -206,7 +206,7 @@ class OfferController extends Controller
         $solution->save();
         $offer->save();
 
-//        event(new SolutionAccepted($solution, $challenge->author, 'Rozwiązanie zostało zaakceptowane: ' . $solution->name, []));
+        event(new OfferAccepted($offer, $challenge->author, 'Oferta zostało zaakceptowane: ' . $solution->name, []));
 
         return response()->json([
             'success' => true,

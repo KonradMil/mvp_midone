@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\ChallengeAdded;
+use App\Events\OfferPublished;
 use App\Events\SolutionAdded;
 use App\Events\SolutionRejected;
 use App\Events\TeamMemberInvited;
@@ -15,6 +16,8 @@ use App\Events\ChallengePublished;
 use App\Events\SolutionPublished;
 use App\Listeners\AddActivityLog;
 use App\Listeners\SendChallengeNotification;
+use App\Listeners\SendOfferAcceptedNotification;
+use App\Listeners\SendOfferPublishedNotification;
 use App\Listeners\SendSolutionNotification;
 use App\Listeners\SendSolutionRejectedNotification;
 use App\Listeners\SendTeamMemberAcceptedNotification;
@@ -23,6 +26,7 @@ use App\Listeners\SendQuestionAnsweredNotification;
 use App\Listeners\SendSolutionAcceptedNotification;
 use App\Listeners\SendSolutionPublishedNotification;
 use App\Listeners\SendChallengePublishedNotification;
+use App\Notifications\OfferAccepted;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -80,7 +84,15 @@ class EventServiceProvider extends ServiceProvider
         SolutionPublished::class => [
             AddActivityLog::class,
             SendSolutionPublishedNotification::class
-        ]
+        ],
+        OfferAccepted::class => [
+            AddActivityLog::class,
+            SendOfferAcceptedNotification::class
+        ],
+        OfferPublished::class => [
+            AddActivityLog::class,
+            SendOfferPublishedNotification::class
+        ],
     ];
 
     /**
