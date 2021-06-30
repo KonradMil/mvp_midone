@@ -54,7 +54,7 @@ name: "Workshop",
         const gameWindow = ref(null);
 
         emitter.on('loadObjectWorkshop', (e) => {
-            unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
+
         });
 
         emitter.on('UnityWorkshopSave', e => {
