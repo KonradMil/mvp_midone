@@ -170,8 +170,8 @@ class OfferController extends Controller
         $offer->status = 1;
         $offer->save();
 
-        $solution = Solution::find($id->solution_id);
-        $challenge = Challenge::find($id->challenge_id);
+        $solution = Solution::find($offer->solution_id);
+        $challenge = Challenge::find($offer->challenge_id);
 
         event(new OfferPublished($challenge, $offer->author, 'Nowa oferta została opublikowana: ' . $solution->name, []));
 
