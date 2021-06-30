@@ -68,6 +68,10 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'SaveStructure', '');
     }
 
+    function loadWorkshopObject(val) {
+        outgoing(game, 'LoadWorkshopItems', val, true);
+    }
+
     function changeGridSize(val) {
         if(val === 0) {
             outgoing(game, 'HideGrid', val)
@@ -210,6 +214,7 @@ export default function unityActionOutgoing(gameWindow) {
         addLine,
         removeLine,
         updateCurrentAnimation,
-        prefix
+        prefix,
+        loadWorkshopObject
     };
 }
