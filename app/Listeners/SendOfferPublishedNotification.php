@@ -35,7 +35,10 @@ class SendOfferPublishedNotification
     {
         $user = $event->subject->installer;
         $challenge = Challenge::find($event->subject->challenge_id);
+        $client = User::find($challenge->author_id);
         $solution = Solution::find($event->subject->solution_id);
         $user->notify(new OfferPublishedNotification($challenge, $solution));
+        $client->notify(new OfferPublishedNotification($challenge, $solution));
+
     }
 }
