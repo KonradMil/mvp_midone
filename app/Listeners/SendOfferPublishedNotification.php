@@ -33,7 +33,7 @@ class SendOfferPublishedNotification
      */
     public function handle(OfferPublished $event)
     {
-        $user = $event->subject->author;
+        $user = $event->subject->installer;
         $challenge = Challenge::find($event->subject->challenge_id);
         $solution = Solution::find($event->subject->solution_id);
         $user->notify(new OfferPublishedNotification($challenge, $solution));
