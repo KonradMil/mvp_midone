@@ -103,7 +103,10 @@ class SolutionController extends Controller
         $solution->selected = false;
         $solution->offers()->delete();
         $solution->selected_offer_id = 0;
+        $challenge = Challenge::find($solution->challenge_id);
         $solution->save();
+
+        event(new SolutionRejected($solution, $challenge->author, 'Rozwiązanie zostało odrzucone: ' . $solution->name, []));
 
         return response()->json([
             'success' => true,

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\ChallengeAdded;
 use App\Events\SolutionAdded;
+use App\Events\SolutionRejected;
 use App\Events\TeamMemberInvited;
 use App\Events\TeamMemberAccepted;
 use App\Events\TeamAdded;
@@ -15,6 +16,7 @@ use App\Events\SolutionPublished;
 use App\Listeners\AddActivityLog;
 use App\Listeners\SendChallengeNotification;
 use App\Listeners\SendSolutionNotification;
+use App\Listeners\SendSolutionRejectedNotification;
 use App\Listeners\SendTeamMemberAcceptedNotification;
 use App\Listeners\SendQuestionAddedNotification;
 use App\Listeners\SendQuestionAnsweredNotification;
@@ -66,6 +68,10 @@ class EventServiceProvider extends ServiceProvider
         SolutionAccepted::class => [
             AddActivityLog::class,
             SendSolutionAcceptedNotification::class
+        ],
+        SolutionRejected::class => [
+            AddActivityLog::class,
+            SendSolutionRejectedNotification::class
         ],
         ChallengePublished::class => [
             AddActivityLog::class,
