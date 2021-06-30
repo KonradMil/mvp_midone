@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OfferAccepted;
 use App\Events\OfferPublished;
 use App\Models\Challenges\Challenge;
 use App\Models\Offer;
