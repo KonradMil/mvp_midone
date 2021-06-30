@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Crud;
 
 use App\Events\SolutionAccepted;
 use App\Events\SolutionPublished;
+use App\Events\SolutionRejected;
 use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
 use App\Models\Estimate;
