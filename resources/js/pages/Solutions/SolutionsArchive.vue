@@ -19,7 +19,7 @@
                         <!--                        <div v-if="challenge.stage >= 2" v-for="(solution, index) in challenge.selected" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box solution-selected">-->
                         <!--                            <SingleSolutionPost  :challenge="challenge" :user="user" :key="'selected_' + index" :solution="solution" :canAccept="false" :canEdit="false"></SingleSolutionPost>-->
                         <!--                        </div>-->
-                        <div v-for="(solution, index) in solutions" :key="index" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box">
+                        <div v-for="(solution, index) in solutions" :key="index" class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
                                 <span v-if="user.type === 'integrator'">
                                     <SingleSolutionPost :user="user" :solution="solution" :type="'archive'"></SingleSolutionPost>
                                 </span>
