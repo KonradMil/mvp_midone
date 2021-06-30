@@ -45,7 +45,7 @@ export default {
         }
 
         emitter.on('loadObjectWorkshop', (e) => {
-            gameInstance.value.SendMessage(gameObject, 'LoadWorkshopItems', e.object.save_json);
+            gameInstance.value.SendMessage(gameInstance.value, 'LoadWorkshopItems', e.object.save_json);
         });
 
         onBeforeMount(() => {

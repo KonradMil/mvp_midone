@@ -67,10 +67,10 @@
                         >
                             <ol class="list-disc ml-5 text-gray-600">
                                 <li class="pt-1">
-                                    <strong>2.1 </strong> Administratorem danych osobowych jest DBR77 sp. z o.o. z siedzibą w Toruniu.
+                                    <strong>2.1 </strong> Administratorem danych osobowych jest CAULFIELD SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ, z siedzibą w Toruniu przy ul. Żółkiewskiego 31, 87-100 Toruń, wpisaną do rejestru przedsiębiorców Krajowego Rejestru Sądowego prowadzonego przez Sąd Rejonowy w Toruniu, VII Wydział Gospodarczy Krajowego Rejestru Sądowego pod numerem KRS 0000860440, NIP 8792725331, REGON 387073039, o kapitale zakładowym 100.000 zł (sto tysięcy złotych)..
                                 </li>
                                 <li class="pt-1">
-                                    <strong>2.2 </strong> Wyznaczyliśmy Inspektora Ochrony Danych, tj. osobę, która może udzielić szczegółowych informacji na temat przetwarzania danych. Skontaktuj się z nami: contact@db77.pl lub DBR77 sp. z o.o., ul. Żółkiewskiego 31, 87-100 Toruń.
+                                    <strong>2.2 </strong> Wyznaczyliśmy Inspektora Ochrony Danych, tj. osobę, która może udzielić szczegółowych informacji na temat przetwarzania danych. Skontaktuj się z nami: contact@db77.pl lub CAULFIELD SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ, z siedzibą w Toruniu przy ul. Żółkiewskiego 31, 87-100 Toruń, wpisaną do rejestru przedsiębiorców Krajowego Rejestru Sądowego prowadzonego przez Sąd Rejonowy w Toruniu, VII Wydział Gospodarczy Krajowego Rejestru Sądowego pod numerem KRS 0000860440, NIP 8792725331, REGON 387073039, o kapitale zakładowym 100.000 zł (sto tysięcy złotych).
                                 </li>
                             </ol>
                         </div>
