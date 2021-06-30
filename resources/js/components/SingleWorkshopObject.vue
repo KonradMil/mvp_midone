@@ -99,7 +99,7 @@ export default {
         }
 
         const editObject = () => {
-            emitter.emit('singleworkshopobject', {action: 'edit', object: object})
+            emitter.emit('loadObjectWorkshop', {action: 'edit', object: object})
         }
 
         const deleteObject = () => {
