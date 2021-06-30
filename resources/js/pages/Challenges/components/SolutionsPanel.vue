@@ -63,6 +63,7 @@ export default {
 
         emitter.on('deletesolution', e => {
             solutions.value.splice(e.index, 1);
+            filterMember();
         });
 
         onMounted(function () {
