@@ -207,7 +207,7 @@ class OfferController extends Controller
         $solution->save();
         $offer->save();
 
-        event(new OfferAccepted($offer, $challenge->author, 'Oferta zostało zaakceptowane: ' . $solution->name, []));
+        event(new OfferAccepted($offer, $offer->installer, 'Oferta zostało zaakceptowane: ' . $solution->name, []));
 
         return response()->json([
             'success' => true,
