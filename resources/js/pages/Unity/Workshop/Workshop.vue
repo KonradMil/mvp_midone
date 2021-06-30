@@ -24,7 +24,7 @@
                 </div>
             </div>
             <!-- END: Profile Menu -->
-            <WorkshopPanel :class="(activeTab == 'workshop')? '' : 'hidden'"></WorkshopPanel>
+            <WorkshopPanel :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></WorkshopPanel>
             <Marketplace v-if="activeTab == 'marketplace'"></Marketplace>
             <OwnObjects v-if="activeTab == 'obiekty'"></OwnObjects>
         </div>
@@ -40,6 +40,7 @@ import UnityBridgeWorkshop from "./bridge_workshop";
 import {getCurrentInstance, onBeforeMount, ref} from "vue";
 import UnityBridge from "../bridge";
 import dayjs from "dayjs";
+import unityActionOutgoing from "../composables/ActionsOutgoing";
 export default {
 name: "Workshop",
     components: {OwnObjects, Marketplace, WorkshopPanel},
@@ -49,6 +50,12 @@ name: "Workshop",
         const activeTab = ref('obiekty');
         const bridge = ref();
         const loadedObjectId = ref(null);
+        const unityActionOutgoingObject = ref({});
+        const gameWindow = ref(null);
+
+        emitter.on('loadObjectWorkshop', (e) => {
+            unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
+        });
 
         emitter.on('UnityWorkshopSave', e => {
             axios.post('/api/workshop/models/save', {object: e, id: loadedObjectId})
@@ -94,6 +101,34 @@ name: "Workshop",
             }
         });
 
+        const handleUnityActionOutgoing = (e) => {
+            try {
+                unityActionOutgoingObject.value[e.action](e.data);
+            } catch (ee) {
+                console.log([ee, e]);
+            }
+        }
+
+        const unlockInput = () => {
+            // console.log('UNLOCK');
+            handleUnityActionOutgoing({action: "unlockInput", data: ''});
+        }
+
+        const initalize = async () => {
+            console.log("initializeMe");
+            setTimeout(function () {
+                unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
+                handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
+                handleUnityActionOutgoing({action: 'prefix', data: 'https://platform.dbr77.com/s3'});
+            }, 2000);
+            setTimeout(() => {
+                unlockInput();
+            }, 5000);
+        }
+
+        //RUNS WHEN UNITY IS READY
+        emitter.on('onInitialized', e => initalize());
+
         onBeforeMount(() => {
             //ADDS LISTENERS
             bridge.value = UnityBridgeWorkshop();
@@ -101,7 +136,11 @@ name: "Workshop",
         });
 
         return {
-            activeTab
+            activeTab,
+            initalize,
+            unlockInput,
+            handleUnityActionOutgoing,
+            gameWindow
         }
     }
 }

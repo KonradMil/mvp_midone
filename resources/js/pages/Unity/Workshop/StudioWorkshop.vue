@@ -14,6 +14,7 @@
 <script>
 import {onMounted, onBeforeMount, ref, getCurrentInstance} from "vue";
 import cash from "cash-dom/dist/cash";
+import unityActionOutgoing from "../composables/ActionsOutgoing";
 
 export default {
     props: ['src', 'module', 'width', 'height', 'externalProgress', 'unityLoader', 'hideFooter'],
@@ -28,11 +29,14 @@ export default {
         const error = ref(null);
         const unity_workshop_path = window.unity_workshop_path;
         const unity_path = window.unity_path;
+
         containerId.value = 'unity-container-' + Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
         const setFullscreen = () => {
             gameInstance.value.SetFullscreen(1);
         }
-4
+
+
+
         const message = (gameObject, method, param) => {
             if (param === null) {
                 param = ''
@@ -44,9 +48,7 @@ export default {
             }
         }
 
-        emitter.on('loadObjectWorkshop', (e) => {
-            gameInstance.value.SendMessage(gameInstance.value, 'LoadWorkshopItems', e.object.save_json);
-        });
+
 
         onBeforeMount(() => {
             // if (props.unityLoader) {
