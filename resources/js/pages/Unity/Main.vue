@@ -322,9 +322,9 @@ export default {
                     break;
                 case 'logout':
                     if(type.value == 'solution') {
-                       window.location.href = 'https://devsys.appworks-dev.pl/challenges/card/' + solution.value.challenge_id;
+                       window.location.href = 'https://platform.dbr77.com/challenges/card/' + solution.value.challenge_id;
                     } else {
-                        window.location.href = 'https://devsys.appworks-dev.pl/challenges/card/' + challenge.value.id;
+                        window.location.href = 'https://platform.dbr77.com/challenges/card/' + challenge.value.id;
                     }
                     break;
                 case 'orto':
@@ -395,7 +395,7 @@ export default {
                 } else {
                     getCardChallengeRepositories(id.value);
                 }
-                handleUnityActionOutgoing({action: 'prefix', data: 'https://devsys.appworks-dev.pl/s3'});
+                handleUnityActionOutgoing({action: 'prefix', data: 'https://platform.dbr77.com/s3'});
             }, 2000);
             setTimeout(() => {
                 unlockInput();
