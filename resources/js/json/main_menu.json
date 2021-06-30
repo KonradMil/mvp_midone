@@ -59,12 +59,6 @@
                     "pageName": "projects",
                     "title": "Aktywne",
                     "ignore": true
-                },
-                {
-                    "icon": "",
-                    "pageName": "projects-archived",
-                    "title": "Archiwalne",
-                    "ignore": true
                 }
             ]
         },
