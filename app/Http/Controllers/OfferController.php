@@ -173,7 +173,7 @@ class OfferController extends Controller
         $solution = Solution::find($offer->solution_id);
         $challenge = Challenge::find($offer->challenge_id);
 
-        event(new OfferPublished($challenge, $offer->author, 'Nowa oferta została opublikowana: ' . $solution->name, []));
+        event(new OfferPublished($challenge, $offer->installer, 'Nowa oferta została opublikowana: ' . $solution->name, []));
 
 
         return response()->json([
