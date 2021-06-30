@@ -531,7 +531,10 @@ class SolutionController extends Controller
     public function delete(Request $request)
     {
         $solution = Solution::find($request->input('id'));
-        $solution->delete();
+        if($solution != NULL){
+            $solution->delete();
+        }
+
 
         return response()->json([
             'success' => true,
