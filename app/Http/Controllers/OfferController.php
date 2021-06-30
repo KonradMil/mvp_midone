@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OfferPublished;
 use App\Models\Challenges\Challenge;
 use App\Models\Offer;
 use App\Models\Solutions\Solution;
@@ -168,6 +169,12 @@ class OfferController extends Controller
         $offer = Offer::find($id);
         $offer->status = 1;
         $offer->save();
+
+        $solution = Solution::find($id->solution_id);
+        $challenge = Challenge::find($id->challenge_id);
+
+        event(new OfferPublished($challenge, $offer->author, 'Nowa oferta została opublikowana: ' . $solution->name, []));
+
 
         return response()->json([
             'success' => true,
