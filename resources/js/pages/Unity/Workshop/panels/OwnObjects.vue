@@ -12,16 +12,29 @@
 </template>
 
 <script>
-import {onMounted, ref} from "vue";
+import {getCurrentInstance, onMounted, ref} from "vue";
 import SingleWorkshopObject from "../../../../components/SingleWorkshopObject";
 
 export default {
     name: "OwnObjects",
     components: {SingleWorkshopObject},
     setup() {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
 
         const objects = ref([]);
 
+        emitter.on('singleobjectdeleted', e => {
+           objects.value.forEach((obj, index) => {
+              if(obj.id == e.id) {
+                  objects.value.splice(index,1);
+              }
+           });
+        });
+
+        emitter.on('singleobjectcopied', e => {
+            getObjects();
+        });
 
         const getObjects = () => {
             axios.post('/api/workshop/models/get/all', {own: true})

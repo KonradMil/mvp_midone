@@ -63,9 +63,34 @@ name: "Workshop",
 
         emitter.on('singleworkshopobject', e => {
             if(e.action == 'delete') {
-
+                axios.post('/api/workshop/models/delete', {id: e.id})
+                    .then(response => {
+                        if (response.data.success) {
+                            emitter.emit('singleobjectdeleted', {id: e.id});
+                        } else {
+                            // toast.error(response.data.message);
+                        }
+                    })
             } else if (e.action == 'edit'){
 
+            } else if (e.action == 'publish'){
+                axios.post('/api/workshop/models/publish', {id: e.id})
+                    .then(response => {
+                        if (response.data.success) {
+                            emitter.emit('singleobjectpublished', {id: e.id});
+                        } else {
+
+                        }
+                    })
+            }else if (e.action == 'copy'){
+                axios.post('/api/workshop/models/copy', {id: e.id})
+                    .then(response => {
+                        if (response.data.success) {
+                            emitter.emit('singleobjectcopied', {id: e.id});
+                        } else {
+
+                        }
+                    })
             }
         });
 

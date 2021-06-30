@@ -219,7 +219,7 @@ export default {
                             if (response.data.success) {
                                 company.value.regon = response.data.payload.regon;
                                 company.value.nip = response.data.payload.nip;
-                                company.value.city = response.data.payload.postCity;
+                                company.value.city = response.data.payload.city;
                                 company.value.company_name = response.data.payload.name;
                                 company.value.street = response.data.payload.street;
                                 company.value.loc_nr = response.data.payload.apartmentNumber;
