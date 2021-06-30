@@ -118,10 +118,11 @@ name: "Workshop",
             console.log("initializeMe");
             setTimeout(function () {
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
-                handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
-                handleUnityActionOutgoing({action: 'prefix', data: 'https://platform.dbr77.com/s3'});
+                // handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
+
             }, 2000);
             setTimeout(() => {
+                handleUnityActionOutgoing({action: 'prefix', data: 'https://platform.dbr77.com/s3'});
                 unlockInput();
             }, 5000);
         }
