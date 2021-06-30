@@ -199,7 +199,7 @@ export default {
                 })
         }
 
-        const deleteSolution = () => {
+        const deleteSolution = async() => {
             axios.post('/api/solution/delete', {id: solution.id})
                 .then(response => {
                     if (response.data.success) {
