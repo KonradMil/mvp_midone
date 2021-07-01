@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\OfferAccepted;
 use App\Events\SolutionAccepted;
 use App\Models\Challenges\Challenge;
+use App\Models\Solutions\Solution;
 use App\Notifications\OfferAcceptedNotification;
 use App\Notifications\SolutionAcceptedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -32,6 +33,7 @@ class SendOfferAcceptedNotification
     {
         $user = $event->subject->installer;
         $challenge = Challenge::find($event->subject->challenge_id);
-        $user->notify(new OfferAcceptedNotification($challenge, $event->subject));
+        $solution = Solution::find($event->subject->solution_id);
+        $user->notify(new OfferAcceptedNotification($challenge, $solution));
     }
 }
