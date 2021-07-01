@@ -39,8 +39,8 @@ class SendCommentAddedNotification
 //        $object = $event -> subject;
         $challenge = Challenge::find($event->subject->challenge_id);
         if($challenge===NULL){
-            $challenge = Challenge::find($event->subject->id);
-            $user->notify(new CommentAddedNotification($challenge));
+            $challenge_new = Challenge::find($event->subject->id);
+            $user->notify(new CommentAddedNotification($challenge_new));
         } else {
             $solution = Solution::find($event->subject->id);
             $user->notify(new CommentAddedNotification($solution));
