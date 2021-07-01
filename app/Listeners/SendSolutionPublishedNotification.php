@@ -3,8 +3,12 @@
 namespace App\Listeners;
 
 use App\Events\SolutionPublished;
+use App\Models\Challenges\Challenge;
+use App\Models\Solutions\Solution;
 use App\Models\User;
 use App\Notifications\ChallengePublishedNotification;
+use App\Notifications\OfferPublishedNotification;
+use App\Notifications\SolutionPublishedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -28,8 +32,9 @@ class SendSolutionPublishedNotification
      */
     public function handle(SolutionPublished $event)
     {
-            $user = User::find($event->subject->author_id);
-
-//            $user->notify(new ($event->subject));
+//            $user = User::find($event->subject->author_id);
+        $user = $event->subject->author;
+        $challenge = Challenge::find($event->subject->challenge_id);
+        $user->notify(new SolutionPublishedNotification($challenge, $event->subject));
     }
 }
