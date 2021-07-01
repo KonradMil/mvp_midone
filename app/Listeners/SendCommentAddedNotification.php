@@ -43,6 +43,7 @@ class SendCommentAddedNotification
             $user->notify(new CommentAddedNotification($solution));
 
         } else {
+            $challenge = Challenge::find($event->subject->id);
             $user->notify(new CommentAddedNotification($challenge));
         }
     }
