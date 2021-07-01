@@ -48,7 +48,7 @@ class CommentsController extends Controller
         $object->comments_count = $object->comments()->count();
         $object->likes = $object->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
 
-        event(new CommentAdded($object, $object->author_id, 'Nowa oferta została opublikowana: ' . $object->name, []));
+//        event(new CommentAdded($object, $object->author_id, 'Nowa oferta została opublikowana: ' . $object->name, []));
 
         //        foreach ($comments as $comment) {
 //            $comment->commentator = $comment->commentator;
