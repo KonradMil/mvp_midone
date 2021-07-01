@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\OfferAccepted;
 use App\Events\SolutionAccepted;
 use App\Models\Challenges\Challenge;
 use App\Notifications\OfferAcceptedNotification;
@@ -27,7 +28,7 @@ class SendOfferAcceptedNotification
      * @param  SolutionAccepted  $event
      * @return void
      */
-    public function handle(SolutionAccepted $event)
+    public function handle(OfferAccepted $event)
     {
         $user = $event->subject->installer;
         $challenge = Challenge::find($event->subject->challenge_id);
