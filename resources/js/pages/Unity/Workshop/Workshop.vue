@@ -117,7 +117,7 @@ name: "Workshop",
         const initalize = async () => {
             console.log("initializeMe");
             setTimeout(function () {
-                unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
+                unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value.refs.gameWindow);
                 // handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
 
             }, 2000);
