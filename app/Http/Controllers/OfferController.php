@@ -141,6 +141,10 @@ class OfferController extends Controller
             $check->period_of_support = $request->period_of_support;
             $check->offer_expires_in = $request->offer_expires_in;
             $check->save();
+            $solution = Solution::find($check->solution_id);
+
+            event(new OfferAdded($check, $check->installer, 'Dodałeś nową ofertę do rozwiązania: ' . $solution ->name, []));
+
             return response()->json([
                 'success' => true,
                 'message' => 'Dodano oferte poprawnie.',
@@ -160,7 +164,6 @@ class OfferController extends Controller
         $offer->save();
 
 
-        event(new OfferAdded($offer, $offer->installer, 'Dodałeś nową ofertę do rozwiązania: ' . $sol ->name, []));
 
 
         return response()->json([
