@@ -54,6 +54,8 @@ name: "Workshop",
         const gameWindow = ref(null);
 
         emitter.on('loadObjectWorkshop', (e) => {
+            console.log(e);
+            console.log(JSON.parse(e.object.save_json));
             handleUnityActionOutgoing({action: 'loadWorkshopObject', data: JSON.parse(e.object.save_json)});
         });
 
