@@ -35,20 +35,6 @@ class OfferAddedNotification extends Notification
         return ['mail', 'broadcast', 'database'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {
-        return (new MailMessage)
-            ->line('Dodałeś ofertę do rozwiązania: ' . $this->solution->name .'.')
-            ->action('Sprawdź', url('https://devsys.appworks-dev.pl/challenges/card/' . $this->challenge->id))
-            ->line('Dziękujemy za korzystanie z platformy DBR77!');
-    }
-
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
