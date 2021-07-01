@@ -170,7 +170,7 @@
                         <input type="number" class="form-control" v-model="offer_expires_in"/>
                     </div>
                 </div>
-                <button class="btn btn-primary w-20 mt-3" @click="save">{{ $t('profiles.save') }}</button>
+                <button class="btn btn-primary w-20 mt-3" @click.prevent="save">{{ $t('profiles.save') }}</button>
             </div>
         </div>
     </div>
