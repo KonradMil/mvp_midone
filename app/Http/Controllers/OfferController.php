@@ -160,7 +160,7 @@ class OfferController extends Controller
         $offer->save();
 
 
-        event(new OfferAdded($offer, $offer->installer, 'Nowa oferta została opublikowana: ' . $sol ->name, []));
+        event(new OfferAdded($offer, $offer->installer, 'Dodałeś nową ofertę do rozwiązania: ' . $sol ->name, []));
 
 
         return response()->json([
