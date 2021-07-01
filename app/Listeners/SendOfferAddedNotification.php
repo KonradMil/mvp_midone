@@ -9,6 +9,7 @@ use App\Models\Challenges\Challenge;
 use App\Models\Solutions\Solution;
 use App\Models\User;
 use App\Notifications\ChallengePublishedNotification;
+use App\Notifications\OfferAddedNotification;
 use App\Notifications\OfferPublishedNotification;
 use App\Notifications\SolutionAcceptedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -37,6 +38,6 @@ class SendOfferAddedNotification
         $user = $event->subject->installer;
         $challenge = Challenge::find($event->subject->challenge_id);
         $solution = Solution::find($event->subject->solution_id);
-        $user->notify(new OfferPublishedNotification($challenge, $solution));
+        $user->notify(new OfferAddedNotification($challenge, $solution));
     }
 }
