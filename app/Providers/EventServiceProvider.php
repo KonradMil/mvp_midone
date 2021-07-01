@@ -87,10 +87,6 @@ class EventServiceProvider extends ServiceProvider
             AddActivityLog::class,
             SendSolutionPublishedNotification::class
         ],
-        OfferAccepted::class => [
-            AddActivityLog::class,
-            SendOfferAcceptedNotification::class
-        ],
         OfferPublished::class => [
             AddActivityLog::class,
             SendOfferPublishedNotification::class
@@ -98,6 +94,10 @@ class EventServiceProvider extends ServiceProvider
         OfferAdded::class => [
             AddActivityLog::class,
             SendOfferAddedNotification::class
+        ],
+        OfferAccepted::class => [
+            AddActivityLog::class,
+            SendOfferAcceptedNotification::class
         ],
     ];
 
