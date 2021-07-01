@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\ChallengeAdded;
+use App\Events\OfferAccepted;
 use App\Events\OfferAdded;
 use App\Events\OfferPublished;
 use App\Events\SolutionAdded;
@@ -28,7 +29,6 @@ use App\Listeners\SendQuestionAnsweredNotification;
 use App\Listeners\SendSolutionAcceptedNotification;
 use App\Listeners\SendSolutionPublishedNotification;
 use App\Listeners\SendChallengePublishedNotification;
-use App\Notifications\OfferAccepted;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
