@@ -121,6 +121,7 @@ name: "Workshop",
             setTimeout(function () {
                 console.log("initializeMe");
                 console.log('gameWindow.value.refs.gameWindow.setup');
+                console.log(gameWindow.value);
                 console.log(gameWindow.value.refs);
                 // console.log(gameWindow.value.refs.gameWindow);
                 // console.log(gameWindow.value.refs);
