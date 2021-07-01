@@ -35,6 +35,9 @@ class SendSolutionPublishedNotification
 //            $user = User::find($event->subject->author_id);
         $user = $event->subject->author;
         $challenge = Challenge::find($event->subject->challenge_id);
+        $client = User::find($challenge->author_id);
         $user->notify(new SolutionPublishedNotification($challenge, $event->subject));
+        $client->notify(new SolutionPublishedNotification($challenge, $event->subject));
+
     }
 }
