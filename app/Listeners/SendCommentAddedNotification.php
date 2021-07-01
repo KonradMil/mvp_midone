@@ -30,7 +30,7 @@ class SendCommentAddedNotification
     /**
      * Handle the event.
      *
-     * @param  SolutionPublished  $event
+     * @param  CommentAdded  $event
      * @return void
      */
     public function handle(CommentAdded $event)
