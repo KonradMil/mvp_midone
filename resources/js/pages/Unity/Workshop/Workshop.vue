@@ -117,20 +117,21 @@ name: "Workshop",
         }
 
         const initalize = async () => {
-            console.log("initializeMe");
+
             setTimeout(function () {
+                console.log("initializeMe");
                 console.log('gameWindow.value.refs.gameWindow.setup');
-                console.log(gameWindow.value.refs.gameWindow.setup);
-                console.log(gameWindow.value.refs.gameWindow);
                 console.log(gameWindow.value.refs);
+                // console.log(gameWindow.value.refs.gameWindow);
+                // console.log(gameWindow.value.refs);
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value.refs.gameWindow);
                 // handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
 
             }, 2000);
-            setTimeout(() => {
-                handleUnityActionOutgoing({action: 'prefix', data: 'https://platform.dbr77.com/s3'});
-                unlockInput();
-            }, 5000);
+            // setTimeout(() => {
+            //     handleUnityActionOutgoing({action: 'prefix', data: 'https://platform.dbr77.com/s3'});
+            //     // unlockInput();
+            // }, 5000);
         }
 
         //RUNS WHEN UNITY IS READY
