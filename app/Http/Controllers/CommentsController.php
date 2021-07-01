@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentAdded;
 use App\Models\Challenges\Challenge;
 use App\Models\Knowledgebase\KnowledgeBaseVideo;
 use App\Models\Solutions\Solution;
@@ -24,6 +25,7 @@ class CommentsController extends Controller
 
     public function comment(Request $request)
     {
+        $user = Auth::user();
         $id = $request->input('id');
         $message = $request->input('message');
         if($request->type === 'challenge') {
@@ -46,7 +48,9 @@ class CommentsController extends Controller
         $object->comments_count = $object->comments()->count();
         $object->likes = $object->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
 
-//        foreach ($comments as $comment) {
+        event(new CommentAdded($object, $object->author_id, 'Nowa oferta została opublikowana: ' . $object->name, []));
+
+        //        foreach ($comments as $comment) {
 //            $comment->commentator = $comment->commentator;
 //
 //        }
