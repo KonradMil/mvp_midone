@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\OfferAccepted;
+use App\Events\OfferAdded;
 use App\Events\OfferPublished;
 use App\Models\Challenges\Challenge;
 use App\Models\Offer;
@@ -157,6 +158,10 @@ class OfferController extends Controller
         $offer->solution_id = $request->solution_id;
         $offer->installer_id = Auth::user()->id;
         $offer->save();
+
+
+        event(new OfferAdded($offer, $offer->installer, 'Nowa oferta została opublikowana: ' . $sol ->name, []));
+
 
         return response()->json([
             'success' => true,

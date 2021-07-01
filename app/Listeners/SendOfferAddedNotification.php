@@ -2,17 +2,18 @@
 
 namespace App\Listeners;
 
+use App\Events\OfferPublished;
 use App\Events\SolutionPublished;
 use App\Models\Challenges\Challenge;
 use App\Models\Solutions\Solution;
 use App\Models\User;
 use App\Notifications\ChallengePublishedNotification;
 use App\Notifications\OfferPublishedNotification;
-use App\Notifications\SolutionPublishedNotification;
+use App\Notifications\SolutionAcceptedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendSolutionPublishedNotification
+class SendOfferAddedNotification
 {
     /**
      * Create the event listener.
@@ -30,13 +31,14 @@ class SendSolutionPublishedNotification
      * @param  SolutionPublished  $event
      * @return void
      */
-    public function handle(SolutionPublished $event)
+    public function handle(OfferPublished $event)
     {
-//            $user = User::find($event->subject->author_id);
-        $user = $event->subject->author;
+        $user = $event->subject->installer;
         $challenge = Challenge::find($event->subject->challenge_id);
         $client = User::find($challenge->author_id);
-        $user->notify(new SolutionPublishedNotification($challenge, $event->subject));
-        $client->notify(new SolutionPublishedNotification($challenge, $event->subject));
+        $solution = Solution::find($event->subject->solution_id);
+        $user->notify(new OfferPublishedNotification($challenge, $solution));
+        $client->notify(new OfferPublishedNotification($challenge, $solution));
+
     }
 }
