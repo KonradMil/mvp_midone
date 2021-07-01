@@ -35,15 +35,15 @@ class SendCommentAddedNotification
      */
     public function handle(CommentAdded $event)
     {
-        dd($event);
-//        $user = $event->subject->author_id;
-//        $object = $event -> subject;
-//        $challenge = Challenge::find($event->subject->challenge_id);
-//        if($challenge===NULL){
-//            $solution = Solution::find($event->subject->id);
-//        } else {
-//
-//        }
-//        $user->notify(new CommentAddedNotification($object));
+        $user = $event->subject->author_id;
+        $object = $event -> subject;
+        $challenge = Challenge::find($event->subject->challenge_id);
+        if($challenge===NULL){
+            $solution = Solution::find($event->subject->id);
+            $user->notify(new CommentAddedNotification($object));
+
+        } else {
+            $user->notify(new CommentAddedNotification($object));
+        }
     }
 }
