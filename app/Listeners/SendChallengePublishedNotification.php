@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Auth;
 
-class SendChallengePublishedNotification
+class SendChallengePublishedNotification implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -29,7 +29,6 @@ class SendChallengePublishedNotification
      */
     public function handle(ChallengePublished $event)
     {
-        $user = Auth::user();
         $challenge = $event -> subject;
         $integrators = User::where('type', '=', 'integrator')->get();
         foreach ($integrators as $integrator) {
