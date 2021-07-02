@@ -13,6 +13,23 @@ use Illuminate\Support\Facades\Auth;
 
 class OfferController extends Controller
 {
+    public function filterChallengeOffers(Request $request)
+    {
+        $option = $request->input('option');
+        $id = $request->input('id');
+        $challenge = Challenge::find($id);
+        $offers = NULL;
+
+        if($option === 'cena'){
+            $offers = $challenge->offers()->orderBy('price_of_delivery', 'ASC')->get();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Filter ok',
+            'payload' => $offers
+        ]);
+    }
     public function check(Request $request)
     {
         $id = $request->input('id');
