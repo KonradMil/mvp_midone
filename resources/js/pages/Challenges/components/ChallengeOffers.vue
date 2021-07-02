@@ -209,7 +209,7 @@ export default {
         const filters = require('../../../json/offer_filters.json');
         const solution = ref();
         const check = ref(false);
-        const filterType = ref(false);
+        const filterType = ref('');
 
         watch(() => offers.value.list, (first, second) => {
         }, {})
