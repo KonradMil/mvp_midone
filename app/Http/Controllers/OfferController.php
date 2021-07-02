@@ -20,7 +20,7 @@ class OfferController extends Controller
         $challenge = Challenge::find($id);
         $offers = NULL;
 
-        if($option === 'cena'){
+        if($option === 'Cena'){
             $offers = $challenge->offers()->orderBy('price_of_delivery', 'ASC')->get();
         }
 

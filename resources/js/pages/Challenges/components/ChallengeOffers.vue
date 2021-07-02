@@ -236,6 +236,9 @@ export default {
             axios.post('/api/offer/user/filter', {option: filterType.value , id: props.challenge.id})
                 .then(response => {
                     if (response.data.success) {
+                        console.log('filterType->' + filterType.value);
+                        console.log('props.challenge.id->' + props.challenge.id);
+                        console.log('response.data->' + response.data.payload);
                         offers.value = response.data.payload;
                     } else {
 
