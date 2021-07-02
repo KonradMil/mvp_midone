@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Crud;
 
 use App\Events\ChallengeAdded;
+use App\Events\ChallengeFollowed;
 use App\Events\ChallengePublished;
 use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
@@ -451,6 +452,8 @@ class ChallengeController extends Controller
         $id = $request->input('id');
         $challenge = Challenge::find($id);
         Auth::user()->viaLoveReacter()->reactTo($challenge, 'Follow');
+
+        event(new ChallengeFollowed($challenge, $challenge->author_id, 'Użytykownik obserwuje Twoje wyzwanie!: ' . $challenge->name, []));
 
         return response()->json([
             'success' => true,

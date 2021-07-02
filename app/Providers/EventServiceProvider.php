@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\ChallengeAdded;
+use App\Events\ChallengeFollowed;
 use App\Events\CommentAdded;
 use App\Events\OfferAccepted;
 use App\Events\OfferAdded;
@@ -18,6 +19,7 @@ use App\Events\SolutionAccepted;
 use App\Events\ChallengePublished;
 use App\Events\SolutionPublished;
 use App\Listeners\AddActivityLog;
+use App\Listeners\SendChallengeFollowedNotification;
 use App\Listeners\SendChallengeNotification;
 use App\Listeners\SendCommentAddedNotification;
 use App\Listeners\SendOfferAcceptedNotification;
@@ -104,6 +106,10 @@ class EventServiceProvider extends ServiceProvider
         CommentAdded::class => [
             AddActivityLog::class,
             SendCommentAddedNotification::class
+        ],
+        ChallengeFollowed::class => [
+            AddActivityLog::class,
+            SendChallengeFollowedNotification::class
         ],
     ];
 
