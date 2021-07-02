@@ -103,41 +103,41 @@
 <!--                </div>-->
                 <!-- END: General Report -->
                 <!-- BEGIN: Recent Activities -->
-                <div
-                    class="col-span-12 xl:col-span-6 mt-2"
-                >
-                    <div class="intro-x flex items-center h-10">
-                        <h2 class="text-lg font-medium truncate mr-5">
-                            Ostatnie aktywności
-                        </h2>
-                    </div>
-                    <div class="report-timeline mt-5 relative">
-                        <div class="intro-x text-gray-500 text-xs text-center my-4">
-                            Dzisiaj
-                        </div>
-                        <div class="intro-x relative flex items-center mb-3" v-for="(log, index) in logs" :key="index + '_activity'" @click="$router.push({path: '/challenges/card/' + log.subject_id})">
-                            <div class="report-timeline__image">
-                                <div
-                                    class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"
-                                >
-                                    <img
-                                        alt="Icewall Tailwind HTML Admin Template"
-                                        :src="'/' + log.subject.screenshot_path"
-                                    />
-                                </div>
-                            </div>
-                            <div class="box px-5 py-3 ml-4 flex-1 zoom-in">
-                                <div class="flex items-center">
-                                    <div class="font-medium">
-                                        Nowe wyzwanie
-                                    </div>
-                                    <div class="text-xs text-gray-500 ml-auto">{{$dayjs(log.created_at).fromNow()}}</div>
-                                </div>
-                                <div class="text-gray-600 mt-1">{{log.description}}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                <div-->
+<!--                    class="col-span-12 xl:col-span-6 mt-2"-->
+<!--                >-->
+<!--                    <div class="intro-x flex items-center h-10">-->
+<!--                        <h2 class="text-lg font-medium truncate mr-5">-->
+<!--                            Ostatnie aktywności-->
+<!--                        </h2>-->
+<!--                    </div>-->
+<!--                    <div class="report-timeline mt-5 relative">-->
+<!--                        <div class="intro-x text-gray-500 text-xs text-center my-4">-->
+<!--                            Dzisiaj-->
+<!--                        </div>-->
+<!--                        <div class="intro-x relative flex items-center mb-3" v-for="(log, index) in logs" :key="index + '_activity'" @click="$router.push({path: '/challenges/card/' + log.subject_id})">-->
+<!--                            <div class="report-timeline__image">-->
+<!--                                <div-->
+<!--                                    class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"-->
+<!--                                >-->
+<!--                                    <img-->
+<!--                                        alt="Icewall Tailwind HTML Admin Template"-->
+<!--                                        :src="'/' + log.subject.screenshot_path"-->
+<!--                                    />-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="box px-5 py-3 ml-4 flex-1 zoom-in">-->
+<!--                                <div class="flex items-center">-->
+<!--                                    <div class="font-medium">-->
+<!--                                        Nowe wyzwanie-->
+<!--                                    </div>-->
+<!--                                    <div class="text-xs text-gray-500 ml-auto">{{$dayjs(log.created_at).fromNow()}}</div>-->
+<!--                                </div>-->
+<!--                                <div class="text-gray-600 mt-1">{{log.description}}</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <!-- END: Recent Activities -->
                 <!-- BEGIN: Schedules -->
 <!--                <div class="col-span-12 xl:col-span-6 mt-2">-->
