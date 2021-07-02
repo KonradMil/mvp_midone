@@ -38,7 +38,6 @@
         <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-            <label for="input-wizard-5" class="form-label">Szukaj</label>
             <Multiselect
                 class="form-control"
                 v-model="filterType"
