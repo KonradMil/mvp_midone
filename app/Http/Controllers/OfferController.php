@@ -21,7 +21,7 @@ class OfferController extends Controller
         $offers = NULL;
 
         if($option === 'Cena'){
-            $offers = $challenge->offers()->orderBy('price_of_delivery', 'ASC')->get();
+            $offers = $challenge->offers()->orderBy('price_of_delivery', 'DESC')->get();
         }
 
         return response()->json([
