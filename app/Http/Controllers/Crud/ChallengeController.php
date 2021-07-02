@@ -453,7 +453,7 @@ class ChallengeController extends Controller
         $challenge = Challenge::find($id);
         Auth::user()->viaLoveReacter()->reactTo($challenge, 'Follow');
 
-        event(new ChallengeFollowed($challenge, $challenge->author_id, 'Użytykownik obserwuje Twoje wyzwanie!: ' . $challenge->name, []));
+//        event(new ChallengeFollowed($challenge, $challenge->author_id, 'Użytykownik obserwuje Twoje wyzwanie!: ' . $challenge->name, []));
 
         return response()->json([
             'success' => true,
