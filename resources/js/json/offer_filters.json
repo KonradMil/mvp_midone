@@ -2,7 +2,7 @@
     "options": [
         "Cena-max",
         "Cena-min",
-        "Cena realizacji uruchomienia u klienta",
+        "Czas realizacji uruchomienia u klienta",
         "Okres zwrotu inwestycji",
         "NPV",
         "OEE po robotyzacji",
