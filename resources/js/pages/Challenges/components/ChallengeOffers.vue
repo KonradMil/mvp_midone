@@ -190,8 +190,14 @@ import {getCurrentInstance, onMounted, ref, watch} from "vue";
 import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
 import {useToast} from "vue-toastification";
 import router from "../../../router";
+import Multiselect from '@vueform/multiselect';
+import DarkModeSwitcher from "../../../components/dark-mode-switcher/Main";
+
 
 export default {
+    components: {
+        Multiselect
+    },
     name: "ChallengeOffers",
     props: {
         challenge: Object,
