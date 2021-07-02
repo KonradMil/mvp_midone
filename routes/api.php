@@ -97,6 +97,7 @@ Route::post('search', [SearchController::class, 'search']);
 Route::group(['prefix' => 'offer', 'middleware' => 'auth:sanctum'], function () {
     Route::post('user/check', [OfferController::class, 'check']);
     Route::post('get', [OfferController::class, 'get']);
+    Route::post('user/filter', [OfferController::class, 'filterChallengeOffers']);
     Route::post('delete', [OfferController::class, 'delete']);
     Route::post('save', [OfferController::class, 'save']);
     Route::post('get/all', [OfferController::class, 'getAll']);

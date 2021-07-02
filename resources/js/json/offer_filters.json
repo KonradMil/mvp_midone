@@ -1,9 +1,11 @@
-[
-    "Cena",
-    "Cena realizacji uruchomienia u klienta",
-    "Okres zwrotu inwestycji",
-    "NPV",
-    "OEE po robotyzacji",
-    "Okres gwarancji stanowiska od integratora",
-    "Okres gwarancji robota"
-]
+{
+    "options": [
+        "Cena",
+        "Cena realizacji uruchomienia u klienta",
+        "Okres zwrotu inwestycji",
+        "NPV",
+        "OEE po robotyzacji",
+        "Okres gwarancji stanowiska od integratora",
+        "Okres gwarancji robota"
+    ]
+}

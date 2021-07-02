@@ -47,7 +47,7 @@
                 max="1"
                 :placeholder="filterType === '' ? 'select' : filterType"
                 valueProp="value"
-                :options="filters"
+                :options="filters['options']"
             />
         </div>
         <div v-if="offers.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
@@ -225,6 +225,17 @@ export default {
             router.push({name: 'projects'});
         }
 
+        const StartFilterOffer = async () => {
+            axios.post('/api/offer/user/filter', {option: filterType.value , id: props.challenge.id})
+                .then(response => {
+                    if (response.data.success) {
+                        offers.value = response.data.payload;
+                    } else {
+
+                    }
+                })
+        }
+
         const acceptOffer = async(offer) => {
             axios.post('/api/offer/accept', {id: offer.id})
                 .then(response => {
@@ -267,6 +278,7 @@ export default {
         });
 
         return {
+            StartFilterOffer,
             filterType,
             check,
             rejectOffer,
