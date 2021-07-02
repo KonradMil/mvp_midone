@@ -239,7 +239,7 @@ export default {
                         console.log('filterType->' + filterType.value);
                         console.log('props.challenge.id->' + props.challenge.id);
                         console.log('response.data->' + response.data.payload);
-                        offers.value = response.data.payload;
+                        offers.value.list = response.data.payload;
                     } else {
 
                     }
