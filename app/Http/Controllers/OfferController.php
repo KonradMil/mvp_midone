@@ -257,6 +257,9 @@ class OfferController extends Controller
         $solution->save();
         $offer->save();
 
+        event(new OfferRejected($offer, $offer->installer, 'Oferta została odrzucona: ' . $solution->name, []));
+
+
         return response()->json([
             'success' => true,
             'message' => 'Odrzucono ofertę.',

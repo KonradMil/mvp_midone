@@ -8,6 +8,7 @@ use App\Events\CommentAdded;
 use App\Events\OfferAccepted;
 use App\Events\OfferAdded;
 use App\Events\OfferPublished;
+use App\Events\OfferRejected;
 use App\Events\SolutionAdded;
 use App\Events\SolutionRejected;
 use App\Events\TeamMemberInvited;
@@ -25,6 +26,7 @@ use App\Listeners\SendCommentAddedNotification;
 use App\Listeners\SendOfferAcceptedNotification;
 use App\Listeners\SendOfferAddedNotification;
 use App\Listeners\SendOfferPublishedNotification;
+use App\Listeners\SendOfferRejectedNotification;
 use App\Listeners\SendSolutionNotification;
 use App\Listeners\SendSolutionRejectedNotification;
 use App\Listeners\SendTeamMemberAcceptedNotification;
@@ -102,6 +104,10 @@ class EventServiceProvider extends ServiceProvider
         OfferAccepted::class => [
             AddActivityLog::class,
             SendOfferAcceptedNotification::class
+        ],
+        OfferRejected::class => [
+            AddActivityLog::class,
+            SendOfferRejectedNotification::class
         ],
         CommentAdded::class => [
             AddActivityLog::class,
