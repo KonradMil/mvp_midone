@@ -33,13 +33,43 @@
 <!--        </div>-->
 <!--    </div>-->
 
-    <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" >
+    <div v-if="offers.length !== 0" class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" >
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
         <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
         <div v-if="offers.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie ma jeszcze żadnych ofert.
         </div>
+        <div class="mt-3">
+            <label for="input-wizard-5" class="form-label">Szukaj</label>
+            <!--                                    <input-->
+            <!--                                        id="input-wizard-11"-->
+            <!--                                        type="text"-->
+            <!--                                        class="form-control"-->
+            <!--                                        v-model="company.province"-->
+            <!--                                    />-->
+            <!--                                    <TailSelect-->
+            <!--                                        id="input-wizard-5"-->
+            <!--                                        class="form-control"-->
+            <!--                                        v-model="company.province"-->
+            <!--                                        :options="{locale: 'pl', placeholder: company.province, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">-->
+            <!--                                        <option :selected="company.province === '' ? 'selected' : ''" disabled>Wybierz...</option>-->
+            <!--                                        <option :selected="index === company.province ? 'selected' : ''" v-for="(det,index) in provinces['province']"-->
+            <!--                                                :value="index">{{ det }}-->
+            <!--                                        </option>-->
+            <!--                                    </TailSelect>-->
+            <Multiselect
+                class="form-control"
+                v-model="filterType"
+                mode="single"
+                label="name"
+                max="1"
+                :placeholder="filterType === '' ? 'select' : filterType"
+                valueProp="value"
+                :options="filters"
+            />
+        </div>
+
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div  v-for="(offer, index) in offers.list" :key="index" class="col-span-12 col-span-12 xxl:col-span-6">
@@ -192,8 +222,10 @@ export default {
         const offers = ref([]);
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
+        const filters = require('../../../json/offer_filters.json');
         const solution = ref();
         const check = ref(false);
+        const filterType = ref();
 
         watch(() => offers.value.list, (first, second) => {
         }, {})
@@ -252,6 +284,7 @@ export default {
         });
 
         return {
+            filterType,
             check,
             rejectOffer,
             acceptOffer,
@@ -259,6 +292,7 @@ export default {
             offers,
             user,
             values,
+            filters,
             solution
         }
     }
