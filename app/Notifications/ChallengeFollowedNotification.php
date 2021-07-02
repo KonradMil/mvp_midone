@@ -17,7 +17,7 @@ class ChallengeFollowedNotification extends Notification
      *
      * @return void
      */
-    public function __construct($challenge, $solution)
+    public function __construct($challenge)
     {
         $this->challenge = $challenge;
     }
