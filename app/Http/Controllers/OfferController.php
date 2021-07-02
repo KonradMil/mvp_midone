@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\OfferAccepted;
 use App\Events\OfferAdded;
 use App\Events\OfferPublished;
+use App\Events\OfferRejected;
 use App\Models\Challenges\Challenge;
 use App\Models\Offer;
 use App\Models\Solutions\Solution;
@@ -20,8 +21,10 @@ class OfferController extends Controller
         $challenge = Challenge::find($id);
         $offers = NULL;
 
-        if($option === 'Cena'){
+        if($option === 'Cena-max'){
             $offers = $challenge->offers()->orderBy('price_of_delivery', 'DESC')->with('solution')->get();
+        }else if($option === 'Cena-min'){
+            $offers = $challenge->offers()->orderBy('price_of_delivery', 'ASC')->with('solution')->get();
         }
 
         return response()->json([

@@ -1,6 +1,7 @@
 {
     "options": [
-        "Cena",
+        "Cena-max",
+        "Cena-min",
         "Cena realizacji uruchomienia u klienta",
         "Okres zwrotu inwestycji",
         "NPV",
