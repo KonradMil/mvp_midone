@@ -35,8 +35,7 @@ class SendChallengeFollowedNotification
     public function handle(ChallengeFollowed $event)
     {
         $user = $event->subject->author_id;
-        $challenge = Challenge::find($event->subject->challenge_id);
-        $solution = Solution::find($event->subject->solution_id);
-        $user->notify(new ChallengeFollowedNotification($challenge, $solution));
+        $challenge = Challenge::find($event->subject->id);
+        $user->notify(new ChallengeFollowedNotification($challenge));
     }
 }

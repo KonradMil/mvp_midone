@@ -11,7 +11,6 @@ use Illuminate\Notifications\Notification;
 class ChallengeFollowedNotification extends Notification
 {
     use Queueable;
-    public $solution;
     public $challenge;
     /**
      * Create a new notification instance.
@@ -21,7 +20,6 @@ class ChallengeFollowedNotification extends Notification
     public function __construct($challenge, $solution)
     {
         $this->challenge = $challenge;
-        $this->solution = $solution;
     }
 
     /**
