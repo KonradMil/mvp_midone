@@ -37,9 +37,6 @@
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
         <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
-        <div v-if="offers.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
-            Nie ma jeszcze żadnych ofert.
-        </div>
         <div class="mt-3">
             <label for="input-wizard-5" class="form-label">Szukaj</label>
             <!--                                    <input-->
@@ -69,7 +66,9 @@
                 :options="filters"
             />
         </div>
-
+        <div v-if="offers.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+            Nie ma jeszcze żadnych ofert.
+        </div>
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div  v-for="(offer, index) in offers.list" :key="index" class="col-span-12 col-span-12 xxl:col-span-6">
