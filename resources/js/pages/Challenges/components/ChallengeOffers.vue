@@ -37,24 +37,8 @@
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
         <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
-        <div class="mt-3">
+        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
             <label for="input-wizard-5" class="form-label">Szukaj</label>
-            <!--                                    <input-->
-            <!--                                        id="input-wizard-11"-->
-            <!--                                        type="text"-->
-            <!--                                        class="form-control"-->
-            <!--                                        v-model="company.province"-->
-            <!--                                    />-->
-            <!--                                    <TailSelect-->
-            <!--                                        id="input-wizard-5"-->
-            <!--                                        class="form-control"-->
-            <!--                                        v-model="company.province"-->
-            <!--                                        :options="{locale: 'pl', placeholder: company.province, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">-->
-            <!--                                        <option :selected="company.province === '' ? 'selected' : ''" disabled>Wybierz...</option>-->
-            <!--                                        <option :selected="index === company.province ? 'selected' : ''" v-for="(det,index) in provinces['province']"-->
-            <!--                                                :value="index">{{ det }}-->
-            <!--                                        </option>-->
-            <!--                                    </TailSelect>-->
             <Multiselect
                 class="form-control"
                 v-model="filterType"
