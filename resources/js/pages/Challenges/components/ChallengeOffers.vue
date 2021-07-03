@@ -45,7 +45,6 @@
                 label="name"
                 max="1"
                 :placeholder="filterType === '' ? 'select' : filterType"
-                @change="StartFilterOffer"
                 valueProp="value"
                 :options="filters['options']"
             />
@@ -218,6 +217,10 @@ export default {
         const filterType = ref('');
 
         watch(() => offers.value.list, (first, second) => {
+        }, {})
+
+        watch(() => filterType.value, (first, second) => {
+            StartFilterOffer();
         }, {})
 
         const switchTab = () => {
