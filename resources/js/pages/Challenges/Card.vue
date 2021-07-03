@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import {defineComponent, ref, provide, onMounted, unref, toRaw, computed, getCurrentInstance} from "vue";
+import {defineComponent, ref, provide, onMounted, unref, toRaw, computed, getCurrentInstance, onBeforeMount} from "vue";
 import GetCardChallenge from "../../compositions/GetCardChallenge";
 import WhatsNext from "./WhatsNext";
 import BasicInformationPanel from "./components/BasicInformationPanel";
@@ -253,10 +253,23 @@ export default defineComponent({
                 })
         }
 
+        onBeforeMount(() => {
+            // if (props.unityLoader) {
+            const script = document.createElement('SCRIPT')
+            script.setAttribute('src', '/s3/unity/' + unity_path + '.loader.js')
+            script.setAttribute('async', '')
+            script.setAttribute('defer', '')
+            document.body.appendChild(script)
+            script.onload = () => {
+                emitter.emit('onload', { done:1 })
+            }
+            // }
+        })
         onMounted(function () {
+            emitter.on('onload', e =>  setTimeout(function () {
+                getCardChallengeRepositories(props.id);
+            }, 1500))
             console.log(props);
-            getCardChallengeRepositories(props.id);
-
         })
 
 
