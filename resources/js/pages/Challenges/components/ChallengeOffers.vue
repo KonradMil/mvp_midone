@@ -45,6 +45,7 @@
                 label="name"
                 max="1"
                 :placeholder="filterType === '' ? 'select' : filterType"
+                @change="StartFilterOffer"
                 valueProp="value"
                 :options="filters['options']"
             />
