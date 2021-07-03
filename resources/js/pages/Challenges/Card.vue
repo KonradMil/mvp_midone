@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import {defineComponent, ref, provide, onMounted, unref, toRaw, computed, getCurrentInstance} from "vue";
+import {defineComponent, ref, provide, onMounted, unref, toRaw, computed, getCurrentInstance, onBeforeMount} from "vue";
 import GetCardChallenge from "../../compositions/GetCardChallenge";
 import WhatsNext from "./WhatsNext";
 import BasicInformationPanel from "./components/BasicInformationPanel";
@@ -252,6 +252,16 @@ export default defineComponent({
                     }
                 })
         }
+
+        onBeforeMount(() => {
+            // if (props.unityLoader) {
+            const script = document.createElement('SCRIPT')
+            script.setAttribute('src', '/s3/unity/' + unity_path + '.loader.js')
+            script.setAttribute('async', '')
+            script.setAttribute('defer', '')
+            document.body.appendChild(script)
+
+        })
 
         onMounted(function () {
             console.log(props);
