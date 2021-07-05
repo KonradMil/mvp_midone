@@ -10,7 +10,7 @@ class FinancialAnalysis extends Model
 {
     use HasFactory;
 
-    protected $table = 'estimates';
+    protected $table = 'financial_analyses';
 
     protected $fillable = [
       'solution_id',

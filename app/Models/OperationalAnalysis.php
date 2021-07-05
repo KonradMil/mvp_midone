@@ -10,7 +10,7 @@ class OperationalAnalysis extends Model
 {
     use HasFactory;
 
-    protected $table = 'estimates';
+    protected $table = 'operational_analyses';
 
     protected $fillable = [
       'solution_id',

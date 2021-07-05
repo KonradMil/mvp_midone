@@ -225,37 +225,37 @@ class SolutionController extends Controller
             'payload' => $solution
         ]);
     }
-    public function financialAnalysisSave(Request $request)
+    public function financialAnalysesSave(Request $request)
     {
         $solution = Solution::find($request->input('solution_id'));
-        if($solution->financial_analysis != Null) {
-            $financial_analysis = $solution->financial_analysis;
+        if($solution->financial_analyses != Null) {
+            $financial_analyses = $solution->financial_analyses;
         } else {
-            $financial_analysis = new FinancialAnalysis();
-            $financial_analysis->solution_id = $request->input('solution_id');
+            $financial_analyses = new FinancialAnalysis();
+            $financial_analyses->solution_id = $request->input('solution_id');
         }
         $input = $request->input();
-        $financial_analysis->cost_capital = (float)$input['capitalCost'];
-        $financial_analysis->capex =  (float)$input['capex'];
-        $financial_analysis->timeframe =  (float)$input['timeframe'];
-        $financial_analysis->cost_per_hour_before = (float)$input['financialsAnalysis']['cost_per_hour_before'];
-        $financial_analysis->cost_per_hour_after = (float)$input['financialsAnalysis']['cost_per_hour_after'];
-        $financial_analysis->cost_per_year_before = (float)$input['financialsAnalysis']['cost_per_year_before'];
-        $financial_analysis->cost_per_year_after = (float)$input['financialsAnalysis']['cost_per_year_after'];
-        $financial_analysis->cost_per_piece_before = (float)$input['financialsAnalysis']['cost_per_piece_before'];
-        $financial_analysis->cost_per_piece_after = (float)$input['financialsAnalysis']['cost_per_piece_after'];
-        $financial_analysis->monthly_reduction_before = (float)$input['financialsAnalysis']['monthly_reduction_before'];
-        $financial_analysis->tkw_reduction_before = (float)$input['financialsAnalysis']['tkw_reduction_before'];
-        $financial_analysis->additional_savings_before = (float)$input['financialsAnalysis']['additional_savings_before'];
-        $financial_analysis->monthly_savings_before = (float)$input['financialsAnalysis']['monthly_savings_before'];
-        $financial_analysis->simple_payback = (float)$input['financialsAnalysis']['simple_payback'];
-        $financial_analysis->npv = (float)$input['financialsAnalysis']['npv'];
-        $financial_analysis->save();
+        $financial_analyses->cost_capital = (float)$input['capitalCost'];
+        $financial_analyses->capex =  (float)$input['capex'];
+        $financial_analyses->timeframe =  (float)$input['timeframe'];
+        $financial_analyses->cost_per_hour_before = (float)$input['financialAnalyses']['cost_per_hour_before'];
+        $financial_analyses->cost_per_hour_after = (float)$input['financialAnalyses']['cost_per_hour_after'];
+        $financial_analyses->cost_per_year_before = (float)$input['financialAnalyses']['cost_per_year_before'];
+        $financial_analyses->cost_per_year_after = (float)$input['financialAnalyses']['cost_per_year_after'];
+        $financial_analyses->cost_per_piece_before = (float)$input['financialAnalyses']['cost_per_piece_before'];
+        $financial_analyses->cost_per_piece_after = (float)$input['financialAnalyses']['cost_per_piece_after'];
+        $financial_analyses->monthly_reduction_before = (float)$input['financialAnalyses']['monthly_reduction_before'];
+        $financial_analyses->tkw_reduction_before = (float)$input['financialAnalyses']['tkw_reduction_before'];
+        $financial_analyses->additional_savings_before = (float)$input['financialAnalyses']['additional_savings_before'];
+        $financial_analyses->monthly_savings_before = (float)$input['financialAnalyses']['monthly_savings_before'];
+        $financial_analyses->simple_payback = (float)$input['financialAnalyses']['simple_payback'];
+        $financial_analyses->npv = (float)$input['financialAnalyses']['npv'];
+        $financial_analyses->save();
 
         return response()->json([
             'success' => true,
             'message' => 'Zapisane poprawnie',
-            'payload' => $financial_analysis
+            'payload' => $financial_analyses
         ]);
     }
     public function estimateSave(Request $request)
