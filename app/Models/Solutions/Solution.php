@@ -43,7 +43,7 @@ class Solution extends Model implements ReactableInterface
         return $this->hasOne(Estimate::class, 'solution_id');
     }
 
-    public function financial_analysis()
+    public function financial_analyses()
     {
         return $this->hasOne(FinancialAnalysis::class, 'solution_id');
     }
