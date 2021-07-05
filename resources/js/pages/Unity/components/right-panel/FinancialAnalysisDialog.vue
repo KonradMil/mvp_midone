@@ -291,14 +291,14 @@ export default {
             getChallenge();
         });
         watch([challenge.value, props.solution, okresZwrotuProsty.value, npv.value], (newValues, prevValues) => {
-            financialAnalysisFunction();
+            financialAnalysesFunction();
         })
 
         watch([capitalCost, capex, timeframe], (newValues, prevValues) => {
             npvFunction();
         })
 
-        const financialAnalysisFunction = () => {
+        const financialAnalysesFunction = () => {
             financialAnalyses.cost_per_hour_before = Math.round(challenge.value.financial_before.operator_cost / 160 * 100) / 100;
             financialAnalyses.cost_per_hour_after = Math.round(challenge.value.financial_after.operator_cost / 160 * 100) / 100;
             financialAnalyses.cost_per_year_before = Math.round(((challenge.value.financial_before.days)*(challenge.value.financial_before.shifts)*(challenge.value.financial_before.shift_time)+(challenge.value.financial_before.weekend_shift)*50*(challenge.value.financial_before.shift_time))*(challenge.value.financial_before.operator_cost / 160)*(challenge.value.financial_before.number_of_operators)*(1+(challenge.value.financial_before.absence / 100)) * 100) / 100;
