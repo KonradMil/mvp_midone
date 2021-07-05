@@ -295,7 +295,6 @@ export default {
 
         onMounted(() => {
             getChallenge();
-            operationalAnalysesFunction();
         });
 
         const getChallenge = () => {
