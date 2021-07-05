@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
 use App\Models\Estimate;
 use App\Models\FinancialAnalysis;
+use App\Models\OperationalAnalysis;
 use App\Models\Solutions\Solution;
 use App\Models\File;
 use App\Models\Financial;
@@ -223,6 +224,54 @@ class SolutionController extends Controller
             'success' => true,
             'message' => 'Wyzwanie zostało zapisane poprawnie',
             'payload' => $solution
+        ]);
+    }
+    public function operationalAnalysesSave(Request $request)
+    {
+        $solution = Solution::find($request->input('solution_id'));
+        if($solution->operational_analyses != Null) {
+            $operational_analyses = $solution->operational_analyses;
+        } else {
+            $operational_analyses = new OperationalAnalysis();
+            $operational_analyses->solution_id = $request->input('solution_id');
+        }
+        $input = $request->input();
+        $operational_analyses->time_available_before= (float)$input['operationalAnalyses']['time_available_before'];
+        $operational_analyses->time_available_after= (float)$input['operationalAnalyses']['time_available_after'];
+        $operational_analyses->time_available_change= (float)$input['operationalAnalyses']['time_available_change'];
+        $operational_analyses->time_production_before = (float)$input['operationalAnalyses']['time_production_before'];
+        $operational_analyses->time_production_after = (float)$input['operationalAnalyses']['time_production_after'];
+        $operational_analyses->time_production_change = (float)$input['operationalAnalyses']['time_production_change'];
+        $operational_analyses->production_before = (float)$input['operationalAnalyses']['production_before'];
+        $operational_analyses->production_after = (float)$input['operationalAnalyses']['production_after'];
+        $operational_analyses->production_change = (float)$input['operationalAnalyses']['production_change'];
+        $operational_analyses->good_arts_production_before = (float)$input['operationalAnalyses']['good_arts_production_before'];
+        $operational_analyses->good_arts_production_after = (float)$input['operationalAnalyses']['good_arts_production_after'];
+        $operational_analyses->good_arts_production_change = (float)$input['operationalAnalyses']['good_arts_production_change'];
+        $operational_analyses->availability_factor_before = (float)$input['operationalAnalyses']['availability_factor_before'];
+        $operational_analyses->availability_factor_after = (float)$input['operationalAnalyses']['availability_factor_after'];
+        $operational_analyses->availability_factor_change = (float)$input['operationalAnalyses']['availability_factor_change'];
+        $operational_analyses->productivity_coefficient_before = (float)$input['operationalAnalyses']['productivity_coefficient_before'];
+        $operational_analyses->productivity_coefficient_after = (float)$input['operationalAnalyses']['productivity_coefficient_after'];
+        $operational_analyses->productivity_coefficient_change = (float)$input['operationalAnalyses']['productivity_coefficient_change'];
+        $operational_analyses->quality_factor_before = (float)$input['operationalAnalyses']['quality_factor_before'];
+        $operational_analyses->quality_factor_after = (float)$input['operationalAnalyses']['quality_factor_after'];
+        $operational_analyses->quality_factor_change = (float)$input['operationalAnalyses']['quality_factor_change'];
+        $operational_analyses->oee_before = (float)$input['operationalAnalyses']['oee_before'];
+        $operational_analyses->oee_after = (float)$input['operationalAnalyses']['oee_after'];
+        $operational_analyses->oee_change = (float)$input['operationalAnalyses']['oee_change'];
+        $operational_analyses->production_volume_before = (float)$input['operationalAnalyses']['production_volume_before'];
+        $operational_analyses->production_volume_after = (float)$input['operationalAnalyses']['production_volume_after'];
+        $operational_analyses->production_volume_change = (float)$input['operationalAnalyses']['production_volume_change'];
+        $operational_analyses->pph_per_person_before = (float)$input['operationalAnalyses']['pph_per_person_before'];
+        $operational_analyses->pph_per_person_after = (float)$input['operationalAnalyses']['pph_per_person_after'];
+        $operational_analyses->pph_per_person_change = (float)$input['operationalAnalyses']['pph_per_person_change'];
+        $operational_analyses->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisane poprawnie',
+            'payload' => $operational_analyses
         ]);
     }
     public function financialAnalysesSave(Request $request)

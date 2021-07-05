@@ -19,7 +19,7 @@ class OperationalAnalysis extends Model
       'production',
       'good_arts_production',
       'availability_factor',
-      'productivity_coefficient	',
+      'productivity_coefficient',
       'quality_factor',
       'oee',
       'production_volume',

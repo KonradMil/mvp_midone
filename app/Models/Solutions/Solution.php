@@ -48,7 +48,7 @@ class Solution extends Model implements ReactableInterface
         return $this->hasOne(FinancialAnalysis::class, 'solution_id');
     }
 
-    public function operational_analysis()
+    public function operational_analyses()
     {
         return $this->hasOne(OperationalAnalysis::class, 'solution_id');
     }
