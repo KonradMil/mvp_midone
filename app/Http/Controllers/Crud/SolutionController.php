@@ -8,6 +8,7 @@ use App\Events\SolutionRejected;
 use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
 use App\Models\Estimate;
+use App\Models\FinancialAnalysis;
 use App\Models\Solutions\Solution;
 use App\Models\File;
 use App\Models\Financial;
@@ -224,7 +225,36 @@ class SolutionController extends Controller
             'payload' => $solution
         ]);
     }
+    public function financialAnalysisSave(Request $request)
+    {
+        $solution = Solution::find($request->input('solution_id'));
+        if($solution->financial_analysis != Null) {
+            $financial_analysis = $solution->financial_analysis;
+        } else {
+            $financial_analysis = new FinancialAnalysis();
+            $financial_analysis->solution_id = $request->input('solution_id');
+        }
+        $input = $request->input();
+        $financial_analysis->cost_capital = (float)$input['capitalCost'];
+        $financial_analysis->capex =  (float)$input['capex'];
+        $financial_analysis->timeframe =  (float)$input['timeframe'];
+        $financial_analysis->mechanical_integration = (float)$input['financialsAnalysis']['cost_per_hour'];
+        $financial_analysis->electrical_integration = (float)$input['financialsAnalysis']['cost_per_year'];
+        $financial_analysis->workstation_integration = (float)$input['financialsAnalysis']['cost_per_piece'];
+        $financial_analysis->programming_robot = (float)$input['financialsAnalysis']['monthly_reduction'];
+        $financial_analysis->programming_plc = (float)$input['financialsAnalysis']['tkw_reduction'];
+        $financial_analysis->documentation_ce = (float)$input['financialsAnalysis']['additional_savings'];
+        $financial_analysis->margin = (float)$input['financialsAnalysis']['monthly_savings'];
+        $financial_analysis->margin = (float)$input['financialsAnalysis']['simple_payback'];
+        $financial_analysis->margin = (float)$input['financialsAnalysis']['npv'];
+        $financial_analysis->save();
 
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisane poprawnie',
+            'payload' => $financial_analysis
+        ]);
+    }
     public function estimateSave(Request $request)
     {
         $solution = Solution::find($request->input('solution_id'));
