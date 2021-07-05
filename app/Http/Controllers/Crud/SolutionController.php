@@ -238,15 +238,18 @@ class SolutionController extends Controller
         $financial_analysis->cost_capital = (float)$input['capitalCost'];
         $financial_analysis->capex =  (float)$input['capex'];
         $financial_analysis->timeframe =  (float)$input['timeframe'];
-        $financial_analysis->mechanical_integration = (float)$input['financialsAnalysis']['cost_per_hour'];
-        $financial_analysis->electrical_integration = (float)$input['financialsAnalysis']['cost_per_year'];
-        $financial_analysis->workstation_integration = (float)$input['financialsAnalysis']['cost_per_piece'];
-        $financial_analysis->programming_robot = (float)$input['financialsAnalysis']['monthly_reduction'];
-        $financial_analysis->programming_plc = (float)$input['financialsAnalysis']['tkw_reduction'];
-        $financial_analysis->documentation_ce = (float)$input['financialsAnalysis']['additional_savings'];
-        $financial_analysis->margin = (float)$input['financialsAnalysis']['monthly_savings'];
-        $financial_analysis->margin = (float)$input['financialsAnalysis']['simple_payback'];
-        $financial_analysis->margin = (float)$input['financialsAnalysis']['npv'];
+        $financial_analysis->cost_per_hour_before = (float)$input['financialsAnalysis']['cost_per_hour_before'];
+        $financial_analysis->cost_per_hour_after = (float)$input['financialsAnalysis']['cost_per_hour_after'];
+        $financial_analysis->cost_per_year_before = (float)$input['financialsAnalysis']['cost_per_year_before'];
+        $financial_analysis->cost_per_year_after = (float)$input['financialsAnalysis']['cost_per_year_after'];
+        $financial_analysis->cost_per_piece_before = (float)$input['financialsAnalysis']['cost_per_piece_before'];
+        $financial_analysis->cost_per_piece_after = (float)$input['financialsAnalysis']['cost_per_piece_after'];
+        $financial_analysis->monthly_reduction_before = (float)$input['financialsAnalysis']['monthly_reduction_before'];
+        $financial_analysis->tkw_reduction_before = (float)$input['financialsAnalysis']['tkw_reduction_before'];
+        $financial_analysis->additional_savings_before = (float)$input['financialsAnalysis']['additional_savings_before'];
+        $financial_analysis->monthly_savings_before = (float)$input['financialsAnalysis']['monthly_savings_before'];
+        $financial_analysis->simple_payback = (float)$input['financialsAnalysis']['simple_payback'];
+        $financial_analysis->npv = (float)$input['financialsAnalysis']['npv'];
         $financial_analysis->save();
 
         return response()->json([
