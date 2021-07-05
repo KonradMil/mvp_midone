@@ -184,7 +184,7 @@ export default {
                 console.log({layers: line.value});
                 emitter.emit('rightpanelaction', { action: 'updateLine', data:{layers: line.value}, json: true });
             } else if (content.value === 'financial-analysis') {
-                emitter.emit('financialsAnalysisSave', {});
+                emitter.emit('financialAnalysesSave', {});
             }
             hidePanel();
         }
