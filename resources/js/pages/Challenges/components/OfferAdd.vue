@@ -269,7 +269,6 @@ export default {
                     solution_robots.value.push(obj);
                 }
             });
-
         };
 
         onMounted(() => {
