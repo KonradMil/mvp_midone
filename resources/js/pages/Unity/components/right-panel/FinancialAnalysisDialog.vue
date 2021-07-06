@@ -288,8 +288,9 @@ export default {
 
 
         onMounted(() => {
-            getChallenge();
-            financialAnalysesFunction();
+            getChallenge((cb) =>{
+                financialAnalysesFunction();
+            });
         });
         watch([challenge.value, props.solution, okresZwrotuProsty.value, npv.value], (newValues, prevValues) => {
             financialAnalysesFunction();
@@ -373,7 +374,7 @@ export default {
             console.log([cashFlow, wacc, dcf, scf, rtp, sdcf, drtp]);
         }
 
-        const getChallenge = () => {
+        const getChallenge = (cb) => {
             axios.post('/api/challenge/user/get/card', {id: props.solution.challenge_id})
                 .then(response => {
                     // console.log(response.data)
@@ -382,6 +383,7 @@ export default {
                         console.log(response.data.payload);
                         console.log(JSON.parse(response.data.payload.save_json));
                         challenge.value = response.data.payload;
+                        cb();
                     }
                 })
         }
