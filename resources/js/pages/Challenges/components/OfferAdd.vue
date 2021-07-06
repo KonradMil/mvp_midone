@@ -224,8 +224,8 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         let c = JSON.parse(response.data.payload.save_json);
-                        console.log(c);
-                        c.forEach((obj) => {
+                        console.log(c.parts);
+                        c.parts.forEach((obj) => {
                             console.log(obj);
                             if(obj.category == 1) {
                                 solution_robots.value.push(obj);
