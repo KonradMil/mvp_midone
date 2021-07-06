@@ -173,17 +173,6 @@
                         <label for="input-wizard-13" class="form-label">
                             Okres ważności oferty w dniach
                         </label>
-                        <template v-for="(obj, index) in Robots">
-                            <div class="intro-y col-span-12 sm:col-span-12" >
-                                <label :for="'input-wizard-' + index" class="form-label w-1/2">
-                                    <input type="text" class="form-control" v-model="obj.name"/>
-                                </label>
-                                <div class="input-group">
-                                    <input type="text" v-model="obj.guarantee_period" class="form-control w-1/2" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-                                    <div class="input-group-text">zł</div>
-                                </div>
-                            </div>
-                        </template>
                         <div class="intro-y col-span-12 sm:col-span-12" >
                             <Multiselect
                                 class="form-control"
@@ -197,6 +186,17 @@
                             />
                         </div>
                     </div>
+                    <template v-for="(obj, index) in Robots">
+                        <div class="intro-y col-span-12 sm:col-span-6 mt-2" >
+                            <label :for="'input-wizard-' + index" class="form-label w-1/2">
+                                <input type="text" class="form-control" v-model="obj.name"/>
+                            </label>
+                            <div class="input-group">
+                                <input type="text" v-model="obj.guarantee_period" class="form-control w-1/2" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                <div class="input-group-text">zł</div>
+                            </div>
+                        </div>
+                    </template>
                 </div>
                 <button class="btn btn-primary w-20 mt-3" @click.prevent="save">{{ $t('profiles.save') }}</button>
             </div>
