@@ -29,12 +29,12 @@ class OfferController extends Controller
         }else if($option === 'Czas realizacji uruchomienia u klienta'){
             $offers = $challenge->offers()->orderBy('time_to_start', 'DESC')->with('solution')->get();
         }else if($option === 'NPV'){
-            $solutions = $challenge->solutions;
-            foreach($solutions as $solution){
-                $financial_analyses = FinancialAnalysis::find($solution->id);
-                $offersForFilter = $solutions->offers();
-            }
-            $offersForFilter = $challenge->offers;
+//            $solutions = $challenge->solutions;
+//            foreach($solutions as $solution){
+//                $financial_analyses = FinancialAnalysis::find($solution->id);
+//                $offersForFilter = $solutions->offers();
+//            }
+            $offersForFilter = $challenge->offers();
 
             $offers = $offersForFilter->solution->financial_analyses()->orderBy('npv', 'DESC')->with('solution')->get();
 //            $offers = $challenge->offers()->orderBy('time_to_start', 'DESC')->with('solution')->get();
