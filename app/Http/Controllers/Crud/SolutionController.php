@@ -15,6 +15,7 @@ use App\Models\File;
 use App\Models\Financial;
 use App\Models\Team;
 use App\Models\TechnicalDetails;
+use App\Models\UnityModel;
 use Carbon\Carbon;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Illuminate\Http\Request;
@@ -122,11 +123,18 @@ class SolutionController extends Controller
     {
         $solution = Solution::find($request->input('id'));
         $save = json_decode($solution->save_json);
-
+        $robots = [];
         foreach ($save->parts as $part) {
-            dd($part);
+            $model = UnityModel::find($part->model->model_id);
+            if($model->category == 1) {
+                $robots[] = $model;
+            }
         }
-
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => $robots
+        ]);
     }
 
     public function acceptSolution (Request $request) {
