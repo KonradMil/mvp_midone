@@ -223,8 +223,14 @@ export default {
             axios.post('/api/solution/get/unity', {id: props.solution_id})
                 .then(response => {
                     if (response.data.success) {
-                        solution_save.value = JSON.parse(response.data.payload.save_json);
-                        segregateRobots();
+                        let c = JSON.parse(response.data.payload.save_json);
+                        c.forEach((obj) => {
+                            console.log(obj);
+                            if(obj.category == 1) {
+                                solution_robots.value.push(obj);
+                            }
+                        })
+                        // segregateRobots();
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -264,7 +270,7 @@ export default {
         }
 
         const segregateRobots = () => {
-            solution_save.value.forEach((obj) => {
+            solution_save.value.map((obj) => {
                 if(obj.category == 1) {
                     solution_robots.value.push(obj);
                 }
@@ -324,7 +330,8 @@ export default {
             save,
             values,
             offer_expires_in,
-            solution_robots
+            solution_robots,
+            solution_save
         }
     }
 }
