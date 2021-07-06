@@ -34,7 +34,9 @@ class OfferController extends Controller
                 $financial_analyses = FinancialAnalysis::find($solution->id);
                 $offersForFilter = $solutions->offers();
             }
-            $offers = $challenge->offers()->solution->financial_analyses->orderBy('npv', 'DESC')->with('solution')->get();
+            $offersForFilter = $challenge->offers;
+
+            $offers = $offersForFilter->solution->financial_analyses()->orderBy('npv', 'DESC')->with('solution')->get();
 //            $offers = $challenge->offers()->orderBy('time_to_start', 'DESC')->with('solution')->get();
         }
 
