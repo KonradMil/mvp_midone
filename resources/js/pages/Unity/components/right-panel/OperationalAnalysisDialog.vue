@@ -297,7 +297,11 @@ export default {
             console.log(operationalAnalyses.time_available_before + '-> time_avaible_before');
             getChallenge();
             // operationalAnalysesFunction();
-            console.log(challenge.value.financial_before.days + '-> challenge.value.finnancial_before.days');
+            try {
+                console.log(challenge + '-> challenge');
+            } catch(e){
+                console.log(challenge.value + '-> challenge.value');
+            }
             console.log(operationalAnalyses.time_available_before + '-> time_avaible_before');
         });
 
