@@ -275,8 +275,8 @@ export default {
         onMounted(() => {
             if(props.edit_offer_id != undefined){
                    getOffer();
-                getSolution();
             }
+            getSolution();
         });
 
 
