@@ -180,7 +180,7 @@
                                 mode="single"
                                 label="name"
                                 max="1"
-                                :placeholder="filterType === '' ? 'select' : filterType"
+                                :placeholder="selected_robot === '' ? 'select' : selected_robot"
                                 valueProp="value"
                                 :options="solution_robots"
                             />
