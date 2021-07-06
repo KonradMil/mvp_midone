@@ -264,12 +264,11 @@ export default {
         }
 
         const segregateRobots = () => {
-            solution_save.valueforEach((obj) => {
+            solution_save.value.forEach((obj) => {
                 if(obj.category == 1) {
                     solution_robots.value.push(obj);
                 }
             });
-
         };
 
         onMounted(() => {
