@@ -295,19 +295,20 @@ export default {
 
         onMounted(() => {
             console.log(operationalAnalyses.time_available_before + '-> time_avaible_before');
-            getChallenge();
+            getChallenge(() => {
+                operationalAnalysesFunction();
+            });
             // operationalAnalysesFunction();
-            try {
-                console.log(challenge + '-> challenge');
-                console.log(challenge.financial_before.days + 'challenge.financial_before_days');
-            } catch(e){
-                console.log(challenge.value + '-> challenge.value');
-                console.log(challenge.value.financial_before.days + 'challenge.value.financial_before_days');
-            }
-            console.log(operationalAnalyses.time_available_before + '-> time_avaible_before');
+            // try {
+            //     console.log(challenge + '-> challenge');
+            // } catch(e){
+            //     console.log(challenge.value + '-> challenge.value');
+            //     console.log(challenge.financial_before.days + 'challenge.financial_before_days');
+            // }
+            // console.log(operationalAnalyses.time_available_before + '-> time_avaible_before');
         });
 
-        const getChallenge = () => {
+        const getChallenge = (cb) => {
             axios.post('/api/challenge/user/get/card', {id: props.solution.challenge_id})
                 .then(response => {
                     // console.log(response.data)
@@ -316,6 +317,7 @@ export default {
                         console.log(response.data.payload);
                         console.log(JSON.parse(response.data.payload.save_json));
                         challenge.value = response.data.payload;
+                        cb();
                     }
                 })
         }
