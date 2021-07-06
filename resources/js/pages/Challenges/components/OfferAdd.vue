@@ -223,7 +223,8 @@ export default {
             axios.post('/api/solution/robots', {id: props.solution_id})
                 .then(response => {
                     if (response.data.success) {
-                      console.log(response.data.payload)
+                      // console.log(response.data.payload)
+                        solution_robots.value = response.data.payload;
                     } else {
                         // toast.error(response.data.message);
                     }
