@@ -121,8 +121,11 @@ class SolutionController extends Controller
     public function getRobots(Request $request)
     {
         $solution = Solution::find($request->input('id'));
-        $save = $solution->save_json;
-        dd($save);
+        $save = json_decode($solution->save_json);
+
+        foreach ($save->parts as $part) {
+            dd($part);
+        }
 
     }
 
