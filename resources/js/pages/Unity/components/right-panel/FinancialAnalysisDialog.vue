@@ -289,6 +289,7 @@ export default {
 
         onMounted(() => {
             getChallenge();
+            financialAnalysesFunction();
         });
         watch([challenge.value, props.solution, okresZwrotuProsty.value, npv.value], (newValues, prevValues) => {
             financialAnalysesFunction();

@@ -294,7 +294,10 @@ export default {
         }
 
         onMounted(() => {
+            console.log(operationalAnalyses.time_available_before + '-> time_avaible_before');
             getChallenge();
+            operationalAnalysesFunction();
+            console.log(operationalAnalyses.time_available_before + '-> time_avaible_before');
         });
 
         const getChallenge = () => {
