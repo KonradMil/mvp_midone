@@ -607,7 +607,11 @@ class SolutionController extends Controller
         $solution->status = 1;
         $solution->save();
 
-        event(new SolutionPublished($solution, $solution->author, 'Nowe rozwiązanie zostało opublikowane: ' . $solution->name, []));
+        try {
+            event(new SolutionPublished($solution, $solution->author, 'Nowe rozwiązanie zostało opublikowane: ' . $solution->name, []));
+        }catch (\Exception $e) {
+
+        }
 
         return response()->json([
             'success' => true,
