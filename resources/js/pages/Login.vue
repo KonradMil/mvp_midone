@@ -1,6 +1,6 @@
 <template>
     <div>
-        <DarkModeSwitcher/>
+<!--        <DarkModeSwitcher/>-->
         <div class="container sm:px-10">en
             <div class="block xl:grid grid-cols-2 gap-4">
                 <!-- BEGIN: Login Info -->
@@ -135,7 +135,7 @@
     const store = useStore();
     export default {
         components: {
-            DarkModeSwitcher,
+
             Modal
         },
         setup() {

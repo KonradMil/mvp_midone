@@ -1,6 +1,6 @@
 <template>
     <div>
-        <DarkModeSwitcher/>
+<!--        <DarkModeSwitcher/>-->
         <div class="container sm:px-10">
             <div class="block xl:grid grid-cols-2 gap-4">
                 <!-- BEGIN: Register Info -->
@@ -262,7 +262,6 @@
 
     export default {
         components: {
-            DarkModeSwitcher,
             PasswordMeter,
         },
         props: {
