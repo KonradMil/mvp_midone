@@ -118,6 +118,14 @@ class SolutionController extends Controller
         ]);
     }
 
+    public function getRobots(Request $request)
+    {
+        $solution = Solution::find($request->input('id'));
+        $save = $solution->save_json;
+        dd($save);
+
+    }
+
     public function acceptSolution (Request $request) {
         $id = $request->input('id');
         $solution = Solution::find($id);
