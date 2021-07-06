@@ -169,6 +169,32 @@
                         </label>
                         <input type="number" class="form-control" v-model="offer_expires_in"/>
                     </div>
+                    <div class="intro-y col-span-12 sm:col-span-12" >
+                        <h4>Pozostałe koszty</h4>
+                    </div>
+                    <template v-for="(obj, index) in Robots">
+                        <div class="intro-y col-span-12 sm:col-span-12" >
+                            <label :for="'input-wizard-' + index" class="form-label w-1/2">
+                                <input type="text" class="form-control" v-model="obj.name"/>
+                            </label>
+                            <div class="input-group">
+                                <input type="text" v-model="obj.guarantee_period" class="form-control w-1/2" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
+                                <div class="input-group-text">zł</div>
+                            </div>
+                        </div>
+                    </template>
+                    <div class="intro-y col-span-12 sm:col-span-12" >
+                        <Multiselect
+                            class="form-control"
+                            v-model="Robots"
+                            mode="single"
+                            label="name"
+                            max="1"
+                            :placeholder="filterType === '' ? 'select' : filterType"
+                            valueProp="value"
+                            :options="solution_robots"
+                        />
+                    </div>
                 </div>
                 <button class="btn btn-primary w-20 mt-3" @click.prevent="save">{{ $t('profiles.save') }}</button>
             </div>
@@ -207,6 +233,8 @@ export default {
         const period_of_support = ref('');
         const solution_robots = ref([]);
         const solution_save = ref({});
+        const Robots = ref([]);
+
 
         const toast = useToast();
         const values = require('../../../json/offer_values.json');
@@ -218,6 +246,13 @@ export default {
         emitter.on('changeToOfferAdd', e => () => {
             getOffer(e.id);
         });
+
+        const addRobot = () => {
+            Robots.value.push({
+                name: 'Dodaj robot',
+                price: 0
+            });
+        }
 
         const getSolution = () => {
             axios.post('/api/solution/robots', {id: props.solution_id})
@@ -307,6 +342,8 @@ export default {
         }
 
         return {
+            Robots,
+            addRobot,
             price_of_delivery,
             weeks_to_start,
             time_to_fix,
