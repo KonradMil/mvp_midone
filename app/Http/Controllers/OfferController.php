@@ -29,19 +29,15 @@ class OfferController extends Controller
         }else if($option === 'Czas realizacji uruchomienia u klienta'){
             $offers = $challenge->offers()->orderBy('time_to_start', 'DESC')->with('solution')->get();
         }else if($option === 'NPV'){
-//            $solutions = $challenge->solutions;
-//            foreach($solutions as $solution){
-//                $financial_analyses = FinancialAnalysis::find($solution->id);
-//                $offersForFilter = $solutions->offers();
+            $offers = $challenge->offers()->with('solution', 'solution.financial_analyses')->orderBy('solution.financial_analyses.npv', 'DESC')->get();
+//        $solutions = $challenge->solutions()->with('financial_analyses')->orderBy('financial_analyses.npv', 'DESC')->get();
+//        foreach($solutions as $solution){
+////            $array[] = $solution->offers;
+//            foreach ($solution->offers as $offer) {
+//                $array[] = $offer;
 //            }
-//`
-//            $offersForFilter = $challenge->offers();
-//            $offers = $offersForFilter->solution->financial_analyses()->orderBy('npv', 'DESC')->with('solution')->get();
-//            $offers = $challenge->offers()->orderBy('time_to_start', 'DESC')->with('solution')->get();
-        $solutions = $challenge->solutions()->with('financial_analyses')->orderBy('financial_analyses.npv', 'DESC')->get();
-        foreach($solutions as $solution){
-            $array[] = $solution->offers;
-        }
+//        }
+//        $offers = collect($array);
 //        foreach($solutions as $solution){
 //            $offers = $solution->offers;
 //            foreach($offers as $offer){
