@@ -7,6 +7,7 @@ use App\Events\OfferAdded;
 use App\Events\OfferPublished;
 use App\Events\OfferRejected;
 use App\Models\Challenges\Challenge;
+use App\Models\FinancialAnalysis;
 use App\Models\Offer;
 use App\Models\Solutions\Solution;
 use Illuminate\Http\Request;
@@ -27,6 +28,15 @@ class OfferController extends Controller
             $offers = $challenge->offers()->orderBy('price_of_delivery', 'ASC')->with('solution')->get();
         }else if($option === 'Czas realizacji uruchomienia u klienta'){
             $offers = $challenge->offers()->orderBy('time_to_start', 'DESC')->with('solution')->get();
+        }else if($option === 'NPV'){
+//            $solutions = $challenge->solutions;
+//            foreach($solutions as $solution){
+//                $financial_analyses = FinancialAnalysis::find($solution->id);
+//                $offersForFilter = $solutions->offers();
+//
+//            }
+            $offers = $challenge->offers->solution->financial_analyses->oderBy('npv', 'DESC')->with('solution')->get();
+//            $offers = $challenge->offers()->orderBy('time_to_start', 'DESC')->with('solution')->get();
         }
 
         return response()->json([
