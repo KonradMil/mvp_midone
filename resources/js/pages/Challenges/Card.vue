@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import {defineComponent, ref, provide, onMounted, unref, toRaw, computed, getCurrentInstance} from "vue";
+import {defineComponent, ref, provide, onMounted, unref, toRaw, computed, getCurrentInstance, onBeforeMount} from "vue";
 import GetCardChallenge from "../../compositions/GetCardChallenge";
 import WhatsNext from "./WhatsNext";
 import BasicInformationPanel from "./components/BasicInformationPanel";
@@ -256,7 +256,6 @@ export default defineComponent({
         onMounted(function () {
             console.log(props);
             getCardChallengeRepositories(props.id);
-
         })
 
 

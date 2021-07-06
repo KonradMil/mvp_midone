@@ -170,7 +170,7 @@
                         <input type="number" class="form-control" v-model="offer_expires_in"/>
                     </div>
                 </div>
-                <button class="btn btn-primary w-20 mt-3" @click="save">{{ $t('profiles.save') }}</button>
+                <button class="btn btn-primary w-20 mt-3" @click.prevent="save">{{ $t('profiles.save') }}</button>
             </div>
         </div>
     </div>
@@ -205,6 +205,8 @@ export default {
         const work_hour_price = ref(0);
         const offer_expires_in = ref(30);
         const period_of_support = ref('');
+        const solution_robots = ref([]);
+        const solution_save = ref({});
 
         const toast = useToast();
         const values = require('../../../json/offer_values.json');
@@ -216,6 +218,18 @@ export default {
         emitter.on('changeToOfferAdd', e => () => {
             getOffer(e.id);
         });
+
+        const getSolution = () => {
+            axios.post('/api/solution/robots', {id: props.solution_id})
+                .then(response => {
+                    if (response.data.success) {
+                      // console.log(response.data.payload)
+                        solution_robots.value = response.data.payload;
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        };
 
         const save = () => {
             axios.post('/api/offer/save', {
@@ -249,10 +263,19 @@ export default {
             })
         }
 
+        const segregateRobots = () => {
+            solution_save.value.map((obj) => {
+                if(obj.category == 1) {
+                    solution_robots.value.push(obj);
+                }
+            });
+        };
+
         onMounted(() => {
             if(props.edit_offer_id != undefined){
                    getOffer();
             }
+            getSolution();
         });
 
 
@@ -300,7 +323,9 @@ export default {
             period_of_support,
             save,
             values,
-            offer_expires_in
+            offer_expires_in,
+            solution_robots,
+            solution_save
         }
     }
 }

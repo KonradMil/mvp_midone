@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Crud;
 
 use App\Events\ChallengeAdded;
+use App\Events\ChallengeFollowed;
 use App\Events\ChallengePublished;
 use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
@@ -452,6 +453,8 @@ class ChallengeController extends Controller
         $challenge = Challenge::find($id);
         Auth::user()->viaLoveReacter()->reactTo($challenge, 'Follow');
 
+//        event(new ChallengeFollowed($challenge, $challenge->author_id, 'Użytykownik obserwuje Twoje wyzwanie!: ' . $challenge->name, []));
+
         return response()->json([
             'success' => true,
             'message' => 'Polajkowano.',
@@ -767,8 +770,15 @@ class ChallengeController extends Controller
         $challenge->stage = 1;
         $challenge->save();
 
-
-//            event(new ChallengePublished($challenge, $challenge->author, 'Nowe wyzwanie zostało opublikowane: ' . $challenge->name, []));
+         try{
+             event(new ChallengePublished($challenge, $challenge->author, 'Nowe wyzwanie zostało opublikowane: ' . $challenge->name, []));
+         } catch (Exception $e){
+             return response()->json([
+                 'success' => false,
+                 'message' => 'Error',
+                 'payload' => $e
+             ]);
+         }
 
 
         return response()->json([

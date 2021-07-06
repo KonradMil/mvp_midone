@@ -97,6 +97,7 @@ Route::post('search', [SearchController::class, 'search']);
 Route::group(['prefix' => 'offer', 'middleware' => 'auth:sanctum'], function () {
     Route::post('user/check', [OfferController::class, 'check']);
     Route::post('get', [OfferController::class, 'get']);
+    Route::post('user/filter', [OfferController::class, 'filterChallengeOffers']);
     Route::post('delete', [OfferController::class, 'delete']);
     Route::post('save', [OfferController::class, 'save']);
     Route::post('get/all', [OfferController::class, 'getAll']);
@@ -113,6 +114,7 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
 });
 
 Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('robots', [SolutionController::class, 'getRobots']);
     Route::post('filter', [SolutionController::class, 'deleteSolutionsNull']);
     Route::post('user/get/archive', [SolutionController::class, 'getUserSolutionsArchive']);
     Route::post('accept', [SolutionController::class, 'acceptSolution']);
@@ -137,6 +139,8 @@ Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function 
     Route::post('unpublish', [SolutionController::class, 'unpublish']);
     Route::post('delete', [SolutionController::class, 'delete']);
     Route::post('estimate/save', [SolutionController::class, 'estimateSave']);
+    Route::post('financial-analyses/save', [SolutionController::class, 'financialAnalysesSave']);
+    Route::post('operational-analyses/save', [SolutionController::class, 'operationalAnalysesSave']);
     Route::post('estimate/get', [SolutionController::class, 'estimateGet']);
 });
 

@@ -4,14 +4,18 @@ namespace App\Http\Controllers\Crud;
 
 use App\Events\SolutionAccepted;
 use App\Events\SolutionPublished;
+use App\Events\SolutionRejected;
 use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
 use App\Models\Estimate;
+use App\Models\FinancialAnalysis;
+use App\Models\OperationalAnalysis;
 use App\Models\Solutions\Solution;
 use App\Models\File;
 use App\Models\Financial;
 use App\Models\Team;
 use App\Models\TechnicalDetails;
+use App\Models\UnityModel;
 use Carbon\Carbon;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Illuminate\Http\Request;
@@ -103,12 +107,33 @@ class SolutionController extends Controller
         $solution->selected = false;
         $solution->offers()->delete();
         $solution->selected_offer_id = 0;
+        $challenge = Challenge::find($solution->challenge_id);
         $solution->save();
+
+        event(new SolutionRejected($solution, $challenge->author, 'Rozwiązanie zostało odrzucone: ' . $solution->name, []));
 
         return response()->json([
             'success' => true,
             'message' => 'Odrzucono rozwiązanie.',
             'payload' => $solution
+        ]);
+    }
+
+    public function getRobots(Request $request)
+    {
+        $solution = Solution::find($request->input('id'));
+        $save = json_decode($solution->save_json);
+        $robots = [];
+        foreach ($save->parts as $part) {
+            $model = UnityModel::find($part->model->model_id);
+            if($model->category == 1) {
+                $robots[] = $model;
+            }
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => $robots
         ]);
     }
 
@@ -220,7 +245,87 @@ class SolutionController extends Controller
             'payload' => $solution
         ]);
     }
+    public function operationalAnalysesSave(Request $request)
+    {
+        $solution = Solution::find($request->input('solution_id'));
+        if($solution->operational_analyses != Null) {
+            $operational_analyses = $solution->operational_analyses;
+        } else {
+            $operational_analyses = new OperationalAnalysis();
+            $operational_analyses->solution_id = $request->input('solution_id');
+        }
+        $input = $request->input();
+        $operational_analyses->time_available_before= (float)$input['operationalAnalyses']['time_available_before'];
+        $operational_analyses->time_available_after= (float)$input['operationalAnalyses']['time_available_after'];
+        $operational_analyses->time_available_change= (float)$input['operationalAnalyses']['time_available_change'];
+        $operational_analyses->time_production_before = (float)$input['operationalAnalyses']['time_production_before'];
+        $operational_analyses->time_production_after = (float)$input['operationalAnalyses']['time_production_after'];
+        $operational_analyses->time_production_change = (float)$input['operationalAnalyses']['time_production_change'];
+        $operational_analyses->production_before = (float)$input['operationalAnalyses']['production_before'];
+        $operational_analyses->production_after = (float)$input['operationalAnalyses']['production_after'];
+        $operational_analyses->production_change = (float)$input['operationalAnalyses']['production_change'];
+        $operational_analyses->good_arts_production_before = (float)$input['operationalAnalyses']['good_arts_production_before'];
+        $operational_analyses->good_arts_production_after = (float)$input['operationalAnalyses']['good_arts_production_after'];
+        $operational_analyses->good_arts_production_change = (float)$input['operationalAnalyses']['good_arts_production_change'];
+        $operational_analyses->availability_factor_before = (float)$input['operationalAnalyses']['availability_factor_before'];
+        $operational_analyses->availability_factor_after = (float)$input['operationalAnalyses']['availability_factor_after'];
+        $operational_analyses->availability_factor_change = (float)$input['operationalAnalyses']['availability_factor_change'];
+        $operational_analyses->productivity_coefficient_before = (float)$input['operationalAnalyses']['productivity_coefficient_before'];
+        $operational_analyses->productivity_coefficient_after = (float)$input['operationalAnalyses']['productivity_coefficient_after'];
+        $operational_analyses->productivity_coefficient_change = (float)$input['operationalAnalyses']['productivity_coefficient_change'];
+        $operational_analyses->quality_factor_before = (float)$input['operationalAnalyses']['quality_factor_before'];
+        $operational_analyses->quality_factor_after = (float)$input['operationalAnalyses']['quality_factor_after'];
+        $operational_analyses->quality_factor_change = (float)$input['operationalAnalyses']['quality_factor_change'];
+        $operational_analyses->oee_before = (float)$input['operationalAnalyses']['oee_before'];
+        $operational_analyses->oee_after = (float)$input['operationalAnalyses']['oee_after'];
+        $operational_analyses->oee_change = (float)$input['operationalAnalyses']['oee_change'];
+        $operational_analyses->production_volume_before = (float)$input['operationalAnalyses']['production_volume_before'];
+        $operational_analyses->production_volume_after = (float)$input['operationalAnalyses']['production_volume_after'];
+        $operational_analyses->production_volume_change = (float)$input['operationalAnalyses']['production_volume_change'];
+        $operational_analyses->pph_per_person_before = (float)$input['operationalAnalyses']['pph_per_person_before'];
+        $operational_analyses->pph_per_person_after = (float)$input['operationalAnalyses']['pph_per_person_after'];
+        $operational_analyses->pph_per_person_change = (float)$input['operationalAnalyses']['pph_per_person_change'];
+        $operational_analyses->save();
 
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisane poprawnie',
+            'payload' => $operational_analyses
+        ]);
+    }
+    public function financialAnalysesSave(Request $request)
+    {
+        $solution = Solution::find($request->input('solution_id'));
+        if($solution->financial_analyses != Null) {
+            $financial_analyses = $solution->financial_analyses;
+        } else {
+            $financial_analyses = new FinancialAnalysis();
+            $financial_analyses->solution_id = $request->input('solution_id');
+        }
+        $input = $request->input();
+        $financial_analyses->cost_capital = (float)$input['capitalCost'];
+        $financial_analyses->capex =  (float)$input['capex'];
+        $financial_analyses->timeframe =  (float)$input['timeframe'];
+        $financial_analyses->cost_per_hour_before = (float)$input['financialAnalyses']['cost_per_hour_before'];
+        $financial_analyses->cost_per_hour_after = (float)$input['financialAnalyses']['cost_per_hour_after'];
+        $financial_analyses->cost_per_year_before = (float)$input['financialAnalyses']['cost_per_year_before'];
+        $financial_analyses->cost_per_year_after = (float)$input['financialAnalyses']['cost_per_year_after'];
+        $financial_analyses->cost_per_piece_before = (float)$input['financialAnalyses']['cost_per_piece_before'];
+        $financial_analyses->cost_per_piece_after = (float)$input['financialAnalyses']['cost_per_piece_after'];
+        $financial_analyses->monthly_reduction_before = (float)$input['financialAnalyses']['monthly_reduction_before'];
+        $financial_analyses->tkw_reduction_before = (float)$input['financialAnalyses']['tkw_reduction_before'];
+        $financial_analyses->additional_savings_before = (float)$input['financialAnalyses']['additional_savings_before'];
+        $financial_analyses->monthly_savings_before = (float)$input['financialAnalyses']['monthly_savings_before'];
+        $financial_analyses->simple_payback = (float)$input['financialAnalyses']['simple_payback'];
+        $financial_analyses->npv = (float)$input['financialAnalyses']['npv'];
+        $financial_analyses->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisane poprawnie',
+            'payload' => $financial_analyses
+        ]);
+    }
     public function estimateSave(Request $request)
     {
         $solution = Solution::find($request->input('solution_id'));
@@ -527,7 +632,10 @@ class SolutionController extends Controller
     public function delete(Request $request)
     {
         $solution = Solution::find($request->input('id'));
-        $solution->delete();
+        if($solution != NULL){
+            $solution->delete();
+        }
+
 
         return response()->json([
             'success' => true,

@@ -5,7 +5,9 @@ namespace App\Models\Solutions;
 use App\Models\Challenges\Challenge;
 use App\Models\Estimate;
 use App\Models\Financial;
+use App\Models\FinancialAnalysis;
 use App\Models\Offer;
+use App\Models\OperationalAnalysis;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -39,6 +41,16 @@ class Solution extends Model implements ReactableInterface
     public function estimate()
     {
         return $this->hasOne(Estimate::class, 'solution_id');
+    }
+
+    public function financial_analyses()
+    {
+        return $this->hasOne(FinancialAnalysis::class, 'solution_id');
+    }
+
+    public function operational_analyses()
+    {
+        return $this->hasOne(OperationalAnalysis::class, 'solution_id');
     }
 
     public function challenge()

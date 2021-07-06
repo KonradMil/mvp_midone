@@ -31,6 +31,17 @@
 
                 <div class="h-screen xl:h-auto flex py-15 xl:py-18 my-10 xl:my-0 ">
                     <form class="validate-form" @submit.prevent="handleSubmit">
+<<<<<<< HEAD
+=======
+                    <div
+                        class="my-auto mx-auto xl:ml-20 bg-white dark:bg-dark-1 mt-20 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto"
+                    >
+                        <h2
+                            class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left"
+                        >
+                            Resetuj hasło
+                        </h2>
+>>>>>>> develop
                         <div
                             class="my-auto mx-auto xl:ml-20 bg-white dark:bg-dark-1 mt-20 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto"
                         >
@@ -109,6 +120,7 @@
                                 <button type="submit"
                                         class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top"
                                 >
+<<<<<<< HEAD
                                     Resetuj
                                 </button>
                                 <button    @click="$router.push('login')"
@@ -117,6 +129,24 @@
                                     {{$t('login.login')}}
                                 </button>
                             </div>
+=======
+                                    {{ $t('validation.' + error.$message) }}
+                                </div>
+                            </template>
+                            <password-meter @score="onScore" :password="validate.password.$model" />
+                        </div>
+                        <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
+                            <button type="submit"
+                                class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top"
+                            >
+                                Resetuj
+                            </button>
+                            <button    @click="$router.push('login')"
+                                class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top"
+                            >
+                                {{$t('login.login')}}
+                            </button>
+>>>>>>> develop
                         </div>
                     </form>
                 </div>

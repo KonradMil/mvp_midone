@@ -3,7 +3,14 @@
 namespace App\Providers;
 
 use App\Events\ChallengeAdded;
+use App\Events\ChallengeFollowed;
+use App\Events\CommentAdded;
+use App\Events\OfferAccepted;
+use App\Events\OfferAdded;
+use App\Events\OfferPublished;
+use App\Events\OfferRejected;
 use App\Events\SolutionAdded;
+use App\Events\SolutionRejected;
 use App\Events\TeamMemberInvited;
 use App\Events\TeamMemberAccepted;
 use App\Events\TeamAdded;
@@ -13,8 +20,15 @@ use App\Events\SolutionAccepted;
 use App\Events\ChallengePublished;
 use App\Events\SolutionPublished;
 use App\Listeners\AddActivityLog;
+use App\Listeners\SendChallengeFollowedNotification;
 use App\Listeners\SendChallengeNotification;
+use App\Listeners\SendCommentAddedNotification;
+use App\Listeners\SendOfferAcceptedNotification;
+use App\Listeners\SendOfferAddedNotification;
+use App\Listeners\SendOfferPublishedNotification;
+use App\Listeners\SendOfferRejectedNotification;
 use App\Listeners\SendSolutionNotification;
+use App\Listeners\SendSolutionRejectedNotification;
 use App\Listeners\SendTeamMemberAcceptedNotification;
 use App\Listeners\SendQuestionAddedNotification;
 use App\Listeners\SendQuestionAnsweredNotification;
@@ -67,6 +81,10 @@ class EventServiceProvider extends ServiceProvider
             AddActivityLog::class,
             SendSolutionAcceptedNotification::class
         ],
+        SolutionRejected::class => [
+            AddActivityLog::class,
+            SendSolutionRejectedNotification::class
+        ],
         ChallengePublished::class => [
             AddActivityLog::class,
             SendChallengePublishedNotification::class
@@ -74,7 +92,31 @@ class EventServiceProvider extends ServiceProvider
         SolutionPublished::class => [
             AddActivityLog::class,
             SendSolutionPublishedNotification::class
-        ]
+        ],
+        OfferPublished::class => [
+            AddActivityLog::class,
+            SendOfferPublishedNotification::class
+        ],
+        OfferAdded::class => [
+            AddActivityLog::class,
+            SendOfferAddedNotification::class
+        ],
+        OfferAccepted::class => [
+            AddActivityLog::class,
+            SendOfferAcceptedNotification::class
+        ],
+        OfferRejected::class => [
+            AddActivityLog::class,
+            SendOfferRejectedNotification::class
+        ],
+        CommentAdded::class => [
+            AddActivityLog::class,
+            SendCommentAddedNotification::class
+        ],
+        ChallengeFollowed::class => [
+            AddActivityLog::class,
+            SendChallengeFollowedNotification::class
+        ],
     ];
 
     /**

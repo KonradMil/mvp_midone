@@ -33,10 +33,22 @@
 <!--        </div>-->
 <!--    </div>-->
 
-    <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" >
+    <div v-if="offers.length !== 0" class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" >
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
         <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
+        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+            <Multiselect
+                class="form-control"
+                v-model="filterType"
+                mode="single"
+                label="name"
+                max="1"
+                :placeholder="filterType === '' ? 'select' : filterType"
+                valueProp="value"
+                :options="filters['options']"
+            />
+        </div>
         <div v-if="offers.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie ma jeszcze żadnych ofert.
         </div>
@@ -176,8 +188,14 @@ import {getCurrentInstance, onMounted, ref, watch} from "vue";
 import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
 import {useToast} from "vue-toastification";
 import router from "../../../router";
+import Multiselect from '@vueform/multiselect';
+import DarkModeSwitcher from "../../../components/dark-mode-switcher/Main";
+
 
 export default {
+    components: {
+        Multiselect
+    },
     name: "ChallengeOffers",
     props: {
         challenge: Object,
@@ -192,10 +210,19 @@ export default {
         const offers = ref([]);
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
+        const filters = require('../../../json/offer_filters.json');
         const solution = ref();
         const check = ref(false);
+        const filterType = ref('');
 
         watch(() => offers.value.list, (first, second) => {
+        }, {})
+
+        watch(() => filterType.value, (first, second) => {
+            StartFilterOffer();
+            if(filterType.value === null){
+                getChallengeOffersRepositories();
+            }
         }, {})
 
         const switchTab = () => {
@@ -208,6 +235,20 @@ export default {
 
         const handleCallback = () => {
             router.push({name: 'projects'});
+        }
+
+        const StartFilterOffer = async () => {
+            axios.post('/api/offer/user/filter', {option: filterType.value , id: props.challenge.id})
+                .then(response => {
+                    if (response.data.success) {
+                        console.log('filterType->' + filterType.value);
+                        console.log('props.challenge.id->' + props.challenge.id);
+                        console.log('response.data->' + response.data.payload);
+                        offers.value.list = response.data.payload;
+                    } else {
+
+                    }
+                })
         }
 
         const acceptOffer = async(offer) => {
@@ -252,6 +293,8 @@ export default {
         });
 
         return {
+            StartFilterOffer,
+            filterType,
             check,
             rejectOffer,
             acceptOffer,
@@ -259,6 +302,7 @@ export default {
             offers,
             user,
             values,
+            filters,
             solution
         }
     }

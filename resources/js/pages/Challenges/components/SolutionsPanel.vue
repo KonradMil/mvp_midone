@@ -61,6 +61,11 @@ export default {
         const guard = ref(false);
         const solutions = ref([]);
 
+        emitter.on('deletesolution', e => {
+            solutions.value.splice(e.index, 1);
+            filterMember();
+        });
+
         onMounted(function () {
            if(user.type == 'investor' && props.inTeam) {
                solutions.value = props.challenge.solutions;
@@ -71,18 +76,10 @@ export default {
 
 
         const filterMember = () => {
-            console.log({challenge_id: challenge.value.id});
             axios.post('/api/solution/filter-member', {challenge_id: challenge.value.id})
                 .then(response => {
-                    console.log('CHEEEEEEEEEECK MEMBER');
-                    console.log("response.data")
-                    console.log(response.data);
-                    console.log(response.data.success + ' -> success');
-                    console.log(response.data.payload + '-> payload');
                     if (response.data.success) {
-                        console.log(response.data.payload + '-> data.payload   ')
                         solutions.value = response.data.payload;
-                        console.log(solutions.value + '-> solutions value');
                     }
                 })
         }

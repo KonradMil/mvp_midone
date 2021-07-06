@@ -21,10 +21,18 @@
                         </tr>
                         <tr class="hover:bg-gray-200">
                             <td class="border">
-                                <input type="number" :value="Math.round(challenge.financial_before.operator_cost / 160 * 100) / 100" class="form-control finclass" placeholder="0" disabled="disabled"/>
+                                <input type="number"
+                                       :value="Math.round(challenge.financial_before.operator_cost / 160 * 100) / 100"
+                                       class="form-control finclass"
+                                       placeholder="0"
+                                       disabled="disabled"/>
                             </td>
                             <td class="border">
-                                <input type="number" :value="Math.round(solution.financial_after.operator_cost / 160 * 100) / 100" class="form-control finclass" placeholder="0" disabled="disabled"/>
+                                <input type="number"
+                                       :value="Math.round(solution.financial_after.operator_cost / 160 * 100) / 100"
+                                       class="form-control finclass"
+                                       placeholder="0"
+                                       disabled="disabled"/>
                             </td>
                             <td class="border">
 
@@ -39,10 +47,18 @@
                         </tr>
                         <tr class="hover:bg-gray-200">
                             <td class="border">
-                                <input type="number" :value="Math.round(((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100)) * 100) / 100" class="form-control finclass" placeholder="0" disabled="disabled"/>
+                                <input type="number"
+                                       :value="Math.round(((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100)) * 100) / 100"
+                                       class="form-control finclass"
+                                       placeholder="0"
+                                       disabled="disabled"/>
                             </td>
                             <td class="border">
-                                <input type="number" :value="Math.round(((solution.financial_after.days)*(solution.financial_after.shifts)*(solution.financial_after.shift_time)+(solution.financial_after.weekend_shift)*50*(solution.financial_after.shift_time))*(solution.financial_after.operator_cost / 160)*(solution.financial_after.number_of_operators)*(1+(solution.financial_after.absence / 100)) * 100) / 100" class="form-control finclass" placeholder="0" disabled="disabled"/>
+                                <input type="number"
+                                       :value="Math.round(((solution.financial_after.days)*(solution.financial_after.shifts)*(solution.financial_after.shift_time)+(solution.financial_after.weekend_shift)*50*(solution.financial_after.shift_time))*(solution.financial_after.operator_cost / 160)*(solution.financial_after.number_of_operators)*(1+(solution.financial_after.absence / 100)) * 100) / 100"
+                                       class="form-control finclass"
+                                       placeholder="0"
+                                       disabled="disabled"/>
                             </td>
                             <td class="border">
                                 <input type="number" :value="Math.round(((((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100)))-(((solution.financial_after.days)*(solution.financial_after.shifts)*(solution.financial_after.shift_time)+(solution.financial_after.weekend_shift)*50*(solution.financial_after.shift_time))*(solution.financial_after.operator_cost / 160)*(solution.financial_after.number_of_operators)*(1+(solution.financial_after.absence / 100))))/(((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100))) * 100 * 100) / 100" class="form-control finclass" placeholder="0" disabled="disabled"/>
@@ -57,10 +73,18 @@
                         </tr>
                         <tr class="hover:bg-gray-200">
                             <td class="border">
-                                <input type="number" :value="Math.round(((((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100))) / (((challenge.financial_before.operator_performance / 100) * ((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time)))) * (1 - (challenge.financial_before.defective / 100 )))) * 100) / 100" class="form-control finclass" placeholder="0" disabled="disabled"/>
+                                <input type="number"
+                                       :value="Math.round(((((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100))) / (((challenge.financial_before.operator_performance / 100) * ((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time)))) * (1 - (challenge.financial_before.defective / 100 )))) * 100) / 100"
+                                       class="form-control finclass"
+                                       placeholder="0"
+                                       disabled="disabled"/>
                             </td>
                             <td class="border">
-                                <input type="number" :value="Math.round(((((solution.financial_after.days)*(solution.financial_after.shifts)*(solution.financial_after.shift_time)+(solution.financial_after.weekend_shift)*50*(solution.financial_after.shift_time))*(solution.financial_after.operator_cost / 160)*(solution.financial_after.number_of_operators)*(1+(solution.financial_after.absence / 100))) / (((solution.financial_after.operator_performance / 100) * ((solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time)))) * (1 - (solution.financial_after.defective / 100 )))) * 100) / 100" class="form-control finclass" placeholder="0" disabled="disabled"/>
+                                <input type="number"
+                                       :value="Math.round(((((solution.financial_after.days)*(solution.financial_after.shifts)*(solution.financial_after.shift_time)+(solution.financial_after.weekend_shift)*50*(solution.financial_after.shift_time))*(solution.financial_after.operator_cost / 160)*(solution.financial_after.number_of_operators)*(1+(solution.financial_after.absence / 100))) / (((solution.financial_after.operator_performance / 100) * ((solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time)))) * (1 - (solution.financial_after.defective / 100 )))) * 100) / 100"
+                                       class="form-control finclass"
+                                       placeholder="0"
+                                       disabled="disabled"/>
                             </td>
                             <td class="border">
                                 <input type="number" :value="Math.round(((((((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100))) / (((challenge.financial_before.operator_performance / 100) * ((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time)))) * (1 - (challenge.financial_before.defective / 100 )))))-(((((solution.financial_after.days)*(solution.financial_after.shifts)*(solution.financial_after.shift_time)+(solution.financial_after.weekend_shift)*50*(solution.financial_after.shift_time))*(solution.financial_after.operator_cost / 160)*(solution.financial_after.number_of_operators)*(1+(solution.financial_after.absence / 100))) / (((solution.financial_after.operator_performance / 100) * ((solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time)))) * (1 - (solution.financial_after.defective / 100 ))))))/(((((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100))) / (((challenge.financial_before.operator_performance / 100) * ((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time)))) * (1 - (challenge.financial_before.defective / 100 ))))) * 100 * 100) / 100" class="form-control finclass" placeholder="0" disabled="disabled"/>
@@ -75,7 +99,11 @@
                         </tr>
                         <tr class="hover:bg-gray-200">
                             <td class="border">
-                                <input type="number" :value="Math.round(((((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100))) - (((solution.financial_after.days)*(solution.financial_after.shifts)*(solution.financial_after.shift_time)+(solution.financial_after.weekend_shift)*50*(solution.financial_after.shift_time))*(solution.financial_after.operator_cost / 160)*(solution.financial_after.number_of_operators)*(1+(solution.financial_after.absence / 100))))/12 * 100) / 100" class="form-control finclass" placeholder="0" disabled="disabled"/>
+                                <input type="number"
+                                       :value="Math.round(((((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100))) - (((solution.financial_after.days)*(solution.financial_after.shifts)*(solution.financial_after.shift_time)+(solution.financial_after.weekend_shift)*50*(solution.financial_after.shift_time))*(solution.financial_after.operator_cost / 160)*(solution.financial_after.number_of_operators)*(1+(solution.financial_after.absence / 100))))/12 * 100) / 100"
+                                       class="form-control finclass"
+                                       placeholder="0"
+                                       disabled="disabled"/>
                             </td>
                             <td class="border">
 
@@ -93,7 +121,11 @@
                         </tr>
                         <tr class="hover:bg-gray-200">
                             <td class="border">
-                                <input type="number" :value="Math.round(((((((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100))) / (((challenge.financial_before.operator_performance / 100) * ((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time)))) * (1 - (challenge.financial_before.defective / 100 ))))) - (((((solution.financial_after.days)*(solution.financial_after.shifts)*(solution.financial_after.shift_time)+(solution.financial_after.weekend_shift)*50*(solution.financial_after.shift_time))*(solution.financial_after.operator_cost / 160)*(solution.financial_after.number_of_operators)*(1+(solution.financial_after.absence / 100))) / (((solution.financial_after.operator_performance / 100) * ((solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time)))) * (1 - (solution.financial_after.defective / 100 )))))) * 100) / 100" class="form-control finclass" placeholder="0" disabled="disabled"/>
+                                <input type="number"
+                                       :value="Math.round(((((((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100))) / (((challenge.financial_before.operator_performance / 100) * ((challenge.financial_before.days * challenge.financial_before.shifts * challenge.financial_before.shift_time * 60 + challenge.financial_before.weekend_shift * 50 * 60) - (challenge.financial_before.days * challenge.financial_before.shifts * (challenge.financial_before.breakfast + challenge.financial_before.stop_time) + challenge.financial_before.weekend_shift * 50 * (challenge.financial_before.breakfast + challenge.financial_before.stop_time)))) * (1 - (challenge.financial_before.defective / 100 ))))) - (((((solution.financial_after.days)*(solution.financial_after.shifts)*(solution.financial_after.shift_time)+(solution.financial_after.weekend_shift)*50*(solution.financial_after.shift_time))*(solution.financial_after.operator_cost / 160)*(solution.financial_after.number_of_operators)*(1+(solution.financial_after.absence / 100))) / (((solution.financial_after.operator_performance / 100) * ((solution.financial_after.days * solution.financial_after.shifts * solution.financial_after.shift_time * 60 + solution.financial_after.weekend_shift * 50 * 60) - (solution.financial_after.days * solution.financial_after.shifts * (solution.financial_after.breakfast + solution.financial_after.stop_time) + solution.financial_after.weekend_shift * 50 * (solution.financial_after.breakfast + solution.financial_after.stop_time)))) * (1 - (solution.financial_after.defective / 100 )))))) * 100) / 100"
+                                       class="form-control finclass"
+                                       placeholder="0"
+                                       disabled="disabled"/>
                             </td>
                             <td class="border">
 
@@ -111,7 +143,11 @@
                         </tr>
                         <tr class="hover:bg-gray-200">
                             <td class="border">
-                                <input type="number" :value="Math.round(((((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100))) - (((solution.financial_after.days)*(solution.financial_after.shifts)*(solution.financial_after.shift_time)+(solution.financial_after.weekend_shift)*50*(solution.financial_after.shift_time))*(solution.financial_after.operator_cost / 160)*(solution.financial_after.number_of_operators)*(1+(solution.financial_after.absence / 100))))  * 100) / 100" class="form-control finclass" placeholder="0" disabled="disabled"/>
+                                <input type="number"
+                                       :value="Math.round(((((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100))) - (((solution.financial_after.days)*(solution.financial_after.shifts)*(solution.financial_after.shift_time)+(solution.financial_after.weekend_shift)*50*(solution.financial_after.shift_time))*(solution.financial_after.operator_cost / 160)*(solution.financial_after.number_of_operators)*(1+(solution.financial_after.absence / 100))))  * 100) / 100"
+                                       class="form-control finclass"
+                                       placeholder="0"
+                                       disabled="disabled"/>
                             </td>
                             <td class="border">
 
@@ -165,7 +201,11 @@
                         </tr>
                         <tr class="hover:bg-gray-200">
                             <td class="border" colspan="3">
-                                <input type="number" :value="Math.round(((((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100))) - (((solution.financial_after.days)*(solution.financial_after.shifts)*(solution.financial_after.shift_time)+(solution.financial_after.weekend_shift)*50*(solution.financial_after.shift_time))*(solution.financial_after.operator_cost / 160)*(solution.financial_after.number_of_operators)*(1+(solution.financial_after.absence / 100))))/12 * 100) / 100" class="form-control finclass" placeholder="0" disabled="disabled"/>
+                                <input type="number"
+                                       :value="Math.round(((((challenge.financial_before.days)*(challenge.financial_before.shifts)*(challenge.financial_before.shift_time)+(challenge.financial_before.weekend_shift)*50*(challenge.financial_before.shift_time))*(challenge.financial_before.operator_cost / 160)*(challenge.financial_before.number_of_operators)*(1+(challenge.financial_before.absence / 100))) - (((solution.financial_after.days)*(solution.financial_after.shifts)*(solution.financial_after.shift_time)+(solution.financial_after.weekend_shift)*50*(solution.financial_after.shift_time))*(solution.financial_after.operator_cost / 160)*(solution.financial_after.number_of_operators)*(1+(solution.financial_after.absence / 100))))/12 * 100) / 100"
+                                       class="form-control finclass"
+                                       placeholder="0"
+                                       disabled="disabled"/>
                             </td>
                         </tr>
                         <tr>
@@ -191,7 +231,6 @@
                             <td class="border" colspan="3">
                                 {{Math.round(npv * 100) / 100}}
                             </td>
-
                         </tr>
                         </tbody>
                     </table>
@@ -202,7 +241,7 @@
 </template>
 
 <script>
-import {onMounted, ref, watch, watchEffect} from "vue";
+import {getCurrentInstance, onMounted, reactive, ref, watch, watchEffect} from "vue";
 
 export default {
     name: "FinancialAnalysisDialog",
@@ -210,7 +249,8 @@ export default {
         solution: Object
     },
     setup(props, context) {
-
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const challenge = ref({});
         const capitalCost = ref(12);
         const capex = ref(0);
@@ -218,18 +258,62 @@ export default {
         const okresZwrotuProsty = ref(0);
         const okresZwrotuZdyskontowany = ref(0);
         const npv = ref(0);
+        const financialAnalyses = reactive({
+            cost_per_hour_before: 0,
+            cost_per_hour_after: 0,
+            cost_per_year_before: 0,
+            cost_per_year_after: 0,
+            cost_per_piece_before: 0,
+            cost_per_piece_after: 0,
+            monthly_reduction_before: 0,
+            monthly_reduction_after: 0,
+            tkw_reduction_before: 0,
+            tkw_reduction_after: 0,
+            additional_savings_before: 0,
+            additional_savings_after: 0,
+            monthly_savings_before: 0,
+            simple_payback: 0,
+            npv: 0,
+        });
+
+        emitter.on('financialAnalysesSave', e => {
+            axios.post('/api/solution/financial-analyses/save', {solution_id: props.solution.id, financialAnalyses: financialAnalyses, capitalCost: capitalCost.value, capex: capex.value, timeframe: timeframe.value})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+
+                    }
+                })
+        });
 
 
         onMounted(() => {
-            getChallenge();
+            getChallenge((cb) =>{
+                financialAnalysesFunction();
+            });
         });
-
+        watch([challenge.value, props.solution, okresZwrotuProsty.value, npv.value], (newValues, prevValues) => {
+            financialAnalysesFunction();
+        })
 
         watch([capitalCost, capex, timeframe], (newValues, prevValues) => {
             npvFunction();
         })
 
-
+        const financialAnalysesFunction = () => {
+            financialAnalyses.cost_per_hour_before = Math.round(challenge.value.financial_before.operator_cost / 160 * 100) / 100;
+            financialAnalyses.cost_per_hour_after = Math.round(props.solution.financial_after.operator_cost / 160 * 100) / 100;
+            financialAnalyses.cost_per_year_before = Math.round(((challenge.value.financial_before.days)*(challenge.value.financial_before.shifts)*(challenge.value.financial_before.shift_time)+(challenge.value.financial_before.weekend_shift)*50*(challenge.value.financial_before.shift_time))*(challenge.value.financial_before.operator_cost / 160)*(challenge.value.financial_before.number_of_operators)*(1+(challenge.value.financial_before.absence / 100)) * 100) / 100;
+            financialAnalyses.cost_per_year_after = Math.round(((props.solution.financial_after.days)*(props.solution.financial_after.shifts)*(props.solution.financial_after.shift_time)+(props.solution.financial_after.weekend_shift)*50*(props.solution.financial_after.shift_time))*(props.solution.financial_after.operator_cost / 160)*(props.solution.financial_after.number_of_operators)*(1+(props.solution.financial_after.absence / 100)) * 100) / 100;
+            financialAnalyses.cost_per_piece_before = Math.round(((((challenge.value.financial_before.days)*(challenge.value.financial_before.shifts)*(challenge.value.financial_before.shift_time)+(challenge.value.financial_before.weekend_shift)*50*(challenge.value.financial_before.shift_time))*(challenge.value.financial_before.operator_cost / 160)*(challenge.value.financial_before.number_of_operators)*(1+(challenge.value.financial_before.absence / 100))) / (((challenge.value.financial_before.operator_performance / 100) * ((challenge.value.financial_before.days * challenge.value.financial_before.shifts * challenge.value.financial_before.shift_time * 60 + challenge.value.financial_before.weekend_shift * 50 * 60) - (challenge.value.financial_before.days * challenge.value.financial_before.shifts * (challenge.value.financial_before.breakfast + challenge.value.financial_before.stop_time) + challenge.value.financial_before.weekend_shift * 50 * (challenge.value.financial_before.breakfast + challenge.value.financial_before.stop_time)))) * (1 - (challenge.value.financial_before.defective / 100 )))) * 100) / 100;
+            financialAnalyses.cost_per_piece_after =Math.round(((((props.solution.financial_after.days)*(props.solution.financial_after.shifts)*(props.solution.financial_after.shift_time)+(props.solution.financial_after.weekend_shift)*50*(props.solution.financial_after.shift_time))*(props.solution.financial_after.operator_cost / 160)*(props.solution.financial_after.number_of_operators)*(1+(props.solution.financial_after.absence / 100))) / (((props.solution.financial_after.operator_performance / 100) * ((props.solution.financial_after.days * props.solution.financial_after.shifts * props.solution.financial_after.shift_time * 60 + props.solution.financial_after.weekend_shift * 50 * 60) - (props.solution.financial_after.days * props.solution.financial_after.shifts * (props.solution.financial_after.breakfast + props.solution.financial_after.stop_time) + props.solution.financial_after.weekend_shift * 50 * (props.solution.financial_after.breakfast + props.solution.financial_after.stop_time)))) * (1 - (props.solution.financial_after.defective / 100 )))) * 100) / 100;
+            financialAnalyses.monthly_reduction_before =Math.round(((((challenge.value.financial_before.days)*(challenge.value.financial_before.shifts)*(challenge.value.financial_before.shift_time)+(challenge.value.financial_before.weekend_shift)*50*(challenge.value.financial_before.shift_time))*(challenge.value.financial_before.operator_cost / 160)*(challenge.value.financial_before.number_of_operators)*(1+(challenge.value.financial_before.absence / 100))) - (((props.solution.financial_after.days)*(props.solution.financial_after.shifts)*(props.solution.financial_after.shift_time)+(props.solution.financial_after.weekend_shift)*50*(props.solution.financial_after.shift_time))*(props.solution.financial_after.operator_cost / 160)*(props.solution.financial_after.number_of_operators)*(1+(props.solution.financial_after.absence / 100))))/12 * 100) / 100;
+            financialAnalyses.tkw_reduction_before =Math.round(((((((challenge.value.financial_before.days)*(challenge.value.financial_before.shifts)*(challenge.value.financial_before.shift_time)+(challenge.value.financial_before.weekend_shift)*50*(challenge.value.financial_before.shift_time))*(challenge.value.financial_before.operator_cost / 160)*(challenge.value.financial_before.number_of_operators)*(1+(challenge.value.financial_before.absence / 100))) / (((challenge.value.financial_before.operator_performance / 100) * ((challenge.value.financial_before.days * challenge.value.financial_before.shifts * challenge.value.financial_before.shift_time * 60 + challenge.value.financial_before.weekend_shift * 50 * 60) - (challenge.value.financial_before.days * challenge.value.financial_before.shifts * (challenge.value.financial_before.breakfast + challenge.value.financial_before.stop_time) + challenge.value.financial_before.weekend_shift * 50 * (challenge.value.financial_before.breakfast + challenge.value.financial_before.stop_time)))) * (1 - (challenge.value.financial_before.defective / 100 ))))) - (((((props.solution.financial_after.days)*(props.solution.financial_after.shifts)*(props.solution.financial_after.shift_time)+(props.solution.financial_after.weekend_shift)*50*(props.solution.financial_after.shift_time))*(props.solution.financial_after.operator_cost / 160)*(props.solution.financial_after.number_of_operators)*(1+(props.solution.financial_after.absence / 100))) / (((props.solution.financial_after.operator_performance / 100) * ((props.solution.financial_after.days * props.solution.financial_after.shifts * props.solution.financial_after.shift_time * 60 + props.solution.financial_after.weekend_shift * 50 * 60) - (props.solution.financial_after.days * props.solution.financial_after.shifts * (props.solution.financial_after.breakfast + props.solution.financial_after.stop_time) + props.solution.financial_after.weekend_shift * 50 * (props.solution.financial_after.breakfast + props.solution.financial_after.stop_time)))) * (1 - (props.solution.financial_after.defective / 100 )))))) * 100) / 100;
+            financialAnalyses.additional_savings_before =Math.round(((((challenge.value.financial_before.days)*(challenge.value.financial_before.shifts)*(challenge.value.financial_before.shift_time)+(challenge.value.financial_before.weekend_shift)*50*(challenge.value.financial_before.shift_time))*(challenge.value.financial_before.operator_cost / 160)*(challenge.value.financial_before.number_of_operators)*(1+(challenge.value.financial_before.absence / 100))) - (((props.solution.financial_after.days)*(props.solution.financial_after.shifts)*(props.solution.financial_after.shift_time)+(props.solution.financial_after.weekend_shift)*50*(props.solution.financial_after.shift_time))*(props.solution.financial_after.operator_cost / 160)*(props.solution.financial_after.number_of_operators)*(1+(props.solution.financial_after.absence / 100))))  * 100) / 100;
+            financialAnalyses.monthly_savings_before =Math.round(((((challenge.value.financial_before.days)*(challenge.value.financial_before.shifts)*(challenge.value.financial_before.shift_time)+(challenge.value.financial_before.weekend_shift)*50*(challenge.value.financial_before.shift_time))*(challenge.value.financial_before.operator_cost / 160)*(challenge.value.financial_before.number_of_operators)*(1+(challenge.value.financial_before.absence / 100))) - (((props.solution.financial_after.days)*(props.solution.financial_after.shifts)*(props.solution.financial_after.shift_time)+(props.solution.financial_after.weekend_shift)*50*(props.solution.financial_after.shift_time))*(props.solution.financial_after.operator_cost / 160)*(props.solution.financial_after.number_of_operators)*(1+(props.solution.financial_after.absence / 100))))/12 * 100) / 100;
+            financialAnalyses.simple_payback = Math.round(okresZwrotuProsty.value * 100) / 100;
+            financialAnalyses.npv = Math.round(npv.value * 100) / 100;
+        }
 
         const npvFunction = () =>  {
             const cashFlow = [];
@@ -290,7 +374,7 @@ export default {
             console.log([cashFlow, wacc, dcf, scf, rtp, sdcf, drtp]);
         }
 
-        const getChallenge = () => {
+        const getChallenge = (cb) => {
             axios.post('/api/challenge/user/get/card', {id: props.solution.challenge_id})
                 .then(response => {
                     // console.log(response.data)
@@ -299,11 +383,13 @@ export default {
                         console.log(response.data.payload);
                         console.log(JSON.parse(response.data.payload.save_json));
                         challenge.value = response.data.payload;
+                        cb();
                     }
                 })
         }
 
         return {
+            financialAnalyses,
             challenge,
             timeframe,
             capex,

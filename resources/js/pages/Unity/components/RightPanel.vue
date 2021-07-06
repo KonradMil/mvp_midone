@@ -183,6 +183,10 @@ export default {
                 console.log('HERE IMPORTA');
                 console.log({layers: line.value});
                 emitter.emit('rightpanelaction', { action: 'updateLine', data:{layers: line.value}, json: true });
+            } else if (content.value === 'financial-analysis') {
+                emitter.emit('financialAnalysesSave', {});
+            } else if (content.value === 'operationalanalysis') {
+                emitter.emit('operationalAnalysesSave', {});
             }
             hidePanel();
         }
