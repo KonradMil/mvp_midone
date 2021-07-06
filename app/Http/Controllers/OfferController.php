@@ -30,6 +30,8 @@ class OfferController extends Controller
             $offers = $challenge->offers()->orderBy('time_to_start', 'DESC')->with('solution')->get();
         }else if($option === 'NPV'){
             $offers = $challenge->offers()->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('financial_analyses as fa', 'fa.solution_id', '=', 'so.id')->with('solution', 'solution.financial_analyses')->orderBy('fa.npv', 'DESC')->get();
+        }else if($option === 'OEE po robotyzacji'){
+            $offers = $challenge->offers()->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('operational_analyses as oa', 'oa.solution_id', '=', 'so.id')->with('solution')->orderBy('oa.oee_after', 'DESC')->get();
         }
 
         return response()->json([
