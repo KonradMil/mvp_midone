@@ -185,8 +185,7 @@ export default {
     props: {
         edit_offer_id: Number,
         solution_id: Number,
-        challenge_id: Number,
-        solution_save: String
+        challenge_id: Number
     },
     setup(props) {
         const app = getCurrentInstance();
@@ -207,6 +206,7 @@ export default {
         const offer_expires_in = ref(30);
         const period_of_support = ref('');
         const solution_robots = ref([]);
+        const solution_save = ref({});
 
         const toast = useToast();
         const values = require('../../../json/offer_values.json');
@@ -218,6 +218,18 @@ export default {
         emitter.on('changeToOfferAdd', e => () => {
             getOffer(e.id);
         });
+
+        const getSolution = () => {
+            axios.post('/api/solution/get/unity', {id: props.solution_id})
+                .then(response => {
+                    if (response.data.success) {
+                        solution_save.value = JSON.parse(response.data.payload.save_json);
+                        segregateRobots();
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        };
 
         const save = () => {
             axios.post('/api/offer/save', {
@@ -252,7 +264,7 @@ export default {
         }
 
         const segregateRobots = () => {
-            JSON.parse(props.solution_save).forEach((obj) => {
+            solution_save.valueforEach((obj) => {
                 if(obj.category == 1) {
                     solution_robots.value.push(obj);
                 }
@@ -263,7 +275,7 @@ export default {
         onMounted(() => {
             if(props.edit_offer_id != undefined){
                    getOffer();
-                   segregateRobots();
+                getSolution();
             }
         });
 
