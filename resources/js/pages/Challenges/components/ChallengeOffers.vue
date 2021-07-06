@@ -48,7 +48,6 @@
                 valueProp="value"
                 :options="filters['options']"
             />
-            <button class="btn btn-primary shadow-md mr-2" @click="StartFilterOffer">Szukaj</button>
         </div>
         <div v-if="offers.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie ma jeszcze żadnych ofert.
@@ -221,6 +220,9 @@ export default {
 
         watch(() => filterType.value, (first, second) => {
             StartFilterOffer();
+            if(filterType.value === null){
+                getChallengeOffersRepositories();
+            }
         }, {})
 
         const switchTab = () => {
