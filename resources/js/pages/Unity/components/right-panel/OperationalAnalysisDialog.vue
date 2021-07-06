@@ -296,7 +296,8 @@ export default {
         onMounted(() => {
             console.log(operationalAnalyses.time_available_before + '-> time_avaible_before');
             getChallenge();
-            operationalAnalysesFunction();
+            // operationalAnalysesFunction();
+            console.log(challenge.value.financial_before.days + '-> challenge.value.finnancial_before.days');
             console.log(operationalAnalyses.time_available_before + '-> time_avaible_before');
         });
 
