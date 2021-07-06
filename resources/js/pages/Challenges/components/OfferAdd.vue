@@ -220,18 +220,10 @@ export default {
         });
 
         const getSolution = () => {
-            axios.post('/api/solution/get/unity', {id: props.solution_id})
+            axios.post('/api/solution/robots', {id: props.solution_id})
                 .then(response => {
                     if (response.data.success) {
-                        let c = JSON.parse(response.data.payload.save_json);
-                        console.log(c.parts);
-                        c.parts.forEach((obj) => {
-                            console.log(obj);
-                            if(obj.category == 1) {
-                                solution_robots.value.push(obj);
-                            }
-                        })
-                        // segregateRobots();
+                      console.log(response.data.payload)
                     } else {
                         // toast.error(response.data.message);
                     }

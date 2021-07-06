@@ -112,9 +112,9 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
     Route::post('user/delete', [ReportController::class, 'deleteReport']);
     Route::post('files/store', [ReportController::class, 'storeFile']);
 });
-Route::post('solution/robots', [SolutionController::class, 'getRobots']);
-Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
 
+Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('solution/robots', [SolutionController::class, 'getRobots']);
     Route::post('filter', [SolutionController::class, 'deleteSolutionsNull']);
     Route::post('user/get/archive', [SolutionController::class, 'getUserSolutionsArchive']);
     Route::post('accept', [SolutionController::class, 'acceptSolution']);
