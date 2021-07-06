@@ -185,7 +185,8 @@ export default {
     props: {
         edit_offer_id: Number,
         solution_id: Number,
-        challenge_id: Number
+        challenge_id: Number,
+        solution_save: String
     },
     setup(props) {
         const app = getCurrentInstance();
@@ -205,6 +206,7 @@ export default {
         const work_hour_price = ref(0);
         const offer_expires_in = ref(30);
         const period_of_support = ref('');
+        const solution_robots = ref([]);
 
         const toast = useToast();
         const values = require('../../../json/offer_values.json');
@@ -249,9 +251,19 @@ export default {
             })
         }
 
+        const segregateRobots = () => {
+            JSON.parse(props.solution_save).forEach((obj) => {
+                if(obj.category == 1) {
+                    solution_robots.value.push(obj);
+                }
+            });
+
+        };
+
         onMounted(() => {
             if(props.edit_offer_id != undefined){
                    getOffer();
+                   segregateRobots();
             }
         });
 
@@ -300,7 +312,8 @@ export default {
             period_of_support,
             save,
             values,
-            offer_expires_in
+            offer_expires_in,
+            solution_robots
         }
     }
 }
