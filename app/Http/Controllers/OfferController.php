@@ -21,7 +21,7 @@ class OfferController extends Controller
         $id = $request->input('id');
         $challenge = Challenge::find($id);
         $offers = NULL;
-
+        $array = [];
         if($option === 'Cena-max'){
             $offers = $challenge->offers()->orderBy('price_of_delivery', 'DESC')->with('solution')->get();
         }else if($option === 'Cena-min'){
@@ -34,10 +34,21 @@ class OfferController extends Controller
 //                $financial_analyses = FinancialAnalysis::find($solution->id);
 //                $offersForFilter = $solutions->offers();
 //            }
-            $offersForFilter = $challenge->offers();
-
-            $offers = $offersForFilter->solution->financial_analyses()->orderBy('npv', 'DESC')->with('solution')->get();
+//`
+//            $offersForFilter = $challenge->offers();
+//            $offers = $offersForFilter->solution->financial_analyses()->orderBy('npv', 'DESC')->with('solution')->get();
 //            $offers = $challenge->offers()->orderBy('time_to_start', 'DESC')->with('solution')->get();
+        $solutions = $challenge->solutions()->with('financial_analyses')->orderBy('financial_analyses.npv', 'DESC')->get();
+        foreach($solutions as $solution){
+            $array[] = $solution->offers;
+        }
+//        foreach($solutions as $solution){
+//            $offers = $solution->offers;
+//            foreach($offers as $offer){
+//                $array[] = $offer->with('solution');
+//                $offersQuery = $solution->offers()->with('solution')->get();
+//            }
+//         }
         }
 
         return response()->json([
