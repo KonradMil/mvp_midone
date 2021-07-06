@@ -176,7 +176,7 @@
                         <div class="intro-y col-span-12 sm:col-span-12" >
                             <Multiselect
                                 class="form-control"
-                                v-model="Robots"
+                                v-model="selected_robot"
                                 mode="single"
                                 label="name"
                                 max="1"
@@ -236,7 +236,7 @@ export default {
         const solution_robots = ref([]);
         const solution_save = ref({});
         const Robots = ref([]);
-
+        const selected_robot = ref({});
 
         const toast = useToast();
         const values = require('../../../json/offer_values.json');
@@ -344,6 +344,7 @@ export default {
         }
 
         return {
+            selected_robot,
             Robots,
             addRobot,
             price_of_delivery,
