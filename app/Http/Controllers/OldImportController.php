@@ -25,7 +25,7 @@ class OldImportController extends Controller
     {
 
         $challenges = OldChallenge::get();
-        dump($challenges);
+        dd($challenges);
         foreach ($challenges as $challenge) {
             $nc = Challenge::where('name', '=', $challenge->name)->first();
             dump($challenge->files);
