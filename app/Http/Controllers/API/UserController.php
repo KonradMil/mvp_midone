@@ -54,7 +54,7 @@ class UserController extends Controller
         $pr->token = $token;
         $pr->save();
 
-        Mail::to($request->email)->send(new ForgotPassword($request->email, $token));
+        Mail::to($pr->email)->queue(new ForgotPassword($pr->email, $token));
 
         return response()->json([
             'success' => true,
