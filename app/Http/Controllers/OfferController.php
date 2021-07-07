@@ -149,9 +149,9 @@ class OfferController extends Controller
             ]);
         } else {
             $check = new Offer();
-
-            $j = json_decode($request->data['solution_robots']['data'], true);
-            $check->robots = json_encode($j);
+            dd($request);
+//            $j = json_decode($request->data['solution_robots']['data'], true);
+//            $check->robots = json_encode($j);
             $check->challenge_id = $request->challenge_id;
             $check->solution_id = $request->solution_id;
             $check->installer_id = Auth::user()->id;
