@@ -112,7 +112,7 @@ class OldImportController extends Controller
 //            }
             }
         }catch (Exception $e) {
-            dd($challenge);
+            dd([$challenge, $e]);
         }
 
 
