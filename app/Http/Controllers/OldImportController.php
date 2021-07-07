@@ -249,10 +249,19 @@ class OldImportController extends Controller
 
                 $nq = new Question();
                 $nq->question = $q->question;
-                $nq->answer = $q->answer;
+                $nq->answer = NULL;
                 $nq->author_id = $nu->id;
                 $nq->challenge_id = $nc->id;
                 $nq->save();
+
+                if(!empty($q->answer)) {
+                    $na = new Question();
+                    $na->question = $q->answer;
+                    $na->answer = $nq->id;
+                    $na->author_id = $nu->id;
+                    $na->challenge_id = $nc->id;
+                    $na->save();
+                }
             } catch (\Exception $e) {
 
             }
