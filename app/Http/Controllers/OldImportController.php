@@ -74,28 +74,33 @@ class OldImportController extends Controller
                 $financial->cycle_time = $fin->cycle_time;
                 $financial->save();
 
-                foreach ($challenge->solutions as $so) {
-                    $ns = Solution::where('name', '=', $so->name)->first();
-                    if($ns != NULL) {
-                        $fins = OldFinancial::where('id', '=', $so->financial_after_id)->first();
-                        if($fins != NULL) {
-                            $financialNew = Financial::where('id', '=', $so->financial_after_id )->first();
-                            $financialNew->days = $fins->days;
-                            $financialNew->shifts = $fins->shifts;
-                            $financialNew->shift_time = $fins->shift_time;
-                            $financialNew->weekend_shift = $fins->weekend_shift;
-                            $financialNew->breakfast = $fins->breakfast;
-                            $financialNew->stop_time = $fins->stop_time;
-                            $financialNew->operator_performance = $fins->operator_performance;
-                            $financialNew->defective = $fins->defective;
-                            $financialNew->number_of_operators = $fins->number_of_operators;
-                            $financialNew->operator_cost = $fins->operator_cost;
-                            $financialNew->absence = $fins->absence;
-                            $financialNew->cycle_time = $fins->cycle_time;
-                            $financialNew->save();
+                try {
+                    foreach ($challenge->solutions as $so) {
+                        $ns = Solution::where('name', '=', $so->name)->first();
+                        if($ns != NULL) {
+                            $fins = OldFinancial::where('id', '=', $so->financial_after_id)->first();
+                            if($fins != NULL) {
+                                $financialNew = Financial::where('id', '=', $so->financial_after_id )->first();
+                                $financialNew->days = $fins->days;
+                                $financialNew->shifts = $fins->shifts;
+                                $financialNew->shift_time = $fins->shift_time;
+                                $financialNew->weekend_shift = $fins->weekend_shift;
+                                $financialNew->breakfast = $fins->breakfast;
+                                $financialNew->stop_time = $fins->stop_time;
+                                $financialNew->operator_performance = $fins->operator_performance;
+                                $financialNew->defective = $fins->defective;
+                                $financialNew->number_of_operators = $fins->number_of_operators;
+                                $financialNew->operator_cost = $fins->operator_cost;
+                                $financialNew->absence = $fins->absence;
+                                $financialNew->cycle_time = $fins->cycle_time;
+                                $financialNew->save();
+                            }
                         }
                     }
+                }catch (Exception $e) {
+                    dd([$so, $e]);
                 }
+
 
                 //            if($nc != NULL) {
 //                foreach ($challenge->files as $o) {
