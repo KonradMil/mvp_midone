@@ -120,24 +120,24 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function saveRobot(Request $request)
-    {
-        $solution = Solution::find($request->input('solution_id'));
-        $save = json_decode($solution->save_json);
-        $id = $request->input('robot_id');
-        foreach ($save->parts as $part) {
-            $model = UnityModel::find($id);
-            if($model->category != NULL) {
-                $model->guarantee_period = $request->input('guarantee_period');
-                $model->save();
-            }
-        }
-        return response()->json([
-            'success' => true,
-            'message' => 'Zapisano poprawnie.',
-            'payload' => $model
-        ]);
-    }
+//    public function saveRobot(Request $request)
+//    {
+//        $solution = Solution::find($request->input('solution_id'));
+//        $save = json_decode($solution->save_json);
+//        $id = $request->input('robot_id');
+////        foreach ($save->parts as $part) {
+////            $model = UnityModel::find($id);
+////            if($model->category != NULL) {
+////                $model->guarantee_period = $request->input('guarantee_period');
+////                $model->save();
+////            }
+////        }
+//        return response()->json([
+//            'success' => true,
+//            'message' => 'Zapisano poprawnie.',
+//            'payload' => $model
+//        ]);
+//    }
 
     public function getRobots(Request $request)
     {
