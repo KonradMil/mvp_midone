@@ -76,21 +76,24 @@ class OldImportController extends Controller
 
                 foreach ($challenge->solutions as $so) {
                     $ns = Solution::where('name', '=', $so->name)->first();
-                    $fins = OldFinancial::where('id', '=', $so->financial_after_id)->first();
-                    $financialNew = $ns->financial_after;
-                    $financialNew->days = $fins->days;
-                    $financialNew->shifts = $fins->shifts;
-                    $financialNew->shift_time = $fins->shift_time;
-                    $financialNew->weekend_shift = $fins->weekend_shift;
-                    $financialNew->breakfast = $fins->breakfast;
-                    $financialNew->stop_time = $fins->stop_time;
-                    $financialNew->operator_performance = $fins->operator_performance;
-                    $financialNew->defective = $fins->defective;
-                    $financialNew->number_of_operators = $fins->number_of_operators;
-                    $financialNew->operator_cost = $fins->operator_cost;
-                    $financialNew->absence = $fins->absence;
-                    $financialNew->cycle_time = $fins->cycle_time;
-                    $financialNew->save();
+                    if($ns != NULL) {
+                        $fins = OldFinancial::where('id', '=', $so->financial_after_id)->first();
+                        $financialNew = $ns->financial_after;
+                        $financialNew->days = $fins->days;
+                        $financialNew->shifts = $fins->shifts;
+                        $financialNew->shift_time = $fins->shift_time;
+                        $financialNew->weekend_shift = $fins->weekend_shift;
+                        $financialNew->breakfast = $fins->breakfast;
+                        $financialNew->stop_time = $fins->stop_time;
+                        $financialNew->operator_performance = $fins->operator_performance;
+                        $financialNew->defective = $fins->defective;
+                        $financialNew->number_of_operators = $fins->number_of_operators;
+                        $financialNew->operator_cost = $fins->operator_cost;
+                        $financialNew->absence = $fins->absence;
+                        $financialNew->cycle_time = $fins->cycle_time;
+                        $financialNew->save();
+                    }
+
                 }
 
                 //            if($nc != NULL) {
