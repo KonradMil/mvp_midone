@@ -58,7 +58,7 @@ class OldImportController extends Controller
                     $tech->number_of_lines = array_search($challenge->select_number_of_lines, $select_number_of_lines);
                     $tech->cycle_time = array_search($challenge->select_cycle_time, $select_cycle_time);
                     $tech->work_shifts = array_search($challenge->select_work_shifts, $select_work_shifts);
-                    dd($tech);
+                    dd([$tech, $challenge]);
                     $tech->save();
 
 //                    $fin = OldFinancial::where('id', '=', $challenge->financial_before_id)->first();
