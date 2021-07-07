@@ -109,12 +109,12 @@ class OldImportController extends Controller
 //        dd($a);
 //
 
-        $challenges = Challenge::get();
-        foreach ($challenges as $challenge) {
-            $tech = new TechnicalDetails();
-            $tech->challenge_id = $challenge->id;
-            $tech->save();
-        }
+//        $challenges = Challenge::get();
+//        foreach ($challenges as $challenge) {
+//            $tech = new TechnicalDetails();
+//            $tech->challenge_id = $challenge->id;
+//            $tech->save();
+//        }
 
         $challenges = OldChallenge::get();
         foreach ($challenges as $challenge) {
@@ -237,26 +237,26 @@ class OldImportController extends Controller
 //        }
 
 
-//        $oldQ = OldQuestion::get();
-//
-//        foreach ($oldQ as $q) {
-//            try {
-//                $ou = OldUser::where('id', '=', $q->author_id)->first();
-//                $oc = OldChallenge::where('id', '=', $q->challenge_id)->first();
-//
-//                $nu = User::where('email', '=', $ou->email)->first();
-//                $nc = Challenge::where('name', '=', $oc->name)->first();
-//
-//                $nq = new Question();
-//                $nq->question = $q->question;
-//                $nq->answer = $q->answer;
-//                $nq->author_id = $nu->id;
-//                $nq->challenge_id = $nc->id;
-//                $nq->save();
-//            } catch (\Exception $e) {
-//
-//            }
-//
-//        }
+        $oldQ = OldQuestion::get();
+
+        foreach ($oldQ as $q) {
+            try {
+                $ou = OldUser::where('id', '=', $q->author_id)->first();
+                $oc = OldChallenge::where('id', '=', $q->challenge_id)->first();
+
+                $nu = User::where('email', '=', $ou->email)->first();
+                $nc = Challenge::where('name', '=', $oc->name)->first();
+
+                $nq = new Question();
+                $nq->question = $q->question;
+                $nq->answer = $q->answer;
+                $nq->author_id = $nu->id;
+                $nq->challenge_id = $nc->id;
+                $nq->save();
+            } catch (\Exception $e) {
+
+            }
+
+        }
     }
 }
