@@ -12,6 +12,14 @@ class OldFile extends Model
     public $table = 'aiods_files';
     protected $connection = 'old';
 
+    protected $fillable = [
+        'name', 'ext', 'original_name', 'path', 'thumbnail', 'size', 'alt', 'tags'
+    ];
+
+    protected $casts = [
+        'tags' => 'array'
+    ];
+
 
     public function challenge()
     {
