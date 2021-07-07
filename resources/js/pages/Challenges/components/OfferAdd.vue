@@ -183,7 +183,7 @@
                                 :placeholder="selected_robot === '' ? 'select' : selected_robot"
                                 valueProp="value"
                                 :track-by="trackBy"
-                                :options="solution_robots"
+                                :options="filters['options']"
                             />
                         </div>
                     </div>
@@ -239,6 +239,7 @@ export default {
         const Robots = ref([]);
         const selected_robot = ref({});
         const trackBy = ref('name');
+        const filters = require('../../../json/offer_filters.json');
 
         const toast = useToast();
         const values = require('../../../json/offer_values.json');
@@ -346,6 +347,7 @@ export default {
         }
 
         return {
+            filters,
             trackBy,
             selected_robot,
             Robots,
