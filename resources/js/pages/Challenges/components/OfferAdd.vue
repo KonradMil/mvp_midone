@@ -272,7 +272,7 @@ export default {
         }
 
         const saveRobot = async (robot_id) => {
-            axios.post('api/solution/save/robot', {robot_id: robot_id, solution_id: props.solution_id, guarantee_period: guarantee_period.value})
+            axios.post('/api/solution/save/robot', {robot_id: robot_id, solution_id: props.solution_id, guarantee_period: guarantee_period.value})
                 .then(response => {
                     if (response.data.success) {
                         isDisabled.value = true;
