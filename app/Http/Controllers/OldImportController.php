@@ -28,7 +28,7 @@ class OldImportController extends Controller
     {
 
         $challenges = OldChallenge::get();
-        try {
+
             foreach ($challenges as $challenge) {
                 $nc = Challenge::where('name', '=', $challenge->name)->first();
                 $tech = $nc->technicalDetails;
@@ -123,9 +123,7 @@ class OldImportController extends Controller
 //                }
 //            }
             }
-        }catch (Exception $e) {
-            dd([$challenge, $e]);
-        }
+
 
 
 
