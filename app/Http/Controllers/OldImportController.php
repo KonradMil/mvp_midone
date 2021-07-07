@@ -16,6 +16,7 @@ use App\Models\Team;
 use App\Models\TechnicalDetails;
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -33,15 +34,15 @@ class OldImportController extends Controller
             foreach ($challenge->files as $o) {
                 $ofile = OldFile::where('id', '=', $o->file_id)->first();
                 try {
-                        $file = new File();
-                        $name = $ofile->name . '.' .$ofile->ext;
-                        $file->name = $name;
-                        $file->ext = $ofile->ext;
-                        $file->path = 's3/screenshots/' . $name;
-                        $file->original_name = $ofile->name;
-                        $file->save();
-                        $nc->files()->attach($file);
-                }catch (\Exception $e) {
+                    $file = new File();
+                    $name = $ofile->name . '.' . $ofile->ext;
+                    $file->name = $name;
+                    $file->ext = $ofile->ext;
+                    $file->path = 's3/screenshots/' . $name;
+                    $file->original_name = $ofile->name;
+                    $file->save();
+                    $nc->files()->attach($file);
+                } catch (Exception $e) {
                     dd($ofile);
                 }
 
@@ -146,7 +147,6 @@ class OldImportController extends Controller
 
 //            Storage::disk('s3')->putFileAs('screenshots', $request->file, $fileName);
 //        $request->file->move(public_path('uploads'), $fileName);
-
 
 
 //        $challenges = OldChallenge::get();
