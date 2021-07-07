@@ -192,7 +192,7 @@
                             Okres gwarancji robota {{obj.name}}
                         </label>
                         <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                            <Slider v-model="solution_robots[index].guarantee_period" :min="0" :max="10" :step="2" style="width: 100%;"/>
+                            <Slider v-model="solution_robots[index].guarantee_period" :min="0" :max="10" :step="1" style="width: 100%;"/>
                         </div>
                     </div>
                 </div>
