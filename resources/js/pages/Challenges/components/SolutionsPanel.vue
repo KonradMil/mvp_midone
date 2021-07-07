@@ -7,6 +7,18 @@
                     <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.solutions')}}</h2>
                 </div>
                 <div class="px-5 py-5">
+                    <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+                        <Multiselect
+                            class="form-control"
+                            v-model="filterType"
+                            mode="single"
+                            label="name"
+                            max="1"
+                            :placeholder="filterType === '' ? 'select' : filterType"
+                            valueProp="value"
+                            :options="filters['options']"
+                        />
+                    </div>
                     <div v-if="challenge.solutions.length == 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
                         {{$t('challengesMain.noSolutions')}}.
                         <div v-if="user.type == 'integrator'">
@@ -40,10 +52,12 @@ import {computed, getCurrentInstance, onMounted, reactive, ref} from "vue";
 import {useToast} from "vue-toastification";
 import router from "../../../router";
 import SingleSolutionPost from "../../../components/SingleSolutionPost";
+import Multiselect from '@vueform/multiselect';
+
 
 export default {
     name: "SolutionsPanel",
-    components: {SingleSolutionPost},
+    components: {SingleSolutionPost, Multiselect},
     props: {
         challenge: Object,
         inTeam: Boolean,
@@ -52,6 +66,7 @@ export default {
     setup(props) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
+        const filters = require('../../../json/offer_filters.json');
         const challenge = computed(() => {
             return props.challenge;
         });
@@ -60,6 +75,7 @@ export default {
         const user = window.Laravel.user;
         const guard = ref(false);
         const solutions = ref([]);
+        const filterType = ref('');
 
         emitter.on('deletesolution', e => {
             solutions.value.splice(e.index, 1);
@@ -151,7 +167,9 @@ export default {
             unfollow,
             user,
             addSolution,
-            filterMember
+            filterMember,
+            filterType,
+            filters
         }
     }
 }
