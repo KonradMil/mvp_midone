@@ -111,12 +111,10 @@ export default {
             axios.post('/api/solution/user/filter', {option: filterType.value , id: props.challenge.id})
                 .then(response => {
                     if (response.data.success) {
-                        console.log('filterType->' + filterType.value);
-                        console.log('props.challenge.id->' + props.challenge.id);
-                        console.log('response.data->' + response.data.payload);
                         solutions.value = response.data.payload;
+                        toast.success('Success!');
                     } else {
-
+                        toast.error('Erro!');
                     }
                 })
         }

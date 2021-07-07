@@ -34,9 +34,9 @@ class SolutionController extends Controller
         $challenge = Challenge::find($id);
         $solutions = NULL;
         if($option === 'Cena-max'){
-            $solutions = $challenge->solutions()->orderBy('sum', 'DESC')->with('solution')->get();
+            $solutions = $challenge->solutions()->orderBy('estimate.sum', 'DESC')->get();
         }else if($option === 'Cena-min'){
-            $solutions = $challenge->solutions()->orderBy('sum', 'ASC')->with('solution')->get();
+            $solutions = $challenge->solutions()->orderBy('estimate.sum', 'ASC')->get();
         }
 
         return response()->json([
