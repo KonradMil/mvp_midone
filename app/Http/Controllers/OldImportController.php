@@ -30,23 +30,82 @@ class OldImportController extends Controller
 
         foreach ($challenges as $challenge) {
             $nc = Challenge::where('name', '=', $challenge->name)->first();
-            if($nc != NULL) {
-                foreach ($challenge->files as $o) {
-                    $ofile = OldFile::where('id', '=', $o->file_id)->first();
-                    try {
-                        $file = new File();
-                        $name = $ofile->name . '.' . $ofile->ext;
-                        $file->name = $name;
-                        $file->ext = $ofile->ext;
-                        $file->path = 's3/screenshots/' . $name;
-                        $file->original_name = $ofile->name;
-                        $file->save();
-                        $nc->files()->attach($file);
-                    } catch (Exception $e) {
-                        dd($ofile);
-                    }
-                }
+            $tech = $nc->technicalDetails;
+            $financial = $nc->financial_before;
+            $select_detail_weight = [1, 3, 5, 15, 200];
+            $select_pick_quality = [1, 2, 3, 4];
+            $select_detail_material = [1, 2, 3, 4, 10];
+            $select_detail_size = [1, 2, 3, 4, 5];
+            $select_detail_pick = [1, 2, 3, 4];
+            $select_detail_position = [1, 2];
+            $select_detail_range = [1, 2, 3, 4, 5];
+            $select_detail_destination = [1, 2, 3];
+            $select_number_of_lines = [1, 2, 3, 4, 5];
+            $select_cycle_time = [5, 7, 12, 20, 60];
+            $select_work_shifts = [1, 2, 3];
+
+            $tech->select_detail_weight = array_search($challenge->select_detail_weight, $select_detail_weight);
+            $tech->select_detail_material = array_search($challenge->select_detail_material, $select_detail_material);
+            $tech->select_pick_quality = array_search($challenge->select_pick_quality, $select_pick_quality);
+            $tech->select_detail_size = array_search($challenge->select_detail_size, $select_detail_size);
+            $tech->select_detail_pick = array_search($challenge->select_detail_pick, $select_detail_pick);
+            $tech->select_detail_position = array_search($challenge->select_detail_position, $select_detail_position);
+            $tech->select_detail_range = array_search($challenge->select_detail_range, $select_detail_range);
+            $tech->select_detail_destination = array_search($challenge->select_detail_destination, $select_detail_destination);
+            $tech->select_number_of_lines = array_search($challenge->select_number_of_lines, $select_number_of_lines);
+            $tech->select_cycle_time = array_search($challenge->select_cycle_time, $select_cycle_time);
+            $tech->select_work_shifts = array_search($challenge->select_work_shifts, $select_work_shifts);
+            $tech->save();
+
+            $financial->days = $challenge->financial_before->days;
+            $financial->shifts = $challenge->financial_before->shifts;
+            $financial->shift_time = $challenge->financial_before->shift_time;
+            $financial->weekend_shift = $challenge->financial_before->weekend_shift;
+            $financial->breakfast = $challenge->financial_before->breakfast;
+            $financial->stop_time = $challenge->financial_before->stop_time;
+            $financial->operator_performance = $challenge->financial_before->operator_performance;
+            $financial->defective = $challenge->financial_before->defective;
+            $financial->number_of_operators = $challenge->financial_before->number_of_operators;
+            $financial->operator_cost = $challenge->financial_before->operator_cost;
+            $financial->absence = $challenge->financial_before->absence;
+            $financial->cycle_time = $challenge->financial_before->cycle_time;
+            $financial->save();
+
+            foreach ($challenge->solutions as $so) {
+                $ns = Solution::where('name', '=', $so->name)->first();
+                $financialNew = $ns->financial_after;
+                $financialNew->days = $so->financial_after->days;
+                $financialNew->shifts = $so->financial_after->shifts;
+                $financialNew->shift_time = $so->financial_aftere->shift_time;
+                $financialNew->weekend_shift = $so->financial_after->weekend_shift;
+                $financialNew->breakfast = $so->financial_after->breakfast;
+                $financialNew->stop_time = $so->financial_after->stop_time;
+                $financialNew->operator_performance = $so->financial_after->operator_performance;
+                $financialNew->defective = $so->financial_after->defective;
+                $financialNew->number_of_operators = $so->financial_after->number_of_operators;
+                $financialNew->operator_cost = $so->financial_after->operator_cost;
+                $financialNew->absence = $so->financial_after->absence;
+                $financialNew->cycle_time = $so->financial_after->cycle_time;
+                $financialNew->save();
             }
+
+            //            if($nc != NULL) {
+//                foreach ($challenge->files as $o) {
+//                    $ofile = OldFile::where('id', '=', $o->file_id)->first();
+//                    try {
+//                        $file = new File();
+//                        $name = $ofile->name . '.' . $ofile->ext;
+//                        $file->name = $name;
+//                        $file->ext = $ofile->ext;
+//                        $file->path = 's3/screenshots/' . $name;
+//                        $file->original_name = $ofile->name;
+//                        $file->save();
+//                        $nc->files()->attach($file);
+//                    } catch (Exception $e) {
+//                        dd($ofile);
+//                    }
+//                }
+//            }
         }
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,6 +25,11 @@ class OldSolution extends Model
     public function teams()
     {
         return $this->belongsToMany(OldTeam::class, 'teams_solutions', 'team_id', 'solution_id');
+    }
+
+    public function financial_after()
+    {
+        return $this->belongsTo(OldFinancial::class, 'solution_id');
     }
 
     public function installer()
