@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
 use App\Models\Estimate;
 use App\Models\FinancialAnalysis;
+use App\Models\Offer;
 use App\Models\OperationalAnalysis;
 use App\Models\Solutions\Solution;
 use App\Models\File;
@@ -141,12 +142,21 @@ class SolutionController extends Controller
     public function getRobots(Request $request)
     {
         $solution = Solution::find($request->input('id'));
-        $save = json_decode($solution->save_json);
-        $robots = [];
-        foreach ($save->parts as $part) {
-            $model = UnityModel::find($part->model->model_id);
-            if($model->category == 1) {
-                $robots[] = $model;
+        if(!empty($request->input('offer_id')))
+        {
+            $offer = Offer::find($request->input('offer_id'));
+            $robots = json_decode($offer->robots);
+
+        }   else {
+            $save = json_decode($solution->save_json);
+            $robots = [];
+            foreach ($save->parts as $part) {
+                $model = UnityModel::find($part->model->model_id);
+                $model->guarantee_period = 0;
+                if($model->category == 1) {
+
+                    $robots[] = $model;
+                }
             }
         }
         return response()->json([

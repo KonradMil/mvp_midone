@@ -300,7 +300,7 @@ export default {
         }
 
         const getSolution = () => {
-            axios.post('/api/solution/robots', {id: props.solution_id})
+            axios.post('/api/solution/robots', {id: props.solution_id, offer_id: props.edit_offer_id})
                 .then(response => {
                     if (response.data.success) {
                       // console.log(response.data.payload)
