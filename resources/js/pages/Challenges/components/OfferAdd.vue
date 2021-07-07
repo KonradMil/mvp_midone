@@ -174,17 +174,29 @@
                             Okres ważności oferty w dniach
                         </label>
                         <div class="intro-y col-span-12 sm:col-span-12" >
-                            <Multiselect
-                                class="form-control"
-                                v-model="selected_robot"
-                                mode="single"
-                                label="name"
-                                max="1"
-                                :placeholder="selected_robot === '' ? 'select' : selected_robot"
-                                valueProp="value"
-                                :track-by="trackBy"
-                                :options="solution_robots"
-                            />
+                            <Multiselect v-model="selected_robot"
+                                         :options="solution_robots"
+                                         :multiple="true"
+                                         group-values="libs"
+                                         group-label="language"
+                                         :group-select="true"
+                                         placeholder="Type to search"
+                                         track-by="name"
+                                         label="name">
+                                <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
+                            </Multiselect>
+                            <pre class="language-json"><code>{{ selected_robot  }}</code></pre>
+<!--                            <Multiselect-->
+<!--                                class="form-control"-->
+<!--                                v-model="selected_robot"-->
+<!--                                mode="single"-->
+<!--                                label="name"-->
+<!--                                max="1"-->
+<!--                                :placeholder="selected_robot === '' ? 'select' : selected_robot"-->
+<!--                                valueProp="value"-->
+<!--                                :track-by="trackBy"-->
+<!--                                :options="solution_robots"-->
+<!--                            />-->
                         </div>
                     </div>
                     <template v-for="(obj, index) in Robots">
