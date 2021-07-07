@@ -30,23 +30,22 @@ class OldImportController extends Controller
 
         foreach ($challenges as $challenge) {
             $nc = Challenge::where('name', '=', $challenge->name)->first();
-
-            foreach ($challenge->files as $o) {
-                $ofile = OldFile::where('id', '=', $o->file_id)->first();
-                try {
-                    $file = new File();
-                    $name = $ofile->name . '.' . $ofile->ext;
-                    $file->name = $name;
-                    $file->ext = $ofile->ext;
-                    $file->path = 's3/screenshots/' . $name;
-                    $file->original_name = $ofile->name;
-                    $file->save();
-                    $nc->files()->attach($file);
-                } catch (Exception $e) {
-                    dd($ofile);
+            if($nc != NULL) {
+                foreach ($challenge->files as $o) {
+                    $ofile = OldFile::where('id', '=', $o->file_id)->first();
+                    try {
+                        $file = new File();
+                        $name = $ofile->name . '.' . $ofile->ext;
+                        $file->name = $name;
+                        $file->ext = $ofile->ext;
+                        $file->path = 's3/screenshots/' . $name;
+                        $file->original_name = $ofile->name;
+                        $file->save();
+                        $nc->files()->attach($file);
+                    } catch (Exception $e) {
+                        dd($ofile);
+                    }
                 }
-
-
             }
         }
 
