@@ -55,7 +55,7 @@ class OldImportController extends Controller
                     $tech->detail_position = array_search($challenge->detail_position, $select_detail_position);
                     $tech->detail_range = array_search($challenge->detail_range, $select_detail_range);
                     $tech->detail_destination = array_search($challenge->detail_destination, $select_detail_destination);
-                    $tech->number_of_lines = array_search($challenge->number_of_lines, $select_number_of_lines);
+                    $tech->number_of_lines = $challenge->number_of_lines;
                     $tech->cycle_time = array_search($challenge->cycle_time, $select_cycle_time);
                     $tech->work_shifts = array_search($challenge->work_shifts, $select_work_shifts);
 //                    dd([$tech, $challenge]);
