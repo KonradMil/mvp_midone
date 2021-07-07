@@ -7,6 +7,7 @@ use App\Models\File;
 use App\Models\Financial;
 use App\Models\OldChallenge;
 use App\Models\OldFile;
+use App\Models\OldFinancial;
 use App\Models\OldQuestion;
 use App\Models\OldTeam;
 use App\Models\OldUser;
@@ -57,18 +58,20 @@ class OldImportController extends Controller
                 $tech->work_shifts = array_search($challenge->select_work_shifts, $select_work_shifts);
                 $tech->save();
 
-                $financial->days = $challenge->financial_before->days;
-                $financial->shifts = $challenge->financial_before->shifts;
-                $financial->shift_time = $challenge->financial_before->shift_time;
-                $financial->weekend_shift = $challenge->financial_before->weekend_shift;
-                $financial->breakfast = $challenge->financial_before->breakfast;
-                $financial->stop_time = $challenge->financial_before->stop_time;
-                $financial->operator_performance = $challenge->financial_before->operator_performance;
-                $financial->defective = $challenge->financial_before->defective;
-                $financial->number_of_operators = $challenge->financial_before->number_of_operators;
-                $financial->operator_cost = $challenge->financial_before->operator_cost;
-                $financial->absence = $challenge->financial_before->absence;
-                $financial->cycle_time = $challenge->financial_before->cycle_time;
+                $fin = OldFinancial::where('id', '=', $challenge->financial_before_id);
+
+                $financial->days = $fin->days;
+                $financial->shifts = $fin->shifts;
+                $financial->shift_time = $fin->shift_time;
+                $financial->weekend_shift = $fin->weekend_shift;
+                $financial->breakfast = $fin->breakfast;
+                $financial->stop_time = $fin->stop_time;
+                $financial->operator_performance = $fin->operator_performance;
+                $financial->defective = $fin->defective;
+                $financial->number_of_operators = $fin->number_of_operators;
+                $financial->operator_cost = $fin->operator_cost;
+                $financial->absence = $fin->absence;
+                $financial->cycle_time = $fin->cycle_time;
                 $financial->save();
 
                 foreach ($challenge->solutions as $so) {
