@@ -192,7 +192,7 @@
                             Okres gwarancji robota {{obj.name}}
                         </label>
                         <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                            <Slider v-model="guarantee_period" :min="0" :max="15" style="width: 100%;" @change="saveRobot(obj.id)"/>
+                            <Slider v-model="solution_robots[index].guarantee_period" :min="0" :max="10" :step="0.5" style="width: 100%;"/>
                         </div>
 <!--                            <a class="flex items-center text-theme-6" @click.prevent="saveRobot(obj.id)" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal">-->
 <!--                                <Edit2Icon class="w-4 h-4 mr-2"/> Zapisz </a>-->
