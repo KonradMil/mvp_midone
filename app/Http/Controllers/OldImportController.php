@@ -59,20 +59,22 @@ class OldImportController extends Controller
                 $tech->save();
 
                 $fin = OldFinancial::where('id', '=', $challenge->financial_before_id)->first();
+                if($fin != NULL) {
+                    $financial->days = $fin->days;
+                    $financial->shifts = $fin->shifts;
+                    $financial->shift_time = $fin->shift_time;
+                    $financial->weekend_shift = $fin->weekend_shift;
+                    $financial->breakfast = $fin->breakfast;
+                    $financial->stop_time = $fin->stop_time;
+                    $financial->operator_performance = $fin->operator_performance;
+                    $financial->defective = $fin->defective;
+                    $financial->number_of_operators = $fin->number_of_operators;
+                    $financial->operator_cost = $fin->operator_cost;
+                    $financial->absence = $fin->absence;
+                    $financial->cycle_time = $fin->cycle_time;
+                    $financial->save();
+                }
 
-                $financial->days = $fin->days;
-                $financial->shifts = $fin->shifts;
-                $financial->shift_time = $fin->shift_time;
-                $financial->weekend_shift = $fin->weekend_shift;
-                $financial->breakfast = $fin->breakfast;
-                $financial->stop_time = $fin->stop_time;
-                $financial->operator_performance = $fin->operator_performance;
-                $financial->defective = $fin->defective;
-                $financial->number_of_operators = $fin->number_of_operators;
-                $financial->operator_cost = $fin->operator_cost;
-                $financial->absence = $fin->absence;
-                $financial->cycle_time = $fin->cycle_time;
-                $financial->save();
 
                 try {
                     foreach ($challenge->solutions as $so) {
