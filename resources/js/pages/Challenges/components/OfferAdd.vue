@@ -188,7 +188,7 @@
 <!--                        </div>-->
 <!--                    </div>-->
                     <div class="intro-y col-span-12 sm:col-span-6 mt-2" v-for="(obj, index) in solution_robots">
-                        <label :for="'input-wizard-' + index" class="form-label">
+                        <label :for="'input-wizard-' + index" class="form-label pb-5">
                             Okres gwarancji robota {{obj.name}}
                         </label>
                         <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
