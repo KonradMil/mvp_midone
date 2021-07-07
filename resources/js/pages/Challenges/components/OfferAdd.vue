@@ -182,7 +182,7 @@
                                 max="1"
                                 :placeholder="selected_robot === '' ? 'select' : selected_robot"
                                 valueProp="value"
-                                :options="solution_robots"
+                                :options="solution_robots['name']"
                             />
                         </div>
                     </div>
