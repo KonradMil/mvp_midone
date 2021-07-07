@@ -47,18 +47,18 @@ class OldImportController extends Controller
                     $select_cycle_time = [5, 7, 12, 20, 60];
                     $select_work_shifts = [1, 2, 3];
 
-                    $tech->detail_weight = array_search($challenge->select_detail_weight, $select_detail_weight);
-                    $tech->detail_material = array_search($challenge->select_detail_material, $select_detail_material);
-                    $tech->pick_quality = array_search($challenge->select_pick_quality, $select_pick_quality);
-                    $tech->detail_size = array_search($challenge->select_detail_size, $select_detail_size);
-                    $tech->detail_pick = array_search($challenge->select_detail_pick, $select_detail_pick);
-                    $tech->detail_position = array_search($challenge->select_detail_position, $select_detail_position);
-                    $tech->detail_range = array_search($challenge->select_detail_range, $select_detail_range);
-                    $tech->detail_destination = array_search($challenge->select_detail_destination, $select_detail_destination);
-                    $tech->number_of_lines = array_search($challenge->select_number_of_lines, $select_number_of_lines);
-                    $tech->cycle_time = array_search($challenge->select_cycle_time, $select_cycle_time);
-                    $tech->work_shifts = array_search($challenge->select_work_shifts, $select_work_shifts);
-                    dd([$tech, $challenge]);
+                    $tech->detail_weight = array_search($challenge->detail_weight, $select_detail_weight);
+                    $tech->detail_material = array_search($challenge->detail_material, $select_detail_material);
+                    $tech->pick_quality = array_search($challenge->pick_quality, $select_pick_quality);
+                    $tech->detail_size = array_search($challenge->detail_size, $select_detail_size);
+                    $tech->detail_pick = array_search($challenge->detail_pick, $select_detail_pick);
+                    $tech->detail_position = array_search($challenge->detail_position, $select_detail_position);
+                    $tech->detail_range = array_search($challenge->detail_range, $select_detail_range);
+                    $tech->detail_destination = array_search($challenge->detail_destination, $select_detail_destination);
+                    $tech->number_of_lines = array_search($challenge->number_of_lines, $select_number_of_lines);
+                    $tech->cycle_time = array_search($challenge->cycle_time, $select_cycle_time);
+                    $tech->work_shifts = array_search($challenge->work_shifts, $select_work_shifts);
+//                    dd([$tech, $challenge]);
                     $tech->save();
 
 //                    $fin = OldFinancial::where('id', '=', $challenge->financial_before_id)->first();
