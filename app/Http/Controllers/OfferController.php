@@ -10,6 +10,7 @@ use App\Models\Challenges\Challenge;
 use App\Models\FinancialAnalysis;
 use App\Models\Offer;
 use App\Models\Solutions\Solution;
+use App\Models\UnityModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,7 @@ class OfferController extends Controller
         $id = $request->input('id');
         $challenge = Challenge::find($id);
         $offers = NULL;
-
+        $sum = 0;
         if($option === 'Cena-max'){
             $offers = $challenge->offers()->orderBy('price_of_delivery', 'DESC')->with('solution')->get();
         }else if($option === 'Cena-min'){
@@ -32,6 +33,9 @@ class OfferController extends Controller
             $offers = $challenge->offers()->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('financial_analyses as fa', 'fa.solution_id', '=', 'so.id')->orderBy('fa.npv', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
         }else if($option === 'OEE po robotyzacji'){
             $offers = $challenge->offers()->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('operational_analyses as oa', 'oa.solution_id', '=', 'so.id')->orderBy('oa.oee_after', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
+        }else if($option === 'Okres gwarancji robota'){
+            $offers = $challenge->offers;
+
         }
 
         return response()->json([
@@ -149,6 +153,13 @@ class OfferController extends Controller
             ]);
         } else {
             $check = new Offer();
+            $c = 0;
+            $sum = 0;
+            foreach ($request->solution_robots as $robot) {
+                $c++;
+                $sum += $robot->guarantee_period;
+            }
+            $check->avg_guarantee = (float)($sum/$c);
             $check->robots = json_encode($request->solution_robots);
             $check->challenge_id = $request->challenge_id;
             $check->solution_id = $request->solution_id;
