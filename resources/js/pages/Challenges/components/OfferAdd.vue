@@ -169,23 +169,11 @@
                         </label>
                         <input type="number" class="form-control" v-model="offer_expires_in"/>
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">
-                        <label for="input-wizard-13" class="form-label">
-                            Okres ważności oferty w dniach
-                        </label>
-                        <div class="intro-y col-span-12 sm:col-span-12" >
-                            <Multiselect v-model="selected_robot"
-                                         :options="solution_robots"
-                                         :multiple="true"
-                                         group-values="libs"
-                                         group-label="language"
-                                         :group-select="true"
-                                         placeholder="Type to search"
-                                         track-by="name"
-                                         label="name">
-                                <span slot="noResult">Oops! No elements found. Consider changing the search query.</span>
-                            </Multiselect>
-                            <pre class="language-json"><code>{{ selected_robot  }}</code></pre>
+<!--                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">-->
+<!--                        <label for="input-wizard-13" class="form-label">-->
+<!--                            Okres ważności oferty w dniach-->
+<!--                        </label>-->
+<!--                        <div class="intro-y col-span-12 sm:col-span-12" >-->
 <!--                            <Multiselect-->
 <!--                                class="form-control"-->
 <!--                                v-model="selected_robot"-->
@@ -197,7 +185,13 @@
 <!--                                :track-by="trackBy"-->
 <!--                                :options="solution_robots"-->
 <!--                            />-->
-                        </div>
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="intro-y col-span-12 sm:col-span-6 mt-2" v-for="(obj, index) in solution_robots">
+                        <label for="input-wizard-13" class="form-label">
+                            Nazwa robota {{obj.name}}
+                        </label>
+                        <input type="number" class="form-control" v-model="obj.guarantee_period"/>
                     </div>
                     <template v-for="(obj, index) in Robots">
                         <div class="intro-y col-span-12 sm:col-span-6 mt-2" >
