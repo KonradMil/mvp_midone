@@ -28,10 +28,10 @@ class OldImportController extends Controller
 
         foreach ($challenges as $challenge) {
             $nc = Challenge::where('name', '=', $challenge->name)->first();
-            print_r($challenge->files);
+            var_dump($challenge->files);
 
             foreach ($challenge->files as $ofile) {
-                print_r($ofile);
+                var_dump($ofile);
                 $file = new File();
                 $name = $ofile->name . '.' .$ofile->ext;
                 $file->name = $name;
