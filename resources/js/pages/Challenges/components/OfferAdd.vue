@@ -207,8 +207,12 @@
 <script>
 import {getCurrentInstance, onMounted, ref} from "vue";
 import {useToast} from "vue-toastification";
+import Multiselect from '@vueform/multiselect';
 
 export default {
+    components: {
+        Multiselect
+    },
     name: "OfferAdd",
     props: {
         edit_offer_id: Number,
