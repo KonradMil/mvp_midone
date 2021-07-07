@@ -251,9 +251,7 @@ export default {
         const work_hour_price = ref(0);
         const offer_expires_in = ref(30);
         const period_of_support = ref('');
-        const solution_robots = ref({
-            guarantee_period: ''
-        });
+        const solution_robots = ref([]);
         const solution_save = ref({});
         const Robots = ref([]);
         const selected_robot = ref('');
