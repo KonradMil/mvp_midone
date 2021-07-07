@@ -191,9 +191,11 @@
                         <label :for="'input-wizard-' + index" class="form-label">
                             Okres gwarancji robota {{obj.name}}
                         </label>
-                        <input type="number" class="form-control" v-model="guarantee_period"/>
-                            <a class="flex items-center text-theme-6" @click.prevent="saveRobot(obj.id)" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal">
-                                <Edit2Icon class="w-4 h-4 mr-2"/> Zapisz </a>
+                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                            <Slider v-model="guarantee_period" :min="0" :max="15" style="width: 100%;" @change="saveRobot(obj.id)"/>
+                        </div>
+<!--                            <a class="flex items-center text-theme-6" @click.prevent="saveRobot(obj.id)" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal">-->
+<!--                                <Edit2Icon class="w-4 h-4 mr-2"/> Zapisz </a>-->
                     </div>
                     <template v-for="(obj, index) in Robots">
                         <div class="intro-y col-span-12 sm:col-span-6 mt-2" >
@@ -217,10 +219,13 @@
 import {getCurrentInstance, onMounted, ref} from "vue";
 import {useToast} from "vue-toastification";
 import Multiselect from '@vueform/multiselect';
+import Slider from '@vueform/slider'
+
 
 export default {
     components: {
-        Multiselect
+        Multiselect,
+        Slider
     },
     name: "OfferAdd",
     props: {
@@ -255,6 +260,7 @@ export default {
         const isDisabled = ref(false);
         const toast = useToast();
         const values = require('../../../json/offer_values.json');
+        const gridSize = ref('');
 
         emitter.on('offerSelected', e => () => {
             getOffer(e.offer_id);
@@ -263,6 +269,8 @@ export default {
         emitter.on('changeToOfferAdd', e => () => {
             getOffer(e.id);
         });
+
+
 
         const addRobot = () => {
             Robots.value.push({
@@ -379,6 +387,7 @@ export default {
         }
 
         return {
+            gridSize,
             saveRobot,
             isDisabled,
             guarantee_period,
