@@ -194,20 +194,7 @@
                         <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
                             <Slider v-model="solution_robots[index].guarantee_period" :min="0" :max="10" :step="0.5" style="width: 100%;"/>
                         </div>
-<!--                            <a class="flex items-center text-theme-6" @click.prevent="saveRobot(obj.id)" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal">-->
-<!--                                <Edit2Icon class="w-4 h-4 mr-2"/> Zapisz </a>-->
                     </div>
-                    <template v-for="(obj, index) in Robots">
-                        <div class="intro-y col-span-12 sm:col-span-6 mt-2" >
-                            <label :for="'input-wizard-' + index" class="form-label w-1/2">
-                                <input type="text" class="form-control" v-model="obj.name"/>
-                            </label>
-                            <div class="input-group">
-                                <input type="text" v-model="obj.guarantee_period" class="form-control w-1/2" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" placeholder="1" :aria-label="$t('challengesNew.numberSupported')" />
-                                <div class="input-group-text">zł</div>
-                            </div>
-                        </div>
-                    </template>
                 </div>
                 <button class="btn btn-primary w-20 mt-3" @click.prevent="save">{{ $t('profiles.save') }}</button>
             </div>
