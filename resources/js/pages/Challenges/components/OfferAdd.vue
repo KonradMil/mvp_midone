@@ -191,7 +191,10 @@
                         <label for="input-wizard-13" class="form-label">
                             Okres gwarancji robota {{obj.name}}
                         </label>
-                        <input type="number" class="form-control" v-model="obj.guarantee_period"/>
+                        <input type="number" class="form-control" v-model="guarantee_period"/>
+                        <div class="flex justify-center items-center">
+                            <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
+                        </div>
                     </div>
                     <template v-for="(obj, index) in Robots">
                         <div class="intro-y col-span-12 sm:col-span-6 mt-2" >
@@ -249,7 +252,7 @@ export default {
         const Robots = ref([]);
         const selected_robot = ref('');
         const trackBy = ref('name');
-        const filters = require('../../../json/offer_filters.json');
+        const guarantee_period = ref('');
 
         const toast = useToast();
         const values = require('../../../json/offer_values.json');
@@ -357,7 +360,7 @@ export default {
         }
 
         return {
-            filters,
+            guarantee_period,
             trackBy,
             selected_robot,
             Robots,
