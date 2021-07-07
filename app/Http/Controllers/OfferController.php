@@ -155,13 +155,10 @@ class OfferController extends Controller
             $check = new Offer();
             $c = 0;
             $sum = 0;
-            foreach ($request->solution_robots as $robot) {
+            $arrays = $request->solutions_robots;
+            foreach ($arrays as $array) {
                     $c++;
-                    try {
-                        $sum += $robot->guarantee_period;
-                    } catch(Exception $e){
-                           throw new Exception($e);
-                    }
+                    $sum += $array->guarantee_period;
             }
 
             $check->avg_guarantee = (float)($sum/$c);
