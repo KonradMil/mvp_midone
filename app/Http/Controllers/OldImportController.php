@@ -81,6 +81,9 @@ class OldImportController extends Controller
                             $fins = OldFinancial::where('id', '=', $so->financial_after_id)->first();
                             if($fins != NULL) {
                                 $financialNew = Financial::where('id', '=', $so->financial_after_id )->first();
+                                if($financialNew == NULL) {
+                                    dd([$so, $financialNew]);
+                                }
                                 $financialNew->days = $fins->days;
                                 $financialNew->shifts = $fins->shifts;
                                 $financialNew->shift_time = $fins->shift_time;
