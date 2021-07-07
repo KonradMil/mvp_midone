@@ -13,6 +13,7 @@ use App\Models\Solutions\Solution;
 use App\Models\UnityModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mrcnpdlk\Lib\Exception;
 
 class OfferController extends Controller
 {
@@ -156,10 +157,10 @@ class OfferController extends Controller
             $sum = 0;
             foreach ($request->solution_robots as $robot) {
                     $c++;
-                    $sum = $sum + $robot->guarantee_period;
             }
 
-            $check->avg_guarantee = (float)($sum/$c);
+//            $check->avg_guarantee = (float)($sum/$c);
+            $check->avg_guarantee = $c;
             $check->robots = json_encode($request->solution_robots);
             $check->challenge_id = $request->challenge_id;
             $check->solution_id = $request->solution_id;
