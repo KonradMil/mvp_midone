@@ -330,7 +330,8 @@ export default {
                 intervention_price: intervention_price.value,
                 work_hour_price: work_hour_price.value,
                 period_of_support: period_of_support.value,
-                offer_expires_in: offer_expires_in.value
+                offer_expires_in: offer_expires_in.value,
+                solution_robots: solution_robots.value,
             }).then(response => {
                 if (response.data.success) {
                     console.log(response.data + '-> OFFER SAVE !!');

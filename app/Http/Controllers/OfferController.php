@@ -140,6 +140,7 @@ class OfferController extends Controller
             $offer->work_hour_price = $request->work_hour_price;
             $offer->period_of_support = $request->period_of_support;
             $offer->offer_expires_in = $request->offer_expires_in;
+
             $offer->save();
             return response()->json([
                 'success' => true,
@@ -148,6 +149,8 @@ class OfferController extends Controller
             ]);
         } else {
             $check = new Offer();
+            $j = json_decode($request->data['save']['solution_robots'], true);
+            $check->robots = json_encode($j);
             $check->challenge_id = $request->challenge_id;
             $check->solution_id = $request->solution_id;
             $check->installer_id = Auth::user()->id;
