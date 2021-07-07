@@ -173,8 +173,7 @@
                         <label for="input-wizard-13" class="form-label">
                             Okres ważności oferty w dniach
                         </label>
-                        <div class="intro-y col-span-12 sm:col-span-12" >
-                            <Multiselect
+                         <Multiselect
                                 class="form-control"
                                 v-model="selected_robot"
                                 mode="single"
@@ -182,9 +181,7 @@
                                 max="1"
                                 :placeholder="selected_robot === '' ? 'select' : selected_robot"
                                 valueProp="value"
-                                :options="solution_robots"
-                            />
-                        </div>
+                                :options="solution_robots"/>
                     </div>
                     <template v-for="(obj, index) in Robots">
                         <div class="intro-y col-span-12 sm:col-span-6 mt-2" >
