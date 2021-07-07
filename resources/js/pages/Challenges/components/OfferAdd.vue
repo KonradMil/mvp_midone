@@ -182,7 +182,6 @@
                                 max="1"
                                 :placeholder="selected_robot === '' ? 'select' : selected_robot"
                                 valueProp="value"
-                                :track-by="trackBy"
                                 :options="filters['options']"
                             />
                         </div>
