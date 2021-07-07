@@ -23,6 +23,27 @@ class OldImportController extends Controller
 {
     public function import(Request $request)
     {
+
+        $challenges = OldChallenge::get();
+        dump($challenges);
+        foreach ($challenges as $challenge) {
+            $nc = Challenge::where('name', '=', $challenge->name)->first();
+            dump($challenge->files);
+            dump($nc);
+            foreach ($challenge->files as $ofile) {
+                dump($ofile);
+                $file = new File();
+                $name = $ofile->name . '.' .$ofile->ext;
+                $file->name = $name;
+                $file->ext = $ofile->ext;
+                $file->path = 's3/screenshots/' . $name;
+                $file->original_name = $ofile->name;
+                $file->save();
+                $nc->files()->attach($file);
+            }
+        }
+
+
 //        $oldUser = OldUser::get();
 //        foreach ($oldUser as $old) {
 //            $user = new User();
@@ -116,23 +137,7 @@ class OldImportController extends Controller
 //            $tech->save();
 //        }
 
-        $challenges = OldChallenge::get();
-        foreach ($challenges as $challenge) {
-            $nc = Challenge::where('name', '=', $challenge->name)->first();
-            dump($challenge->files);
-            dump($nc);
-            foreach ($challenge->files as $ofile) {
-                dump($ofile);
-                $file = new File();
-                $name = $ofile->name . '.' .$ofile->ext;
-                $file->name = $name;
-                $file->ext = $ofile->ext;
-                $file->path = 's3/screenshots/' . $name;
-                $file->original_name = $ofile->name;
-                $file->save();
-                $nc->files()->attach($file);
-            }
-                }
+
 //            Storage::disk('s3')->putFileAs('screenshots', $request->file, $fileName);
 //        $request->file->move(public_path('uploads'), $fileName);
 
