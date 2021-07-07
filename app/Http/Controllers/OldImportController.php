@@ -58,7 +58,7 @@ class OldImportController extends Controller
                 $tech->work_shifts = array_search($challenge->select_work_shifts, $select_work_shifts);
                 $tech->save();
 
-                $fin = OldFinancial::where('id', '=', $challenge->financial_before_id);
+                $fin = OldFinancial::where('id', '=', $challenge->financial_before_id)->first();
 
                 $financial->days = $fin->days;
                 $financial->shifts = $fin->shifts;
@@ -76,7 +76,7 @@ class OldImportController extends Controller
 
                 foreach ($challenge->solutions as $so) {
                     $ns = Solution::where('name', '=', $so->name)->first();
-                    $fins = OldFinancial::where('id', '=', $so->financial_after_id);
+                    $fins = OldFinancial::where('id', '=', $so->financial_after_id)->first();
                     $financialNew = $ns->financial_after;
                     $financialNew->days = $fins->days;
                     $financialNew->shifts = $fins->shifts;
