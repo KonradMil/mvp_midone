@@ -189,7 +189,7 @@
 <!--                    </div>-->
                     <div class="intro-y col-span-12 sm:col-span-6 mt-2" v-for="(obj, index) in solution_robots">
                         <label for="input-wizard-13" class="form-label">
-                            Nazwa robota {{obj.name}}
+                            Okres gwarancji robota {{obj.name}}
                         </label>
                         <input type="number" class="form-control" v-model="obj.guarantee_period"/>
                     </div>
