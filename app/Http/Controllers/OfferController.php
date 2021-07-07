@@ -160,7 +160,7 @@ class OfferController extends Controller
                     try {
                         $sum += $robot->guarantee_period;
                     } catch(Exception $e){
-
+                           throw new Exception($e);
                     }
             }
 
