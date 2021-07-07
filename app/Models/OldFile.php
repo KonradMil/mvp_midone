@@ -9,12 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class OldFile extends Model
 {
     use HasFactory;
-    public $table = 'dbr_challenge_files';
+    public $table = 'aiods_files';
     protected $connection = 'old';
-    protected $fillable = [
-        'type',
-        'challenge_id', 'file_id'
-    ];
+
 
     public function challenge()
     {
