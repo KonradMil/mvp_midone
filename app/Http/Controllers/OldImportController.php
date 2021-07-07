@@ -29,7 +29,6 @@ class OldImportController extends Controller
 
         foreach ($challenges as $challenge) {
             $nc = Challenge::where('name', '=', $challenge->name)->first();
-            var_dump($challenge->files);
 
             foreach ($challenge->files as $o) {
                 $ofile = OldFile::find($o->file_id);
