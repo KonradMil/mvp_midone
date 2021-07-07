@@ -29,7 +29,7 @@ class OldChallenge extends Model
 
     public function financial_before()
     {
-        return $this->belongsTo(Financial::class);
+        return $this->belongsTo(OldFinancial::class, 'challenge_id');
     }
 
     public function solutions()
