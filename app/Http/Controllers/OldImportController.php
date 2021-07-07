@@ -116,24 +116,25 @@ class OldImportController extends Controller
 //            $tech->save();
 //        }
 
-        $challenges = OldChallenge::get();
-        foreach ($challenges as $challenge) {
-            $nc = Challenge::where('name', '=', $challenge->name)->first();
-            foreach ($challenge->files as $ofile) {
-                $file = new File();
-                $name = $ofile->name . '.' .$ofile->ext;
-                $file->name = $name;
-                $file->ext = $ofile->ext;
-                $file->path = 's3/screenshots/' . $name;
-                $file->original_name = $ofile->name;
-                $file->save();
-                $nc->files()->attach($file);
-            }
+//        $challenges = OldChallenge::get();
+//        foreach ($challenges as $challenge) {
+//            $nc = Challenge::where('name', '=', $challenge->name)->first();
+//            foreach ($challenge->files as $ofile) {
+//                $file = new File();
+//                $name = $ofile->name . '.' .$ofile->ext;
+//                $file->name = $name;
+//                $file->ext = $ofile->ext;
+//                $file->path = 's3/screenshots/' . $name;
+//                $file->original_name = $ofile->name;
+//                $file->save();
+//                $nc->files()->attach($file);
+//            }
+        //        }
 //            Storage::disk('s3')->putFileAs('screenshots', $request->file, $fileName);
 //        $request->file->move(public_path('uploads'), $fileName);
 
 
-        }
+
 //        $challenges = OldChallenge::get();
 //        foreach ($challenges as $challenge) {
 //            try {
