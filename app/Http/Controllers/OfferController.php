@@ -149,7 +149,6 @@ class OfferController extends Controller
             ]);
         } else {
             $check = new Offer();
-            $j = json_decode($request->data['solution_robots']['data'], true);
             $check->robots = json_encode($request->solution_robots);
             $check->challenge_id = $request->challenge_id;
             $check->solution_id = $request->solution_id;
