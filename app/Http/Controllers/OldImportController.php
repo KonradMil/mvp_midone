@@ -32,7 +32,7 @@ class OldImportController extends Controller
 
             foreach ($challenge->files as $ofile) {
                 var_dump($ofile);
-                if(!empty(!$ofile->name)) {
+                if(!empty(!$ofile->name) && !empty(!$ofile->ext)) {
                     $file = new File();
                     $name = $ofile->name . '.' .$ofile->ext;
                     $file->name = $name;
