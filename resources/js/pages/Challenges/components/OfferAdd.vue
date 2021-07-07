@@ -192,9 +192,7 @@
                             Okres gwarancji robota {{obj.name}}
                         </label>
                         <input type="number" class="form-control" v-model="guarantee_period"/>
-                        <div class="flex justify-center items-center">
-                            <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
-                        </div>
+                            <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"><Edit2Icon class="w-4 h-4 mr-2"/> Edytuj </a>
                     </div>
                     <template v-for="(obj, index) in Robots">
                         <div class="intro-y col-span-12 sm:col-span-6 mt-2" >
