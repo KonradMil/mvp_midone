@@ -192,7 +192,7 @@
                             Okres gwarancji robota {{obj.name}}
                         </label>
                         <input type="number" class="form-control" v-model="guarantee_period"/>
-                            <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal">
+                            <a class="flex items-center text-theme-6" @click.prevent="saveRobot(obj.id)" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal">
                                 <Edit2Icon class="w-4 h-4 mr-2"/> Zapisz </a>
                     </div>
                     <template v-for="(obj, index) in Robots">
@@ -252,7 +252,7 @@ export default {
         const selected_robot = ref('');
         const trackBy = ref('name');
         const guarantee_period = ref('');
-
+        const isDisabled = ref(false);
         const toast = useToast();
         const values = require('../../../json/offer_values.json');
 
@@ -269,6 +269,26 @@ export default {
                 name: 'Dodaj robot',
                 price: 0
             });
+        }
+
+        const saveRobot = async (robot_id) => {
+            axios.post('api/solution/save/robot', {robot_id: robot_id, solution_id: props.solution_id, guarantee_period: guarantee_period.value})
+                .then(response => {
+                    if (response.data.success) {
+                        isDisabled.value = true;
+                        toast.success(response.data.message);
+                        setTimeout(() =>{
+                            isDisabled.value = false;
+                        }, 2000);
+
+                    } else {
+                        isDisabled.value = true;
+                        toast.error(response.data.message);
+                        setTimeout(() =>{
+                            isDisabled.value = false;
+                        }, 2000);
+                    }
+                })
         }
 
         const getSolution = () => {
@@ -359,6 +379,8 @@ export default {
         }
 
         return {
+            saveRobot,
+            isDisabled,
             guarantee_period,
             trackBy,
             selected_robot,

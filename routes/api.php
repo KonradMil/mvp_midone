@@ -115,6 +115,7 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
 
 Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
     Route::post('robots', [SolutionController::class, 'getRobots']);
+    Route::post('save/robot', [SolutionController::class, 'saveRobot']);
     Route::post('filter', [SolutionController::class, 'deleteSolutionsNull']);
     Route::post('user/get/archive', [SolutionController::class, 'getUserSolutionsArchive']);
     Route::post('accept', [SolutionController::class, 'acceptSolution']);
