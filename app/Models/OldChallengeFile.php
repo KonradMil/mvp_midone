@@ -24,6 +24,6 @@ class OldChallengeFile extends Model
 
     public function file()
     {
-        return $this->belongsTo(OldFile::class);
+        return $this->belongsTo(OldFile::class, 'file_id');
     }
 }
