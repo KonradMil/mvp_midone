@@ -28,10 +28,10 @@ class OldImportController extends Controller
 
         foreach ($challenges as $challenge) {
             $nc = Challenge::where('name', '=', $challenge->name)->first();
-            dump($challenge->files);
-            dump($nc);
+            print_r($challenge->files);
+
             foreach ($challenge->files as $ofile) {
-                dump($ofile);
+                print_r($ofile);
                 $file = new File();
                 $name = $ofile->name . '.' .$ofile->ext;
                 $file->name = $name;
@@ -81,7 +81,7 @@ class OldImportController extends Controller
 //        $oldTeam = OldTeam::get();
 //
 //        foreach ($oldTeam as $team) {
-//           dump($team->users);
+//           print_r($team->users);
 //        }
 //
 //        $oldUser = OldUser::get();
@@ -105,7 +105,7 @@ class OldImportController extends Controller
 //                $nu = User::where('email', '=', $ou->email)->first();
 //                $nu->teams()->attach($nt);
 //            }catch (\Exception $e) {
-//                dump($e);
+//                print_r($e);
 //
 //                dd([$ou, $ot, $rel]);
 //            }
@@ -151,13 +151,13 @@ class OldImportController extends Controller
 //                    $nc->status = 1;
 //                    $nc->save();
 //                }
-////                dump($challenge->teams);
+////                print_r($challenge->teams);
 ////                foreach ($challenge->teams as $t) {
 ////                    $nt = Team::where('name', '=', $t->name)->first();
 ////                    $nc->teams()->attach($nt);
 ////                }
 //            }catch (\Exception $e) {
-//                dump($e);
+//                print_r($e);
 //            }
 //        }
 //        $oldTeam = OldTeam::get();
