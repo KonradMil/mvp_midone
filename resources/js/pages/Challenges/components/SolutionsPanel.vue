@@ -7,7 +7,7 @@
                     <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.solutions')}}</h2>
                 </div>
                 <div class="px-5 py-5">
-                    <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+                    <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="user.type == 'investor'">
                         <Multiselect
                             class="form-control"
                             v-model="filterType"
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import {computed, getCurrentInstance, onMounted, reactive, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, reactive, ref, watch} from "vue";
 import {useToast} from "vue-toastification";
 import router from "../../../router";
 import SingleSolutionPost from "../../../components/SingleSolutionPost";
@@ -82,6 +82,13 @@ export default {
             filterMember();
         });
 
+        watch(() => filterType.value, (first, second) => {
+            StartFilterOffer();
+            if(filterType.value === null){
+                solutions.value = props.challenge.solutions;
+            }
+        }, {})
+
         onMounted(function () {
            if(user.type == 'investor' && props.inTeam) {
                solutions.value = props.challenge.solutions;
@@ -96,6 +103,20 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         solutions.value = response.data.payload;
+                    }
+                })
+        }
+
+        const StartFilterOffer = async () => {
+            axios.post('/api/solution/user/filter', {option: filterType.value , id: props.challenge.id})
+                .then(response => {
+                    if (response.data.success) {
+                        console.log('filterType->' + filterType.value);
+                        console.log('props.challenge.id->' + props.challenge.id);
+                        console.log('response.data->' + response.data.payload);
+                        solutions.value = response.data.payload;
+                    } else {
+
                     }
                 })
         }

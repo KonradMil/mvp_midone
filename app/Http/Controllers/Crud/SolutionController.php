@@ -27,6 +27,24 @@ use Psr\Log\NullLogger;
 
 class SolutionController extends Controller
 {
+    public function filterChallengeSolutions(Request $request)
+    {
+        $option = $request->input('option');
+        $id = $request->input('id');
+        $challenge = Challenge::find($id);
+        $solutions = NULL;
+        if($option === 'Cena-max'){
+            $solutions = $challenge->solutions()->orderBy('sum', 'DESC')->with('solution')->get();
+        }else if($option === 'Cena-min'){
+            $solutions = $challenge->solutions()->orderBy('sum', 'ASC')->with('solution')->get();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Filter ok',
+            'payload' => $solutions
+        ]);
+    }
     public function getUserSolutionsArchive()
     {
         $solutions = Solution::where('archive', '=' , 1)->get();
