@@ -6,6 +6,7 @@ use App\Models\Challenges\Challenge;
 use App\Models\File;
 use App\Models\Financial;
 use App\Models\OldChallenge;
+use App\Models\OldFile;
 use App\Models\OldQuestion;
 use App\Models\OldTeam;
 use App\Models\OldUser;
@@ -30,8 +31,8 @@ class OldImportController extends Controller
             $nc = Challenge::where('name', '=', $challenge->name)->first();
             var_dump($challenge->files);
 
-            foreach ($challenge->files as $ofile) {
-                var_dump($ofile);
+            foreach ($challenge->files as $o) {
+                $ofile = OldFile::find($o->file_id);
                 try {
                     if(!empty(!$ofile->name) && !empty(!$ofile->ext)) {
                         $file = new File();
