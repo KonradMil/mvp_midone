@@ -53,7 +53,7 @@ class UserController extends Controller
         $pr->email = $request->email;
         $pr->token = $token;
         $pr->save();
-
+        dd($request->email);
         Mail::to('konrad.milewski@appworks.pl')->queue(new ForgotPassword($pr->email, $token));
 
         return response()->json([
