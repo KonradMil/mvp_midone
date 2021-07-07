@@ -34,8 +34,7 @@ class OfferController extends Controller
         }else if($option === 'OEE po robotyzacji'){
             $offers = $challenge->offers()->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('operational_analyses as oa', 'oa.solution_id', '=', 'so.id')->orderBy('oa.oee_after', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
         }else if($option === 'Okres gwarancji robota'){
-            $offers = $challenge->offers;
-
+            $offers = $challenge->offers()->orderBy('avg_guarantee', 'DESC')->with('solution')->get();
         }
 
         return response()->json([
@@ -159,6 +158,7 @@ class OfferController extends Controller
                 $c++;
                 $sum += $robot->guarantee_period;
             }
+
             $check->avg_guarantee = (float)($sum/$c);
             $check->robots = json_encode($request->solution_robots);
             $check->challenge_id = $request->challenge_id;
