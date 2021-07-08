@@ -236,6 +236,13 @@ export default {
 
         const getChallengeOffersRepositories = async () => {
             offers.value = GetChallengeOffers(props.challenge.id);
+            console.log(offers.value.list.length + 'offers.value.list.length');
+            console.log(offers.value.list + 'offers.value.list');
+            console.log(offers.value.length + 'offers.value.length');
+            console.log(offers.length + 'offers.length');
+            if(offers.value.list.length < 1){
+                guard.value = 1;
+            }
         }
 
         const handleCallback = () => {
@@ -247,11 +254,6 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         offers.value.list = response.data.payload;
-                        console.log(offers.value.list.length + 'offers.value.list.length');
-                        console.log(offers.value.list + 'offers.value.list');
-                        if(offers.value.list.length < 1){
-                            guard.value = 1;
-                        }
                         toast.success('Success');
                     } else {
                         toast.error('Error');
