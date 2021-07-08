@@ -21,7 +21,7 @@ class OfferController extends Controller
     {
         $id = $request->input('id');
         $challenge = Challenge::find($id);
-        $offers = $challenge->offers();
+        $offers = $challenge->offers;
 
         $sum_check = 0;
         $the_best = NULL;
@@ -123,7 +123,7 @@ class OfferController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Filter ok',
-            'payload' => $sum
+            'payload' => $the_best
         ]);
     }
     public function filterChallengeOffers(Request $request)
