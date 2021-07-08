@@ -43,6 +43,8 @@ class SolutionController extends Controller
             $solutions = $challenge->solutions()->join('financial_analyses', 'solutions.id', '=', 'financial_analyses.solution_id')->orderBy('financial_analyses.npv', 'ASC')->select('solutions.*')->get();
         }else if($option === 'Okres zwrotu inwestycji'){
             $solutions = $challenge->solutions()->orderBy('deadline_offered', 'ASC')->get();
+        }else if($option === null){
+            $solutions = $challenge->solutions()->get();
         }
 
         return response()->json([
