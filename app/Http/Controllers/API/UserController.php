@@ -50,7 +50,8 @@ class UserController extends Controller
 
         $authy_api = new AuthyApi(env('AUTHY_SECRET'));
         $user = $authy_api->registerUser(Auth::user()->email, Auth::user()->phone, 48);
-        dd($user);
+        $response = $user->getBody()->getContent();
+        dd($response);
 
     }
 
