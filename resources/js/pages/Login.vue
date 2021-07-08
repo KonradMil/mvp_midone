@@ -168,8 +168,9 @@ export default {
         }
 
         const checkTwoFa = () => {
+            let email = window.email;
             axios.post('/api/check/twofa', {
-                email: window.email,
+                email: email,
                 code: twofa_code.value
             }).then(response => {
                 console.log(response.data)
@@ -242,7 +243,7 @@ export default {
                                 store.dispatch('login/login', {
                                     user
                                 });
-                                window.email = user.email;
+
                                 // toast.success(response.data.message)
                                 console.log(store);
                                 if (user.name !== undefined || user.name !== '') {
@@ -252,6 +253,7 @@ export default {
                                 }
                             } else {
                                 if (response.data.message == '2fa') {
+                                    window.email = user.email;
                                     this.shows = true;
                                 } else {
                                     toast.error(response.data.message);
