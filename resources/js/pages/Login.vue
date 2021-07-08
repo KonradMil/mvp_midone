@@ -133,7 +133,7 @@
                 <input
                     type="email"
                     class="form-control w-56 box pr-10 placeholder-theme-13"
-                    placeholder="Email"
+                    placeholder="Kod"
                     v-model="twofa_code"
                 />
                 <button class="btn btn-primary shadow-md mr-2" @click="checkTwoFa">Weryfikuj</button>
