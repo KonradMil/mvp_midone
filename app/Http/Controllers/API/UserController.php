@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Mail\ChangePassword;
 use App\Mail\ForgotPassword;
 use App\Mail\TeamInvitation;
+use Authy\AuthyApi;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
@@ -43,6 +44,16 @@ class UserController extends Controller
             'payload' => $users
         ]);
     }
+
+    public function registerAuthy(Request $request)
+    {
+
+        $authy_api = new AuthyApi(env('AUTHY_SECRET'));
+        $user = $authy_api->registerUser(Auth::user()->email, Auth::user()->phone, 48);
+        dd($user);
+
+    }
+
     public function forgotPassword(Request $request)
     {
         $request->validate(['email' => 'required|email']);
