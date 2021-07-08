@@ -23,10 +23,7 @@ use Mpociot\Teamwork\TeamInvite;
 
 class UserController extends Controller
 {
-    public function test()
-    {
-        Auth::user()->permissions();
-    }
+
     public static function userPermissions($model) {
         return 'penis';
     }

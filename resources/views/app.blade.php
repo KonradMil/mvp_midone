@@ -29,7 +29,7 @@
                'teams' => Auth::user()->teams,
                'notifications' => Auth::user()->notifications,
                'company' => $company,
-               'permissions' => Auth::user()->permissions()
+               'permissions' => \App\Http\Controllers\API\UserController::userPermissions(Auth::user())
 
            ])!!}
     </script>
