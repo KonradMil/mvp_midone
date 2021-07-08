@@ -287,14 +287,16 @@ export default {
         }
 
         const getSolution = () => {
-            axios.post('/api/solution/robots', {id: props.solution_id, offer_id: props.edit_offer_id})
-                .then(response => {
-                    if (response.data.success) {
-                      // console.log(response.data.payload)
-                        solution_robots.value = response.data.payload;
-                    } else {
-                        // toast.error(response.data.message);
-                    }
+                axios.post('/api/solution/robots', {id: props.solution_id, offer_id: props.edit_offer_id})
+                    .then(response => {
+                        if (response.data.success) {
+                            // console.log(response.data.payload)
+                            solution_robots.value = response.data.payload;
+                        } else {
+                            // toast.error(response.data.message);
+                        }
+                    }).catch((error) =>{
+                       console.log(error + 'ErrorGetRobots');
                 })
         };
 

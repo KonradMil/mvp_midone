@@ -33,28 +33,29 @@
 <!--        </div>-->
 <!--    </div>-->
 
-    <div v-if="offers.length !== 0" class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" >
-        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+    <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" >
+        <div v-if="guard !== 1"  class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
         <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
-        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="guard !== 1">
             <Multiselect
                 class="form-control"
                 v-model="filterType"
                 mode="single"
                 label="name"
                 max="1"
-                :placeholder="filterType === '' ? 'select' : filterType"
+                :placeholder="filterType === '' ? 'Wybierz...' : filterType"
                 valueProp="value"
                 :options="filters['options']"
             />
         </div>
-        <div v-if="offers.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+        <div v-if="guard === 1" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie ma jeszcze żadnych ofert.
         </div>
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div  v-for="(offer, index) in offers.list" :key="index" class="col-span-12 col-span-12 xxl:col-span-6">
+                <div :class="(offer.id === theBestOffer.id) ? 'best-offer': '' ">
                 <div class="intro-y box"  v-if="challenge.selected_offer_id < 1 || offer.selected == 1">
                     <div class="px-5 py-5" >
                         <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
@@ -74,6 +75,7 @@
                                     <button class="btn shadow-md mr-2 bg-gray-400" @click.prevent="rejectOffer(offer,index)" v-if="offer.rejected != 1 && challenge.selected_offer_id < 1" >Odrzuć ofertę</button>
                                 </div>
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
+                                <div class="flex items-center justify-center text-theme-20" v-if="offer.id === theBestOffer.id"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Najlepsza oferta</div>
                             </div>
                             <div class="flex items-center">
                                 <div class="border-l-2 border-theme-1 pl-4">
@@ -174,6 +176,7 @@
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
 
             <!-- END: Announcement -->
@@ -214,6 +217,8 @@ export default {
         const solution = ref();
         const check = ref(false);
         const filterType = ref('');
+        const theBestOffer = ref('');
+        const guard = ref();
 
         watch(() => offers.value.list, (first, second) => {
         }, {})
@@ -231,6 +236,9 @@ export default {
 
         const getChallengeOffersRepositories = async () => {
             offers.value = GetChallengeOffers(props.challenge.id);
+            if(offers.value.list.length < 1){
+                guard.value = 1;
+            }
         }
 
         const handleCallback = () => {
@@ -241,10 +249,19 @@ export default {
             axios.post('/api/offer/user/filter', {option: filterType.value , id: props.challenge.id})
                 .then(response => {
                     if (response.data.success) {
-                        console.log('filterType->' + filterType.value);
-                        console.log('props.challenge.id->' + props.challenge.id);
-                        console.log('response.data->' + response.data.payload);
                         offers.value.list = response.data.payload;
+                        toast.success('Success');
+                    } else {
+                        toast.error('Error');
+                    }
+                })
+        }
+
+        const GetTheBestOffer = async () => {
+            axios.post('/api/offer/get/best', {id: props.challenge.id})
+                .then(response => {
+                    if (response.data.success) {
+                        theBestOffer.value = response.data.payload;
                     } else {
 
                     }
@@ -290,9 +307,12 @@ export default {
 
         onMounted(() => {
             getChallengeOffersRepositories('');
+            GetTheBestOffer();
         });
 
         return {
+            guard,
+            theBestOffer,
             StartFilterOffer,
             filterType,
             check,

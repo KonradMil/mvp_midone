@@ -34,9 +34,17 @@ class SolutionController extends Controller
         $challenge = Challenge::find($id);
         $solutions = NULL;
         if($option === 'Cena-max'){
-            $solutions = $challenge->solutions()->orderBy('estimate.sum', 'DESC')->get();
+            $solutions = $challenge->solutions()->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->select('solutions.*')->orderBy('estimates.sum', 'DESC')->get();
         }else if($option === 'Cena-min'){
-            $solutions = $challenge->solutions()->orderBy('estimate.sum', 'ASC')->get();
+            $solutions = $challenge->solutions()->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->select('solutions.*')->orderBy('estimates.sum', 'ASC')->get();
+        }else if($option === 'OEE po robotyzacji'){
+            $solutions = $challenge->solutions()->join('operational_analyses', 'solutions.id', '=', 'operational_analyses.solution_id')->orderBy('operational_analyses.oee_after', 'ASC')->select('solutions.*')->get();
+        }else if($option === 'NPV'){
+            $solutions = $challenge->solutions()->join('financial_analyses', 'solutions.id', '=', 'financial_analyses.solution_id')->orderBy('financial_analyses.npv', 'ASC')->select('solutions.*')->get();
+        }else if($option === 'Okres zwrotu inwestycji'){
+            $solutions = $challenge->solutions()->join('financial_analyses', 'solutions.id', '=', 'financial_analyses.solution_id')->orderBy('financial_analyses.simple_payback', 'ASC')->select('solutions.*')->get();
+        }else if($option === null){
+            $solutions = $challenge->solutions()->get();
         }
 
         return response()->json([
@@ -165,15 +173,16 @@ class SolutionController extends Controller
             $offer = Offer::find($request->input('offer_id'));
             $robots = json_decode($offer->robots);
 
-        }   else {
+        }else {
             $save = json_decode($solution->save_json);
             $robots = [];
-            foreach ($save->parts as $part) {
-                $model = UnityModel::find($part->model->model_id);
-                $model->guarantee_period = 0;
-                if($model->category == 1) {
-
-                    $robots[] = $model;
+            if($save != NULL){
+                foreach ($save->parts as $part) {
+                    $model = UnityModel::find($part->model->model_id);
+                    $model->guarantee_period = 0;
+                    if($model->category == 1) {
+                        $robots[] = $model;
+                    }
                 }
             }
         }

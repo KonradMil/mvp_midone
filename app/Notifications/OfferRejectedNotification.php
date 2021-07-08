@@ -32,7 +32,7 @@ class OfferRejectedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'broadcast', 'database'];
+        return ['broadcast', 'database'];
     }
 
     public function toBroadcast($notifiable)

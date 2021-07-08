@@ -17,6 +17,115 @@ use Mrcnpdlk\Lib\Exception;
 
 class OfferController extends Controller
 {
+    public function theBestChallengeOffer(Request $request)
+    {
+        $id = $request->input('id');
+        $challenge = Challenge::find($id);
+        $offers = $challenge->offers;
+
+        $sum_check = 0;
+        $the_best = NULL;
+        foreach($offers as $offer){
+            $sum = 0;
+            if($offer->time_to_start === 0){
+                $sum+=3;
+            }else if($offer->time_to_start === 1){
+                $sum+=2;
+            }else if($offer->time_to_start === 2){
+                $sum+=2;
+            }else if($offer->time_to_start === 3){
+                $sum+=1;
+            }else if($offer->time_to_start === 4){
+                $sum+=1;
+            }
+
+            if($offer->advance_upon_delivery === 0){
+                $sum+=2;
+            }else if($offer->advance_upon_delivery === 1){
+                $sum+=2;
+            }else if($offer->advance_upon_delivery === 2){
+                $sum+=2;
+            }else if($offer->advance_upon_delivery === 3){
+                $sum+=1;
+            }else if($offer->advance_upon_delivery === 4){
+                $sum+=1;
+            }
+
+            if($offer->years_of_guarantee === 0){
+                $sum+=1;
+            }else if($offer->years_of_guarantee === 1){
+                $sum+=2;
+            }else if($offer->years_of_guarantee === 2) {
+                $sum += 3;
+            }
+
+            if($offer->time_to_fix === 0){
+                $sum+=3;
+            }else if($offer->time_to_fix === 1){
+                $sum+=2;
+            }else if($offer->time_to_fix === 2){
+                $sum+=1;
+            }else if($offer->time_to_fix === 3){
+                $sum+=1;
+            }
+
+            if($offer->weeks_to_start === 0){
+                $sum+=3;
+            }else if($offer->weeks_to_start === 1){
+                $sum+=2;
+            }else if($offer->weeks_to_start === 2){
+                $sum+=2;
+            }else if($offer->weeks_to_start === 3){
+                $sum+=1;
+            }else if($offer->weeks_to_start === 4){
+                $sum+=1;
+            }
+
+            if($offer->advance_upon_agreement === 0){
+                $sum+=2;
+            }else if($offer->advance_upon_agreement === 1){
+                $sum+=2;
+            }else if($offer->advance_upon_agreement === 2){
+                $sum+=2;
+            }else if($offer->advance_upon_agreement === 3){
+                $sum+=1;
+            }else if($offer->advance_upon_agreement === 4){
+                $sum+=1;
+            }
+
+            if($offer->advance_upon_start === 0){
+                $sum+=2;
+            }else if($offer->advance_upon_start === 1){
+                $sum+=2;
+            }else if($offer->advance_upon_start === 2){
+                $sum+=2;
+            }else if($offer->advance_upon_start === 3){
+                $sum+=1;
+            }else if($offer->advance_upon_start === 4){
+                $sum+=1;
+            }
+
+            if($offer->reaction_time === 0){
+                $sum+=3;
+            }else if($offer->reaction_time === 1){
+                $sum+=3;
+            }else if($offer->reaction_time === 2){
+                $sum+=2;
+            }else if($offer->reaction_time === 3){
+                $sum+=1;
+            }
+          if($sum>$sum_check){
+              $the_best = $offer;
+              $sum_check = $sum;
+          }
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Filter ok',
+            'payload' => $the_best
+        ]);
+    }
     public function filterChallengeOffers(Request $request)
     {
         $option = $request->input('option');
@@ -36,6 +145,8 @@ class OfferController extends Controller
             $offers = $challenge->offers()->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('operational_analyses as oa', 'oa.solution_id', '=', 'so.id')->orderBy('oa.oee_after', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
         }else if($option === 'Okres gwarancji robota'){
             $offers = $challenge->offers()->orderBy('avg_guarantee', 'DESC')->with('solution')->get();
+        }else if($option === 'Okres zwrotu inwestycji'){
+            $offers = $challenge->offers()->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('financial_analyses as fa', 'fa.solution_id', '=', 'so.id')->orderBy('fa.simple_payback', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
         }
 
         return response()->json([
@@ -155,12 +266,15 @@ class OfferController extends Controller
             $check = new Offer();
             $c = 0;
             $sum = 0;
-            foreach ($request->solution_robots as $robot) {
+            if(isset($request->solution_robots)){
+                foreach ($request->solution_robots as $robot) {
                     $c++;
                     $sum += $robot['guarantee_period'];
+                }
             }
-
-            $check->avg_guarantee = (float)($sum/$c);
+            if($c>0){
+                $check->avg_guarantee = (float)($sum/$c);
+            }
             $check->robots = json_encode($request->solution_robots);
             $check->challenge_id = $request->challenge_id;
             $check->solution_id = $request->solution_id;

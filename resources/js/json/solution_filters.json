@@ -1,0 +1,10 @@
+{
+    "options": [
+        "Cena-max",
+        "Cena-min",
+        "Okres zwrotu inwestycji",
+        "NPV",
+        "OEE po robotyzacji",
+        "Dostawca głównej technologii"
+    ]
+}

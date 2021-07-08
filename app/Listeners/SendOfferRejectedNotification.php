@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\OfferAccepted;
+use App\Events\OfferRejected;
 use App\Events\SolutionAccepted;
 use App\Models\Challenges\Challenge;
 use App\Models\Solutions\Solution;
@@ -31,7 +32,7 @@ class SendOfferRejectedNotification
      * @param  SolutionAccepted  $event
      * @return void
      */
-    public function handle(OfferAccepted $event)
+    public function handle(OfferRejected $event)
     {
         $user = $event->subject->installer;
         $challenge = Challenge::find($event->subject->challenge_id);
