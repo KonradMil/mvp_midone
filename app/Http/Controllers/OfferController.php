@@ -266,12 +266,16 @@ class OfferController extends Controller
             $check = new Offer();
             $c = 0;
             $sum = 0;
-            foreach ($request->solution_robots as $robot) {
+            if(isset($request->solution_robots)){
+                foreach ($request->solution_robots as $robot) {
                     $c++;
                     $sum += $robot['guarantee_period'];
+                }
             }
+            if($c>0){
+                $check->avg_guarantee = (float)($sum/$c);
 
-            $check->avg_guarantee = (float)($sum/$c);
+            }
             $check->robots = json_encode($request->solution_robots);
             $check->challenge_id = $request->challenge_id;
             $check->solution_id = $request->solution_id;
