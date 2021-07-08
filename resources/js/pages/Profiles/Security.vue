@@ -62,7 +62,12 @@ export default {
         };
 
         const save = () => {
-            twofa.value = !twofa.value;
+            if(twofa.value == 1) {
+                twofa.value = 0;
+            } else {
+                twofa.value = 1;
+            }
+
                 axios.post('api/company/save', {
                     id: company.value.id,
 
