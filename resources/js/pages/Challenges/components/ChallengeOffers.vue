@@ -33,7 +33,7 @@
 <!--        </div>-->
 <!--    </div>-->
 
-    <div v-if="guard === 1" class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" >
+    <div v-if="guard !== 1" class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" >
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
         <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
@@ -49,7 +49,7 @@
                 :options="filters['options']"
             />
         </div>
-        <div v-if="guard !== 1" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+        <div v-if="guard === 1" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie ma jeszcze żadnych ofert.
         </div>
         <div class="grid grid-cols-12 gap-6">
@@ -236,10 +236,6 @@ export default {
 
         const getChallengeOffersRepositories = async () => {
             offers.value = GetChallengeOffers(props.challenge.id);
-            console.log(offers.value.list.length + 'offers.value.list.length');
-            console.log(offers.value.list + 'offers.value.list');
-            console.log(offers.value.length + 'offers.value.length');
-            console.log(offers.length + 'offers.length');
             if(offers.value.list.length < 1){
                 guard.value = 1;
             }
