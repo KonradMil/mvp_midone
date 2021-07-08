@@ -37,6 +37,12 @@ class SolutionController extends Controller
             $solutions = $challenge->solutions()->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->orderBy('estimates.sum', 'DESC')->select('solutions.*')->get();
         }else if($option === 'Cena-min'){
             $solutions = $challenge->solutions()->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->orderBy('estimates.sum', 'ASC')->select('solutions.*')->get();
+        }else if($option === 'OEE po robotyzacji'){
+            $solutions = $challenge->solutions()->join('operational_analyses', 'solutions.id', '=', 'operational_analyses.solution_id')->orderBy('operational_analyses.oee_after', 'ASC')->select('solutions.*')->get();
+        }else if($option === 'NPV'){
+            $solutions = $challenge->solutions()->join('financial_analyses', 'solutions.id', '=', 'financial_analyses.solution_id')->orderBy('financial_analyses.npv', 'ASC')->select('solutions.*')->get();
+        }else if($option === 'Okres zwrotu inwestycji'){
+            $solutions = $challenge->solutions()->orderBy('deadline_offered', 'ASC')->get();
         }
 
         return response()->json([
