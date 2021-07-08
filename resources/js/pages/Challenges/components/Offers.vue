@@ -1,10 +1,9 @@
 <template>
     <div class="col-span-9 lg:col-span-9 xxl:col-span-9">
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-            <h2 v-if="guard !== 1" class="font-medium text-base mr-auto">{{$t('challengesMain.myOffers')}}</h2>
-            <h2 v-if="guard === 1" class="font-medium text-base mr-auto">Nie masz jeszcze żadnych ofert.</h2>
+            <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.myOffers')}}</h2>
         </div>
-        <div class="grid grid-cols-12 gap-6" v-if="guard !== 1">
+        <div class="grid grid-cols-12 gap-6">
 
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-6 xxl:col-span-6" v-for="(offer, index) in offers.list" :key="index">
