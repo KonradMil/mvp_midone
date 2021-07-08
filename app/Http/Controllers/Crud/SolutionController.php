@@ -173,15 +173,17 @@ class SolutionController extends Controller
             $offer = Offer::find($request->input('offer_id'));
             $robots = json_decode($offer->robots);
 
-        }   else {
+        }else {
             $save = json_decode($solution->save_json);
             $robots = [];
-            foreach ($save->parts as $part) {
-                $model = UnityModel::find($part->model->model_id);
-                $model->guarantee_period = 0;
-                if($model->category == 1) {
+            if($save->parts != NULL){
+                foreach ($save->parts as $part) {
+                    $model = UnityModel::find($part->model->model_id);
+                    $model->guarantee_period = 0;
+                    if($model->category == 1) {
 
-                    $robots[] = $model;
+                        $robots[] = $model;
+                    }
                 }
             }
         }
