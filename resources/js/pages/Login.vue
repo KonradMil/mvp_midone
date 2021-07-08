@@ -138,9 +138,7 @@
                 />
                 <button class="btn btn-primary shadow-md mr-2" @click="checkTwoFa">Weryfikuj</button>
             </div>
-
         </div>
-
     </Modal>
 </template>
 
@@ -171,7 +169,7 @@ export default {
 
         const checkTwoFa = () => {
             axios.post('/api/check/twofa', {
-                email: emailNew.value,
+                email: window.email,
                 code: twofa_code.value
             }).then(response => {
                 console.log(response.data)
@@ -243,7 +241,8 @@ export default {
                                 // window.Laravel.isLoggedin = true;
                                 store.dispatch('login/login', {
                                     user
-                                })
+                                });
+                                window.email = user.email;
                                 // toast.success(response.data.message)
                                 console.log(store);
                                 if (user.name !== undefined || user.name !== '') {
