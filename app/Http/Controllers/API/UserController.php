@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Mail\ChangePassword;
 use App\Mail\ForgotPassword;
 use App\Mail\TeamInvitation;
+use Authy\AuthyApi;
+use GuzzleHttp\Client;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
@@ -43,6 +45,39 @@ class UserController extends Controller
             'payload' => $users
         ]);
     }
+
+    public function registerAuthy(Request $request)
+    {
+
+        $user =  Auth::user();
+
+        $user->twofa = !$user->twofa;
+
+        if($user->twofa) {
+            $authy_api = new AuthyApi(env('AUTHY_SECRET'));
+            $userat = $authy_api->registerUser(Auth::user()->email, Auth::user()->phone, 48);
+            if($userat->ok()) {
+                $user->authy_id = $userat->id();
+            }
+        }
+
+        $user->save();
+
+        $client = new Client();
+        $r = $client->request('POST', 'https://api.authy.com/protected/json/users/' . $user->authy_id . '/secret', [
+            'json' => ['label' => 'DBR 2-FA', 'qr_size' => 256],
+            'headers' => [
+                'X-Authy-API-Key' => env('AUTHY_SECRET')
+            ]
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => $r->getBody()->getContents()
+        ]);
+    }
+
     public function forgotPassword(Request $request)
     {
         $request->validate(['email' => 'required|email']);
@@ -144,6 +179,7 @@ class UserController extends Controller
         $u = Auth::user();
         $u->name = $request->name;
         $u->lastname = $request->lastname;
+        $u->phone = $request->phone;
         $u->email = $request->input("email", $u->email);
 
         $r =  $u->save();

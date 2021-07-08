@@ -53,6 +53,7 @@ Route::group(['prefix' => 'workshop', 'middleware' => 'auth:sanctum'], function(
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth:sanctum'], function() {
      Route::post('terms/save', [UserController::class, 'saveTerms']);
+     Route::post('register-authy', [UserController::class, 'registerAuthy']);
 });
 
 Route::group(['prefix' => 'question', 'middleware' => 'auth:sanctum'], function() {
