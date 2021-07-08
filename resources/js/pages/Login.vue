@@ -171,11 +171,10 @@ export default {
 
         const checkTwoFa = () => {
             axios.post('/api/check/twofa', {
-                email: this.email,
-                password: this.password
+                email: emailNew.value,
+                code: twofa_code.value
             }).then(response => {
                 console.log(response.data)
-
                 if (response.data.success) {
                     let user = response.data.payload;
                     store.dispatch('login/login', {
