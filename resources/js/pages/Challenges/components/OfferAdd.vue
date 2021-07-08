@@ -287,7 +287,6 @@ export default {
         }
 
         const getSolution = () => {
-            try {
                 axios.post('/api/solution/robots', {id: props.solution_id, offer_id: props.edit_offer_id})
                     .then(response => {
                         if (response.data.success) {
@@ -296,10 +295,9 @@ export default {
                         } else {
                             // toast.error(response.data.message);
                         }
-                    })
-            } catch(error){
-                console.log(error);
-            }
+                    }).catch((error) =>{
+                       console.log(error + 'ErrorGetRobots');
+                })
         };
 
         const save = () => {

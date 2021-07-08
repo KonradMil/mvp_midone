@@ -176,7 +176,7 @@ class SolutionController extends Controller
         }else {
             $save = json_decode($solution->save_json);
             $robots = [];
-            if($save != NULL){
+            if($save == NULL){
                 foreach ($save->parts as $part) {
                     $model = UnityModel::find($part->model->model_id);
                     $model->guarantee_period = 0;
