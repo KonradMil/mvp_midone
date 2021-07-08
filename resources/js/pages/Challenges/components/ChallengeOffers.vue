@@ -33,7 +33,7 @@
 <!--        </div>-->
 <!--    </div>-->
 
-    <div v-if="offers.list !== 0" class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" >
+    <div v-if="guard === 1" class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" >
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
         <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
@@ -49,7 +49,7 @@
                 :options="filters['options']"
             />
         </div>
-        <div v-if="offers.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+        <div v-if="guard != 1" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie ma jeszcze żadnych ofert.
         </div>
         <div class="grid grid-cols-12 gap-6">
@@ -218,6 +218,7 @@ export default {
         const check = ref(false);
         const filterType = ref('');
         const theBestOffer = ref('');
+        const guard = ref();
 
         watch(() => offers.value.list, (first, second) => {
         }, {})
@@ -246,6 +247,11 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         offers.value.list = response.data.payload;
+                        console.log(offers.value.list.length + 'offers.value.list.length');
+                        console.log(offers.value.list + 'offers.value.list');
+                        if(offers.value.list.length < 1){
+                            guard.value = 1;
+                        }
                         toast.success('Success');
                     } else {
                         toast.error('Error');
@@ -307,6 +313,7 @@ export default {
         });
 
         return {
+            guard,
             theBestOffer,
             StartFilterOffer,
             filterType,
