@@ -120,6 +120,7 @@ class OfferController extends Controller
           }
           $o = Offer::find($offer->id);
           $o->points = $sum;
+          $o->save();
         }
 
         return response()->json([
