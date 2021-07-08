@@ -115,7 +115,7 @@ class OfferController extends Controller
                 $sum+=1;
             }
           if($sum>$sum_check){
-              $the_best = $offer;
+              $the_best = $offer->with('solution')->get();
               $sum_check = $sum;
           }
         }
