@@ -10,6 +10,9 @@
                 <div class="flex flex-col-reverse xl:flex-row flex-col">
                     <div class="flex-1 mt-6 xl:mt-0">
                         <div class="grid grid-cols-12 gap-x-5">
+                            <div class="col-span-12 xxl:col-span-12" v-if="qr != ''">
+                                <img :src="qr" class="w-1/2 h-100"/>
+                            </div>
                             <div class="col-span-12 xxl:col-span-12">
                                 <div class="form-check" v-if="twofa">
                                     <input id="checkbox-switch-7" class="form-check-switch" type="checkbox" @change="changeTwoFa"  checked/>
@@ -49,6 +52,7 @@ export default {
 
         const user = window.Laravel.user;
         const twofa = ref(false);
+        const qr = ref('');
 
         const changeTwoFa = () => {
             if(twofa.value) {
@@ -63,7 +67,8 @@ export default {
                 .then(response => {
                     console.log(response.data)
                     if (response.data.success) {
-                        toast.success(response.data.message);
+                        qr.value = JSON.parse(response.data.payload).qr_code;
+                        // toast.success(response.data.message);
                     } else {
                         toast.error(response.data.message);
                     }
@@ -103,7 +108,8 @@ export default {
             user,
             save,
             changeTwoFa,
-            twofa
+            twofa,
+            qr
         }
     }
 }
