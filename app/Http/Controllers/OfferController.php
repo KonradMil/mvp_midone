@@ -125,7 +125,7 @@ class OfferController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Filter ok',
-            'payload' => $the_best
+            'payload' => $the_best, $sum
         ]);
     }
     public function filterChallengeOffers(Request $request)
