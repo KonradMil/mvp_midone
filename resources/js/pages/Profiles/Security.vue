@@ -14,6 +14,17 @@
                                 <img :src="qr" class="w-1/2 h-100"/>
                             </div>
                             <div class="col-span-12 xxl:col-span-12">
+                                <div class="mt-3">
+                                    <label for="input-wizard-2" class="form-label">Telefon</label>
+                                    <input
+                                        id="input-wizard-2"
+                                        type="text"
+                                        class="form-control"
+                                        v-model="user.phone"
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-span-12 xxl:col-span-12">
                                 <div class="form-check" v-if="twofa">
                                     <input id="checkbox-switch-7" class="form-check-switch" type="checkbox" @change="changeTwoFa"  checked/>
                                     <label class="form-check-label" for="checkbox-switch-7">Logowanie dwuetapowe</label>
@@ -55,27 +66,33 @@ export default {
         const qr = ref('');
 
         const changeTwoFa = () => {
-            if(twofa.value) {
-                twofa.value = false;
-            } else {
-                twofa.value = true;
+            if(user.phone == '') {
+                toast.error('Telefon jest wymagany.');
+            } else  {
+
+                if(twofa.value) {
+                    twofa.value = false;
+                } else {
+                    twofa.value = true;
+                }
+
+                console.log('twofa.value');
+                console.log(twofa.value);
+                axios.post('api/user/register-authy', {phone: user.phone})
+                    .then(response => {
+                        console.log(response.data)
+                        if (response.data.success) {
+                            qr.value = JSON.parse(response.data.payload).qr_code;
+                            // toast.success(response.data.message);
+                        } else {
+                            toast.error(response.data.message);
+                        }
+                    })
+                    .catch(function (error) {
+                        toast.error(error);
+                    });
             }
 
-            console.log('twofa.value');
-            console.log(twofa.value);
-            axios.post('api/user/register-authy')
-                .then(response => {
-                    console.log(response.data)
-                    if (response.data.success) {
-                        qr.value = JSON.parse(response.data.payload).qr_code;
-                        // toast.success(response.data.message);
-                    } else {
-                        toast.error(response.data.message);
-                    }
-                })
-                .catch(function (error) {
-                    toast.error(error);
-                });
         };
 
         const save = () => {

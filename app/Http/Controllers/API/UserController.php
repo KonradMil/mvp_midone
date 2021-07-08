@@ -51,6 +51,10 @@ class UserController extends Controller
 
         $user = Auth::user();
 
+        if($request->phone != null) {
+            $user->phone = $request->phone;
+        }
+
         $user->twofa = !$user->twofa;
 
         if ($user->twofa) {
