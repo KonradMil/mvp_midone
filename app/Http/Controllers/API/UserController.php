@@ -48,12 +48,25 @@ class UserController extends Controller
     public function registerAuthy(Request $request)
     {
 
-        $authy_api = new AuthyApi(env('AUTHY_SECRET'));
-        $user = $authy_api->registerUser(Auth::user()->email, Auth::user()->phone, 48);
-        if($user->ok()) {
-            dd($user->id());
+        $user =  Auth::user();
+
+        $user->twofa = !$user->twofa;
+
+        if($user->twofa) {
+            $authy_api = new AuthyApi(env('AUTHY_SECRET'));
+            $user = $authy_api->registerUser(Auth::user()->email, Auth::user()->phone, 48);
+            if($user->ok()) {
+                $user->authy_id = $user->id();
+            }
         }
 
+        $user->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => $user
+        ]);
     }
 
     public function forgotPassword(Request $request)
