@@ -18,7 +18,7 @@ class Offer extends Model
         'advance_after_contract', 'advance_during_installation', 'advance_after_start',
         'service_contract_reaction', 'response_time', 'frequency_checkup', 'price_checkup',
         'status', 'select_response_time', 'service_contract_reaction', 'recup_time', 'emergency_cost',
-        'challenge_id', 'solution_id', 'installer_id', 'rejected', 'offer_expires_in', 'robots', 'avg_guarantee'
+        'challenge_id', 'solution_id', 'installer_id', 'rejected', 'offer_expires_in', 'robots', 'avg_guarantee', 'points'
     ];
 
     public function challenge()
