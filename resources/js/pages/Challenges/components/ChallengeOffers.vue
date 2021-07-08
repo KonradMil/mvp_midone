@@ -33,11 +33,11 @@
 <!--        </div>-->
 <!--    </div>-->
 
-    <div v-if="guard !== 1" class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" >
-        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+    <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" >
+        <div v-if="guard !== 1"  class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
         <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
-        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="offers.length != 0">
+        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="guard !== 1">
             <Multiselect
                 class="form-control"
                 v-model="filterType"
