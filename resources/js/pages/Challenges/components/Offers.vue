@@ -1,7 +1,8 @@
 <template>
     <div class="col-span-9 lg:col-span-9 xxl:col-span-9">
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-            <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.myOffers')}}</h2>
+            <h2 v-if="guard !== 1" class="font-medium text-base mr-auto">{{$t('challengesMain.myOffers')}}</h2>
+            <h2 v-if="guard === 1" class="font-medium text-base mr-auto">Nie masz jeszcze żadnych ofert.</h2>
         </div>
         <div class="grid grid-cols-12 gap-6">
 
@@ -149,6 +150,7 @@ export default {
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
         const offer_id = ref();
+        const guard = ref();
 
         watch(() => offers.value.list, (first, second) => {
         }, {})
@@ -163,6 +165,9 @@ export default {
 
         const getOffersRepositories = async () => {
             offers.value = GetOffers(props.id);
+            if(offers.value.list.length < 1){
+                guard.value = 1;
+            }
         }
 
         const publishOffer = async(offer) => {
@@ -206,6 +211,7 @@ export default {
         });
 
         return {
+            guard,
             deleteOffer,
             offer_id,
             editOffer,
