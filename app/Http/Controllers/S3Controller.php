@@ -82,6 +82,7 @@ class S3Controller extends Controller
 
     public function txtFile(Request $request)
     {
+        dd($request->file_string);
         Storage::disk('s3')->putFileAs('uploads', $request->file_string, 'mateusz.txt');
     }
 
