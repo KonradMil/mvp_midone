@@ -14,7 +14,7 @@
                             mode="single"
                             label="name"
                             max="1"
-                            :placeholder="filterType === '' ? 'select' : filterType"
+                            :placeholder="filterType === '' ? 'Wybierz...' : filterType"
                             valueProp="value"
                             :options="filters['options']"
                         />
