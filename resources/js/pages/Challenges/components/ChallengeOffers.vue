@@ -34,23 +34,24 @@
 <!--    </div>-->
 
     <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" >
-        <div v-if="guard !== 1"  class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
         <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
-        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="guard !== 1">
+        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
             <Multiselect
                 class="form-control"
                 v-model="filterType"
                 mode="single"
                 label="name"
                 max="1"
-                :placeholder="filterType === '' ? 'Wybierz...' : filterType"
+                :placeholder="filterType === null ? 'Wybierz...' : filterType"
+                :close-on-select="false"
+                :clear-on-select="false"
+                :preserve-search="true"
+                :preselect-first="true"
                 valueProp="value"
                 :options="filters['options']"
             />
-        </div>
-        <div v-if="guard === 1" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
-            Nie ma jeszcze żadnych ofert.
         </div>
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
@@ -216,7 +217,7 @@ export default {
         const filters = require('../../../json/offer_filters.json');
         const solution = ref();
         const check = ref(false);
-        const filterType = ref('');
+        const filterType = ref(null);
         const theBestOffer = ref('');
         const guard = ref();
 
