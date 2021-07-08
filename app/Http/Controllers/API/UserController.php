@@ -65,7 +65,10 @@ class UserController extends Controller
 
         $client = new Client();
         $r = $client->request('POST', 'https://api.authy.com/protected/json/users/' . $user->authy_id . '/secret', [
-            'json' => ['label' => 'DBR 2-FA', 'qr_size' => 256]
+            'json' => ['label' => 'DBR 2-FA', 'qr_size' => 256],
+            'headers' => [
+                'X-Authy-API-Key' => env('AUTHY_SECRET')
+            ]
         ]);
           dd($r);
 
