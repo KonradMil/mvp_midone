@@ -44,7 +44,7 @@
                 mode="single"
                 label="name"
                 max="1"
-                :placeholder="filterType === '' ? 'Wybierz...' : filterType"
+                :placeholder="filterType === null ? 'Wybierz...' : filterType"
                 :close-on-select="false"
                 :clear-on-select="false"
                 :preserve-search="true"
@@ -217,7 +217,7 @@ export default {
         const filters = require('../../../json/offer_filters.json');
         const solution = ref();
         const check = ref(false);
-        const filterType = ref('');
+        const filterType = ref(null);
         const theBestOffer = ref('');
         const guard = ref();
 
