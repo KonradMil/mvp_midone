@@ -82,8 +82,12 @@ class S3Controller extends Controller
 
     public function txtFile(Request $request)
     {
-        dd($request->file_string);
-        Storage::disk('s3')->putFileAs('uploads', $request->file_string, 'mateusz.txt');
+
+        $myfile = fopen("mateusz.txt", "w") or die("Unable to open file!");
+        $txt = $request->file_string;
+        fwrite($myfile, $txt);
+        fclose($myfile);
+        Storage::disk('s3')->putFileAs('uploads', file_get_contents($myfile), 'mateusz.txt');
     }
 
     public function mime2ext($mime) {
