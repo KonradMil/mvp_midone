@@ -66,7 +66,7 @@ export default {
     setup(props) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
-        const filters = require('../../../json/offer_filters.json');
+        const filters = require('../../../json/solution_filters.json');
         const challenge = computed(() => {
             return props.challenge;
         });
