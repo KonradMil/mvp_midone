@@ -4,7 +4,7 @@
             <h2 v-if="guard !== 1" class="font-medium text-base mr-auto">{{$t('challengesMain.myOffers')}}</h2>
             <h2 v-if="guard === 1" class="font-medium text-base mr-auto">Nie masz jeszcze żadnych ofert.</h2>
         </div>
-        <div class="grid grid-cols-12 gap-6">
+        <div class="grid grid-cols-12 gap-6" v-if="guard !== 1">
 
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-6 xxl:col-span-6" v-for="(offer, index) in offers.list" :key="index">
