@@ -42,7 +42,7 @@ class SolutionController extends Controller
         }else if($option === 'NPV'){
             $solutions = $challenge->solutions()->join('financial_analyses', 'solutions.id', '=', 'financial_analyses.solution_id')->orderBy('financial_analyses.npv', 'ASC')->select('solutions.*')->get();
         }else if($option === 'Okres zwrotu inwestycji'){
-            $solutions = $challenge->solutions()->orderBy('deadline_offered', 'ASC')->get();
+            $solutions = $challenge->solutions()->join('financial_analyses', 'solutions.id', '=', 'financial_analyses.solution_id')->orderBy('financial_analyses.simple_payback', 'ASC')->select('solutions.*')->get();
         }else if($option === null){
             $solutions = $challenge->solutions()->get();
         }
