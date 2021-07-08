@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\API\UserController;
 use App\Models\Challenges\Challenge;
 use App\Models\Reports\Report;
 use App\Models\Solutions\Solution;
@@ -104,4 +105,8 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
         return $this->belongsToMany(WorkshopObject::class, 'user_workshop_objects', 'author_id', 'workshop_object_id');
     }
 
+    public function permissions()
+    {
+        return UserController::userPermissions($this);
+    }
 }

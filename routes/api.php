@@ -63,6 +63,8 @@ Route::group(['prefix' => 'question', 'middleware' => 'auth:sanctum'], function(
 });
 
 Route::post('set/txt', [S3Controller::class, 'txtFile']);
+Route::get('testme', [UserController::class, 'test']);
+Route::post('check/twofa', [UserController::class, 'checkTwoFa']);
 
 Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard']);
 
