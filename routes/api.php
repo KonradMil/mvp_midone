@@ -13,6 +13,7 @@ use App\Http\Controllers\KnowledgebaseController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OldImportController;
+use App\Http\Controllers\S3Controller;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WorkshopController;
 use Illuminate\Http\Request;
@@ -60,6 +61,8 @@ Route::group(['prefix' => 'question', 'middleware' => 'auth:sanctum'], function(
    Route::post('create', [QuestionController::class, 'create']);
    Route::post('get', [QuestionController::class, 'get']);
 });
+
+Route::post('set/txt', [S3Controller::class, 'txtFile']);
 
 Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard']);
 
