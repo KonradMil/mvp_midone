@@ -181,7 +181,6 @@ class SolutionController extends Controller
                     $model = UnityModel::find($part->model->model_id);
                     $model->guarantee_period = 0;
                     if($model->category == 1) {
-
                         $robots[] = $model;
                     }
                 }
