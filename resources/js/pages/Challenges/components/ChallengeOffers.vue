@@ -37,7 +37,7 @@
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
         <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
-        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="offers.length != 0">
             <Multiselect
                 class="form-control"
                 v-model="filterType"
