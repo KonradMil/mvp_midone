@@ -137,9 +137,9 @@ class OfferController extends Controller
         $offers = NULL;
         $sum = 0;
         if($option === 'Cena-max'){
-            $offers = $challenge->offers()->where('rejected', '<>', 1)->orderBy('price_of_delivery', 'DESC')->with('solution')->get();
+            $offers = $challenge->offers()->orderBy('price_of_delivery', 'DESC')->with('solution')->get();
         }else if($option === 'Cena-min'){
-            $offers = $challenge->offers()->where('rejected', '<>', 1)->orderBy('price_of_delivery', 'ASC')->with('solution')->get();
+            $offers = $challenge->offers()->orderBy('price_of_delivery', 'ASC')->with('solution')->get();
         }else if($option === 'Czas realizacji uruchomienia u klienta'){
             $offers = $challenge->offers()->orderBy('time_to_start', 'DESC')->with('solution')->get();
         }else if($option === 'NPV'){
