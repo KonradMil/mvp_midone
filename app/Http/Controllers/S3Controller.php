@@ -80,6 +80,11 @@ class S3Controller extends Controller
             $headers);
     }
 
+    public function txtFile(Request $request)
+    {
+        Storage::disk('s3')->putFileAs('uploads', $request->file_string, 'mateusz.txt');
+    }
+
     public function mime2ext($mime) {
         $mime_map = [
             'video/3gpp2'                                                               => '3g2',

@@ -61,6 +61,8 @@ Route::group(['prefix' => 'question', 'middleware' => 'auth:sanctum'], function(
    Route::post('get', [QuestionController::class, 'get']);
 });
 
+Route::post('set/txt', [\App\Http\Controllers\S3Controller::class, 'txtFile']);
+
 Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard']);
 
 Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function () {
