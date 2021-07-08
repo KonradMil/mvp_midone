@@ -15,11 +15,11 @@
                             </div>
                             <div class="col-span-12 xxl:col-span-12">
                                 <div class="mt-3">
-                                    <label for="input-wizard-2" class="form-label">Telefon</label>
+                                    <label for="input-wizard-2 w-100" class="form-label">Telefon</label>
                                     <input
                                         id="input-wizard-2"
                                         type="text"
-                                        class="form-control w-75"
+                                        class="form-control w-64"
                                         v-model="user.phone"
                                     />
                                 </div>
