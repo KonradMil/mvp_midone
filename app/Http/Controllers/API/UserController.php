@@ -23,6 +23,14 @@ use Mpociot\Teamwork\TeamInvite;
 
 class UserController extends Controller
 {
+    public function test()
+    {
+        dd(Auth::user()->permissions);
+    }
+    public static function userPermissions($model) {
+        dd($model);
+    }
+
     public function reset(Request $request)
     {
         $pr = \App\Models\PasswordReset::where('token', '=', $request->input('token'))->first();
