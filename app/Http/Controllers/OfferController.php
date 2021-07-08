@@ -17,6 +17,115 @@ use Mrcnpdlk\Lib\Exception;
 
 class OfferController extends Controller
 {
+    public function theBestChallengeOffer(Request $request)
+    {
+        $id = $request->input('id');
+        $challenge = Challenge::find($id);
+        $offers = $challenge->offers();
+
+        $sum_check = 0;
+        $the_best = NULL;
+        foreach($offers as $offer){
+            $sum = 0;
+            if($offer->time_to_start === 0){
+                $sum+=3;
+            }else if($offer->time_to_start === 1){
+                $sum+=2;
+            }else if($offer->time_to_start === 2){
+                $sum+=2;
+            }else if($offer->time_to_start === 3){
+                $sum+=1;
+            }else if($offer->time_to_start === 4){
+                $sum+=1;
+            }
+
+            if($offer->advance_upon_delivery === 0){
+                $sum+=2;
+            }else if($offer->advance_upon_delivery === 1){
+                $sum+=2;
+            }else if($offer->advance_upon_delivery === 2){
+                $sum+=2;
+            }else if($offer->advance_upon_delivery === 3){
+                $sum+=1;
+            }else if($offer->advance_upon_delivery === 4){
+                $sum+=1;
+            }
+
+            if($offer->years_of_guarantee === 0){
+                $sum+=1;
+            }else if($offer->years_of_guarantee === 1){
+                $sum+=2;
+            }else if($offer->years_of_guarantee === 2) {
+                $sum += 3;
+            }
+
+            if($offer->time_to_fix === 0){
+                $sum+=3;
+            }else if($offer->time_to_fix === 1){
+                $sum+=2;
+            }else if($offer->time_to_fix === 2){
+                $sum+=1;
+            }else if($offer->time_to_fix === 3){
+                $sum+=1;
+            }
+
+            if($offer->weeks_to_start === 0){
+                $sum+=3;
+            }else if($offer->weeks_to_start === 1){
+                $sum+=2;
+            }else if($offer->weeks_to_start === 2){
+                $sum+=2;
+            }else if($offer->weeks_to_start === 3){
+                $sum+=1;
+            }else if($offer->weeks_to_start === 4){
+                $sum+=1;
+            }
+
+            if($offer->advance_upon_agreement === 0){
+                $sum+=2;
+            }else if($offer->advance_upon_agreement === 1){
+                $sum+=2;
+            }else if($offer->advance_upon_agreement === 2){
+                $sum+=2;
+            }else if($offer->advance_upon_agreement === 3){
+                $sum+=1;
+            }else if($offer->advance_upon_agreement === 4){
+                $sum+=1;
+            }
+
+            if($offer->advance_upon_start === 0){
+                $sum+=2;
+            }else if($offer->advance_upon_start === 1){
+                $sum+=2;
+            }else if($offer->advance_upon_start === 2){
+                $sum+=2;
+            }else if($offer->advance_upon_start === 3){
+                $sum+=1;
+            }else if($offer->advance_upon_start === 4){
+                $sum+=1;
+            }
+
+            if($offer->reaction_time === 0){
+                $sum+=3;
+            }else if($offer->reaction_time === 1){
+                $sum+=3;
+            }else if($offer->reaction_time === 2){
+                $sum+=2;
+            }else if($offer->reaction_time === 3){
+                $sum+=1;
+            }
+          if($sum>$sum_check){
+              $the_best = $offer;
+              $sum_check = $sum;
+          }
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Filter ok',
+            'payload' => $the_best
+        ]);
+    }
     public function filterChallengeOffers(Request $request)
     {
         $option = $request->input('option');

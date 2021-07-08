@@ -214,6 +214,7 @@ export default {
         const solution = ref();
         const check = ref(false);
         const filterType = ref('');
+        const theBestOffer = ref('');
 
         watch(() => offers.value.list, (first, second) => {
         }, {})
@@ -245,6 +246,17 @@ export default {
                         console.log('props.challenge.id->' + props.challenge.id);
                         console.log('response.data->' + response.data.payload);
                         offers.value.list = response.data.payload;
+                    } else {
+
+                    }
+                })
+        }
+
+        const GetTheBestOffer = async () => {
+            axios.post('/api/offer/get/best', {id: props.challenge.id})
+                .then(response => {
+                    if (response.data.success) {
+                        theBestOffer.value = response.data.payload;
                     } else {
 
                     }
@@ -290,9 +302,11 @@ export default {
 
         onMounted(() => {
             getChallengeOffersRepositories('');
+            GetTheBestOffer();
         });
 
         return {
+            theBestOffer,
             StartFilterOffer,
             filterType,
             check,
