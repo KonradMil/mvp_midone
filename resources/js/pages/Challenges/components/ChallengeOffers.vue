@@ -55,6 +55,7 @@
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div  v-for="(offer, index) in offers.list" :key="index" class="col-span-12 col-span-12 xxl:col-span-6">
+                <div :class="(offer.id === theBestOffer.id) ? 'best-offer': '' ">
                 <div class="intro-y box"  v-if="challenge.selected_offer_id < 1 || offer.selected == 1">
                     <div class="px-5 py-5" >
                         <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
@@ -173,6 +174,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
 
