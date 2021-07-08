@@ -24,6 +24,7 @@
                         <a class="flex items-center px-3 py-2 rounded-md cursor-pointer dark:text-theme-10 font-medium" :class="(activeTab === 'personalia') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'personalia'"> <i data-feather="activity" class="w-4 h-4 mr-2"></i> {{$t('profiles.personality')}} </a>
                         <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" href="" :class="(activeTab === 'company') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'company'" > <i data-feather="box" class="w-4 h-4 mr-2"></i> {{$t('profiles.company')}} </a>
                         <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" href="" :class="(activeTab === 'change_password') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'change_password'" > <i data-feather="lock" class="w-4 h-4 mr-2"></i> {{$t('profiles.changePassword')}} </a>
+                        <a class="flex items-center px-3 py-2 rounded-md cursor-pointer" href="" :class="(activeTab === 'security') ? 'bg-theme-20 dark:bg-dark-1 font-medium text-white' : ''" @click.prevent="activeTab = 'security'" > <i data-feather="lock" class="w-4 h-4 mr-2"></i> Bezpieczeństwo </a>
 <!--                        <a class="flex items-center mt-5" href=""> <i data-feather="settings" class="w-4 h-4 mr-2"></i> User Settings </a>-->
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
@@ -135,6 +136,11 @@
                    <Company></Company>
                     <!-- END: Company -->
                 </div>
+                <div class="col-span-12 lg:col-span-8 xxl:col-span-9" v-if="activeTab === 'security'">
+                    <!-- BEGIN: Company -->
+                    <Security></Security>
+                    <!-- END: Company -->
+                </div>
             </div>
         </div>
     </div>
@@ -160,11 +166,13 @@ import Company from "./Company"
 import Terms  from "./Terms"
 import ChangePassword from "./ChangePassword";
 import Socials from "./Socials";
+import Security from "./Security";
 
 const toast = useToast();
 
 export default defineComponent({
     components: {
+        Security,
         ChangePassword,
         Avatar,
         DarkModeSwitcher,
