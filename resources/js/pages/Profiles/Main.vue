@@ -57,7 +57,7 @@
                                                 type="text"
                                                 class="form-control"
                                                 :placeholder="user.name"
-                                                v-model="name"
+                                                v-model="formData.name"
                                             />                                </div>
                                         <div class="mt-3">
                                             <label for="update-profile-form-3" class="form-label">{{$t('profiles.lastname')}}</label>
@@ -66,7 +66,7 @@
                                                 type="text"
                                                 class="form-control"
                                                 :placeholder="user.lastname"
-                                                v-model="lastname"
+                                                v-model="formData.lastname"
                                             />                                </div>
                                     </div>
                                     <div class="col-span-12 xxl:col-span-6">
@@ -77,12 +77,12 @@
                                                 type="email"
                                                 class="form-control"
                                                 placeholder="Mail"
-                                                v-model="email"
+                                                v-model="formData.email"
                                             />
                                         </div>
                                         <div class="mt-3">
                                             <label for="update-profile-form-4" class="form-label">{{$t('profiles.phone')}}</label>
-                                            <input id="update-profile-form-4" type="text" class="form-control" :placeholder="user.phone"  v-model="user.phone">
+                                            <input id="update-profile-form-4" type="text" class="form-control" :placeholder="user.phone"  v-model="formData.phone">
                                         </div>
                                     </div>
                                 </div>
@@ -190,14 +190,11 @@ export default defineComponent({
         const dropzoneSingleRef = ref();
         const avatar_path = ref();
         const user = window.Laravel.user;
-        const email = ref("");
-        const name = ref("");
-        const lastname = ref("");
         const formData = reactive ({
-            name: '',
-            lastname: '',
-            email: '',
-            phone: ''
+            name: window.Laravel.user.name,
+            lastname: window.Laravel.user.lastname,
+            email: window.Laravel.user.email,
+            phone: window.Laravel.user.phone
         })
         const rules = {
             email: {required, email},
