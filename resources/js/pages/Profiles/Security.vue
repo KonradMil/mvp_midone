@@ -46,7 +46,14 @@ export default {
         const twofa = ref(false);
 
         const changeTwoFa = () => {
+            if(twofa.value) {
+                twofa.value = false;
+            } else {
+                twofa.value = true;
+            }
 
+            console.log('twofa.value');
+            console.log(twofa.value);
             axios.post('api/user/register-authy')
                 .then(response => {
                     console.log(response.data)
@@ -62,14 +69,7 @@ export default {
         };
 
         const save = () => {
-            if(twofa.value) {
-                twofa.value = false;
-            } else {
-                twofa.value = true;
-            }
 
-            console.log('twofa.value');
-            console.log(twofa.value);
 
                 axios.post('api/company/save', {
                     id: company.value.id,
@@ -89,7 +89,7 @@ export default {
         }
 
         onMounted(() => {
-            twofa.value = window.Laravel.user.twofa;
+            twofa.value = !!window.Laravel.user.twofa;
             cash("body")
                 .removeClass("error-page")
 
