@@ -28,7 +28,7 @@ class UserController extends Controller
         Auth::user()->permissions;
     }
     public static function userPermissions($model) {
-        dd($model);
+        return 'penis';
     }
 
     public function reset(Request $request)
