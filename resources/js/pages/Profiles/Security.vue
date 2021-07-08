@@ -19,12 +19,12 @@
                                     <input
                                         id="input-wizard-2"
                                         type="text"
-                                        class="form-control"
+                                        class="form-control w-75"
                                         v-model="user.phone"
                                     />
                                 </div>
                             </div>
-                            <div class="col-span-12 xxl:col-span-12">
+                            <div class="col-span-12 xxl:col-span-12 mt-3">
                                 <div class="form-check" v-if="twofa">
                                     <input id="checkbox-switch-7" class="form-check-switch" type="checkbox" @change="changeTwoFa"  checked/>
                                     <label class="form-check-label" for="checkbox-switch-7">Logowanie dwuetapowe</label>
