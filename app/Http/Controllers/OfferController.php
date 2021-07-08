@@ -274,7 +274,6 @@ class OfferController extends Controller
             }
             if($c>0){
                 $check->avg_guarantee = (float)($sum/$c);
-
             }
             $check->robots = json_encode($request->solution_robots);
             $check->challenge_id = $request->challenge_id;
