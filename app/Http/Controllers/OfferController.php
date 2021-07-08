@@ -388,6 +388,7 @@ class OfferController extends Controller
         $offer->rejected = true;
         $offer->selected = false;
         $challenge = Challenge::find($offer->challenge_id);
+        $challenge->detach($offer);
         if($challenge->selected_offer_id == $offer->id){
             $challenge->selected_offer_id = 0;
         }
