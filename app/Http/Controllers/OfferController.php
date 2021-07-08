@@ -118,6 +118,7 @@ class OfferController extends Controller
               $the_best = $offer;
               $sum_check = $sum;
           }
+          Offer::find($offer->id)->points = $sum;
         }
 
         return response()->json([
