@@ -238,6 +238,8 @@ export default {
             offers.value = GetChallengeOffers(props.challenge.id);
             if(offers.value.list.length < 1){
                 guard.value = 1;
+            }else{
+                guard.value = 0;
             }
         }
 
