@@ -6,6 +6,7 @@ use App\Mail\ChangePassword;
 use App\Mail\ForgotPassword;
 use App\Mail\TeamInvitation;
 use Authy\AuthyApi;
+use GuzzleHttp\Client;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
@@ -61,6 +62,12 @@ class UserController extends Controller
         }
 
         $user->save();
+
+        $client = new Client();
+        $r = $client->request('POST', 'https://api.authy.com/protected/json/users/' . $user->authy_id . '/secret', [
+            'json' => ['label' => 'DBR 2-FA', 'qr_size' => 256]
+        ]);
+          dd($r);
 
         return response()->json([
             'success' => true,
