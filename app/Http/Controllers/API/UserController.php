@@ -25,7 +25,7 @@ class UserController extends Controller
 {
     public function test()
     {
-        Auth::user()->permissions;
+        Auth::user()->permissions();
     }
     public static function userPermissions($model) {
         return 'penis';
