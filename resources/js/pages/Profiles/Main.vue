@@ -82,7 +82,7 @@
                                         </div>
                                         <div class="mt-3">
                                             <label for="update-profile-form-4" class="form-label">{{$t('profiles.phone')}}</label>
-                                            <input id="update-profile-form-4" type="text" class="form-control" placeholder="Input text" value="65570828">
+                                            <input id="update-profile-form-4" type="text" class="form-control" :placeholder="user.phone"  v-model="user.phone">
                                         </div>
                                     </div>
                                 </div>
@@ -190,17 +190,14 @@ export default defineComponent({
         const dropzoneSingleRef = ref();
         const avatar_path = ref();
         const user = window.Laravel.user;
-        const echo = window.Echo;
-        const notifications = ref([]);
-        const lang = ref('pl');
-        const { t, locale } = useI18n({ useScope: 'global' });
         const email = ref("");
         const name = ref("");
         const lastname = ref("");
         const formData = reactive ({
             name: '',
             lastname: '',
-            email: ''
+            email: '',
+            phone: ''
         })
         const rules = {
             email: {required, email},
@@ -214,10 +211,7 @@ export default defineComponent({
 
         onMounted(() => {
             const elDropzoneSingleRef = dropzoneSingleRef.value;
-            console.log(elDropzoneSingleRef);
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
-                console.log("resp.xhr.response");
-                console.log(resp.xhr.response);
                 avatar_path.value = JSON.parse(resp.xhr.response).payload;
                 let user = JSON.parse(resp.xhr.response).user;
                 store.dispatch('login/login', {
@@ -234,57 +228,17 @@ export default defineComponent({
 
         });
 
-        const changeLang = () => {
-            locale.value = lang.value;
-            store.dispatch('main/setCurrentLang', lang.value);
-        }
-
-        watch(() => lang.value, (val) => {
-            changeLang();
-        });
-
-        echo.private('App.Models.User.' + user.id)
-            .notification((notification) => {
-                console.log(notification);
-                getNotificationsRepositories();
-            });
-        const getNotificationsRepositories = async () => {
-            console.log(GetNotifications());
-            // if(GetNotifications().list.)
-            notifications.value = GetNotifications();
-        }
-
-        const searchDropdown = ref(false);
         const store = useStore();
-
-        const showSearchDropdown = () => {
-            searchDropdown.value = true;
-        };
-
-        const hideSearchDropdown = () => {
-            searchDropdown.value = false;
-        };
-
-        const notificationsComp = computed(() => {
-            if(notifications.value.list === undefined) {
-                return notifications.value;
-            }  else {
-                console.log(notifications.value.list);
-                return notifications.value.list;
-            }
-        });
 
         const goTo = (link) => {
             router.push({ path: link})
         };
 
         onMounted(function () {
-            console.log(props.check + 'props check');
             if(props.check === 'change_password'){
                 activeTab.value = 'change_password';
             }
-            lang.value = store.state.main.currentLang;
-            notifications.value = user.notifications;
+
             avatar_path.value = user.avatar;
         })
 
@@ -299,174 +253,14 @@ export default defineComponent({
             if (validate.value.$invalid) {
                 return false;
             } else {
-                return true;
-            }
-        };
-
-        return {
-            searchDropdown,
-            showSearchDropdown,
-            hideSearchDropdown,
-            user,
-            goTo,
-            notifications,
-            notificationsComp,
-            changeLang,
-            lang,
-            formData,
-            validate,
-            save,
-            avatar_path,
-            activeTab,
-        };
-    },
-    mounted() {
-        console.log(store.state);
-        this.name = store.state.login.user.name;
-        this.lastname = store.state.login.user.lastname;
-        this.email = store.state.login.user.email;
-    },
-    data() {
-        return {
-            email:"",
-            error: null,
-            name: "",
-            lastname: "",
-        }
-    },
-    methods: {
-        logout() {
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('api/logout')
-                    .then(response => {
-                        if (response.data.success) {
-                            store.dispatch('login/logout')
-                            this.$router.go('/login');
-                        } else {
-                            toast.error(response.data.message);
-                        }
-                    })
-                // .catch(function (error) {
-                //     this.toast.error(error);
-                // });
-            })
-        },
-        saveCompany(){
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('api/company/create', {
-                    regon : this.regon,
-                    nip: this.nip,
-                    company_name: this.company_name,
-                    city: this.city,
-                    street: this.street,
-                    flat_nr: this.loc_nr,
-                    house_nr: this.house_nr,
-                    postcode: this.postcode,
-                    province: this.voivodeship,
-                    country: this.country,
-                    krs: this.krs
+                axios.post('api/profile/update', {
+                    name: formData.name,
+                    lastname: formData.lastname,
+                    email: formData.email,
+                    phone: formData.phone
                 })
                     .then(response => {
                         console.log(response.data)
-                        // ??
-                        if (response.data.success) {
-                            toast.success(('Zapisano!'))
-                        } else {
-                            toast.error(response.data.message);
-                        }
-                    })
-                    .catch(function (error) {
-                        toast.error(error);
-                    });
-            })
-        },
-        searchNip() {
-            if (this.nip !== '') {
-                this.search(this.nip);
-            } else {
-                toast.warning('NIP nie może być pusty');
-            }
-
-        },
-        searchRegon() {
-            if (this.regon !== '') {
-                this.search(this.regon);
-            } else {
-                toast.warning('REGON nie może być pusty');
-            }
-        },
-        searchKRS() {
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('api/company/search/krs', {
-                    krs: this.krs
-                })
-                    .then(response => {
-                        console.log(response.data)
-                        if (response.data.success) {
-                            if (response.data.success) {
-                                this.regon = response.data.payload[0].regon;
-                                this.nip = response.data.payload[0].nip;
-                                this.city = response.data.payload[0].postalCityName;
-                                this.company_name = response.data.payload[0].company_name;
-                                this.street = response.data.payload[0].streetName;
-                                this.loc_nr = response.data.payload[0].flatNr;
-                                this.house_nr = response.data.payload[0].homeNr;
-                                this.postcode = response.data.payload[0].postalCode;
-                                this.voivodeship = response.data.payload[0].voivodshipName;
-                                this.country = 'Polska';
-                            } else {
-                                toast.error(response.data.message);
-                            }
-
-                        } else {
-                            toast.error(response.data.message);
-                        }
-                    })
-                    .catch(function (error) {
-                        toast.error(error);
-                    });
-            })
-        },
-        search(val) {
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('api/company/search/nip', {
-                    nip: val
-                })
-                    .then(response => {
-                        console.log(response.data)
-                        if (response.data.success) {
-                            this.regon = response.data.payload[0].regon;
-                            this.nip = response.data.payload[0].nip;
-                            this.city = response.data.payload[0].postalCityName;
-                            this.company_name = response.data.payload[0].company_name;
-                            this.street = response.data.payload[0].streetName;
-                            this.loc_nr = response.data.payload[0].flatNr;
-                            this.house_nr = response.data.payload[0].homeNr;
-                            this.postcode = response.data.payload[0].postalCode;
-                            this.voivodeship = response.data.payload[0].voivodshipName;
-                            this.country = 'Polska';
-                        } else {
-                            toast.error(response.data.message);
-                        }
-                    })
-                    .catch(function (error) {
-                        toast.error(error);
-                    });
-            })
-        },
-        handleSubmit() {
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('api/profile/update', {
-                    name: this.name,
-                    lastname: this.lastname,
-                    email: this.email
-                })
-                    .then(response => {
-                        console.log(response.data)
-                        // const toast = useToast();
-                        // if(this.name === '' || this.lastname === ''){
-                        //     toast.error('Uzupełnij imie i nazwisko!');
-                        // }
                         if (response.data.success) {
                             let user = response.data.payload;
                             store.dispatch('login/login', {
@@ -478,11 +272,18 @@ export default defineComponent({
                             toast.error(response.data.message);
                         }
                     })
-                // .catch(function (error) {
-                //     this.toast.error(error);
-                // });
-            })
-        }
+            }
+        };
+
+        return {
+            user,
+            goTo,
+            formData,
+            validate,
+            save,
+            avatar_path,
+            activeTab,
+        };
     },
     created() {
         if (window.Laravel.user) {
