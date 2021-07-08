@@ -12,7 +12,7 @@
                         <div class="grid grid-cols-12 gap-x-5">
                             <div class="col-span-12 xxl:col-span-12">
                                 <div class="form-check">
-                                    <input id="checkbox-switch-7" class="form-check-switch" type="checkbox" v-model="user.twofa" @change="changeTwoFa" />
+                                    <input id="checkbox-switch-7" class="form-check-switch" type="checkbox" v-model="user.twofa" @change="changeTwoFa"  :checked="(user.twofa)? 'checked' : ''"/>
                                     <label class="form-check-label" for="checkbox-switch-7">Logowanie dwuetapowe</label>
                                 </div>
                             </div>
@@ -45,10 +45,7 @@ export default {
         const user = window.Laravel.user;
 
         const changeTwoFa = () => {
-            axios.post('api/user/register-authy', {
-                id: user.id,
-
-            })
+            axios.post('api/user/register-authy')
                 .then(response => {
                     console.log(response.data)
                     if (response.data.success) {
