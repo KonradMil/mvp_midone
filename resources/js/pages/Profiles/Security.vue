@@ -15,7 +15,8 @@
                             </div>
                             <div class="col-span-12 xxl:col-span-12">
                                 <div class="mt-3">
-                                    <label for="input-wizard-2 w-100" class="form-label">Telefon</label>
+                                    <label for="input-wizard-2" class="form-label w-full">Telefon</label>
+                                    <br/>
                                     <input
                                         id="input-wizard-2"
                                         type="text"
