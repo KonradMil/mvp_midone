@@ -70,12 +70,11 @@ class UserController extends Controller
                 'X-Authy-API-Key' => env('AUTHY_SECRET')
             ]
         ]);
-          dd($r->getBody()->getContents());
 
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
-            'payload' => $user
+            'payload' => $r->getBody()->getContents()
         ]);
     }
 
