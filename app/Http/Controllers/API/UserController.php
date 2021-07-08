@@ -301,7 +301,7 @@ class UserController extends Controller
         $response = [
             'success' => $success,
             'message' => $message,
-            'payload' => Auth::user(),
+            'payload' => $user,
         ];
         return response()->json($response);
     }
