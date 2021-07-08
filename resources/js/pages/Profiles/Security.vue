@@ -11,10 +11,15 @@
                     <div class="flex-1 mt-6 xl:mt-0">
                         <div class="grid grid-cols-12 gap-x-5">
                             <div class="col-span-12 xxl:col-span-12">
-                                <div class="form-check">
-                                    <input id="checkbox-switch-7" class="form-check-switch" type="checkbox" @change="changeTwoFa"  :checked="(twofa)? 'checked' : ''"/>
+                                <div class="form-check" v-if="twofa">
+                                    <input id="checkbox-switch-7" class="form-check-switch" type="checkbox" @change="changeTwoFa"  checked/>
                                     <label class="form-check-label" for="checkbox-switch-7">Logowanie dwuetapowe</label>
                                 </div>
+                                <div class="form-check" v-if="!twofa">
+                                    <input id="checkbox-switch-8" class="form-check-switch" type="checkbox" @change="changeTwoFa"/>
+                                    <label class="form-check-label" for="checkbox-switch-8">Logowanie dwuetapowe</label>
+                                </div>
+
                             </div>
                         </div>
                         <button class="btn btn-primary w-20 mt-3" type="submit" @click.prevent="save">{{ $t('global.save') }}</button>
