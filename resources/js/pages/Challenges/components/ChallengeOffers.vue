@@ -45,6 +45,10 @@
                 label="name"
                 max="1"
                 :placeholder="filterType === '' ? 'Wybierz...' : filterType"
+                :close-on-select="false"
+                :clear-on-select="false"
+                :preserve-search="true"
+                :preselect-first="true"
                 valueProp="value"
                 :options="filters['options']"
             />
