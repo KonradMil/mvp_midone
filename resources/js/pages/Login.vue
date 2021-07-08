@@ -252,6 +252,7 @@ export default {
                                     window.location.replace('/kreator');
                                 }
                             } else {
+                                console.log(response.data.message);
                                 if (response.data.message == '2fa') {
                                     let user = response.data.payload;
                                     window.email = user.email;
