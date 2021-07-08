@@ -34,7 +34,9 @@ class SolutionController extends Controller
         $challenge = Challenge::find($id);
         $solutions = NULL;
         if($option === 'Cena-max'){
-            $solutions = $challenge->solutions()->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->select('solutions.*')->orderBy('estimates.sum', 'DESC')->get();
+            $solutions = $challenge->solutions()->with(['estimate'])->orderBy('estimate.sum', 'DESC')->get();
+
+//                ->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->select('solutions.*')
         }else if($option === 'Cena-min'){
             $solutions = $challenge->solutions()->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->select('solutions.*')->orderBy('estimates.sum', 'ASC')->get();
         }else if($option === 'OEE po robotyzacji'){
