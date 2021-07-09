@@ -77,6 +77,7 @@
                                 </div>
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                                 <div class="flex items-center justify-center text-theme-20" v-if="offer.id === theBestOffer.id"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Najlepsza oferta</div>
+                                <circle-icon>sadf</circle-icon>
                             </div>
                             <div class="flex items-center">
                                 <div class="border-l-2 border-theme-1 pl-4">
