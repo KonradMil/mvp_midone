@@ -151,19 +151,21 @@ class OfferController extends Controller
         }else if($option === 'Okres zwrotu inwestycji'){
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('financial_analyses as fa', 'fa.solution_id', '=', 'so.id')->orderBy('fa.simple_payback', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
         }else if($option === 'Ranking'){
-            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_fanuc', 'DESC')->with('solution')->get();
+            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('points', 'DESC')->with('solution')->get();
         }else if($option === 'FANUC'){
-            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_yaskawa', 'DESC')->with('solution')->get();
+            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_fanuc', 'DESC')->with('solution')->get();
         }else if($option === 'Yaskawa'){
-            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_abb', 'DESC')->with('solution')->get();
+            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_yaskawa', 'DESC')->with('solution')->get();
         } else if($option === 'ABB'){
-            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_mitshubishi', 'DESC')->with('solution')->get();
+            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_abb', 'DESC')->with('solution')->get();
         } else if($option === 'Universal Robots'){
-            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_tfm', 'DESC')->with('solution')->get();
-        }else if($option === 'Mitshubishi'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_universal', 'DESC')->with('solution')->get();
+        }else if($option === 'Mitshubishi'){
+            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_mitshubishi', 'DESC')->with('solution')->get();
         }else if($option === 'Universal Robots'){
-            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_kuka', 'DESC')->with('solution')->get();
+            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_universal', 'DESC')->with('solution')->get();
+        }else if($option === 'TFM ROBOTICS'){
+            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_tfm', 'DESC')->with('solution')->get();
         }
 
 
