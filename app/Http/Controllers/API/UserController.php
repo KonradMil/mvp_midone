@@ -31,9 +31,12 @@ class UserController extends Controller
         $solutions = [];
         $ts = Auth::user()->teams;
 
-        foreach ($ts as $tt) {
-            array_push($ars, $tt->id);
+        if($ts != null){
+            foreach ($ts as $tt) {
+                array_push($ars, $tt->id);
+            }
         }
+
 
         $c = Challenge::whereHas('teams', function ($query) use ($ars) {
             $query->whereIn('teams.id', $ars);
