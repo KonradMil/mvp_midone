@@ -60,10 +60,10 @@
                 <div class="intro-y box"  v-if="challenge.selected_offer_id < 1 || offer.selected == 1">
                     <div class="px-5 py-5" >
                         <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
-                            <div class="w-20 h-20 rounded-full flex justify-center items-center">
-                                <p>404</p>
-                            </div>
-                            <div class="flex items-center">
+                            <div class="relative w-12 h-12">
+                                1
+                                <div class="absolute top-0 right-0 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></div>
+                            </div>                            <div class="flex items-center">
                                 <div class="pl-4 my-2">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
                                     <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
