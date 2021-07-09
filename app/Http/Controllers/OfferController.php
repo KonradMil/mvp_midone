@@ -393,7 +393,7 @@ class OfferController extends Controller
         if($challenge->selected_offer_id == $offer->id){
             $challenge->selected_offer_id = 0;
         }
-        $offer->challenge()->diassiocate($challenge);
+        $offer->challenge()->dissociate($challenge);
         $solution = Solution::find($offer->solution_id);
         $solution->selected_offer_id = 0;
         $challenge->save();
