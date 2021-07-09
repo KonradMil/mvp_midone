@@ -644,10 +644,13 @@ class SolutionController extends Controller
         $solution = new Solution();
         $estimate = new Estimate();
         $estimate->solution_id = $solution->id;
+        $estimate->save();
         $financial_analyses = new FinancialAnalysis();
         $financial_analyses->solution_id = $solution->id;
+        $financial_analyses->save();
         $operational_analyses = new OperationalAnalysis();
         $operational_analyses->solution_id = $solution->id;
+        $operational_analyses->save();
 
         $solution->author_id = Auth::user()->id;
         $solution->challenge_id = $request->input('id');
