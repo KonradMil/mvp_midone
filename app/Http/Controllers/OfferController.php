@@ -151,7 +151,7 @@ class OfferController extends Controller
         }else if($option === 'Okres zwrotu inwestycji'){
             $offers = $challenge->offers()->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('financial_analyses as fa', 'fa.solution_id', '=', 'so.id')->orderBy('fa.simple_payback', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
         }else if($option === 'Ranking'){
-            $offers = $challenge->offers()->orderBy('sum', 'DESC')->with('solution')->get();
+            $offers = $challenge->offers()->orderBy('points', 'DESC')->with('solution')->get();
         }
 
         return response()->json([
