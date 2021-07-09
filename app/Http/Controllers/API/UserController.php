@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Mail\ChangePassword;
 use App\Mail\ForgotPassword;
 use App\Mail\TeamInvitation;
+use App\Models\Challenges\Challenge;
 use Authy\AuthyApi;
 use GuzzleHttp\Client;
 use Illuminate\Auth\Events\PasswordReset;
@@ -25,7 +26,22 @@ class UserController extends Controller
 {
 
     public static function userPermissions($model) {
-        return 'penis';
+        $user = Auth::user();
+
+        $solutions = [];
+        $ts = Auth::user()->teams;
+
+        foreach ($ts as $tt) {
+            array_push($ars, $tt->id);
+        }
+
+        $c = Challenge::whereHas('teams', function ($query) use ($ars) {
+            $query->whereIn('teams.id', $ars);
+        })->orderBy('created_at', 'DESC')->get();
+        $challs = Auth::user()->challenges;
+        $challenges = $challs->merge($c);
+
+
     }
 
     public function reset(Request $request)

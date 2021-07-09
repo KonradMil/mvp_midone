@@ -1,6 +1,5 @@
 <template>
     <div>
-        <DarkModeSwitcher/>
         <div class="container sm:px-10">
             <div class="block xl:grid grid-cols-2 gap-4">
                 <!-- BEGIN: Register Info -->
@@ -129,14 +128,11 @@
 
 <script>
     import {defineComponent, onMounted, ref, reactive, toRefs} from "vue";
-    import DarkModeSwitcher from "../components/dark-mode-switcher/Main.vue";
     import PasswordMeter from 'vue-simple-password-meter';
     import {useStore} from '../store';
     import {
         required,
         minLength,
-        email,
-        sameAs,
     } from "@vuelidate/validators";
     import { useVuelidate } from "@vuelidate/core";
     import {useToast} from "vue-toastification";
@@ -146,7 +142,6 @@
 
     export default {
         components: {
-            DarkModeSwitcher,
             PasswordMeter,
         },
         props: {
