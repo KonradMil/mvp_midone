@@ -184,6 +184,15 @@
     border: 3px solid #930f68;
     border-radius: 10px;
 }
+.numberCircle {
+    display:inline-block;
+    line-height:0px;
+
+    border-radius:50%;
+    border:2px solid;
+
+    font-size:32px;
+}
 #bottom {
     pointer-events: none !important;
 }
