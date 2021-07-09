@@ -82,6 +82,9 @@ export default {
             filterMember();
         });
 
+        watch(() => solutions.value, (first, second) => {
+        }, {})
+
         watch(() => filterType.value, (first, second) => {
             StartFilterOffer();
             if(filterType.value === null){
