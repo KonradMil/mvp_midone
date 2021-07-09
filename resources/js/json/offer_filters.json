@@ -1,8 +1,8 @@
 {
     "options": [
         "Ranking",
-        "Cena-max",
-        "Cena-min",
+        "Cene malejąco",
+        "Cena rosnąco",
         "Czas realizacji uruchomienia u klienta",
         "Okres zwrotu inwestycji",
         "NPV",

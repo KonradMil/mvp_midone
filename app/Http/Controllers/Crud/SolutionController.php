@@ -541,6 +541,39 @@ class SolutionController extends Controller
             $c->screenshot_path = $path['relative'];
             unset($j['screenshot']);
             $c->save_json = json_encode($j);
+
+            $sum_fanuc = 0;
+            $sum_yaskawa = 0;
+            $sum_abb = 0;
+            $sum_mitshubishi = 0;
+            $sum_kuka = 0;
+            $sum_tfm = 0;
+            $sum_universal = 0;
+                foreach ($j->parts as $part) {
+                    $model = UnityModel::find($part->model->model_id);
+                    if($model->brand === 'FANUC'){
+                        $sum_fanuc++;
+                    }else if($model->brand === 'Yaskawa'){
+                        $sum_yaskawa++;
+                    }else if($model->brand === 'ABB'){
+                        $sum_abb++;
+                    }else if($model->brand === 'Mitshubishi'){
+                        $sum_mitshubishi++;
+                    }else if($model->brand === 'KUKA'){
+                        $sum_kuka++;
+                    }else if($model->brand === 'TFM ROBOTICS'){
+                        $sum_tfm++;
+                    }else if($model->brand === 'Universal Robots'){
+                        $sum_universal++;
+                    }
+                }
+
+                $c->count_fanuc = $sum_fanuc;
+                $c->count_yaskawa = $sum_yaskawa;
+                $c->count_abb  = $sum_abb;
+                $c->count_mitshubishi = $sum_mitshubishi;
+                $c->count_tfm  = $sum_tfm;
+                $c->count_universal  = $sum_universal;
         }
 
         $c->save();

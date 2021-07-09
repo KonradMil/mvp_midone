@@ -136,9 +136,9 @@ class OfferController extends Controller
         $id = $request->input('id');
         $challenge = Challenge::find($id);
         $offers = NULL;
-        if($option === 'Cena-max'){
+        if($option === 'Cene malejąco'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('price_of_delivery', 'DESC')->with('solution')->get();
-        }else if($option === 'Cena-min'){
+        }else if($option === 'Cena rosnąco'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('price_of_delivery', 'ASC')->with('solution')->get();
         }else if($option === 'Czas realizacji uruchomienia u klienta'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('time_to_start', 'DESC')->with('solution')->get();
