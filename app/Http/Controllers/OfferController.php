@@ -149,7 +149,7 @@ class OfferController extends Controller
         }else if($option === 'Okres gwarancji robota'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('avg_guarantee', 'DESC')->with('solution')->get();
         }else if($option === 'Okres zwrotu inwestycji'){
-            $offers = $challenge->offers()->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('financial_analyses as fa', 'fa.solution_id', '=', 'so.id')->where('rejected', '=', null)->orderBy('fa.simple_payback', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
+            $offers = $challenge->offers()->where('rejected', '=', null)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('financial_analyses as fa', 'fa.solution_id', '=', 'so.id')->orderBy('fa.simple_payback', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
         }else if($option === 'Ranking'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('points', 'DESC')->with('solution')->get();
         }
