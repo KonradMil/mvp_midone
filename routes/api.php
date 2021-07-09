@@ -30,7 +30,7 @@ Route::post('profile/update', 'App\Http\Controllers\API\UserController@updatePro
 Route::post('profile/change-password', 'App\Http\Controllers\API\UserController@changePassword');
 Route::get('communication', 'App\Http\Controllers\API\UserController@getUsers');
 Route::post('forgot-password', [UserController::class, 'forgotPassword']);
-Route::get('reset-password/{token}', [UserController::class, 'resetPassword']);
+//Route::get('reset-password/{token}', [UserController::class, 'resetPassword']);
 
 Route::post('locations', 'App\Http\Controllers\TestController@locations');
 Route::post('locations/own', 'App\Http\Controllers\TestController@locationsOwn');
