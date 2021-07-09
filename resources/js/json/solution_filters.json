@@ -5,11 +5,12 @@
         "Okres zwrotu inwestycji",
         "NPV",
         "OEE po robotyzacji",
-        "Fanuc",
+        "FANUC",
         "Yaskawa",
         "ABB",
         "Mitshubishi",
-        "Kuka",
-        "TFM ROBOTICS"
+        "KUKA",
+        "TFM ROBOTICS",
+        "Universal Robots"
     ]
 }
