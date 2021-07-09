@@ -9,11 +9,12 @@
         "OEE po robotyzacji",
         "Okres gwarancji stanowiska od integratora",
         "Okres gwarancji robota",
-        "Fanuc",
+        "FANUC",
         "Yaskawa",
         "ABB",
+        "Universal Robots",
         "Mitshubishi",
-        "Kuka",
+        "KUKA",
         "TFM ROBOTICS"
     ]
 }
