@@ -60,6 +60,7 @@
                 <div class="intro-y box"  v-if="challenge.selected_offer_id < 1 || offer.selected == 1">
                     <div class="px-5 py-5" >
                         <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
+                            <circle-icon>asdf</circle-icon>
                             <div class="flex items-center">
                                 <div class="pl-4 my-2">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
@@ -77,7 +78,6 @@
                                 </div>
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                                 <div class="flex items-center justify-center text-theme-20" v-if="offer.id === theBestOffer.id"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Najlepsza oferta</div>
-                                <div class="flex items-center justify-center text-theme-20" v-if="offer.id === theBestOffer.id"> <circle-icon>asdf</circle-icon></div>
                             </div>
                             <div class="flex items-center">
                                 <div class="border-l-2 border-theme-1 pl-4">
