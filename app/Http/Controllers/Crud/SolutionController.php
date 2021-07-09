@@ -652,15 +652,15 @@ class SolutionController extends Controller
         $solution->screenshot_path = 'screenshots/dbr_placeholder.jpeg';
         $solution->save();
 
-        $estimate = new Estimate();
-        $estimate->solution_id = $solution->id;
-        $estimate->save();
-        $financial_analyses = new FinancialAnalysis();
-        $financial_analyses->solution_id = $solution->id;
-        $financial_analyses->save();
-        $operational_analyses = new OperationalAnalysis();
-        $operational_analyses->solution_id = $solution->id;
-        $operational_analyses->save();
+//        $estimate = new Estimate();
+//        $estimate->solution_id = $solution->id;
+//        $estimate->save();
+//        $financial_analyses = new FinancialAnalysis();
+//        $financial_analyses->solution_id = $solution->id;
+//        $financial_analyses->save();
+//        $operational_analyses = new OperationalAnalysis();
+//        $operational_analyses->solution_id = $solution->id;
+//        $operational_analyses->save();
 
 //        $financial->days = $request -> days;
 //        $financial->shifts = $request -> shifts;
