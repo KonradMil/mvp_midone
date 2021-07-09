@@ -38,11 +38,13 @@ class UserController extends Controller
         }
 
 
-//        $c = Challenge::whereHas('teams', function ($query) use ($ars) {
-//            $query->whereIn('teams.id', $ars);
-//        })->orderBy('created_at', 'DESC')->get();
-//        $challs = Auth::user()->challenges;
-//        $challenges = $challs->merge($c);
+        $c = Challenge::whereHas('teams', function ($query) use ($ars) {
+            $query->whereIn('teams.id', $ars);
+        })->orderBy('created_at', 'DESC')->get();
+        $challs = Auth::user()->challenges;
+        if($c != null){
+            $challenges = $challs->merge($c);
+        }
 
 
     }
