@@ -30,7 +30,7 @@ class UserController extends Controller
 
         $solutions = [];
         $ts = Auth::user()->teams;
-
+        $ars = [];
         if($ts != null){
             foreach ($ts as $tt) {
                 array_push($ars, $tt->id);
