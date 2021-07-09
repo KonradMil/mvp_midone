@@ -42,9 +42,8 @@ class UserController extends Controller
             $query->whereIn('teams.id', $ars);
         })->orderBy('created_at', 'DESC')->get();
         $challs = Auth::user()->challenges;
-        if($c != null){
-            $challenges = $challs->merge($c);
-        }
+
+//        $challenges = $challs->merge($c);
 
 
     }
