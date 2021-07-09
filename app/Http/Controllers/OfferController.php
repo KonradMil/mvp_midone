@@ -393,15 +393,14 @@ class OfferController extends Controller
         if($challenge->selected_offer_id == $offer->id){
             $challenge->selected_offer_id = 0;
         }
+        $offer->challenge()->dissociate($challenge);
         $solution = Solution::find($offer->solution_id);
         $solution->selected_offer_id = 0;
         $challenge->save();
         $solution->save();
+        $offer->save();
 
         event(new OfferRejected($offer, $offer->installer, 'Oferta została odrzucona: ' . $solution->name, []));
-
-        $offer->challenge()->dissociate($challenge);
-        $offer->save();
 
 
         return response()->json([
