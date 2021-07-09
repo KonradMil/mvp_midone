@@ -642,16 +642,6 @@ class SolutionController extends Controller
         $financial->save();
         $challenge = Challenge::find($request->input('id'));
         $solution = new Solution();
-        $estimate = new Estimate();
-        $estimate->solution_id = $solution->id;
-        $estimate->save();
-        $financial_analyses = new FinancialAnalysis();
-        $financial_analyses->solution_id = $solution->id;
-        $financial_analyses->save();
-        $operational_analyses = new OperationalAnalysis();
-        $operational_analyses->solution_id = $solution->id;
-        $operational_analyses->save();
-
         $solution->author_id = Auth::user()->id;
         $solution->challenge_id = $request->input('id');
         $solution->installer_id = Auth::user()->id;
@@ -661,7 +651,15 @@ class SolutionController extends Controller
         $solution->status = 0;
         $solution->screenshot_path = 'screenshots/dbr_placeholder.jpeg';
         $solution->save();
-
+        $estimate = new Estimate();
+        $estimate->solution_id = $solution->id;
+        $estimate->save();
+        $financial_analyses = new FinancialAnalysis();
+        $financial_analyses->solution_id = $solution->id;
+        $financial_analyses->save();
+        $operational_analyses = new OperationalAnalysis();
+        $operational_analyses->solution_id = $solution->id;
+        $operational_analyses->save();
 //        $financial->days = $request -> days;
 //        $financial->shifts = $request -> shifts;
 //        $financial->shift_time = $request -> shift_time;
