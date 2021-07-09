@@ -565,7 +565,7 @@ class SolutionController extends Controller
             $sum_kuka = 0;
             $sum_tfm = 0;
             $sum_universal = 0;
-                foreach ($j->parts as $part) {
+                foreach ($c->save_json->parts as $part) {
                     $model = UnityModel::find($part->model->model_id);
                     if($model->brand === 'FANUC'){
                         $sum_fanuc++;
