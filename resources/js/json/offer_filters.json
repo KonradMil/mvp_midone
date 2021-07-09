@@ -9,6 +9,11 @@
         "OEE po robotyzacji",
         "Okres gwarancji stanowiska od integratora",
         "Okres gwarancji robota",
-        "Dostawca głównej technologii"
+        "Fanuc",
+        "Yaskawa",
+        "ABB",
+        "Mitshubishi",
+        "Kuka",
+        "TFM ROBOTICS"
     ]
 }
