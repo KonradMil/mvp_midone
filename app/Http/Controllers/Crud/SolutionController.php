@@ -649,8 +649,6 @@ class SolutionController extends Controller
         $operational_analyses = new OperationalAnalysis();
         $operational_analyses->solution_id = $solution->id;
 
-
-
         $solution->author_id = Auth::user()->id;
         $solution->challenge_id = $request->input('id');
         $solution->installer_id = Auth::user()->id;
