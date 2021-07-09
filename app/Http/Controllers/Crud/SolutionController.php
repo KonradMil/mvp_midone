@@ -200,8 +200,8 @@ class SolutionController extends Controller
         $challenge = Challenge::find($solution->challenge_id);
 //        $challenge->stage = 2;
 //        $challenge->save();
-        $solution->selected = true;
-        $solution->rejected = false;
+        $solution->selected = 1;
+        $solution->rejected = 0;
         $solution->save();
 
         event(new SolutionAccepted($solution, $challenge->author, 'Rozwiązanie zostało zaakceptowane: ' . $solution->name, []));
