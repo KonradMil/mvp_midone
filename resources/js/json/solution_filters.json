@@ -5,6 +5,11 @@
         "Okres zwrotu inwestycji",
         "NPV",
         "OEE po robotyzacji",
-        "Dostawca głównej technologii"
+        "Fanuc",
+        "Yaskawa",
+        "ABB",
+        "Mitshubishi",
+        "Kuka",
+        "TFM ROBOTICS"
     ]
 }

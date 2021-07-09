@@ -60,7 +60,7 @@
                 <div class="intro-y box"  v-if="challenge.selected_offer_id < 1 || offer.selected == 1">
                     <div class="px-5 py-5" >
                         <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
-                            <div class="flex items-center">
+                            <span class="numberCircle clrGreen" v-if="filterType === 'Ranking'"><span>{{ index + 1}}</span></span>                          <div class="flex items-center">
                                 <div class="pl-4 my-2">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
                                     <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>

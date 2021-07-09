@@ -184,6 +184,27 @@
     border: 3px solid #930f68;
     border-radius: 10px;
 }
+.numberCircle {
+    font-family: "OpenSans-Semibold", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+    line-height: 0px;
+    border-radius: 50%;
+    font-size: 12px;
+    min-width: 38px;
+    min-height: 38px;
+}
+.numberCircle span {
+    display: inline-block;
+    padding-top: 50%;
+    padding-bottom: 50%;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+.clrGreen {
+    background: #51a529;
+}
 #bottom {
     pointer-events: none !important;
 }

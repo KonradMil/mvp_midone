@@ -134,6 +134,7 @@ class SolutionController extends Controller
         $solution->selected = false;
         $solution->offers()->delete();
         $solution->selected_offer_id = 0;
+        $solution->rejected = 1;
         $challenge = Challenge::find($solution->challenge_id);
         $solution->save();
 
@@ -199,8 +200,8 @@ class SolutionController extends Controller
         $challenge = Challenge::find($solution->challenge_id);
 //        $challenge->stage = 2;
 //        $challenge->save();
-        $solution->selected = true;
-        $solution->rejected = false;
+        $solution->selected = 1;
+        $solution->rejected = 0;
         $solution->save();
 
         event(new SolutionAccepted($solution, $challenge->author, 'Rozwiązanie zostało zaakceptowane: ' . $solution->name, []));
@@ -650,6 +651,16 @@ class SolutionController extends Controller
         $solution->status = 0;
         $solution->screenshot_path = 'screenshots/dbr_placeholder.jpeg';
         $solution->save();
+
+//        $estimate = new Estimate();
+//        $estimate->solution_id = $solution->id;
+//        $estimate->save();
+//        $financial_analyses = new FinancialAnalysis();
+//        $financial_analyses->solution_id = $solution->id;
+//        $financial_analyses->save();
+//        $operational_analyses = new OperationalAnalysis();
+//        $operational_analyses->solution_id = $solution->id;
+//        $operational_analyses->save();
 
 //        $financial->days = $request -> days;
 //        $financial->shifts = $request -> shifts;

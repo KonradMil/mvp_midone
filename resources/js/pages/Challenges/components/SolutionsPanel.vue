@@ -14,7 +14,7 @@
                             mode="single"
                             label="name"
                             max="1"
-                            :placeholder="filterType === '' ? 'Wybierz...' : filterType"
+                            :placeholder="filterType === null ? 'Wybierz...' : filterType"
                             valueProp="value"
                             :options="filters['options']"
                         />
@@ -75,12 +75,15 @@ export default {
         const user = window.Laravel.user;
         const guard = ref(false);
         const solutions = ref([]);
-        const filterType = ref('');
+        const filterType = ref(null);
 
         emitter.on('deletesolution', e => {
             solutions.value.splice(e.index, 1);
             filterMember();
         });
+
+        // watch(() => solutions.value, (first, second) => {
+        // }, {})
 
         watch(() => filterType.value, (first, second) => {
             StartFilterOffer();
