@@ -1,6 +1,5 @@
 {
     "options": [
-        "Ranking",
         "Cena-max",
         "Cena-min",
         "Czas realizacji uruchomienia u klienta",
@@ -9,6 +8,7 @@
         "OEE po robotyzacji",
         "Okres gwarancji stanowiska od integratora",
         "Okres gwarancji robota",
-        "Dostawca głównej technologii"
+        "Dostawca głównej technologii",
+        "Ranking"
     ]
 }
