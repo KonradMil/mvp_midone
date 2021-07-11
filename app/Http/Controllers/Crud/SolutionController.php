@@ -590,6 +590,7 @@ class SolutionController extends Controller
                 $c->number_of_yaskawa = $sum_yaskawa;
                 $c->number_of_abb  = $sum_abb;
                 $c->number_of_mitshubishi = $sum_mitshubishi;
+                $c->number_of_kuka = $sum_kuka;
                 $c->number_of_tfm  = $sum_tfm;
                 $c->number_of_universal  = $sum_universal;
         }
