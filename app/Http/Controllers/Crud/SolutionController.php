@@ -46,21 +46,21 @@ class SolutionController extends Controller
         }else if($option === null){
             $solutions = $challenge->solutions()->get();
         }else if($option === 'FANUC'){
-            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('count_fanuc', 'DESC')->get();
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_fanuc', 'DESC')->get();
         }else if($option === 'KUKA'){
-            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('count_kuka', 'DESC')->get();
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_kuka', 'DESC')->get();
         }else if($option === 'Yaskawa'){
-            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('count_yaskawa', 'DESC')->get();
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_yaskawa', 'DESC')->get();
         } else if($option === 'ABB'){
-            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('count_abb', 'DESC')->get();
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_abb', 'DESC')->get();
         } else if($option === 'Universal Robots'){
-            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('count_universal', 'DESC')->get();
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_universal', 'DESC')->get();
         }else if($option === 'Mitshubishi'){
-            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('count_mitshubishi', 'DESC')->get();
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_mitshubishi', 'DESC')->get();
         }else if($option === 'Universal Robots'){
-            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('count_universal', 'DESC')->get();
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_universal', 'DESC')->get();
         }else if($option === 'TFM ROBOTICS'){
-            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('count_tfm', 'DESC')->get();
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_tfm', 'DESC')->get();
         }
 
         return response()->json([
@@ -586,12 +586,12 @@ class SolutionController extends Controller
                     }
                 }
 
-                $c->count_fanuc = $sum_fanuc;
-                $c->count_yaskawa = $sum_yaskawa;
-                $c->count_abb  = $sum_abb;
-                $c->count_mitshubishi = $sum_mitshubishi;
-                $c->count_tfm  = $sum_tfm;
-                $c->count_universal  = $sum_universal;
+                $c->number_of_anuc = $sum_fanuc;
+                $c->number_of_yaskawa = $sum_yaskawa;
+                $c->number_of_abb  = $sum_abb;
+                $c->number_of_mitshubishi = $sum_mitshubishi;
+                $c->number_of_tfm  = $sum_tfm;
+                $c->number_of_universal  = $sum_universal;
         }
 
         $c->save();
