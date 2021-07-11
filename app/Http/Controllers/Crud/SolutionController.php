@@ -586,7 +586,7 @@ class SolutionController extends Controller
                     }
                 }
 
-                $c->number_of_anuc = $sum_fanuc;
+                $c->number_of_fanuc = $sum_fanuc;
                 $c->number_of_yaskawa = $sum_yaskawa;
                 $c->number_of_abb  = $sum_abb;
                 $c->number_of_mitshubishi = $sum_mitshubishi;
