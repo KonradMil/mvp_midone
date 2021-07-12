@@ -38,7 +38,7 @@
         <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-            <label for="input-wizard-5" class="form-label pr-5">Filtr</label>
+            <label for="input-wizard-5" class="form-label pr-5 font-medium dark:text-theme-10 text-theme-1">Filtr</label>
             <Multiselect
                 class="form-control"
                 v-model="filterType"
@@ -55,7 +55,7 @@
             />
         </div>
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-            <label for="input-wizard-5" class="form-label">Dostawca głównej technologii</label>
+            <label for="input-wizard-5" class="form-label font-medium dark:text-theme-10 text-theme-1">Dostawca głównej technologii</label>
             <Multiselect
                 class="form-control"
                 v-model="technologyType"
@@ -255,7 +255,9 @@ export default {
         }, {})
 
         watch(() => technologyType.value, (first, second) => {
-            StartFilterOffer();
+            if(technologyType.value !== null){
+                StartFilterOffer();
+            }
             // if(technologyType.value === null){
             //     getChallengeOffersRepositories();
             // }
