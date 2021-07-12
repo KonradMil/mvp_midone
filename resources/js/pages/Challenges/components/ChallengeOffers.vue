@@ -75,6 +75,9 @@
 <!--                <div class="option__desc"><span class="option__title">{{ props.option.title }}</span><span class="option__small">{{ props.option.desc }}</span></div>-->
 <!--            </template>-->
         </div>
+        <div v-if="offers.length == 0 && filterType !== null" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+            Nie ma ofert spełniających podane kryteria.
+        </div>
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div  v-for="(offer, index) in offers.list" :key="index" class="col-span-12 col-span-12 xxl:col-span-6">

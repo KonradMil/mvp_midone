@@ -47,12 +47,6 @@
                     </div>
                     <div v-if="challenge.solutions.length == 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
                         {{$t('challengesMain.noSolutions')}}.
-                        <div v-if="user.type == 'integrator'">
-                            <p>
-                                {{$t('challengesMain.noSolutionsInform')}}.
-                            </p>
-                            <button class="btn btn-primary shadow-md mr-2" @click="addSolution">{{$t('challengesMain.addSolution')}}</button>
-                        </div>
                     </div>
                     <div v-if="solutions.length == 0 && filterType !== null" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
                         Nie ma rozwiązań spełniających podane kryteria.
