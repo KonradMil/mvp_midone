@@ -256,9 +256,9 @@ export default {
 
         watch(() => technologyType.value, (first, second) => {
             StartFilterOffer();
-            if(technologyType.value === null){
-                getChallengeOffersRepositories();
-            }
+            // if(technologyType.value === null){
+            //     getChallengeOffersRepositories();
+            // }
         }, {})
 
         watch(() => filterType.value, (first, second) => {
