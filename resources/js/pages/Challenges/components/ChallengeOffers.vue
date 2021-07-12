@@ -38,6 +38,24 @@
         <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+            <label for="input-wizard-5" class="form-label">Filtr</label>
+            <Multiselect
+                class="form-control"
+                v-model="filterType"
+                mode="single"
+                label="name"
+                max="1"
+                :placeholder="filterType === null ? 'Wybierz...' : filterType"
+                :close-on-select="false"
+                :clear-on-select="false"
+                :preserve-search="true"
+                :preselect-first="true"
+                valueProp="value"
+                :options="filters['options']"
+            />
+        </div>
+        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+            <label for="input-wizard-5" class="form-label">Dostawca głównej technologii</label>
             <Multiselect
                 class="form-control"
                 v-model="filterType"
