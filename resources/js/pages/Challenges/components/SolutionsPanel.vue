@@ -149,7 +149,7 @@ export default {
         }
 
         const StartFilterOffer = async () => {
-            axios.post('/api/solution/user/filter', {option: filterType.value , id: props.challenge.id})
+            axios.post('/api/solution/user/filter', {option: filterType.value , id: props.challenge.id, technologyType: technologyType.value})
                 .then(response => {
                     if (response.data.success) {
                         solutions.value = response.data.payload;
