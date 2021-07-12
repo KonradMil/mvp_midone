@@ -7,41 +7,43 @@
                     <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.solutions')}}</h2>
                 </div>
                 <div class="px-5 py-5">
-                    <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="user.type == 'investor'">
-                            <label for="input-wizard-5" class="form-label pr-5 font-medium dark:text-theme-10 text-theme-1">Filtr</label>
-                            <Multiselect
-                                class="form-control"
-                                v-model="filterType"
-                                mode="single"
-                                label="name"
-                                max="1"
-                                :placeholder="filterType === null ? 'Wybierz...' : filterType"
-                                :close-on-select="false"
-                                :clear-on-select="false"
-                                :preserve-search="true"
-                                :preselect-first="true"
-                                valueProp="value"
-                                :options="filters['options']"
-                            />
-                            <label for="input-wizard-5" class="form-label font-medium dark:text-theme-10 text-theme-1">Dostawca głównej technologii</label>
-                            <Multiselect
-                                class="form-control"
-                                v-model="technologyType"
-                                mode="single"
-                                label="name"
-                                max="1"
-                                :placeholder="technologyType === null ? 'Wybierz...' : technologyType"
-                                :show-labels="false"
-                                :preselect-first="true"
-                                valueProp="value"
-                                :disabled="filterType===null"
-                                :options="technology['options']"
-                                :option-height="104"
-                            />
-                            <!--            <template slot="singleLabel" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky"><span class="option__desc"><span class="option__title">{{ props.option.title }}</span></span></template>-->
-                            <!--            <template slot="option" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky">-->
-                            <!--                <div class="option__desc"><span class="option__title">{{ props.option.title }}</span><span class="option__small">{{ props.option.desc }}</span></div>-->
-                            <!--            </template>-->
+                    <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="user.type === 'investor'">
+                        <label for="input-wizard-5" class="form-label pr-5 font-medium dark:text-theme-10 text-theme-1">Filtr</label>
+                        <Multiselect
+                            class="form-control"
+                            v-model="filterType"
+                            mode="single"
+                            label="name"
+                            max="1"
+                            :placeholder="filterType === null ? 'Wybierz...' : filterType"
+                            :close-on-select="false"
+                            :clear-on-select="false"
+                            :preserve-search="true"
+                            :preselect-first="true"
+                            valueProp="value"
+                            :options="filters['options']"
+                        />
+                    </div>
+                    <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="user.type === 'investor'">
+                        <label for="input-wizard-5" class="form-label font-medium dark:text-theme-10 text-theme-1">Dostawca głównej technologii</label>
+                        <Multiselect
+                            class="form-control"
+                            v-model="technologyType"
+                            mode="single"
+                            label="name"
+                            max="1"
+                            :placeholder="technologyType === null ? 'Wybierz...' : technologyType"
+                            :show-labels="false"
+                            :preselect-first="true"
+                            valueProp="value"
+                            :disabled="filterType===null"
+                            :options="technology['options']"
+                            :option-height="104"
+                        />
+                        <!--            <template slot="singleLabel" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky"><span class="option__desc"><span class="option__title">{{ props.option.title }}</span></span></template>-->
+                        <!--            <template slot="option" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky">-->
+                        <!--                <div class="option__desc"><span class="option__title">{{ props.option.title }}</span><span class="option__small">{{ props.option.desc }}</span></div>-->
+                        <!--            </template>-->
                     </div>
                     <div v-if="challenge.solutions.length == 0 || solutions.length === 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
                         {{$t('challengesMain.noSolutions')}}.
