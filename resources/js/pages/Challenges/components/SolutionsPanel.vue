@@ -8,16 +8,44 @@
                 </div>
                 <div class="px-5 py-5">
                     <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="user.type == 'investor'">
-                        <Multiselect
-                            class="form-control"
-                            v-model="filterType"
-                            mode="single"
-                            label="name"
-                            max="1"
-                            :placeholder="filterType === null ? 'Wybierz...' : filterType"
-                            valueProp="value"
-                            :options="filters['options']"
-                        />
+                        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+                            <label for="input-wizard-5" class="form-label pr-5 font-medium dark:text-theme-10 text-theme-1">Filtr</label>
+                            <Multiselect
+                                class="form-control"
+                                v-model="filterType"
+                                mode="single"
+                                label="name"
+                                max="1"
+                                :placeholder="filterType === null ? 'Wybierz...' : filterType"
+                                :close-on-select="false"
+                                :clear-on-select="false"
+                                :preserve-search="true"
+                                :preselect-first="true"
+                                valueProp="value"
+                                :options="filters['options']"
+                            />
+                        </div>
+                        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+                            <label for="input-wizard-5" class="form-label font-medium dark:text-theme-10 text-theme-1">Dostawca głównej technologii</label>
+                            <Multiselect
+                                class="form-control"
+                                v-model="technologyType"
+                                mode="single"
+                                label="name"
+                                max="1"
+                                :placeholder="technologyType === null ? 'Wybierz...' : technologyType"
+                                :show-labels="false"
+                                :preselect-first="true"
+                                valueProp="value"
+                                :disabled="filterType===null"
+                                :options="technology['options']"
+                                :option-height="104"
+                            />
+                            <!--            <template slot="singleLabel" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky"><span class="option__desc"><span class="option__title">{{ props.option.title }}</span></span></template>-->
+                            <!--            <template slot="option" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky">-->
+                            <!--                <div class="option__desc"><span class="option__title">{{ props.option.title }}</span><span class="option__small">{{ props.option.desc }}</span></div>-->
+                            <!--            </template>-->
+                        </div>
                     </div>
                     <div v-if="challenge.solutions.length == 0 || solutions.length === 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
                         {{$t('challengesMain.noSolutions')}}.
@@ -67,6 +95,7 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const filters = require('../../../json/solution_filters.json');
+        const technology = require('../../../json/technology_filters.json');
         const challenge = computed(() => {
             return props.challenge;
         });
@@ -76,6 +105,7 @@ export default {
         const guard = ref(false);
         const solutions = ref([]);
         const filterType = ref(null);
+        const technologyType = ref(null);
 
         emitter.on('deletesolution', e => {
             solutions.value.splice(e.index, 1);
@@ -85,9 +115,19 @@ export default {
         // watch(() => solutions.value, (first, second) => {
         // }, {})
 
+        watch(() => technologyType.value, (first, second) => {
+            if(technologyType.value !== null){
+                StartFilterOffer();
+            }
+            // if(technologyType.value === null){
+            //     getChallengeOffersRepositories();
+            // }
+        }, {})
+
         watch(() => filterType.value, (first, second) => {
             StartFilterOffer();
             if(filterType.value === null){
+                technologyType.value = null;
                 solutions.value = props.challenge.solutions;
             }
         }, {})
@@ -191,7 +231,9 @@ export default {
             addSolution,
             filterMember,
             filterType,
-            filters
+            filters,
+            technologyType,
+            technology
         }
     }
 }
