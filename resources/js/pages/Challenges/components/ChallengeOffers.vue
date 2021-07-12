@@ -66,7 +66,7 @@
                 :show-labels="false"
                 :preselect-first="true"
                 valueProp="value"
-                :options="technology['brands']"
+                :options="technology['options']"
                 :option-height="104"
             />
 <!--            <template slot="singleLabel" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky"><span class="option__desc"><span class="option__title">{{ props.option.title }}</span></span></template>-->
@@ -101,13 +101,13 @@
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                             </div>
                             <div class="flex items-center mt-5">
-                                <div :class="(filterType === 'Cene malejąco' || filterType === 'Cena rosnąco') ? 'border-l-2 border-theme-1 pl-4 opacity-50' : 'border-l-2 border-theme-1 pl-4'">
+                                <div class="border-l-2 border-theme-1 pl-4">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.offerExpires')}}:</span>
                                     <div class="text-gray-600"> {{ offer.offer_expires_in }} dni</div>
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
-                                <div class="border-l-2 border-theme-1 pl-4">
+                                <div :class="(filterType === 'Cene malejąco' || filterType === 'Cena rosnąco') ? 'border-l-2 border-theme-1 pl-4 opacity-50' : 'border-l-2 border-theme-1 pl-4'">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.priceDelivery')}}:</span>
                                     <div class="text-gray-600"> {{ offer.price_of_delivery }}</div>
                                 </div>
@@ -237,7 +237,7 @@ export default {
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
         const filters = require('../../../json/offer_filters.json');
-        const technology = require('../../../json/robot_brands.json');
+        const technology = require('../../../json/technology_filters.json');
         const solution = ref();
         const check = ref(false);
         const filterType = ref(null);
