@@ -60,7 +60,9 @@
                 <div class="intro-y box"  v-if="challenge.selected_offer_id < 1 || offer.selected == 1">
                     <div class="px-5 py-5" >
                         <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
-                            <span class="numberCircle clrGreen" v-if="filterType === 'Ranking'"><span>{{ index + 1}}</span></span>                          <div class="flex items-center">
+                            <span class="numberCircle clrGreen" v-if="filterType !== null"><span>{{ index + 1}}</span></span>
+                            <div class="flex items-center justify-center text-theme-20" v-if="offer.id === theBestOffer.id && (filterType === 'Ranking' || filterType === null)"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Najlepsza oferta</div>
+                            <div class="flex items-center">
                                 <div class="pl-4 my-2">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
                                     <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
@@ -76,15 +78,14 @@
                                     <button class="btn shadow-md mr-2 bg-gray-400" @click.prevent="rejectOffer(offer,index)" v-if="offer.rejected != 1 && challenge.selected_offer_id < 1" >Odrzuć ofertę</button>
                                 </div>
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
-                                <div class="flex items-center justify-center text-theme-20" v-if="offer.id === theBestOffer.id"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Najlepsza oferta</div>
                             </div>
-                            <div class="flex items-center">
+                            <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.offerExpires')}}:</span>
                                     <div class="text-gray-600"> {{ offer.offer_expires_in }} dni</div>
                                 </div>
                             </div>
-                            <div class="flex items-center">
+                            <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.priceDelivery')}}:</span>
                                     <div class="text-gray-600"> {{ offer.price_of_delivery }}</div>
