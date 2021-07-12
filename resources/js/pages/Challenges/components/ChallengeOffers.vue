@@ -77,7 +77,7 @@
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div  v-for="(offer, index) in offers.list" :key="index" class="col-span-12 col-span-12 xxl:col-span-6">
-                <div :class="(offer.id === theBestOffer.id && filterType === 'Ranking' && filterType === null) ? 'best-offer': ''">
+                <div :class="(offer.id === theBestOffer.id && (filterType === 'Ranking' || filterType === null)) ? 'best-offer': ''">
                 <div class="intro-y box"  v-if="challenge.selected_offer_id < 1 || offer.selected == 1">
                     <div class="px-5 py-5" >
                         <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
@@ -108,7 +108,7 @@
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
-                                <div :class="(filterType === 'Cene malejąco' || filterType === 'Cena rosnąco') ? 'border-l-2 border-theme-1 pl-4 opacity-50' : 'border-l-2 border-theme-1 pl-4'">
+                                <div :class="(filterType === 'Cene malejąco' || filterType === 'Cena rosnąco') ? 'border-2 border-theme-1 pl-4' : 'border-l-2 border-theme-1 pl-4'">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.priceDelivery')}}:</span>
                                     <div class="text-gray-600"> {{ offer.price_of_delivery }}</div>
                                 </div>
@@ -120,7 +120,7 @@
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
-                                <div :class="(filterType === 'Czas realizacji uruchomienia u klienta') ? 'border-l-2 border-theme-1 pl-4 opacity-50' : 'border-l-2 border-theme-1 pl-4'">
+                                <div :class="(filterType === 'Czas realizacji uruchomienia u klienta') ? 'border-2 border-theme-1 pl-4' : 'border-l-2 border-theme-1 pl-4'">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.timeToStart')}}:</span>
                                     <div class="text-gray-600"> {{ values['weeks-short'][offer.time_to_start] }} </div>
                                 </div>
@@ -150,7 +150,7 @@
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
-                                <div :class="(filterType === 'Okres gwarancji stanowiska od integratora') ? 'border-l-2 border-theme-1 pl-4 opacity-50' : 'border-l-2 border-theme-1 pl-4'">
+                                <div :class="(filterType === 'Okres gwarancji stanowiska od integratora') ? 'border-2 border-theme-1 pl-4' : 'border-l-2 border-theme-1 pl-4'">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.yearsGuarantee')}}:</span>
                                     <div class="text-gray-600"> {{ values['years-short'][offer.years_of_guarantee] }} </div>
                                 </div>

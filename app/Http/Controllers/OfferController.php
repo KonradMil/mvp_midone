@@ -143,6 +143,8 @@ class OfferController extends Controller
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('price_of_delivery', 'ASC')->with('solution')->get();
         }else if($option === 'Czas realizacji uruchomienia u klienta'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('time_to_start', 'DESC')->with('solution')->get();
+        }else if($option === 'Okres gwarancji stanowiska od integratora'){
+            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('years_of_guarantee', 'DESC')->with('solution')->get();
         }else if($option === 'NPV'){
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('financial_analyses as fa', 'fa.solution_id', '=', 'so.id')->orderBy('fa.npv', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
         }else if($option === 'OEE po robotyzacji'){
