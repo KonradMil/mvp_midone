@@ -81,11 +81,13 @@
                 <div class="intro-y box"  v-if="challenge.selected_offer_id < 1 || offer.selected == 1">
                     <div class="px-5 py-5" >
                         <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
-                            <div class="pb-2">
+                            <div class="flex items-center">
+                                <div class="pb-2">
                                 <span class="numberCircle clrGreen" v-if="filterType !== null"><span>{{ index + 1}}
                             </span></span>
+                                </div>
+                                <div class="flex items-center justify-left text-theme-20" v-if="offer.id === theBestOffer.id && (filterType === 'Ranking' || filterType === null) && technologyType === null"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Najlepsza oferta</div>
                             </div>
-                            <div class="flex items-center justify-left text-theme-20" v-if="offer.id === theBestOffer.id && (filterType === 'Ranking' || filterType === null) && technologyType === null"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Najlepsza oferta</div>
                             <div class="flex items-center">
                                 <div class="pl-4 my-2">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">Rozwiązanie</span>
