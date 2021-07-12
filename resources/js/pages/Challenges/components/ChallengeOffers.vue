@@ -62,7 +62,7 @@
                 mode="single"
                 label="name"
                 max="1"
-                :placeholder="technologyType === null ? 'Wybierz...' : technologyType"
+                :placeholder="(technologyType === null || filterType === null) ? 'Wybierz...' : technologyType"
                 :show-labels="false"
                 :preselect-first="true"
                 valueProp="value"
