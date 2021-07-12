@@ -8,13 +8,6 @@
         "NPV",
         "OEE po robotyzacji",
         "Okres gwarancji stanowiska od integratora",
-        "Okres gwarancji robota",
-        "FANUC",
-        "Yaskawa",
-        "ABB",
-        "Universal Robots",
-        "Mitshubishi",
-        "KUKA",
-        "TFM ROBOTICS"
+        "Okres gwarancji robota"
     ]
 }
