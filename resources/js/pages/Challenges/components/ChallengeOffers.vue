@@ -62,7 +62,7 @@
                 mode="single"
                 label="name"
                 max="1"
-                :placeholder="(technologyType === null || filterType === null) ? 'Wybierz...' : technologyType"
+                :placeholder="technologyType === null ? 'Wybierz...' : technologyType"
                 :show-labels="false"
                 :preselect-first="true"
                 valueProp="value"
@@ -265,6 +265,7 @@ export default {
             StartFilterOffer();
             if(filterType.value === null){
                 getChallengeOffersRepositories();
+                technologyType.value = null;
             }
         }, {})
 
