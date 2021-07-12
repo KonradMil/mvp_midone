@@ -158,17 +158,17 @@ class OfferController extends Controller
         }else if($technology_option  === 'FANUC'){
             $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_fanuc', 'DESC')->get();
         }else if($technology_option  === 'Yaskawa'){
-            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_yaskawa', 'DESC')->with('solution')->get();
+            $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_yaskawa', 'DESC')->get();
         } else if($technology_option  === 'ABB'){
-            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_abb', 'DESC')->with('solution')->get();
+            $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_abb', 'DESC')->get();
         } else if($technology_option  === 'Universal Robots'){
-            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_universal', 'DESC')->with('solution')->get();
+            $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_universal', 'DESC')->get();
         }else if($technology_option  === 'Mitshubishi'){
-            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_mitshubishi', 'DESC')->with('solution')->get();
+            $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_mitshubishi', 'DESC')->get();
         }else if($technology_option  === 'Universal Robots'){
-            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_universal', 'DESC')->with('solution')->get();
+            $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_universal', 'DESC')->get();
         }else if($technology_option  === 'TFM ROBOTICS'){
-            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_tfm', 'DESC')->with('solution')->get();
+            $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_tfm', 'DESC')->get();
         }
 
 
