@@ -108,7 +108,7 @@
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
-                                <div :class="(filterType === 'Cene malejąco' || filterType === 'Cena rosnąco') ? 'border-2 border-theme-1 pl-4' : 'border-l-2 border-theme-1 pl-4'">
+                                <div :class="(filterType === 'Cene malejąco' || filterType === 'Cena rosnąco') ? 'border-2 border-theme-1 p-2' : 'border-l-2 border-theme-1 pl-4'">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.priceDelivery')}}:</span>
                                     <div class="text-gray-600"> {{ offer.price_of_delivery }}</div>
                                 </div>
@@ -120,7 +120,7 @@
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
-                                <div :class="(filterType === 'Czas realizacji uruchomienia u klienta') ? 'border-2 border-theme-1 pl-4' : 'border-l-2 border-theme-1 pl-4'">
+                                <div :class="(filterType === 'Czas realizacji uruchomienia u klienta') ? 'border-2 border-theme-1 p-2' : 'border-l-2 border-theme-1 pl-4'">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.timeToStart')}}:</span>
                                     <div class="text-gray-600"> {{ values['weeks-short'][offer.time_to_start] }} </div>
                                 </div>
@@ -150,7 +150,7 @@
                                 </div>
                             </div>
                             <div class="flex items-center mt-5">
-                                <div :class="(filterType === 'Okres gwarancji stanowiska od integratora') ? 'border-2 border-theme-1 pl-4' : 'border-l-2 border-theme-1 pl-4'">
+                                <div :class="(filterType === 'Okres gwarancji stanowiska od integratora') ? 'border-2 border-theme-1 p-2' : 'border-l-2 border-theme-1 pl-4'">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.yearsGuarantee')}}:</span>
                                     <div class="text-gray-600"> {{ values['years-short'][offer.years_of_guarantee] }} </div>
                                 </div>
