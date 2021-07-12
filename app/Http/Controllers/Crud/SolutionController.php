@@ -34,9 +34,9 @@ class SolutionController extends Controller
         $technology_option = $request->input('technologyType');
         $challenge = Challenge::find($id);
         $solutions = NULL;
-        if($option === 'Cena-max'){
+        if($option === 'Cena rosnąco'){
             $solutions = $challenge->solutions()->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->select('solutions.*')->orderBy('estimates.sum', 'DESC')->get();
-        }else if($option === 'Cena-min'){
+        }else if($option === 'Cena malejąco'){
             $solutions = $challenge->solutions()->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->select('solutions.*')->orderBy('estimates.sum', 'ASC')->get();
         }else if($option === 'OEE po robotyzacji'){
             $solutions = $challenge->solutions()->join('operational_analyses', 'solutions.id', '=', 'operational_analyses.solution_id')->orderBy('operational_analyses.oee_after', 'ASC')->select('solutions.*')->get();
