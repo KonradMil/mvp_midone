@@ -133,6 +133,7 @@ class OfferController extends Controller
     public function filterChallengeOffers(Request $request)
     {
         $option = $request->input('option');
+        $technology_option = $request->input('technologyType');
         $id = $request->input('id');
         $challenge = Challenge::find($id);
         $offers = NULL;
@@ -152,19 +153,19 @@ class OfferController extends Controller
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('financial_analyses as fa', 'fa.solution_id', '=', 'so.id')->orderBy('fa.simple_payback', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
         }else if($option === 'Ranking'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('points', 'DESC')->with('solution')->get();
-        }else if($option === 'FANUC'){
+        }else if($technology_option  === 'FANUC'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_fanuc', 'DESC')->with('solution')->get();
-        }else if($option === 'Yaskawa'){
+        }else if($technology_option  === 'Yaskawa'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_yaskawa', 'DESC')->with('solution')->get();
-        } else if($option === 'ABB'){
+        } else if($technology_option  === 'ABB'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_abb', 'DESC')->with('solution')->get();
-        } else if($option === 'Universal Robots'){
+        } else if($technology_option  === 'Universal Robots'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_universal', 'DESC')->with('solution')->get();
-        }else if($option === 'Mitshubishi'){
+        }else if($technology_option  === 'Mitshubishi'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_mitshubishi', 'DESC')->with('solution')->get();
-        }else if($option === 'Universal Robots'){
+        }else if($technology_option  === 'Universal Robots'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_universal', 'DESC')->with('solution')->get();
-        }else if($option === 'TFM ROBOTICS'){
+        }else if($technology_option  === 'TFM ROBOTICS'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('count_tfm', 'DESC')->with('solution')->get();
         }
 

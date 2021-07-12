@@ -58,11 +58,11 @@
             <label for="input-wizard-5" class="form-label">Dostawca głównej technologii</label>
             <Multiselect
                 class="form-control"
-                v-model="filterType"
+                v-model="technologyType"
                 mode="single"
                 label="name"
                 max="1"
-                :placeholder="filterType === null ? 'Wybierz...' : filterType"
+                :placeholder="technologyType === null ? 'Wybierz...' : technologyType"
                 :show-labels="false"
                 :preselect-first="true"
                 valueProp="value"
@@ -242,10 +242,18 @@ export default {
         const solution = ref();
         const check = ref(false);
         const filterType = ref(null);
+        const technologyType = ref(null);
         const theBestOffer = ref('');
         const guard = ref();
 
         watch(() => offers.value.list, (first, second) => {
+        }, {})
+
+        watch(() => technologyType.value, (first, second) => {
+            StartFilterOffer();
+            if(technologyType.value === null){
+                getChallengeOffersRepositories();
+            }
         }, {})
 
         watch(() => filterType.value, (first, second) => {
@@ -273,7 +281,7 @@ export default {
         }
 
         const StartFilterOffer = async () => {
-            axios.post('/api/offer/user/filter', {option: filterType.value , id: props.challenge.id})
+            axios.post('/api/offer/user/filter', {option: filterType.value , id: props.challenge.id, technologyType: technologyType.value})
                 .then(response => {
                     if (response.data.success) {
                         offers.value.list = response.data.payload;
@@ -351,7 +359,8 @@ export default {
             values,
             filters,
             solution,
-            technology
+            technology,
+            technologyType
         }
     }
 }
