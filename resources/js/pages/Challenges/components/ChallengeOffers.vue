@@ -262,6 +262,8 @@ export default {
                 StartFilterOffer();
                 if(offers.value.list ===0){
                     guard.value = true;
+                }else{
+                    guard.value = false;
                 }
             }
             // if(technologyType.value === null){
@@ -271,6 +273,11 @@ export default {
 
         watch(() => filterType.value, (first, second) => {
             StartFilterOffer();
+            if(offers.value.list ===0){
+                guard.value = true;
+            }else{
+                guard.value = false;
+            }
             if(filterType.value === null){
                 getChallengeOffersRepositories();
                 technologyType.value = null;
