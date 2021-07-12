@@ -75,7 +75,7 @@
 <!--                <div class="option__desc"><span class="option__title">{{ props.option.title }}</span><span class="option__small">{{ props.option.desc }}</span></div>-->
 <!--            </template>-->
         </div>
-        <div v-if="offers.length == 0 && filterType !== null" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+        <div v-if="guard && filterType !== null" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie ma ofert spełniających podane kryteria.
         </div>
         <div class="grid grid-cols-12 gap-6">
@@ -260,6 +260,9 @@ export default {
         watch(() => technologyType.value, (first, second) => {
             if(technologyType.value !== null){
                 StartFilterOffer();
+                if(offers.value.list ===0){
+                    guard.value = true;
+                }
             }
             // if(technologyType.value === null){
             //     getChallengeOffersRepositories();
