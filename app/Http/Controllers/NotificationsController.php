@@ -23,7 +23,6 @@ class NotificationsController extends Controller
             $data = $not['data'];
             $not->author = User::find($data['author']['id']);
         }
-        $user->unreadNotifications->markAsRead();
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
