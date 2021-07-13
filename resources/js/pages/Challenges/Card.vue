@@ -155,6 +155,7 @@ export default defineComponent({
         const toast = useToast();
         const announcementRef = ref();
         const newProjectsRef = ref();
+        const change = ref();
         const challenge = ref({});
         const solutions = ref({});
         const solution = ref({});
@@ -365,6 +366,7 @@ export default defineComponent({
             inTeam,
             isSolutions,
             isPublic,
+            change
         };
     }
 });

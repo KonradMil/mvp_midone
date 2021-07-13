@@ -315,8 +315,8 @@ export default defineComponent({
 
         const goTo = (link,id,change) => {
             setRead(id);
-            console.log(change + '=> params');
-            router.push({ path: link + change})
+            console.log(change + '=> change');
+            router.push({ path: link, params : {change}})
         };
 
         onMounted(function () {
