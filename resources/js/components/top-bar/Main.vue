@@ -68,7 +68,9 @@
                     class="notification-content__box dropdown-menu__content box dark:bg-dark-6 overflow-y-auto" style="max-height: 400px;">
                     <div class="flex items-center">
                         <div class="notification-content__title pr-10">{{$t('global.notifications')}}</div>
-                        <button class="btn btn-primary shadow-md mr-2 pl-5" @click="readAll">Read all</button>
+                        <div class="p-5">
+                        <button class="btn btn-primary shadow-md mr-2" @click.prevent="readAll">{{$t('global.readAll')}}</button>
+                        </div>
                     </div>
                     <div
                         v-for="(notification, index) in notificationsComp"
