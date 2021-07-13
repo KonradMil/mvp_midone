@@ -146,7 +146,8 @@ export default defineComponent({
         WhatsNext
     },
     props: {
-        id: Number
+        id: Number,
+        params: String,
     },
     setup(props, {emit}) {
         const app = getCurrentInstance();
