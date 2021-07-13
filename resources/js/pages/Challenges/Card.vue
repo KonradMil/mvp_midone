@@ -147,7 +147,7 @@ export default defineComponent({
     },
     props: {
         id: Number,
-        params: String,
+        change: String
     },
     setup(props, {emit}) {
         const app = getCurrentInstance();
