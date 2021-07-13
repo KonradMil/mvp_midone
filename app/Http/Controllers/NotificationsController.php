@@ -18,8 +18,11 @@ class NotificationsController extends Controller
 
     public function setReadNotification(Request $request)
     {
-        $notification = Notification::find($request->input('id'));
-        $notification->markAsRead();
+        $notification_id = $request->input('id');
+        $notification = Auth::user()->notifications->find($notification_id);
+        if($notification){
+            $notification->markAsRead();
+        }
 
         return response()->json([
             'success' => true,
