@@ -6,6 +6,7 @@ use App\Mail\ChangePassword;
 use App\Mail\ForgotPassword;
 use App\Mail\TeamInvitation;
 use App\Models\Challenges\Challenge;
+use App\Models\Solutions\Solution;
 use Authy\AuthyApi;
 use GuzzleHttp\Client;
 use Illuminate\Auth\Events\PasswordReset;
@@ -27,7 +28,7 @@ class UserController extends Controller
 
     public static function userPermissions($model)
     {
-        $user = User::find($model->id);
+//        $user = User::find($model->id);
 //        dd($user);
         $publishChallenges = [];
         $acceptChallengeSolutions = [];
@@ -35,13 +36,14 @@ class UserController extends Controller
         $publishSolution = [];
         $addSolutionOffers = [];
 
-        foreach ($user->challenges as $challenge) {
+        $challenges = Challenge::where('author_id', '=', $model->id)->get();
+        foreach ($challenges as $challenge) {
             $publishChallenges[] = $challenge->id;
             $acceptChallengeOffers[] = $challenge->id;
             $acceptChallengeSolutions[] = $challenge->id;
         }
-
-        foreach ($user->solutions as $solution) {
+        $solutions = Solution::where('author_id', '=', $model->id)->get();
+        foreach ($solutions as $solution) {
             $publishSolution[] = $solution->id;
             $addSolutionOffers[] = $solution->id;
         }
