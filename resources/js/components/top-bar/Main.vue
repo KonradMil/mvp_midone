@@ -304,6 +304,7 @@ export default defineComponent({
             axios.post('/api/notifications/set', {id: id})
                 .then(response => {
                     if (response.data.success) {
+                        getNotificationsRepositories();
                         toast.success('Readed');
                     } else {
                         toast.error('Error');

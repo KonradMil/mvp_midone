@@ -34,7 +34,6 @@ class NotificationsController extends Controller
     public function getNotifications()
     {
         $notifications = Auth::user()->notifications;
-        $user = User::find(Auth::user()->id);
         foreach ($notifications as $not) {
             $data = $not['data'];
             $not->author = User::find($data['author']['id']);
