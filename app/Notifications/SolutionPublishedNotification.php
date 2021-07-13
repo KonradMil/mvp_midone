@@ -56,6 +56,8 @@ class SolutionPublishedNotification extends Notification
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
             'params' => 'solution',
+            'name' => 'internalChallenegeCard',
+            'id' => $this->challenge->id,
         ]);
     }
 
@@ -66,6 +68,8 @@ class SolutionPublishedNotification extends Notification
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
             'params' => 'solution',
+            'name' => 'internalChallenegeCard',
+            'id' => $this->challenge->id,
         ];
     }
 }
