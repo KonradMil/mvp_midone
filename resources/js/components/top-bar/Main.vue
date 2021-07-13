@@ -68,7 +68,9 @@
                     class="notification-content__box dropdown-menu__content box dark:bg-dark-6 overflow-y-auto" style="max-height: 400px;">
                     <div class="flex items-center">
                         <div class="notification-content__title pr-10">{{$t('global.notifications')}}</div>
-                        <div class="notification-content__title pl-5" @click="readAll">Read all</div>
+                        <div class="pb-5">
+                        <button class="btn btn-primary shadow-md mr-2" style="max-width: 100px; max-height: 45px;" @click.prevent="readAll">{{$t('global.readAll')}}</button>
+                        </div>
                     </div>
                     <div
                         v-for="(notification, index) in notificationsComp"
@@ -309,7 +311,7 @@ export default defineComponent({
                     if (response.data.success) {
                         // getNotificationsRepositories();
                         notifications.value = response.data.payload
-                        toast.success('Readed all');
+                        toast.success('Readed');
                     } else {
                         toast.error('Error');
                     }
@@ -321,7 +323,7 @@ export default defineComponent({
                     if (response.data.success) {
                         // getNotificationsRepositories();
                         notifications.value = response.data.payload
-                        toast.success('Readed');
+                        toast.success('Readed all');
                     } else {
                         toast.error('Error');
                     }

@@ -55,6 +55,9 @@ class OfferPublishedNotification extends Notification
             'message' => 'Oferta została opublikowana do rozwiązania: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
+            'params' => 'rozwiazania',
+            'name' => 'internalChallenegeCard',
+            'id' => $this->challenge->id,
         ]);
     }
 
@@ -64,6 +67,9 @@ class OfferPublishedNotification extends Notification
             'message' => 'Oferta została opublikowana do rozwiązania: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
+            'params' => 'all-offers',
+            'name' => 'internalChallenegeCard',
+            'id' => $this->challenge->id,
         ];
     }
 }

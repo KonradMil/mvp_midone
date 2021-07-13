@@ -41,6 +41,9 @@ class OfferAddedNotification extends Notification
             'message' => 'Dodałeś ofertę do rozwiązania: ' . $this->solution->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
+            'params' => 'all-offers',
+            'name' => 'internalChallenegeCard',
+            'id' => $this->challenge->id,
         ]);
     }
 
@@ -50,6 +53,9 @@ class OfferAddedNotification extends Notification
             'message' => 'Dodałeś ofertę do rozwiązania: ' . $this->solution->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
+            'params' => 'all-offers',
+            'name' => 'internalChallenegeCard',
+            'id' => $this->challenge->id,
         ];
     }
 }

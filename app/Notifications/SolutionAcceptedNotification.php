@@ -55,6 +55,9 @@ class SolutionAcceptedNotification extends Notification
             'message' => 'Rozwiązanie zostało zaakceptowane do wyzwania: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
+            'params' => 'rozwiazania',
+            'name' => 'internalChallenegeCard',
+            'id' => $this->challenge->id,
         ]);
     }
 
@@ -64,6 +67,9 @@ class SolutionAcceptedNotification extends Notification
             'message' => 'Rozwiązanie zostało zaakceptowane do wyzwania: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
+            'params' => 'rozwiazania',
+            'name' => 'internalChallenegeCard',
+            'id' => $this->challenge->id,
         ];
     }
 }

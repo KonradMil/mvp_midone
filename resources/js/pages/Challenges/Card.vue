@@ -181,7 +181,11 @@ export default defineComponent({
         const isSolutions = ref(false);
         const isPublic = ref(false);
         watch(() => props.change, (first, second) => {
-            activeTab.value = props.change
+            if(props.change === 'all-offers' && user.type === 'integrator'){
+                activeTab.value = 'oferty';
+            }else{
+                activeTab.value = props.change;
+            }
         }, {})
         emitter.on('selectedSolution', e => {
             selected_solution_id.value = e.id;
