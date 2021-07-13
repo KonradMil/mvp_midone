@@ -9,10 +9,6 @@ use Pusher\Pusher;
 
 class NotificationsController extends Controller
 {
-    public function deleteNotification(Request $request)
-    {
-
-    }
     public function broadcastAuth(Request $request)
     {
         $pusher = new Pusher(env('PUSHER_APP_KEY'),env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'));
