@@ -72,7 +72,7 @@
                         :key="'notification_' + index"
                         class="cursor-pointer relative flex items-center"
                         :class="{ 'mt-5': index }"
-                        @click="goTo(notification.data.name,notification.id,notification.data.params,notification.data.id)">
+                        @click="goTo(notification.data.link,notification.id,notification.data.params)">
                         <div class="w-12 h-12 flex-none image-fit mr-1">
                             <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
                                     :username="notification.data.author.name + ' ' + notification.data.author.lastname"
@@ -313,10 +313,15 @@ export default defineComponent({
                 })
         }
 
-        const goTo = (name,id,change,challenge_id) => {
+        // const goTo = (name,id,change,challenge_id) => {
+        //     setRead(id);
+        //     console.log(change + '=> change');
+        //     router.push({ name: name, params : {id: challenge_id, change: change}})
+        // };
+        const goTo = (link,id,change) => {
             setRead(id);
             console.log(change + '=> change');
-            router.push({ name: name, params : {id: challenge_id, change: change}})
+            router.push({ path: link, params : {change: change}})
         };
 
         onMounted(function () {
