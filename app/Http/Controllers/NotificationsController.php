@@ -9,6 +9,10 @@ use Pusher\Pusher;
 
 class NotificationsController extends Controller
 {
+    public function deleteNotification(Request $request)
+    {
+
+    }
     public function broadcastAuth(Request $request)
     {
         $pusher = new Pusher(env('PUSHER_APP_KEY'),env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'));
@@ -18,10 +22,12 @@ class NotificationsController extends Controller
     public function getNotifications()
     {
         $notifications = Auth::user()->notifications;
+        $user = User::find(Auth::user()->id);
         foreach ($notifications as $not) {
             $data = $not['data'];
             $not->author = User::find($data['author']['id']);
         }
+        $user->unreadNotifications->markAsRead();
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
