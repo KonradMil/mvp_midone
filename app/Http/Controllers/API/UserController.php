@@ -25,23 +25,32 @@ use Mpociot\Teamwork\TeamInvite;
 class UserController extends Controller
 {
 
-    public static function userPermissions($model) {
+    public static function userPermissions($model)
+    {
         $user = Auth::user();
 
-        $solutions = [];
-        $ts = Auth::user()->teams;
+        $publishChallenges = [];
+        $acceptChallengeSolutions = [];
+        $acceptChallengeOffers = [];
+        $publishSolution = [];
+        $addSolutionOffers = [];
 
-        foreach ($ts as $tt) {
-            array_push($ars, $tt->id);
+        foreach ($user->challenges as $challenge) {
+            $publishChallenges[] = $challenge->id;
+            $acceptChallengeOffers[] = $challenge->id;
+            $acceptChallengeSolutions[] = $challenge->id;
         }
 
-        $c = Challenge::whereHas('teams', function ($query) use ($ars) {
-            $query->whereIn('teams.id', $ars);
-        })->orderBy('created_at', 'DESC')->get();
-        $challs = Auth::user()->challenges;
-        $challenges = $challs->merge($c);
+        foreach ($user->solutions as $solution) {
+            $publishSolution[] = $solution->id;
+            $addSolutionOffers[] = $solution->id;
+        }
 
+//        foreach ($user->teams as $team) {
+//
+//        }
 
+        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffers' => $addSolutionOffers];
     }
 
     public function reset(Request $request)
@@ -72,7 +81,7 @@ class UserController extends Controller
 
         $user = Auth::user();
 
-        if($request->phone != null) {
+        if ($request->phone != null) {
             $user->phone = $request->phone;
         }
 
@@ -338,9 +347,9 @@ class UserController extends Controller
         $verification = $authy_api->verifyToken($user->authy_id, $request->code);
 
         if ($verification->ok()) {
-          $success = true;
-          $message = 'Zalogowano poprawnie';
-          Auth::login($user);
+            $success = true;
+            $message = 'Zalogowano poprawnie';
+            Auth::login($user);
 
         } else {
             $success = false;
