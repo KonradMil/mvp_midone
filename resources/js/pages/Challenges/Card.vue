@@ -118,7 +118,18 @@
 </template>
 
 <script>
-import {defineComponent, ref, provide, onMounted, unref, toRaw, computed, getCurrentInstance, onBeforeMount} from "vue";
+import {
+    defineComponent,
+    ref,
+    provide,
+    onMounted,
+    unref,
+    toRaw,
+    computed,
+    getCurrentInstance,
+    onBeforeMount,
+    watch
+} from "vue";
 import GetCardChallenge from "../../compositions/GetCardChallenge";
 import WhatsNext from "./WhatsNext";
 import BasicInformationPanel from "./components/BasicInformationPanel";
@@ -146,7 +157,8 @@ export default defineComponent({
         WhatsNext
     },
     props: {
-        id: Number
+        id: Number,
+        change: String
     },
     setup(props, {emit}) {
         const app = getCurrentInstance();
@@ -168,7 +180,9 @@ export default defineComponent({
         const inTeam = ref(false);
         const isSolutions = ref(false);
         const isPublic = ref(false);
-
+        watch(() => props.change, (first, second) => {
+            activeTab.value = props.change
+        }, {})
         emitter.on('selectedSolution', e => {
             selected_solution_id.value = e.id;
             activeTab.value = 'addingoffer';

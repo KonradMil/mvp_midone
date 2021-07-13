@@ -9,6 +9,7 @@ use App\Events\OfferRejected;
 use App\Models\Challenges\Challenge;
 use App\Models\FinancialAnalysis;
 use App\Models\Offer;
+use App\Models\Post;
 use App\Models\Solutions\Solution;
 use App\Models\UnityModel;
 use Illuminate\Http\Request;
@@ -132,15 +133,18 @@ class OfferController extends Controller
     public function filterChallengeOffers(Request $request)
     {
         $option = $request->input('option');
+        $technology_option = $request->input('technologyType');
         $id = $request->input('id');
         $challenge = Challenge::find($id);
         $offers = NULL;
-        if($option === 'Cena-max'){
+        if($option === 'Cene malejąco'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('price_of_delivery', 'DESC')->with('solution')->get();
-        }else if($option === 'Cena-min'){
+        }else if($option === 'Cena rosnąco'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('price_of_delivery', 'ASC')->with('solution')->get();
         }else if($option === 'Czas realizacji uruchomienia u klienta'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('time_to_start', 'DESC')->with('solution')->get();
+        }else if($option === 'Okres gwarancji stanowiska od integratora'){
+            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('years_of_guarantee', 'DESC')->with('solution')->get();
         }else if($option === 'NPV'){
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('financial_analyses as fa', 'fa.solution_id', '=', 'so.id')->orderBy('fa.npv', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
         }else if($option === 'OEE po robotyzacji'){
@@ -151,9 +155,22 @@ class OfferController extends Controller
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('financial_analyses as fa', 'fa.solution_id', '=', 'so.id')->orderBy('fa.simple_payback', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
         }else if($option === 'Ranking'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('points', 'DESC')->with('solution')->get();
-        }else if($option === 'Fanuc'){
-            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('points', 'DESC')->with('solution')->get();
+        }else if($technology_option  === 'FANUC'){
+            $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_fanuc', 'DESC')->get();
+        }else if($technology_option  === 'Yaskawa'){
+            $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_yaskawa', 'DESC')->get();
+        } else if($technology_option  === 'ABB'){
+            $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_abb', 'DESC')->get();
+        } else if($technology_option  === 'Universal Robots'){
+            $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_universal', 'DESC')->get();
+        }else if($technology_option  === 'Mitshubishi'){
+            $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_mitshubishi', 'DESC')->get();
+        }else if($technology_option  === 'Universal Robots'){
+            $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_universal', 'DESC')->get();
+        }else if($technology_option  === 'TFM ROBOTICS'){
+            $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_tfm', 'DESC')->get();
         }
+
 
         return response()->json([
             'success' => true,
@@ -272,15 +289,43 @@ class OfferController extends Controller
             $check = new Offer();
             $c = 0;
             $sum = 0;
+//            $sum_fanuc = 0;
+//            $sum_yaskawa = 0;
+//            $sum_abb = 0;
+//            $sum_mitshubishi = 0;
+//            $sum_kuka = 0;
+//            $sum_tfm = 0;
+//            $sum_universal = 0;
             if(isset($request->solution_robots)){
                 foreach ($request->solution_robots as $robot) {
                     $c++;
                     $sum += $robot['guarantee_period'];
+//                    if($robot['brand'] === 'FANUC'){
+//                        $sum_fanuc++;
+//                    }else if($robot['brand'] === 'Yaskawa'){
+//                        $sum_yaskawa++;
+//                    }else if($robot['brand'] === 'ABB'){
+//                        $sum_abb++;
+//                    }else if($robot['brand'] === 'Mitshubishi'){
+//                        $sum_mitshubishi++;
+//                    }else if($robot['brand'] === 'KUKA'){
+//                        $sum_kuka++;
+//                    }else if($robot['brand'] === 'TFM ROBOTICS'){
+//                        $sum_tfm++;
+//                    }else if($robot['brand'] === 'Universal Robots'){
+//                        $sum_universal++;
+//                    }
                 }
             }
             if($c>0){
                 $check->avg_guarantee = (float)($sum/$c);
             }
+//            $check->count_fanuc = $sum_fanuc;
+//            $check->count_yaskawa = $sum_yaskawa;
+//            $check->count_abb  = $sum_abb;
+//            $check->count_mitshubishi = $sum_mitshubishi;
+//            $check->count_tfm  = $sum_tfm;
+//            $check->count_universal  = $sum_universal;
             $check->robots = json_encode($request->solution_robots);
             $check->challenge_id = $request->challenge_id;
             $check->solution_id = $request->solution_id;

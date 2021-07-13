@@ -31,11 +31,12 @@ class SolutionController extends Controller
     {
         $option = $request->input('option');
         $id = $request->input('id');
+        $technology_option = $request->input('technologyType');
         $challenge = Challenge::find($id);
         $solutions = NULL;
-        if($option === 'Cena-max'){
+        if($option === 'Cena rosnąco'){
             $solutions = $challenge->solutions()->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->select('solutions.*')->orderBy('estimates.sum', 'DESC')->get();
-        }else if($option === 'Cena-min'){
+        }else if($option === 'Cena malejąco'){
             $solutions = $challenge->solutions()->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->select('solutions.*')->orderBy('estimates.sum', 'ASC')->get();
         }else if($option === 'OEE po robotyzacji'){
             $solutions = $challenge->solutions()->join('operational_analyses', 'solutions.id', '=', 'operational_analyses.solution_id')->orderBy('operational_analyses.oee_after', 'ASC')->select('solutions.*')->get();
@@ -45,6 +46,22 @@ class SolutionController extends Controller
             $solutions = $challenge->solutions()->join('financial_analyses', 'solutions.id', '=', 'financial_analyses.solution_id')->orderBy('financial_analyses.simple_payback', 'ASC')->select('solutions.*')->get();
         }else if($option === null){
             $solutions = $challenge->solutions()->get();
+        }else if($technology_option  === 'FANUC'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_fanuc', 'DESC')->get();
+        }else if($technology_option  === 'KUKA'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_kuka', 'DESC')->get();
+        }else if($technology_option  === 'Yaskawa'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_yaskawa', 'DESC')->get();
+        } else if($technology_option  === 'ABB'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_abb', 'DESC')->get();
+        } else if($technology_option  === 'Universal Robots'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_universal', 'DESC')->get();
+        }else if($technology_option  === 'Mitshubishi'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_mitshubishi', 'DESC')->get();
+        }else if($technology_option  === 'Universal Robots'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_universal', 'DESC')->get();
+        }else if($technology_option  === 'TFM ROBOTICS'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_tfm', 'DESC')->get();
         }
 
         return response()->json([
@@ -541,6 +558,42 @@ class SolutionController extends Controller
             $c->screenshot_path = $path['relative'];
             unset($j['screenshot']);
             $c->save_json = json_encode($j);
+
+            $sum_fanuc = 0;
+            $sum_yaskawa = 0;
+            $sum_abb = 0;
+            $sum_mitshubishi = 0;
+            $sum_kuka = 0;
+            $sum_tfm = 0;
+            $sum_universal = 0;
+            $save = json_decode($c->save_json);
+
+            foreach ($save->parts as $part) {
+                    $model = UnityModel::find($part->model->model_id);
+                    if($model->brand === 'FANUC'){
+                        $sum_fanuc++;
+                    }else if($model->brand === 'Yaskawa'){
+                        $sum_yaskawa++;
+                    }else if($model->brand === 'ABB'){
+                        $sum_abb++;
+                    }else if($model->brand === 'Mitshubishi'){
+                        $sum_mitshubishi++;
+                    }else if($model->brand === 'KUKA'){
+                        $sum_kuka++;
+                    }else if($model->brand === 'TFM ROBOTICS'){
+                        $sum_tfm++;
+                    }else if($model->brand === 'Universal Robots'){
+                        $sum_universal++;
+                    }
+                }
+
+                $c->number_of_fanuc = $sum_fanuc;
+                $c->number_of_yaskawa = $sum_yaskawa;
+                $c->number_of_abb  = $sum_abb;
+                $c->number_of_mitshubishi = $sum_mitshubishi;
+                $c->number_of_kuka = $sum_kuka;
+                $c->number_of_tfm  = $sum_tfm;
+                $c->number_of_universal  = $sum_universal;
         }
 
         $c->save();

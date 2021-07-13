@@ -1,0 +1,11 @@
+{
+    "options": [
+        "FANUC",
+        "Yaskawa",
+        "ABB",
+        "Universal Robots",
+        "Mitshubishi",
+        "KUKA",
+        "TFM ROBOTICS"
+    ]
+}

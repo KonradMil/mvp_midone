@@ -65,16 +65,17 @@
             </div>
             <div class="notification-content pt-2 dropdown-menu">
                 <div
-                    class="notification-content__box dropdown-menu__content box dark:bg-dark-6"
-                >
-                    <div class="notification-content__title">{{$t('global.notifications')}}</div>
+                    class="notification-content__box dropdown-menu__content box dark:bg-dark-6 overflow-y-auto" style="max-height: 400px;">
+                    <div class="flex items-center">
+                        <div class="notification-content__title pr-10">{{$t('global.notifications')}}</div>
+                        <div class="notification-content__title pl-5" @click="readAll">Read all</div>
+                    </div>
                     <div
                         v-for="(notification, index) in notificationsComp"
                         :key="'notification_' + index"
                         class="cursor-pointer relative flex items-center"
                         :class="{ 'mt-5': index }"
-                        @click="goTo(notification.data.link)"
-                    >
+                        @click="goTo(notification.data.name,notification.id,notification.data.params,notification.data.id)">
                         <div class="w-12 h-12 flex-none image-fit mr-1">
                             <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
                                     :username="notification.data.author.name + ' ' + notification.data.author.lastname"
@@ -84,7 +85,7 @@
                                  class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white"
                             ></div>
                         </div>
-                        <div class="ml-2 overflow-hidden">
+                        <div :class="(notification.read_at === null) ? 'ml-2 overflow-hidden' : 'ml-2 overflow-hidden opacity-50'" >
                             <div class="flex items-center">
                                 <a href="#" class="font-medium truncate mr-5"></a>
                                 <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">
@@ -302,8 +303,35 @@ export default defineComponent({
            }
         });
 
-        const goTo = (link) => {
-            router.push({ path: link})
+        const setRead = async (id) => {
+            axios.post('/api/notifications/set', {id: id})
+                .then(response => {
+                    if (response.data.success) {
+                        // getNotificationsRepositories();
+                        notifications.value = response.data.payload
+                        toast.success('Readed');
+                    } else {
+                        toast.error('Error');
+                    }
+                })
+        }
+        const readAll = async () => {
+            axios.post('/api/notifications/read-all', {})
+                .then(response => {
+                    if (response.data.success) {
+                        // getNotificationsRepositories();
+                        notifications.value = response.data.payload
+                        toast.success('Readed');
+                    } else {
+                        toast.error('Error');
+                    }
+                })
+        }
+
+        const goTo = (name,id,change,challenge_id) => {
+            setRead(id);
+            console.log(change + '=> change');
+            router.push({ name: name, params : {id: challenge_id, change: change}})
         };
 
         onMounted(function () {
@@ -313,6 +341,8 @@ export default defineComponent({
             notifications.value = user.notifications;
         })
         return {
+            readAll,
+            setRead,
             searchDropdown,
             showSearchDropdown,
             hideSearchDropdown,

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Pusher\Pusher;
 
@@ -13,6 +14,51 @@ class NotificationsController extends Controller
     {
         $pusher = new Pusher(env('PUSHER_APP_KEY'),env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'));
         return $pusher->socket_auth($request->channel_name,$request->socket_id);
+    }
+
+    public function allReadNotifications(Request $request)
+    {
+//        $notifications = Auth::user()->notifications;
+//        foreach($notifications as $notification){
+//            $notification->markAsRead();
+//        }
+//        $notifications = Auth::user()->notifications;
+//        foreach ($notifications as $not) {
+//            $data = $not['data'];
+//            $not->author = User::find($data['author']['id']);
+//        }
+        $user = User::find(Auth::user()->id);
+        $user->unreadNotifications->markAsRead();
+
+        $notifications = Auth::user()->notifications;
+        foreach ($notifications as $not) {
+            $data = $not['data'];
+            $not->author = User::find($data['author']['id']);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => $notifications
+        ]);
+    }
+
+    public function setReadNotification(Request $request)
+    {
+        $notification_id = $request->input('id');
+        $notification = Auth::user()->notifications->find($notification_id);
+        if($notification){
+            $notification->markAsRead();
+        }
+        $notifications = Auth::user()->notifications;
+        foreach ($notifications as $not) {
+            $data = $not['data'];
+            $not->author = User::find($data['author']['id']);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => $notifications
+        ]);
     }
 
     public function getNotifications()

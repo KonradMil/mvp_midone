@@ -24,7 +24,8 @@ class Solution extends Model implements ReactableInterface
     protected $fillable = [
         'deadline_offered', 'offered_installation_price', 'cycle_time', 'selected', 'rejected',
         'name', 'status', 'save_json', 'rate', 'screenshot_path',
-        'installer_id', 'challenge_id', 'financial_after_id', 'author_id', 'published_at'
+        'installer_id', 'challenge_id', 'financial_after_id', 'author_id', 'published_at',
+        'count_fanuc','count_yaskawa','count_abb','count_mitshubishi','count_tfm','count_universal','count_kuka',
     ];
 
 

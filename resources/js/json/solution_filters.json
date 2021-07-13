@@ -1,15 +1,9 @@
 {
     "options": [
-        "Cena-max",
-        "Cena-min",
+        "Cena rosnąco",
+        "Cena malejąco",
         "Okres zwrotu inwestycji",
         "NPV",
-        "OEE po robotyzacji",
-        "Fanuc",
-        "Yaskawa",
-        "ABB",
-        "Mitshubishi",
-        "Kuka",
-        "TFM ROBOTICS"
+        "OEE po robotyzacji"
     ]
 }
