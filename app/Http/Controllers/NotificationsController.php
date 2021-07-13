@@ -16,6 +16,32 @@ class NotificationsController extends Controller
         return $pusher->socket_auth($request->channel_name,$request->socket_id);
     }
 
+    public function allReadNotifications(Request $request)
+    {
+//        $notifications = Auth::user()->notifications;
+//        foreach($notifications as $notification){
+//            $notification->markAsRead();
+//        }
+//        $notifications = Auth::user()->notifications;
+//        foreach ($notifications as $not) {
+//            $data = $not['data'];
+//            $not->author = User::find($data['author']['id']);
+//        }
+        $user = User::find(Auth::user()->id);
+        $user->unreadNotifications->markAsRead();
+
+        $notifications = Auth::user()->notifications;
+        foreach ($notifications as $not) {
+            $data = $not['data'];
+            $not->author = User::find($data['author']['id']);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => $notifications
+        ]);
+    }
+
     public function setReadNotification(Request $request)
     {
         $notification_id = $request->input('id');

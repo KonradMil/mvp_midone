@@ -67,8 +67,8 @@
                 <div
                     class="notification-content__box dropdown-menu__content box dark:bg-dark-6 overflow-y-auto" style="max-height: 400px;">
                     <div class="flex items-center">
-                        <div class="notification-content__title">{{$t('global.notifications')}}</div>
-                        <div class="notification-content__title">Read all</div>
+                        <div class="notification-content__title pr-10">{{$t('global.notifications')}}</div>
+                        <div class="notification-content__title pl-5" @click="readAll">Read all</div>
                     </div>
                     <div
                         v-for="(notification, index) in notificationsComp"
@@ -315,6 +315,18 @@ export default defineComponent({
                     }
                 })
         }
+        const readAll = async () => {
+            axios.post('/api/notifications/read-all', {})
+                .then(response => {
+                    if (response.data.success) {
+                        // getNotificationsRepositories();
+                        notifications.value = response.data.payload
+                        toast.success('Readed');
+                    } else {
+                        toast.error('Error');
+                    }
+                })
+        }
 
         const goTo = (name,id,change,challenge_id) => {
             setRead(id);
@@ -329,6 +341,7 @@ export default defineComponent({
             notifications.value = user.notifications;
         })
         return {
+            readAll,
             setRead,
             searchDropdown,
             showSearchDropdown,
