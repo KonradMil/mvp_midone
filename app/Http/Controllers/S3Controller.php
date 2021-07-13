@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -78,6 +79,14 @@ class S3Controller extends Controller
             },
             200,
             $headers);
+    }
+
+    public function txtFile(Request $request)
+    {
+
+//        $myfile = fopen("mateusz.txt", "w") or die("Unable to open file!");
+        $myfile = File::put('mateusz.txt', $request->file_string);
+        Storage::disk('s3')->putFileAs('uploads', 'mateusz.txt', 'mateusz.txt');
     }
 
     public function mime2ext($mime) {

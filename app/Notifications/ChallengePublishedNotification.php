@@ -53,6 +53,7 @@ class ChallengePublishedNotification extends Notification
             'message' => 'Nowe wyzwanie zostało opublikowane: ' . $this->challenge->name,
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
+            'name' => 'internalChallenegeCard',
         ]);
     }
 
@@ -62,6 +63,7 @@ class ChallengePublishedNotification extends Notification
             'message' => 'Nowe wyzwanie zostało opublikowane: ' . $this->challenge->name,
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
+            'name' => 'internalChallenegeCard',
         ];
     }
 }

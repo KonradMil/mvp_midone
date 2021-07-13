@@ -169,6 +169,32 @@
                         </label>
                         <input type="number" class="form-control" v-model="offer_expires_in"/>
                     </div>
+<!--                    <div class="intro-y col-span-12 sm:col-span-6 mt-2">-->
+<!--                        <label for="input-wizard-13" class="form-label">-->
+<!--                            Okres ważności oferty w dniach-->
+<!--                        </label>-->
+<!--                        <div class="intro-y col-span-12 sm:col-span-12" >-->
+<!--                            <Multiselect-->
+<!--                                class="form-control"-->
+<!--                                v-model="selected_robot"-->
+<!--                                mode="single"-->
+<!--                                label="name"-->
+<!--                                max="1"-->
+<!--                                :placeholder="selected_robot === '' ? 'select' : selected_robot"-->
+<!--                                valueProp="value"-->
+<!--                                :track-by="trackBy"-->
+<!--                                :options="solution_robots"-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="intro-y col-span-12 sm:col-span-6 mt-2" v-for="(obj, index) in solution_robots">
+                        <label :for="'input-wizard-' + index" class="form-label pb-5">
+                            Okres gwarancji robota {{obj.name}}
+                        </label>
+                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                            <Slider v-model="solution_robots[index].guarantee_period" :min="0" :max="10" :step="1" style="width: 100%;"/>
+                        </div>
+                    </div>
                 </div>
                 <button class="btn btn-primary w-20 mt-3" @click.prevent="save">{{ $t('profiles.save') }}</button>
             </div>
@@ -179,8 +205,15 @@
 <script>
 import {getCurrentInstance, onMounted, ref} from "vue";
 import {useToast} from "vue-toastification";
+import Multiselect from '@vueform/multiselect';
+import Slider from '@vueform/slider'
+
 
 export default {
+    components: {
+        Multiselect,
+        Slider
+    },
     name: "OfferAdd",
     props: {
         edit_offer_id: Number,
@@ -207,9 +240,14 @@ export default {
         const period_of_support = ref('');
         const solution_robots = ref([]);
         const solution_save = ref({});
-
+        const Robots = ref([]);
+        const selected_robot = ref('');
+        const trackBy = ref('name');
+        const guarantee_period = ref('');
+        const isDisabled = ref(false);
         const toast = useToast();
         const values = require('../../../json/offer_values.json');
+        const gridSize = ref('');
 
         emitter.on('offerSelected', e => () => {
             getOffer(e.offer_id);
@@ -219,15 +257,46 @@ export default {
             getOffer(e.id);
         });
 
-        const getSolution = () => {
-            axios.post('/api/solution/robots', {id: props.solution_id})
+
+
+        const addRobot = () => {
+            Robots.value.push({
+                name: 'Dodaj robot',
+                price: 0
+            });
+        }
+
+        const saveRobot = async (robot_id) => {
+            axios.post('/api/solution/save/robot', {robot_id: robot_id, solution_id: props.solution_id, guarantee_period: guarantee_period.value})
                 .then(response => {
                     if (response.data.success) {
-                      // console.log(response.data.payload)
-                        solution_robots.value = response.data.payload;
+                        isDisabled.value = true;
+                        toast.success(response.data.message);
+                        setTimeout(() =>{
+                            isDisabled.value = false;
+                        }, 2000);
+
                     } else {
-                        // toast.error(response.data.message);
+                        isDisabled.value = true;
+                        toast.error(response.data.message);
+                        setTimeout(() =>{
+                            isDisabled.value = false;
+                        }, 2000);
                     }
+                })
+        }
+
+        const getSolution = () => {
+                axios.post('/api/solution/robots', {id: props.solution_id, offer_id: props.edit_offer_id})
+                    .then(response => {
+                        if (response.data.success) {
+                            // console.log(response.data.payload)
+                            solution_robots.value = response.data.payload;
+                        } else {
+                            // toast.error(response.data.message);
+                        }
+                    }).catch((error) =>{
+                       console.log(error + 'ErrorGetRobots');
                 })
         };
 
@@ -250,7 +319,8 @@ export default {
                 intervention_price: intervention_price.value,
                 work_hour_price: work_hour_price.value,
                 period_of_support: period_of_support.value,
-                offer_expires_in: offer_expires_in.value
+                offer_expires_in: offer_expires_in.value,
+                solution_robots: solution_robots.value,
             }).then(response => {
                 if (response.data.success) {
                     console.log(response.data + '-> OFFER SAVE !!');
@@ -307,6 +377,14 @@ export default {
         }
 
         return {
+            gridSize,
+            saveRobot,
+            isDisabled,
+            guarantee_period,
+            trackBy,
+            selected_robot,
+            Robots,
+            addRobot,
             price_of_delivery,
             weeks_to_start,
             time_to_fix,

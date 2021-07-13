@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
 use App\Models\Estimate;
 use App\Models\FinancialAnalysis;
+use App\Models\Offer;
 use App\Models\OperationalAnalysis;
 use App\Models\Solutions\Solution;
 use App\Models\File;
@@ -26,6 +27,49 @@ use Psr\Log\NullLogger;
 
 class SolutionController extends Controller
 {
+    public function filterChallengeSolutions(Request $request)
+    {
+        $option = $request->input('option');
+        $id = $request->input('id');
+        $technology_option = $request->input('technologyType');
+        $challenge = Challenge::find($id);
+        $solutions = NULL;
+        if($option === 'Cena rosnąco'){
+            $solutions = $challenge->solutions()->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->select('solutions.*')->orderBy('estimates.sum', 'DESC')->get();
+        }else if($option === 'Cena malejąco'){
+            $solutions = $challenge->solutions()->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->select('solutions.*')->orderBy('estimates.sum', 'ASC')->get();
+        }else if($option === 'OEE po robotyzacji'){
+            $solutions = $challenge->solutions()->join('operational_analyses', 'solutions.id', '=', 'operational_analyses.solution_id')->orderBy('operational_analyses.oee_after', 'ASC')->select('solutions.*')->get();
+        }else if($option === 'NPV'){
+            $solutions = $challenge->solutions()->join('financial_analyses', 'solutions.id', '=', 'financial_analyses.solution_id')->orderBy('financial_analyses.npv', 'ASC')->select('solutions.*')->get();
+        }else if($option === 'Okres zwrotu inwestycji'){
+            $solutions = $challenge->solutions()->join('financial_analyses', 'solutions.id', '=', 'financial_analyses.solution_id')->orderBy('financial_analyses.simple_payback', 'ASC')->select('solutions.*')->get();
+        }else if($option === null){
+            $solutions = $challenge->solutions()->get();
+        }else if($technology_option  === 'FANUC'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_fanuc', 'DESC')->get();
+        }else if($technology_option  === 'KUKA'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_kuka', 'DESC')->get();
+        }else if($technology_option  === 'Yaskawa'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_yaskawa', 'DESC')->get();
+        } else if($technology_option  === 'ABB'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_abb', 'DESC')->get();
+        } else if($technology_option  === 'Universal Robots'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_universal', 'DESC')->get();
+        }else if($technology_option  === 'Mitshubishi'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_mitshubishi', 'DESC')->get();
+        }else if($technology_option  === 'Universal Robots'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_universal', 'DESC')->get();
+        }else if($technology_option  === 'TFM ROBOTICS'){
+            $solutions = $challenge->solutions()->where('rejected', '=', null)->orderBy('number_of_tfm', 'DESC')->get();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Filter ok',
+            'payload' => $solutions
+        ]);
+    }
     public function getUserSolutionsArchive()
     {
         $solutions = Solution::where('archive', '=' , 1)->get();
@@ -107,6 +151,7 @@ class SolutionController extends Controller
         $solution->selected = false;
         $solution->offers()->delete();
         $solution->selected_offer_id = 0;
+        $solution->rejected = 1;
         $challenge = Challenge::find($solution->challenge_id);
         $solution->save();
 
@@ -119,15 +164,44 @@ class SolutionController extends Controller
         ]);
     }
 
+//    public function saveRobot(Request $request)
+//    {
+//        $solution = Solution::find($request->input('solution_id'));
+//        $save = json_decode($solution->save_json);
+//        $id = $request->input('robot_id');
+////        foreach ($save->parts as $part) {
+////            $model = UnityModel::find($id);
+////            if($model->category != NULL) {
+////                $model->guarantee_period = $request->input('guarantee_period');
+////                $model->save();
+////            }
+////        }
+//        return response()->json([
+//            'success' => true,
+//            'message' => 'Zapisano poprawnie.',
+//            'payload' => $model
+//        ]);
+//    }
+
     public function getRobots(Request $request)
     {
         $solution = Solution::find($request->input('id'));
-        $save = json_decode($solution->save_json);
-        $robots = [];
-        foreach ($save->parts as $part) {
-            $model = UnityModel::find($part->model->model_id);
-            if($model->category == 1) {
-                $robots[] = $model;
+        if(!empty($request->input('offer_id')))
+        {
+            $offer = Offer::find($request->input('offer_id'));
+            $robots = json_decode($offer->robots);
+
+        }else {
+            $save = json_decode($solution->save_json);
+            $robots = [];
+            if($save != NULL){
+                foreach ($save->parts as $part) {
+                    $model = UnityModel::find($part->model->model_id);
+                    $model->guarantee_period = 0;
+                    if($model->category == 1) {
+                        $robots[] = $model;
+                    }
+                }
             }
         }
         return response()->json([
@@ -143,8 +217,8 @@ class SolutionController extends Controller
         $challenge = Challenge::find($solution->challenge_id);
 //        $challenge->stage = 2;
 //        $challenge->save();
-        $solution->selected = true;
-        $solution->rejected = false;
+        $solution->selected = 1;
+        $solution->rejected = 0;
         $solution->save();
 
         event(new SolutionAccepted($solution, $challenge->author, 'Rozwiązanie zostało zaakceptowane: ' . $solution->name, []));
@@ -337,18 +411,34 @@ class SolutionController extends Controller
         }
         $input = $request->input();
         $estimate->integration_cost = (float)$input['integrationCost'];
+        $estimate->sum += (float)$input['integrationCost'];
         $estimate->parts_cost =  (float)$input['partsCost'];
+        $estimate->sum += (float)$input['partsCost'];
         $estimate->mechanical_integration = (float)$input['basicCosts']['mechanical_integration'];
+        $estimate->sum += (float)$input['basicCosts']['mechanical_integration'];
         $estimate->electrical_integration = (float)$input['basicCosts']['electrical_integration'];
+        $estimate->sum += (float)$input['basicCosts']['electrical_integration'];
         $estimate->workstation_integration = (float)$input['basicCosts']['workstation_integration'];
+        $estimate->sum += (float)$input['basicCosts']['workstation_integration'];
         $estimate->programming_robot = (float)$input['basicCosts']['programming_robot'];
+        $estimate->sum += (float)$input['basicCosts']['programming_robot'];
         $estimate->programming_plc = (float)$input['basicCosts']['programming_plc'];
+        $estimate->sum += (float)$input['basicCosts']['programming_plc'];
         $estimate->documentation_ce = (float)$input['basicCosts']['documentation_ce'];
+        $estimate->sum += (float)$input['basicCosts']['documentation_ce'];
         $estimate->training = (float)$input['basicCosts']['training'];
+        $estimate->sum += (float)$input['basicCosts']['training'];
         $estimate->project = (float)$input['basicCosts']['project'];
+        $estimate->sum += (float)$input['basicCosts']['project'];
         $estimate->margin = (float)$input['basicCosts']['margin'];
+        $estimate->sum += (float)$input['basicCosts']['margin'];
         $estimate->parts_prices = json_encode($input['partPrices']);
         $estimate->additional_costs = json_encode($input['additionalCosts']);
+//        foreach($estimate as $key => $value){
+//            if($key != solution_id)
+//            $estimate->sum += (float)($key);
+//        }
+
         $estimate->save();
 
         return response()->json([
@@ -468,6 +558,42 @@ class SolutionController extends Controller
             $c->screenshot_path = $path['relative'];
             unset($j['screenshot']);
             $c->save_json = json_encode($j);
+
+            $sum_fanuc = 0;
+            $sum_yaskawa = 0;
+            $sum_abb = 0;
+            $sum_mitshubishi = 0;
+            $sum_kuka = 0;
+            $sum_tfm = 0;
+            $sum_universal = 0;
+            $save = json_decode($c->save_json);
+
+            foreach ($save->parts as $part) {
+                    $model = UnityModel::find($part->model->model_id);
+                    if($model->brand === 'FANUC'){
+                        $sum_fanuc++;
+                    }else if($model->brand === 'Yaskawa'){
+                        $sum_yaskawa++;
+                    }else if($model->brand === 'ABB'){
+                        $sum_abb++;
+                    }else if($model->brand === 'Mitshubishi'){
+                        $sum_mitshubishi++;
+                    }else if($model->brand === 'KUKA'){
+                        $sum_kuka++;
+                    }else if($model->brand === 'TFM ROBOTICS'){
+                        $sum_tfm++;
+                    }else if($model->brand === 'Universal Robots'){
+                        $sum_universal++;
+                    }
+                }
+
+                $c->number_of_fanuc = $sum_fanuc;
+                $c->number_of_yaskawa = $sum_yaskawa;
+                $c->number_of_abb  = $sum_abb;
+                $c->number_of_mitshubishi = $sum_mitshubishi;
+                $c->number_of_kuka = $sum_kuka;
+                $c->number_of_tfm  = $sum_tfm;
+                $c->number_of_universal  = $sum_universal;
         }
 
         $c->save();
@@ -578,6 +704,16 @@ class SolutionController extends Controller
         $solution->status = 0;
         $solution->screenshot_path = 'screenshots/dbr_placeholder.jpeg';
         $solution->save();
+
+//        $estimate = new Estimate();
+//        $estimate->solution_id = $solution->id;
+//        $estimate->save();
+//        $financial_analyses = new FinancialAnalysis();
+//        $financial_analyses->solution_id = $solution->id;
+//        $financial_analyses->save();
+//        $operational_analyses = new OperationalAnalysis();
+//        $operational_analyses->solution_id = $solution->id;
+//        $operational_analyses->save();
 
 //        $financial->days = $request -> days;
 //        $financial->shifts = $request -> shifts;

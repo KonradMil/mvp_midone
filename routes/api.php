@@ -13,6 +13,7 @@ use App\Http\Controllers\KnowledgebaseController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OldImportController;
+use App\Http\Controllers\S3Controller;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WorkshopController;
 use Illuminate\Http\Request;
@@ -53,12 +54,17 @@ Route::group(['prefix' => 'workshop', 'middleware' => 'auth:sanctum'], function(
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth:sanctum'], function() {
      Route::post('terms/save', [UserController::class, 'saveTerms']);
+     Route::post('register-authy', [UserController::class, 'registerAuthy']);
 });
 
 Route::group(['prefix' => 'question', 'middleware' => 'auth:sanctum'], function() {
    Route::post('create', [QuestionController::class, 'create']);
    Route::post('get', [QuestionController::class, 'get']);
 });
+
+Route::post('set/txt', [S3Controller::class, 'txtFile']);
+Route::get('testme', [UserController::class, 'test']);
+Route::post('check/twofa', [UserController::class, 'checkTwoFa']);
 
 Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard']);
 
@@ -96,6 +102,7 @@ Route::post('search', [SearchController::class, 'search']);
 
 Route::group(['prefix' => 'offer', 'middleware' => 'auth:sanctum'], function () {
     Route::post('user/check', [OfferController::class, 'check']);
+    Route::post('get/best', [OfferController::class, 'theBestChallengeOffer']);
     Route::post('get', [OfferController::class, 'get']);
     Route::post('user/filter', [OfferController::class, 'filterChallengeOffers']);
     Route::post('delete', [OfferController::class, 'delete']);
@@ -115,7 +122,9 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
 
 Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
     Route::post('robots', [SolutionController::class, 'getRobots']);
+    Route::post('save/robot', [SolutionController::class, 'saveRobot']);
     Route::post('filter', [SolutionController::class, 'deleteSolutionsNull']);
+    Route::post('user/filter', [SolutionController::class, 'filterChallengeSolutions']);
     Route::post('user/get/archive', [SolutionController::class, 'getUserSolutionsArchive']);
     Route::post('accept', [SolutionController::class, 'acceptSolution']);
     Route::post('reject', [SolutionController::class, 'rejectSolution']);
@@ -156,6 +165,8 @@ Route::post('user/comment/delete', [CommentsController::class, 'commentDelete'])
 
 Route::group(['prefix' => 'notifications', 'middleware' => 'auth:sanctum'], function () {
     Route::post('get', [NotificationsController::class, 'getNotifications']);
+    Route::post('set', [NotificationsController::class, 'setReadNotification']);
+    Route::post('read-all', [NotificationsController::class, 'allReadNotifications']);
 });
 Route::post('/broadcast/auth',  [NotificationsController::class, 'broadcastAuth']);
 

@@ -32,7 +32,7 @@ class OfferRejectedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'broadcast', 'database'];
+        return ['broadcast', 'database'];
     }
 
     public function toBroadcast($notifiable)
@@ -41,6 +41,9 @@ class OfferRejectedNotification extends Notification
             'message' => 'Oferta została odrzucona do wyzwania: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
+            'params' => 'all-offers',
+            'name' => 'internalChallenegeCard',
+            'id' => $this->challenge->id,
         ]);
     }
 
@@ -50,6 +53,9 @@ class OfferRejectedNotification extends Notification
             'message' => 'Oferta została odrzucona do wyzwania: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
+            'params' => 'all-offers',
+            'name' => 'internalChallenegeCard',
+            'id' => $this->challenge->id,
         ];
     }
 }

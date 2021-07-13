@@ -149,6 +149,8 @@
       <path value="$PROJECT_DIR$/vendor/mrcnpdlk/lib-exception" />
       <path value="$PROJECT_DIR$/vendor/mrcnpdlk/lib-mapper" />
       <path value="$PROJECT_DIR$/vendor/predis/predis" />
+      <path value="$PROJECT_DIR$/vendor/authy/php" />
+      <path value="$PROJECT_DIR$/vendor/twilio/sdk" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0">

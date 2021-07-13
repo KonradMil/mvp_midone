@@ -1,6 +1,6 @@
 <template>
     <div>
-<!--        <DarkModeSwitcher/>-->
+        <DarkModeSwitcher/>
         <div class="container sm:px-10">en
             <div class="block xl:grid grid-cols-2 gap-4">
                 <!-- BEGIN: Login Info -->
@@ -35,7 +35,7 @@
                         <h2
                             class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left"
                         >
-                            {{$t('login.loginTitle')}}
+                            {{ $t('login.loginTitle') }}
                         </h2>
                         <div class="intro-x mt-2 text-gray-500 xl:hidden text-center">
                             Pierwszy na świecie marketplace Robotów
@@ -59,38 +59,38 @@
                         <div
                             class="intro-x flex text-gray-700 dark:text-gray-600 text-xs sm:text-sm mt-4"
                         >
-<!--                            <div class="flex items-center mr-auto">-->
-<!--                                <input-->
-<!--                                    id="remember-me"-->
-<!--                                    type="checkbox"-->
-<!--                                    class="form-check-input border mr-2"-->
-<!--                                />-->
-<!--                                <label class="cursor-pointer select-none" for="remember-me"-->
-<!--                                >Remember me</label-->
-<!--                                >-->
-<!--                            </div>-->
-                            <button @click="showAddToTeamModal">{{$t('login.forgot')}}</button>
+                            <!--                            <div class="flex items-center mr-auto">-->
+                            <!--                                <input-->
+                            <!--                                    id="remember-me"-->
+                            <!--                                    type="checkbox"-->
+                            <!--                                    class="form-check-input border mr-2"-->
+                            <!--                                />-->
+                            <!--                                <label class="cursor-pointer select-none" for="remember-me"-->
+                            <!--                                >Remember me</label-->
+                            <!--                                >-->
+                            <!--                            </div>-->
+                            <button @click="showAddToTeamModal">{{ $t('login.forgot') }}</button>
                         </div>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                             <button
                                 class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top"
                                 @click="handleSubmit">
-                                {{$t('login.login')}}
+                                {{ $t('login.login') }}
                             </button>
                             <button
                                 @click="$router.replace({name:'register'})"
                                 class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">
-                                {{$t('login.signup')}}
+                                {{ $t('login.signup') }}
                             </button>
                         </div>
                         <div class="intro-x mt-10 xl:mt-24 text-gray-700 dark:text-gray-600 text-center xl:text-left">
-                            {{$t('login.pol1')}} <br/>
+                            {{ $t('login.pol1') }} <br/>
                             <a class="text-theme-1 dark:text-theme-10" href="/terms/terms-of-service" @click.prevent="$router.push({path: '/terms/terms-of-service'})">
-                                {{$t('login.pol2')}}
+                                {{ $t('login.pol2') }}
                             </a>
                             &
                             <a class="text-theme-1 dark:text-theme-10" href="/terms/privacy-policy" @click.prevent="$router.push({path: '/terms/privacy-policy'})">
-                                {{$t('login.pol3')}}
+                                {{ $t('login.pol3') }}
                             </a>
                         </div>
                     </div>
@@ -120,110 +120,157 @@
         </div>
 
     </Modal>
+
+    <Modal :show="shows" @closed="shows = false;">
+        <h3 class="intro-y text-lg font-medium mt-5">Dwu stopniowa weryfikacja</h3>
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+            <div>
+                Podaj kod z powiązanej aplikacji (Google Authenticator, Authy itd.)
+            </div>
+        </div>
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+            <div class="relative text-gray-700 dark:text-gray-300 mr-4">
+                <input
+                    type="email"
+                    class="form-control w-56 box pr-10 placeholder-theme-13"
+                    placeholder="Kod"
+                    v-model="twofa_code"
+                />
+                <button class="btn btn-primary shadow-md mr-2" @click="checkTwoFa">Weryfikuj</button>
+            </div>
+        </div>
+    </Modal>
 </template>
 
 <script>
-    import {onMounted, ref} from "vue";
-    import DarkModeSwitcher from "../components/dark-mode-switcher/Main.vue";
-    import cash from "cash-dom";
-    import { useToast } from "vue-toastification";
-    import {useStore} from '../store';
-    import Modal from "../components/Modal";
-    import ResetPassword from "../compositions/ResetPassword";
+import {onMounted, ref} from "vue";
+import DarkModeSwitcher from "../components/dark-mode-switcher/Main.vue";
+import cash from "cash-dom";
+import {useToast} from "vue-toastification";
+import {useStore} from '../store';
+import Modal from "../components/Modal";
+import ResetPassword from "../compositions/ResetPassword";
 
-    const toast = useToast();
-    const store = useStore();
-    export default {
-        components: {
+const toast = useToast();
+const store = useStore();
+export default {
+    components: {
+        DarkModeSwitcher,
+        Modal
+    },
+    setup() {
+        const show = ref(false);
+        const emailNew = ref('');
+        const twofa_code = ref('');
 
-            Modal
-        },
-        setup() {
-            const show = ref(false);
-            const emailNew = ref('');
+        const showAddToTeamModal = () => {
+            show.value = true;
+        }
 
-            const showAddToTeamModal = () => {
-                show.value = true;
-                }
-            const modalClosed = () => {
-                show.value = false;
-            }
-            const reset = async () => {
-                if(emailNew.value === '') {
-                    toast.error('Email nie może być pusty');
+        const checkTwoFa = () => {
+            let email = window.email;
+            axios.post('/api/check/twofa', {
+                email: email,
+                code: twofa_code.value
+            }).then(response => {
+                console.log(response.data)
+                if (response.data.success) {
+                    let user = response.data.payload;
+                    store.dispatch('login/login', {
+                        user
+                    })
+                    window.location.replace('/dashboard');
                 } else {
-                    await ResetPassword(emailNew.value)
-                    toast.success('Link do zmiany hasła został wysłany na twojego maila!')
+                    toast.error(response.data.message);
                 }
-            }
+            })
+        }
 
-            console.log(store);
-            onMounted(() => {
-                cash("body")
-                    .removeClass("main")
-                    .removeClass("error-page")
-                    .addClass("login");
-            });
-
-            return {
-                show,
-                emailNew,
-                showAddToTeamModal,
-                modalClosed,
-                reset
-            };
-        },
-        data() {
-            return {
-                email: "",
-                password: "",
-                error: null
+        const modalClosed = () => {
+            show.value = false;
+        }
+        const reset = async () => {
+            if (emailNew.value === '') {
+                toast.error('Email nie może być pusty');
+            } else {
+                await ResetPassword(emailNew.value)
+                toast.success('Link do zmiany hasła został wysłany na twojego maila!')
             }
-        },
-        methods: {
-            handleSubmit(e) {
-                e.preventDefault()
-                if (this.password.length > 0) {
-                    this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                        this.$axios.post('api/login', {
-                            email: this.email,
-                            password: this.password
-                        })
-                            .then(response => {
-                                console.log(response.data)
-                                if (response.data.success) {
-                                    console.log(response.data.success);
+        }
+
+        console.log(store);
+        onMounted(() => {
+            cash("body")
+                .removeClass("main")
+                .removeClass("error-page")
+                .addClass("login");
+        });
+
+        return {
+            show,
+            emailNew,
+            showAddToTeamModal,
+            modalClosed,
+            reset,
+            twofa_code,
+            checkTwoFa
+        };
+    },
+    data() {
+        return {
+            email: "",
+            password: "",
+            shows: false,
+            error: null
+        }
+    },
+    methods: {
+        handleSubmit(e) {
+            e.preventDefault()
+            if (this.password.length > 0) {
+                this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                    this.$axios.post('/api/login', {
+                        email: this.email,
+                        password: this.password
+                    })
+                        .then(response => {
+                            console.log(response.data)
+                            if (response.data.success) {
+                                console.log(response.data.success);
+                                let user = response.data.payload;
+                                console.log(user);
+                                // window.Laravel.isLoggedin = true;
+                                store.dispatch('login/login', {
+                                    user
+                                });
+
+                                // toast.success(response.data.message)
+                                console.log(store);
+                                if (user.name !== undefined || user.name !== '') {
+                                    window.location.replace('/dashboard');
+                                } else {
+                                    window.location.replace('/kreator');
+                                }
+                            } else {
+                                console.log(response.data.message);
+                                if (response.data.message == '2fa') {
                                     let user = response.data.payload;
-                                    console.log(user);
-                                    // window.Laravel.isLoggedin = true;
-                                    store.dispatch('login/login', {
-                                        user
-                                    })
-                                    // toast.success(response.data.message)
-                                    console.log(store);
-                                    if(user.name !== undefined || user.name !== '') {
-                                        window.location.replace('/dashboard');
-                                    } else {
-                                        window.location.replace('/kreator');
-                                    }
-
-                                    // this.$router.go('/kreator');
+                                    window.email = user.email;
+                                    this.shows = true;
                                 } else {
                                     toast.error(response.data.message);
                                 }
-                            })
-                            // .catch(function (error) {
-                            //     this.toast.error(error);
-                            // });
-                    })
-                }
+                            }
+                        })
+                })
             }
-        },
-        beforeRouteEnter(to, from, next) {
-            if (window.Laravel.isLoggedin) {
-                return next('dashboard');
-            }
-            next();
         }
+    },
+    beforeRouteEnter(to, from, next) {
+        if (window.Laravel.isLoggedin) {
+            return next('dashboard');
+        }
+        next();
     }
+}
 </script>

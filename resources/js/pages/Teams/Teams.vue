@@ -65,7 +65,7 @@
                                                 <Avatar :src="'/s3/avatars/' + member.avatar" :username="member.name + ' ' + member.lastname" :size="40" color="#FFF" background-color="#930f68"/>
                                             </div>
                                             <div class="ml-4 mr-auto">
-                                                <a href="" class="font-medium">{{ member.name + ' ' + member.lastname }}</a>
+                                                <a href="" class="font-medium">{{ member.name + ' ' + member.lastname }} - {{member.type}}</a>
                                                 <div class="text-gray-600 mr-5 sm:mr-5" v-if="member.companies.length != 0">
                                                      {{member.companies[0].company_name}}
                                                 </div>

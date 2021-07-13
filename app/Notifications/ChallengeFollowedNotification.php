@@ -39,6 +39,7 @@ class ChallengeFollowedNotification extends Notification
             'message' => 'Użytkownik obserwuje Twoje wyzwanie!: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
+            'name' => 'internalChallenegeCard',
         ]);
     }
 
@@ -48,6 +49,7 @@ class ChallengeFollowedNotification extends Notification
             'message' => 'Użytkownik obserwuje Twoje wyzwanie!: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
+            'name' => 'internalChallenegeCard',
         ];
     }
 }

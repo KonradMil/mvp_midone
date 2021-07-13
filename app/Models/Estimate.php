@@ -26,7 +26,8 @@ class Estimate extends Model
       'project',
       'margin',
       'parts_prices',
-        'additionalCosts'
+        'additionalCosts',
+        'sum'
     ];
 
     public function solution()

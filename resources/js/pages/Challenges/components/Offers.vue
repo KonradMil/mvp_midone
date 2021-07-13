@@ -13,7 +13,7 @@
                         <div class="flex items-center">
                             <div class="pl-4 my-2">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.solution')}}</span>
-                                <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px;"> {{ offer.solution.name }}</div>
+                                <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px; word-break: break-all; max-height: 100px; max-width: 200px;"> {{ offer.solution.name }}</div>
                             </div>
                             <div class="mt-2 pl-9 pb-6" v-if="(user.id === offer.installer_id)">
                                 <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status != 1">{{$t('challengesMain.publishOffer')}}</button>
@@ -24,13 +24,13 @@
                             <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
                             <div class="flex items-center mr-3" v-if="(offer.rejected != 1) && (offer.selected != 1) && (offer.status == 1)"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
                         </div>
-                        <div class="flex items-center">
+                        <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.offerExpires')}}:</span>
                                 <div class="text-gray-600"> {{ offer.offer_expires_in }} dni</div>
                             </div>
                         </div>
-                        <div class="flex items-center">
+                        <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.priceDelivery')}}:</span>
                                 <div class="text-gray-600"> {{ offer.price_of_delivery }}zł</div>
@@ -149,6 +149,7 @@ export default {
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
         const offer_id = ref();
+        const guard = ref();
 
         watch(() => offers.value.list, (first, second) => {
         }, {})
@@ -163,6 +164,9 @@ export default {
 
         const getOffersRepositories = async () => {
             offers.value = GetOffers(props.id);
+            if(offers.value.list.length < 1){
+                guard.value = 1;
+            }
         }
 
         const publishOffer = async(offer) => {
@@ -206,6 +210,7 @@ export default {
         });
 
         return {
+            guard,
             deleteOffer,
             offer_id,
             editOffer,

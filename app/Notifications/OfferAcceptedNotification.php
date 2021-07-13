@@ -55,6 +55,9 @@ class OfferAcceptedNotification extends Notification
             'message' => 'Oferta została zaakceptowana do wyzwania: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
+            'params' => 'all-offers',
+            'name' => 'internalChallenegeCard',
+            'id' => $this->challenge->id,
         ]);
     }
 
@@ -64,6 +67,9 @@ class OfferAcceptedNotification extends Notification
             'message' => 'Oferta została zaakceptowana do wyzwania: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
+            'params' => 'all-offers',
+            'name' => 'internalChallenegeCard',
+            'id' => $this->challenge->id,
         ];
     }
 }
