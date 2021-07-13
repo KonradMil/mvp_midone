@@ -164,7 +164,7 @@ export const routes = [
             },
             {
                 name: 'internalChallenegeCard',
-                path: '/challenges/card/:id',
+                path: '/challenges/card/:id/:change',
                 component: Card,
                 props: true
             },
