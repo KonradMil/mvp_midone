@@ -23,11 +23,15 @@ class NotificationsController extends Controller
         if($notification){
             $notification->markAsRead();
         }
-
+        $notifications = Auth::user()->notifications;
+        foreach ($notifications as $not) {
+            $data = $not['data'];
+            $not->author = User::find($data['author']['id']);
+        }
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
-            'payload' => $notification
+            'payload' => $notifications
         ]);
     }
 
