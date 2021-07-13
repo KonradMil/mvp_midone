@@ -27,7 +27,7 @@ class UserController extends Controller
 
     public static function userPermissions($model)
     {
-        $user = $model;
+        $user = User::find($model->id);
 //        dd($user);
         $publishChallenges = [];
         $acceptChallengeSolutions = [];
