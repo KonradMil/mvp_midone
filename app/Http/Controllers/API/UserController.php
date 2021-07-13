@@ -28,7 +28,7 @@ class UserController extends Controller
     public static function userPermissions($model)
     {
         $user = Auth::user();
-
+        dd($user);
         $publishChallenges = [];
         $acceptChallengeSolutions = [];
         $acceptChallengeOffers = [];
