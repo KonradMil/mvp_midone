@@ -29,7 +29,7 @@ class UserController extends Controller
     public static function userPermissions($model)
     {
 //        $user = User::find($model->id);
-        dd($model->id);
+//        dd($model->id);
         $publishChallenges = [];
         $acceptChallengeSolutions = [];
         $acceptChallengeOffers = [];
@@ -37,16 +37,22 @@ class UserController extends Controller
         $addSolutionOffers = [];
 
         $challenges = Challenge::where('author_id', '=', $model->id)->get();
-        foreach ($challenges as $challenge) {
-            $publishChallenges[] = $challenge->id;
-            $acceptChallengeOffers[] = $challenge->id;
-            $acceptChallengeSolutions[] = $challenge->id;
+        if($challenges != NULL) {
+            foreach ($challenges as $challenge) {
+                $publishChallenges[] = $challenge->id;
+                $acceptChallengeOffers[] = $challenge->id;
+                $acceptChallengeSolutions[] = $challenge->id;
+            }
         }
+
         $solutions = Solution::where('author_id', '=', $model->id)->get();
-        foreach ($solutions as $solution) {
-            $publishSolution[] = $solution->id;
-            $addSolutionOffers[] = $solution->id;
+        if($solutions != NULL) {
+            foreach ($solutions as $solution) {
+                $publishSolution[] = $solution->id;
+                $addSolutionOffers[] = $solution->id;
+            }
         }
+
 
 //        foreach ($user->teams as $team) {
 //
