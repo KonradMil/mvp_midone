@@ -118,7 +118,18 @@
 </template>
 
 <script>
-import {defineComponent, ref, provide, onMounted, unref, toRaw, computed, getCurrentInstance, onBeforeMount} from "vue";
+import {
+    defineComponent,
+    ref,
+    provide,
+    onMounted,
+    unref,
+    toRaw,
+    computed,
+    getCurrentInstance,
+    onBeforeMount,
+    watch
+} from "vue";
 import GetCardChallenge from "../../compositions/GetCardChallenge";
 import WhatsNext from "./WhatsNext";
 import BasicInformationPanel from "./components/BasicInformationPanel";
@@ -155,7 +166,6 @@ export default defineComponent({
         const toast = useToast();
         const announcementRef = ref();
         const newProjectsRef = ref();
-        const change = ref();
         const challenge = ref({});
         const solutions = ref({});
         const solution = ref({});
@@ -170,7 +180,9 @@ export default defineComponent({
         const inTeam = ref(false);
         const isSolutions = ref(false);
         const isPublic = ref(false);
-
+        watch(() => props.change, (first, second) => {
+            activeTab.value = props.change
+        }, {})
         emitter.on('selectedSolution', e => {
             selected_solution_id.value = e.id;
             activeTab.value = 'addingoffer';
@@ -366,7 +378,6 @@ export default defineComponent({
             inTeam,
             isSolutions,
             isPublic,
-            change
         };
     }
 });

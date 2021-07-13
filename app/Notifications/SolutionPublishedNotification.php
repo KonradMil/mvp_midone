@@ -55,7 +55,7 @@ class SolutionPublishedNotification extends Notification
             'message' => 'Nowe rozwiązanie zostało opublikowane do Twojego wyzwania: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
-            'params' => 'solution',
+            'params' => 'rozwiazania',
             'name' => 'internalChallenegeCard',
             'id' => $this->challenge->id,
         ]);
@@ -67,7 +67,7 @@ class SolutionPublishedNotification extends Notification
             'message' => 'Nowe rozwiązanie zostało opublikowane do Twojego wyzwania: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
-            'params' => 'solution',
+            'params' => 'rozwiazania',
             'name' => 'internalChallenegeCard',
             'id' => $this->challenge->id,
         ];
