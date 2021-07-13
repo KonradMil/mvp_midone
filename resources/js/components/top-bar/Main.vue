@@ -72,7 +72,7 @@
                         :key="'notification_' + index"
                         class="cursor-pointer relative flex items-center"
                         :class="{ 'mt-5': index }"
-                        @click="goTo(notification.data.link)">
+                        @click="goTo(notification.data.link,notification.id)">
                         <div class="w-12 h-12 flex-none image-fit mr-1">
                             <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
                                     :username="notification.data.author.name + ' ' + notification.data.author.lastname"
@@ -82,7 +82,7 @@
                                  class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white"
                             ></div>
                         </div>
-                        <div class="ml-2 overflow-hidden">
+                        <div :class="(notification.read_at === null) ? 'ml-2 overflow-hidden' : 'ml-2 overflow-hidden opacity-50'" >
                             <div class="flex items-center">
                                 <a href="#" class="font-medium truncate mr-5"></a>
                                 <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">
@@ -300,7 +300,19 @@ export default defineComponent({
            }
         });
 
-        const goTo = (link) => {
+        const setRead = async (id) => {
+            axios.post('/api/notifications/set', {id: id})
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Readed');
+                    } else {
+                        toast.error('Error');
+                    }
+                })
+        }
+
+        const goTo = (link,id) => {
+            setRead(id);
             router.push({ path: link})
         };
 
@@ -311,6 +323,7 @@ export default defineComponent({
             notifications.value = user.notifications;
         })
         return {
+            setRead,
             searchDropdown,
             showSearchDropdown,
             hideSearchDropdown,
