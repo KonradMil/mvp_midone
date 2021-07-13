@@ -6,6 +6,7 @@ use App\Mail\ChangePassword;
 use App\Mail\ForgotPassword;
 use App\Mail\TeamInvitation;
 use App\Models\Challenges\Challenge;
+use App\Models\Solutions\Solution;
 use Authy\AuthyApi;
 use GuzzleHttp\Client;
 use Illuminate\Auth\Events\PasswordReset;
@@ -25,27 +26,39 @@ use Mpociot\Teamwork\TeamInvite;
 class UserController extends Controller
 {
 
-    public static function userPermissions($model) {
-        $user = Auth::user();
+    public static function userPermissions($model)
+    {
+//        $user = User::find($model->id);
+//        dd($model->id);
+        $publishChallenges = [];
+        $acceptChallengeSolutions = [];
+        $acceptChallengeOffers = [];
+        $publishSolution = [];
+        $addSolutionOffers = [];
 
-        $solutions = [];
-        $ts = Auth::user()->teams;
-        $ars = [];
-        if($ts != null){
-            foreach ($ts as $tt) {
-                array_push($ars, $tt->id);
+        $challenges = Challenge::where('author_id', '=', $model->id)->get();
+        if($challenges != NULL) {
+            foreach ($challenges as $challenge) {
+                $publishChallenges[] = $challenge->id;
+                $acceptChallengeOffers[] = $challenge->id;
+                $acceptChallengeSolutions[] = $challenge->id;
+            }
+        }
+
+        $solutions = Solution::where('author_id', '=', $model->id)->get();
+        if($solutions != NULL) {
+            foreach ($solutions as $solution) {
+                $publishSolution[] = $solution->id;
+                $addSolutionOffers[] = $solution->id;
             }
         }
 
 
-        $c = Challenge::whereHas('teams', function ($query) use ($ars) {
-            $query->whereIn('teams.id', $ars);
-        })->orderBy('created_at', 'DESC')->get();
-        $challs = Auth::user()->challenges;
+//        foreach ($user->teams as $team) {
+//
+//        }
 
-//        $challenges = $challs->merge($c);
-
-
+        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffers' => $addSolutionOffers];
     }
 
     public function reset(Request $request)
@@ -76,7 +89,7 @@ class UserController extends Controller
 
         $user = Auth::user();
 
-        if($request->phone != null) {
+        if ($request->phone != null) {
             $user->phone = $request->phone;
         }
 
@@ -342,9 +355,9 @@ class UserController extends Controller
         $verification = $authy_api->verifyToken($user->authy_id, $request->code);
 
         if ($verification->ok()) {
-          $success = true;
-          $message = 'Zalogowano poprawnie';
-          Auth::login($user);
+            $success = true;
+            $message = 'Zalogowano poprawnie';
+            Auth::login($user);
 
         } else {
             $success = false;
