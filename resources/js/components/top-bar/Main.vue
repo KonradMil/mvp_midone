@@ -67,6 +67,7 @@
                 <div
                     class="notification-content__box dropdown-menu__content box dark:bg-dark-6 overflow-y-auto" style="max-height: 400px;">
                     <div class="notification-content__title">{{$t('global.notifications')}}</div>
+                    <div class="notification-content__title">Read all</div>
                     <div
                         v-for="(notification, index) in notificationsComp"
                         :key="'notification_' + index"
