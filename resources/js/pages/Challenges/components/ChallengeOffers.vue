@@ -86,7 +86,7 @@
                         <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
                             <div class="flex items-center">
                                 <div class="pb-2">
-                                <span class="numberCircle clrGreen" v-if="filterType !== null"><span>{{ index + 1}}
+                                <span class="numberCircle clrGreen" v-if="filterType !== null || technologyType !== null"><span>{{ index + 1}}
                             </span></span>
                                 </div>
                                 <div class="flex items-center justify-left text-theme-20 font-black text-2xl" v-if="offer.id === theBestOffer.id && (filterType === 'Ranking' || filterType === null)"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Najlepsza oferta</div>
