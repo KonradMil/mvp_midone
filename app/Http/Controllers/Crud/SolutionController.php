@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Crud;
 
 use App\Events\SolutionAccepted;
+use App\Events\SolutionAdded;
 use App\Events\SolutionPublished;
 use App\Events\SolutionRejected;
 use App\Http\Controllers\Controller;
@@ -729,6 +730,8 @@ class SolutionController extends Controller
 //        $financial->cycle_time = $request -> cycle_time;
         $financial->challenge_id = $challenge->id;
         $financial->save();
+
+        event(new SolutionAdded($solution, $challenge->author, 'Rozwiązanie zostało dodane: ' . $solution->name, []));
 
         return response()->json([
             'success' => true,

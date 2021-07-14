@@ -27,6 +27,7 @@ use App\Listeners\SendOfferAcceptedNotification;
 use App\Listeners\SendOfferAddedNotification;
 use App\Listeners\SendOfferPublishedNotification;
 use App\Listeners\SendOfferRejectedNotification;
+use App\Listeners\SendSolutionAddedNotification;
 use App\Listeners\SendSolutionNotification;
 use App\Listeners\SendSolutionRejectedNotification;
 use App\Listeners\SendTeamMemberAcceptedNotification;
@@ -54,10 +55,6 @@ class EventServiceProvider extends ServiceProvider
         ChallengeAdded::class => [
             AddActivityLog::class,
             SendChallengeNotification::class
-        ],
-        SolutionAdded::class => [
-            AddActivityLog::class,
-            SendSolutionNotification::class
         ],
         TeamMemberInvited::class => [
             AddActivityLog::class,
@@ -92,6 +89,10 @@ class EventServiceProvider extends ServiceProvider
         SolutionPublished::class => [
             AddActivityLog::class,
             SendSolutionPublishedNotification::class
+        ],
+        SolutionAdded::class => [
+            AddActivityLog::class,
+            SendSolutionAddedNotification::class
         ],
         OfferPublished::class => [
             AddActivityLog::class,

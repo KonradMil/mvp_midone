@@ -66,7 +66,6 @@
                 :show-labels="false"
                 :preselect-first="true"
                 valueProp="value"
-                :disabled="filterType===null"
                 :options="technology['options']"
                 :option-height="104"
             />
@@ -81,16 +80,16 @@
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div  v-for="(offer, index) in offers.list" :key="index" class="col-span-12 col-span-12 xxl:col-span-6">
-                <div :class="(offer.id === theBestOffer.id && (filterType === 'Ranking' || filterType === null)) ? 'best-offer': ''">
+                <div :class="(offer.id === theBestOffer.id && (filterType === 'Ranking' || filterType === null) && technologyType === null) ? 'best-offer': ''">
                 <div class="intro-y box"  v-if="challenge.selected_offer_id < 1 || offer.selected == 1">
                     <div class="px-5 py-5" >
                         <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
                             <div class="flex items-center">
                                 <div class="pb-2">
-                                <span class="numberCircle clrGreen" v-if="filterType !== null"><span>{{ index + 1}}
+                                <span class="numberCircle clrGreen" v-if="filterType !== null || technologyType !== null"><span>{{ index + 1}}
                             </span></span>
                                 </div>
-                                <div class="flex items-center justify-left text-theme-20 font-black text-2xl" v-if="offer.id === theBestOffer.id && (filterType === 'Ranking' || filterType === null)"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Najlepsza oferta</div>
+                                <div class="flex items-center justify-left text-theme-20 font-black text-2xl" v-if="offer.id === theBestOffer.id && (filterType === 'Ranking' || filterType === null) && technologyType ===null"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Najlepsza oferta</div>
                             </div>
                             <div class="flex items-center">
                                 <div class="pl-4 my-2">
@@ -106,9 +105,29 @@
                                     <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && challenge.selected_offer_id < 1">Akceptuj ofertę</button>
                                     </Tippy>
                                     <button class="btn shadow-md mr-2 bg-gray-400" @click.prevent="rejectOffer(offer,index)" v-if="offer.rejected != 1 && challenge.selected_offer_id < 1" >Odrzuć ofertę</button>
+                                    <button class="btn btn-outline-secondary" @click="showDetails[offer.id] = !showDetails[offer.id]">Details</button>
                                 </div>
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                             </div>
+                            <div class="flex items-center mt-5" v-if="showDetails[offer.id] !== true && (filterType === 'Cene malejąco' || filterType === 'Cena rosnąco')">
+                                <div class="border-2 border-theme-1 p-2">
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.priceDelivery')}}:</span>
+                                    <div class="text-gray-600"> {{ offer.price_of_delivery }}</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center mt-5" v-if="showDetails[offer.id] !== true && filterType === 'Czas realizacji uruchomienia u klienta'">
+                                <div class="border-2 border-theme-1 p-2">
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.timeToStart')}}:</span>
+                                    <div class="text-gray-600"> {{ values['weeks-short'][offer.time_to_start] }} </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center mt-5" v-if="showDetails[offer.id] !== true && filterType === 'Okres gwarancji stanowiska od integratora'">
+                                <div class="border-2 border-theme-1 p-2'">
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.yearsGuarantee')}}:</span>
+                                    <div class="text-gray-600"> {{ values['years-short'][offer.years_of_guarantee] }} </div>
+                                </div>
+                            </div>
+                            <div class="intro-y" v-if="showDetails[offer.id] === true">
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.offerExpires')}}:</span>
@@ -205,6 +224,7 @@
                                     <div class="text-gray-600"> {{ offer.period_of_support }} </div>
                                 </div>
                             </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -253,6 +273,10 @@ export default {
         const technologyType = ref(null);
         const theBestOffer = ref('');
         const guard = ref();
+        const show = ref(false);
+        const temporary_offer_id = ref(null);
+        const showDetails = ref([]);
+        const isShow = ref(false);
 
         watch(() => offers.value.list, (first, second) => {
         }, {})
@@ -281,6 +305,10 @@ export default {
             if(filterType.value === null){
                 getChallengeOffersRepositories();
                 technologyType.value = null;
+            }
+            if(filterType.value==='Cena malejąco' || filterType.value==='Cena rosnąco'
+                || filterType.value==='Czas realizacji uruchomienia u klienta' || filterType.value==='Okres gwarancji stanowiska od integratora'){
+                isShow.value = true;
             }
         }, {})
 
@@ -367,6 +395,10 @@ export default {
         });
 
         return {
+            isShow,
+            temporary_offer_id,
+            showDetails,
+            show,
             guard,
             theBestOffer,
             StartFilterOffer,
