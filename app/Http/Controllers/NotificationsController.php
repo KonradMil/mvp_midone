@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
@@ -43,21 +44,30 @@ class NotificationsController extends Controller
     }
     public function deleteNotification(Request $request)
     {
-        $notification_id = $request->input('id');
-        $notification = Auth::user()->notifications->find($notification_id);
-        if($notification){
-            $notification->delete();
-        }
+        try{
+            $notification_id = $request->input('id');
+            $notification = Auth::user()->notifications->find($notification_id);
+            if($notification){
+                $notification->delete();
+            }
 //        $notifications = Auth::user()->notifications;
 //        foreach ($notifications as $not) {
 //            $data = $not['data'];
 //            $not->author = User::find($data['author']['id']);
 //        }
-        return response()->json([
-            'success' => true,
-            'message' => 'Usunięto poprawnie.',
-            'payload' => ''
-        ]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Usunięto poprawnie.',
+                'payload' => ''
+            ]);
+        }catch(Exception $e){
+            return response()->json([
+                'success' => false,
+                'message' => 'Error',
+                'payload' => $e
+            ]);
+        }
+
     }
     public function setReadNotification(Request $request)
     {
