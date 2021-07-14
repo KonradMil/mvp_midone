@@ -23,8 +23,8 @@ class TeamsController extends Controller
         $team = new Team();
         $team-> owner_id = Auth::user()->id;
         $team-> name = $name;
-        $team -> save();
-        Auth::user()->attachTeam($team);
+        $team->save();
+        Auth::user()->teams()->attach($team, ['owner'=> true, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true]);
         $who = $request -> input('who');
         $id = $request -> input('id');
         if($who == 'challenge')
