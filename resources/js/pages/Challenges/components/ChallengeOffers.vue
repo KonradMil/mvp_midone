@@ -344,18 +344,6 @@ export default {
                 },handleCallback)
         }
 
-        // const showDetails = (id) =>{
-        //     console.log(temporary_offer_id + 'temporary_offer_id');
-        //     console.log(id + 'id');
-        //     console.log(temporary_offer_id.value + 'temporary_offer_id.value');
-        //     if(temporary_offer_id.value == null || temporary_offer_id.value === id){
-        //         show.value = !show.value;
-        //     }else{
-        //         show.value = true;
-        //     }
-        //     temporary_offer_id.value = id;
-        // }
-
         const rejectOffer = async(offer,index) => {
             axios.post('/api/offer/reject', {id: offer.id})
                 .then(response => {
