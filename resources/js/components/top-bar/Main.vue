@@ -77,7 +77,7 @@
                         :key="'notification_' + index"
                         class="cursor-pointer relative flex items-center"
                         :class="{ 'mt-5': index }">
-                        <a v-if="notification.read_at !== null" class="flex items-center text-theme-6 pr-4" @click.prevent=delNotifi(notification.id,index) href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon></a>
+                        <a v-if="notification.read_at !== null" class="flex items-center text-theme-6 pr-2" @click.prevent=delNotifi(notification.id,index) href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon style="width: 16px;"></TrashIcon></a>
                         <div class="w-12 h-12 flex-none image-fit mr-1">
                             <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
                                     :username="notification.data.author.name + ' ' + notification.data.author.lastname"
