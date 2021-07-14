@@ -180,13 +180,13 @@ export default defineComponent({
         const inTeam = ref(false);
         const isSolutions = ref(false);
         const isPublic = ref(false);
-        // watch(() => props.change, (first, second) => {
-        //     if(props.change === 'all-offers' && user.type === 'integrator'){
-        //         activeTab.value = 'oferty';
-        //     }else{
-        //         activeTab.value = props.change;
-        //     }
-        // }, {})
+        watch(() => props.change, (first, second) => {
+            if(props.change === 'all-offers' && user.type === 'integrator'){
+                activeTab.value = 'oferty';
+            }else{
+                activeTab.value = props.change;
+            }
+        }, {})
         emitter.on('selectedSolution', e => {
             selected_solution_id.value = e.id;
             activeTab.value = 'addingoffer';
@@ -273,12 +273,6 @@ export default defineComponent({
 
         onMounted(function () {
             console.log(props);
-            console.log(props.change);
-            if(props.change === 'all-offers' && user.type === 'integrator'){
-                activeTab.value = 'oferty';
-            }else if(props.change !== undefined){
-                activeTab.value = props.change;
-            }
             getCardChallengeRepositories(props.id);
         })
 
