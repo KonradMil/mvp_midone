@@ -78,7 +78,7 @@
                         class="cursor-pointer relative flex items-center"
                         :class="{ 'mt-5': index }"
                         @click="goTo(notification.data.name,notification.id,notification.data.params,notification.data.id)">
-                        <a v-if="notification.read_at !== null" class="flex items-center text-theme-6 pr-4" @click.prevent=del(notification.id) href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon></a>
+                        <a v-if="notification.read_at !== null" class="flex items-center text-theme-6 pr-4" @click.prevent=delNotifi(notification.id) href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon></a>
                         <div class="w-12 h-12 flex-none image-fit mr-1">
                             <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
                                     :username="notification.data.author.name + ' ' + notification.data.author.lastname"
@@ -331,7 +331,7 @@ export default defineComponent({
                 })
         }
 
-        const del = async (id) => {
+        const delNotifi = async (id) => {
             axios.post('/api/notifications/delete', {id: id})
                 .then(response => {
                     // console.log(response.data)
@@ -356,7 +356,7 @@ export default defineComponent({
             notifications.value = user.notifications;
         })
         return {
-            del,
+            delNotifi,
             readAll,
             setRead,
             searchDropdown,
