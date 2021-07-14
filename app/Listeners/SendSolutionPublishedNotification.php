@@ -46,7 +46,7 @@ class SendSolutionPublishedNotification
                 }
             }
         }
-        $user->notify(new SolutionPublishedNotification($challenge, $event->subject));
+//        $user->notify(new SolutionPublishedNotification($challenge, $event->subject));
         $client->notify(new SolutionPublishedNotification($challenge, $event->subject));
     }
 }
