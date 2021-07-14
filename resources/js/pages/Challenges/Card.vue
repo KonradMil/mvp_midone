@@ -274,6 +274,9 @@ export default defineComponent({
         onMounted(function () {
             console.log(props);
             getCardChallengeRepositories(props.id);
+            if(props.change !== undefined){
+                activeTab.value = props.change;
+            }
         })
 
 
