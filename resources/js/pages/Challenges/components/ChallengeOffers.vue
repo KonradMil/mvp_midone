@@ -109,19 +109,19 @@
                                 </div>
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                             </div>
-                            <div class="flex items-center mt-5" v-if="showDetails[offer.id] === false && (filterType === 'Cene malejąco' || filterType === 'Cena rosnąco')">
+                            <div class="flex items-center mt-5" v-if="showDetails[offer.id] !== true && (filterType === 'Cene malejąco' || filterType === 'Cena rosnąco')">
                                 <div class="border-2 border-theme-1 p-2">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.priceDelivery')}}:</span>
                                     <div class="text-gray-600"> {{ offer.price_of_delivery }}</div>
                                 </div>
                             </div>
-                            <div class="flex items-center mt-5" v-if="showDetails[offer.id] === false && filterType === 'Czas realizacji uruchomienia u klienta'">
+                            <div class="flex items-center mt-5" v-if="showDetails[offer.id] !== true && filterType === 'Czas realizacji uruchomienia u klienta'">
                                 <div class="border-2 border-theme-1 p-2">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.timeToStart')}}:</span>
                                     <div class="text-gray-600"> {{ values['weeks-short'][offer.time_to_start] }} </div>
                                 </div>
                             </div>
-                            <div class="flex items-center mt-5" v-if="showDetails[offer.id] === false && filterType === 'Okres gwarancji stanowiska od integratora'">
+                            <div class="flex items-center mt-5" v-if="showDetails[offer.id] !== true && filterType === 'Okres gwarancji stanowiska od integratora'">
                                 <div class="border-2 border-theme-1 p-2'">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.yearsGuarantee')}}:</span>
                                     <div class="text-gray-600"> {{ values['years-short'][offer.years_of_guarantee] }} </div>
