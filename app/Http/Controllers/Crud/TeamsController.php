@@ -59,6 +59,9 @@ class TeamsController extends Controller
 //            $queryForeign = Auth::user()->ownedTeams;
         }
 
+        foreach ($query as $t){
+            dump($t->pivot);
+        }
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
