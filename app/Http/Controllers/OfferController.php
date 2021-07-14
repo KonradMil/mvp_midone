@@ -169,6 +169,8 @@ class OfferController extends Controller
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->orderBy('so.number_of_universal', 'DESC')->select('offers.*')->with('solution')->get();
         }else if($technology_option  === 'TFM ROBOTICS'){
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->orderBy('so.number_of_tfm', 'DESC')->select('offers.*')->with('solution')->get();
+        }else if($technology_option  === 'KUKA'){
+            $offers = $challenge->offers()->where('offers.rejected', '=', null)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->orderBy('so.number_of_kuka', 'DESC')->select('offers.*')->with('solution')->get();
         }
 
 
