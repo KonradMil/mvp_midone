@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\SolutionAdded;
 use App\Events\SolutionPublished;
 use App\Models\Challenges\Challenge;
 use App\Models\Solutions\Solution;
@@ -31,7 +32,7 @@ class SendSolutionAddedNotification
      * @param  SolutionPublished  $event
      * @return void
      */
-    public function handle(SolutionPublished $event)
+    public function handle(SolutionAdded $event)
     {
         $user = $event->subject->author;
         $challenge = Challenge::find($event->subject->challenge_id);
