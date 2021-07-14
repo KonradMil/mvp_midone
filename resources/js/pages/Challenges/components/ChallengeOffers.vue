@@ -255,7 +255,8 @@ export default {
         const technologyType = ref(null);
         const theBestOffer = ref('');
         const guard = ref();
-        const show = ref([]);
+        const show = ref(false);
+        const temporary_offer_id = ref(null);
 
 
         watch(() => offers.value.list, (first, second) => {
@@ -343,8 +344,13 @@ export default {
                 },handleCallback)
         }
 
-        const showDetails = async() =>{
-            show.value = !show.value;
+        const showDetails = async(id) =>{
+            if(temporary_offer_id == null || temporary_offer_id === id){
+                show.value = !show.value;
+            }else{
+                show.value = true;
+            }
+            temporary_offer_id.value = id;
         }
 
         const rejectOffer = async(offer,index) => {
@@ -375,6 +381,7 @@ export default {
         });
 
         return {
+            temporary_offer_id,
             showDetails,
             show,
             guard,
