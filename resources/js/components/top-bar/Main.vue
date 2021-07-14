@@ -78,7 +78,7 @@
                         class="cursor-pointer relative flex items-center"
                         :class="{ 'mt-5': index }"
                         @click="goTo(notification.data.name,notification.id,notification.data.params,notification.data.id)">
-                        <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
+                        <a class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon></a>
                         <div class="w-12 h-12 flex-none image-fit mr-1">
                             <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
                                     :username="notification.data.author.name + ' ' + notification.data.author.lastname"
