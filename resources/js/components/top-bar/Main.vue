@@ -76,8 +76,7 @@
                         v-for="(notification, index) in notificationsComp"
                         :key="'notification_' + index"
                         class="cursor-pointer relative flex items-center"
-                        :class="{ 'mt-5': index }"
-                        @click="goTo(notification.data.name,notification.id,notification.data.params,notification.data.id)">
+                        :class="{ 'mt-5': index }">
                         <a v-if="notification.read_at !== null" class="flex items-center text-theme-6 pr-4" @click.prevent=delNotifi(notification.id,index) href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon></a>
                         <div class="w-12 h-12 flex-none image-fit mr-1">
                             <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
@@ -95,7 +94,7 @@
                                     {{ $dayjs(notification.created_at).format('DD.MM.YYYY HH:mm') }}
                                 </div>
                             </div>
-                            <div class="w-full truncate text-gray-600 mt-0.5">
+                            <div class="w-full truncate text-gray-600 mt-0.5" @click="goTo(notification.data.name,notification.id,notification.data.params,notification.data.id)">
                                 {{ notification.data.message }}
                             </div>
                         </div>
