@@ -156,7 +156,7 @@ class OfferController extends Controller
         }else if($option === 'Ranking'){
             $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('points', 'DESC')->with('solution')->get();
         }else if($technology_option  === 'FANUC'){
-            $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_fanuc', 'DESC')->get();
+            $offers = $challenge->offers()->where('rejected', '=', null)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->orderBy('so.number_of_fanuc', 'DESC')->get();
         }else if($technology_option  === 'Yaskawa'){
             $offers = $challenge->offers()->where('rejected', '=', null)->with('solution')->orderBy('solution.number_of_yaskawa', 'DESC')->get();
         } else if($technology_option  === 'ABB'){
