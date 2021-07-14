@@ -109,6 +109,24 @@
                                 </div>
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                             </div>
+                            <div class="flex items-center mt-5" v-if="showDetails[offer.id] === false && (filterType === 'Cene malejąco' || filterType === 'Cena rosnąco')">
+                                <div class="border-2 border-theme-1 p-2">
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.priceDelivery')}}:</span>
+                                    <div class="text-gray-600"> {{ offer.price_of_delivery }}</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center mt-5" v-if="showDetails[offer.id] === false && filterType === 'Czas realizacji uruchomienia u klienta'">
+                                <div class="border-2 border-theme-1 p-2">
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.timeToStart')}}:</span>
+                                    <div class="text-gray-600"> {{ values['weeks-short'][offer.time_to_start] }} </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center mt-5" v-if="showDetails[offer.id] === false && filterType === 'Okres gwarancji stanowiska od integratora'">
+                                <div class="border-2 border-theme-1 p-2'">
+                                    <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.yearsGuarantee')}}:</span>
+                                    <div class="text-gray-600"> {{ values['years-short'][offer.years_of_guarantee] }} </div>
+                                </div>
+                            </div>
                             <div class="intro-y" v-if="showDetails[offer.id] === true">
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
@@ -258,6 +276,7 @@ export default {
         const show = ref(false);
         const temporary_offer_id = ref(null);
         const showDetails = ref([]);
+        const isShow = ref(false);
 
         watch(() => offers.value.list, (first, second) => {
         }, {})
@@ -286,6 +305,10 @@ export default {
             if(filterType.value === null){
                 getChallengeOffersRepositories();
                 technologyType.value = null;
+            }
+            if(filterType.value==='Cena malejąco' || filterType.value==='Cena rosnąco'
+                || filterType.value==='Czas realizacji uruchomienia u klienta' || filterType.value==='Okres gwarancji stanowiska od integratora'){
+                isShow.value = true;
             }
         }, {})
 
@@ -372,6 +395,7 @@ export default {
         });
 
         return {
+            isShow,
             temporary_offer_id,
             showDetails,
             show,
