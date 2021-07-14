@@ -105,7 +105,7 @@
                                     <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && challenge.selected_offer_id < 1">Akceptuj ofertę</button>
                                     </Tippy>
                                     <button class="btn shadow-md mr-2 bg-gray-400" @click.prevent="rejectOffer(offer,index)" v-if="offer.rejected != 1 && challenge.selected_offer_id < 1" >Odrzuć ofertę</button>
-                                    <button class="btn shadow-md mr-2 bg-gray-400" @click.prevent="showDetails(offer.id)">Details</button>
+                                    <button class="btn btn-outline-secondary" @click.prevent="showDetails(offer.id)">Details</button>
                                 </div>
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                             </div>
@@ -345,7 +345,10 @@ export default {
         }
 
         const showDetails = async(id) =>{
-            if(temporary_offer_id == null || temporary_offer_id === id){
+            console.log(temporary_offer_id + 'temporary_offer_id');
+            console.log(id + 'id');
+            console.log(temporary_offer_id.value + 'temporary_offer_id.value');
+            if(temporary_offer_id.value == null || temporary_offer_id.value === id){
                 show.value = !show.value;
             }else{
                 show.value = true;
