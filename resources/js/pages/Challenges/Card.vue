@@ -273,9 +273,10 @@ export default defineComponent({
 
         onMounted(function () {
             console.log(props);
+            console.log(props.change);
             if(props.change === 'all-offers' && user.type === 'integrator'){
                 activeTab.value = 'oferty';
-            }else{
+            }else if(props.change !== undefined){
                 activeTab.value = props.change;
             }
             getCardChallengeRepositories(props.id);
