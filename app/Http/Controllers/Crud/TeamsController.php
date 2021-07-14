@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Crud;
 
+use App\Events\TeamMemberAccepted;
 use App\Http\Controllers\Controller;
 use App\Mail\TeamInvitation;
 use App\Models\Challenges\Challenge;
@@ -189,6 +190,11 @@ class TeamsController extends Controller
     {
         $invite = TeamInvite::find($request->id);
         Teamwork::acceptInvite( $invite );
+        $team = $invite->team;
+
+
+        event(new TeamMemberAccepted($team, $team->onwer_id, 'Użytkownik zaakceptował Twoje zaproszenie do zespołu!: ' . $team->name, []));
+
 //        $team = $invite->team;
 //        $invite->delete();
 //        Auth::user()->attachTeam($team);
