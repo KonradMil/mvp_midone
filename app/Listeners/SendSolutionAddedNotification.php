@@ -33,7 +33,6 @@ class SendSolutionAddedNotification
      */
     public function handle(SolutionPublished $event)
     {
-//            $user = User::find($event->subject->author_id);
         $user = $event->subject->author;
         $challenge = Challenge::find($event->subject->challenge_id);
         $user->notify(new SolutionAddedNotification($challenge, $event->subject));
