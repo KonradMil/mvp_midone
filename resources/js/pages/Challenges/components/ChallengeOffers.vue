@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                             </div>
-                            <div class="intro-y" v-if="showDetails[team.id] === true">
+                            <div class="intro-y" v-if="showDetails[offer.id] === true">
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.offerExpires')}}:</span>
