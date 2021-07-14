@@ -66,7 +66,6 @@
                 :show-labels="false"
                 :preselect-first="true"
                 valueProp="value"
-                :disabled="filterType===null"
                 :options="technology['options']"
                 :option-height="104"
             />
