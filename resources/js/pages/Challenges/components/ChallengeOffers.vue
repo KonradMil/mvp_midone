@@ -105,10 +105,11 @@
                                     <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && challenge.selected_offer_id < 1">Akceptuj ofertę</button>
                                     </Tippy>
                                     <button class="btn shadow-md mr-2 bg-gray-400" @click.prevent="rejectOffer(offer,index)" v-if="offer.rejected != 1 && challenge.selected_offer_id < 1" >Odrzuć ofertę</button>
+                                    <button class="btn shadow-md mr-2 bg-gray-400" @click.prevent="showDetails(offer.id)">Details</button>
                                 </div>
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                             </div>
-                            <div class="intro-y">
+                            <div class="intro-y" v-if="show">
                             <div class="flex items-center mt-5">
                                 <div class="border-l-2 border-theme-1 pl-4">
                                     <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.offerExpires')}}:</span>
@@ -254,6 +255,8 @@ export default {
         const technologyType = ref(null);
         const theBestOffer = ref('');
         const guard = ref();
+        const show = ref([]);
+
 
         watch(() => offers.value.list, (first, second) => {
         }, {})
@@ -340,6 +343,10 @@ export default {
                 },handleCallback)
         }
 
+        const showDetails = async() =>{
+            show.value = !show.value;
+        }
+
         const rejectOffer = async(offer,index) => {
             axios.post('/api/offer/reject', {id: offer.id})
                 .then(response => {
@@ -368,6 +375,8 @@ export default {
         });
 
         return {
+            showDetails,
+            show,
             guard,
             theBestOffer,
             StartFilterOffer,
