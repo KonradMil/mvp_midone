@@ -37,7 +37,7 @@
                                         </div>
                                     </div>
                                     <div class="flex mt-4 lg:mt-0">
-                                        <button v-if="challenge.stage !== 3" class="btn btn-primary py-1 px-2 mr-2" @click="addToSelected(team.id)">{{ $t('teams.add') }}</button>
+                                        <button v-if="challenge.stage !== 3" class="btn btn-primary py-1 px-2 mr-2" @click.prevent="addToSelected(team.id,index)">{{ $t('teams.add') }}</button>
                                         <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
                                             {{ $t('teams.details') }}
                                         </button>
@@ -235,7 +235,7 @@ export default {
                 })
         }
 
-        const addToSelected = (id) => {
+        const addToSelected = (id,index) => {
              let obj = {};
             if(props.who == 'challenge') {
                 obj = props.challenge;
@@ -249,6 +249,10 @@ export default {
                         toast.success('Połączono pomyślnie');
                         if (props.who === 'challenge') {
                             props.challenge.teams.push(response.data.payload);
+                            teams.value.splice(index,1);
+                            setTimeout(()=>{
+
+                            },2000);
                         } else {
                             props.solution.teams.push(response.data.payload);
                         }
