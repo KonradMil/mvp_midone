@@ -42,7 +42,6 @@ class TeamInvitation extends Notification
             'message' => 'Zostałeś zaproszony do zespołu: ' . $this->team_name,
             'link' => '/teams',
             'author' => $this->invitation->inviter,
-            'name' => 'Teams',
         ]);
     }
 
@@ -52,7 +51,6 @@ class TeamInvitation extends Notification
             'message' => 'Zostałeś zaproszony do zespołu: ' . $this->team_name,
             'link' => '/teams',
             'author' => $this->invitation->inviter,
-            'name' => 'Teams',
         ];
     }
 }
