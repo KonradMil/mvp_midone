@@ -194,9 +194,9 @@ class TeamsController extends Controller
         $invite = TeamInvite::find($request->id);
         Teamwork::acceptInvite( $invite );
         $team = $invite->team;
+        $user = User::find($team->owner_id);
 
-
-        event(new TeamMemberAccepted($team, $team->onwer_id, 'Użytkownik zaakceptował Twoje zaproszenie do zespołu!: ' . $team->name, []));
+        event(new TeamMemberAccepted($team, $user, 'Użytkownik zaakceptował Twoje zaproszenie do zespołu!: ' . $team->name, []));
 
 //        $team = $invite->team;
 //        $invite->delete();

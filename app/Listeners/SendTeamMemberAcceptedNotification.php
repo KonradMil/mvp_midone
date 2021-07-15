@@ -29,7 +29,7 @@ class SendTeamMemberAcceptedNotification
      */
     public function handle(TeamMemberAccepted $event)
     {
-        $user = User::find($event->subject->owner_id);
+        $user = User::find($event->causer->id);
         $team = Team::find($event->subject->id);
         $user->notify(new TeamInvitationAccepted($team));
     }
