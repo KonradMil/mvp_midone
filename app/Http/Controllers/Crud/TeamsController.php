@@ -70,13 +70,13 @@ class TeamsController extends Controller
             $currentTeams = $challenge->teams;
         }
 
-        foreach($currentTeams as $cT){
-            foreach($query as $t){
-                if($cT->id == $t->id){
-                    $query->teams->detach($cT);
-                }
-            }
-        }
+//        foreach($currentTeams as $cT){
+//            foreach($query as $t){
+//                if($cT->id == $t->id){
+//                    $query->teams->detach($cT);
+//                }
+//            }
+//        }
 
         foreach ($query as $t){
             dump($t->pivot);
