@@ -198,7 +198,7 @@ export default {
         });
 
         const getTeamsRepositories = async () => {
-                GetTeams('', props.solution.id,props.who,(res) => {
+                GetTeams('', (res) => {
                     teams.value = res;
                 });
         }

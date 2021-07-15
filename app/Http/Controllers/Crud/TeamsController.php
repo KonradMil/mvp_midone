@@ -51,7 +51,7 @@ class TeamsController extends Controller
     public function getUserTeamsFiltered(Request $request)
     {
         $input = $request->input();
-        $who = $request->input('who');
+//        $who = $request->input('who');
 //        dd(Auth::user()->ownedTeams);
         if (!empty($input->search)) {
             $query = Auth::user()->teams()->where('name', 'LIKE', '%' . $input->search . '%')->with('users', 'users.companies')->get();
@@ -62,13 +62,13 @@ class TeamsController extends Controller
             //            $queryForeign = Auth::user()->ownedTeams;
         }
 
-        if($who === 'solution'){
-            $solution = Solution::find($request->input('id'));
-            $currentTeams = $solution->teams;
-        }else{
-            $challenge = Challenge::find($request->input('id'));
-            $currentTeams = $challenge->teams;
-        }
+//        if($who === 'solution'){
+//            $solution = Solution::find($request->input('id'));
+//            $currentTeams = $solution->teams;
+//        }else{
+//            $challenge = Challenge::find($request->input('id'));
+//            $currentTeams = $challenge->teams;
+//        }
 
 //        foreach($currentTeams as $cT){
 //            foreach($query as $t){
