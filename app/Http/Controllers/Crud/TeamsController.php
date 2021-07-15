@@ -196,7 +196,7 @@ class TeamsController extends Controller
         $team = $invite->team;
         $user = User::find($team->owner_id);
 
-        event(new TeamMemberAccepted($team, $user, 'Użytkownik zaakceptował Twoje zaproszenie do zespołu!: ' . $team->name, []));
+//        event(new TeamMemberAccepted($team, $user, 'Użytkownik zaakceptował Twoje zaproszenie do zespołu!: ' . $team->name, []));
 
 //        $team = $invite->team;
 //        $invite->delete();
@@ -205,7 +205,7 @@ class TeamsController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
-            'payload' => []
+            'payload' => $team,
         ]);
     }
 
