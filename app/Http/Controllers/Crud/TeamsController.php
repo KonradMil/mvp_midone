@@ -192,8 +192,13 @@ class TeamsController extends Controller
     public function acceptInvite(Request  $request)
     {
         $invite = TeamInvite::find($request->id);
-        Teamwork::acceptInvite( $invite );
-        $team = $invite->team;
+        $user = User::find($invite->user_id);
+        $user->teams()->attach($invite->team);
+
+        Teamwork::acceptInvite($invite, ['owner'=> true, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true])
+        $team = Team::find($invite->team_id);
+          $invite->delete();
+//        $team = $invite->team;
 
 
         event(new TeamMemberAccepted($team, $team->onwer_id, 'Użytkownik zaakceptował Twoje zaproszenie do zespołu!: ' . $team->name, []));
