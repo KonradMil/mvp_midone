@@ -247,12 +247,9 @@ export default {
                     // console.log(response.data)
                     if (response.data.success) {
                         toast.success('Połączono pomyślnie');
+                        teams.value.splice(index,1);
                         if (props.who === 'challenge') {
                             props.challenge.teams.push(response.data.payload);
-                            teams.value.splice(index,1);
-                            setTimeout(()=>{
-
-                            },2000);
                         } else {
                             props.solution.teams.push(response.data.payload);
                         }
