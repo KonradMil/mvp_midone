@@ -195,7 +195,7 @@ class TeamsController extends Controller
         $user = User::find($invite->user_id);
         $user->teams()->attach($invite->team);
 
-        Teamwork::acceptInvite($invite, ['owner'=> true, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true])
+        Teamwork::acceptInvite($invite, ['owner'=> true, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true]);
         $team = Team::find($invite->team_id);
           $invite->delete();
 //        $team = $invite->team;
