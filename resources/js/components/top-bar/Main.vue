@@ -69,7 +69,7 @@
                     <div class="flex items-center">
                         <div class="notification-content__title pr-10">{{$t('global.notifications')}}</div>
                         <div class="pb-5">
-                        <button class="btn btn-primary shadow-md mr-2" style="max-width: 100px; max-height: 45px;" @click.prevent="readAll">{{$t('global.readAll')}}</button>
+                        <button class="btn btn-primary shadow-md mr-2 truncate" style="max-width: 150px; max-height: 45px;" @click.prevent="readAll">{{$t('global.readAll')}}</button>
                         </div>
                     </div>
                     <div

@@ -192,6 +192,7 @@ class TeamsController extends Controller
     public function acceptInvite(Request  $request)
     {
         $invite = TeamInvite::find($request->id);
+
         $user = User::find($invite->user_id);
         $user->teams()->attach($invite->team);
 
@@ -200,8 +201,7 @@ class TeamsController extends Controller
           $invite->delete();
 //        $team = $invite->team;
 
-
-        event(new TeamMemberAccepted($team, $team->onwer_id, 'Użytkownik zaakceptował Twoje zaproszenie do zespołu!: ' . $team->name, []));
+//        event(new TeamMemberAccepted($team, $user, 'Użytkownik zaakceptował Twoje zaproszenie do zespołu!: ' . $team->name, []));
 
 //        $team = $invite->team;
 //        $invite->delete();
@@ -210,7 +210,7 @@ class TeamsController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
-            'payload' => []
+            'payload' => $team,
         ]);
     }
 
