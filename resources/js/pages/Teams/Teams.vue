@@ -97,7 +97,7 @@
                                         <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#930f68"/>
                                     </div>
                                     <div class="ml-4 mr-auto">
-                                        <div class="font-medium">{{invite.team.name}}</div>
+                                        <div class="font-medium">{{invite.team.id}}</div>
                                         <div class="text-gray-600 text-xs mt-0.5">
                                             Od: {{invite.inviter.name + ' ' + invite.inviter.lastname}}
                                         </div>
