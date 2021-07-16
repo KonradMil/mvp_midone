@@ -52,7 +52,6 @@ class TeamsController extends Controller
     {
         $input = $request->input();
         $who = $request->input('who');
-        $array = [];
 //        dd(Auth::user()->ownedTeams);
         if (!empty($input->search)) {
             $query = Auth::user()->teams()->where('name', 'LIKE', '%' . $input->search . '%')->with('users', 'users.companies')->get();
@@ -71,31 +70,22 @@ class TeamsController extends Controller
             $currentTeams = $challenge->teams;
         }
 
-        if($currentTeams != NULL)
-        {
+        foreach($currentTeams as $cT){
             foreach($query as $t){
-                foreach($currentTeams as $cT){
-                    if($cT->id != $t->id){
-                        $array[] = $cT;
-                    }
+                if($cT->id == $t->id){
+                    $query->teams->detach($cT);
                 }
             }
-            return response()->json([
-                'success' => true,
-                'message' => 'Pobrano poprawnie.',
-                'payload' => $array
-            ]);
-
-        } else{
-            foreach ($query as $t){
-                dump($t->pivot);
-            }
-            return response()->json([
-                'success' => true,
-                'message' => 'Pobrano poprawnie.',
-                'payload' => $query
-            ]);
         }
+
+        foreach ($query as $t){
+            dump($t->pivot);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => $query
+        ]);
     }
 
     public function createTeam(Request $request)
