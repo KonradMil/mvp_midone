@@ -379,8 +379,7 @@ class SolutionController extends Controller
         }
         $input = $request->input();
         $financial_analyses->cost_capital = (float)$input['capitalCost'];
-//        $financial_analyses->capex =  (float)$input['capex'];
-        $financial_analyses->capex =  (float)$input['financialAnalyses']['capex'];
+        $financial_analyses->capex =  (float)$input['capex'];
         $financial_analyses->timeframe =  (float)$input['timeframe'];
         $financial_analyses->cost_per_hour_before = (float)$input['financialAnalyses']['cost_per_hour_before'];
         $financial_analyses->cost_per_hour_after = (float)$input['financialAnalyses']['cost_per_hour_after'];
