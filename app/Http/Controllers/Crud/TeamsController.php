@@ -54,13 +54,14 @@ class TeamsController extends Controller
         $who = $request->input('who');
 //        dd(Auth::user()->ownedTeams);
         $array = [];
-        if($who === 'solution'){
+
+        if($who == 'solution'){
             $solution = Solution::find($request->input('id'));
             $currentTeams = $solution->teams;
             foreach($currentTeams as $cT){
                 $array[] = $cT->id;
             }
-        }else{
+        }else if($who == 'challenge'){
             $challenge = Challenge::find($request->input('id'));
             $currentTeams = $challenge->teams;
             foreach($currentTeams as $cT){
