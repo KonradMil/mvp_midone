@@ -214,7 +214,6 @@ class TeamsController extends Controller
     public function acceptInvite(Request  $request)
     {
         $invite = TeamInvite::find($request->id);
-
         $user = User::find($invite->user_id);
         $user->teams()->attach($invite->team, ['owner'=> true, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true]);
         $team = Team::find($invite->team_id);
