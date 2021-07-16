@@ -53,20 +53,28 @@ class TeamsController extends Controller
         $input = $request->input();
         $who = $request->input('who');
 //        dd(Auth::user()->ownedTeams);
-        if (!empty($input->search)) {
-            $query = Auth::user()->teams()->where('name', 'LIKE', '%' . $input->search . '%')->with('users', 'users.companies')->get();
-//            $queryForeign = Auth::user()->ownedTeams->where('name', 'LIKE', '%' . $input->search . '%')->get();
-        } else {
-            $query = Auth::user()->teams()->with('users', 'users.companies')->get();
-            //            $queryForeign = Auth::user()->ownedTeams;
-        }
-
+        $array = [];
         if($who === 'solution'){
             $solution = Solution::find($request->input('id'));
             $currentTeams = $solution->teams;
+            foreach($currentTeams as $cT){
+                $array[] = $cT->id;
+            }
         }else{
             $challenge = Challenge::find($request->input('id'));
             $currentTeams = $challenge->teams;
+            foreach($currentTeams as $cT){
+                $array[] = $cT->id;
+            }
+        }
+
+
+        if (!empty($input->search)) {
+            $query = Auth::user()->teams()->where('name', 'LIKE', '%' . $input->search . '%')->whereNotIn('id', $array)->with('users', 'users.companies')->get();
+//            $queryForeign = Auth::user()->ownedTeams->where('name', 'LIKE', '%' . $input->search . '%')->get();
+        } else {
+            $query = Auth::user()->teams()->whereNotIn('id', $array)->with('users', 'users.companies')->get();
+            //            $queryForeign = Auth::user()->ownedTeams;
         }
 
         foreach($query as $t){
