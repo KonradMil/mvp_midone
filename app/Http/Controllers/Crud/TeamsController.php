@@ -58,7 +58,6 @@ class TeamsController extends Controller
 //            $queryForeign = Auth::user()->ownedTeams->where('name', 'LIKE', '%' . $input->search . '%')->get();
         } else {
             $query = Auth::user()->teams()->with('users', 'users.companies')->get();
-
             //            $queryForeign = Auth::user()->ownedTeams;
         }
 
@@ -73,7 +72,7 @@ class TeamsController extends Controller
         foreach($query as $t){
             foreach($currentTeams as $cT){
                 if($cT->id == $t->id){
-                    $query->t->detach();
+//                    $query->t->detach();
                 }
             }
         }
