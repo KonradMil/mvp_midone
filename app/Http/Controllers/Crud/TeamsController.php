@@ -78,14 +78,6 @@ class TeamsController extends Controller
             //            $queryForeign = Auth::user()->ownedTeams;
         }
 
-        foreach($query as $t){
-            foreach($currentTeams as $cT){
-                if($cT->id == $t->id){
-//                    $query->t->detach();
-                }
-            }
-        }
-
         foreach ($query as $t){
             dump($t->pivot);
         }
