@@ -73,7 +73,7 @@ class TeamsController extends Controller
         foreach($currentTeams as $cT){
             foreach($query as $t){
                 if($cT->id == $t->id){
-                    $query->teams->detach($cT);
+                    $query->detach($cT);
                 }
             }
         }
