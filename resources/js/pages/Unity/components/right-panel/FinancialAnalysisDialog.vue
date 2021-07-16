@@ -165,7 +165,7 @@
                         </tr>
                         <tr class="hover:bg-gray-200">
                             <td class="border" colspan="3">
-                                <input type="number" v-model="capex" class="form-control finclass" placeholder="0"/>
+                                <input type="number" v-model="financialAnalyses.capex" class="form-control finclass" placeholder="0"/>
                             </td>
                         </tr>
                         <tr>
@@ -273,6 +273,7 @@ export default {
             additional_savings_after: 0,
             monthly_savings_before: 0,
             simple_payback: 0,
+            capex: 0,
             npv: 0,
         });
 
@@ -329,11 +330,11 @@ export default {
 
             for (let i = 0; i < (timeframe.value + 1); i += 1) {
                 if (i === 0) {
-                    cashFlow.push(parseFloat(capex.value) * -1);
+                    cashFlow.push(parseFloat(financialAnalyses.capex.value) * -1);
                     wacc.push(100);
-                    dcf.push(parseFloat(capex.value) * -1);
-                    scf.push(parseFloat(capex.value) * -1);
-                    sdcf.push(parseFloat(capex.value) * -1);
+                    dcf.push(parseFloat(financialAnalyses.capex.value) * -1);
+                    scf.push(parseFloat(financialAnalyses.capex.value) * -1);
+                    sdcf.push(parseFloat(financialAnalyses.capex.value) * -1);
                     rtp.push(0);
                 } else {
                     cashFlow.push(workStationCostBefore - workStationCostAfter);
@@ -357,7 +358,7 @@ export default {
             console.log([cashFlow, wacc, dcf, scf, sdcf, rtp]);
             for (let i = 0; i < rtp.length; i += 1) {
                 if (rtp[i] > 0) {
-                    okresZwrotuProsty.value = (i - 1) + ((capex.value / (workStationCostBefore - workStationCostAfter)) - Math.floor((capex.value / (workStationCostBefore - workStationCostAfter))));
+                    okresZwrotuProsty.value = (i - 1) + ((financialAnalyses.capex.value / (workStationCostBefore - workStationCostAfter)) - Math.floor((financialAnalyses.capex.value / (workStationCostBefore - workStationCostAfter))));
                     break;
                 }
             }
