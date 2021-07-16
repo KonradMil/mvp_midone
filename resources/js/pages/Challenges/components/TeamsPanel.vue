@@ -198,9 +198,16 @@ export default {
         });
 
         const getTeamsRepositories = async () => {
-                GetTeams('', (res) => {
+            if(props.who === 'solution'){
+                GetTeams('', props.solution.id, props.who,(res) => {
                     teams.value = res;
                 });
+            }else{
+                GetTeams('', props.challenge.id, props.who,(res) => {
+                    teams.value = res;
+                });
+            }
+
         }
         const showAddToTeamModal = (id) => {
             if (temporary_team_id == null || temporary_team_id === id) {

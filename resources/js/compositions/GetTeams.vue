@@ -5,11 +5,11 @@
 <script>
 import {ref} from 'vue';
 
-export default function GetTeams(search,handle) {
+export default function GetTeams(search,id,who,handle) {
     const list = ref([]);
 
     async function getTeams(search, handle) {
-        axios.post('/api/teams/user/get', {search: search})
+        axios.post('/api/teams/user/get', {search: search,id: id,who: who})
             .then(response => {
                 // console.log(response.data)
                 if (response.data.success) {
@@ -22,7 +22,7 @@ export default function GetTeams(search,handle) {
             })
     }
 
-    getTeams(search,handle);
+    getTeams(search,id,who,handle);
 
     return {
         list
