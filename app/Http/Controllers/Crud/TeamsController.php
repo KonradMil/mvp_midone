@@ -71,7 +71,7 @@ class TeamsController extends Controller
 
         if($who == 'teams'){
             $query = Auth::user()->teams()->with('users', 'users.companies')->get();
-        }else if (!empty($input->search)) {
+        }else if ((!empty($input->search)) && ($who != 'teams')) {
             $query = Auth::user()->teams()->where('name', 'LIKE', '%' . $input->search . '%')->whereNotIn('id', $array)->with('users', 'users.companies')->get();
 //            $queryForeign = Auth::user()->ownedTeams->where('name', 'LIKE', '%' . $input->search . '%')->get();
         }else {
