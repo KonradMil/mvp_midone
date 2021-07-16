@@ -96,7 +96,7 @@
                                         </div>
                                     </div>
                                     <div class="flex mt-4 lg:mt-0">
-                                        <button v-if="challenge.stage !== 3" class="btn btn-primary py-1 px-2 mr-2" @click="removeFromSelected(team.id, index)">Usuń</button>
+                                        <button v-if="challenge.stage !== 3" class="btn btn-primary py-1 px-2 mr-2" @click="removeFromSelected(team,team.id, index)">Usuń</button>
                                         <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
                                             {{ $t('teams.details') }}
                                         </button>
@@ -223,7 +223,7 @@ export default {
             temporary_team_id.value = null;
         }
 
-        const removeFromSelected = (id, index) => {
+        const removeFromSelected = (team,id, index) => {
             let obj = {};
             if(props.who == 'challenge') {
                 obj = props.challenge;
@@ -234,6 +234,7 @@ export default {
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
+                        teams.value.push(team);
                         toast.success('Rozłączono pomyślnie');
                         teamsObject.value.splice(index, 1);
                     } else {
