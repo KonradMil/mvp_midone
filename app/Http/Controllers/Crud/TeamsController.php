@@ -78,6 +78,10 @@ class TeamsController extends Controller
             //            $queryForeign = Auth::user()->ownedTeams;
         }
 
+    if($who == 'teams'){
+        $query = Auth::user()->teams()->with('users', 'users.companies')->get();
+    }
+
         foreach ($query as $t){
             dump($t->pivot);
         }

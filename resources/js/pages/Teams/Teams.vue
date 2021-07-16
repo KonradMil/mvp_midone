@@ -186,7 +186,7 @@ export default {
         const temporary_team_id = ref(null);
 
         const getTeamsRepositories = async () => {
-            GetTeams('','','',(res) => {
+            GetTeams('','','teams',(res) => {
                 teams.value = res;
             });
         }
