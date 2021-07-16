@@ -70,10 +70,10 @@ class TeamsController extends Controller
             $currentTeams = $challenge->teams;
         }
 
-        foreach($currentTeams as $cT){
-            foreach($query as $t){
+        foreach($query as $t){
+            foreach($currentTeams as $cT){
                 if($cT->id == $t->id){
-                    $t->detach($cT);
+                    $t->delete();
                 }
             }
         }
