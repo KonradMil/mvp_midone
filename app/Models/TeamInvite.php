@@ -16,4 +16,9 @@ class TeamInvite extends Model
         'accept_token',
         'deny_token'
     ];
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, 'team_invites', 'team_invite_id', 'team_id');
+    }
 }
