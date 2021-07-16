@@ -83,7 +83,7 @@ class TeamsController extends Controller
 
 
         foreach ($query as $t){
-            dump($t->pivot);
+            dump($t->pivot->withPivot('publishChallenge'));
         }
         return response()->json([
             'success' => true,
