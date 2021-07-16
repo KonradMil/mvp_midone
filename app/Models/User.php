@@ -60,9 +60,6 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
         'remember_token',
     ];
 
-    public function teams () {
-        return $this->belongsToMany(Team::class, 'team_user')->withPivot('publishChallenge', 'acceptChallengeOffer', 'publishSolution', 'addSolutionOffer','acceptChallengeSolution')->using(TeamUser::class);
-    }
 
     /**
      * The attributes that should be cast to native types.
@@ -78,6 +75,10 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
         'pricing' => 'boolean',
         'privacy_policy' => 'boolean',
     ];
+
+    public function teams () {
+        return $this->belongsToMany(Team::class, 'team_user')->withPivot('publishChallenge', 'acceptChallengeOffer', 'publishSolution', 'addSolutionOffer','acceptChallengeSolution')->using(TeamUser::class);
+    }
 
     public function reports()
     {
