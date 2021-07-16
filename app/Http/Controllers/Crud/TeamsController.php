@@ -73,13 +73,14 @@ class TeamsController extends Controller
 
         if($currentTeams != NULL)
         {
-            foreach($currentTeams as $cT){
-                foreach($query as $t){
+            foreach($query as $t){
+                foreach($currentTeams as $cT){
                     if($cT->id != $t->id){
                         $array[] = $cT;
                     }
                 }
             }
+
             return response()->json([
                 'success' => true,
                 'message' => 'Pobrano poprawnie.',
