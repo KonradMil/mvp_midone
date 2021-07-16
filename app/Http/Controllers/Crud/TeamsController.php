@@ -203,7 +203,7 @@ class TeamsController extends Controller
             'success' => true,
             'message' => 'Pobrano poprawnie.',
             'payload' => $invites,
-            'sent' => $invitesSent
+//            'sent' => $invitesSent
         ]);
     }
 
