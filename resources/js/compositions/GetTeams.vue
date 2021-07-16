@@ -8,7 +8,7 @@ import {ref} from 'vue';
 export default function GetTeams(search,id,who,handle) {
     const list = ref([]);
 
-    async function getTeams(search, handle) {
+    async function getTeams(search,id,who, handle) {
         axios.post('/api/teams/user/get', {search: search,id: id,who: who})
             .then(response => {
                 // console.log(response.data)
