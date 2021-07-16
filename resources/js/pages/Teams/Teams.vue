@@ -71,7 +71,9 @@
                                                 </div>
                                             </div>
                                             <div class="flex justify-center items-center" v-if="team.owner_id == user.id">
-                                                <a v-if="team.owner_id != member.id" :disabled="isDisabled" @click.prevent="del(member.id,team.id)" class="flex items-center text-theme-6 pr-2" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Uprawnienia </a>
+                                                <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
+                                                    Uprawnienia
+                                                </button>
                                                 <a v-if="team.owner_id != member.id" :disabled="isDisabled" @click.prevent="del(member.id,team.id)" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
                                             </div>
                                             <div class="font-medium text-gray-700 dark:text-gray-600">
