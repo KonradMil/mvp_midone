@@ -71,7 +71,10 @@
                                                 </div>
                                             </div>
                                             <div class="flex justify-center items-center" v-if="team.owner_id == user.id">
-                                                <button class="btn btn-outline-secondary py-1 px-2" @click="showPermissions[member.id] = !showPermissions[member.id]">
+<!--                                                <button class="btn btn-outline-secondary py-1 px-2" @click="showPermissions[member.id] = !showPermissions[member.id]">-->
+<!--                                                    Uprawnienia-->
+<!--                                                </button>-->
+                                                <button class="btn btn-outline-secondary py-1 px-2" @click="showMemberPermissionModal(team.id, member.id)">
                                                     Uprawnienia
                                                 </button>
                                                 <a v-if="team.owner_id != member.id" :disabled="isDisabled" @click.prevent="del(member.id,team.id)" class="flex items-center text-theme-6 pl-2" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
@@ -209,6 +212,62 @@
             </div>
         </div>
     </Modal>
+    <Modal :show="showMemberPermission" @closed="modalPermClosed">
+        <div class="flex flex-col lg:flex-row items-center p-5">
+            <div class="intro-y box w-full">
+                <div
+                    class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm "
+                >
+                    <input
+                        id="rodo"
+                        type="checkbox"
+                        class="form-check-input border mr-2 ring-0"
+                        v-model="acceptChallengeOffer"
+                        disabled
+                    />
+                    <label class="cursor-pointer select-none" for="rodo"
+                    >Publish challenge</label
+                    >
+                </div>
+                <div
+                    class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
+                >
+                    <input
+                        id="rodo3"
+                        type="checkbox"
+                        class="form-check-input border mr-2 ring-0"
+                        :checked="acceptChallengeOffer"
+                        disabled
+                    />
+                    <label class="cursor-pointer select-none" for="rodo3"
+                    >Accept challenge offer</label
+                    >
+                </div>
+                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
+                    <input
+                        id="rodo2"
+                        type="checkbox"
+                        class="form-check-input border mr-2 ring-0"
+                        :checked="publishSolution"
+                        disabled/>
+                    <label class="cursor-pointer select-none" for="rodo2">
+                        Publish Solution
+                    </label>
+                </div>
+                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
+                    <input
+                        id="rodo2"
+                        type="checkbox"
+                        class="form-check-input border mr-2 ring-0"
+                        :checked="publishSolution"
+                        disabled/>
+                    <label class="cursor-pointer select-none" for="rodo2">
+                        Add solution offer
+                    </label>
+                </div>
+            </div>
+        </div>
+    </Modal>
 </template>
 
 <script>
@@ -247,6 +306,7 @@ export default {
         const publishSolution = ref(false);
         const addSolutionOffer = ref(false);
         const acceptChallengeSolution = ref(false);
+        const showMemberPermission = ref(false);
 
 
         const getTeamsRepositories = async () => {
@@ -269,6 +329,21 @@ export default {
                 show.value = true;
             }
             temporary_team_id.value =  id;
+        }
+
+        const showMemberPermissionModal = (team_id, member_id) => {
+            if(temporary_team_id == null || temporary_team_id === team_id) {
+                showMemberPermission.value = !showMemberPermission.value;
+            } else {
+                showMemberPermission.value = true;
+            }
+            temporary_team_id.value =  team_id;
+
+        }
+
+        const modalPermClosed = () => {
+            showMemberPermission.value = false;
+            temporary_team_id.value = null;
         }
 
         const modalClosed = () => {
@@ -383,7 +458,10 @@ export default {
             showPermissions,
             isDisabled,
             del,
-            invitesSent
+            invitesSent,
+            showMemberPermission,
+            showMemberPermissionModal,
+            modalPermClosed,
         }
     },
     beforeRouteEnter(to, from, next) {
