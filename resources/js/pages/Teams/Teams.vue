@@ -243,7 +243,7 @@
                     >Accept challenge offer</label
                     >
                 </div>
-                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
+                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
                         id="rodo2"
                         type="checkbox"
