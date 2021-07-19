@@ -218,48 +218,48 @@
             <div class="intro-y box w-full">
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm ">
                     <input
-                        id="rodo"
+                        id="publishChallenge"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         v-model="publishChallenge"
                         disabled/>
-                    <label class="cursor-pointer select-none" for="rodo">Publish challenge</label>
+                    <label class="cursor-pointer select-none" for="publishChallenge">Publish challenge</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
-                        id="rodo3"
+                        id="publishSolution"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         :checked="publishSolution"
                         disabled/>
-                    <label class="cursor-pointer select-none" for="rodo3">Accept challenge solution</label>
+                    <label class="cursor-pointer select-none" for="publishSolution">Publish solution</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
-                        id="rodo3"
+                        id="acceptChallengeOffer"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         :checked="acceptChallengeOffer"
                         disabled/>
-                    <label class="cursor-pointer select-none" for="rodo3">Accept challenge offer</label>
+                    <label class="cursor-pointer select-none" for="acceptChallengeOffer">Accept challenge offer</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
-                        id="rodo2"
+                        id="addSolutionOffer"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         :checked="addSolutionOffer"
                         disabled/>
-                    <label class="cursor-pointer select-none" for="rodo2">Publish Solution</label>
+                    <label class="cursor-pointer select-none" for="addSolutionOffer">Add Solution Offer</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
                     <input
-                        id="rodo2"
+                        id="acceptChallengeSolution"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         :checked="acceptChallengeSolution"
                         disabled/>
-                    <label class="cursor-pointer select-none" for="rodo2">Add solution offer</label>
+                    <label class="cursor-pointer select-none" for="acceptChallengeSolution">Accept Challenge Solution</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
                     <button class="btn btn-outline-secondary py-1 px-2" @click="savePermissions(currentTeam_id,currentMember_id)">
