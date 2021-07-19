@@ -132,60 +132,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="flex flex-col lg:flex-row items-center p-5" v-if="showPermissions[member.id] === true">
-                                                <div class="intro-y box w-full">
-                                                    <div
-                                                        class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm "
-                                                    >
-                                                        <input
-                                                            id="rodo"
-                                                            type="checkbox"
-                                                            class="form-check-input border mr-2 ring-0"
-                                                            v-model="member.pivot.acceptChallengeOffer"
-                                                            disabled
-                                                        />
-                                                        <label class="cursor-pointer select-none" for="rodo"
-                                                        >{{$t('profiles.acceptProvisions')}}</label
-                                                        >
-                                                        <a class="text-theme-1 dark:text-theme-10 ml-1" href="/terms/privacy-policy"
-                                                           @click.prevent="$router.push({path: '/terms/privacy-policy'})"
-                                                        >{{$t('profiles.privacyPolicy')}}</a
-                                                        >.
-                                                    </div>
-                                                    <div
-                                                        class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
-                                                    >
-                                                        <input
-                                                            id="rodo3"
-                                                            type="checkbox"
-                                                            class="form-check-input border mr-2 ring-0"
-                                                            :checked="acceptChallengeOffer"
-                                                            disabled
-                                                        />
-                                                        <label class="cursor-pointer select-none" for="rodo3"
-                                                        >{{$t('profiles.accept')}}</label
-                                                        >
-                                                        <a class="text-theme-1 dark:text-theme-10 ml-1" href="/terms/terms-of-service"
-                                                           @click.prevent="$router.push({path: '/terms/terms-of-service'})">
-                                                            {{$t('profiles.termsService')}}</a> {{$t('profiles.servicesPlatform')}}
-                                                    </div>
-                                                    <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
-                                                        <input
-                                                            id="rodo2"
-                                                            type="checkbox"
-                                                            class="form-check-input border mr-2 ring-0"
-                                                            :checked="publishSolution"
-                                                            disabled/>
-                                                        <label class="cursor-pointer select-none" for="rodo2">
-                                                            {{$t('profiles.accept')}}
-                                                        </label>
-                                                        <a class="text-theme-1 dark:text-theme-10 ml-1" href="/terms/price-list"
-                                                           @click.prevent="$router.push({path: '/terms/price-list'})">
-                                                            {{ $t('profiles.priceList')}}
-                                                        </a>.
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
