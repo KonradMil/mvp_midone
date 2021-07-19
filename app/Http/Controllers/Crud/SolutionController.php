@@ -187,6 +187,7 @@ class SolutionController extends Controller
     public function getRobots(Request $request)
     {
         $solution = Solution::find($request->input('id'));
+        $estimate = Estimate::where('solution_id', '=', $solution->id);
         if(!empty($request->input('offer_id')))
         {
             $offer = Offer::find($request->input('offer_id'));
