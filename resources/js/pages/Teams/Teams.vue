@@ -212,7 +212,7 @@
             </div>
         </div>
     </Modal>
-    <ModalPermission :show="showMemberPermission" @closed="modalPermClosed">
+    <Modal :show="showMemberPermission" @closed="modalPermClosed">
         <h3 class="intro-y text-lg font-medium mt-5">Uprawnienia</h3>
         <div class="flex flex-col lg:flex-row items-center p-5">
             <div class="intro-y box w-full">
@@ -268,7 +268,7 @@
                 </div>
             </div>
         </div>
-    </ModalPermission>
+    </Modal>
 </template>
 
 <script>
