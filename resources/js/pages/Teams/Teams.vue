@@ -212,7 +212,7 @@
             </div>
         </div>
     </Modal>
-    <Modal :show="showMemberPermission" @closed="modalPermClosed">
+    <Modal :show="showMemberPermission" @closed="modalPermClosed" :style="{'max-width':250}">
         <h3 class="intro-y text-lg font-medium mt-5">Uprawnienia</h3>
         <div class="flex flex-col lg:flex-row items-center p-5">
             <div class="intro-y box w-full">
@@ -328,7 +328,7 @@ export default {
                 addSolutionOffer: addSolutionOffer.value, acceptChallengeSolution: acceptChallengeSolution.value})
                 .then(response => {
                     if (response.data.success) {
-                        console.log(response.data.message);
+                        toast.success(response.data.message);
                         modalPermClosed();
                     }else{
                         console.log('error');
