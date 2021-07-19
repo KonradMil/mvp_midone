@@ -221,8 +221,7 @@
                         id="publishChallenge"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        v-model="publishChallenge"
-                        disabled/>
+                        v-model="publishChallenge" />
                     <label class="cursor-pointer select-none" for="publishChallenge">Publish challenge</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
@@ -230,8 +229,7 @@
                         id="publishSolution"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        :checked="publishSolution"
-                        disabled/>
+                        :checked="publishSolution"/>
                     <label class="cursor-pointer select-none" for="publishSolution">Publish solution</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
@@ -239,8 +237,7 @@
                         id="acceptChallengeOffer"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        :checked="acceptChallengeOffer"
-                        disabled/>
+                        :checked="acceptChallengeOffer"/>
                     <label class="cursor-pointer select-none" for="acceptChallengeOffer">Accept challenge offer</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
@@ -248,8 +245,7 @@
                         id="addSolutionOffer"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        :checked="addSolutionOffer"
-                        disabled/>
+                        :checked="addSolutionOffer"/>
                     <label class="cursor-pointer select-none" for="addSolutionOffer">Add Solution Offer</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
@@ -257,8 +253,7 @@
                         id="acceptChallengeSolution"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        :checked="acceptChallengeSolution"
-                        disabled/>
+                        :checked="acceptChallengeSolution"/>
                     <label class="cursor-pointer select-none" for="acceptChallengeSolution">Accept Challenge Solution</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
