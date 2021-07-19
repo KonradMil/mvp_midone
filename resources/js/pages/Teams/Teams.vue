@@ -212,7 +212,8 @@
             </div>
         </div>
     </Modal>
-    <Modal :show="showMemberPermission" @closed="modalPermClosed">
+    <Modal :show="showMemberPermission" @closed="modalPermClosed" style="max-width: 300px;">
+        <h3 class="intro-y text-lg font-medium mt-5">Uprawnienia</h3>
         <div class="flex flex-col lg:flex-row items-center p-5">
             <div class="intro-y box w-full">
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm ">
