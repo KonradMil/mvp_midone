@@ -237,8 +237,10 @@ export default {
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
+                    }else{
+
                     }
-                })
+                }).catch(console.log(partsAr + '->PartsAr'))
         });
 
         const finalPartsList = () => {
