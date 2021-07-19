@@ -212,7 +212,7 @@
             </div>
         </div>
     </Modal>
-    <Modal :show="showMemberPermission" @closed="modalPermClosed" :style="{'max-width':250}">
+    <Modal :show="showMemberPermission" @closed="modalPermClosed" :style="{'max-width' : width}">
         <h3 class="intro-y text-lg font-medium mt-5">Uprawnienia</h3>
         <div class="flex flex-col lg:flex-row items-center p-5">
             <div class="intro-y box w-full">
@@ -306,6 +306,7 @@ export default {
         const showMemberPermission = ref(false);
         const currentTeam_id = ref();
         const currentMember_id = ref();
+        const width = ref('250px');
 
         const getPermissions = (team_id,member_id) => {
             axios.post('/api/teams/user/get/permissions', { team_id: team_id, member_id: member_id})
@@ -494,7 +495,8 @@ export default {
             modalPermClosed,
             savePermissions,
             currentTeam_id,
-            currentMember_id
+            currentMember_id,
+            width
         }
     },
     beforeRouteEnter(to, from, next) {
