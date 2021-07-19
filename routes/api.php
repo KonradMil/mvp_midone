@@ -172,6 +172,7 @@ Route::group(['prefix' => 'notifications', 'middleware' => 'auth:sanctum'], func
 Route::post('/broadcast/auth',  [NotificationsController::class, 'broadcastAuth']);
 
 Route::group(['prefix' => 'teams', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('user/get/permissions', [TeamsController::class, 'getMemberPermission']);
     Route::post('user/create', [TeamsController::class, 'createTeam']);
     Route::post('user/add', [TeamsController::class, 'addUserToTeam']);
     Route::post('user/invite', [TeamsController::class, 'inviteUser']);

@@ -310,6 +310,20 @@ export default {
         const acceptChallengeSolution = ref(false);
         const showMemberPermission = ref(false);
 
+        const getPermissions = (team_id,member_id) => {
+            axios.post('/api/teams/user/get/permissions', { team_id: team_id, member_id: member_id})
+                .then(response => {
+                    if (response.data.success) {
+                        publishChallenge.value = response.data.payload.publishChallenge;
+                        acceptChallengeOffer.value = response.data.payload.acceptChallengeOffer;
+                        addSolutionOffer.value = response.data.payload.addSolutionOffer;
+                        acceptChallengeSolution.value = response.data.payload.acceptChallengeSolution;
+                    }else{
+                        console.log('error');
+                    }
+                })
+        }
+
 
         const getTeamsRepositories = async () => {
             GetTeams('','','teams',(res) => {
@@ -334,6 +348,7 @@ export default {
         }
 
         const showMemberPermissionModal = (team_id, member_id) => {
+            getPermissions(team_id,member_id);
             if(temporary_team_id == null || temporary_team_id === team_id) {
                 showMemberPermission.value = !showMemberPermission.value;
             } else {
