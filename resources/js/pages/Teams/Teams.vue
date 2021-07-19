@@ -215,33 +215,32 @@
     <Modal :show="showMemberPermission" @closed="modalPermClosed">
         <div class="flex flex-col lg:flex-row items-center p-5">
             <div class="intro-y box w-full">
-                <div
-                    class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm "
-                >
+                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm ">
                     <input
                         id="rodo"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         v-model="acceptChallengeOffer"
-                        disabled
-                    />
-                    <label class="cursor-pointer select-none" for="rodo"
-                    >Publish challenge</label
-                    >
+                        disabled/>
+                    <label class="cursor-pointer select-none" for="rodo">Publish challenge</label>
                 </div>
-                <div
-                    class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
-                >
+                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
                         id="rodo3"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         :checked="acceptChallengeOffer"
-                        disabled
-                    />
-                    <label class="cursor-pointer select-none" for="rodo3"
-                    >Accept challenge offer</label
-                    >
+                        disabled/>
+                    <label class="cursor-pointer select-none" for="rodo3">Accept challenge solution</label>
+                </div>
+                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
+                    <input
+                        id="rodo3"
+                        type="checkbox"
+                        class="form-check-input border mr-2 ring-0"
+                        :checked="acceptChallengeOffer"
+                        disabled/>
+                    <label class="cursor-pointer select-none" for="rodo3">Accept challenge offer</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
@@ -250,9 +249,7 @@
                         class="form-check-input border mr-2 ring-0"
                         :checked="publishSolution"
                         disabled/>
-                    <label class="cursor-pointer select-none" for="rodo2">
-                        Publish Solution
-                    </label>
+                    <label class="cursor-pointer select-none" for="rodo2">Publish Solution</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
                     <input
@@ -261,9 +258,12 @@
                         class="form-check-input border mr-2 ring-0"
                         :checked="publishSolution"
                         disabled/>
-                    <label class="cursor-pointer select-none" for="rodo2">
-                        Add solution offer
-                    </label>
+                    <label class="cursor-pointer select-none" for="rodo2">Add solution offer</label>
+                </div>
+                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
+                    <button class="btn btn-outline-secondary py-1 px-2">
+                        Zapisz
+                    </button>
                 </div>
             </div>
         </div>
