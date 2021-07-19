@@ -71,9 +71,69 @@
                                                 </div>
                                             </div>
                                             <div class="flex justify-center items-center" v-if="team.owner_id == user.id">
-                                                <a v-if="team.owner_id != member.id" :disabled="isDisabled" @click.prevent="del(member.id,team.id)" class="flex items-center text-theme-6" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
+<!--                                                <button class="btn btn-outline-secondary py-1 px-2" @click="showPermissions[member.id] = !showPermissions[member.id]">-->
+<!--                                                    Uprawnienia-->
+<!--                                                </button>-->
+                                                <button class="btn btn-outline-secondary py-1 px-2" @click="showMemberPermissionModal(team.id, member.id)">
+                                                    Uprawnienia
+                                                </button>
+                                                <a v-if="team.owner_id != member.id" :disabled="isDisabled" @click.prevent="del(member.id,team.id)" class="flex items-center text-theme-6 pl-2" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
                                             </div>
                                             <div class="font-medium text-gray-700 dark:text-gray-600">
+                                            </div>
+                                            <div class="flex flex-col lg:flex-row items-center p-5" v-if="showPermissions[member.id] === true">
+                                                <div class="intro-y box w-full">
+                                                    <div
+                                                        class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm "
+                                                    >
+                                                        <input
+                                                            id="rodo"
+                                                            type="checkbox"
+                                                            class="form-check-input border mr-2 ring-0"
+                                                            v-model="member.pivot.acceptChallengeOffer"
+                                                            disabled
+                                                        />
+                                                        <label class="cursor-pointer select-none" for="rodo"
+                                                        >Publish challenge</label
+                                                        >
+                                                    </div>
+                                                    <div
+                                                        class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
+                                                    >
+                                                        <input
+                                                            id="rodo3"
+                                                            type="checkbox"
+                                                            class="form-check-input border mr-2 ring-0"
+                                                            :checked="acceptChallengeOffer"
+                                                            disabled
+                                                        />
+                                                        <label class="cursor-pointer select-none" for="rodo3"
+                                                        >Accept challenge offer</label
+                                                        >
+                                                    </div>
+                                                    <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
+                                                        <input
+                                                            id="rodo2"
+                                                            type="checkbox"
+                                                            class="form-check-input border mr-2 ring-0"
+                                                            :checked="publishSolution"
+                                                            disabled/>
+                                                        <label class="cursor-pointer select-none" for="rodo2">
+                                                            Publish Solution
+                                                        </label>
+                                                    </div>
+                                                    <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
+                                                        <input
+                                                            id="rodo2"
+                                                            type="checkbox"
+                                                            class="form-check-input border mr-2 ring-0"
+                                                            :checked="publishSolution"
+                                                            disabled/>
+                                                        <label class="cursor-pointer select-none" for="rodo2">
+                                                            Add solution offer
+                                                        </label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -152,6 +212,63 @@
             </div>
         </div>
     </Modal>
+    <Modal :show="showMemberPermission" @closed="modalPermClosed">
+        <h3 class="intro-y text-lg font-medium mt-5">Uprawnienia</h3>
+        <div class="flex flex-col lg:flex-row items-center p-5">
+            <div class="intro-y box w-full">
+                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm ">
+                    <input
+                        id="rodo"
+                        type="checkbox"
+                        class="form-check-input border mr-2 ring-0"
+                        v-model="acceptChallengeOffer"
+                        disabled/>
+                    <label class="cursor-pointer select-none" for="rodo">Publish challenge</label>
+                </div>
+                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
+                    <input
+                        id="rodo3"
+                        type="checkbox"
+                        class="form-check-input border mr-2 ring-0"
+                        :checked="acceptChallengeOffer"
+                        disabled/>
+                    <label class="cursor-pointer select-none" for="rodo3">Accept challenge solution</label>
+                </div>
+                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
+                    <input
+                        id="rodo3"
+                        type="checkbox"
+                        class="form-check-input border mr-2 ring-0"
+                        :checked="acceptChallengeOffer"
+                        disabled/>
+                    <label class="cursor-pointer select-none" for="rodo3">Accept challenge offer</label>
+                </div>
+                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
+                    <input
+                        id="rodo2"
+                        type="checkbox"
+                        class="form-check-input border mr-2 ring-0"
+                        :checked="publishSolution"
+                        disabled/>
+                    <label class="cursor-pointer select-none" for="rodo2">Publish Solution</label>
+                </div>
+                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
+                    <input
+                        id="rodo2"
+                        type="checkbox"
+                        class="form-check-input border mr-2 ring-0"
+                        :checked="publishSolution"
+                        disabled/>
+                    <label class="cursor-pointer select-none" for="rodo2">Add solution offer</label>
+                </div>
+                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
+                    <button class="btn btn-outline-secondary py-1 px-2">
+                        Zapisz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </Modal>
 </template>
 
 <script>
@@ -164,15 +281,17 @@ import AddTeamMember from '../../compositions/AddTeamMember'
 import {useToast} from "vue-toastification";
 import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
+import ModalPermission from "../../components/ModalPermission";
 
 export default {
     name: "Teams",
-    components: {Avatar, Modal},
+    components: {Avatar, Modal, ModalPermission},
     props: {
         team: Object
     },
     setup(props, {emit}) {
         const showDetails = ref([]);
+        const showPermissions = ref([]);
         const isDisabled = ref(false);
         const teams = ref([]);
         const invites = ref([]);
@@ -184,9 +303,16 @@ export default {
         const toast = useToast();
         const show = ref(false);
         const temporary_team_id = ref(null);
+        const publishChallenge = ref(false);
+        const acceptChallengeOffer = ref(false);
+        const publishSolution = ref(false);
+        const addSolutionOffer = ref(false);
+        const acceptChallengeSolution = ref(false);
+        const showMemberPermission = ref(false);
+
 
         const getTeamsRepositories = async () => {
-            GetTeams('',(res) => {
+            GetTeams('','','teams',(res) => {
                 teams.value = res;
             });
         }
@@ -205,6 +331,21 @@ export default {
                 show.value = true;
             }
             temporary_team_id.value =  id;
+        }
+
+        const showMemberPermissionModal = (team_id, member_id) => {
+            if(temporary_team_id == null || temporary_team_id === team_id) {
+                showMemberPermission.value = !showMemberPermission.value;
+            } else {
+                showMemberPermission.value = true;
+            }
+            temporary_team_id.value =  team_id;
+
+        }
+
+        const modalPermClosed = () => {
+            showMemberPermission.value = false;
+            temporary_team_id.value = null;
         }
 
         const modalClosed = () => {
@@ -298,6 +439,11 @@ export default {
         })
 
         return {
+            publishChallenge,
+            acceptChallengeOffer,
+            publishSolution,
+            addSolutionOffer,
+            acceptChallengeSolution,
             user,
             teams,
             addTeam,
@@ -311,9 +457,13 @@ export default {
             invites,
             acceptInvite,
             showDetails,
+            showPermissions,
             isDisabled,
             del,
-            invitesSent
+            invitesSent,
+            showMemberPermission,
+            showMemberPermissionModal,
+            modalPermClosed,
         }
     },
     beforeRouteEnter(to, from, next) {

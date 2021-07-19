@@ -17,7 +17,7 @@ use Mpociot\Teamwork\Traits\UserHasTeams;
 
 class User extends Authenticatable implements ReacterableInterface, Commentator
 {
-    use HasFactory, Notifiable, Reacterable, UserHasTeams;
+    use HasFactory, Notifiable, Reacterable;
 
     public function needsCommentApproval($model): bool
     {
@@ -60,6 +60,7 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
         'remember_token',
     ];
 
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -74,6 +75,10 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
         'pricing' => 'boolean',
         'privacy_policy' => 'boolean',
     ];
+
+    public function teams () {
+        return $this->belongsToMany(Team::class, 'team_user')->withPivot('publishChallenge', 'acceptChallengeOffer', 'publishSolution', 'addSolutionOffer','acceptChallengeSolution')->using(TeamUser::class);
+    }
 
     public function reports()
     {
