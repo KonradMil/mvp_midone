@@ -257,7 +257,7 @@ export default {
                                     count: 1,
                                     price: partPrices.value[obj.model_name],
                                 };
-                                robots.value = obj.model_name;
+                                robots.value.push(obj.model_name);
                             }
                         } else {
                             if(partsAr.value[obj.model_name] != undefined) {
@@ -274,7 +274,7 @@ export default {
                                     count: 1,
                                     price: 0,
                                 };
-                                robots.value = obj.model_name;
+                                robots.value.push(obj.model_name);
                             }
                         }
                     });
