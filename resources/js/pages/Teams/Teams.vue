@@ -221,7 +221,7 @@
                         id="rodo"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        v-model="acceptChallengeOffer"
+                        v-model="publishChallenge"
                         disabled/>
                     <label class="cursor-pointer select-none" for="rodo">Publish challenge</label>
                 </div>
@@ -230,7 +230,7 @@
                         id="rodo3"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        :checked="acceptChallengeOffer"
+                        :checked="publishSolution"
                         disabled/>
                     <label class="cursor-pointer select-none" for="rodo3">Accept challenge solution</label>
                 </div>
@@ -248,7 +248,7 @@
                         id="rodo2"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        :checked="publishSolution"
+                        :checked="addSolutionOffer"
                         disabled/>
                     <label class="cursor-pointer select-none" for="rodo2">Publish Solution</label>
                 </div>
@@ -257,7 +257,7 @@
                         id="rodo2"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        :checked="publishSolution"
+                        :checked="acceptChallengeSolution"
                         disabled/>
                     <label class="cursor-pointer select-none" for="rodo2">Add solution offer</label>
                 </div>
@@ -315,6 +315,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         publishChallenge.value = response.data.payload.publishChallenge;
+                        publishSolution.value = response.data.payload.publishSolution;
                         acceptChallengeOffer.value = response.data.payload.acceptChallengeOffer;
                         addSolutionOffer.value = response.data.payload.addSolutionOffer;
                         acceptChallengeSolution.value = response.data.payload.acceptChallengeSolution;
