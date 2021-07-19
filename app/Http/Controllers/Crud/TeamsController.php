@@ -24,7 +24,7 @@ class TeamsController extends Controller
         $team-> owner_id = Auth::user()->id;
         $team-> name = $name;
         $team->save();
-        Auth::user()->teams()->attach($team, ['owner'=> true, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true]);
+        Auth::user()->teams()->attach($team, ['owner'=> false, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true]);
         $who = $request -> input('who');
         $id = $request -> input('id');
         if($who == 'challenge')
@@ -194,7 +194,7 @@ class TeamsController extends Controller
         $invite = TeamInvite::find($request->id);
 
         $user = User::find($invite->user_id);
-        $user->teams()->attach($invite->team, ['owner'=> true, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true]);
+        $user->teams()->attach($invite->team, ['owner'=> false, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true]);
         $team = Team::find($invite->team_id);
           $invite->delete();
 //        $team = $invite->team;
