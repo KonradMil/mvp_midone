@@ -571,20 +571,22 @@ class SolutionController extends Controller
 
             foreach ($save->parts as $part) {
                     $model = UnityModel::find($part->model->model_id);
-                    if($model->brand === 'FANUC'){
-                        $sum_fanuc++;
-                    }else if($model->brand === 'Yaskawa'){
-                        $sum_yaskawa++;
-                    }else if($model->brand === 'ABB'){
-                        $sum_abb++;
-                    }else if($model->brand === 'Mitshubishi'){
-                        $sum_mitshubishi++;
-                    }else if($model->brand === 'KUKA'){
-                        $sum_kuka++;
-                    }else if($model->brand === 'TFM ROBOTICS'){
-                        $sum_tfm++;
-                    }else if($model->brand === 'Universal Robots'){
-                        $sum_universal++;
+                    if($model != NULL) {
+                        if($model->brand === 'FANUC'){
+                            $sum_fanuc++;
+                        }else if($model->brand === 'Yaskawa'){
+                            $sum_yaskawa++;
+                        }else if($model->brand === 'ABB'){
+                            $sum_abb++;
+                        }else if($model->brand === 'Mitshubishi'){
+                            $sum_mitshubishi++;
+                        }else if($model->brand === 'KUKA'){
+                            $sum_kuka++;
+                        }else if($model->brand === 'TFM ROBOTICS'){
+                            $sum_tfm++;
+                        }else if($model->brand === 'Universal Robots'){
+                            $sum_universal++;
+                        }
                     }
                 }
 
