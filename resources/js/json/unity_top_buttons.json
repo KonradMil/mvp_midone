@@ -3,21 +3,21 @@
         "left": {
             "layout": {
                 "src": "\/s3/builder_icons/layoute_mode_simple2.png",
-                "tooltip": "",
+                "tooltip": "Tryb Layout",
                 "alttext": "",
                 "type": "button",
                 "position": "left"
             },
             "edit_mode": {
                 "src": "\/s3/builder_icons/edit_mode_simple.png",
-                "tooltip": "",
+                "tooltip": "Tryb Edycji",
                 "alttext": "",
                 "type": "button",
                 "position": "left"
             },
             "animation_mode": {
                 "src": "\/s3/builder_icons/animation_mode_simple2.png",
-                "tooltip": "",
+                "tooltip": "Tryb Animacji",
                 "alttext": "",
                 "type": "button",
                 "position": "left"
@@ -26,21 +26,21 @@
         "right": {
             "fullscreen": {
                 "src": "\/s3/builder_icons/fullscreen_simple.png",
-                "tooltip": "",
+                "tooltip": "Pełen ekran",
                 "alttext": "",
                 "type": "button",
                 "position": "right"
             },
             "logout": {
                 "src": "\/s3/builder_icons/logout_simple.png",
-                "tooltip": "",
+                "tooltip": "Wyjdź",
                 "alttext": "",
                 "type": "button",
                 "position": "right"
             },
             "eye": {
                 "src": "\/s3/builder_icons/eye_simple3.png",
-                "tooltip": "",
+                "tooltip": "Kamery",
                 "alttext": "",
                 "type": "dropdown",
                 "position": "right",
@@ -65,14 +65,14 @@
             },
             "save": {
                 "src": "\/s3/builder_icons/save_simple.png",
-                "tooltip": "",
+                "tooltip": "Zapisz",
                 "alttext": "",
                 "type": "button",
                 "position": "right"
             },
             "help": {
                 "src": "\/s3/builder_icons/help_simple.png",
-                "tooltip": "",
+                "tooltip": "Pomoc",
                 "alttext": "",
                 "type": "button",
                 "position": "right"

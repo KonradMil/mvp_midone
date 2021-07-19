@@ -37,7 +37,7 @@ class TeamsController extends Controller
         $team-> owner_id = Auth::user()->id;
         $team-> name = $name;
         $team->save();
-        Auth::user()->teams()->attach($team, ['owner'=> true, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true]);
+        Auth::user()->teams()->attach($team, ['owner'=> false, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true]);
         $who = $request -> input('who');
         $id = $request -> input('id');
         if($who == 'challenge')
@@ -64,35 +64,14 @@ class TeamsController extends Controller
     public function getUserTeamsFiltered(Request $request)
     {
         $input = $request->input();
-        $who = $request->input('who');
 //        dd(Auth::user()->ownedTeams);
-        $array = [];
-
-        if($who == 'solution'){
-            $solution = Solution::find($request->input('id'));
-            $currentTeams = $solution->teams;
-            foreach($currentTeams as $cT){
-                $array[] = $cT->id;
-            }
-        }else if($who == 'challenge'){
-            $challenge = Challenge::find($request->input('id'));
-            $currentTeams = $challenge->teams;
-            foreach($currentTeams as $cT){
-                $array[] = $cT->id;
-            }
-        }
-
-        if($who == 'teams'){
-            $query = Auth::user()->teams()->with('users', 'users.companies')->get();
-        }else if ((!empty($input->search)) && ($who != 'teams')) {
-            $query = Auth::user()->teams()->where('name', 'LIKE', '%' . $input->search . '%')->whereNotIn('id', $array)->with('users', 'users.companies')->get();
+        if (!empty($input->search)) {
+            $query = Auth::user()->teams()->where('name', 'LIKE', '%' . $input->search . '%')->with('users', 'users.companies')->get();
 //            $queryForeign = Auth::user()->ownedTeams->where('name', 'LIKE', '%' . $input->search . '%')->get();
-        }else {
-            $query = Auth::user()->teams()->whereNotIn('id', $array)->with('users', 'users.companies')->get();
-            //            $queryForeign = Auth::user()->ownedTeams;
+        } else {
+            $query = Auth::user()->teams()->with('users', 'users.companies')->get();
+//            $queryForeign = Auth::user()->ownedTeams;
         }
-
-
 
         foreach ($query as $t){
             dump($t->pivot);
@@ -219,16 +198,16 @@ class TeamsController extends Controller
             'success' => true,
             'message' => 'Pobrano poprawnie.',
             'payload' => $invites,
-//            'sent' => $invitesSent
+            'sent' => $invitesSent
         ]);
     }
 
     public function acceptInvite(Request  $request)
     {
         $invite = TeamInvite::find($request->id);
-//        $user = User::find($invite->user_id);
-        $user = User::find(Auth::user()->id);
-        $user->teams()->attach($invite->team, ['owner'=> true, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true]);
+
+        $user = User::find($invite->user_id);
+        $user->teams()->attach($invite->team, ['owner'=> false, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true]);
         $team = Team::find($invite->team_id);
           $invite->delete();
 //        $team = $invite->team;
