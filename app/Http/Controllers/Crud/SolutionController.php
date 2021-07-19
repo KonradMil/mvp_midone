@@ -193,7 +193,7 @@ class SolutionController extends Controller
             $robots = json_decode($offer->robots);
 
         }else {
-            $save = json_decode($solution->save_json);
+            $save = json_decode($solution->save_robots);
             $robots = [];
             if($save != NULL){
                 foreach ($save->parts as $part) {
@@ -559,6 +559,7 @@ class SolutionController extends Controller
             $c->screenshot_path = $path['relative'];
             unset($j['screenshot']);
             $c->save_json = json_encode($j);
+            $c->save_robots = json_encode($j);
 
             $sum_fanuc = 0;
             $sum_yaskawa = 0;
