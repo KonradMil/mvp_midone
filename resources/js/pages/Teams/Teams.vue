@@ -212,7 +212,7 @@
             </div>
         </div>
     </Modal>
-    <Modal :show="showMemberPermission" @closed="modalPermClosed" style="max-width: 300px;">
+    <ModalPermission :show="showMemberPermission" @closed="modalPermClosed">
         <h3 class="intro-y text-lg font-medium mt-5">Uprawnienia</h3>
         <div class="flex flex-col lg:flex-row items-center p-5">
             <div class="intro-y box w-full">
@@ -268,7 +268,7 @@
                 </div>
             </div>
         </div>
-    </Modal>
+    </ModalPermission>
 </template>
 
 <script>
@@ -281,10 +281,11 @@ import AddTeamMember from '../../compositions/AddTeamMember'
 import {useToast} from "vue-toastification";
 import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
+import ModalPermission from "../../components/ModalPermission";
 
 export default {
     name: "Teams",
-    components: {Avatar, Modal},
+    components: {Avatar, Modal, ModalPermission},
     props: {
         team: Object
     },
