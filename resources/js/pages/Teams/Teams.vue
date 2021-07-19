@@ -330,7 +330,6 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         toast.success(response.data.message);
-                        modalPermClosed();
                     }else{
                         console.log('error');
                     }
