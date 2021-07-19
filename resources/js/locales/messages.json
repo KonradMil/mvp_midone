@@ -19,7 +19,13 @@
             "comment" : "Comment...",
             "select" : "Select",
             "financials" : "Financials",
-            "file" : "File"
+            "file" : "File",
+            "permissions" : "Permissions",
+            "publishChallenge" : "Publish challenge",
+            "publishSolution" : "Publish solution",
+            "acceptChallengeOffer" : "Accept challenge offer",
+            "addSolutionOffer" : "Add solution offer",
+            "acceptChallengeSolution" : "Accept challenge solution"
         },
         "validation": {
             "Value is required": "Value is required.",
@@ -314,7 +320,13 @@
             "comment" : "Skomentuj...",
             "select" : "Wybierz",
             "financials" : "Założenia operacyjne",
-            "file" : "Plik"
+            "file" : "Plik",
+            "permissions" : "Uprawnienia",
+            "publishChallenge" : "Publikacja wyzwania",
+            "publishSolution" : "Publikacja rozwiązania",
+            "acceptChallengeOffer" : "Akceptacja ofert",
+            "addSolutionOffer" : "Dodawanie ofert",
+            "acceptChallengeSolution" : "Akceptacja rozwiązań"
         },
         "topBar": {
             "profil": "Profil",

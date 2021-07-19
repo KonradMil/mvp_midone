@@ -75,7 +75,7 @@
 <!--                                                    Uprawnienia-->
 <!--                                                </button>-->
                                                 <button class="btn btn-outline-secondary py-1 px-2" @click="showMemberPermissionModal(team.id, member.id)">
-                                                    Uprawnienia
+                                                    {{ $t('global.permissions') }}
                                                 </button>
                                                 <a v-if="team.owner_id != member.id" :disabled="isDisabled" @click.prevent="del(member.id,team.id)" class="flex items-center text-theme-6 pl-2" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
                                             </div>
@@ -213,7 +213,7 @@
         </div>
     </Modal>
     <ModalPermission :show="showMemberPermission" @closed="modalPermClosed">
-        <h3 class="intro-y text-lg font-medium mt-5">Uprawnienia</h3>
+        <h3 class="intro-y text-lg font-medium mt-5">{{ $t('global.permissions') }}</h3>
         <div class="flex flex-col lg:flex-row items-center p-5">
             <div class="intro-y box w-full">
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm ">
@@ -222,7 +222,7 @@
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         v-model="publishChallenge" />
-                    <label class="cursor-pointer select-none" for="publishChallenge">Publish challenge</label>
+                    <label class="cursor-pointer select-none" for="publishChallenge">{{ $t('global.publishChallenge') }}</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
@@ -230,7 +230,7 @@
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         :checked="publishSolution"/>
-                    <label class="cursor-pointer select-none" for="publishSolution">Publish solution</label>
+                    <label class="cursor-pointer select-none" for="publishSolution">{{ $t('global.publishSolution') }}</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
@@ -238,7 +238,7 @@
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         :checked="acceptChallengeOffer"/>
-                    <label class="cursor-pointer select-none" for="acceptChallengeOffer">Accept challenge offer</label>
+                    <label class="cursor-pointer select-none" for="acceptChallengeOffer">{{ $t('global.acceptChallengeOffer') }}</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
@@ -246,7 +246,7 @@
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         :checked="addSolutionOffer"/>
-                    <label class="cursor-pointer select-none" for="addSolutionOffer">Add Solution Offer</label>
+                    <label class="cursor-pointer select-none" for="addSolutionOffer">{{ $t('global.addSolutionOffer') }}</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
                     <input
@@ -254,7 +254,7 @@
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         :checked="acceptChallengeSolution"/>
-                    <label class="cursor-pointer select-none" for="acceptChallengeSolution">Accept Challenge Solution</label>
+                    <label class="cursor-pointer select-none" for="acceptChallengeSolution">{{ $t('global.acceptChallengeSolution') }}</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
                     <button class="btn btn-outline-secondary py-1 px-2" @click="savePermissions(currentTeam_id,currentMember_id)">
