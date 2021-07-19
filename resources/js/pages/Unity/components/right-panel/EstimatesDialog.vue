@@ -224,7 +224,7 @@ export default {
         });
 
         const partsAr = ref({});
-
+        const robots = ref([]);
         const additionalCosts = ref([]);
         const partPrices = ref({});
 
@@ -233,7 +233,7 @@ export default {
         }
 
         emitter.on('estimatesave', e => {
-            axios.post('/api/solution/estimate/save', {solution_id: props.solution.id, basicCosts: basicCosts, additionalCosts: additionalCosts.value, partPrices: partPrices.value, partsCost:partsCost.value, integrationCost: integrationCost.value })
+            axios.post('/api/solution/estimate/save', {solution_id: props.solution.id, basicCosts: basicCosts, additionalCosts: additionalCosts.value, partPrices: partPrices.value, partsAr: partsAr.value, partsCost:partsCost.value, integrationCost: integrationCost.value })
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
@@ -413,7 +413,8 @@ export default {
             addCost,
             refreshMe,
             integrationCost,
-            partsCost
+            partsCost,
+            robots
         }
     }
 }

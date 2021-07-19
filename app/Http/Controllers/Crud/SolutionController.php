@@ -414,6 +414,7 @@ class SolutionController extends Controller
         $estimate->integration_cost = (float)$input['integrationCost'];
         $estimate->sum += (float)$input['integrationCost'];
         $estimate->parts_cost =  (float)$input['partsCost'];
+        $estimate->parts_ar =  (float)$input['partsAr'];
         $estimate->sum += (float)$input['partsCost'];
         $estimate->mechanical_integration = (float)$input['basicCosts']['mechanical_integration'];
         $estimate->sum += (float)$input['basicCosts']['mechanical_integration'];
