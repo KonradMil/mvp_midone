@@ -18,6 +18,23 @@ use Mpociot\Teamwork\TeamInvite;
 
 class TeamsController extends Controller
 {
+    public function saveMemberPermission(Request $request)
+    {
+        $team = Team::find($request->input('team_id'));
+        $member = User::find($request->input('member_id'));
+        $team_user = TeamUser::where('user_id', '=', $member->id)->where('team_id', '=', $team->id)->first();
+        $team_user -> publishChallenge = $request->input('publishChallenge');
+        $team_user -> publishSolution = $request->input('publishSolution');
+        $team_user -> acceptChallengeOffer = $request->input('acceptChallengeOffer');
+        $team_user -> addSolutionOffer = $request->input('addSolutionOffer');
+        $team_user -> acceptChallengeSolution = $request->input('acceptChallengeSolution');
+//        $teams = $member->teams()->where('id', '=', $team->id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano uprawnienia!',
+            'payload' => $team_user
+        ]);
+    }
     public function getMemberPermission(Request $request)
     {
         $team = Team::find($request->input('team_id'));

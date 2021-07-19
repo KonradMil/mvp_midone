@@ -262,7 +262,7 @@
                     <label class="cursor-pointer select-none" for="rodo2">Add solution offer</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
-                    <button class="btn btn-outline-secondary py-1 px-2">
+                    <button class="btn btn-outline-secondary py-1 px-2" @click="savePermissions(currentTeam_id,currentMember_id)">
                         Zapisz
                     </button>
                 </div>
@@ -309,6 +309,8 @@ export default {
         const addSolutionOffer = ref(false);
         const acceptChallengeSolution = ref(false);
         const showMemberPermission = ref(false);
+        const currentTeam_id = ref();
+        const currentMember_id = ref();
 
         const getPermissions = (team_id,member_id) => {
             axios.post('/api/teams/user/get/permissions', { team_id: team_id, member_id: member_id})
@@ -325,6 +327,18 @@ export default {
                 })
         }
 
+        const savePermissions = (team_id,member_id) => {
+            axios.post('/api/teams/user/save/permissions', { team_id: team_id, member_id: member_id,
+                publishChallenge: publishChallenge.value, publishSolution: publishSolution.value, acceptChallengeOffer: acceptChallengeOffer.value,
+                addSolutionOffer: addSolutionOffer.value, acceptChallengeSolution: acceptChallengeSolution.value})
+                .then(response => {
+                    if (response.data.success) {
+                        console.log(response.data.message);
+                    }else{
+                        console.log('error');
+                    }
+                })
+        }
 
         const getTeamsRepositories = async () => {
             GetTeams('','','teams',(res) => {
@@ -349,6 +363,8 @@ export default {
         }
 
         const showMemberPermissionModal = (team_id, member_id) => {
+            currentTeam_id.value = team_id;
+            currentMember_id.value = member_id;
             getPermissions(team_id,member_id);
             if(temporary_team_id == null || temporary_team_id === team_id) {
                 showMemberPermission.value = !showMemberPermission.value;
@@ -480,6 +496,9 @@ export default {
             showMemberPermission,
             showMemberPermissionModal,
             modalPermClosed,
+            savePermissions,
+            currentTeam_id,
+            currentMember_id
         }
     },
     beforeRouteEnter(to, from, next) {
