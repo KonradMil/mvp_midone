@@ -8,6 +8,7 @@ use App\Mail\TeamInvitation;
 use App\Models\Challenges\Challenge;
 use App\Models\Solutions\Solution;
 use App\Models\Team;
+use App\Models\TeamUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,18 @@ use Mpociot\Teamwork\TeamInvite;
 
 class TeamsController extends Controller
 {
+    public function getMemberPermission(Request $request)
+    {
+        $team = Team::find($request->input('team_id'));
+        $member = User::find($request->input('member_id'));
+        $team_user = TeamUser::where('user_id', '=', $member->id)->where('team_id', '=', $team->id)->first();
+//        $teams = $member->teams()->where('id', '=', $team->id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano uprawnienia!',
+            'payload' => $team_user
+        ]);
+    }
     public function addObjectTeam(Request $request)
     {
         $name = $request -> input('name');
