@@ -334,6 +334,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         console.log(response.data.message);
+                        modalPermClosed();
                     }else{
                         console.log('error');
                     }
