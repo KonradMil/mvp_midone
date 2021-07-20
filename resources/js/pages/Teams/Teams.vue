@@ -221,7 +221,7 @@
                         id="publishChallenge"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        v-model="publishChallenge" />
+                        :checked="publishChallenge" />
                     <label class="cursor-pointer select-none" for="publishChallenge">{{ $t('global.publishChallenge') }}</label>
                 </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
