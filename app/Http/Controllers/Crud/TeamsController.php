@@ -124,6 +124,10 @@ class TeamsController extends Controller
     public function deleteTeam(Request $request)
     {
         $team = Team::find($request->input('team_id'));
+        $team_invites = TeamInvite::where('team_id', '=', $team->id);
+        foreach($team_invites as $ti){
+            $ti->delete();
+        }
         if($team != NULL){
             foreach($team->users as $user){
                 $user->teams()->detach($team);
