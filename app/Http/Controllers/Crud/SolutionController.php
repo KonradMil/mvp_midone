@@ -23,6 +23,7 @@ use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use Mrcnpdlk\Lib\Exception;
 use phpDocumentor\Reflection\Types\Boolean;
 use Psr\Log\NullLogger;
 
@@ -193,7 +194,12 @@ class SolutionController extends Controller
             $offer = Offer::find($request->input('offer_id'));
             $robots = json_decode($offer->robots);
         }else {
-            $save = $estimate->parts_ar;
+            try{
+                $save = json_decode($estimate->parts_ar);
+            } catch(Exception $e){
+                dd($e);
+            }
+
             $robots = [];
             if($save != NULL){
                 foreach($save as $key => $val){
