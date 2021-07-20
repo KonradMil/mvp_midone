@@ -249,9 +249,6 @@ export default {
                     props.parts.forEach((obj) => {
                         console.log('OBJ');
                         console.log(obj);
-                        if(partsAr.value[obj.model_name].count === 1){
-                            robots.value.push(obj.model_name);
-                        }
                         if(partPrices.value[obj.model_name] != undefined) {
                             if(partsAr.value[obj.model_name] != undefined) {
                                 partsAr.value[obj.model_name].count += 1;
