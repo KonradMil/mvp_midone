@@ -124,10 +124,13 @@ class TeamsController extends Controller
     public function deleteTeam(Request $request)
     {
         $team = Team::find($request->input('team_id'));
-        foreach($team->users as $user){
-            $user->teams()->detach($team);
+        if($team != NULL){
+            foreach($team->users as $user){
+                $user->teams()->detach($team);
+            }
+            $team->delete();
         }
-        $team->delete();
+
         return response()->json([
             'success' => true,
             'message' => 'Usunięto poprawnie',
