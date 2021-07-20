@@ -16,4 +16,6 @@ class TeamInvite extends Model
         'accept_token',
         'deny_token'
     ];
+
+
 }
