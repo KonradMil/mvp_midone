@@ -193,7 +193,7 @@ class SolutionController extends Controller
             $offer = Offer::find($request->input('offer_id'));
             $robots = json_decode($offer->robots);
         }else {
-            $save = json_decode($estimate->parts_ar);
+            $save = $estimate->parts_ar;
             $robots = [];
             if($save != NULL){
                 foreach($save as $key => $val){
