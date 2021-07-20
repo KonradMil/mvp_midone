@@ -277,6 +277,7 @@ import {useToast} from "vue-toastification";
 import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
 import ModalPermission from "../../components/ModalPermission";
+import router from "../../router";
 
 export default {
     name: "Teams",
@@ -330,6 +331,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         toast.success(response.data.message);
+                        modalPermClosed();
                     }else{
                         console.log('error');
                     }
