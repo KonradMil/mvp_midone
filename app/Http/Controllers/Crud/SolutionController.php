@@ -200,7 +200,7 @@ class SolutionController extends Controller
             if($save != NULL){
                 foreach($save as $key => $val){
                     if($val->count > 0){
-                        $model = UnityModel::find($key->model_name);
+                        $model = UnityModel::where('name', '=' , $key->model_name)->first();
                         $model->guarantee_period = 0;
                         if($model->category == 1) {
                             $robots[] = $model;
