@@ -57,7 +57,7 @@
                                     </button>
                                     <div class="pl-2">
                                     <button class="btn btn-danger py-1 px-2 mr-2" @click="delTeam(team.id,index)" v-if="team.owner_id === user.id"><TrashIcon></TrashIcon></button>
-                                        <button class="btn btn-success mr-1 mb-2"> Adding <i data-loading-icon="spinning-circles" data-color="white" class="w-4 h-4 ml-2"></i> </button>
+<!--                                        <button class="btn btn-success mr-1 mb-2"> Adding <i data-loading-icon="spinning-circles" data-color="white" class="w-4 h-4 ml-2"></i> </button>-->
                                     </div>
                                 </div>
                             </div>
