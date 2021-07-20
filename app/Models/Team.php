@@ -16,7 +16,7 @@ class Team extends Model
     ];
 
     public function users () {
-        return $this->belongsToMany(User::class, 'team_user')->withPivot('publishChallenge', 'acceptChallengeOffer', 'publishSolution', 'addSolutionOffer','acceptChallengeSolution')->using(TeamUser::class)->withTimestamps();
+        return $this->belongsToMany(User::class, 'team_user')->withPivot('publishChallenge', 'acceptChallengeOffer', 'publishSolution', 'addSolutionOffer','acceptChallengeSolution', 'addChallengeSolution')->using(TeamUser::class)->withTimestamps();
     }
 
     public function invites () {

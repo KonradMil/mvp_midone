@@ -256,6 +256,14 @@
                         :checked="acceptChallengeSolution"/>
                     <label class="cursor-pointer select-none" for="acceptChallengeSolution">{{ $t('global.acceptChallengeSolution') }}</label>
                 </div>
+                <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
+                    <input
+                        id="addChallengeSolution"
+                        type="checkbox"
+                        class="form-check-input border mr-2 ring-0"
+                        :checked="addChallengeSolution"/>
+                    <label class="cursor-pointer select-none" for="acceptChallengeSolution">{{ $t('global.addChallengeSolution') }}</label>
+                </div>
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
                     <button class="btn btn-outline-secondary py-1 px-2" @click="savePermissions(currentTeam_id,currentMember_id)">
                         Zapisz
@@ -303,6 +311,7 @@ export default {
         const acceptChallengeOffer = ref(false);
         const publishSolution = ref(false);
         const addSolutionOffer = ref(false);
+        const addChallengeSolution = ref(false);
         const acceptChallengeSolution = ref(false);
         const showMemberPermission = ref(false);
         const currentTeam_id = ref();
@@ -318,6 +327,7 @@ export default {
                         acceptChallengeOffer.value = response.data.payload.acceptChallengeOffer;
                         addSolutionOffer.value = response.data.payload.addSolutionOffer;
                         acceptChallengeSolution.value = response.data.payload.acceptChallengeSolution;
+                        addChallengeSolution.value = response.data.payload.addChallengeSolution;
                     }else{
                         console.log('error');
                     }
@@ -327,7 +337,7 @@ export default {
         const savePermissions = (team_id,member_id) => {
             axios.post('/api/teams/user/save/permissions', { team_id: team_id, member_id: member_id,
                 publishChallenge: publishChallenge.value, publishSolution: publishSolution.value, acceptChallengeOffer: acceptChallengeOffer.value,
-                addSolutionOffer: addSolutionOffer.value, acceptChallengeSolution: acceptChallengeSolution.value})
+                addSolutionOffer: addSolutionOffer.value, acceptChallengeSolution: acceptChallengeSolution.value, addChallengeSolution: addChallengeSolution.value})
                 .then(response => {
                     if (response.data.success) {
                         toast.success(response.data.message);
@@ -474,6 +484,7 @@ export default {
             publishSolution,
             addSolutionOffer,
             acceptChallengeSolution,
+            addChallengeSolution,
             user,
             teams,
             addTeam,

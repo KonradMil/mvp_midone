@@ -25,7 +25,8 @@
             "publishSolution" : "Publish solution",
             "acceptChallengeOffer" : "Accept challenge offer",
             "addSolutionOffer" : "Add solution offer",
-            "acceptChallengeSolution" : "Accept challenge solution"
+            "acceptChallengeSolution" : "Accept challenge solution",
+            "addChallengeSolution" : "Add challenge solution"
         },
         "validation": {
             "Value is required": "Value is required.",
@@ -326,7 +327,8 @@
             "publishSolution" : "Publikacja rozwiązania",
             "acceptChallengeOffer" : "Akceptacja ofert",
             "addSolutionOffer" : "Dodawanie ofert",
-            "acceptChallengeSolution" : "Akceptacja rozwiązań"
+            "acceptChallengeSolution" : "Akceptacja rozwiązań",
+            "addChallengeSolution" : "Dodawanie rozwiązań"
         },
         "topBar": {
             "profil": "Profil",

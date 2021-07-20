@@ -16,7 +16,8 @@ class TeamUser extends Pivot
         'acceptChallengeSolution',
         'acceptChallengeOffer',
         'publishSolution',
-        'addSolutionOffer'
+        'addSolutionOffer',
+        'addChallengeSolution'
     ];
 
 }
