@@ -214,7 +214,7 @@
     </Modal>
     <ModalPermission :show="showMemberPermission" @closed="modalPermClosed">
         <h3 class="intro-y text-lg font-medium mt-5">{{ $t('global.permissions') }}</h3>
-        <div class="flex flex-col lg:flex-row items-center p-5">
+        <div class="flex flex-col lg:flex-row items-center p-5 border-solid border-4 border-light-blue-500" style="border-color: #930f68;">
             <div class="intro-y box w-full">
                 <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm ">
                     <input
