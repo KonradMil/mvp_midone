@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                                 <div class="flex mt-4 lg:mt-0">
-                                    <button class="btn btn-primary py-1 px-2 mr-2" @click="delTeam(team.id)" v-if="team.owner_id === user.id">{{$t('models.delete')}}</button>
+                                    <button class="btn btn-primary py-1 px-2 mr-2" @click="delTeam(team.id,index)" v-if="team.owner_id === user.id">{{$t('models.delete')}}</button>
                                     <button class="btn btn-primary py-1 px-2 mr-2" @click="showAddToTeamModal(team.id)" v-if="team.owner_id === user.id">{{$t('teams.add')}}</button>
                                     <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
                                         {{$t('teams.details')}}
@@ -337,13 +337,14 @@ export default {
             temporary_team_id.value = null;
         }
 
-        const delTeam = async (team_id) => {
+        const delTeam = async (team_id,index) => {
             axios.post('/api/teams/user/delete', {team_id: team_id})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
                         isDisabled.value = true;
                         toast.success(response.data.message);
+                        teams.value.splice(index, 1);
                         setTimeout(() =>{
                             isDisabled.value = false;
                         }, 2000);
