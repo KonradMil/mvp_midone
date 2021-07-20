@@ -202,7 +202,7 @@ class SolutionController extends Controller
                     if($val->count > 0){
                         $model = UnityModel::where('name', '=' , $key)->first();
                         $model->guarantee_period = 0;
-                        if($model->category == 1) {
+                        if($model->category == 1 && $model->subcategory != 1) {
                             $robots[] = $model;
                         }
                     }
