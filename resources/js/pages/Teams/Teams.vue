@@ -216,7 +216,7 @@
         <h3 class="intro-y text-lg font-medium mt-5">{{ $t('global.permissions') }}</h3>
         <div class="flex flex-col lg:flex-row items-center p-5">
             <div class="intro-y box w-full">
-                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm ">
+                <div v-if="user.type === 'investor'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
                         id="publishChallenge"
                         type="checkbox"
@@ -224,7 +224,7 @@
                         :checked="publishChallenge" />
                     <label class="cursor-pointer select-none" for="publishChallenge">{{ $t('global.publishChallenge') }}</label>
                 </div>
-                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
+                <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
                         id="publishSolution"
                         type="checkbox"
@@ -232,7 +232,7 @@
                         :checked="publishSolution"/>
                     <label class="cursor-pointer select-none" for="publishSolution">{{ $t('global.publishSolution') }}</label>
                 </div>
-                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
+                <div v-if="user.type === 'investor'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
                         id="acceptChallengeOffer"
                         type="checkbox"
@@ -240,7 +240,7 @@
                         :checked="acceptChallengeOffer"/>
                     <label class="cursor-pointer select-none" for="acceptChallengeOffer">{{ $t('global.acceptChallengeOffer') }}</label>
                 </div>
-                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
+                <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
                         id="addSolutionOffer"
                         type="checkbox"
@@ -248,7 +248,7 @@
                         :checked="addSolutionOffer"/>
                     <label class="cursor-pointer select-none" for="addSolutionOffer">{{ $t('global.addSolutionOffer') }}</label>
                 </div>
-                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
+                <div v-if="user.type === 'investor'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
                     <input
                         id="acceptChallengeSolution"
                         type="checkbox"
