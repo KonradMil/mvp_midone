@@ -124,7 +124,7 @@
 
                                     </div>
                                     <div class="ml-4 mr-auto">
-                                        <div class="font-medium">{{invite.team.id}}</div>
+                                        <div class="font-medium">{{invite.team_id}}</div>
                                         <div class="text-gray-600 text-xs mt-0.5"  v-if="invite.user != null">
                                             Do: {{invite.user.name + ' ' + invite.user.lastname}}
                                         </div>
