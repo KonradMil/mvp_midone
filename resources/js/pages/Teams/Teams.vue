@@ -55,7 +55,9 @@
                                     <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
                                         {{$t('teams.details')}}
                                     </button>
+                                    <div class="pl-2">
                                     <button class="btn btn-primary py-1 px-2 mr-2" @click="delTeam(team.id,index)" v-if="team.owner_id === user.id">{{$t('models.delete')}}</button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="flex flex-col lg:flex-row items-center p-5" v-if="showDetails[team.id] === true">
