@@ -56,7 +56,7 @@
                                         {{$t('teams.details')}}
                                     </button>
                                     <div class="pl-2">
-                                    <button class="btn btn-primary py-1 px-2 mr-2" @click="delTeam(team.id,index)" v-if="team.owner_id === user.id"><TrashIcon></TrashIcon>{{$t('models.delete')}}</button>
+                                    <button class="btn btn-danger py-1 px-2 mr-2" @click="delTeam(team.id,index)" v-if="team.owner_id === user.id"><TrashIcon></TrashIcon></button>
                                     </div>
                                 </div>
                             </div>
