@@ -27,6 +27,7 @@ class Estimate extends Model
       'margin',
       'parts_prices',
         'additionalCosts',
+        'parts_ar',
         'sum'
     ];
 
