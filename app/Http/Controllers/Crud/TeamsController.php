@@ -215,7 +215,7 @@ class TeamsController extends Controller
     public function getUserInvites()
     {
 //        $invites = Auth::user()->invites()->with('team', 'inviter')->get();
-        $invites = TeamInvite::where('email', '=', Auth::user()->email)->with('team', 'invviter', 'user')->get();
+        $invites = TeamInvite::where('email', '=', Auth::user()->email)->with('team', 'inviter', 'user')->get();
         $invitesSent = TeamInvite::where('user_id', '=', Auth::user()->id)->with('team', 'inviter', 'user')->get();
         return response()->json([
             'success' => true,
