@@ -108,7 +108,7 @@ class TeamsController extends Controller
         $team->name = $name;
         $team->save();
 
-        Auth::user()->attachTeam($team);
+        Auth::user()->teams()->attach($team, ['owner'=> true, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true]);
         $t = Team::where('id', '=', $team->id)->with('users', 'users.companies')->first();
 //        dd($team);
 
