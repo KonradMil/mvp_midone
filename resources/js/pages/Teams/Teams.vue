@@ -51,6 +51,7 @@
                                     </div>
                                 </div>
                                 <div class="flex mt-4 lg:mt-0">
+                                    <button class="btn btn-primary py-1 px-2 mr-2" @click="delTeam(team.id)" v-if="team.owner_id === user.id">{{$t('models.delete')}}</button>
                                     <button class="btn btn-primary py-1 px-2 mr-2" @click="showAddToTeamModal(team.id)" v-if="team.owner_id === user.id">{{$t('teams.add')}}</button>
                                     <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
                                         {{$t('teams.details')}}
@@ -71,69 +72,12 @@
                                                 </div>
                                             </div>
                                             <div class="flex justify-center items-center" v-if="team.owner_id == user.id">
-<!--                                                <button class="btn btn-outline-secondary py-1 px-2" @click="showPermissions[member.id] = !showPermissions[member.id]">-->
-<!--                                                    Uprawnienia-->
-<!--                                                </button>-->
                                                 <button class="btn btn-outline-secondary py-1 px-2" @click="showMemberPermissionModal(team.id, member.id)">
                                                     {{ $t('global.permissions') }}
                                                 </button>
                                                 <a v-if="team.owner_id != member.id" :disabled="isDisabled" @click.prevent="del(member.id,team.id)" class="flex items-center text-theme-6 pl-2" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
                                             </div>
                                             <div class="font-medium text-gray-700 dark:text-gray-600">
-                                            </div>
-                                            <div class="flex flex-col lg:flex-row items-center p-5" v-if="showPermissions[member.id] === true">
-                                                <div class="intro-y box w-full">
-                                                    <div
-                                                        class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm "
-                                                    >
-                                                        <input
-                                                            id="rodo"
-                                                            type="checkbox"
-                                                            class="form-check-input border mr-2 ring-0"
-                                                            v-model="member.pivot.acceptChallengeOffer"
-                                                            disabled
-                                                        />
-                                                        <label class="cursor-pointer select-none" for="rodo"
-                                                        >Publish challenge</label
-                                                        >
-                                                    </div>
-                                                    <div
-                                                        class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
-                                                    >
-                                                        <input
-                                                            id="rodo3"
-                                                            type="checkbox"
-                                                            class="form-check-input border mr-2 ring-0"
-                                                            :checked="acceptChallengeOffer"
-                                                            disabled
-                                                        />
-                                                        <label class="cursor-pointer select-none" for="rodo3"
-                                                        >Accept challenge offer</label
-                                                        >
-                                                    </div>
-                                                    <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
-                                                        <input
-                                                            id="rodo2"
-                                                            type="checkbox"
-                                                            class="form-check-input border mr-2 ring-0"
-                                                            :checked="publishSolution"
-                                                            disabled/>
-                                                        <label class="cursor-pointer select-none" for="rodo2">
-                                                            Publish Solution
-                                                        </label>
-                                                    </div>
-                                                    <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
-                                                        <input
-                                                            id="rodo2"
-                                                            type="checkbox"
-                                                            class="form-check-input border mr-2 ring-0"
-                                                            :checked="publishSolution"
-                                                            disabled/>
-                                                        <label class="cursor-pointer select-none" for="rodo2">
-                                                            Add solution offer
-                                                        </label>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -393,8 +337,32 @@ export default {
             temporary_team_id.value = null;
         }
 
+        const delTeam = async (team_id) => {
+            axios.post('/api/teams/user/delete', {team_id: team_id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        isDisabled.value = true;
+                        toast.success(response.data.message);
+                        setTimeout(() =>{
+                            isDisabled.value = false;
+                        }, 2000);
+                    } else {
+                        isDisabled.value = true;
+                        toast.error(response.data.message);
+                        setTimeout(() =>{
+                            isDisabled.value = false;
+                        }, 2000);
+                    }
+                    setTimeout(() =>{
+                        isDisabled.value = false;
+                    }, 2000);
+                })
+            await getTeamsRepositories();
+        }
+
         const del = async (member_id,team_id) => {
-            axios.post('api/teams/user/member/delete', {member_id: member_id, team_id: team_id})
+            axios.post('api/teams/user/delete', {member_id: member_id, team_id: team_id})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
@@ -501,6 +469,7 @@ export default {
             showPermissions,
             isDisabled,
             del,
+            delTeam,
             invitesSent,
             showMemberPermission,
             showMemberPermissionModal,
