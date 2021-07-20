@@ -138,6 +138,7 @@ class TeamsController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Usunięto poprawnie',
+            'payload' => $team_invites
         ]);
     }
     public function deleteMember(Request $request)
