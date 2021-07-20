@@ -188,16 +188,15 @@ class SolutionController extends Controller
     public function getRobots(Request $request)
     {
         $solution = Solution::find($request->input('id'));
-        $estimate = Estimate::where('solution_id', '=', $solution->id);
+        $estimate = Estimate::where('solution_id', '=', $solution->id)->first();
         if(!empty($request->input('offer_id')))
         {
             $offer = Offer::find($request->input('offer_id'));
             $robots = json_decode($offer->robots);
         }else {
 
-           dd(json_decode($estimate->parts_ar));
-
-            $robots = [];
+           $save = json_decode($estimate->parts_ar);
+           $robots = [];
             if($save != NULL){
                 foreach($save as $key => $val){
                     if($val->count > 0){
