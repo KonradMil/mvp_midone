@@ -359,7 +359,7 @@ export default {
                         isDisabled.value = false;
                     }, 2000);
                 })
-            await getTeamsRepositories();
+            // await getTeamsRepositories();
         }
 
         const del = async (member_id,team_id) => {
