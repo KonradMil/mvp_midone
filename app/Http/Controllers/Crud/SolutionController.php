@@ -192,7 +192,6 @@ class SolutionController extends Controller
         {
             $offer = Offer::find($request->input('offer_id'));
             $robots = json_decode($offer->robots);
-
         }else {
             $save = json_decode($solution->save_json);
             $robots = [];
@@ -415,7 +414,6 @@ class SolutionController extends Controller
         $estimate->integration_cost = (float)$input['integrationCost'];
         $estimate->sum += (float)$input['integrationCost'];
         $estimate->parts_cost =  (float)$input['partsCost'];
-        $estimate->parts_ar =  (float)$input['partsAr'];
         $estimate->sum += (float)$input['partsCost'];
         $estimate->mechanical_integration = (float)$input['basicCosts']['mechanical_integration'];
         $estimate->sum += (float)$input['basicCosts']['mechanical_integration'];
@@ -437,6 +435,8 @@ class SolutionController extends Controller
         $estimate->sum += (float)$input['basicCosts']['margin'];
         $estimate->parts_prices = json_encode($input['partPrices']);
         $estimate->additional_costs = json_encode($input['additionalCosts']);
+        $estimate->parts_ar =  json_encode($input['partsAr']);
+
 //        foreach($estimate as $key => $value){
 //            if($key != solution_id)
 //            $estimate->sum += (float)($key);

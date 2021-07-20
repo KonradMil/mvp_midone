@@ -280,9 +280,6 @@ export default {
                                 console.log('partPrices.value[obj.model_name] count 1 price 0')
                             }
                         }
-                        if(partsAr.value[obj.count] === 1){
-                            robots.value.push(partsAr.value[obj]);
-                        }
                     });
                     try {
                         let tempChallenge = JSON.parse(challenge.value.save_json);
