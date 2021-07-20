@@ -77,7 +77,7 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
     ];
 
     public function teams () {
-        return $this->belongsToMany(Team::class, 'team_user')->withPivot('publishChallenge', 'acceptChallengeOffer', 'publishSolution', 'addSolutionOffer','acceptChallengeSolution')->using(TeamUser::class);
+        return $this->belongsToMany(Team::class, 'team_user')->withPivot('publishChallenge', 'acceptChallengeOffer', 'publishSolution', 'addSolutionOffer','acceptChallengeSolution')->using(TeamUser::class)->withTimestamps();
     }
 
     public function reports()
