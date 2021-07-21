@@ -56,10 +56,14 @@ class UserController extends Controller
             }
         }
 
+        $guard = 0;
         $user = User::find($model->id);
 //        $teams = TeamUser::where('user_id', '=' , $user->id);
         if($user->teams != NULL){
             foreach($user->teams as $team){
+                if($team->solutions != NULL){
+                    $guard = 1;
+                }
                 $teamSolution = $team->solutions;
                 $challenges = $team->challenges;
                 $solutions  = $team->solutions;
@@ -89,7 +93,7 @@ class UserController extends Controller
             }
         }
 
-        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffers' => $addSolutionOffers, 'addChallengeSolution' => $addChallengeSolution, 'teams' => $user->teams,'teamSolution' => $teamSolution, ];
+        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffers' => $addSolutionOffers, 'addChallengeSolution' => $addChallengeSolution, 'teams' => $user->teams,'teamSolution' => $teamSolution, 'guard' => $guard];
     }
 
     public function reset(Request $request)
