@@ -80,14 +80,14 @@ class UserController extends Controller
                       }
                 }else if($solutions != NULL){
                     $guard++;
-                    $teamChallenge = TeamUser::where('team_id', '=', $team->id)->first();
+                    $teamSolution = TeamUser::where('team_id', '=', $team->id)->first();
                     foreach($solutions as $solution){
                         $guard++;
-                        if($teamChallenge->publishSolution === 1){
+                        if($teamSolution->publishSolution === 1){
                             $publishSolution[] = $solution->id;
-                        }else if($teamChallenge->addSolutionOffers === 1){
+                        }else if($teamSolution->addSolutionOffers === 1){
                             $addSolutionOffers[] = $solution->id;
-                        }else if($teamChallenge->addChallengeSolution === 1){
+                        }else if($teamSolution->addChallengeSolution === 1){
                             $addChallengeSolution[] = $solution->id;
                         }
                     }
