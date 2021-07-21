@@ -68,7 +68,7 @@ class UserController extends Controller
 //                }
 
                 $teamSolution = TeamSolution::where('team_id', '=', $team->id);
-                $guard = $teamSolution->id;
+//                $guard = $teamSolution->id;
                 $challenges = $team->challenges;
                 $solutions  = $team->solutions;
                 if($challenges != NULL){
