@@ -37,7 +37,7 @@ class UserController extends Controller
         $acceptChallengeSolutions = [];
         $acceptChallengeOffers = [];
         $publishSolution = [];
-        $addSolutionOffers = [];
+        $addSolutionOffer = [];
         $addChallengeSolution = [];
 
         $challenges = Challenge::where('author_id', '=', $model->id)->get();
@@ -53,7 +53,7 @@ class UserController extends Controller
         if($solutions != NULL) {
             foreach ($solutions as $solution) {
                 $publishSolution[] = $solution->id;
-                $addSolutionOffers[] = $solution->id;
+                $addSolutionOffer[] = $solution->id;
                 $addChallengeSolution[] = $solution->id;
             }
         }
@@ -87,8 +87,8 @@ class UserController extends Controller
                             if($teamSolution->publishSolution === 1){
                                 $publishSolution[] = $solution->id;
                             }
-                            if($teamSolution->addSolutionOffers === 1){
-                                $addSolutionOffers[] = $solution->id;
+                            if($teamSolution->addSolutionOffer === 1){
+                                $addSolutionOffer[] = $solution->id;
                             }
                             if($teamSolution->addChallengeSolution === 1){
                                 $addChallengeSolution[] = $solution->id;
