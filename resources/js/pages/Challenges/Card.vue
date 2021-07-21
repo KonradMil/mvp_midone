@@ -174,6 +174,7 @@ export default defineComponent({
         const edit_offer_id = ref(null);
         const activeTab = ref('podstawowe');
         const user = window.Laravel.user;
+        const permissions = window.Laravel.permissions;
         const selected_solution_id = ref(null);
         const types = require("../../json/types.json");
         const who = ref('challenge');
@@ -362,6 +363,7 @@ export default defineComponent({
         };
 
         return {
+            permissions,
             filter,
             edit_offer_id,
             who,
