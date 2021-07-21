@@ -86,9 +86,11 @@ class UserController extends Controller
                         foreach($solutions as $solution){
                             if($teamSolution->publishSolution === 1){
                                 $publishSolution[] = $solution->id;
-                            }else if($teamSolution->addSolutionOffers === 1){
+                            }
+                            if($teamSolution->addSolutionOffers === 1){
                                 $addSolutionOffers[] = $solution->id;
-                            }else if($teamSolution->addChallengeSolution === 1){
+                            }
+                            if($teamSolution->addChallengeSolution === 1){
                                 $addChallengeSolution[] = $solution->id;
                             }
                         }
