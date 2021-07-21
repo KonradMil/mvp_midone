@@ -78,7 +78,8 @@ class UserController extends Controller
                             }
                         }
                     }
-                }else if($solutions != NULL){
+                }
+                foreach($solutions as $solution){
                     $guard++;
                     $teamSolution = TeamUser::where('team_id', '=', $team->id)->first();
                     if($teamSolution != NULL){
