@@ -56,10 +56,11 @@ class UserController extends Controller
             }
         }
 
-        $user = User::find(Auth::user()->id);
+        $user = User::find($model->id);
 //        $teams = TeamUser::where('user_id', '=' , $user->id);
         if($user->teams != NULL){
             foreach($user->teams as $team){
+                $teamSolution =
                 $challenges = $team->challenges;
                 $solutions  = $team->solutions;
                 if($challenges != NULL){
