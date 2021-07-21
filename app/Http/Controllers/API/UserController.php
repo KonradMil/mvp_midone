@@ -89,7 +89,7 @@ class UserController extends Controller
             }
         }
 
-        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffers' => $addSolutionOffers, 'addChallengeSolution' => $addChallengeSolution, 'teams' => $user->teams];
+        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffers' => $addSolutionOffers, 'addChallengeSolution' => $addChallengeSolution, 'teams' => $user->teams->with('solutions')];
     }
 
     public function reset(Request $request)
