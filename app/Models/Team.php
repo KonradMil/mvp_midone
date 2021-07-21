@@ -30,7 +30,7 @@ class Team extends Model
 
     public function solutions()
     {
-        return $this->belongsToMany(Challenge::class, 'team_challenge');
+        return $this->belongsToMany(Challenge::class, 'team_solution');
     }
 
 }
