@@ -59,6 +59,7 @@ class UserController extends Controller
         }
 
         $user = User::find($model->id);
+        $guard = 0;
         if($user->teams != NULL){
             foreach($user->teams as $team){
                 $currentTeam = Team::where('id', '=', $team->id)->with('solutions')->get();
@@ -78,6 +79,7 @@ class UserController extends Controller
                         }
                     }
                 }else if($solutions != NULL){
+                    $guard++;
                     $teamSolution = TeamUser::where('team_id', '=', $team->id)->first();
                     if($teamSolution != NULL){
                         foreach($solutions as $solution){
@@ -94,7 +96,7 @@ class UserController extends Controller
             }
         }
 
-        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffers' => $addSolutionOffers, 'addChallengeSolution' => $addChallengeSolution, 'teams' => $user->teams, 'currentTeam' => $currentTeam, 'solutions' => $solutions, 'teamSolution' => $teamSolution];
+        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffers' => $addSolutionOffers, 'addChallengeSolution' => $addChallengeSolution, 'teams' => $user->teams, 'currentTeam' => $currentTeam, 'solutions' => $solutions, 'teamSolution' => $teamSolution, 'guard' => $guard];
     }
 
     public function reset(Request $request)
