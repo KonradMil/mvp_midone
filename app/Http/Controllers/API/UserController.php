@@ -65,8 +65,7 @@ class UserController extends Controller
                 $currentTeam = Team::where('id', '=', $team->id)->with('solutions')->get();
                 $challenges = $team->challenges;
                 $solutions  = $team->solutions;
-                if($challenges != NULL){
-                    $teamChallenge = TeamUser::where('team_id', '=', $team->id)->first();
+                $teamChallenge = TeamUser::where('team_id', '=', $team->id)->first();
                     if($teamChallenge != NULL){
                         foreach($challenges as $challenge){
                             if($teamChallenge->publishChallenges === 1){
@@ -78,7 +77,7 @@ class UserController extends Controller
                             }
                         }
                     }
-                }
+
                 foreach($solutions as $solution){
                     $guard++;
                     $teamSolution = TeamUser::where('team_id', '=', $team->id)->first();
