@@ -68,7 +68,7 @@ class UserController extends Controller
                             $guard++;
                             $teamChallenge = TeamUser::where('team_id', '=', $team->id)->first();
                             if($teamChallenge != NULL){
-                                $guard++;
+                                $guard = $teamChallenge;
                                 if($teamChallenge->publishChallenges === 1){
                                     $guard++;
                                 $publishChallenges[] = $challenge->id;
