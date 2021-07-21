@@ -68,27 +68,31 @@ class UserController extends Controller
                 if($challenges != NULL){
                     $guard++;
                     $teamChallenge = TeamUser::where('team_id', '=', $team->id)->first();
-                     foreach($challenges as $challenge){
-                         $guard++;
-                         if($teamChallenge->publishChallenges === 1){
-                             $publishChallenges[] = $challenge->id;
-                         }else if($teamChallenge->acceptChallengeOffers === 1){
-                             $acceptChallengeOffers[] = $challenge->id;
-                         }else if($teamChallenge->acceptChallengeSolutions === 1){
-                             $acceptChallengeSolutions[] = $challenge->id;
-                         }
-                      }
+                    if($teamChallenge != NULL){
+                        foreach($challenges as $challenge){
+                            $guard++;
+                            if($teamChallenge->publishChallenges === 1){
+                                $publishChallenges[] = $challenge->id;
+                            }else if($teamChallenge->acceptChallengeOffers === 1){
+                                $acceptChallengeOffers[] = $challenge->id;
+                            }else if($teamChallenge->acceptChallengeSolutions === 1){
+                                $acceptChallengeSolutions[] = $challenge->id;
+                            }
+                        }
+                    }
                 }else if($solutions != NULL){
                     $guard++;
                     $teamSolution = TeamUser::where('team_id', '=', $team->id)->first();
-                    foreach($solutions as $solution){
-                        $guard++;
-                        if($teamSolution->publishSolution === 1){
-                            $publishSolution[] = $solution->id;
-                        }else if($teamSolution->addSolutionOffers === 1){
-                            $addSolutionOffers[] = $solution->id;
-                        }else if($teamSolution->addChallengeSolution === 1){
-                            $addChallengeSolution[] = $solution->id;
+                    if($teamSolution != NULL){
+                        foreach($solutions as $solution){
+                            $guard++;
+                            if($teamSolution->publishSolution === 1){
+                                $publishSolution[] = $solution->id;
+                            }else if($teamSolution->addSolutionOffers === 1){
+                                $addSolutionOffers[] = $solution->id;
+                            }else if($teamSolution->addChallengeSolution === 1){
+                                $addChallengeSolution[] = $solution->id;
+                            }
                         }
                     }
                 }
