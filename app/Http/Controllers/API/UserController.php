@@ -62,7 +62,6 @@ class UserController extends Controller
         $guard = 0;
         if($user->teams != NULL){
             foreach($user->teams as $team){
-                $currentTeam = Team::where('id', '=', $team->id)->with('solutions')->get();
                 $challenges = $team->challenges;
                 $solutions  = $team->solutions;
                         foreach($challenges as $challenge){
@@ -98,7 +97,7 @@ class UserController extends Controller
             }
         }
 
-        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffer' => $addSolutionOffer, 'addChallengeSolution' => $addChallengeSolution, 'teams' => $user->teams, 'currentTeam' => $currentTeam, 'solutions' => $solutions, 'guard' => $guard];
+        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffer' => $addSolutionOffer, 'addChallengeSolution' => $addChallengeSolution, 'teams' => $user->teams,'solutions' => $solutions, 'guard' => $guard];
     }
 
     public function reset(Request $request)
