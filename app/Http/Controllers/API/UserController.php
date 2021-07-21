@@ -70,6 +70,7 @@ class UserController extends Controller
                             if($teamChallenge != NULL){
                                 $guard++;
                                 if($teamChallenge->publishChallenges === 1){
+                                    $guard++;
                                 $publishChallenges[] = $challenge->id;
                                }else if($teamChallenge->acceptChallengeOffers === 1){
                                 $acceptChallengeOffers[] = $challenge->id;
