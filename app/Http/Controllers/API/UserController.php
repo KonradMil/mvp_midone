@@ -7,6 +7,7 @@ use App\Mail\ForgotPassword;
 use App\Mail\TeamInvitation;
 use App\Models\Challenges\Challenge;
 use App\Models\Solutions\Solution;
+use App\Models\Team;
 use App\Models\TeamSolution;
 use App\Models\TeamUser;
 use Authy\AuthyApi;
@@ -62,6 +63,7 @@ class UserController extends Controller
 //        $teams = TeamUser::where('user_id', '=' , $user->id);
         if($user->teams != NULL){
             foreach($user->teams as $team){
+                $currentTeam = Team::where('id', '=', $team->id)->with('solution')->get();
                 $guard++;
                 if($team->solutions != NULL){
                     foreach($team->challenges as $challenge){
@@ -104,7 +106,7 @@ class UserController extends Controller
             }
         }
 
-        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffers' => $addSolutionOffers, 'addChallengeSolution' => $addChallengeSolution, 'teams' => $user->teams, 'guard' => $guard];
+        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffers' => $addSolutionOffers, 'addChallengeSolution' => $addChallengeSolution, 'teams' => $user->teams, 'guard' => $guard, 'currentTeam' => $currentTeam];
     }
 
     public function reset(Request $request)
