@@ -7,6 +7,7 @@ use App\Mail\ForgotPassword;
 use App\Mail\TeamInvitation;
 use App\Models\Challenges\Challenge;
 use App\Models\Solutions\Solution;
+use App\Models\TeamSolution;
 use App\Models\TeamUser;
 use Authy\AuthyApi;
 use GuzzleHttp\Client;
@@ -61,12 +62,12 @@ class UserController extends Controller
 //        $teams = TeamUser::where('user_id', '=' , $user->id);
         if($user->teams != NULL){
             foreach($user->teams as $team){
-                if($team->solutions != NULL){
-                    $guard = 1;
-                    $teamSolution = $team->solutions;
+//                if($team->solutions != NULL){
+//                    $guard = 1;
+//                    $teamSolution = $team->solutions;
+//                }
 
-                }
-
+                $teamSolution = TeamSolution::where('team_id', '=', $team->id);
                 $challenges = $team->challenges;
                 $solutions  = $team->solutions;
                 if($challenges != NULL){
