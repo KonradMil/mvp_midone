@@ -58,26 +58,16 @@ class UserController extends Controller
             }
         }
 
-        $guard = 0;
         $user = User::find($model->id);
-//        $teams = TeamUser::where('user_id', '=' , $user->id);
         if($user->teams != NULL){
             foreach($user->teams as $team){
                 $currentTeam = Team::where('id', '=', $team->id)->with('solutions')->get();
-                $guard++;
-                if($team->solutions != NULL){
-                    foreach($team->challenges as $challenge){
-                        $guard = $challenge->id;
-                    }
-                }
                 $challenges = $team->challenges;
                 $solutions  = $team->solutions;
                 if($challenges != NULL){
-                    $guard++;
                     $teamChallenge = TeamUser::where('team_id', '=', $team->id)->first();
                     if($teamChallenge != NULL){
                         foreach($challenges as $challenge){
-                            $guard++;
                             if($teamChallenge->publishChallenges === 1){
                                 $publishChallenges[] = $challenge->id;
                             }else if($teamChallenge->acceptChallengeOffers === 1){
@@ -88,11 +78,9 @@ class UserController extends Controller
                         }
                     }
                 }else if($solutions != NULL){
-                    $guard++;
                     $teamSolution = TeamUser::where('team_id', '=', $team->id)->first();
                     if($teamSolution != NULL){
                         foreach($solutions as $solution){
-                            $guard++;
                             if($teamSolution->publishSolution === 1){
                                 $publishSolution[] = $solution->id;
                             }else if($teamSolution->addSolutionOffers === 1){
@@ -106,7 +94,7 @@ class UserController extends Controller
             }
         }
 
-        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffers' => $addSolutionOffers, 'addChallengeSolution' => $addChallengeSolution, 'teams' => $user->teams, 'guard' => $guard, 'currentTeam' => $currentTeam];
+        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffers' => $addSolutionOffers, 'addChallengeSolution' => $addChallengeSolution, 'teams' => $user->teams, 'currentTeam' => $currentTeam];
     }
 
     public function reset(Request $request)
