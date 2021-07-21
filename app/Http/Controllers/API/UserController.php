@@ -7,6 +7,7 @@ use App\Mail\ForgotPassword;
 use App\Mail\TeamInvitation;
 use App\Models\Challenges\Challenge;
 use App\Models\Solutions\Solution;
+use App\Models\TeamUser;
 use Authy\AuthyApi;
 use GuzzleHttp\Client;
 use Illuminate\Auth\Events\PasswordReset;
@@ -35,6 +36,7 @@ class UserController extends Controller
         $acceptChallengeOffers = [];
         $publishSolution = [];
         $addSolutionOffers = [];
+        $addChallengeSolution = [];
 
         $challenges = Challenge::where('author_id', '=', $model->id)->get();
         if($challenges != NULL) {
@@ -50,15 +52,43 @@ class UserController extends Controller
             foreach ($solutions as $solution) {
                 $publishSolution[] = $solution->id;
                 $addSolutionOffers[] = $solution->id;
+                $addChallengeSolution[] = $solution->id;
             }
         }
 
+        $user = User::find(Auth::user()->id);
+//        $teams = TeamUser::where('user_id', '=' , $user->id);
+        if($user->teams != NULL){
+            foreach($user->teams as $team){
+                $challenges = $team->challenges;
+                $solutions  = $team->solutions;
+                if($challenges != NULL){
+                    $teamChallenge = TeamUser::where('team_id', '=', $team->id)->first();
+                     foreach($challenges as $challenge){
+                         if($teamChallenge->publishChallenges === 1){
+                             $publishChallenges[] = $challenge->id;
+                         }else if($teamChallenge->acceptChallengeOffers === 1){
+                             $acceptChallengeOffers[] = $challenge->id;
+                         }else if($teamChallenge->acceptChallengeSolutions === 1){
+                             $acceptChallengeSolutions[] = $challenge->id;
+                         }
+                      }
+                }else if($solutions != NULL){
+                    $teamChallenge = TeamUser::where('team_id', '=', $team->id)->first();
+                    foreach($solutions as $solution){
+                        if($teamChallenge->publishSolution === 1){
+                            $publishSolution[] = $solution->id;
+                        }else if($teamChallenge->addSolutionOffers === 1){
+                            $addSolutionOffers[] = $solution->id;
+                        }else if($teamChallenge->addChallengeSolution === 1){
+                            $addChallengeSolution[] = $solution->id;
+                        }
+                    }
+                }
+            }
+        }
 
-//        foreach ($user->teams as $team) {
-//
-//        }
-
-        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffers' => $addSolutionOffers];
+        return ['publishChallenges' => $publishChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffers' => $addSolutionOffers, 'addChallengeSolution' => $addChallengeSolution];
     }
 
     public function reset(Request $request)
