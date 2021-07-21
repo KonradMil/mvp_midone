@@ -64,10 +64,11 @@ class UserController extends Controller
                 if($team->solutions != NULL){
                     $guard = 1;
                     $teamSolution = $team->solutions;
+                    foreach($teamSolution as $tS){
+                        $guard++;
+                    }
                 }
-                foreach($teamSolution as $tS){
-                    $guard++;
-                }
+
                 $challenges = $team->challenges;
                 $solutions  = $team->solutions;
                 if($challenges != NULL){
