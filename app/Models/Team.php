@@ -5,6 +5,7 @@ namespace App\Models;
 
 
 use App\Models\Challenges\Challenge;
+use App\Models\Solutions\Solution;
 use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
@@ -30,7 +31,7 @@ class Team extends Model
 
     public function solutions()
     {
-        return $this->belongsToMany(Challenge::class, 'team_solution');
+        return $this->belongsToMany(Solution::class, 'team_solution');
     }
 
 }
