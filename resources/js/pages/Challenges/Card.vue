@@ -168,13 +168,14 @@ export default defineComponent({
         const newProjectsRef = ref();
         const challenge = ref({});
         const solutions = ref({});
+        const permissions = ref({});
         const solution = ref({});
         const questions = ref({});
         const temp_offer_id = ref(null);
         const edit_offer_id = ref(null);
         const activeTab = ref('podstawowe');
         const user = window.Laravel.user;
-        const permissions = window.Laravel.permissions;
+        // const permissions = window.Laravel.permissions;
         const selected_solution_id = ref(null);
         const types = require("../../json/types.json");
         const who = ref('challenge');
@@ -273,7 +274,6 @@ export default defineComponent({
                         challenge.value = response.data.payload;
                         checkTeam();
                         filter();
-                        checkPermissions();
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -281,6 +281,7 @@ export default defineComponent({
         }
 
         onMounted(function () {
+            permissions.value = window.Laravel.permissions;
             console.log(props);
             getCardChallengeRepositories(props.id);
         })
