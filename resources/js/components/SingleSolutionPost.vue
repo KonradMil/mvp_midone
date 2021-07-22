@@ -46,8 +46,8 @@
                 {{ solution.description }}
             </div>
             <div class="mt-2" v-if="canAccept && type!=='archive'">
-                <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1  && solution.archive != 1">{{$t('challengesMain.acceptSolution')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1  && solution.archive != 1">{{$t('challengesMain.rejectSolution')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1  && solution.archive != 1 && acceptChallengeSolutions">{{$t('challengesMain.acceptSolution')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1  && solution.archive != 1 && acceptChallengeSolutions">{{$t('challengesMain.rejectSolution')}}</button>
             </div>
             <div class="mt-2" v-if="canEdit || inTeam && type!=='archive'">
                 <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: '/studio/solution/' + solution.id});" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1">{{$t('models.edit')}}</button>
@@ -114,7 +114,8 @@ export default {
         canAccept: Boolean,
         canEdit: Boolean,
         activeTab: String,
-        type: String
+        type: String,
+        acceptChallengeSolutions: Boolean
     },
     setup(props,context) {
         const toast = useToast();
