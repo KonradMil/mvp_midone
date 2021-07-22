@@ -273,6 +273,7 @@ export default defineComponent({
                         challenge.value = response.data.payload;
                         checkTeam();
                         filter();
+                        checkPermissions();
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -282,7 +283,6 @@ export default defineComponent({
         onMounted(function () {
             console.log(props);
             getCardChallengeRepositories(props.id);
-            checkPermissions();
         })
 
 
