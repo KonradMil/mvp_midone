@@ -273,7 +273,7 @@ export default defineComponent({
         }
 
         onMounted(function () {
-            permissions.value.forEach((obj) =>{
+            window.Laravel.permissions.forEach((obj) =>{
                 console.log(obj + '-> object');
             });
             console.log(props);
