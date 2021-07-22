@@ -218,6 +218,13 @@ export default defineComponent({
             });
         }
 
+        const checkPermissions = () => {
+            console.log(challenge.value.solutions + '->  solutions.value');
+            permissions.value.forEach(function (permission) {
+                console.log(permission + 'permission');
+            });
+        }
+
         const checkTeam = () => {
             console.log({user_id: user.id, challenge_id: challenge.value.id});
             axios.post('/api/challenge/check-team', {user_id: user.id, challenge_id: challenge.value.id})
@@ -273,11 +280,9 @@ export default defineComponent({
         }
 
         onMounted(function () {
-            window.Laravel.permissions.forEach((obj) =>{
-                console.log(obj + '-> object');
-            });
             console.log(props);
             getCardChallengeRepositories(props.id);
+            checkPermissions();
         })
 
 
@@ -366,6 +371,7 @@ export default defineComponent({
         };
 
         return {
+            checkPermissions,
             permissions,
             filter,
             edit_offer_id,
