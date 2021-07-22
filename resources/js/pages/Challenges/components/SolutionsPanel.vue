@@ -90,6 +90,10 @@ export default {
         challenge: Object,
         inTeam: Boolean,
         type: String,
+        addChallengeSolution: Boolean,
+        acceptChallengeSolutions: Boolean,
+        publishSolution: Boolean,
+        addSolutionOffer: Boolean
     },
     setup(props) {
         const app = getCurrentInstance();

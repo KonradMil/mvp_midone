@@ -255,7 +255,8 @@ export default {
     props: {
         challenge: Object,
         activeTab: String,
-        inTeam: Boolean
+        inTeam: Boolean,
+        acceptChallengeOffers: Boolean
     },
     emits: ["update:activeTab"],
     setup(props, context) {

@@ -139,6 +139,7 @@ export default {
     props: {
         activeTab: String,
         id: Number,
+        addSolutionOffer: Boolean
     },
     emits: ["update:activeTab"],
 
