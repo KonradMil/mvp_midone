@@ -376,6 +376,7 @@ export default defineComponent({
             permissions.value.acceptChallengeOffers.forEach(function (permission) {
                 if(props.id === permission){
                     acceptChallengeOffers.value = true;
+                    console.log(acceptChallengeOffers.value + '->acceptChallengeOffers.value');
                 }
                 console.log(permission + 'permission');
             });
