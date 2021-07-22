@@ -182,6 +182,13 @@ export default defineComponent({
         const inTeam = ref(false);
         const isSolutions = ref(false);
         const isPublic = ref(false);
+        const acceptChallengeOffers = ref(false);
+        const addChallengeSolution = ref(false);
+        const acceptChallengeSolution = ref(false);
+        const publishChallenges = ref(false);
+        const publishSolution = ref(false);
+        const addSolutionOffer = ref(false);
+
         watch(() => props.change, (first, second) => {
             if(props.change === 'all-offers' && user.type === 'integrator'){
                 activeTab.value = 'oferty';
@@ -216,16 +223,6 @@ export default defineComponent({
                 } else if((solution.published === 1) && (solution.author.id === user.id)) {
                     isPublic.value = true;
                 }
-            });
-        }
-
-        const checkPermissions = () => {
-            console.log(challenge.value.solutions + '->  solutions.value');
-            permissions.value.acceptChallengeOffers.forEach(function (permission) {
-                console.log(permission + 'permission');
-            });
-            permissions.value.addChallengeSolution.forEach(function (permission) {
-                console.log(permission + 'permission');
             });
         }
 
@@ -375,7 +372,51 @@ export default defineComponent({
             el.tns.goTo("next");
         };
 
+        const checkPermissions = () => {
+            permissions.value.acceptChallengeOffers.forEach(function (permission) {
+                if(props.id === permission){
+                    acceptChallengeOffers.value = true;
+                }
+                console.log(permission + 'permission');
+            });
+            permissions.value.acceptChallengeSolution.forEach(function (permission) {
+                if(props.id === permission){
+                    acceptChallengeSolution.value = true;
+                }
+                console.log(permission + 'permission');
+            });
+            permissions.value.addChallengeSolution.forEach(function (permission) {
+                if(props.id === permission){
+                    addChallengeSolution.value = true;
+                }
+                console.log(permission + 'permission');
+            });
+            permissions.value.publishChallenges.forEach(function (permission) {
+                if(props.id === permission){
+                    publishChallenges.value = true;
+                }
+                console.log(permission + 'permission');
+            });
+            permissions.value.addSolutionOffer.forEach(function (permission) {
+                if(props.id === permission){
+                    addSolutionOffer.value = true;
+                }
+                console.log(permission + 'permission');
+            });
+            permissions.value.publishSolution.forEach(function (permission) {
+                if(props.id === permission){
+                    publishSolution.value = true;
+                }
+                console.log(permission + 'permission');
+            });
+        }
         return {
+            addSolutionOffer,
+            publishSolution,
+            publishChallenges,
+            acceptChallengeSolution,
+            addChallengeSolution,
+            acceptChallengeOffers,
             checkPermissions,
             permissions,
             filter,
