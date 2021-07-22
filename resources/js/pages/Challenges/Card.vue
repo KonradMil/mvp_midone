@@ -284,6 +284,7 @@ export default defineComponent({
             permissions.value = window.Laravel.permissions;
             console.log(props);
             getCardChallengeRepositories(props.id);
+            checkPermissions();
         })
 
 
