@@ -102,9 +102,9 @@
                                         href=""
                                         class="dark:text-gray-300 text-gray-600"
                                         content="Po zaakceptowaniu oferty staje się ona wiążąca dla obu stron.">
-                                    <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && challenge.selected_offer_id < 1">Akceptuj ofertę</button>
+                                    <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && challenge.selected_offer_id < 1 && acceptChallengeOffers">Akceptuj ofertę</button>
                                     </Tippy>
-                                    <button class="btn shadow-md mr-2 bg-gray-400" @click.prevent="rejectOffer(offer,index)" v-if="offer.rejected != 1 && challenge.selected_offer_id < 1" >Odrzuć ofertę</button>
+                                    <button class="btn shadow-md mr-2 bg-gray-400" @click.prevent="rejectOffer(offer,index)" v-if="offer.rejected != 1 && challenge.selected_offer_id < 1 && acceptChallengeOffers" >Odrzuć ofertę</button>
                                     <button class="btn btn-outline-secondary" @click="showDetails[offer.id] = !showDetails[offer.id]">{{$t('teams.details')}}</button>
                                 </div>
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
