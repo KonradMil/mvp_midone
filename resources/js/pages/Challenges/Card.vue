@@ -220,7 +220,7 @@ export default defineComponent({
 
         const checkPermissions = () => {
             console.log(challenge.value.solutions + '->  solutions.value');
-            permissions.value.forEach(function (permission) {
+            permissions.acceptChallengeOffers.value.forEach(function (permission) {
                 console.log(permission + 'permission');
             });
         }
