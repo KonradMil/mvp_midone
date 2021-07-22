@@ -273,6 +273,9 @@ export default defineComponent({
         }
 
         onMounted(function () {
+            permissions.value.forEach((obj) =>{
+                console.log(obj + '-> object');
+            });
             console.log(props);
             getCardChallengeRepositories(props.id);
         })
