@@ -224,6 +224,9 @@ export default defineComponent({
             permissions.value.acceptChallengeOffers.forEach(function (permission) {
                 console.log(permission + 'permission');
             });
+            permissions.value.addChallengeSolution.forEach(function (permission) {
+                console.log(permission + 'permission');
+            });
         }
 
         const checkTeam = () => {
