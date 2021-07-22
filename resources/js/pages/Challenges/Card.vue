@@ -379,34 +379,36 @@ export default defineComponent({
                     console.log(acceptChallengeOffers.value + '->acceptChallengeOffers.value');
                 }
                 console.log(permission + 'permission');
-                console.log(acceptChallengeOffers.value + 'acceptChallengeOffers.value');
+                console.log(acceptChallengeOffers.value + '->acceptChallengeOffers.value');
             });
             permissions.value.acceptChallengeSolutions.forEach(function (permission) {
-                if(props.id === permission){
+                if(permission == props.id){
                     acceptChallengeSolutions.value = true;
                 }
                 console.log(permission + 'permission');
+                console.log(acceptChallengeSolutions.value + '->acceptChallengeSolutions.value');
             });
             permissions.value.addChallengeSolution.forEach(function (permission) {
-                if(props.id === permission){
+                if(permission == props.id){
                     addChallengeSolution.value = true;
                 }
                 console.log(permission + 'permission');
             });
             permissions.value.publishChallenges.forEach(function (permission) {
-                if(props.id === permission){
+                if(permission == props.id){
                     publishChallenges.value = true;
                 }
                 console.log(permission + 'permission');
+                console.log(publishChallenges.value + '->publishChallenges.value');
             });
             permissions.value.addSolutionOffer.forEach(function (permission) {
-                if(props.id === permission){
+                if(permission == props.id){
                     addSolutionOffer.value = true;
                 }
                 console.log(permission + 'permission');
             });
             permissions.value.publishSolution.forEach(function (permission) {
-                if(props.id === permission){
+                if(permission == props.id){
                     publishSolution.value = true;
                 }
                 console.log(permission + 'permission');
