@@ -184,7 +184,7 @@ export default defineComponent({
         const isPublic = ref(false);
         const acceptChallengeOffers = ref(false);
         const addChallengeSolution = ref(false);
-        const acceptChallengeSolution = ref(false);
+        const acceptChallengeSolutions = ref(false);
         const publishChallenges = ref(false);
         const publishSolution = ref(false);
         const addSolutionOffer = ref(false);
@@ -379,9 +379,9 @@ export default defineComponent({
                 }
                 console.log(permission + 'permission');
             });
-            permissions.value.acceptChallengeSolution.forEach(function (permission) {
+            permissions.value.acceptChallengeSolutions.forEach(function (permission) {
                 if(props.id === permission){
-                    acceptChallengeSolution.value = true;
+                    acceptChallengeSolutions.value = true;
                 }
                 console.log(permission + 'permission');
             });
@@ -414,7 +414,7 @@ export default defineComponent({
             addSolutionOffer,
             publishSolution,
             publishChallenges,
-            acceptChallengeSolution,
+            acceptChallengeSolutions,
             addChallengeSolution,
             acceptChallengeOffers,
             checkPermissions,
