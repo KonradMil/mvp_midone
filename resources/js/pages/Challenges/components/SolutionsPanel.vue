@@ -112,7 +112,7 @@ export default {
         const technologyType = ref(null);
         const permissions = ref({});
         const addSolutionOffer = ref({});
-        const publishSolution = ref({});
+        const publishSolution = ref(false);
 
         emitter.on('deletesolution', e => {
             solutions.value.splice(e.index, 1);
