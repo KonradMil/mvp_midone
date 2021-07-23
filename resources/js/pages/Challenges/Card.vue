@@ -394,8 +394,10 @@ export default defineComponent({
                 }
             });
             permissions.value.addSolutionOffer.forEach(function (permission) {
+                console.log(addSolutionOffer.value + '->before addSolutionOffer.value')
                 if(permission == props.id){
                     addSolutionOffer.value = true;
+                    console.log(addSolutionOffer.value + '->after addSolutionOffer.value')
                 }
             });
             permissions.value.publishSolution.forEach(function (permission) {
