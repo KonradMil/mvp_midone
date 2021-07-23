@@ -216,7 +216,7 @@
 <!--                        Zapisz-->
 <!--                    </button>-->
 <!--                </div>-->
-                <div class="flex flex-col lg:flex-row items-center p-5">
+                <div class="flex flex-col lg:flex-row items-center p-5" style="justify-content: center;">
                 <button class="btn btn-outline-secondary py-1 px-2" @click="savePermissions(currentTeam_id,currentMember_id)">
                     Zapisz
                 </button>
