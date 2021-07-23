@@ -74,7 +74,7 @@
                                                      {{member.companies[0].company_name}}
                                                 </div>
                                             </div>
-                                            <div class="flex justify-center items-center" v-if="team.owner_id == user.id">
+                                            <div class="flex justify-center items-center" v-if="team.owner_id == user.id && member.id !== user.id">
                                                 <button class="btn btn-outline-secondary py-1 px-2" @click="showMemberPermissionModal(team.id, member.id)">
                                                     {{ $t('global.permissions') }}
                                                 </button>
