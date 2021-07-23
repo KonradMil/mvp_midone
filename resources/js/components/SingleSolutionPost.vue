@@ -52,11 +52,11 @@
             <div class="mt-2" v-if="canEdit || inTeam && type!=='archive'">
                 <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: '/studio/solution/' + solution.id});" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1">{{$t('models.edit')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution" v-if="challenge.stage == 1 && solution.selected != 1 && solution.archive != 1">{{$t('models.delete')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0 && challenge.stage == 1 &&  solution.archive != 1" @click="publishSolution">{{$t('challengesMain.publish')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0 && challenge.stage == 1 &&  solution.archive != 1 && publishSolution" @click="publishSolution">{{$t('challengesMain.publish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1" @click="unpublishSolution">{{$t('challengesMain.unpublish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive != 1" @click="switchTab">{{$t('teams.teams')}}</button>
             </div>
-            <div class="mt-2" v-if="user.type == 'integrator' && solution.selected == 1 && type!=='archive'">
+            <div class="mt-2" v-if="user.type == 'integrator' && solution.selected == 1 && type!=='archive' && addSolutionOffer">
                 <button v-if="solution.archive != 1" class="btn btn-primary shadow-md mr-2" @click="addOffer">{{$t('challengesMain.addOffer')}}</button>
             </div>
         </div>
