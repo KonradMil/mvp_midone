@@ -145,7 +145,7 @@ export default {
             permissions.value.addSolutionOffer.forEach(function (permission) {
                 console.log(addSolutionOffer.value + '->before addSolutionOffer.value')
                 console.log(props.challenge.solutions + '->solutions.valueFOREACH');
-                solutions.value.forEach(function (solution){
+                props.challenge.solutions.forEach(function (solution){
                     console.log(solution + '->solution');
                     console.log(solution.id + '->solution.id');
                    let id = solution.id;
