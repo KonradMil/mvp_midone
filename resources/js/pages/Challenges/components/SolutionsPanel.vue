@@ -144,6 +144,7 @@ export default {
         const checkPermissions = () => {
             permissions.value.addSolutionOffer.forEach(function (permission) {
                 console.log(addSolutionOffer.value + '->before addSolutionOffer.value')
+                console.log(solutions.value + '->solutions.valueFOREACH');
                 solutions.value.forEach(function (solution){
                     console.log(solution + '->solution');
                     console.log(solution.id + '->solution.id');
