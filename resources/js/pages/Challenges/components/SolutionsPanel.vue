@@ -60,7 +60,7 @@
 <!--                        <div v-if="challenge.stage >= 2" v-for="(solution, index) in challenge.selected" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box solution-selected">-->
 <!--                            <SingleSolutionPost  :challenge="challenge" :user="user" :key="'selected_' + index" :solution="solution" :canAccept="false" :canEdit="false"></SingleSolutionPost>-->
 <!--                        </div>-->
-                        <div v-for="(solution, index) in solutions" :key="index" v-if="challenge.stage > 0" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected) ? 'solution-selected' : ''">
+                        <div v-for="(solution, index) in solutionsInTeam" :key="index" v-if="challenge.stage > 0" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected) ? 'solution-selected' : ''">
                                 <span v-if="user.type === 'integrator'">
                                     <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id" :publishSolution="publishSolution" :addSolutionOffer="addSolutionOffer"></SingleSolutionPost>
                                 </span>
@@ -143,27 +143,13 @@ export default {
 
         const checkPermissions = () => {
             permissions.value.addSolutionOffer.forEach(function (permission) {
-                console.log(addSolutionOffer.value + '->before addSolutionOffer.value')
-                console.log(props.challenge.solutions + '->solutions.valueFOREACH');
                 props.challenge.solutions.forEach(function (solution){
-                    console.log(solution + '->solution');
-                    console.log(solution.id + '->solution.id');
-                   let id = solution.id;
+                    let id = solution.id;
                    if(id === permission){
                        solutionsInTeam.value.push(solution);
                    }
                 });
-                if(permission == props.id){
-                    addSolutionOffer.value = true;
-                    console.log(addSolutionOffer.value + '->after addSolutionOffer.value')
-                }
             });
-
-            // permissions.value.publishSolution.forEach(function (permission) {
-            //     if(permission == props.id){
-            //         publishSolution.value = true;
-            //     }
-            // });
         }
 
         onMounted(function () {
