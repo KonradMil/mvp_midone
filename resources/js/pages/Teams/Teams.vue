@@ -160,8 +160,10 @@
         </div>
     </Modal>
     <ModalPermission :show="showMemberPermission" @closed="modalPermClosed">
+        <div class="divide-y divide-fuchsia-300">
         <h3 class="intro-y text-lg font-medium mt-5">{{ $t('global.permissions') }}</h3>
-        <div class="flex flex-col lg:flex-row items-center p-5">
+        </div>
+            <div class="flex flex-col lg:flex-row items-center p-5">
             <div class="intro-y box w-full divide-y divide-fuchsia-300">
                 <div v-if="user.type === 'investor'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
