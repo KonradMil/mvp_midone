@@ -108,8 +108,12 @@ export default {
         const user = window.Laravel.user;
         const guard = ref(false);
         const solutions = ref([]);
+        const solutionsInTeam = ref([]);
         const filterType = ref(null);
         const technologyType = ref(null);
+        const permissions = ref({});
+        const addSolutionOffer = ref({});
+        const publishSolution = ref({});
 
         emitter.on('deletesolution', e => {
             solutions.value.splice(e.index, 1);
@@ -136,7 +140,30 @@ export default {
             }
         }, {})
 
+        const checkPermissions = () => {
+            permissions.value.addSolutionOffer.forEach(function (permission) {
+                console.log(addSolutionOffer.value + '->before addSolutionOffer.value')
+                solutions.value.forEach(function (solution){
+                   let id = solution.id;
+                   if(id === permission){
+                       solutionsInTeam.value.push(solution);
+                   }
+                });
+                if(permission == props.id){
+                    addSolutionOffer.value = true;
+                    console.log(addSolutionOffer.value + '->after addSolutionOffer.value')
+                }
+            });
+
+            // permissions.value.publishSolution.forEach(function (permission) {
+            //     if(permission == props.id){
+            //         publishSolution.value = true;
+            //     }
+            // });
+        }
+
         onMounted(function () {
+            permissions.value = window.Laravel.permissions;
            if(user.type == 'investor' && props.inTeam) {
                solutions.value = props.challenge.solutions;
            } else {
@@ -225,6 +252,10 @@ export default {
                 })
         }
         return {
+            solutionsInTeam,
+            publishSolution,
+            addSolutionOffer,
+            permissions,
             guard,
             solutions,
             challenge,
