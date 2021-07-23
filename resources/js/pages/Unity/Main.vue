@@ -7,7 +7,7 @@
     </div>
     <BottomPanel  v-if="loaded" :allowedEdit="allowedEdit" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
     <RightButtons  v-if="loaded" :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>
-    <RightPanel  :allowedEdit="allowedEdit" @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
+    <RightPanel  :allowedEdit="allowedEdit" :publishChallenges="publishChallenges" @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
     <div v-if="!loaded" id="loader">
         <LoadingIcon icon="grid" class="w-8 h-8" />
     </div>
@@ -119,7 +119,8 @@ export default {
         readOnly: {
             default: false,
             type: Boolean
-        }
+        },
+        publishChallenges: Boolean
     },
     components: {RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
     setup(props, {emit}) {

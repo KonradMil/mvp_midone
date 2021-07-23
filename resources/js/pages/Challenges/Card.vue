@@ -76,14 +76,14 @@
                             Studio 3D
                         </button>
                         <button
-                            v-if="challenge.status == 0"
+                            v-if="challenge.status == 0 && publishChallenges"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
                             @click="publish(challenge.id)">
                             {{$t('challengesMain.publish')}}
                         </button>
                         <button
-                            v-if="challenge.status == 1 && challenge.solutions.length == 0"
+                            v-if="challenge.status == 1 && challenge.solutions.length == 0 && publishChallenges"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
                             @click="unpublish(challenge.id)">
@@ -91,7 +91,7 @@
                         </button>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="!inTeam && user.type == 'integrator'">
-                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge, readOnly: true}})">
+                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge, readOnly: true, publishChallenges: publishChallenges}})">
                             Studio 3D
                         </button>
                         <button v-if="challenge.stage == 1"
