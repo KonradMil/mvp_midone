@@ -92,7 +92,6 @@ export default {
         type: String,
         addChallengeSolution: Boolean,
         acceptChallengeSolutions: Boolean,
-        publishSolution: Boolean,
         addSolutionOffer: Boolean
     },
     setup(props) {
