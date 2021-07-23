@@ -25,7 +25,8 @@
                         leave-to-class="opacity-0 translate-y-10 translate-y-0 scale-95"
                     >
                         <div
-                            class="relative bg-white rounded-lg text-left overflow-hidden shadow-xl p-8 w-1/5"
+                            class="relative bg-white rounded-lg text-left overflow-hidden shadow-xl p-8 w-1/5 border-solid border-4"
+                            style="border-color: #930f68;"
                             role="dialog"
                             ref="modal"
                             aria-modal="true"

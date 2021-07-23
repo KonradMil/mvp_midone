@@ -162,7 +162,7 @@
     <ModalPermission :show="showMemberPermission" @closed="modalPermClosed">
         <h3 class="intro-y text-lg font-medium mt-5">{{ $t('global.permissions') }}</h3>
         <div class="flex flex-col lg:flex-row items-center p-5">
-            <div class="intro-y box w-full">
+            <div class="intro-y box w-full divide-y divide-fuchsia-300">
                 <div v-if="user.type === 'investor'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
                         id="publishChallenge"
@@ -179,7 +179,7 @@
                         :checked="publishSolution"/>
                     <label class="cursor-pointer select-none" for="publishSolution">{{ $t('global.publishSolution') }}</label>
                 </div>
-                <div v-if="user.type === 'investor'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
+                <div v-if="user.type === 'investor'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pt-2">
                     <input
                         id="acceptChallengeOffer"
                         type="checkbox"
@@ -187,7 +187,7 @@
                         :checked="acceptChallengeOffer"/>
                     <label class="cursor-pointer select-none" for="acceptChallengeOffer">{{ $t('global.acceptChallengeOffer') }}</label>
                 </div>
-                <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
+                <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pt-2">
                     <input
                         id="addSolutionOffer"
                         type="checkbox"
@@ -195,7 +195,7 @@
                         :checked="addSolutionOffer"/>
                     <label class="cursor-pointer select-none" for="addSolutionOffer">{{ $t('global.addSolutionOffer') }}</label>
                 </div>
-                <div v-if="user.type === 'investor'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
+                <div v-if="user.type === 'investor'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5 pt-2">
                     <input
                         id="acceptChallengeSolution"
                         type="checkbox"
@@ -203,7 +203,7 @@
                         :checked="acceptChallengeSolution"/>
                     <label class="cursor-pointer select-none" for="acceptChallengeSolution">{{ $t('global.acceptChallengeSolution') }}</label>
                 </div>
-                <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
+                <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5 pt-2">
                     <input
                         id="addChallengeSolution"
                         type="checkbox"
@@ -211,11 +211,14 @@
                         :checked="addChallengeSolution"/>
                     <label class="cursor-pointer select-none" for="acceptChallengeSolution">{{ $t('global.addChallengeSolution') }}</label>
                 </div>
-                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">
-                    <button class="btn btn-outline-secondary py-1 px-2" @click="savePermissions(currentTeam_id,currentMember_id)">
-                        Zapisz
-                    </button>
-                </div>
+<!--                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">-->
+<!--                    <button class="btn btn-outline-secondary py-1 px-2" @click="savePermissions(currentTeam_id,currentMember_id)">-->
+<!--                        Zapisz-->
+<!--                    </button>-->
+<!--                </div>-->
+                <button class="btn btn-outline-secondary py-1 px-2" @click="savePermissions(currentTeam_id,currentMember_id)">
+                    Zapisz
+                </button>
             </div>
         </div>
     </ModalPermission>
