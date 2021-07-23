@@ -140,7 +140,9 @@ export default {
             }
         }, {})
 
+
         const checkPermissions = () => {
+            solutionsInTeam.value = solutions.whereIn('id', permissions.value.addSolutionOffer);
             permissions.value.addSolutionOffer.forEach(function (permission) {
                 console.log(addSolutionOffer.value + '->before addSolutionOffer.value')
                 solutions.value.forEach(function (solution){
