@@ -42,7 +42,7 @@
                     <button v-if="challenge.stage != 3" type="button" data-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1">
                         Anuluj
                     </button>
-                    <button v-if="props.allowedEdit && !(content == 'settings' && type == 'solution') && challenge.stage != 3" type="button" class="btn btn-primary w-20" @click="save">
+                    <button v-if="props.allowedEdit && !(content == 'settings' && type == 'solution') && challenge.stage != 3 && (publishChallenges || publishSolution)" type="button" class="btn btn-primary w-20" @click="save">
                         Zapisz
                     </button>
                 </div>
@@ -94,7 +94,8 @@ export default {
         solution: Object,
         type: String,
         allowedEdit: Object,
-        publishChallenges: Boolean
+        publishChallenges: Boolean,
+        publishSolution: Boolean
     },
     setup(props) {
         //GLOBAL
