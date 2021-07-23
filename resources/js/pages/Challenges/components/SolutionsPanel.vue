@@ -169,6 +169,7 @@ export default {
            } else {
                filterMember();
            }
+            checkPermissions();
         });
 
 
@@ -252,6 +253,7 @@ export default {
                 })
         }
         return {
+            checkPermissions,
             solutionsInTeam,
             publishSolution,
             addSolutionOffer,
