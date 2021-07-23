@@ -144,6 +144,8 @@ export default {
             permissions.value.addSolutionOffer.forEach(function (permission) {
                 console.log(addSolutionOffer.value + '->before addSolutionOffer.value')
                 solutions.value.forEach(function (solution){
+                    console.log(solution + '->solution');
+                    console.log(solution.id + '->solution.id');
                    let id = solution.id;
                    if(id === permission){
                        solutionsInTeam.value.push(solution);
