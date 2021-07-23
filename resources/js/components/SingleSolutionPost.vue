@@ -115,7 +115,9 @@ export default {
         canEdit: Boolean,
         activeTab: String,
         type: String,
-        acceptChallengeSolutions: Boolean
+        acceptChallengeSolutions: Boolean,
+        publishSolution: Boolean,
+        addSolutionOffer: Boolean
     },
     setup(props,context) {
         const toast = useToast();
