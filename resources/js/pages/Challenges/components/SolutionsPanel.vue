@@ -62,7 +62,7 @@
 <!--                        </div>-->
                         <div v-for="(solution, index) in solutionsInTeam" :key="index" v-if="challenge.stage > 0" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected) ? 'solution-selected' : ''">
                                 <span v-if="user.type === 'integrator'">
-                                    <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id" :publishSolution="publishSolution" :addSolutionOffer="addSolutionOffer"></SingleSolutionPost>
+                                    <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id" :canEditSolution="canEditSolution" :addSolutionOffer="addSolutionOffer"></SingleSolutionPost>
                                 </span>
                                 <span v-if="user.type === 'investor'">
                                     <SingleSolutionPost v-if="solution.status === 1" :challenge="challenge" :user="user" :solution="solution" :canAccept="(inTeam) && challenge.status == 1" :canEdit="false" :acceptChallengeSolutions="acceptChallengeSolutions"></SingleSolutionPost>
@@ -112,7 +112,7 @@ export default {
         const technologyType = ref(null);
         const permissions = ref({});
         const addSolutionOffer = ref({});
-        const publishSolution = ref(false);
+        const canEditSolution= ref(false);
 
         emitter.on('deletesolution', e => {
             solutions.value.splice(e.index, 1);
@@ -146,8 +146,8 @@ export default {
                     let id = solution.id;
                    if(id === permission){
                        solutionsInTeam.value.push(solution);
-                       if(publishSolution.value === false){
-                           publishSolution.value = true;
+                       if(canEditSolution.value === false){
+                           canEditSolution.value = true;
                        }
                    }
                 });
@@ -247,7 +247,7 @@ export default {
         return {
             checkPermissions,
             solutionsInTeam,
-            publishSolution,
+            canEditSolution,
             addSolutionOffer,
             permissions,
             guard,
