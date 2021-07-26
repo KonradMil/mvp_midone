@@ -1,19 +1,19 @@
 <template>
-    <div class="flex fixed w-full z-50 pb-2 h-24 bottom-0 h-28" v-if="expanded == 0" id="bottom-animation-minimalized" style="pointer-events: none;">
-        <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto; pointer-events: none;">
-            <AnimationButtons :icons="icons"></AnimationButtons>
-        </div>
-    </div>
-    <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-96 bottom-0 bg-white rounded-md bg-opacity-25" v-if="expanded == 1" id="bottom-animation-normal">
-        <div class="left flex-1 pt-2 flex-row ml-5">
-            <div class="grid grid-cols-12 w-full h-full">
-                <div class="col-span-1">
-                    <UnityButton tooltip="Dodaj linie" alttext="Dodaj linie" path="/s3/builder_icons/add_simple.png" action="addline" position="animationbuttonclick"/>
-                    <UnityButton tooltip="Maksymalizuj" alttext="Maksymalizuj" path="/s3/builder_icons/maximize_simple.png" action="maximize" position="animationbuttonclick"/>
-                    <UnityButton tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick"/>
-                    <UnityButton tooltip="Odtwórz" alttext="Odtwórz" path="/s3/builder_icons/play_simple.png" action="play" position="animationbuttonclick"/>
-                </div>
-                <div class="col-span-11 rounded-md mr-5 relative" style=" overflow-y: scroll;">
+<!--    <div class="flex fixed w-full z-50 pb-2 h-24 bottom-0 h-28" v-if="expanded == 0" id="bottom-animation-minimalized" style="pointer-events: none;">-->
+<!--        <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto; pointer-events: none;">-->
+<!--            <AnimationButtons :icons="icons"></AnimationButtons>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-96 bottom-0 bg-white rounded-md bg-opacity-25" v-if="expanded == 1" id="bottom-animation-normal">-->
+<!--        <div class="left flex-1 pt-2 flex-row ml-5">-->
+<!--            <div class="grid grid-cols-12 w-full h-full">-->
+<!--                <div class="col-span-1">-->
+<!--                    <UnityButton tooltip="Dodaj linie" alttext="Dodaj linie" path="/s3/builder_icons/add_simple.png" action="addline" position="animationbuttonclick"/>-->
+<!--                    <UnityButton tooltip="Maksymalizuj" alttext="Maksymalizuj" path="/s3/builder_icons/maximize_simple.png" action="maximize" position="animationbuttonclick"/>-->
+<!--                    <UnityButton tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick"/>-->
+<!--                    <UnityButton tooltip="Odtwórz" alttext="Odtwórz" path="/s3/builder_icons/play_simple.png" action="play" position="animationbuttonclick"/>-->
+<!--                </div>-->
+<!--                <div class="col-span-11 rounded-md mr-5 relative" style=" overflow-y: scroll;">-->
 <!--                    <div class="grid grid-cols-12 my-3" @click="activeLineIndex = line.index; setNewAnimationLayer();" :class="(activeLineIndex == line.index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + line.index">-->
 <!--                        <div class="col-span-1">-->
 <!--                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);">-->
@@ -76,15 +76,15 @@
 <!--                            </div>-->
 <!--                        </div>-->
 <!--                    </div>-->
-                </div>
-            </div>
-        </div>
-    </div>
-    <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-24 bottom-0 h-100 bg-white rounded-md bg-opacity-25" v-if="expanded == 2" id="bottom-animation-expanded">
-        <div class="left flex  pt-2 flex-row ml-24">
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-24 bottom-0 h-100 bg-white rounded-md bg-opacity-25" v-if="expanded == 2" id="bottom-animation-expanded">-->
+<!--        <div class="left flex  pt-2 flex-row ml-24">-->
 
-        </div>
-    </div>
+<!--        </div>-->
+<!--    </div>-->
 </template>
 
 <script>
