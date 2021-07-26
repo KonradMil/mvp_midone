@@ -422,7 +422,7 @@ class UserController extends Controller
         try {
             Session::flush();
             $success = true;
-            $message = 'Pomyślne wylogowano!';
+            $message = 'Pomyślnie wylogowano!';
         } catch (\Illuminate\Database\QueryException $ex) {
             $success = false;
             $message = $ex->getMessage();
