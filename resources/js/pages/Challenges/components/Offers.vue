@@ -3,8 +3,11 @@
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
             <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.myOffers')}}</h2>
         </div>
-        <div class="grid grid-cols-12 gap-6">
 
+        <div class="grid grid-cols-12 gap-6">
+            <div v-if="offers.length == 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+                {{$t('challengesMain.noSolutions')}}.
+            </div>
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-6 xxl:col-span-6" v-for="(offer, index) in offers.list" :key="index">
 
