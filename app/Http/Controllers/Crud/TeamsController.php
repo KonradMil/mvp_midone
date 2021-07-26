@@ -102,7 +102,7 @@ class TeamsController extends Controller
             $query = Auth::user()->teams()->where('name', 'LIKE', '%' . $input->search . '%')->whereNotIn('id', $array)->with('users', 'users.companies')->get();
 //            $queryForeign = Auth::user()->ownedTeams->where('name', 'LIKE', '%' . $input->search . '%')->get();
         } else {
-            $query = Auth::user()->teams()->with('users', 'users.companies')->get();
+            $query = Auth::user()->teams()->with('users', 'users.companies')->whereNotIn('id', $array)->get();
 //            $queryForeign = Auth::user()->ownedTeams;
         }
 
