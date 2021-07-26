@@ -168,6 +168,7 @@
                         id="publishchallenge"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
+                        :checked="publishChallenge"
                         :value="publishChallenge"/>
                     <label class="cursor-pointer select-none" for="publishChallenge">{{ $t('global.publishChallenge') }}</label>
                 </div>
