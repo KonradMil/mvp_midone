@@ -160,6 +160,7 @@ export default {
                solutions.value = props.challenge.solutions;
            } else {
                // filterMember();
+               solutions.value = props.challenge.solutions;
            }
             checkPermissions();
         });
