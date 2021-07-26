@@ -292,6 +292,7 @@ export default {
                 addSolutionOffer: addSolutionOffer.value, acceptChallengeSolution: acceptChallengeSolution.value, addChallengeSolution: addChallengeSolution.value})
                 .then(response => {
                     if (response.data.success) {
+                        console.log(publishChallenge.value + '-> publishChallenge');
                         toast.success(response.data.message);
                         modalPermClosed();
                     }else{
