@@ -96,10 +96,14 @@ class UserController extends Controller
                                     }
                                 }
                                 if($teamSolution->addSolutionOffer === 1){
-                                    $addSolutionOffer[] = $solution->id;
+                                    if(!(in_array($solution->id, $addSolutionOffer))){
+                                        $addSolutionOffer[] = $solution->id;
+                                    }
                                 }
                                 if($teamSolution->addChallengeSolution === 1){
-                                    $addChallengeSolution[] = $solution->id;
+                                    if(!(in_array($solution->id, $addChallengeSolution))){
+                                        $addChallengeSolution[] = $solution->id;
+                                    }
                                 }
                             }
                         }
