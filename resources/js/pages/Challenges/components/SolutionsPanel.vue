@@ -152,6 +152,12 @@ export default {
                    }
                 });
             });
+            permissions.value.publishChallenges.forEach(function (permission) {
+                    let id = props.challenge.id
+                    if(id === permission){
+                        solutionsInTeam.value = props.challenge.solutions;
+                    }
+                });
         }
 
         onMounted(function () {
