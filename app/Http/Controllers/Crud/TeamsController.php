@@ -23,13 +23,16 @@ class TeamsController extends Controller
         $team = Team::find($request->input('team_id'));
         $member = User::find($request->input('member_id'));
         $team_user = TeamUser::where('user_id', '=', $member->id)->where('team_id', '=', $team->id)->first();
-        $team_user -> publishChallenge = $request->input('publishChallenge');
-        $team_user -> publishSolution = $request->input('publishSolution');
-        $team_user -> acceptChallengeOffer = $request->input('acceptChallengeOffer');
-        $team_user -> addSolutionOffer = $request->input('addSolutionOffer');
-        $team_user -> acceptChallengeSolution = $request->input('acceptChallengeSolution');
-        $team_user -> addChallengeSolution = $request->input('addChallengeSolution');
-        $team_user->save();
+        if($team_user != NULL){
+            $team_user -> publishChallenge = $request->input('publishChallenge');
+            $team_user -> publishSolution = $request->input('publishSolution');
+            $team_user -> acceptChallengeOffer = $request->input('acceptChallengeOffer');
+            $team_user -> addSolutionOffer = $request->input('addSolutionOffer');
+            $team_user -> acceptChallengeSolution = $request->input('acceptChallengeSolution');
+            $team_user -> addChallengeSolution = $request->input('addChallengeSolution');
+            $team_user->save();
+        }
+
 //        $teams = $member->teams()->where('id', '=', $team->id);
         return response()->json([
             'success' => true,
