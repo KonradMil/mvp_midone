@@ -168,7 +168,7 @@
                         id="publishChallenge"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        :checked="publishChallenge" />
+                        v-model="userPermissions.publishChallenge" />
                     <label class="cursor-pointer select-none" for="publishChallenge">{{ $t('global.publishChallenge') }}</label>
                 </div>
                 <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
@@ -227,7 +227,7 @@
 </template>
 
 <script>
-import {onMounted, ref} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import GetTeams from '../../compositions/GetTeams'
 import GetInvites from '../../compositions/GetInvites'
 import AcceptInvite from '../../compositions/AcceptInvite'
@@ -270,11 +270,19 @@ export default {
         const currentMember_id = ref();
         const width = ref('250px');
 
+        const userPermissions = reactive({
+            acceptChallengeSolution: 0,
+            acceptChallengeOffer: 0,
+            publishChallenge: 0,
+        });
+
+
         const getPermissions = (team_id,member_id) => {
             axios.post('/api/teams/user/get/permissions', { team_id: team_id, member_id: member_id})
                 .then(response => {
                     if (response.data.success) {
-                        publishChallenge.value = response.data.payload.publishChallenge;
+                        // publishChallenge.value = response.data.payload.publishChallenge;
+                        userPermissions.publishChallenge.value = response.data.payload.publishChallenge;
                         publishSolution.value = response.data.payload.publishSolution;
                         acceptChallengeOffer.value = response.data.payload.acceptChallengeOffer;
                         addSolutionOffer.value = response.data.payload.addSolutionOffer;
@@ -288,7 +296,7 @@ export default {
 
         const savePermissions = (team_id,member_id) => {
             axios.post('/api/teams/user/save/permissions', { team_id: team_id, member_id: member_id,
-                publishChallenge: publishChallenge.value, publishSolution: publishSolution.value, acceptChallengeOffer: acceptChallengeOffer.value,
+                publishChallenge: userPermissions.publishChallenge.value, publishSolution: publishSolution.value, acceptChallengeOffer: acceptChallengeOffer.value,
                 addSolutionOffer: addSolutionOffer.value, acceptChallengeSolution: acceptChallengeSolution.value, addChallengeSolution: addChallengeSolution.value})
                 .then(response => {
                     if (response.data.success) {
@@ -457,6 +465,7 @@ export default {
         })
 
         return {
+            userPermissions,
             publishChallenge,
             acceptChallengeOffer,
             publishSolution,
