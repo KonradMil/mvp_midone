@@ -282,8 +282,7 @@ export default {
             axios.post('/api/teams/user/get/permissions', { team_id: team_id, member_id: member_id})
                 .then(response => {
                     if (response.data.success) {
-                        // publishChallenge.value = response.data.payload.publishChallenge;
-                        // userPermissions.publishChallenge.value = response.data.payload.publishChallenge;
+                        publishChallenge.value = response.data.payload.publishChallenge;
                         publishSolution.value = response.data.payload.publishSolution;
                         acceptChallengeOffer.value = response.data.payload.acceptChallengeOffer;
                         addSolutionOffer.value = response.data.payload.addSolutionOffer;
