@@ -29,7 +29,7 @@ class TeamsController extends Controller
         $team_user -> addSolutionOffer = $request->input('addSolutionOffer');
         $team_user -> acceptChallengeSolution = $request->input('acceptChallengeSolution');
         $team_user -> addChallengeSolution = $request->input('addChallengeSolution');
-        $team_user->save();
+//        $team_user->save();
 //        $teams = $member->teams()->where('id', '=', $team->id);
         return response()->json([
             'success' => true,
