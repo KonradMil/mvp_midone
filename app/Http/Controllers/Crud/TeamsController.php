@@ -23,9 +23,7 @@ class TeamsController extends Controller
         $team = Team::find($request->input('team_id'));
         $member = User::find($request->input('member_id'));
         $team_user = TeamUser::where('user_id', '=', $member->id)->where('team_id', '=', $team->id)->first();
-        if($request->input('publishChallenge') != NULL){
-            $team_user -> publishChallenge = $request->input('publishChallenge');
-        }
+        $team_user -> publishChallenge = $request->input('publishChallenge');
         $team_user -> publishSolution = $request->input('publishSolution');
         $team_user -> acceptChallengeOffer = $request->input('acceptChallengeOffer');
         $team_user -> addSolutionOffer = $request->input('addSolutionOffer');
