@@ -273,7 +273,7 @@ export default {
         const userPermissions = reactive({
             acceptChallengeSolution: 0,
             acceptChallengeOffer: 0,
-            publishChallenge: 0,
+            publishChallenge: false,
         });
 
 
