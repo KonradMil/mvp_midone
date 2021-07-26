@@ -66,7 +66,6 @@ class UserController extends Controller
                         foreach($challenges as $challenge){
                             $teamChallenge = TeamUser::where('team_id', '=', $team->id)->first();
                             if($teamChallenge != NULL){
-                                if($publishChallenges->whereNotIn('id'))
                                 if($teamChallenge->publishChallenge === 1){
                                     if(!(in_array($challenge->id, $publishChallenges))){
                                         $publishChallenges[] = $challenge->id;
