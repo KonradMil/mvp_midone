@@ -83,8 +83,23 @@ class TeamsController extends Controller
     {
         $input = $request->input();
 //        dd(Auth::user()->ownedTeams);
+        $who = $request->input('who');
+        $array = [];
+        if($who === 'solution'){
+            $solution = Solution::find($request->input('id'));
+            $teams = $solution->teams;
+            foreach($teams as $team){
+                $array[] = $team->id;
+            }
+        }else if($who === 'challenge'){
+            $challenge = Challenge::find($request->input('id'));
+            $teams = $challenge->teams;
+            foreach($teams as $team){
+                $array[] = $team->id;
+            }
+        }
         if (!empty($input->search)) {
-            $query = Auth::user()->teams()->where('name', 'LIKE', '%' . $input->search . '%')->with('users', 'users.companies')->get();
+            $query = Auth::user()->teams()->where('name', 'LIKE', '%' . $input->search . '%')->whereNotIn('id', $array)->with('users', 'users.companies')->get();
 //            $queryForeign = Auth::user()->ownedTeams->where('name', 'LIKE', '%' . $input->search . '%')->get();
         } else {
             $query = Auth::user()->teams()->with('users', 'users.companies')->get();
@@ -97,7 +112,7 @@ class TeamsController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
-            'payload' => $query
+            'payload' => $query, $array
         ]);
     }
 
