@@ -168,7 +168,8 @@
                         id="publishChallenge"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        v-model="userPermissions.publishChallenge" />
+                        value="publishChallenge"
+                        v-model="publishChallenge"/>
                     <label class="cursor-pointer select-none" for="publishChallenge">{{ $t('global.publishChallenge') }}</label>
                 </div>
                 <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
@@ -270,11 +271,11 @@ export default {
         const currentMember_id = ref();
         const width = ref('250px');
 
-        const userPermissions = reactive({
-            acceptChallengeSolution: 0,
-            acceptChallengeOffer: 0,
-            publishChallenge: false,
-        });
+        // const userPermissions = reactive({
+        //     acceptChallengeSolution: 0,
+        //     acceptChallengeOffer: 0,
+        //     publishChallenge: false,
+        // });
 
 
         const getPermissions = (team_id,member_id) => {
@@ -282,7 +283,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         // publishChallenge.value = response.data.payload.publishChallenge;
-                        userPermissions.publishChallenge.value = response.data.payload.publishChallenge;
+                        // userPermissions.publishChallenge.value = response.data.payload.publishChallenge;
                         publishSolution.value = response.data.payload.publishSolution;
                         acceptChallengeOffer.value = response.data.payload.acceptChallengeOffer;
                         addSolutionOffer.value = response.data.payload.addSolutionOffer;
@@ -296,7 +297,7 @@ export default {
 
         const savePermissions = (team_id,member_id) => {
             axios.post('/api/teams/user/save/permissions', { team_id: team_id, member_id: member_id,
-                publishChallenge: userPermissions.publishChallenge.value, publishSolution: publishSolution.value, acceptChallengeOffer: acceptChallengeOffer.value,
+                publishChallenge: publishChallenge.value, publishSolution: publishSolution.value, acceptChallengeOffer: acceptChallengeOffer.value,
                 addSolutionOffer: addSolutionOffer.value, acceptChallengeSolution: acceptChallengeSolution.value, addChallengeSolution: addChallengeSolution.value})
                 .then(response => {
                     if (response.data.success) {
@@ -465,7 +466,7 @@ export default {
         })
 
         return {
-            userPermissions,
+            // userPermissions,
             publishChallenge,
             acceptChallengeOffer,
             publishSolution,
