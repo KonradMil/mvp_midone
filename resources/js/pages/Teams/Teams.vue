@@ -210,7 +210,7 @@
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         v-model="addChallengeSolution"/>
-                    <label class="cursor-pointer select-none" for="acceptChallengeSolution">{{ $t('global.addChallengeSolution') }}</label>
+                    <label class="cursor-pointer select-none" for="addChallengeSolution">{{ $t('global.addChallengeSolution') }}</label>
                 </div>
 <!--                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">-->
 <!--                    <button class="btn btn-outline-secondary py-1 px-2" @click="savePermissions(currentTeam_id,currentMember_id)">-->
@@ -296,8 +296,12 @@ export default {
 
         const savePermissions = (team_id,member_id) => {
             axios.post('/api/teams/user/save/permissions', { team_id: team_id, member_id: member_id,
-                publishChallenge: publishChallenge.value, publishSolution: publishSolution.value, acceptChallengeOffer: acceptChallengeOffer.value,
-                addSolutionOffer: addSolutionOffer.value, acceptChallengeSolution: acceptChallengeSolution.value, addChallengeSolution: addChallengeSolution.value})
+                publishChallenge: publishChallenge.value,
+                publishSolution: publishSolution.value,
+                acceptChallengeOffer: acceptChallengeOffer.value,
+                addSolutionOffer: addSolutionOffer.value,
+                acceptChallengeSolution: acceptChallengeSolution.value,
+                addChallengeSolution: addChallengeSolution.value})
                 .then(response => {
                     if (response.data.success) {
                         console.log(publishChallenge.value + '-> publishChallenge');
