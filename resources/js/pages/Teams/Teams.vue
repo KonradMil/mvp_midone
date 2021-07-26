@@ -165,11 +165,11 @@
             <div class="intro-y box w-full divide-y divide-fuchsia-300">
                 <div v-if="user.type === 'investor'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
-                        id="publishChallenge"
+                        id="publishchallenge"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         value="publishChallenge"
-                        v-model="publishChallenge"/>
+                        :value="publishChallenge"/>
                     <label class="cursor-pointer select-none" for="publishChallenge">{{ $t('global.publishChallenge') }}</label>
                 </div>
                 <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
