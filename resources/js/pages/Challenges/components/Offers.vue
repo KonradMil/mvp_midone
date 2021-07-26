@@ -1,11 +1,11 @@
 <template>
-    <div class="intro -y col-span-9 lg:col-span-9 xxl:col-span-9">
-        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+    <div class="col-span-9 lg:col-span-9 xxl:col-span-9">
+        <div class="intro -y flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
             <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.myOffers')}}</h2>
         </div>
 
         <div class="grid grid-cols-12 gap-6">
-            <div v-if="offers.list.length == 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+            <div v-if="guard === 1" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
                 {{$t('challengesMain.noSolutions')}}.
             </div>
             <!-- BEGIN: Announcement -->
