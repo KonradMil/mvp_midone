@@ -112,7 +112,7 @@ class TeamsController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
-            'payload' => $query, $array
+            'payload' => $query,
         ]);
     }
 
