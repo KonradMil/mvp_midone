@@ -169,7 +169,7 @@
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         :checked="publishChallenge"
-                        :value="publishChallenge"/>
+                        v-model="publishChallenge"/>
                     <label class="cursor-pointer select-none" for="publishChallenge">{{ $t('global.publishChallenge') }}</label>
                 </div>
                 <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
