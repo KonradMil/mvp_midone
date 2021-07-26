@@ -116,7 +116,7 @@ export default {
 
         emitter.on('deletesolution', e => {
             solutions.value.splice(e.index, 1);
-            filterMember();
+            // filterMember();
         });
 
         // watch(() => solutions.value, (first, second) => {
@@ -159,7 +159,7 @@ export default {
            if(user.type == 'investor' && props.inTeam) {
                solutions.value = props.challenge.solutions;
            } else {
-               filterMember();
+               // filterMember();
            }
             checkPermissions();
         });
