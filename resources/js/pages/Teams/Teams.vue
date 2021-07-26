@@ -169,7 +169,7 @@
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
                         value="publishChallenge"
-                        v-model="publishChallenge"/>
+                        :checked="publishChallenge"/>
                     <label class="cursor-pointer select-none" for="publishChallenge">{{ $t('global.publishChallenge') }}</label>
                 </div>
                 <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
@@ -193,7 +193,7 @@
                         id="addSolutionOffer"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        v-model="addSolutionOffer"/>
+                        :checked="addSolutionOffer"/>
                     <label class="cursor-pointer select-none" for="addSolutionOffer">{{ $t('global.addSolutionOffer') }}</label>
                 </div>
                 <div v-if="user.type === 'investor'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5 pt-2">
@@ -201,7 +201,7 @@
                         id="acceptChallengeSolution"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        v-model="acceptChallengeSolution"/>
+                        :checked="acceptChallengeSolution"/>
                     <label class="cursor-pointer select-none" for="acceptChallengeSolution">{{ $t('global.acceptChallengeSolution') }}</label>
                 </div>
                 <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5 pt-2">
@@ -209,7 +209,7 @@
                         id="addChallengeSolution"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        v-model="addChallengeSolution"/>
+                        :checked="addChallengeSolution"/>
                     <label class="cursor-pointer select-none" for="addChallengeSolution">{{ $t('global.addChallengeSolution') }}</label>
                 </div>
 <!--                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">-->
