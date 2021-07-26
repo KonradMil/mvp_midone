@@ -305,8 +305,8 @@ export default {
             switch (e.val) {
                 case 'animation_mode':
                     handleUnityActionOutgoing({action: "animationMode", data: ''});
-                    // currentRadialMenu.value = radialMenuAnimation.value;
-                    // mode.value = 'animation';
+                    currentRadialMenu.value = radialMenuAnimation.value;
+                    mode.value = 'animation';
                     break;
                 case 'edit_mode':
                     handleUnityActionOutgoing({action: "editMode", data: ''});
