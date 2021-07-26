@@ -5,9 +5,6 @@
         </div>
 
         <div class="grid grid-cols-12 gap-6">
-            <div v-if="guard === 1" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
-                {{$t('challengesMain.noSolutions')}}.
-            </div>
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-6 xxl:col-span-6" v-for="(offer, index) in offers.list" :key="index">
 
