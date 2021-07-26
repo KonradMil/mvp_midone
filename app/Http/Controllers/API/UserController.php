@@ -66,14 +66,21 @@ class UserController extends Controller
                         foreach($challenges as $challenge){
                             $teamChallenge = TeamUser::where('team_id', '=', $team->id)->first();
                             if($teamChallenge != NULL){
+                                if($publishChallenges->whereNotIn('id'))
                                 if($teamChallenge->publishChallenge === 1){
-                                $publishChallenges[] = $challenge->id;
+                                    if(!(in_array($challenge->id, $publishChallenges))){
+                                        $publishChallenges[] = $challenge->id;
+                                    }
                                }
                                 if($teamChallenge->acceptChallengeOffer === 1){
-                                $acceptChallengeOffers[] = $challenge->id;
+                                    if(!(in_array($challenge->id, $acceptChallengeOffers))){
+                                        $acceptChallengeOffers[] = $challenge->id;
+                                    }
                                }
                                 if($teamChallenge->acceptChallengeSolution === 1){
-                                $acceptChallengeSolutions[] = $challenge->id;
+                                    if(!(in_array($challenge->id, $acceptChallengeSolutions))){
+                                        $acceptChallengeSolutions[] = $challenge->id;
+                                    }
                                 }
                         }
                     }
@@ -84,7 +91,9 @@ class UserController extends Controller
                         foreach($solutions as $solution){
                             if($user->id != $solution->author_id){
                                 if($teamSolution->publishSolution === 1){
-                                    $publishSolution[] = $solution->id;
+                                    if(!(in_array($solution->id, $publishSolution))){
+                                        $publishSolution[] = $solution->id;
+                                    }
                                 }
                                 if($teamSolution->addSolutionOffer === 1){
                                     $addSolutionOffer[] = $solution->id;
