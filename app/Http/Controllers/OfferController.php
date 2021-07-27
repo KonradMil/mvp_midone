@@ -352,11 +352,14 @@ class OfferController extends Controller
             $check->save();
             $solution = Solution::find($check->solution_id);
 
-            foreach($solution->teams as $team){
-                foreach($team->users as $member){
-                    $member->offers()->attach($check);
+            if($solution->teams != NULL){
+                foreach($solution->teams as $team){
+                    foreach($team->users as $member){
+                        $member->offers()->attach($check);
+                    }
                 }
             }
+
 
             event(new OfferAdded($check, $check->installer, 'Dodałeś nową ofertę do rozwiązania: ' . $solution ->name, []));
 
