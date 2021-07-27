@@ -252,7 +252,13 @@ class OfferController extends Controller
     {
         $id = $request->input('id');
         $challenge = Challenge::find($id);
-        $offers = Offer::where('installer_id', '=', Auth::user()->id)->where('challenge_id', '=', $challenge->id)->with('solution')->get();
+        $user = User::find(Auth::user()->id);
+
+        foreach($user->teams as $team){
+            foreach($team->users as $member){
+                $offers = Offer::where('installer_id', '=', $member->id)->where('challenge_id', '=', $challenge->id)->with('solution')->get();
+            }
+        }
 
         return response()->json([
             'success' => true,
