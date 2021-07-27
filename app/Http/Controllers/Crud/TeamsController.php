@@ -24,9 +24,8 @@ class TeamsController extends Controller
         $member = User::find($request->input('member_id'));
         $team_user = TeamUser::where('user_id', '=', $member->id)->where('team_id', '=', $team->id)->first();
 
-        $publishChallenge = $member->teams()->where('id', '=', $team->id)->pivot->publishChallenge;
- /*       if($team_user != NULL){
-            $team_user -> publishChallenge = $request->input('publishChallenge');
+       if($team_user != NULL){
+//            $team_user -> publishChallenge = $request->input('publishChallenge');
             $team_user -> publishChallenge = 0;
             $team_user -> publishSolution = $request->input('publishSolution');
             $team_user -> acceptChallengeOffer = $request->input('acceptChallengeOffer');
@@ -34,13 +33,13 @@ class TeamsController extends Controller
             $team_user -> acceptChallengeSolution = $request->input('acceptChallengeSolution');
             $team_user -> addChallengeSolution = $request->input('addChallengeSolution');
             $team_user->save();
-        }*/
+        }
 
 //        $teams = $member->teams()->where('id', '=', $team->id);
         return response()->json([
             'success' => true,
             'message' => 'Zapisano uprawnienia!',
-            'payload' => $publishChallenge
+            'payload' => $team_user
         ]);
     }
     public function getMemberPermission(Request $request)
