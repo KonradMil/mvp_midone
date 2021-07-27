@@ -39,7 +39,8 @@ class UserController extends Controller
         $acceptChallengeOffers = [];
         $publishSolution = [];
         $addSolutionOffer = [];
-        $addChallengeSolution = [];
+        $canEditSolution = [];
+        $canDeleteSolution = [];
 
         $challenges = Challenge::where('author_id', '=', $model->id)->get();
         if($challenges != NULL) {
@@ -56,7 +57,8 @@ class UserController extends Controller
             foreach ($solutions as $solution) {
                 $publishSolution[] = $solution->id;
                 $addSolutionOffer[] = $solution->id;
-                $addChallengeSolution[] = $solution->id;
+                $canEditSolution[] = $solution->id;
+                $canDeleteSolution[] = $solution->id;
             }
         }
 
@@ -109,9 +111,14 @@ class UserController extends Controller
                                         $addSolutionOffer[] = $solution->id;
                                     }
                                 }
-                                if($team_user -> pivot -> addChallengeSolution === 1){
-                                    if(!(in_array($solution->id, $addChallengeSolution))){
-                                        $addChallengeSolution[] = $solution->id;
+                                if($team_user -> pivot -> canEditSolution === 1){
+                                    if(!(in_array($solution->id, $canEditSolution))){
+                                        $canEditSolution[] = $solution->id;
+                                    }
+                                }
+                                if($team_user -> pivot -> canDeleteSolution === 1){
+                                    if(!(in_array($solution->id, $canDeleteSolution))){
+                                        $canDeleteSolution[] = $solution->id;
                                     }
                                 }
                             }
@@ -121,7 +128,7 @@ class UserController extends Controller
             }
         }
 
-        return ['publishChallenges' => $publishChallenges,'editChallenges' => $editChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffer' => $addSolutionOffer, 'addChallengeSolution' => $addChallengeSolution, 'teams' => $user->teams,'solutions' => $solutions];
+        return ['publishChallenges' => $publishChallenges,'editChallenges' => $editChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffer' => $addSolutionOffer, 'canDeleteSolution' => $canDeleteSolution,'canEditSolution' => $canEditSolution, 'teams' => $user->teams,'solutions' => $solutions];
     }
 
     public function reset(Request $request)
