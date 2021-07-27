@@ -219,12 +219,21 @@
                 </div>
                 <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5 pt-2">
                     <input
-                        id="addChallengeSolution"
+                        id="canEditSolution"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        :checked="addChallengeSolution"
-                        v-model="addChallengeSolution"/>
-                    <label class="cursor-pointer select-none" for="addChallengeSolution">{{ $t('global.addChallengeSolution') }}</label>
+                        :checked="canEditSolution"
+                        v-model="canEditSolution"/>
+                    <label class="cursor-pointer select-none" for="canEditSolution">{{ $t('global.canEditSolution') }}</label>
+                </div>
+                <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5 pt-2">
+                    <input
+                        id="canDeleteSolution"
+                        type="checkbox"
+                        class="form-check-input border mr-2 ring-0"
+                        :checked="canDeleteSolution"
+                        v-model="canDeleteSolution"/>
+                    <label class="cursor-pointer select-none" for="canDeleteSolution">{{ $t('global.canDeleteSolution') }}</label>
                 </div>
                 <div class="flex flex-col lg:flex-row items-center p-5" style="justify-content: center;">
                 <button class="btn btn-outline-secondary py-1 px-2" @click="savePermissions(currentTeam_id,currentMember_id)">
@@ -273,8 +282,9 @@ export default {
         const editChallenge = ref(false);
         const acceptChallengeOffer = ref(false);
         const publishSolution = ref(false);
+        const canEditSolution = ref(false);
+        const canDeleteSolution = ref(false);
         const addSolutionOffer = ref(false);
-        const addChallengeSolution = ref(false);
         const acceptChallengeSolution = ref(false);
         const showMemberPermission = ref(false);
         const currentTeam_id = ref();
@@ -295,10 +305,11 @@ export default {
                         publishChallenge.value = response.data.payload.publishChallenge;
                         editChallenge.value = response.data.payload.editChallenge;
                         publishSolution.value = response.data.payload.publishSolution;
+                        canEditSolution.value = response.data.payload.canEditSolution;
+                        canDeleteSolution.value = response.data.payload.canDeleteSolution;
                         acceptChallengeOffer.value = response.data.payload.acceptChallengeOffer;
                         addSolutionOffer.value = response.data.payload.addSolutionOffer;
                         acceptChallengeSolution.value = response.data.payload.acceptChallengeSolution;
-                        addChallengeSolution.value = response.data.payload.addChallengeSolution;
                     }else{
                         console.log('error');
                     }
@@ -310,10 +321,11 @@ export default {
                 publishChallenge: publishChallenge.value,
                 editChallenge: editChallenge.value,
                 publishSolution: publishSolution.value,
+                canEditSolution: canEditSolution.value,
+                canDeleteSolution: canDeleteSolution.value,
                 acceptChallengeOffer: acceptChallengeOffer.value,
                 addSolutionOffer: addSolutionOffer.value,
-                acceptChallengeSolution: acceptChallengeSolution.value,
-                addChallengeSolution: addChallengeSolution.value})
+                acceptChallengeSolution: acceptChallengeSolution.value})
                 .then(response => {
                     if (response.data.success) {
                         console.log(publishChallenge.value + '-> publishChallenge');
@@ -485,9 +497,10 @@ export default {
             publishChallenge,
             acceptChallengeOffer,
             publishSolution,
+            canEditSolution,
+            canDeleteSolution,
             addSolutionOffer,
             acceptChallengeSolution,
-            addChallengeSolution,
             user,
             teams,
             addTeam,

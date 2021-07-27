@@ -34,6 +34,8 @@ class TeamsController extends Controller
             $team_user -> pivot -> publishChallenge = $request->input('publishChallenge');
             $team_user -> pivot -> editChallenge = $request->input('editChallenge');
             $team_user -> pivot -> publishSolution = $request->input('publishSolution');
+            $team_user -> pivot -> canEditSolution = $request->input('canEditSolution');
+            $team_user -> pivot -> canDeleteSolution = $request->input('canDeleteSolution');
             $team_user -> pivot -> acceptChallengeOffer = $request->input('acceptChallengeOffer');
             $team_user -> pivot -> addSolutionOffer = $request->input('addSolutionOffer');
             $team_user -> pivot -> acceptChallengeSolution = $request->input('acceptChallengeSolution');
@@ -67,7 +69,7 @@ class TeamsController extends Controller
         $team-> owner_id = Auth::user()->id;
         $team-> name = $name;
         $team->save();
-        Auth::user()->teams()->attach($team, ['owner'=> false, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true]);
+        Auth::user()->teams()->attach($team, ['owner'=> false, 'publishChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false, 'canEditSolution' => false,'canDeleteSolution' => false, 'addSolutionOffer' => false]);
         $who = $request -> input('who');
         $id = $request -> input('id');
         if($who == 'challenge')
@@ -136,7 +138,7 @@ class TeamsController extends Controller
         $team->name = $name;
         $team->save();
 
-        Auth::user()->teams()->attach($team, ['owner'=> true, 'publishChallenge' => true,'editChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true, 'addChallengeSolution' => true]);
+        Auth::user()->teams()->attach($team, ['owner'=> true, 'publishChallenge' => false,'editChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false,'canEditSolution' => false,'canDeleteSolution' => false, 'addSolutionOffer' => false]);
         $t = Team::where('id', '=', $team->id)->with('users', 'users.companies')->first();
 //        dd($team);
 
@@ -208,7 +210,7 @@ class TeamsController extends Controller
         $team_id = $request->input('team_id');
         $user_id = $request->input('user_id');
         $user = User::find($user_id);
-        $user->attachTeam($team_id, ['owner'=> true, 'publishChallenge' => true,'editChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true, 'addChallengeSolution' => true]);
+        $user->attachTeam($team_id, ['owner'=> false, 'publishChallenge' => false,'editChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false, 'addSolutionOffer' => false, 'canEditSolution' => false,'canDeleteSolution' => false,]);
 
         return response()->json([
             'success' => true,
@@ -266,7 +268,7 @@ class TeamsController extends Controller
         $team = Team::find($invite->team_id);
 //        $user = User::find($invite->user_id);
         $user = User::where('email', '=', $invite->email)->first();
-        $user->teams()->attach($team, ['owner'=> false, 'publishChallenge' => true, 'editChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true, 'addChallengeSolution' => true]);
+        $user->teams()->attach($team, ['owner'=> fTalse, 'publishChallenge' => false, 'editChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false, 'addSolutionOffer' => false,'canEditSolution' => false,'canDeleteSolution' => false,]);
         $team = Team::find($invite->team_id);
           $invite->delete();
 //        $team = $invite->team;
