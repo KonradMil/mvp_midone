@@ -121,6 +121,10 @@ export default {
             // filterMember();
         });
 
+        const changeAddSolutionOffer = async(addSolutionOffer) => {
+            emitter.emit('updateAddSolutionOffer', {addSolutionOffer: addSolutionOffer});
+        }
+
         // watch(() => solutions.value, (first, second) => {
         // }, {})
 
@@ -147,8 +151,12 @@ export default {
                 props.challenge.solutions.forEach(function (solution){
                     let id = solution.id;
                    if(id === permission){
-                           addSolutionOffer.value = true;
-                       }
+                          if(addSolutionOffer.value === false){
+                              addSolutionOffer.value = true;
+                              changeAddSolutionOffer(addSolutionOffer);
+                          }
+
+                   }
                 });
             });
             permissions.value.publishChallenges.forEach(function (permission) {

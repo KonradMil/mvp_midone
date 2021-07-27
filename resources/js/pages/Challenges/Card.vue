@@ -215,6 +215,10 @@ export default defineComponent({
             activeTab.value = 'all-offers';
         });
 
+        emitter.on('updateAddSolutionOffer', e => {
+            addSolutionOffer.value = e.addSolutionOffer;
+        });
+
         const filter = () => {
             console.log(challenge.value.solutions + '->  solutions.value');
             challenge.value.solutions.forEach(function (solution) {
