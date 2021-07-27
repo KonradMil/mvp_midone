@@ -26,19 +26,19 @@ class TeamsController extends Controller
 
         $team_user = $member->teams()->where(['team_id'=>$team->id,'user_id'=>$member->id])->first(); //get the first record
 
-        $team_user->pivot->publishChallenge = 0; //change your col to a new value
+//        $team_user->pivot->publishChallenge = 0;
 
-        $team_user->pivot->save(); //save
+//        $team_user->pivot->save();
 
-//       if($team_user != NULL){
-//            $team_user -> publishChallenge = $request->input('publishChallenge');
-//            $team_user -> publishSolution = $request->input('publishSolution');
-//            $team_user -> acceptChallengeOffer = $request->input('acceptChallengeOffer');
-//            $team_user -> addSolutionOffer = $request->input('addSolutionOffer');
-//            $team_user -> acceptChallengeSolution = $request->input('acceptChallengeSolution');
-//            $team_user -> addChallengeSolution = $request->input('addChallengeSolution');
-//            $team_user->save();
-//        }
+       if($team_user != NULL){
+            $team_user -> pivot -> publishChallenge = $request->input('publishChallenge');
+            $team_user -> pivot -> publishSolution = $request->input('publishSolution');
+            $team_user -> pivot -> acceptChallengeOffer = $request->input('acceptChallengeOffer');
+            $team_user -> pivot -> addSolutionOffer = $request->input('addSolutionOffer');
+            $team_user -> pivot -> acceptChallengeSolution = $request->input('acceptChallengeSolution');
+            $team_user -> pivot -> addChallengeSolution = $request->input('addChallengeSolution');
+            $team_user -> pivot ->save();
+        }
 
 //        $teams = $member->teams()->where('id', '=', $team->id);
         return response()->json([
