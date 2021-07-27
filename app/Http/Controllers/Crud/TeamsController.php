@@ -32,6 +32,7 @@ class TeamsController extends Controller
 
        if($team_user != NULL){
             $team_user -> pivot -> publishChallenge = $request->input('publishChallenge');
+            $team_user -> pivot -> editChallenge = $request->input('editChallenge');
             $team_user -> pivot -> publishSolution = $request->input('publishSolution');
             $team_user -> pivot -> acceptChallengeOffer = $request->input('acceptChallengeOffer');
             $team_user -> pivot -> addSolutionOffer = $request->input('addSolutionOffer');
@@ -135,7 +136,7 @@ class TeamsController extends Controller
         $team->name = $name;
         $team->save();
 
-        Auth::user()->teams()->attach($team, ['owner'=> true, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true, 'addChallengeSolution' => true]);
+        Auth::user()->teams()->attach($team, ['owner'=> true, 'publishChallenge' => true,'editChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true, 'addChallengeSolution' => true]);
         $t = Team::where('id', '=', $team->id)->with('users', 'users.companies')->first();
 //        dd($team);
 
@@ -207,7 +208,7 @@ class TeamsController extends Controller
         $team_id = $request->input('team_id');
         $user_id = $request->input('user_id');
         $user = User::find($user_id);
-        $user->attachTeam($team_id, ['owner'=> true, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true, 'addChallengeSolution' => true]);
+        $user->attachTeam($team_id, ['owner'=> true, 'publishChallenge' => true,'editChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true, 'addChallengeSolution' => true]);
 
         return response()->json([
             'success' => true,
@@ -265,7 +266,7 @@ class TeamsController extends Controller
         $team = Team::find($invite->team_id);
 //        $user = User::find($invite->user_id);
         $user = User::where('email', '=', $invite->email)->first();
-        $user->teams()->attach($team, ['owner'=> false, 'publishChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true, 'addChallengeSolution' => true]);
+        $user->teams()->attach($team, ['owner'=> false, 'publishChallenge' => true, 'editChallenge' => true, 'acceptChallengeSolution' => true, 'acceptChallengeOffer' => true, 'publishSolution' => true, 'addSolutionOffer' => true, 'addChallengeSolution' => true]);
         $team = Team::find($invite->team_id);
           $invite->delete();
 //        $team = $invite->team;

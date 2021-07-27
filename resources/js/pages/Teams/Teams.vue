@@ -172,14 +172,14 @@
                         v-model="publishChallenge"/>
                     <label class="cursor-pointer select-none" for="publishChallenge">{{ $t('global.publishChallenge') }}</label>
                 </div>
-                <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
+                <div v-if="user.type === 'investor'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                     <input
-                        id="publishSolution"
+                        id="editchallenge"
                         type="checkbox"
                         class="form-check-input border mr-2 ring-0"
-                        :checked="publishSolution"
-                        v-model="publishSolution"/>
-                    <label class="cursor-pointer select-none" for="publishSolution">{{ $t('global.publishSolution') }}</label>
+                        :checked="editChallenge"
+                        v-model="editChallenge"/>
+                    <label class="cursor-pointer select-none" for="editChallenge">{{ $t('global.editChallenge') }}</label>
                 </div>
                 <div v-if="user.type === 'investor'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pt-2">
                     <input
@@ -190,15 +190,6 @@
                         v-model="acceptChallengeOffer"/>
                     <label class="cursor-pointer select-none" for="acceptChallengeOffer">{{ $t('global.acceptChallengeOffer') }}</label>
                 </div>
-                <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pt-2">
-                    <input
-                        id="addSolutionOffer"
-                        type="checkbox"
-                        class="form-check-input border mr-2 ring-0"
-                        :checked="addSolutionOffer"
-                        v-model="addSolutionOffer"/>
-                    <label class="cursor-pointer select-none" for="addSolutionOffer">{{ $t('global.addSolutionOffer') }}</label>
-                </div>
                 <div v-if="user.type === 'investor'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5 pt-2">
                     <input
                         id="acceptChallengeSolution"
@@ -207,6 +198,24 @@
                         :checked="acceptChallengeSolution"
                         v-model="acceptChallengeSolution"/>
                     <label class="cursor-pointer select-none" for="acceptChallengeSolution">{{ $t('global.acceptChallengeSolution') }}</label>
+                </div>
+                <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
+                    <input
+                        id="publishSolution"
+                        type="checkbox"
+                        class="form-check-input border mr-2 ring-0"
+                        :checked="publishSolution"
+                        v-model="publishSolution"/>
+                    <label class="cursor-pointer select-none" for="publishSolution">{{ $t('global.publishSolution') }}</label>
+                </div>
+                <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pt-2">
+                    <input
+                        id="addSolutionOffer"
+                        type="checkbox"
+                        class="form-check-input border mr-2 ring-0"
+                        :checked="addSolutionOffer"
+                        v-model="addSolutionOffer"/>
+                    <label class="cursor-pointer select-none" for="addSolutionOffer">{{ $t('global.addSolutionOffer') }}</label>
                 </div>
                 <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5 pt-2">
                     <input
@@ -217,14 +226,9 @@
                         v-model="addChallengeSolution"/>
                     <label class="cursor-pointer select-none" for="addChallengeSolution">{{ $t('global.addChallengeSolution') }}</label>
                 </div>
-<!--                <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">-->
-<!--                    <button class="btn btn-outline-secondary py-1 px-2" @click="savePermissions(currentTeam_id,currentMember_id)">-->
-<!--                        Zapisz-->
-<!--                    </button>-->
-<!--                </div>-->
                 <div class="flex flex-col lg:flex-row items-center p-5" style="justify-content: center;">
                 <button class="btn btn-outline-secondary py-1 px-2" @click="savePermissions(currentTeam_id,currentMember_id)">
-                    Zapisz
+                    {{ $t('global.save') }}
                 </button>
                     </div>
             </div>
@@ -266,6 +270,7 @@ export default {
         const show = ref(false);
         const temporary_team_id = ref(null);
         const publishChallenge = ref(false);
+        const editChallenge = ref(false);
         const acceptChallengeOffer = ref(false);
         const publishSolution = ref(false);
         const addSolutionOffer = ref(false);
@@ -288,6 +293,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         publishChallenge.value = response.data.payload.publishChallenge;
+                        editChallenge.value = response.data.payload.editChallenge;
                         publishSolution.value = response.data.payload.publishSolution;
                         acceptChallengeOffer.value = response.data.payload.acceptChallengeOffer;
                         addSolutionOffer.value = response.data.payload.addSolutionOffer;
@@ -302,6 +308,7 @@ export default {
         const savePermissions = (team_id,member_id) => {
             axios.post('/api/teams/user/save/permissions', { team_id: team_id, member_id: member_id,
                 publishChallenge: publishChallenge.value,
+                editChallenge: editChallenge.value,
                 publishSolution: publishSolution.value,
                 acceptChallengeOffer: acceptChallengeOffer.value,
                 addSolutionOffer: addSolutionOffer.value,
@@ -474,7 +481,7 @@ export default {
         })
 
         return {
-            // userPermissions,
+            editChallenge,
             publishChallenge,
             acceptChallengeOffer,
             publishSolution,

@@ -12,6 +12,7 @@ class TeamUser extends Pivot
 
     protected $fillable = [
         'publishChallenge',
+        'editChallenge',
         'owner',
         'acceptChallengeSolution',
         'acceptChallengeOffer',
