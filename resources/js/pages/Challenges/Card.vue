@@ -284,6 +284,7 @@ export default defineComponent({
                         challenge.value = response.data.payload;
                         checkTeam();
                         filter();
+                        checkPermissions();
                     } else {
                         // toast.error(response.data.message);
                     }
