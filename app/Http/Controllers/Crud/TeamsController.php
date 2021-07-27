@@ -267,7 +267,7 @@ class TeamsController extends Controller
         $team = Team::find($invite->team_id);
 //        $user = User::find($invite->user_id);
         $user = User::where('email', '=', $invite->email)->first();
-        $user->teams()->attach($team, ['owner'=> fTalse, 'publishChallenge' => false, 'editChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false, 'addSolutionOffer' => false,'canEditSolution' => false,'canDeleteSolution' => false,]);
+        $user->teams()->attach($team, ['owner'=> false, 'publishChallenge' => false, 'editChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false, 'addSolutionOffer' => false,'canEditSolution' => false,'canDeleteSolution' => false,]);
         $team = Team::find($invite->team_id);
           $invite->delete();
 //        $team = $invite->team;
