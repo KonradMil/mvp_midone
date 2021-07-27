@@ -186,6 +186,7 @@ export default defineComponent({
         const addChallengeSolution = ref(false);
         const acceptChallengeSolutions = ref(false);
         const publishChallenges = ref(false);
+        const editChallenges = ref(false);
         const publishSolution = ref(false);
         const addSolutionOffer = ref(false);
 
@@ -393,6 +394,11 @@ export default defineComponent({
                     publishChallenges.value = true;
                 }
             });
+            permissions.value.editChallenges.forEach(function (permission) {
+                if(permission == props.id){
+                    editChallenges.value = true;
+                }
+            });
             permissions.value.addSolutionOffer.forEach(function (permission) {
                 console.log(addSolutionOffer.value + '->before addSolutionOffer.value')
                 if(permission == props.id){
@@ -407,6 +413,7 @@ export default defineComponent({
             });
         }
         return {
+            editChallenges,
             addSolutionOffer,
             publishSolution,
             publishChallenges,
