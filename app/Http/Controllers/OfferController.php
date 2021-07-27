@@ -258,7 +258,9 @@ class OfferController extends Controller
             foreach($team->users as $member){
                 $offers = Offer::where('installer_id', '=', $member->id)->where('challenge_id', '=', $challenge->id)->with('solution')->get();
                foreach($offers as $offer){
-                   $array[]= $offer->id;
+                   if(!(in_array($offer->id, $array))){
+                       $array[]= $offer->id;
+                   }
                }
             }
         }
