@@ -39,7 +39,6 @@ class TeamsController extends Controller
             $team_user -> pivot -> acceptChallengeOffer = $request->input('acceptChallengeOffer');
             $team_user -> pivot -> addSolutionOffer = $request->input('addSolutionOffer');
             $team_user -> pivot -> acceptChallengeSolution = $request->input('acceptChallengeSolution');
-            $team_user -> pivot -> addChallengeSolution = $request->input('addChallengeSolution');
             $team_user -> pivot ->save();
         }
 

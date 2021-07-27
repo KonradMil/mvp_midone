@@ -217,7 +217,7 @@
                         v-model="addSolutionOffer"/>
                     <label class="cursor-pointer select-none" for="addSolutionOffer">{{ $t('global.addSolutionOffer') }}</label>
                 </div>
-                <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5 pt-2">
+                <div v-if="user.type === 'integrator'" class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pt-2">
                     <input
                         id="canEditSolution"
                         type="checkbox"
