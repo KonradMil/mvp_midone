@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="inTeam">
-                        <button type="button" class="btn btn-primary py-1 px-2" v-if="challenge.solutions.length == 0" @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
+                        <button type="button" class="btn btn-primary py-1 px-2" v-if="challenge.solutions.length == 0 && editChallenges" @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
                             {{$t('models.edit')}}
                         </button>
                         <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge, publishChallenges: publishChallenges}})">
