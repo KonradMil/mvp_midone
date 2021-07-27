@@ -12,6 +12,7 @@ use App\Models\Offer;
 use App\Models\Post;
 use App\Models\Solutions\Solution;
 use App\Models\UnityModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Mrcnpdlk\Lib\Exception;
@@ -350,6 +351,12 @@ class OfferController extends Controller
             $check->offer_expires_in = $request->offer_expires_in;
             $check->save();
             $solution = Solution::find($check->solution_id);
+
+            foreach($solution->teams as $team){
+                foreach($team->users as $member){
+                    $member->offers()->attach($check);
+                }
+            }
 
             event(new OfferAdded($check, $check->installer, 'Dodałeś nową ofertę do rozwiązania: ' . $solution ->name, []));
 
