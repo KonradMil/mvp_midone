@@ -65,7 +65,7 @@ class UserController extends Controller
                 $solutions  = $team->solutions;
                         foreach($challenges as $challenge){
 //                            $teamChallenge = TeamUser::where('team_id', '=', $team->id)->first();
-                            $team_user = $user->teams()->where(['team_id'=>$team->id,'user_id'=>$member->id])->first();
+                            $team_user = $user->teams()->where(['team_id'=>$team->id,'user_id'=>$user->id])->first();
                             if($team_user != NULL){
                                 if($team_user -> pivot ->publishChallenge === 1){
                                     if(!(in_array($challenge->id, $publishChallenges))){
