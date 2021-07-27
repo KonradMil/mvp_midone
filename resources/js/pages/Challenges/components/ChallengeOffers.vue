@@ -54,7 +54,7 @@
                 :options="filters['options']"
             />
         </div>
-        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5 pb-10">
             <label for="input-wizard-5" class="form-label font-medium dark:text-theme-10 text-theme-1">Dostawca głównej technologii</label>
             <Multiselect
                 class="form-control"
