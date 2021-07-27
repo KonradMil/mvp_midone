@@ -384,11 +384,6 @@ export default defineComponent({
                     acceptChallengeSolutions.value = true;
                 }
             });
-            permissions.value.addChallengeSolution.forEach(function (permission) {
-                if(permission == props.id){
-                    addChallengeSolution.value = true;
-                }
-            });
             permissions.value.publishChallenges.forEach(function (permission) {
                 if(permission == props.id){
                     publishChallenges.value = true;
