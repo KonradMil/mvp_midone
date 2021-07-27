@@ -62,7 +62,7 @@
 <!--                        </div>-->
                         <div v-for="(solution, index) in solutionsInTeam" :key="index" v-if="challenge.stage > 0" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected) ? 'solution-selected' : ''">
                                 <span v-if="user.type === 'integrator'">
-                                    <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id" :canEditSolution="canEditSolution" :addSolutionOffer="addSolutionOffer"></SingleSolutionPost>
+                                    <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id" :canEditSolution="canEditSolution" :addSolutionOffer="addSolutionOffer" :canDeleteSolution="canDeleteSolution"></SingleSolutionPost>
                                 </span>
                                 <span v-if="user.type === 'investor'">
                                     <SingleSolutionPost v-if="solution.status === 1" :challenge="challenge" :user="user" :solution="solution" :canAccept="(inTeam) && challenge.status == 1" :canEdit="false" :acceptChallengeSolutions="acceptChallengeSolutions"></SingleSolutionPost>
@@ -147,11 +147,8 @@ export default {
                 props.challenge.solutions.forEach(function (solution){
                     let id = solution.id;
                    if(id === permission){
-                       if(canEditSolution.value === false){
-                           canEditSolution.value = true;
                            addSolutionOffer.value = true;
                        }
-                   }
                 });
             });
             permissions.value.publishChallenges.forEach(function (permission) {
@@ -168,6 +165,22 @@ export default {
                         if(publishSolution.value === false){
                             publishSolution.value = true;
                         }
+                    }
+                });
+            });
+            permissions.value.canEditSolution.forEach(function (permission) {
+                props.challenge.solutions.forEach(function (solution){
+                    let id = solution.id;
+                    if(id === permission){
+                            canEditSolution.value = true;
+                        }
+                });
+            });
+            permissions.value.canDeleteSolution.forEach(function (permission) {
+                props.challenge.solutions.forEach(function (solution){
+                    let id = solution.id;
+                    if(id === permission){
+                        canDeleteSolution.value = true;
                     }
                 });
             });
