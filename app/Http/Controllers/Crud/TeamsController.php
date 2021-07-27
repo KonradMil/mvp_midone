@@ -25,7 +25,6 @@ class TeamsController extends Controller
         $team_user = TeamUser::where('user_id', '=', $member->id)->where('team_id', '=', $team->id)->first();
 
 
-        $team -> pivot -> publishChallenge = 0;
 
        if($team_user != NULL){
 //            $team_user -> publishChallenge = $request->input('publishChallenge');
