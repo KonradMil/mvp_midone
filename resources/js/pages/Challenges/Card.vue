@@ -270,6 +270,10 @@ export default defineComponent({
             activeTab.value = 'addingoffer';
         });
 
+        const handleCallback = () => {
+            checkPermissions();
+        };
+
         const getCardChallengeRepositories = async (id) => {
             await axios.post('/api/challenge/user/get/card', {id: id})
                 .then(response => {
@@ -282,14 +286,13 @@ export default defineComponent({
                     } else {
                         // toast.error(response.data.message);
                     }
-                })
+                }, handleCallback)
         }
 
         onMounted(function () {
             permissions.value = window.Laravel.permissions;
             console.log(props);
             getCardChallengeRepositories(props.id);
-            checkPermissions();
         })
 
 
