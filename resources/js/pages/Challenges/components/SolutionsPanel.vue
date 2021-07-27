@@ -111,8 +111,10 @@ export default {
         const filterType = ref(null);
         const technologyType = ref(null);
         const permissions = ref({});
-        const addSolutionOffer = ref({});
+        const addSolutionOffer = ref(false);
+        const publishSolution = ref(false);
         const canEditSolution= ref(false);
+        const canDeleteSolution = ref(false);
 
         emitter.on('deletesolution', e => {
             solutions.value.splice(e.index, 1);
@@ -148,6 +150,7 @@ export default {
                        solutionsInTeam.value.push(solution);
                        if(canEditSolution.value === false){
                            canEditSolution.value = true;
+                           addSolutionOffer.value = true;
                        }
                    }
                 });
@@ -158,6 +161,16 @@ export default {
                         solutionsInTeam.value = props.challenge.solutions;
                     }
                 });
+            permissions.value.publishSolution.forEach(function (permission) {
+                props.challenge.solutions.forEach(function (solution){
+                    let id = solution.id;
+                    if(id === permission){
+                        if(publishSolution.value === false){
+                            publishSolution.value = true;
+                        }
+                    }
+                });
+            });
         }
 
         onMounted(function () {
@@ -252,6 +265,8 @@ export default {
                 })
         }
         return {
+            canDeleteSolution,
+            publishSolution,
             checkPermissions,
             solutionsInTeam,
             canEditSolution,
