@@ -271,6 +271,7 @@ export default defineComponent({
         });
 
         const handleCallback = () => {
+            console.log('checkPermissions' + challenge.value.solutions);
             checkPermissions();
         };
 
@@ -402,6 +403,7 @@ export default defineComponent({
                 }
             });
             permissions.value.addSolutionOffer.forEach(function (permission) {
+                console.log('addSolutionOffer + solutions' + challenge.value.solutions);
                 challenge.value.solutions.forEach(function (solution){
                     if(permission == solution.id){
                         addSolutionOffer.value = true;
