@@ -147,7 +147,6 @@ export default {
                 props.challenge.solutions.forEach(function (solution){
                     let id = solution.id;
                    if(id === permission){
-                       solutionsInTeam.value.push(solution);
                        if(canEditSolution.value === false){
                            canEditSolution.value = true;
                            addSolutionOffer.value = true;
@@ -165,6 +164,7 @@ export default {
                 props.challenge.solutions.forEach(function (solution){
                     let id = solution.id;
                     if(id === permission){
+                        solutionsInTeam.value.push(solution);
                         if(publishSolution.value === false){
                             publishSolution.value = true;
                         }
