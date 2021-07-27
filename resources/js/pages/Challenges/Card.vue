@@ -399,11 +399,11 @@ export default defineComponent({
                 }
             });
             permissions.value.addSolutionOffer.forEach(function (permission) {
-                console.log(addSolutionOffer.value + '->before addSolutionOffer.value')
-                if(permission == props.id){
-                    addSolutionOffer.value = true;
-                    console.log(addSolutionOffer.value + '->after addSolutionOffer.value')
-                }
+                challenge.value.solutions.forEach(function (solution){
+                    if(permission == solution.id){
+                        addSolutionOffer.value = true;
+                    }
+                });
             });
             permissions.value.publishSolution.forEach(function (permission) {
                 if(permission == props.id){
