@@ -64,19 +64,20 @@ class UserController extends Controller
                 $challenges = $team->challenges;
                 $solutions  = $team->solutions;
                         foreach($challenges as $challenge){
-                            $teamChallenge = TeamUser::where('team_id', '=', $team->id)->first();
-                            if($teamChallenge != NULL){
-                                if($teamChallenge->publishChallenge === 1){
+//                            $teamChallenge = TeamUser::where('team_id', '=', $team->id)->first();
+                            $team_user = $user->teams()->where(['team_id'=>$team->id,'user_id'=>$member->id])->first();
+                            if($team_user != NULL){
+                                if($team_user -> pivot ->publishChallenge === 1){
                                     if(!(in_array($challenge->id, $publishChallenges))){
                                         $publishChallenges[] = $challenge->id;
                                     }
                                }
-                                if($teamChallenge->acceptChallengeOffer === 1){
+                                if($team_user -> pivot ->acceptChallengeOffer === 1){
                                     if(!(in_array($challenge->id, $acceptChallengeOffers))){
                                         $acceptChallengeOffers[] = $challenge->id;
                                     }
                                }
-                                if($teamChallenge->acceptChallengeSolution === 1){
+                                if($team_user -> pivot ->acceptChallengeSolution === 1){
                                     if(!(in_array($challenge->id, $acceptChallengeSolutions))){
                                         $acceptChallengeSolutions[] = $challenge->id;
                                     }
