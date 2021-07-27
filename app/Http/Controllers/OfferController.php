@@ -154,7 +154,7 @@ class OfferController extends Controller
         }else if($option === 'Okres zwrotu inwestycji'){
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('financial_analyses as fa', 'fa.solution_id', '=', 'so.id')->orderBy('fa.simple_payback', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
         }else if($option === 'Ranking'){
-            $offers = $challenge->offers()->where('rejected', '=', null)->orderBy('points', 'DESC')->with('solution')->get();
+            $offers = $challenge->offers()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('points', 'DESC')->with('solution')->get();
         }else if($technology_option  === 'FANUC'){
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->orderBy('so.number_of_fanuc', 'DESC')->select('offers.*')->with('solution')->get();
         }else if($technology_option  === 'Yaskawa'){
