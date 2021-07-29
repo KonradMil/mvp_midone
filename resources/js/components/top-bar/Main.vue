@@ -311,7 +311,7 @@ export default defineComponent({
                     if (response.data.success) {
                         // getNotificationsRepositories();
                         notifications.value = response.data.payload
-                        toast.success('Readed');
+                        // toast.success('Readed');
                     } else {
                         toast.error('Error');
                     }
@@ -323,7 +323,7 @@ export default defineComponent({
                     if (response.data.success) {
                         // getNotificationsRepositories();
                         notifications.value = response.data.payload
-                        toast.success('Readed all');
+                        // toast.success('Readed all');
                     } else {
                         toast.error('Error');
                     }

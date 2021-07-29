@@ -19,7 +19,7 @@
 <!--                    <UnityButton  v-if="icon.type === 'button'" :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"/>-->
                     <UnityDropdown :alttext="''" :path="'/s3/builder_icons/eye_simple3.png'" :action="'eye'" position="topbuttonclick" :options="icons.right['eye'].options"></UnityDropdown>
                 </div>
-                <div :key="'topIcon_save'" class="top-i w-30 pl-6 unity-button" v-if="allowedEdit">
+                <div :key="'topIcon_save'" class="top-i w-30 pl-6 unity-button" v-if="allowedEdit && canEditSolution">
                     <UnityButton  :tooltip="''" :alttext="''" :path="'/s3/builder_icons/save_simple.png'" :action="'save'" position="topbuttonclick"/>
                 </div>
                 <div :key="'topIcon_help'" class="top-i w-30 pl-6 unity-button" v-if="allowedEdit">
@@ -39,7 +39,7 @@ export default {
     props: {
         icons: Array,
         allowedEdit: Boolean,
-        canEditSolutions: Boolean
+        canEditSolution: Boolean
     },
     components: {UnityDropdown, UnityButton},
     setup(props) {
