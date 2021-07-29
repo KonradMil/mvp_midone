@@ -95,7 +95,7 @@ export default {
         type: String,
         allowedEdit: Object,
         publishChallenges: Boolean,
-        publishSolution: Boolean
+        canEditSolution: Boolean
     },
     setup(props) {
         //GLOBAL
