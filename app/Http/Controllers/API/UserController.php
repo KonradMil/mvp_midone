@@ -95,12 +95,8 @@ class UserController extends Controller
                                 }
                         }
                     }
-
-                foreach($solutions as $solution){
-//                    $teamSolution = TeamUser::where('team_id', '=', $team->id)->first();
-                    $team_user = $user->teams()->where(['team_id'=>$team->id,'user_id'=>$user->id])->first();
-
-                    if($team_user!= NULL){
+                        $team_user = $user->teams()->where(['team_id'=>$team->id,'user_id'=>$user->id])->first();
+                        if($team_user!= NULL){
                         foreach($solutions as $solution){
                             if($user->id != $solution->author_id){
                                 if($team_user -> pivot -> publishSolution === 1){
@@ -132,10 +128,9 @@ class UserController extends Controller
                         }
                     }
                 }
-            }
         }
 
-        return ['publishChallenges' => $publishChallenges,'editChallenges' => $editChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffer' => $addSolutionOffer, 'canDeleteSolution' => $canDeleteSolution,'canEditSolution' => $canEditSolution,'showSolutions' => $showSolutions, 'teams' => $user->teams,'solutions' => $solutions];
+        return ['publishChallenges' => $publishChallenges,'editChallenges' => $editChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffer' => $addSolutionOffer, 'canDeleteSolution' => $canDeleteSolution,'canEditSolution' => $canEditSolution,'showSolutions' => $showSolutions, 'teams' => $user->teams,'solutions' => $solutions, 'team_user' => $team_user];
     }
 
     public function reset(Request $request)
