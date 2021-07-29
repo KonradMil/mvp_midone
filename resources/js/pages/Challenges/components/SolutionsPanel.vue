@@ -118,7 +118,14 @@ export default {
 
         emitter.on('deletesolution', e => {
             solutionsInTeam.value.splice(e.index, 1);
-            // filterMember();
+            let index;
+            let length = permissions.value.showSolutions.length;
+            for(index = 0; index < length; index++){
+                if(permissions.value.showSolutions[index] === e.id){
+                    permissions.value.showSolutions.splice(index, 1);
+                    break;
+                }
+            }
         });
 
         const changeAddSolutionOffer = async(addSolutionOffer) => {

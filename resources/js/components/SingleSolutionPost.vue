@@ -211,7 +211,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Rozwiązanie zostało usunięte');
-                        emitter.emit('deletesolution', {index: props.index});
+                        emitter.emit('deletesolution', {index: props.index, id: solution.id});
                         // router.push({name: 'challenges'});
                     } else {
                         // toast.error(response.data.message);
