@@ -20,7 +20,7 @@
                     <UnityDropdown :alttext="''" :path="'/s3/builder_icons/eye_simple3.png'" :action="'eye'" position="topbuttonclick" :options="icons.right['eye'].options"></UnityDropdown>
                 </div>
                 <div :key="'topIcon_save'" class="top-i w-30 pl-6 unity-button" v-if="allowedEdit && canEditSolution">
-                    <UnityButton  :tooltip="''" :alttext="''" :path="'/s3/builder_icons/save_simple.png'" :action="'save'" position="topbuttonclick"/>
+                    <UnityButton  v-if="canEditSolution" :tooltip="''" :alttext="''" :path="'/s3/builder_icons/save_simple.png'" :action="'save'" position="topbuttonclick"/>
                 </div>
                 <div :key="'topIcon_help'" class="top-i w-30 pl-6 unity-button" v-if="allowedEdit">
                     <UnityButton :alttext="''" :path="'/s3/builder_icons/help_simple.png'" :action="'help'" position="topbuttonclick" ></UnityButton>
