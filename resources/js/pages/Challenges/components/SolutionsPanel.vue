@@ -62,7 +62,7 @@
 <!--                        </div>-->
                         <div v-for="(solution, index) in solutionsInTeam" :key="index" v-if="challenge.stage > 0" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected) ? 'solution-selected' : ''">
                                 <span v-if="user.type === 'integrator'">
-                                    <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id" :canEditSolution="canEditSolution" :addSolutionOffer="addSolutionOffer" :canDeleteSolution="canDeleteSolution"></SingleSolutionPost>
+                                    <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id" :canEditSolution="canEditSolution" :addSolutionOffer="addSolutionOffer" :canDeleteSolution="canDeleteSolution" :canPublishSolution="canPublishSolution"></SingleSolutionPost>
                                 </span>
                                 <span v-if="user.type === 'investor'">
                                     <SingleSolutionPost v-if="solution.status === 1" :challenge="challenge" :user="user" :solution="solution" :canAccept="(inTeam) && challenge.status == 1" :canEdit="false" :acceptChallengeSolutions="acceptChallengeSolutions"></SingleSolutionPost>
@@ -112,7 +112,7 @@ export default {
         const technologyType = ref(null);
         const permissions = ref({});
         const addSolutionOffer = ref(false);
-        const publishSolution = ref(false);
+        const canPublishSolution = ref(false);
         const canEditSolution= ref(false);
         const canDeleteSolution = ref(false);
 
@@ -169,8 +169,8 @@ export default {
                 props.challenge.solutions.forEach(function (solution){
                     let id = solution.id;
                     if(id === permission){
-                        if(publishSolution.value === false){
-                            publishSolution.value = true;
+                        if(canPublishSolution.value === false){
+                            canPublishSolution.value = true;
                         }
                     }
                 });
@@ -294,7 +294,7 @@ export default {
         }
         return {
             canDeleteSolution,
-            publishSolution,
+            canPublishSolution,
             checkPermissions,
             solutionsInTeam,
             canEditSolution,
