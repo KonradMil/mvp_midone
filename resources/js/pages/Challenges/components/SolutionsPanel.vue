@@ -147,6 +147,8 @@ export default {
 
 
         const checkPermissions = () => {
+            solutionsInTeam.value = permissions.value.solutions;
+
             permissions.value.addSolutionOffer.forEach(function (permission) {
                 props.challenge.solutions.forEach(function (solution){
                     let id = solution.id;
@@ -173,14 +175,6 @@ export default {
                         if(publishSolution.value === false){
                             publishSolution.value = true;
                         }
-                    }
-                });
-            });
-            permissions.value.showSolutions.forEach(function (permission) {
-                props.challenge.solutions.forEach(function (solution){
-                    let id = solution.id;
-                    if(id === permission){
-                        solutionsInTeam.value.push(solution);
                     }
                 });
             });
