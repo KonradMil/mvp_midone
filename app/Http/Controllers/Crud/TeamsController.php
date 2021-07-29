@@ -68,7 +68,7 @@ class TeamsController extends Controller
         $team-> owner_id = Auth::user()->id;
         $team-> name = $name;
         $team->save();
-        Auth::user()->teams()->attach($team, ['owner'=> false, 'publishChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false, 'canEditSolution' => false,'canDeleteSolution' => false, 'addSolutionOffer' => false]);
+        Auth::user()->teams()->attach($team, ['owner'=> false, 'publishChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false, 'canEditSolution' => false,'canDeleteSolution' => false, 'addSolutionOffer' => false, 'showSolutions' => true]);
         $who = $request -> input('who');
         $id = $request -> input('id');
         if($who == 'challenge')
@@ -137,7 +137,12 @@ class TeamsController extends Controller
         $team->name = $name;
         $team->save();
 
-        Auth::user()->teams()->attach($team, ['owner'=> true, 'publishChallenge' => false,'editChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false,'canEditSolution' => false,'canDeleteSolution' => false, 'addSolutionOffer' => false]);
+        if(Auth::user()->type === 'investor'){
+            Auth::user()->teams()->attach($team, ['owner'=> true, 'publishChallenge' => false,'editChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false,'canEditSolution' => false,'canDeleteSolution' => false, 'addSolutionOffer' => false]);
+
+        } else if(Auth::user()->type === 'integrator'){
+            Auth::user()->teams()->attach($team, ['owner'=> true, 'publishChallenge' => false,'editChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false,'canEditSolution' => false,'canDeleteSolution' => false, 'addSolutionOffer' => false,'showSolutions' => true]);
+        }
         $t = Team::where('id', '=', $team->id)->with('users', 'users.companies')->first();
 //        dd($team);
 
@@ -209,7 +214,13 @@ class TeamsController extends Controller
         $team_id = $request->input('team_id');
         $user_id = $request->input('user_id');
         $user = User::find($user_id);
-        $user->attachTeam($team_id, ['owner'=> false, 'publishChallenge' => false,'editChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false, 'addSolutionOffer' => false, 'canEditSolution' => false,'canDeleteSolution' => false,]);
+        $team = Team::find($team_id);
+        $check = User::find($team->owner_id);
+        if($check->type === 'investor'){
+            $user->attachTeam($team_id, ['owner'=> false, 'publishChallenge' => false,'editChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false, 'addSolutionOffer' => false, 'canEditSolution' => false,'canDeleteSolution' => false]);
+        }else if($check->type === 'integrator'){
+            $user->attachTeam($team_id, ['owner'=> false, 'publishChallenge' => false,'editChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false, 'addSolutionOffer' => false, 'canEditSolution' => false,'canDeleteSolution' => false, 'showSolutions' => true]);
+        }
 
         return response()->json([
             'success' => true,
@@ -267,7 +278,12 @@ class TeamsController extends Controller
         $team = Team::find($invite->team_id);
 //        $user = User::find($invite->user_id);
         $user = User::where('email', '=', $invite->email)->first();
-        $user->teams()->attach($team, ['owner'=> false, 'publishChallenge' => false, 'editChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false, 'addSolutionOffer' => false,'canEditSolution' => false,'canDeleteSolution' => false]);
+        $check = User::find($team->owner_id);
+        if($check->type === 'investor'){
+            $user->teams()->attach($team, ['owner'=> false, 'publishChallenge' => false, 'editChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false, 'addSolutionOffer' => false,'canEditSolution' => false,'canDeleteSolution' => false]);
+        }else if($check->type === 'integrator'){
+            $user->teams()->attach($team, ['owner'=> false, 'publishChallenge' => false, 'editChallenge' => false, 'acceptChallengeSolution' => false, 'acceptChallengeOffer' => false, 'publishSolution' => false, 'addSolutionOffer' => false,'canEditSolution' => false,'canDeleteSolution' => false, 'showSolutions' => true]);
+        }
         $team = Team::find($invite->team_id);
           $invite->delete();
 //        $team = $invite->team;

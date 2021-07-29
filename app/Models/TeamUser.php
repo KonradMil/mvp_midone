@@ -19,7 +19,8 @@ class TeamUser extends Pivot
         'publishSolution',
         'canEditSolution',
         'canDeleteSolution',
-        'addSolutionOffer'
+        'addSolutionOffer',
+        'showSolutions'
     ];
 
 }

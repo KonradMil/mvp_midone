@@ -176,6 +176,14 @@ export default {
                     }
                 });
             });
+            permissions.value.showSolutions.forEach(function (permission) {
+                props.challenge.solutions.forEach(function (solution){
+                    let id = solution.id;
+                    if(id === permission){
+                        solutionsInTeam.value.push(solution);
+                    }
+                });
+            });
             permissions.value.canEditSolution.forEach(function (permission) {
                 props.challenge.solutions.forEach(function (solution){
                     let id = solution.id;

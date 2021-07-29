@@ -41,6 +41,7 @@ class UserController extends Controller
         $addSolutionOffer = [];
         $canEditSolution = [];
         $canDeleteSolution = [];
+        $showSolutions = [];
 
         $challenges = Challenge::where('author_id', '=', $model->id)->get();
         if($challenges != NULL) {
@@ -59,6 +60,7 @@ class UserController extends Controller
                 $addSolutionOffer[] = $solution->id;
                 $canEditSolution[] = $solution->id;
                 $canDeleteSolution[] = $solution->id;
+                $showSolutions[] = $solution->id;
             }
         }
 
@@ -121,6 +123,11 @@ class UserController extends Controller
                                         $canDeleteSolution[] = $solution->id;
                                     }
                                 }
+                                if($team_user -> pivot -> showSolutions === 1){
+                                    if(!(in_array($solution->id, $showSolutions))){
+                                        $showSolutions[] = $solution->id;
+                                    }
+                                }
                             }
                         }
                     }
@@ -128,7 +135,7 @@ class UserController extends Controller
             }
         }
 
-        return ['publishChallenges' => $publishChallenges,'editChallenges' => $editChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffer' => $addSolutionOffer, 'canDeleteSolution' => $canDeleteSolution,'canEditSolution' => $canEditSolution, 'teams' => $user->teams,'solutions' => $solutions];
+        return ['publishChallenges' => $publishChallenges,'editChallenges' => $editChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffer' => $addSolutionOffer, 'canDeleteSolution' => $canDeleteSolution,'canEditSolution' => $canEditSolution,'showSolutions' => $showSolutions, 'teams' => $user->teams,'solutions' => $solutions];
     }
 
     public function reset(Request $request)
