@@ -109,6 +109,7 @@ export default {
     name: "SingleSolutionPost",
     components: {CommentSection, TeamsPanelSolution},
     props: {
+        index: Number,
         challenge: Object,
         user: Object,
         solution: Object,
@@ -206,11 +207,11 @@ export default {
         }
 
         const deleteSolution = async() => {
-            axios.post('/api/solution/delete', {id: solution.id})
+            await axios.post('/api/solution/delete', {id: solution.id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Rozwiązanie zostało usunięte');
-                        emitter.emit('deletesolution', {index: solution.id});
+                        emitter.emit('deletesolution', {index: props.index});
                         // router.push({name: 'challenges'});
                     } else {
                         // toast.error(response.data.message);
