@@ -117,7 +117,7 @@ export default {
         const canDeleteSolution = ref(false);
 
         emitter.on('deletesolution', e => {
-            solutions.value.splice(e.index, 1);
+            solutionsInTeam.value.splice(e.index, 1);
             // filterMember();
         });
 
