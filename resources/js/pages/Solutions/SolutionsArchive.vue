@@ -6,7 +6,7 @@
                 <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.solutions')}}</h2>
                 </div>
-                <div class="px-5 py-5">
+                <div class="px-5 py-5" style="background-color: rgba(241,245,248,var(--tw-bg-opacity));">
                     <div v-if="solutions.length == 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
                         <div>
                             <p>
