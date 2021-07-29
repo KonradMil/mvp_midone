@@ -148,7 +148,7 @@ export default {
             StartFilterOffer();
             if(filterType.value === null){
                 technologyType.value = null;
-                solutions.value = props.challenge.solutions;
+                solutionsInTeam.value = props.challenge.solutions;
             }
         }, {})
 
@@ -233,7 +233,7 @@ export default {
             axios.post('/api/solution/user/filter', {option: filterType.value , id: props.challenge.id, technologyType: technologyType.value})
                 .then(response => {
                     if (response.data.success) {
-                        solutions.value = response.data.payload;
+                        solutionsInTeam.value = response.data.payload;
                         toast.success('Success!');
                     } else {
                         toast.error('Erro!');
