@@ -38,7 +38,8 @@ export default {
     name: "TopButtons",
     props: {
         icons: Array,
-        allowedEdit: Boolean
+        allowedEdit: Boolean,
+        canEditSolutions: Boolean
     },
     components: {UnityDropdown, UnityButton},
     setup(props) {
