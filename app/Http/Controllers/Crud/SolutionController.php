@@ -189,38 +189,27 @@ class SolutionController extends Controller
     {
         $solution = Solution::find($request->input('id'));
         $estimate = Estimate::where('solution_id', '=', $solution->id)->first();
+
         if(!empty($request->input('offer_id')))
         {
             $offer = Offer::find($request->input('offer_id'));
             $robots = json_decode($offer->robots);
         }else {
-
-           $save = json_decode($estimate->parts_ar);
-           $robots = [];
-            if($save != NULL){
-                foreach($save as $key => $val){
-                    if($val->count > 0){
-                        $model = UnityModel::where('name', '=' , $key)->first();
-                        $model->guarantee_period = 0;
-                        if($model->category == 1 && $model->subcategory != 1) {
-                            $robots[] = $model;
+            if($estimate != NULL){
+                $save = json_decode($estimate->parts_ar);
+                $robots = [];
+                if($save != NULL){
+                    foreach($save as $key => $val){
+                        if($val->count > 0){
+                            $model = UnityModel::where('name', '=' , $key)->first();
+                            $model->guarantee_period = 0;
+                            if($model->category == 1 && $model->subcategory != 1) {
+                                $robots[] = $model;
+                            }
                         }
                     }
                 }
             }
-
-
-//            $save = json_decode($solution->save_json);
-//            $robots = [];
-//            if($save != NULL){
-//                foreach ($save->parts as $part) {
-//                    $model = UnityModel::find($part->model->model_id);
-//                    $model->guarantee_period = 0;
-//                    if($model->category == 1) {
-//                        $robots[] = $model;
-//                    }
-//                }
-//            }
         }
         return response()->json([
             'success' => true,
