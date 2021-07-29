@@ -527,13 +527,17 @@ class SolutionController extends Controller
         $check = false;
         $solution = Solution::find($request->solution_id);
 
-        foreach ($solution->teams as $team) {
-            foreach (Auth::user()->teams as $t) {
-                if($t->id == $team->id) {
-                    $check = true;
+
+        if($solution != NULL){
+            foreach ($solution->teams as $team) {
+                foreach (Auth::user()->teams as $t) {
+                    if($t->id == $team->id) {
+                        $check = true;
+                    }
                 }
             }
         }
+
 
         return response()->json([
             'success' => true,
