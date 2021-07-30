@@ -150,13 +150,13 @@ export default {
         const getChallengeRepositories = async () => {
             console.log('asdadsadsada');
             challenges.value = GetChallenges();
-            challenges.value.forEach(function(challenge){
-                console.log('challenge -> ' +challenge);
-                console.log('challenge.id ->' + challenge.id);
-                 if(challenge.stage === 3){
-                     projects.value.push(challenge);
-                 }
-            });
+            let index;
+            let length = challenges.value.list.length;
+            for(index = 0; index < length; index++){
+                if(challenges.value.list[index].stage === 3){
+                    challenges.value.list.splice(index,1);
+                }
+            }
             console.log(projects + '->projects');
         }
 
