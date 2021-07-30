@@ -153,7 +153,7 @@ export default {
             let number;
             console.log(challenges.value + 'asdf');
             let length = challenges.value.list.length;
-            console.log(length + '--> length');
+            console.log(challenges.value.list.length + '--> length');
             for(number = 0; number < length; number++){
                 console.log('here--->' + challenges.value.list[number].stage);
                 console.log('here--->');
