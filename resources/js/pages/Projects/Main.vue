@@ -154,6 +154,7 @@ export default {
                      projects.value.push(challenge);
                  }
             });
+            console.log(projects + '->projects');
         }
 
         const types = require("../../json/types.json");
