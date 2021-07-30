@@ -152,7 +152,11 @@ export default {
             challenges.value = GetChallenges();
             let number;
             let length = challenges.value.list.length;
+            console.log(length + '--> length');
             for(number = 0; number < length; number++){
+                console.log('here--->' + challenges.value.list[number].stage);
+                console.log('here--->');
+
                 if(challenges.value.list[number].stage === 3){
                     console.log('here--->' + challenges.value.list[number].stage);
                     projects.value.push(challenges.value.list[number]);
