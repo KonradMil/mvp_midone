@@ -344,6 +344,7 @@ export default {
         }
 
         const getInvitesRepositories = async () => {
+            console.log('asdadsadsadas');
            GetInvites((res) => {
                invites.value = res.payload;
                invitesSent.value = res.sent;
