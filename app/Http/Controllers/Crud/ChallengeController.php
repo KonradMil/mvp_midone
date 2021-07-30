@@ -847,7 +847,7 @@ class ChallengeController extends Controller
             $query->where('favourite', '=', 1);
         }
 
-        $challenges = $query->with(['comments.commentator', 'technicalDetails', 'financial_before'])->orderBy('created_at', 'DESC')->get();
+        $challenges = $query->where('stage', '=', 3)->with(['comments.commentator', 'technicalDetails', 'financial_before'])->orderBy('created_at', 'DESC')->get();
 
         $ars = [];
 
