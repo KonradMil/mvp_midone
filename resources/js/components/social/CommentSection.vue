@@ -26,7 +26,7 @@
             <span v-if="(current_object_focus == object.id && current_object_focus_showComments) && comments.length != 0">{{$t('CommentSection.hideComments')}}</span>
         </a>
     </div>
-    <div class="w-full flex items-center mt-3">
+    <div class="w-full flex items-center mt-3" v-if="guard !==3">
         <div class="w-8 h-8 flex-none image-fit mr-3">
             <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" :size="35" color="#FFF"
                     background-color="#930f68"/>
