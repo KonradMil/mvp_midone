@@ -151,6 +151,7 @@ export default {
             console.log('asdadsadsada');
             challenges.value = GetChallenges();
             let number;
+            console.log(challenges.value + 'asdf');
             let length = challenges.value.list.length;
             console.log(length + '--> length');
             for(number = 0; number < length; number++){
