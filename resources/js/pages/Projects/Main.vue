@@ -146,6 +146,7 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         const toast = useToast();
         const projects = ref([]);
+        const goodProjects = ref([]);
 
         const getChallengeRepositories = async () => {
             console.log('asdadsadsada');
@@ -184,6 +185,12 @@ export default {
                     // console.log(response.data)
                     if (response.data.success) {
                         projects.value = response.data.payload;
+                        projects.value.forEach(function(project){
+                            console.log(project.stage + '->project.stage')
+                            if(project.stage === 3){
+                                goodProjects.value.push(project);
+                            }
+                        });
                     } else {
                         console.log('error');
                     }
@@ -268,6 +275,7 @@ export default {
         return {
             getProjects,
             projects,
+            goodProjects,
             challenges,
             user,
             types,
