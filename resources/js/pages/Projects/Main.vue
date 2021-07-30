@@ -39,7 +39,7 @@
                         </p>
                     </div>
                 </div>
-            <div v-for="(challenge, index) in challenges.list" :key="index" class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+            <div v-for="(challenge, index) in projects" :key="index" class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
                 <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
                     <div class="w-10 h-10 flex-none image-fit">
                         <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" :src="'/' + challenge.screenshot_path"/>
@@ -131,10 +131,11 @@ import GetChallengesProjects from "../../compositions/GetChallengesProjects";
 import GetChallengesFollowed from "../../compositions/GetChallengesFollowed";
 import CommentSection from "../../components/social/CommentSection";
 import {useToast} from "vue-toastification";
+import GetChallenges from "../../compositions/GetChallenges";
 
 export default {
     name: "ProjectsMain",
-    components: {CommentSection, Comment, GetChallengesProjects},
+    components: {CommentSection, Comment, GetChallengesProjects, GetChallenges},
     props: {
         type: String
     },
@@ -144,9 +145,15 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const toast = useToast();
+        const projects = ref([]);
 
         const getChallengeRepositories = async () => {
-            challenges.value = GetChallengesProjects();
+            challenges.value = GetChallenges();
+            challenges.value.list.forEach(function(challenge){
+                 if(challenge.stage === 3){
+                     projects.value.push(challenge);
+                 }
+            });
         }
 
         const types = require("../../json/types.json");
@@ -235,6 +242,7 @@ export default {
         }
 
         return {
+            projects,
             challenges,
             user,
             types,
