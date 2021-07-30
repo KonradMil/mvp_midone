@@ -27,7 +27,7 @@
         </div>
         <div class="intro-y grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Blog Layout -->
-            <div class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium" v-if="challenges.list == undefined || challenges.list.length == 0">
+            <div class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium" v-if="projects.length == 0">
                 <div>
                     <p v-if="user.type == 'integrator'">
                         Brak aktywnych projektów.
