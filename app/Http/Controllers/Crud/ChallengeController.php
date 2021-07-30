@@ -862,7 +862,7 @@ class ChallengeController extends Controller
         })->orderBy('created_at', 'DESC')->get();
 
 
-        $merged = $challenges->merge($c);
+        $merged = $challenges->where('stage', '=', 3)->merge($c);
 
         foreach ($challenges as $challenge) {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like')) {
