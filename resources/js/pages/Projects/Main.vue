@@ -154,6 +154,7 @@ export default {
             let length = challenges.value.list.length;
             for(number = 0; number < length; number++){
                 if(challenges.value.list[number].stage === 3){
+                    console.log('here--->' + challenges.value.list[number].stage);
                     projects.value.push(challenges.value.list[number]);
                 }
             }
