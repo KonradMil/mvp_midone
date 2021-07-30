@@ -127,15 +127,12 @@
 
 <script>
 import {defineComponent, ref, provide, onMounted, getCurrentInstance, watch, onUpdated} from "vue";
-import GetChallengesProjects from "../../compositions/GetChallengesProjects";
-import GetChallengesFollowed from "../../compositions/GetChallengesFollowed";
 import CommentSection from "../../components/social/CommentSection";
 import {useToast} from "vue-toastification";
-import GetChallenges from "../../compositions/GetChallenges";
 
 export default {
     name: "ProjectsMain",
-    components: {CommentSection, Comment, GetChallengesProjects, GetChallenges},
+    components: {CommentSection, Comment},
     props: {
         type: String
     },
@@ -148,32 +145,11 @@ export default {
         const projects = ref([]);
         const goodProjects = ref([]);
 
-        const getChallengeRepositories = async () => {
-            console.log('asdadsadsada');
-            challenges.value = GetChallenges();
-            let number;
-            console.log(challenges.value + 'asdf');
-            let length = challenges.value.list.length;
-
-            console.log(challenges.value.list.length + '--> length challenges');
-            for(number = 0; number < length; number++){
-                console.log('here--->' + challenges.value.list[number].stage);
-                console.log('here--->');
-
-                if(challenges.value.list[number].stage === 3){
-                    console.log('here--->' + challenges.value.list[number].stage);
-                    projects.value.push(challenges.value.list[number]);
-                }
-            }
-            console.log(projects + '->projects');
-        }
-
         const types = require("../../json/types.json");
         const sels = require("../../json/challenge.json");
 
         onMounted(function () {
             getProjects();
-            // getChallengeRepositories();
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
@@ -282,7 +258,6 @@ export default {
             sels,
             like,
             dislike,
-            getChallengeRepositories,
             follow,
             unfollow,
             deleteChallenge
