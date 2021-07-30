@@ -39,7 +39,7 @@
                         </p>
                     </div>
                 </div>
-            <div v-for="(challenge, index) in projects" :key="index" class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+            <div v-for="(challenge, index) in goodProjects" :key="index" class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
                 <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
                     <div class="w-10 h-10 flex-none image-fit">
                         <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" :src="'/' + challenge.screenshot_path"/>
