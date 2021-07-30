@@ -129,9 +129,7 @@ class UserController extends Controller
                     }
                 }
         }
-     if($team_user != NULL){
          return ['publishChallenges' => $publishChallenges,'editChallenges' => $editChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffer' => $addSolutionOffer, 'canDeleteSolution' => $canDeleteSolution,'canEditSolution' => $canEditSolution,'showSolutions' => $showSolutions, 'teams' => $user->teams,'solutions' => $solutions, 'team_user' => $team_user];
-     }
     }
 
     public function reset(Request $request)
