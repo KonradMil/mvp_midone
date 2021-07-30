@@ -77,10 +77,11 @@ class NotificationsController extends Controller
             $notification->markAsRead();
         }
         $notifications = Auth::user()->notifications;
-        foreach ($notifications as $not) {
-            $data = $not['data'];
-            $not->author = User::find($data['author']['id']);
-        }
+
+//        foreach ($notifications as $not) {
+//            $data = $not['data'];
+//            $not->author = User::find($data['author']['id']);
+//        }
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
