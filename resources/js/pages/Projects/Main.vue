@@ -161,6 +161,7 @@ export default {
         const sels = require("../../json/challenge.json");
 
         onMounted(function () {
+            console.log('ASDADSADSAFDSAFDDSAFDSF');
             getChallengeRepositories();
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
