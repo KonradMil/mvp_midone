@@ -96,7 +96,7 @@
                     <div class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-2">
                         <div class="mt-5">
                             <div v-if="invites.length == 0" class="intro-y text-lg text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
-                                Nie otrzymałeś jeszcze żadnych zaproszeń. sadsadsadsa
+                                Nie otrzymałeś jeszcze żadnych zaproszeń.
                             </div>
                             <div v-for="(invite, index) in invites" :key="'invite_' + index" class="intro-y">
                                 <div class="box px-4 py-4 mb-3 flex items-center zoom-in">

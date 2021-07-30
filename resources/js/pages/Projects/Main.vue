@@ -151,6 +151,8 @@ export default {
             console.log('asdadsadsada');
             challenges.value = GetChallenges();
             challenges.value.list.forEach(function(challenge){
+                console.log('challenge -> ' +challenge);
+                console.log('challenge.id ->' + challenge.id);
                  if(challenge.stage === 3){
                      projects.value.push(challenge);
                  }
@@ -162,8 +164,6 @@ export default {
         const sels = require("../../json/challenge.json");
 
         onMounted(function () {
-            console.log('ASDADSADSAFDSAFDDSAFDSF');
-            console.log('ASDADSADSAFDSAFDDSAFDSF');
             getChallengeRepositories();
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
