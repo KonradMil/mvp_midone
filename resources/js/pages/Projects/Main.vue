@@ -156,7 +156,7 @@ export default {
         });
 
         const getProjects = async() => {
-            axios.post('/api/challenge/user/get/good/projects', {})
+            axios.post('/api/challenge/user/get/projects', {})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
