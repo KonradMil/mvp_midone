@@ -821,4 +821,69 @@ class ChallengeController extends Controller
             'payload' => $challenge
         ]);
     }
+    public function getUserChallengesGoodProjects(Request $request)
+    {
+        $input = $request->input();
+
+        $query = Challenge::query();
+        if (Auth::user()->type == 'integrator') {
+            $query->whereIn('stage', [1, 2])->where('status', '=', 1);
+        } else if (Auth::user()->type == 'investor') {
+            $query->where('author_id', '=', Auth::user()->id)->where('stage', '=', 3);
+        } else {
+
+        }
+
+        if (isset($input->status)) {
+            $query->where('status', '=', $input->status);
+        }
+        if (isset($input->type)) {
+            $query->where('type', '=', $input->type);
+        }
+        if (isset($input->rating)) {
+            $query->whereIn('rating', [($input->rating - 0.5), $input->rating, ($input->rating + 0.5)]);
+        }
+        if (isset($input->favourite)) {
+            $query->where('favourite', '=', 1);
+        }
+
+        $challenges = $query->with(['comments.commentator', 'technicalDetails', 'financial_before'])->orderBy('created_at', 'DESC')->get();
+
+        $ars = [];
+
+        $ts = Auth::user()->teams;
+
+        foreach ($ts as $tt) {
+            array_push($ars, $tt->id);
+        }
+
+        $c = Challenge::whereHas('teams', function ($query) use ($ars) {
+            $query->whereIn('teams.id', $ars);
+        })->orderBy('created_at', 'DESC')->get();
+
+
+        $merged = $challenges->merge($c);
+
+        foreach ($challenges as $challenge) {
+            if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like')) {
+                $challenge->liked = true;
+            } else {
+                $challenge->liked = false;
+            }
+            $challenge->comments_count = $challenge->comments()->count();
+            $challenge->likes = $challenge->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
+
+            if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Follow', 1)) {
+                $challenge->followed = true;
+            } else {
+                $challenge->followed = false;
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => $merged->all()
+        ]);
+    }
 }

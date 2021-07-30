@@ -153,6 +153,7 @@ export default {
             let number;
             console.log(challenges.value + 'asdf');
             let length = challenges.value.list.length;
+
             console.log(challenges.value.list.length + '--> length challenges');
             for(number = 0; number < length; number++){
                 console.log('here--->' + challenges.value.list[number].stage);
@@ -170,11 +171,24 @@ export default {
         const sels = require("../../json/challenge.json");
 
         onMounted(function () {
+            getProjects();
             getChallengeRepositories();
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
         });
+
+        const getProjects = async() => {
+            axios.post('/api/challenge/get/good/projects', {})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        projects.value = response.data.payload;
+                    } else {
+                        console.log('error');
+                    }
+                })
+        }
 
         const deleteChallenge = async(id) => {
             axios.post('/api/challenge/delete', {id: id})
@@ -252,6 +266,7 @@ export default {
         }
 
         return {
+            getProjects,
             projects,
             challenges,
             user,
