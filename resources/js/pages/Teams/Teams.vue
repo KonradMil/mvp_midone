@@ -485,6 +485,7 @@ export default {
         }
 
         onMounted(function () {
+            console.log('ASDADSADSAFDSAFDDSAFDSF');
             getTeamsRepositories('');
             getInvitesRepositories('');
             if (window.Laravel.user) {
