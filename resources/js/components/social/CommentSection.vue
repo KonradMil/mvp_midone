@@ -33,7 +33,7 @@
         </div>
         <div class="flex-1 relative text-gray-700">
             <form role="form" @submit.prevent>
-                <input v-if="guard !==3"
+                <input
                        @keyup.enter="addCommentObject(object.id)"
                        type="text"
                        v-model="message"
