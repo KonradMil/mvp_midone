@@ -466,7 +466,10 @@ class ChallengeController extends Controller
     {
         $id = $request->input('id');
         $challenge = Challenge::find($id);
+
         Auth::user()->viaLoveReacter()->reactTo($challenge, 'Like');
+
+
 
         return response()->json([
             'success' => true,
