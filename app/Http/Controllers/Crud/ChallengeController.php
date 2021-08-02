@@ -468,10 +468,11 @@ class ChallengeController extends Controller
     {
         $id = $request->input('id');
         $challenge = Challenge::find($id);
+        $user = User::find(Auth::user()->id);
 
         try {
             Auth::user()->viaLoveReacter()->reactTo($challenge, 'Like');
-            event(new ChallengeLiked($challenge, $challenge->author, 'Wyzwanie zostało polubione: ' . $challenge->name, []));
+            event(new ChallengeLiked($challenge, $user, 'Wyzwanie zostało polubione: ' . $challenge->name, []));
 
 //            event(new ChallengeLiked($challenge, $challenge->author, 'Wyzwanie zostało polubione: ' . $challenge->name, []));
         } catch (Exception $e){
