@@ -10,10 +10,13 @@ use App\Models\Solutions\Solution;
 use App\Models\User;
 use App\Notifications\ChallengePublishedNotification;
 use App\Notifications\CommentAddedNotification;
+use App\Notifications\CommentChallengeAddedNotification;
+use App\Notifications\CommentSolutionAddedNotification;
 use App\Notifications\OfferPublishedNotification;
 use App\Notifications\SolutionAcceptedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Auth;
 
 class SendCommentAddedNotification
 {
@@ -36,14 +39,17 @@ class SendCommentAddedNotification
     public function handle(CommentAdded $event)
     {
         $user = $event->subject->author_id;
+        $member = User::find(Auth::user()->id);
+
 //        $object = $event -> subject;
         $challenge = Challenge::find($event->subject->challenge_id);
         if($challenge===NULL){
             $challenge_new = Challenge::find($event->subject->id);
-            $user->notify(new CommentAddedNotification($challenge_new));
+            $user->notify(new CommentChallengeAddedNotification($challenge_new, $member));
         } else {
             $solution = Solution::find($event->subject->id);
-            $user->notify(new CommentAddedNotification($solution));
+            $challenge = Challenge::find($solution->challenge_id);
+            $user->notify(new CommentSolutionAddedNotification($challenge, $solution, $member));
         }
     }
 }

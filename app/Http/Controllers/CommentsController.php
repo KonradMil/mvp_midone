@@ -6,6 +6,7 @@ use App\Events\CommentAdded;
 use App\Models\Challenges\Challenge;
 use App\Models\Knowledgebase\KnowledgeBaseVideo;
 use App\Models\Solutions\Solution;
+use App\Models\User;
 use BeyondCode\Comments\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,7 +49,9 @@ class CommentsController extends Controller
         $object->comments_count = $object->comments()->count();
         $object->likes = $object->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
 
-//        event(new CommentAdded($object, $object->author_id, 'Nowa oferta została opublikowana: ' . $object->name, []));
+//        $member = User::find(Auth::user()->id);
+
+        event(new CommentAdded($object, $object->author_id, 'Użytkownik skomentował : ' . $object->name, []));
 
         //        foreach ($comments as $comment) {
 //            $comment->commentator = $comment->commentator;

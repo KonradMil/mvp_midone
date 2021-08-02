@@ -8,10 +8,10 @@ use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class CommentAddedNotification extends Notification
+class CommentChallengeAddedNotification extends Notification
 {
     use Queueable;
-    public $object;
+    public $challenge;
     public $member;
 
     /**
@@ -19,9 +19,9 @@ class CommentAddedNotification extends Notification
      *
      * @return void
      */
-    public function __construct($object, $member)
+    public function __construct($challenge, $member)
     {
-        $this->object = $object;
+        $this->challenge = $challenge;
         $this->member = $member;
     }
 
@@ -39,9 +39,9 @@ class CommentAddedNotification extends Notification
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'message' => $this->member->name . $this->member->lastname . 'skomentował: ' . $this->object->name .'.',
-            'link' => '/challenges/card/' . $this->object->id,
-            'author' => $this->object->author,
+            'message' => $this->member->name . $this->member->lastname . 'skomentował: ' . $this->challenge->name .'.',
+            'link' => '/challenges/card/' . $this->challenge->id,
+            'author' => $this->challenge->author,
             'params' => 'rozwiazania',
             'name' => 'internalChallenegeCard',
             'id' => $this->challenge->id,
@@ -51,9 +51,12 @@ class CommentAddedNotification extends Notification
     public function toDatabase($notifable)
     {
         return [
-            'message' => $this->member->name . $this->member->lastname . 'skomentował: ' . $this->object->name .'.',
-            'link' => '/challenges/card/' . $this->object->id,
-            'author' => $this->object->author,
+            'message' => $this->member->name . $this->member->lastname . 'skomentował: ' . $this->challenge->name .'.',
+            'link' => '/challenges/card/' . $this->challenge->id,
+            'author' => $this->challenge->author,
+            'params' => 'rozwiazania',
+            'name' => 'internalChallenegeCard',
+            'id' => $this->challenge->id,
         ];
     }
 }
