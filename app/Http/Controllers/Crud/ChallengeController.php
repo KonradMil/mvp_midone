@@ -469,10 +469,16 @@ class ChallengeController extends Controller
         $id = $request->input('id');
         $challenge = Challenge::find($id);
 
-        Auth::user()->viaLoveReacter()->reactTo($challenge, 'Like');
-
-        event(new ChallengeLiked($challenge, $challenge->author, 'Wyzwanie zostało polubione: ' . $challenge->name, []));
-
+        try {
+            Auth::user()->viaLoveReacter()->reactTo($challenge, 'Like');
+            event(new ChallengeLiked($challenge, $challenge->author, 'Wyzwanie zostało polubione: ' . $challenge->name, []));
+        } catch (Exception $e){
+            return response()->json([
+                'success' => true,
+                'message' => 'Polajkowano.',
+                'payload' => $e
+            ]);
+        }
 
         return response()->json([
             'success' => true,

@@ -11,7 +11,6 @@ use Illuminate\Notifications\Notification;
 class ChallengeLikedNotification extends Notification
 {
     use Queueable;
-    public $solution;
     public $challenge;
     /**
      * Create a new notification instance.
