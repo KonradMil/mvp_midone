@@ -475,7 +475,7 @@ class ChallengeController extends Controller
         } catch (Exception $e){
             return response()->json([
                 'success' => true,
-                'message' => 'Polajkowano.',
+                'message' => 'Error.',
                 'payload' => $e
             ]);
         }
