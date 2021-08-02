@@ -38,7 +38,7 @@ class SendCommentAddedNotification
      */
     public function handle(CommentAdded $event)
     {
-        $user = $event->subject->author_id;
+        $user = $event->subject->author;
         $member = User::find(Auth::user()->id);
 
 //        $object = $event -> subject;
