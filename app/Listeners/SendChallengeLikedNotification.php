@@ -38,6 +38,6 @@ class SendChallengeLikedNotification
     {
         $user = $event->subject->author;
         $challenge = Challenge::find($event->subject->challenge_id);
-        $user->notify(new ChallengeLikedNotification($challenge, $event->subject));
+        $user->notify(new ChallengeLikedNotification($challenge));
     }
 }
