@@ -42,9 +42,9 @@ class CommentChallengeAddedNotification extends Notification
             'message' => $this->member->name . $this->member->lastname . ' skomentował: ' . $this->challenge->name .'.',
             'link' => '/challenges',
             'author' => $this->challenge->author,
-            'params' => 'rozwiazania',
-            'name' => 'internalChallenegeCard',
-            'id' => $this->challenge->id,
+            'params' => '',
+            'name' => 'ChallengesMain',
+            'id' => '',
         ]);
     }
 
@@ -54,9 +54,9 @@ class CommentChallengeAddedNotification extends Notification
             'message' => $this->member->name . $this->member->lastname . ' skomentował: ' . $this->challenge->name .'.',
             'link' => '/challenges',
             'author' => $this->challenge->author,
-            'params' => 'rozwiazania',
-            'name' => 'internalChallenegeCard',
-            'id' => $this->challenge->id,
+            'params' => '',
+            'name' => 'ChallengesMain',
+            'id' => '',
         ];
     }
 }
