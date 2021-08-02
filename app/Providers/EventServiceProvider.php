@@ -11,6 +11,7 @@ use App\Events\OfferAdded;
 use App\Events\OfferPublished;
 use App\Events\OfferRejected;
 use App\Events\SolutionAdded;
+use App\Events\SolutionDisliked;
 use App\Events\SolutionLiked;
 use App\Events\SolutionRejected;
 use App\Events\TeamMemberInvited;
@@ -31,6 +32,7 @@ use App\Listeners\SendOfferAddedNotification;
 use App\Listeners\SendOfferPublishedNotification;
 use App\Listeners\SendOfferRejectedNotification;
 use App\Listeners\SendSolutionAddedNotification;
+use App\Listeners\SendSolutionDislikedNotification;
 use App\Listeners\SendSolutionLikedNotification;
 use App\Listeners\SendSolutionNotification;
 use App\Listeners\SendSolutionRejectedNotification;
@@ -101,6 +103,10 @@ class EventServiceProvider extends ServiceProvider
         SolutionLiked::class => [
             AddActivityLog::class,
             SendSolutionLikedNotification::class
+        ],
+        SolutionDisliked::class => [
+            AddActivityLog::class,
+            SendSolutionDislikedNotification::class
         ],
         OfferPublished::class => [
             AddActivityLog::class,

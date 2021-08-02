@@ -565,7 +565,18 @@ class SolutionController extends Controller
     {
         $id = $request->input('id');
         $solution= Solution::find($id);
-        Auth::user()->viaLoveReacter()->unreactTo($solution, 'Like');
+        $user = User::find(Auth::user()->id);
+
+        try {
+            Auth::user()->viaLoveReacter()->unreactTo($solution, 'Like');
+            event(new SolutionDisliked($solution, $user, 'Rozwiązanie zostało polubione: ' . $solution->name, []));
+        } catch (Exception $e){
+            return response()->json([
+                'success' => true,
+                'message' => 'Error.',
+                'payload' => $e
+            ]);
+        }
 
         return response()->json([
             'success' => true,
