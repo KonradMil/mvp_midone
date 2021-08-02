@@ -19,6 +19,7 @@ use App\Models\Financial;
 use App\Models\Team;
 use App\Models\TechnicalDetails;
 use App\Models\UnityModel;
+use App\Models\User;
 use Carbon\Carbon;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Illuminate\Http\Request;
@@ -541,9 +542,10 @@ class SolutionController extends Controller
         $id = $request->input('id');
         $solution = Solution::find($id);
         $challenge = Challenge::find($solution->challenge_id);
-       try {
+        $user = User::find(Auth::user()->id);
+        try {
            Auth::user()->viaLoveReacter()->reactTo($solution, 'Like');
-           event(new SolutionLiked($solution, $challenge->author, 'Rozwiązanie zostało polubione: ' . $solution->name, []));
+           event(new SolutionLiked($solution, $user, 'Rozwiązanie zostało polubione: ' . $solution->name, []));
        } catch (Exception $e){
            return response()->json([
                'success' => true,

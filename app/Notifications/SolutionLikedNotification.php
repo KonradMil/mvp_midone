@@ -11,17 +11,19 @@ use Illuminate\Notifications\Notification;
 class SolutionLikedNotification extends Notification
 {
     use Queueable;
-    public $solution;
     public $challenge;
+    public $solution;
+    public $member;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($challenge, $solution)
+    public function __construct($challenge, $solution, $member)
     {
         $this->challenge = $challenge;
         $this->solution = $solution;
+        $this->member = $member;
     }
 
     /**
@@ -38,7 +40,7 @@ class SolutionLikedNotification extends Notification
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'message' => 'Twoje rozwiązanie zostało polubione: ' . $this->challenge->name .'.',
+            'message' => $this->member->name . ' ' . $this->member->lastname .' lubi Twoje rozwiązanie: ' . $this->solution->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
             'params' => 'rozwiazania',
@@ -50,7 +52,7 @@ class SolutionLikedNotification extends Notification
     public function toDatabase($notifable)
     {
         return [
-            'message' => 'Twoje rozwiązanie zostało polubione: ' . $this->challenge->name .'.',
+            'message' => $this->member->name . ' ' . $this->member->lastname .' lubi Twoje rozwiązanie: ' . $this->solution->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
             'params' => 'rozwiazania',

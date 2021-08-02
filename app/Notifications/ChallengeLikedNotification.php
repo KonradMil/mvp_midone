@@ -12,16 +12,16 @@ class ChallengeLikedNotification extends Notification
 {
     use Queueable;
     public $challenge;
-    public $user;
+    public $member;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($challenge, $user)
+    public function __construct($challenge, $member)
     {
         $this->challenge = $challenge;
-        $this->user = $user;
+        $this->member = $member;
     }
 
     /**
@@ -38,7 +38,7 @@ class ChallengeLikedNotification extends Notification
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'message' => $this->user->name . ' ' . $this->user->lastname .' lubi Twoje wyzwanie: ' . $this->challenge->name .'.',
+            'message' => $this->member->name . ' ' . $this->member->lastname .' lubi Twoje wyzwanie: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
             'params' => '',
@@ -50,7 +50,7 @@ class ChallengeLikedNotification extends Notification
     public function toDatabase($notifable)
     {
         return [
-            'message' => $this->user->name . ' ' . $this->user->lastname .' lubi Twoje wyzwanie: ' . $this->challenge->name .'.',
+            'message' => $this->member->name . ' ' . $this->member->lastname .' lubi Twoje wyzwanie: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
             'params' => '',
