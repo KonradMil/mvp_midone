@@ -88,12 +88,7 @@ export const routes = [
         component: TermsMain,
         props: true
     },
-    {
-        name: 'notifications',
-        path: "/notifications",
-        component: Notifications,
-        props: true
-    },
+
     {
         path: "/",
         component: SideMenu,
@@ -102,6 +97,12 @@ export const routes = [
                 name: 'workshop',
                 path: '/workshop',
                 component: Workshop,
+                props: true
+            },
+            {
+                name: 'notifications',
+                path: "/notifications",
+                component: Notifications,
                 props: true
             },
             {

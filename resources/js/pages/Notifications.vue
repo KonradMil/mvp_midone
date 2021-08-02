@@ -1,4 +1,5 @@
 <template>
+    <div>
     <div class="col-span-12 lg:col-span-9 xxl:col-span-10">
         <!-- BEGIN: Inbox Filter -->
         <div class="intro-y flex flex-col-reverse sm:flex-row items-center">
@@ -433,6 +434,7 @@
             </div>
         </div>
         <!-- END: Inbox Content -->
+    </div>
     </div>
 </template>
 
