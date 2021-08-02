@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Crud;
 
 use App\Events\SolutionAccepted;
 use App\Events\SolutionAdded;
+use App\Events\SolutionLiked;
 use App\Events\SolutionPublished;
 use App\Events\SolutionRejected;
 use App\Http\Controllers\Controller;
