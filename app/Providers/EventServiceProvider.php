@@ -96,6 +96,10 @@ class EventServiceProvider extends ServiceProvider
             AddActivityLog::class,
             SendSolutionAddedNotification::class
         ],
+        SolutionLiked::class => [
+            AddActivityLog::class,
+            SendSolutionLikeNotification::class
+        ],
         OfferPublished::class => [
             AddActivityLog::class,
             SendOfferPublishedNotification::class

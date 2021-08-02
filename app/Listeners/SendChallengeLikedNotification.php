@@ -31,7 +31,7 @@ class SendChallengeLikedNotification
     /**
      * Handle the event.
      *
-     * @param  SolutionPublished  $event
+     * @param  ChallengeLiked  $event
      * @return void
      */
     public function handle(ChallengeLiked $event)

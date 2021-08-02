@@ -539,9 +539,19 @@ class SolutionController extends Controller
 
         $id = $request->input('id');
         $solution = Solution::find($id);
-        Auth::user()->viaLoveReacter()->reactTo($solution, 'Like');
+        $challenge = Challenge::find($solution->challenge_id);
+       try {
+           Auth::user()->viaLoveReacter()->reactTo($solution, 'Like');
+           event(new SolutionLiked($solution, $challenge->author, 'Rozwiązanie zostało zaakceptowane: ' . $solution->name, []));
+       } catch (Exception $e){
+           return response()->json([
+               'success' => true,
+               'message' => 'Error.',
+               'payload' => $e
+           ]);
+       }
 
-        return response()->json([
+       return response()->json([
             'success' => true,
             'message' => 'Polajkowano.',
             'payload' => ''
