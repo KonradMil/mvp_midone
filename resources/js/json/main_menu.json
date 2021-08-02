@@ -82,6 +82,11 @@
             "icon": "InboxIcon",
             "pageName": "communication",
             "title": "Pomoc"
+        },
+        {
+            "icon": "InboxIcon",
+            "pageName": "notifications",
+            "title": "Powiadomienia"
         }
     ]
 }
