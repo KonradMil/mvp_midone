@@ -33,7 +33,7 @@ class SendSolutionLikedNotification
     public function handle(SolutionLiked $event)
     {
         $user = $event->subject->author;
-        $member = $event->causer->id;
+        $member = User::find($event->causer->id);
         $solution = Solution::find($event->subject->id);
         $challenge = Challenge::find($event->subject->challenge_id);
 
