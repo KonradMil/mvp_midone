@@ -1,0 +1,559 @@
+<template>
+    <div class="col-span-12 lg:col-span-9 xxl:col-span-10">
+        <!-- BEGIN: Inbox Filter -->
+        <div class="intro-y flex flex-col-reverse sm:flex-row items-center">
+            <div class="w-full sm:w-auto relative mr-auto mt-3 sm:mt-0">
+                <i class="w-4 h-4 absolute my-auto inset-y-0 ml-3 left-0 z-10 text-gray-700 dark:text-gray-300" data-feather="search"></i>
+                <input type="text" class="form-control w-full sm:w-64 box px-10 text-gray-700 dark:text-gray-300 placeholder-theme-13" placeholder="Search mail">
+                <div class="inbox-filter dropdown absolute inset-y-0 mr-3 right-0 flex items-center" data-placement="bottom-start">
+                    <i class="dropdown-toggle w-4 h-4 cursor-pointer text-gray-700 dark:text-gray-300" role="button" aria-expanded="false" data-feather="chevron-down"></i>
+                    <div class="inbox-filter__dropdown-menu dropdown-menu pt-2">
+                        <div class="dropdown-menu__content box p-5">
+                            <div class="grid grid-cols-12 gap-4 gap-y-3">
+                                <div class="col-span-6">
+                                    <label for="input-filter-1" class="form-label text-xs">From</label>
+                                    <input id="input-filter-1" type="text" class="form-control flex-1" placeholder="example@gmail.com">
+                                </div>
+                                <div class="col-span-6">
+                                    <label for="input-filter-2" class="form-label text-xs">To</label>
+                                    <input id="input-filter-2" type="text" class="form-control flex-1" placeholder="example@gmail.com">
+                                </div>
+                                <div class="col-span-6">
+                                    <label for="input-filter-3" class="form-label text-xs">Subject</label>
+                                    <input id="input-filter-3" type="text" class="form-control flex-1" placeholder="Important Meeting">
+                                </div>
+                                <div class="col-span-6">
+                                    <label for="input-filter-4" class="form-label text-xs">Has the Words</label>
+                                    <input id="input-filter-4" type="text" class="form-control flex-1" placeholder="Job, Work, Documentation">
+                                </div>
+                                <div class="col-span-6">
+                                    <label for="input-filter-5" class="form-label text-xs">Doesn't Have</label>
+                                    <input id="input-filter-5" type="text" class="form-control flex-1" placeholder="Job, Work, Documentation">
+                                </div>
+                                <div class="col-span-6">
+                                    <label for="input-filter-6" class="form-label text-xs">Size</label>
+                                    <select id="input-filter-6" class="form-select flex-1">
+                                        <option>10</option>
+                                        <option>25</option>
+                                        <option>35</option>
+                                        <option>50</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-12 flex items-center mt-3">
+                                    <button class="btn btn-secondary w-32 ml-auto">Create Filter</button>
+                                    <button class="btn btn-primary w-32 ml-2">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full sm:w-auto flex">
+                <button class="btn btn-primary shadow-md mr-2">Start a Video Call</button>
+                <div class="dropdown">
+                    <button class="dropdown-toggle btn px-2 box text-gray-700 dark:text-gray-300" aria-expanded="false">
+                        <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-feather="plus"></i> </span>
+                    </button>
+                    <div class="dropdown-menu w-40">
+                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
+                            <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="user" class="w-4 h-4 mr-2"></i> Contacts </a>
+                            <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"> <i data-feather="settings" class="w-4 h-4 mr-2"></i> Settings </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END: Inbox Filter -->
+        <!-- BEGIN: Inbox Content -->
+        <div class="intro-y inbox box mt-5">
+            <div class="p-5 flex flex-col-reverse sm:flex-row text-gray-600 border-b border-gray-200 dark:border-dark-1">
+                <div class="flex items-center mt-3 sm:mt-0 border-t sm:border-0 border-gray-200 pt-5 sm:pt-0 mt-5 sm:mt-0 -mx-5 sm:mx-0 px-5 sm:px-0">
+                    <input class="form-check-input" type="checkbox">
+                    <div class="dropdown ml-1" data-placement="bottom-start">
+                        <a class="dropdown-toggle w-5 h-5 block dark:text-gray-300" href="javascript:;" aria-expanded="false"> <i data-feather="chevron-down" class="w-5 h-5"></i> </a>
+                        <div class="dropdown-menu w-32">
+                            <div class="dropdown-menu__content box dark:bg-dark-1 p-2"> <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">All</a> <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">None</a> <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Read</a> <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Unread</a> <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Starred</a> <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">Unstarred</a> </div>
+                        </div>
+                    </div>
+                    <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="refresh-cw"></i> </a>
+                    <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="more-horizontal"></i> </a>
+                </div>
+                <div class="flex items-center sm:ml-auto">
+                    <div class="dark:text-gray-300">1 - 50 of 5,238</div>
+                    <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="chevron-left"></i> </a>
+                    <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="chevron-right"></i> </a>
+                    <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="settings"></i> </a>
+                </div>
+            </div>
+            <div class="overflow-x-auto sm:overflow-x-visible">
+                <div class="intro-y">
+                    <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" checked>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-14.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Morgan Freeman</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">There are many variations of passages of Lorem Ips</span> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomi </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">01:10 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" checked>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-8.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Leonardo DiCaprio</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">Lorem Ipsum is simply dummy te</span> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500 </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">01:10 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inbox__item--active inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" >
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-13.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Denzel Washington</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">Contrary to popular belief, Lo</span> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20 </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">01:10 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inbox__item--active inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" >
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-7.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Edward Norton</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">Lorem Ipsum is simply dummy te</span> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500 </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">06:05 AM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" checked>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-5.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Sylvester Stallone</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">There are many variations of passages of Lorem Ips</span> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomi </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">01:10 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inbox__item--active inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" >
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-12.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">John Travolta</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">It is a long established fact </span> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">01:10 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inbox__item--active inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" >
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-8.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Johnny Depp</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">Contrary to popular belief, Lo</span> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20 </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">01:10 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inbox__item--active inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" >
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-1.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Sylvester Stallone</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">There are many variations of passages of Lorem Ips</span> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomi </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">05:09 AM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inbox__item--active inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" >
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-12.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Johnny Depp</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">There are many variations of passages of Lorem Ips</span> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomi </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">01:10 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inbox__item--active inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" >
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-10.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Denzel Washington</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">It is a long established fact </span> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">06:05 AM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" checked>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-4.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Tom Cruise</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">Contrary to popular belief, Lo</span> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20 </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">01:10 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" checked>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-3.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Leonardo DiCaprio</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">Contrary to popular belief, Lo</span> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20 </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">05:09 AM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" checked>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-6.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Al Pacino</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">Lorem Ipsum is simply dummy te</span> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500 </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">05:09 AM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inbox__item--active inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" >
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-2.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Johnny Depp</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">It is a long established fact </span> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">01:10 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inbox__item--active inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" >
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-3.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Arnold Schwarzenegger</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">Contrary to popular belief, Lo</span> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20 </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">01:10 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inbox__item--active inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" >
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-14.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Leonardo DiCaprio</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">Contrary to popular belief, Lo</span> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20 </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">01:10 PM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inbox__item--active inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" >
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-1.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Johnny Depp</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">It is a long established fact </span> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">05:09 AM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" checked>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-7.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Kevin Spacey</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">Lorem Ipsum is simply dummy te</span> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500 </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">05:09 AM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" checked>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-15.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Christian Bale</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">It is a long established fact </span> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">05:09 AM</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="intro-y">
+                    <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="flex px-5 py-3">
+                            <div class="w-72 flex-none flex items-center mr-5">
+                                <input class="form-check-input flex-none" type="checkbox" checked>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
+                                <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <img alt="Rubick Tailwind HTML Admin Template" class="rounded-full" src="dist/images/profile-4.jpg">
+                                </div>
+                                <div class="inbox__item--sender truncate ml-3">Johnny Depp</div>
+                            </div>
+                            <div class="w-64 sm:w-auto truncate"> <span class="inbox__item--highlight">Contrary to popular belief, Lo</span> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20 </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">03:20 PM</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">
+                <div class="dark:text-gray-300">4.41 GB (25%) of 17 GB used Manage</div>
+                <div class="sm:ml-auto mt-2 sm:mt-0 dark:text-gray-300">Last account activity: 36 minutes ago</div>
+            </div>
+        </div>
+        <!-- END: Inbox Content -->
+    </div>
+</template>
+
+
+<script>
+    import {defineComponent, ref, onMounted, provide} from "vue";
+    import DarkModeSwitcher from "../components/dark-mode-switcher/Main.vue";
+    import cash from "cash-dom";
+    import Dropzone from '../global-components/dropzone/Main'
+    import {useToast} from "vue-toastification";
+    import {useStore} from "../store";
+    import {GoogleMap, Marker} from 'vue3-google-map'
+
+    const toast = useToast();
+    const store = useStore();
+
+
+    export default {
+        components: {
+            DarkModeSwitcher,
+            Dropzone,
+            GoogleMap,
+            Marker
+        },
+        name: 'notifications',
+
+        setup() {
+            const toast = useToast();
+            const dropzoneSingleRef = ref();
+            const avatar_path = ref();
+            provide("bind[dropzoneSingleRef]", el => {
+                dropzoneSingleRef.value = el;
+            });
+
+            onMounted(() => {
+                const elDropzoneSingleRef = dropzoneSingleRef.value;
+                console.log(elDropzoneSingleRef);
+                elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                    console.log(resp.xhr.response);
+                    avatar_path.value = '/s3/avatars/' + JSON.parse(resp.xhr.response).payload;
+                    toast.success('Avatar został załadowany poprawnie!');
+                });
+                elDropzoneSingleRef.dropzone.on("error", () => {
+                    toast.error("Błąd");
+                });
+                avatar_path.value = '';
+                cash("body")
+                    .removeClass("error-page")
+
+            });
+
+            return {avatar_path};
+        },
+        mounted() {
+            console.log(store.state);
+            this.name = store.state.login.user.name;
+            this.lastname = store.state.login.user.lastname;
+            // this.getMarkers();
+        },
+        data() {
+            return {
+                name: "",
+                lastname: "",
+                error: null,
+                markers: [],
+                image_path: '',
+                init: {
+                    streetViewControl: true,
+                    scaleControl: true,
+                    center: {lat: 54.04924594193164, lng: 18.04924594193164},
+                    zoom: 9,
+                }
+            }
+        },
+        methods: {
+            getMarkers() {
+                this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                    this.$axios.post('api/locations/get')
+                        .then(response => {
+                            let m = [];
+                            response.data.forEach(function (item) {
+                                m.push({lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
+                            });
+                            console.log(m);
+                            this.markers = m;
+                        })
+                })
+            },
+            next() {
+                if( (this.lastname == '' || this.lastname == null) || (this.name == '' || this.name == null)) {
+                    toast.warning('Imię i nazwisko nie mogą być puste.');
+                } else {
+                    this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                        this.$axios.post('api/profile/update', {
+                            name: this.name,
+                            lastname: this.lastname
+                        })
+                            .then(response => {
+                                console.log(response.data)
+                                if (response.data.success) {
+                                    let user = response.data.payload;
+                                    store.dispatch('login/login', {
+                                        user
+                                    });
+                                    toast.success('Pomyślnie przeszedłeś do kolejnego kroku!');
+                                    window.location.href = '/kreator-krok-jeden';
+                                } else {
+                                    toast.error(response.data.message);
+                                }
+                            })
+                    })
+                }
+
+            }
+        },
+    }
+</script>
+<style>
+#dr .dz-message {
+    position: absolute;
+    bottom: calc(50% - 15px);
+    left: calc(50% - 115px);
+}
+</style>

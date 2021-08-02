@@ -32,6 +32,7 @@ import NewOffer from "../pages/Offers/NewOffer";
 import Offers from "../pages/Challenges/components/Offers";
 import SolutionsPanel from "../pages/Challenges/components/SolutionsPanel";
 import SolutionsArchive from "../pages/Solutions/SolutionsArchive";
+import Notifications from "../pages/Notifications";
 
 export const routes = [
     {
@@ -85,6 +86,12 @@ export const routes = [
         name: 'terms',
         path: "/terms/:page",
         component: TermsMain,
+        props: true
+    },
+    {
+        name: 'notifications',
+        path: "/notifications",
+        component: Notifications,
         props: true
     },
     {

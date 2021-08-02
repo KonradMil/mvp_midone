@@ -165,7 +165,7 @@ import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
 import Report from "./Report";
 import AddReport from "./AddReport";
-import Notifications from "./Notifications";
+import Notifications from "./NotificationsOld";
 import Teams from "./Teams";
 
 const store = useStore();
