@@ -40,7 +40,7 @@ class CommentChallengeAddedNotification extends Notification
     {
         return new BroadcastMessage([
             'message' => $this->member->name . $this->member->lastname . ' skomentował: ' . $this->challenge->name .'.',
-            'link' => '/challenges/card/' . $this->challenge->id,
+            'link' => '/challenges',
             'author' => $this->challenge->author,
             'params' => 'rozwiazania',
             'name' => 'internalChallenegeCard',
@@ -52,7 +52,7 @@ class CommentChallengeAddedNotification extends Notification
     {
         return [
             'message' => $this->member->name . $this->member->lastname . ' skomentował: ' . $this->challenge->name .'.',
-            'link' => '/challenges/card/' . $this->challenge->id,
+            'link' => '/challenges',
             'author' => $this->challenge->author,
             'params' => 'rozwiazania',
             'name' => 'internalChallenegeCard',
