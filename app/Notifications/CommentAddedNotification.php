@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class mCommentAddedNotification extends Notification
+class CommentAddedNotification extends Notification
 {
     use Queueable;
     public $object;
