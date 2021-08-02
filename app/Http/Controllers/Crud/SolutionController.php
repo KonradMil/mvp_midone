@@ -543,7 +543,7 @@ class SolutionController extends Controller
         $challenge = Challenge::find($solution->challenge_id);
        try {
            Auth::user()->viaLoveReacter()->reactTo($solution, 'Like');
-           event(new SolutionLiked($solution, $challenge->author, 'Rozwiązanie zostało zaakceptowane: ' . $solution->name, []));
+           event(new SolutionLiked($solution, $challenge->author, 'Rozwiązanie zostało polubione: ' . $solution->name, []));
        } catch (Exception $e){
            return response()->json([
                'success' => true,
