@@ -56,7 +56,8 @@
             "Baza wiedzy": "Knowledge base",
             "Marketplace obiektów": "Objects marketplace",
             "Komunikacja": "Communication",
-            "Pomoc" : "Support"
+            "Pomoc" : "Support",
+            "Powiadomnienia" : "Notifications"
         },
         "subMenu": {
             "Wszystkie": "All",
@@ -355,7 +356,8 @@
             "Baza wiedzy": "Baza wiedzy",
             "Marketplace obiektów": "Marketplace obiektów",
             "Komunikacja": "Komunikacja",
-            "Pomoc" : "Pomoc"
+            "Pomoc" : "Pomoc",
+            "Powiadomnienia" : "Powiadomnienia"
         },
 
         "subMenu": {
