@@ -38,7 +38,7 @@ class ChallengeLikedNotification extends Notification
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'message' => 'Użytkownik ' . $this->user->name . ' ' . $this->user->lastname .' polubił wyzwanie: ' . $this->challenge->name .'.',
+            'message' => $this->user->name . ' ' . $this->user->lastname .' lubi Twoje wyzwanie: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
             'params' => '',
@@ -50,7 +50,7 @@ class ChallengeLikedNotification extends Notification
     public function toDatabase($notifable)
     {
         return [
-            'message' => 'Użytkownik ' . $this->user->name . ' ' . $this->user->lastname .' polubił wyzwanie: ' . $this->challenge->name .'.',
+            'message' => $this->user->name . ' ' . $this->user->lastname .' lubi Twoje wyzwanie: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
             'params' => '',
