@@ -41,7 +41,7 @@ class CommentSolutionAddedNotification extends Notification
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'message' => $this->member->name . $this->member->lastname . 'skomentował: ' . $this->solution->name .'.',
+            'message' => $this->member->name . $this->member->lastname . ' skomentował: ' . $this->solution->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
             'params' => 'rozwiazania',
@@ -53,7 +53,7 @@ class CommentSolutionAddedNotification extends Notification
     public function toDatabase($notifable)
     {
         return [
-            'message' => $this->member->name . $this->member->lastname . 'skomentował: ' . $this->solution->name .'.',
+            'message' => $this->member->name . $this->member->lastname . ' skomentował: ' . $this->solution->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
             'params' => 'rozwiazania',

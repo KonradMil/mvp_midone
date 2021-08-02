@@ -345,6 +345,9 @@ export default defineComponent({
         const goTo = (name,id,change,challenge_id) => {
             setRead(id);
             console.log(change + '=> change');
+            if(change === 'commentChallenge'){
+                router.push({ path: '/challenges' })
+            }
             router.push({ name: name, params : {id: challenge_id, change: change}})
         };
 

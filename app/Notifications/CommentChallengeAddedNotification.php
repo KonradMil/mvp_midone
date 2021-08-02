@@ -42,7 +42,7 @@ class CommentChallengeAddedNotification extends Notification
             'message' => $this->member->name . $this->member->lastname . ' skomentował: ' . $this->challenge->name .'.',
             'link' => '/challenges',
             'author' => $this->challenge->author,
-            'params' => '',
+            'params' => 'commentChallenge',
             'name' => 'ChallengesMain',
             'id' => '',
         ]);
@@ -54,7 +54,7 @@ class CommentChallengeAddedNotification extends Notification
             'message' => $this->member->name . $this->member->lastname . ' skomentował: ' . $this->challenge->name .'.',
             'link' => '/challenges',
             'author' => $this->challenge->author,
-            'params' => '',
+            'params' => 'commentChallenge',
             'name' => 'ChallengesMain',
             'id' => '',
         ];
