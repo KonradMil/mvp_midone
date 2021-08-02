@@ -472,6 +472,8 @@ class ChallengeController extends Controller
         try {
             Auth::user()->viaLoveReacter()->reactTo($challenge, 'Like');
             event(new ChallengeLiked($challenge, $challenge->author, 'Wyzwanie zostało polubione: ' . $challenge->name, []));
+
+//            event(new ChallengeLiked($challenge, $challenge->author, 'Wyzwanie zostało polubione: ' . $challenge->name, []));
         } catch (Exception $e){
             return response()->json([
                 'success' => true,

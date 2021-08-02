@@ -3,16 +3,13 @@
 namespace App\Listeners;
 
 use App\Events\ChallengeLiked;
-use App\Events\SolutionAdded;
-use App\Events\SolutionPublished;
+use App\Events\SolutionAccepted;
+use App\Events\SolutionLiked;
 use App\Models\Challenges\Challenge;
-use App\Models\Solutions\Solution;
 use App\Models\User;
 use App\Notifications\ChallengeLikedNotification;
-use App\Notifications\ChallengePublishedNotification;
-use App\Notifications\OfferPublishedNotification;
-use App\Notifications\SolutionAddedNotification;
-use App\Notifications\SolutionPublishedNotification;
+use App\Notifications\SolutionAcceptedNotification;
+use App\Notifications\SolutionLikedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -37,7 +34,7 @@ class SendChallengeLikedNotification
     public function handle(ChallengeLiked $event)
     {
         $user = $event->subject->author;
-        $challenge = Challenge::find($event->subject->challenge_id);
+        $challenge = Challenge::find($event->subject->id);
         $user->notify(new ChallengeLikedNotification($challenge));
     }
 }
