@@ -570,7 +570,7 @@ class SolutionController extends Controller
 
         try {
             Auth::user()->viaLoveReacter()->unreactTo($solution, 'Like');
-            event(new SolutionDisliked($solution, $user, 'Rozwiązanie zostało polubione: ' . $solution->name, []));
+            event(new SolutionDisliked($solution, $user, 'Rozwiązanie zostało odlajkowane: ' . $solution->name, []));
         } catch (Exception $e){
             return response()->json([
                 'success' => true,
