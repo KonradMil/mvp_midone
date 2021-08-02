@@ -40,7 +40,7 @@ class SolutionDislikedNotification extends Notification
     public function toDatabase($notifable)
     {
         return [
-            'message' => $this->member->name . ' ' . $this->member->lastname .' lubi Twoje rozwiązanie: ' . $this->solution->name .'.',
+            'message' => $this->member->name . ' ' . $this->member->lastname .' nie lubi Twojego rozwiązania: ' . $this->solution->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
             'params' => 'rozwiazania',
