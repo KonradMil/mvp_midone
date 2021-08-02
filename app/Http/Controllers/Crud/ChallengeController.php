@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Crud;
 
 use App\Events\ChallengeAdded;
 use App\Events\ChallengeFollowed;
+use App\Events\ChallengeLiked;
 use App\Events\ChallengePublished;
 use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
@@ -13,6 +14,7 @@ use App\Models\Offer;
 use App\Models\Solutions\Solution;
 use App\Models\Team;
 use App\Models\TechnicalDetails;
+use App\Models\User;
 use Carbon\Carbon;
 use Cog\Laravel\Love\Reaction\Models\Reaction;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
@@ -469,6 +471,7 @@ class ChallengeController extends Controller
 
         Auth::user()->viaLoveReacter()->reactTo($challenge, 'Like');
 
+        event(new ChallengeLiked($challenge, $challenge->author, 'Wyzwanie zostało polubione: ' . $challenge->name, []));
 
 
         return response()->json([
