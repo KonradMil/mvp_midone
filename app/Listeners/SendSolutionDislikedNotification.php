@@ -34,11 +34,11 @@ class SendSolutionDislikedNotification
      */
     public function handle(SolutionDisliked $event)
     {
-        $user = $event->subject->author;
-        $member = User::find($event->causer->id);
-        $solution = Solution::find($event->subject->id);
-        $challenge = Challenge::find($event->subject->challenge_id);
-
-        $user->notify(new SolutionDislikedNotification($challenge, $solution, $member));
+//        $user = $event->subject->author;
+//        $member = User::find($event->causer->id);
+//        $solution = Solution::find($event->subject->id);
+//        $challenge = Challenge::find($event->subject->challenge_id);
+//
+//        $user->notify(new SolutionDislikedNotification($challenge, $solution, $member));
     }
 }
