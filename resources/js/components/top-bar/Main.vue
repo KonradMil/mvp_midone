@@ -56,7 +56,7 @@
         <!-- END: Search -->
         <!-- BEGIN: Notifications -->
         <div class="intro-x dropdown mr-auto sm:mr-6">
-            <div data-count='{{counts}}'
+            <div :data-count=counts
                 class="dropdown-toggle notification notification--bullet cursor-pointer"
                 role="button"
                 aria-expanded="false"
