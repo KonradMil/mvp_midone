@@ -377,6 +377,7 @@
 
 <script>
 import {defineComponent, onMounted, ref, computed, getCurrentInstance, watch} from "vue";
+import store, {useStore} from "../store";
 import router from '../router';
 import GetNotifications from "../compositions/GetNotifications"
 import GetInvites from "../compositions/GetInvites"
