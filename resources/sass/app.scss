@@ -184,8 +184,8 @@
     border: 3px solid #d4af37;
     border-radius: 10px;
 }
-.sibling:hover ~ .sibling-two{
-    display: flex;
+.sibling:hover > sibling-two{
+    display: block;
 }
 
 .sibling-two{
