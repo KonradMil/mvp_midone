@@ -60,7 +60,7 @@
                 class="dropdown-toggle notification notification--bullet cursor-pointer"
                 role="button"
                 aria-expanded="false"
-                style="content: '25';"
+                style="content: '{{counts}}';"
             >
                 <BellIcon class="notification__icon dark:text-gray-300"/>
             </div>
