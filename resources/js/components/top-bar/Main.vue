@@ -97,8 +97,8 @@
                             </div>
                             <div class="w-full truncate text-gray-600 mt-0.5" @click="goTo(notification.data.name,notification.id,notification.data.params,notification.data.id)">
                                 {{ notification.data.message }}
+                                <a class="flex items-center text-theme-6 pr-2" @click.prevent=delNotifi(notification.id,index) href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon style="width: 16px;"></TrashIcon></a>
                             </div>
-                            <a class="flex items-center text-theme-6 pr-2" @click.prevent=delNotifi(notification.id,index) href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon style="width: 16px;"></TrashIcon></a>
                         </div>
                     </div>
                     <div
