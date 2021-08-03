@@ -9,7 +9,7 @@
             width: 1.5rem !important;
             @apply w-5 h-5;
         }
-        &.notification--bullet:before {
+        &.notification--bullet {
             content: '';
             width: 14px;
             height: 14px;
