@@ -78,7 +78,7 @@
                     <div
                         v-for="(notification, index) in notificationsComp"
                         :key="'notification_' + index"
-                        class="cursor-pointer relative flex items-center transform hover:-translate-x-10"
+                        class="cursor-pointer relative flex items-center transition duration-500 ease-in-out transform hover:-translate-x-10 hover:scale-100"
                         :class="{ 'mt-5': index }">
                         <div class="w-12 h-12 flex-none image-fit mr-1">
                             <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
@@ -98,8 +98,8 @@
                             <div class="w-full truncate text-gray-600 mt-0.5" @click="goTo(notification.data.name,notification.id,notification.data.params,notification.data.id)">
                                 {{ notification.data.message }}
                             </div>
+                            <a v-if="notification.read_at !== null" class="flex items-center text-theme-6 pr-2" @click.prevent=delNotifi(notification.id,index) href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon style="width: 16px;"></TrashIcon></a>
                         </div>
-                        <a v-if="notification.read_at !== null" class="flex items-center text-theme-6 pr-2" @click.prevent=delNotifi(notification.id,index) href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon style="width: 16px;"></TrashIcon></a>
                     </div>
                     <div
                        v-if="notifications.length === 0"
