@@ -281,7 +281,7 @@ export default defineComponent({
             });
 
         const checkCounts = () => {
-            user.notifications.value.forEach(function (notification){
+            user.notifications.forEach(function (notification){
                 console.log('notification.read_at' + notification.read_at);
                 if(notification.read_at === null){
                     counts.value++;
