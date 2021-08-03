@@ -27,7 +27,7 @@ class S3Controller extends Controller
         $getMimeType = Storage::disk('s3')->getMimetype($path);
 
         $headers = [
-            'Access-Control-Allow-Origin' => '*',
+            'Access-Control-Allow-Origin' => true,
             'Content-Disposition'=>sprintf('attachment; filename="%s"', array_reverse(explode('/', $path))[0])
         ];
         Log::error($path);
@@ -61,7 +61,7 @@ class S3Controller extends Controller
 
         $headers = [
             'Content-Disposition'=>sprintf('attachment; filename="%s"', array_reverse(explode('/', $path))[0]),
-            'Access-Control-Allow-Origin' => '*'
+            'Access-Control-Allow-Origin' => true,
         ];
         Log::error($path);
         if (strpos($path, 'unityweb') !== false || strpos($path, 'wasm') !== false|| strpos($path, '.br') !== false ) {
