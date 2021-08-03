@@ -329,7 +329,7 @@ export default defineComponent({
                     if (response.data.success) {
                         // getNotificationsRepositories();
                         notifications.value = response.data.payload
-                        checkCounts();
+                        counts.value--;
                     } else {
                         toast.error('Error');
                     }
