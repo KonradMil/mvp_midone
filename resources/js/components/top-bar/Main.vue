@@ -277,10 +277,6 @@ export default defineComponent({
         watch(() => counts.value, (val) => {
         });
 
-        watch(() => notifications.value, (val) => {
-        });
-
-
         echo.private('App.Models.User.' + user.id)
             .notification((notification) => {
                 console.log(notification);
