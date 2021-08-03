@@ -75,6 +75,7 @@
                         <button class="btn btn-primary shadow-md mr-2 truncate" style="max-width: 150px; max-height: 45px;" @click.prevent="readAll">{{$t('global.readAll')}}</button>
                         </div>
                     </div>
+                    <div class="sibling">
                     <div
                         v-for="(notification, index) in notificationsComp"
                         :key="'notification_' + index"
@@ -98,8 +99,9 @@
                             <div class="w-full truncate text-gray-600 mt-0.5" @click="goTo(notification.data.name,notification.id,notification.data.params,notification.data.id)">
                                 {{ notification.data.message }}
                             </div>
-                            <a class="flex items-center text-theme-6 pr-2" @click.prevent=delNotifi(notification.id,index) href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon style="width: 16px;"></TrashIcon></a>
+                            <a class="sibling-two" @click.prevent=delNotifi(notification.id,index) href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon style="width: 16px;"></TrashIcon></a>
                         </div>
+                    </div>
                     </div>
                     <div
                        v-if="notifications.length === 0"
