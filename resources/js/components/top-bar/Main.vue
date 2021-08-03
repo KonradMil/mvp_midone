@@ -250,10 +250,12 @@ export default defineComponent({
         const { t, locale } = useI18n({ useScope: 'global' })
         const results = ref({});
         const searchTerm = ref('');
+        const counts = ref(0);
         const changeLang = () => {
             locale.value = lang.value;
             store.dispatch('main/setCurrentLang', lang.value);
         }
+
 
         const searchMe = () => {
             axios.post('/api/search', {query: searchTerm.value})
@@ -282,6 +284,11 @@ export default defineComponent({
             console.log(GetNotifications());
             // if(GetNotifications().list.)
             notifications.value = GetNotifications();
+            notifications.value.forEach(function (notifi){
+               if(notifi.read_at === null){
+                   counts.value++;
+               }
+            });
         }
 
         const GetInvitesRepositories = async () => {
@@ -361,6 +368,7 @@ export default defineComponent({
             notifications.value = user.notifications;
         })
         return {
+            counts,
             delNotifi,
             readAll,
             setRead,

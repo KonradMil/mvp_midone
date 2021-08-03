@@ -88,18 +88,18 @@ class NotificationsController extends Controller
     public function getNotifications()
     {
         $notifications = Auth::user()->notifications;
-        $number = 0;
+//        $number = 0;
         foreach ($notifications as $not) {
             $data = $not['data'];
             $not->author = User::find($data['author']['id']);
-            if($not->read_at === null){
-                $number++;
-            }
+//            if($not->read_at === null){
+//                $number++;
+//            }
         }
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',
-            'payload' => $notifications,
+            'payload' => $notifications
         ]);
     }
 }
