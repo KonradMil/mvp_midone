@@ -440,122 +440,160 @@
 
 
 <script>
-    import {defineComponent, ref, onMounted, provide} from "vue";
-    import DarkModeSwitcher from "../components/dark-mode-switcher/Main.vue";
-    import cash from "cash-dom";
-    import Dropzone from '../global-components/dropzone/Main'
-    import {useToast} from "vue-toastification";
-    import {useStore} from "../store";
-    import {GoogleMap, Marker} from 'vue3-google-map'
-
-    const toast = useToast();
-    const store = useStore();
+import {defineComponent, onMounted, ref, computed, getCurrentInstance, watch} from "vue";
+import store, {useStore} from "../../store";
+import router from '../router';
+import GetNotifications from "../compositions/GetNotifications"
+import GetInvites from "../compositions/GetInvites"
+import { useI18n } from 'vue-i18n'
+import {useToast} from "vue-toastification";
+import Avatar from "../components/avatar/Avatar";
 
 
-    export default {
-        components: {
-            DarkModeSwitcher,
-            Dropzone,
-            GoogleMap,
-            Marker
-        },
-        name: 'notifications',
+const toast = useToast();
 
-        setup() {
-            const toast = useToast();
-            const dropzoneSingleRef = ref();
-            const avatar_path = ref();
-            provide("bind[dropzoneSingleRef]", el => {
-                dropzoneSingleRef.value = el;
-            });
+export default defineComponent({
+    components:  {Avatar},
+    setup() {
+        const invites = ref([]);
+        const user = window.Laravel.user;
+        const echo = window.Echo;
+        const notifications = ref([]);
+        const lang = ref('pl');
+        const { t, locale } = useI18n({ useScope: 'global' })
+        const results = ref({});
+        const searchTerm = ref('');
+        const changeLang = () => {
+            locale.value = lang.value;
+            store.dispatch('main/setCurrentLang', lang.value);
+        }
 
-            onMounted(() => {
-                const elDropzoneSingleRef = dropzoneSingleRef.value;
-                console.log(elDropzoneSingleRef);
-                elDropzoneSingleRef.dropzone.on("success", (resp) => {
-                    console.log(resp.xhr.response);
-                    avatar_path.value = '/s3/avatars/' + JSON.parse(resp.xhr.response).payload;
-                    toast.success('Avatar został załadowany poprawnie!');
-                });
-                elDropzoneSingleRef.dropzone.on("error", () => {
-                    toast.error("Błąd");
-                });
-                avatar_path.value = '';
-                cash("body")
-                    .removeClass("error-page")
-
-            });
-
-            return {avatar_path};
-        },
-        mounted() {
-            console.log(store.state);
-            this.name = store.state.login.user.name;
-            this.lastname = store.state.login.user.lastname;
-            // this.getMarkers();
-        },
-        data() {
-            return {
-                name: "",
-                lastname: "",
-                error: null,
-                markers: [],
-                image_path: '',
-                init: {
-                    streetViewControl: true,
-                    scaleControl: true,
-                    center: {lat: 54.04924594193164, lng: 18.04924594193164},
-                    zoom: 9,
-                }
-            }
-        },
-        methods: {
-            getMarkers() {
-                this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                    this.$axios.post('api/locations/get')
-                        .then(response => {
-                            let m = [];
-                            response.data.forEach(function (item) {
-                                m.push({lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
-                            });
-                            console.log(m);
-                            this.markers = m;
-                        })
+        const searchMe = () => {
+            axios.post('/api/search', {query: searchTerm.value})
+                .then(response => {
+                    if (response.data.success) {
+                        console.log(response.data.payload);
+                        results.value = response.data.payload;
+                        showSearchDropdown();
+                    } else {
+                        toast.error(response.data.message);
+                    }
                 })
-            },
-            next() {
-                if( (this.lastname == '' || this.lastname == null) || (this.name == '' || this.name == null)) {
-                    toast.warning('Imię i nazwisko nie mogą być puste.');
-                } else {
-                    this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                        this.$axios.post('api/profile/update', {
-                            name: this.name,
-                            lastname: this.lastname
-                        })
-                            .then(response => {
-                                console.log(response.data)
-                                if (response.data.success) {
-                                    let user = response.data.payload;
-                                    store.dispatch('login/login', {
-                                        user
-                                    });
-                                    toast.success('Pomyślnie przeszedłeś do kolejnego kroku!');
-                                    window.location.href = '/kreator-krok-jeden';
-                                } else {
-                                    toast.error(response.data.message);
-                                }
-                            })
-                    })
-                }
+        }
 
+        watch(() => lang.value, (val) => {
+            changeLang();
+        });
+
+        echo.private('App.Models.User.' + user.id)
+            .notification((notification) => {
+                console.log(notification);
+                getNotificationsRepositories();
+            });
+
+        const getNotificationsRepositories = async () => {
+            console.log(GetNotifications());
+            // if(GetNotifications().list.)
+            notifications.value = GetNotifications();
+        }
+
+        const GetInvitesRepositories = async () => {
+            invites.value = GetInvites();
+        }
+        const searchDropdown = ref(false);
+        const store = useStore();
+
+        const showSearchDropdown = () => {
+            searchDropdown.value = true;
+        };
+
+        const hideSearchDropdown = () => {
+            searchDropdown.value = false;
+        };
+
+        const notificationsComp = computed(() => {
+            if(notifications.value.list === undefined) {
+                return notifications.value;
+            }  else {
+                console.log(notifications.value.list);
+                return notifications.value.list;
             }
-        },
+        });
+
+        const setRead = async (id) => {
+            axios.post('/api/notifications/set', {id: id})
+                .then(response => {
+                    if (response.data.success) {
+                        // getNotificationsRepositories();
+                        notifications.value = response.data.payload
+                        // toast.success('Readed');
+                    } else {
+                        toast.error('Error');
+                    }
+                })
+        }
+        const readAll = async () => {
+            axios.post('/api/notifications/read-all', {})
+                .then(response => {
+                    if (response.data.success) {
+                        // getNotificationsRepositories();
+                        notifications.value = response.data.payload
+                        // toast.success('Readed all');
+                    } else {
+                        toast.error('Error');
+                    }
+                })
+        }
+
+        const delNotifi = async (id,index) => {
+            axios.post('/api/notifications/delete', {id: id})
+                .then(response => {
+                    // console.log(response.data)
+                    if (response.data.success) {
+                        // notifications.value = response.data.payload
+                        notifications.value.splice(index,1);
+                        toast.success(response.data.message);
+                    } else {
+                    }
+                })
+        }
+
+        const goTo = (name,id,change,challenge_id) => {
+            setRead(id);
+            console.log(change + '=> change');
+            if(change === 'commentChallenge'){
+                router.push({ path: '/challenges' })
+            }
+            router.push({ name: name, params : {id: challenge_id, change: change}})
+        };
+
+        onMounted(function () {
+            GetInvitesRepositories();
+            getNotificationsRepositories();
+            lang.value = store.state.main.currentLang;
+            notifications.value = user.notifications;
+        })
+        return {
+            delNotifi,
+            readAll,
+            setRead,
+            searchDropdown,
+            showSearchDropdown,
+            hideSearchDropdown,
+            user,
+            goTo,
+            notifications,
+            notificationsComp,
+            changeLang,
+            lang,
+            invites,
+            searchMe,
+            searchTerm,
+            results
+        };
     }
+});
 </script>
 <style>
-#dr .dz-message {
-    position: absolute;
-    bottom: calc(50% - 15px);
-    left: calc(50% - 115px);
-}
+
 </style>
