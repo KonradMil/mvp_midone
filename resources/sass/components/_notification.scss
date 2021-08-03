@@ -15,10 +15,11 @@
             height: 14px;
             right: -6px !important;
             color: white;
-            font-size: 11px;
+            font-size: 9px;
             vertical-align: top;
             line-height: 11px;
             text-align: center;
+            padding-top: 2px;
             @apply rounded-full absolute right-0 bg-theme-6;
         }
     }
