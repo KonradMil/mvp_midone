@@ -8,9 +8,15 @@
             @apply w-5 h-5;
         }
         &.notification--bullet:before {
-            content: "";
-            width: 8px;
-            height: 8px;
+            content: "15";
+            width: 14px;
+            height: 14px;
+            right: -6px !important;
+            color: white;
+            font-size: 11px;
+            vertical-align: top;
+            line-height: 11px;
+            text-align: center;
             @apply rounded-full absolute right-0 bg-theme-6;
         }
     }
