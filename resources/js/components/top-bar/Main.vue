@@ -56,11 +56,10 @@
         <!-- END: Search -->
         <!-- BEGIN: Notifications -->
         <div class="intro-x dropdown mr-auto sm:mr-6">
-            <div
+            <div data-count='{{counts}}'
                 class="dropdown-toggle notification notification--bullet cursor-pointer"
                 role="button"
                 aria-expanded="false"
-                style="content: '{{counts}}';"
             >
                 <BellIcon class="notification__icon dark:text-gray-300"/>
             </div>
