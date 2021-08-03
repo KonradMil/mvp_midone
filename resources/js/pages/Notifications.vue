@@ -6,7 +6,7 @@
             <div class="overflow-x-auto sm:overflow-x-visible">
                 <div v-for="(notification, index) in notificationsComp"
                      :key="'notification_' + index"
-                    class="intro-y">
+                    class="intro-y pb-2">
                     <div class="inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
                         <div class="flex px-5 py-3">
                             <div class="w-72 flex-none flex items-center mr-5">
