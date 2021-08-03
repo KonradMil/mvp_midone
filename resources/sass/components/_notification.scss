@@ -11,8 +11,8 @@
         }
         &.notification--bullet:before {
             content: attr(data-count);
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             right: -6px !important;
             color: white;
             font-size: 9px;
