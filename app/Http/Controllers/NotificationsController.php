@@ -87,7 +87,7 @@ class NotificationsController extends Controller
 
     public function getNotifications()
     {
-        $notifications = Auth::user()->notifications->take(5);
+        $notifications = Auth::user()->notifications;
         $number = 0;
         foreach ($notifications as $not) {
             $data = $not['data'];
