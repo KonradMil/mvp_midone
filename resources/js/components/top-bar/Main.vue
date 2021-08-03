@@ -280,16 +280,21 @@ export default defineComponent({
                 getNotificationsRepositories();
             });
 
+        const checkCounts = () => {
+            notifications.value.list.forEach(function (notification){
+                console.log('notification.read_at' + notification.read_at);
+                if(notification.read_at === null){
+                    counts.value++;
+                }
+            });
+        };
+
+
         const getNotificationsRepositories = async () => {
             console.log(GetNotifications());
             // if(GetNotifications().list.)
             notifications.value = await GetNotifications();
-            notifications.value.list.forEach(function (notification){
-                console.log('notification.read_at' + notification.read_at);
-               if(notification.read_at === null){
-                   counts.value++;
-               }
-            });
+            checkCounts();
         }
 
         const GetInvitesRepositories = async () => {
@@ -369,6 +374,7 @@ export default defineComponent({
             notifications.value = user.notifications;
         })
         return {
+            checkCounts,
             counts,
             delNotifi,
             readAll,
