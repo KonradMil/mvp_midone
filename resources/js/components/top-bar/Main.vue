@@ -274,6 +274,9 @@ export default defineComponent({
             changeLang();
         });
 
+        watch(() => counts.value, (val) => {
+        });
+
         echo.private('App.Models.User.' + user.id)
             .notification((notification) => {
                 console.log(notification);
