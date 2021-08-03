@@ -283,7 +283,7 @@ export default defineComponent({
         const getNotificationsRepositories = async () => {
             console.log(GetNotifications());
             // if(GetNotifications().list.)
-            notifications.value = GetNotifications();
+            notifications.value = await GetNotifications();
             notifications.value.forEach(function (notification){
                 console.log('notification.read_at' + notification.read_at);
                if(notification.read_at === null){
