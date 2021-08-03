@@ -16,7 +16,7 @@
                                 <div class="w-6 h-6 flex-none image-fit relative ml-5">
                                     <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
                                             :username="notification.data.author.name + ' ' + notification.data.author.lastname"
-                                            :size="40" color="#FFF" background-color="#930f68"/>
+                                            :size="35" color="#FFF" background-color="#930f68"/>
                                 </div>
                             </div>
                             <div class="w-64 sm:w-auto truncate" @click="goTo(notification.data.name,notification.id,notification.data.params,notification.data.id)">
@@ -26,10 +26,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">
-                <div class="dark:text-gray-300">4.41 GB (25%) of 17 GB used Manage</div>
-                <div class="sm:ml-auto mt-2 sm:mt-0 dark:text-gray-300">Last account activity: 36 minutes ago</div>
             </div>
         </div>
         <!-- END: Inbox Content -->
