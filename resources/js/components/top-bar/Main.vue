@@ -284,7 +284,7 @@ export default defineComponent({
             console.log(GetNotifications());
             // if(GetNotifications().list.)
             notifications.value = await GetNotifications();
-            notifications.value.forEach(function (notification){
+            notifications.value.list.forEach(function (notification){
                 console.log('notification.read_at' + notification.read_at);
                if(notification.read_at === null){
                    counts.value++;
