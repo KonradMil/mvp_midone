@@ -67,8 +67,10 @@
                 <div
                     class="notification-content__box dropdown-menu__content box dark:bg-dark-6 overflow-y-auto" style="max-height: 400px;">
                     <div class="flex items-center">
+                        <div class="pb-5">
                         <button class="btn btn-primary shadow-md mr-2 truncate" style="max-width: 150px; max-height: 45px;" @click.prevent="readAll">Zobacz wszystko</button>
-                        <!--                        <div class="notification-content__title pr-10">{{$t('global.notifications')}}</div>-->
+                        </div>
+                            <!--                        <div class="notification-content__title pr-10">{{$t('global.notifications')}}</div>-->
                         <div class="pb-5">
                         <button class="btn btn-primary shadow-md mr-2 truncate" style="max-width: 150px; max-height: 45px;" @click.prevent="readAll">{{$t('global.readAll')}}</button>
                         </div>
