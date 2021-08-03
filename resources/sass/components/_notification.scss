@@ -5,6 +5,8 @@
             @apply text-theme-30;
         }
         .notification__icon {
+            height: 1.7rem !important;
+            width: 1.5rem !important;
             @apply w-5 h-5;
         }
         &.notification--bullet:before {
