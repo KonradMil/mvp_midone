@@ -282,7 +282,6 @@ export default defineComponent({
 
         echo.private('App.Models.User.' + user.id)
             .notification((notification) => {
-                console.log(notification);
                 getNotificationsRepositories();
             });
 
@@ -297,8 +296,6 @@ export default defineComponent({
 
 
         const getNotificationsRepositories = async () => {
-            console.log(GetNotifications());
-            // if(GetNotifications().list.)
             notifications.value = await GetNotifications();
             checkCounts();
         }
@@ -347,7 +344,6 @@ export default defineComponent({
                         // getNotificationsRepositories();
                         notifications.value = response.data.payload
                         counts.value = 0;
-                        // toast.success('Readed all');
                     } else {
                         toast.error('Error');
                     }
@@ -359,7 +355,6 @@ export default defineComponent({
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
-                        // notifications.value = response.data.payload
                         notifications.value.splice(index,1);
                         toast.success(response.data.message);
                     } else {
@@ -369,7 +364,6 @@ export default defineComponent({
 
         const goTo = (name,id,change,challenge_id) => {
             setRead(id);
-            console.log(change + '=> change');
             if(change === 'commentChallenge'){
                 router.push({ path: '/challenges' })
             }

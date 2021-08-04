@@ -199,9 +199,7 @@ export default defineComponent({
             axios.post('/api/notifications/set', {id: id})
                 .then(response => {
                     if (response.data.success) {
-                        // getNotificationsRepositories();
                         notifications.value = response.data.payload
-                        // toast.success('Readed');
                     } else {
                         toast.error('Error');
                     }
@@ -211,9 +209,7 @@ export default defineComponent({
             axios.post('/api/notifications/read-all', {})
                 .then(response => {
                     if (response.data.success) {
-                        // getNotificationsRepositories();
                         notifications.value = response.data.payload
-                        // toast.success('Readed all');
                     } else {
                         toast.error('Error');
                     }
@@ -225,7 +221,6 @@ export default defineComponent({
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
-                        // notifications.value = response.data.payload
                         notifications.value.splice(index,1);
                         toast.success(response.data.message);
                     } else {
