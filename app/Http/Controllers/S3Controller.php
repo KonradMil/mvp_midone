@@ -60,13 +60,11 @@ class S3Controller extends Controller
 
         $headers = [
             'Content-Disposition'=>sprintf('attachment; filename="%s"', array_reverse(explode('/', $path))[0]),
-            'Access-Control-Allow-Origin' => '*'
         ];
         Log::error($path);
         if (strpos($path, 'unityweb') !== false || strpos($path, 'wasm') !== false|| strpos($path, '.br') !== false ) {
             $getMimeType = 'application/wasm';
             $headers['Content-Encoding'] = 'br';
-            $headers['Access-Control-Allow-Origin'] = '*';
         }
         $headers['Content-type'] = $getMimeType;
 
