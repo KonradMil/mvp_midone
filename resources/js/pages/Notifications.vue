@@ -2,6 +2,11 @@
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="col-span-12 xxl:col-span-6">
         <!-- BEGIN: Inbox Content -->
+            <div
+                class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5"
+            >
+                <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.technicalDetails')}}</h2>
+            </div>
         <div class="intro-y inbox box mt-5">
             <div class="overflow-x-auto sm:overflow-x-visible">
                 <div v-for="(notification, index) in notificationsComp"
