@@ -47,7 +47,7 @@
                     <div v-if="invites.length == 0" class="intro-y text-lg text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
                         Nie otrzymałeś jeszcze żadnych zaproszeń.
                     </div>
-                    <div v-for="(invite, index) in invites.list" :key="'invite_' + index" class="intro-y">
+                    <div v-for="(invite, index) in invites" :key="'invite_' + index" class="intro-y">
                         <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
                             <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
                                 <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#930f68"/>
@@ -128,7 +128,7 @@ export default defineComponent({
 
         const getInvitesRepositories = async () => {
             console.log('getInvitesRepositories');
-            GetInvites((res) => {
+            await GetInvites((res) => {
                 console.log('res.payload ' + res.payload);
                 invites.value = res.payload;
                 console.log('res.sent ' + res.sent);
