@@ -63,8 +63,6 @@ export default {
         const operational_analyses = ref('');
 
         onMounted(() => {
-            console.log("props.challenge");
-            console.log(props.challenge);
             getOperationalAnalysis();
         });
 
