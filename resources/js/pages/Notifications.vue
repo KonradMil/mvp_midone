@@ -14,7 +14,7 @@
                     class="intro-y pb-2">
                     <div :class="(notification.read_at === null) ? 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1' : 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1 opacity-60'">
                         <div class="flex px-5 py-3">
-                            <div class="w-72 flex-none flex items-center mr-5">
+                            <div class="w-72 flex-none flex items-center mr-5" style="max-width: 200px;">
 <!--                                <input class="form-check-input flex-none" type="checkbox" checked>-->
                                 <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
                                 <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
@@ -49,9 +49,9 @@
                     </div>
                     <div v-for="(invite, index) in invites.list" :key="'invite_' + index" class="intro-y">
                         <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-<!--                            <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">-->
-<!--                                <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#930f68"/>-->
-<!--                            </div>-->
+                            <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
+                                <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#930f68"/>
+                            </div>
                             <div class="ml-4 mr-auto">
                                 <div class="font-medium">{{invite.team.name}}</div>
                                 <div class="text-gray-600 text-xs mt-0.5">
@@ -127,9 +127,11 @@ export default defineComponent({
         }
 
         const getInvitesRepositories = async () => {
-            console.log('asdadsadsadas');
+            console.log('getInvitesRepositories');
             GetInvites((res) => {
+                console.log('res.payload ' + res.payload);
                 invites.value = res.payload;
+                console.log('res.sent ' + res.sent);
                 invitesSent.value = res.sent;
             });
         }
