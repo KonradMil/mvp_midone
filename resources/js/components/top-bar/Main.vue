@@ -277,6 +277,7 @@ export default defineComponent({
         });
 
         watch(() => counts.value, (val) => {
+
         });
 
         echo.private('App.Models.User.' + user.id)
@@ -331,9 +332,7 @@ export default defineComponent({
                     if (response.data.success) {
                         // getNotificationsRepositories();
                         notifications.value = response.data.payload
-                        if(counts.value !== 0){
-                            counts.value--;
-                        }
+                        checkCounts();
                     } else {
                         toast.error('Error');
                     }
