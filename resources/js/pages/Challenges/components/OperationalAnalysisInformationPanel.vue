@@ -54,7 +54,7 @@
 import {computed, onMounted, reactive, ref} from "vue";
 
 export default {
-    name: "BasicInformationPanel",
+    name: "OperationalAnalysisInformationPanel",
     props: {
         solution: Object,
     },
