@@ -434,8 +434,10 @@ class OfferController extends Controller
             $archiveSolution->archive = 1;
             $archiveSolution->save();
         }
+
         $solution = Solution::find($offer->solution_id);
         $solution->selected_offer_id = $offer->id;
+        $challenge->solution_project_id = $solution->id;
 
         $offer->selected = true;
 
