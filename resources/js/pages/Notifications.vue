@@ -5,7 +5,7 @@
             <div
                 class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5"
             >
-                <h2 class="font-medium text-base mr-auto">{{$t('menu.powiadomienia')}}</h2>
+                <h2 class="font-medium text-base mr-auto">{{$t('global.notifications')}}</h2>
             </div>
         <div class="intro-y inbox box mt-5">
             <div class="overflow-x-auto sm:overflow-x-visible">
@@ -49,9 +49,9 @@
                     </div>
                     <div v-for="(invite, index) in invites" :key="'invite_' + index" class="intro-y">
                         <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                            <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#930f68"/>
-                            </div>
+<!--                            <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">-->
+<!--                                <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#930f68"/>-->
+<!--                            </div>-->
                             <div class="ml-4 mr-auto">
                                 <div class="font-medium">{{invite.team.name}}</div>
                                 <div class="text-gray-600 text-xs mt-0.5">
