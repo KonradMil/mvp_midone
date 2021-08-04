@@ -52,43 +52,21 @@
 
 <script>
 import {computed, onMounted, reactive, ref} from "vue";
-import {useToast} from "vue-toastification";
-import VueEasyLightbox from 'vue-easy-lightbox'
 
 export default {
     name: "BasicInformationPanel",
     props: {
         solution: Object,
     },
-    components: {
-        VueEasyLightbox
-    },
-    setup(props) {
-        const challenge = computed(() => {
-            return props.challenge;
-        });
-        const toast = useToast();
-        const types = require("../../../json/types.json");
-        const lightboxVisible = ref(false);
-        const operational_analyses = ref('');
 
-        const lightBoxIndex = ref(0);
+    setup(props) {
+        const operational_analyses = ref('');
 
         onMounted(() => {
             console.log("props.challenge");
             console.log(props.challenge);
             getOperationalAnalysis();
         });
-
-        const showImage = (index) => {
-            console.log(index);
-            lightboxVisible.value = true;
-            lightBoxIndex.value = index;
-        }
-
-        const hideLightbox = () => {
-            lightboxVisible.value = false;
-        }
 
         const getOperationalAnalysis = () => {
             axios.post('/api/solution/operational-analyses/get', {id: props.solution.id})
@@ -101,31 +79,8 @@ export default {
                 })
         }
 
-        const unfollow = () => {
-            axios.post('/api/challenge/user/unfollow', {id: props.challenge.id})
-                .then(response => {
-                    // console.log(response.data)
-                    if (response.data.success) {
-                        challenge.value.followed = false;
-                        toast.success('Nie śledzisz już tego wyzwania.');
-                    } else {
-
-                    }
-                })
-        }
-
         return {
             operational_analyses,
-            challenge,
-            types,
-            follow,
-            unfollow,
-            lightboxVisible,
-            lightBoxIndex,
-            images,
-            showImage,
-            hideLightbox,
-            saveDate
         }
     }
 }
