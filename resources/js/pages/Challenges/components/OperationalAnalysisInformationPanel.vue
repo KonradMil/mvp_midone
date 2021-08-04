@@ -2,7 +2,7 @@
     <div class="intro-y box mt-5" style="width: 1000px;">
         <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
             <h2 class="font-medium text-base mr-auto">
-                Bordered Table
+                Analiza operacyjna {{solution.name}}
             </h2>
         </div>
         <div class="p-5" id="bordered-table">
@@ -11,27 +11,69 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">#</th>
-                            <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">First Name</th>
-                            <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Last Name</th>
-                            <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Username</th>
+                            <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap"></th>
+                            <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Przed robotyzacją</th>
+                            <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Po robotyzacji</th>
+                            <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Zmiana</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="border">1</td>
+                            <td class="border">Czas dostępny (min)</td>
                             <td class="border">Angelina</td>
                             <td class="border">Jolie</td>
                             <td class="border">@angelinajolie</td>
                         </tr>
                         <tr>
-                            <td class="border">2</td>
+                            <td class="border">Czas produkcji (min)</td>
                             <td class="border">Brad</td>
                             <td class="border">Pitt</td>
                             <td class="border">@bradpitt</td>
                         </tr>
                         <tr>
-                            <td class="border">3</td>
+                            <td class="border">Produkcja (min)</td>
+                            <td class="border">Charlie</td>
+                            <td class="border">Hunnam</td>
+                            <td class="border">@charliehunnam</td>
+                        </tr>
+                        <tr>
+                            <td class="border">Czas produkcji sztuk dobrych (min)</td>
+                            <td class="border">Charlie</td>
+                            <td class="border">Hunnam</td>
+                            <td class="border">@charliehunnam</td>
+                        </tr>
+                        <tr>
+                            <td class="border">AR - Współczynnik dostepności</td>
+                            <td class="border">Charlie</td>
+                            <td class="border">Hunnam</td>
+                            <td class="border">@charliehunnam</td>
+                        </tr>
+                        <tr>
+                            <td class="border">PR - Współczynnik produktywności</td>
+                            <td class="border">Charlie</td>
+                            <td class="border">Hunnam</td>
+                            <td class="border">@charliehunnam</td>
+                        </tr>
+                        <tr>
+                            <td class="border">QR - współczynnik jakości</td>
+                            <td class="border">Charlie</td>
+                            <td class="border">Hunnam</td>
+                            <td class="border">@charliehunnam</td>
+                        </tr>
+                        <tr>
+                            <td class="border">OEE</td>
+                            <td class="border">Charlie</td>
+                            <td class="border">Hunnam</td>
+                            <td class="border">@charliehunnam</td>
+                        </tr>
+                        <tr>
+                            <td class="border">Wielkość produkcji</td>
+                            <td class="border">Charlie</td>
+                            <td class="border">Hunnam</td>
+                            <td class="border">@charliehunnam</td>
+                        </tr>
+                        <tr>
+                            <td class="border">PPH na osobę na zmianę</td>
                             <td class="border">Charlie</td>
                             <td class="border">Hunnam</td>
                             <td class="border">@charliehunnam</td>
