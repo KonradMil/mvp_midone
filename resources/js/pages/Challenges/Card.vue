@@ -232,7 +232,7 @@ export default defineComponent({
 
         const checkSolution = () => {
              challenge.value.solutions(function(solution){
-                if(solution.id === challenge.value.solution_project_id){
+                if(solution.selected_offer_id === challenge.value.selected_offer_id){
                     solution_project.value = solution;
                 }
              });
