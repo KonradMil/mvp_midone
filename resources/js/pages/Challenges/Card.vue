@@ -231,7 +231,7 @@ export default defineComponent({
         });
 
         const checkSolution = () => {
-             challenge.value.solutions(function(solution){
+             challenge.value.solutions.forEach(function(solution){
                 if(solution.selected_offer_id === challenge.value.selected_offer_id){
                     solution_project.value = solution;
                 }
