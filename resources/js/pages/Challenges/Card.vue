@@ -230,6 +230,14 @@ export default defineComponent({
             addSolutionOffer.value = e.addSolutionOffer;
         });
 
+        const checkSolution = () => {
+             challenge.value.solutions(function(solution){
+                if(solution.id === challenge.value.solution_project_id){
+                    solution_project.value = solution;
+                }
+             });
+        }
+
         const filter = () => {
             console.log(challenge.value.solutions + '->  solutions.value');
             challenge.value.solutions.forEach(function (solution) {
@@ -306,6 +314,7 @@ export default defineComponent({
             permissions.value = window.Laravel.permissions;
             console.log(props);
             getCardChallengeRepositories(props.id);
+            checkSolution();
         })
 
 
@@ -458,7 +467,8 @@ export default defineComponent({
             inTeam,
             isSolutions,
             isPublic,
-            solution_project
+            solution_project,
+            checkSolution
         };
     }
 });
