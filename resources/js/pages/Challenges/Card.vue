@@ -304,6 +304,7 @@ export default defineComponent({
                         checkTeam();
                         filter();
                         checkPermissions();
+                        checkSolution();
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -314,7 +315,6 @@ export default defineComponent({
             permissions.value = window.Laravel.permissions;
             console.log(props);
             getCardChallengeRepositories(props.id);
-            checkSolution();
         })
 
 
