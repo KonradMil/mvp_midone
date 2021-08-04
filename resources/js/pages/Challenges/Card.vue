@@ -120,7 +120,7 @@
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :edit_offer_id="edit_offer_id"></OfferAdd>
             <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab" :id="challenge.id" :inTeam="inTeam" :addSolutionOffer="addSolutionOffer"></Offers>
             <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam" :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
-            <OperationalAnalysisDialog v-if="activeTab == 'operational-analysis'" :solution_project="solution_project" ></OperationalAnalysisDialog>
+            <OperationalAnalysisDialog v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisDialog>
         </div>
     </div>
 </template>
