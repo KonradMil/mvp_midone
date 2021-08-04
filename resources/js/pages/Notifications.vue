@@ -172,9 +172,9 @@ export default defineComponent({
             notifications.value = GetNotifications();
         }
 
-        const GetInvitesRepositories = async () => {
-            invites.value = GetInvites();
-        }
+        // const GetInvitesRepositories = async () => {
+        //     invites.value = GetInvites();
+        // }
         const searchDropdown = ref(false);
         const store = useStore();
 
@@ -241,7 +241,7 @@ export default defineComponent({
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
-            GetInvitesRepositories();
+            getInvitesRepositories();
             getNotificationsRepositories();
             lang.value = store.state.main.currentLang;
             notifications.value = user.notifications;
