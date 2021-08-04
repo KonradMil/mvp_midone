@@ -1,6 +1,6 @@
 <template>
     <div class="grid grid-cols-12 gap-6 mt-5">
-        <div class="col-span-12 lg:col-span-9 xxl:col-span-10">
+        <div class="col-span-12 xxl:col-span-6">
         <!-- BEGIN: Inbox Content -->
         <div class="intro-y inbox box mt-5">
             <div class="overflow-x-auto sm:overflow-x-visible">
@@ -30,7 +30,7 @@
         </div>
         <!-- END: Inbox Content -->
     </div>
-        <div class="col-span-12 lg:col-span-9 xxl:col-span-10">
+        <div class="col-span-12 xxl:col-span-6">
             <!-- BEGIN: Inbox Content -->
             <div class="intro-y inbox box mt-5">
                 <div class="overflow-x-auto sm:overflow-x-visible">
