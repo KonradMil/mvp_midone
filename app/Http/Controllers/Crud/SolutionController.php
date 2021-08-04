@@ -411,7 +411,7 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function operationalAnalysisGet(Request $request)
+    public function operationalAnalysesGet(Request $request)
     {
         $solution = Solution::find($request->input('id'));
         $operational_analysis = OperationalAnalysis::where('solution_id', '=' , $solution->id);
