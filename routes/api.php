@@ -151,6 +151,7 @@ Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function 
     Route::post('estimate/save', [SolutionController::class, 'estimateSave']);
     Route::post('financial-analyses/save', [SolutionController::class, 'financialAnalysesSave']);
     Route::post('operational-analyses/save', [SolutionController::class, 'operationalAnalysesSave']);
+    Route::post('operational-analyses/get', [SolutionController::class, 'operationalAnalysesGet']);
     Route::post('estimate/get', [SolutionController::class, 'estimateGet']);
 });
 

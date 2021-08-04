@@ -410,6 +410,19 @@ class SolutionController extends Controller
             'payload' => $financial_analyses
         ]);
     }
+
+    public function operationalAnalysisGet(Request $request)
+    {
+        $solution = Solution::find($request->input('id'));
+        $operational_analysis = OperationalAnalysis::where('solution_id', '=' , $solution->id);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie',
+            'payload' => $operational_analysis
+        ]);
+    }
+
     public function estimateSave(Request $request)
     {
         $solution = Solution::find($request->input('solution_id'));

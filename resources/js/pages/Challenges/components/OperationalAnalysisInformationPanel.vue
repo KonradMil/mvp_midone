@@ -1,13 +1,9 @@
 <template>
-    <div class="intro-y box mt-5">
+    <div class="intro-y box mt-5" style="width: 1000px;">
         <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
             <h2 class="font-medium text-base mr-auto">
                 Bordered Table
             </h2>
-            <div class="w-full sm:w-auto flex items-center sm:ml-auto mt-3 sm:mt-0">
-                <label class="form-check-label ml-0 sm:ml-2" for="show-example-2">Show example code</label>
-                <input data-target="#bordered-table" class="show-code form-check-switch mr-0 ml-3" type="checkbox" id="show-example-2">
-            </div>
         </div>
         <div class="p-5" id="bordered-table">
             <div class="preview">
@@ -62,8 +58,7 @@ import VueEasyLightbox from 'vue-easy-lightbox'
 export default {
     name: "BasicInformationPanel",
     props: {
-        challenge: Object,
-
+        solution: Object,
     },
     components: {
         VueEasyLightbox
@@ -75,24 +70,14 @@ export default {
         const toast = useToast();
         const types = require("../../../json/types.json");
         const lightboxVisible = ref(false);
-        const images = computed(() => {
-            let a = [];
-            a.push('/' + props.challenge.screenshot_path);
-            if (props.challenge.files != undefined) {
-                if (props.challenge.files.length > 0) {
-                    props.challenge.files.forEach((val) => {
-                        a.push('/' + val.path);
-                    });
-                }
-            }
-            return a;
-        })
+        const operational_analyses = ref('');
+
         const lightBoxIndex = ref(0);
 
         onMounted(() => {
             console.log("props.challenge");
             console.log(props.challenge);
-            // images.value.push('/' + props.challenge.screenshot_path);
+            getOperationalAnalysis();
         });
 
         const showImage = (index) => {
@@ -105,13 +90,11 @@ export default {
             lightboxVisible.value = false;
         }
 
-        const follow = () => {
-            axios.post('/api/challenge/user/follow', {id: props.challenge.id})
+        const getOperationalAnalysis = () => {
+            axios.post('/api/solution/operational-analyses/get', {id: props.solution.id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
-                        challenge.value.followed = true;
-                        toast.success('Teraz śledzisz to wyzwanie.');
+                        operational_analyses.value = response.data.payload;
                     } else {
 
                     }
@@ -131,46 +114,8 @@ export default {
                 })
         }
 
-        const saveDate = () => {
-            axios.post('/api/challenge/change/dates', {id: challenge.value.id, offer_deadline: challenge.value.offer_deadline, solution_deadline: challenge.value.solution_deadline})
-                .then(response => {
-                    // console.log(response.data)
-                    if (response.data.success) {
-                        toast.success('Daty zmienione.');
-                    } else {
-
-                    }
-                })
-        }
-
-        const stage = computed(function () {
-            switch (challenge.value.stage) {
-                case 0:
-                    return 'Szkic';
-                    break;
-                case 1:
-                    return 'Oczekiwanie na rozwiązania';
-                    break;
-                case 2:
-                    return 'Oczekiwanie na oferty';
-                    break;
-                case 3:
-                    return 'Podisywanie umowy';
-                    break;
-                case 4:
-                    return 'Planowanie projektu';
-                    break;
-                case 5:
-                    return 'Wdrażanie';
-                    break;
-                case 6:
-                    return 'Fakturowanie';
-                    break;
-            }
-        });
-
         return {
-            stage,
+            operational_analyses,
             challenge,
             types,
             follow,
