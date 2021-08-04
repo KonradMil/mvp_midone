@@ -120,7 +120,7 @@
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :edit_offer_id="edit_offer_id"></OfferAdd>
             <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab" :id="challenge.id" :inTeam="inTeam" :addSolutionOffer="addSolutionOffer"></Offers>
             <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam" :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
-            <OperationalAnalysisDialog v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisDialog>
+            <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisInformationPanel>
         </div>
     </div>
 </template>
@@ -150,7 +150,7 @@ import OfferAdd from "./components/OfferAdd";
 import Offers from "./components/Offers";
 import TeamsPanel from "./components/TeamsPanel";
 import ChallengeOffers from "./components/ChallengeOffers";
-import OperationalAnalysisDialog from "../Unity/components/right-panel/OperationalAnalysisDialog";
+import OperationalAnalysisInformationPanel from "./components/OperationalAnalysisInformationPanel";
 
 export default defineComponent({
     name: 'Card',
@@ -164,7 +164,7 @@ export default defineComponent({
         TechnicalInformationPanel,
         BasicInformationPanel,
         WhatsNext,
-        OperationalAnalysisDialog
+        OperationalAnalysisInformationPanel
     },
     props: {
         id: Number,
