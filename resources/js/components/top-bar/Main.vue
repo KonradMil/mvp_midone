@@ -331,7 +331,9 @@ export default defineComponent({
                     if (response.data.success) {
                         // getNotificationsRepositories();
                         notifications.value = response.data.payload
-                        counts.value--;
+                        if(counts.value > 0){
+                            counts.value--;
+                        }
                     } else {
                         toast.error('Error');
                     }
