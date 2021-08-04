@@ -102,7 +102,7 @@ export default {
     },
 
     setup(props) {
-        const operational_analyses = ref('');
+        const operational_analyses = ref({});
 
         onMounted(() => {
             getOperationalAnalysis();
@@ -112,6 +112,7 @@ export default {
             axios.post('/api/solution/operational-analyses/get', {id: props.solution.id})
                 .then(response => {
                     if (response.data.success) {
+                        console.log('dsadsadad->' + response.data.payload);
                         operational_analyses.value = response.data.payload;
                     } else {
 
