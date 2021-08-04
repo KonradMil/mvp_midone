@@ -331,7 +331,7 @@ export default defineComponent({
                     if (response.data.success) {
                         // getNotificationsRepositories();
                         notifications.value = response.data.payload
-                        if(counts.value > 0){
+                        if(counts.value !== 0){
                             counts.value--;
                         }
                     } else {
