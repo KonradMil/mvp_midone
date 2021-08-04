@@ -249,6 +249,7 @@ export default defineComponent({
             notifications.value = user.notifications;
         })
         return {
+            acceptInvite,
             delNotifi,
             readAll,
             setRead,
