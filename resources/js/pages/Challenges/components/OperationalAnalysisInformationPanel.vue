@@ -8,7 +8,7 @@
         <div class="p-5" id="bordered-table">
             <div class="preview">
                 <div class="overflow-x-auto">
-                    <table class="table">
+                    <table class="table" >
                         <thead>
                         <tr>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap"></th>
@@ -102,7 +102,7 @@ export default {
     },
 
     setup(props) {
-        const operational_analyses = ref({});
+        const operational_analyses = ref('');
 
         onMounted(() => {
             console.log('asdf');
