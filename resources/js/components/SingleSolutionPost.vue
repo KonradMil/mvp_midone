@@ -120,10 +120,11 @@ import {computed, getCurrentInstance, onMounted, ref} from "vue";
 import router from "../router";
 import {useToast} from "vue-toastification";
 import TeamsPanelSolution from "../pages/Challenges/components/TeamsPanel";
+import Modal from "./Modal";
 
 export default {
     name: "SingleSolutionPost",
-    components: {CommentSection, TeamsPanelSolution},
+    components: {CommentSection, TeamsPanelSolution, Modal},
     props: {
         index: Number,
         challenge: Object,
