@@ -20,63 +20,63 @@
                         <tbody>
                         <tr>
                             <td class="border">Czas dostępny (min)</td>
-                            <td class="border">{{operation_analyses.time_available_before}}</td>
-                            <td class="border">{{operation_analyses.time_available_after}}</td>
-                            <td class="border">{{operation_analyses.time_available_change}}</td>
+                            <td class="border">{{operational_analyses.time_available_before}}</td>
+                            <td class="border">{{operational_analyses.time_available_after}}</td>
+                            <td class="border">{{operational_analyses.time_available_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">Czas produkcji (min)</td>
-                            <td class="border">{{operation_analyses.time_production_before}}</td>
-                            <td class="border">{{operation_analyses.time_production_after}}</td>
-                            <td class="border">{{operation_analyses.time_production_change}}</td>
+                            <td class="border">{{operational_analyses.time_production_before}}</td>
+                            <td class="border">{{operational_analyses.time_production_after}}</td>
+                            <td class="border">{{operational_analyses.time_production_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">Produkcja (min)</td>
-                            <td class="border">{{operation_analyses.production_before}}</td>
-                            <td class="border">{{operation_analyses.production_after}}</td>
-                            <td class="border">{{operation_analyses.production_change}}</td>
+                            <td class="border">{{operational_analyses.production_before}}</td>
+                            <td class="border">{{operational_analyses.production_after}}</td>
+                            <td class="border">{{operational_analyses.production_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">Czas produkcji sztuk dobrych (min)</td>
-                            <td class="border">{{operation_analyses.good_arts_production_before}}</td>
-                            <td class="border">{{operation_analyses.good_arts_production_after}}</td>
-                            <td class="border">{{operation_analyses.good_arts_production_change}}</td>
+                            <td class="border">{{operational_analyses.good_arts_production_before}}</td>
+                            <td class="border">{{operational_analyses.good_arts_production_after}}</td>
+                            <td class="border">{{operational_analyses.good_arts_production_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">AR - Współczynnik dostepności</td>
-                            <td class="border">{{operation_analyses.availability_factor_before}}</td>
-                            <td class="border">{{operation_analyses.availability_factor_after}}</td>
-                            <td class="border">{{operation_analyses.availability_factor_change}}</td>
+                            <td class="border">{{operational_analyses.availability_factor_before}}</td>
+                            <td class="border">{{operational_analyses.availability_factor_after}}</td>
+                            <td class="border">{{operational_analyses.availability_factor_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">PR - Współczynnik produktywności</td>
-                            <td class="border">{{operation_analyses.productivity_coefficient_before}}</td>
-                            <td class="border">{{operation_analyses.productivity_coefficient_after}}</td>
-                            <td class="border">{{operation_analyses.productivity_coefficient_change}}</td>
+                            <td class="border">{{operational_analyses.productivity_coefficient_before}}</td>
+                            <td class="border">{{operational_analyses.productivity_coefficient_after}}</td>
+                            <td class="border">{{operational_analyses.productivity_coefficient_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">QR - współczynnik jakości</td>
-                            <td class="border">{{operation_analyses.quality_factor_before}}</td>
-                            <td class="border">{{operation_analyses.quality_factor_after}}</td>
-                            <td class="border">{{operation_analyses.quality_factor_change}}</td>
+                            <td class="border">{{operational_analyses.quality_factor_before}}</td>
+                            <td class="border">{{operational_analyses.quality_factor_after}}</td>
+                            <td class="border">{{operational_analyses.quality_factor_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">OEE</td>
-                            <td class="border">{{operation_analyses.oee_before}}</td>
-                            <td class="border">{{operation_analyses.oee_after}}</td>
-                            <td class="border">{{operation_analyses.oee_change}}</td>
+                            <td class="border">{{operational_analyses.oee_before}}</td>
+                            <td class="border">{{operational_analyses.oee_after}}</td>
+                            <td class="border">{{operational_analyses.oee_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">Wielkość produkcji</td>
-                            <td class="border">{{operation_analyses.production_volume_before}}</td>
-                            <td class="border">{{operation_analyses.production_volume_after}}</td>
-                            <td class="border">{{operation_analyses.production_volume_change}}</td>
+                            <td class="border">{{operational_analyses.production_volume_before}}</td>
+                            <td class="border">{{operational_analyses.production_volume_after}}</td>
+                            <td class="border">{{operational_analyses.production_volume_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">PPH na osobę na zmianę</td>
-                            <td class="border">{{operation_analyses.pph_per_person_before}}</td>
-                            <td class="border">{{operation_analyses.pph_per_person_after}}</td>
-                            <td class="border">{{operation_analyses.pph_per_person_change}}</td>
+                            <td class="border">{{operational_analyses.pph_per_person_before}}</td>
+                            <td class="border">{{operational_analyses.pph_per_person_after}}</td>
+                            <td class="border">{{operational_analyses.pph_per_person_change}}</td>
                         </tr>
                         </tbody>
                     </table>
