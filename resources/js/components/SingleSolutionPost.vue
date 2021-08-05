@@ -96,7 +96,7 @@
             />
         </div>
     </div>
-    <Modal :show="show" @closed="modalClosed">
+    <ModalFile :show="show" @closed="modalClosed">
         <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
             <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
                 <ChevronDownIcon class="w-4 h-4 mr-2"/>
@@ -123,7 +123,7 @@
 <!--                    </div>-->
 <!--                </div>-->
                 <div class="mt-3">
-                    <label class="form-label"> {{ $t('challengesNew.uploadPhoto') }}</label>
+                    <label class="form-label"> {{ $t('challengesNew.file') }}</label>
                     <div class="rounded-md pt-4">
                         <div class="flex flex-wrap px-4">
                             <Dropzone
@@ -151,7 +151,7 @@
                 </div>
             </div>
         </div>
-    </Modal>
+    </ModalFile>
 
     <!--    <TeamsPanelSolution v-if="activeTab && (solution.author_id === user.id)" :solution="solution"/>-->
 </template>
@@ -162,7 +162,7 @@ import {computed, getCurrentInstance, onMounted, provide, ref} from "vue";
 import router from "../router";
 import {useToast} from "vue-toastification";
 import TeamsPanelSolution from "../pages/Challenges/components/TeamsPanel";
-import Modal from "./Modal";
+import ModalFile from "./ModalFile";
 
 export default {
     name: "SingleSolutionPost",
