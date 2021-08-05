@@ -114,7 +114,9 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         console.log('response.data.payload' + response.data.payload);
+                        console.log('operational_analyses.value before' + operational_analyses.value);
                         operational_analyses.value = response.data.payload;
+                        console.log('operational_analyses.value after' + operational_analyses.value);
                     } else {
 
                     }
