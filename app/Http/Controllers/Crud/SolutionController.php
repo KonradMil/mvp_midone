@@ -415,6 +415,7 @@ class SolutionController extends Controller
     {
         $solution = Solution::find($request->input('id'));
         $operational_analysis = OperationalAnalysis::where('solution_id', '=' , $solution->id)->get();
+        $operational_analysis->toObject();
 
         return response()->json([
             'success' => true,
