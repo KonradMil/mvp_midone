@@ -117,6 +117,8 @@ export default {
                         console.log('operational_analyses.value before' + operational_analyses.value);
                         operational_analyses.value = response.data.payload;
                         console.log('operational_analyses.value after' + operational_analyses.value);
+                        console.log('operational_analyses.value after' + operational_analyses.value.time_available_before);
+
                     } else {
 
                     }
