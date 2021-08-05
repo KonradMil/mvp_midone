@@ -1,5 +1,5 @@
 <template>
-    <div class="intro-y box mt-5" style="width: 1000px;">
+    <div class="intro-y box" style="width: 1000px;">
         <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
             <h2 class="font-medium text-base mr-auto">
                 Analiza operacyjna {{solution.name}}
