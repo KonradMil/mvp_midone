@@ -14,7 +14,6 @@
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap"></th>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Przed robotyzacją</th>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Po robotyzacji</th>
-                            <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Zmiana</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -117,7 +116,7 @@ export default {
                         console.log('financial_analyses.value before' + financial_analyses.value);
                         financial_analyses.value = response.data.payload;
                         console.log('financial_analyses.value after' + financial_analyses.value);
-                        console.log('financial_analyses.value after' + financial_analyses.value[0].cost_per_hour_before);
+                        console.log('financial_analyses.value after' + financial_analyses.value.cost_per_hour_before);
                     } else {
 
                     }
