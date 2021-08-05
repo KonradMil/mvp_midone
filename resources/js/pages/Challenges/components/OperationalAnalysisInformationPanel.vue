@@ -20,63 +20,63 @@
                         <tbody>
                         <tr>
                             <td class="border">Czas dostępny (min)</td>
-                            <td class="border">Angelina</td>
-                            <td class="border">Jolie</td>
-                            <td class="border">@angelinajolie</td>
+                            <td class="border">{{operational_analyses[0].time_available_before}}</td>
+                            <td class="border">{{operational_analyses[0].time_available_after}}</td>
+                            <td class="border">{{operational_analyses[0].time_available_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">Czas produkcji (min)</td>
-                            <td class="border">Brad</td>
-                            <td class="border">Pitt</td>
-                            <td class="border">@bradpitt</td>
+                            <td class="border">{{operational_analyses[0].time_production_before}}</td>
+                            <td class="border">{{operational_analyses[0].time_production_after}}</td>
+                            <td class="border">{{operational_analyses[0].time_production_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">Produkcja (min)</td>
-                            <td class="border">Charlie</td>
-                            <td class="border">Hunnam</td>
-                            <td class="border">@charliehunnam</td>
+                            <td class="border">{{operational_analyses[0].production_before}}</td>
+                            <td class="border">{{operational_analyses[0].production_after}}</td>
+                            <td class="border">{{operational_analyses[0].production_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">Czas produkcji sztuk dobrych (min)</td>
-                            <td class="border">Charlie</td>
-                            <td class="border">Hunnam</td>
-                            <td class="border">@charliehunnam</td>
+                            <td class="border">{{operational_analyses[0].good_arts_production_before}}</td>
+                            <td class="border">{{operational_analyses[0].good_arts_production_after}}</td>
+                            <td class="border">{{operational_analyses[0].good_arts_production_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">AR - Współczynnik dostepności</td>
-                            <td class="border">Charlie</td>
-                            <td class="border">Hunnam</td>
-                            <td class="border">@charliehunnam</td>
+                            <td class="border">{{operational_analyses[0].availability_factor_before}}</td>
+                            <td class="border">{{operational_analyses[0].availability_factor_before}}</td>
+                            <td class="border">{{operational_analyses[0].availability_factor_before}}</td>
                         </tr>
                         <tr>
                             <td class="border">PR - Współczynnik produktywności</td>
-                            <td class="border">Charlie</td>
-                            <td class="border">Hunnam</td>
-                            <td class="border">@charliehunnam</td>
+                            <td class="border">{{operational_analyses[0].productivity_coefficient_before}}</td>
+                            <td class="border">{{operational_analyses[0].productivity_coefficient_after}}</td>
+                            <td class="border">{{operational_analyses[0].productivity_coefficient_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">QR - współczynnik jakości</td>
-                            <td class="border">Charlie</td>
-                            <td class="border">Hunnam</td>
-                            <td class="border">@charliehunnam</td>
+                            <td class="border">{{operational_analyses[0].quality_factor_before}}</td>
+                            <td class="border">{{operational_analyses[0].quality_factor_after}}</td>
+                            <td class="border">{{operational_analyses[0].quality_factor_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">OEE</td>
-                            <td class="border">Charlie</td>
-                            <td class="border">Hunnam</td>
-                            <td class="border">@charliehunnam</td>
+                            <td class="border">{{operational_analyses[0].oee_before}}</td>
+                            <td class="border">{{operational_analyses[0].oee_after}}</td>
+                            <td class="border">{{operational_analyses[0].oee_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">Wielkość produkcji</td>
-                            <td class="border">Charlie</td>
-                            <td class="border">Hunnam</td>
-                            <td class="border">@charliehunnam</td>
+                            <td class="border">{{operational_analyses[0].production_volume_before}}</td>
+                            <td class="border">{{operational_analyses[0].production_volume_after}}</td>
+                            <td class="border">{{operational_analyses[0].production_volume_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">PPH na osobę na zmianę</td>
-                            <td class="border">Charlie</td>
-                            <td class="border">Hunnam</td>
-                            <td class="border">@charliehunnam</td>
+                            <td class="border">{{operational_analyses[0].pph_per_person_before}}</td>
+                            <td class="border">{{operational_analyses[0].pph_per_person_after}}</td>
+                            <td class="border">{{operational_analyses[0].pph_per_person_change}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -104,21 +104,21 @@ export default {
     setup(props) {
         const operational_analyses = ref('');
 
-        onMounted(() => {
-            getOperationalAnalysis();
-        });
-
         const getOperationalAnalysis = () => {
             axios.post('/api/solution/operational-analyses/get', {id: props.solution.id})
                 .then(response => {
                     if (response.data.success) {
-                        console.log('dsadsadad->' + response.data.payload);
                         operational_analyses.value = response.data.payload;
                     } else {
 
                     }
                 })
         }
+
+        onMounted(() => {
+            getOperationalAnalysis();
+        });
+
 
         return {
             operational_analyses,
