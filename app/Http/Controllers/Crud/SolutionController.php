@@ -424,6 +424,20 @@ class SolutionController extends Controller
             'payload' => $object
         ]);
     }
+    public function financialAnalysesGet(Request $request)
+    {
+        $solution = Solution::find($request->input('id'));
+        $financial_analysis = FinancialAnalysis::where('solution_id', '=' , $solution->id)->get();
+        $object = (object)$financial_analysis;
+
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie',
+            'payload' => $object
+        ]);
+    }
+
 
     public function estimateSave(Request $request)
     {

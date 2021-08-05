@@ -65,6 +65,13 @@
                             <SettingsIcon class="w-4 h-4 mr-2"/>
                             Analiza operacyjna rozwiązania
                         </a>
+                        <a v-if="challenge.stage === 3"
+                           class="flex items-center mt-5" href=""
+                           @click.prevent="activeTab = 'financial-analysis'"
+                           :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                            <SettingsIcon class="w-4 h-4 mr-2"/>
+                            Analiza finansowa rozwiązania
+                        </a>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5" v-if="(challenge.author_id == user.id)">
                         <a class="flex items-center" href=""
@@ -121,6 +128,7 @@
             <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab" :id="challenge.id" :inTeam="inTeam" :addSolutionOffer="addSolutionOffer"></Offers>
             <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam" :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
             <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisInformationPanel>
+            <FinancialAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></FinancialAnalysisInformationPanel>
         </div>
     </div>
 </template>
@@ -152,6 +160,7 @@ import Offers from "../Challenges/components/Offers";
 import TeamsPanel from "../Challenges/components/TeamsPanel";
 import ChallengeOffers from "../Challenges/components/ChallengeOffers";
 import OperationalAnalysisInformationPanel from "../Challenges/components/OperationalAnalysisInformationPanel";
+import FinancialAnalysisInformationPanel from "./components/FinancialAnalysisInformationPanel";
 
 export default defineComponent({
     name: 'projectCard',
@@ -165,7 +174,8 @@ export default defineComponent({
         TechnicalInformationPanel,
         BasicInformationPanel,
         WhatsNext,
-        OperationalAnalysisInformationPanel
+        OperationalAnalysisInformationPanel,
+        FinancialAnalysisInformationPanel
     },
     props: {
         id: Number,
