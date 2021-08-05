@@ -427,7 +427,7 @@ class SolutionController extends Controller
     public function financialAnalysesGet(Request $request)
     {
         $solution = Solution::find($request->input('id'));
-        $financial_analysis = FinancialAnalysis::where('solution_id', '=' , $solution->id)->get();
+        $financial_analysis = FinancialAnalysis::where('solution_id', '=' , $solution->id)->first();
         $object = (object)$financial_analysis;
 
 
