@@ -186,12 +186,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="tab === 'details'" id="content2" class="tab-pane p-5 active" role="tabpanel" aria-labelledby="content-tab">
-                            <Details v-model:details="details" :types="categories" :selects="challengeSelects"></Details>
-                        </div>
-                        <div v-if="tab==='financials'" class="intro-y box mt-5">
-                            <Financials v-model:financials="financials"></Financials>
-                        </div>
                     </div>
                 </div>
             </div>
