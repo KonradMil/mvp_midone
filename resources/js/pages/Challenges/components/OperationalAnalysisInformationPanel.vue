@@ -8,7 +8,7 @@
         <div class="p-5" id="bordered-table">
             <div class="preview">
                 <div class="overflow-x-auto">
-                    <table class="table" >
+                    <table class="table" v-for="(operation, index) in operational_analyses" :key="index" >
                         <thead>
                         <tr>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap"></th>
@@ -20,7 +20,7 @@
                         <tbody>
                         <tr>
                             <td class="border">Czas dostępny (min)</td>
-<!--                            <td class="border">{{operational_analyses[0].time_available_before}}</td>-->
+                            <td class="border">{{operation.time_available_before}}</td>
 <!--                            <td class="border">{{operational_analyses[0].time_available_after}}</td>-->
 <!--                            <td class="border">{{operational_analyses[0].time_available_change}}</td>-->
                         </tr>
