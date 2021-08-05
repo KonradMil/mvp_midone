@@ -159,7 +159,7 @@ import OfferAdd from "../Challenges/components/OfferAdd";
 import Offers from "../Challenges/components/Offers";
 import TeamsPanel from "../Challenges/components/TeamsPanel";
 import ChallengeOffers from "../Challenges/components/ChallengeOffers";
-import OperationalAnalysisInformationPanel from "../Challenges/components/OperationalAnalysisInformationPanel";
+import OperationalAnalysisInformationPanel from "./components/OperationalAnalysisInformationPanel";
 import FinancialAnalysisInformationPanel from "./components/FinancialAnalysisInformationPanel";
 
 export default defineComponent({
