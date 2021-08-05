@@ -96,7 +96,7 @@
             />
         </div>
     </div>
-    <Modal :show="show" @closed="modalClosed">
+    <Modal :show="asdf" @closed="modalClosed">
         <h3 class="intro-y text-lg font-medium mt-5">{{$t('teams.addMember')}}</h3>
         <div class="intro-y box p-5 mt-12 sm:mt-5">
             <div>
@@ -147,14 +147,14 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         const activeTab = ref(false);
         const inTeam = ref(false);
-        const show = ref(false);
+        const asdf = ref(false);
 
         const modalClosed = () => {
-            show.value = false;
+            asdf.value = false;
         }
 
         const showAddFileModal = (id) => {
-                show.value = !show.value;
+                asdf.value = !asdf.value;
             }
 
         const switchTab = () => {
@@ -286,7 +286,7 @@ export default {
         return {
             showAddFileModal,
             modalClosed,
-            show,
+            asdf,
             switchTab,
             teams,
             activeTab,
