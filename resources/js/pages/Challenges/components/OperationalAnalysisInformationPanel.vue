@@ -102,7 +102,7 @@ export default {
     },
 
     setup(props) {
-        const operational_analyses = ref('');
+        const operational_analyses = ref({});
 
         const getOperationalAnalysis = () => {
             axios.post('/api/solution/operational-analyses/get', {id: props.solution.id})
