@@ -32,4 +32,9 @@ class File extends Model
         return $this->belongsToMany(File::class, 'challenge_image', 'image_id', 'challenge_id');
     }
 
+    public function solutions()
+    {
+        return $this->belongsToMany(File::class, 'solution_image', 'image_id', 'solution_id');
+    }
+
 }

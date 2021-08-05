@@ -56,6 +56,7 @@
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0 && challenge.stage == 1 &&  solution.archive != 1 && canPublishSolution" @click="publishSolution">{{$t('challengesMain.publish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1 && canPublishSolution" @click="unpublishSolution">{{$t('challengesMain.unpublish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive != 1" @click="switchTab">{{$t('teams.teams')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="solution.archive" @click="showAddFileModal">Dodaj plik</button>
             </div>
             <div class="mt-2" v-if="user.type == 'integrator' && solution.selected == 1 && type!=='archive' && addSolutionOffer">
                 <button v-if="solution.archive != 1" class="btn btn-primary shadow-md mr-2" @click="addOffer">{{$t('challengesMain.addOffer')}}</button>
@@ -95,7 +96,22 @@
             />
         </div>
     </div>
-<!--    <TeamsPanelSolution v-if="activeTab && (solution.author_id === user.id)" :solution="solution"/>-->
+    <Modal :show="show" @closed="modalClosed">
+        <h3 class="intro-y text-lg font-medium mt-5">{{$t('teams.addMember')}}</h3>
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+            <div>
+                {{$t('teams.description')}}
+            </div>
+        </div>
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+            <div class="relative text-gray-700 dark:text-gray-300 mr-4">
+                <input type="text" class="form-control w-56 box pr-10 placeholder-theme-13" placeholder="Email" v-model="new_team_member_email"/>
+                <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addMember">{{ $t('teams.invite') }}</button>
+            </div>
+        </div>
+    </Modal>
+
+    <!--    <TeamsPanelSolution v-if="activeTab && (solution.author_id === user.id)" :solution="solution"/>-->
 </template>
 
 <script>
@@ -131,6 +147,16 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         const activeTab = ref(false);
         const inTeam = ref(false);
+        const show = ref(false);
+
+        const modalClosed = () => {
+            show.value = false;
+        }
+
+        const showAddFileModal = (id) => {
+                show.value = !show.value;
+            }
+
         const switchTab = () => {
             console.log('Switch2244444');
             console.log(props.solution + ' its props solution');
@@ -258,6 +284,9 @@ export default {
         }
 
         return {
+            showAddFileModal,
+            modalClosed,
+            show,
             switchTab,
             teams,
             activeTab,

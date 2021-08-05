@@ -4,6 +4,7 @@ namespace App\Models\Solutions;
 
 use App\Models\Challenges\Challenge;
 use App\Models\Estimate;
+use App\Models\File;
 use App\Models\Financial;
 use App\Models\FinancialAnalysis;
 use App\Models\Offer;
@@ -68,6 +69,12 @@ class Solution extends Model implements ReactableInterface
     {
         return $this->hasOne(Financial::class, 'id' , 'financial_after_id');
     }
+
+    public function files()
+    {
+        return $this->belongsToMany(File::class, 'solution_image', 'solution_id', 'image_id');
+    }
+
 //
 //    public function estimate()
 //    {

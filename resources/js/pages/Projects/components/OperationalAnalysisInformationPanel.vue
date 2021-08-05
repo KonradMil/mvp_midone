@@ -78,7 +78,7 @@
                             <td class="border">{{operational_analyses.pph_per_person_after}}</td>
                             <td class="border">{{operational_analyses.pph_per_person_change}}</td>
                         </tr>
-                        </tbody>
+                        </tbody>C
                     </table>
                 </div>
             </div>
