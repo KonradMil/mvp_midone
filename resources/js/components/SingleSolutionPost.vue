@@ -131,7 +131,7 @@
                                                     display: flex;"
                                 ref-key="dropzoneSingleRef"
                                 :options="{
-                              url: '/api/challenge/images/store',
+                              url: '/api/solution/images/store',
                               thumbnailWidth: 150,
                               maxFilesize: 5,
                               maxFiles: 5,

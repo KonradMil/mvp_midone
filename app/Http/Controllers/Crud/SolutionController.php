@@ -25,6 +25,7 @@ use Carbon\Carbon;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Mrcnpdlk\Lib\Exception;
 use phpDocumentor\Reflection\Types\Boolean;
@@ -32,6 +33,28 @@ use Psr\Log\NullLogger;
 
 class SolutionController extends Controller
 {
+    public function storeFile(Request $request)
+    {
+        $ext = $request->file->extension();
+        $fileName = time() . '.' . $ext;
+        Storage::disk('s3')->putFileAs('screenshots', $request->file, $fileName);
+//        $request->file->move(public_path('uploads'), $fileName);
+        $file = new File();
+        $file->name = $fileName;
+        $file->ext = $ext;
+        $file->path = 's3/screenshots/' . $fileName;
+        $file->original_name = $request->file->getClientOriginalName();
+        $file->save();
+//        $challenge = Challenge::find($request->challenge_id);
+//        $challenge->files()->attach($file);
+        return response()->json([
+            'success' => true,
+            'message' => 'Zdjecie zostało wgrane poprawnie',
+            'payload' => $file
+        ]);
+    }
+
+
     public function filterChallengeSolutions(Request $request)
     {
         $option = $request->input('option');
