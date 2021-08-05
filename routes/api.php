@@ -145,7 +145,6 @@ Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function 
     Route::post('user/like', [SolutionController::class, 'likeSolution']);
     Route::post('user/dislike', [SolutionController::class, 'dislikeSolution']);
     Route::post('user/comment', [SolutionController::class, 'commentSolution']);
-    Route::post('images/store', [SolutionController::class, 'storeImage']);
     Route::post('publish', [SolutionController::class, 'publish']);
     Route::post('unpublish', [SolutionController::class, 'unpublish']);
     Route::post('delete', [SolutionController::class, 'delete']);
