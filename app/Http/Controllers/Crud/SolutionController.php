@@ -414,7 +414,7 @@ class SolutionController extends Controller
     public function operationalAnalysesGet(Request $request)
     {
         $solution = Solution::find($request->input('id'));
-        $operational_analysis = OperationalAnalysis::where('solution_id', '=' , $solution->id)->get();
+        $operational_analysis = OperationalAnalysis::where('solution_id', '=' , $solution->id)->first();
         $object = (object)$operational_analysis;
 
 
