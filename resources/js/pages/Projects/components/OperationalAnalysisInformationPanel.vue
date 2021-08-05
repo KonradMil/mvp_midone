@@ -105,7 +105,6 @@ export default {
         const operational_analyses = ref({});
 
         onMounted(() => {
-            console.log('asdf');
             getOperationalAnalysis();
         });
 
@@ -113,11 +112,7 @@ export default {
             axios.post('/api/solution/operational-analyses/get', {id: props.solution.id})
                 .then(response => {
                     if (response.data.success) {
-                        console.log('response.data.payload' + response.data.payload);
-                        console.log('operational_analyses.value before' + operational_analyses.value);
                         operational_analyses.value = response.data.payload;
-                        console.log('operational_analyses.value after' + operational_analyses.value);
-                        console.log('operational_analyses.value after' + operational_analyses.value.time_available_before);
                     } else {
 
                     }
