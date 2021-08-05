@@ -1,5 +1,5 @@
 <template>
-    <div class="intro-y box" style="width: 1000px;">
+    <div class="intro-y box mt-5" style="width: 1000px;">
         <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
             <h2 class="font-medium text-base mr-auto">
                 Analiza operacyjna {{solution.name}}
@@ -45,8 +45,8 @@
                         <tr>
                             <td class="border">AR - Współczynnik dostepności</td>
                             <td class="border">{{operation_analyses.availability_factor_before}}</td>
-                            <td class="border">{{operation_analyses.availability_factor_after}}</td>
-                            <td class="border">{{operation_analyses.availability_factor_change}}</td>
+                            <td class="border">{{operation_analyses.availability_factor_before}}</td>
+                            <td class="border">{{operation_analyses.availability_factor_before}}</td>
                         </tr>
                         <tr>
                             <td class="border">PR - Współczynnik produktywności</td>
@@ -105,6 +105,7 @@ export default {
         const operational_analyses = ref({});
 
         onMounted(() => {
+            console.log('asdf');
             getOperationalAnalysis();
         });
 
@@ -112,7 +113,10 @@ export default {
             axios.post('/api/solution/operational-analyses/get', {id: props.solution.id})
                 .then(response => {
                     if (response.data.success) {
+                        console.log('response.data.payload' + response.data.payload);
+                        console.log('operational_analyses.value before' + operational_analyses.value);
                         operational_analyses.value = response.data.payload;
+                        console.log('operational_analyses.value after' + operational_analyses.value);
                     } else {
 
                     }
