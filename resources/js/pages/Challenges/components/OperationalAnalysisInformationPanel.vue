@@ -20,7 +20,7 @@
                         <tbody>
                         <tr>
                             <td class="border">Czas dostępny (min)</td>
-<!--                            <td class="border">{{operation_analyses.time_available_before}}</td>-->
+                            <td class="border">{{operational_analyses.time_available_before}}</td>
 <!--                            <td class="border">{{operation_analyses.time_available_after}}</td>-->
 <!--                            <td class="border">{{operation_analyses.time_available_change}}</td>-->
                         </tr>
