@@ -104,6 +104,10 @@ export default {
     setup(props) {
         const operational_analyses = ref({});
 
+        onMounted(() => {
+            getOperationalAnalysis();
+        });
+
         const getOperationalAnalysis = () => {
             axios.post('/api/solution/operational-analyses/get', {id: props.solution.id})
                 .then(response => {
@@ -114,11 +118,6 @@ export default {
                     }
                 })
         }
-
-        onMounted(() => {
-            getOperationalAnalysis();
-        });
-
 
         return {
             operational_analyses,
