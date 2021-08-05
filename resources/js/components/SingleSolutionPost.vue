@@ -105,8 +105,8 @@
         </div>
         <div class="intro-y box p-5 mt-12 sm:mt-5">
             <div class="relative text-gray-700 dark:text-gray-300 mr-4">
-                <input type="text" class="form-control w-56 box pr-10 placeholder-theme-13" placeholder="Email" v-model="new_team_member_email"/>
-                <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addMember">{{ $t('teams.invite') }}</button>
+                <input type="text" class="form-control w-56 box pr-10 placeholder-theme-13" placeholder="Email"/>
+                <button class="btn btn-primary shadow-md mr-2">{{ $t('teams.invite') }}</button>
             </div>
         </div>
     </Modal>

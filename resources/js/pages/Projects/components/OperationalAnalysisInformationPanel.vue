@@ -1,5 +1,5 @@
 <template>
-    <div class="intro-y box" style="width: 1000px;">
+    <div class="intro-y box border-solid border-4 border-pink-600" style="width: 1000px;">
         <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
             <h2 class="font-medium text-base mr-auto">
                 Analiza operacyjna {{solution.name}}
@@ -78,7 +78,7 @@
                             <td class="border">{{operational_analyses.pph_per_person_after}}</td>
                             <td class="border">{{operational_analyses.pph_per_person_change}}</td>
                         </tr>
-                        </tbody>C
+                        </tbody>
                     </table>
                 </div>
             </div>
