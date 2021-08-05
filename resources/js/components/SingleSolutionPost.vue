@@ -192,6 +192,7 @@ export default {
         const inTeam = ref(false);
         const show = ref(false);
         const dropzoneSingleRef = ref();
+        const images = ref([]);
 
         const modalClosed = () => {
             show.value = false;
@@ -340,6 +341,7 @@ export default {
         });
 
         return {
+            images,
             dropzoneSingleRef,
             showAddFileModal,
             modalClosed,
