@@ -122,7 +122,7 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
 });
 
 Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
-    Route::post('images/store', [ChallengeController::class, 'storeFile']);
+    Route::post('images/store', [SolutionController::class, 'storeFile']);
     Route::post('robots', [SolutionController::class, 'getRobots']);
     Route::post('save/robot', [SolutionController::class, 'saveRobot']);
     Route::post('filter', [SolutionController::class, 'deleteSolutionsNull']);
