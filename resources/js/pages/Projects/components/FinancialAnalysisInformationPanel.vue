@@ -8,7 +8,7 @@
         <div class="p-5" id="bordered-table">
             <div class="preview">
                 <div class="overflow-x-auto">
-                    <table class="table" v-for="(financial, index) in financial_analyses" :key="index" >
+                    <table class="table">
                         <thead>
                         <tr>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap"></th>
@@ -19,64 +19,64 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="border">Czas dostępny (min)</td>
-<!--                            <td class="border">{{operation.time_available_before}}</td>-->
-<!--                            <td class="border">{{operation.time_available_after}}</td>-->
-<!--                            <td class="border">{{operation.time_available_change}}</td>-->
+                            <td class="border">Koszt pracy na stanowisku na godzinę za osobę</td>
+                            <td class="border">{{financial_analyses.cost_per_hour_before}}</td>
+                            <td class="border">{{financial_analyses.cost_per_hour_after}}</td>
                         </tr>
                         <tr>
-                            <td class="border">Czas produkcji (min)</td>
-<!--                            <td class="border">{{operation.time_production_before}}</td>-->
-<!--                            <td class="border">{{operation.time_production_after}}</td>-->
-<!--                            <td class="border">{{operation.time_production_change}}</td>-->
+                            <td class="border">Koszt pracy na stanowisku rok</td>
+                            <td class="border">{{financial_analyses.cost_per_year_before}}</td>
+                            <td class="border">{{financial_analyses.cost_per_year_after}}</td>
                         </tr>
                         <tr>
-                            <td class="border">Produkcja (min)</td>
-<!--                            <td class="border">{{operation.production_before}}</td>-->
-<!--                            <td class="border">{{operation.production_after}}</td>-->
-<!--                            <td class="border">{{operation.production_change}}</td>-->
+                            <td class="border">Koszt pracy na sztukę produkcji</td>
+                            <td class="border">{{financial_analyses.cost_per_piece_before}}</td>
+                            <td class="border">{{financial_analyses.cost_per_piece_after}}</td>
                         </tr>
                         <tr>
-                            <td class="border">Czas produkcji sztuk dobrych (min)</td>
-<!--                            <td class="border">{{operation.good_arts_production_before}}</td>-->
-<!--                            <td class="border">{{operation.good_arts_production_after}}</td>-->
-<!--                            <td class="border">{{operation.good_arts_production_change}}</td>-->
+                            <td class="border">Miesieczna redukcja koszty obsługi stanowiska (ludzie)</td>
+                            <td class="border">{{financial_analyses.monthly_reduction_before}}</td>
+                            <td class="border">{{financial_analyses.monthly_reduction_after}}</td>
                         </tr>
                         <tr>
-                            <td class="border">AR - Współczynnik dostepności</td>
-<!--                            <td class="border">{{operation.availability_factor_before}}</td>-->
-<!--                            <td class="border">{{operation.availability_factor_before}}</td>-->
-<!--                            <td class="border">{{operation.availability_factor_before}}</td>-->
+                            <td class="border">Obniżka TKW na sztukę produkcji</td>
+                            <td class="border">{{financial_analyses.tkw_reduction_before}}</td>
+                            <td class="border">{{financial_analyses.tkw_reduction_after}}</td>
                         </tr>
                         <tr>
-                            <td class="border">PR - Współczynnik produktywności</td>
-<!--                            <td class="border">{{operation.productivity_coefficient_before}}</td>-->
-<!--                            <td class="border">{{operation.productivity_coefficient_after}}</td>-->
-<!--                            <td class="border">{{operation.productivity_coefficient_change}}</td>-->
+                            <td class="border">Roczna oszczędność finansowa (dodatkowy zysk brutto)</td>
+                            <td class="border">{{financial_analyses.additional_savings_before}}</td>
+                            <td class="border">{{financial_analyses.additional_savings_after}}</td>
                         </tr>
                         <tr>
-                            <td class="border">QR - współczynnik jakości</td>
-<!--                            <td class="border">{{operation.quality_factor_before}}</td>-->
-<!--                            <td class="border">{{operation.quality_factor_after}}</td>-->
-<!--                            <td class="border">{{operation.quality_factor_change}}</td>-->
+                            <td class="border">Capex</td>
+                            <td class="border">{{financial_analyses.capex}}</td>
+                            <td class="border">{{financial_analyses.capex}}</td>
                         </tr>
                         <tr>
-                            <td class="border">OEE</td>
-<!--                            <td class="border">{{operation.oee_before}}</td>-->
-<!--                            <td class="border">{{operation.oee_after}}</td>-->
-<!--                            <td class="border">{{operation.oee_change}}</td>-->
+                            <td class="border">Koszt kapitału (zakładany automatycznie)</td>
+                            <td class="border">{{financial_analyses.timeframe}}</td>
+                            <td class="border">{{financial_analyses.timeframe}}</td>
                         </tr>
                         <tr>
-                            <td class="border">Wielkość produkcji</td>
-<!--                            <td class="border">{{operation.production_volume_before}}</td>-->
-<!--                            <td class="border">{{operation.production_volume_after}}</td>-->
-<!--                            <td class="border">{{operation.production_volume_change}}</td>-->
+                            <td class="border">Zakładany okres analizy</td>
+                            <td class="border">{{financial_analyses.monthly_savings_before}}</td>
+                            <td class="border">{{financial_analyses.monthly_savings_before}}</td>
                         </tr>
                         <tr>
-                            <td class="border">PPH na osobę na zmianę</td>
-<!--                            <td class="border">{{operation.pph_per_person_before}}</td>-->
-<!--                            <td class="border">{{operation.pph_per_person_after}}</td>-->
-<!--                            <td class="border">{{operation.pph_per_person_change}}</td>-->
+                            <td class="border">Średnia oszczędność miesięczna</td>
+                            <td class="border">{{financial_analyses.pph_per_person_before}}</td>
+                            <td class="border">{{financial_analyses.pph_per_person_after}}</td>
+                        </tr>
+                        <tr>
+                            <td class="border">Okres zwrotu prosty</td>
+                            <td class="border">{{financial_analyses.simple_payback}}</td>
+                            <td class="border">{{financial_analyses.simple_payback}}</td>
+                        </tr>
+                        <tr>
+                            <td class="border">NPV</td>
+                            <td class="border">{{financial_analyses.npv}}</td>
+                            <td class="border">{{financial_analyses.npv}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -114,10 +114,10 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         console.log('response.data.payload' + response.data.payload);
-                        console.log('operational_analyses.value before' + financial_analyses.value);
+                        console.log('financial_analyses.value before' + financial_analyses.value);
                         financial_analyses.value = response.data.payload;
-                        console.log('operational_analyses.value after' + financial_analyses.value);
-                        console.log('operational_analyses.value after' + financial_analyses.value[0].time_available_before);
+                        console.log('financial_analyses.value after' + financial_analyses.value);
+                        console.log('financial_analyses.value after' + financial_analyses.value[0].cost_per_hour_before);
                     } else {
 
                     }

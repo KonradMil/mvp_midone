@@ -45,8 +45,8 @@
                         <tr>
                             <td class="border">AR - Współczynnik dostepności</td>
                             <td class="border">{{operation_analyses.availability_factor_before}}</td>
-                            <td class="border">{{operation_analyses.availability_factor_before}}</td>
-                            <td class="border">{{operation_analyses.availability_factor_before}}</td>
+                            <td class="border">{{operation_analyses.availability_factor_after}}</td>
+                            <td class="border">{{operation_analyses.availability_factor_change}}</td>
                         </tr>
                         <tr>
                             <td class="border">PR - Współczynnik produktywności</td>
