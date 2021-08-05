@@ -110,7 +110,7 @@ export default {
         });
 
         const getOperationalAnalysis = async() => {
-            await axios.post('/api/solution/operational-analyses/get', {id: props.solution.id})
+            axios.post('/api/solution/operational-analyses/get', {id: props.solution.id})
                 .then(response => {
                     if (response.data.success) {
                         console.log('response.data.payload' + response.data.payload);
