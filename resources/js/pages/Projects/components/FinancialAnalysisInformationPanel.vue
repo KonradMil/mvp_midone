@@ -10,14 +10,14 @@
                 <div class="overflow-x-auto">
                     <table class="table text-gray-100 bg-gradient-to-l from-pink-500 to-pink-900">
                         <thead>
-                        <tr>
+                        <tr class="text-left border-b-2 border-indigo-300">
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap"></th>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Przed robotyzacją</th>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Po robotyzacji</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <tr class="text-left border-b-2 border-indigo-300">
                             <td class="border">Koszt pracy na stanowisku na godzinę za osobę</td>
                             <td class="border">{{financial_analyses.cost_per_hour_before}}</td>
                             <td class="border">{{financial_analyses.cost_per_hour_after}}</td>
