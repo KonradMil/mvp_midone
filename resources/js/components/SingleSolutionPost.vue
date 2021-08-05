@@ -166,7 +166,7 @@ import ModalFile from "./ModalFile";
 
 export default {
     name: "SingleSolutionPost",
-    components: {CommentSection, TeamsPanelSolution, Modal},
+    components: {CommentSection, TeamsPanelSolution, ModalFile},
     props: {
         index: Number,
         challenge: Object,
