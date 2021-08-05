@@ -97,16 +97,58 @@
         </div>
     </div>
     <Modal :show="asdf" @closed="modalClosed">
-        <h3 class="intro-y text-lg font-medium mt-5">{{$t('teams.addMember')}}</h3>
-        <div class="intro-y box p-5 mt-12 sm:mt-5">
-            <div>
-                {{$t('teams.description')}}
+        <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
+            <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
+                <ChevronDownIcon class="w-4 h-4 mr-2"/>
+                {{ $t('challengesNew.photo') }}
             </div>
-        </div>
-        <div class="intro-y box p-5 mt-12 sm:mt-5">
-            <div class="relative text-gray-700 dark:text-gray-300 mr-4">
-                <input type="text" class="form-control w-56 box pr-10 placeholder-theme-13" placeholder="Email"/>
-                <button class="btn btn-primary shadow-md mr-2">{{ $t('teams.invite') }}</button>
+            <div class="mt-5">
+                <div class="mt-3" v-if="images.length > 0">
+                    <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>
+                    <div class="rounded-md pt-4">
+                        <div class="row flex h-full">
+                            <div class=" h-full" v-for="(image, index) in images" :key="'image_' + index">
+                                <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
+                                    <img class="w-full h-full"
+                                         :alt="image.original_name"
+                                         :src="'/' + image.path"
+                                    />
+                                    <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
+                                    </div>
+                                </div>
+                                <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteImage(index)" class="cursor-pointer">USUŃ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <label class="form-label"> {{ $t('challengesNew.uploadPhoto') }}</label>
+                    <div class="rounded-md pt-4">
+                        <div class="flex flex-wrap px-4">
+                            <Dropzone
+                                style="position: relative;
+                                                    display: flex;"
+                                ref-key="dropzoneSingleRef"
+                                :options="{
+                              url: '/api/challenge/images/store',
+                              thumbnailWidth: 150,
+                              maxFilesize: 5,
+                              maxFiles: 5,
+                              previewTemplate: '<div style=\'display: none\'></div>'
+                            }"
+                                class="dropzone">
+                                <div class="px-4 py-4 flex items-center cursor-pointer relative">
+                                    <ImageIcon class="w-4 h-4 mr-2"/>
+                                    <span class="text-theme-1 dark:text-theme-10 mr-1">
+                                                            {{ $t('challengesNew.file') }}
+                                                        </span>
+                                    {{ $t('challengesNew.fileUpload') }}
+                                </div>
+                            </Dropzone>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </Modal>
@@ -116,7 +158,7 @@
 
 <script>
 import CommentSection from "./social/CommentSection";
-import {computed, getCurrentInstance, onMounted, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, provide, ref} from "vue";
 import router from "../router";
 import {useToast} from "vue-toastification";
 import TeamsPanelSolution from "../pages/Challenges/components/TeamsPanel";
@@ -149,6 +191,7 @@ export default {
         const activeTab = ref(false);
         const inTeam = ref(false);
         const asdf = ref(false);
+        const dropzoneSingleRef = ref();
 
         const modalClosed = () => {
             asdf.value = false;
@@ -165,13 +208,21 @@ export default {
         }
 
         const teams = computed(() => {
-            return props.solution.teams
+            return props.solution.teams3
         }, () => {
 
         });
 
         onMounted(() => {
             checkTeam();
+            const elDropzoneSingleRef = dropzoneSingleRef.value;
+            elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                images.value.push(JSON.parse(resp.xhr.response).payload);
+                toast.success('Zdjecie zostało wgrane poprawnie!');
+            });
+            elDropzoneSingleRef.dropzone.on("error", () => {
+                toast.error("Błąd");
+            });
         });
 
         const addOffer = () => {
@@ -284,7 +335,12 @@ export default {
                 })
         }
 
+        provide("bind[dropzoneSingleRef]", el => {
+            dropzoneSingleRef.value = el;
+        });
+
         return {
+            dropzoneSingleRef,
             showAddFileModal,
             modalClosed,
             asdf,
