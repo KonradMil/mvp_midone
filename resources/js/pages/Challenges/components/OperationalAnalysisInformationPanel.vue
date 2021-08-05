@@ -113,6 +113,7 @@ export default {
             await axios.post('/api/solution/operational-analyses/get', {id: props.solution.id})
                 .then(response => {
                     if (response.data.success) {
+                        console.log('response.data.payload' + response.data.payload);
                         operational_analyses.value = response.data.payload;
                     } else {
 
