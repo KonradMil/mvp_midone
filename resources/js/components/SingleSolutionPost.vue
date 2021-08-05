@@ -96,32 +96,32 @@
             />
         </div>
     </div>
-    <Modal :show="asdf" @closed="modalClosed">
+    <Modal :show="show" @closed="modalClosed">
         <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
             <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
                 <ChevronDownIcon class="w-4 h-4 mr-2"/>
                 {{ $t('challengesNew.photo') }}
             </div>
             <div class="mt-5">
-                <div class="mt-3" v-if="images.length > 0">
-                    <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>
-                    <div class="rounded-md pt-4">
-                        <div class="row flex h-full">
-                            <div class=" h-full" v-for="(image, index) in images" :key="'image_' + index">
-                                <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
-                                    <img class="w-full h-full"
-                                         :alt="image.original_name"
-                                         :src="'/' + image.path"
-                                    />
-                                    <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
-                                    </div>
-                                </div>
-                                <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteImage(index)" class="cursor-pointer">USUŃ
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="mt-3" v-if="images.length > 0">-->
+<!--                    <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>-->
+<!--                    <div class="rounded-md pt-4">-->
+<!--                        <div class="row flex h-full">-->
+<!--                            <div class=" h-full" v-for="(image, index) in images" :key="'image_' + index">-->
+<!--                                <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">-->
+<!--                                    <img class="w-full h-full"-->
+<!--                                         :alt="image.original_name"-->
+<!--                                         :src="'/' + image.path"-->
+<!--                                    />-->
+<!--                                    <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteImage(index)" class="cursor-pointer">USUŃ-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <div class="mt-3">
                     <label class="form-label"> {{ $t('challengesNew.uploadPhoto') }}</label>
                     <div class="rounded-md pt-4">
@@ -190,15 +190,15 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         const activeTab = ref(false);
         const inTeam = ref(false);
-        const asdf = ref(false);
+        const show = ref(false);
         const dropzoneSingleRef = ref();
 
         const modalClosed = () => {
-            asdf.value = false;
+            show.value = false;
         }
 
         const showAddFileModal = (id) => {
-                asdf.value = !asdf.value;
+                show.value = !show.value;
             }
 
         const switchTab = () => {
@@ -343,7 +343,7 @@ export default {
             dropzoneSingleRef,
             showAddFileModal,
             modalClosed,
-            asdf,
+            show,
             switchTab,
             teams,
             activeTab,
