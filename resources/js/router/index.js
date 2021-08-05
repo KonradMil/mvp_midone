@@ -150,7 +150,8 @@ export const routes = [
             {
                 name: 'projectCard',
                 path: '/projects/card/:id',
-                component: ProjectCard
+                component: ProjectCard,
+                props: true
             },
             {
                 name: 'addChallenge',
