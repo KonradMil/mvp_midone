@@ -266,7 +266,7 @@ class OfferController extends Controller
         }
         $goodOffers = NULL;
         if($challenge->stage === 3){
-            $goodOffers = Offer::where('id', '=', $challenge->selected_offer_id);
+            $goodOffers = Offer::where('id', '=', $challenge->selected_offer_id)->get();
         }else{
             $goodOffers = Offer::whereIn('id', $array)->with('solution')->get();
         }
