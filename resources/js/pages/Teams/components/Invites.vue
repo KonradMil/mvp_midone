@@ -103,7 +103,7 @@ export default {
                 await AcceptInvite(id)
                 setTimeout(function () {
                     getInvitesRepositories(search.value);
-                    pushTeam(team);
+                    emitter.emit('pushTeamList', {team: team});
                 }, 1000);
         }
 
