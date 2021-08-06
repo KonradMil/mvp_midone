@@ -236,13 +236,11 @@ class TeamsController extends Controller
         $user = User::where('email', '=', $request->email)->first();
         foreach($team->users as $member){
             if($member->email === $user->email){
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Użytkownik jest już w zespole!.',
-                    'payload' => []
-                ]);
+
             }
+
         }
+
         if ($user != null) {
             $check = 0;
             foreach ($user->teams as $teamm) {
@@ -251,7 +249,11 @@ class TeamsController extends Controller
                 }
             }
             if ($check !== 0) {
-                //USER ALREADY IN TEAM
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Użytkownik jest już w zespole!.',
+                    'payload' => []
+                ]);
             }
         }
 
