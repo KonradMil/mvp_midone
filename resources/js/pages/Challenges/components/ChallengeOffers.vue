@@ -326,9 +326,7 @@ export default {
             }
         }
 
-        const handleCallback = () => {
-            router.push({name: 'projects'});
-        }
+
 
         const StartFilterOffer = async () => {
             axios.post('/api/offer/user/filter', {option: filterType.value , id: props.challenge.id, technologyType: technologyType.value})
@@ -351,6 +349,11 @@ export default {
 
                     }
                 })
+        }
+
+        const handleCallback = () => {
+            console.log('handleCallback router');
+            router.push( {path : '/projects/card/' + props.challenge.id});
         }
 
         const acceptOffer = async(offer) => {
