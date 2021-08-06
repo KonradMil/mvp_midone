@@ -139,7 +139,8 @@ export default {
     props: {
         activeTab: String,
         id: Number,
-        addSolutionOffer: Boolean
+        addSolutionOffer: Boolean,
+        selected_offer_id: Number
     },
     emits: ["update:activeTab"],
 
@@ -211,6 +212,7 @@ export default {
         });
 
         return {
+            arrayIncludesInObj,
             guard,
             deleteOffer,
             offer_id,

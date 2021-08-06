@@ -264,8 +264,13 @@ class OfferController extends Controller
                }
             }
         }
+        $goodOffers = NULL;
+        if($challenge->stage === 3){
+            $goodOffers = Offer::where('id', '=', $challenge->selected_offer_id);
+        }else{
+            $goodOffers = Offer::whereIn('id', $array)->with('solution')->get();
+        }
 
-        $goodOffers = Offer::whereIn('id', $array)->with('solution')->get();
 
         return response()->json([
             'success' => true,
