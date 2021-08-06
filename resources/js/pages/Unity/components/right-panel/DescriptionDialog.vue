@@ -161,6 +161,7 @@ export default {
         });
 
         return {
+            dropzoneSingleRef,
             images,
             user,
             c,
