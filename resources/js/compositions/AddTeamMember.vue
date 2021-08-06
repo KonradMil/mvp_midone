@@ -15,8 +15,9 @@ export default function AddTeamMember(email,team_id) {
             .then(response => {
                 if (response.data.success) {
                     list.value = response.data.success;
+                    toast.success('Wysłano zaproszenie do zespołu!')
                 } else {
-                    toast.error(response.data.message);
+                    toast.warning(response.data.message);
                 }
             })
     }

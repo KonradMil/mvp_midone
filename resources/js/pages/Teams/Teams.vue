@@ -479,7 +479,6 @@ export default {
                     new_team_member_email.value = '';
                     modalClosed();
                 }, 1000);
-                toast.success('Wysłano zaproszenie do zespołu!')
             }
             setTimeout(() =>{
                isDisabled.value = false;
