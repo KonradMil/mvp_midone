@@ -3,7 +3,7 @@
                 <h2 class="intro-y text-lg font-medium mt-5">{{$t('teams.invitations')}}</h2>
                 <div class="grid-cols-12 grid">
                     <div class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-2">
-                        <div class="mt-5">
+                        <div class="mt-3">
                             <div v-if="invites.length == 0" class="intro-y text-lg text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
                                 Nie otrzymałeś jeszcze żadnych zaproszeń.
                             </div>
@@ -18,7 +18,7 @@
                                             Od: {{invite.inviter.name + ' ' + invite.inviter.lastname}}
                                         </div>
                                     </div>
-                                    <div class="py-1 px-2 rounded-full text-xs text-center bg-theme-9 text-white cursor-pointer font-medium" @click="acceptInvite(invite.id)">
+                                    <div class="py-1 px-2 rounded-full text-xs text-center bg-theme-9 text-white cursor-pointer font-medium" @click="acceptInvite(invite.id, invite.team)">
                                         {{$t('teams.acceptInvite')}}
                                     </div>
                                 </div>
@@ -95,15 +95,15 @@ export default {
            });
         }
 
-        const pushTeam = async() => {
-            emitter.emit('pushTeamList', {});
+        const pushTeam = async(team) => {
+            emitter.emit('pushTeamList', {team: team});
         }
 
-        const acceptInvite = async (id) => {
+        const acceptInvite = async (id,team) => {
                 await AcceptInvite(id)
                 setTimeout(function () {
                     getInvitesRepositories(search.value);
-                    pushTeam();
+                    pushTeam(team);
                 }, 1000);
         }
 

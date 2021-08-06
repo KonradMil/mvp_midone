@@ -339,6 +339,10 @@ export default {
                 })
         }
 
+        emitter.on('pushTeamList', e => {
+            teams.value.push(team);
+        });
+
         const getTeamsRepositories = async () => {
             GetTeams('','','teams',(res) => {
                 teams.value = res;
