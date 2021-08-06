@@ -247,7 +247,7 @@
 </template>
 
 <script>
-import {onMounted, reactive, ref} from "vue";
+import {getCurrentInstance, onMounted, reactive, ref} from "vue";
 import GetTeams from '../../compositions/GetTeams'
 import GetInvites from '../../compositions/GetInvites'
 import AcceptInvite from '../../compositions/AcceptInvite'
@@ -267,6 +267,8 @@ export default {
         team: Object
     },
     setup(props, {emit}) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const showDetails = ref([]);
         const showPermissions = ref([]);
         const isDisabled = ref(false);
