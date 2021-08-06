@@ -212,7 +212,6 @@ export default {
         });
 
         return {
-            arrayIncludesInObj,
             guard,
             deleteOffer,
             offer_id,
