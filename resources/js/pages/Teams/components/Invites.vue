@@ -51,11 +51,10 @@
                     </div>
                 </div>
             </div>
-            <!-- BEGIN: Users Layout -->
 </template>
 
 <script>
-import {onMounted, reactive, ref} from "vue";
+import {getCurrentInstance, onMounted, reactive, ref} from "vue";
 import GetTeams from '../../../compositions/GetTeams'
 import GetInvites from '../../../compositions/GetInvites'
 import AcceptInvite from '../../../compositions/AcceptInvite'
@@ -72,6 +71,8 @@ export default {
         team: Object
     },
     setup(props, {emit}) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const isDisabled = ref(false);
         const teams = ref([]);
         const invites = ref([]);
@@ -94,10 +95,15 @@ export default {
            });
         }
 
+        const pushTeam = async() => {
+            emitter.emit('pushTeamList', {});
+        }
+
         const acceptInvite = async (id) => {
                 await AcceptInvite(id)
                 setTimeout(function () {
                     getInvitesRepositories(search.value);
+                    pushTeam();
                 }, 1000);
         }
 
