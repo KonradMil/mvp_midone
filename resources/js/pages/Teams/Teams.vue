@@ -477,6 +477,7 @@ export default {
                     getTeamsRepositories(search.value);
                     getInvitesRepositories();
                     new_team_member_email.value = '';
+                    emitter.emit('pushInviteList', {});
                     modalClosed();
                 }, 1000);
             }

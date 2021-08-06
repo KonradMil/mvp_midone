@@ -98,7 +98,9 @@ export default {
         const pushTeam = async(team) => {
             emitter.emit('pushTeamList', {team: team});
         }
-
+        emitter.on('pushInviteList', e => {
+            getInvitesRepositories(search.value);
+        });
         const acceptInvite = async (id,team) => {
                 await AcceptInvite(id)
                 setTimeout(function () {
