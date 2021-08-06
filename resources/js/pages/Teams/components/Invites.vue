@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import {getCurrentInstance, onMounted, reactive, ref} from "vue";
+import {getCurrentInstance, onMounted, reactive, ref, watch} from "vue";
 import GetTeams from '../../../compositions/GetTeams'
 import GetInvites from '../../../compositions/GetInvites'
 import AcceptInvite from '../../../compositions/AcceptInvite'
@@ -68,7 +68,8 @@ export default {
     name: "Invites",
     components: {Avatar},
     props: {
-        team: Object
+        team: Object,
+        guard: Boolean,
     },
     setup(props, {emit}) {
         const app = getCurrentInstance();
@@ -86,7 +87,9 @@ export default {
         const currentTeam_id = ref();
         const currentMember_id = ref();
         const width = ref('250px');
-
+        watch(() => props.guard, (first, second) => {
+            getInvitesRepositories(search.value);
+        }, {});
         const getInvitesRepositories = async () => {
             console.log('asdadsadsadas');
            GetInvites((res) => {
@@ -98,9 +101,7 @@ export default {
         const pushTeam = async(team) => {
             emitter.emit('pushTeamList', {team: team});
         }
-        emitter.on('pushInviteList', e => {
-            getInvitesRepositories(search.value);
-        });
+
         const acceptInvite = async (id,team) => {
                 await AcceptInvite(id)
                 setTimeout(function () {

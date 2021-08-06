@@ -90,7 +90,7 @@
                     </div>
                 </div>
             </div>
-            <Invites></Invites>
+            <Invites :guard="guard"></Invites>
 <!--            <div class="col-span-3">-->
 <!--                <h2 class="intro-y text-lg font-medium mt-5">{{$t('teams.invitations')}}</h2>-->
 <!--                <div class="grid-cols-12 grid">-->
@@ -294,12 +294,8 @@ export default {
         const currentTeam_id = ref();
         const currentMember_id = ref();
         const width = ref('250px');
+        const guard = ref(false);
 
-        // const userPermissions = reactive({
-        //     acceptChallengeSolution: 0,
-        //     acceptChallengeOffer: 0,
-        //     publishChallenge: false,
-        // });
 
 
         const getPermissions = (team_id,member_id) => {
@@ -477,7 +473,7 @@ export default {
                     getTeamsRepositories(search.value);
                     getInvitesRepositories();
                     new_team_member_email.value = '';
-                    emitter.emit('pushInviteList', {});
+                    guard.value = true;
                     modalClosed();
                 }, 1000);
             }
@@ -503,6 +499,7 @@ export default {
         })
 
         return {
+            guard,
             editChallenge,
             publishChallenge,
             acceptChallengeOffer,
