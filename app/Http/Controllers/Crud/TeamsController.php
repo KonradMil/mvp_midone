@@ -234,6 +234,15 @@ class TeamsController extends Controller
 
         $team = Team::find($request->team_id);
         $user = User::where('email', '=', $request->email)->first();
+        foreach($team->users as $member){
+            if($member->email === $user->email){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Użytkownik jest już w zespole!.',
+                    'payload' => []
+                ]);
+            }
+        }
         if ($user != null) {
             $check = 0;
             foreach ($user->teams as $teamm) {
