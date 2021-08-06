@@ -205,7 +205,7 @@ export default {
         }
 
         const teams = computed(() => {
-            return props.solution.teams3
+            return props.solution.teams;
         }, () => {
 
         });
