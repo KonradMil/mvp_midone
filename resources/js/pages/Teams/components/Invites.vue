@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <div class="col-span-3">
+    <div class="col-span-3">
                 <h2 class="intro-y text-lg font-medium mt-5">{{$t('teams.invitations')}}</h2>
                 <div class="grid-cols-12 grid">
                     <div class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-2">
@@ -53,7 +52,6 @@
                 </div>
             </div>
             <!-- BEGIN: Users Layout -->
-        </div>
 </template>
 
 <script>
