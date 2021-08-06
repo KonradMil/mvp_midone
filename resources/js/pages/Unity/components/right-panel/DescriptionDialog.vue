@@ -41,7 +41,7 @@
                 :disabled="((props.type === 'solution') && (user.type === 'investor'))"
             />
         </div>
-        <div class="mt-3">
+        <div class="mt-3" v-if="props.type !== 'solution'">
             <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
                 <div class="mt-5">
                     <!--                <div class="mt-3" v-if="images.length > 0">-->
