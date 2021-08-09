@@ -256,9 +256,9 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const challenge = ref({});
-        const capitalCost = ref(12);
+        const capitalCost = ref(0);
         const capex = ref(0);
-        const timeframe = ref(5);
+        const timeframe = ref(0);
         const okresZwrotuProsty = ref(0);
         const okresZwrotuZdyskontowany = ref(0);
         const npv = ref(0);
@@ -294,6 +294,7 @@ export default {
         onMounted(() => {
             getChallenge((cb) =>{
                 financialAnalysesFunction();
+                npvFunction();
             });
         });
         watch([challenge.value, props.solution, okresZwrotuProsty.value, npv.value], (newValues, prevValues) => {
