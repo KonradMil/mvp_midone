@@ -21,7 +21,7 @@
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
                         <strong>{{$t('challengesMain.basicInformation')}}:</strong> {{ types[challenge.type] }}
                     </div>
-                    <div class="text-gray-700 dark:text-gray-600 mt-2" style="word-break: keep-all; max-height: 100px; overflow-y: scroll; white-space: pre-wrap;">
+                    <div class="text-gray-700 dark:text-gray-600 mt-2" style="word-break: keep-all; max-height: 200px; overflow-y: scroll; white-space: pre-wrap;">
                         <strong>{{$t('challengesNew.description')}}:</strong> {{ challenge.description }}
                     </div>
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
