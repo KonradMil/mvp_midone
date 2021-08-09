@@ -321,6 +321,7 @@ export default {
         }
 
         const npvFunction = () =>  {
+            console.log('npv Function coming' + capex.value);
             const cashFlow = [];
             const wacc = [];
             const dcf = [];
@@ -335,6 +336,7 @@ export default {
             for (let i = 0; i < (timeframe.value + 1); i += 1) {
                 if (i === 0) {
                     cashFlow.push(parseFloat(capex.value) * -1);
+                    console.log('npv Function inside' + capex.value);
                     wacc.push(100);
                     dcf.push(parseFloat(capex.value) * -1);
                     scf.push(parseFloat(capex.value) * -1);
@@ -343,6 +345,7 @@ export default {
                 } else {
                     cashFlow.push(workStationCostBefore - workStationCostAfter);
                     wacc.push(1 / ((1 + (parseFloat(capitalCost.value) / 100)) ** i));
+                    console.log('npv Function inside' + capex.value);
                     dcf.push(cashFlow[i] * (wacc[i]));
                     scf.push(scf[i - 1] + (workStationCostBefore - workStationCostAfter));
                     if (scf[i] > 0) {
@@ -377,6 +380,7 @@ export default {
 
             npv.value = sdcf[timeframe.value];
             console.log([cashFlow, wacc, dcf, scf, rtp, sdcf, drtp]);
+            console.log('npv Function end' + capex.value);
         }
 
         const getChallenge = (cb) => {
