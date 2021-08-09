@@ -35,6 +35,7 @@
         <div class="mt-3">
             <label for="modal-form-2" class="form-label">Opis</label>
             <textarea
+                style="height: 200px;"
                 id="modal-form-2"
                 class="form-control"
                 v-model="c.description"
