@@ -165,7 +165,11 @@
                         </tr>
                         <tr class="hover:bg-gray-200">
                             <td class="border" colspan="3">
-                                <input type="number" v-model="capex" class="form-control finclass" placeholder="0"/>
+                                <input
+                                    type="number"
+                                    :value="capex"
+                                    class="form-control finclass"
+                                    placeholder="0"/>
                             </td>
                         </tr>
                         <tr>
