@@ -11440,19 +11440,19 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('idea') }}">{{trans('menu.idea')}}</a>
+                        <a class="nav-link" href="{{ url('idea') }}">Idea</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('produkt') }}">{{trans('menu.product')}}</a>
+                        <a class="nav-link" href="{{ url('produkt') }}">Produkt</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('wspolpraca') }}">{{trans('menu.cooperation')}}</a>
+                        <a class="nav-link" href="{{ url('wspolpraca') }}">Współpraca</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('contact') }}">{{trans('menu.kontakt')}}</a>
+                        <a class="nav-link" href="{{ url('contact') }}">Kontakt</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://platforma.dbr77.com">{{trans('menu.platform')}}</a>
+                        <a class="nav-link" href="https://platforma.dbr77.com">Platforma</a>
                     </li>
 
 {{--                    <li class="nav-item dropdown">--}}
@@ -11485,7 +11485,7 @@
         <div class="container">
             <div class="row">
                 <div class=" col-12 text-left">
-                    <h1>{{trans('ue.title')}}</h1>
+                    <h1>Projekty UE</h1>
                 </div>
             </div>
             <div class="row">
@@ -11630,9 +11630,9 @@
             <!-- Grid column -->
             <div class="col-md-4 col-12">
                 <ul class="bottom-menu">
-                    <li><a href="{{url('start')}}">{{trans('menu.start')}}</a></li>
-                    <li><a href="{{url('about')}}">{{trans('menu.about')}}</a></li>
-                    <li><a href="{{url('privacy')}}">{{trans('menu.privacy')}}</a></li>
+                    <li><a href="{{url('start')}}">Home</a></li>
+                    <li><a href="{{url('about')}}">O nas</a></li>
+                    <li><a href="{{url('privacy')}}">Polityka prywatności</a></li>
                 </ul>
             </div>
             <!-- Grid column -->
