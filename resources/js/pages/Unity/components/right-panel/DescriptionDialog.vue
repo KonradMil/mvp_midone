@@ -42,9 +42,7 @@
                 :disabled="((props.type === 'solution') && (user.type === 'investor'))"
             />
         </div>
-
-        <div class="mt-3" v-if="props.type !== 'solution'">
-            <Dropzone
+        <Dropzone
                 style="position: relative;
                                                     display: flex;"
                 ref-key="dropzoneSingleRef"
@@ -64,7 +62,6 @@
                     {{ $t('challengesNew.fileUpload') }}
                 </div>
             </Dropzone>
-        </div>
         <div class="mt-3" v-if="images.length > 0 && props.type !== 'solution'">
             <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>
             <div class="rounded-md pt-4">
