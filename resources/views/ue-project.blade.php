@@ -11455,23 +11455,23 @@
                         <a class="nav-link" href="https://platforma.dbr77.com">{{trans('menu.platform')}}</a>
                     </li>
 
-                    <li class="nav-item dropdown">
-                        @php $locale = session()->get('locale'); @endphp
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            @switch($locale)
-                                @case('en')
-                                <img src="{{url('images/en_symbol.png')}}" width="30px" height="20x">
-                                @break
-                                @default
-                                <img src="{{url('images/pl_symbol.png')}}" width="30px" height="20x">
-                            @endswitch
-                            {{trans('menu.language')}} <span class="caret"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="lang/en"><img src="{{url('images/en_symbol.png')}}" width="30px" height="20x"> {{trans('menu.english')}}</a>
-                            <a class="dropdown-item" href="lang/pl"><img src="{{url('images/pl_symbol.png')}}" width="30px" height="20x"> {{trans('menu.polish')}}</a>
-                        </div>
-                    </li>
+{{--                    <li class="nav-item dropdown">--}}
+{{--                        @php $locale = session()->get('locale'); @endphp--}}
+{{--                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
+{{--                            @switch($locale)--}}
+{{--                                @case('en')--}}
+{{--                                <img src="{{url('images/en_symbol.png')}}" width="30px" height="20x">--}}
+{{--                                @break--}}
+{{--                                @default--}}
+{{--                                <img src="{{url('images/pl_symbol.png')}}" width="30px" height="20x">--}}
+{{--                            @endswitch--}}
+{{--                            {{trans('menu.language')}} <span class="caret"></span>--}}
+{{--                        </a>--}}
+{{--                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
+{{--                            <a class="dropdown-item" href="lang/en"><img src="{{url('images/en_symbol.png')}}" width="30px" height="20x"> {{trans('menu.english')}}</a>--}}
+{{--                            <a class="dropdown-item" href="lang/pl"><img src="{{url('images/pl_symbol.png')}}" width="30px" height="20x"> {{trans('menu.polish')}}</a>--}}
+{{--                        </div>--}}
+{{--                    </li>--}}
                 </ul>
                 <a class="navbar-brand" href="{{ url('projekty-ue') }}">
                     <img src="{{url('images/unia_logo.jpg')}}" class="logo"/>
