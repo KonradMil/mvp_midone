@@ -124,8 +124,11 @@ import Multiselect from '@vueform/multiselect'
 import cash from "cash-dom";
 import Dropzone from '../../../../global-components/dropzone/Main'
 import {useStore} from "../../../../store";
+import {useToast} from "vue-toastification";
+
 
 const store = useStore();
+const toast = useToast();
 
 export default {
     name: "DescriptionDialog",
@@ -161,7 +164,10 @@ export default {
 
         onMounted(() => {
             c.value = props.object
+            console.log('dropzoneSingleRef' + dropzoneSingleRef.value);
+
             if(dropzoneSingleRef.value != undefined){
+                console.log('dropzoneSingleRefndefined??!' + dropzoneSingleRef.value);
                 const elDropzoneSingleRef = dropzoneSingleRef.value;
                 elDropzoneSingleRef.dropzone.on("success", (resp) => {
                     images.value.push(JSON.parse(resp.xhr.response).payload);
