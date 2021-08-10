@@ -122,6 +122,7 @@
 import {onMounted, provide, ref, watch} from "vue";
 import Multiselect from '@vueform/multiselect'
 import cash from "cash-dom";
+import Dropzone from '../../../../global-components/dropzone/Main'
 
 
 export default {
@@ -129,6 +130,9 @@ export default {
     props: {
         object: Object,
         type: String
+    },
+    components: {
+      Dropzone
     },
     setup(props, context) {
         const c = ref({description: '', name: '', solution_deadline: '', offer_deadline: ''});
