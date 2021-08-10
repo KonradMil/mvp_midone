@@ -127,27 +127,27 @@ export default {
         const deleteImage = (index) => {
             images.value.splice(index, 1);
         }
-
+        provide("bind[dropzoneSingleRef]", el => {
+            console.log('providedropzoneSingleRef' + dropzoneSingleRef.value);
+            dropzoneSingleRef.value = el;
+        });
 
         onMounted(() => {
             c.value = props.object
-            provide("bind[dropzoneSingleRef]", el => {
-                console.log('providedropzoneSingleRef' + dropzoneSingleRef.value);
-                dropzoneSingleRef.value = el;
-            });
-             console.log('dropzoneSingleRef' + dropzoneSingleRef.value);
 
-            if(dropzoneSingleRef.value != undefined){
-                console.log('dropzoneSingleRefndefined??!' + dropzoneSingleRef.value);
+            console.log('dropzoneSingleRef' + dropzoneSingleRef.value);
+            console.log('dropzoneSingleRefndefined??!' + dropzoneSingleRef.value);
                 const elDropzoneSingleRef = dropzoneSingleRef.value;
                 elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                    console.log('pushImage' + images.value[0])
                     images.value.push(JSON.parse(resp.xhr.response).payload);
+                    console.log('pushImage' + images.value[0])
                     toast.success('Zdjecie zostało wgrane poprawnie!');
                 });
                 elDropzoneSingleRef.dropzone.on("error", () => {
                     toast.error("Błąd");
                 });
-            }
+
 
             // if (props.object.name != undefined && props.object.name != '') {
             //     c.value.name = props.object.name;
