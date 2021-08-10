@@ -299,6 +299,7 @@ export default {
         });
         watch([challenge.value, props.solution, okresZwrotuProsty.value, npv.value], (newValues, prevValues) => {
             financialAnalysesFunction();
+            npvFunction();
         })
 
         watch([capitalCost, capex, timeframe], (newValues, prevValues) => {
