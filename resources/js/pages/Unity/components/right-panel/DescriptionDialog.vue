@@ -125,6 +125,12 @@ export default {
             console.log('CHANGE');
             context.emit("update:object", ca);
         }, {deep: true})
+
+        provide("bind[dropzoneSingleRef]", el => {
+            dropzoneSingleRef.value = el;
+        });
+
+
         onMounted(() => {
             c.value = props.object
             const elDropzoneSingleRef = dropzoneSingleRef.value;
@@ -155,10 +161,6 @@ export default {
             // } else {
             //     c.value.offer_deadline = '';
             // }
-        });
-
-        provide("bind[dropzoneSingleRef]", el => {
-            dropzoneSingleRef.value = el;
         });
 
         return {
