@@ -42,6 +42,26 @@
                 :disabled="((props.type === 'solution') && (user.type === 'investor'))"
             />
         </div>
+        <Dropzone
+            style="position: relative;
+                                                    display: flex;"
+            ref-key="dropzoneSingleRef"
+            :options="{
+                              url: '/api/solution/images/store',
+                              thumbnailWidth: 150,
+                              maxFilesize: 5,
+                              maxFiles: 5,
+                              previewTemplate: '<div style=\'display: none\'></div>'
+                            }"
+            class="dropzone">
+            <div class="px-4 py-4 flex items-center cursor-pointer relative">
+                <ImageIcon class="w-4 h-4 mr-2"/>
+                <span class="text-theme-1 dark:text-theme-10 mr-1">
+                                                            {{ $t('challengesNew.file') }}
+                                                        </span>
+                {{ $t('challengesNew.fileUpload') }}
+            </div>
+        </Dropzone>
         <div class="mt-3" v-if="props.type !== 'solution'">
             <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
 
