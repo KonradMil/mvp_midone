@@ -64,30 +64,51 @@
                     <!--                        </div>-->
                     <!--                    </div>-->
                     <!--                </div>-->
-                    <div class="mt-3">
-                        <label class="form-label"> {{ $t('challengesNew.file') }}</label>
-                        <div class="rounded-md pt-4">
-                            <div class="flex flex-wrap px-4">
-                                <Dropzone
-                                    style="position: relative;
+                    <div class="mt-5">
+<!--                        <div class="mt-3" v-if="images.length > 0">-->
+<!--                            <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>-->
+<!--                            <div class="rounded-md pt-4">-->
+<!--                                <div class="row flex h-full">-->
+<!--                                    <div class=" h-full" v-for="(image, index) in images" :key="'image_' + index">-->
+<!--                                        <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">-->
+<!--                                            <img class="w-full h-full"-->
+<!--                                                 :alt="image.original_name"-->
+<!--                                                 :src="'/' + image.path"-->
+<!--                                            />-->
+<!--                                            <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteImage(index)" class="cursor-pointer">USUŃ-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="mt-3">
+                            <label class="form-label"> {{ $t('challengesNew.uploadPhoto') }}</label>
+                            <div class="rounded-md pt-4">
+                                <div class="flex flex-wrap px-4">
+                                    <Dropzone
+                                        style="position: relative;
                                                     display: flex;"
-                                    ref-key="dropzoneSingleRef"
-                                    :options="{
+                                        ref-key="dropzoneSingleRef"
+                                        :options="{
                               url: '/api/solution/images/store',
                               thumbnailWidth: 150,
                               maxFilesize: 5,
                               maxFiles: 5,
                               previewTemplate: '<div style=\'display: none\'></div>'
                             }"
-                                    class="dropzone">
-                                    <div class="px-4 py-4 flex items-center cursor-pointer relative">
-                                        <ImageIcon class="w-4 h-4 mr-2"/>
-                                        <span class="text-theme-1 dark:text-theme-10 mr-1">
+                                        class="dropzone">
+                                        <div class="px-4 py-4 flex items-center cursor-pointer relative">
+                                            <ImageIcon class="w-4 h-4 mr-2"/>
+                                            <span class="text-theme-1 dark:text-theme-10 mr-1">
                                                             {{ $t('challengesNew.file') }}
                                                         </span>
-                                        {{ $t('challengesNew.fileUpload') }}
-                                    </div>
-                                </Dropzone>
+                                            {{ $t('challengesNew.fileUpload') }}
+                                        </div>
+                                    </Dropzone>
+                                </div>
                             </div>
                         </div>
                     </div>
