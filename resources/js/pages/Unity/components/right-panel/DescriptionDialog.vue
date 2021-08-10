@@ -124,7 +124,9 @@ export default {
             context.emit("update:object", ca);
         }, {deep: true})
 
-
+        const deleteImage = (index) => {
+            images.value.splice(index, 1);
+        }
 
 
         onMounted(() => {
@@ -170,6 +172,7 @@ export default {
         });
 
         return {
+            deleteImage,
             dropzoneSingleRef,
             images,
             user,
