@@ -302,6 +302,9 @@ export default {
             npvFunction();
         })
 
+        watch(() => capex.value, (val) => {
+
+        });
         watch([capitalCost, capex, timeframe], (newValues, prevValues) => {
             npvFunction();
         })
