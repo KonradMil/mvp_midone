@@ -156,15 +156,16 @@ export default {
             context.emit("update:object", ca);
         }, {deep: true})
 
-        provide("bind[dropzoneSingleRef]", el => {
-            console.log('providedropzoneSingleRef' + dropzoneSingleRef.value);
-            dropzoneSingleRef.value = el;
-        });
+
 
 
         onMounted(() => {
             c.value = props.object
-            console.log('dropzoneSingleRef' + dropzoneSingleRef.value);
+            provide("bind[dropzoneSingleRef]", el => {
+                console.log('providedropzoneSingleRef' + dropzoneSingleRef.value);
+                dropzoneSingleRef.value = el;
+            });
+             console.log('dropzoneSingleRef' + dropzoneSingleRef.value);
 
             if(dropzoneSingleRef.value != undefined){
                 console.log('dropzoneSingleRefndefined??!' + dropzoneSingleRef.value);
