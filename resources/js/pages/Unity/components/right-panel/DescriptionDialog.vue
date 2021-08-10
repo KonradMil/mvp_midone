@@ -128,7 +128,6 @@ import {useToast} from "vue-toastification";
 
 
 const store = useStore();
-const toast = useToast();
 
 export default {
     name: "DescriptionDialog",
@@ -144,7 +143,7 @@ export default {
         const user = window.Laravel.user;
 
         // const select_detail_weight = ref();
-
+        const toast = useToast();
         const types = require("../../../../json/types.json");
         const tagss = require("../../../../json/tagsChallenge.json");
         const images = ref([]);
