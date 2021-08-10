@@ -148,6 +148,7 @@ export default {
         }, {deep: true})
 
         provide("bind[dropzoneSingleRef]", el => {
+            console.log('providedropzoneSingleRef' + dropzoneSingleRef.value);
             dropzoneSingleRef.value = el;
         });
 
