@@ -167,7 +167,7 @@
                             <td class="border" colspan="3">
                                 <input
                                     type="number"
-                                    :value="capex"
+                                    v-model="capex"
                                     class="form-control finclass"
                                     placeholder="0"/>
                             </td>
