@@ -123,7 +123,9 @@ import {onMounted, provide, ref, watch} from "vue";
 import Multiselect from '@vueform/multiselect'
 import cash from "cash-dom";
 import Dropzone from '../../../../global-components/dropzone/Main'
+import {useStore} from "../../../../store";
 
+const store = useStore();
 
 export default {
     name: "DescriptionDialog",
