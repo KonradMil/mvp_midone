@@ -156,13 +156,15 @@ export default {
         onMounted(() => {
             c.value = props.object
             const elDropzoneSingleRef = dropzoneSingleRef.value;
-            elDropzoneSingleRef.dropzone.on("success", (resp) => {
-                images.value.push(JSON.parse(resp.xhr.response).payload);
-                toast.success('Zdjecie zostało wgrane poprawnie!');
-            });
-            elDropzoneSingleRef.dropzone.on("error", () => {
-                toast.error("Błąd");
-            });
+            if(elDropzoneSingleRef.value != undefined){
+                elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                    images.value.push(JSON.parse(resp.xhr.response).payload);
+                    toast.success('Zdjecie zostało wgrane poprawnie!');
+                });
+                elDropzoneSingleRef.dropzone.on("error", () => {
+                    toast.error("Błąd");
+                });
+            }
             // if (props.object.name != undefined && props.object.name != '') {
             //     c.value.name = props.object.name;
             // } else {
