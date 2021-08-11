@@ -5,8 +5,7 @@ System requirements description is not ready yet.
 
 ##Run with Docker
 
-1. In the project root directory run following commands:
-
+In the project root directory run following commands:
 
     $ cp .env.example .env
     $ sudo docker-compose up -d
@@ -15,6 +14,8 @@ System requirements description is not ready yet.
     # php artisan key:generate
     # php artisan migrate
     # exit
+
+Go to http://localhost
 
 ## Laravel Vue SPA, Auth & CRUD
 Using Laravel and Vue.js 3, we are going to create a single page application. We will learn who to create, read, update, delete and auth using Vue 3 and Laravel API backend.
