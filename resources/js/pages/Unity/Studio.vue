@@ -76,7 +76,7 @@ export default {
                 codeUrl: "/s3/unity/" + unity_path + ".wasm.br",
                 streamingAssetsUrl: "StreamingAssets",
                 companyName: "DBR",
-                productName: "devsys.appworks-dev.pl",
+                productName: "platform.dbr77.com",
                 productVersion: "1.0",
             }).then(function (instance) {
                 gameInstance.value = instance;

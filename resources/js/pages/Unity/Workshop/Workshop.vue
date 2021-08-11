@@ -24,7 +24,7 @@
                 </div>
             </div>
             <!-- END: Profile Menu -->
-            <WorkshopPanel v-if="activeTab == 'workshop'"></WorkshopPanel>
+            <WorkshopPanel :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></WorkshopPanel>
             <Marketplace v-if="activeTab == 'marketplace'"></Marketplace>
             <OwnObjects v-if="activeTab == 'obiekty'"></OwnObjects>
         </div>
@@ -40,6 +40,7 @@ import UnityBridgeWorkshop from "./bridge_workshop";
 import {getCurrentInstance, onBeforeMount, ref} from "vue";
 import UnityBridge from "../bridge";
 import dayjs from "dayjs";
+import unityActionOutgoing from "../composables/ActionsOutgoing";
 export default {
 name: "Workshop",
     components: {OwnObjects, Marketplace, WorkshopPanel},
@@ -49,6 +50,14 @@ name: "Workshop",
         const activeTab = ref('obiekty');
         const bridge = ref();
         const loadedObjectId = ref(null);
+        const unityActionOutgoingObject = ref({});
+        const gameWindow = ref(null);
+
+        emitter.on('loadObjectWorkshop', (e) => {
+            console.log(e);
+            console.log(JSON.parse(e.object.save_json));
+            handleUnityActionOutgoing({action: 'loadWorkshopObject', data: JSON.parse(e.object.save_json)});
+        });
 
         emitter.on('UnityWorkshopSave', e => {
             axios.post('/api/workshop/models/save', {object: e, id: loadedObjectId})
@@ -72,7 +81,7 @@ name: "Workshop",
                         }
                     })
             } else if (e.action == 'edit'){
-
+                emitter.emit('LoadWorkshopItems', e.object);
             } else if (e.action == 'publish'){
                 axios.post('/api/workshop/models/publish', {id: e.id})
                     .then(response => {
@@ -94,6 +103,41 @@ name: "Workshop",
             }
         });
 
+        const handleUnityActionOutgoing = (e) => {
+            try {
+                unityActionOutgoingObject.value[e.action](e.data);
+            } catch (ee) {
+                console.log([ee, e]);
+            }
+        }
+
+        const unlockInput = () => {
+            // console.log('UNLOCK');
+            handleUnityActionOutgoing({action: "unlockInput", data: ''});
+        }
+
+        const initalize = async () => {
+
+            setTimeout(function () {
+                console.log("initializeMe");
+                console.log('gameWindow.value.refs.gameWindow.setup');
+                console.log(gameWindow.value);
+                console.log(gameWindow.value.refs);
+                // console.log(gameWindow.value.refs.gameWindow);
+                // console.log(gameWindow.value.refs);
+                unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value.refs.gameWindow);
+                // handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
+
+            }, 2000);
+            // setTimeout(() => {
+            //     handleUnityActionOutgoing({action: 'prefix', data: 'https://platform.dbr77.com/s3'});
+            //     // unlockInput();
+            // }, 5000);
+        }
+
+        //RUNS WHEN UNITY IS READY
+        emitter.on('onInitialized', e => initalize());
+
         onBeforeMount(() => {
             //ADDS LISTENERS
             bridge.value = UnityBridgeWorkshop();
@@ -101,7 +145,11 @@ name: "Workshop",
         });
 
         return {
-            activeTab
+            activeTab,
+            initalize,
+            unlockInput,
+            handleUnityActionOutgoing,
+            gameWindow
         }
     }
 }

@@ -660,20 +660,22 @@ class SolutionController extends Controller
 
             foreach ($save->parts as $part) {
                     $model = UnityModel::find($part->model->model_id);
-                    if($model->brand === 'FANUC'){
-                        $sum_fanuc++;
-                    }else if($model->brand === 'Yaskawa'){
-                        $sum_yaskawa++;
-                    }else if($model->brand === 'ABB'){
-                        $sum_abb++;
-                    }else if($model->brand === 'Mitshubishi'){
-                        $sum_mitshubishi++;
-                    }else if($model->brand === 'KUKA'){
-                        $sum_kuka++;
-                    }else if($model->brand === 'TFM ROBOTICS'){
-                        $sum_tfm++;
-                    }else if($model->brand === 'Universal Robots'){
-                        $sum_universal++;
+                    if($model != NULL) {
+                        if($model->brand === 'FANUC'){
+                            $sum_fanuc++;
+                        }else if($model->brand === 'Yaskawa'){
+                            $sum_yaskawa++;
+                        }else if($model->brand === 'ABB'){
+                            $sum_abb++;
+                        }else if($model->brand === 'Mitshubishi'){
+                            $sum_mitshubishi++;
+                        }else if($model->brand === 'KUKA'){
+                            $sum_kuka++;
+                        }else if($model->brand === 'TFM ROBOTICS'){
+                            $sum_tfm++;
+                        }else if($model->brand === 'Universal Robots'){
+                            $sum_universal++;
+                        }
                     }
                 }
 
@@ -835,7 +837,11 @@ class SolutionController extends Controller
         $solution->status = 1;
         $solution->save();
 
-        event(new SolutionPublished($solution, $solution->author, 'Nowe rozwiązanie zostało opublikowane: ' . $solution->name, []));
+        try {
+            event(new SolutionPublished($solution, $solution->author, 'Nowe rozwiązanie zostało opublikowane: ' . $solution->name, []));
+        }catch (\Exception $e) {
+
+        }
 
         return response()->json([
             'success' => true,

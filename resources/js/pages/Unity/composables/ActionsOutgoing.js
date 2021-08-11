@@ -1,7 +1,7 @@
 import {watch, unref, onUnmounted} from 'vue';
 function outgoing(game, action, data, json) {
-    // console.log('ADASD');
-
+    console.log('ADASD');
+    console.log(game);
     let finalData = '';
     if(json) {
         if(data.value != undefined) {
@@ -66,6 +66,10 @@ export default function unityActionOutgoing(gameWindow) {
 
     function save() {
         outgoing(game, 'SaveStructure', '');
+    }
+
+    function loadWorkshopObject(val) {
+        outgoing(game, 'LoadWorkshopItems', val, true);
     }
 
     function changeGridSize(val) {
@@ -210,6 +214,7 @@ export default function unityActionOutgoing(gameWindow) {
         addLine,
         removeLine,
         updateCurrentAnimation,
-        prefix
+        prefix,
+        loadWorkshopObject
     };
 }

@@ -14,6 +14,7 @@
 <script>
 import {onMounted, onBeforeMount, ref, getCurrentInstance} from "vue";
 import cash from "cash-dom/dist/cash";
+import unityActionOutgoing from "../composables/ActionsOutgoing";
 
 export default {
     props: ['src', 'module', 'width', 'height', 'externalProgress', 'unityLoader', 'hideFooter'],
@@ -28,11 +29,14 @@ export default {
         const error = ref(null);
         const unity_workshop_path = window.unity_workshop_path;
         const unity_path = window.unity_path;
+
         containerId.value = 'unity-container-' + Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
         const setFullscreen = () => {
             gameInstance.value.SetFullscreen(1);
         }
-4
+
+
+
         const message = (gameObject, method, param) => {
             if (param === null) {
                 param = ''
@@ -43,6 +47,8 @@ export default {
                 console.warn('vue-unity-webgl: you\'ve sent a message to the Unity content, but it wasn\t instantiated yet.')
             }
         }
+
+
 
         onBeforeMount(() => {
             // if (props.unityLoader) {
@@ -66,7 +72,7 @@ export default {
                 codeUrl: "/s3/" + unity_workshop_path + ".wasm.br",
                 streamingAssetsUrl: "StreamingAssets",
                 companyName: "DBR",
-                productName: "devsys.appworks-dev.pl",
+                productName: "platform.dbr77.com",
                 productVersion: "1.0",
             }).then(function (instance) {
                 gameInstance.value = instance;
@@ -122,7 +128,7 @@ export default {
             progress,
             error,
             setFullscreen,
-            message,
+            message
         }
     },
 

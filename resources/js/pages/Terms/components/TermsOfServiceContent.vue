@@ -64,7 +64,7 @@
                         >
                             <ol class="list-disc ml-5 text-gray-600">
                                 <li class="pt-1">
-                                    <strong>2.1 DBR 77</strong> - DBR 77 sp. z o.o. z siedzibą w Toruniu, ul. Żółkiewskiego 31, 87-100 Toruń, zarejestrowaną w rejestrze przedsiębiorców Krajowym Rejestrze Sądowym przez Sąd Rejonowy w Toruniu, VII Wydział Gospodarczy Krajowego Rejestru Sądowego pod numerem KRS: 0000725551, kapitał zakładowy w wysokości: 500 000 zł, wpłacony w całości, NIP: 8792700638, REGON: 36986134800000.
+                                    <strong>2.1 DBR 77</strong> - CAULFIELD SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ, z siedzibą w Toruniu przy ul. Żółkiewskiego 31, 87-100 Toruń, wpisaną do rejestru przedsiębiorców Krajowego Rejestru Sądowego prowadzonego przez Sąd Rejonowy w Toruniu, VII Wydział Gospodarczy Krajowego Rejestru Sądowego pod numerem KRS 0000860440, NIP 8792725331, REGON 387073039, o kapitale zakładowym 100.000 zł (sto tysięcy złotych).
                                 </li>
                                 <li class="pt-1">
                                     <strong>2.2 Platforma</strong> – oznacza (mobilną) platformę internetową i aplikację, przez którą udostępniane są funkcjonalności związane z projektowaniem, zakupem i nadzorem nad realizacją procesu robotyzacji stanowisk przemysłowych która jest własnością, jest kontrolowana, zarządzana, utrzymywana i/lub hostowana przez DBR 77.

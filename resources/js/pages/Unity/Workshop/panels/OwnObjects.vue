@@ -5,7 +5,7 @@
         </div>
         <div class="grid grid-cols-12 gap-6 mt-5">
             <div v-for="(object, index) in objects" :key="'workshop_object' + index" v-if="objects.length != 0" class="box intro-y col-span-12 lg:col-span-4 xxl:col-span-4 flex lg:block flex-col-reverse">
-                <SingleWorkshopObject :object="object" :key="'obiekt_' + index"/>
+                <SingleWorkshopObject :object="object" :key="'obiekt_' + index" :own="true"/>
             </div>
         </div>
     </div>

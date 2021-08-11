@@ -1,6 +1,6 @@
 <template>
     <div>
-        <DarkModeSwitcher/>
+<!--        <DarkModeSwitcher/>-->
         <div class="container sm:px-10">
             <div class="block xl:grid grid-cols-2 gap-4">
                 <!-- BEGIN: Register Info -->
@@ -228,7 +228,7 @@
                             >
                                 {{$t('register.signup')}}
                             </button>
-                            <button    @click="$router.push('login')"
+                            <button @click.prevent="$router.push('login')"
                                 class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top"
                             >
                                 {{$t('login.login')}}
@@ -262,7 +262,6 @@
 
     export default {
         components: {
-            DarkModeSwitcher,
             PasswordMeter,
         },
         props: {
