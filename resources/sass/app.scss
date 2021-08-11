@@ -184,6 +184,14 @@
     border: 3px solid #d4af37;
     border-radius: 10px;
 }
+.sibling:hover ~ .sibling-two{
+    display: flex;
+}
+
+.sibling-two{
+    display:none;
+}
+
 .numberCircle {
     font-family: "OpenSans-Semibold", Arial, "Helvetica Neue", Helvetica, sans-serif;
     display: inline-block;

@@ -75,6 +75,7 @@
                         <button class="btn btn-primary shadow-md mr-2 truncate" style="max-width: 150px; max-height: 45px;" @click.prevent="readAll">{{$t('global.readAll')}}</button>
                         </div>
                     </div>
+                    <div class="sibling">
                     <div
                         v-for="(notification, index) in notificationsComp"
                         :key="'notification_' + index"
@@ -98,8 +99,9 @@
                             <div class="w-full truncate text-gray-600 mt-0.5" @click="goTo(notification.data.name,notification.id,notification.data.params,notification.data.id)">
                                 {{ notification.data.message }}
                             </div>
-                            <a class="flex items-center text-theme-6 pr-2" @click.prevent=delNotifi(notification.id,index) href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon style="width: 16px;"></TrashIcon></a>
+                            <a class="sibling-two" @click.prevent=delNotifi(notification.id,index) href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon style="width: 16px;"></TrashIcon></a>
                         </div>
+                    </div>
                     </div>
                     <div
                        v-if="notifications.length === 0"
@@ -275,11 +277,11 @@ export default defineComponent({
         });
 
         watch(() => counts.value, (val) => {
+
         });
 
         echo.private('App.Models.User.' + user.id)
             .notification((notification) => {
-                console.log(notification);
                 getNotificationsRepositories();
             });
 
@@ -294,8 +296,6 @@ export default defineComponent({
 
 
         const getNotificationsRepositories = async () => {
-            console.log(GetNotifications());
-            // if(GetNotifications().list.)
             notifications.value = await GetNotifications();
             checkCounts();
         }
@@ -329,7 +329,9 @@ export default defineComponent({
                     if (response.data.success) {
                         // getNotificationsRepositories();
                         notifications.value = response.data.payload
-                        counts.value--;
+                        if(counts.value - 1 >= 0){
+                            counts.value--;
+                        }
                     } else {
                         toast.error('Error');
                     }
@@ -342,7 +344,6 @@ export default defineComponent({
                         // getNotificationsRepositories();
                         notifications.value = response.data.payload
                         counts.value = 0;
-                        // toast.success('Readed all');
                     } else {
                         toast.error('Error');
                     }
@@ -354,7 +355,6 @@ export default defineComponent({
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
-                        // notifications.value = response.data.payload
                         notifications.value.splice(index,1);
                         toast.success(response.data.message);
                     } else {
@@ -364,7 +364,6 @@ export default defineComponent({
 
         const goTo = (name,id,change,challenge_id) => {
             setRead(id);
-            console.log(change + '=> change');
             if(change === 'commentChallenge'){
                 router.push({ path: '/challenges' })
             }

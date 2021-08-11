@@ -122,6 +122,7 @@ Route::group(['prefix' => 'report', 'middleware' => 'auth:sanctum'], function ()
 });
 
 Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('images/store', [SolutionController::class, 'storeFile']);
     Route::post('robots', [SolutionController::class, 'getRobots']);
     Route::post('save/robot', [SolutionController::class, 'saveRobot']);
     Route::post('filter', [SolutionController::class, 'deleteSolutionsNull']);
@@ -144,13 +145,14 @@ Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function 
     Route::post('user/like', [SolutionController::class, 'likeSolution']);
     Route::post('user/dislike', [SolutionController::class, 'dislikeSolution']);
     Route::post('user/comment', [SolutionController::class, 'commentSolution']);
-    Route::post('images/store', [SolutionController::class, 'storeImage']);
     Route::post('publish', [SolutionController::class, 'publish']);
     Route::post('unpublish', [SolutionController::class, 'unpublish']);
     Route::post('delete', [SolutionController::class, 'delete']);
     Route::post('estimate/save', [SolutionController::class, 'estimateSave']);
     Route::post('financial-analyses/save', [SolutionController::class, 'financialAnalysesSave']);
     Route::post('operational-analyses/save', [SolutionController::class, 'operationalAnalysesSave']);
+    Route::post('operational-analyses/get', [SolutionController::class, 'operationalAnalysesGet']);
+    Route::post('financial-analyses/get', [SolutionController::class, 'financialAnalysesGet']);
     Route::post('estimate/get', [SolutionController::class, 'estimateGet']);
 });
 

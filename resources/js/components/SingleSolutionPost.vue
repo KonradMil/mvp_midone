@@ -56,6 +56,7 @@
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0 && challenge.stage == 1 &&  solution.archive != 1 && canPublishSolution" @click="publishSolution">{{$t('challengesMain.publish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1 && canPublishSolution" @click="unpublishSolution">{{$t('challengesMain.unpublish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive != 1" @click="switchTab">{{$t('teams.teams')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="solution.archive != 1 && solution.selected != 1" @click="showAddFileModal(solution.id)">Dodaj plik</button>
             </div>
             <div class="mt-2" v-if="user.type == 'integrator' && solution.selected == 1 && type!=='archive' && addSolutionOffer">
                 <button v-if="solution.archive != 1" class="btn btn-primary shadow-md mr-2" @click="addOffer">{{$t('challengesMain.addOffer')}}</button>
@@ -95,19 +96,73 @@
             />
         </div>
     </div>
-<!--    <TeamsPanelSolution v-if="activeTab && (solution.author_id === user.id)" :solution="solution"/>-->
+    <ModalFile :show="show" @closed="modalClosed">
+        <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
+            <div class="mt-5">
+<!--                <div class="mt-3" v-if="images.length > 0">-->
+<!--                    <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>-->
+<!--                    <div class="rounded-md pt-4">-->
+<!--                        <div class="row flex h-full">-->
+<!--                            <div class=" h-full" v-for="(image, index) in images" :key="'image_' + index">-->
+<!--                                <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">-->
+<!--                                    <img class="w-full h-full"-->
+<!--                                         :alt="image.original_name"-->
+<!--                                         :src="'/' + image.path"-->
+<!--                                    />-->
+<!--                                    <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteImage(index)" class="cursor-pointer">USUŃ-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="mt-3">
+                    <label class="form-label"> {{ $t('challengesNew.file') }}</label>
+                    <div class="rounded-md pt-4">
+                        <div class="flex flex-wrap px-4">
+                            <Dropzone
+                                style="position: relative;
+                                                    display: flex;"
+                                ref-key="dropzoneSingleRef"
+                                :options="{
+                              url: '/api/solution/images/store',
+                              thumbnailWidth: 150,
+                              maxFilesize: 5,
+                              maxFiles: 5,
+                              previewTemplate: '<div style=\'display: none\'></div>'
+                            }"
+                                class="dropzone">
+                                <div class="px-4 py-4 flex items-center cursor-pointer relative">
+                                    <ImageIcon class="w-4 h-4 mr-2"/>
+                                    <span class="text-theme-1 dark:text-theme-10 mr-1">
+                                                            {{ $t('challengesNew.file') }}
+                                                        </span>
+                                    {{ $t('challengesNew.fileUpload') }}
+                                </div>
+                            </Dropzone>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ModalFile>
+
+    <!--    <TeamsPanelSolution v-if="activeTab && (solution.author_id === user.id)" :solution="solution"/>-->
 </template>
 
 <script>
 import CommentSection from "./social/CommentSection";
-import {computed, getCurrentInstance, onMounted, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, provide, ref} from "vue";
 import router from "../router";
 import {useToast} from "vue-toastification";
 import TeamsPanelSolution from "../pages/Challenges/components/TeamsPanel";
+import ModalFile from "./ModalFile";
 
 export default {
     name: "SingleSolutionPost",
-    components: {CommentSection, TeamsPanelSolution},
+    components: {CommentSection, TeamsPanelSolution, ModalFile},
     props: {
         index: Number,
         challenge: Object,
@@ -131,6 +186,18 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         const activeTab = ref(false);
         const inTeam = ref(false);
+        const show = ref(false);
+        const dropzoneSingleRef = ref();
+        const images = ref([]);
+
+        const modalClosed = () => {
+            show.value = false;
+        }
+
+        const showAddFileModal = (id) => {
+                show.value = !show.value;
+            }
+
         const switchTab = () => {
             console.log('Switch2244444');
             console.log(props.solution + ' its props solution');
@@ -138,13 +205,21 @@ export default {
         }
 
         const teams = computed(() => {
-            return props.solution.teams
+            return props.solution.teams;
         }, () => {
 
         });
 
         onMounted(() => {
             checkTeam();
+            const elDropzoneSingleRef = dropzoneSingleRef.value;
+            elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                images.value.push(JSON.parse(resp.xhr.response).payload);
+                toast.success('Zdjecie zostało wgrane poprawnie!');
+            });
+            elDropzoneSingleRef.dropzone.on("error", () => {
+                toast.error("Błąd");
+            });
         });
 
         const addOffer = () => {
@@ -257,7 +332,17 @@ export default {
                 })
         }
 
+        provide("bind[dropzoneSingleRef]", el => {
+            console.log('dropzoneSingleRef' + dropzoneSingleRef.value);
+            dropzoneSingleRef.value = el;
+        });
+
         return {
+            images,
+            dropzoneSingleRef,
+            showAddFileModal,
+            modalClosed,
+            show,
             switchTab,
             teams,
             activeTab,

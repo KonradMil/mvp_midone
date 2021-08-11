@@ -1,7 +1,12 @@
 <template>
-    <div>
-    <div class="col-span-12 lg:col-span-9 xxl:col-span-10">
+    <div class="grid grid-cols-12 gap-6 mt-5">
+        <div class="col-span-12 xxl:col-span-6">
         <!-- BEGIN: Inbox Content -->
+            <div
+                class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5"
+            >
+                <h2 class="font-medium text-base mr-auto">{{$t('global.notifications')}}</h2>
+            </div>
         <div class="intro-y inbox box mt-5">
             <div class="overflow-x-auto sm:overflow-x-visible">
                 <div v-for="(notification, index) in notificationsComp"
@@ -9,7 +14,7 @@
                     class="intro-y pb-2">
                     <div :class="(notification.read_at === null) ? 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1' : 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1 opacity-60'">
                         <div class="flex px-5 py-3">
-                            <div class="w-72 flex-none flex items-center mr-5">
+                            <div class="w-72 flex-none flex items-center mr-5" style="max-width: 200px;">
 <!--                                <input class="form-check-input flex-none" type="checkbox" checked>-->
                                 <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
                                 <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
@@ -30,6 +35,63 @@
         </div>
         <!-- END: Inbox Content -->
     </div>
+        <Invites></Invites>
+<!--        <div class="col-span-12 xxl:col-span-6">-->
+<!--            <div-->
+<!--                class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5"-->
+<!--            >-->
+<!--                <h2 class="font-medium text-base mr-auto">{{$t('teams.invitations')}}</h2>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; BEGIN: Inbox Content &ndash;&gt;-->
+<!--            <div class="intro-y inbox box mt-5">-->
+<!--                <div class="overflow-x-auto sm:overflow-x-visible">-->
+<!--                    <div v-if="invites.length == 0" class="intro-y text-lg text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">-->
+<!--                        Nie otrzymałeś jeszcze żadnych zaproszeń.-->
+<!--                    </div>-->
+<!--                    <div v-for="(invite, index) in invites" :key="'invite_' + index" class="intro-y">-->
+<!--                        <div class="box px-4 py-4 mb-3 flex items-center zoom-in">-->
+<!--                            <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">-->
+<!--                                <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#930f68"/>-->
+<!--                            </div>-->
+<!--                            <div class="ml-4 mr-auto">-->
+<!--                                <div class="font-medium">{{invite.team.name}}</div>-->
+<!--                                <div class="text-gray-600 text-xs mt-0.5">-->
+<!--                                    Od: {{invite.inviter.name + ' ' + invite.inviter.lastname}}-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="py-1 px-2 rounded-full text-xs text-center bg-theme-9 text-white cursor-pointer font-medium" @click="acceptInvite(invite.id)">-->
+<!--                                {{$t('teams.acceptInvite')}}-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <hr class="my-2"/>-->
+<!--                    <div v-for="(invite, index) in invitesSent" :key="'inviteSent_' + index" class="intro-y">-->
+<!--                        <div class="box px-4 py-4 mb-3 flex items-center zoom-in">-->
+<!--                            <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden" v-if="invite.user != null">-->
+<!--                                <Avatar :src="'/s3/avatars/' + invite.user.avatar" :username="invite.user.name + ' ' + invite.user.lastname" :size="40" color="#FFF" background-color="#930f68"/>-->
+<!--                            </div>-->
+<!--                            <div v-if="invite.user == null">-->
+<!--                                <Avatar :src="''" :username="invite.email" :size="40" color="#FFF" background-color="#930f68"/>-->
+
+<!--                            </div>-->
+<!--                            <div class="ml-4 mr-auto">-->
+<!--                                <div class="font-medium">{{invite.team.name}}</div>-->
+<!--                                <div class="text-gray-600 text-xs mt-0.5"  v-if="invite.user != null">-->
+<!--                                    Do: {{invite.user.name + ' ' + invite.user.lastname}}-->
+<!--                                </div>-->
+<!--                                <div class="text-gray-600 text-xs mt-0.5"  v-if="invite.user == null">-->
+<!--                                    Do: {{invite.email}}-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="py-1 px-2 rounded-full text-xs text-center bg-theme-27 text-white cursor-pointer font-medium">-->
+<!--                                Wysłano-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; END: Inbox Content &ndash;&gt;-->
+<!--        </div>-->
     </div>
 </template>
 
@@ -43,14 +105,15 @@ import GetInvites from "../compositions/GetInvites"
 import { useI18n } from 'vue-i18n'
 import {useToast} from "vue-toastification";
 import Avatar from "../components/avatar/Avatar";
+import AcceptInvite from "../compositions/AcceptInvite";
+import Invites from "./Teams/components/Invites";
 
 
 const toast = useToast();
 
 export default defineComponent({
-    components:  {Avatar},
+    components:  {Invites, Avatar},
     setup() {
-        const invites = ref([]);
         const user = window.Laravel.user;
         const echo = window.Echo;
         const notifications = ref([]);
@@ -58,9 +121,28 @@ export default defineComponent({
         const { t, locale } = useI18n({ useScope: 'global' })
         const results = ref({});
         const searchTerm = ref('');
+        const invites = ref([]);
+        const invitesSent = ref([]);
         const changeLang = () => {
             locale.value = lang.value;
             store.dispatch('main/setCurrentLang', lang.value);
+        }
+
+        const getInvitesRepositories = async () => {
+            console.log('getInvitesRepositories');
+            await GetInvites((res) => {
+                console.log('res.payload ' + res.payload);
+                invites.value = res.payload;
+                console.log('res.sent ' + res.sent);
+                invitesSent.value = res.sent;
+            });
+        }
+
+        const acceptInvite = async (id) => {
+            await AcceptInvite(id)
+            setTimeout(function () {
+                getInvitesRepositories(search.value);
+            }, 1000);
         }
 
         const searchMe = () => {
@@ -92,9 +174,9 @@ export default defineComponent({
             notifications.value = GetNotifications();
         }
 
-        const GetInvitesRepositories = async () => {
-            invites.value = GetInvites();
-        }
+        // const GetInvitesRepositories = async () => {
+        //     invites.value = GetInvites();
+        // }
         const searchDropdown = ref(false);
         const store = useStore();
 
@@ -119,9 +201,7 @@ export default defineComponent({
             axios.post('/api/notifications/set', {id: id})
                 .then(response => {
                     if (response.data.success) {
-                        // getNotificationsRepositories();
                         notifications.value = response.data.payload
-                        // toast.success('Readed');
                     } else {
                         toast.error('Error');
                     }
@@ -131,9 +211,7 @@ export default defineComponent({
             axios.post('/api/notifications/read-all', {})
                 .then(response => {
                     if (response.data.success) {
-                        // getNotificationsRepositories();
                         notifications.value = response.data.payload
-                        // toast.success('Readed all');
                     } else {
                         toast.error('Error');
                     }
@@ -145,7 +223,6 @@ export default defineComponent({
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
-                        // notifications.value = response.data.payload
                         notifications.value.splice(index,1);
                         toast.success(response.data.message);
                     } else {
@@ -163,12 +240,16 @@ export default defineComponent({
         };
 
         onMounted(function () {
-            GetInvitesRepositories();
+            if (window.Laravel.user) {
+                user.value = window.Laravel.user;
+            }
+            getInvitesRepositories();
             getNotificationsRepositories();
             lang.value = store.state.main.currentLang;
             notifications.value = user.notifications;
         })
         return {
+            acceptInvite,
             delNotifi,
             readAll,
             setRead,
@@ -182,6 +263,7 @@ export default defineComponent({
             changeLang,
             lang,
             invites,
+            invitesSent,
             searchMe,
             searchTerm,
             results

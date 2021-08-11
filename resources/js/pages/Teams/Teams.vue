@@ -90,58 +90,59 @@
                     </div>
                 </div>
             </div>
-            <div class="col-span-3">
-                <h2 class="intro-y text-lg font-medium mt-5">{{$t('teams.invitations')}}</h2>
-                <div class="grid-cols-12 grid">
-                    <div class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-2">
-                        <div class="mt-5">
-                            <div v-if="invites.length == 0" class="intro-y text-lg text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
-                                Nie otrzymałeś jeszcze żadnych zaproszeń.
-                            </div>
-                            <div v-for="(invite, index) in invites" :key="'invite_' + index" class="intro-y">
-                                <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                    <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">
-                                        <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#930f68"/>
-                                    </div>
-                                    <div class="ml-4 mr-auto">
-                                        <div class="font-medium">{{invite.team.name}}</div>
-                                        <div class="text-gray-600 text-xs mt-0.5">
-                                            Od: {{invite.inviter.name + ' ' + invite.inviter.lastname}}
-                                        </div>
-                                    </div>
-                                    <div class="py-1 px-2 rounded-full text-xs text-center bg-theme-9 text-white cursor-pointer font-medium" @click="acceptInvite(invite.id)">
-                                        {{$t('teams.acceptInvite')}}
-                                    </div>
-                                </div>
-                            </div>
-                          <hr class="my-2"/>
-                            <div v-for="(invite, index) in invitesSent" :key="'inviteSent_' + index" class="intro-y">
-                                <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
-                                    <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden" v-if="invite.user != null">
-                                        <Avatar :src="'/s3/avatars/' + invite.user.avatar" :username="invite.user.name + ' ' + invite.user.lastname" :size="40" color="#FFF" background-color="#930f68"/>
-                                    </div>
-                                    <div v-if="invite.user == null">
-                                        <Avatar :src="''" :username="invite.email" :size="40" color="#FFF" background-color="#930f68"/>
+            <Invites :guard="guard"></Invites>
+<!--            <div class="col-span-3">-->
+<!--                <h2 class="intro-y text-lg font-medium mt-5">{{$t('teams.invitations')}}</h2>-->
+<!--                <div class="grid-cols-12 grid">-->
+<!--                    <div class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-2">-->
+<!--                        <div class="mt-5">-->
+<!--                            <div v-if="invites.length == 0" class="intro-y text-lg text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">-->
+<!--                                Nie otrzymałeś jeszcze żadnych zaproszeń.-->
+<!--                            </div>-->
+<!--                            <div v-for="(invite, index) in invites" :key="'invite_' + index" class="intro-y">-->
+<!--                                <div class="box px-4 py-4 mb-3 flex items-center zoom-in">-->
+<!--                                    <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">-->
+<!--                                        <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#930f68"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="ml-4 mr-auto">-->
+<!--                                        <div class="font-medium">{{invite.team.name}}</div>-->
+<!--                                        <div class="text-gray-600 text-xs mt-0.5">-->
+<!--                                            Od: {{invite.inviter.name + ' ' + invite.inviter.lastname}}-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="py-1 px-2 rounded-full text-xs text-center bg-theme-9 text-white cursor-pointer font-medium" @click="acceptInvite(invite.id)">-->
+<!--                                        {{$t('teams.acceptInvite')}}-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                          <hr class="my-2"/>-->
+<!--                            <div v-for="(invite, index) in invitesSent" :key="'inviteSent_' + index" class="intro-y">-->
+<!--                                <div class="box px-4 py-4 mb-3 flex items-center zoom-in">-->
+<!--                                    <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden" v-if="invite.user != null">-->
+<!--                                        <Avatar :src="'/s3/avatars/' + invite.user.avatar" :username="invite.user.name + ' ' + invite.user.lastname" :size="40" color="#FFF" background-color="#930f68"/>-->
+<!--                                    </div>-->
+<!--                                    <div v-if="invite.user == null">-->
+<!--                                        <Avatar :src="''" :username="invite.email" :size="40" color="#FFF" background-color="#930f68"/>-->
 
-                                    </div>
-                                    <div class="ml-4 mr-auto">
-                                        <div class="font-medium">{{invite.team.name}}</div>
-                                        <div class="text-gray-600 text-xs mt-0.5"  v-if="invite.user != null">
-                                            Do: {{invite.user.name + ' ' + invite.user.lastname}}
-                                        </div>
-                                        <div class="text-gray-600 text-xs mt-0.5"  v-if="invite.user == null">
-                                            Do: {{invite.email}}
-                                        </div>
-                                    </div>
-                                    <div class="py-1 px-2 rounded-full text-xs text-center bg-theme-27 text-white cursor-pointer font-medium">
-                                        Wysłano
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--                                    </div>-->
+<!--                                    <div class="ml-4 mr-auto">-->
+<!--                                        <div class="font-medium">{{invite.team.name}}</div>-->
+<!--                                        <div class="text-gray-600 text-xs mt-0.5"  v-if="invite.user != null">-->
+<!--                                            Do: {{invite.user.name + ' ' + invite.user.lastname}}-->
+<!--                                        </div>-->
+<!--                                        <div class="text-gray-600 text-xs mt-0.5"  v-if="invite.user == null">-->
+<!--                                            Do: {{invite.email}}-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="py-1 px-2 rounded-full text-xs text-center bg-theme-27 text-white cursor-pointer font-medium">-->
+<!--                                        Wysłano-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
             <!-- BEGIN: Users Layout -->
         </div>
     </div>
@@ -246,7 +247,7 @@
 </template>
 
 <script>
-import {onMounted, reactive, ref} from "vue";
+import {getCurrentInstance, onMounted, reactive, ref} from "vue";
 import GetTeams from '../../compositions/GetTeams'
 import GetInvites from '../../compositions/GetInvites'
 import AcceptInvite from '../../compositions/AcceptInvite'
@@ -257,14 +258,17 @@ import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
 import ModalPermission from "../../components/ModalPermission";
 import router from "../../router";
+import Invites from "./components/Invites";
 
 export default {
     name: "Teams",
-    components: {Avatar, Modal, ModalPermission},
+    components: {Avatar, Modal, ModalPermission, Invites},
     props: {
         team: Object
     },
     setup(props, {emit}) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const showDetails = ref([]);
         const showPermissions = ref([]);
         const isDisabled = ref(false);
@@ -290,12 +294,8 @@ export default {
         const currentTeam_id = ref();
         const currentMember_id = ref();
         const width = ref('250px');
+        const guard = ref(false);
 
-        // const userPermissions = reactive({
-        //     acceptChallengeSolution: 0,
-        //     acceptChallengeOffer: 0,
-        //     publishChallenge: false,
-        // });
 
 
         const getPermissions = (team_id,member_id) => {
@@ -336,6 +336,10 @@ export default {
                     }
                 })
         }
+
+        emitter.on('pushTeamList', e => {
+            getTeamsRepositories(search.value);
+        });
 
         const getTeamsRepositories = async () => {
             GetTeams('','','teams',(res) => {
@@ -469,9 +473,9 @@ export default {
                     getTeamsRepositories(search.value);
                     getInvitesRepositories();
                     new_team_member_email.value = '';
+                    guard.value = true;
                     modalClosed();
                 }, 1000);
-                toast.success('Wysłano zaproszenie do zespołu!')
             }
             setTimeout(() =>{
                isDisabled.value = false;
@@ -495,6 +499,7 @@ export default {
         })
 
         return {
+            guard,
             editChallenge,
             publishChallenge,
             acceptChallengeOffer,

@@ -58,6 +58,13 @@
                             <SettingsIcon class="w-4 h-4 mr-2"/>
                             {{$t('communication.questions')}}
                         </a>
+                        <a v-if="challenge.stage === 3"
+                            class="flex items-center mt-5" href=""
+                           @click.prevent="activeTab = 'operational-analysis'"
+                           :class="(activeTab == 'operational-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                            <SettingsIcon class="w-4 h-4 mr-2"/>
+                            Analiza operacyjna rozwiązania
+                        </a>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5" v-if="(challenge.author_id == user.id)">
                         <a class="flex items-center" href=""
@@ -113,6 +120,7 @@
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :edit_offer_id="edit_offer_id"></OfferAdd>
             <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab" :id="challenge.id" :inTeam="inTeam" :addSolutionOffer="addSolutionOffer"></Offers>
             <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam" :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
+            <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisInformationPanel>
         </div>
     </div>
 </template>
@@ -142,6 +150,7 @@ import OfferAdd from "./components/OfferAdd";
 import Offers from "./components/Offers";
 import TeamsPanel from "./components/TeamsPanel";
 import ChallengeOffers from "./components/ChallengeOffers";
+import OperationalAnalysisInformationPanel from "./components/OperationalAnalysisInformationPanel";
 
 export default defineComponent({
     name: 'Card',
@@ -154,7 +163,8 @@ export default defineComponent({
         QuestionsPanel,
         TechnicalInformationPanel,
         BasicInformationPanel,
-        WhatsNext
+        WhatsNext,
+        OperationalAnalysisInformationPanel
     },
     props: {
         id: Number,
@@ -189,6 +199,7 @@ export default defineComponent({
         const editChallenges = ref(false);
         const publishSolution = ref(false);
         const addSolutionOffer = ref(false);
+        const solution_project = ref('');
 
         watch(() => props.change, (first, second) => {
             if(props.change === 'all-offers' && user.type === 'integrator'){
@@ -218,6 +229,14 @@ export default defineComponent({
         emitter.on('updateAddSolutionOffer', e => {
             addSolutionOffer.value = e.addSolutionOffer;
         });
+
+        const checkSolution = () => {
+             challenge.value.solutions.forEach(function(solution){
+                if(solution.selected_offer_id === challenge.value.selected_offer_id){
+                    solution_project.value = solution;
+                }
+             });
+        }
 
         const filter = () => {
             console.log(challenge.value.solutions + '->  solutions.value');
@@ -285,6 +304,7 @@ export default defineComponent({
                         checkTeam();
                         filter();
                         checkPermissions();
+                        checkSolution();
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -447,6 +467,8 @@ export default defineComponent({
             inTeam,
             isSolutions,
             isPublic,
+            solution_project,
+            checkSolution
         };
     }
 });

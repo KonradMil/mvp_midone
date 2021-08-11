@@ -44,7 +44,7 @@
                     <div class="w-10 h-10 flex-none image-fit">
                         <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" :src="'/' + challenge.screenshot_path"/>
                     </div>
-                    <div class="ml-3 mr-auto" @click="$router.push( {path : '/challenges/card/' + challenge.id})">
+                    <div class="ml-3 mr-auto" @click="$router.push( {path : '/projects/card/' + challenge.id})">
                         <a href="" class="font-medium">{{ challenge.name }}</a>
                         <div class="flex text-gray-600 truncate text-xs mt-0.5" style="flex-direction: column;">
                             <a class="text-theme-1 dark:text-theme-10 inline-block truncate" href="">
@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="p-5">
-                    <div class="h-40 xxl:h-56 image-fit" @click="$router.push( {path : '/challenges/card/' + challenge.id})">
+                    <div class="h-40 xxl:h-56 image-fit" @click="$router.push( {path : '/projects/card/' + challenge.id})">
                         <img
                             alt="Icewall Tailwind HTML Admin Template"
                             class="rounded-md"

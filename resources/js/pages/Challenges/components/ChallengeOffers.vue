@@ -326,9 +326,7 @@ export default {
             }
         }
 
-        const handleCallback = () => {
-            router.push({name: 'projects'});
-        }
+
 
         const StartFilterOffer = async () => {
             axios.post('/api/offer/user/filter', {option: filterType.value , id: props.challenge.id, technologyType: technologyType.value})
@@ -353,6 +351,11 @@ export default {
                 })
         }
 
+        const handleCallback = () => {
+            console.log('handleCallback router');
+            router.push( {path : '/projects/card/' + props.challenge.id});
+        }
+
         const acceptOffer = async(offer) => {
             axios.post('/api/offer/accept', {id: offer.id})
                 .then(response => {
@@ -362,6 +365,7 @@ export default {
                         offer.rejected = 0;
                         offer.solution.selected_offer_id = offer.id;
                         props.challenge.selected_offer_id = offer.id;
+                        // window.location.replace('/projects');
                     } else {
                         // toast.error(response.data.message);
                     }
