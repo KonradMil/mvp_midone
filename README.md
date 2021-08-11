@@ -1,9 +1,9 @@
-#DBR77 System - installation guide
+# DBR77 System - installation guide
 
-##Requirements
+## Requirements
 System requirements description is not ready yet.
 
-##Run with Docker
+## Run with Docker
 
 In the project root directory run following commands:
 
@@ -17,7 +17,7 @@ In the project root directory run following commands:
 
 Go to http://localhost
 
-###STAGES:
+### STAGES:
 0 - draft
 
 1 - awaiting solution
