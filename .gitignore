@@ -19,3 +19,4 @@ yarn.lock
 package.json
 rr
 .rr.yaml
+docker/nginx/log/

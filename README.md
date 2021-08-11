@@ -1,3 +1,21 @@
+#DBR77 System - installation guide
+
+##Requirements
+System requirements description is not ready yet.
+
+##Run with Docker
+
+1. In the project root directory run following commands:
+
+
+    $ cp .env.example .env
+    $ sudo docker-compose up -d
+    $ sudo docker exec -it php_dbr77 bash
+    # composer install
+    # php artisan key:generate
+    # php artisan migrate
+    # exit
+
 ## Laravel Vue SPA, Auth & CRUD
 Using Laravel and Vue.js 3, we are going to create a single page application. We will learn who to create, read, update, delete and auth using Vue 3 and Laravel API backend.
 
