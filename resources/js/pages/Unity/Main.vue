@@ -11,6 +11,7 @@
     <div v-if="!loaded" id="loader">
         <LoadingIcon icon="grid" class="w-8 h-8" />
     </div>
+    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>
 
     <div id="help-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl">
@@ -108,6 +109,7 @@ import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
 
 import router from "../../router";
+import VoiceChat from "./components/VoiceChat";
 
 const ww = WindowWatcher();
 
@@ -121,9 +123,10 @@ export default {
             type: Boolean
         },
         publishChallenges: Boolean,
-        canEditSolution: Boolean
+        canEditSolution: Boolean,
+        sessionid: String
     },
-    components: {RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
+    components: {VoiceChat, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
     setup(props, {emit}) {
         //GLOBAL
         const app = getCurrentInstance();
@@ -160,8 +163,16 @@ export default {
         const radialMenuLayout = ref([]);
         const animationSave = ref({layers: []});
         const saving = ref(false);
+        const sessionid = ref('');
+        const owner = ref(false);
 
-
+        if(props.sessionid === undefined) {
+            sessionid.value = Math.random().toString(36).slice(-5);
+            owner.value = true;
+        } else {
+            sessionid.value = props.sessionid;
+            owner.value = false;
+        }
 
         window_height.value = window.innerHeight;
 
@@ -516,7 +527,9 @@ export default {
             unlockInput,
             modelActiveTab,
             startTutorial,
-            loaded
+            loaded,
+            sessionid,
+            owner
         }
     }
 }
