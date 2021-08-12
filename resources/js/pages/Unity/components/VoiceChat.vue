@@ -74,7 +74,7 @@ export default {
             connection.audiosContainer = document.getElementById('audios-container');
             connection.onstream = onStream(event);
             connection.onstreamended = onStreamEnded(event);
-            connection.open(props.sessionsid);
+            connection.openOrJoin(props.sessionsid);
         });
 
         return {}
