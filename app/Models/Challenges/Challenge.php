@@ -5,6 +5,7 @@ namespace App\Models\Challenges;
 use App\Models\File;
 use App\Models\Financial;
 use App\Models\Offer;
+use App\Models\Question;
 use App\Models\Solutions\Solution;
 use App\Models\Team;
 use App\Models\TechnicalDetails;
