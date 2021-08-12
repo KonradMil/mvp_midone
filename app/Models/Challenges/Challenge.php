@@ -9,6 +9,7 @@ use App\Models\Solutions\Solution;
 use App\Models\Team;
 use App\Models\TechnicalDetails;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
@@ -19,18 +20,55 @@ class Challenge extends Model implements ReactableInterface
 {
     use Reactable, HasTags, HasComments;
 
+    const TYPES = [
+        "Pick & Place",
+        "Montaż",
+        "Kontrola jakości",
+        "Malowanie",
+        "Spawanie"
+    ];
+
+    const STAGES = [
+        'draft',
+        'awaiting solution',
+        'awaiting offer',
+        'agreement planning',
+        'project planning',
+        'project accepting',
+        'invoicing'
+    ];
+
     public $table = 'challenges';
+
     protected $fillable = [
-        'type',
-        'name', 'en_name', 'solution_deadline', 'offer_deadline', 'status', 'stage', 'save_json', 'screenshot_path',
+        'type', 'name', 'en_name', 'solution_deadline', 'offer_deadline', 'status', 'stage', 'save_json', 'screenshot_path',
         'client_id', 'author_id', 'financial_before_id', 'description', 'en_description', 'allowed_publishing', 'selected_offer_id'
     ];
 
+    protected $casts = [
+        'name' => 'string',
+        'type' => 'string',
+        'en_name' => 'string',
+        'description' => 'string',
+        'en_description' => 'string',
+        'status' => 'integer',
+        'stage' => 'integer',
+        'save_json' => AsArrayObject::class,
+        'screenshot_path' => 'string',
+        'allowed_publishing' => 'boolean',
+        'solution_deadline' => 'timestamp',
+        'offer_deadline' => 'timestamp',
+    ];
 
-//    public function rates()
-//    {
-//        return $this->hasMany(Rate::class);
-//    }
+    public function getStageName(): string
+    {
+        return self::STAGES[$this->attributes['stage']];
+    }
+
+    public function getTypeName(): string
+    {
+        return self::TYPES[$this->attributes['type']];
+    }
 
     public function client()
     {
@@ -47,7 +85,8 @@ class Challenge extends Model implements ReactableInterface
         return $this->belongsToMany(Team::class, 'team_challenge', 'challenge_id', 'team_id');
     }
 
-    public function technicalDetails(){
+    public function technicalDetails()
+    {
         return $this->hasOne(TechnicalDetails::class);
     }
 
@@ -61,16 +100,6 @@ class Challenge extends Model implements ReactableInterface
         return $this->hasMany(Solution::class, 'challenge_id', 'id');
     }
 
-//    public function projects()
-//    {
-//        return $this->hasMany(Project::class);
-//    }
-//
-//    public function workStations()
-//    {
-//        return $this->hasMany(WorkStation::class);
-//    }
-
     public function offers()
     {
         return $this->hasMany(Offer::class);
@@ -81,9 +110,9 @@ class Challenge extends Model implements ReactableInterface
         return $this->hasOne(Financial::class, 'id', 'financial_before_id');
     }
 
-//    public function questions()
-//    {
-//        return $this->hasMany(Question::class);
-//    }
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
 
 }
