@@ -13,7 +13,7 @@ let postcssImport = require('postcss-import');
  */
 // mix.options({
 //     hmrOptions: {
-//         host: 'platform.dbr77.com',
+//         host: 'devsys.appworks-dev.pl',
 //         port: '8080'
 //     }
 // });
