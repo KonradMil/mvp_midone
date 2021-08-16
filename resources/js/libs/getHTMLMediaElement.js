@@ -4,7 +4,8 @@ import getAudioElement from './getAudioElement';
 // getHTMLMediaElement.js
 function getHTMLMediaElement(mediaElement, config) {
     config = config || {};
-
+    console.log("mediaElement");
+    console.log(mediaElement);
     if (!mediaElement.nodeName || (mediaElement.nodeName.toLowerCase() != 'audio' && mediaElement.nodeName.toLowerCase() != 'video')) {
         if (!mediaElement.getVideoTracks().length) {
             return getAudioElement(mediaElement, config);
