@@ -177,6 +177,9 @@ function getAudioElement(mediaElement, config) {
 
 // getHTMLMediaElement.js
 function getHTMLMediaElement(mediaElement, config) {
+    if(mediaElement == undefined || mediaElement == null) {
+        return false;
+    }
     config = config || {};
     console.log("mediaElement");
     console.log(mediaElement);
