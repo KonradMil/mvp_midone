@@ -4,12 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Mail\ChangePassword;
 use App\Mail\ForgotPassword;
-use App\Mail\TeamInvitation;
 use App\Models\Challenges\Challenge;
 use App\Models\Solutions\Solution;
-use App\Models\Team;
-use App\Models\TeamSolution;
-use App\Models\TeamUser;
 use Authy\AuthyApi;
 use GuzzleHttp\Client;
 use Illuminate\Auth\Events\PasswordReset;
