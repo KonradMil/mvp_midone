@@ -5,6 +5,7 @@
 <script>
 import {getCurrentInstance, onMounted} from "vue";
 import RTCMultiConnection from 'rtcmulticonnection';
+import getHTMLMediaElement from '../../../libs/getHTMLMediaElement'
 
 export default {
     name: "VoiceChat",

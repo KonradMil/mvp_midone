@@ -26,8 +26,6 @@ class UserController extends Controller
 
     public static function userPermissions($model)
     {
-//        $user = User::find($model->id);
-//        dd($model->id);
         $publishChallenges = [];
         $editChallenges = [];
         $acceptChallengeSolutions = [];
@@ -39,7 +37,7 @@ class UserController extends Controller
         $showSolutions = [];
 
         $challenges = Challenge::where('author_id', '=', $model->id)->get();
-        if($challenges != NULL) {
+        if ($challenges != NULL) {
             foreach ($challenges as $challenge) {
                 $publishChallenges[] = $challenge->id;
                 $editChallenges[] = $challenge->id;
@@ -49,7 +47,7 @@ class UserController extends Controller
         }
 
         $solutions = Solution::where('author_id', '=', $model->id)->get();
-        if($solutions != NULL) {
+        if ($solutions != NULL) {
             foreach ($solutions as $solution) {
                 $publishSolution[] = $solution->id;
                 $addSolutionOffer[] = $solution->id;
@@ -60,71 +58,71 @@ class UserController extends Controller
         }
 
         $user = User::find($model->id);
-        if($user->teams != NULL){
-            foreach($user->teams as $team){
+        if ($user->teams != NULL) {
+            foreach ($user->teams as $team) {
                 $challenges = $team->challenges;
-                $solutions  = $team->solutions;
-                        foreach($challenges as $challenge){
+                $solutions = $team->solutions;
+                foreach ($challenges as $challenge) {
 //                            $teamChallenge = TeamUser::where('team_id', '=', $team->id)->first();
-                            $team_user = $user->teams()->where(['team_id'=>$team->id,'user_id'=>$user->id])->first();
-                            if($team_user != NULL){
-                                if($team_user -> pivot ->publishChallenge === 1){
-                                    if(!(in_array($challenge->id, $publishChallenges))){
-                                        $publishChallenges[] = $challenge->id;
-                                    }
-                               }
-                                if($team_user -> pivot ->editChallenge === 1){
-                                    if(!(in_array($challenge->id, $editChallenges))){
-                                        $editChallenges[] = $challenge->id;
-                                    }
-                                }
-                                if($team_user -> pivot ->acceptChallengeOffer === 1){
-                                    if(!(in_array($challenge->id, $acceptChallengeOffers))){
-                                        $acceptChallengeOffers[] = $challenge->id;
-                                    }
-                               }
-                                if($team_user -> pivot ->acceptChallengeSolution === 1){
-                                    if(!(in_array($challenge->id, $acceptChallengeSolutions))){
-                                        $acceptChallengeSolutions[] = $challenge->id;
-                                    }
-                                }
+                    $team_user = $user->teams()->where(['team_id' => $team->id, 'user_id' => $user->id])->first();
+                    if ($team_user != NULL) {
+                        if ($team_user->pivot->publishChallenge === 1) {
+                            if (!(in_array($challenge->id, $publishChallenges))) {
+                                $publishChallenges[] = $challenge->id;
+                            }
+                        }
+                        if ($team_user->pivot->editChallenge === 1) {
+                            if (!(in_array($challenge->id, $editChallenges))) {
+                                $editChallenges[] = $challenge->id;
+                            }
+                        }
+                        if ($team_user->pivot->acceptChallengeOffer === 1) {
+                            if (!(in_array($challenge->id, $acceptChallengeOffers))) {
+                                $acceptChallengeOffers[] = $challenge->id;
+                            }
+                        }
+                        if ($team_user->pivot->acceptChallengeSolution === 1) {
+                            if (!(in_array($challenge->id, $acceptChallengeSolutions))) {
+                                $acceptChallengeSolutions[] = $challenge->id;
+                            }
                         }
                     }
-                        $team_user = $user->teams()->where(['team_id'=>$team->id,'user_id'=>$user->id])->first();
-                        if($team_user!= NULL){
-                        foreach($solutions as $solution){
-                            if($user->id != $solution->author_id){
-                                if($team_user -> pivot -> publishSolution === 1){
-                                    if(!(in_array($solution->id, $publishSolution))){
-                                        $publishSolution[] = $solution->id;
-                                    }
+                }
+                $team_user = $user->teams()->where(['team_id' => $team->id, 'user_id' => $user->id])->first();
+                if ($team_user != NULL) {
+                    foreach ($solutions as $solution) {
+                        if ($user->id != $solution->author_id) {
+                            if ($team_user->pivot->publishSolution === 1) {
+                                if (!(in_array($solution->id, $publishSolution))) {
+                                    $publishSolution[] = $solution->id;
                                 }
-                                if($team_user -> pivot -> addSolutionOffer === 1){
-                                    if(!(in_array($solution->id, $addSolutionOffer))){
-                                        $addSolutionOffer[] = $solution->id;
-                                    }
+                            }
+                            if ($team_user->pivot->addSolutionOffer === 1) {
+                                if (!(in_array($solution->id, $addSolutionOffer))) {
+                                    $addSolutionOffer[] = $solution->id;
                                 }
-                                if($team_user -> pivot -> canEditSolution === 1){
-                                    if(!(in_array($solution->id, $canEditSolution))){
-                                        $canEditSolution[] = $solution->id;
-                                    }
+                            }
+                            if ($team_user->pivot->canEditSolution === 1) {
+                                if (!(in_array($solution->id, $canEditSolution))) {
+                                    $canEditSolution[] = $solution->id;
                                 }
-                                if($team_user -> pivot -> canDeleteSolution === 1){
-                                    if(!(in_array($solution->id, $canDeleteSolution))){
-                                        $canDeleteSolution[] = $solution->id;
-                                    }
+                            }
+                            if ($team_user->pivot->canDeleteSolution === 1) {
+                                if (!(in_array($solution->id, $canDeleteSolution))) {
+                                    $canDeleteSolution[] = $solution->id;
                                 }
-                                if($team_user -> pivot -> showSolutions === 1){
-                                    if(!(in_array($solution->id, $showSolutions))){
-                                        $showSolutions[] = $solution->id;
-                                    }
+                            }
+                            if ($team_user->pivot->showSolutions === 1) {
+                                if (!(in_array($solution->id, $showSolutions))) {
+                                    $showSolutions[] = $solution->id;
                                 }
                             }
                         }
                     }
                 }
+            }
         }
-         return ['publishChallenges' => $publishChallenges,'editChallenges' => $editChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffer' => $addSolutionOffer, 'canDeleteSolution' => $canDeleteSolution,'canEditSolution' => $canEditSolution,'showSolutions' => $showSolutions, 'teams' => $user->teams,'solutions' => $solutions];
+        return ['publishChallenges' => $publishChallenges, 'editChallenges' => $editChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffer' => $addSolutionOffer, 'canDeleteSolution' => $canDeleteSolution, 'canEditSolution' => $canEditSolution, 'showSolutions' => $showSolutions, 'teams' => $user->teams, 'solutions' => $solutions];
     }
 
     public function reset(Request $request)
