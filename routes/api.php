@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Crud\ChallengeController;
 use App\Http\Controllers\Crud\ModelController;
 use App\Http\Controllers\Crud\QuestionController;
@@ -12,7 +12,6 @@ use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\KnowledgebaseController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\OfferController;
-use App\Http\Controllers\OldImportController;
 use App\Http\Controllers\S3Controller;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WorkshopController;
@@ -25,11 +24,11 @@ Route::post('register', [UserController::class, 'register']);
 Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('test', function (){dd(\Illuminate\Support\Facades\Auth::user());});
-Route::get('email/unique/{email}', 'App\Http\Controllers\API\UserController@checkEmail');
-Route::post('avatar/store', 'App\Http\Controllers\API\UserController@storeAvatar');
-Route::post('profile/update', 'App\Http\Controllers\API\UserController@updateProfile');
-Route::post('profile/change-password', 'App\Http\Controllers\API\UserController@changePassword');
-Route::get('communication', 'App\Http\Controllers\API\UserController@getUsers');
+Route::get('email/unique/{email}', 'App\Http\Controllers\UserController@checkEmail');
+Route::post('avatar/store', 'App\Http\Controllers\UserController@storeAvatar');
+Route::post('profile/update', 'App\Http\Controllers\UserController@updateProfile');
+Route::post('profile/change-password', 'App\Http\Controllers\UserController@changePassword');
+Route::get('communication', 'App\Http\Controllers\UserController@getUsers');
 Route::post('forgot-password', [UserController::class, 'forgotPassword']);
 //Route::get('reset-password/{token}', [UserController::class, 'resetPassword']);
 
@@ -42,9 +41,9 @@ Route::get('import', 'App\Http\Controllers\TestController@importModels');
 Route::group(['prefix' => 'company', 'middleware' => 'auth:sanctum'], function () {
     Route::post('search/nip', 'App\Http\Controllers\TerytController@searchRegonNip');
     Route::post('search/krs', 'App\Http\Controllers\TerytController@searchRegonKrs');
-    Route::post('create', 'App\Http\Controllers\API\CompanyController@saveCompany');
-    Route::post('save', 'App\Http\Controllers\API\CompanyController@saveCompanyEdit');
-    Route::get('get', '\App\Http\Controllers\API\CompanyController@getUserCompanies');
+    Route::post('create', 'App\Http\Controllers\CompanyController@saveCompany');
+    Route::post('save', 'App\Http\Controllers\CompanyController@saveCompanyEdit');
+    Route::get('get', '\App\Http\Controllers\CompanyController@getUserCompanies');
 });
 
 Route::group(['prefix' => 'workshop', 'middleware' => 'auth:sanctum'], function() {

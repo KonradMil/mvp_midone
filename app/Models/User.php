@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\API\UserController;
 use App\Models\Challenges\Challenge;
 use App\Models\Reports\Report;
 use App\Models\Solutions\Solution;
