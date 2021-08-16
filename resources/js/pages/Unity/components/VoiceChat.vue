@@ -21,6 +21,8 @@ export default {
         const connection = new RTCMultiConnection();
 
         const onStream = (event) => {
+            console.log("event");
+            console.log(event);
             var width = parseInt(connection.audiosContainer.clientWidth / 2) - 20;
             var mediaElement = getHTMLMediaElement(event.mediaElement, {
                 title: event.userid,
