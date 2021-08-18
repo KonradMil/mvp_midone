@@ -11,7 +11,11 @@ Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard']
 Route::post('search', [SearchController::class, 'search']);
 Route::post('/broadcast/auth', [NotificationsController::class, 'broadcastAuth']);
 
+require __DIR__ . '/api/solutions.php';
+require __DIR__ . '/api/reports.php';
+require __DIR__ . '/api/knowledgebase.php';
 require __DIR__ . '/api/security.php'; //@TODO zorganizować tutaj logowanie, rejestrację itp. pod AuthController
+require __DIR__ . '/api/users.php';
 require __DIR__ . '/api/companies.php';
 require __DIR__ . '/api/workshop.php';
 require __DIR__ . '/api/challenges.php';
