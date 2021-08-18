@@ -2,6 +2,7 @@
 
 namespace App\Models\Challenges;
 
+use App\Models\Casts\JsonAsArrayObjectWithNull;
 use App\Models\File;
 use App\Models\Financial;
 use App\Models\Offer;
@@ -54,7 +55,7 @@ class Challenge extends Model implements ReactableInterface
         'en_description' => 'string',
         'status' => 'integer',
         'stage' => 'integer',
-        'save_json' => AsArrayObject::class,
+        'save_json' => JsonAsArrayObjectWithNull::class,
         'screenshot_path' => 'string',
         'allowed_publishing' => 'boolean',
         'solution_deadline' => 'timestamp',
