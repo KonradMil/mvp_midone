@@ -1,14 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Crud;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\UnityModel;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ *
+ */
 class ModelController extends Controller
 {
-    public function getModel(Request  $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getModel(Request $request): JsonResponse
     {
         $model = UnityModel::find($request->id);
         return response()->json([
@@ -18,11 +25,19 @@ class ModelController extends Controller
         ]);
     }
 
+    /**
+     * @param $var
+     * @return bool
+     */
     public function isempty(&$var) {
         return !empty($var) || $var === '0';
     }
 
-    public function getModelsUnity (Request  $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getModelsUnity (Request $request)
     {
         if(isset($request->search)) {
             if(is_array($request->search)){
@@ -46,7 +61,11 @@ class ModelController extends Controller
         ]);
     }
 
-    public function getModels(Request  $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getModels(Request $request)
     {
 //        dd($request->search);
         $se = $request->search;
@@ -75,6 +94,10 @@ class ModelController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function addModel(Request $request)
     {
         $model = new UnityModel();
@@ -88,7 +111,13 @@ class ModelController extends Controller
             'payload' => $model
         ]);
     }
-    public function editModel(Request $request,UnityModel $model)
+
+    /**
+     * @param Request $request
+     * @param UnityModel $model
+     * @return JsonResponse
+     */
+    public function editModel(Request $request, UnityModel $model)
     {
         $model->fill($request->input('data'));
         $model->save();
@@ -99,6 +128,11 @@ class ModelController extends Controller
            'payload' => $model
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function deleteModel(Request $request)
     {
         $m = UnityModel::find($request->id);

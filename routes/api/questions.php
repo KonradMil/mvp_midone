@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Crud\QuestionController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'question', 'middleware' => 'auth:sanctum'], function () {

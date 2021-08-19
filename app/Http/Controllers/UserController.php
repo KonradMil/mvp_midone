@@ -8,7 +8,9 @@ use App\Models\Challenges\Challenge;
 use App\Models\Solutions\Solution;
 use Authy\AuthyApi;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Session;
@@ -21,10 +23,17 @@ use Illuminate\Support\Str;
 use Mpociot\Teamwork\Facades\Teamwork;
 use Mpociot\Teamwork\TeamInvite;
 
+/**
+ *
+ */
 class UserController extends Controller
 {
 
-    public static function userPermissions($model)
+    /**
+     * @param $model
+     * @return array
+     */
+    public static function userPermissions($model): array
     {
         $publishChallenges = [];
         $editChallenges = [];
@@ -125,7 +134,11 @@ class UserController extends Controller
         return ['publishChallenges' => $publishChallenges, 'editChallenges' => $editChallenges, 'acceptChallengeSolutions' => $acceptChallengeSolutions, 'acceptChallengeOffers' => $acceptChallengeOffers, 'publishSolution' => $publishSolution, 'addSolutionOffer' => $addSolutionOffer, 'canDeleteSolution' => $canDeleteSolution, 'canEditSolution' => $canEditSolution, 'showSolutions' => $showSolutions, 'teams' => $user->teams, 'solutions' => $solutions];
     }
 
-    public function reset(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function reset(Request $request): JsonResponse
     {
         $pr = \App\Models\PasswordReset::where('token', '=', $request->input('token'))->first();
         $user = User::where('email', '=', $pr->email)->first();
@@ -138,7 +151,10 @@ class UserController extends Controller
         ]);
     }
 
-    public function getUsers()
+    /**
+     * @return JsonResponse
+     */
+    public function getUsers(): JsonResponse
     {
         $users = User::all();
         return response()->json([
@@ -148,7 +164,12 @@ class UserController extends Controller
         ]);
     }
 
-    public function registerAuthy(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws GuzzleException
+     */
+    public function registerAuthy(Request $request): JsonResponse
     {
 
         $user = Auth::user();
@@ -184,7 +205,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function forgotPassword(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function forgotPassword(Request $request): JsonResponse
     {
         $request->validate(['email' => 'required|email']);
 
@@ -205,7 +230,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function resetPasswordToken(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function resetPasswordToken(Request $request): JsonResponse
     {
         $request->validate([
             'token' => 'required',
@@ -241,7 +270,11 @@ class UserController extends Controller
         }
     }
 
-    public function changePassword(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function changePassword(Request $request): JsonResponse
     {
         $u = Auth::user();
         $credentials = [
@@ -267,7 +300,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function accept(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function accept(Request $request): JsonResponse
     {
         $invite = TeamInvite::find($request->id);
         Teamwork::acceptInvite($invite);
@@ -282,7 +319,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function updateProfile(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function updateProfile(Request $request): JsonResponse
     {
         $u = Auth::user();
         $u->name = $request->name;
@@ -299,7 +340,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function storeAvatar(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function storeAvatar(Request $request): JsonResponse
     {
 
         $fileName = time() . '.' . $request->file->extension();
@@ -317,7 +362,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function checkEmail($email)
+    /**
+     * @param $email
+     * @return JsonResponse
+     */
+    public function checkEmail($email): JsonResponse
     {
         $user = User::where('email', '=', $email)->first();
         if ($user == NULL) {
@@ -330,7 +379,7 @@ class UserController extends Controller
     /**
      * Register
      */
-    public function register(Request $request)
+    public function register(Request $request): JsonResponse
     {
         try {
             $user = new User();
@@ -373,7 +422,7 @@ class UserController extends Controller
     /**
      * Login
      */
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         $credentials = [
             'email' => $request->email,
@@ -413,7 +462,11 @@ class UserController extends Controller
         return response()->json($response);
     }
 
-    public function checkTwoFa(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function checkTwoFa(Request $request): JsonResponse
     {
         $user = User::where('email', '=', $request->email)->first();
         $authy_api = new AuthyApi(env('AUTHY_SECRET'));
@@ -441,7 +494,7 @@ class UserController extends Controller
     /**
      * Logout
      */
-    public function logout()
+    public function logout(): JsonResponse
     {
         try {
             Session::flush();
@@ -460,7 +513,11 @@ class UserController extends Controller
         return response()->json($response);
     }
 
-    public function saveTerms(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function saveTerms(Request $request): JsonResponse
     {
         $user = Auth::user();
         $input = $request->input();

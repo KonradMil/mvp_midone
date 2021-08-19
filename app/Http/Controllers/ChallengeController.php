@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Crud;
+namespace App\Http\Controllers;
 
-use App\Events\ChallengeAdded;
-use App\Events\ChallengeFollowed;
+
 use App\Events\ChallengeLiked;
 use App\Events\ChallengePublished;
-use App\Http\Controllers\Controller;
 use App\Models\Challenges\Challenge;
 use App\Models\File;
 use App\Models\Financial;
@@ -16,18 +14,23 @@ use App\Models\Team;
 use App\Models\TechnicalDetails;
 use App\Models\User;
 use Carbon\Carbon;
-use Cog\Laravel\Love\Reaction\Models\Reaction;
-use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use Symfony\Contracts\Service;
 
+/**
+ *
+ */
 class ChallengeController extends Controller
 {
-    public function getUserChallengesArchive(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getUserChallengesArchive(Request $request): JsonResponse
     {
         $input = $request->input();
         $query = Challenge::query();
@@ -36,22 +39,22 @@ class ChallengeController extends Controller
         $ar = [];
         if ($challengesProject != NULL && Auth::user()->type === 'investor') {
             $check = false;
-             foreach ($challengesProject as $challenge) {
-                    if(Auth::user()->id == $challenge->author_id){
-                        $query->where('author_id', '=', Auth::user()->id)->where('stage', '=', 3);
-                        array_push($ar, $challenge->id);
-                        $check = true;
-                    }
-                    foreach ($challenge->teams as $team) {
-                        foreach (Auth::user()->teams as $t) {
-                            if ($t->id == $team->id) {
-                                $query->where('author_id', '=', Auth::user()->id)->where('stage', '=', 3);
-                                $check = true;
-                                array_push($ar, $challenge->id);
-                            }
+            foreach ($challengesProject as $challenge) {
+                if (Auth::user()->id == $challenge->author_id) {
+                    $query->where('author_id', '=', Auth::user()->id)->where('stage', '=', 3);
+                    array_push($ar, $challenge->id);
+                    $check = true;
+                }
+                foreach ($challenge->teams as $team) {
+                    foreach (Auth::user()->teams as $t) {
+                        if ($t->id == $team->id) {
+                            $query->where('author_id', '=', Auth::user()->id)->where('stage', '=', 3);
+                            $check = true;
+                            array_push($ar, $challenge->id);
                         }
                     }
                 }
+            }
 
 
             if (isset($input->type)) {
@@ -103,7 +106,8 @@ class ChallengeController extends Controller
                 ]);
             } else {
 
-            }return response()->json([
+            }
+            return response()->json([
                 'success' => true,
                 'message' => 'Brak projektów. Check minus',
                 'payload' => ''
@@ -116,7 +120,13 @@ class ChallengeController extends Controller
             ]);
         }
     }
-    public function saveChallengeFinancials(Request $request, Financial $financial)
+
+    /**
+     * @param Request $request
+     * @param Financial $financial
+     * @return JsonResponse
+     */
+    public function saveChallengeFinancials(Request $request, Financial $financial): JsonResponse
     {
         $financial->fill($request->input('data'));
         $financial->save();
@@ -128,7 +138,12 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function saveChallengeDetails(Request $request, TechnicalDetails $technical)
+    /**
+     * @param Request $request
+     * @param TechnicalDetails $technical
+     * @return JsonResponse
+     */
+    public function saveChallengeDetails(Request $request, TechnicalDetails $technical): JsonResponse
     {
         $technical->fill($request->input('data'));
         $technical->save();
@@ -140,7 +155,12 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function saveChallengeTeams(Request $request, Challenge $challenge)
+    /**
+     * @param Request $request
+     * @param Challenge $challenge
+     * @return JsonResponse
+     */
+    public function saveChallengeTeams(Request $request, Challenge $challenge): JsonResponse
     {
         foreach ((array)$request->teams as $team_id) {
             $team = Team::find($team_id);
@@ -154,7 +174,11 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function saveChallenge(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function saveChallenge(Request $request): JsonResponse
     {
         $c = Challenge::find($request->data['id']);
 
@@ -175,7 +199,11 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function processSS($ss)
+    /**
+     * @param $ss
+     * @return array
+     */
+    public function processSS($ss): array
     {
         $content = base64_decode($ss);
         $name = uniqid('ss_') . '.jpg';
@@ -189,7 +217,10 @@ class ChallengeController extends Controller
         return ['absolute_path' => $path, 'relative' => ('screenshots/' . $name)];
     }
 
-    public function getUserChallenges()
+    /**
+     * @return JsonResponse
+     */
+    public function getUserChallenges(): JsonResponse
     {
         if (Auth::user()->type == 'integrator') {
             $challenges = Challenge::whereIn('stage', [1, 2])->where('status', '=', 1)->orderBy('created_at', 'DESC')->get();
@@ -206,7 +237,11 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function getUserChallengesProjects(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getUserChallengesProjects(Request $request): JsonResponse
     {
         $input = $request->input();
         $query = Challenge::query();
@@ -220,7 +255,7 @@ class ChallengeController extends Controller
                     $offer = Offer::find($challenge->selected_offer_id);
                     if ($offer != NULL) {
                         $solution = Solution::find($offer->solution_id);
-                        if($solution->author_id == Auth::user()->id) {
+                        if ($solution->author_id == Auth::user()->id) {
                             $query->where('stage', '=', 3)->where('status', '=', 1);
                             $check = true;
                             array_push($ar, $challenge->id);
@@ -239,7 +274,7 @@ class ChallengeController extends Controller
                 }
             } else if (Auth::user()->type == 'investor') {
                 foreach ($challengesProject as $challenge) {
-                    if(Auth::user()->id == $challenge->author_id){
+                    if (Auth::user()->id == $challenge->author_id) {
                         $query->where('author_id', '=', Auth::user()->id)->where('stage', '=', 3);
                         array_push($ar, $challenge->id);
                         $check = true;
@@ -305,7 +340,8 @@ class ChallengeController extends Controller
                 ]);
             } else {
 
-            }return response()->json([
+            }
+            return response()->json([
                 'success' => true,
                 'message' => 'Brak projektów. Check minus',
                 'payload' => ''
@@ -321,7 +357,11 @@ class ChallengeController extends Controller
 
     }
 
-    public function getUserChallengesFiltered(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getUserChallengesFiltered(Request $request): JsonResponse
     {
         $input = $request->input();
 
@@ -329,7 +369,7 @@ class ChallengeController extends Controller
         if (Auth::user()->type == 'integrator') {
             $query->whereIn('stage', [1, 2])->where('status', '=', 1);
         } else if (Auth::user()->type == 'investor') {
-            $query->whereIn('stage', [0,1, 2])->where('author_id', '=', Auth::user()->id);
+            $query->whereIn('stage', [0, 1, 2])->where('author_id', '=', Auth::user()->id);
         } else {
 
         }
@@ -387,7 +427,11 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function getUserChallengesFollowed(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getUserChallengesFollowed(Request $request): JsonResponse
     {
         $input = $request->input();
         $query = Challenge::query();
@@ -436,7 +480,11 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function unfollowChallenge(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function unfollowChallenge(Request $request): JsonResponse
     {
         $id = $request->input('id');
         $challenge = Challenge::find($id);
@@ -449,7 +497,11 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function followChallenge(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function followChallenge(Request $request): JsonResponse
     {
         $id = $request->input('id');
         $challenge = Challenge::find($id);
@@ -464,7 +516,11 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function likeChallenge(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function likeChallenge(Request $request): JsonResponse
     {
         $id = $request->input('id');
         $challenge = Challenge::find($id);
@@ -475,7 +531,7 @@ class ChallengeController extends Controller
             event(new ChallengeLiked($challenge, $user, 'Wyzwanie zostało polubione: ' . $challenge->name, []));
 
 //            event(new ChallengeLiked($challenge, $challenge->author, 'Wyzwanie zostało polubione: ' . $challenge->name, []));
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'success' => true,
                 'message' => 'Error.',
@@ -490,7 +546,11 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function dislikeChallenge(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function dislikeChallenge(Request $request): JsonResponse
     {
         $id = $request->input('id');
         $challenge = Challenge::find($id);
@@ -507,7 +567,11 @@ class ChallengeController extends Controller
     }
 
 
-    public function storeImage(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function storeImage(Request $request): JsonResponse
     {
 //        $request->validate([
 //            'file' => 'required|mimes:jpg,png,JPG,jpeg|max:4096',
@@ -532,7 +596,11 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function createChallenge(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function createChallenge(Request $request): JsonResponse
     {
         $request = json_decode(json_encode($request->data));
         if (isset($request->id)) {
@@ -659,7 +727,11 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function saveDescription(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function saveDescription(Request $request): JsonResponse
     {
 //        dd($request->data);
         $challenge = Challenge::find($request->data['id']);
@@ -674,7 +746,11 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function checkTeam(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function checkTeam(Request $request): JsonResponse
     {
         $check = false;
         $challenge = Challenge::find($request->challenge_id);
@@ -693,7 +769,11 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function delete(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function delete(Request $request): JsonResponse
     {
         $id = $request->input('id');
         Challenge::destroy($id);
@@ -709,14 +789,18 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function getCardData(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getCardData(Request $request): JsonResponse
     {
         if (isset($request->id)) {
             $challenge = Challenge::with(
                 'solutions', 'author', 'technicalDetails',
                 'financial_before', 'teams', 'files', 'teams.users',
-                'teams.users.companies', 'solutions.comments', 'solutions.files','solutions.comments.commentator', 'solutions.teams',
-                'solutions.teams.users', 'solutions.teams.users.companies' , 'solutions.offers'
+                'teams.users.companies', 'solutions.comments', 'solutions.files', 'solutions.comments.commentator', 'solutions.teams',
+                'solutions.teams.users', 'solutions.teams.users.companies', 'solutions.offers'
             )->find($request->id);
 
         } else {
@@ -777,22 +861,26 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function publish(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function publish(Request $request): JsonResponse
     {
         $challenge = Challenge::with('solutions', 'author')->find($request->input('id'));
         $challenge->status = 1;
         $challenge->stage = 1;
         $challenge->save();
 
-         try{
-             event(new ChallengePublished($challenge, $challenge->author, 'Nowe wyzwanie zostało opublikowane: ' . $challenge->name, []));
-         } catch (Exception $e){
-             return response()->json([
-                 'success' => false,
-                 'message' => 'Error',
-                 'payload' => $e
-             ]);
-         }
+        try {
+            event(new ChallengePublished($challenge, $challenge->author, 'Nowe wyzwanie zostało opublikowane: ' . $challenge->name, []));
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error',
+                'payload' => $e
+            ]);
+        }
 
 
         return response()->json([
@@ -802,7 +890,11 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function changeDates(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function changeDates(Request $request): JsonResponse
     {
         $challenge = Challenge::find($request->input('id'));
         try {
@@ -823,7 +915,11 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function unpublish(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function unpublish(Request $request): JsonResponse
     {
         $challenge = Challenge::with('solutions')->find($request->input('id'));
         $challenge->status = 0;
@@ -836,7 +932,12 @@ class ChallengeController extends Controller
             'payload' => $challenge
         ]);
     }
-    public function getUserChallengesGoodProjects(Request $request)
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getUserChallengesGoodProjects(Request $request): JsonResponse
     {
         $input = $request->input();
 

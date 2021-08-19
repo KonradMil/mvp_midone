@@ -5,18 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Challenges\Challenge;
 use App\Models\Post;
 use App\Models\Solutions\Solution;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Spatie\Activitylog\Models\Activity;
 
+/**
+ *
+ */
 class DashboardController extends Controller
 {
-    public function getDataForDashboard()
+    /**
+     * @return JsonResponse
+     */
+    public function getDataForDashboard(): JsonResponse
     {
         $logs = Activity::where('description', 'LIKE', '%wyzwanie zostało opublikowane%')->take(10)->get();
         $uniqueLogs = $logs->unique('description');
         $uniqueLogs->values()->all();
         foreach ($uniqueLogs as $log) {
-            if($log->subject_type == 'App\Models\Solutions\Solution') {
+            if ($log->subject_type == 'App\Models\Solutions\Solution') {
                 $solution = Solution::find($log->subject->id);
                 $challenge = Challenge::find($solution->challenge_id);
                 $log->subject_id = $challenge->id;

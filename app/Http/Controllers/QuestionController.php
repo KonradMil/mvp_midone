@@ -1,22 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\Crud;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Question;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ *
+ */
 class QuestionController extends Controller
 {
-    public function create(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function create(Request $request): JsonResponse
     {
         $input = $request->input();
         $question = new Question();
         $question->question = $input['data']['question'];
         $question->challenge_id = $input['data']['challenge_id'];
         $question->author_id = Auth::user()->id;
-        if(!empty($input['data']['isAnswer'])) {
+        if (!empty($input['data']['isAnswer'])) {
             $question->answer = $input['data']['isAnswer'];
         }
         $question->save();
@@ -28,8 +35,13 @@ class QuestionController extends Controller
         ]);
     }
 
-    public function get(Request $request) {
-          $questions = Question::where('challenge_id', '=', $request->input('id'))->where('answer', '=', null)->with('answers')->get();
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function get(Request $request): JsonResponse
+    {
+        $questions = Question::where('challenge_id', '=', $request->input('id'))->where('answer', '=', null)->with('answers')->get();
 
         return response()->json([
             'success' => true,

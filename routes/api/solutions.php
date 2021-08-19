@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Crud\SolutionController;
+use App\Http\Controllers\SolutionController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {

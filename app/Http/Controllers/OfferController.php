@@ -7,19 +7,23 @@ use App\Events\OfferAdded;
 use App\Events\OfferPublished;
 use App\Events\OfferRejected;
 use App\Models\Challenges\Challenge;
-use App\Models\FinancialAnalysis;
 use App\Models\Offer;
-use App\Models\Post;
 use App\Models\Solutions\Solution;
-use App\Models\UnityModel;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Mrcnpdlk\Lib\Exception;
 
+/**
+ *
+ */
 class OfferController extends Controller
 {
-    public function theBestChallengeOffer(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function theBestChallengeOffer(Request $request): JsonResponse
     {
         $id = $request->input('id');
         $challenge = Challenge::find($id);
@@ -27,102 +31,102 @@ class OfferController extends Controller
 
         $sum_check = 0;
         $the_best = NULL;
-        foreach($offers as $offer){
+        foreach ($offers as $offer) {
             $sum = 0;
-            if($offer->time_to_start === 0){
-                $sum+=3;
-            }else if($offer->time_to_start === 1){
-                $sum+=2;
-            }else if($offer->time_to_start === 2){
-                $sum+=2;
-            }else if($offer->time_to_start === 3){
-                $sum+=1;
-            }else if($offer->time_to_start === 4){
-                $sum+=1;
+            if ($offer->time_to_start === 0) {
+                $sum += 3;
+            } else if ($offer->time_to_start === 1) {
+                $sum += 2;
+            } else if ($offer->time_to_start === 2) {
+                $sum += 2;
+            } else if ($offer->time_to_start === 3) {
+                $sum += 1;
+            } else if ($offer->time_to_start === 4) {
+                $sum += 1;
             }
 
-            if($offer->advance_upon_delivery === 0){
-                $sum+=2;
-            }else if($offer->advance_upon_delivery === 1){
-                $sum+=2;
-            }else if($offer->advance_upon_delivery === 2){
-                $sum+=2;
-            }else if($offer->advance_upon_delivery === 3){
-                $sum+=1;
-            }else if($offer->advance_upon_delivery === 4){
-                $sum+=1;
+            if ($offer->advance_upon_delivery === 0) {
+                $sum += 2;
+            } else if ($offer->advance_upon_delivery === 1) {
+                $sum += 2;
+            } else if ($offer->advance_upon_delivery === 2) {
+                $sum += 2;
+            } else if ($offer->advance_upon_delivery === 3) {
+                $sum += 1;
+            } else if ($offer->advance_upon_delivery === 4) {
+                $sum += 1;
             }
 
-            if($offer->years_of_guarantee === 0){
-                $sum+=1;
-            }else if($offer->years_of_guarantee === 1){
-                $sum+=2;
-            }else if($offer->years_of_guarantee === 2) {
+            if ($offer->years_of_guarantee === 0) {
+                $sum += 1;
+            } else if ($offer->years_of_guarantee === 1) {
+                $sum += 2;
+            } else if ($offer->years_of_guarantee === 2) {
                 $sum += 3;
             }
 
-            if($offer->time_to_fix === 0){
-                $sum+=3;
-            }else if($offer->time_to_fix === 1){
-                $sum+=2;
-            }else if($offer->time_to_fix === 2){
-                $sum+=1;
-            }else if($offer->time_to_fix === 3){
-                $sum+=1;
+            if ($offer->time_to_fix === 0) {
+                $sum += 3;
+            } else if ($offer->time_to_fix === 1) {
+                $sum += 2;
+            } else if ($offer->time_to_fix === 2) {
+                $sum += 1;
+            } else if ($offer->time_to_fix === 3) {
+                $sum += 1;
             }
 
-            if($offer->weeks_to_start === 0){
-                $sum+=3;
-            }else if($offer->weeks_to_start === 1){
-                $sum+=2;
-            }else if($offer->weeks_to_start === 2){
-                $sum+=2;
-            }else if($offer->weeks_to_start === 3){
-                $sum+=1;
-            }else if($offer->weeks_to_start === 4){
-                $sum+=1;
+            if ($offer->weeks_to_start === 0) {
+                $sum += 3;
+            } else if ($offer->weeks_to_start === 1) {
+                $sum += 2;
+            } else if ($offer->weeks_to_start === 2) {
+                $sum += 2;
+            } else if ($offer->weeks_to_start === 3) {
+                $sum += 1;
+            } else if ($offer->weeks_to_start === 4) {
+                $sum += 1;
             }
 
-            if($offer->advance_upon_agreement === 0){
-                $sum+=2;
-            }else if($offer->advance_upon_agreement === 1){
-                $sum+=2;
-            }else if($offer->advance_upon_agreement === 2){
-                $sum+=2;
-            }else if($offer->advance_upon_agreement === 3){
-                $sum+=1;
-            }else if($offer->advance_upon_agreement === 4){
-                $sum+=1;
+            if ($offer->advance_upon_agreement === 0) {
+                $sum += 2;
+            } else if ($offer->advance_upon_agreement === 1) {
+                $sum += 2;
+            } else if ($offer->advance_upon_agreement === 2) {
+                $sum += 2;
+            } else if ($offer->advance_upon_agreement === 3) {
+                $sum += 1;
+            } else if ($offer->advance_upon_agreement === 4) {
+                $sum += 1;
             }
 
-            if($offer->advance_upon_start === 0){
-                $sum+=2;
-            }else if($offer->advance_upon_start === 1){
-                $sum+=2;
-            }else if($offer->advance_upon_start === 2){
-                $sum+=2;
-            }else if($offer->advance_upon_start === 3){
-                $sum+=1;
-            }else if($offer->advance_upon_start === 4){
-                $sum+=1;
+            if ($offer->advance_upon_start === 0) {
+                $sum += 2;
+            } else if ($offer->advance_upon_start === 1) {
+                $sum += 2;
+            } else if ($offer->advance_upon_start === 2) {
+                $sum += 2;
+            } else if ($offer->advance_upon_start === 3) {
+                $sum += 1;
+            } else if ($offer->advance_upon_start === 4) {
+                $sum += 1;
             }
 
-            if($offer->reaction_time === 0){
-                $sum+=3;
-            }else if($offer->reaction_time === 1){
-                $sum+=3;
-            }else if($offer->reaction_time === 2){
-                $sum+=2;
-            }else if($offer->reaction_time === 3){
-                $sum+=1;
+            if ($offer->reaction_time === 0) {
+                $sum += 3;
+            } else if ($offer->reaction_time === 1) {
+                $sum += 3;
+            } else if ($offer->reaction_time === 2) {
+                $sum += 2;
+            } else if ($offer->reaction_time === 3) {
+                $sum += 1;
             }
-          if($sum>$sum_check){
-              $the_best = $offer;
-              $sum_check = $sum;
-          }
-          $o = Offer::find($offer->id);
-          $o->points = $sum;
-          $o->save();
+            if ($sum > $sum_check) {
+                $the_best = $offer;
+                $sum_check = $sum;
+            }
+            $o = Offer::find($offer->id);
+            $o->points = $sum;
+            $o->save();
         }
 
         return response()->json([
@@ -131,46 +135,51 @@ class OfferController extends Controller
             'payload' => $the_best
         ]);
     }
-    public function filterChallengeOffers(Request $request)
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function filterChallengeOffers(Request $request): JsonResponse
     {
         $option = $request->input('option');
         $technology_option = $request->input('technologyType');
         $id = $request->input('id');
         $challenge = Challenge::find($id);
         $offers = NULL;
-        if($option === 'Cene malejąco'){
+        if ($option === 'Cene malejąco') {
             $offers = $challenge->offers()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('price_of_delivery', 'DESC')->with('solution')->get();
-        }else if($option === 'Cena rosnąco'){
+        } else if ($option === 'Cena rosnąco') {
             $offers = $challenge->offers()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('price_of_delivery', 'ASC')->with('solution')->get();
-        }else if($option === 'Czas realizacji uruchomienia u klienta'){
+        } else if ($option === 'Czas realizacji uruchomienia u klienta') {
             $offers = $challenge->offers()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('time_to_start', 'DESC')->with('solution')->get();
-        }else if($option === 'Okres gwarancji stanowiska od integratora'){
+        } else if ($option === 'Okres gwarancji stanowiska od integratora') {
             $offers = $challenge->offers()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('years_of_guarantee', 'DESC')->with('solution')->get();
-        }else if($option === 'NPV'){
+        } else if ($option === 'NPV') {
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->where('offers.status', '=', 1)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('financial_analyses as fa', 'fa.solution_id', '=', 'so.id')->orderBy('fa.npv', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
-        }else if($option === 'OEE po robotyzacji'){
+        } else if ($option === 'OEE po robotyzacji') {
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->where('offers.status', '=', 1)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('operational_analyses as oa', 'oa.solution_id', '=', 'so.id')->orderBy('oa.oee_after', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
-        }else if($option === 'Okres gwarancji robota'){
+        } else if ($option === 'Okres gwarancji robota') {
             $offers = $challenge->offers()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('avg_guarantee', 'DESC')->with('solution')->get();
-        }else if($option === 'Okres zwrotu inwestycji'){
+        } else if ($option === 'Okres zwrotu inwestycji') {
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->where('offers.status', '=', 1)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->join('financial_analyses as fa', 'fa.solution_id', '=', 'so.id')->orderBy('fa.simple_payback', 'DESC')->select('offers.*')->with('solution', 'solution.financial_analyses')->get();
-        }else if($option === 'Ranking'){
+        } else if ($option === 'Ranking') {
             $offers = $challenge->offers()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('points', 'DESC')->with('solution')->get();
-        }else if($technology_option  === 'FANUC'){
+        } else if ($technology_option === 'FANUC') {
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->where('offers.status', '=', 1)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->orderBy('so.number_of_fanuc', 'DESC')->select('offers.*')->with('solution')->get();
-        }else if($technology_option  === 'Yaskawa'){
+        } else if ($technology_option === 'Yaskawa') {
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->where('offers.status', '=', 1)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->orderBy('so.number_of_yaskawa', 'DESC')->select('offers.*')->with('solution')->get();
-        } else if($technology_option  === 'ABB'){
+        } else if ($technology_option === 'ABB') {
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->where('offers.status', '=', 1)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->orderBy('so.number_of_abb', 'DESC')->select('offers.*')->with('solution')->get();
-        } else if($technology_option  === 'Universal Robots'){
+        } else if ($technology_option === 'Universal Robots') {
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->where('offers.status', '=', 1)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->orderBy('so.number_of_universal', 'DESC')->select('offers.*')->with('solution')->get();
-        }else if($technology_option  === 'Mitshubishi'){
+        } else if ($technology_option === 'Mitshubishi') {
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->where('offers.status', '=', 1)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->orderBy('so.number_of_mitshubishi', 'DESC')->select('offers.*')->with('solution')->get();
-        }else if($technology_option  === 'Universal Robots'){
+        } else if ($technology_option === 'Universal Robots') {
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->where('offers.status', '=', 1)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->orderBy('so.number_of_universal', 'DESC')->select('offers.*')->with('solution')->get();
-        }else if($technology_option  === 'TFM ROBOTICS'){
+        } else if ($technology_option === 'TFM ROBOTICS') {
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->where('offers.status', '=', 1)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->orderBy('so.number_of_tfm', 'DESC')->select('offers.*')->with('solution')->get();
-        }else if($technology_option  === 'KUKA'){
+        } else if ($technology_option === 'KUKA') {
             $offers = $challenge->offers()->where('offers.rejected', '=', null)->where('offers.status', '=', 1)->join('solutions as so', 'so.id', '=', 'offers.solution_id')->orderBy('so.number_of_kuka', 'DESC')->select('offers.*')->with('solution')->get();
         }
 
@@ -181,19 +190,24 @@ class OfferController extends Controller
             'payload' => $offers
         ]);
     }
-    public function check(Request $request)
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function check(Request $request): JsonResponse
     {
         $id = $request->input('id');
         $challenge = Challenge::find($id);
         $solutions = $challenge->solutions;
         $check = false;
-        foreach($solutions as $solution) {
+        foreach ($solutions as $solution) {
             $offers = $solution->offers;
-            foreach($offers as $offer){
-                if($offer->installer_id === Auth::user()->id && $offer->status == 0 && Auth::user()->type=='integrator'){
+            foreach ($offers as $offer) {
+                if ($offer->installer_id === Auth::user()->id && $offer->status == 0 && Auth::user()->type == 'integrator') {
                     $check = true;
-                } else if(Auth::user()->type == 'investor' && $offer->rejected != 1 && $offer->status == 1){
-                    if($offer->selected == 0){
+                } else if (Auth::user()->type == 'investor' && $offer->rejected != 1 && $offer->status == 1) {
+                    if ($offer->selected == 0) {
                         $check = true;
                     }
                 }
@@ -207,7 +221,11 @@ class OfferController extends Controller
         ]);
     }
 
-    public function delete(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function delete(Request $request): JsonResponse
     {
         $id = $request->input('id');
         Offer::destroy($id);
@@ -218,7 +236,12 @@ class OfferController extends Controller
             'payload' => ''
         ]);
     }
-    public function get(Request $request)
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function get(Request $request): JsonResponse
     {
         $id = $request->input('id');
         $offer = Offer::find($id);
@@ -230,14 +253,18 @@ class OfferController extends Controller
         ]);
     }
 
-    public function getAllChallengeOffers(Challenge $challenge)
+    /**
+     * @param Challenge $challenge
+     * @return JsonResponse
+     */
+    public function getAllChallengeOffers(Challenge $challenge): JsonResponse
     {
         $offers = Offer::where('challenge_id', '=', $challenge->id)->with('solution')->get();
         $array = [];
 
-        foreach($offers as $offer){
+        foreach ($offers as $offer) {
             $solution = Solution::find($offer->solution_id);
-            if(($solution->selected == true) && ($offer->rejected != 1) && ($offer->status == 1)){
+            if (($solution->selected == true) && ($offer->rejected != 1) && ($offer->status == 1)) {
                 $array[] = $offer;
             }
         }
@@ -248,26 +275,30 @@ class OfferController extends Controller
         ]);
     }
 
-    public function getAll(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getAll(Request $request): JsonResponse
     {
         $id = $request->input('id');
         $challenge = Challenge::find($id);
         $user = User::find(Auth::user()->id);
         $array = [];
-        foreach($user->teams as $team){
-            foreach($team->users as $member){
+        foreach ($user->teams as $team) {
+            foreach ($team->users as $member) {
                 $offers = Offer::where('installer_id', '=', $member->id)->where('challenge_id', '=', $challenge->id)->with('solution')->get();
-               foreach($offers as $offer){
-                   if(!(in_array($offer->id, $array))){
-                       $array[]= $offer->id;
-                   }
-               }
+                foreach ($offers as $offer) {
+                    if (!(in_array($offer->id, $array))) {
+                        $array[] = $offer->id;
+                    }
+                }
             }
         }
         $goodOffers = NULL;
-        if($challenge->stage === 3){
+        if ($challenge->stage === 3) {
             $goodOffers = Offer::where('id', '=', $challenge->selected_offer_id)->with('solution')->get();
-        }else{
+        } else {
             $goodOffers = Offer::whereIn('id', $array)->with('solution')->get();
         }
 
@@ -279,9 +310,13 @@ class OfferController extends Controller
         ]);
     }
 
-    public function save(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function save(Request $request): JsonResponse
     {
-        if($request->edit_id != null){
+        if ($request->edit_id != null) {
             $offer = Offer::find($request->edit_id);
             $offer->price_of_delivery = $request->price_of_delivery;
             $offer->weeks_to_start = $request->weeks_to_start;
@@ -317,7 +352,7 @@ class OfferController extends Controller
 //            $sum_kuka = 0;
 //            $sum_tfm = 0;
 //            $sum_universal = 0;
-            if(isset($request->solution_robots)){
+            if (isset($request->solution_robots)) {
                 foreach ($request->solution_robots as $robot) {
                     $c++;
                     $sum += $robot['guarantee_period'];
@@ -338,8 +373,8 @@ class OfferController extends Controller
 //                    }
                 }
             }
-            if($c>0){
-                $check->avg_guarantee = (float)($sum/$c);
+            if ($c > 0) {
+                $check->avg_guarantee = (float)($sum / $c);
             }
 //            $check->count_fanuc = $sum_fanuc;
 //            $check->count_yaskawa = $sum_yaskawa;
@@ -379,7 +414,7 @@ class OfferController extends Controller
 //            }
 
 
-            event(new OfferAdded($check, $check->installer, 'Dodałeś nową ofertę do rozwiązania: ' . $solution ->name, []));
+            event(new OfferAdded($check, $check->installer, 'Dodałeś nową ofertę do rozwiązania: ' . $solution->name, []));
 
             return response()->json([
                 'success' => true,
@@ -389,7 +424,11 @@ class OfferController extends Controller
         }
     }
 
-    public function addOffer(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function addOffer(Request $request): JsonResponse
     {
         $offer = new Offer();
         $sol = Solution::find($request->solution_id);
@@ -400,8 +439,6 @@ class OfferController extends Controller
         $offer->save();
 
 
-
-
         return response()->json([
             'success' => true,
             'message' => 'Dodano oferte poprawnie.',
@@ -409,7 +446,12 @@ class OfferController extends Controller
         ]);
     }
 
-    public function publishOffer(Request $request){
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function publishOffer(Request $request): JsonResponse
+    {
         $id = $request->input('id');
         $offer = Offer::find($id);
         $offer->status = 1;
@@ -428,14 +470,19 @@ class OfferController extends Controller
         ]);
     }
 
-    public function acceptOffer (Request $request) {
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function acceptOffer(Request $request): JsonResponse
+    {
         $id = $request->input('id');
         $offer = Offer::find($id);
         $challenge = Challenge::find($offer->challenge_id);
         $challenge->selected_offer_id = $offer->id;
         $challenge->stage = 3;
         $archiveSolutions = $challenge->solutions;
-        foreach($archiveSolutions as $archiveSolution){
+        foreach ($archiveSolutions as $archiveSolution) {
             $archiveSolution->archive = 1;
             $archiveSolution->save();
         }
@@ -446,7 +493,7 @@ class OfferController extends Controller
 
         $offer->selected = true;
 
-        if($offer->rejected==true) {
+        if ($offer->rejected == true) {
             $offer->rejected = false;
         }
         $challenge->save();
@@ -461,14 +508,19 @@ class OfferController extends Controller
             'payload' => $offer, $solution, $challenge
         ]);
     }
-    public function rejectOffer(Request $request)
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function rejectOffer(Request $request): JsonResponse
     {
         $id = $request->input('id');
         $offer = Offer::find($id);
         $offer->rejected = true;
         $offer->selected = false;
         $challenge = Challenge::find($offer->challenge_id);
-        if($challenge->selected_offer_id == $offer->id){
+        if ($challenge->selected_offer_id == $offer->id) {
             $challenge->selected_offer_id = 0;
         }
         $solution = Solution::find($offer->solution_id);

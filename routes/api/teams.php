@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Crud\TeamsController;
+use App\Http\Controllers\TeamsController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'teams', 'middleware' => 'auth:sanctum'], function () {
