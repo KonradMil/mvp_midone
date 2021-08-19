@@ -13,6 +13,7 @@ In the project root directory run following commands:
     # composer install
     # php artisan key:generate
     # php artisan migrate
+    # php artisan db:seed
     # exit
 
 Go to http://localhost
