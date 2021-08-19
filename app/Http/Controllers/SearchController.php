@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Challenges\Challenge;
-use App\Models\Knowledgebase\KnowledgeBaseVideo;
+use App\Models\Challenge;
+use App\Models\KnowledgeBaseVideo;
 use App\Models\Question;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

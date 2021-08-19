@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Mail\ChangePassword;
 use App\Mail\ForgotPassword;
-use App\Models\Challenges\Challenge;
-use App\Models\Solutions\Solution;
+use App\Models\Challenge;
+use App\Models\Solution;
 use Authy\AuthyApi;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;

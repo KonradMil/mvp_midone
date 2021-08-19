@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\Mail\TeamInvitation;
-use App\Models\Challenges\Challenge;
-use App\Models\Solutions\Solution;
+use App\Models\Challenge;
+use App\Models\Solution;
 use App\Models\Team;
 use App\Models\TeamUser;
 use App\Models\User;

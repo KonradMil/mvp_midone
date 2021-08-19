@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Challenges\Challenge;
+use App\Models\Challenge;
 use App\Models\Post;
-use App\Models\Solutions\Solution;
+use App\Models\Solution;
 use Illuminate\Http\JsonResponse;
 use Spatie\Activitylog\Models\Activity;
 
@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $uniqueLogs = $logs->unique('description');
         $uniqueLogs->values()->all();
         foreach ($uniqueLogs as $log) {
-            if ($log->subject_type == 'App\Models\Solutions\Solution') {
+            if ($log->subject_type == 'App\Models\Solution') {
                 $solution = Solution::find($log->subject->id);
                 $challenge = Challenge::find($solution->challenge_id);
                 $log->subject_id = $challenge->id;

@@ -1,27 +1,29 @@
 <?php
 
-namespace App\Models\Challenges;
+namespace App\Models;
 
 use App\Models\Casts\JsonAsArrayObjectWithNull;
-use App\Models\File;
-use App\Models\Financial;
-use App\Models\Offer;
-use App\Models\Question;
-use App\Models\Solutions\Solution;
-use App\Models\Team;
-use App\Models\TechnicalDetails;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Model;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Tags\HasTags;
 use BeyondCode\Comments\Traits\HasComments;
 
+
+/**
+ *
+ */
 class Challenge extends Model implements ReactableInterface
 {
     use Reactable, HasTags, HasComments;
 
+    /**
+     *
+     */
     const TYPES = [
         "Pick & Place",
         "Montaż",
@@ -30,6 +32,9 @@ class Challenge extends Model implements ReactableInterface
         "Spawanie"
     ];
 
+    /**
+     *
+     */
     const STAGES = [
         'draft',
         'awaiting solution',
@@ -40,13 +45,22 @@ class Challenge extends Model implements ReactableInterface
         'invoicing'
     ];
 
+    /**
+     * @var string
+     */
     public $table = 'challenges';
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'type', 'name', 'en_name', 'solution_deadline', 'offer_deadline', 'status', 'stage', 'save_json', 'screenshot_path',
         'client_id', 'author_id', 'financial_before_id', 'description', 'en_description', 'allowed_publishing', 'selected_offer_id'
     ];
 
+    /**
+     * @var string[]
+     */
     protected $casts = [
         'name' => 'string',
         'type' => 'string',
@@ -62,57 +76,90 @@ class Challenge extends Model implements ReactableInterface
         'offer_deadline' => 'timestamp',
     ];
 
+    /**
+     * @return string
+     */
     public function getStageName(): string
     {
         return self::STAGES[$this->attributes['stage']];
     }
 
+    /**
+     * @return string
+     */
     public function getTypeName(): string
     {
         return self::TYPES[$this->attributes['type']];
     }
 
-    public function client()
+    /**
+     * @return BelongsTo
+     */
+    public function client(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function author()
+    /**
+     * @return BelongsTo
+     */
+    public function author(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function teams()
+    /**
+     * @return BelongsToMany
+     */
+    public function teams(): BelongsToMany
     {
         return $this->belongsToMany(Team::class, 'team_challenge', 'challenge_id', 'team_id');
     }
 
-    public function technicalDetails()
+    /**
+     * @return HasOne
+     */
+    public function technicalDetails(): HasOne
     {
         return $this->hasOne(TechnicalDetails::class);
     }
 
-    public function files()
+    /**
+     * @return BelongsToMany
+     */
+    public function files(): BelongsToMany
     {
         return $this->belongsToMany(File::class, 'challenge_image', 'challenge_id', 'image_id');
     }
 
-    public function solutions()
+    /**
+     * @return HasMany
+     */
+    public function solutions(): HasMany
     {
         return $this->hasMany(Solution::class, 'challenge_id', 'id');
     }
 
-    public function offers()
+    /**
+     * @return HasMany
+     */
+    public function offers(): HasMany
     {
         return $this->hasMany(Offer::class);
     }
 
-    public function financial_before()
+    /**
+     * @return HasOne
+     */
+    public function financial_before(): HasOne
     {
         return $this->hasOne(Financial::class, 'id', 'financial_before_id');
     }
 
-    public function questions()
+    /**
+     * @return HasMany
+     */
+    public function questions(): HasMany
     {
         return $this->hasMany(Question::class);
     }

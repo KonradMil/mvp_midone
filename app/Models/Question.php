@@ -2,31 +2,51 @@
 
 namespace App\Models;
 
-use App\Models\Challenges\Challenge;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ *
+ */
 class Question extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     public $table = 'questions';
+
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'question', 'answer',
         'author_id', 'challenge_id'
     ];
 
-    public function author()
+    /**
+     * @return BelongsTo
+     */
+    public function author(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function answers()
+    /**
+     * @return HasMany
+     */
+    public function answers(): HasMany
     {
         return $this->hasMany(Question::class, 'answer');
     }
 
-    public function challenge()
+    /**
+     * @return BelongsTo
+     */
+    public function challenge(): BelongsTo
     {
         return $this->belongsTo(Challenge::class);
     }

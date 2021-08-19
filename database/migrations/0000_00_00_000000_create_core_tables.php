@@ -491,6 +491,17 @@ class CreateCoreTables extends Migration
             $table->timestamp('failed_at')->useCurrent();
         });
 
+        Schema::create('reports', function (Blueprint $table) {
+
+            $table->id();
+            $table->string('title');
+            $table->string('type');
+            $table->string('description');
+            $table->integer('author_id');
+            $table->timestamps();
+
+        });
+
         //LOVE REACTANTS
         Schema::create((new Reacter())->getTable(), function (Blueprint $table) {
             $table->bigIncrements('id');
@@ -701,6 +712,7 @@ class CreateCoreTables extends Migration
         Schema::dropIfExists('jobs');
         Schema::dropIfExists('estimates');
         Schema::dropIfExists('failed_jobs');
+        Schema::dropIfExists('reports');
 
         Schema::dropIfExists((new Reacter())->getTable());
         Schema::dropIfExists((new Reactant)->getTable());

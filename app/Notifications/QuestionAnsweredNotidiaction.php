@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Models\Challenges\Challenge;
+use App\Models\Challenge;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\BroadcastMessage;

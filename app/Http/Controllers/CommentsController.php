@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Events\CommentAdded;
-use App\Models\Challenges\Challenge;
-use App\Models\Knowledgebase\KnowledgeBaseVideo;
-use App\Models\Solutions\Solution;
+use App\Models\Challenge;
+use App\Models\KnowledgeBaseVideo;
+use App\Models\Solution;
 use BeyondCode\Comments\Comment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

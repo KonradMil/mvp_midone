@@ -4,10 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ *
+ */
 class TeamInvite extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'team_invites';
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'user_id',
         'team_id',

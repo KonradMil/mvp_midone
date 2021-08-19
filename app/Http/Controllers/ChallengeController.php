@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 
 use App\Events\ChallengeLiked;
 use App\Events\ChallengePublished;
-use App\Models\Challenges\Challenge;
+use App\Models\Challenge;
 use App\Models\File;
 use App\Models\Financial;
 use App\Models\Offer;
-use App\Models\Solutions\Solution;
+use App\Models\Solution;
 use App\Models\Team;
 use App\Models\TechnicalDetails;
 use App\Models\User;

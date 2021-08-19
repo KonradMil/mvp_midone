@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Challenges\Challenge;
+use App\Models\Challenge;
 use App\Models\File;
-use App\Models\Reports\Report;
+use App\Models\Report;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

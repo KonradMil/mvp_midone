@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Events\SolutionAccepted;
 use App\Events\SolutionRejected;
-use App\Models\Challenges\Challenge;
+use App\Models\Challenge;
 use App\Notifications\SolutionAcceptedNotification;
 use App\Notifications\SolutionRejectedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
