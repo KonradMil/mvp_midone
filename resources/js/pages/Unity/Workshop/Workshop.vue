@@ -83,10 +83,12 @@ name: "Workshop",
             } else if (e.action == 'edit'){
                 emitter.emit('LoadWorkshopItems', e.object);
             } else if (e.action == 'publish'){
-                axios.post('/api/workshop/models/publish', {id: e.id})
+                console.log("e");
+                console.log(e);
+                axios.post('/api/workshop/models/publish', {id: e.object})
                     .then(response => {
                         if (response.data.success) {
-                            emitter.emit('singleobjectpublished', {id: e.object});
+                            emitter.emit('singleobjectpublished', {id: e.object.id});
                         } else {
 
                         }
