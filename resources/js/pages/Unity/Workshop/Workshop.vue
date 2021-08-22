@@ -85,10 +85,10 @@ name: "Workshop",
             } else if (e.action == 'publish'){
                 console.log("e");
                 console.log(e);
-                axios.post('/api/workshop/models/publish', {id: e.object})
+                axios.post('/api/workshop/models/publish', {id: e.object.id})
                     .then(response => {
                         if (response.data.success) {
-                            emitter.emit('singleobjectpublished', {id: e.object.id});
+                            emitter.emit('singleobjectpublished', {id: e.object});
                         } else {
 
                         }
