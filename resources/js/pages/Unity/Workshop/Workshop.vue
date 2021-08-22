@@ -135,7 +135,7 @@ name: "Workshop",
                 console.log(gameWindow.value.refs);
                 // console.log(gameWindow.value.refs.gameWindow);
                 // console.log(gameWindow.value.refs);
-                unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value.refs.gameWindow);
+                unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
                 // handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
 
             }, 5000);
