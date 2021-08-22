@@ -36,11 +36,11 @@ import WorkshopPanel from "./panels/WorkshopPanel";
 import Marketplace from "./panels/Marketplace";
 import OwnObjects from "./panels/OwnObjects";
 import UnityBridgeWorkshop from "./bridge_workshop";
-
+import {useToast} from "vue-toastification";
 import {getCurrentInstance, onBeforeMount, ref} from "vue";
-import UnityBridge from "../bridge";
-import dayjs from "dayjs";
 import unityActionOutgoing from "../composables/ActionsOutgoing";
+
+
 export default {
 name: "Workshop",
     components: {OwnObjects, Marketplace, WorkshopPanel},
@@ -52,20 +52,21 @@ name: "Workshop",
         const loadedObjectId = ref(null);
         const unityActionOutgoingObject = ref({});
         const gameWindow = ref(null);
+        const toast = useToast();
 
         emitter.on('loadObjectWorkshop', (e) => {
             console.log(e);
             console.log(JSON.parse(e.object.save_json));
-            handleUnityActionOutgoing({action: 'loadWorkshopObject', data: JSON.parse(e.object.save_json)});
+            handleUnityActionOutgoing({action: 'loadWorkshopObject', data: JSON.parse(e.object.save)});
         });
 
         emitter.on('UnityWorkshopSave', e => {
             axios.post('/api/workshop/models/save', {object: e, id: loadedObjectId})
                 .then(response => {
                     if (response.data.success) {
-
+                        toast.success('Zapisano');
                     } else {
-                        // toast.error(response.data.message);
+                        toast.error('Wystąpił błąd');
                     }
                 })
         });
@@ -76,8 +77,9 @@ name: "Workshop",
                     .then(response => {
                         if (response.data.success) {
                             emitter.emit('singleobjectdeleted', {id: e.id});
+                            toast.success('Usunięto');
                         } else {
-                            // toast.error(response.data.message);
+                            toast.error('Wystąpił błąd');
                         }
                     })
             } else if (e.action == 'edit'){
@@ -89,8 +91,9 @@ name: "Workshop",
                     .then(response => {
                         if (response.data.success) {
                             emitter.emit('singleobjectpublished', {id: e.object});
+                            toast.success('Opublikowano');
                         } else {
-
+                            toast.error('Wystąpił błąd');
                         }
                     })
             }else if (e.action == 'copy'){
@@ -98,8 +101,9 @@ name: "Workshop",
                     .then(response => {
                         if (response.data.success) {
                             emitter.emit('singleobjectcopied', {id: e.id});
+                            toast.success('Zaimportowano');
                         } else {
-
+                            toast.error('Wystąpił błąd');
                         }
                     })
             }
