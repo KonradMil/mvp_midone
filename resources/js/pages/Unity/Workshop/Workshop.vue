@@ -86,7 +86,7 @@ name: "Workshop",
                 axios.post('/api/workshop/models/publish', {id: e.id})
                     .then(response => {
                         if (response.data.success) {
-                            emitter.emit('singleobjectpublished', {id: e.id});
+                            emitter.emit('singleobjectpublished', {id: e.object});
                         } else {
 
                         }
