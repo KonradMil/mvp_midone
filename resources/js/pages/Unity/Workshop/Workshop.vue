@@ -111,6 +111,8 @@ name: "Workshop",
 
         const handleUnityActionOutgoing = (e) => {
             try {
+                console.log("eeweee");
+                console.log(e);
                 unityActionOutgoingObject.value[e.action](e.data);
             } catch (ee) {
                 console.log([ee, e]);
