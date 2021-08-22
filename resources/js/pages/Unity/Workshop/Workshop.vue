@@ -113,6 +113,8 @@ name: "Workshop",
             try {
                 console.log("eeweee");
                 console.log(e);
+                console.log(unityActionOutgoingObject.value);
+                console.log(unityActionOutgoingObject.value[e.action]);
                 unityActionOutgoingObject.value[e.action](e.data);
             } catch (ee) {
                 console.log([ee, e]);
