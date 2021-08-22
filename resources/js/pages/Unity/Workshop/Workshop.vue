@@ -56,7 +56,7 @@ name: "Workshop",
 
         emitter.on('loadObjectWorkshop', (e) => {
             console.log(e);
-            console.log(JSON.parse(e.object.save_json));
+            console.log(JSON.parse(e.object.save));
             handleUnityActionOutgoing({action: 'loadWorkshopObject', data: JSON.parse(e.object.save)});
         });
 
