@@ -17,6 +17,27 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WorkshopController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::prefix('companies')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+Route::prefix('solutions')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+Route::prefix('users')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+Route::prefix('workshop/objects')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+Route::prefix('questions')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+Route::prefix('offers')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+Route::prefix('reports')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+Route::prefix('files')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+Route::prefix('teams')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+Route::prefix('models')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+Route::prefix('notifications')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+Route::prefix('unity/models')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+Route::prefix('social/comments')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+Route::prefix('knowledgebase/posts')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+Route::prefix('social/posts')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+Route::prefix('social/threads')->middleware('auth:sanctum')->group(base_path('routes/api/challenges.php'));
+
+
+
+
 Route::post('reset-password', [UserController::class, 'reset']);
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);

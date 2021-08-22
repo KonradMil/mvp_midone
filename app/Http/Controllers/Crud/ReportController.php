@@ -57,7 +57,6 @@ class ReportController extends Controller
 
         }
 
-
         if(isset($input->status)){
             $query->where('status', '=', $input->status);
         }
