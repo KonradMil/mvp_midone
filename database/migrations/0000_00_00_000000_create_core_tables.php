@@ -45,7 +45,6 @@ class CreateCoreTables extends Migration
             $table->timestamps();
         });
 
-
         Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email')->index();
             $table->string('token');
@@ -247,7 +246,7 @@ class CreateCoreTables extends Migration
             $table->timestamps();
         });
 
-        Schema::table('challenges', function (Blueprint  $table){
+        Schema::table('challenges', function (Blueprint $table) {
             $table->foreign('solution_project_id')->references('id')->on('solutions');
         });
 
@@ -267,6 +266,7 @@ class CreateCoreTables extends Migration
             $table->foreign('solution_id')->references('id')->on('solutions');
 
         });
+
         Schema::table('offers', function (Blueprint $table) {
             $table->unsignedBigInteger('challenge_id');
             $table->unsignedBigInteger('solution_id');
@@ -348,6 +348,18 @@ class CreateCoreTables extends Migration
         Schema::create('team_user', function (Blueprint $table) {
             $table->bigInteger('user_id')->unsigned();
             $table->integer('team_id')->unsigned();
+
+            //Kolumny powinny nazywać się tak, aby nazwy wskazywały na to do czego służą np: is_owner, can_edit_challenges, can_publish_solutions
+            $table->boolean('owner');
+            $table->boolean('publishChallenge');
+            $table->boolean('editChallenge');
+            $table->boolean('acceptChallengeSolution');
+            $table->boolean('acceptChallengeOffer');
+            $table->boolean('publishSolution');
+            $table->boolean('addSolutionOffer');
+            $table->boolean('canEditSolution');
+            $table->boolean('canDeleteSolution');
+            $table->boolean('showSolutions');
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -487,6 +499,7 @@ class CreateCoreTables extends Migration
 
             $table->index('type');
         });
+
         Schema::create((new Reactant)->getTable(), function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('type');
@@ -494,6 +507,7 @@ class CreateCoreTables extends Migration
 
             $table->index('type');
         });
+
         Schema::create((new ReactionType())->getTable(), function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
@@ -502,6 +516,7 @@ class CreateCoreTables extends Migration
 
             $table->index('name');
         });
+
         Schema::create((new Reaction())->getTable(), function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('reactant_id');
@@ -583,6 +598,7 @@ class CreateCoreTables extends Migration
                 ->on('love_reactants')
                 ->onDelete('cascade');
         });
+
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('love_reacter_id')->nullable();
 
@@ -591,6 +607,7 @@ class CreateCoreTables extends Migration
                 ->references('id')
                 ->on('love_reacters');
         });
+
         Schema::table('challenges', function (Blueprint $table) {
             $table->unsignedBigInteger('love_reactant_id')->nullable();
 
@@ -599,6 +616,7 @@ class CreateCoreTables extends Migration
                 ->references('id')
                 ->on('love_reactants');
         });
+
         Schema::table('solutions', function (Blueprint $table) {
             $table->unsignedBigInteger('love_reactant_id')->nullable();
 
@@ -607,6 +625,7 @@ class CreateCoreTables extends Migration
                 ->references('id')
                 ->on('love_reactants');
         });
+
         Schema::table('knowledgebase_videos', function (Blueprint $table) {
             $table->unsignedBigInteger('love_reactant_id')->nullable();
 
@@ -665,8 +684,8 @@ class CreateCoreTables extends Migration
             $table->dropColumn('current_team_id');
         });
         Schema::table('team_user', function (Blueprint $table) {
-                $table->dropForeign('team_user'.'_user_id_foreign');
-                $table->dropForeign('team_user'.'_team_id_foreign');
+            $table->dropForeign('team_user' . '_user_id_foreign');
+            $table->dropForeign('team_user' . '_team_id_foreign');
         });
 
         Schema::drop('team_user');
