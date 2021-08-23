@@ -11,7 +11,7 @@
     <div v-if="!loaded" id="loader">
         <LoadingIcon icon="grid" class="w-8 h-8" />
     </div>
-    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>
+<!--    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>-->
 
     <div id="help-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl">
