@@ -24,7 +24,7 @@
                 </div>
             </div>
             <!-- END: Profile Menu -->
-            <WorkshopPanel :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></WorkshopPanel>
+<!--            <WorkshopPanel :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></WorkshopPanel>-->
             <StudioWorkshop hideFooter="true" :src="''" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></StudioWorkshop>
             <Marketplace v-if="activeTab == 'marketplace'"></Marketplace>
             <OwnObjects v-if="activeTab == 'obiekty'"></OwnObjects>
