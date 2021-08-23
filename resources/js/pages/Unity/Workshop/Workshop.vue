@@ -25,6 +25,7 @@
             </div>
             <!-- END: Profile Menu -->
             <WorkshopPanel :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></WorkshopPanel>
+            <StudioWorkshop hideFooter="true" :src="''" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></StudioWorkshop>
             <Marketplace v-if="activeTab == 'marketplace'"></Marketplace>
             <OwnObjects v-if="activeTab == 'obiekty'"></OwnObjects>
         </div>
@@ -53,6 +54,8 @@ name: "Workshop",
         const unityActionOutgoingObject = ref({});
         const gameWindow = ref(null);
         const toast = useToast();
+        const window_width = ref('100%');
+        const window_height = ref(0);
 
         emitter.on('loadObjectWorkshop', (e) => {
             console.log(e);
@@ -159,7 +162,9 @@ name: "Workshop",
             initalize,
             unlockInput,
             handleUnityActionOutgoing,
-            gameWindow
+            gameWindow,
+            window_height,
+            window_width
         }
     }
 }
