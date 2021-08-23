@@ -40,11 +40,12 @@ import UnityBridgeWorkshop from "./bridge_workshop";
 import {useToast} from "vue-toastification";
 import {getCurrentInstance, onBeforeMount, ref} from "vue";
 import unityActionOutgoing from "../composables/ActionsOutgoing";
+import StudioWorkshop from "./StudioWorkshop";
 
 
 export default {
 name: "Workshop",
-    components: {OwnObjects, Marketplace, WorkshopPanel},
+    components: {OwnObjects, Marketplace, WorkshopPanel, StudioWorkshop},
     setup() {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
