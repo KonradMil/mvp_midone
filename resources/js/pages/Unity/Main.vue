@@ -418,7 +418,7 @@ export default {
         onBeforeMount(() => {
             //ADDS LISTENERS
             bridge.value = UnityBridge();
-
+            console.log("bridge.value", bridge.value);
         });
 
         emitter.on('updateanimationSave', e => {
