@@ -4,8 +4,8 @@ namespace App\Listeners;
 
 use App\Events\OfferPublished;
 use App\Events\SolutionPublished;
-use App\Models\Challenges\Challenge;
-use App\Models\Solutions\Solution;
+use App\Models\Challenge;
+use App\Models\Solution;
 use App\Models\User;
 use App\Notifications\ChallengePublishedNotification;
 use App\Notifications\OfferPublishedNotification;

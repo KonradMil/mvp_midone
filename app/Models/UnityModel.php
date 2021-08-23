@@ -3,11 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
+/**
+ *
+ */
 class UnityModel extends Model
 {
+    /**
+     * @var string
+     */
     public $table = 'models';
+
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'name', 'category', 'subcategory', 'price',
         'model_file', 'brand', 'model', 'max_load_kg',
@@ -15,7 +26,10 @@ class UnityModel extends Model
     ];
 
 
-    public function file()
+    /**
+     * @return BelongsTo
+     */
+    public function file(): BelongsTo
     {
         return $this->belongsTo(File::class);
     }

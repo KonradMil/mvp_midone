@@ -1,76 +1,108 @@
 <?php
 
-namespace App\Models\Solutions;
+namespace App\Models;
 
-use App\Models\Challenges\Challenge;
-use App\Models\Estimate;
-use App\Models\File;
-use App\Models\Financial;
-use App\Models\FinancialAnalysis;
-use App\Models\Offer;
-use App\Models\OperationalAnalysis;
-use App\Models\Team;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
 use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Tags\HasTags;
 use BeyondCode\Comments\Traits\HasComments;
 
+/**
+ *
+ */
 class Solution extends Model implements ReactableInterface
 {
     use Reactable, HasTags, HasComments;
 
+    /**
+     * @var string
+     */
     public $table = 'solutions';
+
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'deadline_offered', 'offered_installation_price', 'cycle_time', 'selected', 'rejected',
         'name', 'status', 'save_json', 'rate', 'screenshot_path',
         'installer_id', 'challenge_id', 'financial_after_id', 'author_id', 'published_at',
-        'count_fanuc','count_yaskawa','count_abb','count_mitshubishi','count_tfm','count_universal','count_kuka',
+        'count_fanuc', 'count_yaskawa', 'count_abb', 'count_mitshubishi', 'count_tfm', 'count_universal', 'count_kuka',
     ];
 
 
-    public function author()
+    /**
+     * @return BelongsTo
+     */
+    public function author(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function teams()
+    /**
+     * @return BelongsToMany
+     */
+    public function teams(): BelongsToMany
     {
         return $this->belongsToMany(Team::class, 'team_solution', 'solution_id', 'team_id');
     }
 
-    public function estimate()
+    /**
+     * @return HasOne
+     */
+    public function estimate(): HasOne
     {
         return $this->hasOne(Estimate::class, 'solution_id');
     }
 
-    public function financial_analyses()
+    /**
+     * @return HasOne
+     */
+    public function financial_analyses(): HasOne
     {
         return $this->hasOne(FinancialAnalysis::class, 'solution_id');
     }
 
-    public function operational_analyses()
+    /**
+     * @return HasOne
+     */
+    public function operational_analyses(): HasOne
     {
         return $this->hasOne(OperationalAnalysis::class, 'solution_id');
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function challenge()
     {
         return $this->belongsTo(Challenge::class, 'challenge_id');
     }
 
-    public function offers()
+    /**
+     * @return HasMany
+     */
+    public function offers(): HasMany
     {
         return $this->hasMany(Offer::class);
     }
 
-    public function financial_after()
+    /**
+     * @return HasOne
+     */
+    public function financial_after(): HasOne
     {
-        return $this->hasOne(Financial::class, 'id' , 'financial_after_id');
+        return $this->hasOne(Financial::class, 'id', 'financial_after_id');
     }
 
-    public function files()
+    /**
+     * @return BelongsToMany
+     */
+    public function files(): BelongsToMany
     {
         return $this->belongsToMany(File::class, 'solution_image', 'solution_id', 'image_id');
     }

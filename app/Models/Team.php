@@ -3,33 +3,54 @@
 namespace App\Models;
 
 
-
-use App\Models\Challenges\Challenge;
-use App\Models\Solutions\Solution;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ *
+ */
 class Team extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'teams';
 
-    protected $fillable =[
+    /**
+     * @var string[]
+     */
+    protected $fillable = [
         'owner_id', 'name'
     ];
 
-    public function users () {
-        return $this->belongsToMany(User::class, 'team_user')->withPivot('publishChallenge', 'editChallenge', 'acceptChallengeOffer', 'publishSolution', 'canEditSolution', 'canDeleteSolution','addSolutionOffer','acceptChallengeSolution', 'showSolutions')->using(TeamUser::class)->withTimestamps();
+    /**
+     * @return BelongsToMany
+     */
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'team_user')->withPivot('publishChallenge', 'editChallenge', 'acceptChallengeOffer', 'publishSolution', 'canEditSolution', 'canDeleteSolution', 'addSolutionOffer', 'acceptChallengeSolution', 'showSolutions')->using(TeamUser::class)->withTimestamps();
     }
 
-    public function invites () {
+    /**
+     * @return BelongsToMany
+     */
+    public function invites(): BelongsToMany
+    {
         return $this->belongsToMany(TeamInvite::class, 'team_invites');
     }
 
-    public function challenges()
+    /**
+     * @return BelongsToMany
+     */
+    public function challenges(): BelongsToMany
     {
         return $this->belongsToMany(Challenge::class, 'team_challenge');
     }
 
-    public function solutions()
+    /**
+     * @return BelongsToMany
+     */
+    public function solutions(): BelongsToMany
     {
         return $this->belongsToMany(Solution::class, 'team_solution');
     }

@@ -5,7 +5,7 @@ namespace App\Listeners;
 use App\Events\ChallengeLiked;
 use App\Events\SolutionAccepted;
 use App\Events\SolutionLiked;
-use App\Models\Challenges\Challenge;
+use App\Models\Challenge;
 use App\Models\User;
 use App\Notifications\ChallengeLikedNotification;
 use App\Notifications\SolutionAcceptedNotification;

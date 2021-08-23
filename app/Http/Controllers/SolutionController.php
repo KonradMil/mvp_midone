@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Crud;
+namespace App\Http\Controllers;
 
 use App\Events\SolutionAccepted;
 use App\Events\SolutionAdded;
@@ -8,32 +8,33 @@ use App\Events\SolutionDisliked;
 use App\Events\SolutionLiked;
 use App\Events\SolutionPublished;
 use App\Events\SolutionRejected;
-use App\Http\Controllers\Controller;
-use App\Models\Challenges\Challenge;
+use App\Models\Challenge;
 use App\Models\Estimate;
 use App\Models\FinancialAnalysis;
 use App\Models\Offer;
 use App\Models\OperationalAnalysis;
-use App\Models\Solutions\Solution;
+use App\Models\Solution;
 use App\Models\File;
 use App\Models\Financial;
 use App\Models\Team;
-use App\Models\TechnicalDetails;
 use App\Models\UnityModel;
 use App\Models\User;
-use Carbon\Carbon;
-use Cog\Laravel\Love\ReactionType\Models\ReactionType;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use Mrcnpdlk\Lib\Exception;
-use phpDocumentor\Reflection\Types\Boolean;
-use Psr\Log\NullLogger;
 
+/**
+ *
+ */
 class SolutionController extends Controller
 {
-    public function storeFile(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function storeFile(Request $request): JsonResponse
     {
         $ext = $request->file->extension();
         $fileName = time() . '.' . $ext;
@@ -55,40 +56,44 @@ class SolutionController extends Controller
     }
 
 
-    public function filterChallengeSolutions(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function filterChallengeSolutions(Request $request): JsonResponse
     {
         $option = $request->input('option');
         $id = $request->input('id');
         $technology_option = $request->input('technologyType');
         $challenge = Challenge::find($id);
         $solutions = NULL;
-        if($option === 'Cena rosnąco'){
+        if ($option === 'Cena rosnąco') {
             $solutions = $challenge->solutions()->where('solutions.status', '=', 1)->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->select('solutions.*')->orderBy('estimates.sum', 'DESC')->get();
-        }else if($option === 'Cena malejąco'){
+        } else if ($option === 'Cena malejąco') {
             $solutions = $challenge->solutions()->where('solutions.status', '=', 1)->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->select('solutions.*')->orderBy('estimates.sum', 'ASC')->get();
-        }else if($option === 'OEE po robotyzacji'){
+        } else if ($option === 'OEE po robotyzacji') {
             $solutions = $challenge->solutions()->where('solutions.status', '=', 1)->join('operational_analyses', 'solutions.id', '=', 'operational_analyses.solution_id')->orderBy('operational_analyses.oee_after', 'ASC')->select('solutions.*')->get();
-        }else if($option === 'NPV'){
+        } else if ($option === 'NPV') {
             $solutions = $challenge->solutions()->where('solutions.status', '=', 1)->join('financial_analyses', 'solutions.id', '=', 'financial_analyses.solution_id')->orderBy('financial_analyses.npv', 'ASC')->select('solutions.*')->get();
-        }else if($option === 'Okres zwrotu inwestycji'){
+        } else if ($option === 'Okres zwrotu inwestycji') {
             $solutions = $challenge->solutions()->where('solutions.status', '=', 1)->join('financial_analyses', 'solutions.id', '=', 'financial_analyses.solution_id')->orderBy('financial_analyses.simple_payback', 'ASC')->select('solutions.*')->get();
-        }else if($option === null){
+        } else if ($option === null) {
             $solutions = $challenge->solutions()->where('rejected', '=', null)->where('solutions.status', '=', 1)->get();
-        }else if($technology_option  === 'FANUC'){
+        } else if ($technology_option === 'FANUC') {
             $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_fanuc', 'DESC')->get();
-        }else if($technology_option  === 'KUKA'){
+        } else if ($technology_option === 'KUKA') {
             $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_kuka', 'DESC')->get();
-        }else if($technology_option  === 'Yaskawa'){
+        } else if ($technology_option === 'Yaskawa') {
             $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_yaskawa', 'DESC')->get();
-        } else if($technology_option  === 'ABB'){
+        } else if ($technology_option === 'ABB') {
             $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_abb', 'DESC')->get();
-        } else if($technology_option  === 'Universal Robots'){
+        } else if ($technology_option === 'Universal Robots') {
             $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_universal', 'DESC')->get();
-        }else if($technology_option  === 'Mitshubishi'){
+        } else if ($technology_option === 'Mitshubishi') {
             $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_mitshubishi', 'DESC')->get();
-        }else if($technology_option  === 'Universal Robots'){
+        } else if ($technology_option === 'Universal Robots') {
             $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_universal', 'DESC')->get();
-        }else if($technology_option  === 'TFM ROBOTICS'){
+        } else if ($technology_option === 'TFM ROBOTICS') {
             $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_tfm', 'DESC')->get();
         }
 
@@ -98,20 +103,24 @@ class SolutionController extends Controller
             'payload' => $solutions
         ]);
     }
-    public function getUserSolutionsArchive()
+
+    /**
+     * @return JsonResponse
+     */
+    public function getUserSolutionsArchive(): JsonResponse
     {
-        $solutions = Solution::where('archive', '=' , 1)->get();
+        $solutions = Solution::where('archive', '=', 1)->get();
         $filterSolutions = [];
 
-        foreach($solutions as $solution){
-            foreach($solution->teams as $team){
-                foreach(Auth::user()->teams as $t){
-                    if($team->id == $t->id){
+        foreach ($solutions as $solution) {
+            foreach ($solution->teams as $team) {
+                foreach (Auth::user()->teams as $t) {
+                    if ($team->id == $t->id) {
                         $filterSolutions[] = $solution;
                     }
                 }
             }
-            if($solution->author_id == Auth::user()->id){
+            if ($solution->author_id == Auth::user()->id) {
                 $filterSolutions[] = $solution;
             }
         }
@@ -121,12 +130,16 @@ class SolutionController extends Controller
             'payload' => $filterSolutions
         ]);
     }
-    public function deleteSolutionsNull()
+
+    /**
+     * @return JsonResponse
+     */
+    public function deleteSolutionsNull(): JsonResponse
     {
         $solutions = Solution::all();
-        foreach($solutions as $solution){
+        foreach ($solutions as $solution) {
             $challenge = Challenge::find($solution->challenge_id);
-            if($challenge==NULL){
+            if ($challenge == NULL) {
                 $solution->delete();
             }
         }
@@ -137,7 +150,11 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function getUserSolutionsProject(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getUserSolutionsProject(Request $request): JsonResponse
     {
         $id = $request->input('id');
         $solutions = Solution::where('author_id', '=', Auth::user()->id)->where('challenge_id', '=', $id)->get();
@@ -148,7 +165,11 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function getUserSolutionsChallenge(Challenge $challenge)
+    /**
+     * @param Challenge $challenge
+     * @return JsonResponse
+     */
+    public function getUserSolutionsChallenge(Challenge $challenge): JsonResponse
     {
         $solutions = $challenge->solutions->where('author_id', '=', Auth::user()->id);
 
@@ -158,7 +179,13 @@ class SolutionController extends Controller
             'payload' => $solutions
         ]);
     }
-    public function saveSolutionTeams(Request $request, Solution $solution)
+
+    /**
+     * @param Request $request
+     * @param Solution $solution
+     * @return JsonResponse
+     */
+    public function saveSolutionTeams(Request $request, Solution $solution): JsonResponse
     {
         foreach ($request->teams as $team_id) {
             $team = Team::find($team_id);
@@ -171,7 +198,11 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function rejectSolution(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function rejectSolution(Request $request): JsonResponse
     {
         $id = $request->input('id');
         $solution = Solution::find($id);
@@ -211,25 +242,28 @@ class SolutionController extends Controller
 //        ]);
 //    }
 
-    public function getRobots(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getRobots(Request $request): JsonResponse
     {
         $solution = Solution::find($request->input('id'));
         $estimate = Estimate::where('solution_id', '=', $solution->id)->first();
 
-        if(!empty($request->input('offer_id')))
-        {
+        if (!empty($request->input('offer_id'))) {
             $offer = Offer::find($request->input('offer_id'));
             $robots = json_decode($offer->robots);
-        }else {
-            if($estimate != NULL){
+        } else {
+            if ($estimate != NULL) {
                 $save = json_decode($estimate->parts_ar);
                 $robots = [];
-                if($save != NULL){
-                    foreach($save as $key => $val){
-                        if($val->count > 0){
-                            $model = UnityModel::where('name', '=' , $key)->first();
+                if ($save != NULL) {
+                    foreach ($save as $key => $val) {
+                        if ($val->count > 0) {
+                            $model = UnityModel::where('name', '=', $key)->first();
                             $model->guarantee_period = 0;
-                            if($model->category == 1 && $model->subcategory != 1) {
+                            if ($model->category == 1 && $model->subcategory != 1) {
                                 $robots[] = $model;
                             }
                         }
@@ -244,7 +278,12 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function acceptSolution (Request $request) {
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function acceptSolution(Request $request): JsonResponse
+    {
         $id = $request->input('id');
         $solution = Solution::find($id);
         $challenge = Challenge::find($solution->challenge_id);
@@ -263,7 +302,12 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function saveSolutionFinancials(Request $request, Financial $financial)
+    /**
+     * @param Request $request
+     * @param Financial $financial
+     * @return JsonResponse
+     */
+    public function saveSolutionFinancials(Request $request, Financial $financial): JsonResponse
     {
         $financial->fill($request->input('data'));
         $financial->save();
@@ -274,10 +318,15 @@ class SolutionController extends Controller
             'payload' => $financial
         ]);
     }
-    public function getUserSolutionUnity(Request $request)
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getUserSolutionUnity(Request $request): JsonResponse
     {
         if (isset($request->id)) {
-            $solution = Solution::with('challenge', 'author','financial_after', 'challenge.financial_before', 'challenge.technicalDetails')->find($request->id);
+            $solution = Solution::with('challenge', 'author', 'financial_after', 'challenge.financial_before', 'challenge.technicalDetails')->find($request->id);
 
         } else {
             $solution = NULL;
@@ -287,18 +336,21 @@ class SolutionController extends Controller
 //        $challenge->likes = $challenge->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
 
 
-
         return response()->json([
             'success' => true,
             'message' => 'Rozwiazanie zostało załadowane poprawnie',
             'payload' => $solution
         ]);
     }
-    public function getUserSolutions()
+
+    /**
+     * @return JsonResponse
+     */
+    public function getUserSolutions(): JsonResponse
     {
 
-        if(Auth::user()->type == 'integrator') {
-            $solutions = Solution::whereIn('stage', [1,2])->where('status', '=', 1)->get();
+        if (Auth::user()->type == 'integrator') {
+            $solutions = Solution::whereIn('stage', [1, 2])->where('status', '=', 1)->get();
         } else {
             $solutions = Auth::user()->solutions()->get();
         }
@@ -310,7 +362,12 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function getUserSolutionsFiltered(Request $request) {
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getUserSolutionsFiltered(Request $request): JsonResponse
+    {
         $input = $request->input();
         $query = Solution::query();
         $query->where('author_id', '=', Auth::user()->id);
@@ -322,7 +379,7 @@ class SolutionController extends Controller
         $solutions = $query->with('comments', 'comments.commentator')->get();
 
         foreach ($solutions as $solution) {
-            if(Auth::user()->viaLoveReacter()->hasReactedTo($solution)){
+            if (Auth::user()->viaLoveReacter()->hasReactedTo($solution)) {
                 $solution->liked = true;
             } else {
                 $solution->liked = false;
@@ -338,7 +395,11 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function saveDescription(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function saveDescription(Request $request): JsonResponse
     {
 //        dd($request->data);
         $solution = Solution::find($request->data['id']);
@@ -352,19 +413,24 @@ class SolutionController extends Controller
             'payload' => $solution
         ]);
     }
-    public function operationalAnalysesSave(Request $request)
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function operationalAnalysesSave(Request $request): JsonResponse
     {
         $solution = Solution::find($request->input('solution_id'));
-        if($solution->operational_analyses != Null) {
+        if ($solution->operational_analyses != Null) {
             $operational_analyses = $solution->operational_analyses;
         } else {
             $operational_analyses = new OperationalAnalysis();
             $operational_analyses->solution_id = $request->input('solution_id');
         }
         $input = $request->input();
-        $operational_analyses->time_available_before= (float)$input['operationalAnalyses']['time_available_before'];
-        $operational_analyses->time_available_after= (float)$input['operationalAnalyses']['time_available_after'];
-        $operational_analyses->time_available_change= (float)$input['operationalAnalyses']['time_available_change'];
+        $operational_analyses->time_available_before = (float)$input['operationalAnalyses']['time_available_before'];
+        $operational_analyses->time_available_after = (float)$input['operationalAnalyses']['time_available_after'];
+        $operational_analyses->time_available_change = (float)$input['operationalAnalyses']['time_available_change'];
         $operational_analyses->time_production_before = (float)$input['operationalAnalyses']['time_production_before'];
         $operational_analyses->time_production_after = (float)$input['operationalAnalyses']['time_production_after'];
         $operational_analyses->time_production_change = (float)$input['operationalAnalyses']['time_production_change'];
@@ -400,10 +466,15 @@ class SolutionController extends Controller
             'payload' => $operational_analyses
         ]);
     }
-    public function financialAnalysesSave(Request $request)
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function financialAnalysesSave(Request $request): JsonResponse
     {
         $solution = Solution::find($request->input('solution_id'));
-        if($solution->financial_analyses != Null) {
+        if ($solution->financial_analyses != Null) {
             $financial_analyses = $solution->financial_analyses;
         } else {
             $financial_analyses = new FinancialAnalysis();
@@ -411,8 +482,8 @@ class SolutionController extends Controller
         }
         $input = $request->input();
         $financial_analyses->cost_capital = (float)$input['capitalCost'];
-        $financial_analyses->capex =  (float)$input['capex'];
-        $financial_analyses->timeframe =  (float)$input['timeframe'];
+        $financial_analyses->capex = (float)$input['capex'];
+        $financial_analyses->timeframe = (float)$input['timeframe'];
         $financial_analyses->cost_per_hour_before = (float)$input['financialAnalyses']['cost_per_hour_before'];
         $financial_analyses->cost_per_hour_after = (float)$input['financialAnalyses']['cost_per_hour_after'];
         $financial_analyses->cost_per_year_before = (float)$input['financialAnalyses']['cost_per_year_before'];
@@ -434,10 +505,14 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function operationalAnalysesGet(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function operationalAnalysesGet(Request $request): JsonResponse
     {
         $solution = Solution::find($request->input('id'));
-        $operational_analysis = OperationalAnalysis::where('solution_id', '=' , $solution->id)->first();
+        $operational_analysis = OperationalAnalysis::where('solution_id', '=', $solution->id)->first();
         $object = (object)$operational_analysis;
 
 
@@ -447,10 +522,15 @@ class SolutionController extends Controller
             'payload' => $object
         ]);
     }
-    public function financialAnalysesGet(Request $request)
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function financialAnalysesGet(Request $request): JsonResponse
     {
         $solution = Solution::find($request->input('id'));
-        $financial_analysis = FinancialAnalysis::where('solution_id', '=' , $solution->id)->first();
+        $financial_analysis = FinancialAnalysis::where('solution_id', '=', $solution->id)->first();
         $object = (object)$financial_analysis;
 
 
@@ -462,10 +542,14 @@ class SolutionController extends Controller
     }
 
 
-    public function estimateSave(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function estimateSave(Request $request): JsonResponse
     {
         $solution = Solution::find($request->input('solution_id'));
-        if($solution->estimate != Null) {
+        if ($solution->estimate != Null) {
             $estimate = $solution->estimate;
         } else {
             $estimate = new Estimate();
@@ -474,7 +558,7 @@ class SolutionController extends Controller
         $input = $request->input();
         $estimate->integration_cost = (float)$input['integrationCost'];
         $estimate->sum += (float)$input['integrationCost'];
-        $estimate->parts_cost =  (float)$input['partsCost'];
+        $estimate->parts_cost = (float)$input['partsCost'];
         $estimate->sum += (float)$input['partsCost'];
         $estimate->mechanical_integration = (float)$input['basicCosts']['mechanical_integration'];
         $estimate->sum += (float)$input['basicCosts']['mechanical_integration'];
@@ -496,7 +580,7 @@ class SolutionController extends Controller
         $estimate->sum += (float)$input['basicCosts']['margin'];
         $estimate->parts_prices = json_encode($input['partPrices']);
         $estimate->additional_costs = json_encode($input['additionalCosts']);
-        $estimate->parts_ar =  json_encode($input['partsAr']);
+        $estimate->parts_ar = json_encode($input['partsAr']);
 
 //        foreach($estimate as $key => $value){
 //            if($key != solution_id)
@@ -512,31 +596,34 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function filterMember(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function filterMember(Request $request): JsonResponse
     {
-        $id = $request-> input('challenge_id');
+        $id = $request->input('challenge_id');
         $challenge = Challenge::find($id);
 
         $query = [];
 
-        if(Auth::user()->id === $challenge->author_id) {
+        if (Auth::user()->id === $challenge->author_id) {
             return response()->json([
                 'success' => true,
                 'message' => '',
                 'payload' => $challenge->solutions,
             ]);
-        }
-        else {
+        } else {
             foreach ($challenge->solutions as $solution) {
                 if (Auth::user()->id === $solution->author_id) {
                     $query[] = $solution;
                 }
                 foreach ($solution->teams as $team) {
-                      foreach (Auth::user()->teams as $t) {
-                              if (($t->id == $team->id) && (Auth::user()->id != $solution->author_id) ) {
-                                      $query[] = $solution;
-                              }
-                      }
+                    foreach (Auth::user()->teams as $t) {
+                        if (($t->id == $team->id) && (Auth::user()->id != $solution->author_id)) {
+                            $query[] = $solution;
+                        }
+                    }
                 }
             }
         }
@@ -548,10 +635,14 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function estimateGet(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function estimateGet(Request $request): JsonResponse
     {
         $solution = Solution::find($request->input('solution_id'));
-        if($solution->estimate != null) {
+        if ($solution->estimate != null) {
             return response()->json([
                 'success' => true,
                 'message' => '',
@@ -566,16 +657,20 @@ class SolutionController extends Controller
         }
     }
 
-    public function checkTeam(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function checkTeam(Request $request): JsonResponse
     {
         $check = false;
         $solution = Solution::find($request->solution_id);
 
 
-        if($solution != NULL){
+        if ($solution != NULL) {
             foreach ($solution->teams as $team) {
                 foreach (Auth::user()->teams as $t) {
-                    if($t->id == $team->id) {
+                    if ($t->id == $team->id) {
                         $check = true;
                     }
                 }
@@ -590,40 +685,49 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function likeSolution(Request $request) {
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function likeSolution(Request $request): JsonResponse
+    {
 
         $id = $request->input('id');
         $solution = Solution::find($id);
         $challenge = Challenge::find($solution->challenge_id);
         $user = User::find(Auth::user()->id);
         try {
-           Auth::user()->viaLoveReacter()->reactTo($solution, 'Like');
-           event(new SolutionLiked($solution, $user, 'Rozwiązanie zostało polubione: ' . $solution->name, []));
-       } catch (Exception $e){
-           return response()->json([
-               'success' => true,
-               'message' => 'Error.',
-               'payload' => $e
-           ]);
-       }
+            Auth::user()->viaLoveReacter()->reactTo($solution, 'Like');
+            event(new SolutionLiked($solution, $user, 'Rozwiązanie zostało polubione: ' . $solution->name, []));
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Error.',
+                'payload' => $e
+            ]);
+        }
 
-       return response()->json([
+        return response()->json([
             'success' => true,
             'message' => 'Polajkowano.',
             'payload' => ''
         ]);
     }
 
-    public function dislikeSolution(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function dislikeSolution(Request $request): JsonResponse
     {
         $id = $request->input('id');
-        $solution= Solution::find($id);
+        $solution = Solution::find($id);
         $user = User::find(Auth::user()->id);
 
         try {
             Auth::user()->viaLoveReacter()->unreactTo($solution, 'Like');
             event(new SolutionDisliked($solution, $user, 'Rozwiązanie zostało odlajkowane: ' . $solution->name, []));
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return response()->json([
                 'success' => true,
                 'message' => 'Error.',
@@ -638,7 +742,11 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function saveSolution(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function saveSolution(Request $request): JsonResponse
     {
         $c = Solution::find($request->data['id']);
         $j = json_decode($request->data['save']['save_json'], true);
@@ -659,33 +767,33 @@ class SolutionController extends Controller
             $save = json_decode($c->save_json);
 
             foreach ($save->parts as $part) {
-                    $model = UnityModel::find($part->model->model_id);
-                    if($model != NULL) {
-                        if($model->brand === 'FANUC'){
-                            $sum_fanuc++;
-                        }else if($model->brand === 'Yaskawa'){
-                            $sum_yaskawa++;
-                        }else if($model->brand === 'ABB'){
-                            $sum_abb++;
-                        }else if($model->brand === 'Mitshubishi'){
-                            $sum_mitshubishi++;
-                        }else if($model->brand === 'KUKA'){
-                            $sum_kuka++;
-                        }else if($model->brand === 'TFM ROBOTICS'){
-                            $sum_tfm++;
-                        }else if($model->brand === 'Universal Robots'){
-                            $sum_universal++;
-                        }
+                $model = UnityModel::find($part->model->model_id);
+                if ($model != NULL) {
+                    if ($model->brand === 'FANUC') {
+                        $sum_fanuc++;
+                    } else if ($model->brand === 'Yaskawa') {
+                        $sum_yaskawa++;
+                    } else if ($model->brand === 'ABB') {
+                        $sum_abb++;
+                    } else if ($model->brand === 'Mitshubishi') {
+                        $sum_mitshubishi++;
+                    } else if ($model->brand === 'KUKA') {
+                        $sum_kuka++;
+                    } else if ($model->brand === 'TFM ROBOTICS') {
+                        $sum_tfm++;
+                    } else if ($model->brand === 'Universal Robots') {
+                        $sum_universal++;
                     }
                 }
+            }
 
-                $c->number_of_fanuc = $sum_fanuc;
-                $c->number_of_yaskawa = $sum_yaskawa;
-                $c->number_of_abb  = $sum_abb;
-                $c->number_of_mitshubishi = $sum_mitshubishi;
-                $c->number_of_kuka = $sum_kuka;
-                $c->number_of_tfm  = $sum_tfm;
-                $c->number_of_universal  = $sum_universal;
+            $c->number_of_fanuc = $sum_fanuc;
+            $c->number_of_yaskawa = $sum_yaskawa;
+            $c->number_of_abb = $sum_abb;
+            $c->number_of_mitshubishi = $sum_mitshubishi;
+            $c->number_of_kuka = $sum_kuka;
+            $c->number_of_tfm = $sum_tfm;
+            $c->number_of_universal = $sum_universal;
         }
 
         $c->save();
@@ -696,7 +804,11 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function processSS($ss)
+    /**
+     * @param $ss
+     * @return array
+     */
+    public function processSS($ss): array
     {
         $content = base64_decode($ss);
         $name = uniqid('ss_') . '.jpg';
@@ -709,13 +821,17 @@ class SolutionController extends Controller
         return ['absolute_path' => $path, 'relative' => ('screenshots/' . $name)];
     }
 
-    public function storeImage(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function storeImage(Request $request): JsonResponse
     {
 //        $request->validate([
 //            'file' => 'required|mimes:jpg,png,JPG,jpeg|max:4096',
 //        ]);
         $ext = $request->file->extension();
-        $fileName = time().'.'.$ext;
+        $fileName = time() . '.' . $ext;
 
         $request->file->move(public_path('uploads'), $fileName);
         $file = new File();
@@ -781,7 +897,11 @@ class SolutionController extends Controller
 //
 //    }
 
-    public function create(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function create(Request $request): JsonResponse
     {
         $financial = new Financial();
         $financial->save();
@@ -831,7 +951,11 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function publish(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function publish(Request $request): JsonResponse
     {
         $solution = Solution::find($request->input('id'));
         $solution->status = 1;
@@ -839,7 +963,7 @@ class SolutionController extends Controller
 
         try {
             event(new SolutionPublished($solution, $solution->author, 'Nowe rozwiązanie zostało opublikowane: ' . $solution->name, []));
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
 
         }
 
@@ -850,7 +974,11 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function unpublish(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function unpublish(Request $request): JsonResponse
     {
         $solution = Solution::find($request->input('id'));
         $solution->status = 0;
@@ -863,10 +991,14 @@ class SolutionController extends Controller
         ]);
     }
 
-    public function delete(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function delete(Request $request): JsonResponse
     {
         $solution = Solution::find($request->input('id'));
-        if($solution != NULL){
+        if ($solution != NULL) {
             $solution->delete();
         }
 

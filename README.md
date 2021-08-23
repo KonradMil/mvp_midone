@@ -1,4 +1,24 @@
-###STAGES:
+# DBR77 System - installation guide
+
+## Requirements
+System requirements description is not ready yet.
+
+## Run with Docker
+
+In the project root directory run following commands:
+
+    $ cp .env.example .env
+    $ sudo docker-compose up -d
+    $ sudo docker exec -it php_dbr77 bash
+    # composer install
+    # php artisan key:generate
+    # php artisan migrate
+    # php artisan db:seed
+    # exit
+
+Go to http://localhost
+
+### STAGES:
 0 - draft
 
 1 - awaiting solution

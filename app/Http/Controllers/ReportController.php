@@ -1,22 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Crud;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Challenges\Challenge;
+use App\Models\Challenge;
 use App\Models\File;
-use App\Models\Financial;
-use App\Models\Reports\Report;
-use App\Models\TechnicalDetails;
-use Carbon\Carbon;
-use Cog\Laravel\Love\ReactionType\Models\ReactionType;
+use App\Models\Report;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use phpDocumentor\Reflection\Types\Boolean;
 
+/**
+ *
+ */
 class ReportController extends Controller
 {
-    public function getReport(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getReport(Request $request): JsonResponse
     {
         $report = Report::with('files')->find($request->id);
 
@@ -26,16 +28,25 @@ class ReportController extends Controller
             'payload' => $report
         ]);
     }
-    public function deleteReport(Request $request)
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function deleteReport(Request $request): JsonResponse
     {
         Report::destroy($request->id);
 
         return response()->json([
-           'success' => true,
-           'message' => 'Usunięto poprawnie',
+            'success' => true,
+            'message' => 'Usunięto poprawnie',
         ]);
     }
-    public function getUserReports()
+
+    /**
+     * @return JsonResponse
+     */
+    public function getUserReports(): JsonResponse
     {
         $reports = Auth::user()->reports()->with('files')->get();
 
@@ -46,18 +57,24 @@ class ReportController extends Controller
         ]);
     }
 
-    public function getUserChallengesFiltered(Request $request) {
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getUserChallengesFiltered(Request $request): JsonResponse
+    {
         $input = $request->input();
         $query = Challenge::query();
-        if(Auth::user()->type == 'integrator') {
-            $query->whereIn('stage', [1,2])->where('status', '=', 1);
-        } else  if(Auth::user()->type == 'inwestor') {
+        if (Auth::user()->type == 'integrator') {
+            $query->whereIn('stage', [1, 2])->where('status', '=', 1);
+        } else if (Auth::user()->type == 'inwestor') {
             $query->where('author_id', '=', Auth::user()->id);
         } else {
 
         }
 
-        if(isset($input->status)){
+
+        if (isset($input->status)) {
             $query->where('status', '=', $input->status);
         }
         if (isset($input->type)) {
@@ -73,7 +90,7 @@ class ReportController extends Controller
         $challenges = $query->with('comments', 'comments.commentator')->get();
 
         foreach ($challenges as $challenge) {
-            if(Auth::user()->viaLoveReacter()->hasReactedTo($challenge)){
+            if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge)) {
                 $challenge->liked = true;
             } else {
                 $challenge->liked = false;
@@ -89,7 +106,11 @@ class ReportController extends Controller
         ]);
     }
 
-    public function storeFile(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function storeFile(Request $request): JsonResponse
     {
         $request->validate([
             'file' => 'required|mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx,csv|max:4096',
@@ -97,7 +118,7 @@ class ReportController extends Controller
 
         $ext = $request->file->extension();
 
-        $fileName = time().'.'.$ext;
+        $fileName = time() . '.' . $ext;
 
         $request->file->move(public_path('uploads'), $fileName);
         $file = new File();
@@ -116,11 +137,15 @@ class ReportController extends Controller
         ]);
     }
 
-    public function createReport(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function createReport(Request $request): JsonResponse
     {
         $report = new Report();
         $request = json_decode(json_encode($request->data));
-     //    dd($request);
+        //    dd($request);
         $report->title = $request->title;
         $report->type = $request->type;
         $report->description = $request->description;
@@ -131,7 +156,7 @@ class ReportController extends Controller
             $file = File::find($request->file_id);
             $report->files()->attach($file);
             $report->files = $report->files()->get();
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
 
         }
 
@@ -143,9 +168,13 @@ class ReportController extends Controller
         ]);
     }
 
-    public function getCardData(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getCardData(Request $request): JsonResponse
     {
-        if(isset($request->id)) {
+        if (isset($request->id)) {
             $challenge = Challenge::with('solutions', 'author')->find($request->id);
 
         } else {
