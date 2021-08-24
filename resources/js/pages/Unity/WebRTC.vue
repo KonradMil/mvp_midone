@@ -1,4 +1,5 @@
 <template>
+    <button class="btn-primary btn" @click="join">DOŁĄCZ</button>
     <div class="video-list">
         <div v-for="item in videoList"
              :video="item"
@@ -104,7 +105,7 @@ export default {
                     }
                 }
                 discoveryData.peers.forEach((peerID) => connectToPeer(peerID));
-                emit('opened-room', props.roomId);
+                // emit('opened-room', props.roomId);
             });
             signalClient.value.on('request', async (request) => {
                 console.log('requested', request)
@@ -132,7 +133,7 @@ export default {
                         }
                     });
                     videoList.value = newList;
-                    emit('left-room', remoteStream.id);
+                    // emit('left-room', remoteStream.id);
                 });
                 peer.on('error', (err) => {
                     console.log('peer error ', err);
@@ -164,7 +165,7 @@ export default {
                 }
             }, 500);
 
-            emit('joined-room', stream.id);
+            // emit('joined-room', stream.id);
         }
 
         const leave = () => {
@@ -204,7 +205,7 @@ export default {
             try {
                 let screenStream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: false });
                 joinedRoom(screenStream, true);
-                emit('share-started', screenStream.id);
+                // emit('share-started', screenStream.id);
                 signalClient.value.peers().forEach(p => onPeer(p, screenStream));
             } catch (e) {
                 console.log('Media error: ' + JSON.stringify(e));
