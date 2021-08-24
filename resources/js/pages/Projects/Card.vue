@@ -46,13 +46,13 @@
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
                     <a href="javascript:;" class="menu">
                         <div class="menu__icon"> <i data-feather="home"></i> </div>
-                        <div class="menu__title">
+                        <div class="menu__title" @click.prevent="showMenu = !showMenu">
                             <ActivityIcon class="w-4 h-4 mr-2"/>
                                 Startowa karta projektu
                             <i data-feather="chevron-down" class="menu__sub-icon"></i>
                         </div>
                     </a>
-                    <ul class="">
+                    <ul :show="showMenu">
                         <li>
                             <a class="flex items-center"
                                href=""
@@ -289,6 +289,7 @@ export default defineComponent({
         const addSolutionOffer = ref(false);
         const solution_project = ref('');
         const show = ref(false);
+        const showMenu = ref(false);
 
 
         watch(() => props.change, (first, second) => {
@@ -537,6 +538,7 @@ export default defineComponent({
             });
         }
         return {
+            showMenu,
             showModal,
             show,
             modalClosed,
