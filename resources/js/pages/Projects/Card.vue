@@ -146,8 +146,29 @@
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'financial-analysis'"
                            :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                            <i data-feather="check-square" class="w-4 h-4 mr-2"></i>
+                            Raport z wizji lokalnej
+                        </a>
+                        <a v-if="challenge.stage === 3"
+                           class="flex items-center mt-5" href=""
+                           @click.prevent="activeTab = 'financial-analysis'"
+                           :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                            <i data-feather="check-square" class="w-4 h-4 mr-2"></i>
+                            Założenia projektu
+                        </a>
+                        <a v-if="challenge.stage === 3"
+                           class="flex items-center mt-5" href=""
+                           @click.prevent="activeTab = 'financial-analysis'"
+                           :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <SettingsIcon class="w-4 h-4 mr-2"/>
-                            Analiza finansowa rozwiązania
+                            Oferta
+                        </a>
+                        <a v-if="challenge.stage === 3"
+                           class="flex items-center mt-5" href=""
+                           @click.prevent="activeTab = 'financial-analysis'"
+                           :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                            <SettingsIcon class="w-4 h-4 mr-2"/>
+                            Checkpointy list fazy 1
                         </a>
                  </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="inTeam">
