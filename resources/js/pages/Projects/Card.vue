@@ -34,7 +34,7 @@
                             <div class="font-medium text-base">
                                 {{ challenge.name }} <span class="text-theme-1 dark:text-theme-10" v-if="challenge.status == 0"> - Szkic</span>
                             </div>
-                            <div class="text-gray-600">{{ types[challenge.type] }}</div>
+                            <div class="text-gray-600">{{ types[challenge.type] }} dsadsadsadsada</div>
                         </div>
                         <div class="ml-4 mr-auto">
                             <div class="text-gray-600">Karta bez zmian</div>
