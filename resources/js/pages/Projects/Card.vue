@@ -9,7 +9,7 @@
                 <div class="lg:w-32 font-medium text-base lg:mt-3 ml-3 lg:mx-auto">Inicjowanie projektu</div>
             </div>
             <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
-                <button class="w-10 h-10 rounded-full btn text-gray-600 bg-gray-200 dark:bg-dark-1">2</button>
+                <button class="w-10 h-10 rounded-full btn text-gray-600 bg-gray-200 dark:bg-dark-1" @click="showModal">2</button>
                 <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Planowanie projektu</div>
             </div>
             <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
@@ -44,69 +44,105 @@
                         </div>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
-                        <a class="flex items-center"
-                            href=""
-                            @click.prevent="activeTab = 'podstawowe'"
-                            :class="(activeTab == 'podstawowe')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
+                    <a href="javascript:;" class="menu">
+                        <div class="menu__icon"> <i data-feather="home"></i> </div>
+                        <div class="menu__title" @click.prevent="showMenu = !showMenu">
                             <ActivityIcon class="w-4 h-4 mr-2"/>
-                            {{$t('challengesMain.basicInformation')}}
-                        </a>
-                        <a class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'techniczne'"
-                           :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <BoxIcon class="w-4 h-4 mr-2"/>
-                            {{$t('challengesMain.technicalDetails')}}                        </a>
-                        <a class="flex items-center mt-5" href="" v-if="challenge != undefined"
-                           @click.prevent="activeTab = 'rozwiazania'"
-                           :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <LockIcon class="w-4 h-4 mr-2"/>
-                            <div v-if="challenge.selected != undefined && challenge.selected.length != 0">{{$t('challengesMain.solutions')}}</div><div v-if="challenge.selected == undefined || challenge.selected.length == 0">{{$t('challengesMain.solutions')}}
+                                Startowa karta projektu
+                            <i data-feather="chevron-down" class="menu__sub-icon"></i>
                         </div>
-                        </a>
-                        <a v-if="!inTeam && challenge.stage >= 1"
-                            class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'oferty'"
-                           :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <SettingsIcon class="w-4 h-4 mr-2"/>
-                            {{$t('challengesMain.myOffers')}}
-                        </a>
-                        <a v-if="inTeam && challenge.stage >= 1"
-                            class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'all-offers'"
-                           :class="(activeTab == 'all-offers')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <SettingsIcon class="w-4 h-4 mr-2"/>
-                            {{$t('challengesMain.offers')}}
-                        </a>
-                        <a class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'pytania'"
-                           :class="(activeTab == 'pytania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <SettingsIcon class="w-4 h-4 mr-2"/>
-                            {{$t('communication.questions')}}
-                        </a>
-                        <a v-if="challenge.stage === 3"
-                            class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'operational-analysis'"
-                           :class="(activeTab == 'operational-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <SettingsIcon class="w-4 h-4 mr-2"/>
-                            Analiza operacyjna rozwiązania
-                        </a>
-                        <a v-if="challenge.stage === 3"
-                           class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'financial-analysis'"
-                           :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <SettingsIcon class="w-4 h-4 mr-2"/>
-                            Analiza finansowa rozwiązania
-                        </a>
-                    </div>
-                    <div class="p-5 border-t border-gray-200 dark:border-dark-5" v-if="(challenge.author_id == user.id)">
-                        <a class="flex items-center" href=""
-                           @click.prevent="activeTab = 'teams'"
-                           :class="(activeTab == 'teams')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
-                            <ActivityIcon class="w-4 h-4 mr-2"/>
-                            {{$t('teams.teams')}}
-                        </a>
-                    </div>
-
+                    </a>
+                    <ul v-if="showMenu">
+                        <li>
+                            <a class="flex items-center"
+                               href=""
+                               @click.prevent="activeTab = 'podstawowe'"
+                               :class="(activeTab == 'podstawowe')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
+                                <ActivityIcon class="w-4 h-4 mr-2"/>
+                                {{$t('challengesMain.basicInformation')}}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center mt-5" href=""
+                               @click.prevent="activeTab = 'techniczne'"
+                               :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <BoxIcon class="w-4 h-4 mr-2"/>
+                                {{$t('challengesMain.technicalDetails')}}                        </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center mt-5" href="" v-if="challenge != undefined"
+                               @click.prevent="activeTab = 'rozwiazania'"
+                               :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <LockIcon class="w-4 h-4 mr-2"/>
+                                <div v-if="challenge.selected != undefined && challenge.selected.length != 0">{{$t('challengesMain.solutions')}}</div><div v-if="challenge.selected == undefined || challenge.selected.length == 0">{{$t('challengesMain.solutions')}}
+                            </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a v-if="!inTeam && challenge.stage >= 1"
+                               class="flex items-center mt-5" href=""
+                               @click.prevent="activeTab = 'oferty'"
+                               :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <SettingsIcon class="w-4 h-4 mr-2"/>
+                                {{$t('challengesMain.myOffers')}}
+                            </a>
+                        </li>
+                        <li>
+                            <a v-if="inTeam && challenge.stage >= 1"
+                               class="flex items-center mt-5" href=""
+                               @click.prevent="activeTab = 'all-offers'"
+                               :class="(activeTab == 'all-offers')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <SettingsIcon class="w-4 h-4 mr-2"/>
+                                {{$t('challengesMain.offers')}}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center mt-5" href=""
+                               @click.prevent="activeTab = 'pytania'"
+                               :class="(activeTab == 'pytania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <SettingsIcon class="w-4 h-4 mr-2"/>
+                                {{$t('communication.questions')}}
+                            </a>
+                        </li>
+                        <li>
+                            <a v-if="challenge.stage === 3"
+                               class="flex items-center mt-5" href=""
+                               @click.prevent="activeTab = 'operational-analysis'"
+                               :class="(activeTab == 'operational-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <SettingsIcon class="w-4 h-4 mr-2"/>
+                                Analiza operacyjna rozwiązania
+                            </a>
+                        </li>
+                        <li>
+                            <a v-if="challenge.stage === 3"
+                               class="flex items-center mt-5" href=""
+                               @click.prevent="activeTab = 'financial-analysis'"
+                               :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <SettingsIcon class="w-4 h-4 mr-2"/>
+                                Analiza finansowa rozwiązania
+                            </a>
+                        </li>
+                        <li>
+                            <a v-if="challenge.stage === 3"
+                               class="flex items-center mt-5" href=""
+                               @click.prevent="activeTab = 'financial-analysis'"
+                               :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <SettingsIcon class="w-4 h-4 mr-2"/>
+                                Analiza finansowa rozwiązania
+                            </a>
+                        </li>
+                        <li>
+                            <div class="p-5 border-t border-gray-200 dark:border-dark-5" v-if="(challenge.author_id == user.id)">
+                                <a class="flex items-center" href=""
+                                   @click.prevent="activeTab = 'teams'"
+                                   :class="(activeTab == 'teams')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
+                                    <ActivityIcon class="w-4 h-4 mr-2"/>
+                                    {{$t('teams.teams')}}
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                 </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="inTeam">
                         <button type="button" class="btn btn-primary py-1 px-2" v-if="challenge.solutions.length == 0 && editChallenges" @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
                             {{$t('models.edit')}}
@@ -154,6 +190,20 @@
             <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam" :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
             <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisInformationPanel>
             <FinancialAnalysisInformationPanel v-if="activeTab == 'financial-analysis'" :solution="solution_project" ></FinancialAnalysisInformationPanel>
+            <ModalCard :show="show" @closed="modalClosed">
+                <h3 class="intro-y text-lg font-medium mt-5">{{ $t('teams.addMember') }}</h3>
+                <div class="intro-y box p-5 mt-12 sm:mt-5">
+                    <div>
+                        Zatwierdź
+                    </div>
+                </div>
+                <div class="intro-y box p-5 mt-12 sm:mt-5">
+                    <div class="relative text-gray-700 dark:text-gray-300 mr-4">
+                        <button class="btn btn-primary shadow-md mr-2">Karta bez zmian</button>
+                        <button class="btn btn-primary shadow-md mr-2">Zmiana karty</button>
+                        </div>
+                </div>
+            </ModalCard>
         </div>
     </div>
 </template>
@@ -186,6 +236,7 @@ import TeamsPanel from "../Challenges/components/TeamsPanel";
 import ChallengeOffers from "../Challenges/components/ChallengeOffers";
 import OperationalAnalysisInformationPanel from "./components/OperationalAnalysisInformationPanel";
 import FinancialAnalysisInformationPanel from "./components/FinancialAnalysisInformationPanel";
+import ModalCard from "../../components/ModalCard";
 
 export default defineComponent({
     name: 'projectCard',
@@ -200,7 +251,8 @@ export default defineComponent({
         BasicInformationPanel,
         WhatsNext,
         OperationalAnalysisInformationPanel,
-        FinancialAnalysisInformationPanel
+        FinancialAnalysisInformationPanel,
+        ModalCard
     },
     props: {
         id: Number,
@@ -236,6 +288,9 @@ export default defineComponent({
         const publishSolution = ref(false);
         const addSolutionOffer = ref(false);
         const solution_project = ref('');
+        const show = ref(false);
+        const showMenu = ref(false);
+
 
         watch(() => props.change, (first, second) => {
             if(props.change === 'all-offers' && user.type === 'integrator'){
@@ -272,6 +327,15 @@ export default defineComponent({
                     solution_project.value = solution;
                 }
              });
+        }
+
+        const modalClosed = () => {
+            show.value = false;
+        }
+
+        const showModal = async() => {
+            show.value = !show.value;
+            console.log('showwww');
         }
 
         const filter = () => {
@@ -474,6 +538,10 @@ export default defineComponent({
             });
         }
         return {
+            showMenu,
+            showModal,
+            show,
+            modalClosed,
             editChallenges,
             addSolutionOffer,
             publishSolution,
