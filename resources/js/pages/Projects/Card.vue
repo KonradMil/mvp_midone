@@ -146,28 +146,28 @@
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'financial-analysis'"
                            :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <CheckCircleIcon class="w-4 h-4 mr-2"/>
+                            <CheckCircleIcon class="w-4 h-4 mr-2" style="color: green;"/>
                             Raport z wizji lokalnej
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'financial-analysis'"
                            :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <CheckCircleIcon class="w-4 h-4 mr-2"/>
+                            <CheckCircleIcon class="w-4 h-4 mr-2" style="color: green;"/>
                             Założenia projektu
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'financial-analysis'"
                            :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon class="w-4 h-4 mr-2"/>
+                            <EditIcon class="w-4 h-4 mr-2" style="color: red;"/>
                             Oferta
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'financial-analysis'"
                            :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon class="w-4 h-4 mr-2"/>
+                            <EditIcon class="w-4 h-4 mr-2" style="color: red;"/>
                             Checkpointy list fazy 1
                         </a>
                  </div>
@@ -219,7 +219,7 @@
             <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisInformationPanel>
             <FinancialAnalysisInformationPanel v-if="activeTab == 'financial-analysis'" :solution="solution_project" ></FinancialAnalysisInformationPanel>
             <ModalCard :show="show" @closed="modalClosed">
-                <h3 class="intro-y text-lg font-medium mt-5">{{ $t('teams.addMember') }}</h3>
+                <h3 class="intro-y text-lg font-medium mt-5">Czy na pewno chcesz przejść do następnej fazy?</h3>
                 <div class="intro-y box p-5 mt-12 sm:mt-5">
                     <div>
                         Zatwierdź
@@ -227,8 +227,8 @@
                 </div>
                 <div class="intro-y box p-5 mt-12 sm:mt-5">
                     <div class="relative text-gray-700 dark:text-gray-300 mr-4">
-                        <button class="btn btn-primary shadow-md mr-2">Karta bez zmian</button>
-                        <button class="btn btn-primary shadow-md mr-2">Zmiana karty</button>
+                        <button class="btn btn-primary shadow-md mr-2">Tak</button>
+                        <button class="btn btn-primary shadow-md mr-2">Anuluj</button>
                         </div>
                 </div>
             </ModalCard>
