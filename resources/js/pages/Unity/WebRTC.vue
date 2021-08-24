@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 
 const io = require("socket.io-client");
 const SimpleSignalClient = require('simple-signal-client');
@@ -61,10 +61,10 @@ export default {
                 return {};
             }
         },
-        deviceId: {
-            type: String,
-            default: null
-        }
+        // deviceId: {
+        //     type: String,
+        //     default: null
+        // }
     },
     setup(props) {
         const signalClient = ref(null);
@@ -73,6 +73,7 @@ export default {
         const socket = ref(null);
         const videos = ref(null);
         const ctx = ref(null);
+        const deviceId = ref('');
 
         const join = async () => {
             console.log('join');
@@ -82,8 +83,8 @@ export default {
                 video: props.enableVideo,
                 audio: props.enableAudio
             };
-            if (props.deviceId && props.enableVideo) {
-                constraints.video = { deviceId: { exact: props.deviceId } };
+            if (deviceId.value && props.enableVideo) {
+                constraints.video = { deviceId: { exact: deviceId.value } };
             }
             const localStream = await navigator.mediaDevices.getUserMedia(constraints);
             console.log('opened', localStream);
@@ -210,7 +211,12 @@ export default {
             } catch (e) {
                 console.log('Media error: ' + JSON.stringify(e));
             }
+
         }
+
+        onMounted(() => {
+            navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then((val) => { deviceId.value = val.id; });
+        });
 
         return {
             signalClient,
