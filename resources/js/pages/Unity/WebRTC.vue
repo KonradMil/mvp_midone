@@ -79,7 +79,9 @@ export default {
         const join = async () => {
             console.log('join');
             socket.value = io(props.socketURL, { rejectUnauthorized: false, transports: ['websocket'] });
+            console.log('join2');
             signalClient.value = new SimpleSignalClient(socket.value);
+            console.log('join3');
             let constraints = {
                 video: props.enableVideo,
                 audio: props.enableAudio
@@ -88,6 +90,7 @@ export default {
             if (deviceId.value && props.enableVideo) {
                 constraints.video = { deviceId: { exact: deviceId.value } };
             }
+            console.log('join4');
             const localStream = await navigator.mediaDevices.getUserMedia(constraints);
             console.log('opened', localStream);
             joinedRoom(localStream, true);
