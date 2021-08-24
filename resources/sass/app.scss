@@ -150,6 +150,25 @@
 @import "components/ads-box";
 @import "components/full-calendar";
 @import "components/pristine";
+
+.video-list {
+    background: whitesmoke;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.video-list div {
+    padding: 0px;
+}
+
+.video-item {
+    background: #c5c4c4;
+    display: inline-block;
+}
+
 #loader {
     position: absolute;
     top: 45%;

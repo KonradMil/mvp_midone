@@ -12,7 +12,7 @@
         <LoadingIcon icon="grid" class="w-8 h-8" />
     </div>
 <!--    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>-->
-
+    <WebRTC width="100%" roomId="roomId"></WebRTC>
     <div id="help-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -110,6 +110,7 @@ import RightButtons from "./components/RightButtons";
 
 import router from "../../router";
 import VoiceChat from "./components/VoiceChat";
+import WebRTC from "./WebRTC";
 
 const ww = WindowWatcher();
 
@@ -126,7 +127,7 @@ export default {
         canEditSolution: Boolean,
         sessionid: String
     },
-    components: {VoiceChat, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
+    components: {WebRTC, VoiceChat, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
     setup(props, {emit}) {
         //GLOBAL
         const app = getCurrentInstance();
