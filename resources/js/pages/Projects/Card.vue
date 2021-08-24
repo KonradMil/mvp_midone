@@ -34,14 +34,14 @@
                             <div class="font-medium text-base">
                                 {{ challenge.name }} <span class="text-theme-1 dark:text-theme-10" v-if="challenge.status == 0"> - Szkic</span>
                             </div>
-                            <div class="text-gray-600">{{ types[challenge.type] }} dsadsadsadsada</div>
+                            <div class="text-gray-600">{{ types[challenge.type] }}</div>
                         </div>
-                        <div class="ml-4 mr-auto">
-                            <div class="text-gray-600">Karta bez zmian</div>
-                        </div>
-                        <div class="ml-4 mr-auto">
-                            <div class="text-gray-600">Zmiana karty</div>
-                        </div>
+<!--                        <div class="ml-4 mr-auto">-->
+<!--                            <div class="text-gray-600">Karta bez zmian</div>-->
+<!--                        </div>-->
+<!--                        <div class="ml-4 mr-auto">-->
+<!--                            <div class="text-gray-600">Zmiana karty</div>-->
+<!--                        </div>-->
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
                         <a class="flex items-center"
@@ -154,6 +154,20 @@
             <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam" :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
             <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisInformationPanel>
             <FinancialAnalysisInformationPanel v-if="activeTab == 'financial-analysis'" :solution="solution_project" ></FinancialAnalysisInformationPanel>
+            <ModalCard :show="show" @closed="modalClosed">
+                <h3 class="intro-y text-lg font-medium mt-5">{{ $t('teams.addMember') }}</h3>
+                <div class="intro-y box p-5 mt-12 sm:mt-5">
+                    <div>
+                        Zatwierdź
+                    </div>
+                </div>
+                <div class="intro-y box p-5 mt-12 sm:mt-5">
+                    <div class="relative text-gray-700 dark:text-gray-300 mr-4">
+                        <button class="btn btn-primary shadow-md mr-2">Karta bez zmian</button>
+                        <button class="btn btn-primary shadow-md mr-2">Zmiana karty</button>
+                    </div>
+                </div>
+            </ModalCard>
         </div>
     </div>
 </template>
@@ -186,6 +200,7 @@ import TeamsPanel from "../Challenges/components/TeamsPanel";
 import ChallengeOffers from "../Challenges/components/ChallengeOffers";
 import OperationalAnalysisInformationPanel from "./components/OperationalAnalysisInformationPanel";
 import FinancialAnalysisInformationPanel from "./components/FinancialAnalysisInformationPanel";
+import ModalCard from "../../components/ModalCard";
 
 export default defineComponent({
     name: 'projectCard',
@@ -200,7 +215,8 @@ export default defineComponent({
         BasicInformationPanel,
         WhatsNext,
         OperationalAnalysisInformationPanel,
-        FinancialAnalysisInformationPanel
+        FinancialAnalysisInformationPanel,
+        ModalCard
     },
     props: {
         id: Number,
@@ -236,6 +252,8 @@ export default defineComponent({
         const publishSolution = ref(false);
         const addSolutionOffer = ref(false);
         const solution_project = ref('');
+        const show = ref(false);
+
 
         watch(() => props.change, (first, second) => {
             if(props.change === 'all-offers' && user.type === 'integrator'){
@@ -272,6 +290,11 @@ export default defineComponent({
                     solution_project.value = solution;
                 }
              });
+        }
+
+        const modalClosed = () => {
+            show.value = false;
+            temporary_team_id.value = null;
         }
 
         const filter = () => {
@@ -474,6 +497,8 @@ export default defineComponent({
             });
         }
         return {
+            show,
+            modalClosed,
             editChallenges,
             addSolutionOffer,
             publishSolution,
