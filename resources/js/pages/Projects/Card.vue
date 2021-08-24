@@ -36,6 +36,12 @@
                             </div>
                             <div class="text-gray-600">{{ types[challenge.type] }}</div>
                         </div>
+                        <div class="ml-4 mr-auto">
+                            <div class="text-gray-600">Karta bez zmian</div>
+                        </div>
+                        <div class="ml-4 mr-auto">
+                            <div class="text-gray-600">Zmiana karty</div>
+                        </div>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
                         <a class="flex items-center"
