@@ -444,7 +444,7 @@ export default {
                             checkTeam();
                             handleUnityActionOutgoing({
                                 action: 'loadStructure',
-                                data: JSON.parse(response.data.payload.save_json)
+                                data: response.data.payload.save_json
                             });
                             unlockInput();
                         }
