@@ -396,21 +396,22 @@ export default {
                 console.log('gameWindow.value');
                 console.log(gameWindow.value);
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
-                handleUnityActionOutgoing({
-                    action: 'setSessionId',
-                    data: Number(Math.random().toString().substr(3, length) + Date.now()).toString(36)
-                });
+                // handleUnityActionOutgoing({
+                //     action: 'setSessionId',
+                //     data: Number(Math.random().toString().substr(3, length) + Date.now()).toString(36)
+                // });
                 // handleUnityActionOutgoing({action: 'setHangarAppearance', data: 1});
-                handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
-                handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
                 console.log('GET ME');
+                handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
+                handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
+
                 // if(type.value == 'solution') {
                 //     getSolutionRepositories(id.value);
                 // } else {
                 //     getCardChallengeRepositories(id.value);
                 // }
                 handleUnityActionOutgoing({action: 'prefix', data: 'https://devsys.appworks-dev.pl/s3'});
-            }, 2000);
+            }, 5000);
             setTimeout(() => {
                 unlockInput();
             }, 5000);
