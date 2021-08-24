@@ -77,7 +77,7 @@ export default {
         const join = async () => {
             console.log('join');
             socket.value = io(props.socketURL, { rejectUnauthorized: false, transports: ['websocket'] });
-            signalClient.value = new SimpleSignalClient(this.socket);
+            signalClient.value = new SimpleSignalClient(socket.value);
             let constraints = {
                 video: props.enableVideo,
                 audio: props.enableAudio
