@@ -142,6 +142,13 @@
                             </div>
                         </li>
                     </ul>
+                        <a v-if="challenge.stage === 3"
+                           class="flex items-center mt-5" href=""
+                           @click.prevent="activeTab = 'financial-analysis'"
+                           :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                            <SettingsIcon class="w-4 h-4 mr-2"/>
+                            Analiza finansowa rozwiązania
+                        </a>
                  </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="inTeam">
                         <button type="button" class="btn btn-primary py-1 px-2" v-if="challenge.solutions.length == 0 && editChallenges" @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
