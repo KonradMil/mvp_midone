@@ -402,7 +402,7 @@ export default {
                 });
                 // handleUnityActionOutgoing({action: 'setHangarAppearance', data: 1});
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
-                handleUnityActionOutgoing({action: 'LaunchTutorial', data: ''});
+                handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
                 console.log('GET ME');
                 // if(type.value == 'solution') {
                 //     getSolutionRepositories(id.value);

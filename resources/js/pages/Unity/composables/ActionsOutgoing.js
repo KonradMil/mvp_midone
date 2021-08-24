@@ -64,6 +64,10 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'ChangeCamera', val)
     }
 
+    function launchTutorial () {
+        outgoing(game, 'LaunchTutorial', '');
+    }
+
     function save() {
         outgoing(game, 'SaveStructure', '');
     }
@@ -215,6 +219,7 @@ export default function unityActionOutgoing(gameWindow) {
         removeLine,
         updateCurrentAnimation,
         prefix,
-        loadWorkshopObject
+        loadWorkshopObject,
+        launchTutorial
     };
 }
