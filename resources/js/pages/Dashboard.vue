@@ -121,7 +121,7 @@
 <!--                                    class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"-->
 <!--                                >-->
 <!--                                    <img-->
-<!--                                        alt="Icewall Tailwind HTML Admin Template"-->
+<!--                                        alt="DBR77"-->
 <!--                                        :src="'/' + log.subject.screenshot_path"-->
 <!--                                    />-->
 <!--                                </div>-->

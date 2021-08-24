@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 /**
  *
  */
+
 class ModelController extends Controller
 {
     /**

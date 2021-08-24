@@ -8,7 +8,7 @@
             >
                 <div class="-intro-x lg:mr-20">
                     <img
-                        alt="Icewall Tailwind HTML Admin Template"
+                        alt="DBR77"
                         class="h-48 lg:h-auto"
                         :src="require(`../../images/error-illustration.svg`)"
                     />

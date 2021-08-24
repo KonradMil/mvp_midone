@@ -42,7 +42,7 @@
             <div v-for="(challenge, index) in projects" :key="index" class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
                 <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
                     <div class="w-10 h-10 flex-none image-fit">
-                        <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" :src="'/' + challenge.screenshot_path"/>
+                        <img alt="DBR77" class="rounded-full" :src="'/' + challenge.screenshot_path"/>
                     </div>
                     <div class="ml-3 mr-auto" @click="$router.push( {path : '/projects/card/' + challenge.id})">
                         <a href="" class="font-medium">{{ challenge.name }}</a>
@@ -80,7 +80,7 @@
                 <div class="p-5">
                     <div class="h-40 xxl:h-56 image-fit" @click="$router.push( {path : '/projects/card/' + challenge.id})">
                         <img
-                            alt="Icewall Tailwind HTML Admin Template"
+                            alt="DBR77"
                             class="rounded-md"
                             :src="'/' + challenge.screenshot_path"
                         />

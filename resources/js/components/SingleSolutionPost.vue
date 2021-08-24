@@ -3,7 +3,7 @@
         <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4" :class="(solution.rejected == 1)? 'rejected-solution': '' ">
             <div class="w-10 h-10 flex-none image-fit">
                 <img
-                    alt="Icewall Tailwind HTML Admin Template"
+                    alt="DBR77"
                     class="rounded-full"
                     :src="'/' + solution.screenshot_path"
                 />
@@ -36,7 +36,7 @@
         <div class="p-5 border-t border-gray-200 dark:border-dark-5" >
             <div class="h-40 xxl:h-56 image-fit">
                 <img @click="$router.push({name: 'challengeStudio', params: {id: solution.id, type: 'solution', canEditSolution: canEditSolution}});"
-                     alt="Icewall Tailwind HTML Admin Template"
+                     alt="DBR77"
                      class="rounded-md"
                      :src="'/' + solution.screenshot_path"
                 />
