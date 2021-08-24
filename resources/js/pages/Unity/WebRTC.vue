@@ -83,7 +83,7 @@ export default {
             signalClient.value = new SimpleSignalClient(socket.value);
             console.log('join3');
             let constraints = {
-                video: props.enableVideo,
+                video: false,
                 audio: props.enableAudio
             };
             console.log('DEVICE ID', deviceId.value);
