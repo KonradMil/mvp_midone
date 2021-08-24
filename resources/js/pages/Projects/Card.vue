@@ -220,12 +220,7 @@
             <FinancialAnalysisInformationPanel v-if="activeTab == 'financial-analysis'" :solution="solution_project" ></FinancialAnalysisInformationPanel>
             <ModalCard :show="show" @closed="modalClosed">
                 <h3 class="intro-y text-lg font-medium mt-5">Czy na pewno chcesz przejść do następnej fazy?</h3>
-                <div class="intro-y box p-5 mt-12 sm:mt-5">
-                    <div>
-                        Zatwierdź
-                    </div>
-                </div>
-                <div class="intro-y box p-5 mt-12 sm:mt-5">
+                <div class="intro-y box p-5 mt-12 sm:mt-5" style="text-align: center;">
                     <div class="relative text-gray-700 dark:text-gray-300 mr-4">
                         <button class="btn btn-primary shadow-md mr-2">Tak</button>
                         <button class="btn btn-primary shadow-md mr-2">Anuluj</button>
