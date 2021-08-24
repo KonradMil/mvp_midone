@@ -82,16 +82,16 @@ export default {
             console.log('join2');
             signalClient.value = new SimpleSignalClient(socket.value);
             console.log('join3');
-            let constraints = {
-                video: false,
-                audio: props.enableAudio
-            };
+            // let constraints = ;
             console.log('DEVICE ID', deviceId.value);
-            if (deviceId.value && props.enableVideo) {
-                constraints.video = { deviceId: { exact: deviceId.value } };
-            }
+            // if (deviceId.value && props.enableVideo) {
+            //     constraints.video = { deviceId: { exact: deviceId.value } };
+            // }
             console.log('join4');
-            const localStream = await navigator.mediaDevices.getUserMedia(constraints);
+            const localStream = await navigator.mediaDevices.getUserMedia({
+                video: false,
+                audio: true
+            });
             console.log('opened', localStream);
             joinedRoom(localStream, true);
             signalClient.value.once('discover', (discoveryData) => {
