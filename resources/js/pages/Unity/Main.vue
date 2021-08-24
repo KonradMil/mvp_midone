@@ -182,7 +182,7 @@ export default {
         });
 
         const startTutorial = () => {
-
+            handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
         }
 
         //RUNS WHEN UNITY IS READY
@@ -396,22 +396,20 @@ export default {
                 console.log('gameWindow.value');
                 console.log(gameWindow.value);
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
-                // handleUnityActionOutgoing({
-                //     action: 'setSessionId',
-                //     data: Number(Math.random().toString().substr(3, length) + Date.now()).toString(36)
-                // });
+                handleUnityActionOutgoing({
+                    action: 'setSessionId',
+                    data: Number(Math.random().toString().substr(3, length) + Date.now()).toString(36)
+                });
                 // handleUnityActionOutgoing({action: 'setHangarAppearance', data: 1});
-                console.log('GET ME');
-                handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
-
-                // if(type.value == 'solution') {
-                //     getSolutionRepositories(id.value);
-                // } else {
-                //     getCardChallengeRepositories(id.value);
-                // }
+                console.log('GET ME');
+                if(type.value == 'solution') {
+                    getSolutionRepositories(id.value);
+                } else {
+                    getCardChallengeRepositories(id.value);
+                }
                 handleUnityActionOutgoing({action: 'prefix', data: 'https://devsys.appworks-dev.pl/s3'});
-            }, 5000);
+            }, 2000);
             setTimeout(() => {
                 unlockInput();
             }, 5000);
