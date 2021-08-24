@@ -26,6 +26,7 @@
                     >
                         <div
                             class="relative bg-white rounded-lg text-left overflow-hidden shadow-xl p-8 w-1/2"
+                            style="max-width: 500px; max-height: 250px;"
                             role="dialog"
                             ref="modal"
                             aria-modal="true"

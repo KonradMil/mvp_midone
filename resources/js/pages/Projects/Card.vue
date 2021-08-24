@@ -34,7 +34,7 @@
                             <div class="font-medium text-base">
                                 {{ challenge.name }} <span class="text-theme-1 dark:text-theme-10" v-if="challenge.status == 0"> - Szkic</span>
                             </div>
-                            <div class="text-gray-600">{{ types[challenge.type] }} sadsadasdasda</div>
+                            <div class="text-gray-600">{{ types[challenge.type] }}</div>
                         </div>
                         <div class="ml-4 mr-auto">
                             <div class="text-gray-600">Karta bez zmian</div>
@@ -163,9 +163,13 @@
                 </div>
                 <div class="intro-y box p-5 mt-12 sm:mt-5">
                     <div class="relative text-gray-700 dark:text-gray-300 mr-4">
+                        <div class="pr-3">
                         <button class="btn btn-primary shadow-md mr-2">Karta bez zmian</button>
+                        </div>
+                        <div class="">
                         <button class="btn btn-primary shadow-md mr-2">Zmiana karty</button>
-                    </div>
+                        </div>
+                        </div>
                 </div>
             </ModalCard>
         </div>
