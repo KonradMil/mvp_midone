@@ -9,7 +9,7 @@
                 <div class="lg:w-32 font-medium text-base lg:mt-3 ml-3 lg:mx-auto">Inicjowanie projektu</div>
             </div>
             <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
-                <button class="w-10 h-10 rounded-full btn text-gray-600 bg-gray-200 dark:bg-dark-1" @click.prevent="showModal">2</button>
+                <button class="w-10 h-10 rounded-full btn text-gray-600 bg-gray-200 dark:bg-dark-1" @click="showModal">2</button>
                 <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Planowanie projektu</div>
             </div>
             <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
@@ -296,7 +296,7 @@ export default defineComponent({
             show.value = false;
         }
 
-        const showModal = () => {
+        const showModal = async() => {
             show.value = !show.value;
             console.log('showwww');
         }
