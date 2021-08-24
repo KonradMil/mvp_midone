@@ -52,8 +52,8 @@
                             <i data-feather="chevron-down" class="menu__sub-icon"></i>
                         </div>
                     </a>
-                    <ul v-if="showMenu">
-                        <li>
+                    <ul v-if="showMenu" class="intro-y">
+                        <li class="intro-y">
                             <a class="flex items-center"
                                href=""
                                @click.prevent="activeTab = 'podstawowe'"
@@ -62,14 +62,14 @@
                                 {{$t('challengesMain.basicInformation')}}
                             </a>
                         </li>
-                        <li>
+                        <li class="intro-y">
                             <a class="flex items-center mt-5" href=""
                                @click.prevent="activeTab = 'techniczne'"
                                :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                                 <BoxIcon class="w-4 h-4 mr-2"/>
                                 {{$t('challengesMain.technicalDetails')}}                        </a>
                         </li>
-                        <li>
+                        <li class="intro-y">
                             <a class="flex items-center mt-5" href="" v-if="challenge != undefined"
                                @click.prevent="activeTab = 'rozwiazania'"
                                :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
@@ -78,7 +78,7 @@
                             </div>
                             </a>
                         </li>
-                        <li>
+                        <li class="intro-y">
                             <a v-if="!inTeam && challenge.stage >= 1"
                                class="flex items-center mt-5" href=""
                                @click.prevent="activeTab = 'oferty'"
@@ -87,7 +87,7 @@
                                 {{$t('challengesMain.myOffers')}}
                             </a>
                         </li>
-                        <li>
+                        <li class="intro-y">
                             <a v-if="inTeam && challenge.stage >= 1"
                                class="flex items-center mt-5" href=""
                                @click.prevent="activeTab = 'all-offers'"
@@ -96,7 +96,7 @@
                                 {{$t('challengesMain.offers')}}
                             </a>
                         </li>
-                        <li>
+                        <li class="intro-y">
                             <a class="flex items-center mt-5" href=""
                                @click.prevent="activeTab = 'pytania'"
                                :class="(activeTab == 'pytania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
@@ -104,7 +104,7 @@
                                 {{$t('communication.questions')}}
                             </a>
                         </li>
-                        <li>
+                        <li class="intro-y">
                             <a v-if="challenge.stage === 3"
                                class="flex items-center mt-5" href=""
                                @click.prevent="activeTab = 'operational-analysis'"
@@ -113,7 +113,7 @@
                                 Analiza operacyjna rozwiązania
                             </a>
                         </li>
-                        <li>
+                        <li class="intro-y">
                             <a v-if="challenge.stage === 3"
                                class="flex items-center mt-5" href=""
                                @click.prevent="activeTab = 'financial-analysis'"
@@ -122,7 +122,7 @@
                                 Analiza finansowa rozwiązania
                             </a>
                         </li>
-                        <li>
+                        <li class="intro-y">
                             <a v-if="challenge.stage === 3"
                                class="flex items-center mt-5" href=""
                                @click.prevent="activeTab = 'financial-analysis'"
@@ -131,7 +131,7 @@
                                 Analiza finansowa rozwiązania
                             </a>
                         </li>
-                        <li>
+                        <li class="intro-y">
                             <div class="p-5 border-t border-gray-200 dark:border-dark-5" v-if="(challenge.author_id == user.id)">
                                 <a class="flex items-center" href=""
                                    @click.prevent="activeTab = 'teams'"
