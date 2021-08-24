@@ -146,28 +146,28 @@
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'financial-analysis'"
                            :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <i data-feather="check-square" class="w-4 h-4 mr-2"></i>
+                            <CheckCircleIcon class="w-4 h-4 mr-2"/>
                             Raport z wizji lokalnej
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'financial-analysis'"
                            :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <i data-feather="check-square" class="w-4 h-4 mr-2"></i>
+                            <CheckCircleIcon class="w-4 h-4 mr-2"/>
                             Założenia projektu
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'financial-analysis'"
                            :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <SettingsIcon class="w-4 h-4 mr-2"/>
+                            <EditIcon class="w-4 h-4 mr-2"/>
                             Oferta
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'financial-analysis'"
                            :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <SettingsIcon class="w-4 h-4 mr-2"/>
+                            <EditIcon class="w-4 h-4 mr-2"/>
                             Checkpointy list fazy 1
                         </a>
                  </div>
