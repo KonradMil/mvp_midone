@@ -46,7 +46,7 @@
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
                     <a href="javascript:;" class="menu">
                         <div class="menu__icon"> <i data-feather="home"></i> </div>
-                        <div class="menu__title"> Dashboard <i data-feather="chevron-down" class="menu__sub-icon"></i> </div>
+                        <div class="menu__title"> Startowa karta <projek></projek>tu <i data-feather="chevron-down" class="menu__sub-icon"></i> </div>
                     </a>
                     <ul class="">
                         <li>
