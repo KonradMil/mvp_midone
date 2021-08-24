@@ -437,10 +437,10 @@ export default {
                             checkTeam();
                             unlockInput();
                         } else {
-                            console.log(JSON.parse(response.data.payload.save_json));
+                            console.log(response.data.payload.save_json);
                             challenge.value = response.data.payload;
-                            initialLoad.value = JSON.parse(response.data.payload.save_json);
-                            animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
+                            initialLoad.value = response.data.payload.save_json;
+                            animationSave.value = response.data.payload.save_json.animation_layers;
                             checkTeam();
                             handleUnityActionOutgoing({
                                 action: 'loadStructure',
