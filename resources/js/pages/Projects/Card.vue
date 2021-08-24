@@ -52,7 +52,7 @@
                             <i data-feather="chevron-down" class="menu__sub-icon"></i>
                         </div>
                     </a>
-                    <ul :show="showMenu">
+                    <ul v-if="showMenu">
                         <li>
                             <a class="flex items-center"
                                href=""
