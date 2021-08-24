@@ -83,6 +83,7 @@ export default {
                 video: props.enableVideo,
                 audio: props.enableAudio
             };
+            console.log('DEVICE ID', deviceId.value);
             if (deviceId.value && props.enableVideo) {
                 constraints.video = { deviceId: { exact: deviceId.value } };
             }
@@ -223,6 +224,7 @@ export default {
             socket,
             videoList,
             canvas,
+            deviceId,
             shareScreen,
             joinedRoom,
             getCanvas,
