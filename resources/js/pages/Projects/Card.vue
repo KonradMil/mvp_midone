@@ -44,69 +44,101 @@
                         </div>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
-                        <a class="flex items-center"
-                            href=""
-                            @click.prevent="activeTab = 'podstawowe'"
-                            :class="(activeTab == 'podstawowe')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
-                            <ActivityIcon class="w-4 h-4 mr-2"/>
-                            {{$t('challengesMain.basicInformation')}}
-                        </a>
-                        <a class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'techniczne'"
-                           :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <BoxIcon class="w-4 h-4 mr-2"/>
-                            {{$t('challengesMain.technicalDetails')}}                        </a>
-                        <a class="flex items-center mt-5" href="" v-if="challenge != undefined"
-                           @click.prevent="activeTab = 'rozwiazania'"
-                           :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <LockIcon class="w-4 h-4 mr-2"/>
-                            <div v-if="challenge.selected != undefined && challenge.selected.length != 0">{{$t('challengesMain.solutions')}}</div><div v-if="challenge.selected == undefined || challenge.selected.length == 0">{{$t('challengesMain.solutions')}}
-                        </div>
-                        </a>
-                        <a v-if="!inTeam && challenge.stage >= 1"
-                            class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'oferty'"
-                           :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <SettingsIcon class="w-4 h-4 mr-2"/>
-                            {{$t('challengesMain.myOffers')}}
-                        </a>
-                        <a v-if="inTeam && challenge.stage >= 1"
-                            class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'all-offers'"
-                           :class="(activeTab == 'all-offers')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <SettingsIcon class="w-4 h-4 mr-2"/>
-                            {{$t('challengesMain.offers')}}
-                        </a>
-                        <a class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'pytania'"
-                           :class="(activeTab == 'pytania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <SettingsIcon class="w-4 h-4 mr-2"/>
-                            {{$t('communication.questions')}}
-                        </a>
-                        <a v-if="challenge.stage === 3"
-                            class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'operational-analysis'"
-                           :class="(activeTab == 'operational-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <SettingsIcon class="w-4 h-4 mr-2"/>
-                            Analiza operacyjna rozwiązania
-                        </a>
-                        <a v-if="challenge.stage === 3"
-                           class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'financial-analysis'"
-                           :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <SettingsIcon class="w-4 h-4 mr-2"/>
-                            Analiza finansowa rozwiązania
-                        </a>
-                    </div>
-                    <div class="p-5 border-t border-gray-200 dark:border-dark-5" v-if="(challenge.author_id == user.id)">
-                        <a class="flex items-center" href=""
-                           @click.prevent="activeTab = 'teams'"
-                           :class="(activeTab == 'teams')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
-                            <ActivityIcon class="w-4 h-4 mr-2"/>
-                            {{$t('teams.teams')}}
-                        </a>
-                    </div>
-
+                    <a href="javascript:;" class="menu">
+                        <div class="menu__icon"> <i data-feather="home"></i> </div>
+                        <div class="menu__title"> Dashboard <i data-feather="chevron-down" class="menu__sub-icon"></i> </div>
+                    </a>
+                    <ul class="">
+                        <li>
+                            <a class="flex items-center"
+                               href=""
+                               @click.prevent="activeTab = 'podstawowe'"
+                               :class="(activeTab == 'podstawowe')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
+                                <ActivityIcon class="w-4 h-4 mr-2"/>
+                                {{$t('challengesMain.basicInformation')}}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center mt-5" href=""
+                               @click.prevent="activeTab = 'techniczne'"
+                               :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <BoxIcon class="w-4 h-4 mr-2"/>
+                                {{$t('challengesMain.technicalDetails')}}                        </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center mt-5" href="" v-if="challenge != undefined"
+                               @click.prevent="activeTab = 'rozwiazania'"
+                               :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <LockIcon class="w-4 h-4 mr-2"/>
+                                <div v-if="challenge.selected != undefined && challenge.selected.length != 0">{{$t('challengesMain.solutions')}}</div><div v-if="challenge.selected == undefined || challenge.selected.length == 0">{{$t('challengesMain.solutions')}}
+                            </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a v-if="!inTeam && challenge.stage >= 1"
+                               class="flex items-center mt-5" href=""
+                               @click.prevent="activeTab = 'oferty'"
+                               :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <SettingsIcon class="w-4 h-4 mr-2"/>
+                                {{$t('challengesMain.myOffers')}}
+                            </a>
+                        </li>
+                        <li>
+                            <a v-if="inTeam && challenge.stage >= 1"
+                               class="flex items-center mt-5" href=""
+                               @click.prevent="activeTab = 'all-offers'"
+                               :class="(activeTab == 'all-offers')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <SettingsIcon class="w-4 h-4 mr-2"/>
+                                {{$t('challengesMain.offers')}}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="flex items-center mt-5" href=""
+                               @click.prevent="activeTab = 'pytania'"
+                               :class="(activeTab == 'pytania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <SettingsIcon class="w-4 h-4 mr-2"/>
+                                {{$t('communication.questions')}}
+                            </a>
+                        </li>
+                        <li>
+                            <a v-if="challenge.stage === 3"
+                               class="flex items-center mt-5" href=""
+                               @click.prevent="activeTab = 'operational-analysis'"
+                               :class="(activeTab == 'operational-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <SettingsIcon class="w-4 h-4 mr-2"/>
+                                Analiza operacyjna rozwiązania
+                            </a>
+                        </li>
+                        <li>
+                            <a v-if="challenge.stage === 3"
+                               class="flex items-center mt-5" href=""
+                               @click.prevent="activeTab = 'financial-analysis'"
+                               :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <SettingsIcon class="w-4 h-4 mr-2"/>
+                                Analiza finansowa rozwiązania
+                            </a>
+                        </li>
+                        <li>
+                            <a v-if="challenge.stage === 3"
+                               class="flex items-center mt-5" href=""
+                               @click.prevent="activeTab = 'financial-analysis'"
+                               :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                <SettingsIcon class="w-4 h-4 mr-2"/>
+                                Analiza finansowa rozwiązania
+                            </a>
+                        </li>
+                        <li>
+                            <div class="p-5 border-t border-gray-200 dark:border-dark-5" v-if="(challenge.author_id == user.id)">
+                                <a class="flex items-center" href=""
+                                   @click.prevent="activeTab = 'teams'"
+                                   :class="(activeTab == 'teams')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
+                                    <ActivityIcon class="w-4 h-4 mr-2"/>
+                                    {{$t('teams.teams')}}
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                 </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="inTeam">
                         <button type="button" class="btn btn-primary py-1 px-2" v-if="challenge.solutions.length == 0 && editChallenges" @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
                             {{$t('models.edit')}}
