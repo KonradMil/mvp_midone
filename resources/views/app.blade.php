@@ -13,7 +13,7 @@
     <script>
         window.unity_path = '{{env('UNITY_PATH')}}';
         window.unity_workshop_path = '{{env('UNITY_WORKSHOP_PATH')}}';
-        window.unity_tutorial_path = '{{env('UNITY_TUTORIAL_PATH')}}';
+        window.unity_tutorial_path = '{{env('UNITY_PATH')}}';
         @php
         if(empty(Auth::user()->companies->toArray())) {
                $company = new App\Models\Company();

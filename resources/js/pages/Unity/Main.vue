@@ -402,12 +402,13 @@ export default {
                 });
                 // handleUnityActionOutgoing({action: 'setHangarAppearance', data: 1});
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
+                handleUnityActionOutgoing({action: 'LaunchTutorial', data: ''});
                 console.log('GET ME');
-                if(type.value == 'solution') {
-                    getSolutionRepositories(id.value);
-                } else {
-                    getCardChallengeRepositories(id.value);
-                }
+                // if(type.value == 'solution') {
+                //     getSolutionRepositories(id.value);
+                // } else {
+                //     getCardChallengeRepositories(id.value);
+                // }
                 handleUnityActionOutgoing({action: 'prefix', data: 'https://devsys.appworks-dev.pl/s3'});
             }, 2000);
             setTimeout(() => {
