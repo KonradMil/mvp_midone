@@ -298,6 +298,7 @@ export default defineComponent({
 
         const showModal = () => {
             show.value = !show.value;
+            console.log('showwww');
         }
 
         const filter = () => {
