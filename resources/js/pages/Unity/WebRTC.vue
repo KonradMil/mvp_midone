@@ -1,5 +1,6 @@
 <template>
-    <button class="btn-primary btn" @click="join">DOŁĄCZ</button>
+    <button class="btn-primary btn" style="top: 1px;
+    position: absolute;" @click="join">DOŁĄCZ</button>
     <div class="video-list">
         <div v-for="item in videoList"
              :video="item"
