@@ -492,7 +492,7 @@ class OfferController extends Controller
         $challenge->solution_project_id = $solution->id;
 
         $offer->selected = true;
-
+        $offer->status = 2;
         if ($offer->rejected == true) {
             $offer->rejected = false;
         }
