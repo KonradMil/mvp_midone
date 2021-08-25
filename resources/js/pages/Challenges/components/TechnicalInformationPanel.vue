@@ -228,7 +228,12 @@
                         <div class="flex items-center">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.days')}}</span>
-                                <div class=" dark:text-theme-10 text-theme-1"> {{ challenge.financial_before.days }} dni</div>
+                                <div class=" dark:text-theme-10 text-theme-1">
+                                    {{ challenge.financial_before.days }} dni
+                                </div>
+                                <input type="number"
+                                       v-model="challenge.financial_before.days"
+                                       class="form-control"/>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
