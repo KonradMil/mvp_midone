@@ -23,6 +23,7 @@
                                     {{ details['select_detail_weight'][challenge.technical_details.detail_weight].name }}
                                 </div>
                                 <TailSelect
+                                    v-if="stage === 3"
                                     id="input-wizard-1"
                                     v-model="challenge.technical_details.detail_weight"
                                     :options="{locale: 'pl', placeholder: details.select_detail_weight[challenge.technical_details.detail_weight].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
@@ -43,11 +44,12 @@
                                 <TailSelect
                                     v-if="stage === 3"
                                     id="input-wizard-1"
-                                    v-model="details['select_pick_quality'][challenge.technical_details.pick_quality].name"
-                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                                    <option  :selected="details.select_pick_quality === '' ? '' : 'selected'" disabled>Wybierz...</option>
-                                    <option :selected="det.value === details.select_pick_quality ? '' : 'selected'" v-for="(det,index) in details.select_pick_quality"
-                                            :value="det.value">{{ det.name }}
+                                    v-model="challenge.technical_details.pick_quality"
+                                    :options="{locale: 'pl', placeholder: details.select_pick_quality[challenge.technical_details.pick_quality].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    <option selected disabled>Wybierz...</option>
+                                    <option v-for="(det,index) in details.select_pick_quality"
+                                            :value="det.value">
+                                        {{ det.name }}
                                     </option>
                                 </TailSelect>
                             </div>

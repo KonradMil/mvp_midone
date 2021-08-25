@@ -151,13 +151,12 @@ name: "WhatsNext",
         const doMe = () => {
             try {
                 console.log('filter is coming');
-                if(props.user.type === 'integrator') {
-                    if(props.stage === 3){
-                        text.value = 'W raporcie z wizji lokalnej uzwględnij wszelkie zmiany jakie należy wprowadzić w projekcie po wizycie na zakładzie.';
-                        action.value = {redirect: '' }
-                    } else if(isSelected.value === true && check.value === false){
-                        text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';
-                        action.value = {redirect: ''}
+                if(props.stage === 3){
+                    text.value = 'W raporcie z wizji lokalnej uzwględnij wszelkie zmiany jakie należy wprowadzić w projekcie po wizycie na zakładzie.';
+                    action.value = {redirect: '' }
+                } else if(props.user.type === 'integrator') {
+                     if(isSelected.value === true && check.value === false){
+                        text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';action.value = {redirect: ''}
                     } else if(isSolutions.value === false && props.challenge.stage === 1) {
                         console.log('HERE');
                         text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
@@ -175,7 +174,7 @@ name: "WhatsNext",
                         text.value = 'Opublikuj przygotowaną ofertę.';
                         action.value = {redirect: ''}
                     }
-                } else {
+                } else if(props.user.type === 'investor'){
                     if(props.challenge.solutions < 1 && props.challenge.stage === 1) {
                         text.value = 'Oczekuj na nowe rozwiązania.';
                         buttonText.value = '';
