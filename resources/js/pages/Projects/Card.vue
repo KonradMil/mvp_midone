@@ -36,12 +36,6 @@
                             </div>
                             <div class="text-gray-600">{{ types[challenge.type] }}</div>
                         </div>
-                        <div class="ml-4 mr-auto">
-                            <div class="text-gray-600">Karta bez zmian</div>
-                        </div>
-                        <div class="ml-4 mr-auto">
-                            <div class="text-gray-600">Zmiana karty</div>
-                        </div>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
                     <a href="javascript:;" class="menu">
@@ -52,7 +46,7 @@
                             <i data-feather="chevron-down" class="menu__sub-icon"></i>
                         </div>
                     </a>
-                    <ul v-if="showMenu" class="intro-y pt-4">
+                    <ul v-if="showMenu" class="intro-y pt-4 pl-5">
                         <li class="intro-y">
                             <a class="flex items-center"
                                href=""
@@ -151,9 +145,10 @@
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'financial-analysis'"
-                           :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600"/>
+                           @click.prevent="activeTab = 'techniczne'"
+                           :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                            <EditIcon class="w-4 h-4 mr-2 text-red-600" v-if="is_done_technical === false"/>
+                            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600" v-if="is_done_technical === true"/>
                             Założenia projektu
                         </a>
                         <a v-if="challenge.stage === 3"
@@ -206,7 +201,7 @@
                         </button>
                     </div>
                 </div>
-                <WhatsNext :user="user" :challenge="challenge" :solutions="challenge.solutions"></WhatsNext>
+                <WhatsNext :user="user" :challenge="challenge" :solutions="challenge.solutions" :stage="3"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
             <BasicInformationPanel :challenge="challenge" :inTeam="inTeam" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
@@ -316,6 +311,7 @@ export default defineComponent({
         const showMenu = ref(false);
         const is_done_offer = ref(false);
         const change_offer = ref(false);
+        const is_done_technical = ref(false);
 
         watch(() => props.change, (first, second) => {
             if(props.change === 'all-offers' && user.type === 'integrator'){
@@ -574,6 +570,7 @@ export default defineComponent({
             });
         }
         return {
+            is_done_technical,
             change_offer,
             is_done_offer,
             showMenu,
