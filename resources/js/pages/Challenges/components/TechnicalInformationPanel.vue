@@ -19,7 +19,7 @@
                         <div class="flex items-center">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.maxWeight')}}:</span>
-                                <div class=" dark:text-theme-10 text-theme-1">
+                                <div class=" dark:text-theme-10 text-theme-1" v-if="stage !== 3">
                                     {{ details['select_detail_weight'][challenge.technical_details.detail_weight].name }}
                                 </div>
                                 <TailSelect
@@ -38,7 +38,7 @@
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.quality')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1">
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
                                     {{ details['select_pick_quality'][challenge.technical_details.pick_quality].name }}
                                 </div>
                                 <TailSelect
@@ -57,7 +57,7 @@
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.detail')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1">
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
                                     {{ details['select_detail_material'][challenge.technical_details.detail_material].name }}
                                 </div>
                                 <TailSelect
@@ -76,7 +76,7 @@
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.size')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1">
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
                                     {{ details['select_detail_size'][challenge.technical_details.detail_size].name}}
                                 </div>
                                 <TailSelect
@@ -95,7 +95,7 @@
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.way')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1">
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
                                     {{ details['select_detail_pick'][challenge.technical_details.detail_pick].name }}
                                 </div>
                                 <TailSelect
@@ -114,7 +114,7 @@
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.position')}}</span>
-                                <div class="dark:text-theme-10 text-theme-1">
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
                                     {{ details['select_detail_position'][challenge.technical_details.detail_position].name }}
                                 </div>
                                 <TailSelect
@@ -133,7 +133,7 @@
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.distance')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1">
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
                                     {{ details['select_detail_range'][challenge.technical_details.detail_range].name }}
                                 </div>
                                 <TailSelect
@@ -152,7 +152,7 @@
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.place')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1">
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
                                     {{ details['select_detail_destination'][challenge.technical_details.detail_destination].name }}
                                 </div>
                                 <TailSelect
@@ -171,7 +171,7 @@
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.numberSupported')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1">
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
                                     {{challenge.technical_details.number_of_lines }}
                                 </div>
                                 <TailSelect
@@ -190,7 +190,7 @@
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.changeNumber')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1">
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
                                     {{ details['select_work_shifts'][challenge.technical_details.work_shifts].name }}
                                 </div>
                                 <TailSelect
