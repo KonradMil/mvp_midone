@@ -19,25 +19,28 @@
                         <div class="flex items-center">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.maxWeight')}}:</span>
-                                <div class=" dark:text-theme-10 text-theme-1"> {{ details['select_detail_weight'][challenge.technical_details.detail_weight].name }}</div>
+                                <div class=" dark:text-theme-10 text-theme-1" v-if="stage !== 3">
+                                    {{ details['select_detail_weight'][challenge.technical_details.detail_weight].name }}
+                                </div>
+                                <TailSelect
+                                    v-if="stage === 3"
+                                    id="input-wizard-1"
+                                    v-model="challenge.technical_details.detail_weight"
+                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    <option  :selected="details.select_detail_weight === '' ? '' : 'selected'" disabled>Wybierz...</option>
+                                    <option :selected="det.value === details.select_detail_weight ? '' : 'selected'" v-for="(det,index) in details.select_detail_weight"
+                                            :value="det.value">{{ det.name }}
+                                    </option>
+                                </TailSelect>
+
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.quality')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
+                                <div class="dark:text-theme-10 text-theme-1">
                                     {{ details['select_pick_quality'][challenge.technical_details.pick_quality].name }}
                                 </div>
-                                <TailSelect
-                                    v-if="stage === 3"
-                                    id="input-wizard-1"
-                                    v-model="details.select_detail_weight"
-                                    :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                                    <option  :selected="details.select_detail_weight === '' ? '' : 'selected'" disabled>Wybierz...</option>
-                                    <option :selected="det.value === details.select_detail_weight ? '' : 'selected'" v-for="(det,index) in details['select_detail_weight'][challenge.technical_details.detail_weight].name"
-                                            :value="det.value">{{ det.name }}
-                                    </option>
-                                </TailSelect>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
@@ -201,6 +204,19 @@ export default {
             return props.challenge;
         });
         const details = require("../../../json/challenge.json");
+
+        const challenge_details = ref({
+            select_work_shifts: '',
+            select_number_of_lines: '',
+            select_detail_destination: '',
+            select_detail_range: '',
+            select_detail_position: '',
+            select_detail_pick: '',
+            select_detail_size: '',
+            select_detail_material: '',
+            select_pick_quality: '',
+            select_detail_weight: ''
+        });
 
         onMounted(() => {
 
