@@ -104,7 +104,6 @@
                                         :key="'report_' + index"
                                         :ind="index"
                                         :report="report">
-
                                 </Report>
                                 </tbody>
                             </table>
@@ -112,13 +111,13 @@
 
                         <div class="overflow-x-auto sm:overflow-x-visible"  :class="(activeTab==='notifications')? '':'hidden'"
                         >
-                            <Notifications class="intro-y"
-                                 v-for="(notification, index) in notifications.list"
-                                 :key="'notification_' + index"
-                                 :ind="index"
-                                 :notification="notification"
-                            >
-                            </Notifications>
+<!--                            <Notifications class="intro-y"-->
+<!--                                 v-for="(notification, index) in notifications.list"-->
+<!--                                 :key="'notification_' + index"-->
+<!--                                 :ind="index"-->
+<!--                                 :notification="notification"-->
+<!--                            >-->
+<!--                            </Notifications>-->
                         </div>
                         <div class="intro-y col-span-12 overflow-auto lg:overflow-visible"  :class="(activeTab==='teams')? '':'hidden'">
                             <table class="table table-report -mt-2">
@@ -131,12 +130,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <Teams class="intro-x"
-                                    v-for="(team, index) in teams.list"
-                                    :key="'team_' + index"
-                                    :ind="index"
-                                    :team="team">
-                                </Teams>
+<!--                                <Teams class="intro-x"-->
+<!--                                    v-for="(team, index) in teams.list"-->
+<!--                                    :key="'team_' + index"-->
+<!--                                    :ind="index"-->
+<!--                                    :team="team">-->
+<!--                                </Teams>-->
                                 </tbody>
                             </table>
                         </div>
