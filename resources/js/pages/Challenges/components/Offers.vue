@@ -18,10 +18,11 @@
                             <div class="mt-2 pl-9 pb-6" v-if="(user.id === offer.installer_id) || addSolutionOffer">
                                 <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status < 1">{{$t('challengesMain.publishOffer')}}</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="editOffer(offer.id)"><p v-if="offer.status < 1 && offer.selected !== true">{{$t('models.edit')}}</p><p v-if="offer.selected === true">Zmiana oferty</p></button>
-                                <button class="btn btn-primary shadow-md mr-2" @click="editOffer(offer.id)">Oferta bez zmiany</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="changeOffer(offer.id)">Zmiana oferty</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="noChangeOffer" v-if="offer.is_changed !== 1">Zakończ ofertyzację</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click.prevent="deleteOffer(offer.id,index)" v-if="offer.status < 1 || offer.rejected == 1">{{$t('models.delete')}}</button>
                             </div>
-                            <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
+                            <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1 && stage !== 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
                             <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
                             <div class="flex items-center mr-3" v-if="(offer.rejected != 1) && (offer.selected != 1) && (offer.status == 1)"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
                         </div>
@@ -141,7 +142,8 @@ export default {
         activeTab: String,
         id: Number,
         addSolutionOffer: Boolean,
-        selected_offer_id: Number
+        selected_offer_id: Number,
+        stage: Number
     },
     emits: ["update:activeTab"],
 
@@ -153,6 +155,8 @@ export default {
         const values = require('../../../json/offer_values.json');
         const offer_id = ref();
         const guard = ref();
+        const change = ref(false);
+        const is_done_offer = ref(false);
 
         watch(() => offers.value.list, (first, second) => {
         }, {})
@@ -163,6 +167,14 @@ export default {
 
         const editOffer = async(edit_offer_id) => {
             emitter.emit('changeToEditOffer', {edit_offer_id: edit_offer_id});
+        }
+
+        const changeOffer = async(edit_offer_id) => {
+            emitter.emit('changeOfferProject', {edit_offer_id: edit_offer_id, change: change});
+        }
+
+        const noChangeOffer = async() => {
+            emitter.emit('noChangeOfferProject', {is_done_offer: is_done_offer});
         }
 
         const getOffersRepositories = async () => {
@@ -210,9 +222,16 @@ export default {
         onMounted(() => {
             // getOffers();
             getOffersRepositories('');
+            if(props.stage === 3){
+                change.value = true;
+            }
         });
 
         return {
+            noChangeOffer,
+            is_done_offer,
+            changeOffer,
+            change,
             guard,
             deleteOffer,
             offer_id,

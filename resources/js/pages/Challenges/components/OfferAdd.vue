@@ -218,7 +218,8 @@ export default {
     props: {
         edit_offer_id: Number,
         solution_id: Number,
-        challenge_id: Number
+        challenge_id: Number,
+        change_offer: Boolean
     },
     setup(props) {
         const app = getCurrentInstance();
@@ -321,6 +322,7 @@ export default {
                 period_of_support: period_of_support.value,
                 offer_expires_in: offer_expires_in.value,
                 solution_robots: solution_robots.value,
+                is_changed: props.change_offer,
             }).then(response => {
                 if (response.data.success) {
                     console.log(response.data + '-> OFFER SAVE !!');

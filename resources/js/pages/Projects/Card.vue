@@ -146,14 +146,15 @@
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'oferty'"
                            :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon class="w-4 h-4 mr-2 text-red-600"/>
+                            <EditIcon class="w-4 h-4 mr-2 text-red-600" v-if="is_done_offer === false"/>
+                            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600" v-if="is_done_offer === true"/>
                             Oferta
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'financial-analysis'"
                            :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600" style="color: green;"/>
+                            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600"/>
                             Raport z wizji lokalnej
                         </a>
                         <a v-if="challenge.stage === 3"
@@ -213,8 +214,8 @@
             <QuestionsPanel v-if="activeTab == 'pytania'" :author_id="challenge.author_id" :id="challenge.id" :challenge_stage="challenge.stage"></QuestionsPanel>
             <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge" :inTeam="inTeam" :addChallengeSolution="addChallengeSolution" :acceptChallengeSolutions="acceptChallengeSolutions" :publishSolution="publishSolution" :addSolutionOffer="addSolutionOffer"></SolutionsPanel>
             <TeamsPanel v-if="(activeTab == 'teams') && ((challenge.author_id == user.id) || (solution.author_id == user.id))" :solution="solution" :challenge="challenge" :who="who" ></TeamsPanel>
-            <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :edit_offer_id="edit_offer_id"></OfferAdd>
-            <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab" :id="challenge.id" :inTeam="inTeam" :addSolutionOffer="addSolutionOffer" :selected_offer_id="challenge.selected_offer_id"></Offers>
+            <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :edit_offer_id="edit_offer_id" :change_offer="change_offer"></OfferAdd>
+            <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab" :stage = "challenge.stage" :id="challenge.id" :inTeam="inTeam" :addSolutionOffer="addSolutionOffer" :selected_offer_id="challenge.selected_offer_id"></Offers>
             <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam" :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
             <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisInformationPanel>
             <FinancialAnalysisInformationPanel v-if="activeTab == 'financial-analysis'" :solution="solution_project" ></FinancialAnalysisInformationPanel>
@@ -313,7 +314,8 @@ export default defineComponent({
         const solution_project = ref('');
         const show = ref(false);
         const showMenu = ref(false);
-
+        const is_done_offer = ref(false);
+        const change_offer = ref(false);
 
         watch(() => props.change, (first, second) => {
             if(props.change === 'all-offers' && user.type === 'integrator'){
@@ -330,6 +332,16 @@ export default defineComponent({
         emitter.on('changeToEditOffer', e => {
             edit_offer_id.value = e.edit_offer_id;
             activeTab.value = 'addingoffer';
+        });
+
+        emitter.on('changeOfferProject', e => {
+            edit_offer_id.value = e.edit_offer_id;
+            change_offer.value = true;
+            activeTab.value = 'addingoffer';
+        });
+
+        emitter.on('noChangeOfferProject', e => {
+            is_done_offer.value = true;
         });
 
         emitter.on('changeToOffers', e => {
@@ -561,6 +573,8 @@ export default defineComponent({
             });
         }
         return {
+            change_offer,
+            is_done_offer,
             showMenu,
             showModal,
             show,

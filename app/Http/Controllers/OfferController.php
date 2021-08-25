@@ -334,6 +334,9 @@ class OfferController extends Controller
             $offer->work_hour_price = $request->work_hour_price;
             $offer->period_of_support = $request->period_of_support;
             $offer->offer_expires_in = $request->offer_expires_in;
+            if($request->is_changed != null){
+                $offer->is_changed = $request->is_changed;
+            }
 
             $offer->save();
             return response()->json([
