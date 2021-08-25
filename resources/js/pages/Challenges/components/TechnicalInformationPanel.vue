@@ -57,49 +57,153 @@
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.detail')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ details['select_detail_material'][challenge.technical_details.detail_material].name }} </div>
+                                <div class="dark:text-theme-10 text-theme-1">
+                                    {{ details['select_detail_material'][challenge.technical_details.detail_material].name }}
+                                </div>
+                                <TailSelect
+                                    v-if="stage === 3"
+                                    id="input-wizard-1"
+                                    v-model="challenge.technical_details.detail_material"
+                                    :options="{locale: 'pl', placeholder: details.select_detail_material[challenge.technical_details.detail_material].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    <option selected disabled>Wybierz...</option>
+                                    <option v-for="(det,index) in details.select_detail_material"
+                                            :value="det.value">
+                                        {{ det.name }}
+                                    </option>
+                                </TailSelect>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.size')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ details['select_detail_size'][challenge.technical_details.detail_size].name }} </div>
+                                <div class="dark:text-theme-10 text-theme-1">
+                                    {{ details['select_detail_size'][challenge.technical_details.detail_size].name}}
+                                </div>
+                                <TailSelect
+                                    v-if="stage === 3"
+                                    id="input-wizard-1"
+                                    v-model="challenge.technical_details.detail_size"
+                                    :options="{locale: 'pl', placeholder: details.select_detail_size[challenge.technical_details.detail_size].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    <option selected disabled>Wybierz...</option>
+                                    <option v-for="(det,index) in details.select_detail_size"
+                                            :value="det.value">
+                                        {{ det.name }}
+                                    </option>
+                                </TailSelect>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.way')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ details['select_detail_pick'][challenge.technical_details.detail_pick].name }} </div>
+                                <div class="dark:text-theme-10 text-theme-1">
+                                    {{ details['select_detail_pick'][challenge.technical_details.detail_pick].name }}
+                                </div>
+                                <TailSelect
+                                    v-if="stage === 3"
+                                    id="input-wizard-1"
+                                    v-model="challenge.technical_details.detail_pick"
+                                    :options="{locale: 'pl', placeholder: details.select_detail_pick[challenge.technical_details.detail_pick].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    <option selected disabled>Wybierz...</option>
+                                    <option v-for="(det,index) in details.select_detail_pick"
+                                            :value="det.value">
+                                        {{ det.name }}
+                                    </option>
+                                </TailSelect>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.position')}}</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ details['select_detail_position'][challenge.technical_details.detail_position].name }} </div>
+                                <div class="dark:text-theme-10 text-theme-1">
+                                    {{ details['select_detail_position'][challenge.technical_details.detail_position].name }}
+                                </div>
+                                <TailSelect
+                                    v-if="stage === 3"
+                                    id="input-wizard-1"
+                                    v-model="challenge.technical_details.detail_position"
+                                    :options="{locale: 'pl', placeholder: details.select_detail_position[challenge.technical_details.detail_position].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    <option selected disabled>Wybierz...</option>
+                                    <option v-for="(det,index) in details.select_detail_position"
+                                            :value="det.value">
+                                        {{ det.name }}
+                                    </option>
+                                </TailSelect>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.distance')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ details['select_detail_range'][challenge.technical_details.detail_range].name }} </div>
+                                <div class="dark:text-theme-10 text-theme-1">
+                                    {{ details['select_detail_range'][challenge.technical_details.detail_range].name }}
+                                </div>
+                                <TailSelect
+                                    v-if="stage === 3"
+                                    id="input-wizard-1"
+                                    v-model="challenge.technical_details.detail_range"
+                                    :options="{locale: 'pl', placeholder: details.select_detail_range[challenge.technical_details.detail_range].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    <option selected disabled>Wybierz...</option>
+                                    <option v-for="(det,index) in details.select_detail_range"
+                                            :value="det.value">
+                                        {{ det.name }}
+                                    </option>
+                                </TailSelect>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.place')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ details['select_detail_destination'][challenge.technical_details.detail_destination].name }} </div>
+                                <div class="dark:text-theme-10 text-theme-1">
+                                    {{ details['select_detail_destination'][challenge.technical_details.detail_destination].name }}
+                                </div>
+                                <TailSelect
+                                    v-if="stage === 3"
+                                    id="input-wizard-1"
+                                    v-model="challenge.technical_details.detail_destination"
+                                    :options="{locale: 'pl', placeholder: details.select_detail_destination[challenge.technical_details.detail_destination].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    <option selected disabled>Wybierz...</option>
+                                    <option v-for="(det,index) in details.select_detail_destination"
+                                            :value="det.value">
+                                        {{ det.name }}
+                                    </option>
+                                </TailSelect>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.numberSupported')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{challenge.technical_details.number_of_lines }} </div>
+                                <div class="dark:text-theme-10 text-theme-1">
+                                    {{challenge.technical_details.number_of_lines }}
+                                </div>
+                                <TailSelect
+                                    v-if="stage === 3"
+                                    id="input-wizard-1"
+                                    v-model="challenge.technical_details.number_of_lines"
+                                    :options="{locale: 'pl', placeholder: details.select_number_of_lines[challenge.technical_details.number_of_lines].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    <option selected disabled>Wybierz...</option>
+                                    <option v-for="(det,index) in details.select_number_of_lines"
+                                            :value="det.value">
+                                        {{ det.name }}
+                                    </option>
+                                </TailSelect>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.changeNumber')}}:</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ details['select_work_shifts'][challenge.technical_details.work_shifts].name }} </div>
+                                <div class="dark:text-theme-10 text-theme-1">
+                                    {{ details['select_work_shifts'][challenge.technical_details.work_shifts].name }}
+                                </div>
+                                <TailSelect
+                                    v-if="stage === 3"
+                                    id="input-wizard-1"
+                                    v-model="challenge.technical_details.work_shifts"
+                                    :options="{locale: 'pl', placeholder: details.select_work_shifts[challenge.technical_details.work_shifts].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    <option selected disabled>Wybierz...</option>
+                                    <option v-for="(det,index) in details.select_work_shifts"
+                                            :value="det.value">
+                                        {{ det.name }}
+                                    </option>
+                                </TailSelect>
                             </div>
                         </div>
                     </div>
