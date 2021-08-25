@@ -155,8 +155,7 @@ name: "WhatsNext",
                     if(props.stage === 3){
                         text.value = 'W raporcie z wizji lokalnej uzwględnij wszelkie zmiany jakie należy wprowadzić w projekcie po wizycie na zakładzie.';
                         action.value = {redirect: '' }
-                    }
-                      else if(isSelected.value === true && check.value === false){
+                    } else if(isSelected.value === true && check.value === false){
                         text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';
                         action.value = {redirect: ''}
                     } else if(isSolutions.value === false && props.challenge.stage === 1) {
