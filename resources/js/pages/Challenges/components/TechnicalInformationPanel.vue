@@ -19,7 +19,7 @@
                         <div class="flex items-center">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.maxWeight')}}:</span>
-                                <div class=" dark:text-theme-10 text-theme-1" v-if="stage !== 3">
+                                <div class=" dark:text-theme-10 text-theme-1">
                                     {{ details['select_detail_weight'][challenge.technical_details.detail_weight].name }}
                                 </div>
                                 <TailSelect
