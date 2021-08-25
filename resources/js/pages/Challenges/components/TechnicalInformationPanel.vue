@@ -45,7 +45,7 @@
                                     id="input-wizard-1"
                                     v-model="details['select_pick_quality'][challenge.technical_details.pick_quality].name"
                                     :options="{locale: 'pl', placeholder: 'Wybierz...', limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
-                                    <option  :selected="details.select_detail_weight === '' ? '' : 'selected'" disabled>Wybierz...</option>
+                                    <option  :selected="details.select_pick_quality === '' ? '' : 'selected'" disabled>Wybierz...</option>
                                     <option :selected="det.value === details.select_pick_quality ? '' : 'selected'" v-for="(det,index) in details.select_pick_quality"
                                             :value="det.value">{{ det.name }}
                                     </option>
