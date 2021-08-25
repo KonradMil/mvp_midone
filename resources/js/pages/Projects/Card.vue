@@ -144,14 +144,6 @@
                     </ul>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'oferty'"
-                           :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon class="w-4 h-4 mr-2 text-red-600" v-if="is_done_offer === false"/>
-                            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600" v-if="is_done_offer === true"/>
-                            Oferta
-                        </a>
-                        <a v-if="challenge.stage === 3"
-                           class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'financial-analysis'"
                            :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600"/>
@@ -163,6 +155,14 @@
                            :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600"/>
                             Założenia projektu
+                        </a>
+                        <a v-if="challenge.stage === 3"
+                           class="flex items-center mt-5" href=""
+                           @click.prevent="activeTab = 'oferty'"
+                           :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                            <EditIcon class="w-4 h-4 mr-2 text-red-600" v-if="is_done_offer === false"/>
+                            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600" v-if="is_done_offer === true"/>
+                            Oferta
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
