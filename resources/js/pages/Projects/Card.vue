@@ -155,8 +155,8 @@
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'oferty'"
                            :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon class="w-4 h-4 mr-2 text-red-600" v-if="is_done_offer === false"/>
-                            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600" v-if="is_done_offer === true"/>
+                            <EditIcon class="w-4 h-4 mr-2 text-red-600" v-if="challenge.is_offer_changed !== 1"/>
+                            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600" v-if="challenge.is_offer_changed === 1"/>
                             Oferta
                         </a>
                         <a v-if="challenge.stage === 3"
