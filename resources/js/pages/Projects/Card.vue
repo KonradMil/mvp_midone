@@ -47,7 +47,7 @@
                     <a href="javascript:;" class="menu">
                         <div class="menu__icon"> <i data-feather="home"></i> </div>
                         <div class="menu__title" @click.prevent="showMenu = !showMenu">
-                            <ActivityIcon class="w-4 h-4 mr-2"/>
+                            <InfoIcon class="w-4 h-4 mr-2"/>
                                 Startowa karta projektu
                             <i data-feather="chevron-down" class="menu__sub-icon"></i>
                         </div>
@@ -144,6 +144,13 @@
                     </ul>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
+                           @click.prevent="activeTab = 'oferty'"
+                           :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                            <EditIcon class="w-4 h-4 mr-2 text-red-600"/>
+                            Oferta
+                        </a>
+                        <a v-if="challenge.stage === 3"
+                           class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'financial-analysis'"
                            :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600" style="color: green;"/>
@@ -155,13 +162,6 @@
                            :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600"/>
                             Założenia projektu
-                        </a>
-                        <a v-if="challenge.stage === 3"
-                           class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'financial-analysis'"
-                           :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon class="w-4 h-4 mr-2 text-red-600"/>
-                            Oferta
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
