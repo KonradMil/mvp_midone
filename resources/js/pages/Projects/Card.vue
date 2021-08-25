@@ -346,6 +346,7 @@ export default defineComponent({
 
         emitter.on('changeToOffers', e => {
             activeTab.value = 'oferty';
+            is_done_offer.value = true;
         });
 
         emitter.on('updateOffers', e => {
