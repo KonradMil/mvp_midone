@@ -228,10 +228,11 @@
                         <div class="flex items-center">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.days')}}</span>
-                                <div class=" dark:text-theme-10 text-theme-1">
+                                <div class=" dark:text-theme-10 text-theme-1" v-if="stage !== 3">
                                     {{ challenge.financial_before.days }} dni
                                 </div>
-                                <input type="number"
+                                <input v-if="stage === 3"
+                                       type="number"
                                        v-model="challenge.financial_before.days"
                                        class="form-control"/>
                             </div>
@@ -239,67 +240,133 @@
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.shifts')}}</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{challenge.financial_before.shifts }} zmian</div>
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
+                                    {{challenge.financial_before.shifts }} zmian
+                                </div>
+                                <input v-if="stage === 3"
+                                       type="number"
+                                       v-model="challenge.financial_before.shifts"
+                                       class="form-control"/>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.shift_time')}}</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ challenge.financial_before.shift_time }} godzin</div>
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
+                                    {{ challenge.financial_before.shift_time }} godzin
+                                </div>
+                                <input v-if="stage === 3"
+                                       type="number"
+                                       v-model="challenge.financial_before.shift_time"
+                                       class="form-control"/>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.weekend_shift')}}</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ challenge.financial_before.weekend_shift }} zmian</div>
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
+                                    {{ challenge.financial_before.weekend_shift }} zmian
+                                </div>
+                                <input v-if="stage === 3"
+                                       type="number"
+                                       v-model="challenge.financial_before.weekend_shift"
+                                       class="form-control"/>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600"> {{$t('challengesNew.breakfast')}}</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ challenge.financial_before.breakfast }} minut</div>
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
+                                    {{ challenge.financial_before.breakfast }} minut
+                                </div>
+                                <input v-if="stage === 3"
+                                       type="number"
+                                       v-model="challenge.financial_before.breakfast"
+                                       class="form-control"/>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600"> {{$t('challengesNew.stop_time')}}</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ challenge.financial_before.stop_time }} minut</div>
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
+                                    {{ challenge.financial_before.stop_time }} minut
+                                </div>
+                                <input v-if="stage === 3"
+                                       type="number"
+                                       v-model="challenge.financial_before.stop_time"
+                                       class="form-control"/>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.operator_performance')}}</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ challenge.financial_before.operator_performance }}%</div>
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
+                                    {{ challenge.financial_before.operator_performance }}%
+                                </div>
+                                <input v-if="stage === 3"
+                                       type="number"
+                                       v-model="challenge.financial_before.operator_performance"
+                                       class="form-control"/>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.defective')}}</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ challenge.financial_before.defective }}%</div>
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
+                                    {{ challenge.financial_before.defective }}%
+                                </div>
+                                <input v-if="stage === 3"
+                                       type="number"
+                                       v-model="challenge.financial_before.defective"
+                                       class="form-control"/>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.number_of_operators')}}</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ challenge.financial_before.number_of_operators }} operatorów</div>
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
+                                    {{ challenge.financial_before.number_of_operators }} operatorów
+                                </div>
+                                <input v-if="stage === 3"
+                                       type="number"
+                                       v-model="challenge.financial_before.number_of_operators"
+                                       class="form-control"/>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.operator_cost')}}</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ challenge.financial_before.operator_cost }}zł</div>
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
+                                    {{ challenge.financial_before.operator_cost }}zł
+                                </div>
+                                <input v-if="stage === 3"
+                                       type="number"
+                                       v-model="challenge.financial_before.operator_cost"
+                                       class="form-control"/>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.absence')}}</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ challenge.financial_before.absence }}% </div>
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
+                                    {{ challenge.financial_before.absence }}%
+                                </div>
+                                <input v-if="stage === 3"
+                                       type="number"
+                                       v-model="challenge.financial_before.absence"
+                                       class="form-control"/>
                             </div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.cycle_time')}}</span>
-                                <div class="dark:text-theme-10 text-theme-1"> {{ challenge.financial_before.cycle_time }}s </div>
+                                <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
+                                    {{ challenge.financial_before.cycle_time }}s
+                                </div>
+                                <input v-if="stage === 3"
+                                       type="number"
+                                       v-model="challenge.financial_before.cycle_time"
+                                       class="form-control"/>
                             </div>
                         </div>
                     </div>
