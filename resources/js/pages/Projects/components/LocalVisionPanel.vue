@@ -136,7 +136,6 @@ export default {
             deleteReport,
             reports,
             addNewReport,
-            new_report,
             removeReport,
             saveReports
         }
