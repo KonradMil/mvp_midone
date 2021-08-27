@@ -7,7 +7,9 @@
             <button class=""  @click.prevent="addNewReport">
                 <PlusCircleIcon/>
             </button>
-
+            <button class="">
+                <SaveIcon/>
+            </button>
         </div>
         <div class="p-5" id="bordered-table">
             <div class="preview">
@@ -22,15 +24,21 @@
                         </thead>
                         <tbody>
                         <tr class="intro-x text-left border-b-2 border-pink-300" v-for="(report, index) in reports" :key="index">
-                            <td class="intro-x border">
+                            <td class="border">
                                 <input type="text"  class="form-control"/>
                             </td>
-                            <td class="intro-x border">
+                            <td class="border">
                                 <input type="text"  class="form-control"/>
                             </td>
-                            <td class="intro-x border">
+                            <td class="border">
                                 <input type="text"  class="form-control"/>
                             </td>
+                            <button class=""  @click.prevent="addNewReport">
+                                <PlusCircleIcon/>
+                            </button>
+                            <button class="">
+                                <MinusCircleIcon/>
+                            </button>
                         </tr>
 
 <!--                        <tr class="text-left border-b-2 border-pink-300">-->
