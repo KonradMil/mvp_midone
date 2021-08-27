@@ -25,19 +25,19 @@
                         <tbody>
                         <tr class="intro-x text-left border-b-2 border-pink-300" v-for="(report, index) in reports" :key="index">
                             <td class="border">
-                                <input type="text"
-                                       v-model="report.description"
-                                       class="form-control text-gray-600"/>
+                                <textarea type="text"
+                                          v-model="report.description"
+                                          class="form-control text-gray-600"/>
                             </td>
                             <td class="border">
-                                <input type="text"
-                                       v-model="report.before"
-                                       class="form-control text-gray-600"/>
+                                <textarea type="text"
+                                          v-model="report.before"
+                                          class="form-control text-gray-600"/>
                             </td>
                             <td class="border">
-                                <input type="text"
-                                       v-model="report.after"
-                                       class="form-control text-gray-600"/>
+                                <textarea type="text"
+                                          v-model="report.after"
+                                          class="form-control text-gray-600"/>
                             </td>
                                 <button class="pt-4 pl-2" @click.prevent="removeReport(index)">
                                     <MinusCircleIcon/>
