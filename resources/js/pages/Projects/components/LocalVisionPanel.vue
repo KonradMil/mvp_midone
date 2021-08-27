@@ -7,7 +7,7 @@
             <button class="pr-3"  @click.prevent="addNewReport">
                 <PlusCircleIcon/>
             </button>
-            <button class="">
+            <button class="" @click.prevent="saveReports">
                 <SaveIcon/>
             </button>
         </div>
@@ -115,21 +115,23 @@
 
 <script>
 import {computed, onMounted, reactive, ref} from "vue";
+import {useToast} from "vue-toastification";
 
 export default {
     name: "LocalVisionPanel",
     props: {
-        solution: Object,
+        challenge_id: Number
     },
 
     setup(props) {
-        const financial_analyses = ref({});
         const reports = ref([]);
         const new_report = ref({
             description: '',
             before: '',
             after: ''
         })
+        const toast = useToast();
+
 
         const removeReport = async (index) => {
             setTimeout( function(){
@@ -148,15 +150,26 @@ export default {
             }, 1000)
         }
 
-        const getFinancialAnalysis = async() => {
-            axios.post('/api/solution/financial-analyses/get', {id: props.solution.id})
+        // const getFinancialAnalysis = async() => {
+        //     axios.post('/api/solution/financial-analyses/get', {id: props.solution.id})
+        //         .then(response => {
+        //             if (response.data.success) {
+        //                 console.log('response.data.payload' + response.data.payload);
+        //                 console.log('financial_analyses.value before' + financial_analyses.value);
+        //                 financial_analyses.value = response.data.payload;
+        //                 console.log('financial_analyses.value after' + financial_analyses.value);
+        //                 console.log('financial_analyses.value after' + financial_analyses.value.cost_per_hour_before);
+        //             } else {
+        //
+        //             }
+        //         })
+        // }
+
+        const saveReports = async() => {
+            axios.post('/api/challenges/local-vision/save', {id: props.challenge_id, reports: reports.value})
                 .then(response => {
                     if (response.data.success) {
-                        console.log('response.data.payload' + response.data.payload);
-                        console.log('financial_analyses.value before' + financial_analyses.value);
-                        financial_analyses.value = response.data.payload;
-                        console.log('financial_analyses.value after' + financial_analyses.value);
-                        console.log('financial_analyses.value after' + financial_analyses.value.cost_per_hour_before);
+                        toast.success('Zapisano poprawnie');
                     } else {
 
                     }
@@ -165,15 +178,14 @@ export default {
 
         onMounted(() => {
             console.log('asdf');
-            getFinancialAnalysis();
         });
 
         return {
-            financial_analyses,
             reports,
             addNewReport,
             new_report,
-            removeReport
+            removeReport,
+            saveReports
         }
     }
 }

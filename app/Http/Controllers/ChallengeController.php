@@ -8,6 +8,7 @@ use App\Events\ChallengePublished;
 use App\Models\Challenge;
 use App\Models\File;
 use App\Models\Financial;
+use App\Models\LocalVision;
 use App\Models\Offer;
 use App\Models\Solution;
 use App\Models\Team;
@@ -1000,6 +1001,31 @@ class ChallengeController extends Controller
             'success' => true,
             'message' => 'Pobrano poprawnie.',
             'payload' => $merged->all()
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function localVisionSave(Request $request): JsonResponse
+    {
+        $challenge = Challenge::find($request->input('id'));
+        $reports = $request->input('reports');
+
+        foreach($reports as $report){
+            $vision = new LocalVision();
+            $vision->project_id = $challenge->id;
+            $vision->description = $report->description;
+            $vision->before = $report->before;
+            $vision->after = $report->after;
+            $vision->save();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $reports
         ]);
     }
 }
