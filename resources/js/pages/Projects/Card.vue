@@ -247,6 +247,7 @@ import TeamsPanel from "../Challenges/components/TeamsPanel";
 import ChallengeOffers from "../Challenges/components/ChallengeOffers";
 import OperationalAnalysisInformationPanel from "./components/OperationalAnalysisInformationPanel";
 import FinancialAnalysisInformationPanel from "./components/FinancialAnalysisInformationPanel";
+import LocalVisionPanel from "./components/LocalVisionPanel";
 import ModalCard from "../../components/ModalCard";
 
 export default defineComponent({
@@ -263,7 +264,8 @@ export default defineComponent({
         WhatsNext,
         OperationalAnalysisInformationPanel,
         FinancialAnalysisInformationPanel,
-        ModalCard
+        ModalCard,
+        LocalVisionPanel
     },
     props: {
         id: Number,
