@@ -4,7 +4,10 @@
             <h2 class="font-medium text-base mr-auto">
                 Wizja lokalna
             </h2>
-            <PlusCircleIcon @click.prevent="addNewReport"/>
+            <button class="btn"  @click.prevent="addNewReport">
+                <PlusCircleIcon/>
+            </button>
+
         </div>
         <div class="p-5" id="bordered-table">
             <div class="preview">
@@ -22,8 +25,8 @@
                             <td class="border">
                                 <input type="number"  class="form-control"/>
                             </td>
-                            <td class="border"><input type="number"  class="form-control"/></td>
-                            <td class="border"><input type="number"  class="form-control"/></td>
+                            <td class="border"><input type="text"  class="form-control"/></td>
+                            <td class="border"><input type="text"  class="form-control"/></td>
                         </tr>
 
 <!--                        <tr class="text-left border-b-2 border-pink-300">-->
@@ -115,9 +118,14 @@ export default {
 
 
         const addNewReport = async () => {
+            let report = {
+                description: '',
+                before: '',
+                after: '',
+            }
             setTimeout( function(){
-                reports.value.push(new_report);
-            }, 1500)
+                reports.value.push(report);
+            }, 1000)
         }
 
         const getFinancialAnalysis = async() => {
