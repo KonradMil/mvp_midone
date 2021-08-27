@@ -163,5 +163,12 @@ class Challenge extends Model implements ReactableInterface
     {
         return $this->hasMany(Question::class);
     }
+    /**
+     * @return BelongsTo
+     */
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
 
 }
