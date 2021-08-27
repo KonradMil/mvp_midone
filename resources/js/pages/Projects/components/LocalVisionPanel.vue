@@ -4,7 +4,7 @@
             <h2 class="font-medium text-base mr-auto">
                 Wizja lokalna
             </h2>
-            <button class=""  @click.prevent="addNewReport">
+            <button class="pr-3"  @click.prevent="addNewReport">
                 <PlusCircleIcon/>
             </button>
             <button class="">
@@ -32,13 +32,13 @@
                             </td>
                             <td class="border">
                                 <input type="text"  class="form-control"/>
+                                <button class=""  @click.prevent="addNewReport">
+                                    <PlusCircleIcon/>
+                                </button>
+                                <button class="">
+                                    <MinusCircleIcon/>
+                                </button>
                             </td>
-                            <button class=""  @click.prevent="addNewReport">
-                                <PlusCircleIcon/>
-                            </button>
-                            <button class="">
-                                <MinusCircleIcon/>
-                            </button>
                         </tr>
 
 <!--                        <tr class="text-left border-b-2 border-pink-300">-->
