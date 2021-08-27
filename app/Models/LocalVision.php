@@ -36,11 +36,11 @@ class LocalVision extends Model
         'after' => 'string',
     ];
 
-    /**
-     * @return BelongsTo
-     */
-    public function project(): BelongsTo
-    {
-        return $this->belongsTo(Project::class, 'id', 'project_id');
-    }
+//    /**
+//     * @return BelongsTo
+//     */
+//    public function project(): BelongsTo
+//    {
+//        return $this->belongsTo(Project::class, 'id', 'project_id');
+//    }
 }
