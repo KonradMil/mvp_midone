@@ -17,9 +17,8 @@ use BeyondCode\Comments\Traits\HasComments;
 /**
  *
  */
-class LocalVision extends Model implements ReactableInterface
+class LocalVision extends Model
 {
-    use Reactable, HasTags, HasComments;
 
     /**
      * @var string
