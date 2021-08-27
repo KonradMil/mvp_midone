@@ -1016,9 +1016,6 @@ class ChallengeController extends Controller
         foreach($reports as $report){
             $vision = new LocalVision();
             $vision->project_id = $challenge->id;
-//            $vision->description = $report['description'];
-//            $vision->before = $report['before'];
-//            $vision->after = $report['after'];
             $vision->save();
         }
 
