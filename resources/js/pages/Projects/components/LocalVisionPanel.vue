@@ -39,7 +39,7 @@
                                        v-model="report.after"
                                        class="form-control text-gray-600"/>
                             </td>
-                                <button class="" @click.prevent="removeReport(index)">
+                                <button class="pt-2" @click.prevent="removeReport(index)">
                                     <MinusCircleIcon/>
                                 </button>
                         </tr>
