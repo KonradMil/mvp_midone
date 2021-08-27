@@ -25,17 +25,20 @@
                         <tbody>
                         <tr class="intro-x text-left border-b-2 border-pink-300" v-for="(report, index) in reports" :key="index">
                             <td class="border">
-                                <textarea type="text"
+                                <textarea maxlength="100"
+                                          type="text"
                                           v-model="report.description"
                                           class="form-control text-gray-600"/>
                             </td>
                             <td class="border">
-                                <textarea type="text"
+                                <textarea maxlength="100"
+                                          type="text"
                                           v-model="report.before"
                                           class="form-control text-gray-600"/>
                             </td>
                             <td class="border">
-                                <textarea type="text"
+                                <textarea maxlength="100"
+                                          type="text"
                                           v-model="report.after"
                                           class="form-control text-gray-600"/>
                             </td>
