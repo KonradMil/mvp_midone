@@ -54,4 +54,5 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
     Route::post('unpublish', [ChallengeController::class, 'unpublish']);
     Route::post('change/dates', [ChallengeController::class, 'changeDates']);
     Route::post('local-vision/save', [ChallengeController::class, 'localVisionSave']);
+    Route::post('local-vision/get', [ChallengeController::class, 'localVisionGet']);
 });

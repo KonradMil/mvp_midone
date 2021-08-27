@@ -1029,4 +1029,30 @@ class ChallengeController extends Controller
             'payload' => $challenge->id
         ]);
     }
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function localVisionGet(Request $request): JsonResponse
+    {
+        $reports = LocalVision::where('challenge_id', '=', $request->input('id'))->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'pobrano poprawnie',
+            'payload' => $reports
+        ]);
+    }
+
+    public function localVisionDelete(Request $request): JsonResponse
+    {
+        $report = LocalVision::where('challenge_id', '=', $request->input('id'))->first();
+        $report->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Usunięto poprawnie',
+            'payload' => ''
+        ]);
+    }
 }
