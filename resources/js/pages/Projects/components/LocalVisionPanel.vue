@@ -124,7 +124,6 @@ export default {
     },
 
     setup(props) {
-        const financial_analyses = ref({});
         const reports = ref([]);
         const new_report = ref({
             description: '',
@@ -151,20 +150,20 @@ export default {
             }, 1000)
         }
 
-        const getFinancialAnalysis = async() => {
-            axios.post('/api/solution/financial-analyses/get', {id: props.solution.id})
-                .then(response => {
-                    if (response.data.success) {
-                        console.log('response.data.payload' + response.data.payload);
-                        console.log('financial_analyses.value before' + financial_analyses.value);
-                        financial_analyses.value = response.data.payload;
-                        console.log('financial_analyses.value after' + financial_analyses.value);
-                        console.log('financial_analyses.value after' + financial_analyses.value.cost_per_hour_before);
-                    } else {
-
-                    }
-                })
-        }
+        // const getFinancialAnalysis = async() => {
+        //     axios.post('/api/solution/financial-analyses/get', {id: props.solution.id})
+        //         .then(response => {
+        //             if (response.data.success) {
+        //                 console.log('response.data.payload' + response.data.payload);
+        //                 console.log('financial_analyses.value before' + financial_analyses.value);
+        //                 financial_analyses.value = response.data.payload;
+        //                 console.log('financial_analyses.value after' + financial_analyses.value);
+        //                 console.log('financial_analyses.value after' + financial_analyses.value.cost_per_hour_before);
+        //             } else {
+        //
+        //             }
+        //         })
+        // }
 
         const saveReports = async() => {
             axios.post('/api/challenges/local-vision/save', {id: props.challenge_id, reports: reports.value})
@@ -179,11 +178,9 @@ export default {
 
         onMounted(() => {
             console.log('asdf');
-            getFinancialAnalysis();
         });
 
         return {
-            financial_analyses,
             reports,
             addNewReport,
             new_report,
