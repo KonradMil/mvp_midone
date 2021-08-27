@@ -109,7 +109,6 @@ import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
 
 import router from "../../router";
-import VoiceChat from "./components/VoiceChat";
 import WebRTC from "./WebRTC";
 
 const ww = WindowWatcher();
@@ -127,7 +126,7 @@ export default {
         canEditSolution: Boolean,
         sessionid: String
     },
-    components: {WebRTC, VoiceChat, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
+    components: {WebRTC, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
     setup(props, {emit}) {
         //GLOBAL
         const app = getCurrentInstance();
