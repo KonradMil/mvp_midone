@@ -87,6 +87,20 @@
                     </ul>
                 </div>
             </div>
+            <div class="grid-cols-12 grid gap-6 " style="position: absolute; z-index: 3; width: 80%; margin-left: 10%;">
+                <div class="col-span-1 offset-4">
+                    <img src="/s3/twopointo/images/blobs/facebook.svg"/>
+                </div>
+                <div class="col-span-1">
+                    <img src="/s3/twopointo/images/blobs/linkedin.svg"/>
+                </div>
+                <div class="col-span-1">
+                    <img src="/s3/twopointo/images/blobs/youtube.svg"/>
+                </div>
+                <div class="col-span-1">
+                    <img src="/s3/twopointo/images/blobs/instagram.svg"/>
+                </div>
+            </div>
         </div>
     </footer>
 </template>
