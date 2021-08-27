@@ -7,7 +7,7 @@
             <button class="pr-3"  @click.prevent="addNewReport">
                 <PlusCircleIcon/>
             </button>
-            <button class="">
+            <button class="" @click.prevent="saveReports">
                 <SaveIcon/>
             </button>
         </div>
@@ -115,11 +115,12 @@
 
 <script>
 import {computed, onMounted, reactive, ref} from "vue";
+import {useToast} from "vue-toastification";
 
 export default {
     name: "LocalVisionPanel",
     props: {
-        solution: Object,
+        challenge_id: Number
     },
 
     setup(props) {
@@ -130,6 +131,8 @@ export default {
             before: '',
             after: ''
         })
+        const toast = useToast();
+
 
         const removeReport = async (index) => {
             setTimeout( function(){
@@ -163,6 +166,17 @@ export default {
                 })
         }
 
+        const saveReports = async() => {
+            axios.post('/api/challenges/local-vision/save', {id: props.challenge_id, reports: reports.value})
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Zapisano poprawnie');
+                    } else {
+
+                    }
+                })
+        }
+
         onMounted(() => {
             console.log('asdf');
             getFinancialAnalysis();
@@ -173,7 +187,8 @@ export default {
             reports,
             addNewReport,
             new_report,
-            removeReport
+            removeReport,
+            saveReports
         }
     }
 }
