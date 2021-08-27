@@ -100,4 +100,12 @@ class Project extends Model implements ReactableInterface
     {
         return $this->hasOne(Challenge::class, 'id', 'challenge_id');
     }
+
+    /**
+     * @return HasOne
+     */
+    public function local_vision(): HasOne
+    {
+        return $this->hasOne(LocalVision::class, 'id', 'project_id');
+    }
 }

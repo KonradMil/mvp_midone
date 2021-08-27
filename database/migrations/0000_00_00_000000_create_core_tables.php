@@ -220,6 +220,15 @@ class CreateCoreTables extends Migration
             $table->timestamps();
         });
 
+        Schema::create('local_visions', function (Blueprint $table) {
+            $table->id();
+            $table->integer('challenge_id')->nullable();
+            $table->string('description')->nullable();
+            $table->string('before')->nullable();
+            $table->string('after')->nullable();
+            $table->timestamps();
+        });
+
         Schema::create('challenge_image', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('challenge_id');
@@ -709,6 +718,7 @@ class CreateCoreTables extends Migration
         Schema::dropIfExists('ratings');
         Schema::dropIfExists('comments');
         Schema::dropIfExists('projects');
+        Schema::dropIfExists('local_visions');
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('current_team_id');
         });
