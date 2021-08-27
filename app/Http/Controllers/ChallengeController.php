@@ -1047,7 +1047,9 @@ class ChallengeController extends Controller
     public function localVisionDelete(Request $request): JsonResponse
     {
         $report = LocalVision::where('challenge_id', '=', $request->input('id'))->first();
-        $report->delete();
+        if($report != null){
+            $report->delete();
+        }
 
         return response()->json([
             'success' => true,
