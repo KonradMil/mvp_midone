@@ -1044,6 +1044,10 @@ class ChallengeController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function localVisionDelete(Request $request): JsonResponse
     {
         $report = LocalVision::where('challenge_id', '=', $request->input('id'))->first();
