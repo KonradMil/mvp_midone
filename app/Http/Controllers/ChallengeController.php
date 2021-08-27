@@ -1010,22 +1010,23 @@ class ChallengeController extends Controller
      */
     public function localVisionSave(Request $request): JsonResponse
     {
-        $challenge = Challenge::find($request->id);
-        $reports = $request->reports;
+        $challenge = Challenge::find($request->input('id'));
+        $reports = $request->input('reports');
 
-        foreach($reports as $report){
-            $vision = new LocalVision();
-            $vision->project_id = $challenge->id;
-            $vision->description = $report['description'];
-            $vision->before = $report['before'];
-            $vision->after = $report['after'];
-            $vision->save();
-        }
+
+//        foreach($reports as $report){
+//            $vision = new LocalVision();
+//            $vision->project_id = $challenge->id;
+//            $vision->description = $report['description'];
+//            $vision->before = $report['before'];
+//            $vision->after = $report['after'];
+//            $vision->save();
+//        }
 
         return response()->json([
             'success' => true,
             'message' => 'Zapisano poprawnie',
-            'payload' => $reports
+            'payload' => $challenge->id
         ]);
     }
 }
