@@ -4,7 +4,7 @@
             <h2 class="font-medium text-base mr-auto">
                 Wizja lokalna
             </h2>
-            <button class="btn"  @click.prevent="addNewReport">
+            <button class=""  @click.prevent="addNewReport">
                 <PlusCircleIcon/>
             </button>
 
@@ -22,11 +22,15 @@
                         </thead>
                         <tbody>
                         <tr class="intro-x text-left border-b-2 border-pink-300" v-for="(report, index) in reports" :key="index">
-                            <td class="border">
-                                <input type="number"  class="form-control"/>
+                            <td class="intro-x border">
+                                <input type="text"  class="form-control"/>
                             </td>
-                            <td class="border"><input type="text"  class="form-control"/></td>
-                            <td class="border"><input type="text"  class="form-control"/></td>
+                            <td class="intro-x border">
+                                <input type="text"  class="form-control"/>
+                            </td>
+                            <td class="intro-x border">
+                                <input type="text"  class="form-control"/>
+                            </td>
                         </tr>
 
 <!--                        <tr class="text-left border-b-2 border-pink-300">-->
