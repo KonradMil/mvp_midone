@@ -166,7 +166,7 @@ export default {
         // }
 
         const saveReports = async() => {
-            axios.post('/api/challenges/local-vision/save', {id: props.challenge_id, reports: reports.value})
+            axios.post('/api/challenge/local-vision/save', {id: props.challenge_id, reports: reports.value})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Zapisano poprawnie');
