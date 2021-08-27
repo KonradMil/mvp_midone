@@ -203,6 +203,23 @@ class CreateCoreTables extends Migration
             $table->timestamps();
         });
 
+        Schema::create('projects', function (Blueprint $table) {
+            $table->id();
+            $table->integer('type');
+            $table->string('name')->nullable();
+            $table->integer('challenge_id')->nullable();
+            $table->string('en_name')->nullable();
+            $table->string('description')->nullable();
+            $table->string('en_description')->nullable();
+            $table->string('screenshot_path')->nullable();
+            $table->longText('save_json')->nullable();
+            $table->integer('status')->default(0);
+            $table->integer('stage')->nullable();
+            $table->timestamp('solution_deadline');
+            $table->timestamp('offer_deadline');
+            $table->timestamps();
+        });
+
         Schema::create('challenge_image', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('challenge_id');
@@ -691,6 +708,7 @@ class CreateCoreTables extends Migration
         Schema::dropIfExists('tags');
         Schema::dropIfExists('ratings');
         Schema::dropIfExists('comments');
+        Schema::dropIfExists('projects');
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('current_team_id');
         });

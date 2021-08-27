@@ -17,7 +17,7 @@ use BeyondCode\Comments\Traits\HasComments;
 /**
  *
  */
-class Challenge extends Model implements ReactableInterface
+class Project extends Model implements ReactableInterface
 {
     use Reactable, HasTags, HasComments;
 
@@ -48,14 +48,14 @@ class Challenge extends Model implements ReactableInterface
     /**
      * @var string
      */
-    public $table = 'challenges';
+    public $table = 'projects';
 
     /**
      * @var string[]
      */
     protected $fillable = [
-        'type', 'name', 'en_name', 'solution_deadline', 'offer_deadline', 'status', 'stage', 'save_json', 'screenshot_path',
-        'client_id', 'author_id', 'financial_before_id', 'description', 'en_description', 'allowed_publishing', 'selected_offer_id'
+        'type', 'name', 'challenge_id', 'en_name', 'solution_deadline', 'offer_deadline', 'status',
+        'stage', 'save_json', 'screenshot_path', 'description', 'en_description',
     ];
 
     /**
@@ -64,6 +64,7 @@ class Challenge extends Model implements ReactableInterface
     protected $casts = [
         'name' => 'string',
         'type' => 'string',
+        'challenge_id' => 'integer',
         'en_name' => 'string',
         'description' => 'string',
         'en_description' => 'string',
@@ -93,82 +94,10 @@ class Challenge extends Model implements ReactableInterface
     }
 
     /**
-     * @return BelongsTo
-     */
-    public function client(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function author(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * @return BelongsToMany
-     */
-    public function teams(): BelongsToMany
-    {
-        return $this->belongsToMany(Team::class, 'team_challenge', 'challenge_id', 'team_id');
-    }
-
-    /**
      * @return HasOne
      */
-    public function technicalDetails(): HasOne
+    public function challenge(): HasOne
     {
-        return $this->hasOne(TechnicalDetails::class);
+        return $this->hasOne(Challenge::class, 'id', 'challenge_id');
     }
-
-    /**
-     * @return BelongsToMany
-     */
-    public function files(): BelongsToMany
-    {
-        return $this->belongsToMany(File::class, 'challenge_image', 'challenge_id', 'image_id');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function solutions(): HasMany
-    {
-        return $this->hasMany(Solution::class, 'challenge_id', 'id');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function offers(): HasMany
-    {
-        return $this->hasMany(Offer::class);
-    }
-
-    /**
-     * @return HasOne
-     */
-    public function financial_before(): HasOne
-    {
-        return $this->hasOne(Financial::class, 'id', 'financial_before_id');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function questions(): HasMany
-    {
-        return $this->hasMany(Question::class);
-    }
-    /**
-     * @return BelongsTo
-     */
-    public function project(): BelongsTo
-    {
-        return $this->belongsTo(Project::class);
-    }
-
 }
