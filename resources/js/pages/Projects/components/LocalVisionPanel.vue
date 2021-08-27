@@ -43,7 +43,7 @@
                                           v-model="report.after"
                                           class="form-control text-gray-600"/>
                             </td>
-                            <button class="pt-4 pl-2" @click.prevent="deleteReport(index)">
+                            <button class="pt-4 pl-2" @click.prevent="deleteReport(index,report.id)">
                                 <MinusCircleIcon/>
                             </button>
                         </tr>
@@ -92,8 +92,8 @@ export default {
             }, 1000)
         }
 
-        const deleteReport = async (index) => {
-            axios.post('/api/challenge/local-vision/delete', {id: props.challenge_id})
+        const deleteReport = async (index,id) => {
+            axios.post('/api/challenge/local-vision/delete', {id: id})
                 .then(response => {
                     if (response.data.success) {
                         reports.value.splice(index, 1);

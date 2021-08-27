@@ -1035,7 +1035,7 @@ class ChallengeController extends Controller
      */
     public function localVisionGet(Request $request): JsonResponse
     {
-        $reports = LocalVision::where('challenge_id', '=', $request->input('id'))->get();
+        $reports = LocalVision::where('project_id', '=', $request->input('id'))->get();
 
         return response()->json([
             'success' => true,
@@ -1050,7 +1050,7 @@ class ChallengeController extends Controller
      */
     public function localVisionDelete(Request $request): JsonResponse
     {
-        $report = LocalVision::where('challenge_id', '=', $request->input('id'))->first();
+        $report = LocalVision::where('id', '=', $request->input('id'))->first();
         if($report != null){
             $report->delete();
         }
