@@ -16,14 +16,14 @@
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Przed</th>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Po</th>
                         </tr>
-                        <PlusCircleIcon>
-                        </PlusCircleIcon>
                         </thead>
                         <tbody>
-                        <tr class="text-left border-b-2 border-pink-300" v-for="(report, index) in reports" :key="index">
-                            <td class="border">Koszt pracy na stanowisku na godzinę za osobę</td>
-                            <td class="border">{{financial_analyses.cost_per_hour_before}}</td>
-                            <td class="border">{{financial_analyses.cost_per_hour_after}}</td>
+                        <tr class="intro-x text-left border-b-2 border-pink-300" v-for="(report, index) in reports" :key="index">
+                            <td class="border">
+                                <input type="number"  class="form-control"/>
+                            </td>
+                            <td class="border"><input type="number"  class="form-control"/></td>
+                            <td class="border"><input type="number"  class="form-control"/></td>
                         </tr>
 
 <!--                        <tr class="text-left border-b-2 border-pink-300">-->
@@ -83,7 +83,6 @@
 <!--                        </tr>-->
                         </tbody>
                     </table>
-                    <PlusCircleIcon />
                 </div>
             </div>
             <div class="source-code hidden">
@@ -116,7 +115,9 @@ export default {
 
 
         const addNewReport = async () => {
-               reports.value.push(new_report);
+            setTimeout( function(){
+                reports.value.push(new_report);
+            }, 1500)
         }
 
         const getFinancialAnalysis = async() => {
