@@ -4,9 +4,7 @@
             <h2 class="font-medium text-base mr-auto">
                 Wizja lokalna
             </h2>
-            <PlusCircleIcon>
-
-            </PlusCircleIcon>
+            <PlusCircleIcon @click.prevent="addNewReport"/>
         </div>
         <div class="p-5" id="bordered-table">
             <div class="preview">
@@ -19,8 +17,10 @@
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Po</th>
                         </tr>
                         </thead>
+                        <PlusCircleIcon>
+                        </PlusCircleIcon>
                         <tbody>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2 border-pink-300" v-for="(report, index) in reports" :key="index">
                             <td class="border">Koszt pracy na stanowisku na godzinę za osobę</td>
                             <td class="border">{{financial_analyses.cost_per_hour_before}}</td>
                             <td class="border">{{financial_analyses.cost_per_hour_after}}</td>
@@ -99,18 +99,24 @@
 import {computed, onMounted, reactive, ref} from "vue";
 
 export default {
-    name: "FinancialAnalysisInformationPanel",
+    name: "LocalVisionPanel",
     props: {
         solution: Object,
     },
 
     setup(props) {
         const financial_analyses = ref({});
+        const reports = ref([]);
+        const new_report = ref({
+            description: '',
+            before: '',
+            after: ''
+        })
 
-        onMounted(() => {
-            console.log('asdf');
-            getFinancialAnalysis();
-        });
+
+        const addNewReport = async () => {
+               reports.value.push(new_report);
+        }
 
         const getFinancialAnalysis = async() => {
             axios.post('/api/solution/financial-analyses/get', {id: props.solution.id})
@@ -127,8 +133,16 @@ export default {
                 })
         }
 
+        onMounted(() => {
+            console.log('asdf');
+            getFinancialAnalysis();
+        });
+
         return {
             financial_analyses,
+            reports,
+            addNewReport,
+            new_report
         }
     }
 }
