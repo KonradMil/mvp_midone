@@ -16,9 +16,9 @@
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Przed</th>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Po</th>
                         </tr>
-                        </thead>
                         <PlusCircleIcon>
                         </PlusCircleIcon>
+                        </thead>
                         <tbody>
                         <tr class="text-left border-b-2 border-pink-300" v-for="(report, index) in reports" :key="index">
                             <td class="border">Koszt pracy na stanowisku na godzinę za osobę</td>
@@ -83,6 +83,7 @@
 <!--                        </tr>-->
                         </tbody>
                     </table>
+                    <PlusCircleIcon />
                 </div>
             </div>
             <div class="source-code hidden">
