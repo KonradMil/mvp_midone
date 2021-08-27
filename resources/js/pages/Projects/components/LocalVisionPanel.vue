@@ -24,7 +24,6 @@
                         </thead>
                         <tbody>
                         <tr class="intro-x text-left border-b-2 border-pink-300" v-for="(report, index) in reports" :key="index">
-                            <div class="flex flex-col">
                             <td class="border">
                                 <input type="text"
                                        v-model="report.description"
@@ -46,7 +45,6 @@
                                 <button class="">
                                     <MinusCircleIcon/>
                                 </button>
-                            </div>
                         </tr>
 
 <!--                        <tr class="text-left border-b-2 border-pink-300">-->
