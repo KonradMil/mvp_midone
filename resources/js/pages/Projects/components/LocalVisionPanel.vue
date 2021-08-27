@@ -39,10 +39,7 @@
                                        v-model="report.after"
                                        class="form-control text-gray-600"/>
                             </td>
-                                <button class=""  @click.prevent="addNewReport">
-                                    <PlusCircleIcon/>
-                                </button>
-                                <button class="">
+                                <button class="" @click.prevent="removeReport(index)">
                                     <MinusCircleIcon/>
                                 </button>
                         </tr>
@@ -134,6 +131,11 @@ export default {
             after: ''
         })
 
+        const removeReport = async (index) => {
+            setTimeout( function(){
+                reports.value.splice(index,1);
+            }, 1000)
+        }
 
         const addNewReport = async () => {
             let report = {
@@ -170,7 +172,8 @@ export default {
             financial_analyses,
             reports,
             addNewReport,
-            new_report
+            new_report,
+            removeReport
         }
     }
 }
