@@ -117,15 +117,6 @@
                             </a>
                         </li>
                         <li class="intro-y">
-                            <a v-if="challenge.stage === 3"
-                               class="flex items-center mt-5" href=""
-                               @click.prevent="activeTab = 'financial-analysis'"
-                               :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                <SettingsIcon class="w-4 h-4 mr-2"/>
-                                Analiza finansowa rozwiązania
-                            </a>
-                        </li>
-                        <li class="intro-y">
                             <div class="p-5 border-t border-gray-200 dark:border-dark-5" v-if="(challenge.author_id == user.id)">
                                 <a class="flex items-center" href=""
                                    @click.prevent="activeTab = 'teams'"
@@ -138,8 +129,8 @@
                     </ul>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'financial-analysis'"
-                           :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                           @click.prevent="activeTab = 'local-vision'"
+                           :class="(activeTab == 'local-vision')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600"/>
                             Raport z wizji lokalnej
                         </a>
@@ -214,6 +205,7 @@
             <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam" :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
             <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisInformationPanel>
             <FinancialAnalysisInformationPanel v-if="activeTab == 'financial-analysis'" :solution="solution_project" ></FinancialAnalysisInformationPanel>
+            <LocalVisionPanel v-if="activeTab == 'local-vision'" :solution="solution_project"></LocalVisionPanel>
             <ModalCard :show="show" @closed="modalClosed">
                 <h3 class="intro-y text-lg font-medium mt-5">Czy na pewno chcesz przejść do następnej fazy?</h3>
                 <div class="intro-y box p-5 mt-12 sm:mt-5" style="text-align: center;">
