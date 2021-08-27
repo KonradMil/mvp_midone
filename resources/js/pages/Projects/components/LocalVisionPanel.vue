@@ -169,6 +169,7 @@ export default {
             axios.post('/api/challenge/local-vision/save', {id: props.challenge_id, reports: reports.value})
                 .then(response => {
                     if (response.data.success) {
+                        console.log('saveReports')
                         toast.success('Zapisano poprawnie');
                     } else {
 
