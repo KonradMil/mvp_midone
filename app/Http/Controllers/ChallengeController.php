@@ -1010,8 +1010,8 @@ class ChallengeController extends Controller
      */
     public function localVisionSave(Request $request): JsonResponse
     {
-        $challenge = Challenge::find($request->input('id'));
-        $reports = $request->input('reports');
+        $challenge = Challenge::find($request-id);
+        $reports = $request->reports;
 
         foreach($reports as $report){
             $vision = new LocalVision();
