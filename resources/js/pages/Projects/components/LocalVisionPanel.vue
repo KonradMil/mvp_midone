@@ -27,17 +27,17 @@
                             <td class="border">
                                 <input type="text"
                                        v-model="report.description"
-                                       class="form-control"/>
+                                       class="form-control text-gray-600"/>
                             </td>
                             <td class="border">
                                 <input type="text"
                                        v-model="report.before"
-                                       class="form-control"/>
+                                       class="form-control text-gray-600"/>
                             </td>
                             <td class="border">
                                 <input type="text"
                                        v-model="report.after"
-                                       class="form-control"/>
+                                       class="form-control text-gray-600"/>
                             </td>
                                 <button class=""  @click.prevent="addNewReport">
                                     <PlusCircleIcon/>
