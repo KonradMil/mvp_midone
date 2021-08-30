@@ -435,7 +435,7 @@ export default {
 
         const saveFinancialDetails = async () => {
             axios.post('/api/challenge/financial-analyses/save', {
-                id: props.challenge.financial_before.value.id,
+                id: props.challenge.value.financial_before_id,
                 days: props.challenge.financial_before.value.days,
                 shifts: props.challenge.financial_before.value.shifts,
                 shift_time: props.challenge.financial_before.value.shift_time,
