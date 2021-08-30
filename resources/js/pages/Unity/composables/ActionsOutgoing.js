@@ -73,6 +73,8 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function loadWorkshopObject(val) {
+        console.log('HEEREE IMPORTANT', val);
+
         outgoing(game, 'LoadWorkshopItems', val, true);
     }
 
