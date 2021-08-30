@@ -386,7 +386,11 @@ export default {
                             console.log(response.data.payload.selected.estimate);
                             capex.value = response.data.payload.selected[0].estimate.sum;
                         }catch (e) {
-
+                            response.data.payload.solutions.forEach((val) => {
+                                if(val.id === props.solution.id) {
+                                    capex.value = val.estimate.sum;
+                                }
+                            });
                         }
                         console.log(JSON.parse(response.data.payload.save_json));
                         challenge.value = response.data.payload;
