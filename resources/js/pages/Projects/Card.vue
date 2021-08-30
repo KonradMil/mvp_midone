@@ -152,8 +152,8 @@
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'financial-analysis'"
-                           :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                           @click.prevent="activeTab = 'report-init'"
+                           :class="(activeTab == 'report-init')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <EditIcon class="w-4 h-4 mr-2 text-red-600"/>
                             Checkpointy list fazy 1
                         </a>
@@ -206,6 +206,7 @@
             <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisInformationPanel>
             <FinancialAnalysisInformationPanel v-if="activeTab == 'financial-analysis'" :solution="solution_project" ></FinancialAnalysisInformationPanel>
             <LocalVisionPanel v-if="activeTab == 'local-vision'" :challenge_id="challenge.id" :author_id="solution_project.author_id"></LocalVisionPanel>
+            <ReportInitPanel v-if="activeTab == 'report-init'" :challenge_id="challenge.id" :author_id="solution_project.author_id"></ReportInitPanel>
             <ModalCard :show="show" @closed="modalClosed">
                 <h3 class="intro-y text-lg font-medium mt-5">Czy na pewno chcesz przejść do następnej fazy?</h3>
                 <div class="intro-y box p-5 mt-12 sm:mt-5" style="text-align: center;">
@@ -249,6 +250,7 @@ import OperationalAnalysisInformationPanel from "./components/OperationalAnalysi
 import FinancialAnalysisInformationPanel from "./components/FinancialAnalysisInformationPanel";
 import LocalVisionPanel from "./components/LocalVisionPanel";
 import ModalCard from "../../components/ModalCard";
+import ReportInitPanel from "./components/ReportInitPanel";
 
 export default defineComponent({
     name: 'projectCard',
@@ -265,7 +267,8 @@ export default defineComponent({
         OperationalAnalysisInformationPanel,
         FinancialAnalysisInformationPanel,
         ModalCard,
-        LocalVisionPanel
+        LocalVisionPanel,
+        ReportInitPanel
     },
     props: {
         id: Number,
