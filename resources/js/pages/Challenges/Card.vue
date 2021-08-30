@@ -38,14 +38,14 @@
                             <div v-if="challenge.selected != undefined && challenge.selected.length != 0">{{$t('challengesMain.solutions')}}</div><div v-if="challenge.selected == undefined || challenge.selected.length == 0">{{$t('challengesMain.solutions')}}
                         </div>
                         </a>
-                        <a v-if="!inTeam && challenge.stage >= 1"
+                        <a v-if="!inTeam && challenge.stage >= 1 && user.type === 'integrator'"
                             class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'oferty'"
                            :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <SettingsIcon class="w-4 h-4 mr-2"/>
                             {{$t('challengesMain.myOffers')}}
                         </a>
-                        <a v-if="inTeam && challenge.stage >= 1"
+                        <a v-if="inTeam && challenge.stage >= 1 || challenge.author_id === user.id"
                             class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'all-offers'"
                            :class="(activeTab == 'all-offers')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
