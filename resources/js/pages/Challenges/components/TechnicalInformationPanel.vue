@@ -435,7 +435,7 @@ export default {
         }
 
         const saveChallengeFinancialsRepo = async () => {
-            SaveChallengeFinancials(props.challenge.financial_before.value, props.challenge.financial_before.value.id);
+            SaveChallengeFinancials(props.challenge.financial_before.value, props.challenge.financial_before_id.value);
         }
 
 
