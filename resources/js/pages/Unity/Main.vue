@@ -1,6 +1,6 @@
 <template>
     <TopButtons v-if="loaded" :allowedEdit="allowedEdit && (challenge.status != 1)" :icons="topIcons" :canEditSolution="canEditSolution"></TopButtons>
-    <LeftButtons :icons="leftIcons" v-if="mode === 'edit' && allowedEdit && loaded"></LeftButtons>
+    <LeftButtons :icons="leftIcons" v-if="showLeftButtons"></LeftButtons>
     <LeftPanel></LeftPanel>
     <div @contextmenu.prevent="openMenu">
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
@@ -260,6 +260,11 @@ export default {
                 }
             }
         }
+
+        const showLeftButtons = computed(() => {
+            let t = (mode == 'edit' && allowedEdit && loaded);
+            return t;
+        })
 
         const checkTeam = async () => {
             if(type.value == 'challenge') {
@@ -529,7 +534,8 @@ export default {
             startTutorial,
             loaded,
             sessionid,
-            owner
+            owner,
+            showLeftButtons
         }
     }
 }
