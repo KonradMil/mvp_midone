@@ -512,8 +512,6 @@ class OfferController extends Controller
         $project->stage = 0;
         $project->save_json = json_encode($challenge->save_json);
         $project->screenshot_path = $challenge->screenshot_path;
-        $project->solution_deadline = $challenge->solution_deadline;
-        $project->offer_deadline = $challenge->offer_deadline;
 
         $project->save();
         $challenge->save();
