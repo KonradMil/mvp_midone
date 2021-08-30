@@ -12,7 +12,7 @@
         <LoadingIcon icon="grid" class="w-8 h-8" />
     </div>
 <!--    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>-->
-    <WebRTC width="100%" roomId="roomId"></WebRTC>
+<!--    <WebRTC width="100%" roomId="roomId"></WebRTC>-->
     <div id="help-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
