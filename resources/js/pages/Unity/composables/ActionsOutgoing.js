@@ -178,6 +178,9 @@ export default function unityActionOutgoing(gameWindow) {
 
     function loadStructure (val) {
         console.log('HEEREE IMPORTANT', val);
+        if(val === {}) {
+            val = JSON.stringify([]);
+        }
         outgoing(game, 'LoadStructure', val, true);
     }
 
