@@ -262,6 +262,7 @@ export default {
         }
 
         const showLeftButtons = computed(() => {
+            console.log('showLeftButtons', [mode, allowedEdit, loaded]);
             let t = (mode == 'edit' && allowedEdit && loaded);
             return t;
         })

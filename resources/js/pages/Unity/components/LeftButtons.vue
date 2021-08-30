@@ -16,7 +16,7 @@ export default {
     name: "LeftButtons",
     props: {
         icons: Array,
-        allowedEdit: Object
+        allowedEdit: Boolean
     },
     components: {UnityButton},
     setup() {
