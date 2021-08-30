@@ -215,6 +215,9 @@ class CreateCoreTables extends Migration
             $table->string('description')->nullable();
             $table->string('en_description')->nullable();
             $table->integer('stage')->nullable();
+            $table->integer('project_accept_offer')->default(0);
+            $table->integer('project_accept_details')->default(0);
+            $table->integer('project_accept_vision')->default(0);
             $table->timestamps();
         });
 

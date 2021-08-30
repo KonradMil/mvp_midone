@@ -25,6 +25,7 @@ class Project extends Model
     protected $fillable = [
         'type', 'name', 'challenge_id', 'en_name',
         'stage','description', 'en_description',
+        'project_accept_offer', 'project_accept_details', 'project_accept_vision'
     ];
 
     /**
