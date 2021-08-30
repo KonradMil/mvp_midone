@@ -73,7 +73,7 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function loadWorkshopObject(val) {
-        console.log('HEEREE IMPORTANT', val);
+
 
         outgoing(game, 'LoadWorkshopItems', val, true);
     }
@@ -177,6 +177,7 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function loadStructure (val) {
+        console.log('HEEREE IMPORTANT', val);
         outgoing(game, 'LoadStructure', val, true);
     }
 
