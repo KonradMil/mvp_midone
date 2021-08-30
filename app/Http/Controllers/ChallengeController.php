@@ -1061,4 +1061,31 @@ class ChallengeController extends Controller
             'payload' => ''
         ]);
     }
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function financialDetailsSave(Request $request): JsonResponse
+    {
+        $financial = Financial::find($request->id);
+        $financial->days = $request->days;
+        $financial->shifts = $request->shifts;
+        $financial->shift_time = $request->shift_time;
+        $financial->weekend_shift = $request->weekend_shift;
+        $financial->breakfast = $request->breakfast;
+        $financial->stop_time = $request->stop_time;
+        $financial->operator_performance = $request->operator_performance;
+        $financial->defective = $request->defective;
+        $financial->number_of_operators = $request->number_of_operators;
+        $financial->operator_cost = $request->operator_cost;
+        $financial->absence = $request->absence;
+        $financial->cycle_time = $request->cycle_time;
+        $financial->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $financial
+        ]);
+    }
 }

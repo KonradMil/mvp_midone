@@ -215,7 +215,7 @@
             <div class="intro-y box col-span-12 xxl:col-span-6">
                 <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 v-if="stage===3" class="font-medium text-base mr-auto">{{$t('challengesMain.financialDetails')}}</h2>
-                    <button class="" @click.prevent="saveChallengeFinancialsRepo">
+                    <button class="" @click.prevent="saveFinancialDetails">
                         <SaveIcon/>
                     </button>
                 </div>
@@ -380,14 +380,10 @@
 </template>
 
 <script>
-import {computed, onMounted, reactive, ref} from "vue";
-import SaveChallengeFinancials from "../../../compositions/SaveChallengeFinancials";
+import {computed, onMounted, ref} from "vue";
 
 export default {
     name: "TechnicalInformationPanel",
-    components: {
-        SaveChallengeFinancials
-    },
     props: {
         challenge: Object,
         stage: Number
@@ -434,37 +430,35 @@ export default {
                 })
         }
 
-        const saveChallengeFinancialsRepo = async () => {
-            SaveChallengeFinancials(props.challenge.financial_before.value, props.challenge.financial_before_id.value);
+
+
+
+        const saveFinancialDetails = async () => {
+            axios.post('/api/challenge/financial-analyses/save', {
+                id: props.challenge.financial_before.value.id,
+                days: props.challenge.financial_before.value.days,
+                shifts: props.challenge.financial_before.value.shifts,
+                shift_time: props.challenge.financial_before.value.shift_time,
+                weekend_shift: props.challenge.financial_before.value.weekend_shift,
+                breakfast: props.challenge.financial_before.value.breakfast,
+                stop_time: props.challenge.financial_before.value.stop_time,
+                operator_performance: props.challenge.financial_before.value.operator_performance,
+                defective: props.challenge.financial_before.value.defective,
+                number_of_operators: props.challenge.financial_before.value.number_of_operators,
+                operator_cost: props.challenge.financial_before.value.operator_cost,
+                absence: props.challenge.financial_before.value.absence,
+                cycle_time: props.challenge.financial_before.value.cycle_time,
+            })
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Zapisano poprawnie');
+                    } else {
+
+                    }
+                })
         }
 
 
-        // const saveFinancialDetails = async () => {
-        //     axios.post('/api/challenge/local-vision/save', {
-        //
-        //     })
-        //         .then(response => {
-        //             if (response.data.success) {
-        //                 toast.success('Zapisano poprawnie');
-        //             } else {
-        //
-        //             }
-        //         })
-        // }
-
-        // id: props.challenge_id,
-        //     days: props.challenge.financial_before.value.days,
-        //     shifts: props.challenge.financial_before.value.shifts,
-        //     shift_time: props.challenge.financial_before.value.shift_time,
-        //     weekend_shift: props.challenge.financial_before.value.weekend_shift,
-        //     breakfast: props.challenge.financial_before.value.breakfast,
-        //     stop_time: props.challenge.financial_before.value.stop_time,
-        //     operator_performance: props.challenge.financial_before.value.operator_performance,
-        //     defective: props.challenge.financial_before.value.defective,
-        //     number_of_operators: props.challenge.financial_before.value.number_of_operators,
-        //     operator_cost: props.challenge.financial_before.value.operator_cost,
-        //     absence: props.challenge.financial_before.value.absence,
-        //     cycle_time: props.challenge.financial_before.value.cycle_time,
 
         onMounted(() => {
 
@@ -473,7 +467,7 @@ export default {
 
         return {
             saveTechnicalDetails,
-            saveChallengeFinancialsRepo,
+            saveFinancialDetails,
             challenge,
             details
         }
