@@ -1,5 +1,5 @@
 <template>
-    <div class="intro-y box lg:mt-5" style="width: 350px; height: 250px; margin-top: -2px;">
+    <div class="intro-y box lg:mt-5" style="width: 350px; height: 280px; margin-top: -2px;">
         <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
             <h2 class="font-medium text-base mr-auto">
                 Zaakceptuj zmiany żeby przejść do następnej fazy projektu
