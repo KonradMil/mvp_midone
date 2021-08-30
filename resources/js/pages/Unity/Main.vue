@@ -353,7 +353,7 @@ export default {
             if(!saving.value) {
                 saving.value = true;
                 gameLoad.value.save_json = e.saveGame;
-                if (type.value == 'challenge') {
+                if (type.value == 'challenge' && window.location.href.indexOf("challenge") > -1) {
                     SaveChallengeUnity({save: gameLoad.value, id: id.value}, () => {
                         saving.value = false;
                     });
