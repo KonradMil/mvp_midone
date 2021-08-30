@@ -4,12 +4,12 @@
             <h2 class="font-medium text-base mr-auto">
                 Wizja lokalna
             </h2>
-            <a class="pr-3" @click.prevent="addNewReport">
+            <button class="pr-3" @click.prevent="addNewReport">
                 <PlusCircleIcon/>
-            </a>
-            <a class="" @click.prevent="saveReports">
+            </button>
+            <button class="" @click.prevent="saveReports">
                 <SaveIcon/>
-            </a>
+            </button>
         </div>
         <div class="p-5" id="bordered-table">
             <div class="preview">
@@ -89,7 +89,7 @@ export default {
             }
             setTimeout(function () {
                 reports.value.push(report);
-            }, 1000)
+            }, 750)
         }
 
         const deleteReport = async (index,id) => {

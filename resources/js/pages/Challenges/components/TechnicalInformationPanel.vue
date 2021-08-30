@@ -3,10 +3,11 @@
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12 xxl:col-span-6">
-                <div
-                    class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5"
-                >
-                    <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.technicalDetails')}}</h2>
+                <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+                    <h2 v-if="stage===3" class="font-medium text-base mr-auto">{{$t('challengesMain.technicalDetails')}}</h2>
+                    <button class="" @click.prevent="saveTechnicalDetails">
+                        <SaveIcon/>
+                    </button>
                 </div>
                 <div class="px-5 py-5">
                     <div
@@ -212,10 +213,11 @@
             <!-- END: Announcement -->
             <!-- BEGIN: Daily Sales -->
             <div class="intro-y box col-span-12 xxl:col-span-6">
-                <div
-                    class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5"
-                >
-                    <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.financialDetails')}}</h2>
+                <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+                    <h2 v-if="stage===3" class="font-medium text-base mr-auto">{{$t('challengesMain.financialDetails')}}</h2>
+                    <button class="" @click.prevent="saveChallengeFinancialsRepo">
+                        <SaveIcon/>
+                    </button>
                 </div>
                 <div class="px-5 py-5">
                     <div
@@ -379,9 +381,13 @@
 
 <script>
 import {computed, onMounted, reactive, ref} from "vue";
+import SaveChallengeFinancials from "../../../compositions/SaveChallengeFinancials";
 
 export default {
     name: "TechnicalInformationPanel",
+    components: {
+        SaveChallengeFinancials
+    },
     props: {
         challenge: Object,
         stage: Number
@@ -405,12 +411,69 @@ export default {
             select_detail_weight: ''
         });
 
+        const saveTechnicalDetails = async () => {
+            axios.post('/api/challenge/local-vision/save', {
+                id: props.challenge_id,
+                detail_weight: challenge_details.value.select_detail_weight,
+                pick_quality: challenge_details.value.select_pick_quality,
+                detail_material: challenge_details.value.select_detail_material,
+                detail_size: challenge_details.value.select_detail_size,
+                detail_pick: challenge_details.value.select_detail_pick,
+                detail_position: challenge_details.value.select_detail_position,
+                detail_range: challenge_details.value.select_detail_range,
+                detail_destination: challenge_details.value.select_detail_destination,
+                number_of_lines: challenge_details.value.select_number_of_lines,
+                work_shifts: challenge_details.value.select_work_shifts,
+            })
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Zapisano poprawnie');
+                    } else {
+
+                    }
+                })
+        }
+
+        const saveChallengeFinancialsRepo = async () => {
+            SaveChallengeFinancials(props.challenge.financial_before.value, props.challenge.financial_before.value.id);
+        }
+
+
+        // const saveFinancialDetails = async () => {
+        //     axios.post('/api/challenge/local-vision/save', {
+        //
+        //     })
+        //         .then(response => {
+        //             if (response.data.success) {
+        //                 toast.success('Zapisano poprawnie');
+        //             } else {
+        //
+        //             }
+        //         })
+        // }
+
+        // id: props.challenge_id,
+        //     days: props.challenge.financial_before.value.days,
+        //     shifts: props.challenge.financial_before.value.shifts,
+        //     shift_time: props.challenge.financial_before.value.shift_time,
+        //     weekend_shift: props.challenge.financial_before.value.weekend_shift,
+        //     breakfast: props.challenge.financial_before.value.breakfast,
+        //     stop_time: props.challenge.financial_before.value.stop_time,
+        //     operator_performance: props.challenge.financial_before.value.operator_performance,
+        //     defective: props.challenge.financial_before.value.defective,
+        //     number_of_operators: props.challenge.financial_before.value.number_of_operators,
+        //     operator_cost: props.challenge.financial_before.value.operator_cost,
+        //     absence: props.challenge.financial_before.value.absence,
+        //     cycle_time: props.challenge.financial_before.value.cycle_time,
+
         onMounted(() => {
 
         });
 
 
         return {
+            saveTechnicalDetails,
+            saveChallengeFinancialsRepo,
             challenge,
             details
         }
