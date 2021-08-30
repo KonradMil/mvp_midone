@@ -435,19 +435,19 @@ export default {
 
         const saveFinancialDetails = async () => {
             axios.post('/api/challenge/financial-analyses/save', {
-                id: props.challenge.value.financial_before_id,
-                days: props.challenge.financial_before.value.days,
-                shifts: props.challenge.financial_before.value.shifts,
-                shift_time: props.challenge.financial_before.value.shift_time,
-                weekend_shift: props.challenge.financial_before.value.weekend_shift,
-                breakfast: props.challenge.financial_before.value.breakfast,
-                stop_time: props.challenge.financial_before.value.stop_time,
-                operator_performance: props.challenge.financial_before.value.operator_performance,
-                defective: props.challenge.financial_before.value.defective,
-                number_of_operators: props.challenge.financial_before.value.number_of_operators,
-                operator_cost: props.challenge.financial_before.value.operator_cost,
-                absence: props.challenge.financial_before.value.absence,
-                cycle_time: props.challenge.financial_before.value.cycle_time,
+                id: props.challenge.financial_before.id,
+                days: props.challenge.financial_before.days,
+                shifts: props.challenge.financial_before.shifts,
+                shift_time: props.challenge.financial_before.shift_time,
+                weekend_shift: props.challenge.financial_before.weekend_shift,
+                breakfast: props.challenge.financial_before.breakfast,
+                stop_time: props.challenge.financial_before.stop_time,
+                operator_performance: props.challenge.financial_before.operator_performance,
+                defective: props.challenge.financial_before.defective,
+                number_of_operators: props.challenge.financial_before.number_of_operators,
+                operator_cost: props.challenge.financial_before.operator_cost,
+                absence: props.challenge.financial_before.absence,
+                cycle_time: props.challenge.financial_before.cycle_time,
             })
                 .then(response => {
                     if (response.data.success) {
