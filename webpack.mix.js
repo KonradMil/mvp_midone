@@ -50,7 +50,6 @@ mix.js('resources/js/app.js', 'public/js')
         [postcssImport]
         ]
 });
-
     //
     // [ tailwind("tailwind.config.js"),
     //     postcssImport()

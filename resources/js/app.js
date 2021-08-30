@@ -60,9 +60,9 @@ app.use(lazyPlugin, {
 })
 router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
-    const publicPages = ['/login', '/register', '/terms/terms-of-service', '/terms/privacy-policy', '/terms/price-list', '/site'];
+    const publicPages = ['/login', '/register', '/terms/terms-of-service', '/terms/privacy-policy', '/terms/price-list', '/site/homepage'];
     const authRequired = !publicPages.includes(to.path);
-    // console.log(to.path);
+    console.log(to.path);
     // console.log(store.state.login.isLoggedIn);
     // console.log(authRequired);
     if(!store.state.login.isLoggedIn) {
@@ -75,14 +75,9 @@ router.beforeEach((to, from, next) => {
         next();
     }
 })
-app.use(VueCookies, {
-    expireTimes: "1h",
-});
+
 app.use(VueFinalModal)
-app.use(router)
-app.use(store)
 app.use(Toast, options);
-app.use(i18n);
 app.mount('#app')
 
 

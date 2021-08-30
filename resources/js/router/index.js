@@ -34,8 +34,6 @@ import Offers from "../pages/Challenges/components/Offers";
 import SolutionsPanel from "../pages/Challenges/components/SolutionsPanel";
 import SolutionsArchive from "../pages/Solutions/SolutionsArchive";
 import Notifications from "../pages/Notifications";
-import MainSiteLayout from "../pages/Website/layouts/MainSiteLayout";
-import HomePage from "../pages/Website/HomePage";
 
 export const routes = [
     {
@@ -79,7 +77,6 @@ export const routes = [
         component: TermsMain,
         props: true
     },
-
     {
         path: "/",
         component: SideMenu,
@@ -246,18 +243,6 @@ export const routes = [
                 component: ChangePassword
             },
 
-        ]
-    },
-    {
-        path: "/site",
-        component: MainSiteLayout,
-        children: [
-            {
-                name: 'homepage',
-                path: '/',
-                component: HomePage,
-                props: true
-            }
         ]
     },
     {

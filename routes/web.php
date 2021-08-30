@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\S3Controller;
 use Illuminate\Support\Facades\Route;
+Route::get('site', function(){
+    return view('site.layouts.app');
+});
 Route::get('projekty-ue', function(){
     return view('ue-project');
 });
