@@ -410,6 +410,7 @@ class SolutionController extends Controller
             $estimate = new Estimate();
             $estimate->solution_id = $request->input('solution_id');
         }
+        $estimate->sum = 0;
         $input = $request->input();
         $estimate->integration_cost = (float)$input['integrationCost'];
         $estimate->sum += (float)$input['integrationCost'];
