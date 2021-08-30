@@ -23,8 +23,8 @@ class Project extends Model
      * @var string[]
      */
     protected $fillable = [
-        'type', 'name', 'challenge_id', 'en_name', 'solution_deadline', 'offer_deadline', 'status',
-        'stage', 'save_json', 'screenshot_path', 'description', 'en_description',
+        'type', 'name', 'challenge_id', 'en_name',
+        'stage','description', 'en_description',
     ];
 
     /**

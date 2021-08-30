@@ -214,12 +214,7 @@ class CreateCoreTables extends Migration
             $table->string('en_name')->nullable();
             $table->string('description')->nullable();
             $table->string('en_description')->nullable();
-            $table->string('screenshot_path')->nullable();
-            $table->longText('save_json')->nullable();
-            $table->integer('status')->default(0);
             $table->integer('stage')->nullable();
-            $table->timestamp('solution_deadline');
-            $table->timestamp('offer_deadline');
             $table->timestamps();
         });
 
