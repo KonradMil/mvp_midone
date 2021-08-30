@@ -381,6 +381,7 @@
 
 <script>
 import {computed, onMounted, ref} from "vue";
+import {useToast} from "vue-toastification";
 
 export default {
     name: "TechnicalInformationPanel",
@@ -393,7 +394,7 @@ export default {
             return props.challenge;
         });
         const details = require("../../../json/challenge.json");
-
+        const toast = useToast();
         const challenge_details = ref({
             select_work_shifts: '',
             select_number_of_lines: '',
@@ -408,8 +409,8 @@ export default {
         });
 
         const saveTechnicalDetails = async () => {
-            axios.post('/api/challenge/local-vision/save', {
-                id: props.challenge_id,
+            axios.post('/api/challenge/technical-details/save', {
+                id: props.challenge.technical_details.id,
                 detail_weight: challenge_details.value.select_detail_weight,
                 pick_quality: challenge_details.value.select_pick_quality,
                 detail_material: challenge_details.value.select_detail_material,
@@ -429,9 +430,6 @@ export default {
                     }
                 })
         }
-
-
-
 
         const saveFinancialDetails = async () => {
             axios.post('/api/challenge/financial-details/save', {

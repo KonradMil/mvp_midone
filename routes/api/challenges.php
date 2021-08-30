@@ -57,4 +57,5 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
     Route::post('local-vision/get', [ChallengeController::class, 'localVisionGet']);
     Route::post('local-vision/delete', [ChallengeController::class, 'localVisionDelete']);
     Route::post('financial-details/save', [ChallengeController::class, 'financialDetailsSave']);
+    Route::post('technical-details/save', [ChallengeController::class, 'technicalDetailsSave']);
 });
