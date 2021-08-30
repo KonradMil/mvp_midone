@@ -143,7 +143,8 @@ export default {
         id: Number,
         addSolutionOffer: Boolean,
         selected_offer_id: Number,
-        stage: Number
+        stage: Number,
+        author_id: Number
     },
     emits: ["update:activeTab"],
 

@@ -4,10 +4,10 @@
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12 xxl:col-span-6">
                 <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-                    <h2 v-if="stage===3" class="font-medium text-base mr-auto">{{$t('challengesMain.technicalDetails')}}</h2>
-                    <button class="" @click.prevent="saveTechnicalDetails">
+                    <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.technicalDetails')}}</h2>
+                    <div v-if="stage === 3 && author_id === user.id" class="cursor-pointer" @click.prevent="saveTechnicalDetails">
                         <SaveIcon/>
-                    </button>
+                    </div>
                 </div>
                 <div class="px-5 py-5">
                     <div
@@ -214,10 +214,10 @@
             <!-- BEGIN: Daily Sales -->
             <div class="intro-y box col-span-12 xxl:col-span-6">
                 <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-                    <h2 v-if="stage===3" class="font-medium text-base mr-auto">{{$t('challengesMain.financialDetails')}}</h2>
-                    <button class="" @click.prevent="saveFinancialDetails">
+                    <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.financialDetails')}}</h2>
+                    <div v-if="stage === 3 && author_id === user.id" class="cursor-pointer" @click.prevent="saveFinancialDetails">
                         <SaveIcon/>
-                    </button>
+                    </div>
                 </div>
                 <div class="px-5 py-5">
                     <div
@@ -387,7 +387,8 @@ export default {
     name: "TechnicalInformationPanel",
     props: {
         challenge: Object,
-        stage: Number
+        stage: Number,
+        author_id: Number
     },
     setup(props) {
         const challenge = computed(() => {
@@ -395,6 +396,7 @@ export default {
         });
         const details = require("../../../json/challenge.json");
         const toast = useToast();
+        const user = window.Laravel.user;
         const challenge_details = ref({
             select_work_shifts: '',
             select_number_of_lines: '',
@@ -464,6 +466,7 @@ export default {
 
 
         return {
+            user,
             saveTechnicalDetails,
             saveFinancialDetails,
             challenge,

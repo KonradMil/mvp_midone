@@ -71,12 +71,14 @@ import {useToast} from "vue-toastification";
 export default {
     name: "LocalVisionPanel",
     props: {
-        challenge_id: Number
+        challenge_id: Number,
+        author_id: Number
     },
 
     setup(props) {
         const reports = ref([]);
         const toast = useToast();
+        const user = window.Laravel.user;
         const removeReport = async (index) => {
             reports.value.splice(index, 1);
         }
@@ -133,6 +135,7 @@ export default {
         });
 
         return {
+            user,
             deleteReport,
             reports,
             addNewReport,
