@@ -384,7 +384,7 @@ export default {
 
                         try {
                             console.log(response.data.payload.selected.estimate);
-                            capex.value = response.data.payload.selected[0].estimate;
+                            capex.value = response.data.payload.selected[0].estimate.sum;
                         }catch (e) {
 
                         }
