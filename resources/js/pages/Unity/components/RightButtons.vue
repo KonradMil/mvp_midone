@@ -35,7 +35,7 @@ export default {
     components: {UnityButton},
     props: {
         icons: Array,
-        allowedEdit: Object,
+        allowedEdit: Boolean,
         type: String
     },
     setup(props) {
