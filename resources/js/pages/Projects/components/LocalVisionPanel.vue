@@ -4,12 +4,12 @@
             <h2 class="font-medium text-base mr-auto">
                 Wizja lokalna
             </h2>
-            <button class="pr-3" @click.prevent="addNewReport">
+            <a class="pr-3" @click.prevent="addNewReport">
                 <PlusCircleIcon/>
-            </button>
-            <button class="" @click.prevent="saveReports">
+            </a>
+            <a class="" @click.prevent="saveReports">
                 <SaveIcon/>
-            </button>
+            </a>
         </div>
         <div class="p-5" id="bordered-table">
             <div class="preview">
