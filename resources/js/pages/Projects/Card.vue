@@ -58,7 +58,7 @@
                         </li>
                         <li class="intro-y">
                             <a class="flex items-center mt-5" href=""
-                               @click.prevent="activeTab = 'techniczne'"
+                               @click.prevent="(activeTab = 'techniczne') && (stage=2)"
                                :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                                 <BoxIcon class="w-4 h-4 mr-2"/>
                                 {{$t('challengesMain.technicalDetails')}}                        </a>
@@ -136,7 +136,7 @@
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'techniczne'"
+                           @click.prevent="(activeTab = 'techniczne') && (stage=3)"
                            :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <EditIcon class="w-4 h-4 mr-2 text-red-600" v-if="is_done_technical === false"/>
                             <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600" v-if="is_done_technical === true"/>
@@ -196,7 +196,7 @@
             </div>
             <!-- END: Profile Menu -->
             <BasicInformationPanel :challenge="challenge" :inTeam="inTeam" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
-            <TechnicalInformationPanel :challenge="challenge" :stage="3" v-if="activeTab == 'techniczne'"></TechnicalInformationPanel>
+            <TechnicalInformationPanel :challenge="challenge" :stage="stage" v-if="activeTab == 'techniczne'"></TechnicalInformationPanel>
             <QuestionsPanel v-if="activeTab == 'pytania'" :author_id="challenge.author_id" :id="challenge.id" :challenge_stage="challenge.stage"></QuestionsPanel>
             <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge" :inTeam="inTeam" :addChallengeSolution="addChallengeSolution" :acceptChallengeSolutions="acceptChallengeSolutions" :publishSolution="publishSolution" :addSolutionOffer="addSolutionOffer"></SolutionsPanel>
             <TeamsPanel v-if="(activeTab == 'teams') && ((challenge.author_id == user.id) || (solution.author_id == user.id))" :solution="solution" :challenge="challenge" :who="who" ></TeamsPanel>
@@ -306,6 +306,8 @@ export default defineComponent({
         const is_done_offer = ref(false);
         const change_offer = ref(false);
         const is_done_technical = ref(false);
+        const stage = ref(0);
+
 
         watch(() => props.change, (first, second) => {
             if(props.change === 'all-offers' && user.type === 'integrator'){
@@ -564,6 +566,7 @@ export default defineComponent({
             });
         }
         return {
+            stage,
             is_done_technical,
             change_offer,
             is_done_offer,
