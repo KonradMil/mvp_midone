@@ -4,12 +4,12 @@
             <h2 class="font-medium text-base mr-auto">
                 Wizja lokalna
             </h2>
-            <button class="pr-3" @click.prevent="addNewReport">
+            <div class="cursor-pointer pr-3" @click.prevent="addNewReport">
                 <PlusCircleIcon/>
-            </button>
-            <button class="" @click.prevent="saveReports">
+            </div>
+            <div class="cursor-pointer" @click.prevent="saveReports">
                 <SaveIcon/>
-            </button>
+            </div>
         </div>
         <div class="p-5" id="bordered-table">
             <div class="preview">
@@ -43,9 +43,9 @@
                                           v-model="report.after"
                                           class="form-control text-gray-600"/>
                             </td>
-                            <button class="pt-4 pl-2" @click.prevent="deleteReport(index,report.id)">
+                            <div class="cursor-pointer pt-4 pl-2" @click.prevent="deleteReport(index,report.id)">
                                 <MinusCircleIcon/>
-                            </button>
+                            </div>
                         </tr>
                         </tbody>
                     </table>
