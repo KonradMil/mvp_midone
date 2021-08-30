@@ -8,6 +8,7 @@
                     <div v-if="stage === 3 && author_id === user.id" class="cursor-pointer" @click.prevent="saveTechnicalDetails">
                         <SaveIcon/>
                     </div>
+                    <button v-if="challenge.author_id === user.id" class="btn btn-primary w-20 mt-3">Akceptuje zmiany</button>
                 </div>
                 <div class="px-5 py-5">
                     <div
@@ -218,6 +219,7 @@
                     <div v-if="stage === 3 && author_id === user.id" class="cursor-pointer" @click.prevent="saveFinancialDetails">
                         <SaveIcon/>
                     </div>
+                    <button v-if="challenge.author_id === user.id" class="btn btn-primary w-20 mt-3">Akceptuje zmiany</button>
                 </div>
                 <div class="px-5 py-5">
                     <div

@@ -4,10 +4,11 @@
             <h2 class="font-medium text-base mr-auto">
                 Wizja lokalna
             </h2>
-            <div class="cursor-pointer pr-3" @click.prevent="addNewReport">
+            <button v-if="challenge_author_id === user.id" class="btn btn-primary w-20 mt-3">Akceptuje zmiany</button>
+            <div v-if="author_id === user.id" class="cursor-pointer pr-3" @click.prevent="addNewReport">
                 <PlusCircleIcon/>
             </div>
-            <div class="cursor-pointer" @click.prevent="saveReports">
+            <div v-if="author_id === user.id" class="cursor-pointer" @click.prevent="saveReports">
                 <SaveIcon/>
             </div>
         </div>
@@ -43,7 +44,7 @@
                                           v-model="report.after"
                                           class="form-control text-gray-600"/>
                             </td>
-                            <div class="cursor-pointer pt-4 pl-2" @click.prevent="deleteReport(index,report.id)">
+                            <div v-if="author_id === user.id" class="cursor-pointer pt-4 pl-2" @click.prevent="deleteReport(index,report.id)">
                                 <MinusCircleIcon/>
                             </div>
                         </tr>
@@ -72,7 +73,8 @@ export default {
     name: "LocalVisionPanel",
     props: {
         challenge_id: Number,
-        author_id: Number
+        author_id: Number,
+        challenge_author_id: Number
     },
 
     setup(props) {

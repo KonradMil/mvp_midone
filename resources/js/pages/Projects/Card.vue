@@ -201,11 +201,11 @@
             <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge" :inTeam="inTeam" :addChallengeSolution="addChallengeSolution" :acceptChallengeSolutions="acceptChallengeSolutions" :publishSolution="publishSolution" :addSolutionOffer="addSolutionOffer"></SolutionsPanel>
             <TeamsPanel v-if="(activeTab == 'teams') && ((challenge.author_id == user.id) || (solution.author_id == user.id))" :solution="solution" :challenge="challenge" :who="who" ></TeamsPanel>
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :edit_offer_id="edit_offer_id" :change_offer="change_offer"></OfferAdd>
-            <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab" :stage = "challenge.stage" :id="challenge.id" :inTeam="inTeam" :addSolutionOffer="addSolutionOffer" :selected_offer_id="challenge.selected_offer_id" :author_id="solution_project.author_id"></Offers>
+            <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab" :stage = "challenge.stage" :id="challenge.id" :inTeam="inTeam" :addSolutionOffer="addSolutionOffer" :selected_offer_id="challenge.selected_offer_id" :author_id="solution_project.author_id" :challenge_author_id="challenge.author_id"></Offers>
             <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam" :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
             <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisInformationPanel>
             <FinancialAnalysisInformationPanel v-if="activeTab == 'financial-analysis'" :solution="solution_project" ></FinancialAnalysisInformationPanel>
-            <LocalVisionPanel v-if="activeTab == 'local-vision'" :challenge_id="challenge.id" :author_id="solution_project.author_id"></LocalVisionPanel>
+            <LocalVisionPanel v-if="activeTab == 'local-vision'" :challenge_author_id="challenge.author_id" :challenge_id="challenge.id" :author_id="solution_project.author_id"></LocalVisionPanel>
             <ReportInitPanel v-if="activeTab == 'report-init'" :challenge_id="challenge.id" :author_id="solution_project.author_id"></ReportInitPanel>
             <ModalCard :show="show" @closed="modalClosed">
                 <h3 class="intro-y text-lg font-medium mt-5">Czy na pewno chcesz przejść do następnej fazy?</h3>
