@@ -381,6 +381,13 @@ export default {
                     if (response.data.success) {
                         console.log("response.data.payload");
                         console.log(response.data.payload);
+
+                        try {
+                            console.log(response.data.payload.selected.estimate);
+                            capex.value = response.data.payload.selected.estimate;
+                        }catch (e) {
+
+                        }
                         console.log(JSON.parse(response.data.payload.save_json));
                         challenge.value = response.data.payload;
                         cb();

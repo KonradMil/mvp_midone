@@ -13,13 +13,13 @@
             <div class="unity-button">
                 <UnityButton :tooltip="'Założenia finansowe'" :alttext="'financial'" :path="'/s3/builder_icons/assum_simple.png'" :action="'financial'" position="rightbuttonclick"  />
             </div>
-            <div class="unity-button" v-if="type == 'solution'">
+            <div class="unity-button" v-if="type == 'solution' && user.type != 'investor'">
                 <UnityButton :tooltip="'Kosztorys'" :alttext="'financial'" :path="'/s3/builder_icons/estimate_simple.png'" :action="'estimates'" position="rightbuttonclick"  />
             </div>
-            <div class="unity-button" v-if="type == 'solution'">
+            <div class="unity-button" v-if="type == 'solution' && user.type != 'investor'">
                 <UnityButton :tooltip="'Analiza operacyjna'" :alttext="'operational'" :path="'/s3/builder_icons/analiza_finansowa.png'" :action="'financialanalysis'" position="rightbuttonclick"  />
             </div>
-            <div class="unity-button" v-if="type == 'solution'">
+            <div class="unity-button" v-if="type == 'solution' && user.type != 'investor'">
                 <UnityButton :tooltip="'Analiza finansowa'" :alttext="'operationalanalysis'" :path="'/s3/builder_icons/analiza_operacyjna_simple.png'" :action="'operationalanalysis'" position="rightbuttonclick"  />
             </div>
         </div>
@@ -42,6 +42,7 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const type = ref('challenge');
+        const user = window.Laravel.user;
         emitter.on('rightbuttonclick', e =>  handleChange(e.val) );
 
         onMounted(() => {
@@ -76,6 +77,10 @@ export default {
                     emitter.emit('EstimatesDialog', { val: '' });
                     break;
             }
+        }
+
+        return {
+            user
         }
     }
 }

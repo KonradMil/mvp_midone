@@ -715,7 +715,7 @@ class ChallengeController extends Controller
 //            $challenge->technical_details = $technical;
 //        }
 
-        $challenge->selected = $challenge->solutions()->where('selected', '=', 1)->get();
+        $challenge->selected = $challenge->solutions()->where('selected', '=', 1)->with('estimate')->get();
 
         try {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like', 1)) {

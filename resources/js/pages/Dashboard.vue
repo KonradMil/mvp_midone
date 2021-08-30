@@ -3,30 +3,24 @@
         <div class="col-span-12 xxl:col-span-9">
             <div class="grid grid-cols-12 gap-6">
                 <!-- BEGIN: Notification -->
-                <div class="col-span-12 mt-6 -mb-6 intro-y">
-                    <div
-                        class="alert alert-dismissible show box bg-theme-3 text-white flex items-center mb-6"
-                        role="alert"
-                    >
-            <span
-            >Najnowszy webinar 20.04.2021 - więcej na
-              <a
-                  href="https://drb77.com"
-                  class="underline ml-1"
-                  target="blank"
-              >dbr77.com</a
-              >.</span
-            >
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="alert"
-                            aria-label="Close"
-                        >
-                            <XIcon class="w-4 h-4"/>
-                        </button>
-                    </div>
-                </div>
+<!--                <div class="col-span-12 mt-6 -mb-6 intro-y">-->
+<!--                    <div-->
+<!--                        class="alert alert-dismissible show box bg-theme-3 text-white flex items-center mb-6"-->
+<!--                        role="alert">-->
+<!--            <span>-->
+<!--                Najnowszy webinar 20.04.2021 - więcej na-->
+<!--              <a href="https://drb77.com"-->
+<!--                  class="underline ml-1"-->
+<!--                  target="blank">dbr77.com</a>.</span>-->
+<!--                        <button-->
+<!--                            type="button"-->
+<!--                            class="btn-close"-->
+<!--                            data-bs-dismiss="alert"-->
+<!--                            aria-label="Close">-->
+<!--                            <XIcon class="w-4 h-4"/>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <!-- BEGIN: Notification -->
                 <!-- BEGIN: General Report -->
 <!--                <div class="col-span-12 lg:col-span-8 xl:col-span-6 mt-2">-->
