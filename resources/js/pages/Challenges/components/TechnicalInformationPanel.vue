@@ -411,16 +411,16 @@ export default {
         const saveTechnicalDetails = async () => {
             axios.post('/api/challenge/technical-details/save', {
                 id: props.challenge.technical_details.id,
-                detail_weight: challenge_details.value.select_detail_weight,
-                pick_quality: challenge_details.value.select_pick_quality,
-                detail_material: challenge_details.value.select_detail_material,
-                detail_size: challenge_details.value.select_detail_size,
-                detail_pick: challenge_details.value.select_detail_pick,
-                detail_position: challenge_details.value.select_detail_position,
-                detail_range: challenge_details.value.select_detail_range,
-                detail_destination: challenge_details.value.select_detail_destination,
-                number_of_lines: challenge_details.value.select_number_of_lines,
-                work_shifts: challenge_details.value.select_work_shifts,
+                detail_weight: challenge_details.select_detail_weight,
+                pick_quality: challenge_details.select_pick_quality,
+                detail_material: challenge_details.select_detail_material,
+                detail_size: challenge_details.select_detail_size,
+                detail_pick: challenge_details.select_detail_pick,
+                detail_position: challenge_details.select_detail_position,
+                detail_range: challenge_details.select_detail_range,
+                detail_destination: challenge_details.select_detail_destination,
+                number_of_lines: challenge_details.select_number_of_lines,
+                work_shifts: challenge_details.select_work_shifts,
             })
                 .then(response => {
                     if (response.data.success) {
