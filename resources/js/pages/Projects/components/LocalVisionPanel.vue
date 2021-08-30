@@ -4,7 +4,7 @@
             <h2 class="font-medium text-base mr-auto">
                 Wizja lokalna
             </h2>
-            <button v-if="challenge_author_id === user.id" class="btn btn-primary w-20 mt-3">Akceptuje zmiany</button>
+            <button v-if="challenge_author_id === user.id" class="btn btn-primary">Akceptuje zmiany</button>
             <div v-if="author_id === user.id" class="cursor-pointer pr-3" @click.prevent="addNewReport">
                 <PlusCircleIcon/>
             </div>
@@ -95,7 +95,6 @@ export default {
                 reports.value.push(report);
             }, 750)
         }
-
         const deleteReport = async (index,id) => {
             axios.post('/api/challenge/local-vision/delete', {id: id})
                 .then(response => {
@@ -107,8 +106,6 @@ export default {
                     }
                 }, removeReport)
         }
-
-
         const saveReports = async () => {
             axios.post('/api/challenge/local-vision/save', {id: props.challenge_id, reports: reports.value})
                 .then(response => {
@@ -119,7 +116,6 @@ export default {
                     }
                 })
         }
-
         const getReports = async () => {
             axios.post('/api/challenge/local-vision/get', {id: props.challenge_id})
                 .then(response => {
@@ -130,9 +126,18 @@ export default {
                     }
                 })
         }
+        const acceptLocalVision = async () => {
+            axios.post('/api/challenge/local-vision/accept', {id: props.challenge_id})
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Zapisano poprawnie');
+                    } else {
+
+                    }
+                })
+        }
 
         onMounted(() => {
-            console.log('asdf');
             getReports();
         });
 
@@ -142,7 +147,8 @@ export default {
             reports,
             addNewReport,
             removeReport,
-            saveReports
+            saveReports,
+            acceptLocalVision
         }
     }
 }

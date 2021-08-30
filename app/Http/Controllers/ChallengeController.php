@@ -1135,4 +1135,52 @@ class ChallengeController extends Controller
             'payload' => $technical
         ]);
     }
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function projectOfferAccept(Request $request): JsonResponse
+    {
+        $challenge = Challenge::find($request->input('id'));
+        $challenge->project_accept_offer = 1;
+        $challenge->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $challenge
+        ]);
+    }
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function projectOfferDetails(Request $request): JsonResponse
+    {
+        $challenge = Challenge::find($request->input('id'));
+        $challenge->project_accept_details = 1;
+        $challenge->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $challenge
+        ]);
+    }
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function localVisionAccept(Request $request): JsonResponse
+    {
+        $challenge = Challenge::find($request->input('id'));
+        $challenge->project_accept_vision = 1;
+        $challenge->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $challenge
+        ]);
+    }
 }
