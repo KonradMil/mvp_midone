@@ -4,22 +4,16 @@ namespace App\Models;
 
 use App\Models\Casts\JsonAsArrayObjectWithNull;
 use Illuminate\Database\Eloquent\Model;
-use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableInterface;
-use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Tags\HasTags;
-use BeyondCode\Comments\Traits\HasComments;
 
 
 /**
  *
  */
-class Project extends Model implements ReactableInterface
+class Project extends Model
 {
-    use Reactable, HasTags, HasComments;
+    use HasTags;
 
     /**
      *
