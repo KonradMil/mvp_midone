@@ -4,12 +4,13 @@
             <h2 class="font-medium text-base mr-auto">
                 Wizja lokalna
             </h2>
-            <a class="pr-3" @click.prevent="addNewReport">
+            <button v-if="challenge_author_id === user.id" class="btn btn-primary w-20 mt-3">Akceptuje zmiany</button>
+            <div v-if="author_id === user.id" class="cursor-pointer pr-3" @click.prevent="addNewReport">
                 <PlusCircleIcon/>
-            </a>
-            <a class="" @click.prevent="saveReports">
+            </div>
+            <div v-if="author_id === user.id" class="cursor-pointer" @click.prevent="saveReports">
                 <SaveIcon/>
-            </a>
+            </div>
         </div>
         <div class="p-5" id="bordered-table">
             <div class="preview">
@@ -43,9 +44,9 @@
                                           v-model="report.after"
                                           class="form-control text-gray-600"/>
                             </td>
-                            <button class="pt-4 pl-2" @click.prevent="deleteReport(index,report.id)">
+                            <div v-if="author_id === user.id" class="cursor-pointer pt-4 pl-2" @click.prevent="deleteReport(index,report.id)">
                                 <MinusCircleIcon/>
-                            </button>
+                            </div>
                         </tr>
                         </tbody>
                     </table>
@@ -71,12 +72,15 @@ import {useToast} from "vue-toastification";
 export default {
     name: "LocalVisionPanel",
     props: {
-        challenge_id: Number
+        challenge_id: Number,
+        author_id: Number,
+        challenge_author_id: Number
     },
 
     setup(props) {
         const reports = ref([]);
         const toast = useToast();
+        const user = window.Laravel.user;
         const removeReport = async (index) => {
             reports.value.splice(index, 1);
         }
@@ -89,7 +93,7 @@ export default {
             }
             setTimeout(function () {
                 reports.value.push(report);
-            }, 1000)
+            }, 750)
         }
 
         const deleteReport = async (index,id) => {
@@ -133,6 +137,7 @@ export default {
         });
 
         return {
+            user,
             deleteReport,
             reports,
             addNewReport,

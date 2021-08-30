@@ -1061,4 +1061,78 @@ class ChallengeController extends Controller
             'payload' => ''
         ]);
     }
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function financialDetailsSave(Request $request): JsonResponse
+    {
+        $financial = Financial::find($request->id);
+        $financial->days = $request->days;
+        $financial->shifts = $request->shifts;
+        $financial->shift_time = $request->shift_time;
+        $financial->weekend_shift = $request->weekend_shift;
+        $financial->breakfast = $request->breakfast;
+        $financial->stop_time = $request->stop_time;
+        $financial->operator_performance = $request->operator_performance;
+        $financial->defective = $request->defective;
+        $financial->number_of_operators = $request->number_of_operators;
+        $financial->operator_cost = $request->operator_cost;
+        $financial->absence = $request->absence;
+        $financial->cycle_time = $request->cycle_time;
+        $financial->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $financial
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function technicalDetailsSave(Request $request): JsonResponse
+    {
+        $technical = TechnicalDetails::find($request->id);
+
+        if (isset($request->detail_weight)) {
+            $technical->detail_weight = (string)$request->detail_weight;
+        }
+        if (isset($request->pick_quality)) {
+            $technical->pick_quality = (string)$request->pick_quality;
+        }
+        if (isset($request->detail_material)) {
+            $technical->detail_material = (string)$request->detail_material;
+        }
+        if (isset($request->detail_size)) {
+            $technical->detail_size = (string)$request->detail_size;
+        }
+        if (isset($request->detail_pick)) {
+            $technical->detail_pick = (string)$request->detail_pick;
+        }
+        if (isset($request->detail_position)) {
+            $technical->detail_position = (string)$request->detail_position;
+        }
+        if (isset($request->detail_range)) {
+            $technical->detail_range = (string)$request->detail_range;
+        }
+        if (isset($request->detail_destination)) {
+            $technical->detail_destination = (string)$request->detail_destination;
+        }
+        if (isset($request->number_of_lines)) {
+            $technical->number_of_lines = (string)$request->number_of_lines ?? 1;
+        }
+        if (isset($request->work_shifts)) {
+            $technical->work_shifts = (string)$request->work_shifts;
+        }
+        $technical->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $technical
+        ]);
+    }
 }

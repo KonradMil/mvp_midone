@@ -3,10 +3,12 @@
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12 xxl:col-span-6">
-                <div
-                    class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5"
-                >
+                <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.technicalDetails')}}</h2>
+                    <div v-if="stage === 3 && author_id === user.id" class="cursor-pointer" @click.prevent="saveTechnicalDetails">
+                        <SaveIcon/>
+                    </div>
+                    <button v-if="challenge.author_id === user.id" class="btn btn-primary w-20 mt-3">Akceptuje zmiany</button>
                 </div>
                 <div class="px-5 py-5">
                     <div
@@ -212,10 +214,12 @@
             <!-- END: Announcement -->
             <!-- BEGIN: Daily Sales -->
             <div class="intro-y box col-span-12 xxl:col-span-6">
-                <div
-                    class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5"
-                >
+                <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.financialDetails')}}</h2>
+                    <div v-if="stage === 3 && author_id === user.id" class="cursor-pointer" @click.prevent="saveFinancialDetails">
+                        <SaveIcon/>
+                    </div>
+                    <button v-if="challenge.author_id === user.id" class="btn btn-primary w-20 mt-3">Akceptuje zmiany</button>
                 </div>
                 <div class="px-5 py-5">
                     <div
@@ -378,20 +382,23 @@
 </template>
 
 <script>
-import {computed, onMounted, reactive, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
+import {useToast} from "vue-toastification";
 
 export default {
     name: "TechnicalInformationPanel",
     props: {
         challenge: Object,
-        stage: Number
+        stage: Number,
+        author_id: Number
     },
     setup(props) {
         const challenge = computed(() => {
             return props.challenge;
         });
         const details = require("../../../json/challenge.json");
-
+        const toast = useToast();
+        const user = window.Laravel.user;
         const challenge_details = ref({
             select_work_shifts: '',
             select_number_of_lines: '',
@@ -405,12 +412,65 @@ export default {
             select_detail_weight: ''
         });
 
+        const saveTechnicalDetails = async () => {
+            axios.post('/api/challenge/technical-details/save', {
+                id: props.challenge.technical_details.id,
+                detail_weight: props.challenge.technical_details.detail_weight,
+                pick_quality: props.challenge.technical_details.pick_quality,
+                detail_material: props.challenge.technical_details.detail_material,
+                detail_size: props.challenge.technical_details.detail_size,
+                detail_pick: props.challenge.technical_details.detail_pick,
+                detail_position: props.challenge.technical_details.detail_position,
+                detail_range: props.challenge.technical_details.detail_range,
+                detail_destination: props.challenge.technical_details.detail_destination,
+                number_of_lines: props.challenge.technical_details.number_of_lines,
+                work_shifts: props.challenge.technical_details.work_shifts,
+            })
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Zapisano poprawnie');
+                    } else {
+
+                    }
+                })
+        }
+
+        const saveFinancialDetails = async () => {
+            axios.post('/api/challenge/financial-details/save', {
+                id: props.challenge.financial_before.id,
+                days: props.challenge.financial_before.days,
+                shifts: props.challenge.financial_before.shifts,
+                shift_time: props.challenge.financial_before.shift_time,
+                weekend_shift: props.challenge.financial_before.weekend_shift,
+                breakfast: props.challenge.financial_before.breakfast,
+                stop_time: props.challenge.financial_before.stop_time,
+                operator_performance: props.challenge.financial_before.operator_performance,
+                defective: props.challenge.financial_before.defective,
+                number_of_operators: props.challenge.financial_before.number_of_operators,
+                operator_cost: props.challenge.financial_before.operator_cost,
+                absence: props.challenge.financial_before.absence,
+                cycle_time: props.challenge.financial_before.cycle_time,
+            })
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Zapisano poprawnie');
+                    } else {
+
+                    }
+                })
+        }
+
+
+
         onMounted(() => {
 
         });
 
 
         return {
+            user,
+            saveTechnicalDetails,
+            saveFinancialDetails,
             challenge,
             details
         }
