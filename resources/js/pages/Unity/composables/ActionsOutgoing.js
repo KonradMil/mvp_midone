@@ -73,6 +73,8 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function loadWorkshopObject(val) {
+
+
         outgoing(game, 'LoadWorkshopItems', val, true);
     }
 
@@ -175,7 +177,14 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function loadStructure (val) {
-        outgoing(game, 'LoadStructure', val, true);
+
+        if(val && Object.keys(val).length === 0 && val.constructor === Object) {
+
+        } else {
+            console.log('HEEREE IMPORTANT', val);
+            outgoing(game, 'LoadStructure', val, true);
+        }
+
     }
 
     function getParts () {

@@ -3,7 +3,6 @@
         <div class="intro -y flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
             <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.myOffers')}}</h2>
         </div>
-
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-6 xxl:col-span-6" v-for="(offer, index) in offers.list" :key="index">
@@ -21,6 +20,9 @@
                                 <button class="btn btn-primary shadow-md mr-2" @click="changeOffer(offer.id)" v-if="stage === 3">Zmiana oferty</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="noChangeOffer" v-if="offer.is_changed !== 1 && stage === 3">Zakończ ofertowanie</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click.prevent="deleteOffer(offer.id,index)" v-if="offer.status < 1 || offer.rejected == 1">{{$t('models.delete')}}</button>
+                            </div>
+                            <div class="mt-2 pl-9 pb-6" v-if="(user.id === challenge_author_id) || addSolutionOffer && stage === 3">
+                                <button class="btn btn-primary shadow-md mr-2" @click.prevent="acceptProjectOffer">Akceptuje zmiany</button>
                             </div>
                             <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1 && stage !== 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
                             <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
@@ -143,7 +145,9 @@ export default {
         id: Number,
         addSolutionOffer: Boolean,
         selected_offer_id: Number,
-        stage: Number
+        stage: Number,
+        author_id: Number,
+        challenge_author_id: Number
     },
     emits: ["update:activeTab"],
 
@@ -207,17 +211,17 @@ export default {
                 })
         }
 
-        // const getOffers = () => {
-        //     axios.post('/api/offer/get/all', {})
-        //         .then(response => {
-        //             if (response.data.success) {
-        //                 offers.value = response.data.payload;
-        //                 console.log(response.data.payload + ' -> OFFERS VALUE')
-        //             } else {
-        //                 // toast.error(response.data.message);
-        //             }
-        //         })
-        // };
+        const acceptProjectOffer = async () => {
+            axios.post('/api/challenge/project-offer/accept', {id: props.challenge_id})
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Zapisano poprawnie');
+                    } else {
+
+                    }
+                })
+        }
+
 
         onMounted(() => {
             // getOffers();
@@ -228,6 +232,7 @@ export default {
         });
 
         return {
+            acceptProjectOffer,
             noChangeOffer,
             is_done_offer,
             changeOffer,

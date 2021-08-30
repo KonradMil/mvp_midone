@@ -93,7 +93,7 @@ export default {
         challenge: Object,
         solution: Object,
         type: String,
-        allowedEdit: Object,
+        allowedEdit: Boolean,
         publishChallenges: Boolean,
         canEditSolution: Boolean
     },

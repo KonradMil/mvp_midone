@@ -55,8 +55,8 @@ app.config.globalProperties.$axios = axios;
 app.config.globalProperties.cash = cash;
 app.config.globalProperties.emitter = emitter;
 app.use(lazyPlugin, {
-    loading: '/loader.gif',
-    error: '/s3/s3/screenshots/dbr_placeholder.jpeg'
+    loading: '/s3/twopointo/images/loader.gif',
+    error: '/s3/screenshots/dbr_placeholder.jpeg'
 })
 router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page

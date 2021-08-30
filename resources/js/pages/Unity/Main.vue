@@ -1,6 +1,6 @@
 <template>
     <TopButtons v-if="loaded" :allowedEdit="allowedEdit && (challenge.status != 1)" :icons="topIcons" :canEditSolution="canEditSolution"></TopButtons>
-    <LeftButtons :icons="leftIcons" v-if="mode == 'edit' && allowedEdit && loaded"></LeftButtons>
+    <LeftButtons :icons="leftIcons" v-if="(mode == 'edit' && allowedEdit && loaded)"></LeftButtons>
     <LeftPanel></LeftPanel>
     <div @contextmenu.prevent="openMenu">
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
@@ -12,7 +12,7 @@
         <LoadingIcon icon="grid" class="w-8 h-8" />
     </div>
 <!--    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>-->
-    <WebRTC width="100%" roomId="roomId"></WebRTC>
+<!--    <WebRTC width="100%" roomId="roomId"></WebRTC>-->
     <div id="help-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -109,7 +109,6 @@ import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
 
 import router from "../../router";
-import VoiceChat from "./components/VoiceChat";
 import WebRTC from "./WebRTC";
 
 const ww = WindowWatcher();
@@ -127,7 +126,7 @@ export default {
         canEditSolution: Boolean,
         sessionid: String
     },
-    components: {WebRTC, VoiceChat, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
+    components: {WebRTC, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
     setup(props, {emit}) {
         //GLOBAL
         const app = getCurrentInstance();
@@ -261,6 +260,15 @@ export default {
                 }
             }
         }
+
+        const showLeftButtons = computed(() => {
+            if(mode == 'edit' && allowedEdit && loaded) {
+                return true;
+            } else {
+                return false;
+            }
+
+        })
 
         const checkTeam = async () => {
             if(type.value == 'challenge') {
@@ -530,7 +538,8 @@ export default {
             startTutorial,
             loaded,
             sessionid,
-            owner
+            owner,
+            showLeftButtons
         }
     }
 }

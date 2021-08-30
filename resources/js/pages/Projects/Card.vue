@@ -58,7 +58,7 @@
                         </li>
                         <li class="intro-y">
                             <a class="flex items-center mt-5" href=""
-                               @click.prevent="activeTab = 'techniczne'"
+                               @click.prevent="(activeTab = 'techniczne') && (stage=2)"
                                :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                                 <BoxIcon class="w-4 h-4 mr-2"/>
                                 {{$t('challengesMain.technicalDetails')}}                        </a>
@@ -117,15 +117,6 @@
                             </a>
                         </li>
                         <li class="intro-y">
-                            <a v-if="challenge.stage === 3"
-                               class="flex items-center mt-5" href=""
-                               @click.prevent="activeTab = 'financial-analysis'"
-                               :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                <SettingsIcon class="w-4 h-4 mr-2"/>
-                                Analiza finansowa rozwiązania
-                            </a>
-                        </li>
-                        <li class="intro-y">
                             <div class="p-5 border-t border-gray-200 dark:border-dark-5" v-if="(challenge.author_id == user.id)">
                                 <a class="flex items-center" href=""
                                    @click.prevent="activeTab = 'teams'"
@@ -138,31 +129,32 @@
                     </ul>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'financial-analysis'"
-                           :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600"/>
+                           @click.prevent="activeTab = 'local-vision'"
+                           :class="(activeTab == 'local-vision')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                            <EditIcon v-if="challenge.project_accept_vision !== 1" class="w-4 h-4 mr-2 text-red-600"/>
+                            <CheckCircleIcon v-if="challenge.project_accept_vision === 1" class="w-4 h-4 mr-2 text-green-600"/>
                             Raport z wizji lokalnej
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'techniczne'"
+                           @click.prevent="(activeTab = 'techniczne') && (stage=3)"
                            :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon class="w-4 h-4 mr-2 text-red-600" v-if="is_done_technical === false"/>
-                            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600" v-if="is_done_technical === true"/>
+                            <EditIcon v-if="challenge.project_accept_details !== 1" class="w-4 h-4 mr-2 text-red-600"/>
+                            <CheckCircleIcon v-if="challenge.project_accept_details === 1" class="w-4 h-4 mr-2 text-green-600"/>
                             Założenia projektu
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'oferty'"
                            :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon class="w-4 h-4 mr-2 text-red-600" v-if="challenge.is_offer_changed !== 1"/>
-                            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600" v-if="challenge.is_offer_changed === 1"/>
+                            <EditIcon v-if="challenge.project_accept_offer !== 1" class="w-4 h-4 mr-2 text-red-600"/>
+                            <CheckCircleIcon v-if="challenge.project_accept_offer === 1" class="w-4 h-4 mr-2 text-green-600"/>
                             Oferta
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'financial-analysis'"
-                           :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                           @click.prevent="activeTab = 'report-init'"
+                           :class="(activeTab == 'report-init')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <EditIcon class="w-4 h-4 mr-2 text-red-600"/>
                             Checkpointy list fazy 1
                         </a>
@@ -205,15 +197,17 @@
             </div>
             <!-- END: Profile Menu -->
             <BasicInformationPanel :challenge="challenge" :inTeam="inTeam" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
-            <TechnicalInformationPanel :challenge="challenge" :stage="3" v-if="activeTab == 'techniczne'"></TechnicalInformationPanel>
+            <TechnicalInformationPanel :challenge="challenge" :stage="stage" v-if="activeTab == 'techniczne'" :author_id="solution_project.author_id"></TechnicalInformationPanel>
             <QuestionsPanel v-if="activeTab == 'pytania'" :author_id="challenge.author_id" :id="challenge.id" :challenge_stage="challenge.stage"></QuestionsPanel>
             <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge" :inTeam="inTeam" :addChallengeSolution="addChallengeSolution" :acceptChallengeSolutions="acceptChallengeSolutions" :publishSolution="publishSolution" :addSolutionOffer="addSolutionOffer"></SolutionsPanel>
             <TeamsPanel v-if="(activeTab == 'teams') && ((challenge.author_id == user.id) || (solution.author_id == user.id))" :solution="solution" :challenge="challenge" :who="who" ></TeamsPanel>
             <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :edit_offer_id="edit_offer_id" :change_offer="change_offer"></OfferAdd>
-            <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab" :stage = "challenge.stage" :id="challenge.id" :inTeam="inTeam" :addSolutionOffer="addSolutionOffer" :selected_offer_id="challenge.selected_offer_id"></Offers>
+            <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab" :stage = "challenge.stage" :id="challenge.id" :inTeam="inTeam" :addSolutionOffer="addSolutionOffer" :selected_offer_id="challenge.selected_offer_id" :author_id="solution_project.author_id" :challenge_author_id="challenge.author_id"></Offers>
             <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam" :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
             <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisInformationPanel>
             <FinancialAnalysisInformationPanel v-if="activeTab == 'financial-analysis'" :solution="solution_project" ></FinancialAnalysisInformationPanel>
+            <LocalVisionPanel v-if="activeTab == 'local-vision'" :challenge_author_id="challenge.author_id" :challenge_id="challenge.id" :author_id="solution_project.author_id"></LocalVisionPanel>
+            <ReportInitPanel v-if="activeTab == 'report-init'" :challenge_id="challenge.id" :author_id="solution_project.author_id"></ReportInitPanel>
             <ModalCard :show="show" @closed="modalClosed">
                 <h3 class="intro-y text-lg font-medium mt-5">Czy na pewno chcesz przejść do następnej fazy?</h3>
                 <div class="intro-y box p-5 mt-12 sm:mt-5" style="text-align: center;">
@@ -255,7 +249,9 @@ import TeamsPanel from "../Challenges/components/TeamsPanel";
 import ChallengeOffers from "../Challenges/components/ChallengeOffers";
 import OperationalAnalysisInformationPanel from "./components/OperationalAnalysisInformationPanel";
 import FinancialAnalysisInformationPanel from "./components/FinancialAnalysisInformationPanel";
+import LocalVisionPanel from "./components/LocalVisionPanel";
 import ModalCard from "../../components/ModalCard";
+import ReportInitPanel from "./components/ReportInitPanel";
 
 export default defineComponent({
     name: 'projectCard',
@@ -271,7 +267,9 @@ export default defineComponent({
         WhatsNext,
         OperationalAnalysisInformationPanel,
         FinancialAnalysisInformationPanel,
-        ModalCard
+        ModalCard,
+        LocalVisionPanel,
+        ReportInitPanel
     },
     props: {
         id: Number,
@@ -312,6 +310,8 @@ export default defineComponent({
         const is_done_offer = ref(false);
         const change_offer = ref(false);
         const is_done_technical = ref(false);
+        const stage = ref(0);
+
 
         watch(() => props.change, (first, second) => {
             if(props.change === 'all-offers' && user.type === 'integrator'){
@@ -570,6 +570,7 @@ export default defineComponent({
             });
         }
         return {
+            stage,
             is_done_technical,
             change_offer,
             is_done_offer,

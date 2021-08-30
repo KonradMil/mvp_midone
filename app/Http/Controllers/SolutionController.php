@@ -911,7 +911,7 @@ class SolutionController extends Controller
         $solution->challenge_id = $request->input('id');
         $solution->installer_id = Auth::user()->id;
         $solution->financial_after_id = $financial->id;
-        $solution->save_json = $challenge->save_json;
+        $solution->save_json = json_encode($challenge->save_json);
         $solution->published = 0;
         $solution->status = 0;
         $solution->screenshot_path = 'screenshots/dbr_placeholder.jpeg';

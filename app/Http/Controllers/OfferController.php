@@ -8,6 +8,7 @@ use App\Events\OfferPublished;
 use App\Events\OfferRejected;
 use App\Models\Challenge;
 use App\Models\Offer;
+use App\Models\Project;
 use App\Models\Solution;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -501,6 +502,16 @@ class OfferController extends Controller
         if ($offer->rejected == true) {
             $offer->rejected = false;
         }
+        $project = new Project();
+        $project->challenge_id = $challenge->id;
+        $project->name = $challenge->name;
+        $project->en_name = $challenge->en_name;
+        $project->type = $challenge->type;
+        $project->description = $challenge->description;
+        $project->en_description = $challenge->en_description;
+        $project->stage = 0;
+
+        $project->save();
         $challenge->save();
         $solution->save();
         $offer->save();
@@ -510,7 +521,7 @@ class OfferController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Zatwierdzono ofertę.',
-            'payload' => $offer, $solution, $challenge
+            'payload' => $project
         ]);
     }
 

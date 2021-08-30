@@ -26,6 +26,7 @@ Route::group(['prefix' => 'challenges', 'middleware' => 'auth:sanctum'], functio
     Route::post('publish', [ChallengeController::class, 'publish']);
     Route::post('unpublish', [ChallengeController::class, 'unpublish']);
     Route::post('change/dates', [ChallengeController::class, 'changeDates']);
+    Route::post('local-vision/save', [ChallengeController::class, 'localVisionSave']);
 });
 
 // TODO cała grupa poniżej do usunięcia
@@ -52,4 +53,12 @@ Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function
     Route::post('publish', [ChallengeController::class, 'publish']);
     Route::post('unpublish', [ChallengeController::class, 'unpublish']);
     Route::post('change/dates', [ChallengeController::class, 'changeDates']);
+    Route::post('local-vision/save', [ChallengeController::class, 'localVisionSave']);
+    Route::post('local-vision/get', [ChallengeController::class, 'localVisionGet']);
+    Route::post('local-vision/delete', [ChallengeController::class, 'localVisionDelete']);
+    Route::post('local-vision/accept', [ChallengeController::class, 'localVisionAccept']);
+    Route::post('financial-details/save', [ChallengeController::class, 'financialDetailsSave']);
+    Route::post('technical-details/save', [ChallengeController::class, 'technicalDetailsSave']);
+    Route::post('project-offer/accept', [ChallengeController::class, 'projectOfferAccept']);
+    Route::post('details/accept', [ChallengeController::class, 'projectDetailsAccept']);
 });
