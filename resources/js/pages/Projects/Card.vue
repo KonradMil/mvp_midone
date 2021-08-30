@@ -131,23 +131,24 @@
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'local-vision'"
                            :class="(activeTab == 'local-vision')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600"/>
+                            <EditIcon v-if="challenge.project_accept_vision !== 1" class="w-4 h-4 mr-2 text-red-600"/>
+                            <CheckCircleIcon v-if="challenge.project_accept_vision === 1" class="w-4 h-4 mr-2 text-green-600"/>
                             Raport z wizji lokalnej
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
                            @click.prevent="(activeTab = 'techniczne') && (stage=3)"
                            :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon class="w-4 h-4 mr-2 text-red-600" v-if="is_done_technical === false"/>
-                            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600" v-if="is_done_technical === true"/>
+                            <EditIcon v-if="challenge.project_accept_details !== 1" class="w-4 h-4 mr-2 text-red-600"/>
+                            <CheckCircleIcon v-if="challenge.project_accept_details === 1" class="w-4 h-4 mr-2 text-green-600"/>
                             Założenia projektu
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'oferty'"
                            :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon class="w-4 h-4 mr-2 text-red-600" v-if="challenge.is_offer_changed !== 1"/>
-                            <CheckCircleIcon class="w-4 h-4 mr-2 text-green-600" v-if="challenge.is_offer_changed === 1"/>
+                            <EditIcon v-if="challenge.project_accept_offer !== 1" class="w-4 h-4 mr-2 text-red-600"/>
+                            <CheckCircleIcon v-if="challenge.project_accept_offer === 1" class="w-4 h-4 mr-2 text-green-600"/>
                             Oferta
                         </a>
                         <a v-if="challenge.stage === 3"
