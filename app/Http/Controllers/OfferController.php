@@ -525,7 +525,7 @@ class OfferController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Zatwierdzono ofertę.',
-            'payload' => $offer, $solution, $challenge
+            'payload' => $project
         ]);
     }
 
