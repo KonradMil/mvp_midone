@@ -84,7 +84,7 @@ class ProjectController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function localVisionSave(Request $request): JsonResponse
+    public function saveLocalVision(Request $request): JsonResponse
     {
         $project = Project::find($request->input('id'));
         $reports = $request->input('reports');
@@ -108,7 +108,7 @@ class ProjectController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function localVisionGet(Request $request): JsonResponse
+    public function getLocalVision(Request $request): JsonResponse
     {
         $reports = LocalVision::where('project_id', '=', $request->input('id'))->get();
 
@@ -123,7 +123,7 @@ class ProjectController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function localVisionDelete(Request $request): JsonResponse
+    public function deleteLocalVision(Request $request): JsonResponse
     {
         $report = LocalVision::where('id', '=', $request->input('id'))->first();
         if($report != null){
@@ -140,7 +140,7 @@ class ProjectController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function financialDetailsSave(Request $request): JsonResponse
+    public function saveFinancialDetails(Request $request): JsonResponse
     {
         $financial = Financial::find($request->id);
         $financial->days = $request->days;
@@ -168,7 +168,7 @@ class ProjectController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function technicalDetailsSave(Request $request): JsonResponse
+    public function saveTechnicalDetails(Request $request): JsonResponse
     {
         $technical = TechnicalDetails::find($request->id);
 
@@ -214,7 +214,7 @@ class ProjectController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function projectOfferAccept(Request $request): JsonResponse
+    public function acceptOffer(Request $request): JsonResponse
     {
         $project = Project::where('challenge_id', '=' , $request->input('id'));
         $project->project_accept_offer = 1;
@@ -230,7 +230,7 @@ class ProjectController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function projectOfferDetails(Request $request): JsonResponse
+    public function acceptDetails(Request $request): JsonResponse
     {
         $project = Project::where('challenge_id', '=' , $request->input('id'));
         $project->project_accept_details = 1;
@@ -246,7 +246,7 @@ class ProjectController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function localVisionAccept(Request $request): JsonResponse
+    public function acceptLocalVision(Request $request): JsonResponse
     {
         $project = Project::where('challenge_id', '=' , $request->input('id'));
         $project->project_accept_vision = 1;
