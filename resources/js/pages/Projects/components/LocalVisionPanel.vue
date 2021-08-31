@@ -96,7 +96,7 @@ export default {
             }, 750)
         }
         const deleteReport = async (index,id) => {
-            axios.post('/api/challenge/local-vision/delete', {id: id})
+            axios.post('/api/projects/local-vision/delete', {id: id})
                 .then(response => {
                     if (response.data.success) {
                         reports.value.splice(index, 1);
@@ -107,7 +107,7 @@ export default {
                 }, removeReport)
         }
         const saveReports = async () => {
-            axios.post('/api/challenge/local-vision/save', {id: props.challenge_id, reports: reports.value})
+            axios.post('/api/projects/local-vision/save', {id: props.challenge_id, reports: reports.value})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Zapisano poprawnie');
@@ -117,7 +117,7 @@ export default {
                 })
         }
         const getReports = async () => {
-            axios.post('/api/challenge/local-vision/get', {id: props.challenge_id})
+            axios.post('/api/projects/local-vision/get', {id: props.challenge_id})
                 .then(response => {
                     if (response.data.success) {
                         reports.value = response.data.payload;
@@ -127,7 +127,7 @@ export default {
                 })
         }
         const acceptLocalVision = async () => {
-            axios.post('/api/challenge/local-vision/accept', {id: props.challenge_id})
+            axios.post('/api/projects/local-vision/accept', {id: props.challenge_id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Zapisano poprawnie');

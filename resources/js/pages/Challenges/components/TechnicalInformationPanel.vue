@@ -413,7 +413,7 @@ export default {
         });
 
         const saveTechnicalDetails = async () => {
-            axios.post('/api/challenge/technical-details/save', {
+            axios.post('/api/projects/technical-details/save', {
                 id: props.challenge.technical_details.id,
                 detail_weight: props.challenge.technical_details.detail_weight,
                 pick_quality: props.challenge.technical_details.pick_quality,
@@ -436,7 +436,7 @@ export default {
         }
 
         const saveFinancialDetails = async () => {
-            axios.post('/api/challenge/financial-details/save', {
+            axios.post('/api/projects/financial-details/save', {
                 id: props.challenge.financial_before.id,
                 days: props.challenge.financial_before.days,
                 shifts: props.challenge.financial_before.shifts,
@@ -461,7 +461,7 @@ export default {
         }
 
         const acceptDetails = async () => {
-            axios.post('/api/challenge/details/accept', {id: props.challenge_id})
+            axios.post('/api/projects/details/accept', {id: props.challenge_id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Zapisano poprawnie');

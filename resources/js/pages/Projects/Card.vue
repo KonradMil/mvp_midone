@@ -282,6 +282,7 @@ export default defineComponent({
         const announcementRef = ref();
         const newProjectsRef = ref();
         const challenge = ref({});
+        const project = ref({});
         const solutions = ref({});
         const permissions = ref({});
         const solution = ref({});
@@ -426,13 +427,14 @@ export default defineComponent({
             checkPermissions();
         };
 
-        const getCardChallengeRepositories = async (id) => {
-            await axios.post('/api/challenge/user/get/card', {id: id})
+        const getCardProjectRepositories = async (id) => {
+            await axios.post('/api/projects/get/card', {id: id})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
                         console.log(response.data.payload);
                         challenge.value = response.data.payload;
+                        project.value = response.data.project;
                         checkTeam();
                         filter();
                         checkPermissions();
@@ -446,7 +448,7 @@ export default defineComponent({
         onMounted(function () {
             permissions.value = window.Laravel.permissions;
             console.log(props);
-            getCardChallengeRepositories(props.id);
+            getCardProjectRepositories(props.id);
         })
 
 
@@ -457,50 +459,6 @@ export default defineComponent({
         provide("bind[newProjectsRef]", el => {
             newProjectsRef.value = el;
         });
-
-        const publish = async(id) => {
-            axios.post('/api/challenge/publish', {id: id})
-                .then(response => {
-                    console.log(response.data)
-                    console.log(response.data.success + '-> heeeeeeeeeeere')
-                    if (response.data.success) {
-                        console.log(response.data.payload);
-                        challenge.value = response.data.payload;
-                        toast.success('Opublikowano.');
-                    } else {
-                        // toast.error(response.data.message);
-                        toast.error('Błąd.');
-                    }
-                }).catch(function (error) {
-                console.error(error);
-            });
-        }
-
-        const unpublish = async(id) => {
-            axios.post('/api/challenge/unpublish', {id: id})
-                .then(response => {
-                    // console.log(response.data)
-                    if (response.data.success) {
-                        console.log(response.data.payload);
-                        challenge.value = response.data.payload;
-                        toast.success('Wyzwanie nie jest już publiczne.');
-                    } else {
-                        toast.error('Błąd.');
-                    }
-                })
-        }
-
-        const addSolution = () => {
-            axios.post('/api/solution/create', {id: challenge.value.id})
-                .then(response => {
-                    if (response.data.success) {
-                        console.log(response.data.payload);
-                        router.push({path: '/studio/solution/' + response.data.payload.id});
-                    } else {
-                        // toast.error(response.data.message);
-                    }
-                })
-        };
 
         const delete_cookie = ( name, path = '/', domain ) => {
             if( get_cookie( name ) ) {
@@ -570,6 +528,7 @@ export default defineComponent({
             });
         }
         return {
+            project,
             stage,
             is_done_technical,
             change_offer,
