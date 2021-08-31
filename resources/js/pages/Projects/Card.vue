@@ -374,7 +374,6 @@ export default defineComponent({
         const filter = () => {
             console.log(challenge.value.solutions + '->  solutions.value');
             challenge.value.solutions.forEach(function (solution) {
-                console.log(solution.author_id + 'author_id');
                 if(solution.author_id=== user.id) {
                     isSolutions.value = true;
                 } else if((solution.published === 1) && (solution.author.id === user.id)) {
@@ -384,15 +383,9 @@ export default defineComponent({
         }
 
         const checkTeam = () => {
-            console.log({user_id: user.id, challenge_id: challenge.value.id});
             axios.post('/api/challenge/check-team', {user_id: user.id, challenge_id: challenge.value.id})
                 .then(response => {
-                    console.log("response.data")
-                    console.log(response.data)
                     if (response.data.success) {
-                        console.log("user.id");
-                        console.log(user.id);
-                        console.log(challenge.value.author_id);
                         inTeam.value = response.data.payload || (user.id == challenge.value.author_id);
                     } else {
 
@@ -406,9 +399,7 @@ export default defineComponent({
         });
 
         emitter.on('*', (type, e) => {
-            console.log(type, e);
-            console.log('HERE212');
-                if(type == 'activeTab') {
+            if(type == 'activeTab') {
                     activeTab.value = e.name;
                     solution.value = e.solution;
                     who.value = e.who;
@@ -418,21 +409,17 @@ export default defineComponent({
 
 
         emitter.on('changeToOfferAdd', e => () => {
-            console.log('BOLLOCKS');
             activeTab.value = 'addingoffer';
         });
 
         const handleCallback = () => {
-            console.log('checkPermissions' + challenge.value.solutions);
             checkPermissions();
         };
 
         const getCardProjectRepositories = async (id) => {
             await axios.post('/api/projects/get/card', {id: id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
-                        console.log(response.data.payload);
                         challenge.value = response.data.payload;
                         project.value = response.data.project;
                         checkTeam();
@@ -447,7 +434,6 @@ export default defineComponent({
 
         onMounted(function () {
             permissions.value = window.Laravel.permissions;
-            console.log(props);
             getCardProjectRepositories(props.id);
         })
 

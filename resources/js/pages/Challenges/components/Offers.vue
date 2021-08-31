@@ -224,7 +224,6 @@ export default {
 
 
         onMounted(() => {
-            // getOffers();
             getOffersRepositories('');
             if(props.stage === 3){
                 change.value = true;
