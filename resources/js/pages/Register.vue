@@ -39,12 +39,7 @@
                         >
                             {{$t('register.signup')}}
                         </h2>
-                        <div
-                            class="intro-x mt-2 text-gray-500 dark:text-gray-500 xl:hidden text-center"
-                        >
-                            A few more clicks to sign in to your account. Manage all your
-                            e-commerce accounts in one place
-                        </div>
+
                         <div class="intro-x mt-8">
                             <div class="mt-3"><label>{{$t('register.iam')}}</label>
                                 <div class="flex flex-col sm:flex-row mt-2">
@@ -328,15 +323,12 @@
             const validate = useVuelidate(rules, toRefs(formData));
             // const s = this.methods.handleSubmit();
             const save = () => {
-                console.log('here');
+
                 if(formData.password != formData.passwordConfirm) {
                     toast.warning('Hasła muszą być takie same');
                     return false;
                 }
-                console.log((formData.rodo && formData.rodo2 && formData.rodo3));
-                console.log(formData.rodo);
-                console.log(formData.rodo2);
-                console.log(formData.rodo3);
+
                 if(!(formData.rodo && formData.rodo2 && formData.rodo3)) {
                     toast.error('Wszystkie zgody muszą być zaznaczone.');
                     return false;
@@ -376,10 +368,11 @@
                 if(!a) {
                     return false;
                 }
-                console.log('here');
+
                 if(this.formData.password != this.formData.passwordConfirm) {
                     return false;
                 }
+
                 axios.get('/sanctum/csrf-cookie').then(response => {
                     axios.post('/api/register', {
                         type: this.formData.type,
@@ -399,7 +392,11 @@
                             }
                         })
                         .catch(function (error) {
-                            console.error(error);
+
+                            if(error.response.status === 400) {
+                                toast.warning(error.response.data.message);
+                            }
+
                         });
                 })
             }

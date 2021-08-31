@@ -64,7 +64,7 @@ class AuthController extends Controller
         if (!$parameters->validate()) {
 
             $response['message'] = $parameters->getMessagesString();
-            return response()->json($response, Response::HTTP_OK);
+            return response()->json($response, Response::HTTP_BAD_REQUEST);
 
             //New way:
 

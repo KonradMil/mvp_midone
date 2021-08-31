@@ -18,6 +18,7 @@ class TeamInvitation extends Mailable
      * Create a new message instance.
      *
      * @param $invite
+     * @param $name
      */
     public function __construct($invite, $name)
     {
@@ -30,7 +31,7 @@ class TeamInvitation extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(): TeamInvitation
     {
         return $this->view('emails.team_invitation')->with([ 'invite' => $this->invite, 'name' => $this->name]);
     }
