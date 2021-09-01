@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Tags\HasTags;
 
@@ -29,11 +30,11 @@ class Project extends Model
     ];
 
     /**
-     * @return HasOne
+     * @return BelongsTo
      */
-    public function challenge(): HasOne
+    public function challenge(): BelongsTo
     {
-        return $this->hasOne(Challenge::class, 'id', 'challenge_id');
+        return $this->BelongsTo(Challenge::class, 'id', 'challenge_id');
     }
 
     /**
