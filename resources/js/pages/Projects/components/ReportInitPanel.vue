@@ -2,7 +2,7 @@
     <div class="intro-y box lg:mt-5" style="width: 350px; height: 280px; margin-top: -2px;">
         <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
             <h2 class="font-medium text-base mr-auto">
-                Zaakceptuj zmiany żeby przejść do następnej fazy projektu
+                Podgląd fazy 1
             </h2>
         </div>
         <!-- END: Display Information -->
@@ -12,7 +12,8 @@
                     id="rodo"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    v-model="project_accept_local_vision"/>
+                    v-model="project.project_accept_local_vision"
+                    disabled/>
                 <label class="cursor-pointer select-none" for="rodo">
                     Akceptacja wizji lokalnej</label>
             </div>
@@ -21,7 +22,8 @@
                     id="rodo3"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    :checked="project_accept_offer"/>
+                    :checked="project.project_accept_offer"
+                     disabled/>
                 <label class="cursor-pointer select-none" for="rodo3">
                     Akceptacja oferty
                 </label>
@@ -31,7 +33,8 @@
                     id="rodo2"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    :checked="project_accept_details"/>
+                    :checked="project.project_accept_details"
+                     disabled/>
                 <label class="cursor-pointer select-none" for="rodo2">
                     Akceptacja założen projektu
                 </label>
@@ -48,6 +51,9 @@ import {useToast} from "vue-toastification";
 export default {
     name: 'ReportInitPanel.vue',
     components: {
+    },
+    props:{
+        project: Object
     },
     setup() {
         const user = window.Laravel.user;

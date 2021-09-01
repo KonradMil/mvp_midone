@@ -131,24 +131,24 @@
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'local-vision'"
                            :class="(activeTab == 'local-vision')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon v-if="challenge.project.project_accept_vision !== 1" class="w-4 h-4 mr-2 text-red-600"/>
-                            <CheckCircleIcon v-if="challenge.project.project_accept_vision === 1" class="w-4 h-4 mr-2 text-green-600"/>
+                            <EditIcon v-if="project.project_accept_vision !== 1" class="w-4 h-4 mr-2 text-red-600"/>
+                            <CheckCircleIcon v-if="project.project_accept_vision === 1" class="w-4 h-4 mr-2 text-green-600"/>
                             Raport z wizji lokalnej
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
                            @click.prevent="(activeTab = 'techniczne') && (stage=3)"
                            :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon v-if="challenge.project.project_accept_details !== 1" class="w-4 h-4 mr-2 text-red-600"/>
-                            <CheckCircleIcon v-if="challenge.project.project_accept_details === 1" class="w-4 h-4 mr-2 text-green-600"/>
+                            <EditIcon v-if="project.project_accept_details !== 1" class="w-4 h-4 mr-2 text-red-600"/>
+                            <CheckCircleIcon v-if="project.project_accept_details === 1" class="w-4 h-4 mr-2 text-green-600"/>
                             Założenia projektu
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'oferty'"
                            :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon v-if="challenge.project.project_accept_offer !== 1" class="w-4 h-4 mr-2 text-red-600"/>
-                            <CheckCircleIcon v-if="challenge.project.project_accept_offer === 1" class="w-4 h-4 mr-2 text-green-600"/>
+                            <EditIcon v-if="project.project_accept_offer !== 1" class="w-4 h-4 mr-2 text-red-600"/>
+                            <CheckCircleIcon v-if="project.project_accept_offer === 1" class="w-4 h-4 mr-2 text-green-600"/>
                             Oferta
                         </a>
                         <a v-if="challenge.stage === 3"
@@ -207,7 +207,7 @@
             <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisInformationPanel>
             <FinancialAnalysisInformationPanel v-if="activeTab == 'financial-analysis'" :solution="solution_project" ></FinancialAnalysisInformationPanel>
             <LocalVisionPanel v-if="activeTab == 'local-vision'" :challenge_author_id="challenge.author_id" :challenge_id="challenge.id" :author_id="solution_project.author_id"></LocalVisionPanel>
-            <ReportInitPanel v-if="activeTab == 'report-init'" :challenge_id="challenge.id" :author_id="solution_project.author_id"></ReportInitPanel>
+            <ReportInitPanel v-if="activeTab == 'report-init'" :project="project" :challenge_id="challenge.id" :author_id="solution_project.author_id"></ReportInitPanel>
             <ModalCard :show="show" @closed="modalClosed">
                 <h3 class="intro-y text-lg font-medium mt-5">Czy na pewno chcesz przejść do następnej fazy?</h3>
                 <div class="intro-y box p-5 mt-12 sm:mt-5" style="text-align: center;">
@@ -354,13 +354,13 @@ export default defineComponent({
             addSolutionOffer.value = e.addSolutionOffer;
         });
         emitter.on('acceptOffer', e => {
-            challenge.value.project.project_accept_offer = 1;
+            project.value.project_accept_offer = 1;
         });
         emitter.on('acceptLocalVision', e => {
-            challenge.value.project.project_accept_vision = 1;
+            project.value.project_accept_vision = 1;
         });
         emitter.on('acceptDetails', e => {
-            challenge.value.project.project_accept_details = 1;
+            project.value.project_accept_details = 1;
         });
 
         const checkSolution = () => {
