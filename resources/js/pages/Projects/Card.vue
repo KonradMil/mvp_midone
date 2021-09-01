@@ -353,6 +353,15 @@ export default defineComponent({
         emitter.on('updateAddSolutionOffer', e => {
             addSolutionOffer.value = e.addSolutionOffer;
         });
+        emitter.on('acceptOffer', e => {
+            project.project_accept_offer.value = 1;
+        });
+        emitter.on('acceptLocalVision', e => {
+            project.project_accept_vision.value = 1;
+        });
+        emitter.on('acceptDetails', e => {
+            project.project_accept_details.value = 1;
+        });
 
         const checkSolution = () => {
              challenge.value.solutions.forEach(function(solution){

@@ -9,7 +9,7 @@
 <!--                        <SaveIcon/>-->
 <!--                    </div>-->
                     <button v-if="stage === 3 && author_id === user.id" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveTechnicalDetails">{{$t('profiles.save')}}</button>
-                    <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary" @click.prevent="acceptDetails">Akceptuje zmiany</button>
+                    <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary" @click.prevent="acceptTechnicalDetails">Akceptuje zmiany</button>
                 </div>
                 <div class="px-5 py-5">
                     <div
@@ -221,7 +221,7 @@
 <!--                        <SaveIcon/>-->
 <!--                    </div>-->
                     <button v-if="stage === 3 && author_id === user.id" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveFinancialDetails">{{$t('profiles.save')}}</button>
-                    <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary">Akceptuje zmiany</button>
+                    <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary" @click.prevent="acceptFinancialDetails">Akceptuje zmiany</button>
                 </div>
                 <div class="px-5 py-5">
                     <div
@@ -384,7 +384,7 @@
 </template>
 
 <script>
-import {computed, onMounted, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, ref} from "vue";
 import {useToast} from "vue-toastification";
 
 export default {
@@ -395,6 +395,8 @@ export default {
         author_id: Number
     },
     setup(props) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const challenge = computed(() => {
             return props.challenge;
         });
@@ -462,11 +464,24 @@ export default {
                 })
         }
 
-        const acceptDetails = async () => {
-            axios.post('/api/projects/details/accept', {id: props.challenge_id})
+        const acceptTechnicalDetails = async () => {
+            axios.post('/api/projects/technical-details/accept', {id: props.challenge_id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Zapisano poprawnie');
+                        emitter.emit('acceptDetails', {});
+                    } else {
+
+                    }
+                })
+        }
+
+        const acceptFinancialDetails = async () => {
+            axios.post('/api/projects/financial-details/accept', {id: props.challenge_id})
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Zapisano poprawnie');
+                        emitter.emit('acceptDetails', {});
                     } else {
 
                     }
@@ -483,7 +498,8 @@ export default {
             saveFinancialDetails,
             challenge,
             details,
-            acceptDetails
+            acceptTechnicalDetails,
+            acceptFinancialDetails
         }
     }
 }

@@ -18,7 +18,6 @@
                                 <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status < 1">{{$t('challengesMain.publishOffer')}}</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="editOffer(offer.id)" v-if="stage !== 3 && offer.status < 1">{{$t('models.edit')}}</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="changeOffer(offer.id)" v-if="stage === 3 && user.id === author_id">Zmiana oferty</button>
-                                <button class="btn btn-primary shadow-md mr-2" @click="noChangeOffer" v-if="offer.is_changed !== 1 && stage === 3">Zakończ ofertowanie</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click.prevent="deleteOffer(offer.id,index)" v-if="offer.status < 1 || offer.rejected == 1">{{$t('models.delete')}}</button>
                             </div>
                             <div class="mt-2 pl-9 pb-6" v-if="user.id === challenge_author_id && stage === 3">
@@ -216,6 +215,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Zapisano poprawnie');
+                        emitter.emit('acceptOffer', {});
                     } else {
 
                     }

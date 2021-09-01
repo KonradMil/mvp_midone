@@ -4,7 +4,7 @@
             <h2 class="font-medium text-base mr-auto">
                 Wizja lokalna
             </h2>
-            <button v-if="challenge_author_id === user.id" class="btn btn-primary">Akceptuje zmiany</button>
+            <button v-if="challenge_author_id === user.id" class="btn btn-primary" @click.prevent="acceptLocalVision">Akceptuje zmiany</button>
             <div v-if="author_id === user.id" class="cursor-pointer pr-3" @click.prevent="addNewReport">
                 <PlusCircleIcon/>
             </div>
@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import {computed, onMounted, reactive, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, reactive, ref} from "vue";
 import {useToast} from "vue-toastification";
 
 export default {
@@ -79,6 +79,8 @@ export default {
     },
 
     setup(props) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const reports = ref([]);
         const toast = useToast();
         const user = window.Laravel.user;
@@ -132,6 +134,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Zapisano poprawnie');
+                        emitter.emit('acceptLocalVision', {});
                     } else {
 
                     }
