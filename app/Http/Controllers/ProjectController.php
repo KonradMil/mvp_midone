@@ -91,7 +91,7 @@ class ProjectController extends Controller
 
         foreach($reports as $report){
             $vision = new LocalVision();
-            $vision->project_id = $project->id;
+            $vision->project_id = $request->input('id');
             $vision->description = $report['description'];
             $vision->before = $report['before'];
             $vision->after = $report['after'];
@@ -101,7 +101,7 @@ class ProjectController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Zapisano poprawnie',
-            'payload' => $project->id
+            'payload' => ''
         ]);
     }
     /**
