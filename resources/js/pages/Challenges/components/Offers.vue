@@ -219,7 +219,7 @@ export default {
             axios.post('/api/projects/project-offer/accept', {id: props.id})
                 .then(response => {
                     if (response.data.success) {
-                        toast.success('Zapisano poprawnie');
+                        toast.success('Zaakceptowałeś oferte');
                         emitter.emit('acceptOffer', {});
                     } else {
 
@@ -230,7 +230,7 @@ export default {
             axios.post('/api/projects/project-offer/reject', {id: props.id})
                 .then(response => {
                     if (response.data.success) {
-                        toast.success('Zapisano poprawnie');
+                        toast.success('Odrzuciłeś oferte');
                         emitter.emit('rejectOffer', {});
                     } else {
 

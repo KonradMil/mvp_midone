@@ -135,7 +135,7 @@ export default {
             axios.post('/api/projects/local-vision/accept', {id: props.challenge_id})
                 .then(response => {
                     if (response.data.success) {
-                        toast.success('Zapisano poprawnie');
+                        toast.success('Zaakceptowano');
                         emitter.emit('acceptLocalVision', {});
                     } else {
 
@@ -146,7 +146,7 @@ export default {
             axios.post('/api/projects/local-vision/reject', {id: props.challenge_id})
                 .then(response => {
                     if (response.data.success) {
-                        toast.success('Zapisano poprawnie');
+                        toast.success('Odrzucono');
                         emitter.emit('rejectLocalVision', {});
                     } else {
 

@@ -495,7 +495,7 @@ export default {
             axios.post('/api/projects/financial-details/accept', {id: props.challenge.id})
                 .then(response => {
                     if (response.data.success) {
-                        toast.success('Zapisano poprawnie');
+                        toast.success('Zaakceptowałeś szczegóły techniczne');
                         emitter.emit('acceptDetails', {});
                     } else {
 
@@ -506,7 +506,7 @@ export default {
             axios.post('/api/projects/technical-details/reject', {id: props.challenge.id})
                 .then(response => {
                     if (response.data.success) {
-                        toast.success('Zapisano poprawnie');
+                        toast.success('Odrzuciłeś szczegóły finansowe');
                         emitter.emit('rejectDetails', {});
                     } else {
 
