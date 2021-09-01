@@ -13,7 +13,8 @@ Route::group(['prefix' => 'projects', 'middleware' => 'auth:sanctum'], function 
     Route::post('financial-details/save', [ProjectController::class, 'saveFinancialDetails']);
     Route::post('technical-details/save', [ProjectController::class, 'saveTechnicalDetails']);
     Route::post('project-offer/accept', [ProjectController::class, 'acceptOffer']);
-    Route::post('details/accept', [ProjectController::class, 'acceptDetails']);
+    Route::post('technical-details/accept', [ProjectController::class, 'acceptTechnicalDetails']);
+    Route::post('financial-details/accept', [ProjectController::class, 'acceptFinancialDetails']);
 });
 
 

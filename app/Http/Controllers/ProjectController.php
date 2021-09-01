@@ -230,7 +230,23 @@ class ProjectController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function acceptDetails(Request $request): JsonResponse
+    public function acceptTechnicalDetails(Request $request): JsonResponse
+    {
+        $project = Project::where('challenge_id', '=' , $request->input('id'));
+        $project->project_accept_details = 1;
+        $project->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $project
+        ]);
+    }
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function acceptFinancialDetails(Request $request): JsonResponse
     {
         $project = Project::where('challenge_id', '=' , $request->input('id'));
         $project->project_accept_details = 1;
@@ -258,4 +274,5 @@ class ProjectController extends Controller
             'payload' => $project
         ]);
     }
+
 }
