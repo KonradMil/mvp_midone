@@ -480,7 +480,17 @@ export default {
                     }
                 })
         }
+        const rejectTechnicalDetails = async () => {
+            axios.post('/api/projects/technical-details/reject', {id: props.challenge.id})
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Zapisano poprawnie');
+                        emitter.emit('rejectDetails', {});
+                    } else {
 
+                    }
+                })
+        }
         const acceptFinancialDetails = async () => {
             axios.post('/api/projects/financial-details/accept', {id: props.challenge.id})
                 .then(response => {
@@ -492,7 +502,17 @@ export default {
                     }
                 })
         }
+        const rejectFinancialDetails = async () => {
+            axios.post('/api/projects/technical-details/reject', {id: props.challenge.id})
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Zapisano poprawnie');
+                        emitter.emit('rejectDetails', {});
+                    } else {
 
+                    }
+                })
+        }
         onMounted(() => {
 
         });
@@ -504,7 +524,9 @@ export default {
             challenge,
             details,
             acceptTechnicalDetails,
-            acceptFinancialDetails
+            acceptFinancialDetails,
+            rejectTechnicalDetails,
+            rejectFinancialDetails
         }
     }
 }

@@ -230,10 +230,42 @@ class ProjectController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
+    public function rejectOffer(Request $request): JsonResponse
+    {
+        $project = Project::where('challenge_id', '=' , $request->input('id'))->first();
+        $project->project_accept_offer = 2;
+        $project->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $project
+        ]);
+    }
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function acceptTechnicalDetails(Request $request): JsonResponse
     {
         $project = Project::where('challenge_id', '=', $request->input('id'))->first();
         $project->project_accept_details = 1;
+        $project->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $project
+        ]);
+    }
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function rejectTechnicalDetails(Request $request): JsonResponse
+    {
+        $project = Project::where('challenge_id', '=', $request->input('id'))->first();
+        $project->project_accept_details = 2;
         $project->save();
 
         return response()->json([
@@ -262,10 +294,42 @@ class ProjectController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
+    public function rejectFinancialDetails(Request $request): JsonResponse
+    {
+        $project = Project::where('challenge_id', '=' , $request->input('id'))->first();
+        $project->project_accept_details = 2;
+        $project->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $project
+        ]);
+    }
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function acceptLocalVision(Request $request): JsonResponse
     {
         $project = Project::where('challenge_id', '=' , $request->input('id'))->first();
         $project->project_accept_vision = 1;
+        $project->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $project
+        ]);
+    }
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function rejectLocalVision(Request $request): JsonResponse
+    {
+        $project = Project::where('challenge_id', '=' , $request->input('id'))->first();
+        $project->project_accept_vision = 2;
         $project->save();
 
         return response()->json([

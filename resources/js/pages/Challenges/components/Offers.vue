@@ -226,6 +226,17 @@ export default {
                     }
                 })
         }
+        const rejectProjectOffer = async () => {
+            axios.post('/api/projects/project-offer/reject', {id: props.id})
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Zapisano poprawnie');
+                        emitter.emit('rejectOffer', {});
+                    } else {
+
+                    }
+                })
+        }
 
 
         onMounted(() => {
@@ -236,6 +247,7 @@ export default {
         });
 
         return {
+            rejectProjectOffer,
             acceptProjectOffer,
             noChangeOffer,
             is_done_offer,

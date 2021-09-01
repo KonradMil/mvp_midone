@@ -142,6 +142,17 @@ export default {
                     }
                 })
         }
+        const rejectLocalVision = async () => {
+            axios.post('/api/projects/local-vision/reject', {id: props.challenge_id})
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Zapisano poprawnie');
+                        emitter.emit('rejectLocalVision', {});
+                    } else {
+
+                    }
+                })
+        }
 
         onMounted(() => {
             getReports();
@@ -154,7 +165,8 @@ export default {
             addNewReport,
             removeReport,
             saveReports,
-            acceptLocalVision
+            acceptLocalVision,
+            rejectLocalVision
         }
     }
 }
