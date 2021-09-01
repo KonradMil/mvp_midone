@@ -8,7 +8,7 @@
 <!--                    <div v-if="stage === 3 && author_id === user.id" class="cursor-pointer" @click.prevent="saveTechnicalDetails">-->
 <!--                        <SaveIcon/>-->
 <!--                    </div>-->
-                    <button v-if="stage === 3 && author_id === user.id" class="btn btn-primary w-20 mt-3" @click.prevent="saveTechnicalDetails">{{$t('profiles.save')}}</button>
+                    <button v-if="stage === 3 && author_id === user.id" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveTechnicalDetails">{{$t('profiles.save')}}</button>
                     <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary" @click.prevent="acceptDetails">Akceptuje zmiany</button>
                 </div>
                 <div class="px-5 py-5">
@@ -220,7 +220,7 @@
 <!--                    <div v-if="stage === 3 && author_id === user.id" class="cursor-pointer" @click.prevent="saveFinancialDetails">-->
 <!--                        <SaveIcon/>-->
 <!--                    </div>-->
-                    <button v-if="stage === 3 && author_id === user.id" class="btn btn-primary w-20 mt-3" @click.prevent="saveTechnicalDetails">{{$t('profiles.save')}}</button>
+                    <button v-if="stage === 3 && author_id === user.id" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveFinancialDetails">{{$t('profiles.save')}}</button>
                     <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary">Akceptuje zmiany</button>
                 </div>
                 <div class="px-5 py-5">
