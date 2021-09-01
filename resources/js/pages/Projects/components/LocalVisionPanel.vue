@@ -8,9 +8,10 @@
             <div v-if="author_id === user.id" class="cursor-pointer pr-3" @click.prevent="addNewReport">
                 <PlusCircleIcon/>
             </div>
-            <div v-if="author_id === user.id" class="cursor-pointer" @click.prevent="saveReports">
-                <SaveIcon/>
-            </div>
+<!--            <div v-if="author_id === user.id" class="cursor-pointer" @click.prevent="saveReports">-->
+<!--                <SaveIcon/>-->
+<!--            </div>-->
+            <button v-if="author_id === user.id" class="btn btn-primary w-20 mt-3" @click.prevent="saveReports">{{$t('profiles.save')}}</button>
         </div>
         <div class="p-5" id="bordered-table">
             <div class="preview">
