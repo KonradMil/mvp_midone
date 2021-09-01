@@ -188,6 +188,7 @@ class CreateCoreTables extends Migration
             $table->integer('status')->default(0);
             $table->integer('stage')->nullable();
             $table->integer('published')->default(0);
+            $table->integer('allowed_publishing')->default(0);
             $table->unsignedBigInteger('author_id');
             $table->unsignedBigInteger('financial_before_id');
             $table->unsignedBigInteger('technical_details_id');
