@@ -22,7 +22,11 @@
                             </div>
                             <div class="mt-2 pl-9 pb-6" v-if="user.id === challenge_author_id && stage === 3">
                                 <button class="btn btn-primary shadow-md mr-2" @click.prevent="acceptProjectOffer">Akceptuje zmiany</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click.prevent="rejectProjectOffer">Odrzucam zmiany</button>
                             </div>
+                            <div class="flex items-center justify-center text-theme-9" v-if="project.project_accept_offer === 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
+                            <div class="flex items-center justify-center text-theme-6" v-if="project.project_accept_offer === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
+                            <div class="flex items-center mr-3" v-if="project.project_accept_offer < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
                             <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1 && stage !== 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
                             <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
                             <div class="flex items-center mr-3" v-if="(offer.rejected != 1) && (offer.selected != 1) && (offer.status == 1)"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
@@ -146,7 +150,8 @@ export default {
         selected_offer_id: Number,
         stage: Number,
         author_id: Number,
-        challenge_author_id: Number
+        challenge_author_id: Number,
+        project: Object
     },
     emits: ["update:activeTab"],
 

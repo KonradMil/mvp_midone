@@ -4,13 +4,14 @@
             <h2 class="font-medium text-base mr-auto">
                 Wizja lokalna
             </h2>
+            <div class="flex items-center justify-center text-theme-9" v-if="project.project_accept_vision === 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
+            <div class="flex items-center justify-center text-theme-6" v-if="project.project_accept_vision === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
+            <div class="flex items-center mr-3" v-if="project.project_accept_vision < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
             <button v-if="challenge_author_id === user.id" class="btn btn-primary" @click.prevent="acceptLocalVision">Akceptuje zmiany</button>
+            <button v-if="challenge_author_id === user.id" class="btn btn-primary" @click.prevent="rejectLocalVision">Odrzucam zmiany</button>
             <div v-if="author_id === user.id" class="cursor-pointer pr-3" @click.prevent="addNewReport">
                 <PlusCircleIcon/>
             </div>
-<!--            <div v-if="author_id === user.id" class="cursor-pointer" @click.prevent="saveReports">-->
-<!--                <SaveIcon/>-->
-<!--            </div>-->
             <button v-if="author_id === user.id" class="btn btn-primary w-20 mt-3" @click.prevent="saveReports">{{$t('profiles.save')}}</button>
         </div>
         <div class="p-5" id="bordered-table">
@@ -75,7 +76,8 @@ export default {
     props: {
         challenge_id: Number,
         author_id: Number,
-        challenge_author_id: Number
+        challenge_author_id: Number,
+        project: Object
     },
 
     setup(props) {
