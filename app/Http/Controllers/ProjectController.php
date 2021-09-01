@@ -232,14 +232,15 @@ class ProjectController extends Controller
      */
     public function acceptTechnicalDetails(Request $request): JsonResponse
     {
-        $project = Project::where('challenge_id', '=' , $request->input('id'));
-        $project->project_accept_details = 1;
-        $project->save();
+        $challenge = Challenge::find($request->input('id'));
+
+        $challenge->project->project_accept_details = 1;
+        $challenge->project->save();
 
         return response()->json([
             'success' => true,
             'message' => 'Zapisano poprawnie',
-            'payload' => $project
+            'payload' => $challenge->project
         ]);
     }
     /**
