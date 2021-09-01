@@ -16,6 +16,9 @@
                     disabled/>
                 <label class="cursor-pointer select-none" for="rodo">
                     Akceptacja wizji lokalnej</label>
+                <div class="text-theme-9">
+                    Zaakceptowano
+                </div>
             </div>
             <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                 <input
