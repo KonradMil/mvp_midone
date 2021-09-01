@@ -134,17 +134,17 @@ class CreateCoreTables extends Migration
 
         Schema::create('technical_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('detail_weight')->nullable();
-            $table->integer('pick_quality');
-            $table->integer('detail_material');
-            $table->integer('detail_size');
-            $table->integer('detail_pick');
-            $table->integer('detail_position');
-            $table->integer('detail_range');
-            $table->integer('detail_destination');
-            $table->integer('number_of_lines');
-            $table->integer('cycle_time');
-            $table->integer('work_shifts');
+            $table->integer('detail_weight')->default(0);
+            $table->integer('pick_quality')->default(0);
+            $table->integer('detail_material')->default(0);
+            $table->integer('detail_size')->default(0);
+            $table->integer('detail_pick')->default(0);
+            $table->integer('detail_position')->default(0);
+            $table->integer('detail_range')->default(0);
+            $table->integer('detail_destination')->default(0);
+            $table->integer('number_of_lines')->default(0);
+            $table->integer('cycle_time')->default(0);
+            $table->integer('work_shifts')->default(0);
             $table->timestamps();
         });
 
@@ -191,9 +191,9 @@ class CreateCoreTables extends Migration
             $table->integer('allowed_publishing')->default(0);
             $table->unsignedBigInteger('author_id');
             $table->unsignedBigInteger('financial_before_id');
-            $table->unsignedBigInteger('technical_details_id');
-            $table->unsignedBigInteger('selected_offer_id');
-            $table->unsignedBigInteger('solution_project_id');
+            $table->unsignedBigInteger('technical_details_id')->nullable();
+            $table->unsignedBigInteger('selected_offer_id')->nullable();
+            $table->unsignedBigInteger('solution_project_id')->nullable();
             $table->foreign('author_id')->references('id')->on('users');
             $table->foreign('financial_before_id')->references('id')->on('financials');
             $table->foreign('technical_details_id')->references('id')->on('technical_details');
@@ -261,8 +261,8 @@ class CreateCoreTables extends Migration
         });
 
         Schema::table('technical_details', function (Blueprint $table) {
-            $table->unsignedBigInteger('challenge_id');
-            $table->unsignedBigInteger('solution_id');
+            $table->unsignedBigInteger('challenge_id')->nullable();
+            $table->unsignedBigInteger('solution_id')->nullable();
             $table->foreign('challenge_id')->references('id')->on('challenges');
             $table->foreign('solution_id')->references('id')->on('solutions');
 
