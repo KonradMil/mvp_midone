@@ -188,9 +188,6 @@ class CreateCoreTables extends Migration
             $table->integer('status')->default(0);
             $table->integer('stage')->nullable();
             $table->integer('published')->default(0);
-            $table->integer('project_accept_offer')->default(0);
-            $table->integer('project_accept_details')->default(0);
-            $table->integer('project_accept_vision')->default(0);
             $table->unsignedBigInteger('author_id');
             $table->unsignedBigInteger('financial_before_id');
             $table->unsignedBigInteger('technical_details_id');
@@ -203,30 +200,6 @@ class CreateCoreTables extends Migration
 
             $table->timestamp('solution_deadline');
             $table->timestamp('offer_deadline');
-            $table->timestamps();
-        });
-
-        Schema::create('projects', function (Blueprint $table) {
-            $table->id();
-            $table->integer('type');
-            $table->string('name')->nullable();
-            $table->integer('challenge_id')->nullable();
-            $table->string('en_name')->nullable();
-            $table->string('description')->nullable();
-            $table->string('en_description')->nullable();
-            $table->integer('stage')->nullable();
-            $table->integer('project_accept_offer')->default(0);
-            $table->integer('project_accept_details')->default(0);
-            $table->integer('project_accept_vision')->default(0);
-            $table->timestamps();
-        });
-
-        Schema::create('local_visions', function (Blueprint $table) {
-            $table->id();
-            $table->integer('challenge_id')->nullable();
-            $table->string('description')->nullable();
-            $table->string('before')->nullable();
-            $table->string('after')->nullable();
             $table->timestamps();
         });
 
@@ -718,8 +691,6 @@ class CreateCoreTables extends Migration
         Schema::dropIfExists('tags');
         Schema::dropIfExists('ratings');
         Schema::dropIfExists('comments');
-        Schema::dropIfExists('projects');
-        Schema::dropIfExists('local_visions');
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('current_team_id');
         });
