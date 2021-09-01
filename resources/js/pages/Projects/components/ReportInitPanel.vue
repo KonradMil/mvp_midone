@@ -39,7 +39,6 @@
                     Akceptacja założen projektu
                 </label>
             </div>
-            <button class="btn btn-primary w-20 mt-3">{{$t('profiles.save')}}</button>
         </div>
     </div>
 </template>
