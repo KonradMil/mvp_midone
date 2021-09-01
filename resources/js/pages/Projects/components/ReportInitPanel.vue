@@ -12,7 +12,7 @@
                     id="rodo"
                     type="checkbox"
                     class="form-check-input border mr-2 ring-0"
-                    v-model="project.project_accept_vision"
+                    :checked="project.project_accept_vision"
                     disabled/>
                 <label class="cursor-pointer select-none" for="rodo">
                     Akceptacja wizji lokalnej</label>
@@ -56,16 +56,10 @@ export default {
     },
     setup() {
         const user = window.Laravel.user;
-        const project_accept_local_vision = ref(false);
-        const project_accept_offer = ref(false);
-        const project_accept_details = ref(false);
         const toast = useToast();
 
         return {
             user,
-            project_accept_local_vision,
-            project_accept_offer,
-            project_accept_details
         };
     },
 }
