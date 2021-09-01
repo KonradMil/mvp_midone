@@ -266,7 +266,7 @@ class ProjectController extends Controller
     {
         $project = Project::where('challenge_id', '=' , $request->input('id'));
         $project->project_accept_vision = 1;
-        $project->save();
+//        $project->save();
 
         return response()->json([
             'success' => true,
