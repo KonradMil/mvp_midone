@@ -382,11 +382,7 @@
                     })
                         .then(response => {
                             if (response.data.success) {
-                                let user = response.data.payload;
-                                store.dispatch('login/login', {
-                                    user
-                                });
-                                window.location.replace('/kreator');
+                                toast.success(response.data.message);
                             } else {
                                 toast.warning(response.data.message);
                             }

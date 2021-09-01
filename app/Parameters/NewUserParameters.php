@@ -33,6 +33,11 @@ class NewUserParameters extends Parameters
     public string $hashedPassword;
 
     /**
+     * @var string
+     */
+    public string $confirmationToken;
+
+    /**
      *
      */
     public function __construct()

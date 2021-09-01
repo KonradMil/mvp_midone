@@ -78,12 +78,12 @@ class AuthController extends Controller
             $newUser = $this->userService->addUser($parameters);
 
             $response['success'] = true;
-            $response['message'] = __('messages.account_created');
+            $response['message'] = __('messages.registration.account-created');
             $response['payload'] = $newUser;
 
             //new way:
 
-            $responseBuilder->setMessage(__('messages.account_created'));
+            $responseBuilder->setMessage(__('messages.registration.account-created'));
             $responseBuilder->addData('user', $newUser);
 
 

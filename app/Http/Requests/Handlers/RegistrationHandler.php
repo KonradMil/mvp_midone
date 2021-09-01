@@ -21,6 +21,7 @@ class RegistrationHandler extends RequestHandler
         $parameters->type = $this->request->get('type');
         $parameters->password = $this->request->get('password');
         $parameters->hashedPassword = Hash::make($this->request->get('password'));
+        $parameters->confirmationToken = md5(rand(1, 100) . microtime());
 
         return $parameters;
     }
