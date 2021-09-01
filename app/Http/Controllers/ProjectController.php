@@ -69,7 +69,7 @@ class ProjectController extends Controller
         $challenge->comments_count = $challenge->comments()->count();
         $challenge->likes = $challenge->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
 
-        $project = Project::where('challenge_id', '=', $challenge->id);
+        $project = Project::where('challenge_id', '=', $challenge->id)->first();
 
         return response()->json([
             'success' => true,
@@ -86,12 +86,12 @@ class ProjectController extends Controller
      */
     public function saveLocalVision(Request $request): JsonResponse
     {
-        $project = Project::where('challenge_id', '=', $request->input('id'));
+        $project = Project::where('challenge_id', '=', $request->input('id'))->first();
         $reports = $request->input('reports');
 
         foreach($reports as $report){
             $vision = new LocalVision();
-            $vision->project_id = $request->input('id');
+            $vision->project_id = $project->id;
             $vision->description = $report['description'];
             $vision->before = $report['before'];
             $vision->after = $report['after'];
@@ -216,7 +216,7 @@ class ProjectController extends Controller
      */
     public function acceptOffer(Request $request): JsonResponse
     {
-        $project = Project::where('challenge_id', '=' , $request->input('id'));
+        $project = Project::where('challenge_id', '=' , $request->input('id'))->first();
         $project->project_accept_offer = 1;
         $project->save();
 
@@ -232,15 +232,14 @@ class ProjectController extends Controller
      */
     public function acceptTechnicalDetails(Request $request): JsonResponse
     {
-        $challenge = Challenge::find($request->input('id'));
-
-        $challenge->project->project_accept_details = 1;
-        $challenge->project->save();
+        $project = Project::where('challenge_id', '=', $request->input('id'))->first();
+        $project->project_accept_details = 1;
+        $project->save();
 
         return response()->json([
             'success' => true,
             'message' => 'Zapisano poprawnie',
-            'payload' => $challenge->project
+            'payload' => $project
         ]);
     }
     /**
@@ -249,7 +248,7 @@ class ProjectController extends Controller
      */
     public function acceptFinancialDetails(Request $request): JsonResponse
     {
-        $project = Project::where('challenge_id', '=' , $request->input('id'));
+        $project = Project::where('challenge_id', '=' , $request->input('id'))->first();
         $project->project_accept_details = 1;
         $project->save();
 
@@ -265,9 +264,9 @@ class ProjectController extends Controller
      */
     public function acceptLocalVision(Request $request): JsonResponse
     {
-        $project = Project::where('challenge_id', '=' , $request->input('id'));
+        $project = Project::where('challenge_id', '=' , $request->input('id'))->first();
         $project->project_accept_vision = 1;
-//        $project->save();
+        $project->save();
 
         return response()->json([
             'success' => true,
