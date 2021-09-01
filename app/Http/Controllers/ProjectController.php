@@ -86,7 +86,7 @@ class ProjectController extends Controller
      */
     public function saveLocalVision(Request $request): JsonResponse
     {
-        $project = Project::find($request->input('id'));
+        $project = Project::where('challenge_id', '=', $request->input('id'));
         $reports = $request->input('reports');
 
         foreach($reports as $report){
