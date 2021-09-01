@@ -465,7 +465,7 @@ export default {
         }
 
         const acceptTechnicalDetails = async () => {
-            axios.post('/api/projects/technical-details/accept', {id: props.challenge_id})
+            axios.post('/api/projects/technical-details/accept', {id: props.challenge.id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Zapisano poprawnie');
@@ -477,7 +477,7 @@ export default {
         }
 
         const acceptFinancialDetails = async () => {
-            axios.post('/api/projects/financial-details/accept', {id: props.challenge_id})
+            axios.post('/api/projects/financial-details/accept', {id: props.challenge.id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Zapisano poprawnie');

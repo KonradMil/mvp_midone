@@ -211,7 +211,7 @@ export default {
         }
 
         const acceptProjectOffer = async () => {
-            axios.post('/api/projects/project-offer/accept', {id: props.challenge_id})
+            axios.post('/api/projects/project-offer/accept', {id: props.id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Zapisano poprawnie');
