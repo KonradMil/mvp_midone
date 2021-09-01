@@ -222,7 +222,7 @@
                     <div class="flex items-center justify-center text-theme-6" v-if="project.project_accept_details === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
                     <div class="flex items-center mr-3" v-if="project.project_accept_details < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
                     <button v-if="stage === 3 && author_id === user.id" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveFinancialDetails">{{$t('profiles.save')}}</button>
-                    <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary" @click.prevent="acceptFinancialDetails">Akceptuje zmiany</button>
+                    <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary mr-6" @click.prevent="acceptFinancialDetails">Akceptuje zmiany</button>
                     <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary" @click.prevent="rejectFinancialDetails">Odrzucam zmiany</button>
                 </div>
                 <div class="px-5 py-5">
