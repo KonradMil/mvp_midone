@@ -8,9 +8,10 @@
             <div v-if="author_id === user.id" class="cursor-pointer pr-3" @click.prevent="addNewReport">
                 <PlusCircleIcon/>
             </div>
-            <div v-if="author_id === user.id" class="cursor-pointer" @click.prevent="saveReports">
-                <SaveIcon/>
-            </div>
+<!--            <div v-if="author_id === user.id" class="cursor-pointer" @click.prevent="saveReports">-->
+<!--                <SaveIcon/>-->
+<!--            </div>-->
+            <button v-if="author_id === user.id" class="btn btn-primary w-20 mt-3" @click.prevent="saveReports">{{$t('profiles.save')}}</button>
         </div>
         <div class="p-5" id="bordered-table">
             <div class="preview">
@@ -96,7 +97,7 @@ export default {
             }, 750)
         }
         const deleteReport = async (index,id) => {
-            axios.post('/api/challenge/local-vision/delete', {id: id})
+            axios.post('/api/projects/local-vision/delete', {id: id})
                 .then(response => {
                     if (response.data.success) {
                         reports.value.splice(index, 1);
@@ -107,7 +108,7 @@ export default {
                 }, removeReport)
         }
         const saveReports = async () => {
-            axios.post('/api/challenge/local-vision/save', {id: props.challenge_id, reports: reports.value})
+            axios.post('/api/projects/local-vision/save', {id: props.challenge_id, reports: reports.value})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Zapisano poprawnie');
@@ -117,7 +118,7 @@ export default {
                 })
         }
         const getReports = async () => {
-            axios.post('/api/challenge/local-vision/get', {id: props.challenge_id})
+            axios.post('/api/projects/local-vision/get', {id: props.challenge_id})
                 .then(response => {
                     if (response.data.success) {
                         reports.value = response.data.payload;
@@ -127,7 +128,7 @@ export default {
                 })
         }
         const acceptLocalVision = async () => {
-            axios.post('/api/challenge/local-vision/accept', {id: props.challenge_id})
+            axios.post('/api/projects/local-vision/accept', {id: props.challenge_id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Zapisano poprawnie');

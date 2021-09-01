@@ -134,17 +134,17 @@ class CreateCoreTables extends Migration
 
         Schema::create('technical_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('detail_weight')->nullable();
-            $table->integer('pick_quality');
-            $table->integer('detail_material');
-            $table->integer('detail_size');
-            $table->integer('detail_pick');
-            $table->integer('detail_position');
-            $table->integer('detail_range');
-            $table->integer('detail_destination');
-            $table->integer('number_of_lines');
-            $table->integer('cycle_time');
-            $table->integer('work_shifts');
+            $table->integer('detail_weight')->default(0);
+            $table->integer('pick_quality')->default(0);
+            $table->integer('detail_material')->default(0);
+            $table->integer('detail_size')->default(0);
+            $table->integer('detail_pick')->default(0);
+            $table->integer('detail_position')->default(0);
+            $table->integer('detail_range')->default(0);
+            $table->integer('detail_destination')->default(0);
+            $table->integer('number_of_lines')->default(0);
+            $table->integer('cycle_time')->default(0);
+            $table->integer('work_shifts')->default(0);
             $table->timestamps();
         });
 
@@ -188,14 +188,12 @@ class CreateCoreTables extends Migration
             $table->integer('status')->default(0);
             $table->integer('stage')->nullable();
             $table->integer('published')->default(0);
-            $table->integer('project_accept_offer')->default(0);
-            $table->integer('project_accept_details')->default(0);
-            $table->integer('project_accept_vision')->default(0);
+            $table->integer('allowed_publishing')->default(0);
             $table->unsignedBigInteger('author_id');
             $table->unsignedBigInteger('financial_before_id');
-            $table->unsignedBigInteger('technical_details_id');
-            $table->unsignedBigInteger('selected_offer_id');
-            $table->unsignedBigInteger('solution_project_id');
+            $table->unsignedBigInteger('technical_details_id')->nullable();
+            $table->unsignedBigInteger('selected_offer_id')->nullable();
+            $table->unsignedBigInteger('solution_project_id')->nullable();
             $table->foreign('author_id')->references('id')->on('users');
             $table->foreign('financial_before_id')->references('id')->on('financials');
             $table->foreign('technical_details_id')->references('id')->on('technical_details');
@@ -203,30 +201,6 @@ class CreateCoreTables extends Migration
 
             $table->timestamp('solution_deadline');
             $table->timestamp('offer_deadline');
-            $table->timestamps();
-        });
-
-        Schema::create('projects', function (Blueprint $table) {
-            $table->id();
-            $table->integer('type');
-            $table->string('name')->nullable();
-            $table->integer('challenge_id')->nullable();
-            $table->string('en_name')->nullable();
-            $table->string('description')->nullable();
-            $table->string('en_description')->nullable();
-            $table->integer('stage')->nullable();
-            $table->integer('project_accept_offer')->default(0);
-            $table->integer('project_accept_details')->default(0);
-            $table->integer('project_accept_vision')->default(0);
-            $table->timestamps();
-        });
-
-        Schema::create('local_visions', function (Blueprint $table) {
-            $table->id();
-            $table->integer('challenge_id')->nullable();
-            $table->string('description')->nullable();
-            $table->string('before')->nullable();
-            $table->string('after')->nullable();
             $table->timestamps();
         });
 
@@ -287,8 +261,8 @@ class CreateCoreTables extends Migration
         });
 
         Schema::table('technical_details', function (Blueprint $table) {
-            $table->unsignedBigInteger('challenge_id');
-            $table->unsignedBigInteger('solution_id');
+            $table->unsignedBigInteger('challenge_id')->nullable();
+            $table->unsignedBigInteger('solution_id')->nullable();
             $table->foreign('challenge_id')->references('id')->on('challenges');
             $table->foreign('solution_id')->references('id')->on('solutions');
 
@@ -718,8 +692,6 @@ class CreateCoreTables extends Migration
         Schema::dropIfExists('tags');
         Schema::dropIfExists('ratings');
         Schema::dropIfExists('comments');
-        Schema::dropIfExists('projects');
-        Schema::dropIfExists('local_visions');
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('current_team_id');
         });

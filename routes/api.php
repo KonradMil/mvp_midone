@@ -29,3 +29,4 @@ require __DIR__ . '/api/teams.php';
 require __DIR__ . '/api/models.php';
 require __DIR__ . '/api/workshop_models.php';
 require __DIR__ . '/api/offers.php';
+require __DIR__ . '/api/projects.php';

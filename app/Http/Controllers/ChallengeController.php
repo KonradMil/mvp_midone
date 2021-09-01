@@ -10,6 +10,7 @@ use App\Models\File;
 use App\Models\Financial;
 use App\Models\LocalVision;
 use App\Models\Offer;
+use App\Models\Project;
 use App\Models\Solution;
 use App\Models\Team;
 use App\Models\TechnicalDetails;
@@ -853,12 +854,14 @@ class ChallengeController extends Controller
 
         $challenge->comments_count = $challenge->comments()->count();
         $challenge->likes = $challenge->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
-
+        $project = Project::where('challenge_id', '=', $challenge->id);
 
         return response()->json([
             'success' => true,
             'message' => 'Wyzwanie zostao dodane poprawnie',
-            'payload' => $challenge
+            'payload' => $challenge,
+            'project' => $project,
+
         ]);
     }
 
