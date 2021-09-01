@@ -1,76 +1,50 @@
 <template>
-    <div class="intro-y box lg:mt-5" style="width: 350px; height: 280px; margin-top: -2px;">
+    <div class="intro-y box lg:mt-5" style="width: 700px; height: 350px; margin-top: -2px;">
         <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
             <h2 class="font-medium text-base mr-auto">
                 Raport z fazy inicjowania
             </h2>
         </div>
-        <!-- END: Display Information -->
-<!--        <div class="pl-4 pb-5">-->
-<!--            <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm ">-->
-<!--                <input-->
-<!--                    id="rodo"-->
-<!--                    type="checkbox"-->
-<!--                    class="form-check-input border mr-2 ring-0"-->
-<!--                    :checked="project.project_accept_vision"-->
-<!--                    disabled/>-->
-<!--                <label class="cursor-pointer select-none" for="rodo">-->
-<!--                    Akceptacja wizji lokalnej</label>-->
-<!--                <div class="text-theme-9">-->
-<!--                    Zaakceptowano-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">-->
-<!--                <input-->
-<!--                    id="rodo3"-->
-<!--                    type="checkbox"-->
-<!--                    class="form-check-input border mr-2 ring-0"-->
-<!--                    :checked="project.project_accept_offer"-->
-<!--                     disabled/>-->
-<!--                <label class="cursor-pointer select-none" for="rodo3">-->
-<!--                    Akceptacja oferty-->
-<!--                </label>-->
-<!--            </div>-->
-<!--            <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm pb-5">-->
-<!--                <input-->
-<!--                    id="rodo2"-->
-<!--                    type="checkbox"-->
-<!--                    class="form-check-input border mr-2 ring-0"-->
-<!--                    :checked="project.project_accept_details"-->
-<!--                     disabled/>-->
-<!--                <label class="cursor-pointer select-none" for="rodo2">-->
-<!--                    Akceptacja założen projektu-->
-<!--                </label>-->
-<!--            </div>-->
-<!--        </div>-->
-        <table class="table">
+        <table class="table" style="max-width: 650px; margin-left: 20px;">
             <thead>
             <tr>
-                <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Lp.</th>
+                <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap" style="width: 10px;">Lp.</th>
                 <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Krok w procesie</th>
                 <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Status</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td class="border">1</td>
+                <td class="border" style="width: 10px;">1</td>
                 <td class="border">Przygotowanie karty danych w projekcie</td>
-                <td class="border">statis</td>
+                <td class="border">Status</td>
             </tr>
             <tr>
-                <td class="border">2</td>
+                <td class="border" style="width: 10px;">2</td>
                 <td class="border">Wizja lokalna</td>
-                <td class="border">stat</td>
+                <td class="border">
+                    <div class="text-theme-9" v-if="project.project_accept_vision === 1">Akceptacja</div>
+                    <div class="text-theme-6" v-if="project.project_accept_vision === 2">Odrzucenie</div>
+                    <div class="" v-if="project.project_accept_vision < 1">W trakcie</div>
+                </td>
             </tr>
             <tr>
-                <td class="border">3</td>
+                <td class="border" style="width: 10px;">3</td>
                 <td class="border">Akceptacja założeń technicznych</td>
-                <td class="border">satus</td>
+                <td class="border">
+                    <div class="text-theme-9" v-if="project.project_accept_details === 1">Akceptacja</div>
+                    <div class="text-theme-6" v-if="project.project_accept_details === 2">Odrzucenie</div>
+                    <div class="" v-if="project.project_accept_details < 1">W trakcie</div>
+                </td>
             </tr>
             <tr>
-                <td class="border">4</td>
+                <td class="border" style="width: 10px;">4</td>
                 <td class="border">Podsumowanie z oferty</td>
-                <td class="border">status</td>
+                <td class="border">
+                    <div class="text-theme-9" v-if="project.project_accept_offer === 1">Akceptacja</div>
+                    <div class="text-theme-6" v-if="project.project_accept_offer === 2">Odrzucenie</div>
+                    <div class="" v-if="project.project_accept_offer < 1">W trakcie</div>
+                </td>
             </tr>
             </tbody>
         </table>
