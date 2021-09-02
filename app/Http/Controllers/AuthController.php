@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserRegisteredEvent;
 use App\Http\Requests\Handlers\RegistrationHandler;
 use App\Http\ResponseBuilder;
 use App\Services\UserService;
@@ -39,12 +40,6 @@ class AuthController extends Controller
 
         $responseBuilder = new ResponseBuilder();
 
-        $response = [
-            'success' => false,
-            'message' => "",
-            'payload' => null
-        ];
-
         $registrationHandler = new RegistrationHandler($request);
 
         if (!$registrationHandler->authorize()) {
@@ -67,13 +62,6 @@ class AuthController extends Controller
         try {
 
             $newUser = $this->userService->addUser($parameters);
-
-            $response['success'] = true;
-            $response['message'] = __('messages.registration.account-created');
-            $response['payload'] = $newUser;
-
-            //new way:
-
             $responseBuilder->setMessage(__('messages.registration.account-created'));
             $responseBuilder->addData('user', $newUser);
 
@@ -96,7 +84,8 @@ class AuthController extends Controller
 
         }
 
-        //New way:
+        //event(new UserRegisteredEvent($newUser->email));
+
         return $responseBuilder->getResponse();
     }
 
