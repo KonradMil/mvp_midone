@@ -389,8 +389,15 @@
                         })
                         .catch(function (error) {
 
+                            let resData = error.response.data;
+
                             if(error.response.status === 400) {
-                                toast.warning(error.response.data.message);
+                                for(let i in resData.errors) {
+                                    for(let k in resData.errors[i].messages) {
+                                        toast.error(resData.errors[i].messages[k]);
+                                    }
+                                }
+
                             }
 
                         });

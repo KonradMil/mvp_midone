@@ -49,10 +49,6 @@ class AuthController extends Controller
 
         if (!$registrationHandler->authorize()) {
 
-            return response()->json("Unauthorized!", Response::HTTP_UNAUTHORIZED);
-
-            //New way:
-
             $responseBuilder->setError("Unauthorized!", 'security');
             return $responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
 
@@ -62,11 +58,6 @@ class AuthController extends Controller
         $parameters = $registrationHandler->handleRequest();
 
         if (!$parameters->validate()) {
-
-            $response['message'] = $parameters->getMessagesString();
-            return response()->json($response, Response::HTTP_BAD_REQUEST);
-
-            //New way:
 
             $responseBuilder->setErrorsFromMB($parameters->getMessageBag());
             return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
@@ -89,10 +80,6 @@ class AuthController extends Controller
 
         } catch (QueryException $e) {
 
-            $response['message'] = 'Unexpected error occured!';
-            return response()->json($response, Response::HTTP_INTERNAL_SERVER_ERROR);
-
-            //New way:
             $responseBuilder->setError('Unexpected error occured!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
@@ -108,8 +95,6 @@ class AuthController extends Controller
             }
 
         }
-
-        return response()->json($response);
 
         //New way:
         return $responseBuilder->getResponse();
