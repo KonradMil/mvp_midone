@@ -5,9 +5,11 @@
             <div class="intro-y box col-span-12 xxl:col-span-6">
                 <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.technicalDetails')}}
+                        <div v-if="challenge.stage === 3">
                         <div class="flex items-center justify-center text-theme-9 pt-2" v-if="project.project_accept_details === 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
                         <div class="flex items-center justify-center text-theme-6 pt-2" v-if="project.project_accept_details === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
                         <div class="flex items-center mr-3 pt-2" v-if="project.project_accept_details < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
+                        </div>
                     </h2>
                     <button v-if="stage === 3 && author_id === user.id" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveTechnicalDetails">{{$t('profiles.save')}}</button>
                     <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary mr-6" @click.prevent="acceptTechnicalDetails">Akceptuje</button>
@@ -219,9 +221,11 @@
             <div class="intro-y box col-span-12 xxl:col-span-6">
                 <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.financialDetails')}}
+                        <div v-if="challenge.stage === 3">
                         <div class="flex items-center justify-center text-theme-9 pt-2" v-if="project.project_accept_details === 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
                         <div class="flex items-center justify-center text-theme-6 pt-2" v-if="project.project_accept_details === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
                         <div class="flex items-center mr-3 pt-2" v-if="project.project_accept_details < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
+                        </div>
                     </h2>
                     <button v-if="stage === 3 && author_id === user.id" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveFinancialDetails">{{$t('profiles.save')}}</button>
                     <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary mr-6" @click.prevent="acceptFinancialDetails">Akceptuje</button>
