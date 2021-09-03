@@ -496,7 +496,7 @@ class OfferController extends Controller
         $challenge->stage = 3;
         $archiveSolutions = $challenge->solutions;
         foreach ($archiveSolutions as $archiveSolution) {
-            $archiveSolution->archive = 1;
+            $archiveSolution->archived = 1;
             $archiveSolution->save();
         }
 
