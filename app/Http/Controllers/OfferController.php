@@ -286,16 +286,25 @@ class OfferController extends Controller
         $challenge = Challenge::find($id);
         $user = User::find(Auth::user()->id);
         $array = [];
-        foreach ($user->teams as $team) {
-            foreach ($team->users as $member) {
-                $offers = Offer::where('installer_id', '=', $member->id)->where('challenge_id', '=', $challenge->id)->with('solution')->get();
-                foreach ($offers as $offer) {
-                    if (!(in_array($offer->id, $array))) {
-                        $array[] = $offer->id;
+        if($user->teams == null){
+            foreach($challenge->offers as $offer){
+                if($user->id == $offer->id){
+                    $array[] = $offer->id;
+                }
+            }
+        } else {
+            foreach ($user->teams as $team) {
+                foreach ($team->users as $member) {
+                    $offers = Offer::where('installer_id', '=', $member->id)->where('challenge_id', '=', $challenge->id)->with('solution')->get();
+                    foreach ($offers as $offer) {
+                        if (!(in_array($offer->id, $array))) {
+                            $array[] = $offer->id;
+                        }
                     }
                 }
             }
         }
+
         $goodOffers = NULL;
         if ($challenge->stage === 3) {
             $goodOffers = Offer::where('id', '=', $challenge->selected_offer_id)->with('solution')->get();
