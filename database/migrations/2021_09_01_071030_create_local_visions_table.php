@@ -15,7 +15,7 @@ class CreateLocalVisionsTable extends Migration
     {
         Schema::create('local_visions', function (Blueprint $table) {
             $table->id();
-            $table->integer('challenge_id')->nullable();
+            $table->integer('project_id')->nullable();
             $table->string('description')->nullable();
             $table->string('before')->nullable();
             $table->string('after')->nullable();

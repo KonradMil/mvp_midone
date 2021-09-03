@@ -106,6 +106,13 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
     }
 
     /**
+     * @return HasMany
+     */
+    public function local_visions(): HasMany
+    {
+        return $this->hasMany(LocalVision::class, 'author_id');
+    }
+    /**
      * @return BelongsTo
      */
     public function challenges(): BelongsTo
