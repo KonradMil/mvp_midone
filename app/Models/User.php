@@ -21,6 +21,12 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
 {
     use HasFactory, Notifiable, Reacterable;
 
+    const USER_TYPE_INVESTOR = 'investor';
+
+    const USER_TYPE_INTEGRATOR = 'integrator';
+
+    const USER_TYPE_ADMIN = 'admin';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -44,7 +50,8 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
         'solution_accepted',
         'offer_accepted',
         'twofa',
-        'authy_id'
+        'authy_id',
+        'type'
     ];
 
     /**

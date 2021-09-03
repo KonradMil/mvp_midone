@@ -6,7 +6,7 @@
         <img
           alt="DBR77 Platforma Robotów "
           class="w-6"
-          src="../../../images/logo.svg"
+          src="//s3/twopointo/images/dbr_logo_white.svg"
         />
       </a>
       <BarChart2Icon

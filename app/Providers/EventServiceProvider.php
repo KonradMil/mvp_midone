@@ -34,7 +34,6 @@ use App\Listeners\SendOfferRejectedNotification;
 use App\Listeners\SendSolutionAddedNotification;
 use App\Listeners\SendSolutionDislikedNotification;
 use App\Listeners\SendSolutionLikedNotification;
-use App\Listeners\SendSolutionNotification;
 use App\Listeners\SendSolutionRejectedNotification;
 use App\Listeners\SendTeamMemberAcceptedNotification;
 use App\Listeners\SendQuestionAddedNotification;
@@ -45,7 +44,8 @@ use App\Listeners\SendChallengePublishedNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
+use App\Events\UserRegisteredEvent;
+use App\Listeners\SendEmailConfirmationLink;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -136,6 +136,9 @@ class EventServiceProvider extends ServiceProvider
             AddActivityLog::class,
             SendChallengeLikedNotification::class
         ],
+        UserRegisteredEvent::class => [
+            SendEmailConfirmationLink::class
+        ]
     ];
 
     /**
