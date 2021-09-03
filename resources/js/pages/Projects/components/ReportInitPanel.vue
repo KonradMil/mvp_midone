@@ -17,7 +17,7 @@
             <tr>
                 <td class="border" style="width: 10px;">1</td>
                 <td class="border">Przygotowanie karty danych w projekcie</td>
-                <td class="border">Status</td>
+                <td class="border">Podgląd</td>
             </tr>
             <tr>
                 <td class="border" style="width: 10px;">2</td>
