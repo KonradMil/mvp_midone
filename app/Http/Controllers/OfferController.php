@@ -296,6 +296,13 @@ class OfferController extends Controller
                 }
             }
         }
+        foreach($challenge->offers as $offer){
+            if($offer->installer_id == $user->id){
+                if(!(in_array($offer->id, $array))){
+                    $array[] = $offer->id;
+                }
+            }
+        }
         $goodOffers = NULL;
         if ($challenge->stage === 3) {
             $goodOffers = Offer::where('id', '=', $challenge->selected_offer_id)->with('solution')->get();
