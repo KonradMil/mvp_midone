@@ -207,7 +207,7 @@
             <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam" :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
             <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisInformationPanel>
             <FinancialAnalysisInformationPanel v-if="activeTab == 'financial-analysis'" :solution="solution_project" ></FinancialAnalysisInformationPanel>
-            <LocalVisionPanel v-if="activeTab == 'local-vision'" :project="project" :challenge_author_id="challenge.author_id" :challenge_id="challenge.id" :author_id="solution_project.author_id"></LocalVisionPanel>
+            <LocalVisionPanel v-if="activeTab == 'local-vision'" :project="project" :challenge="challenge" :challenge_author_id="challenge.author_id" :challenge_id="challenge.id" :author_id="solution_project.author_id"></LocalVisionPanel>
             <ReportInitPanel v-if="activeTab == 'report-init'" :project="project" :challenge_id="challenge.id" :author_id="solution_project.author_id"></ReportInitPanel>
             <ModalCard :show="show" @closed="modalClosed">
                 <h3 class="intro-y text-lg font-medium mt-5">Czy na pewno chcesz przejść do następnej fazy?</h3>

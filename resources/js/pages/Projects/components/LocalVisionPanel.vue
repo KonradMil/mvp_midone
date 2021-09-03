@@ -9,7 +9,7 @@
             <div class="flex items-center mr-3" style="margin-right: 400px;" v-if="project.project_accept_vision < 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
             <button v-if="challenge_author_id === user.id" class="btn btn-primary mr-6" @click.prevent="acceptLocalVision">Akceptuje zmiany</button>
             <button v-if="challenge_author_id === user.id" class="btn btn-primary" @click.prevent="rejectLocalVision">Odrzucam zmiany</button>
-            <div v-if="author_id === user.id" class="cursor-pointer pr-3" @click.prevent="addNewReport">
+            <div v-if="challenge.selected[0].author_id === user.id" class="cursor-pointer pr-3" @click.prevent="addNewReport">
                 <PlusCircleIcon/>
             </div>
             <button v-if="author_id === user.id" class="btn btn-primary w-20 mt-3" @click.prevent="saveReports">{{$t('profiles.save')}}</button>
@@ -46,8 +46,16 @@
                                           v-model="report.after"
                                           class="form-control text-gray-600"/>
                             </td>
-                            <div v-if="author_id === user.id" class="cursor-pointer pt-4 pl-2" @click.prevent="deleteReport(index,report.id)">
+                            <div v-if="challenge.selected[0].author_id === user.id" class="cursor-pointer pt-4 pl-2" @click.prevent="deleteReport(index,report.id)">
                                 <MinusCircleIcon/>
+                            </div>
+                            <div v-if="challenge.author_id === user.id" class="cursor-pointer pt-4 pl-2" @click.prevent="acceptReport(index,report.id)">
+<!--                                <input-->
+<!--                                      id="rodo"-->
+<!--                                      type="checkbox"-->
+<!--                                      class="form-check-input border mr-2"-->
+<!--                                      v-model=""-->
+<!--                                />-->
                             </div>
                         </tr>
                         </tbody>
@@ -77,7 +85,8 @@ export default {
         challenge_id: Number,
         author_id: Number,
         challenge_author_id: Number,
-        project: Object
+        project: Object,
+        challenge: Object,
     },
 
     setup(props) {

@@ -11,7 +11,7 @@
                         <div class="flex items-center mr-3 pt-2" v-if="project.project_accept_details < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
                         </div>
                     </h2>
-                    <button v-if="stage === 3 && author_id === user.id" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveTechnicalDetails">{{$t('profiles.save')}}</button>
+                    <button v-if="stage === 3 && challenge.selected[0].author_id === user.id" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveTechnicalDetails">{{$t('profiles.save')}}</button>
                     <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary mr-6" @click.prevent="acceptTechnicalDetails">Akceptuje</button>
                     <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary" @click.prevent="rejectTechnicalDetails">Odrzucam</button>
                 </div>
@@ -227,7 +227,7 @@
                         <div class="flex items-center mr-3 pt-2" v-if="project.project_accept_details < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
                         </div>
                     </h2>
-                    <button v-if="stage === 3 && author_id === user.id" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveFinancialDetails">{{$t('profiles.save')}}</button>
+                    <button v-if="stage === 3 && challenge.selected[0].author_id === user.id" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveFinancialDetails">{{$t('profiles.save')}}</button>
                     <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary mr-6" @click.prevent="acceptFinancialDetails">Akceptuje</button>
                     <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary" @click.prevent="rejectFinancialDetails">Odrzucam</button>
                 </div>
