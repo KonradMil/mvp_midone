@@ -343,10 +343,10 @@ class OfferController extends Controller
             $offer->period_of_support = $request->period_of_support;
             $offer->offer_expires_in = $request->offer_expires_in;
             $challenge = Challenge::find($request->challenge_id);
-            if ($request->is_changed != null) {
-                $offer->is_changed = $request->is_changed;
-                $challenge -> is_offer_changed = 1;
-            }
+//            if ($request->is_changed != null) {
+//                $offer->is_changed = $request->is_changed;
+//                $challenge -> is_offer_changed = 1;
+//            }
             $offer->save();
             $challenge->save();
             return response()->json([

@@ -92,9 +92,11 @@ class ProjectController extends Controller
         foreach($reports as $report){
             $vision = new LocalVision();
             $vision->project_id = $project->id;
+            $vision->author_id = Auth::user()->id;
             $vision->description = $report['description'];
             $vision->before = $report['before'];
             $vision->after = $report['after'];
+            $vision->accepted = 0;
             $vision->save();
         }
 
