@@ -3,8 +3,10 @@
 namespace App\Listeners;
 
 use App\Events\UserRegisteredEvent;
+use App\Mail\MailConfirmation;
+use Illuminate\Support\Facades\Mail;
 
-class SendEmailConfirmationLink
+class UserRegisteredListener
 {
     /**
      * Create the event listener.
@@ -19,11 +21,11 @@ class SendEmailConfirmationLink
     /**
      * Handle the event.
      *
-     * @param  UserRegisteredEvent  $event
+     * @param UserRegisteredEvent $event
      * @return void
      */
     public function handle(UserRegisteredEvent $event)
     {
-        $email = $event->email;
+        Mail::to($event->user->email)->send(new MailConfirmation($event->user->confirmation_token));
     }
 }

@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Events\UserRegisteredEvent;
 use App\Http\Requests\Handlers\RegistrationHandler;
 use App\Http\ResponseBuilder;
+use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Mpociot\Teamwork\Facades\Teamwork;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 
 /**
  *
@@ -61,7 +65,9 @@ class AuthController extends Controller
 
         try {
 
+            /** @var User $newUser */
             $newUser = $this->userService->addUser($parameters);
+
             $responseBuilder->setMessage(__('messages.registration.account-created'));
             $responseBuilder->addData('user', $newUser);
 
@@ -84,9 +90,15 @@ class AuthController extends Controller
 
         }
 
-        //event(new UserRegisteredEvent($newUser->email));
+        event(new Registered($newUser));
 
         return $responseBuilder->getResponse();
+    }
+
+    public function emailVerification(EmailVerificationRequest $request)
+    { dd("TESTS");
+        $request->fulfill();
+        return redirect('login')->with('message', "Zaloguj się...");
     }
 
 }

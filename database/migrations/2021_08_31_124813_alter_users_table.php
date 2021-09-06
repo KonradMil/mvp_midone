@@ -14,7 +14,7 @@ class AlterUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('confirmation_token')->nullable(true);
+            $table->dateTime('email_verified_at')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AlterUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->removeColumn('confirmation_token');
+            $table->dateTime('email_verified_at');
         });
     }
 }

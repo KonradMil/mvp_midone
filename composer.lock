@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "377f55b08f3dc57d87fd57fabc08cf48",
+    "content-hash": "313c2da7a423e14949faea9ceb9119a1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2821,6 +2821,72 @@
                 }
             ],
             "time": "2021-07-23T07:42:52+00:00"
+        },
+        {
+            "name": "mostafaznv/recaptcha",
+            "version": "1.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mostafaznv/recaptcha.git",
+                "reference": "51fc6043f58d117383e2853b4338684db28e5f6f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mostafaznv/recaptcha/zipball/51fc6043f58d117383e2853b4338684db28e5f6f",
+                "reference": "51fc6043f58d117383e2853b4338684db28e5f6f",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "6.* || 7.*",
+                "laravel/framework": "5.3.* || 5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || 6.* || 7.* || 8.*",
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mostafaznv\\Recaptcha\\RecaptchaServiceProvider"
+                    ],
+                    "aliases": {
+                        "Recaptcha": "Mostafaznv\\Recaptcha\\Facades\\Recaptcha"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mostafaznv\\Recaptcha\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "mostafaznv",
+                    "email": "mostafa.zeinivand@gmail.com"
+                }
+            ],
+            "description": "Laravel package for Google Recaptcha v3",
+            "keywords": [
+                "Google ReCaptcha",
+                "laravel",
+                "laravel 5",
+                "laravel 6",
+                "laravel 7",
+                "laravel 8",
+                "mostafaznv",
+                "no captcha",
+                "packalyst",
+                "recaptcha",
+                "recaptcha v3"
+            ],
+            "support": {
+                "docs": "https://github.com/mostafaznv/recaptcha/blob/master/README.md",
+                "issues": "https://github.com/mostafaznv/recaptcha/issues",
+                "source": "https://github.com/mostafaznv/recaptcha"
+            },
+            "time": "2021-02-25T16:12:05+00:00"
         },
         {
             "name": "mpociot/teamwork",
@@ -10343,5 +10409,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
