@@ -56,7 +56,7 @@ class AuthController extends Controller
 
         $parameters = $registrationHandler->handleRequest();
 
-        if (!$parameters->validate()) {
+        if (!$parameters->isValid()) {
 
             $responseBuilder->setErrorsFromMB($parameters->getMessageBag());
             return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
@@ -96,7 +96,7 @@ class AuthController extends Controller
     }
 
     public function emailVerification(EmailVerificationRequest $request)
-    { dd("TESTS");
+    {
         $request->fulfill();
         return redirect('login')->with('message', "Zaloguj się...");
     }

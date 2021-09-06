@@ -2,6 +2,7 @@
 
 namespace App\Parameters;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 
 /**
@@ -37,16 +38,35 @@ abstract class Parameters implements ParametersInterface
         return $this->messageBag;
     }
 
+    /**
+     * @return string
+     */
     public function getMessagesString(): string
     {
         $message = "";
 
         foreach ($this->messageBag->getMessages() as $msg) {
-            foreach($msg as $m) {
-                $message .= $m.PHP_EOL;
+            foreach ($msg as $m) {
+                $message .= $m . PHP_EOL;
             }
         }
 
         return $message;
+    }
+
+    /**
+     * @param array|null $subject
+     * @return bool
+     */
+    public function validate(array $subject): bool
+    {
+        $validator = Validator::make($subject, $this->validationRules, $this->validationMessages);
+        $fails = $validator->fails();
+
+        if ($fails) {
+            $this->messageBag = $validator->getMessageBag();
+        }
+
+        return !$fails;
     }
 }

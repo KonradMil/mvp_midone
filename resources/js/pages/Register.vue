@@ -260,18 +260,14 @@
 
 
 <script>
-import {defineComponent, onMounted, ref, reactive, toRefs} from "vue";
-import DarkModeSwitcher from "../components/dark-mode-switcher/Main.vue";
+
+import {onMounted, reactive, ref, toRefs} from "vue";
 import PasswordMeter from 'vue-simple-password-meter';
 import {useStore} from '../store';
-import {
-    required,
-    minLength,
-    email,
-    sameAs,
-} from "@vuelidate/validators";
+import {email, minLength, required,} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 import {useToast} from "vue-toastification";
+import {useReCaptcha} from "vue-recaptcha-v3";
 
 const toast = useToast();
 const store = useStore();
@@ -280,11 +276,14 @@ export default {
     components: {
         PasswordMeter,
     },
+
     props: {
         token: String
     },
 
     setup(props, {emit}) {
+
+        const {executeRecaptcha, recaptchaLoaded} = useReCaptcha();
 
         onMounted(() => {
 
@@ -296,6 +295,7 @@ export default {
         });
 
         const password = ref("");
+
         const score = ref(null);
 
         const onScore = (payload) => {
@@ -349,7 +349,7 @@ export default {
         // const s = this.methods.handleSubmit();
         const save = () => {
 
-            if (formData.password != formData.passwordConfirm) {
+            if (formData.password !== formData.passwordConfirm) {
                 toast.warning('Hasła muszą być takie same');
                 return false;
             }
@@ -362,11 +362,45 @@ export default {
                 return false;
             }
             validate.value.$touch();
-            if (validate.value.$invalid) {
-                return false;
-            } else {
-                return true;
-            }
+            return !validate.value.$invalid;
+        };
+
+        const register = async () => {
+
+            await recaptchaLoaded();
+            const recaptchaToken = await executeRecaptcha("register");
+
+            axios.get('/sanctum/csrf-cookie').then(response => {
+
+                axios.post('/api/register', {
+                    type: formData.type,
+                    email: formData.email,
+                    password: formData.password,
+                    token: props.token,
+                    recaptchaToken: recaptchaToken
+                })
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success(response.data.message);
+                    } else {
+                        toast.warning(response.data.message);
+                    }
+                })
+                .catch(function (error) {
+
+                    let resData = error.response.data;
+
+                    if (error.response.status === 400) {
+                        for (let i in resData.errors) {
+                            for (let k in resData.errors[i].messages) {
+                                toast.error(resData.errors[i].messages[k]);
+                            }
+                        }
+
+                    }
+
+                });
+            })
         };
 
         return {
@@ -376,13 +410,16 @@ export default {
             password,
             onScore,
             score,
+            register
         };
     },
+
     data() {
         return {
             error: null
         }
     },
+
     methods: {
         handleSubmit(e) {
             let a = this.save();
@@ -390,48 +427,20 @@ export default {
                 return false;
             }
 
-            if (this.formData.password != this.formData.passwordConfirm) {
+            if (this.formData.password !== this.formData.passwordConfirm) {
                 return false;
             }
 
-            let recaptchaToken = recaptcha.executeRecaptcha('register');
-            console.log(recaptchaToken);
-            axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.post('/api/register', {
-                    type: this.formData.type,
-                    email: this.formData.email,
-                    password: this.formData.password,
-                    token: this.token,
-                })
-                    .then(response => {
-                        if (response.data.success) {
-                            toast.success(response.data.message);
-                        } else {
-                            toast.warning(response.data.message);
-                        }
-                    })
-                    .catch(function (error) {
-
-                        let resData = error.response.data;
-
-                        if (error.response.status === 400) {
-                            for (let i in resData.errors) {
-                                for (let k in resData.errors[i].messages) {
-                                    toast.error(resData.errors[i].messages[k]);
-                                }
-                            }
-
-                        }
-
-                    });
-            })
+            this.register();
         }
     },
+
     validate() {
         if (this.password.length > 0) {
 
         }
     },
+
     beforeRouteEnter(to, from, next) {
         if (window.Laravel.isLoggedin) {
             return next('dashboard');
