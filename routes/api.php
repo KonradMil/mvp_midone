@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\App;
 App::setLocale('pl');
 
 Route::post('set/txt', [S3Controller::class, 'txtFile']);
-Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard']);
+Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard'])->middleware();
 Route::post('search', [SearchController::class, 'search']);
 Route::post('/broadcast/auth', [NotificationsController::class, 'broadcastAuth']);
 

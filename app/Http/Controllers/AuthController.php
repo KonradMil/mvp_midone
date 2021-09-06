@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\UserRegisteredEvent;
 use App\Http\Requests\Handlers\RegistrationHandler;
 use App\Http\ResponseBuilder;
 use App\Models\User;
+use App\Repository\Eloquent\UserRepository;
 use App\Services\UserService;
+use Illuminate\Auth\Events\Verified;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Mpociot\Teamwork\Facades\Teamwork;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
 /**
@@ -95,10 +99,41 @@ class AuthController extends Controller
         return $responseBuilder->getResponse();
     }
 
-    public function emailVerification(EmailVerificationRequest $request)
+    /**
+     * @param UserRepository $userRepository
+     * @param int $id
+     * @param string $hash
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function emailVerification(UserRepository $userRepository, int $id, string $hash)
     {
-        $request->fulfill();
-        return redirect('login')->with('message', "Zaloguj się...");
+
+        /** @var MustVerifyEmail|User|null $user */
+        $user = $userRepository->find($id);
+
+        if (
+            !$user ||
+            !hash_equals(
+                (string)$id,
+                (string)$user->getKey()
+            ) ||
+            !hash_equals(
+                $hash,
+                sha1($user->getEmailForVerification())
+            )
+        ) {
+            abort(404);
+        }
+
+        if (!$user->hasVerifiedEmail()) {
+            $user->markEmailAsVerified();
+
+            event(new Verified($user));
+        }
+
+
+        return redirect('/login');
+
     }
 
 }
