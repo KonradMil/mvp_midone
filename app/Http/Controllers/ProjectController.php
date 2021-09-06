@@ -173,43 +173,46 @@ class ProjectController extends Controller
     public function saveTechnicalDetails(Request $request): JsonResponse
     {
         $technical = TechnicalDetails::find($request->id);
+        $new_technical = new TechnicalDetails();
+        $new_technical->challenge_id = $technical->challenge_id;
 
         if (isset($request->detail_weight)) {
-            $technical->detail_weight = (string)$request->detail_weight;
+            $new_technical->detail_weight = (string)$request->detail_weight;
         }
         if (isset($request->pick_quality)) {
-            $technical->pick_quality = (string)$request->pick_quality;
+            $new_technical->pick_quality = (string)$request->pick_quality;
         }
         if (isset($request->detail_material)) {
-            $technical->detail_material = (string)$request->detail_material;
+            $new_technical->detail_material = (string)$request->detail_material;
         }
         if (isset($request->detail_size)) {
-            $technical->detail_size = (string)$request->detail_size;
+            $new_technical->detail_size = (string)$request->detail_size;
         }
         if (isset($request->detail_pick)) {
-            $technical->detail_pick = (string)$request->detail_pick;
+            $new_technical->detail_pick = (string)$request->detail_pick;
         }
         if (isset($request->detail_position)) {
-            $technical->detail_position = (string)$request->detail_position;
+            $new_technical->detail_position = (string)$request->detail_position;
         }
         if (isset($request->detail_range)) {
-            $technical->detail_range = (string)$request->detail_range;
+            $new_technical->detail_range = (string)$request->detail_range;
         }
         if (isset($request->detail_destination)) {
-            $technical->detail_destination = (string)$request->detail_destination;
+            $new_technical->detail_destination = (string)$request->detail_destination;
         }
         if (isset($request->number_of_lines)) {
-            $technical->number_of_lines = (string)$request->number_of_lines ?? 1;
+            $new_technical->number_of_lines = (string)$request->number_of_lines ?? 1;
         }
         if (isset($request->work_shifts)) {
-            $technical->work_shifts = (string)$request->work_shifts;
+            $new_technical->work_shifts = (string)$request->work_shifts;
         }
-        $technical->save();
+        $new_technical->save();
 
         return response()->json([
             'success' => true,
             'message' => 'Zapisano poprawnie',
-            'payload' => $technical
+            'technical' => $technical,
+            'new_technical' => $new_technical
         ]);
     }
     /**
@@ -332,21 +335,9 @@ class ProjectController extends Controller
     public function rejectLocalVision(Request $request): JsonResponse
     {
         $project = Project::where('challenge_id', '=' , $request->input('id'))->first();
-        $report = LocalVision::find($request->input('report_id'));
-        $report->accepted = 2;
-        $reports_in_project = LocalVision::where('project_id', '=', $project->id);
-        $guard = 0;
-        foreach($reports_in_project as $each){
-            if($each->accepted != 2){
-                $guard = 1;
-            }
-        }
-        if($guard == 1){
-            $project->project_accept_vision = 2;
-        }
-        $report->save();
-        $project->save();
+        $project->project_accept_vision = 2;
 
+        $project->save();
         return response()->json([
             'success' => true,
             'message' => 'Zapisano poprawnie',
