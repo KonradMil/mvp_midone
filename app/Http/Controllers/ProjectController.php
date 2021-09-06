@@ -96,7 +96,7 @@ class ProjectController extends Controller
             $vision->description = $report['description'];
             $vision->before = $report['before'];
             $vision->after = $report['after'];
-            $vision->accepted = 0;
+            $vision->accepted = $report['accepted'];
             $vision->save();
         }
 
@@ -316,6 +316,7 @@ class ProjectController extends Controller
     {
         $project = Project::where('challenge_id', '=' , $request->input('id'))->first();
         $project->project_accept_vision = 1;
+
         $project->save();
 
         return response()->json([
@@ -331,13 +332,62 @@ class ProjectController extends Controller
     public function rejectLocalVision(Request $request): JsonResponse
     {
         $project = Project::where('challenge_id', '=' , $request->input('id'))->first();
-        $project->project_accept_vision = 2;
+        $report = LocalVision::find($request->input('report_id'));
+        $report->accepted = 2;
+        $reports_in_project = LocalVision::where('project_id', '=', $project->id);
+        $guard = 0;
+        foreach($reports_in_project as $each){
+            if($each->accepted != 2){
+                $guard = 1;
+            }
+        }
+        if($guard == 1){
+            $project->project_accept_vision = 2;
+        }
+        $report->save();
         $project->save();
 
         return response()->json([
             'success' => true,
             'message' => 'Zapisano poprawnie',
             'payload' => $project
+        ]);
+    }
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function acceptReport(Request $request): JsonResponse
+    {
+        $reports = $request->input('reports');
+
+        foreach($reports as $report){
+            $local_vision = LocalVision::find($report['id']);
+            $local_vision->accepted = true;
+            $local_vision->save();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $reports
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function rejectReport(Request $request): JsonResponse
+    {
+        $local_vision = LocalVision::find($request->input('report_id'));
+        $local_vision->accepted = 2;
+        $local_vision->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'payload' => $local_vision
         ]);
     }
 

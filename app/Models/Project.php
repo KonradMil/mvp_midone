@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Tags\HasTags;
 
 
@@ -38,10 +38,10 @@ class Project extends Model
     }
 
     /**
-     * @return HasOne
+     * @return HasMany
      */
-    public function local_vision(): HasOne
+    public function local_visions(): HasMany
     {
-        return $this->hasOne(LocalVision::class, 'id', 'project_id');
+        return $this->hasMany(LocalVision::class, 'id', 'project_id');
     }
 }

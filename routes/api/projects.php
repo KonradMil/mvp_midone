@@ -10,7 +10,9 @@ Route::group(['prefix' => 'projects', 'middleware' => 'auth:sanctum'], function 
     Route::post('local-vision/get', [ProjectController::class, 'getLocalVision']);
     Route::post('local-vision/delete', [ProjectController::class, 'deleteLocalVision']);
     Route::post('local-vision/accept', [ProjectController::class, 'acceptLocalVision']);
+    Route::post('local-vision/accept-report', [ProjectController::class, 'acceptReport']);
     Route::post('local-vision/reject', [ProjectController::class, 'rejectLocalVision']);
+    Route::post('local-vision/reject-report', [ProjectController::class, 'rejectReport']);
     Route::post('financial-details/save', [ProjectController::class, 'saveFinancialDetails']);
     Route::post('technical-details/save', [ProjectController::class, 'saveTechnicalDetails']);
     Route::post('project-offer/accept', [ProjectController::class, 'acceptOffer']);

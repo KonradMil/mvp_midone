@@ -9,53 +9,82 @@
             <div class="flex items-center mr-3" style="margin-right: 400px;" v-if="project.project_accept_vision < 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
             <button v-if="challenge_author_id === user.id" class="btn btn-primary mr-6" @click.prevent="acceptLocalVision">Akceptuje zmiany</button>
             <button v-if="challenge_author_id === user.id" class="btn btn-primary" @click.prevent="rejectLocalVision">Odrzucam zmiany</button>
-            <div v-if="challenge.selected[0].author_id === user.id" class="cursor-pointer pr-3" @click.prevent="addNewReport">
+            <div v-if="challenge.selected[0].author_id === user.id" class="cursor-pointer pr-3 text-theme-3 pt-3" @click.prevent="addNewReport">
                 <PlusCircleIcon/>
             </div>
-            <button v-if="author_id === user.id" class="btn btn-primary w-20 mt-3" @click.prevent="saveReports">{{$t('profiles.save')}}</button>
+            <button v-if="challenge.selected[0].author_id === user.id" class="btn btn-primary w-20 mt-3" @click.prevent="saveReports">{{$t('profiles.save')}}</button>
         </div>
         <div class="p-5" id="bordered-table">
             <div class="preview">
                 <div class="overflow-x-auto">
-                    <table class="table text-gray-100 bg-gradient-to-l from-pink-500 to-pink-900">
+                    <table class="table text-gray-100">
                         <thead>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left bg-gradient-to-l from-pink-500 to-pink-900">
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Opis</th>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Przed</th>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Po</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="intro-x text-left border-b-2 border-pink-300" v-for="(report, index) in reports"
+                        <tr class="intro-x text-left" v-for="(report, index) in reports"
                             :key="index">
-                            <td class="border">
+                            <td :class="(report.accepted === 2) ? ' border bg-gray-300' : 'border'">
                                 <textarea maxlength="100"
                                           type="text"
                                           v-model="report.description"
                                           class="form-control text-gray-600"/>
                             </td>
-                            <td class="border">
+                            <td :class="(report.accepted === 2) ? ' border bg-gray-300' : 'border'">
                                 <textarea maxlength="100"
                                           type="text"
                                           v-model="report.before"
                                           class="form-control text-gray-600"/>
                             </td>
-                            <td class="border">
+                            <td :class="(report.accepted === 2) ? ' border bg-gray-300' : 'border'">
                                 <textarea maxlength="100"
                                           type="text"
                                           v-model="report.after"
                                           class="form-control text-gray-600"/>
                             </td>
-                            <div v-if="challenge.selected[0].author_id === user.id" class="cursor-pointer pt-4 pl-2" @click.prevent="deleteReport(index,report.id)">
+                            <div v-if="challenge.selected[0].author_id === user.id" class="cursor-pointer pt-4 pl-2 text-theme-3 pt-7" style="float: left;" @click.prevent="deleteReport(index,report.id)">
+                                <Tippy
+                                    tag="a"
+                                    href=""
+                                    class="dark:text-gray-300 text-gray-600"
+                                    content="Usuń">
                                 <MinusCircleIcon/>
+                                </Tippy>
                             </div>
-                            <div v-if="challenge.author_id === user.id" class="cursor-pointer pt-4 pl-2" @click.prevent="acceptReport(index,report.id)">
-<!--                                <input-->
-<!--                                      id="rodo"-->
-<!--                                      type="checkbox"-->
-<!--                                      class="form-check-input border mr-2"-->
-<!--                                      v-model=""-->
-<!--                                />-->
+                            <div v-if="challenge.author_id === user.id && report.accepted !== 2" class="cursor-pointer pt-8 pl-4" style="float: left;">
+                                <Tippy
+                                    tag="a"
+                                    href=""
+                                    class="dark:text-gray-300 text-gray-600"
+                                    content="Akceptuj">
+                                    <input
+                                        id="accepted"
+                                        type="checkbox"
+                                        class="form-check-input border mr-2"
+                                        :checked="report.accepted"/>
+                                </Tippy>
+                            </div>
+                            <div v-if="challenge.author_id === user.id && report.accepted !== 2" class="text-theme-3 pt-7" style="float: left;" @click.prevent="rejectReport(index,report)">
+                                <Tippy
+                                    tag="a"
+                                    href=""
+                                    class=""
+                                    content="Odrzuć">
+                                    <XIcon></XIcon>
+                                </Tippy>
+                            </div>
+                            <div v-if="report.accepted === 2" class="text-theme-3 pt-7 pl-2" style="float: left;">
+                                <Tippy
+                                    tag="a"
+                                    href=""
+                                    class=""
+                                    content="Odrzucono">
+                                    <XCircleIcon></XCircleIcon>
+                                </Tippy>
                             </div>
                         </tr>
                         </tbody>
@@ -76,7 +105,7 @@
 </template>
 
 <script>
-import {computed, getCurrentInstance, onMounted, reactive, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, reactive, ref, watch} from "vue";
 import {useToast} from "vue-toastification";
 
 export default {
@@ -88,13 +117,17 @@ export default {
         project: Object,
         challenge: Object,
     },
-
     setup(props) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const reports = ref([]);
         const toast = useToast();
         const user = window.Laravel.user;
+
+        watch(() => reports.value, (first, second) => {
+           acceptReport();
+        }, {})
+
         const removeReport = async (index) => {
             reports.value.splice(index, 1);
         }
@@ -104,6 +137,7 @@ export default {
                 description: '',
                 before: '',
                 after: '',
+                accepted: ''
             }
             setTimeout(function () {
                 reports.value.push(report);
@@ -141,7 +175,7 @@ export default {
                 })
         }
         const acceptLocalVision = async () => {
-            axios.post('/api/projects/local-vision/accept', {id: props.challenge_id})
+            axios.post('/api/projects/local-vision/accept', {id: props.challenge_id, reports: reports.value})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Zaakceptowano');
@@ -162,12 +196,37 @@ export default {
                     }
                 })
         }
+        const acceptReport = async () => {
+            axios.post('/api/projects/local-vision/accept-report', {reports: reports.value})
+                .then(response => {
+                    if (response.data.success) {
+                        // toast.success('Zaakceptowano');
+                    } else {
+
+                    }
+                })
+        }
+
+        const rejectReport = async (index,report) => {
+            axios.post('/api/projects/local-vision/reject-report', {report_id: report.id})
+                .then(response => {
+                    if (response.data.success) {
+                        console.log(report + 'report');
+                        report.accepted  = 2;
+                        toast.success('Odrzucono');
+                    } else {
+
+                    }
+                })
+        }
 
         onMounted(() => {
             getReports();
         });
 
         return {
+            rejectReport,
+            acceptReport,
             user,
             deleteReport,
             reports,
