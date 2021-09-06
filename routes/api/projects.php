@@ -19,6 +19,7 @@ Route::group(['prefix' => 'projects', 'middleware' => 'auth:sanctum'], function 
     Route::post('project-offer/reject', [ProjectController::class, 'rejectOffer']);
     Route::post('technical-details/accept', [ProjectController::class, 'acceptTechnicalDetails']);
     Route::post('technical-details/reject', [ProjectController::class, 'rejectTechnicalDetails']);
+    Route::post('technical-details/get-new', [ProjectController::class, 'getNewTechnicalDetails']);
     Route::post('financial-details/accept', [ProjectController::class, 'acceptFinancialDetails']);
     Route::post('financial-details/reject', [ProjectController::class, 'rejectFinancialDetails']);
 });

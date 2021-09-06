@@ -172,9 +172,9 @@ class ProjectController extends Controller
      */
     public function saveTechnicalDetails(Request $request): JsonResponse
     {
-        $technical = TechnicalDetails::find($request->id);
+        $challenge = Challenge::find($request->challenge_id);
         $new_technical = new TechnicalDetails();
-        $new_technical->challenge_id = $technical->challenge_id;
+        $new_technical->challenge_id = $challenge->id;
 
         if (isset($request->detail_weight)) {
             $new_technical->detail_weight = (string)$request->detail_weight;
@@ -211,7 +211,6 @@ class ProjectController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Zapisano poprawnie',
-            'technical' => $technical,
             'new_technical' => $new_technical
         ]);
     }
@@ -379,6 +378,23 @@ class ProjectController extends Controller
             'success' => true,
             'message' => 'Zapisano poprawnie',
             'payload' => $local_vision
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getNewTechnicalDetails(Request $request): JsonResponse
+    {
+        $technicals = TechnicalDetails::where('challenge_id', '=', $request->input('id'))
+            ->orderBy('created_at', 'DESC')->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie',
+            'new_technical' => $technicals[0],
+            'old_technical' => $technicals[1]
         ]);
     }
 

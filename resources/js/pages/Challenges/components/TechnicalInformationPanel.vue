@@ -23,17 +23,17 @@
                         aria-labelledby="latest-tasks-new-tab"
                         v-if="challenge.technical_details != undefined"
                     >
-                        <div class="flex items-center">
+                        <div :class="(new_technical.detail_weight === old_technical.detail_weight) ? 'flex items-center' : 'flex items center border border-theme-1'">
                             <div class="border-l-2 border-theme-1 pl-4">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.maxWeight')}}:</span>
                                 <div class=" dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ details['select_detail_weight'][challenge.technical_details.detail_weight].name }}
+                                    {{ details['select_detail_weight'][old_technical.detail_weight].name }}
                                 </div>
                                 <TailSelect
                                     v-if="stage === 3"
                                     id="input-wizard-1"
-                                    v-model="challenge.technical_details.detail_weight"
-                                    :options="{locale: 'pl', placeholder: details.select_detail_weight[challenge.technical_details.detail_weight].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    v-model="new_technical.detail_weight"
+                                    :options="{locale: 'pl', placeholder: details.select_detail_weight[new_technical.detail_weight].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                                     <option selected disabled>Wybierz...</option>
                                     <option v-for="(det,index) in details.select_detail_weight"
                                             :value="det.value">
@@ -392,8 +392,9 @@
 </template>
 
 <script>
-import {computed, getCurrentInstance, onMounted, ref} from "vue";
+import {computed, getCurrentInstance, onBeforeMount, onMounted, ref} from "vue";
 import {useToast} from "vue-toastification";
+import UnityBridgeWorkshop from "../../Unity/Workshop/bridge_workshop";
 
 export default {
     name: "TechnicalInformationPanel",
@@ -412,6 +413,34 @@ export default {
         const details = require("../../../json/challenge.json");
         const toast = useToast();
         const user = window.Laravel.user;
+        const old_technical = ref({
+            id: challenge.value.technical_details.id,
+            challenge_id: challenge.value.id,
+            detail_weight: challenge.value.technical_details.detail_weight,
+            pick_quality: challenge.value.technical_details.pick_quality,
+            detail_material: challenge.value.technical_details.detail_material,
+            detail_size: challenge.value.technical_details.detail_size,
+            detail_pick: challenge.value.technical_details.detail_pick,
+            detail_position: challenge.value.technical_details.detail_position,
+            detail_range: challenge.value.technical_details.detail_range,
+            detail_destination: challenge.value.technical_details.detail_destination,
+            number_of_lines: challenge.value.technical_details.number_of_lines,
+            work_shifts: challenge.value.technical_details.work_shifts,
+        });
+        const new_technical = ref({
+            id: '',
+            challenge_id: '',
+            detail_weight: '',
+            pick_quality: '',
+            detail_material: '',
+            detail_size: '',
+            detail_pick: '',
+            detail_position: '',
+            detail_range: '',
+            detail_destination: '',
+            number_of_lines: '',
+            work_shifts: '',
+        });
         const challenge_details = ref({
             select_work_shifts: '',
             select_number_of_lines: '',
@@ -424,11 +453,14 @@ export default {
             select_pick_quality: '',
             select_detail_weight: ''
         });
+        const example = ref({});
+
 
         const saveTechnicalDetails = async () => {
             axios.post('/api/projects/technical-details/save', {
                 id: props.challenge.technical_details.id,
-                detail_weight: props.challenge.technical_details.detail_weight,
+                challenge_id: props.challenge.id,
+                detail_weight: new_technical.detail_weight,
                 pick_quality: props.challenge.technical_details.pick_quality,
                 detail_material: props.challenge.technical_details.detail_material,
                 detail_size: props.challenge.technical_details.detail_size,
@@ -441,6 +473,8 @@ export default {
             })
                 .then(response => {
                     if (response.data.success) {
+                        // new_technical.value = response.data.payload;
+                        getNewTechnical();
                         toast.success('Zapisano poprawnie');
                     } else {
 
@@ -517,11 +551,28 @@ export default {
                     }
                 })
         }
-        onMounted(() => {
+        const getNewTechnical = async () => {
+            axios.post('/api/projects/technical-details/get-new', {id: props.challenge.id})
+                .then(response => {
+                    if (response.data.success) {
+                        new_technical.value = response.data.new_technical;
+                        old_technical.value = response.data.old_technical;
+                    } else {
 
+                    }
+                })
+        }
+        onBeforeMount(() => {
+            getNewTechnical();
+        });
+        onMounted(() => {
+            getNewTechnical();
         });
 
         return {
+            example,
+            old_technical,
+            new_technical,
             user,
             saveTechnicalDetails,
             saveFinancialDetails,
