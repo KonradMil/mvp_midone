@@ -132,7 +132,8 @@ class AuthController extends Controller
         }
 
 
-        return redirect('/login');
+
+        return redirect('/login')->with('message', __('messages.registration.email_confirmed'));
 
     }
 
