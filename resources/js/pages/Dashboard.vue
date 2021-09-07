@@ -275,7 +275,7 @@
                                 <th class="whitespace-nowrap">NAZWA</th>
                                 <th class="text-center whitespace-nowrap">INTEGRATOR</th>
                                 <!--                                <th class="text-center whitespace-nowrap">STATUS</th>-->
-                                <th class="text-center whitespace-nowrap">AKCJE</th>
+<!--                                <th class="text-center whitespace-nowrap">AKCJE</th>-->
                             </tr>
                             </thead>
                             <tbody>
@@ -285,10 +285,10 @@
                                 class="intro-x"
                             >
                                 <td>
-                                    <a href="" class="font-medium whitespace-nowrap" v-if="solution.name == '' || solution.name == null">
+                                    <a href="" class="font-medium whitespace-nowrap" @click.prevent="" v-if="solution.name == '' || solution.name == null">
                                         {{solution.challenge.name }}
                                     </a>
-                                    <a href="" class="font-medium whitespace-nowrap" v-if="solution.name != '' && solution.name != null">
+                                    <a href="" class="font-medium whitespace-nowrap" @click.prevent="" v-if="solution.name != '' && solution.name != null">
                                         {{solution.name }}
                                     </a>
                                     <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">
@@ -308,17 +308,17 @@
                                 <!--                                        {{ faker.trueFalse[0] ? "Active" : "Inactive" }}-->
                                 <!--                                    </div>-->
                                 <!--                                </td>-->
-                                <td class="table-report__action w-56">
-                                    <div class="flex justify-center items-center">
-                                        <a class="flex items-center mr-3" href="">
-                                            <CheckSquareIcon class="w-4 h-4 mr-1"/>
-                                            Podejrzyj
-                                        </a>
-                                        <!--                                        <a class="flex items-center text-theme-6" href="">-->
-                                        <!--                                            <Trash2Icon class="w-4 h-4 mr-1" /> Delete-->
-                                        <!--                                        </a>-->
-                                    </div>
-                                </td>
+<!--                                <td class="table-report__action w-56">-->
+<!--                                    <div class="flex justify-center items-center">-->
+<!--                                        <a class="flex items-center mr-3" href=" @click.prevent=""">-->
+<!--                                            <CheckSquareIcon class="w-4 h-4 mr-1"/>-->
+<!--                                            Podejrzyj-->
+<!--                                        </a>-->
+<!--                                        &lt;!&ndash;                                        <a class="flex items-center text-theme-6" href="">&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                            <Trash2Icon class="w-4 h-4 mr-1" /> Delete&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                        </a>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                </td>-->
                             </tr>
                             </tbody>
                         </table>
