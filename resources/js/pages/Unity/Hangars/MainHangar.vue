@@ -331,7 +331,6 @@ export default {
             rightIcons,
             mode,
             inTeam,
-            allowedEdit,
             openMenu,
             lockInput,
             unlockInput,
