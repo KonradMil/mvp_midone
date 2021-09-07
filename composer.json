@@ -18,6 +18,7 @@
         "authy/php": "4.0.0-rc2",
         "beyondcode/laravel-comments": "^1.2",
         "cybercog/laravel-love": "^8.7",
+        "doctrine/dbal": "^3.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "gusapi/gusapi": "^5.3",

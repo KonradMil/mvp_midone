@@ -131,8 +131,6 @@ class AuthController extends Controller
             event(new Verified($user));
         }
 
-
-
         return redirect('/login')->with('message', __('messages.registration.email_confirmed'));
 
     }
