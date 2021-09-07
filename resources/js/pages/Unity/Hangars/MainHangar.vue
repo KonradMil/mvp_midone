@@ -1,14 +1,12 @@
 <template>
-<!--    <TopButtons v-if="loaded" :allowedEdit="allowedEdit && (challenge.status != 1)" :icons="topIcons" :canEditSolution="canEditSolution"></TopButtons>-->
-<!--    <LeftButtons :icons="leftIcons" v-if="(mode == 'edit' && allowedEdit && loaded)"></LeftButtons>-->
-<!--    <LeftPanel></LeftPanel>-->
+
     <div @contextmenu.prevent="openMenu">
         <Studio hideFooter="true" :src="unity_hangar_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
 <!--    <BottomPanel  v-if="loaded" :allowedEdit="allowedEdit" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>-->
 <!--    <RightButtons  v-if="loaded" :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>-->
 <!--    <RightPanel  :allowedEdit="allowedEdit" :publishChallenges="publishChallenges" :canEditSolution="canEditSolution" @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>-->
-<!--    <div v-if="!loaded" id="loader">-->
+    <div v-if="!loaded" id="loader">
         <LoadingIcon icon="grid" class="w-8 h-8" />
     </div>
 <!--    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>-->
@@ -301,15 +299,15 @@ export default {
                 .removeClass("main")
                 .removeClass("error-page")
                 .addClass("p-0");
-            const li = require("../../json/unity_left_buttons.json");
+            const li = require("../../../json/unity_left_buttons.json");
             leftIcons.value = li.icons;
-            const ri = require("../../json/unity_right_buttons.json");
+            const ri = require("../../../json/unity_right_buttons.json");
             rightIcons.value = ri.icons;
-            const ti = require("../../json/unity_top_buttons.json");
+            const ti = require("../../../json/unity_top_buttons.json");
             topIcons.value = ti.icons;
-            radialMenuAnimation.value = require("../../json/radial_animation.json");
-            radialMenuEdit.value = require("../../json/radial_edit.json");
-            radialMenuLayout.value = require("../../json/radial_layout.json");
+            radialMenuAnimation.value = require("../../../json/radial_animation.json");
+            radialMenuEdit.value = require("../../../json/radial_edit.json");
+            radialMenuLayout.value = require("../../../json/radial_layout.json");
             currentRadialMenu.value = radialMenuEdit.value;
             mode.value = 'edit';
             type.value = props.type;

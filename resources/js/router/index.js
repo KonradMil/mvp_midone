@@ -16,6 +16,7 @@ import AddSolution from "../pages/Solutions/New";
 import Teams from "../pages/Teams/Teams";
 import NotFound from "../pages/NotFound";
 import Main from "../pages/Unity/Main";
+import MainHangar from "../pages/Unity/Hangars/MainHangar";
 import MainKnowledgebase from "../pages/KnowledgeBase/Main";
 import AddKnowledgebase from "../pages/KnowledgeBase/Add";
 import Profiles from "../pages/Profiles/Main";
@@ -69,6 +70,12 @@ export const routes = [
         name: 'challengeStudio',
         path: '/studio/:type/:id',
         component: Main,
+        props: true
+    },
+    {
+        name: 'hangarStudio',
+        path: '/hangar',
+        component: MainHangar,
         props: true
     },
     {
