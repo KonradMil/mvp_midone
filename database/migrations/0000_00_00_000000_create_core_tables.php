@@ -620,8 +620,6 @@ class CreateCoreTables extends Migration
 
         });
 
-        //TODO Zapytać kontada o tabelę websockets_statistics_entries
-
         Schema::create('workshop_objects', function (Blueprint $table) {
 
             $table->id();
