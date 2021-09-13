@@ -377,49 +377,6 @@ class UserController extends Controller
     }
 
     /**
-     * Register
-     */
-    public function register(Request $request): JsonResponse
-    {
-        try {
-            $user = new User();
-//            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->type = $request->type;
-            $user->password = Hash::make($request->password);
-            $user->save();
-
-            $success = true;
-            $message = 'User register successfully';
-        } catch (\Illuminate\Database\QueryException $ex) {
-            if (strpos($ex->getMessage(), 'Dupli') !== false) {
-                $success = false;
-                $message = 'Ten email jest już zarejestrowany.';
-            } else {
-                $success = false;
-                $message = $ex->getMessage();
-            }
-        }
-        Auth::login($user);
-
-        if (!empty($request->token)) {
-            $invite = Teamwork::getInviteFromAcceptToken($request->token);
-
-            if ($invite) // valid token found
-            {
-                Teamwork::acceptInvite($invite);
-            }
-        }
-        // response
-        $response = [
-            'success' => $success,
-            'message' => $message,
-            'payload' => $user
-        ];
-        return response()->json($response);
-    }
-
-    /**
      * Login
      */
     public function login(Request $request): JsonResponse

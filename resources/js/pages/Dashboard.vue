@@ -444,7 +444,6 @@
 import {defineComponent, ref, provide, onMounted} from "vue";
 import ReportDonutChart from "../components/report-donut-chart/Main.vue";
 import ReportBarChart from "../components/report-bar-chart/Main.vue";
-import ReportMap from "../components/report-map/Main.vue";
 import GetDashboard from "../compositions/GetDashboard"
 import WordpressPost from "../components/wordpress-post/WordpressPost";
 
@@ -453,7 +452,6 @@ export default {
         WordpressPost,
         ReportDonutChart,
         ReportBarChart,
-        ReportMap
     },
     setup() {
         const importantNotesRef = ref();

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Http\Controllers\UserController;
 use BeyondCode\Comments\Contracts\Commentator;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -17,9 +18,15 @@ use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 /**
  *
  */
-class User extends Authenticatable implements ReacterableInterface, Commentator
+class User extends Authenticatable implements ReacterableInterface, Commentator, MustVerifyEmail
 {
     use HasFactory, Notifiable, Reacterable;
+
+    const USER_TYPE_INVESTOR = 'investor';
+
+    const USER_TYPE_INTEGRATOR = 'integrator';
+
+    const USER_TYPE_ADMIN = 'admin';
 
     /**
      * The attributes that are mass assignable.
@@ -44,7 +51,9 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
         'solution_accepted',
         'offer_accepted',
         'twofa',
-        'authy_id'
+        'authy_id',
+        'type',
+        'email_verified_at'
     ];
 
     /**

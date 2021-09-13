@@ -3,7 +3,7 @@
 use App\Http\Controllers\ChallengeController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'challenges', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => 'challenges', 'middleware' => ['auth:sanctum', 'verified']], function () {
     Route::post('{id}/delete', [ChallengeController::class, 'delete']);
     Route::post('get', [ChallengeController::class, 'getUserChallengesFiltered']);
     Route::post('get/projects', [ChallengeController::class, 'getUserChallengesProjects']);
@@ -30,7 +30,7 @@ Route::group(['prefix' => 'challenges', 'middleware' => 'auth:sanctum'], functio
 });
 
 // TODO cała grupa poniżej do usunięcia
-Route::group(['prefix' => 'challenge', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => 'challenge', 'middleware' => ['auth:sanctum', 'verified']], function () {
     Route::post('delete', [ChallengeController::class, 'delete']);
     Route::post('user/get', [ChallengeController::class, 'getUserChallengesFiltered']);
     Route::post('user/get/projects', [ChallengeController::class, 'getUserChallengesProjects']);
