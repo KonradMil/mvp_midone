@@ -421,13 +421,6 @@ class CreateCoreTables extends Migration
             $table->integer('rating');
             $table->morphs('rateable');
             $table->unsignedBigInteger('user_id');
-
-            //TODO WTF?
-            /*$table->index([
-                'reactant_id',
-                'reaction_type_id',
-            ], 'ratings_rateable_type_rateable_id_index');*/
-
             $table->index('rateable_id');
             $table->index('rateable_type');
             $table->index('user_id', 'ratings_user_id_foreign');

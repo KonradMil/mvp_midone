@@ -264,6 +264,205 @@ class CoreTablesFixer extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('challenge_files', function (Blueprint $table) {
+            $table->dropForeign('challenge_files_challenge_id_foreign');
+            $table->dropForeign('challenge_files_file_id_foreign');
+            $table->integer('challenge_id')->change();
+            $table->dropColumn('image_id');
+            $table->integer('file_id')->change();
+        });
+
+        Schema::table('challenge_image', function (Blueprint $table) {
+            $table->dropForeign('challenge_image_challenge_id_foreign');
+            $table->dropForeign('challenge_image_image_id_foreign');
+            $table->integer('challenge_id')->change();
+            $table->integer('image_id')->change();
+        });
+
+        Schema::table('companies', function (Blueprint $table) {
+            $table->dropForeign('companies_author_id_foreign');
+            $table->integer('author_id')->change();
+
+        });
+
+        Schema::table('estimates', function (Blueprint $table) {
+
+            $table->dropForeign('estimates_solution_id_foreign');
+            $table->integer('solution_id')->change();
+            $table->dropColumn('parts_ar');
+
+        });
+
+        Schema::table('knowledgebase_videos', function (Blueprint $table) {
+
+            $table->dropForeign('knowledgebase_videos_love_reactant_id_foreign');
+            $table->dropColumn('en_name');
+            $table->dropColumn('en_description');
+
+        });
+
+        Schema::table((new ReactionCounter())->getTable(), function (Blueprint $table) {
+
+            $table->dropForeign('love_reactant_reaction_counters_reactant_id_foreign');
+            $table->dropForeign('love_reactant_reaction_counters_reaction_type_id_foreign');
+
+        });
+
+        Schema::table((new ReactionTotal())->getTable(), function (Blueprint $table) {
+
+            $table->dropForeign('love_reactant_reaction_totals_reactant_id_foreign');
+
+        });
+
+        Schema::table((new Reaction)->getTable(), function (Blueprint $table) {
+
+            $table->dropForeign('love_reactions_reactant_id_foreign');
+            $table->dropForeign('love_reactions_reacter_id_foreign');
+            $table->dropForeign('love_reactions_reaction_type_id_foreign');
+
+        });
+
+        Schema::table('offers', function (Blueprint $table) {
+
+            $table->dropForeign('offers_challenge_id_foreign');
+            $table->dropForeign('offers_installer_id_foreign');
+            $table->dropForeign('offers_solution_id_foreign');
+
+            $table->unsignedInteger('challenge_id')->nullable()->default(0)->change();
+            $table->unsignedInteger('solution_id')->nullable()->default(1)->change();
+            $table->unsignedInteger('installer_id')->nullable()->change();
+
+            $table->unsignedInteger('price_of_delivery')->nullable()->default(1)->change();
+            $table->integer('selected')->nullable()->change();
+            $table->integer('rejected')->nullable()->change();
+
+        });
+
+        Schema::table('questions', function (Blueprint $table) {
+
+            $table->dropForeign('questions_author_id_foreign');
+            $table->dropForeign('questions_challenge_id_foreign');
+
+            $table->integer('author_id')->nullable()->change();
+            $table->integer('challenge_id')->change();
+
+        });
+
+        Schema::table('ratings', function (Blueprint $table) {
+
+            $table->dropForeign('ratings_user_id_foreign');
+
+        });
+
+        Schema::table('solutions', function (Blueprint $table) {
+
+            $table->dropForeign('solutions_author_id_foreign');
+            $table->dropForeign('solutions_challenge_id_foreign');
+            $table->dropForeign('solutions_financial_after_id_foreign');
+            $table->dropForeign('solutions_installer_id_foreign');
+            $table->dropForeign('solutions_love_reactant_id_foreign');
+
+            $table->integer('author_id')->change();
+            $table->integer('challenge_id')->change();
+            $table->integer('installer_id')->nullable()->change();
+            $table->integer('financial_after_id')->nullable()->change();
+            $table->dropColumn('en_name');
+            $table->dropColumn('en_description');
+
+        });
+
+        Schema::table('taggables', function (Blueprint $table) {
+
+            $table->dropForeign('taggables_tag_id_foreign');
+
+        });
+
+        Schema::table('team_challenge', function (Blueprint $table) {
+
+            $table->dropForeign('team_challenge_challenge_id_foreign');
+            $table->dropForeign('team_challenge_team_id_foreign');
+
+            $table->integer('challenge_id')->change();
+            $table->integer('team_id')->change();
+
+        });
+
+        Schema::table('team_invites', function (Blueprint $table) {
+
+            $table->dropForeign('team_invites_team_id_foreign');
+
+        });
+
+        Schema::table('team_solution', function (Blueprint $table) {
+
+            $table->dropForeign('');
+            $table->dropForeign('');
+
+            $table->integer('solution_id')->change();
+            $table->integer('team_id')->change();
+
+        });
+
+        Schema::table('team_user', function (Blueprint $table) {
+
+            $table->dropForeign('team_user_team_id_foreign');
+            $table->dropForeign('team_user_user_id_foreign');
+
+            $table->dropColumn('owner');
+            $table->dropColumn('publishChallenge');
+            $table->dropColumn('editChallenge');
+            $table->dropColumn('acceptChallengeSolution');
+            $table->dropColumn('acceptChallengeOffer');
+            $table->dropColumn('publishSolution');
+            $table->dropColumn('addSolutionOffer');
+            $table->dropColumn('canEditSolution');
+            $table->dropColumn('canDeleteSolution');
+            $table->dropColumn('showSolutions');
+
+        });
+
+        Schema::table('technical_details', function (Blueprint $table) {
+
+            $table->dropForeign('technical_details_challenge_id_foreign');
+            $table->dropForeign('technical_details_solution_id_foreign');
+
+            $table->integer('challenge_id')->nullable()->change();
+            $table->integer('solution_id')->nullable()->change();
+
+        });
+
+        Schema::table('user_companies', function (Blueprint $table) {
+
+            $table->dropForeign('');
+            $table->dropForeign('');
+
+            $table->integer('user_id')->change();
+            $table->integer('company_id')->change();
+
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+
+            $table->dropForeign('users_love_reacter_id_foreign');
+
+        });
+
+        Schema::table('user_workshop_objects', function (Blueprint $table) {
+
+            $table->dropForeign('user_workshop_objects_user_id_foreign');
+            $table->dropForeign('user_workshop_objects_workshop_object_id_foreign');
+
+            $table->integer('user_id')->change();
+            $table->integer('workshop_object_id')->change();
+
+        });
+
+        Schema::table('workshop_objects', function (Blueprint $table) {
+
+            $table->dropForeign('workshop_objects_author_id_foreign');
+            $table->integer('author_id')->change();
+
+        });
+
     }
 }
