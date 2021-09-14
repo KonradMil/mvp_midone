@@ -17,7 +17,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Mpociot\Teamwork\Facades\Teamwork;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,13 +50,13 @@ class AuthController extends Controller
     {
 
         $responseBuilder = new ResponseBuilder();
+
         $registrationHandler = new RegistrationHandler($request);
 
         if (!$registrationHandler->authorize()) {
 
-            $responseBuilder->setError("Unauthorized!", 'security');
+            $responseBuilder->setErrorMessage("Unauthorized!");
             return $responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
-
 
         }
 
@@ -65,7 +64,7 @@ class AuthController extends Controller
 
         if (!$parameters->isValid()) {
 
-            $responseBuilder->setErrorsFromMB($parameters->getMessageBag());
+            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
             return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
 
         }
@@ -75,13 +74,13 @@ class AuthController extends Controller
             /** @var User $newUser */
             $newUser = $this->userService->addUser($parameters);
 
-            $responseBuilder->setMessage(__('messages.registration.account_created'));
-            $responseBuilder->addData('user', $newUser);
+            $responseBuilder->setSuccessMessage(__('messages.registration.account-created'));
+            $responseBuilder->setData('user', $newUser);
 
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setError('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occured!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
