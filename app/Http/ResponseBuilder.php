@@ -15,14 +15,19 @@ class ResponseBuilder
 {
 
     /**
-     * @var string|null
+     * @var array
      */
-    private ?string $message = null;
+    private array $errorMessages = [];
 
     /**
      * @var array
      */
-    private array $errors = [];
+    private array $warningMessages = [];
+
+    /**
+     * @var array
+     */
+    private array $successMessages = [];
 
     /**
      * @var array
@@ -37,12 +42,16 @@ class ResponseBuilder
     {
         $responseData = [];
 
-        if ($this->message) {
-            $responseData['message'] = $this->message;
+        if (!empty($this->errorMessages)) {
+            $responseData['errors'] = $this->errorMessages;
         }
 
-        if ($this->hasErrors()) {
-            $responseData['errors'] = $this->errors;
+        if (!empty($this->warningMessages)) {
+            $responseData['warnings'] = $this->warningMessages;
+        }
+
+        if (!empty($this->successMessages)) {
+            $responseData['success'] = $this->successMessages;
         }
 
         if (!empty($this->data)) {
@@ -53,77 +62,140 @@ class ResponseBuilder
     }
 
     /**
-     * @param array $messages
+     * @param string $message
      */
-    public function setErrors(array $messages)
+    public function setErrorMessage(string $message)
     {
-        foreach ($messages as $msg) {
-            $this->setError($msg['message'], $msg['context']);
-        }
+
+        $this->errorMessages[] = $message;
+
     }
 
     /**
-     * @param string $message
-     * @param string $context
+     * @param array $messages
      */
-    public function setError(string $message, string $context = 'general')
+    public function setErrorMessages(array $messages)
     {
-
-        $contextKey = null;
-
-        foreach ($this->errors as $k => $e) {
-
-            if ($e['context'] === $context) {
-                $contextKey = $k;
-            }
+        foreach ($messages as $msg) {
+            $this->setErrorMessage($msg['message']);
         }
-
-        if ($contextKey !== null) {
-            $this->errors[$contextKey]['messages'][] = $message;
-        } else {
-            $this->errors[] = [
-                'context' => $context,
-                'messages' => [$message]
-            ];
-        }
-
     }
 
     /**
      * @param MessageBag $messageBag
      */
-    public function setErrorsFromMB(MessageBag $messageBag)
+    public function setErrorMessagesFromMB(MessageBag $messageBag)
     {
-        foreach ($messageBag->getMessages() as $k => $msg) {
+        foreach ($messageBag->getMessages() as $msg) {
             foreach ($msg as $m) {
-                $this->setError($m, $k);
+                $this->setErrorMessage($m);
             }
         }
     }
 
     /**
-     * @return bool
+     * @param string $message
      */
-    public function hasErrors(): bool
+    public function setWarningMessage(string $message)
     {
-        return !empty($this->errors);
+
+        $this->warningMessages[] = $message;
+
     }
 
     /**
-     * @param string|null $message
+     * @param array $messages
      */
-    public function setMessage(?string $message)
+    public function setWarningMessages(array $messages)
     {
-        $this->message = $message;
+        foreach ($messages as $msg) {
+            $this->setWarningMessage($msg['message']);
+        }
+    }
+
+    /**
+     * @param MessageBag $messageBag
+     */
+    public function setWarningsFromMB(MessageBag $messageBag)
+    {
+        foreach ($messageBag->getMessages() as $k => $msg) {
+            foreach ($msg as $m) {
+                $this->setWarningMessage($m);
+            }
+        }
+    }
+
+    /**
+     * @param string $message
+     */
+    public function setSuccessMessage(string $message)
+    {
+
+        $this->successMessages[] = $message;
+
+    }
+
+    /**
+     * @param array $messages
+     */
+    public function setSuccessMessages(array $messages)
+    {
+        foreach ($messages as $msg) {
+            $this->setSuccessMessage($msg['message']);
+        }
+    }
+
+    /**
+     * @param MessageBag $messageBag
+     */
+    public function setSuccessMessagesFromMB(MessageBag $messageBag)
+    {
+        foreach ($messageBag->getMessages() as $k => $msg) {
+            foreach ($msg as $m) {
+                $this->setSuccessMessage($m);
+            }
+        }
     }
 
     /**
      * @param string $key
      * @param $value
      */
-    public function addData(string $key, $value)
+    public function setData(string $key, $value)
     {
         $this->data[$key] = $value;
+    }
+
+    /**
+     * @return array
+     */
+    public function getErrorMessages(): array
+    {
+        return $this->errorMessages;
+    }
+
+    /**
+     * @return array
+     */
+    public function getWarningMessages(): array
+    {
+        return $this->warningMessages;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSuccessMessages(): array
+    {
+        return $this->successMessages;
+    }
+
+    /**
+     * @return array
+     */
+    public function getData(): array
+    {
+        return $this->data;
     }
 
 }

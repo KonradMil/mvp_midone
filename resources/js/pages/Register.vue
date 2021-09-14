@@ -380,23 +380,40 @@ export default {
                     recaptchaToken: recaptchaToken
                 })
                 .then(response => {
-                    if (response.data.success) {
-                        toast.success(response.data.message);
-                    } else {
-                        toast.warning(response.data.message);
+                    if (typeof response.data.success !== 'undefined') {
+                        for(let i in response.data.success) {
+                            toast.success(response.data.success[i]);
+                        }
+                    }
+                    if (typeof response.data.warnings !== 'undefined') {
+                        for(let i in response.data.warnings) {
+                            toast.warning(response.data.warnings[i]);
+                        }
+                    }
+                    if (typeof response.data.errors !== 'undefined') {
+                        for(let i in response.data.errors) {
+                            toast.error(response.data.errors[i]);
+                        }
                     }
                 })
                 .catch(function (error) {
 
                     let resData = error.response.data;
 
-                    if (error.response.status === 400) {
-                        for (let i in resData.errors) {
-                            for (let k in resData.errors[i].messages) {
-                                toast.error(resData.errors[i].messages[k]);
-                            }
+                    if (typeof resData.success !== 'undefined') {
+                        for(let i in rresData.success) {
+                            toast.success(resData.success[i]);
                         }
-
+                    }
+                    if (typeof resData.warnings !== 'undefined') {
+                        for(let i in resData.warnings) {
+                            toast.warning(resData.warnings[i]);
+                        }
+                    }
+                    if (typeof resData.errors !== 'undefined') {
+                        for(let i in resData.errors) {
+                            toast.error(resData.errors[i]);
+                        }
                     }
 
                 });
