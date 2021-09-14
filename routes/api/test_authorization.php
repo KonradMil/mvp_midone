@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\TestAuthorizationController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/test_auth/search');
-Route::get('/test_auth/get');
-Route::get('/test_auth/update');
-Route::get('/test_auth/delete');
+Route::group(['prefix' => 'test_auth', 'middleware' => 'auth:sanctum'], function(){
+    Route::get('search', [TestAuthorizationController::class, 'searchAction']);
+    Route::get('get', [TestAuthorizationController::class, 'getAction']);
+    Route::post('update', [TestAuthorizationController::class, 'updateAction']);
+    Route::post('delete', [TestAuthorizationController::class, 'deleteAction']);
+});

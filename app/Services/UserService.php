@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Parameters\NewUserParameters;
+use App\Parameters\User\NewUserParameters;
 use App\Repository\Eloquent\UserRepository;
 use Illuminate\Database\Eloquent\Model;
 

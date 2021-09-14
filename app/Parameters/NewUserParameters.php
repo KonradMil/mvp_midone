@@ -3,6 +3,7 @@
 namespace App\Parameters;
 
 use App\Models\User;
+use App\Parameters\Parameters;
 use Illuminate\Validation\Rule;
 
 /**

@@ -29,11 +29,12 @@ class UserRepository extends BaseRepository
     }
 
     /**
-     *
+     * @param string $email
+     * @return mixed
      */
-    public function search()
+    public function findByEmail(string $email)
     {
-
+        return User::where('email', '=', $email)->first();
     }
 
 }

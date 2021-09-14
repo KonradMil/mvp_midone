@@ -14,7 +14,7 @@ class RegistrationHandler extends RequestHandler
     /**
      * @return RegistrationParameters
      */
-    public function handleRequest(): RegistrationParameters
+    public function getParameters(): RegistrationParameters
     {
         $parameters = new RegistrationParameters();
         $parameters->email = $this->request->get('email');

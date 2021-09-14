@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Handlers\LoginHandler;
 use App\Http\Requests\Handlers\RegistrationHandler;
 use App\Http\ResponseBuilder;
 use App\Models\User;
+use App\Parameters\LoginParameters;
 use App\Repository\Eloquent\UserRepository;
 use App\Services\UserService;
 use Illuminate\Auth\Events\Verified;
@@ -49,7 +51,6 @@ class AuthController extends Controller
     {
 
         $responseBuilder = new ResponseBuilder();
-
         $registrationHandler = new RegistrationHandler($request);
 
         if (!$registrationHandler->authorize()) {
@@ -60,7 +61,7 @@ class AuthController extends Controller
 
         }
 
-        $parameters = $registrationHandler->handleRequest();
+        $parameters = $registrationHandler->getParameters();
 
         if (!$parameters->isValid()) {
 
@@ -74,7 +75,7 @@ class AuthController extends Controller
             /** @var User $newUser */
             $newUser = $this->userService->addUser($parameters);
 
-            $responseBuilder->setMessage(__('messages.registration.account-created'));
+            $responseBuilder->setMessage(__('messages.registration.account_created'));
             $responseBuilder->addData('user', $newUser);
 
 
@@ -140,15 +141,35 @@ class AuthController extends Controller
     /**
      * Login
      */
-    public function login(Request $request): JsonResponse
+    public function login(Request $request, UserRepository $userRepository): JsonResponse
     {
-        $credentials = [
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
 
-        $user = User::where('email', '=', $request->email)->first();
-        if ($user == NULL) {
+        $responseBuilder = new ResponseBuilder();
+        $loginHandler = new LoginHandler($request);
+
+        if(!$loginHandler->authorize()) {
+            $responseBuilder->setError('Unauthorized!');
+            return $responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
+        }
+
+        /** @var LoginParameters $loginParameters */
+        $loginParameters = $loginHandler->getParameters();
+
+        if (!$loginParameters->isValid()) {
+
+            $responseBuilder->setErrorsFromMB($loginParameters->getMessageBag());
+            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+
+        }
+
+        $user = $userRepository->findByEmail($loginParameters->email);
+
+        if(!$user || !Hash::check($loginParameters->password, $user->password)) {
+            $responseBuilder->setError(__('messages.login.wrong_credentials'));
+            return $responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
+        }
+
+        /*if ($user == NULL) {
             $success = false;
             $message = 'Niepoprawny email lub hasło!';
         } else {
@@ -176,9 +197,9 @@ class AuthController extends Controller
             'success' => $success,
             'message' => $message,
             'payload' => $user,
-        ];
+        ];*/
 
-        return response()->json($response);
+        return $responseBuilder->getResponse();
     }
 
 }
