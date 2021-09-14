@@ -30,3 +30,4 @@ require __DIR__ . '/api/models.php';
 require __DIR__ . '/api/workshop_models.php';
 require __DIR__ . '/api/offers.php';
 require __DIR__ . '/api/projects.php';
+require __DIR__ . '/api/test_authorization.php';
