@@ -17,6 +17,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Mpociot\Teamwork\Facades\Teamwork;
 use Symfony\Component\HttpFoundation\Response;
@@ -74,7 +75,7 @@ class AuthController extends Controller
             /** @var User $newUser */
             $newUser = $this->userService->addUser($parameters);
 
-            $responseBuilder->setSuccessMessage(__('messages.registration.account-created'));
+            $responseBuilder->setInfoMessage(__('messages.registration.account_created'));
             $responseBuilder->setData('user', $newUser);
 
 
@@ -147,8 +148,10 @@ class AuthController extends Controller
         $loginHandler = new LoginHandler($request);
 
         if(!$loginHandler->authorize()) {
-            $responseBuilder->setError('Unauthorized!');
+
+            $responseBuilder->setErrorMessage('Unauthorized!');
             return $responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
+
         }
 
         /** @var LoginParameters $loginParameters */
@@ -156,7 +159,7 @@ class AuthController extends Controller
 
         if (!$loginParameters->isValid()) {
 
-            $responseBuilder->setErrorsFromMB($loginParameters->getMessageBag());
+            $responseBuilder->setErrorMessagesFromMB($loginParameters->getMessageBag());
             return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
 
         }
@@ -164,40 +167,26 @@ class AuthController extends Controller
         $user = $userRepository->findByEmail($loginParameters->email);
 
         if(!$user || !Hash::check($loginParameters->password, $user->password)) {
-            $responseBuilder->setError(__('messages.login.wrong_credentials'));
+
+            $responseBuilder->setErrorMessage(__('messages.login.wrong_credentials'));
             return $responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
+
         }
 
-        /*if ($user == NULL) {
-            $success = false;
-            $message = 'Niepoprawny email lub hasło!';
+        if ($user->twofa == 1) {
+            $responseBuilder->setData('twofa', true);
         } else {
-            if ($user->twofa == 1) {
-                if (Hash::check($request->password, $user->password)) {
-                    $success = false;
-                    $message = '2fa';
-                } else {
-                    $success = false;
-                    $message = 'Niepoprawny email lub hasło!';
-                }
-            } else {
-                if (Auth::attempt($credentials)) {
-                    $success = true;
-                    $message = 'Pomyślnie zalogowano!';
-                } else {
-                    $success = false;
-                    $message = 'Niepoprawny email lub hasło!';
-                }
+
+            if (!Auth::attempt(['email' => $loginParameters->email, 'password' => $loginParameters->password])) {
+                $responseBuilder->setErrorMessage(__('messages.login.wrong_credentials'));
+                return $responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
             }
+
+            $responseBuilder->setData('twofa', false);
+
         }
 
-        // response
-        $response = [
-            'success' => $success,
-            'message' => $message,
-            'payload' => $user,
-        ];*/
-
+        $responseBuilder->setData('user', $user);
         return $responseBuilder->getResponse();
     }
 

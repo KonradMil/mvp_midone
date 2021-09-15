@@ -268,6 +268,7 @@ import {email, minLength, required,} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 import {useToast} from "vue-toastification";
 import {useReCaptcha} from "vue-recaptcha-v3";
+import RequestHandler from "../compositions/RequestHandler";
 
 const toast = useToast();
 const store = useStore();
@@ -370,54 +371,16 @@ export default {
             await recaptchaLoaded();
             const recaptchaToken = await executeRecaptcha("register");
 
-            axios.get('/sanctum/csrf-cookie').then(response => {
-
-                axios.post('/api/register', {
+            RequestHandler('/sanctum/csrf-cookie', 'GET', {}, () => {
+                RequestHandler('register', 'POST', {
                     type: formData.type,
                     email: formData.email,
                     password: formData.password,
                     token: props.token,
                     recaptchaToken: recaptchaToken
-                })
-                .then(response => {
-                    if (typeof response.data.success !== 'undefined') {
-                        for(let i in response.data.success) {
-                            toast.success(response.data.success[i]);
-                        }
-                    }
-                    if (typeof response.data.warnings !== 'undefined') {
-                        for(let i in response.data.warnings) {
-                            toast.warning(response.data.warnings[i]);
-                        }
-                    }
-                    if (typeof response.data.errors !== 'undefined') {
-                        for(let i in response.data.errors) {
-                            toast.error(response.data.errors[i]);
-                        }
-                    }
-                })
-                .catch(function (error) {
-
-                    let resData = error.response.data;
-
-                    if (typeof resData.success !== 'undefined') {
-                        for(let i in rresData.success) {
-                            toast.success(resData.success[i]);
-                        }
-                    }
-                    if (typeof resData.warnings !== 'undefined') {
-                        for(let i in resData.warnings) {
-                            toast.warning(resData.warnings[i]);
-                        }
-                    }
-                    if (typeof resData.errors !== 'undefined') {
-                        for(let i in resData.errors) {
-                            toast.error(resData.errors[i]);
-                        }
-                    }
-
                 });
-            })
+            });
+
         };
 
         return {

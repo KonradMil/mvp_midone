@@ -3,40 +3,76 @@ import {ref} from 'vue';
 import {useToast} from "vue-toastification";
 
 
-export default function RequestHandler(url, type, data, callback) {
+export default function RequestHandler(url, method, data, successCallback = null, errorCallback = null) {
+
     const toast = useToast();
     const getParams = ref('');
+    method = String(method).toLowerCase();
 
-    async function requestHandler(url, type, data, callback) {
-        if (type === 'post') {
+    async function requestHandler(url, method, data, successCallback = null, errorCallback = null) {
+        if (method === 'post') {
             await axios.post('/api/' + url, data)
-                .then(response => {
-                    callback(response)
-                }).catch((error) => {
-                    handleErrors(error);
-                })
-        } else if (type == 'get') {
+                .then(handleSuccess)
+                .catch(handleError)
+        } else if (method === 'get') {
             getParams.value = new URLSearchParams(data).toString();
-            await axios.get('/api/' + url + '?' + getParams.value).then(response => {
-                callback(response)
-            }).catch((error) => {
-                handleErrors(error);
-            })
+            await axios.get('/api/' + url + '?' + getParams.value)
+                .then(handleSuccess)
+                .catch(handleError)
         } else {
-            console.log('Wrong request type: ' + type);
+            console.warn('Wrong request method: ' + method);
         }
     }
 
-    const handleErrors = (error) => {
-        error.response.data.errors.forEach((val) => {
-            toast.error(val);
-        });
-        error.response.data.warnings.forEach((val) => {
-            toast.warning(val);
-        });
+    const handleSuccess = (response) => {
+        handleMessages(response.data);
+        if (successCallback) {
+            successCallback(response);
+        }
     }
 
-    requestHandler(url, type, data, callback);
+    const handleError = (error) => {
+
+        if(typeof error.response !== 'undefined' && typeof error.response.status !== 'undefined') {
+            handleMessages(error.response.data);
+            if (errorCallback) {
+                errorCallback(error);
+            }
+        } else {
+            console.error(error);
+        }
+
+    }
+
+    const handleMessages = (responseData) => {
+
+        if (typeof responseData.errors !== 'undefined') {
+            responseData.errors.forEach((val) => {
+                toast.error(val);
+            });
+        }
+
+        if (typeof responseData.warnings !== 'undefined') {
+            responseData.warnings.forEach((val) => {
+                toast.warning(val);
+            });
+        }
+
+        if (typeof responseData.success !== 'undefined') {
+            responseData.success.forEach((val) => {
+                toast.success(val);
+            });
+        }
+
+        if (typeof responseData.info !== 'undefined') {
+            responseData.info.forEach((val) => {
+                toast.info(val);
+            });
+        }
+
+    }
+
+    requestHandler(url, method, data, successCallback, errorCallback);
 
 }
 </script>

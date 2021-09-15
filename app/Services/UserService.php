@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Parameters\User\NewUserParameters;
+use App\Parameters\RegistrationParameters;
 use App\Repository\Eloquent\UserRepository;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,10 +25,10 @@ class UserService
     }
 
     /**
-     * @param NewUserParameters $newUserParameters
+     * @param RegistrationParameters $newUserParameters
      * @return Model
      */
-    public function addUser(NewUserParameters $newUserParameters): Model
+    public function addUser(RegistrationParameters $newUserParameters): Model
     {
 
         return $this->userRepository->create([

@@ -29,6 +29,8 @@ class ResponseBuilder
      */
     private array $successMessages = [];
 
+    private array $infoMessages = [];
+
     /**
      * @var array
      */
@@ -54,8 +56,12 @@ class ResponseBuilder
             $responseData['success'] = $this->successMessages;
         }
 
+        if (!empty($this->infoMessages)) {
+            $responseData['info'] = $this->infoMessages;
+        }
+
         if (!empty($this->data)) {
-            $responseData['data'] = $this->data;
+            $responseData = array_merge($responseData, $this->data);
         }
 
         return new JsonResponse($responseData, $code);
@@ -153,6 +159,38 @@ class ResponseBuilder
         foreach ($messageBag->getMessages() as $k => $msg) {
             foreach ($msg as $m) {
                 $this->setSuccessMessage($m);
+            }
+        }
+    }
+
+    /**
+     * @param string $message
+     */
+    public function setInfoMessage(string $message)
+    {
+
+        $this->infoMessages[] = $message;
+
+    }
+
+    /**
+     * @param array $messages
+     */
+    public function setInfoMessages(array $messages)
+    {
+        foreach ($messages as $msg) {
+            $this->setInfoMessage($msg['message']);
+        }
+    }
+
+    /**
+     * @param MessageBag $messageBag
+     */
+    public function setInfoMessagesFromMB(MessageBag $messageBag)
+    {
+        foreach ($messageBag->getMessages() as $k => $msg) {
+            foreach ($msg as $m) {
+                $this->setInfoMessage($m);
             }
         }
     }

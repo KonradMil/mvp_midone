@@ -1,8 +1,14 @@
 <?php
 
 return [
+    'recaptcha_error' => 'Udowodnij że nie jesteś robotem.',
+    'validation' => [
+        'registration' => [
+            'wrong_account_type' => "Nieprawidłowy typ konta."
+        ]
+    ],
     'registration' => [
-        'account-created' => "Twoje konto zostało utworzone! Na twój adres e-mail został wysłany link aktywacyjny w celu potwierdzenia.",
+        'account_created' => "Twoje konto zostało utworzone! Na twój adres e-mail został wysłany link aktywacyjny w celu potwierdzenia.",
         'email_confirmed' => "Twoje konto zostało aktywowane."
     ],
     'login' => [
