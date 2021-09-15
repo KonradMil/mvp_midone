@@ -29,6 +29,9 @@ class ResponseBuilder
      */
     private array $successMessages = [];
 
+    /**
+     * @var array
+     */
     private array $infoMessages = [];
 
     /**
@@ -226,6 +229,14 @@ class ResponseBuilder
     public function getSuccessMessages(): array
     {
         return $this->successMessages;
+    }
+
+    /**
+     * @return array
+     */
+    public function getInfoMessages(): array
+    {
+        return $this->infoMessages;
     }
 
     /**
