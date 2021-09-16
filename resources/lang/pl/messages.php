@@ -12,6 +12,7 @@ return [
         'email_confirmed' => "Twoje konto zostało aktywowane."
     ],
     'login' => [
-        'wrong_credentials' => "Nieprawidłowy adres e-mail lub hasło."
+        'wrong_credentials' => "Nieprawidłowy adres e-mail lub hasło.",
+        'account_inactive' => "Twoje konto jest nieaktywne. Sprawdź swóją skrzynkę e-mail, a następnie kliknij w link aktywacyjny."
     ]
 ];

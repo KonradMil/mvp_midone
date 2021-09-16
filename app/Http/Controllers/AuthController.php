@@ -173,6 +173,11 @@ class AuthController extends Controller
 
         }
 
+        if(!$user->email_verified_at) {
+            $responseBuilder->setWarningMessage(__('messages.login.account_inactive'));
+            return $responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
+        }
+
         if ($user->twofa == 1) {
             $responseBuilder->setData('twofa', true);
         } else {
