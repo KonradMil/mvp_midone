@@ -4,6 +4,10 @@ const UnityBridge = () => {
     const emitter = app.appContext.config.globalProperties.emitter;
 
     onMounted(() => {
+        window.TutorialFinished = function TutorialFinished(str) {
+            console.log('UnityPerformanceIssue');
+            console.log(str);
+        }
         window.UnityPerformanceIssue = function UnityPerformanceIssue(str) {
             console.log('UnityPerformanceIssue');
             console.log(str);
