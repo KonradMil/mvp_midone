@@ -805,6 +805,12 @@ class ChallengeController extends Controller
                 'solutions.teams.users', 'solutions.teams.users.companies', 'solutions.offers'
             )->find($request->id);
 
+            $user = Auth::user();
+
+            if(!$challenge || $user->id !== $challenge->author_id && $user->type !== User::USER_TYPE_INTEGRATOR) {
+                abort(404);
+            }
+
         } else {
             $challenge = NULL;
         }
