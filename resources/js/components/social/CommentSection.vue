@@ -77,6 +77,7 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         const user = window.Laravel.user;
         const guard = ref();
+
         onMounted(function () {
             if(props.object.stage===undefined){
                 guard.value = props.object.archive + 2;

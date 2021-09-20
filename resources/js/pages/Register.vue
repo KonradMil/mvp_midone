@@ -268,6 +268,7 @@ import {email, minLength, required,} from "@vuelidate/validators";
 import {useVuelidate} from "@vuelidate/core";
 import {useToast} from "vue-toastification";
 import {useReCaptcha} from "vue-recaptcha-v3";
+import RequestHandler from "../compositions/RequestHandler";
 
 const toast = useToast();
 const store = useStore();
@@ -370,37 +371,16 @@ export default {
             await recaptchaLoaded();
             const recaptchaToken = await executeRecaptcha("register");
 
-            axios.get('/sanctum/csrf-cookie').then(response => {
-
-                axios.post('/api/register', {
+            RequestHandler('/sanctum/csrf-cookie', 'GET', {}, () => {
+                RequestHandler('register', 'POST', {
                     type: formData.type,
                     email: formData.email,
                     password: formData.password,
                     token: props.token,
                     recaptchaToken: recaptchaToken
-                })
-                .then(response => {
-                    if (response.data.success) {
-                        toast.success(response.data.message);
-                    } else {
-                        toast.warning(response.data.message);
-                    }
-                })
-                .catch(function (error) {
-
-                    let resData = error.response.data;
-
-                    if (error.response.status === 400) {
-                        for (let i in resData.errors) {
-                            for (let k in resData.errors[i].messages) {
-                                toast.error(resData.errors[i].messages[k]);
-                            }
-                        }
-
-                    }
-
                 });
-            })
+            });
+
         };
 
         return {

@@ -19,7 +19,7 @@ interface RequestHandlerInterface
     /**
      * @return ParametersInterface
      */
-    public function handleRequest(): ParametersInterface;
+    public function getParameters(): ParametersInterface;
 
     /**
      * @return mixed

@@ -43,16 +43,16 @@ class ModelController extends Controller
         if(isset($request->search)) {
             if(is_array($request->search)){
                 if(!empty($request->search['brand'])) {
-                    $models = UnityModel::where('category', '=', $request->search['category'])->where('subcategory', '=', $request->search['subcategory'])->where('brand', '=', $request->search['brand'])->take(30)->get();
+                    $models = UnityModel::where('category', '=', $request->search['category'])->where('subcategory', '=', $request->search['subcategory'])->where('brand', '=', $request->search['brand'])->take(40)->get();
                 } else {
-                    $models = UnityModel::where('category', '=', $request->search['category'])->where('subcategory', '=', $request->search['subcategory'])->take(30)->get();
+                    $models = UnityModel::where('category', '=', $request->search['category'])->where('subcategory', '=', $request->search['subcategory'])->take(40)->get();
                 }
 
             } else {
-                $models = UnityModel::where('name', 'LIKE', '%'. $request->search . '%')->take(10)->get();
+                $models = UnityModel::where('name', 'LIKE', '%'. $request->search . '%')->take(40)->get();
             }
         } else {
-            $models = UnityModel::take(10)->get();
+            $models = UnityModel::take(40)->get();
         }
 
         return response()->json([

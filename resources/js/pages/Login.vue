@@ -99,6 +99,7 @@
             </div>
         </div>
     </div>
+
     <Modal :show="show" @closed="modalClosed">
         <h3 class="intro-y text-lg font-medium mt-5">Zresetuj hasło</h3>
         <div class="intro-y box p-5 mt-12 sm:mt-5">
@@ -122,7 +123,7 @@
     </Modal>
 
     <Modal :show="shows" @closed="shows = false;">
-        <h3 class="intro-y text-lg font-medium mt-5">Dwu stopniowa weryfikacja</h3>
+        <h3 class="intro-y text-lg font-medium mt-5">Dwustopniowa weryfikacja</h3>
         <div class="intro-y box p-5 mt-12 sm:mt-5">
             <div>
                 Podaj kod z powiązanej aplikacji (Google Authenticator, Authy itd.)
@@ -140,6 +141,7 @@
             </div>
         </div>
     </Modal>
+
 </template>
 
 <script>
@@ -150,15 +152,23 @@ import {useToast} from "vue-toastification";
 import {useStore} from '../store';
 import Modal from "../components/Modal";
 import ResetPassword from "../compositions/ResetPassword";
+import {useReCaptcha} from "vue-recaptcha-v3";
+import RequestHandler from "../compositions/RequestHandler";
 
 const toast = useToast();
 const store = useStore();
+
 export default {
+
     components: {
         DarkModeSwitcher,
         Modal
     },
+
     setup() {
+
+        const {executeRecaptcha, recaptchaLoaded} = useReCaptcha();
+
         const show = ref(false);
         const emailNew = ref('');
         const twofa_code = ref('');
@@ -173,7 +183,7 @@ export default {
                 email: email,
                 code: twofa_code.value
             }).then(response => {
-                console.log(response.data)
+
                 if (response.data.success) {
                     let user = response.data.payload;
                     store.dispatch('login/login', {
@@ -189,6 +199,7 @@ export default {
         const modalClosed = () => {
             show.value = false;
         }
+
         const reset = async () => {
             if (emailNew.value === '') {
                 toast.error('Email nie może być pusty');
@@ -198,7 +209,6 @@ export default {
             }
         }
 
-        console.log(store);
         onMounted(() => {
             cash("body")
                 .removeClass("main")
@@ -213,9 +223,12 @@ export default {
             modalClosed,
             reset,
             twofa_code,
-            checkTwoFa
+            checkTwoFa,
+            executeRecaptcha,
+            recaptchaLoaded
         };
     },
+
     data() {
         return {
             email: "",
@@ -224,53 +237,61 @@ export default {
             error: null
         }
     },
-    methods: {
-        handleSubmit(e) {
-            e.preventDefault()
-            if (this.password.length > 0) {
-                this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                    this.$axios.post('/api/login', {
-                        email: this.email,
-                        password: this.password
-                    })
-                        .then(response => {
-                            console.log(response.data)
-                            if (response.data.success) {
-                                console.log(response.data.success);
-                                let user = response.data.payload;
-                                console.log(user);
-                                // window.Laravel.isLoggedin = true;
-                                store.dispatch('login/login', {
-                                    user
-                                });
 
-                                // toast.success(response.data.message)
-                                console.log(store);
-                                if (user.name !== undefined || user.name !== '') {
-                                    window.location.replace('/dashboard');
-                                } else {
-                                    window.location.replace('/kreator');
-                                }
-                            } else {
-                                console.log(response.data.message);
-                                if (response.data.message == '2fa') {
-                                    let user = response.data.payload;
+    methods: {
+
+        async handleSubmit(e) {
+
+            e.preventDefault()
+
+            if (this.password.length > 0) {
+
+                await this.recaptchaLoaded();
+                const recaptchaToken = await this.executeRecaptcha("login");
+
+                RequestHandler('/sanctum/csrf-cookie', 'GET', {},
+
+                    () => {
+
+                        RequestHandler('login', 'POST', {
+                                email: this.email,
+                                password: this.password,
+                                recaptchaToken: recaptchaToken
+                            },
+                            (response) => {
+
+                                let twoFactory = typeof response.data.twofa !== 'undefined' ? response.data.twofa : false;
+                                let user = response.data.user;
+
+                                if (twoFactory) {
                                     window.email = user.email;
                                     this.shows = true;
                                 } else {
-                                    toast.error(response.data.message);
+
+                                    store.dispatch('login/login', {user});
+
+                                    if (user.name !== undefined || user.name !== '') {
+                                        window.location.replace('/dashboard');
+                                    } else {
+                                        window.location.replace('/kreator');
+                                    }
                                 }
-                            }
-                        })
-                })
+                            });
+                    },
+                );
             }
         }
+
     },
+
     beforeRouteEnter(to, from, next) {
+
         if (window.Laravel.isLoggedin) {
             return next('dashboard');
         }
+
         next();
+
     }
 }
 </script>

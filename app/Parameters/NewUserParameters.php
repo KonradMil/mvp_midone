@@ -3,6 +3,7 @@
 namespace App\Parameters;
 
 use App\Models\User;
+use App\Parameters\Parameters;
 use Illuminate\Validation\Rule;
 
 /**
@@ -60,8 +61,7 @@ class NewUserParameters extends Parameters
         ];
 
         $this->validationMessages = [
-            'email.unique' => 'Podany adres e-mail jest już zajęty.',
-            'type.in' => 'Wybrany typ konta jest nieprawidłowy.'
+            'type.in' => __('messages.validation.registration.wrong_account_type')
         ];
 
         $this->validationSubject = (array)$this;

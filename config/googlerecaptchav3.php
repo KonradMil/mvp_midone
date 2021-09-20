@@ -117,6 +117,11 @@ return [
             'action' => 'register',
             'threshold' => 0.2,
             'score_comparison' => true
+        ],
+        [
+            'action' => 'login',
+            'threshold' => 0.2,
+            'score_comparison' => true
         ]
     ],
 

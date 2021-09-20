@@ -23,7 +23,7 @@ class RegistrationParameters extends NewUserParameters
         parent::__construct();
 
         $this->validationRules['recaptchaToken'] = [new GoogleReCaptchaV3ValidationRule('register')];
-        $this->validationMessages['recaptchaToken.passes'] = 'Udowodnij, że nie jesteś robotem';
+        $this->validationMessages['recaptchaToken.*'] = __('messages.recaptcha_error');
 
     }
 
