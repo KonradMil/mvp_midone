@@ -33,6 +33,8 @@ import Workshop from "../pages/Unity/Workshop/Workshop";
 import NewOffer from "../pages/Offers/NewOffer";
 import Offers from "../pages/Challenges/components/Offers";
 import SolutionsPanel from "../pages/Challenges/components/SolutionsPanel";
+import ProjectsList from "../pages/Admin/ProjectsList";
+import UserList from '../pages/Admin/UserList';
 import SolutionsArchive from "../pages/Solutions/SolutionsArchive";
 import Notifications from "../pages/Notifications";
 
@@ -88,6 +90,18 @@ export const routes = [
         path: "/",
         component: SideMenu,
         children: [
+            {
+                name: 'admin-projects',
+                path: '/admin/projects',
+                component: ProjectsList,
+                props: true
+            },
+            {
+                name: 'admin-users',
+                path: '/admin/users',
+                component: UserList,
+                props: true
+            },
             {
                 name: 'workshop',
                 path: '/workshop',

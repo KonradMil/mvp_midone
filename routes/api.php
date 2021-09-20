@@ -14,6 +14,7 @@ Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard']
 Route::post('search', [SearchController::class, 'search']);
 Route::post('/broadcast/auth', [NotificationsController::class, 'broadcastAuth']);
 
+require __DIR__ . '/api/admin.php';
 require __DIR__ . '/api/solutions.php';
 require __DIR__ . '/api/reports.php';
 require __DIR__ . '/api/knowledgebase.php';

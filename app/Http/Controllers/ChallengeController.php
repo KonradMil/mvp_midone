@@ -1192,4 +1192,20 @@ class ChallengeController extends Controller
             'payload' => $challenge
         ]);
     }
+
+    public function adminGetProjects()
+    {
+        $challenges = Challenge::with('solutions', function ($query) {
+            $query->where('selected','=','1');
+        })->with('solutions.author', 'author', 'author.own_company', 'solutions.author.own_company')->get();
+
+        return response($challenges);
+    }
+
+    public function adminGetUsers()
+    {
+       $users = User::with('author')->get();
+
+        return response($users);
+    }
 }
