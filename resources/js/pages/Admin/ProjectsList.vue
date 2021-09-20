@@ -122,6 +122,10 @@ export default {
                 });
         }
 
+        onMounted(() => {
+            getData();
+        });
+
         return {
             projects
         }
