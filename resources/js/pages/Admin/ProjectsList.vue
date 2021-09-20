@@ -104,7 +104,6 @@ import RequestHandler from '../../compositions/RequestHandler'
 
 export default {
     name: "ProjectsList",
-    components: {SubcategoryName, CategoryName},
     setup() {
         const toast = useToast();
         const projects = ref([]);
