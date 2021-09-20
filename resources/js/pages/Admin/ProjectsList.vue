@@ -52,13 +52,13 @@
                         <td class="w-40">
                             <div class="flex">
                                 <div class="w-10 h-10 image-fit zoom-in">
-<!--                                    <Tippy-->
-<!--                                        tag="img"-->
-<!--                                        alt="DBR77"-->
-<!--                                        class="rounded-full"-->
-<!--                                        :src="require(`@/assets/images/${faker.images[0]}`)"-->
-<!--                                        :content="`Uploaded at ${faker.dates[0]}`"-->
-<!--                                    />-->
+                                    <!--                                    <Tippy-->
+                                    <!--                                        tag="img"-->
+                                    <!--                                        alt="DBR77"-->
+                                    <!--                                        class="rounded-full"-->
+                                    <!--                                        :src="require(`@/assets/images/${faker.images[0]}`)"-->
+                                    <!--                                        :content="`Uploaded at ${faker.dates[0]}`"-->
+                                    <!--                                    />-->
                                 </div>
                             </div>
                         </td>
