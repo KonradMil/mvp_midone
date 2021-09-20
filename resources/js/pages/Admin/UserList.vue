@@ -10,7 +10,6 @@ import {useToast} from "vue-toastification";
 
 export default {
     name: "UserList",
-    components: {SubcategoryName, CategoryName},
     setup() {
         const toast = useToast();
 
