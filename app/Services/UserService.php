@@ -40,11 +40,17 @@ class UserService
     public function addUser(RegistrationParameters $newUserParameters): Model
     {
 
-        $user = $this->userRepository->create([
+        $userParams = [
             'email' => $newUserParameters->email,
             'password' => $newUserParameters->hashedPassword,
             'type' => $newUserParameters->type
-        ]);
+        ];
+
+        if(env('APP_ENV') === 'local') {
+            $userParams['email_verified_at'] = (new \DateTime('now', new \DateTimeZone('UTC')))->format('Y-m-d H:i:s');
+        }
+
+        $user = $this->userRepository->create($userParams);
 
         /** @var Company $company */
         $company = $this->companyRepository->create([

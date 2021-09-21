@@ -173,7 +173,7 @@ class AuthController extends Controller
 
         }
 
-        if(env('APP_ENV') === 'prod' && !$user->email_verified_at) {
+        if(!$user->email_verified_at) {
             $responseBuilder->setWarningMessage(__('messages.login.account_inactive'));
             return $responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
         }
