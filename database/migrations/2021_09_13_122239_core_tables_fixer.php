@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Cog\Laravel\Love\Reactant\Models\Reactant;
 use Cog\Laravel\Love\Reactant\ReactionCounter\Models\ReactionCounter;
@@ -28,9 +29,19 @@ class CoreTablesFixer extends Migration
             $table->foreign('file_id')->references('id')->on('files');
         });
 
+        $results = DB::select(
+            "SELECT _ci.id FROM challenge_image _ci
+                    LEFT JOIN challenges _c ON _c.id = _ci.challenge_id
+	                WHERE _c.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM challenge_image WHERE id = '.$row->id);
+        }
+
         Schema::table('challenge_image', function (Blueprint $table) {
-            $table->unsignedBigInteger('challenge_id')->change();
-            $table->unsignedBigInteger('image_id')->change();
+            $table->unsignedBigInteger('challenge_id')->index()->change();
+            $table->unsignedBigInteger('image_id')->index()->change();
             $table->foreign('challenge_id')->references('id')->on('challenges');
             $table->foreign('image_id')->references('id')->on('files');
         });
@@ -39,6 +50,16 @@ class CoreTablesFixer extends Migration
             $table->unsignedBigInteger('author_id')->change();
             $table->foreign('author_id')->references('id')->on('users');
         });
+
+        $results = DB::select(
+            "SELECT e.id FROM estimates e
+                    LEFT JOIN solutions s ON s.id = e.solution_id
+                    WHERE s.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM estimates WHERE id = '.$row->id);
+        }
 
         Schema::table('estimates', function (Blueprint $table) {
             $table->json('parts_ar')->after('sum');
@@ -54,6 +75,16 @@ class CoreTablesFixer extends Migration
 
         });
 
+        $results = DB::select(
+            "SELECT lrrc.id FROM love_reactant_reaction_counters lrrc
+                    LEFT JOIN love_reactants lr ON lr.id = lrrc.reactant_id
+                    WHERE lr.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM love_reactant_reaction_counters WHERE id = '.$row->id);
+        }
+
         Schema::table((new ReactionCounter())->getTable(), function (Blueprint $table) {
 
             $table->foreign('reactant_id')
@@ -68,6 +99,16 @@ class CoreTablesFixer extends Migration
                 ->onDelete('cascade');
 
         });
+
+        $results = DB::select(
+            "SELECT lrrt.id FROM love_reactant_reaction_totals lrrt
+                    LEFT JOIN love_reactants lr ON lr.id = lrrt.reactant_id
+                    WHERE lr.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM love_reactant_reaction_totals WHERE id = '.$row->id);
+        }
 
         Schema::table((new ReactionTotal())->getTable(), function (Blueprint $table) {
 
@@ -99,6 +140,36 @@ class CoreTablesFixer extends Migration
 
         });
 
+        $results = DB::select(
+            "SELECT o.id FROM offers o
+                    LEFT JOIN challenges c ON c.id = o.challenge_id
+                    WHERE c.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM offers WHERE id = '.$row->id);
+        }
+
+        $results = DB::select(
+            "SELECT o.id FROM offers o
+                    LEFT JOIN solutions s ON s.id = o.solution_id
+                    WHERE s.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM offers WHERE id = '.$row->id);
+        }
+
+        $results = DB::select(
+            "SELECT o.id FROM offers o
+                    LEFT JOIN users u ON u.id = o.installer_id
+                    WHERE u.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM offers WHERE id = '.$row->id);
+        }
+
         Schema::table('offers', function (Blueprint $table) {
             $table->float('price_of_delivery')->nullable()->default(1)->change();
             $table->boolean('selected')->default(false)->change();
@@ -111,6 +182,26 @@ class CoreTablesFixer extends Migration
             $table->foreign('solution_id')->references('id')->on('solutions');
             $table->foreign('installer_id')->references('id')->on('users');
         });
+
+        $results = DB::select(
+            "SELECT q.id FROM questions q
+                    LEFT JOIN users u ON u.id = q.author_id
+                    WHERE u.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM questions WHERE id = '.$row->id);
+        }
+
+        $results = DB::select(
+            "SELECT q.id FROM questions q
+                    LEFT JOIN challenges c ON c.id = q.challenge_id
+                    WHERE c.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM questions WHERE id = '.$row->id);
+        }
 
         Schema::table('questions', function (Blueprint $table) {
 
@@ -155,6 +246,26 @@ class CoreTablesFixer extends Migration
 
         });
 
+        $results = DB::select(
+            "SELECT tc.id FROM team_challenge tc
+                    LEFT JOIN challenges c ON c.id = tc.challenge_id
+                    WHERE c.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM team_challenge WHERE id = '.$row->id);
+        }
+
+        $results = DB::select(
+            "SELECT tc.id FROM team_challenge tc
+                    LEFT JOIN teams t ON t.id = tc.team_id
+                    WHERE t.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM team_challenge WHERE id = '.$row->id);
+        }
+
         Schema::table('team_challenge', function (Blueprint $table) {
 
             $table->unsignedBigInteger('challenge_id')->change();
@@ -173,6 +284,16 @@ class CoreTablesFixer extends Migration
                 ->onDelete('cascade');
 
         });
+
+        $results = DB::select(
+            "SELECT ts.id FROM team_solution ts
+                    LEFT JOIN solutions s ON s.id = ts.solution_id
+                    WHERE s.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM team_solution WHERE id = '.$row->id);
+        }
 
         Schema::table('team_solution', function (Blueprint $table) {
 
@@ -210,6 +331,26 @@ class CoreTablesFixer extends Migration
 
         });
 
+        $results = DB::select(
+            "SELECT td.id FROM technical_details td
+                    LEFT JOIN challenges c ON c.id = td.challenge_id
+                    WHERE c.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM technical_details WHERE id = '.$row->id);
+        }
+
+        $results = DB::select(
+            "SELECT td.id FROM technical_details td
+                    LEFT JOIN solutions s ON s.id = td.solution_id
+                    WHERE s.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM technical_details WHERE id = '.$row->id);
+        }
+
         Schema::table('technical_details', function (Blueprint $table) {
 
             $table->unsignedBigInteger('challenge_id')->nullable()->change();
@@ -219,6 +360,26 @@ class CoreTablesFixer extends Migration
             $table->foreign('solution_id')->references('id')->on('solutions');
 
         });
+
+        $results = DB::select(
+            "SELECT uc.id FROM user_companies uc
+                    LEFT JOIN users u ON u.id = uc.user_id
+                    WHERE u.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM user_companies WHERE id = '.$row->id);
+        }
+
+        $results = DB::select(
+            "SELECT uc.id FROM user_companies uc
+                    LEFT JOIN companies c ON c.id = uc.company_id
+                    WHERE c.id is null"
+        );
+
+        foreach($results as $row) {
+            DB::delete('DELETE FROM user_companies WHERE id = '.$row->id);
+        }
 
         Schema::table('user_companies', function (Blueprint $table) {
 
