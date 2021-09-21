@@ -3,8 +3,10 @@
 namespace App\Services;
 
 use App\Parameters\RegistrationParameters;
+use App\Repository\Eloquent\CompanyRepository;
 use App\Repository\Eloquent\UserRepository;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Company;
 
 /**
  *
@@ -17,11 +19,18 @@ class UserService
     private UserRepository $userRepository;
 
     /**
-     * @param UserRepository $userRepository
+     * @var CompanyRepository
      */
-    public function __construct(UserRepository $userRepository)
+    private CompanyRepository $companyRepository;
+
+    /**
+     * @param UserRepository $userRepository
+     * @param CompanyRepository $companyRepository
+     */
+    public function __construct(UserRepository $userRepository, CompanyRepository $companyRepository)
     {
         $this->userRepository = $userRepository;
+        $this->companyRepository = $companyRepository;
     }
 
     /**
@@ -31,11 +40,20 @@ class UserService
     public function addUser(RegistrationParameters $newUserParameters): Model
     {
 
-        return $this->userRepository->create([
+        $user = $this->userRepository->create([
             'email' => $newUserParameters->email,
             'password' => $newUserParameters->hashedPassword,
             'type' => $newUserParameters->type
         ]);
+
+        /** @var Company $company */
+        $company = $this->companyRepository->create([
+            'author_id' => $user->id
+        ]);
+
+        $company->users()->attach($user);
+
+        return $user;
 
     }
 }

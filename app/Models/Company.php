@@ -40,7 +40,7 @@ class Company extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'user_companies', 'user_id', 'company_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'user_companies', 'company_id', 'user_id')->withTimestamps();
     }
 
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Company;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -416,6 +418,25 @@ class CoreTablesFixer extends Migration
             $table->foreign('author_id')->references('id')->on('users');
 
         });
+
+        $result = DB::select("
+            select u.id from users u
+            left join user_companies uc on uc.user_id = u.id
+            where uc.id is null
+        ");
+
+        foreach($result as $row){
+
+            $user = User::find($row->id);
+
+            $company = Company::create([
+                'author_id' => $user->id
+            ]);
+
+            $company->users()->attach($user);
+
+        }
+
     }
 
     /**

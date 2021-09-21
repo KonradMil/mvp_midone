@@ -23,8 +23,8 @@
         if(empty(Auth::user()->companies->toArray())) {
                $company = new App\Models\Company();
                $company->author_id = Auth::user()->id;
-                $company->save();
-                $company->users()->attach(Auth::user());
+               $company->save();
+               $company->users()->attach(Auth::user());
         } else {
             $company = Auth::user()->companies->toArray()[0];
         }
