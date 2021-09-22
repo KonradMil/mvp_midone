@@ -285,7 +285,22 @@ class OfferController extends Controller
         $id = $request->input('id');
         $challenge = Challenge::find($id);
         $user = User::find(Auth::user()->id);
+        $old_offer = null;
+        $new_offer = null;
         $array = [];
+        if($challenge->stage === 3){
+//            $old_offer = Offer::find($challenge->selected_offer_id);
+//            $project = Project::where('challenge_id', '=', $challenge->project_id)->first();
+//            $tmp_id = $project->project_accept_offer;
+//            $new_offer = Offer::find($tmp_id);
+//
+//            return response()->json([
+//                'success' => true,
+//                'message' => 'Pobrano oferty poprawnie.',
+//                'old_offer' => $old_offer,
+//                'new_offer' => $new_offer,
+//            ]);
+        }
         foreach ($user->teams as $team) {
             foreach ($team->users as $member) {
                 $offers = Offer::where('installer_id', '=', $member->id)->where('challenge_id', '=', $challenge->id)->with('solution')->get();
@@ -324,7 +339,57 @@ class OfferController extends Controller
      */
     public function save(Request $request): JsonResponse
     {
-        if ($request->edit_id != null) {
+        $stage = $request->stage;
+
+        if($stage == 3){
+            $challenge = Challenge::find($request->challenge_id);
+            $project = Project::where('challenge_id', '=' , $challenge->id)->first();
+            $old_offer = Offer::find($challenge->selected_offer_id);
+
+            $new_offer = new Offer();
+            $new_offer->challenge_id = $challenge->id;
+            $new_offer->solution_id = $challenge->solution_project_id;
+            $c = 0;
+            $sum = 0;
+            if (isset($request->solution_robots)) {
+                foreach ($request->solution_robots as $robot) {
+                    $c++;
+                    $sum += $robot['guarantee_period'];
+                }
+            }
+            if ($c > 0) {
+                $new_offer->avg_guarantee = (float)($sum / $c);
+            }
+            $new_offer->installer_id = Auth::user()->id;
+            $new_offer->robots = json_encode($request->solution_robots);
+            $new_offer->price_of_delivery = $request->price_of_delivery;
+            $new_offer->weeks_to_start = $request->weeks_to_start;
+            $new_offer->time_to_start = $request->time_to_start;
+            $new_offer->time_to_fix = $request->time_to_fix;
+            $new_offer->advance_upon_start = $request->advance_upon_start;
+            $new_offer->advance_upon_delivery = $request->advance_upon_delivery;
+            $new_offer->advance_upon_agreement = $request->advance_upon_agreement;
+            $new_offer->years_of_guarantee = $request->years_of_guarantee;
+            $new_offer->service_support_scope = $request->service_support_scope;
+            $new_offer->maintenance_frequency = $request->maintenance_frequency;
+            $new_offer->price_of_maintenance = $request->price_of_maintenance;
+            $new_offer->reaction_time = $request->reaction_time;
+            $new_offer->intervention_price = $request->intervention_price;
+            $new_offer->work_hour_price = $request->work_hour_price;
+            $new_offer->period_of_support = $request->period_of_support;
+            $new_offer->offer_expires_in = $request->offer_expires_in;
+            $new_offer->project_id = $project->id;
+            $new_offer->save();
+            $project->selected_offer_id = $new_offer->id;
+            $project->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Dodano kontrofertę poprawnie.',
+                'payload' => $new_offer,
+                'project' => $old_offer,
+            ]);
+        } else if ($request->edit_id != null) {
             $offer = Offer::find($request->edit_id);
             $offer->price_of_delivery = $request->price_of_delivery;
             $offer->weeks_to_start = $request->weeks_to_start;
@@ -343,10 +408,7 @@ class OfferController extends Controller
             $offer->period_of_support = $request->period_of_support;
             $offer->offer_expires_in = $request->offer_expires_in;
             $challenge = Challenge::find($request->challenge_id);
-//            if ($request->is_changed != null) {
-//                $offer->is_changed = $request->is_changed;
-//                $challenge -> is_offer_changed = 1;
-//            }
+
             $offer->save();
             $challenge->save();
             return response()->json([
@@ -358,43 +420,15 @@ class OfferController extends Controller
             $check = new Offer();
             $c = 0;
             $sum = 0;
-//            $sum_fanuc = 0;
-//            $sum_yaskawa = 0;
-//            $sum_abb = 0;
-//            $sum_mitshubishi = 0;
-//            $sum_kuka = 0;
-//            $sum_tfm = 0;
-//            $sum_universal = 0;
             if (isset($request->solution_robots)) {
                 foreach ($request->solution_robots as $robot) {
                     $c++;
                     $sum += $robot['guarantee_period'];
-//                    if($robot['brand'] === 'FANUC'){
-//                        $sum_fanuc++;
-//                    }else if($robot['brand'] === 'Yaskawa'){
-//                        $sum_yaskawa++;
-//                    }else if($robot['brand'] === 'ABB'){
-//                        $sum_abb++;
-//                    }else if($robot['brand'] === 'Mitshubishi'){
-//                        $sum_mitshubishi++;
-//                    }else if($robot['brand'] === 'KUKA'){
-//                        $sum_kuka++;
-//                    }else if($robot['brand'] === 'TFM ROBOTICS'){
-//                        $sum_tfm++;
-//                    }else if($robot['brand'] === 'Universal Robots'){
-//                        $sum_universal++;
-//                    }
                 }
             }
             if ($c > 0) {
                 $check->avg_guarantee = (float)($sum / $c);
             }
-//            $check->count_fanuc = $sum_fanuc;
-//            $check->count_yaskawa = $sum_yaskawa;
-//            $check->count_abb  = $sum_abb;
-//            $check->count_mitshubishi = $sum_mitshubishi;
-//            $check->count_tfm  = $sum_tfm;
-//            $check->count_universal  = $sum_universal;
             $check->robots = json_encode($request->solution_robots);
             $check->challenge_id = $request->challenge_id;
             $check->solution_id = $request->solution_id;
@@ -417,15 +451,6 @@ class OfferController extends Controller
             $check->offer_expires_in = $request->offer_expires_in;
             $check->save();
             $solution = Solution::find($check->solution_id);
-
-//            if($solution->teams != NULL){
-//                foreach($solution->teams as $team){
-//                    foreach($team->users as $member){
-//                        $member->offers()->attach($check);
-//                    }
-//                }
-//            }
-
 
             event(new OfferAdded($check, $check->installer, 'Dodałeś nową ofertę do rozwiązania: ' . $solution->name, []));
 
@@ -506,6 +531,7 @@ class OfferController extends Controller
 
         $offer->selected = true;
         $offer->status = 2;
+        $offer->is_offer_project = 1;
         if ($offer->rejected == true) {
             $offer->rejected = false;
         }
@@ -517,8 +543,15 @@ class OfferController extends Controller
         $project->description = $challenge->description;
         $project->en_description = $challenge->en_description;
         $project->stage = 0;
-
+        $project->accept_technical_details = 0;
+        $project->accept_financial_details = 0;
+        $project->accept_offer = 0;
+        $project->accept_local_vision = 0;
+        $project->accept_visit_date = 0;
+        $project->selected_offer_id = 0;
         $project->save();
+
+        $offer->project_id = $project->id;
         $challenge->save();
         $solution->save();
         $offer->save();
