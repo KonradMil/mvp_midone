@@ -1,19 +1,19 @@
 <template>
     <div class="col-span-12 lg:col-span-8 xxl:col-span-9">
-        <div class="grid grid-cols-12 gap-6">
+        <div class="grid grid-cols-12 gap-6" v-if="guard === true">
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12 xxl:col-span-6">
                 <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.technicalDetails')}}
                         <div v-if="challenge.stage === 3">
-                        <div class="flex items-center justify-center text-theme-9 pt-2" v-if="project.project_accept_details === 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
-                        <div class="flex items-center justify-center text-theme-6 pt-2" v-if="project.project_accept_details === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
-                        <div class="flex items-center mr-3 pt-2" v-if="project.project_accept_details < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
+                            <div class="intro-y flex items-center justify-center text-theme-9 pt-2" v-if="project.accept_technical_details === 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
+                            <div class="intro-y flex items-center justify-center text-theme-6 pt-2" v-if="project.accept_technical_details === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
+                            <div class="flex items-center mr-3 pt-2" v-if="project.accept_technical_details < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
                         </div>
                     </h2>
-                    <button v-if="stage === 3 && author_id === user.id" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveTechnicalDetails">{{$t('profiles.save')}}</button>
-                    <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary mr-6" @click.prevent="acceptTechnicalDetails">Akceptuje</button>
-                    <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary" @click.prevent="rejectTechnicalDetails">Odrzucam</button>
+                    <button v-if="challenge.stage === 3 && challenge.selected[0].author_id === user.id && project.accept_technical_details !== 1 && project.accept_financial_details !== 1" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveTechnicalDetails">{{$t('profiles.save')}}</button>
+                    <button v-if="challenge.author_id === user.id && challenge.stage === 3 && project.accept_technical_details !== 1 && project.accept_financial_details !== 1" class="btn btn-primary mr-6" @click.prevent="acceptTechnicalDetails">Akceptuje</button>
+                    <button v-if="challenge.author_id === user.id && challenge.stage === 3 && project.accept_technical_details !== 1 && project.accept_financial_details !== 1" class="btn btn-primary" @click.prevent="rejectTechnicalDetails">Odrzucam</button>
                 </div>
                 <div class="px-5 py-5">
                     <div
@@ -23,190 +23,200 @@
                         aria-labelledby="latest-tasks-new-tab"
                         v-if="challenge.technical_details != undefined"
                     >
-                        <div class="flex items-center">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_technical.detail_weight === old_technical.detail_weight && old_technical !== undefined) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_technical.detail_weight === old_technical.detail_weight && old_technical !== undefined) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.maxWeight')}}:</span>
                                 <div class=" dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ details['select_detail_weight'][challenge.technical_details.detail_weight].name }}
+                                    {{ details['select_detail_weight'][new_technical.detail_weight].name }}
                                 </div>
                                 <TailSelect
                                     v-if="stage === 3"
                                     id="input-wizard-1"
-                                    v-model="challenge.technical_details.detail_weight"
-                                    :options="{locale: 'pl', placeholder: details.select_detail_weight[challenge.technical_details.detail_weight].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    v-model="new_technical.detail_weight"
+                                    :options="{locale: 'pl', placeholder: details.select_detail_weight[new_technical.detail_weight].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                                     <option selected disabled>Wybierz...</option>
-                                    <option v-for="(det,index) in details.select_detail_weight"
+                                    <option :disabled="challenge.selected[0].author_id !== user.id"
+                                            v-for="(det,index) in details.select_detail_weight"
                                             :value="det.value">
                                         {{ det.name }}
                                     </option>
                                 </TailSelect>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_technical.pick_quality === old_technical.pick_quality) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_technical.pick_quality === old_technical.pick_quality) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.quality')}}:</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ details['select_pick_quality'][challenge.technical_details.pick_quality].name }}
+                                    {{ details['select_pick_quality'][new_technical.pick_quality].name }}
                                 </div>
                                 <TailSelect
                                     v-if="stage === 3"
                                     id="input-wizard-1"
-                                    v-model="challenge.technical_details.pick_quality"
-                                    :options="{locale: 'pl', placeholder: details.select_pick_quality[challenge.technical_details.pick_quality].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    v-model="new_technical.pick_quality"
+                                    :options="{locale: 'pl', placeholder: details.select_pick_quality[new_technical.pick_quality].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                                     <option selected disabled>Wybierz...</option>
-                                    <option v-for="(det,index) in details.select_pick_quality"
+                                    <option :disabled="challenge.selected[0].author_id !== user.id"
+                                            v-for="(det,index) in details.select_pick_quality"
                                             :value="det.value">
                                         {{ det.name }}
                                     </option>
                                 </TailSelect>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_technical.detail_material === old_technical.detail_material) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_technical.detail_material === old_technical.detail_material) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.detail')}}:</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ details['select_detail_material'][challenge.technical_details.detail_material].name }}
+                                    {{ details['select_detail_material'][new_technical.detail_material].name }}
                                 </div>
                                 <TailSelect
                                     v-if="stage === 3"
                                     id="input-wizard-1"
-                                    v-model="challenge.technical_details.detail_material"
-                                    :options="{locale: 'pl', placeholder: details.select_detail_material[challenge.technical_details.detail_material].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    v-model="new_technical.detail_material"
+                                    :options="{locale: 'pl', placeholder: details.select_detail_material[new_technical.detail_material].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                                     <option selected disabled>Wybierz...</option>
-                                    <option v-for="(det,index) in details.select_detail_material"
+                                    <option :disabled="challenge.selected[0].author_id !== user.id"
+                                            v-for="(det,index) in details.select_detail_material"
                                             :value="det.value">
                                         {{ det.name }}
                                     </option>
                                 </TailSelect>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_technical.detail_size === old_technical.detail_size) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_technical.detail_size === old_technical.detail_size) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.size')}}:</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ details['select_detail_size'][challenge.technical_details.detail_size].name}}
+                                    {{ details['select_detail_size'][new_technical.detail_size].name}}
                                 </div>
                                 <TailSelect
                                     v-if="stage === 3"
                                     id="input-wizard-1"
-                                    v-model="challenge.technical_details.detail_size"
-                                    :options="{locale: 'pl', placeholder: details.select_detail_size[challenge.technical_details.detail_size].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    v-model="new_technical.detail_size"
+                                    :options="{locale: 'pl', placeholder: details.select_detail_size[new_technical.detail_size].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                                     <option selected disabled>Wybierz...</option>
-                                    <option v-for="(det,index) in details.select_detail_size"
+                                    <option :disabled="challenge.selected[0].author_id !== user.id"
+                                            v-for="(det,index) in details.select_detail_size"
                                             :value="det.value">
                                         {{ det.name }}
                                     </option>
                                 </TailSelect>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_technical.detail_pick === old_technical.detail_pick) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_technical.detail_pick === old_technical.detail_pick) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.way')}}:</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ details['select_detail_pick'][challenge.technical_details.detail_pick].name }}
+                                    {{ details['select_detail_pick'][new_technical.detail_pick].name }}
                                 </div>
                                 <TailSelect
                                     v-if="stage === 3"
                                     id="input-wizard-1"
-                                    v-model="challenge.technical_details.detail_pick"
-                                    :options="{locale: 'pl', placeholder: details.select_detail_pick[challenge.technical_details.detail_pick].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    v-model="new_technical.detail_pick"
+                                    :options="{locale: 'pl', placeholder: details.select_detail_pick[new_technical.detail_pick].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                                     <option selected disabled>Wybierz...</option>
-                                    <option v-for="(det,index) in details.select_detail_pick"
+                                    <option :disabled="challenge.selected[0].author_id !== user.id"
+                                            v-for="(det,index) in details.select_detail_pick"
                                             :value="det.value">
                                         {{ det.name }}
                                     </option>
                                 </TailSelect>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_technical.detail_position === old_technical.detail_position) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_technical.detail_position === old_technical.detail_position) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.position')}}</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ details['select_detail_position'][challenge.technical_details.detail_position].name }}
+                                    {{ details['select_detail_position'][new_technical.detail_position].name }}
                                 </div>
                                 <TailSelect
                                     v-if="stage === 3"
                                     id="input-wizard-1"
-                                    v-model="challenge.technical_details.detail_position"
-                                    :options="{locale: 'pl', placeholder: details.select_detail_position[challenge.technical_details.detail_position].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    v-model="new_technical.detail_position"
+                                    :options="{locale: 'pl', placeholder: details.select_detail_position[new_technical.detail_position].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                                     <option selected disabled>Wybierz...</option>
-                                    <option v-for="(det,index) in details.select_detail_position"
+                                    <option :disabled="challenge.selected[0].author_id !== user.id"
+                                            v-for="(det,index) in details.select_detail_position"
                                             :value="det.value">
                                         {{ det.name }}
                                     </option>
                                 </TailSelect>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_technical.detail_range === old_technical.detail_range) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_technical.detail_range === old_technical.detail_range) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.distance')}}:</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ details['select_detail_range'][challenge.technical_details.detail_range].name }}
+                                    {{ details['select_detail_range'][new_technical.detail_range].name }}
                                 </div>
                                 <TailSelect
                                     v-if="stage === 3"
                                     id="input-wizard-1"
-                                    v-model="challenge.technical_details.detail_range"
-                                    :options="{locale: 'pl', placeholder: details.select_detail_range[challenge.technical_details.detail_range].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    v-model="new_technical.detail_range"
+                                    :options="{locale: 'pl', placeholder: details.select_detail_range[new_technical.detail_range].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                                     <option selected disabled>Wybierz...</option>
-                                    <option v-for="(det,index) in details.select_detail_range"
+                                    <option :disabled="challenge.selected[0].author_id !== user.id"
+                                            v-for="(det,index) in details.select_detail_range"
                                             :value="det.value">
                                         {{ det.name }}
                                     </option>
                                 </TailSelect>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_technical.detail_destination === old_technical.detail_destination) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_technical.detail_destination === old_technical.detail_destination) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.place')}}:</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ details['select_detail_destination'][challenge.technical_details.detail_destination].name }}
+                                    {{ details['select_detail_destination'][new_technical.detail_destination].name }}
                                 </div>
                                 <TailSelect
                                     v-if="stage === 3"
                                     id="input-wizard-1"
-                                    v-model="challenge.technical_details.detail_destination"
-                                    :options="{locale: 'pl', placeholder: details.select_detail_destination[challenge.technical_details.detail_destination].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    v-model="new_technical.detail_destination"
+                                    :options="{locale: 'pl', placeholder: details.select_detail_destination[new_technical.detail_destination].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                                     <option selected disabled>Wybierz...</option>
-                                    <option v-for="(det,index) in details.select_detail_destination"
+                                    <option :disabled="challenge.selected[0].author_id !== user.id"
+                                            v-for="(det,index) in details.select_detail_destination"
                                             :value="det.value">
                                         {{ det.name }}
                                     </option>
                                 </TailSelect>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_technical.number_of_lines === old_technical.number_of_lines) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_technical.number_of_lines === old_technical.number_of_lines) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.numberSupported')}}:</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{challenge.technical_details.number_of_lines }}
+                                    {{new_technical.number_of_lines }}
                                 </div>
                                 <TailSelect
                                     v-if="stage === 3"
                                     id="input-wizard-1"
-                                    v-model="challenge.technical_details.number_of_lines"
-                                    :options="{locale: 'pl', placeholder: details.select_number_of_lines[challenge.technical_details.number_of_lines].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    v-model="new_technical.number_of_lines"
+                                    :options="{locale: 'pl', placeholder: details.select_number_of_lines[new_technical.number_of_lines].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                                     <option selected disabled>Wybierz...</option>
-                                    <option v-for="(det,index) in details.select_number_of_lines"
+                                    <option :disabled="challenge.selected[0].author_id !== user.id"
+                                            v-for="(det,index) in details.select_number_of_lines"
                                             :value="det.value">
                                         {{ det.name }}
                                     </option>
                                 </TailSelect>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_technical.work_shifts === old_technical.work_shifts) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_technical.work_shifts === old_technical.work_shifts) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.changeNumber')}}:</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ details['select_work_shifts'][challenge.technical_details.work_shifts].name }}
+                                    {{ details['select_work_shifts'][new_technical.work_shifts].name }}
                                 </div>
                                 <TailSelect
                                     v-if="stage === 3"
                                     id="input-wizard-1"
-                                    v-model="challenge.technical_details.work_shifts"
-                                    :options="{locale: 'pl', placeholder: details.select_work_shifts[challenge.technical_details.work_shifts].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
+                                    v-model="new_technical.work_shifts"
+                                    :options="{locale: 'pl', placeholder: details.select_work_shifts[new_technical.work_shifts].name, limit: 'Nie można wybrać więcej', search: false, hideSelected: false, classNames: 'w-full' }">
                                     <option selected disabled>Wybierz...</option>
-                                    <option v-for="(det,index) in details.select_work_shifts"
+                                    <option :disabled="challenge.selected[0].author_id !== user.id"
+                                            v-for="(det,index) in details.select_work_shifts"
                                             :value="det.value">
                                         {{ det.name }}
                                     </option>
@@ -222,14 +232,14 @@
                 <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.financialDetails')}}
                         <div v-if="challenge.stage === 3">
-                        <div class="flex items-center justify-center text-theme-9 pt-2" v-if="project.project_accept_details === 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
-                        <div class="flex items-center justify-center text-theme-6 pt-2" v-if="project.project_accept_details === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
-                        <div class="flex items-center mr-3 pt-2" v-if="project.project_accept_details < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
+                            <div class="flex items-center justify-center text-theme-9 pt-2" v-if="project.accept_financial_details === 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
+                            <div class="flex items-center justify-center text-theme-6 pt-2" v-if="project.accept_financial_details === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
+                            <div class="flex items-center mr-3 pt-2" v-if="project.accept_financial_details < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
                         </div>
                     </h2>
-                    <button v-if="stage === 3 && author_id === user.id" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveFinancialDetails">{{$t('profiles.save')}}</button>
-                    <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary mr-6" @click.prevent="acceptFinancialDetails">Akceptuje</button>
-                    <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary" @click.prevent="rejectFinancialDetails">Odrzucam</button>
+                    <button v-if="stage === 3 && challenge.selected[0].author_id === user.id && project.accept_financial_details !== 1" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveFinancialDetails">{{$t('profiles.save')}}</button>
+                    <button v-if="challenge.author_id === user.id && stage === 3 && project.accept_financial_details !== 1" class="btn btn-primary mr-6" @click.prevent="acceptFinancialDetails">Akceptuje</button>
+                    <button v-if="challenge.author_id === user.id && stage === 3 && project.accept_financial_details !== 1" class="btn btn-primary" @click.prevent="rejectFinancialDetails">Odrzucam</button>
                 </div>
                 <div class="px-5 py-5">
                     <div
@@ -239,147 +249,159 @@
                         aria-labelledby="latest-tasks-new-tab"
                         v-if="challenge.financial_before != undefined"
                     >
-                        <div class="flex items-center">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_financial.days === old_financial.days && old_financial !== undefined) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_financial.days === old_financial.days && old_financial !== undefined) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.days')}}</span>
                                 <div class=" dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ challenge.financial_before.days }} dni
+                                    {{ new_financial.days }} dni
                                 </div>
-                                <input v-if="stage === 3"
+                                <input :disabled="challenge.selected[0].author_id !== user.id"
+                                       v-if="stage === 3"
                                        type="number"
-                                       v-model="challenge.financial_before.days"
+                                       v-model="new_financial.days"
                                        class="form-control"/>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_financial.shifts === old_financial.shifts && old_financial !== undefined) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_financial.shifts === old_financial.shifts && old_financial !== undefined) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.shifts')}}</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{challenge.financial_before.shifts }} zmian
+                                    {{new_financial.shifts  }} zmian
                                 </div>
-                                <input v-if="stage === 3"
+                                <input :disabled="challenge.selected[0].author_id !== user.id"
+                                       v-if="stage === 3"
                                        type="number"
-                                       v-model="challenge.financial_before.shifts"
+                                       v-model="new_financial.shifts "
                                        class="form-control"/>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_financial.shift_time === old_financial.shift_time && old_financial !== undefined) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_financial.shift_time === old_financial.shift_time && old_financial !== undefined) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.shift_time')}}</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ challenge.financial_before.shift_time }} godzin
+                                    {{ new_financial.shift_time }} godzin
                                 </div>
-                                <input v-if="stage === 3"
+                                <input :disabled="challenge.selected[0].author_id !== user.id"
+                                       v-if="stage === 3"
                                        type="number"
-                                       v-model="challenge.financial_before.shift_time"
+                                       v-model="new_financial.shift_time"
                                        class="form-control"/>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_financial.weekend_shift === old_financial.weekend_shift && old_financial !== undefined) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_financial.weekend_shift=== old_financial.weekend_shift && old_financial !== undefined) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.weekend_shift')}}</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ challenge.financial_before.weekend_shift }} zmian
+                                    {{ new_financial.weekend_shift }} zmian
                                 </div>
-                                <input v-if="stage === 3"
+                                <input :disabled="challenge.selected[0].author_id !== user.id"
+                                       v-if="stage === 3"
                                        type="number"
-                                       v-model="challenge.financial_before.weekend_shift"
+                                       v-model="new_financial.weekend_shift"
                                        class="form-control"/>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_financial.breakfast === old_financial.breakfast && old_financial !== undefined) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_financial.breakfast === old_financial.breakfast && old_financial !== undefined) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600"> {{$t('challengesNew.breakfast')}}</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ challenge.financial_before.breakfast }} minut
+                                    {{ new_financial.breakfast  }} minut
                                 </div>
-                                <input v-if="stage === 3"
+                                <input :disabled="challenge.selected[0].author_id !== user.id"
+                                       v-if="stage === 3"
                                        type="number"
-                                       v-model="challenge.financial_before.breakfast"
+                                       v-model="new_financial.breakfast "
                                        class="form-control"/>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_financial.stop_time === old_financial.stop_time && old_financial !== undefined) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_financial.stop_time === old_financial.stop_time && old_financial !== undefined) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600"> {{$t('challengesNew.stop_time')}}</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ challenge.financial_before.stop_time }} minut
+                                    {{ new_financial.stop_time}} minut
                                 </div>
-                                <input v-if="stage === 3"
+                                <input :disabled="challenge.selected[0].author_id !== user.id"
+                                       v-if="stage === 3"
                                        type="number"
-                                       v-model="challenge.financial_before.stop_time"
+                                       v-model="new_financial.stop_time"
                                        class="form-control"/>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_financial.operator_performance === old_financial.operator_performance && old_financial !== undefined) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_financial.operator_performance === old_financial.operator_performance && old_financial !== undefined) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.operator_performance')}}</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ challenge.financial_before.operator_performance }}%
+                                    {{ new_financial.operator_performance }}%
                                 </div>
-                                <input v-if="stage === 3"
+                                <input :disabled="challenge.selected[0].author_id !== user.id"
+                                       v-if="stage === 3"
                                        type="number"
-                                       v-model="challenge.financial_before.operator_performance"
+                                       v-model="new_financial.operator_performance"
                                        class="form-control"/>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_financial.defective === old_financial.defective && old_financial !== undefined) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_financial.defective === old_financial.defective && old_financial !== undefined) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.defective')}}</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ challenge.financial_before.defective }}%
+                                    {{ new_financial.defective }}%
                                 </div>
-                                <input v-if="stage === 3"
+                                <input :disabled="challenge.selected[0].author_id !== user.id"
+                                       v-if="stage === 3"
                                        type="number"
-                                       v-model="challenge.financial_before.defective"
+                                       v-model="new_financial.defective"
                                        class="form-control"/>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_financial.number_of_operators === old_financial.number_of_operators && old_financial !== undefined) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_financial.number_of_operators === old_financial.number_of_operators && old_financial !== undefined) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.number_of_operators')}}</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ challenge.financial_before.number_of_operators }} operatorów
+                                    {{ new_financial.number_of_operators }} operatorów
                                 </div>
-                                <input v-if="stage === 3"
+                                <input :disabled="challenge.selected[0].author_id !== user.id"
+                                       v-if="stage === 3"
                                        type="number"
-                                       v-model="challenge.financial_before.number_of_operators"
+                                       v-model="new_financial.number_of_operators"
                                        class="form-control"/>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_financial.operator_cost === old_financial.operator_cost && old_financial !== undefined) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_financial.operator_cost === old_financial.operator_cost && old_financial !== undefined) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.operator_cost')}}</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ challenge.financial_before.operator_cost }}zł
+                                    {{ new_financial.operator_cost }}zł
                                 </div>
-                                <input v-if="stage === 3"
+                                <input :disabled="challenge.selected[0].author_id !== user.id"
+                                       v-if="stage === 3"
                                        type="number"
-                                       v-model="challenge.financial_before.operator_cost"
+                                       v-model="new_financial.operator_cost"
                                        class="form-control"/>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_financial.absence === old_financial.absence && old_financial !== undefined) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_financial.absence === old_financial.absence && old_financial !== undefined) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.absence')}}</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ challenge.financial_before.absence }}%
+                                    {{ new_financial.absence }}%
                                 </div>
-                                <input v-if="stage === 3"
+                                <input :disabled="challenge.selected[0].author_id !== user.id"
+                                       v-if="stage === 3"
                                        type="number"
-                                       v-model="challenge.financial_before.absence"
+                                       v-model="new_financial.absence"
                                        class="form-control"/>
                             </div>
                         </div>
-                        <div class="flex items-center mt-5">
-                            <div class="border-l-2 border-theme-1 pl-4">
+                        <div :class="(new_financial.cycle_time === old_financial.cycle_time && old_financial !== undefined) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">
+                            <div :class="(new_financial.cycle_time === old_financial.cycle_time && old_financial !== undefined) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">
                                 <span class="font-medium text-gray-600">{{$t('challengesNew.cycle_time')}}</span>
                                 <div class="dark:text-theme-10 text-theme-1" v-if="stage !== 3">
-                                    {{ challenge.financial_before.cycle_time }}s
+                                    {{ new_financial.cycle_time }}s
                                 </div>
-                                <input v-if="stage === 3"
+                                <input :disabled="challenge.selected[0].author_id !== user.id"
+                                       v-if="stage === 3"
                                        type="number"
-                                       v-model="challenge.financial_before.cycle_time"
+                                       v-model="new_financial.cycle_time"
                                        class="form-control"/>
                             </div>
                         </div>
@@ -392,8 +414,10 @@
 </template>
 
 <script>
-import {computed, getCurrentInstance, onMounted, ref} from "vue";
+import {computed, getCurrentInstance, onBeforeMount, onMounted, ref} from "vue";
 import {useToast} from "vue-toastification";
+import UnityBridgeWorkshop from "../../Unity/Workshop/bridge_workshop";
+import router from "../../../router";
 
 export default {
     name: "TechnicalInformationProjectPanel",
@@ -412,6 +436,12 @@ export default {
         const details = require("../../../json/challenge.json");
         const toast = useToast();
         const user = window.Laravel.user;
+        const guard = ref(false);
+        const error = ref(null);
+        const old_technical = ref({});
+        const new_technical = ref({});
+        const old_financial = ref({});
+        const new_financial = ref({});
         const challenge_details = ref({
             select_work_shifts: '',
             select_number_of_lines: '',
@@ -424,23 +454,30 @@ export default {
             select_pick_quality: '',
             select_detail_weight: ''
         });
+        const example = ref({});
+
 
         const saveTechnicalDetails = async () => {
             axios.post('/api/projects/technical-details/save', {
-                id: props.challenge.technical_details.id,
-                detail_weight: props.challenge.technical_details.detail_weight,
-                pick_quality: props.challenge.technical_details.pick_quality,
-                detail_material: props.challenge.technical_details.detail_material,
-                detail_size: props.challenge.technical_details.detail_size,
-                detail_pick: props.challenge.technical_details.detail_pick,
-                detail_position: props.challenge.technical_details.detail_position,
-                detail_range: props.challenge.technical_details.detail_range,
-                detail_destination: props.challenge.technical_details.detail_destination,
-                number_of_lines: props.challenge.technical_details.number_of_lines,
-                work_shifts: props.challenge.technical_details.work_shifts,
+                id: new_technical.value.id,
+                challenge_id: props.challenge.id,
+                detail_weight: new_technical.value.detail_weight,
+                pick_quality: new_technical.value.pick_quality,
+                detail_material: new_technical.value.detail_material,
+                detail_size: new_technical.value.detail_size,
+                detail_pick: new_technical.value.detail_pick,
+                detail_position: new_technical.value.detail_position,
+                detail_range: new_technical.value.detail_range,
+                detail_destination: new_technical.value.detail_destination,
+                number_of_lines: new_technical.value.number_of_lines,
+                work_shifts: new_technical.value.work_shifts,
             })
                 .then(response => {
                     if (response.data.success) {
+                        // new_technical.value = response.data.payload;
+                        getNewTechnical((response) => {
+                            guard.value = true;
+                        });
                         toast.success('Zapisano poprawnie');
                     } else {
 
@@ -450,19 +487,19 @@ export default {
 
         const saveFinancialDetails = async () => {
             axios.post('/api/projects/financial-details/save', {
-                id: props.challenge.financial_before.id,
-                days: props.challenge.financial_before.days,
-                shifts: props.challenge.financial_before.shifts,
-                shift_time: props.challenge.financial_before.shift_time,
-                weekend_shift: props.challenge.financial_before.weekend_shift,
-                breakfast: props.challenge.financial_before.breakfast,
-                stop_time: props.challenge.financial_before.stop_time,
-                operator_performance: props.challenge.financial_before.operator_performance,
-                defective: props.challenge.financial_before.defective,
-                number_of_operators: props.challenge.financial_before.number_of_operators,
-                operator_cost: props.challenge.financial_before.operator_cost,
-                absence: props.challenge.financial_before.absence,
-                cycle_time: props.challenge.financial_before.cycle_time,
+                challenge_id: props.challenge.id,
+                days: new_financial.value.days,
+                shifts: new_financial.value.shifts,
+                shift_time: new_financial.value.shift_time,
+                weekend_shift: new_financial.value.weekend_shift,
+                breakfast: new_financial.value.breakfast,
+                stop_time: new_financial.value.stop_time,
+                operator_performance: new_financial.value.operator_performance,
+                defective: new_financial.value.defective,
+                number_of_operators: new_financial.value.number_of_operators,
+                operator_cost: new_financial.value.operator_cost,
+                absence: new_financial.value.absence,
+                cycle_time: new_financial.value.cycle_time,
             })
                 .then(response => {
                     if (response.data.success) {
@@ -477,8 +514,9 @@ export default {
             axios.post('/api/projects/technical-details/accept', {id: props.challenge.id})
                 .then(response => {
                     if (response.data.success) {
+                        props.project.accept_technical_details = 1;
                         toast.success('Zapisano poprawnie');
-                        emitter.emit('acceptDetails', {});
+                        emitter.emit('acceptTechnicalDetails', {});
                     } else {
 
                     }
@@ -488,7 +526,8 @@ export default {
             axios.post('/api/projects/technical-details/reject', {id: props.challenge.id})
                 .then(response => {
                     if (response.data.success) {
-                        toast.success('Zapisano poprawnie');
+                        props.project.accept_technical_details = 2;
+                        toast.success('Odrzucono założenia techniczne');
                         emitter.emit('rejectDetails', {});
                     } else {
 
@@ -499,29 +538,102 @@ export default {
             axios.post('/api/projects/financial-details/accept', {id: props.challenge.id})
                 .then(response => {
                     if (response.data.success) {
-                        toast.success('Zaakceptowałeś szczegóły techniczne');
-                        emitter.emit('acceptDetails', {});
+                        props.project.accept_financial_details = 1;
+                        toast.success('Zaakceptowano szczegóły techniczne');
+                        emitter.emit('acceptFinancialDetails', {});
                     } else {
 
                     }
                 })
         }
         const rejectFinancialDetails = async () => {
-            axios.post('/api/projects/technical-details/reject', {id: props.challenge.id})
+            axios.post('/api/projects/financial-details/reject', {id: props.challenge.id})
                 .then(response => {
                     if (response.data.success) {
-                        toast.success('Odrzuciłeś szczegóły finansowe');
+                        props.project.accept_financial_details = 2;
+                        toast.success('Odrzucono szczegóły finansowe');
                         emitter.emit('rejectDetails', {});
                     } else {
 
                     }
                 })
         }
+
+        const getNewTechnical = async (callback) => {
+            axios.post('/api/projects/technical-details/get-new', {id: props.challenge.id})
+                .then(response => {
+                    if (response.data.success) {
+                        if(response.data.old_technical === undefined){
+                            old_technical.value = response.data.new_technical;
+                            new_technical.value = response.data.new_technical;
+                        } else {
+                            new_technical.value = response.data.new_technical;
+                            old_technical.value = response.data.old_technical;
+                        }
+                        callback(response);
+                    } else {
+
+                    }
+                })
+                .catch(function (){
+                    let resData = error.response.data;
+                    if(error.response.status === 400) {
+                        for(let i in resData.errors) {
+                            for(let k in resData.errors[i].messages) {
+                                toast.error(resData.errors[i].messages[k]);
+                            }
+                        }
+
+                    }
+                })
+        }
+        const getNewFinancial = async (callback) => {
+            axios.post('/api/projects/financial-details/get-new', {id: props.challenge.id})
+                .then(response => {
+                    if (response.data.success) {
+                        if(response.data.old_financial === undefined){
+                            old_financial.value = response.data.new_financial;
+                            new_financial.value = response.data.new_financial;
+                        } else {
+                            new_financial.value = response.data.new_financial;
+                            old_financial.value = response.data.old_financial;
+                        }
+                        callback(response);
+                    } else {
+
+                    }
+                })
+                .catch(function (){
+                    let resData = error.response.data;
+                    if(error.response.status === 400) {
+                        for(let i in resData.errors) {
+                            for(let k in resData.errors[i].messages) {
+                                toast.error(resData.errors[i].messages[k]);
+                            }
+                        }
+
+                    }
+                })
+        }
+
+
         onMounted(() => {
+            getNewTechnical((response) => {
+                guard.value = true;
+            });
+            getNewFinancial((response) => {
+            });
 
         });
 
         return {
+            error,
+            guard,
+            example,
+            old_technical,
+            new_technical,
+            old_financial,
+            new_financial,
             user,
             saveTechnicalDetails,
             saveFinancialDetails,

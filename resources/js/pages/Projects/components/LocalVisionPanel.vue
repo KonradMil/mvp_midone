@@ -1,105 +1,161 @@
 <template>
-    <div class="intro-y box shadow-2xl" style="width: 1000px;">
+    <div class="intro-y box shadow-2xl" style="width: 1200px;" v-if="guard = true">
         <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
             <h2 class="font-medium text-base mr-auto">
                 Wizja lokalna
             </h2>
-            <div class="flex items-center justify-center text-theme-9" style="margin-right: 400px;" v-if="project.project_accept_vision === 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
-            <div class="flex items-center justify-center text-theme-6" style="margin-right: 650px;" v-if="project.project_accept_vision === 2"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
-            <div class="flex items-center mr-3" style="margin-right: 400px;" v-if="project.project_accept_vision < 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
-            <button v-if="challenge_author_id === user.id" class="btn btn-primary mr-6" @click.prevent="acceptLocalVision">Akceptuje zmiany</button>
-            <button v-if="challenge_author_id === user.id" class="btn btn-primary" @click.prevent="rejectLocalVision">Odrzucam zmiany</button>
-            <div v-if="challenge.selected[0].author_id === user.id" class="cursor-pointer pr-3 text-theme-3 pt-3" @click.prevent="addNewReport">
-                <PlusCircleIcon/>
-            </div>
-            <button v-if="challenge.selected[0].author_id === user.id" class="btn btn-primary w-20 mt-3" @click.prevent="saveReports">{{$t('profiles.save')}}</button>
+            <div class="flex items-center justify-center text-theme-1" style="margin-right: 500px;" v-if="project.accept_local_vision === 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Zakończono etap</div>
+<!--            <div class="flex items-center justify-center text-theme-6" style="margin-right: 650px;" v-if="project.accept_local_vision === 2"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>-->
+<!--            <div class="flex items-center mr-3" style="margin-right: 500px;" v-if="project.accept_local_vision < 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>-->
+            <button v-if="(user.id === integrator.id || user.id === investor.id) && project.accept_local_vision < 1 && check === true" class="btn btn-primary mr-6 mt-3" @click.prevent="acceptLocalVision">Zakończ etap</button>
+<!--            <div v-if="challenge.selected[0].author_id === user.id" class="curs or-pointer pr-3 text-theme-3 pt-3" @click.prevent="addNewReport">-->
+<!--                <Tippy-->
+<!--                    tag="a"-->
+<!--                    class="dark:text-gray-300 text-theme-600"-->
+<!--                    content="Dodaj">-->
+<!--                    <button class="btn btn-primary w-20 mt-3" @click.prevent="saveReports">{{$t('profiles.save')}}</button>-->
+<!--                </Tippy>-->
+<!--            </div>-->
+            <button v-if="challenge.selected[0].author_id === user.id && project.accept_local_vision !== 1" class="btn btn-primary w-15 mt-3 mr-3" @click.prevent="addNewReport">
+                Dodaj raport
+            </button>
+<!--            <button v-if="challenge.selected[0].author_id === user.id" class="btn btn-primary w-20 mt-3" @click.prevent="saveReports">{{$t('profiles.save')}}</button>-->
         </div>
-        <div class="p-5" id="bordered-table">
-            <div class="preview">
-                <div class="overflow-x-auto">
-                    <table class="table text-gray-100">
-                        <thead>
-                        <tr class="text-left bg-gradient-to-l from-pink-500 to-pink-900">
-                            <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Opis</th>
-                            <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Przed</th>
-                            <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Po</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="intro-x text-left" v-for="(report, index) in reports"
-                            :key="index">
-                            <td :class="(report.accepted === 2) ? ' border bg-gray-300' : 'border'">
-                                <textarea maxlength="100"
-                                          type="text"
-                                          v-model="report.description"
-                                          class="form-control text-gray-600"/>
-                            </td>
-                            <td :class="(report.accepted === 2) ? ' border bg-gray-300' : 'border'">
-                                <textarea maxlength="100"
-                                          type="text"
-                                          v-model="report.before"
-                                          class="form-control text-gray-600"/>
-                            </td>
-                            <td :class="(report.accepted === 2) ? ' border bg-gray-300' : 'border'">
-                                <textarea maxlength="100"
-                                          type="text"
-                                          v-model="report.after"
-                                          class="form-control text-gray-600"/>
-                            </td>
-                            <div v-if="challenge.selected[0].author_id === user.id" class="cursor-pointer pt-4 pl-2 text-theme-3 pt-7" style="float: left;" @click.prevent="deleteReport(index,report.id)">
+        <div class="intro-y inbox box mt-5 overflow-y-auto" style="max-height: 521px; overflow-x: hidden;">
+            <div class="" v-for="report in reports" :key="report.id">
+                <div @click="showDetails[report.id] = !showDetails[report.id]" class="intro-y">
+                    <div :class="(showDetails[report.id] === true) ? 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-200 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1' : 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1'">
+                        <div class="flex px-5 py-3 pb-5">
+                            <div class="w-72 flex-none flex items-center mr-5" v-if="report.author !== undefined">
+<!--                                <input class="form-check-input flex-none" type="checkbox" checked>-->
                                 <Tippy
                                     tag="a"
-                                    href=""
                                     class="dark:text-gray-300 text-gray-600"
-                                    content="Usuń">
-                                <MinusCircleIcon/>
+                                    content="W trakcie podejmowania decyzji">
+                                      <EditIcon v-if="report.accepted === 0" class="w-5 h-5 mr-2 ml-2 text-red-600"/>
                                 </Tippy>
+                                    <Tippy
+                                        tag="a"
+                                        class="dark:text-gray-300 text-gray-600"
+                                        content="Zaakceptowano">
+                                        <CheckCircleIcon v-if="report.accepted === 1" class="w-6 h-6 mr-2 ml-2 text-green-600"/>
+                                    </Tippy>
+                                    <Tippy
+                                            tag="a"
+                                            class="dark:text-gray-300 text-gray-600"
+                                            content="Odrzucono">
+                                            <XCircleIcon v-if="report.accepted === 2" class="w-6 h-6 mr-2 ml-2 text-red-600"/>
+                                        </Tippy>
+                                <div class="w-6 h-6 flex-none image-fit relative ml-5">
+                                    <Avatar :src="'/s3/avatars/' + report.author.avatar" :username="report.author.name + ' ' + report.author.lastname" :size="30"
+                                            color="#FFF" background-color="#930f68"/>                                </div>
+                                <div class="inbox__item--sender truncate ml-3">{{ report.author.name }} {{ report.author.lastname }}</div>
                             </div>
-                            <div v-if="challenge.author_id === user.id && report.accepted !== 2" class="cursor-pointer pt-8 pl-4" style="float: left;">
+                            <div class="w-64 sm:w-auto truncate pt-3 pl-6" style="max-width: 350px;">
+                                <span class="inbox__item--highlight" v-if="report.author_id >= 1">{{ report.description }}</span>
+                                <span class="inbox__item--highlight" v-else>Uzupełnij raport!</span>
+                            </div>
+                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10 pr-4 pt-3">
+                                <p class="text-theme-9" v-if="report.accepted === 1">{{$t('challengesMain.accepted')}}</p>
+                                <p class="text-theme-6" v-if="report.accepted === 2">{{$t('challengesMain.rejected')}}</p>
+                                <p v-if="report.accepted === 0">{{$t('challengesMain.waitingApproval')}}</p>
+                            </div>
+                            <div class="pt-1" v-if="report.author_id !== '' && investor.id === user.id && report.accepted === 0">
                                 <Tippy
                                     tag="a"
-                                    href=""
                                     class="dark:text-gray-300 text-gray-600"
                                     content="Akceptuj">
-                                    <input
-                                        id="accepted"
-                                        type="checkbox"
-                                        class="form-check-input border mr-2"
-                                        :checked="report.accepted"/>
+                                    <button class="btn btn-primary mr-3 btn-sm" @click.prevent="acceptReport(report)">Akceptuję zmiany</button>
                                 </Tippy>
-                            </div>
-                            <div v-if="challenge.author_id === user.id && report.accepted !== 2" class="text-theme-3 pt-7" style="float: left;" @click.prevent="rejectReport(index,report)">
                                 <Tippy
                                     tag="a"
-                                    href=""
-                                    class=""
+                                    class="dark:text-gray-300 text-gray-600"
                                     content="Odrzuć">
-                                    <XIcon></XIcon>
+                                    <button class="btn btn-primary btn-sm" @click.prevent="rejectReport(report)">Odrzucam zmiany</button>
                                 </Tippy>
                             </div>
-                            <div v-if="report.accepted === 2" class="text-theme-3 pt-7 pl-2" style="float: left;">
+                            <div class="pt-1" v-if="integrator.id === user.id && report.accepted < 1">
                                 <Tippy
                                     tag="a"
-                                    href=""
-                                    class=""
-                                    content="Odrzucono">
-                                    <XCircleIcon></XCircleIcon>
+                                    class="dark:text-gray-300 text-gray-600"
+                                    content="Usuń">
+                                    <button class="btn btn-primary btn-sm" @click.prevent="deleteReport(report)">Usuń</button>
                                 </Tippy>
                             </div>
-                        </tr>
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
                 </div>
+                <ul v-if="showDetails[report.id] === true" class="intro-y pt-4 pl-5">
+                    <li class="intro-y">
+                        <div class="sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                            <div class="flex px-5 py-3 pb-5">
+                                <label for="input-wizard-1" class="form-label" style="width: 750px;">
+                                    Czego dotyczy
+                                    <textarea
+                                        style="height: 100px;"
+                                        :disabled="integrator.id !== user.id || report.accepted === 1 || report.accepted === 2 && project.accept_local_vision !== 1"
+                                        type="text"
+                                        v-model="report.description"
+                                        class="mt-3 w-full px-3 py-2 text-gray-700 border rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-pink-700 focus:border-transparent"/>
+                                </label>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="intro-y">
+                        <div class="sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                            <div class="flex px-5 py-3 pb-5">
+                                <label for="input-wizard-1" class="form-label" style="width: 750px;">
+                                    Stan początkowy
+                                <textarea
+                                    style="height: 100px;"
+                                    :disabled="integrator.id !== user.id || report.accepted === 1 || report.accepted === 2 && project.accept_local_vision !== 1"
+                                    type="text"
+                                    v-model="report.before"
+                                    class="mt-3 w-full px-3 py-2 text-gray-700 border rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-pink-700 focus:border-transparent"/>
+                                </label>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="intro-y">
+                        <div class="sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                            <div class="flex px-5 py-3 pb-5">
+                                <label for="input-wizard-1" class="form-label" style="width: 750px;">
+                                    Stan końcowy
+                                <textarea
+                                    style="height: 100px;"
+                                    :disabled="integrator.id !== user.id || report.accepted === 1 || report.accepted === 2 && project.accept_local_vision !== 1"
+                                    type="text"
+                                    v-model="report.after"
+                                    class="mt-3 w-full px-3 py-2 text-gray-700 border rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-pink-700 focus:border-transparent"/>
+                                </label>
+                            </div>
+                            <button v-if="integrator.id === user.id && report.accepted < 1" class="btn btn-primary mr-3 btn-sm" style="margin-left: 25px; margin-bottom: 20px;" @click.prevent="saveReports(report)">Zapisz</button>
+                        </div>
+                    </li>
+                    <li class="intro-y" v-if="(report.comment !== '' && integrator.id === user.id) || investor.id === user.id">
+                        <div class="sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                            <div class="flex px-5 py-3 pb-5">
+                                <label for="input-wizard-1" class="form-label" style="width: 750px;">
+                                    Komentarz inwestora
+                                <textarea
+                                    style="height: 100px;"
+                                    :disabled="investor.id !== user.id || report.accepted === 1 || report.accepted === 2 && project.accept_local_vision !== 1"
+                                    v-model="report.comment"
+                                    type="text"
+                                    :class="(report.comment === null && report.accepted === 0 && user.id === investor.id) ? 'mt-3 w-full px-3 py-2 text-gray-700 border rounded-lg border border-transparent focus:outline-none ring-2 ring-pink-700 border-transparent' : 'mt-3 w-full px-3 py-2 text-gray-700 border rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-pink-700 focus:border-transparent'"/>
+                                </label>
+                            </div>
+                            <button v-if="investor.id === user.id && report.accepted === 0" class="btn btn-primary mr-3 btn-sm" style="margin-left: 25px; margin-bottom: 20px;" @click.prevent="saveReports(report)">Zapisz</button>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            <div class="source-code hidden">
-                <button data-target="#copy-bordered-table" class="copy-code btn py-1 px-2 btn-outline-secondary"><i
-                    data-feather="file" class="w-4 h-4 mr-2"></i> Copy example code
-                </button>
-                <div class="overflow-y-auto mt-3 rounded-md">
-                    <pre class="source-preview" id="copy-bordered-table"> <code
-                        class="text-xs p-0 rounded-md html pl-5 pt-8 pb-4 -mb-10 -mt-10"> HTMLOpenTagdiv class=&quot;overflow-x-auto&quot;HTMLCloseTag HTMLOpenTagtable class=&quot;table&quot;HTMLCloseTag HTMLOpenTagtheadHTMLCloseTag HTMLOpenTagtrHTMLCloseTag HTMLOpenTagth class=&quot;border border-b-2 dark:border-dark-5 whitespace-nowrap&quot;HTMLCloseTag#HTMLOpenTag/thHTMLCloseTag HTMLOpenTagth class=&quot;border border-b-2 dark:border-dark-5 whitespace-nowrap&quot;HTMLCloseTagFirst NameHTMLOpenTag/thHTMLCloseTag HTMLOpenTagth class=&quot;border border-b-2 dark:border-dark-5 whitespace-nowrap&quot;HTMLCloseTagLast NameHTMLOpenTag/thHTMLCloseTag HTMLOpenTagth class=&quot;border border-b-2 dark:border-dark-5 whitespace-nowrap&quot;HTMLCloseTagUsernameHTMLOpenTag/thHTMLCloseTag HTMLOpenTag/trHTMLCloseTag HTMLOpenTag/theadHTMLCloseTag HTMLOpenTagtbodyHTMLCloseTag HTMLOpenTagtrHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTag1HTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTagAngelinaHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTagJolieHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTag@angelinajolieHTMLOpenTag/tdHTMLCloseTag HTMLOpenTag/trHTMLCloseTag HTMLOpenTagtrHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTag2HTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTagBradHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTagPittHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTag@bradpittHTMLOpenTag/tdHTMLCloseTag HTMLOpenTag/trHTMLCloseTag HTMLOpenTagtrHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTag3HTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTagCharlieHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTagHunnamHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtd class=&quot;border&quot;HTMLCloseTag@charliehunnamHTMLOpenTag/tdHTMLCloseTag HTMLOpenTag/trHTMLCloseTag HTMLOpenTag/tbodyHTMLCloseTag HTMLOpenTag/tableHTMLCloseTag HTMLOpenTag/divHTMLCloseTag </code> </pre>
-                </div>
+            <div v-if="reports.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-6 py-3 pb-4" style="font-size: 16px;">
+                Nie ma jeszcze żadnych raportów.
             </div>
+<!--            <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">-->
+<!--                <div class="sm:ml-auto mt-2 sm:mt-0 dark:text-gray-300">Last account activity: 36 minutes ago</div>-->
+<!--            </div>-->
         </div>
     </div>
 </template>
@@ -107,6 +163,7 @@
 <script>
 import {computed, getCurrentInstance, onMounted, reactive, ref, watch} from "vue";
 import {useToast} from "vue-toastification";
+import Avatar from "../../../components/avatar/Avatar";
 
 export default {
     name: "LocalVisionPanel",
@@ -116,6 +173,11 @@ export default {
         challenge_author_id: Number,
         project: Object,
         challenge: Object,
+        integrator: Object,
+        investor: Object,
+    },
+    components: {
+      Avatar
     },
     setup(props) {
         const app = getCurrentInstance();
@@ -123,9 +185,13 @@ export default {
         const reports = ref([]);
         const toast = useToast();
         const user = window.Laravel.user;
+        const showDetails = ref([]);
+        const guard = ref(false);
+        const rejects = ref([]);
+        const check = ref(false);
 
         watch(() => reports.value, (first, second) => {
-           acceptReport();
+
         }, {})
 
         const removeReport = async (index) => {
@@ -137,53 +203,109 @@ export default {
                 description: '',
                 before: '',
                 after: '',
-                accepted: ''
+                accepted: '',
+                comment: '',
+                author_id: '',
             }
             setTimeout(function () {
                 reports.value.push(report);
-            }, 750)
+            }, 500)
         }
-        const deleteReport = async (index,id) => {
-            axios.post('/api/projects/local-vision/delete', {id: id})
+        const deleteReport = async (report) => {
+            axios
+                .post('/api/projects/local-vision/delete', {id: report.id})
                 .then(response => {
                     if (response.data.success) {
-                        reports.value.splice(index, 1);
+                        showDetails.value[report.id] = false;
+                        reports.value.splice(reports.value.indexOf(report), 1);
                         toast.success('Usunięto poprawnie');
                     } else {
 
                     }
-                }, removeReport)
+                })
+                .catch(function (error) {
+                let resData = error.response.data;
+                if(error.response.status === 400) {
+                    for(let i in resData.errors) {
+                        for(let k in resData.errors[i].messages) {
+                            toast.error(resData.errors[i].messages[k]);
+                        }
+                    }
+                }
+                });
         }
-        const saveReports = async () => {
-            axios.post('/api/projects/local-vision/save', {id: props.challenge_id, reports: reports.value})
+        const saveReports = async (report) => {
+            axios
+                .post('/api/projects/local-vision/save', {id: props.challenge_id, reports: reports.value})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Zapisano poprawnie');
+                        report.author_id = user.id;
+                        showDetails.value[report.id] = false;
+                        getReports();
+                        rejects.value.forEach(function(reject){
+                            if(reject.id === report.id){
+                                rejectReport(report);
+                            }
+                        })
                     } else {
 
                     }
                 })
+                .catch(function (error) {
+                    let resData = error.response.data;
+                    if(error.response.status === 400) {
+                        for(let i in resData.errors) {
+                            for(let k in resData.errors[i].messages) {
+                                toast.error(resData.errors[i].messages[k]);
+                            }
+                        }
+                    }
+                });
         }
-        const getReports = async () => {
-            axios.post('/api/projects/local-vision/get', {id: props.challenge_id})
+        const getReports = async (callback) => {
+           await axios.post('/api/projects/local-vision/get', {id: props.project.id})
                 .then(response => {
                     if (response.data.success) {
                         reports.value = response.data.payload;
+                        check.value = response.data.check;
+                        callback(response);
                     } else {
 
                     }
                 })
+                .catch(function (error) {
+                    let resData = error.response.data;
+                    if(error.response.status === 400) {
+                        for(let i in resData.errors) {
+                            for(let k in resData.errors[i].messages) {
+                                toast.error(resData.errors[i].messages[k]);
+                            }
+                        }
+                    }
+                });
         }
         const acceptLocalVision = async () => {
-            axios.post('/api/projects/local-vision/accept', {id: props.challenge_id, reports: reports.value})
+            axios.post('/api/projects/local-vision/accept', {id: props.project.id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Zaakceptowano');
+                        props.project.accept_local_vision = 1;
                         emitter.emit('acceptLocalVision', {});
                     } else {
 
                     }
                 })
+                .catch(function (error) {
+                    let resData = error.response.data;
+                    if(error.response.status === 400) {
+                        for(let i in resData.errors) {
+                            for(let k in resData.errors[i].messages) {
+                                toast.error(resData.errors[i].messages[k]);
+                            }
+                        }
+                    }
+                });
         }
         const rejectLocalVision = async () => {
             axios.post('/api/projects/local-vision/reject', {id: props.challenge_id})
@@ -195,36 +317,86 @@ export default {
 
                     }
                 })
+                .catch(function (error) {
+                    let resData = error.response.data;
+                    if(error.response.status === 400) {
+                        for(let i in resData.errors) {
+                            for(let k in resData.errors[i].messages) {
+                                toast.error(resData.errors[i].messages[k]);
+                            }
+                        }
+                    }
+                });
         }
-        const acceptReport = async () => {
-            axios.post('/api/projects/local-vision/accept-report', {reports: reports.value})
+        const acceptReport = async (report) => {
+            console.log(report.id + 'report.id');
+            axios.post('/api/projects/local-vision/accept-report', {id: report.id})
                 .then(response => {
                     if (response.data.success) {
-                        // toast.success('Zaakceptowano');
+                        report.accepted = 1;
+                        showDetails.value[report.id] = false;
+                        getReports();
+                        toast.success('Zaakceptowano');
                     } else {
 
                     }
                 })
+                .catch(function (error) {
+                    let resData = error.response.data;
+                    if(error.response.status === 400) {
+                        for(let i in resData.errors) {
+                            for(let k in resData.errors[i].messages) {
+                                toast.error(resData.errors[i].messages[k]);
+                            }
+                        }
+                    }
+                });
         }
 
-        const rejectReport = async (index,report) => {
-            axios.post('/api/projects/local-vision/reject-report', {report_id: report.id})
-                .then(response => {
-                    if (response.data.success) {
-                        console.log(report + 'report');
-                        report.accepted  = 2;
-                        toast.success('Odrzucono');
-                    } else {
+        const rejectReport = async (report) => {
+            if(report.comment === null){
+                rejects.value.push(report);
+                toast.warning('Przy odrzuceniu raportu konieczny jest komentarz!')
+            } else {
+                axios
+                    .post('/api/projects/local-vision/reject-report', {report_id: report.id, comment: report.comment})
+                    .then(response => {
+                        if (response.data.success) {
+                            report.accepted  = 2;
+                            showDetails.value[report.id] = false;
+                            getReports();
+                            toast.success('Odrzucono');
+                        } else {
 
-                    }
-                })
+                        }
+                    })
+                    .catch(function (error) {
+                        let resData = error.response.data;
+                        if(error.response.status === 400) {
+                            for(let i in resData.errors) {
+                                for(let k in resData.errors[i].messages) {
+                                    toast.error(resData.errors[i].messages[k]);
+                                }
+                            }
+                        }
+                    });
+            }
+
         }
 
         onMounted(() => {
-            getReports();
+            getReports(function(){
+                setTimeout(function(){
+                    guard.value = true;
+                }, 2000)
+            });
         });
 
         return {
+            check,
+            rejects,
+            guard,
+            showDetails,
             rejectReport,
             acceptReport,
             user,
