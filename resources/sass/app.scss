@@ -292,6 +292,10 @@
     border-radius: 10px;
 }
 
+html::-webkit-scrollbar {
+    width: 0px; /* For Chrome, Safari, and Opera */
+}
+
 .best-offer {
     border: 3px solid #d4af37;
     border-radius: 10px;

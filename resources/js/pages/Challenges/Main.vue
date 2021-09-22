@@ -2,7 +2,7 @@
     <div>
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">{{$t('challengesMain.challenges')}}</h2>
-            <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+            <div v-if="guard = true" class="w-full sm:w-auto flex mt-4 sm:mt-0">
                 <button class="btn btn-primary shadow-md mr-2" v-if="user.type == 'investor' && type==='normal'" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
                 <div class="dropdown ml-auto sm:ml-0">
                     <div class="dropdown-menu w-40">
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="intro-y grid grid-cols-12 gap-6 mt-5">
+        <div v-if="guard = true" class="intro-y grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Blog Layout -->
             <div class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium" v-if="challenges.list == undefined || challenges.list.length == 0">
                 <div>
@@ -160,21 +160,27 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const toast = useToast();
+        const guard = ref(false);
 
-        const getChallengeRepositories = async () => {
+        const getChallengeRepositories = async (callback) => {
             if(props.type == 'followed') {
                 challenges.value = GetChallengesFollowed();
+                callback();
             } else if(props.type ==='archive'){
                 challenges.value = GetChallengesArchive();
+                callback();
             } else {
                 challenges.value = GetChallenges();
+                callback();
             }
         }
         const types = require("../../json/types.json");
         const sels = require("../../json/challenge.json");
 
         onMounted(function () {
-            getChallengeRepositories();
+            getChallengeRepositories(function(){
+                guard.value = true;
+            });
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }

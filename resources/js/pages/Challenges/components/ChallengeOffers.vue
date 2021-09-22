@@ -365,11 +365,11 @@ export default {
                         offer.rejected = 0;
                         offer.solution.selected_offer_id = offer.id;
                         props.challenge.selected_offer_id = offer.id;
-                        // window.location.replace('/projects');
+                        router.push( {path : '/projects'});
                     } else {
                         // toast.error(response.data.message);
                     }
-                },handleCallback)
+                })
         }
 
         const rejectOffer = async(offer,index) => {
