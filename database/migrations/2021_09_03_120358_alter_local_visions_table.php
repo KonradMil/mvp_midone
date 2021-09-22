@@ -14,8 +14,9 @@ class AlterLocalVisionsTable extends Migration
     public function up()
     {
         Schema::table('local_visions', function (Blueprint $table) {
-            $table->integer('author_id')->nullable(true);
-            $table->integer('accepted')->nullable(true);
+            $table->integer('author_id')->default(0);
+            $table->integer('accepted')->default(0);
+            $table->text('comment')->nullable();
         });
     }
 
