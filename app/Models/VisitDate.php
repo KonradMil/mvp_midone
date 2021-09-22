@@ -2,41 +2,23 @@
 
 namespace App\Models;
 
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-
-
-/**
- *
- */
-class LocalVision extends Model
+class VisitDate extends Model
 {
-
+    use HasFactory;
     /**
      * @var string
      */
-    public $table = 'local_visions';
+    public $table = 'visit_dates';
 
     /**
      * @var string[]
      */
     protected $fillable = [
-        'project_id', 'author_id', 'description', 'before', 'after', 'accepted', 'comment'
-    ];
-
-    /**
-     * @var string[]
-     */
-    protected $casts = [
-        'project_id' => 'int',
-        'author_id' => 'int',
-        'description' => 'string',
-        'before' => 'string',
-        'after' => 'string',
-        'accepted' => 'int',
-        'comment' => 'string'
+        'project_id', 'author_id', 'date', 'accepted_investor', 'accepted_integrator', 'status', 'members', 'time' , 'accepted'
     ];
 
     /**
