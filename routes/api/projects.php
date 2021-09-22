@@ -22,6 +22,18 @@ Route::group(['prefix' => 'projects', 'middleware' => 'auth:sanctum'], function 
     Route::post('technical-details/get-new', [ProjectController::class, 'getNewTechnicalDetails']);
     Route::post('financial-details/accept', [ProjectController::class, 'acceptFinancialDetails']);
     Route::post('financial-details/reject', [ProjectController::class, 'rejectFinancialDetails']);
+    Route::post('financial-details/get-new', [ProjectController::class, 'getNewFinancialDetails']);
+    Route::post('solution/get', [ProjectController::class, 'getProjectSolution']);
+    Route::post('investor-integrator/get', [ProjectController::class, 'getInvestorAndIntegrator']);
+    Route::post('visit-date/save', [ProjectController::class, 'saveVisitDate']);
+    Route::post('visit-date/get', [ProjectController::class, 'getVisitDate']);
+    Route::post('visit-date/accept', [ProjectController::class, 'acceptVisitDate']);
+    Route::post('visit-date/reject', [ProjectController::class, 'rejectVisitDate']);
+    Route::post('visit-date/cancel', [ProjectController::class, 'cancelVisitDate']);
+    Route::post('visit-date/end', [ProjectController::class, 'endVisitDate']);
+    Route::post('visit-date/delete', [ProjectController::class, 'deleteVisitDate']);
+    Route::post('offer/get', [ProjectController::class, 'getOffersProject']);
+    Route::post('offer/integrator/get', [ProjectController::class, 'getOffersProjectIntegrator']);
 });
 
 
