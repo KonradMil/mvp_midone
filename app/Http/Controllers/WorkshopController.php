@@ -6,6 +6,7 @@ use App\Models\WorkshopObject;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
@@ -85,9 +86,9 @@ class WorkshopController extends Controller
             $constraint->aspectRatio();
             $constraint->upsize();
         });
+        $image_normal->save(public_path('images/'. $name));
 
-
-        Storage::disk('s3')->putFileAs('screenshots/', $name, $image_normal->stream());
+        Storage::disk('s3')->putFileAs('screenshots/', $name, new File(public_path('images/'. $name)));
 
         return ['absolute_path' => $path, 'relative' => ('screenshots/' . $name)];
     }
