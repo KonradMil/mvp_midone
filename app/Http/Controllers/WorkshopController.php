@@ -84,9 +84,9 @@ class WorkshopController extends Controller
         $image_normal = Image::make($content)->resize(1000, null, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
-        })->encode('jpg');
-
-        Storage::disk('s3')->putFileAs('screenshots/', $name, $image_normal->getEncoded());
+        });
+        $resource = $image_normal->stream()->detach();
+        Storage::disk('s3')->putFileAs('screenshots/', $name, $resource);
 
 
         return ['absolute_path' => $path, 'relative' => ('screenshots/' . $name)];
