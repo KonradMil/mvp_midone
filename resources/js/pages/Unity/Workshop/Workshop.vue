@@ -5,7 +5,7 @@
         </div>
         <div class="grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Profile Menu -->
-            <div class="col-span-12 lg:col-span-4 xxl:col-span-3 flex lg:block flex-col-reverse">
+            <div class="col-span-12 lg:col-span-4 xxl:col-span-3 md:col-span-2 flex lg:block flex-col-reverse">
                 <div class="intro-y box mt-5 lg:mt-0">
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
                         <a class="flex items-center" href="" @click.prevent="activeTab = 'obiekty'" :class="(activeTab == 'obiekty')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
