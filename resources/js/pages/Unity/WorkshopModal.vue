@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import Workshop from './Workshop/Workshop';
 export default {
     name: 'WorkshopModal',
@@ -27,12 +27,18 @@ export default {
         open: {
             type: Boolean,
             default: false
-        }
+        },
     },
     setup(props) {
-
+        watch(props.open, (newData, oldData) => {
+            if(newData) {
+                cash("#workshop-modal").modal("show");
+            } else {
+                cash("#workshop-modal").modal("close");
+            }
+        });
         onMounted(() => {
-            cash("#workshop-modal").modal("show");
+
         });
 
         return {
