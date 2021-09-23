@@ -186,7 +186,9 @@ export default {
             handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
         }
 
-        emitter.on('workshop_open', e => () => {
+        emitter.on('*', (type, e) => console.log(type, e) )
+
+        emitter.on('workshop_open', e => {
             console.log("CLICKED WORKSHOP MIT");
             workshopOpen.value = true;
         });
