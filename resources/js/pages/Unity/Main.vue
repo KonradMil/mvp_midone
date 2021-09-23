@@ -107,6 +107,7 @@ import TopButtons from "./components/TopButtons";
 import BottomPanel from "./components/BottomPanel";
 import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
+import WorkshopModal from "./WorkshopModal"
 
 import router from "../../router";
 import WebRTC from "./WebRTC";
@@ -126,7 +127,7 @@ export default {
         canEditSolution: Boolean,
         sessionid: String
     },
-    components: {WebRTC, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
+    components: {WebRTC, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio, WorkshopModal},
     setup(props, {emit}) {
         //GLOBAL
         const app = getCurrentInstance();
@@ -185,8 +186,6 @@ export default {
         const startTutorial = () => {
             handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
         }
-
-        emitter.on('*', (type, e) => console.log(type, e) )
 
         emitter.on('workshop_open', e => {
             console.log("CLICKED WORKSHOP MIT");

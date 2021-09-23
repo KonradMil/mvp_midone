@@ -17,7 +17,7 @@
 
 <script>
 import {onMounted, ref} from "vue";
-import Workshop from 'Workshop/Workshop';
+import Workshop from './Workshop/Workshop';
 export default {
     name: 'WorkshopModal',
     components: {
@@ -28,7 +28,7 @@ export default {
             type: Boolean,
             default: false
         }
-    }
+    },
     setup(props) {
 
         onMounted(() => {
@@ -37,6 +37,6 @@ export default {
         return {
 
         }
-    },
+    }
 };
 </script>
