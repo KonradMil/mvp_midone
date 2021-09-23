@@ -6,6 +6,7 @@ use App\Models\WorkshopObject;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 /**
@@ -80,11 +81,13 @@ class WorkshopController extends Controller
         $content = base64_decode($ss);
         $name = uniqid('ss_') . '.jpg';
         $path = public_path('screenshots/' . $name);
-        \Illuminate\Support\Facades\File::put($path, $content);
-        Image::make($path)->resize(1000, null, function ($constraint) {
+        $image_normal = Image::make($content)->resize(1000, null, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
-        })->save($path);
+        })->encode('jpg');
+
+        Storage::disk('s3')->putFileAs('screenshots/', $name, $image_normal->getEncoded());
+
 
         return ['absolute_path' => $path, 'relative' => ('screenshots/' . $name)];
     }
