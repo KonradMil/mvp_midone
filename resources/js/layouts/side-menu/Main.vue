@@ -7,7 +7,7 @@
                 <!--         BEGIN: Logo-->
                 <div class="flex-row w-full items-center">
                     <router-link :to="{ name: 'dashboard' }" tag="a" class="intro-x flex items-center  pt-4 px-12">
-                        <img alt="DBR77 Platforma Robotów " class="w-full" src="/s3/twopointo/images/dbr_logo_white.svg"/>
+                        <img alt="DBR77 Platforma Robotów " class="w-full" src="/s3/twopointo/images/dbr_logo_white_notagline.svg"/>
                     </router-link>
                 </div>
                 <!--         END: Logo-->
