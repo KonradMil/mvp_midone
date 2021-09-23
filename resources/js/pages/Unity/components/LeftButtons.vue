@@ -1,8 +1,8 @@
 <template>
-    <div class="flex fixed h-full z-50 pt-14"  style="pointer-events: none;">
+    <div class="flex fixed h-full z-50 pt-14" style="pointer-events: none;">
         <div class="flex-1 pt-2 ml-10">
             <div :class="(category == icon.value)?'left-button-category-active':''" v-for="(icon, index) in icons" :key="'leftIcon_' + index" class="unity-button">
-            <UnityButton :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="icon.value" position="leftbuttonclick"/>
+                <UnityButton :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="icon.value" position="leftbuttonclick"/>
             </div>
         </div>
     </div>
@@ -23,19 +23,16 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const category = ref(null);
-        emitter.on('leftbuttonclick', e =>  handleChange(e.val) );
+        emitter.on('leftbuttonclick', e => handleChange(e.val));
+
         const handleChange = (cat_id) => {
-            if(cat_id == 9) {
-                console.log("CLICKED WORKSHOP");
-                emitter.emit('workshop_open', {status: true});
+            if (category.value === cat_id) {
+                category.value = null;
             } else {
-                if(category.value === cat_id) {
-                    category.value = null;
-                } else {
-                    category.value = cat_id;
-                }
+                category.value = cat_id;
             }
         }
+
         return {
             category
         }
