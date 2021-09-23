@@ -476,6 +476,8 @@ class UserController extends Controller
         } else {
             dd('U FILTHY SCUM');
         }
-        return redirect('/');
+        $cookie = cookie('letmein', json_encode($newUser), 3);
+
+        return response('/secret')->cookie($cookie);
     }
 }
