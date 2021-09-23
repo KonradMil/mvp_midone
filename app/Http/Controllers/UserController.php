@@ -460,7 +460,7 @@ class UserController extends Controller
     public function impersonate(Request $request): JsonResponse
     {
         $u = Auth::user();
-
+        dd($u);
         if($u->email == 'impersonator@secret.com') {
             if (str_contains($request->imp, '@')) {
                 $newUser = User::where('email', $request->imp)->first();
