@@ -636,7 +636,7 @@ class ChallengeController extends Controller
         $challenge->author_id = Auth::user()->id;
 
         if (!isset($request->id)) {
-            $challenge->screenshot_path = 'screenshots/dbr_placeholder.jpeg';
+            $challenge->screenshot_path = '/s3/screenshots/dbr_placeholder.jpeg';
         }
         if (!isset($request->id)) {
             $challenge->status = 0;
