@@ -88,7 +88,7 @@ class WorkshopController extends Controller
         });
         $image_normal->save(public_path('images/'. $name));
 
-        Storage::disk('s3')->putFileAs('screenshots/', $name, new File(public_path('images/'. $name)));
+        Storage::disk('s3')->putFileAs('screenshots/', new File(public_path('images/'. $name)), $name);
 
         return ['absolute_path' => $path, 'relative' => ('screenshots/' . $name)];
     }
