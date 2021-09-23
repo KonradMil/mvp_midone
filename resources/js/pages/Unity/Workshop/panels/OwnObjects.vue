@@ -37,6 +37,7 @@ export default {
         });
 
         const send = (object) => {
+            console.log('SEND OBJ', object.id)
             emitter.emit('workshop_object_clicked', {object: object});
         }
 
