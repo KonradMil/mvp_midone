@@ -91,7 +91,7 @@ class WorkshopController extends Controller
 
         Storage::disk('s3')->putFileAs('screenshots/', new File(public_path('images/'. $name)), $name);
 
-        return ['absolute_path' => $path, 'relative' => ('screenshots/' . $name)];
+        return ['absolute_path' => $path, 'relative' => ('s3/screenshots/' . $name)];
     }
 
     /**
