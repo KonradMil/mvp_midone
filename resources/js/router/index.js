@@ -250,7 +250,8 @@ export const routes = [
             {
                 name: 'dashboard',
                 path: '/dashboard',
-                component: Dashboard
+                component: Challenges,
+                props: {type: 'normal'}
             },
             {
                 name: 'profiles',

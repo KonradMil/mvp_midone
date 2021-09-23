@@ -262,117 +262,117 @@
 <!--                </div>-->
                 <!-- END: Schedules -->
                 <!-- BEGIN: Weekly Top Products -->
-                <div class="col-span-12 xl:col-span-6 mt-2">
-                    <div class="intro-y block sm:flex items-center h-10">
-                        <h2 class="text-lg font-medium truncate mr-5">
-                            Najwyżej oceniane rozwiązania
-                        </h2>
-                    </div>
-                    <div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
-                        <table class="table table-report sm:mt-2">
-                            <thead>
-                            <tr>
-                                <th class="whitespace-nowrap">NAZWA</th>
-                                <th class="text-center whitespace-nowrap">INTEGRATOR</th>
-                                <!--                                <th class="text-center whitespace-nowrap">STATUS</th>-->
-<!--                                <th class="text-center whitespace-nowrap">AKCJE</th>-->
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr
-                                v-for="(solution, index) in solutions"
-                                :key="index"
-                                class="intro-x"
-                            >
-                                <td>
-                                    <a href="" class="font-medium whitespace-nowrap" @click.prevent="" v-if="solution.name == '' || solution.name == null">
-                                        {{solution.challenge.name }}
-                                    </a>
-                                    <a href="" class="font-medium whitespace-nowrap" @click.prevent="" v-if="solution.name != '' && solution.name != null">
-                                        {{solution.name }}
-                                    </a>
-                                    <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">
-                                        {{types[solution.challenge.type]}}
-                                    </div>
-                                </td>
-                                <td class="text-center">    {{solution.author.name }}</td>
-                                <!--                                <td class="w-40">-->
-                                <!--                                    <div-->
-                                <!--                                        class="flex items-center justify-center"-->
-                                <!--                                        :class="{-->
-                                <!--                        'text-theme-9': faker.trueFalse[0],-->
-                                <!--                        'text-theme-6': !faker.trueFalse[0]-->
-                                <!--                      }"-->
-                                <!--                                    >-->
-                                <!--                                        <CheckSquareIcon class="w-4 h-4 mr-2" />-->
-                                <!--                                        {{ faker.trueFalse[0] ? "Active" : "Inactive" }}-->
-                                <!--                                    </div>-->
-                                <!--                                </td>-->
-<!--                                <td class="table-report__action w-56">-->
-<!--                                    <div class="flex justify-center items-center">-->
-<!--                                        <a class="flex items-center mr-3" href=" @click.prevent=""">-->
-<!--                                            <CheckSquareIcon class="w-4 h-4 mr-1"/>-->
-<!--                                            Podejrzyj-->
-<!--                                        </a>-->
-<!--                                        &lt;!&ndash;                                        <a class="flex items-center text-theme-6" href="">&ndash;&gt;-->
-<!--                                        &lt;!&ndash;                                            <Trash2Icon class="w-4 h-4 mr-1" /> Delete&ndash;&gt;-->
-<!--                                        &lt;!&ndash;                                        </a>&ndash;&gt;-->
+<!--                <div class="col-span-12 xl:col-span-6 mt-2">-->
+<!--                    <div class="intro-y block sm:flex items-center h-10">-->
+<!--                        <h2 class="text-lg font-medium truncate mr-5">-->
+<!--                            Najwyżej oceniane rozwiązania-->
+<!--                        </h2>-->
+<!--                    </div>-->
+<!--                    <div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">-->
+<!--                        <table class="table table-report sm:mt-2">-->
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <th class="whitespace-nowrap">NAZWA</th>-->
+<!--                                <th class="text-center whitespace-nowrap">INTEGRATOR</th>-->
+<!--                                &lt;!&ndash;                                <th class="text-center whitespace-nowrap">STATUS</th>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <th class="text-center whitespace-nowrap">AKCJE</th>&ndash;&gt;-->
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                            <tr-->
+<!--                                v-for="(solution, index) in solutions"-->
+<!--                                :key="index"-->
+<!--                                class="intro-x"-->
+<!--                            >-->
+<!--                                <td>-->
+<!--                                    <a href="" class="font-medium whitespace-nowrap" @click.prevent="" v-if="solution.name == '' || solution.name == null">-->
+<!--                                        {{solution.challenge.name }}-->
+<!--                                    </a>-->
+<!--                                    <a href="" class="font-medium whitespace-nowrap" @click.prevent="" v-if="solution.name != '' && solution.name != null">-->
+<!--                                        {{solution.name }}-->
+<!--                                    </a>-->
+<!--                                    <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">-->
+<!--                                        {{types[solution.challenge.type]}}-->
 <!--                                    </div>-->
 <!--                                </td>-->
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-<!--                    <div-->
-<!--                        class="intro-y flex flex-wrap sm:flex-row sm:flex-nowrap items-center mt-3"-->
-<!--                    >-->
-<!--                        <ul class="pagination">-->
-<!--                            <li>-->
-<!--                                <a class="pagination__link" href="">-->
-<!--                                    <ChevronsLeftIcon class="w-4 h-4"/>-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <a class="pagination__link" href="">-->
-<!--                                    <ChevronLeftIcon class="w-4 h-4"/>-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <a class="pagination__link" href="">...</a>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <a class="pagination__link" href="">1</a>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <a class="pagination__link pagination__link&#45;&#45;active" href=""-->
-<!--                                >2</a-->
-<!--                                >-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <a class="pagination__link" href="">3</a>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <a class="pagination__link" href="">...</a>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <a class="pagination__link" href="">-->
-<!--                                    <ChevronRightIcon class="w-4 h-4"/>-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <a class="pagination__link" href="">-->
-<!--                                    <ChevronsRightIcon class="w-4 h-4"/>-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                        <select class="w-20 form-select box mt-3 sm:mt-0">-->
-<!--                            <option>10</option>-->
-<!--                            <option>25</option>-->
-<!--                            <option>35</option>-->
-<!--                            <option>50</option>-->
-<!--                        </select>-->
+<!--                                <td class="text-center">    {{solution.author.name }}</td>-->
+<!--                                &lt;!&ndash;                                <td class="w-40">&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    <div&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                        class="flex items-center justify-center"&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                        :class="{&ndash;&gt;-->
+<!--                                &lt;!&ndash;                        'text-theme-9': faker.trueFalse[0],&ndash;&gt;-->
+<!--                                &lt;!&ndash;                        'text-theme-6': !faker.trueFalse[0]&ndash;&gt;-->
+<!--                                &lt;!&ndash;                      }"&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    >&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                        <CheckSquareIcon class="w-4 h-4 mr-2" />&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                        {{ faker.trueFalse[0] ? "Active" : "Inactive" }}&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    </div>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <td class="table-report__action w-56">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <div class="flex justify-center items-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <a class="flex items-center mr-3" href=" @click.prevent=""">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <CheckSquareIcon class="w-4 h-4 mr-1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            Podejrzyj&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        &lt;!&ndash;                                        <a class="flex items-center text-theme-6" href="">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                        &lt;!&ndash;                                            <Trash2Icon class="w-4 h-4 mr-1" /> Delete&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                        &lt;!&ndash;                                        </a>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </td>&ndash;&gt;-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
 <!--                    </div>-->
-                </div>
+<!--&lt;!&ndash;                    <div&ndash;&gt;-->
+<!--&lt;!&ndash;                        class="intro-y flex flex-wrap sm:flex-row sm:flex-nowrap items-center mt-3"&ndash;&gt;-->
+<!--&lt;!&ndash;                    >&ndash;&gt;-->
+<!--&lt;!&ndash;                        <ul class="pagination">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <a class="pagination__link" href="">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <ChevronsLeftIcon class="w-4 h-4"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <a class="pagination__link" href="">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <ChevronLeftIcon class="w-4 h-4"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <a class="pagination__link" href="">...</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <a class="pagination__link" href="">1</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <a class="pagination__link pagination__link&#45;&#45;active" href=""&ndash;&gt;-->
+<!--&lt;!&ndash;                                >2</a&ndash;&gt;-->
+<!--&lt;!&ndash;                                >&ndash;&gt;-->
+<!--&lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <a class="pagination__link" href="">3</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <a class="pagination__link" href="">...</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <a class="pagination__link" href="">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <ChevronRightIcon class="w-4 h-4"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <a class="pagination__link" href="">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <ChevronsRightIcon class="w-4 h-4"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <select class="w-20 form-select box mt-3 sm:mt-0">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <option>10</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <option>25</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <option>35</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <option>50</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </select>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                </div>-->
                 <!-- END: Weekly Top Products -->
             </div>
         </div>
