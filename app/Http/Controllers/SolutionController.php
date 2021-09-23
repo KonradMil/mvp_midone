@@ -914,7 +914,7 @@ class SolutionController extends Controller
         $solution->save_json = json_encode($challenge->save_json);
         $solution->published = 0;
         $solution->status = 0;
-        $solution->screenshot_path = '/s3/screenshots/dbr_placeholder.jpeg';
+        $solution->screenshot_path = 's3/screenshots/dbr_placeholder.jpeg';
         $solution->save();
 
 //        $estimate = new Estimate();
