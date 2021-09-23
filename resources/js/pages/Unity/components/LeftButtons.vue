@@ -26,6 +26,7 @@ export default {
         emitter.on('leftbuttonclick', e =>  handleChange(e.val) );
         const handleChange = (cat_id) => {
             if(cat_id == 9) {
+                console.log("CLICKED WORKSHOP");
                 emitter.emit('workshop_open', {status: true});
             } else {
                 if(category.value === cat_id) {

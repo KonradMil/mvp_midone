@@ -187,7 +187,8 @@ export default {
         }
 
         emitter.on('workshop_open', e => () => {
-
+            console.log("CLICKED WORKSHOP MIT");
+            workshopOpen.value = true;
         });
 
         //RUNS WHEN UNITY IS READY
