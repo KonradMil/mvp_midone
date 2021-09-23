@@ -3,10 +3,16 @@
 <!--        <div class="intro -y flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">-->
 <!--            <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.myOffers')}}</h2>-->
 <!--        </div>-->
-        <div class="grid grid-cols-12 gap-6" v-if="is_offers === true">
+        <div class="grid grid-cols-12 gap-6 md:grid-cols-12" v-if="is_offers === true">
                         <div class="intro-y box col-span-6 xxl:col-span-6">
                             <div class="intro -y flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
                                 <h2 class="font-medium text-base mr-auto">Oferta</h2>
+                                <div class="flex items-center mr-3" v-if="project.accept_offer < 1 && stage === 3 && user.id === investor.id"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>
+                                    Oczekuje na kontroofertę ze strony integratora
+                                </div>
+                                <div class="flex items-center justify-center" v-if="project.accept_offer > 1 && stage === 3 && user.id === integrator.id"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>
+                                    Pierwotna oferta
+                                </div>
                             </div>
                              <div :class="(old_offer.rejected === 1) ? 'px-5 py-5 opacity-50' : 'px-5 py-5'">
                                 <div id="latest-tasks-new2" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
@@ -16,9 +22,8 @@
                                             <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px; word-break: break-all; max-height: 100px; max-width: 200px;"> {{ old_offer.solution.name }}</div>
                                         </div>
                                         <div v-if="user.id === investor.id">
-                                           <div class="flex items-center justify-center" v-if="project.accept_offer > 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Oferta</div>
             <!--                               <div class="flex items-center justify-center text-theme-6" v-if="project.accept_offer === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>-->
-                                           <div class="flex items-center mr-3" v-if="project.accept_offer < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Oczekuje na kontroofertę ze strony integratora</div>
+
                                         </div>
             <!--                            <div class="" v-if="user.id === challenge_author_id && stage === 3 && new_offer.id === old_offer.id">-->
             <!--                                  <button class="btn btn-primary shadow-md mr-2" style="margin-left: 90px;" @click.prevent="acceptProjectOffer">Akceptuje</button>-->
