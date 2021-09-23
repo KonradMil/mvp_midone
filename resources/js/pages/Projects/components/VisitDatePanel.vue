@@ -9,13 +9,7 @@
 <!--            <div class="flex items-center mr-3" style="margin-right: 400px;" v-if="project.accept_visit_date < 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>-->
 <!--            <button v-if="challenge_author_id === user.id" class="btn btn-primary mr-6 mt-3" @click.prevent="acceptVisitDate">Zakończ wizytację</button>-->
             <div v-if="(integrator.id === user.id || investor.id === user.id) && project.accept_local_vision < 1" class="pr-2">
-                <Tippy
-                    tag="a"
-                    class="dark:text-gray-300 text-theme-600"
-                    content="Dodaj">
-                    <button class="btn btn-primary w-15 mt-3"  @click.prevent="addNewDeadline">Dodaj termin</button>
-<!--                    <PlusCircleIcon/>-->
-                </Tippy>
+                <button class="btn btn-primary w-15 mt-3"  @click.prevent="addNewDeadline">Dodaj termin</button>
             </div>
 <!--            <button v-if="challenge.selected[0].author_id === user.id" class="btn btn-primary w-20 mt-3" @click.prevent="saveDeadlines">{{$t('profiles.save')}}</button>-->
         </div>
@@ -55,11 +49,11 @@
                                 <div class="inbox__item--sender truncate ml-3" style="width: 200px;">{{ deadline.author.name }} {{ deadline.author.lastname }}</div>
                             </div>
 
-                            <div class="w-64 sm:w-auto truncate pt-3 pl-6">
+                            <div class="w-64 sm:w-auto truncate pt-5 pl-6">
                                 <span class="inbox__item--highlight" v-if="deadline.author !== undefined">Proponowany termin: {{ deadline.date }} {{ deadline.time }}</span>
                                 <span class="inbox__item--highlight" v-else>Dodaj termin wizyty</span>
                             </div>
-                            <div class="flex px-5 py-3 pb-5 text-theme-1" style="margin-left: 60px; max-width: 150px;" v-if="deadline.author === undefined">
+                            <div class="flex px-5 py-3 pb-5 text-theme-1" style="margin-left: 60px; max-width: 250px;" v-if="deadline.author === undefined">
                                 <Litepicker
                                     class="form-control"
                                     id="post-form-2"
@@ -72,11 +66,18 @@
                                     buttonText: {'apply':'OK','cancel':'Anuluj'},
                                     dropdowns: {
                                        minYear: 2021,
-                                       maxYear: null,
+                                       maxYear: 2023,
                                        months: true,
                                        years: true
                                         }
                                      }"/>
+<!--                                <input style="height: 40px;"-->
+<!--                                       type="datetime-local"-->
+<!--                                       id="meeting-time"-->
+<!--                                       name="meeting-time"-->
+<!--                                       v-model="newDate"-->
+<!--                                       min="2021-09-22T00:00"-->
+<!--                                       max="2025-06-14T00:00">-->
                             </div>
                             <div class="flex text-theme-1" style="max-height: 35px; margin-top: 12px;" v-if="deadline.author === undefined">
                                <input id="appt-time" type="time" name="appt-time" v-model="deadline.time">
@@ -160,12 +161,11 @@
 
 <script>
 import {computed, getCurrentInstance, onMounted, reactive, ref, watch} from "vue";
-import {useToast} from "vue-toastification";
 
+import {useToast} from "vue-toastification";
 export default {
     name: "VisitDatePanel",
     components: {
-
     },
     props: {
         challenge_id: Number,
@@ -186,7 +186,10 @@ export default {
         const is_selected =ref(0);
         const guard = ref(false);
         const block = ref(false);
-
+        const date = ref('');
+        const inputValue = ref('');
+        const inputEvents = ref('');
+        const newDate = new Date();
 
         const addNewDeadline = async () => {
             block.value = true;
@@ -311,6 +314,10 @@ export default {
         });
 
         return {
+            newDate,
+            inputValue,
+            inputEvents,
+            date,
             block,
             guard,
             is_selected,

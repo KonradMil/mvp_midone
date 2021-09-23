@@ -66,7 +66,7 @@
             <div class="notification-content pt-2 dropdown-menu">
                 <div
                     class="notification-content__box dropdown-menu__content box dark:bg-dark-6 overflow-y-auto" style="max-height: 400px;">
-                    <div class="flex items-center">
+                    <div class="flex items-center sticky top-0" style="z-index: 1;">
                         <div class="pb-5">
                         <button class="btn btn-primary shadow-md mr-2 truncate" style="max-width: 150px; max-height: 45px;" @click.prevent="$router.push({path: '/notifications'})">Zobacz wszystko</button>
                         </div>
@@ -81,7 +81,7 @@
                         :key="'notification_' + index"
                         class="cursor-pointer relative flex items-center transition duration-500 ease-in-out transform hover:-translate-x-10 hover:scale-100"
                         :class="{ 'mt-5': index }">
-                        <div class="w-12 h-12 flex-none image-fit mr-1">
+                        <div class="w-12 h-12 flex-none image-fit mr-1" style="z-index: 2;">
                             <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
                                     :username="notification.data.author.name + ' ' + notification.data.author.lastname"
                                     :size="50" color="#FFF" background-color="#930f68"/>
