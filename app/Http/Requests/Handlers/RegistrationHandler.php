@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Handlers;
 
-use App\Parameters\NewUserParameters;
+use App\Parameters\RegistrationParameters;
 use Illuminate\Support\Facades\Hash;
 
 /**
@@ -12,16 +12,17 @@ class RegistrationHandler extends RequestHandler
 {
 
     /**
-     * @return NewUserParameters
+     * @return RegistrationParameters
      */
-    public function handleRequest(): NewUserParameters
+    public function getParameters(): RegistrationParameters
     {
-        $parameters = new NewUserParameters();
+        $parameters = new RegistrationParameters();
         $parameters->email = $this->request->get('email');
         $parameters->type = $this->request->get('type');
         $parameters->password = $this->request->get('password');
         $parameters->hashedPassword = Hash::make($this->request->get('password'));
         $parameters->confirmationToken = md5(rand(1, 100) . microtime());
+        $parameters->recaptchaToken = $this->request->get('recaptchaToken');
 
         return $parameters;
     }

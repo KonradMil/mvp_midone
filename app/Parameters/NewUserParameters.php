@@ -3,7 +3,7 @@
 namespace App\Parameters;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
+use App\Parameters\Parameters;
 use Illuminate\Validation\Rule;
 
 /**
@@ -61,18 +61,17 @@ class NewUserParameters extends Parameters
         ];
 
         $this->validationMessages = [
-            'email.unique' => 'Podany adres e-mail jest już zajęty.',
-            'type.in' => 'Wybrany typ konta jest nieprawidłowy.'
+            'type.in' => __('messages.validation.registration.wrong_account_type')
         ];
+
+        $this->validationSubject = (array)$this;
     }
 
     /**
      * @return bool
      */
-    public function validate(): bool
+    public function isValid(): bool
     {
-        $validator = Validator::make((array)$this, $this->validationRules, $this->validationMessages);
-        $this->messageBag = $validator->errors();
-        return !$validator->fails();
+        return parent::validate((array)$this);
     }
 }

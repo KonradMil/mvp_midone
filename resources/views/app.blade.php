@@ -14,6 +14,7 @@
         window.unity_path = '{{env('UNITY_PATH')}}';
         window.unity_workshop_path = '{{env('UNITY_WORKSHOP_PATH')}}';
         window.unity_tutorial_path = '{{env('UNITY_PATH')}}';
+        window.unity_hangar_path = '{{env('UNITY_HANGAR_PATH')}}';
         window.errors = '{{json_encode(Session::get('error'))}}';
         window.warnings = '{{json_encode(Session::get('warning'))}}';
         window.info = '{{json_encode(Session::get('info'))}}';
@@ -22,8 +23,8 @@
         if(empty(Auth::user()->companies->toArray())) {
                $company = new App\Models\Company();
                $company->author_id = Auth::user()->id;
-                $company->save();
-                $company->users()->attach(Auth::user());
+               $company->save();
+               $company->users()->attach(Auth::user());
         } else {
             $company = Auth::user()->companies->toArray()[0];
         }

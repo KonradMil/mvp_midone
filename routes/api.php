@@ -10,10 +10,11 @@ use Illuminate\Support\Facades\App;
 App::setLocale('pl');
 
 Route::post('set/txt', [S3Controller::class, 'txtFile']);
-Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard']);
+Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard'])->middleware();
 Route::post('search', [SearchController::class, 'search']);
 Route::post('/broadcast/auth', [NotificationsController::class, 'broadcastAuth']);
 
+require __DIR__ . '/api/admin.php';
 require __DIR__ . '/api/solutions.php';
 require __DIR__ . '/api/reports.php';
 require __DIR__ . '/api/knowledgebase.php';

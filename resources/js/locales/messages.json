@@ -526,7 +526,7 @@
             "select" : "Wybierz...",
             "maxWeight": "Maksymalna waga detalu",
             "detail" : "Material detalu",
-            "way" : "Sposób pobierania metalu",
+            "way" : "Sposób pobierania detalu",
             "quality" : "Jakość chwytania detalu",
             "size" : "Wielkość detalu",
             "position" : "Czy detal jest pozycjonowany do pobrania?",

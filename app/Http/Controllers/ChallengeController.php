@@ -805,6 +805,12 @@ class ChallengeController extends Controller
                 'solutions.teams.users', 'solutions.teams.users.companies', 'solutions.offers'
             )->find($request->id);
 
+            $user = Auth::user();
+
+            if(!$challenge || $user->id !== $challenge->author_id && $user->type !== User::USER_TYPE_INTEGRATOR) {
+                abort(404);
+            }
+
         } else {
             $challenge = NULL;
         }
@@ -1185,5 +1191,21 @@ class ChallengeController extends Controller
             'message' => 'Zapisano poprawnie',
             'payload' => $challenge
         ]);
+    }
+
+    public function adminGetProjects()
+    {
+        $challenges = Challenge::with('solutions', function ($query) {
+            $query->where('selected','=','1');
+        })->with('solutions.author', 'author', 'author.own_company', 'solutions.author.own_company')->get();
+
+        return response($challenges);
+    }
+
+    public function adminGetUsers()
+    {
+       $users = User::with('author')->get();
+
+        return response($users);
     }
 }

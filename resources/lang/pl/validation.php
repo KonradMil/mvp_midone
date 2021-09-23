@@ -131,8 +131,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'email' => [
+            'unique' => 'Podany adres e-mail jest zajęty.',
         ],
     ],
 
@@ -148,7 +148,7 @@ return [
     */
 
     'attributes' => [
-        'password' => 'hasło',
+        'password' => 'Hasło',
         'type' => 'typ'
     ],
 

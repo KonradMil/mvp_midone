@@ -147,6 +147,7 @@ import GetChallengesFollowed from "../../compositions/GetChallengesFollowed";
 import GetChallengesArchive from "../../compositions/GetChallengesArchive";
 import CommentSection from "../../components/social/CommentSection";
 import {useToast} from "vue-toastification";
+import RequestHandler from "../../compositions/RequestHandler"
 
 export default {
     name: "ChallengesMain",
@@ -213,18 +214,10 @@ export default {
         }
 
         const unfollow = (id, index) => {
-            axios.post('/api/challenge/user/unfollow', {id: id})
-                .then(response => {
-                    // console.log(response.data)
-                    if (response.data.success) {
-                        console.log(challenges.value);
-                        console.log(challenges.value.list[index]);
-                        challenges.value.list[index].followed  = false;
-                        toast.success('Nie śledzisz już tego wyzwania.');
-                    } else {
-
-                    }
-                })
+            RequestHandler('challenge/user/unfollow', 'post', {id:id}, (val) => {
+                challenges.value.list[index].followed  = false;
+                toast.success('Nie śledzisz już tego wyzwania.');
+            });
         }
 
         const like = async (challenge) => {

@@ -16,6 +16,7 @@ import AddSolution from "../pages/Solutions/New";
 import Teams from "../pages/Teams/Teams";
 import NotFound from "../pages/NotFound";
 import Main from "../pages/Unity/Main";
+import MainHangar from "../pages/Unity/Hangars/MainHangar";
 import MainKnowledgebase from "../pages/KnowledgeBase/Main";
 import AddKnowledgebase from "../pages/KnowledgeBase/Add";
 import Profiles from "../pages/Profiles/Main";
@@ -32,6 +33,8 @@ import Workshop from "../pages/Unity/Workshop/Workshop";
 import NewOffer from "../pages/Offers/NewOffer";
 import Offers from "../pages/Challenges/components/Offers";
 import SolutionsPanel from "../pages/Challenges/components/SolutionsPanel";
+import ProjectsList from "../pages/Admin/ProjectsList";
+import UserList from '../pages/Admin/UserList';
 import SolutionsArchive from "../pages/Solutions/SolutionsArchive";
 import Notifications from "../pages/Notifications";
 
@@ -72,6 +75,12 @@ export const routes = [
         props: true
     },
     {
+        name: 'hangarStudio',
+        path: '/hangar',
+        component: MainHangar,
+        props: true
+    },
+    {
         name: 'terms',
         path: "/terms/:page",
         component: TermsMain,
@@ -81,6 +90,18 @@ export const routes = [
         path: "/",
         component: SideMenu,
         children: [
+            {
+                name: 'admin-projects',
+                path: '/admin/projects',
+                component: ProjectsList,
+                props: true
+            },
+            {
+                name: 'admin-users',
+                path: '/admin/users',
+                component: UserList,
+                props: true
+            },
             {
                 name: 'workshop',
                 path: '/workshop',

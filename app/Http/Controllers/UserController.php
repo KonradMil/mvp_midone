@@ -377,49 +377,6 @@ class UserController extends Controller
     }
 
     /**
-     * Login
-     */
-    public function login(Request $request): JsonResponse
-    {
-        $credentials = [
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
-
-        $user = User::where('email', '=', $request->email)->first();
-        if ($user == NULL) {
-            $success = false;
-            $message = 'Niepoprawny email lub hasło!';
-        } else {
-            if ($user->twofa == 1) {
-                if (Hash::check($request->password, $user->password)) {
-                    $success = false;
-                    $message = '2fa';
-                } else {
-                    $success = false;
-                    $message = 'Niepoprawny email lub hasło!';
-                }
-            } else {
-                if (Auth::attempt($credentials)) {
-                    $success = true;
-                    $message = 'Pomyślnie zalogowano!';
-                } else {
-                    $success = false;
-                    $message = 'Niepoprawny email lub hasło!';
-                }
-            }
-        }
-
-        // response
-        $response = [
-            'success' => $success,
-            'message' => $message,
-            'payload' => $user,
-        ];
-        return response()->json($response);
-    }
-
-    /**
      * @param Request $request
      * @return JsonResponse
      */
