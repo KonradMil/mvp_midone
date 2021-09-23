@@ -479,6 +479,6 @@ class UserController extends Controller
         }
         $cookie = cookie('letmein', json_encode($newUser), 3);
 
-        return redirect('/secret')->cookie($cookie);
+        return redirect('/');
     }
 }
