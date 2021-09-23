@@ -85,9 +85,9 @@ class WorkshopController extends Controller
             $constraint->aspectRatio();
             $constraint->upsize();
         });
-        $resource = $image_normal->stream()->detach();
 
-        Storage::disk('s3')->putFileAs('screenshots/', $name, $resource);
+
+        Storage::disk('s3')->putFileAs('screenshots/', $name, $image_normal->stream());
 
         return ['absolute_path' => $path, 'relative' => ('screenshots/' . $name)];
     }
