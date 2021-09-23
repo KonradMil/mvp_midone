@@ -456,9 +456,9 @@ class UserController extends Controller
 
     /**
      * @param Request $request
-     * @return Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|Response|\Illuminate\Routing\Redirector
      */
-    public function impersonate(Request $request): Response
+    public function impersonate(Request $request)
     {
         $u = Auth::user();
 //        dd($u);
@@ -479,6 +479,6 @@ class UserController extends Controller
         }
         $cookie = cookie('letmein', json_encode($newUser), 3);
 
-        return response('/secret')->cookie($cookie);
+        return redirect('/secret')->cookie($cookie);
     }
 }
