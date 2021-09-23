@@ -24,7 +24,7 @@
                 </div>
             </div>
             <!-- END: Profile Menu -->
-<!--            <WorkshopPanel :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></WorkshopPanel>-->
+            <!--            <WorkshopPanel :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></WorkshopPanel>-->
             <StudioWorkshop hideFooter="true" :src="''" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></StudioWorkshop>
             <Marketplace v-if="activeTab == 'marketplace'"></Marketplace>
             <OwnObjects v-if="activeTab == 'obiekty'"></OwnObjects>
@@ -44,7 +44,7 @@ import StudioWorkshop from "./StudioWorkshop";
 
 
 export default {
-name: "Workshop",
+    name: "Workshop",
     components: {OwnObjects, Marketplace, WorkshopPanel, StudioWorkshop},
     setup() {
         const app = getCurrentInstance();
@@ -76,7 +76,7 @@ name: "Workshop",
         });
 
         emitter.on('singleworkshopobject', e => {
-            if(e.action == 'delete') {
+            if (e.action == 'delete') {
                 axios.post('/api/workshop/models/delete', {id: e.id})
                     .then(response => {
                         if (response.data.success) {
@@ -86,9 +86,9 @@ name: "Workshop",
                             toast.error('Wystąpił błąd');
                         }
                     })
-            } else if (e.action == 'edit'){
+            } else if (e.action == 'edit') {
                 emitter.emit('LoadWorkshopItems', e.object);
-            } else if (e.action == 'publish'){
+            } else if (e.action == 'publish') {
                 console.log("e");
                 console.log(e);
                 axios.post('/api/workshop/models/publish', {id: e.object.id})
@@ -100,7 +100,7 @@ name: "Workshop",
                             toast.error('Wystąpił błąd');
                         }
                     })
-            }else if (e.action == 'copy'){
+            } else if (e.action == 'copy') {
                 axios.post('/api/workshop/models/copy', {id: e.id})
                     .then(response => {
                         if (response.data.success) {
