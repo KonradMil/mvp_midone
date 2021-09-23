@@ -12,19 +12,19 @@
                             src="/s3/twopointo/images/dbr_logo_white.svg"
                         />
                     </a>
-                    <div class="my-auto">
-                        <img
-                            alt="DBR77 Platforma Robotów "
-                            class="-intro-x w-1/2 -mt-16"
-                            src="/s3/twopointo/images/workers.svg"
-                        />
-                        <div
-                            class="-intro-x text-white font-medium text-4xl leading-tight mt-10"
-                        >
-                            Pierwszy na świecie <br/>marketplace Robotów
-                        </div>
+<!--                    <div class="my-auto">-->
+<!--                        <img-->
+<!--                            alt="DBR77 Platforma Robotów "-->
+<!--                            class="-intro-x w-1/2 -mt-16"-->
+<!--                            src="/s3/twopointo/images/workers.svg"-->
+<!--                        />-->
+<!--                        <div-->
+<!--                            class="-intro-x text-white font-medium text-4xl leading-tight mt-10"-->
+<!--                        >-->
+<!--                            Pierwszy na świecie <br/>marketplace Robotów-->
+<!--                        </div>-->
 
-                    </div>
+<!--                    </div>-->
                 </div>
                 <!-- END: Register Info -->
                 <!-- BEGIN: Register Form -->
