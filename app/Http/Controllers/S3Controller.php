@@ -46,7 +46,7 @@ class S3Controller extends Controller
             $headers['Content-Encoding'] = 'br';
         }
         if (strpos($path, 'framework') !== false) {
-            $getMimeType = 'application/octet-stream';
+            $getMimeType = 'application/javascript';
             $headers['Content-Encoding'] = 'br';
         }
 
