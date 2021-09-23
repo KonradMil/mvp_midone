@@ -31,7 +31,8 @@ export default {
     },
     setup(props) {
         watch(props.open, (newData, oldData) => {
-            if(newData) {
+            consol.log('NEW DATA', newData)
+            if(newData == true) {
                 cash("#workshop-modal").modal("show");
             } else {
                 cash("#workshop-modal").modal("close");
