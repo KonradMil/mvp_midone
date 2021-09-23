@@ -8,7 +8,7 @@
                     <a target="_blank" href="" class="-intro-x flex items-center pt-5">
                         <img
                             alt="DBR77 Platforma Robotów "
-                            class="w-2/4"
+                            class="w-2/4 mt-36"
                             src="/s3/twopointo/images/dbr_logo_white.svg"
                         />
                     </a>
