@@ -133,15 +133,15 @@ const state = () => {
                 pageName: "object-marketplace",
                 title: "Marketplace obiektów"
             },
-            {
-                icon: "InboxIcon",
-                pageName: "communication",
-                title: "Pomoc"
-            },
+
         ]
     };
 };
-
+// {
+//     icon: "InboxIcon",
+//         pageName: "communication",
+//     title: "Pomoc"
+// },
 // getters
 const getters = {
     menu: state => state.menu
