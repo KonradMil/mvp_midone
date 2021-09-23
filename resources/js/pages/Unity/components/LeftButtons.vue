@@ -25,10 +25,14 @@ export default {
         const category = ref(null);
         emitter.on('leftbuttonclick', e =>  handleChange(e.val) );
         const handleChange = (cat_id) => {
-            if(category.value === cat_id) {
-                category.value = null;
+            if(cat_id == 9) {
+                emitter.emit('workshop_open', {status: true});
             } else {
-                category.value = cat_id;
+                if(category.value === cat_id) {
+                    category.value = null;
+                } else {
+                    category.value = cat_id;
+                }
             }
         }
         return {

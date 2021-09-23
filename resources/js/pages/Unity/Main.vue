@@ -89,7 +89,7 @@
             </div>
         </div>
     </div>
-
+    <WorkshopModal :open="workshopOpen"></WorkshopModal>
 </template>
 
 <script>
@@ -139,6 +139,7 @@ export default {
         const gameWindow = ref(null);
         const gameLoad = ref({});
         const loaded = ref(false);
+        const workshopOpen = ref(false);
         const doubleClick = ref(false);
         const mousePositionY = ref(0);
         const mousePositionX = ref(0);
@@ -184,6 +185,10 @@ export default {
         const startTutorial = () => {
             handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
         }
+
+        emitter.on('workshop_open', e => () => {
+
+        });
 
         //RUNS WHEN UNITY IS READY
         emitter.on('onInitialized', e => initalize());
@@ -514,6 +519,7 @@ export default {
         });
 
         return {
+            workshopOpen,
             user,
             challenge,
             solution,
