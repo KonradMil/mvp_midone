@@ -27,7 +27,7 @@ class AlterCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::table('challenges', function (Blueprint $table) {
+        Schema::table('companies', function (Blueprint $table) {
 
             $table->string('company_name', 70)->change();
 

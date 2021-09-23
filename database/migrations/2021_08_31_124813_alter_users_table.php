@@ -26,7 +26,7 @@ class AlterUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dateTime('email_verified_at');
+            $table->dropColumn('email_verified_at');
         });
     }
 }

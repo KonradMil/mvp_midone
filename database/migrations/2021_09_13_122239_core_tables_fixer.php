@@ -449,27 +449,41 @@ class CoreTablesFixer extends Migration
         Schema::table('challenge_files', function (Blueprint $table) {
             $table->dropForeign('challenge_files_challenge_id_foreign');
             $table->dropForeign('challenge_files_file_id_foreign');
+        });
+
+        Schema::table('challenge_files', function (Blueprint $table) {
             $table->integer('challenge_id')->change();
             $table->dropColumn('image_id');
             $table->integer('file_id')->change();
         });
 
+
         Schema::table('challenge_image', function (Blueprint $table) {
             $table->dropForeign('challenge_image_challenge_id_foreign');
             $table->dropForeign('challenge_image_image_id_foreign');
+        });
+
+        Schema::table('challenge_image', function (Blueprint $table) {
             $table->integer('challenge_id')->change();
             $table->integer('image_id')->change();
         });
 
         Schema::table('companies', function (Blueprint $table) {
             $table->dropForeign('companies_author_id_foreign');
-            $table->integer('author_id')->change();
+        });
 
+        Schema::table('companies', function (Blueprint $table) {
+            $table->integer('author_id')->change();
         });
 
         Schema::table('estimates', function (Blueprint $table) {
 
             $table->dropForeign('estimates_solution_id_foreign');
+
+        });
+
+        Schema::table('estimates', function (Blueprint $table) {
+
             $table->integer('solution_id')->change();
             $table->dropColumn('parts_ar');
 
@@ -510,10 +524,13 @@ class CoreTablesFixer extends Migration
             $table->dropForeign('offers_installer_id_foreign');
             $table->dropForeign('offers_solution_id_foreign');
 
+        });
+
+        Schema::table('offers', function (Blueprint $table) {
+
             $table->unsignedInteger('challenge_id')->nullable()->default(0)->change();
             $table->unsignedInteger('solution_id')->nullable()->default(1)->change();
             $table->unsignedInteger('installer_id')->nullable()->change();
-
             $table->unsignedInteger('price_of_delivery')->nullable()->default(1)->change();
             $table->integer('selected')->nullable()->change();
             $table->integer('rejected')->nullable()->change();
@@ -524,6 +541,10 @@ class CoreTablesFixer extends Migration
 
             $table->dropForeign('questions_author_id_foreign');
             $table->dropForeign('questions_challenge_id_foreign');
+
+        });
+
+        Schema::table('questions', function (Blueprint $table) {
 
             $table->integer('author_id')->nullable()->change();
             $table->integer('challenge_id')->change();
@@ -543,6 +564,10 @@ class CoreTablesFixer extends Migration
             $table->dropForeign('solutions_financial_after_id_foreign');
             $table->dropForeign('solutions_installer_id_foreign');
             $table->dropForeign('solutions_love_reactant_id_foreign');
+
+        });
+
+        Schema::table('solutions', function (Blueprint $table) {
 
             $table->integer('author_id')->change();
             $table->integer('challenge_id')->change();
@@ -564,6 +589,10 @@ class CoreTablesFixer extends Migration
             $table->dropForeign('team_challenge_challenge_id_foreign');
             $table->dropForeign('team_challenge_team_id_foreign');
 
+        });
+
+        Schema::table('team_challenge', function (Blueprint $table) {
+
             $table->integer('challenge_id')->change();
             $table->integer('team_id')->change();
 
@@ -577,8 +606,12 @@ class CoreTablesFixer extends Migration
 
         Schema::table('team_solution', function (Blueprint $table) {
 
-            $table->dropForeign('');
-            $table->dropForeign('');
+            $table->dropForeign('team_solution_solution_id_foreign');
+            $table->dropForeign('team_solution_team_id_foreign');
+
+        });
+
+        Schema::table('team_solution', function (Blueprint $table) {
 
             $table->integer('solution_id')->change();
             $table->integer('team_id')->change();
@@ -589,6 +622,10 @@ class CoreTablesFixer extends Migration
 
             $table->dropForeign('team_user_team_id_foreign');
             $table->dropForeign('team_user_user_id_foreign');
+
+        });
+
+        Schema::table('team_user', function (Blueprint $table) {
 
             $table->dropColumn('owner');
             $table->dropColumn('publishChallenge');
@@ -608,6 +645,10 @@ class CoreTablesFixer extends Migration
             $table->dropForeign('technical_details_challenge_id_foreign');
             $table->dropForeign('technical_details_solution_id_foreign');
 
+        });
+
+        Schema::table('technical_details', function (Blueprint $table) {
+
             $table->integer('challenge_id')->nullable()->change();
             $table->integer('solution_id')->nullable()->change();
 
@@ -615,8 +656,12 @@ class CoreTablesFixer extends Migration
 
         Schema::table('user_companies', function (Blueprint $table) {
 
-            $table->dropForeign('');
-            $table->dropForeign('');
+            $table->dropForeign('user_companies_company_id_foreign');
+            $table->dropForeign('user_companies_user_id_foreign');
+
+        });
+
+        Schema::table('user_companies', function (Blueprint $table) {
 
             $table->integer('user_id')->change();
             $table->integer('company_id')->change();
@@ -634,6 +679,10 @@ class CoreTablesFixer extends Migration
             $table->dropForeign('user_workshop_objects_user_id_foreign');
             $table->dropForeign('user_workshop_objects_workshop_object_id_foreign');
 
+        });
+
+        Schema::table('user_workshop_objects', function (Blueprint $table) {
+
             $table->integer('user_id')->change();
             $table->integer('workshop_object_id')->change();
 
@@ -642,6 +691,11 @@ class CoreTablesFixer extends Migration
         Schema::table('workshop_objects', function (Blueprint $table) {
 
             $table->dropForeign('workshop_objects_author_id_foreign');
+
+        });
+
+        Schema::table('workshop_objects', function (Blueprint $table) {
+
             $table->integer('author_id')->change();
 
         });
