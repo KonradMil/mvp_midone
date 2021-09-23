@@ -1,5 +1,5 @@
 <template>
-    <div id="help-modal" class="modal" tabindex="-1" aria-hidden="true">
+    <div id="workshop-modal" class="modal" tabindex="-1" aria-hidden="false">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-body p-10 text-center">
@@ -32,6 +32,7 @@ export default {
     setup(props) {
 
         onMounted(() => {
+
         });
 
         return {
