@@ -32,7 +32,7 @@ export default {
     setup(props) {
 
         onMounted(() => {
-
+            cash("#workshop-modal").modal("show");
         });
 
         return {
