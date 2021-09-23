@@ -189,7 +189,7 @@ export default {
 
         emitter.on('workshop_object_clicked', e => {
             workshopOpen.value = false;
-            handleUnityActionOutgoing({action: "loadWorkshopObject", data: JSON.parse(e.object.save)});
+            handleUnityActionOutgoing({action: "loadWorkshopObject", data: e.object.save});
         });
 
         emitter.on('workshop_open', e => {
