@@ -5,6 +5,7 @@ use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'projects', 'middleware' => 'auth:sanctum'], function () {
+    //    Route::get('{id}/card/get', [ProjectController::class, 'getCardData']);
     Route::post('get/card', [ProjectController::class, 'getCardData']);
     Route::post('local-vision/save', [ProjectController::class, 'saveLocalVision']);
     Route::post('local-vision/get', [ProjectController::class, 'getLocalVision']);
