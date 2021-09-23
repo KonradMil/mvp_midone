@@ -41,7 +41,7 @@ class S3Controller extends Controller
             'Content-Disposition' => sprintf('attachment; filename="%s"', array_reverse(explode('/', $path))[0])
         ];
         Log::error($path);
-        if (strpos($path, 'unityweb') !== false || strpos($path, 'wasm') !== false || strpos($path, '.br') !== false) {
+        if (strpos($path, 'unityweb') !== false || strpos($path, 'wasm') !== false || strpos($path, '.br') !== false || strpos($path, 'framework') === false) {
             $getMimeType = 'application/wasm';
             $headers['Content-Encoding'] = 'br';
         }
