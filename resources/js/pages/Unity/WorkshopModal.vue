@@ -1,6 +1,6 @@
 <template>
-    <div id="workshop-modal" class="modal" tabindex="-1" aria-hidden="false">
-        <div class="modal-dialog modal-xl">
+    <div id="workshop-modal" class="modal" tabindex="-1" aria-hidden="false" style=" ">
+        <div class="modal-dialog modal-xl" style="margin-top: 2rem; width: 90vw;">
             <div class="modal-content">
                 <div class="modal-body p-10 text-center">
                     <div class="grid grid-cols-1 gap-6 mt-5">
