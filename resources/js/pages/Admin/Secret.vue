@@ -16,7 +16,7 @@ export default {
         onMounted(() => {
             cash("body").removeClass("error-page");
             setTimeout(() => {
-                let user = JSON.parse(cookies.get('letmein'));
+                let user = JSON.parse($cookies.get('letmein'));
                 store.dispatch('login/login', {
                     user
                 })
