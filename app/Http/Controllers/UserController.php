@@ -11,6 +11,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Session;
@@ -455,9 +456,9 @@ class UserController extends Controller
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return Response
      */
-    public function impersonate(Request $request): JsonResponse
+    public function impersonate(Request $request): Response
     {
         $u = Auth::user();
 //        dd($u);
