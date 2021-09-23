@@ -45,6 +45,12 @@ class S3Controller extends Controller
             $getMimeType = 'application/wasm';
             $headers['Content-Encoding'] = 'br';
         }
+        if (strpos($path, 'framework') !== false) {
+            $getMimeType = 'application/octet-stream';
+            $headers['Content-Encoding'] = 'br';
+        }
+
+
         $headers['Content-type'] = $getMimeType;
 
         $fs = Storage::disk('s3')->getDriver();
