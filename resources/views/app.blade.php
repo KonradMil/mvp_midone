@@ -6,7 +6,13 @@
     <meta name="csrf-token" value="{{ csrf_token() }}"/>
     <title>{{env('APP_NAME')}}</title>
     <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
-    <link rel='shortcut icon' type='image/x-icon' href="/s3/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#a80085">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#a9a9a9">
 </head>
 <body>
 @if (Auth::check())
