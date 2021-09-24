@@ -1200,14 +1200,22 @@ class ChallengeController extends Controller
         $challenges = Challenge::with('solutions', function ($query) {
             $query->where('selected','=','1');
         })->with('solutions.author', 'author', 'author.own_company', 'solutions.author.own_company')->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie',
+            'payload' => $challenges
+        ]);
 
-        return response()->json($challenges);
     }
 
     public function adminGetUsers()
     {
        $users = User::with('author')->get();
 
-        return response($users);
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie',
+            'payload' => $users
+        ]);
     }
 }
