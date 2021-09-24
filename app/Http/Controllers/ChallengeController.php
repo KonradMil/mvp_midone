@@ -1195,13 +1195,13 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function adminGetProjects()
+    public function adminGetProjects(): JsonResponse
     {
         $challenges = Challenge::with('solutions', function ($query) {
             $query->where('selected','=','1');
         })->with('solutions.author', 'author', 'author.own_company', 'solutions.author.own_company')->get();
 
-        return response($challenges);
+        return response()->json($challenges);
     }
 
     public function adminGetUsers()
