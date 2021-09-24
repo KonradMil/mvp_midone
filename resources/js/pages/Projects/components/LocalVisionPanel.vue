@@ -1,5 +1,5 @@
 <template>
-    <div class="intro-y box shadow-2xl" style="width: 1200px;" v-if="guard = true">
+    <div class="intro-y box shadow-2xl" style="width: 1200px;" v-if="guard === true">
         <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
             <h2 class="font-medium text-base mr-auto">
                 Wizja lokalna
@@ -150,7 +150,7 @@
                     </li>
                 </ul>
             </div>
-            <div v-if="reports.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-6 py-3 pb-4" style="font-size: 16px;">
+            <div v-if="reports.length === 0" class="text-theme-1 dark:text-theme-10 font-medium pl-6 py-3 pb-4" style="font-size: 16px;">
                 Nie ma jeszcze żadnych raportów.
             </div>
 <!--            <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">-->
@@ -208,7 +208,7 @@ export default {
                 author_id: '',
             }
             setTimeout(function () {
-                reports.value.push(report);
+                reports.value.unshift(report);
             }, 500)
         }
         const deleteReport = async (report) => {
@@ -386,9 +386,7 @@ export default {
 
         onMounted(() => {
             getReports(function(){
-                setTimeout(function(){
-                    guard.value = true;
-                }, 2000)
+                        guard.value = true;
             });
         });
 

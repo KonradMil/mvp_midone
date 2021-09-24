@@ -1,5 +1,5 @@
 <template>
-    <div class="intro-y box shadow-2xl" style="width: 1200px;" v-if="guard = true">
+    <div class="intro-y box shadow-2xl" style="width: 1200px;" v-if="guard === true">
         <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
             <h2 class="font-medium text-base mr-auto">
                 Termin wizyt
@@ -149,7 +149,7 @@
                     </li>
                 </ul>
             </div>
-            <div v-if="deadlines.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-6 py-3 pb-4" style="font-size: 16px;">
+            <div v-if="deadlines.length === 0" class="text-theme-1 dark:text-theme-10 font-medium pl-6 py-3 pb-4" style="font-size: 16px;">
                 Nie ma jeszcze żadnej propozycji terminu spotkania.
             </div>
 <!--            <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">-->
@@ -201,7 +201,7 @@ export default {
                 status: ''
             }
             setTimeout(function () {
-                deadlines.value.push(deadline);
+                deadlines.value.unshift(deadline);
             }, 750)
             setTimeout(function(){
                block.value = false;
@@ -224,7 +224,7 @@ export default {
                     if (response.data.success) {
                         toast.success('Zapisano poprawnie');
                         if(deadline.members === ''){
-                            deadlines.value.push(deadline);
+                            deadlines.value.unshift(deadline);
                         }
                         showDetails.value[deadline.id] = false;
                         getDeadlines();
@@ -307,9 +307,7 @@ export default {
         }
         onMounted(() => {
             getDeadlines(function(){
-                setTimeout(function(){
                     guard.value = true;
-                }, 2500)
             });
         });
 
