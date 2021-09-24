@@ -109,6 +109,7 @@ class AuthController extends Controller
      * @return Application|RedirectResponse|Redirector
      */
     public function emailVerification(UserRepository $userRepository, int $id, string $hash)
+    : Redirector|RedirectResponse|Application
     {
 
         /** @var MustVerifyEmail|User|null $user */
@@ -139,6 +140,31 @@ class AuthController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param UserRepository $userRepository
+     * @return JsonResponse
+     */
+    public function resendVerificationEmail(Request $request, UserRepository $userRepository): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+        $email = $request->get('email');
+
+        /** @var User $user */
+        $user = $userRepository->findByEmail($email);
+
+        if(!$user || $user->hasVerifiedEmail()) {
+            $responseBuilder->setErrorMessage(__('messages.registration.confirmation.wrong_email'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $user->sendEmailVerificationNotification();
+
+        $responseBuilder->setSuccessMessage(__('messages.registration.confirmation.sent'));
+
+        return $responseBuilder->getResponse();
+    }
+
+    /**
      * Login
      */
     public function login(Request $request, UserRepository $userRepository): JsonResponse
@@ -147,7 +173,7 @@ class AuthController extends Controller
         $responseBuilder = new ResponseBuilder();
         $loginHandler = new LoginHandler($request);
 
-        if(!$loginHandler->authorize()) {
+        if (!$loginHandler->authorize()) {
 
             $responseBuilder->setErrorMessage('Unauthorized!');
             return $responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
@@ -166,15 +192,16 @@ class AuthController extends Controller
 
         $user = $userRepository->findByEmail($loginParameters->email);
 
-        if(!$user || !Hash::check($loginParameters->password, $user->password)) {
+        if (!$user || !Hash::check($loginParameters->password, $user->password)) {
 
             $responseBuilder->setErrorMessage(__('messages.login.wrong_credentials'));
             return $responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
 
         }
 
-        if(!$user->email_verified_at) {
+        if (!$user->email_verified_at) {
             $responseBuilder->setWarningMessage(__('messages.login.account_inactive'));
+            $responseBuilder->setData('accountInactive', true);
             return $responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
         }
 

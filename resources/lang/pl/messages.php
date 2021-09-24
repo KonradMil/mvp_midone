@@ -9,7 +9,11 @@ return [
     ],
     'registration' => [
         'account_created' => "Twoje konto zostało utworzone! Na twój adres e-mail został wysłany link aktywacyjny w celu potwierdzenia.",
-        'email_confirmed' => "Twoje konto zostało aktywowane."
+        'email_confirmed' => "Twoje konto zostało aktywowane.",
+        'confirmation' => [
+            'sent' => 'Na twój adres e-mail został wysłany link aktywacyjny w celu potwierdzenia.',
+            'wrong_email' => "Podany adres e-mail nie istnieje."
+        ]
     ],
     'login' => [
         'wrong_credentials' => "Nieprawidłowy adres e-mail lub hasło.",

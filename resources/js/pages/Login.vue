@@ -37,6 +37,12 @@
                         >
                             {{ $t('login.loginTitle') }}
                         </h2>
+                        <div v-if="resendEmail" class="intro-x flex flex-col text-gray-700 dark:text-gray-600 text-xs sm:text-sm mt-4">
+                            <span style="padding-bottom: 10px;">Link aktywacyjny nie dotarł?</span>
+                            <button @click="resendConfirmationEmail" class="btn btn-secondary">
+                                Wyślij link ponownie
+                            </button>
+                        </div>
                         <div class="intro-x mt-2 text-gray-500 xl:hidden text-center">
                             Pierwszy na świecie marketplace Robotów
                         </div>
@@ -84,7 +90,7 @@
                             </button>
                         </div>
                         <div class="intro-x mt-10 xl:mt-24 text-gray-700 dark:text-gray-600 text-center xl:text-left">
-                            {{ $t('login.pol1') }} <br/>
+                            {{ $t('login.pol1') }}<br/>
                             <a class="text-theme-1 dark:text-theme-10" href="/terms/terms-of-service" @click.prevent="$router.push({path: '/terms/terms-of-service'})">
                                 {{ $t('login.pol2') }}
                             </a>
@@ -225,7 +231,7 @@ export default {
             twofa_code,
             checkTwoFa,
             executeRecaptcha,
-            recaptchaLoaded
+            recaptchaLoaded,
         };
     },
 
@@ -234,13 +240,14 @@ export default {
             email: "",
             password: "",
             shows: false,
-            error: null
+            error: null,
+            resendEmail: false,
         }
     },
 
     methods: {
 
-        async handleSubmit(e) {
+        handleSubmit: async function(e){
 
             e.preventDefault()
 
@@ -276,10 +283,29 @@ export default {
                                         window.location.replace('/kreator');
                                     }
                                 }
+                            },
+                            (error) => {
+
+                                if(typeof error.response.data.accountInactive !== 'undefined') {
+
+                                    this.resendEmail = true;
+
+                                }
+
                             });
                     },
                 );
             }
+        },
+
+        resendConfirmationEmail: async function (e) {
+
+            RequestHandler('/sanctum/csrf-cookie', 'GET', {}, () => {
+                RequestHandler('email/verify/resend_email', 'POST', {
+                    email: this.email
+                });
+            });
+
         }
 
     },
