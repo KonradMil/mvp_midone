@@ -39,14 +39,18 @@ class FixUserCompanies extends Command
     public function handle()
     {
         $companies = DB::select('SELECT id, author_id FROM companies');
+        DB::delete('DELETE FROM user_companies WHERE id > 0');
+
+        $now = new \DateTime('now', new \DateTimeZone('UTC'));
+        $strNow = $now->format('Y-m-d H:i:s');
 
         foreach($companies as $c) {
 
-            $userCompanies = DB::select('SELECT id FROM user_companies WHERE company_id = '.$c->author_id);
+            DB::insert("
+                INSERT INTO user_companies (user_id, company_id, created_at, updated_at)
+                VALUES('$c->author_id', '$c->id', '$strNow', '$strNow')
+            ");
 
-            foreach($userCompanies as $uc) {
-                DB::update('UPDATE user_companies SET user_id = '.$c->author_id.', company_id = '.$c->id .' WHERE id = '.$uc->id);
-            }
         }
 
         return 0;
