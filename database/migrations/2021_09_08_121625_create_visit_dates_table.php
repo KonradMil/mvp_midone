@@ -15,12 +15,15 @@ class CreateVisitDatesTable extends Migration
     {
         Schema::create('visit_dates', function (Blueprint $table) {
             $table->id();
-            $table->integer('author_id');
-            $table->integer('project_id');
-            $table->timestamp('deadline');
-            $table->tinyInteger('accepted_investor');
-            $table->tinyInteger('accepted_integrator');
-            $table->tinyInteger('status');
+            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('project_id');
+            $table->timestamp('date');
+            $table->time('time');
+            $table->tinyInteger('accepted')->default(0);
+            $table->tinyInteger('status')->nullable();
+            $table->text('members')->nullable();
+            $table->foreign('author_id')->references('id')->on('users');
+            $table->foreign('project_id')->references('id')->on('projects');
             $table->timestamps();
         });
     }
