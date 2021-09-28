@@ -18,7 +18,8 @@ class VisitDate extends Model
      * @var string[]
      */
     protected $fillable = [
-        'project_id', 'author_id', 'date', 'accepted_investor', 'accepted_integrator', 'status', 'members', 'time' , 'accepted'
+        'project_id', 'author_id', 'date',
+        'status', 'members', 'time' , 'accepted'
     ];
 
     /**

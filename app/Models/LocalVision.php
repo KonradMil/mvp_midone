@@ -23,7 +23,9 @@ class LocalVision extends Model
      * @var string[]
      */
     protected $fillable = [
-        'project_id', 'author_id', 'description', 'before', 'after', 'accepted', 'comment'
+        'project_id', 'author_id',
+        'description', 'before', 'after',
+        'accepted', 'comment'
     ];
 
     /**

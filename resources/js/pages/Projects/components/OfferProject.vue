@@ -352,244 +352,6 @@
                     </div>
                 </div>
             </div>
-
-            <!--            <div class="intro-y box col-span-6 xxl:col-span-6">-->
-<!--                <div class="intro -y flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">-->
-<!--                    <h2 class="font-medium text-base mr-auto">Oferta</h2>-->
-<!--                </div>-->
-<!--                 <div :class="(old_offer.rejected === 1) ? 'px-5 py-5 opacity-50' : 'px-5 py-5'">-->
-<!--                    <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="pl-4 my-2">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.solution')}}</span>-->
-<!--                                <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px; word-break: break-all; max-height: 100px; max-width: 200px;"> {{ old_offer.solution.name }}</div>-->
-<!--                            </div>-->
-<!--                            <div v-if="user.id === investor.id">-->
-<!--                               <div class="flex items-center justify-center" v-if="project.accept_offer > 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Dane pierwotnej oferty</div>-->
-<!--&lt;!&ndash;                               <div class="flex items-center justify-center text-theme-6" v-if="project.accept_offer === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>&ndash;&gt;-->
-<!--                               <div class="flex items-center mr-3" v-if="project.accept_offer < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Oczekuje na kontroofertę ze strony integratora</div>-->
-<!--                            </div>-->
-<!--&lt;!&ndash;                            <div class="" v-if="user.id === challenge_author_id && stage === 3 && new_offer.id === old_offer.id">&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <button class="btn btn-primary shadow-md mr-2" style="margin-left: 90px;" @click.prevent="acceptProjectOffer">Akceptuje</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                                  <button class="btn btn-primary shadow-md mr-2" @click.prevent="rejectProjectOffer">Odrzucam</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
-<!--                            <div class="" v-if="user.id === integrator.id && project.selected_offer_id  && activeTab === 'project-offer'">-->
-<!--                                <button class="btn btn-primary shadow-md ml-5" @click.prevent="editOffer(old_offer.id)">Złóż kontrofertę</button>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="border-l-2 border-theme-1 pl-4">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.offerExpires')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ old_offer.offer_expires_in }} dni</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="border-l-2 border-theme-1 pl-4">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.priceDelivery')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ old_offer.price_of_delivery }}zł</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="border-l-2 border-theme-1 pl-4">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.weeksToStart')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['weeks'][old_offer.weeks_to_start] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="border-l-2 border-theme-1 pl-4">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.timeToStart')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['weeks-short'][old_offer.time_to_start] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="border-l-2 border-theme-1 pl-4">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.timeToFix')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['hours'][old_offer.time_to_fix] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="border-l-2 border-theme-1 pl-4">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.advanceUponAgreement')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['percent'][old_offer.advance_upon_agreement] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="border-l-2 border-theme-1 pl-4">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.advanceUponDelivery')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['percent'][old_offer.advance_upon_delivery] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="border-l-2 border-theme-1 pl-4">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.advanceUponStart')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['percent'][old_offer.advance_upon_start] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="border-l-2 border-theme-1 pl-4">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.yearsGuarantee')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['years-short'][old_offer.years_of_guarantee] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="border-l-2 border-theme-1 pl-4">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.maintenanceFrequency')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ old_offer.maintenance_frequency }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="border-l-2 border-theme-1 pl-4">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.priceMaintenance')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ old_offer.price_of_maintenance }}zł</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="border-l-2 border-theme-1 pl-4">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.reactionTime')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['hours'][old_offer.reaction_time] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="border-l-2 border-theme-1 pl-4">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.interventionPrice')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ old_offer.intervention_price }}zł</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="border-l-2 border-theme-1 pl-4">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.workHourPrice')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ old_offer.work_hour_price }}zł</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="border-l-2 border-theme-1 pl-4">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.periodSupport')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ old_offer.period_of_support }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="intro-y box col-span-6 xxl:col-span-6" v-if="new_offer.id !== old_offer.id && activeTab === 'project-offer'">-->
-<!--                <div class="intro -y flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">-->
-<!--                    <h2 class="font-medium text-base mr-auto">Kontroferta</h2>-->
-<!--                    <div class="flex items-center mr-3 text-theme-1" v-if="integrator.id === user.id"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Oczekuje na akceptacje inwestora</div>-->
-<!--                </div>-->
-<!--                <div class="flex items-center justify-center text-theme-9" v-if="project.accept_offer === 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>-->
-<!--                <div class="flex items-center justify-center text-theme-6" v-if="project.accept_offer === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>-->
-<!--                <div class="flex items-center mr-3" v-if="project.accept_offer < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>-->
-<!--                <div :class="(new_offer.rejected === 1) ? 'px-5 py-5 opacity-50' : 'px-5 py-5'">-->
-<!--                    <div id="latest-tasks-two" class="tab-pane acftive" role="tabpanel" aria-labelledby="latest-tasks-new-tab">-->
-<!--                        <div class="flex items-center mb-5">-->
-<!--                            <div class="pl-4 my-2">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.solution')}}</span>-->
-<!--                                <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px; word-break: break-all; max-height: 100px; max-width: 200px;"> {{ new_offer.solution.name }}</div>-->
-<!--                            </div>-->
-<!--                            <div class="flex items-center mr-3" v-if="investor.id === user.id"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Kontroferta</div>-->
-<!--                            <div class="" v-if="user.id === challenge_author_id && stage === 3">-->
-<!--                                <button class="btn btn-primary shadow-md mr-2" style="margin-left: 90px;" @click.prevent="acceptProjectOffer">Akceptuje</button>-->
-<!--                                <button class="btn btn-primary shadow-md mr-2" @click.prevent="showModal">Odrzucam</button>-->
-<!--                            </div>-->
-<!--                            <div class="flex items-center justify-center text-theme-9" v-if="project.accept_offer === 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>-->
-<!--                            <div class="flex items-center justify-center text-theme-6" v-if="project.accept_offer === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>-->
-<!--                            <div class="flex items-center mr-3" v-if="project.accept_offer < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>-->
-<!--                        </div>-->
-<!--                        <div :class="(new_offer.offer_expires_in === old_offer.offer_expires_in) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">-->
-<!--                            <div :class="(new_offer.offer_expires_in === old_offer.offer_expires_in) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.offerExpires')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ new_offer.offer_expires_in }} dni</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div :class="(new_offer.price_of_delivery === old_offer.price_of_delivery) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">-->
-<!--                            <div :class="(new_offer.price_of_delivery === old_offer.price_of_delivery) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.priceDelivery')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ new_offer.price_of_delivery }}zł</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div :class="(new_offer.weeks_to_start === old_offer.weeks_to_start) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">-->
-<!--                            <div :class="(new_offer.weeks_to_start === old_offer.weeks_to_start) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.weeksToStart')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['weeks'][new_offer.weeks_to_start] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div :class="(new_offer.time_to_start === old_offer.time_to_start) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">-->
-<!--                            <div :class="(new_offer.time_to_start === old_offer.time_to_start) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.timeToStart')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['weeks-short'][new_offer.time_to_start] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div :class="(new_offer.time_to_fix === old_offer.time_to_fix) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">-->
-<!--                            <div :class="(new_offer.time_to_fix === old_offer.time_to_fix) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.timeToFix')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['hours'][new_offer.time_to_fix] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div :class="(new_offer.advance_upon_agreement === old_offer.advance_upon_agreement) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">-->
-<!--                            <div :class="(new_offer.advance_upon_agreement === old_offer.advance_upon_agreement) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.advanceUponAgreement')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['percent'][new_offer.advance_upon_agreement] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div :class="(new_offer.adadvance_upon_delivery === old_offer.adadvance_upon_delivery) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">-->
-<!--                            <div :class="(new_offer.adadvance_upon_delivery === old_offer.adadvance_upon_delivery) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.advanceUponDelivery')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['percent'][new_offer.advance_upon_delivery] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div :class="(new_offer.advance_upon_start === old_offer.advance_upon_start) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">-->
-<!--                            <div :class="(new_offer.advance_upon_start === old_offer.advance_upon_start) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.advanceUponStart')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['percent'][new_offer.advance_upon_start] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div :class="(new_offer.years_of_guarantee === old_offer.years_of_guarantee) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">-->
-<!--                            <div :class="(new_offer.years_of_guarantee === old_offer.years_of_guarantee) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.yearsGuarantee')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['years-short'][new_offer.years_of_guarantee] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div :class="(new_offer.maintenance_frequency === old_offer.maintenance_frequency) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">-->
-<!--                            <div :class="(new_offer.maintenance_frequency === old_offer.maintenance_frequency) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.maintenanceFrequency')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ new_offer.maintenance_frequency }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div :class="(new_offer.price_of_maintenance === old_offer.price_of_maintenance) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">-->
-<!--                            <div :class="(new_offer.price_of_maintenance === old_offer.price_of_maintenance) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.priceMaintenance')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ new_offer.price_of_maintenance }}zł</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div :class="(new_offer.reaction_time === old_offer.reaction_time) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">-->
-<!--                            <div :class="(new_offer.reaction_time === old_offer.reaction_time) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.reactionTime')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ values['hours'][new_offer.reaction_time] }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div :class="(new_offer.intervention_price === old_offer.intervention_price) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">-->
-<!--                            <div :class="(new_offer.intervention_price === old_offer.intervention_price) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.interventionPrice')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ new_offer.intervention_price }}zł</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div :class="(new_offer.work_hour_price === old_offer.work_hour_price) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">-->
-<!--                            <div :class="(new_offer.work_hour_price === old_offer.work_hour_price) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.workHourPrice')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ new_offer.work_hour_price }}zł</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div :class="(new_offer.period_of_support === old_offer.period_of_support) ? 'flex items-center mb-5' : 'flex items center border border-theme-1 pt-2 pb-2 mb-5'">-->
-<!--                            <div :class="(new_offer.period_of_support === old_offer.period_of_support) ? 'border-l-2 border-theme-1 pl-4' : 'pl-4'">-->
-<!--                                <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.periodSupport')}}:</span>-->
-<!--                                <div class="text-gray-600"> {{ new_offer.period_of_support }}</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-            <!-- END: Announcement -->
         </div>
     </div>
     <ModalRejectOffer :show="show" @closed="modalClosed">
@@ -617,6 +379,7 @@ import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
 import {useToast} from "vue-toastification";
 import OfferAddProject from "./OfferAddProject";
 import ModalRejectOffer from "../../../components/ModalRejectOffer";
+import RequestHandler from "../../../compositions/RequestHandler";
 
 const toast = useToast();
 
@@ -683,34 +446,25 @@ export default {
         }
 
         const getOffersProject = async(callback) => {
-            axios.post('/api/projects/offer/get', {id: props.id})
-                .then(response => {
-                    if (response.data.success) {
-                        if(response.data.new_offer === null){
-                            new_offer.value = response.data.old_offer;
-                            old_offer.value = response.data.old_offer;
-                            callback(response);
-                        } else {
-                            new_offer.value = response.data.new_offer;
-                            old_offer.value = response.data.old_offer;
-                            callback(response);
-                        }
-                    } else {
-                    }
-                })
+            RequestHandler('projects/' + props.challenge.id + '/offers', 'get', {project_id: props.project.id}, (response) => {
+                if(response.data.new_offer === null){
+                    new_offer.value = response.data.old_offer;
+                    old_offer.value = response.data.old_offer;
+                    callback(response);
+                } else {
+                    old_offer.value = response.data.old_offer;
+                    new_offer.value = response.data.new_offer;
+                    callback(response);
+                }
+            });
         }
 
         const getOffersProjectIntegrator = async(callback) => {
-            axios.post('/api/projects/offer/integrator/get', {id: props.id})
-                .then(response => {
-                    if (response.data.success) {
-                         offers.value = response.data.payload;
-                         old_offer.value = response.data.old_offer;
-                         callback(response);
-                    } else {
-
-                    }
-                })
+            RequestHandler('projects/' + props.challenge.id + '/offers/integrator', 'get', {project_id: props.project.id}, (response) => {
+                    offers.value = response.data.offers;
+                    old_offer.value = response.data.old_offer;
+                    callback(response);
+            });
         }
 
         const publishOffer = async(offer) => {
@@ -737,34 +491,29 @@ export default {
         }
 
         const acceptProjectOffer = async () => {
-            axios.post('/api/projects/project-offer/accept', {id: props.id, new_offer_id: new_offer.value.id})
-                .then(response => {
-                    if (response.data.success) {
-                        toast.success('Zaakceptowałeś oferte');
-                        emitter.emit('acceptOffer', {});
-                    } else {
-
-                    }
-                })
+            RequestHandler('projects/' + props.project.id + '/offer/'+ new_offer.value.id + '/accept', 'post', {
+                project_id: props.project.id,
+                new_offer_id: new_offer.value.id
+            }, (response) => {
+                emitter.emit('acceptOffer', {});
+            });
         }
+
         const rejectProjectOffer = async () => {
             if(feedback.value.length < 10){
                 toast.warning('Komentarz musi posiadać minimum 10 znaków!')
             } else {
-                axios.post('/api/projects/project-offer/reject', {id: props.id, feedback: feedback.value, new_offer_id: new_offer.value.id})
-                    .then(response => {
-                        if (response.data.success) {
-                            getOffersProject();
-                            modalClosed();
-                            toast.success('Odrzuciłeś oferte');
-                            emitter.emit('rejectOffer', {});
-                        } else {
-
-                        }
-                    })
+                RequestHandler('projects/' + props.project.id + '/offer/'+ new_offer.value.id + '/reject', 'post', {
+                    project_id: props.project.id,
+                    feedback: feedback.value,
+                    new_offer_id: new_offer.value.id
+                }, (response) => {
+                    getOffersProject();
+                    modalClosed();
+                    emitter.emit('rejectOffer', {});
+                });
             }
         }
-
 
         onMounted(() => {
             if(user.type === 'investor'){

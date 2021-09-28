@@ -22,7 +22,7 @@ class TechnicalDetails extends Model
      * @var string[]
      */
     protected $fillable = [
-        'detail_weight', 'pick_quality',
+        'challenge_id', 'detail_weight', 'pick_quality',
         'detail_material', 'detail_size', 'detail_pick', 'detail_position', 'detail_range',
         'detail_destination', 'number_of_lines', 'cycle_time', 'work_shifts',
     ];
