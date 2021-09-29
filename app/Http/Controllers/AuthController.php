@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 use Mpociot\Teamwork\Facades\Teamwork;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Auth\Events\Registered;
@@ -34,6 +35,8 @@ class AuthController extends Controller
      * @var UserService
      */
     private UserService $userService;
+
+    protected array $allowedSocialProviders = ['facebook', 'google'];
 
     /**
      * @param UserService $userService
@@ -108,8 +111,7 @@ class AuthController extends Controller
      * @param string $hash
      * @return Application|RedirectResponse|Redirector
      */
-    public function emailVerification(UserRepository $userRepository, int $id, string $hash)
-    : Redirector|RedirectResponse|Application
+    public function emailVerification(UserRepository $userRepository, int $id, string $hash): Redirector|RedirectResponse|Application
     {
 
         /** @var MustVerifyEmail|User|null $user */
@@ -152,7 +154,7 @@ class AuthController extends Controller
         /** @var User $user */
         $user = $userRepository->findByEmail($email);
 
-        if(!$user || $user->hasVerifiedEmail()) {
+        if (!$user || $user->hasVerifiedEmail()) {
             $responseBuilder->setErrorMessage(__('messages.registration.confirmation.wrong_email'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
@@ -165,7 +167,9 @@ class AuthController extends Controller
     }
 
     /**
-     * Login
+     * @param Request $request
+     * @param UserRepository $userRepository
+     * @return JsonResponse
      */
     public function login(Request $request, UserRepository $userRepository): JsonResponse
     {
@@ -219,6 +223,24 @@ class AuthController extends Controller
         }
 
         $responseBuilder->setData('user', $user);
+        return $responseBuilder->getResponse();
+    }
+
+    /**
+     * @param string $provider
+     * @return JsonResponse
+     */
+    public function socialSignIn(string $provider): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        if (!in_array($provider, $this->allowedSocialProviders)) {
+            $responseBuilder->setErrorMessage(__('messages.login.socialite.wrong_provider'));
+            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+        }
+
+        $socialiteUser = Socialite::driver($provider);
+
         return $responseBuilder->getResponse();
     }
 

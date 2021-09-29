@@ -89,6 +89,27 @@
                                 {{ $t('login.signup') }}
                             </button>
                         </div>
+                        <div class="social-auth flex flex-col intro-x mt-5 xl:mt-8 text-center xl:text-left">
+                            <button class="btn btn-social btn-outline-secondary py-3 px-4 w-full xl:mr-3 align-top">
+                                <div class="icon">
+                                    <img src="icons/facebook.svg"/>
+                                </div>
+                                <div class="text">
+                                    Logowanie Facebook
+                                </div>
+                            </button>
+                            <button class="btn btn-social btn-outline-secondary py-3 px-4 w-full xl:mr-3 align-top">
+                                <div class="icon">
+                                    <img src="icons/google.svg"/>
+                                </div>
+                                <div class="text">
+                                    Logowanie Google
+                                </div>
+                            </button>
+                        </div>
+                        <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
+
+                        </div>
                         <div class="intro-x mt-10 xl:mt-24 text-gray-700 dark:text-gray-600 text-center xl:text-left">
                             {{ $t('login.pol1') }}<br/>
                             <a class="text-theme-1 dark:text-theme-10" href="/terms/terms-of-service" @click.prevent="$router.push({path: '/terms/terms-of-service'})">
