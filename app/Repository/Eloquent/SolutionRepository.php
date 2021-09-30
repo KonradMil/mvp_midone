@@ -18,6 +18,4 @@ class SolutionRepository extends BaseRepository
     {
         parent::__construct($solution);
     }
-
-
 }
