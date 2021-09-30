@@ -63,8 +63,6 @@ class NewUserParameters extends Parameters
         $this->validationMessages = [
             'type.in' => __('messages.validation.registration.wrong_account_type')
         ];
-
-        $this->validationSubject = (array)$this;
     }
 
     /**

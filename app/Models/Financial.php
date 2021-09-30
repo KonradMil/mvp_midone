@@ -17,7 +17,7 @@ class Financial extends Model
      * @var string[]
      */
     protected $fillable = [
-        'days', 'shifts', 'shift_time', 'weekend_shift', 'breakfast', 'stop_time', 'operator_performance',
+        'challenge_id', 'days', 'shifts', 'shift_time', 'weekend_shift', 'breakfast', 'stop_time', 'operator_performance',
         'defective', 'number_of_operators', 'operator_cost', 'absence', 'cycle_time', 'author_id'
     ];
 

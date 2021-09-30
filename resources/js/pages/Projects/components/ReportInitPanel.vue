@@ -23,27 +23,27 @@
                 <td class="border" style="width: 10px;">2</td>
                 <td class="border">Wizja lokalna</td>
                 <td class="border">
-                    <div class="text-theme-9" v-if="project.project_accept_vision === 1">Akceptacja</div>
-                    <div class="text-theme-6" v-if="project.project_accept_vision === 2">Odrzucenie</div>
-                    <div class="" v-if="project.project_accept_vision < 1">W trakcie</div>
+                    <div class="text-theme-9" v-if="project.accept_local_vision === 1">Zakończono</div>
+                    <div class="text-theme-6" v-if="project.accept_local_vision === 2">Odrzucono</div>
+                    <div class="" v-if="project.accept_local_vision < 1">W trakcie</div>
                 </td>
             </tr>
             <tr>
                 <td class="border" style="width: 10px;">3</td>
                 <td class="border">Akceptacja założeń technicznych</td>
                 <td class="border">
-                    <div class="text-theme-9" v-if="project.project_accept_details === 1">Akceptacja</div>
-                    <div class="text-theme-6" v-if="project.project_accept_details === 2">Odrzucenie</div>
-                    <div class="" v-if="project.project_accept_details < 1">W trakcie</div>
+                    <div class="text-theme-9" v-if="project.accept_technical_details === 1 && project.accept_financial_details === 1">Zakończono</div>
+                    <div class="text-theme-6" v-if="project.accept_technical_details === 2 || project.accept_financial_details === 2">Odrzucenie</div>
+                    <div class="" v-if="project.accept_technical_details < 1 || project.accept_technical_details < 1">W trakcie</div>
                 </td>
             </tr>
             <tr>
                 <td class="border" style="width: 10px;">4</td>
                 <td class="border">Podsumowanie z oferty</td>
                 <td class="border">
-                    <div class="text-theme-9" v-if="project.project_accept_offer === 1">Akceptacja</div>
-                    <div class="text-theme-6" v-if="project.project_accept_offer === 2">Odrzucenie</div>
-                    <div class="" v-if="project.project_accept_offer < 1">W trakcie</div>
+                    <div class="text-theme-9" v-if="project.accept_offer === 1">Zakończono</div>
+                    <div class="text-theme-6" v-if="project.accept_offer === 2">Odrzucono</div>
+                    <div class="" v-if="project.accept_offer < 1">W trakcie</div>
                 </td>
             </tr>
             </tbody>

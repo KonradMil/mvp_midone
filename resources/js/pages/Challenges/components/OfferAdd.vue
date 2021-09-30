@@ -219,7 +219,9 @@ export default {
         edit_offer_id: Number,
         solution_id: Number,
         challenge_id: Number,
-        change_offer: Boolean
+        change_offer: Boolean,
+        project: Object,
+        stage: Number,
     },
     setup(props) {
         const app = getCurrentInstance();
@@ -304,6 +306,7 @@ export default {
         const save = () => {
             axios.post('/api/offer/save', {
                 edit_id: props.edit_offer_id,
+                stage: props.stage,
                 challenge_id: props.challenge_id,
                 solution_id: props.solution_id,
                 price_of_delivery: price_of_delivery.value,
@@ -325,8 +328,6 @@ export default {
                 is_changed: props.change_offer,
             }).then(response => {
                 if (response.data.success) {
-                    console.log(response.data + '-> OFFER SAVE !!');
-                    console.log(advance_upon_delivery.value + '-> delivery');
                     toast.success(response.data.message);
                     emitter.emit('changeToOffers', {action: 'go', check: true, is_done_offer: props.is_changed});
                 } else {

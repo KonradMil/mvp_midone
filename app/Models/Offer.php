@@ -28,6 +28,7 @@ class Offer extends Model
         'status', 'select_response_time', 'service_contract_reaction', 'recup_time', 'emergency_cost',
         'challenge_id', 'solution_id', 'installer_id', 'rejected', 'offer_expires_in', 'robots', 'avg_guarantee', 'points',
         'count_fanuc', 'count_yaskawa', 'count_abb', 'count_mitshubishi', 'count_tfm', 'count_universal', 'count_kuka',
+        'comment', 'is_offer_project', 'project_id'
     ];
 
     /**

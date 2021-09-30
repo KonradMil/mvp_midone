@@ -23,7 +23,9 @@ class LocalVision extends Model
      * @var string[]
      */
     protected $fillable = [
-        'project_id', 'description', 'before', 'after'
+        'project_id', 'author_id',
+        'description', 'before', 'after',
+        'accepted', 'comment'
     ];
 
     /**
@@ -31,16 +33,26 @@ class LocalVision extends Model
      */
     protected $casts = [
         'project_id' => 'int',
+        'author_id' => 'int',
         'description' => 'string',
         'before' => 'string',
         'after' => 'string',
+        'accepted' => 'int',
+        'comment' => 'string'
     ];
 
-//    /**
-//     * @return BelongsTo
-//     */
-//    public function project(): BelongsTo
-//    {
-//        return $this->belongsTo(Project::class, 'id', 'project_id');
-//    }
+    /**
+     * @return BelongsTo
+     */
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class, 'id', 'project_id');
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
