@@ -545,19 +545,21 @@ export default defineComponent({
         const handleCallback = () => {
         };
 
-        const getCardProjectRepositories = async (id) => {
-            RequestHandler('projects/' + id + '/card', 'get', {}, (response) => {
+        const getCardProjectRepositories = async (callback) => {
+            RequestHandler('projects/' + props.id + '/card', 'get', {}, (response) => {
                 challenge.value = response.data.challenge;
                 project.value = response.data.project;
-                checkTeam();
-                filter();
-                checkSolution();
+                callback(response);
             });
         }
 
         onMounted(function () {
             permissions.value = window.Laravel.permissions;
-            getCardProjectRepositories(props.id);
+            getCardProjectRepositories(function (){
+                checkTeam();
+                filter();
+                checkSolution();
+            });
             getInvestorAndIntegrator(function () {
 
             })
@@ -567,26 +569,12 @@ export default defineComponent({
         })
 
         const getInvestorAndIntegrator = (callback) => {
-            axios.post('/api/projects/investor-integrator/get', {id: props.id})
-                .then(response => {
-                    if (response.data.success) {
-                        investor.value = response.data.investor;
-                        integrator.value = response.data.integrator;
-                        callback(response);
-                    } else {
-
-                    }
-                })
-                .catch(function (error) {
-                    let resData = error.response.data;
-                    if (error.response.status === 400) {
-                        for (let i in resData.errors) {
-                            for (let k in resData.errors[i].messages) {
-                                toast.error(resData.errors[i].messages[k]);
-                            }
-                        }
-                    }
-                });
+            console.log(props.id + '->props.id');
+            RequestHandler('projects/' + props.id + '/investor-integrator', 'get', {}, (response) => {
+                investor.value = response.data.investor;
+                integrator.value = response.data.integrator;
+                callback(response);
+            });
         }
 
         provide("bind[announcementRef]", el => {

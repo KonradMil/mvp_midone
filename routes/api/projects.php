@@ -31,8 +31,8 @@ Route::group(['prefix' => 'projects', 'middleware' => 'auth:sanctum'], function 
     Route::get('{challenge_id}/offers/integrator', [ProjectController::class, 'getOffersProjectIntegrator']);
     Route::post('{project_id}/offer/{id}/accept', [ProjectController::class, 'acceptOffer']);
     Route::post('{project_id}/offer/{id}/reject', [ProjectController::class, 'rejectOffer']);
-    Route::post('solution/get', [ProjectController::class, 'getProjectSolution']);
-    Route::post('investor-integrator/get', [ProjectController::class, 'getInvestorAndIntegrator']);
+    Route::get('{challenge_id}/solution', [ProjectController::class, 'getProjectSolution']);
+    Route::get('{challenge_id}/investor-integrator', [ProjectController::class, 'getInvestorAndIntegrator']);
     Route::post('visit-date/end', [ProjectController::class, 'endVisitDate']);
 });
 

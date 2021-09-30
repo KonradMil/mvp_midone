@@ -10,7 +10,7 @@ class NewFinancialParameters extends Parameters
     /**
      * @var int
      */
-    public int $challenge_id;
+    public int $challengeId;
     /**
      * @var int
      */
@@ -22,11 +22,11 @@ class NewFinancialParameters extends Parameters
     /**
      * @var int
      */
-    public int $shift_time;
+    public int $shiftTime;
     /**
      * @var int
      */
-    public int $weekend_shift;
+    public int $weekendShift;
     /**
      * @var int
      */
@@ -34,11 +34,11 @@ class NewFinancialParameters extends Parameters
     /**
      * @var int
      */
-    public int $stop_time;
+    public int $stopTime;
     /**
      * @var int
      */
-    public int $operator_performance;
+    public int $operatorPerformance;
     /**
      * @var int
      */
@@ -46,19 +46,19 @@ class NewFinancialParameters extends Parameters
     /**
      * @var int
      */
-    public int $number_of_operators;
+    public int $numberOfOperators;
     /**
      * @var int
      */
-    public int $operator_cost;
+    public int $operatorCost;
     /**
      * @var int
      */
     public int $absence;
     /**
-     * @var int
+     * @var ?int
      */
-    public int $cycle_time;
+    public ?int $cycleTime;
 
 
 
@@ -68,23 +68,19 @@ class NewFinancialParameters extends Parameters
     public function __construct()
     {
         $this->validationRules = [
-            'challenge_id' => 'required|int',
+            'challengeId' => 'required|int',
             'days' => 'required|int',
             'shifts' => 'required|int',
-            'shift_time' => 'required|int',
-            'weekend_shift' => 'required|int',
+            'shiftTime' => 'required|int',
+            'weekendShift' => 'required|int',
             'breakfast' => 'required|int',
-            'stop_time' => 'required|int',
-            'operator_performance' => 'required|int',
+            'stopTime' => 'required|int',
+            'operatorPerformance' => 'required|int',
             'defective' => 'required|int',
-            'number_of_operators' => 'required|int',
-            'operator_cost' => 'required|int',
+            'numberOfOperators' => 'required|int',
+            'operatorCost' => 'required|int',
             'absence' => 'required|int',
-            'cycle_time' => 'required|int',
-        ];
-
-        $this->validationMessages = [
-            'type.in' => __('messages.validation.local_vision.wrong_data')
+            'cycleTime' => 'nullable',
         ];
 
         $this->validationSubject = (array)$this;

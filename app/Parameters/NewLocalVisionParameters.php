@@ -10,11 +10,11 @@ class NewLocalVisionParameters extends Parameters
     /**
      * @var int
      */
-    public int $author_id;
+    public int $authorId;
     /**
      * @var int
      */
-    public int $project_id;
+    public int $projectId;
 
     /**
      * @var string
@@ -42,16 +42,12 @@ class NewLocalVisionParameters extends Parameters
     public function __construct()
     {
         $this->validationRules = [
-            'author_id' => 'required|int',
-            'project_id' => 'required|int',
+            'authorId' => 'required|int',
+            'projectId' => 'required|int',
             'description' => 'required|string',
             'before' => 'required|string',
             'after' => 'required|string',
             'accepted' => 'nullable|int'
-        ];
-
-        $this->validationMessages = [
-            'type.in' => __('messages.validation.local_vision.wrong_data')
         ];
 
         $this->validationSubject = (array)$this;

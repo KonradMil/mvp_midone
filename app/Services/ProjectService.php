@@ -10,7 +10,6 @@ use App\Models\Offer;
 use App\Models\Project;
 use App\Models\TechnicalDetails;
 use App\Models\VisitDate;
-use App\Parameters\FinancialParameters;
 use App\Parameters\NewFinancialParameters;
 use App\Parameters\NewLocalVisionCommentParameters;
 use App\Parameters\NewLocalVisionParameters;
@@ -20,8 +19,10 @@ use App\Parameters\NewVisitDateParameters;
 use App\Repository\Eloquent\ChallengeRepository;
 use App\Repository\Eloquent\FinancialRepository;
 use App\Repository\Eloquent\LocalVisionRepository;
+use App\Repository\Eloquent\OfferRepository;
 use App\Repository\Eloquent\TechnicalDetailsRepository;
 use App\Repository\Eloquent\VisitDateRepository;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -30,6 +31,10 @@ use Illuminate\Support\Facades\Auth;
  */
 class ProjectService
 {
+    /**
+     * @var OfferRepository
+     */
+    private OfferRepository $offerRepository;
     /**
      * @var TechnicalDetailsRepository
      */
@@ -50,13 +55,14 @@ class ProjectService
 
     private ChallengeRepository $challengeRepository;
 
-    public function __construct(ChallengeRepository $challengeRepository, VisitDateRepository $visitDateRepository, LocalVisionRepository $localVisionRepository, TechnicalDetailsRepository $technicalDetailsRepository, FinancialRepository $financialRepository)
+    public function __construct(ChallengeRepository $challengeRepository, VisitDateRepository $visitDateRepository, LocalVisionRepository $localVisionRepository, TechnicalDetailsRepository $technicalDetailsRepository, FinancialRepository $financialRepository, OfferRepository $offerRepository)
     {
         $this->challengeRepository = $challengeRepository;
         $this->visitDateRepository = $visitDateRepository;
         $this->localVisionRepository = $localVisionRepository;
         $this->technicalDetailsRepository = $technicalDetailsRepository;
         $this->financialRepository = $financialRepository;
+        $this->offerRepository = $offerRepository;
     }
 
     public function getChallengeById(int $id): ?Challenge
@@ -106,18 +112,17 @@ class ProjectService
 
     /**
      * @param NewVisitDateParameters $newVisitDateParameters
-     * @return VisitDate
+     * @return Model
      */
-    public function addVisitDate(NewVisitDateParameters $newVisitDateParameters): VisitDate
+    public function addVisitDate(NewVisitDateParameters $newVisitDateParameters): Model
     {
 
         $visitDateParams = [
             'author_id' => Auth::user()->id,
-            'project_id' => $newVisitDateParameters->project_id,
+            'project_id' => $newVisitDateParameters->projectId,
             'date' => $newVisitDateParameters->date,
             'time' => $newVisitDateParameters->time
         ];
-        /** @var VisitDate $visitDate */
 
         $visitDate = $this->visitDateRepository->create($visitDateParams);
 
@@ -134,7 +139,6 @@ class ProjectService
         $visitDate->members = $newVisitDateMembersParameters->members;
         $visitDate->save();
 
-        /** @var VisitDate $visitDate */
         return $visitDate;
     }
 
@@ -147,7 +151,6 @@ class ProjectService
         $visitDate->accepted = 1;
         $visitDate->save();
 
-        /** @var VisitDate $visitDate */
         return $visitDate;
     }
 
@@ -160,7 +163,6 @@ class ProjectService
         $visitDate->accepted = 2;
         $visitDate->save();
 
-        /** @var VisitDate $visitDate */
         return $visitDate;
     }
 
@@ -173,7 +175,6 @@ class ProjectService
         $visitDate->status = 1;
         $visitDate->save();
 
-        /** @var VisitDate $visitDate */
         return $visitDate;
     }
 
@@ -194,13 +195,12 @@ class ProjectService
 
         $localVisionParams = [
             'author_id' => Auth::user()->id,
-            'project_id' => $newLocalVisionParameters->project_id,
+            'project_id' => $newLocalVisionParameters->projectId,
             'description' => $newLocalVisionParameters->description,
             'before' => $newLocalVisionParameters->before,
             'after' => $newLocalVisionParameters->after,
             'accepted' => $newLocalVisionParameters->accepted,
         ];
-        /** @var LocalVision $localVision */
 
         $localVision = $this->localVisionRepository->create($localVisionParams);
 
@@ -216,7 +216,6 @@ class ProjectService
         $localVision->accepted = 1;
         $localVision->save();
 
-        /** @var LocalVision $localVision */
         return $localVision;
     }
 
@@ -229,7 +228,6 @@ class ProjectService
         $localVision->accepted = 2;
         $localVision->save();
 
-        /** @var LocalVision $localVision */
         return $localVision;
     }
 
@@ -262,7 +260,6 @@ class ProjectService
         $localVision->comment = $newLocalVisionCommentParameters->comment;
         $localVision->save();
 
-        /** @var LocalVision $localVision */
         return $localVision;
     }
 
@@ -296,17 +293,17 @@ class ProjectService
     public function addTechnicalDetails(NewTechnicalDetailsParameters $newTechnicalDetailsParameters): TechnicalDetails
     {
         $technicalDetailsParams = [
-            'challenge_id' => $newTechnicalDetailsParameters->challenge_id,
-            'detail_weight' => $newTechnicalDetailsParameters->detail_weight,
-            'pick_quality' => $newTechnicalDetailsParameters->pick_quality,
-            'detail_material' => $newTechnicalDetailsParameters->detail_material,
-            'detail_size' => $newTechnicalDetailsParameters->detail_size,
-            'detail_pick' => $newTechnicalDetailsParameters->detail_pick,
-            'detail_position' => $newTechnicalDetailsParameters->detail_position,
-            'detail_range' => $newTechnicalDetailsParameters->detail_range,
-            'detail_destination' => $newTechnicalDetailsParameters->detail_destination,
-            'number_of_lines' => $newTechnicalDetailsParameters->number_of_lines,
-            'work_shifts' => $newTechnicalDetailsParameters->work_shifts,
+            'challenge_id' => $newTechnicalDetailsParameters->challengeId,
+            'detail_weight' => $newTechnicalDetailsParameters->detailWeight,
+            'pick_quality' => $newTechnicalDetailsParameters->pickQuality,
+            'detail_material' => $newTechnicalDetailsParameters->detailMaterial,
+            'detail_size' => $newTechnicalDetailsParameters->detailSize,
+            'detail_pick' => $newTechnicalDetailsParameters->detailPick,
+            'detail_position' => $newTechnicalDetailsParameters->detailPosition,
+            'detail_range' => $newTechnicalDetailsParameters->detailRange,
+            'detail_destination' => $newTechnicalDetailsParameters->detailDestination,
+            'number_of_lines' => $newTechnicalDetailsParameters->numberOfLines,
+            'work_shifts' => $newTechnicalDetailsParameters->workShifts,
         ];
         /** @var TechnicalDetails $technicalDetails */
 
@@ -322,19 +319,19 @@ class ProjectService
     public function addFinancialDetails(NewFinancialParameters $newFinancialParameters): Financial
     {
         $financialParams = [
-            'challenge_id' => $newFinancialParameters->challenge_id,
+            'challenge_id' => $newFinancialParameters->challengeId,
             'days' => $newFinancialParameters->days,
             'shifts' => $newFinancialParameters->shifts,
-            'shift_time' => $newFinancialParameters->shift_time,
-            'weekend_shift' => $newFinancialParameters->weekend_shift,
+            'shift_time' => $newFinancialParameters->shiftTime,
+            'weekend_shift' => $newFinancialParameters->weekendShift,
             'breakfast' => $newFinancialParameters->breakfast,
-            'stop_time' => $newFinancialParameters->stop_time,
-            'operator_performance' => $newFinancialParameters->operator_performance,
+            'stop_time' => $newFinancialParameters->stopTime,
+            'operator_performance' => $newFinancialParameters->operatorPerformance,
             'defective' => $newFinancialParameters->defective,
-            'number_of_operators' => $newFinancialParameters->number_of_operators,
-            'operator_cost' => $newFinancialParameters->operator_cost,
+            'number_of_operators' => $newFinancialParameters->numberOfOperators,
+            'operator_cost' => $newFinancialParameters->operatorCost,
             'absence' => $newFinancialParameters->absence,
-            'cycle_time' => $newFinancialParameters->cycle_time,
+            'cycle_time' => $newFinancialParameters->cycleTime,
         ];
         /** @var Financial $financial */
 
@@ -345,6 +342,7 @@ class ProjectService
 
     /**
      * @param Project $project
+     * @return Project
      */
     public function acceptTechnicalDetails(Project $project): Project
     {
@@ -356,6 +354,7 @@ class ProjectService
 
     /**
      * @param Project $project
+     * @return Project
      */
     public function rejectTechnicalDetails(Project $project): Project
     {
@@ -367,6 +366,7 @@ class ProjectService
 
     /**
      * @param Project $project
+     * @return Project
      */
     public function acceptFinancialDetails(Project $project): Project
     {
@@ -378,6 +378,7 @@ class ProjectService
 
     /**
      * @param Project $project
+     * @return Project
      */
     public function rejectFinancialDetails(Project $project): Project
     {
@@ -385,19 +386,6 @@ class ProjectService
         $project->save();
 
         return $project;
-    }
-
-    /**
-     * @param Project $project
-     */
-    public function getSelectedOfferByProject(Project $project): ?Offer
-    {
-        $offer = null;
-        if ($project->selected_offer_id > 0) {
-            $offer = Offer::find($project->selected_offer_id)->with('solution');
-        }
-
-        return $offer;
     }
 
     /**

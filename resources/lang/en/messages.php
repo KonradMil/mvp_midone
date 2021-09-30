@@ -1,13 +1,15 @@
 <?php
 
 return [
+    'save_correct' => "Saved correctly",
+    'delete_correct' => "Delete correctly",
+    'accepted' => 'Accepted',
+    'rejected'=> 'Rejected',
+    'canceled' => 'Canceled',
     'recaptcha_error' => 'Prove you are not a robot.',
     'validation' => [
         'registration' => [
             'wrong_account_type' => "Incorrect account type"
-        ],
-        'local_vision' => [
-            'wrong_data' => "Incorrect data"
         ],
     ],
     'registration' => [
@@ -21,12 +23,16 @@ return [
     'challenge' => [
         'not_found' => "Challenge not found.",
     ],
+    'solution' => [
+        'not_found' => "Solution not found.",
+    ],
     'project' => [
         'not_found' => "Project not found.",
-        'save_correct' => "Saved correctly",
-        'delete_correct' => "Delete correctly",
-        'accepted' => 'Accepted',
-        'rejected'=> 'Rejected',
-        'canceled' => 'Canceled'
-    ]
+    ],
+    'offer' => [
+      'not_found' => "Offer not found",
+    ],
+    'user' => [
+        'not_found' => "User not found",
+    ],
 ];

@@ -32,6 +32,7 @@ import {useToast} from "vue-toastification";
 import router from "../../../router";
 import SingleSolutionPost from "../../../components/SingleSolutionPost";
 import Multiselect from '@vueform/multiselect';
+import RequestHandler from "../../../compositions/RequestHandler";
 
 
 export default {
@@ -73,15 +74,9 @@ export default {
         }
 
         const getProjectSolution = () => {
-            axios.post('/api/projects/solution/get', {id: props.challenge.id})
-                .then(response => {
-                    // console.log(response.data)
-                    if (response.data.success) {
-                        solution.value = response.data.payload;
-                    } else {
-
-                    }
-                })
+            RequestHandler('projects/' + props.id + '/solution', 'get', {}, (response) => {
+                solution.value = response.data.solution;
+            });
         }
 
         const follow = () => {

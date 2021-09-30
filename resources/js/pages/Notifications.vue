@@ -8,7 +8,7 @@
                 <h2 class="font-medium text-base mr-auto">{{$t('global.notifications')}}</h2>
             </div>
         <div class="intro-y inbox box mt-5">
-            <div class="overflow-x-auto sm:overflow-x-visible">
+            <div class="overflow-y-auto" style="height: 500px; overflow-x: hidden;">
                 <div v-for="(notification, index) in notificationsComp"
                      :key="'notification_' + index"
                     class="intro-y pb-2">
@@ -129,11 +129,8 @@ export default defineComponent({
         }
 
         const getInvitesRepositories = async () => {
-            console.log('getInvitesRepositories');
             await GetInvites((res) => {
-                console.log('res.payload ' + res.payload);
                 invites.value = res.payload;
-                console.log('res.sent ' + res.sent);
                 invitesSent.value = res.sent;
             });
         }
@@ -149,7 +146,6 @@ export default defineComponent({
             axios.post('/api/search', {query: searchTerm.value})
                 .then(response => {
                     if (response.data.success) {
-                        console.log(response.data.payload);
                         results.value = response.data.payload;
                         showSearchDropdown();
                     } else {
@@ -164,13 +160,10 @@ export default defineComponent({
 
         echo.private('App.Models.User.' + user.id)
             .notification((notification) => {
-                console.log(notification);
                 getNotificationsRepositories();
             });
 
         const getNotificationsRepositories = async () => {
-            console.log(GetNotifications());
-            // if(GetNotifications().list.)
             notifications.value = GetNotifications();
         }
 
@@ -192,7 +185,6 @@ export default defineComponent({
             if(notifications.value.list === undefined) {
                 return notifications.value;
             }  else {
-                console.log(notifications.value.list);
                 return notifications.value.list;
             }
         });
@@ -232,7 +224,6 @@ export default defineComponent({
 
         const goTo = (name,id,change,challenge_id) => {
             setRead(id);
-            console.log(change + '=> change');
             if(change === 'commentChallenge'){
                 router.push({ path: '/challenges' })
             }

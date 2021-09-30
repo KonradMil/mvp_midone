@@ -44,29 +44,6 @@ class ProjectRepository extends BaseRepository
     }
 
     /**
-     * @param int $id
-     * @return Builder|array|Collection|Model
-     */
-    public function getProjectById(int $id): Builder|array|Collection|Model
-    {
-        /** @var Project|null $project */
-        $project = Project::find($id);
-
-        return $project;
-    }
-
-    /**
-     * @param Project $project
-     * @return Project|null
-     */
-    public function getSelectedOfferByProject(Project $project)
-    {
-        $offer = Offer::where('id', '=', $project->selected_offer_id)->with('solution')->first();
-
-        return $offer;
-    }
-
-    /**
      * @param Project $project
      * @return Collection
      */
@@ -75,15 +52,5 @@ class ProjectRepository extends BaseRepository
         $offers = Offer::where('project_id', '=', $project->id)->orderBy('is_offer_project', 'ASC')->orderBy('created_at', 'DESC')->with('solution')->get();
 
         return $offers;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function getNewOfferProject(int $id)
-    {
-        $offer = Offer::where('id', '=', $id)->first();
-
-        return $offer;
     }
 }

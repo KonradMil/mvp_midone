@@ -58,21 +58,17 @@ class NewTechnicalDetailsParameters extends Parameters
     public function __construct()
     {
         $this->validationRules = [
-            'challenge_id' => 'required|int',
-            'detail_weight' => 'required|int',
-            'pick_quality' => 'required|int',
-            'detail_material' => 'required|int',
-            'detail_size' => 'required|int',
-            'detail_pick' => 'required|int',
-            'detail_position' => 'required|int',
-            'detail_range' => 'required|int',
-            'detail_destination' => 'required|int',
-            'number_of_lines' => 'required|int',
-            'work_shifts' => 'required|int',
-        ];
-
-        $this->validationMessages = [
-            'type.in' => __('messages.validation.local_vision.wrong_data')
+            'challengeId' => 'required|int',
+            'detailWeight' => 'required|int',
+            'pickQuality' => 'required|int',
+            'detailMaterial' => 'required|int',
+            'detailSize' => 'required|int',
+            'detailPick' => 'required|int',
+            'detailPosition' => 'required|int',
+            'detailRange' => 'required|int',
+            'detailDestination' => 'required|int',
+            'numberOfLines' => 'required|int',
+            'workShifts' => 'required|int',
         ];
 
         $this->validationSubject = (array)$this;

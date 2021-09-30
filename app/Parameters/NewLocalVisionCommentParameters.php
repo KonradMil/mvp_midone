@@ -21,10 +21,6 @@ class NewLocalVisionCommentParameters extends Parameters
             'comment' => 'required|string',
         ];
 
-        $this->validationMessages = [
-            'type.in' => __('messages.validation.local_vision.wrong_data')
-        ];
-
         $this->validationSubject = (array)$this;
     }
 

@@ -30,21 +30,10 @@ class LocalVisionRepository extends BaseRepository
     }
 
     /**
-     * @param int $id
-     * @return LocalVision
-     */
-    public function getLocalVisionById(int $id): LocalVision
-    {
-        /** @var LocalVision|null $localVision */
-
-        return LocalVision::find($id);
-    }
-
-    /**
      * @param int $projectId
      * @return Collection
      */
-    public function getAllLocalVisionByProjectId(int $projectId): Collection
+    public function getAllLocalVisionsByProjectId(int $projectId): Collection
     {
         /** @var Collection|null $collection */
 

@@ -37,4 +37,13 @@ class UserRepository extends BaseRepository
         return User::where('email', '=', $email)->first();
     }
 
+    /**
+     * @param integer $id
+     */
+    public function getUserWithCompanies(int $id)
+    {
+        $user = User::where('id', '=', $id)->with('companies')->first();
+
+        return $user;
+    }
 }

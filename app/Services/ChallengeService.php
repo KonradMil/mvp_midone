@@ -106,9 +106,4 @@ class ChallengeService
 
         return $array;
     }
-
-    public function getSelectedOfferByChallenge(Challenge $challenge)
-    {
-        return Offer::find($challenge->selected_offer_id)->with('solution');
-    }
 }

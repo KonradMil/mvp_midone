@@ -18,8 +18,8 @@ class VisitDateHandler extends RequestHandler
     public function getParameters(): NewVisitDateParameters
     {
         $parameters = new NewVisitDateParameters();
-        $parameters->author_id = Auth::user()->id;
-        $parameters->project_id = (int)$this->request->route()->parameter('project_id');
+        $parameters->authorId = Auth::user()->id;
+        $parameters->projectId = (int)$this->request->route()->parameter('project_id');
         $parameters->date = $this->request->get('date');
         $parameters->time = $this->request->get('time');
 

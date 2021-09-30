@@ -7,16 +7,12 @@ use App\Http\Requests\Handlers\LocalVisionHandler;
 use App\Http\Requests\Handlers\TechnicalDetailsHandler;
 use App\Http\Requests\Handlers\VisitDateHandler;
 use App\Http\ResponseBuilder;
-use App\Models\Challenge;
-use App\Models\LocalVision;
-use App\Models\Project;
-use App\Models\Solution;
-use App\Models\TechnicalDetails;
-use App\Models\User;
-use App\Models\VisitDate;
 use App\Repository\Eloquent\ChallengeRepository;
 use App\Repository\Eloquent\LocalVisionRepository;
+use App\Repository\Eloquent\OfferRepository;
 use App\Repository\Eloquent\ProjectRepository;
+use App\Repository\Eloquent\SolutionRepository;
+use App\Repository\Eloquent\UserRepository;
 use App\Repository\Eloquent\VisitDateRepository;
 use App\Services\ChallengeService;
 use App\Services\ProjectService;
@@ -27,48 +23,22 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProjectController extends Controller
 {
-    /**
-     * @var ChallengeService
-     */
-    private ChallengeService $challengeService;
 
-    /**
-     * @var ProjectService
-     */
-    private ProjectService $projectService;
-
-    /**
-     * @var ProjectRepository
-     */
-    private ProjectRepository $projectRepository;
-
-    /**
-     * @var ChallengeRepository
-     */
-    private ChallengeRepository $challengeRepository;
-
-    /**
-     * @param ProjectService $projectService
-     * @param ChallengeService $challengeService
-     * @param ChallengeRepository $challengeRepository
-     */
-    public function __construct(ProjectService $projectService, ChallengeService $challengeService, ChallengeRepository $challengeRepository)
+    public function __construct()
     {
-        $this->projectService = $projectService;
-        $this->challengeService = $challengeService;
-        $this->challengeRepository = $challengeRepository;
+
     }
 
     /**
-     * @param ChallengeService $challengeService
+     * @param ChallengeRepository $challengeRepository
      * @param ProjectRepository $projectRepository
      * @param int $id
      * @return JsonResponse
      */
-    public function getProjectCard(ChallengeService $challengeService, ProjectRepository $projectRepository, int $id): JsonResponse
+    public function getProjectCard(ChallengeRepository $challengeRepository, ProjectRepository $projectRepository, int $id): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
-        $challenge = $challengeService->getChallengeById($id);
+        $challenge = $challengeRepository->getFullChallengeById($id);
 
         if (!$challenge) {
             $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
@@ -91,15 +61,16 @@ class ProjectController extends Controller
     /**
      * @param Request $request
      * @param ProjectRepository $projectRepository
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function saveLocalVision(Request $request, ProjectRepository $projectRepository): JsonResponse
+    public function saveLocalVision(Request $request, ProjectRepository $projectRepository, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
         $localVisionHandler = new LocalVisionHandler($request);
 
-        $project = $projectRepository->getProjectById($request->input('project_id'));
+        $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -108,16 +79,21 @@ class ProjectController extends Controller
 
         $parameters = $localVisionHandler->getParameters();
 
-        try {
-            $newLocalVision = $this->projectService->addLocalVision($parameters);
+        if (!$parameters->isValid()) {
+            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+        }
 
-            $responseBuilder->setSuccessMessage(__('messages.project.save_correct'));
+        try {
+            $newLocalVision = $projectService->addLocalVision($parameters);
+
+            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
             $responseBuilder->setData('local_vision', $newLocalVision);
 
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -129,22 +105,23 @@ class ProjectController extends Controller
      * @param int $id
      * @param ProjectRepository $projectRepository
      * @param LocalVisionRepository $localVisionRepository
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function getLocalVision(int $id, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository): JsonResponse
+    public function getLocalVision(int $id, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($id);
+        $project = $projectRepository->find($id);
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $reports = $localVisionRepository->getAllLocalVisionByProjectId($id);
+        $reports = $localVisionRepository->getAllLocalVisionsByProjectId($id);
 
-        $check = $this->projectService->checkLocalVision($id);
+        $check = $projectService->checkLocalVision($id);
 
         $responseBuilder->setData('reports', $reports);
         $responseBuilder->setData('check', $check);
@@ -158,18 +135,18 @@ class ProjectController extends Controller
      * @param LocalVisionRepository $localVisionRepository
      * @return JsonResponse
      */
-    public function deleteReport(Request $request, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository): JsonResponse
+    public function deleteReport(Request $request, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($request->input('project_id'));
+        $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $localVision = $localVisionRepository->getLocalVisionById($request->input('id'));
+        $localVision = $localVisionRepository->find($request->input('id'));
 
         if (!$localVision) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -178,14 +155,13 @@ class ProjectController extends Controller
 
         try {
 
-            /** @var LocalVision $deleteLocalVision */
-            $this->projectService->deleteReport($localVision);
+            $projectService->deleteReport($localVision);
 
-            $responseBuilder->setSuccessMessage(__('messages.project.delete_correct'));
+            $responseBuilder->setSuccessMessage(__('messages.delete_correct'));
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -195,15 +171,16 @@ class ProjectController extends Controller
 
     /**
      * @param Request $request
-     * @param ChallengeService $challengeService
+     * @param ChallengeRepository $challengeRepository
      * @param int $id
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function saveFinancialDetails(Request $request, ChallengeService $challengeService, int $id): JsonResponse
+    public function saveFinancialDetails(Request $request, ChallengeRepository $challengeRepository, int $id, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $challenge = $challengeService->getChallengeById($id);
+        $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {
             $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
@@ -214,17 +191,22 @@ class ProjectController extends Controller
 
         $parameters = $financialHandler->getParameters();
 
+        if (!$parameters->isValid()) {
+            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+        }
+
         try {
 
-            $newFinancial = $this->projectService->addFinancialDetails($parameters);
+            $newFinancial = $projectService->addFinancialDetails($parameters);
 
-            $responseBuilder->setSuccessMessage(__('messages.project.save_correct'));
+            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
             $responseBuilder->setData('new_technical', $newFinancial);
 
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -237,13 +219,14 @@ class ProjectController extends Controller
      * @param Request $request
      * @param int $id
      * @param ChallengeRepository $challengeRepository
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function saveTechnicalDetails(Request $request, int $id, ChallengeRepository $challengeRepository): JsonResponse
+    public function saveTechnicalDetails(Request $request, int $id, ChallengeRepository $challengeRepository, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $challenge = $challengeRepository->getChallengeById($id);
+        $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {
             $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
@@ -254,17 +237,22 @@ class ProjectController extends Controller
 
         $parameters = $technicalDetailsHandler->getParameters();
 
+        if (!$parameters->isValid()) {
+            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+        }
+
         try {
 
-            $newTechnicalDetails = $this->projectService->addTechnicalDetails($parameters);
+            $newTechnicalDetails = $projectService->addTechnicalDetails($parameters);
 
-            $responseBuilder->setSuccessMessage(__('messages.project.save_correct'));
+            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
             $responseBuilder->setData('new_technical', $newTechnicalDetails);
 
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -274,22 +262,23 @@ class ProjectController extends Controller
 
     /**
      * @param Request $request
-     * @param int $id
      * @param ProjectRepository $projectRepository
+     * @param OfferRepository $offerRepository
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function acceptOffer(Request $request, ProjectRepository $projectRepository): JsonResponse
+    public function acceptOffer(Request $request, ProjectRepository $projectRepository, OfferRepository $offerRepository, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($request->input('project_id'));
+        $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $offer = $projectRepository->getNewOfferProject($request->input('new_offer_id'));
+        $offer = $offerRepository->find($request->input('new_offer_id'));
 
         if (!$offer) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -297,16 +286,14 @@ class ProjectController extends Controller
         }
 
         try {
+            $projectService->acceptOffer($project, $offer);
 
-            /** @var TechnicalDetails $acceptTechnicalDetails */
-            $this->projectService->acceptOffer($project, $offer);
-
-            $responseBuilder->setSuccessMessage(__('messages.project.accepted'));
+            $responseBuilder->setSuccessMessage(__('messages.accepted'));
             $responseBuilder->setData('project', $project);
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -317,20 +304,22 @@ class ProjectController extends Controller
     /**
      * @param Request $request
      * @param ProjectRepository $projectRepository
+     * @param OfferRepository $offerRepository
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function rejectOffer(Request $request, ProjectRepository $projectRepository): JsonResponse
+    public function rejectOffer(Request $request, ProjectRepository $projectRepository, OfferRepository $offerRepository, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($request->input('project_id'));
+        $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $offer = $projectRepository->getNewOfferProject($request->input('new_offer_id'));
+        $offer = $offerRepository->find($request->input('new_offer_id'));
 
         if (!$offer) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -340,86 +329,14 @@ class ProjectController extends Controller
         $feedback = $request->input('feedback');
 
         try {
+            $projectService->rejectOffer($project, $offer, $feedback);
 
-            /** @var TechnicalDetails $acceptTechnicalDetails */
-            $this->projectService->rejectOffer($project, $offer, $feedback);
-
-            $responseBuilder->setSuccessMessage(__('messages.project.rejected'));
+            $responseBuilder->setSuccessMessage(__('messages.rejected'));
             $responseBuilder->setData('project', $project);
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
-    }
-
-    /**
-     * @param Request $request
-     * @param ProjectRepository $projectRepository
-     * @param int $id
-     * @return JsonResponse
-     */
-    public function acceptTechnicalDetails(Request $request, ProjectRepository $projectRepository, int $id): JsonResponse
-    {
-        $responseBuilder = new ResponseBuilder();
-
-        $project = $projectRepository->getProjectById($id);
-
-        if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
-        }
-
-        try {
-
-            /** @var TechnicalDetails $acceptTechnicalDetails */
-            $this->projectService->acceptTechnicalDetails($project);
-
-            $responseBuilder->setSuccessMessage(__('messages.project.accepted'));
-            $responseBuilder->setData('project', $project);
-
-        } catch (QueryException $e) {
-
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
-    }
-
-    /**
-     * @param Request $request
-     * @param ProjectRepository $projectRepository
-     * @param int $id
-     * @return JsonResponse
-     */
-    public function rejectTechnicalDetails(Request $request, ProjectRepository $projectRepository, int $id): JsonResponse
-    {
-        $responseBuilder = new ResponseBuilder();
-
-        $project = $projectRepository->getProjectById($id);
-
-        if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
-        }
-
-        try {
-
-            /** @var TechnicalDetails $acceptTechnicalDetails */
-            $this->projectService->rejectTechnicalDetails($project);
-
-            $responseBuilder->setSuccessMessage(__('messages.project.rejected'));
-            $responseBuilder->setData('project', $project);
-
-        } catch (QueryException $e) {
-
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -430,13 +347,14 @@ class ProjectController extends Controller
     /**
      * @param ProjectRepository $projectRepository
      * @param int $id
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function acceptFinancialDetails(ProjectRepository $projectRepository, int $id): JsonResponse
+    public function acceptTechnicalDetails(ProjectRepository $projectRepository, int $id, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($id);
+        $project = $projectRepository->find($id);
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -444,15 +362,14 @@ class ProjectController extends Controller
         }
 
         try {
+            $projectService->acceptTechnicalDetails($project);
 
-            $this->projectService->acceptFinancialDetails($project);
-
-            $responseBuilder->setSuccessMessage(__('messages.project.accepted'));
+            $responseBuilder->setSuccessMessage(__('messages.accepted'));
             $responseBuilder->setData('project', $project);
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -461,16 +378,49 @@ class ProjectController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param ProjectRepository $projectRepository
      * @param int $id
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function rejectFinancialDetails(Request $request, ProjectRepository $projectRepository, int $id): JsonResponse
+    public function rejectTechnicalDetails(ProjectRepository $projectRepository, int $id, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($id);
+        $project = $projectRepository->find($id);
+
+        if (!$project) {
+            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        try {
+            $projectService->rejectTechnicalDetails($project);
+
+            $responseBuilder->setSuccessMessage(__('messages.rejected'));
+            $responseBuilder->setData('project', $project);
+
+        } catch (QueryException $e) {
+
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
+
+        return $responseBuilder->getResponse();
+    }
+
+    /**
+     * @param ProjectRepository $projectRepository
+     * @param int $id
+     * @param ProjectService $projectService
+     * @return JsonResponse
+     */
+    public function acceptFinancialDetails(ProjectRepository $projectRepository, int $id, ProjectService $projectService): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $project = $projectRepository->find($id);
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -479,14 +429,48 @@ class ProjectController extends Controller
 
         try {
 
-            $this->projectService->rejectFinancialDetails($project);
+            $projectService->acceptFinancialDetails($project);
 
-            $responseBuilder->setSuccessMessage(__('messages.project.rejected'));
+            $responseBuilder->setSuccessMessage(__('messages.accepted'));
             $responseBuilder->setData('project', $project);
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
+
+        return $responseBuilder->getResponse();
+    }
+
+    /**
+     * @param ProjectRepository $projectRepository
+     * @param int $id
+     * @param ProjectService $projectService
+     * @return JsonResponse
+     */
+    public function rejectFinancialDetails(ProjectRepository $projectRepository, int $id, ProjectService $projectService): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $project = $projectRepository->find($id);
+
+        if (!$project) {
+            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        try {
+
+            $projectService->rejectFinancialDetails($project);
+
+            $responseBuilder->setSuccessMessage(__('messages.rejected'));
+            $responseBuilder->setData('project', $project);
+
+        } catch (QueryException $e) {
+
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -497,14 +481,14 @@ class ProjectController extends Controller
     /**
      * @param Request $request
      * @param ProjectRepository $projectRepository
-     * @param LocalVisionRepository $localVisionRepository
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function endLocalVision(Request $request, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository): JsonResponse
+    public function endLocalVision(Request $request, ProjectRepository $projectRepository,ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($request->input('project_id'));
+        $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -512,15 +496,13 @@ class ProjectController extends Controller
         }
 
         try {
-
-            /** @var LocalVision $acceptLocalVision */
-            $this->projectService->endLocalVision($project);
+            $projectService->endLocalVision($project);
 
             $responseBuilder->setData('visit_date', $project);
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -532,20 +514,21 @@ class ProjectController extends Controller
      * @param Request $request
      * @param ProjectRepository $projectRepository
      * @param LocalVisionRepository $localVisionRepository
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function acceptReport(Request $request, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository): JsonResponse
+    public function acceptReport(Request $request, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($request->input('project_id'));
+        $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $localVision = $localVisionRepository->getLocalVisionById($request->input('id'));
+        $localVision = $localVisionRepository->find($request->input('id'));
 
         if (!$localVision) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -553,16 +536,14 @@ class ProjectController extends Controller
         }
 
         try {
+            $acceptLocalVision = $projectService->acceptReport($localVision);
 
-            /** @var LocalVision $acceptLocalVision */
-            $acceptLocalVision = $this->projectService->acceptReport($localVision);
-
-            $responseBuilder->setSuccessMessage(__('messages.project.accepted'));
+            $responseBuilder->setSuccessMessage(__('messages.accepted'));
             $responseBuilder->setData('visit_date', $acceptLocalVision);
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -574,20 +555,21 @@ class ProjectController extends Controller
      * @param Request $request
      * @param ProjectRepository $projectRepository
      * @param LocalVisionRepository $localVisionRepository
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function rejectReport(Request $request, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository): JsonResponse
+    public function rejectReport(Request $request, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($request->input('project_id'));
+        $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $localVision = $localVisionRepository->getLocalVisionById($request->input('id'));
+        $localVision = $localVisionRepository->find($request->input('id'));
 
         if (!$localVision) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -595,16 +577,14 @@ class ProjectController extends Controller
         }
 
         try {
+            $rejectLocalVision = $projectService->rejectReport($localVision);
 
-            /** @var LocalVision $rejectLocalVision */
-            $rejectLocalVision = $this->projectService->rejectReport($localVision);
-
-            $responseBuilder->setSuccessMessage(__('messages.project.rejected'));
+            $responseBuilder->setSuccessMessage(__('messages.rejected'));
             $responseBuilder->setData('visit_date', $rejectLocalVision);
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -616,20 +596,21 @@ class ProjectController extends Controller
      * @param Request $request
      * @param ProjectRepository $projectRepository
      * @param LocalVisionRepository $localVisionRepository
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function saveCommentVisitDate(Request $request, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository,): JsonResponse
+    public function saveCommentVisitDate(Request $request, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($request->input('project_id'));
+        $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $localVision = $localVisionRepository->getLocalVisionById($request->input('id'));
+        $localVision = $localVisionRepository->find($request->input('id'));
 
         if (!$localVision) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -641,16 +622,15 @@ class ProjectController extends Controller
         $parameters = $localVisionHandler->getCommentParameters();
 
         try {
-            /** @var LocalVision $addCommentLocalVision */
-            $addCommentLocalVision = $this->projectService->addCommentLocalVision($parameters, $localVision);
+            $addCommentLocalVision = $projectService->addCommentLocalVision($parameters, $localVision);
 
-            $responseBuilder->setSuccessMessage(__('messages.project.save_correct'));
+            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
             $responseBuilder->setData('local_vision', $addCommentLocalVision);
 
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -662,12 +642,13 @@ class ProjectController extends Controller
     /**
      * @param int $id
      * @param ChallengeService $challengeService
+     * @param ChallengeRepository $challengeRepository
      * @return JsonResponse
      */
-    public function getTechnicalDetails(int $id, ChallengeService $challengeService): JsonResponse
+    public function getTechnicalDetails(int $id, ChallengeService $challengeService, ChallengeRepository $challengeRepository): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
-        $challenge = $challengeService->getChallengeById($id);
+        $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {
             $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
@@ -690,12 +671,14 @@ class ProjectController extends Controller
     /**
      * @param int $id
      * @param ChallengeService $challengeService
+     * @param ChallengeRepository $challengeRepository
      * @return JsonResponse
      */
-    public function getFinancialDetails(int $id, ChallengeService $challengeService): JsonResponse
+    public function getFinancialDetails(int $id, ChallengeService $challengeService, ChallengeRepository $challengeRepository): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
-        $challenge = $challengeService->getChallengeById($id);
+
+        $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {
             $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
@@ -716,57 +699,99 @@ class ProjectController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param int $id
+     * @param SolutionRepository $solutionRepository
+     * @param ChallengeRepository $challengeRepository
      * @return JsonResponse
      */
-    public function getProjectSolution(Request $request): JsonResponse
+    public function getProjectSolution(int $id, SolutionRepository $solutionRepository, ChallengeRepository $challengeRepository): JsonResponse
     {
-        $solution = Solution::find($request->input('id'));
+        $responseBuilder = new ResponseBuilder();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Zapisano poprawnie',
-            'payload' => $solution,
-        ]);
+        $challenge = $challengeRepository->find($id);
+
+        if (!$challenge) {
+            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $solution = $solutionRepository->find($id);
+
+        if (!$solution) {
+            $responseBuilder->setErrorMessage(__('messages.solution.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $responseBuilder->setData('solution', $solution);
+
+        return $responseBuilder->getResponse();
     }
 
     /**
-     * @param Request $request
+     * @param int $id
+     * @param UserRepository $userRepository
+     * @param ChallengeRepository $challengeRepository
+     * @param SolutionRepository $solutionRepository
      * @return JsonResponse
      */
-    public function getInvestorAndIntegrator(Request $request): JsonResponse
+    public function getInvestorAndIntegrator(int $id, UserRepository $userRepository, ChallengeRepository $challengeRepository, SolutionRepository $solutionRepository): JsonResponse
     {
-        $challenge = Challenge::find($request->input('id'));
-        $investor = User::with('companies')->find($challenge->author_id);
-        $solution = Solution::find($challenge->solution_project_id);
-        $integrator = User::with('companies')->find($solution->author_id);
+        $responseBuilder = new ResponseBuilder();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Zapisano poprawnie',
-            'investor' => $investor,
-            'integrator' => $integrator,
-        ]);
+        $challenge = $challengeRepository->find($id);
+
+        if (!$challenge) {
+            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $investor = $userRepository->getUserWithCompanies($challenge->author_id);
+
+        if (!$investor) {
+            $responseBuilder->setErrorMessage(__('messages.user.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $solution = $solutionRepository->find($challenge->solution_project_id);
+
+        if (!$solution) {
+            $responseBuilder->setErrorMessage(__('messages.solution.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+
+        $integrator = $userRepository->getUserWithCompanies($solution->author_id);
+
+        if (!$integrator) {
+            $responseBuilder->setErrorMessage(__('messages.user.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $responseBuilder->setData('investor', $investor);
+        $responseBuilder->setData('integrator', $integrator);
+
+        return $responseBuilder->getResponse();
     }
 
     /**
      * @param Request $request
      * @param ProjectRepository $projectRepository
      * @param VisitDateRepository $visitDateRepository
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function saveMembersVisitDate(Request $request, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository,): JsonResponse
+    public function saveMembersVisitDate(Request $request, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($request->input('project_id'));
+        $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $visitDate = $visitDateRepository->getVisitDateById($request->input('id'));
+        $visitDate = $visitDateRepository->find($request->input('id'));
 
         if (!$visitDate) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -779,16 +804,15 @@ class ProjectController extends Controller
 
         try {
 
-            /** @var VisitDate $addMembersVisitDate */
-            $addMembersVisitDate = $this->projectService->addMembersVisitDate($parameters, $visitDate);
+            $addMembersVisitDate = $projectService->addMembersVisitDate($parameters, $visitDate);
 
-            $responseBuilder->setSuccessMessage(__('messages.project.save_correct'));
+            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
             $responseBuilder->setData('visit_date', $addMembersVisitDate);
 
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -799,9 +823,10 @@ class ProjectController extends Controller
 
     /**
      * @param Request $request
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function saveVisitDate(Request $request): JsonResponse
+    public function saveVisitDate(Request $request, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
@@ -809,17 +834,22 @@ class ProjectController extends Controller
 
         $parameters = $visitDateHandler->getParameters();
 
+        if (!$parameters->isValid()) {
+            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+        }
+
         try {
 
-            $newVisitDate = $this->projectService->addVisitDate($parameters);
+            $newVisitDate = $projectService->addVisitDate($parameters);
 
-            $responseBuilder->setSuccessMessage(__('messages.project.save_correct'));
+            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
             $responseBuilder->setData('visit_date', $newVisitDate);
 
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -837,7 +867,7 @@ class ProjectController extends Controller
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($id);
+        $project = $projectRepository->find($id);
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -855,20 +885,21 @@ class ProjectController extends Controller
      * @param Request $request
      * @param ProjectRepository $projectRepository
      * @param VisitDateRepository $visitDateRepository
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function acceptVisitDate(Request $request, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository): JsonResponse
+    public function acceptVisitDate(Request $request, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($request->input('project_id'));
+        $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $visitDate = $visitDateRepository->getVisitDateById($request->input('id'));
+        $visitDate = $visitDateRepository->find($request->input('id'));
 
         if (!$visitDate) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -877,8 +908,7 @@ class ProjectController extends Controller
 
         try {
 
-            /** @var VisitDate $acceptVisitDate */
-            $acceptVisitDate = $this->projectService->acceptVisitDate($visitDate);
+            $acceptVisitDate = $projectService->acceptVisitDate($visitDate);
 
             $responseBuilder->setSuccessMessage(__('messages.project.accepted'));
             $responseBuilder->setData('visit_date', $acceptVisitDate);
@@ -886,7 +916,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -898,20 +928,21 @@ class ProjectController extends Controller
      * @param Request $request
      * @param ProjectRepository $projectRepository
      * @param VisitDateRepository $visitDateRepository
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function rejectVisitDate(Request $request, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository): JsonResponse
+    public function rejectVisitDate(Request $request, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($request->input('project_id'));
+        $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $visitDate = $visitDateRepository->getVisitDateById($request->input('id'));
+        $visitDate = $visitDateRepository->find($request->input('id'));
 
         if (!$visitDate) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -920,16 +951,15 @@ class ProjectController extends Controller
 
         try {
 
-            /** @var VisitDate $rejectVisitDate */
-            $rejectVisitDate = $this->projectService->rejectVisitDate($visitDate);
+            $rejectVisitDate = $projectService->rejectVisitDate($visitDate);
 
-            $responseBuilder->setSuccessMessage(__('messages.project.rejected'));
+            $responseBuilder->setSuccessMessage(__('messages.rejected'));
             $responseBuilder->setData('visit_date', $rejectVisitDate);
 
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -941,38 +971,38 @@ class ProjectController extends Controller
      * @param Request $request
      * @param ProjectRepository $projectRepository
      * @param VisitDateRepository $visitDateRepository
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function cancelVisitDate(Request $request, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository): JsonResponse
+    public function cancelVisitDate(Request $request, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($request->input('project_id'));
+        $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $visitDate = $visitDateRepository->getVisitDateById($request->input('id'));
+        $visitDate = $visitDateRepository->find($request->input('id'));
 
         if (!$visitDate) {
-            $responseBuilder->setErrorMessage(__('messages.project.canceled'));
+            $responseBuilder->setErrorMessage(__('messages.canceled'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         try {
 
-            /** @var VisitDate $cancelVisitDate */
-            $cancelVisitDate = $this->projectService->cancelVisitDate($visitDate);
+            $cancelVisitDate = $projectService->cancelVisitDate($visitDate);
 
-            $responseBuilder->setSuccessMessage(__('messages.project.save_correct'));
+            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
             $responseBuilder->setData('visit_date', $cancelVisitDate);
 
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -984,20 +1014,21 @@ class ProjectController extends Controller
      * @param Request $request
      * @param ProjectRepository $projectRepository
      * @param VisitDateRepository $visitDateRepository
+     * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function deleteVisitDate(Request $request, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository): JsonResponse
+    public function deleteVisitDate(Request $request, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $project = $projectRepository->getProjectById($request->input('project_id'));
+        $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $visitDate = $visitDateRepository->getVisitDateById($request->input('id'));
+        $visitDate = $visitDateRepository->find($request->input('id'));
 
         if (!$visitDate) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -1006,13 +1037,12 @@ class ProjectController extends Controller
 
         try {
 
-            /** @var VisitDate $deleteVisitDate */
-            $this->projectService->deleteVisitDate($visitDate);
+            $projectService->deleteVisitDate($visitDate);
 
-            $responseBuilder->setSuccessMessage(__('messages.project.delete_correct'));
+            $responseBuilder->setSuccessMessage(__('messages.delete_correct'));
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
@@ -1024,39 +1054,47 @@ class ProjectController extends Controller
      * @param int $id
      * @param ChallengeRepository $challengeRepository
      * @param ProjectRepository $projectRepository
+     * @param OfferRepository $offerRepository
      * @return JsonResponse
      */
-    public function getOffersProject(Request $request, int $id, ChallengeRepository $challengeRepository, ProjectRepository $projectRepository): JsonResponse
+    public function getOffersProject(Request $request, int $id, ChallengeRepository $challengeRepository, ProjectRepository $projectRepository, OfferRepository $offerRepository): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $challenge = $challengeRepository->getChallengeById($id);
+        $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {
             $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $project = $projectRepository->getProjectById($request->input('project_id'));
+        $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
+        $old_offer = $offerRepository->getSelectedOfferByChallenge($challenge);
+
+        if (!$old_offer) {
+            $responseBuilder->setErrorMessage(__('messages.offer.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+
         try {
-            $old_offer = $challengeRepository->getSelectedOfferByChallenge($challenge);
 
             $new_offer = null;
             if ($project->selected_offer_id > 0) {
-                $new_offer = $projectRepository->getSelectedOfferByProject($project);
+                $new_offer = $offerRepository->getSelectedOfferByProject($project);
             }
 
             $responseBuilder->setData('old_offer', $old_offer);
             $responseBuilder->setData('new_offer', $new_offer);
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
@@ -1068,20 +1106,21 @@ class ProjectController extends Controller
      * @param int $id
      * @param ChallengeRepository $challengeRepository
      * @param ProjectRepository $projectRepository
+     * @param OfferRepository $offerRepository
      * @return JsonResponse
      */
-    public function getOffersProjectIntegrator(Request $request, int $id, ChallengeRepository $challengeRepository, ProjectRepository $projectRepository): JsonResponse
+    public function getOffersProjectIntegrator(Request $request, int $id, ChallengeRepository $challengeRepository, ProjectRepository $projectRepository, OfferRepository $offerRepository): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
-        $challenge = $challengeRepository->getChallengeById($id);
+        $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {
             $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $project = $projectRepository->getProjectById($request->input('project_id'));
+        $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -1089,17 +1128,17 @@ class ProjectController extends Controller
         }
 
         try {
-            $offers = $projectRepository->getProjectOffers($project);
-            $old_offer = $challengeRepository->getSelectedOfferByChallenge($challenge);
+            $offers = $offerRepository->getProjectOffers($project,$challenge->selected_offer_id);
+            $old_offer = $offerRepository->getSelectedOfferByChallenge($challenge);
 
             $responseBuilder->setData('offers', $offers);
             $responseBuilder->setData('old_offer', $old_offer);
         } catch (QueryException $e) {
-
-            $responseBuilder->setErrorMessage('Unexpected error occured!');
+            $responseBuilder->setErrorMessage('Unexpected error occurred!');
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         return $responseBuilder->getResponse();
     }
+
 }
