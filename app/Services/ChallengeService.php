@@ -3,12 +3,9 @@
 namespace App\Services;
 
 
-use App\Models\Challenge;
 use App\Models\Financial;
-use App\Models\Offer;
 use App\Models\TechnicalDetails;
 use App\Repository\Eloquent\ChallengeRepository;
-use Illuminate\Support\Facades\Auth;
 
 /**
  *
@@ -22,6 +19,10 @@ class ChallengeService
         $this->challengeRepository = $challengeRepository;
     }
 
+    /**
+     * @param integer $challengeId
+     * @return array
+     */
     public function getTechnicalDetailsByChallengeId(int $challengeId): array
     {
         $array = [];
@@ -42,6 +43,10 @@ class ChallengeService
         return $array;
     }
 
+    /**
+     * @param integer $challengeId
+     * @return array
+     */
     public function getFinancialDetailsByChallengeId(int $challengeId): array
     {
         $array = [];
