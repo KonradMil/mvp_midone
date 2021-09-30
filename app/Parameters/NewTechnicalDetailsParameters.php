@@ -10,47 +10,47 @@ class NewTechnicalDetailsParameters extends Parameters
     /**
      * @var int
      */
-    public int $challenge_id;
+    public int $challengeId;
     /**
      * @var int
      */
-    public int $detail_weight;
+    public int $detailWeight;
     /**
      * @var int
      */
-    public int $pick_quality;
+    public int $pickQuality;
     /**
      * @var int
      */
-    public int $detail_material;
+    public int $detailMaterial;
     /**
      * @var int
      */
-    public int $detail_size;
+    public int $detailSize;
     /**
      * @var int
      */
-    public int $detail_pick;
+    public int $detailPick;
     /**
      * @var int
      */
-    public int $detail_position;
+    public int $detailPosition;
     /**
      * @var int
      */
-    public int $detail_range;
+    public int $detailRange;
     /**
      * @var int
      */
-    public int $detail_destination;
+    public int $detailDestination;
     /**
      * @var int
      */
-    public int $number_of_lines;
+    public int $numberOfLines;
     /**
      * @var int
      */
-    public int $work_shifts;
+    public int $workShifts;
 
     /**
      *
