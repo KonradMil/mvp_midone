@@ -22,51 +22,6 @@ class ChallengeService
         $this->challengeRepository = $challengeRepository;
     }
 
-    public function getChallengeById(int $id): ?Challenge
-    {
-        /** @var Challenge|null $challenge */
-        $challenge = $this->challengeRepository->getFullChallengeById($id);
-
-        if (!$challenge) {
-            return $challenge;
-        }
-
-        $challenge->selected = $challenge->solutions()->where('selected', '=', 1)->get();
-
-        if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like', 1)) {
-            $challenge->liked = true;
-        } else {
-            $challenge->liked = false;
-        }
-
-        if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Follow', 1)) {
-            $challenge->followed = true;
-        } else {
-            $challenge->followed = false;
-        }
-
-        foreach ($challenge->solutions as $sol) {
-            if (Auth::user()->viaLoveReacter()->hasReactedTo($sol, 'Like', 1)) {
-                $sol->liked = true;
-            } else {
-                $sol->liked = false;
-            }
-
-            if (Auth::user()->viaLoveReacter()->hasReactedTo($sol, 'Follow', 1)) {
-                $sol->followed = true;
-            } else {
-                $sol->followed = false;
-            }
-            $sol->comments_count = $sol->comments()->count();
-            $sol->likes = $sol->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
-        }
-
-        $challenge->comments_count = $challenge->comments()->count();
-        $challenge->likes = $challenge->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
-
-        return $challenge;
-    }
-
     public function getTechnicalDetailsByChallengeId(int $challengeId): array
     {
         $array = [];

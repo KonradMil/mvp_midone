@@ -70,8 +70,6 @@ class NewTechnicalDetailsParameters extends Parameters
             'numberOfLines' => 'required|int',
             'workShifts' => 'required|int',
         ];
-
-        $this->validationSubject = (array)$this;
     }
 
     /**

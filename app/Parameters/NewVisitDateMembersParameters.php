@@ -20,8 +20,6 @@ class NewVisitDateMembersParameters extends Parameters
         $this->validationRules = [
             'members' => 'required|string',
         ];
-
-        $this->validationSubject = (array)$this;
     }
 
     /**

@@ -93,7 +93,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -161,7 +161,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -206,7 +206,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -252,7 +252,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -293,7 +293,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -336,7 +336,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -369,7 +369,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -402,7 +402,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -436,7 +436,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -470,7 +470,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -502,7 +502,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -543,7 +543,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -584,7 +584,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -599,7 +599,7 @@ class ProjectController extends Controller
      * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function saveCommentVisitDate(Request $request, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository, ProjectService $projectService): JsonResponse
+    public function saveCommentLocalVision(Request $request, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository, ProjectService $projectService): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
@@ -621,6 +621,11 @@ class ProjectController extends Controller
 
         $parameters = $localVisionHandler->getCommentParameters();
 
+        if (!$parameters->isValid()) {
+            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+        }
+
         try {
             $addCommentLocalVision = $projectService->addCommentLocalVision($parameters, $localVision);
 
@@ -630,7 +635,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -662,8 +667,17 @@ class ProjectController extends Controller
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $responseBuilder->setData('old_technical', $details[0]);
-        $responseBuilder->setData('new_technical', $details[1]);
+        try {
+
+            $responseBuilder->setData('old_technical', $details[0]);
+            $responseBuilder->setData('new_technical', $details[1]);
+
+        } catch(QueryException $e) {
+
+            $responseBuilder->setErrorMessage(__('messages.error'));
+            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+       ;
 
         return $responseBuilder->getResponse();
     }
@@ -692,8 +706,18 @@ class ProjectController extends Controller
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $responseBuilder->setData('old_financial', $details[0]);
-        $responseBuilder->setData('new_financial', $details[1]);
+        try {
+
+            $responseBuilder->setData('old_financial', $details[0]);
+            $responseBuilder->setData('new_financial', $details[1]);
+
+        } catch(QueryException $e) {
+
+            $responseBuilder->setErrorMessage(__('messages.error'));
+            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
+
 
         return $responseBuilder->getResponse();
     }
@@ -702,9 +726,10 @@ class ProjectController extends Controller
      * @param int $id
      * @param SolutionRepository $solutionRepository
      * @param ChallengeRepository $challengeRepository
+     * @param ProjectRepository $projectRepository
      * @return JsonResponse
      */
-    public function getProjectSolution(int $id, SolutionRepository $solutionRepository, ChallengeRepository $challengeRepository): JsonResponse
+    public function getProjectSolution(int $id, SolutionRepository $solutionRepository, ChallengeRepository $challengeRepository, ProjectRepository $projectRepository): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
@@ -712,6 +737,13 @@ class ProjectController extends Controller
 
         if (!$challenge) {
             $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $project = $projectRepository->getProjectByChallengeId($challenge->id);
+
+        if (!$project) {
+            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
@@ -802,6 +834,11 @@ class ProjectController extends Controller
 
         $parameters = $visitDateHandler->getMembersParameters();
 
+        if (!$parameters->isValid()) {
+            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+        }
+
         try {
 
             $addMembersVisitDate = $projectService->addMembersVisitDate($parameters, $visitDate);
@@ -812,7 +849,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -849,7 +886,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -916,7 +953,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -959,7 +996,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -1002,7 +1039,7 @@ class ProjectController extends Controller
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
@@ -1042,7 +1079,7 @@ class ProjectController extends Controller
             $responseBuilder->setSuccessMessage(__('messages.delete_correct'));
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
@@ -1094,7 +1131,7 @@ class ProjectController extends Controller
             $responseBuilder->setData('new_offer', $new_offer);
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
@@ -1134,7 +1171,7 @@ class ProjectController extends Controller
             $responseBuilder->setData('offers', $offers);
             $responseBuilder->setData('old_offer', $old_offer);
         } catch (QueryException $e) {
-            $responseBuilder->setErrorMessage('Unexpected error occurred!');
+            $responseBuilder->setErrorMessage(__('messages.error'));
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 

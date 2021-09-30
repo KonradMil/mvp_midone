@@ -42,8 +42,6 @@ class NewVisitDateParameters extends Parameters
             'date' => 'required|date',
             'time' => 'required|string',
         ];
-
-        $this->validationSubject = (array)$this;
     }
 
     /**

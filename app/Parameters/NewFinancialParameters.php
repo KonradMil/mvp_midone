@@ -82,8 +82,6 @@ class NewFinancialParameters extends Parameters
             'absence' => 'required|int',
             'cycleTime' => 'nullable',
         ];
-
-        $this->validationSubject = (array)$this;
     }
 
     /**

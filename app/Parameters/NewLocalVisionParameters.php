@@ -49,8 +49,6 @@ class NewLocalVisionParameters extends Parameters
             'after' => 'required|string',
             'accepted' => 'nullable|int'
         ];
-
-        $this->validationSubject = (array)$this;
     }
 
     /**

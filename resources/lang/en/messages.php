@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'error' => "Unexpected error occurred!",
     'save_correct' => "Saved correctly",
     'delete_correct' => "Delete correctly",
     'accepted' => 'Accepted',

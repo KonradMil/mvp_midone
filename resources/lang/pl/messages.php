@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'error' => "Wystąpił nieoczekiwany błąd!!",
     'save_correct' => "Zapisano poprawnie",
     'delete_correct' => "Usunięto poprawnie",
     'accepted' => 'Zaakceptowano',

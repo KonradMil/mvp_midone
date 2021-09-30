@@ -10,7 +10,7 @@ class NewLocalVisionCommentParameters extends Parameters
     /**
      * @var string
      */
-    public string $members;
+    public string $comment;
 
     /**
      *
@@ -20,8 +20,6 @@ class NewLocalVisionCommentParameters extends Parameters
         $this->validationRules = [
             'comment' => 'required|string',
         ];
-
-        $this->validationSubject = (array)$this;
     }
 
     /**

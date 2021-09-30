@@ -18,7 +18,7 @@ Route::group(['prefix' => 'projects', 'middleware' => 'auth:sanctum'], function 
     Route::post('{project_id}/local-vision/{id}/reject', [ProjectController::class, 'rejectReport']);
     Route::post('{project_id}/local-vision/{id}/delete', [ProjectController::class, 'deleteReport']);
     Route::post('{project_id}/local-vision/end', [ProjectController::class, 'endLocalVision']);
-    Route::post('{project_id}/local-vision/{id}/save_comment', [ProjectController::class, 'saveCommentVisitDate']);
+    Route::post('{project_id}/local-vision/{id}/save_comment', [ProjectController::class, 'saveCommentLocalVision']);
     Route::get('{challenge_id}/technical-details', [ProjectController::class, 'getTechnicalDetails']);
     Route::get('{challenge_id}/financial-details', [ProjectController::class, 'getFinancialDetails']);
     Route::post('{challenge_id}/technical-details/save', [ProjectController::class, 'saveTechnicalDetails']);
