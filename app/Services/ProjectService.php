@@ -144,9 +144,9 @@ class ProjectService
 
     /**
      * @param NewLocalVisionParameters $newLocalVisionParameters
-     * @return LocalVision
+     * @return Model
      */
-    public function addLocalVision(NewLocalVisionParameters $newLocalVisionParameters): LocalVision
+    public function addLocalVision(NewLocalVisionParameters $newLocalVisionParameters): Model
     {
 
         $localVisionParams = [
