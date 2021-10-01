@@ -58,7 +58,6 @@
                                                    value="integrator"/>
                                                 <Tippy
                                                     tag="a"
-                                                    href=""
                                                     class="dark:text-gray-300 text-gray-600"
                                                     content="Podmiot świadczący usługi związane z automatyzacją stanowisk przemysłowych w zakładzie produkcyjnym.">
                                                    <label class="form-check-label" for="radio-switch-4">{{$t('common.integratorem')}}</label>
@@ -73,7 +72,6 @@
                                                    value="investor"/>
                                         <Tippy
                                             tag="a"
-                                            href=""
                                             class="dark:text-gray-300 text-gray-600"
                                             content="Przedsiębiorca zamierzający zautomatyzować stanowisko przemysłowe w zakładzie produkcyjnym.">
                                             <label class="form-check-label"  for="radio-switch-5">{{$t('common.investorem')}}</label>
@@ -142,11 +140,8 @@
                                 <div v-if="score === 2" class="col-span-3 h-full rounded bg-gray-200 dark:bg-dark-2"></div>
                                 <div v-if="score === 3" class="col-span-3 h-full rounded bg-gray-200 dark:bg-dark-2"></div>
                             </div>
-                            <a
-                                href=""
-                                class="intro-x text-gray-600 block mt-2 text-xs sm:text-sm"
-                            >{{$t('register.safepassword')}}</a
-                            >
+                            <a class="intro-x text-gray-600 block mt-2 text-xs sm:text-sm cursor-default">
+                                {{$t('register.safepassword')}}</a>
                             <input
                                 type="password"
                                 class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
