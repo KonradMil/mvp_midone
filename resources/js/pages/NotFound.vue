@@ -8,9 +8,9 @@
             >
                 <div class="-intro-x lg:mr-20">
                     <img
-                        alt="Icewall Tailwind HTML Admin Template"
+                        alt="DBR77"
                         class="h-48 lg:h-auto"
-                        :src="require(`../../images/error-illustration.svg`)"
+                        src="//s3/twopointo/images//error_illustration.svg"
                     />
                 </div>
                 <div class="text-white mt-10 lg:mt-0">

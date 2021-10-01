@@ -24,7 +24,8 @@
                 </div>
             </div>
             <!-- END: Profile Menu -->
-            <WorkshopPanel :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></WorkshopPanel>
+<!--            <WorkshopPanel :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></WorkshopPanel>-->
+            <StudioWorkshop hideFooter="true" :src="''" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></StudioWorkshop>
             <Marketplace v-if="activeTab == 'marketplace'"></Marketplace>
             <OwnObjects v-if="activeTab == 'obiekty'"></OwnObjects>
         </div>
@@ -36,14 +37,15 @@ import WorkshopPanel from "./panels/WorkshopPanel";
 import Marketplace from "./panels/Marketplace";
 import OwnObjects from "./panels/OwnObjects";
 import UnityBridgeWorkshop from "./bridge_workshop";
-
+import {useToast} from "vue-toastification";
 import {getCurrentInstance, onBeforeMount, ref} from "vue";
-import UnityBridge from "../bridge";
-import dayjs from "dayjs";
 import unityActionOutgoing from "../composables/ActionsOutgoing";
+import StudioWorkshop from "./StudioWorkshop";
+
+
 export default {
 name: "Workshop",
-    components: {OwnObjects, Marketplace, WorkshopPanel},
+    components: {OwnObjects, Marketplace, WorkshopPanel, StudioWorkshop},
     setup() {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
@@ -52,20 +54,23 @@ name: "Workshop",
         const loadedObjectId = ref(null);
         const unityActionOutgoingObject = ref({});
         const gameWindow = ref(null);
+        const toast = useToast();
+        const window_width = ref('100%');
+        const window_height = ref(0);
 
         emitter.on('loadObjectWorkshop', (e) => {
             console.log(e);
-            console.log(JSON.parse(e.object.save_json));
-            handleUnityActionOutgoing({action: 'loadWorkshopObject', data: JSON.parse(e.object.save_json)});
+            console.log(JSON.parse(e.object.save));
+            handleUnityActionOutgoing({action: 'loadWorkshopObject', data: JSON.parse(e.object.save)});
         });
 
         emitter.on('UnityWorkshopSave', e => {
             axios.post('/api/workshop/models/save', {object: e, id: loadedObjectId})
                 .then(response => {
                     if (response.data.success) {
-
+                        toast.success('Zapisano');
                     } else {
-                        // toast.error(response.data.message);
+                        toast.error('Wystąpił błąd');
                     }
                 })
         });
@@ -76,19 +81,23 @@ name: "Workshop",
                     .then(response => {
                         if (response.data.success) {
                             emitter.emit('singleobjectdeleted', {id: e.id});
+                            toast.success('Usunięto');
                         } else {
-                            // toast.error(response.data.message);
+                            toast.error('Wystąpił błąd');
                         }
                     })
             } else if (e.action == 'edit'){
                 emitter.emit('LoadWorkshopItems', e.object);
             } else if (e.action == 'publish'){
-                axios.post('/api/workshop/models/publish', {id: e.id})
+                console.log("e");
+                console.log(e);
+                axios.post('/api/workshop/models/publish', {id: e.object.id})
                     .then(response => {
                         if (response.data.success) {
-                            emitter.emit('singleobjectpublished', {id: e.id});
+                            emitter.emit('singleobjectpublished', {id: e.object});
+                            toast.success('Opublikowano');
                         } else {
-
+                            toast.error('Wystąpił błąd');
                         }
                     })
             }else if (e.action == 'copy'){
@@ -96,8 +105,9 @@ name: "Workshop",
                     .then(response => {
                         if (response.data.success) {
                             emitter.emit('singleobjectcopied', {id: e.id});
+                            toast.success('Zaimportowano');
                         } else {
-
+                            toast.error('Wystąpił błąd');
                         }
                     })
             }
@@ -105,6 +115,10 @@ name: "Workshop",
 
         const handleUnityActionOutgoing = (e) => {
             try {
+                console.log("eeweee");
+                console.log(e);
+                console.log(unityActionOutgoingObject.value);
+                console.log(unityActionOutgoingObject.value[e.action]);
                 unityActionOutgoingObject.value[e.action](e.data);
             } catch (ee) {
                 console.log([ee, e]);
@@ -125,12 +139,12 @@ name: "Workshop",
                 console.log(gameWindow.value.refs);
                 // console.log(gameWindow.value.refs.gameWindow);
                 // console.log(gameWindow.value.refs);
-                unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value.refs.gameWindow);
+                unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
                 // handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
 
-            }, 2000);
+            }, 5000);
             // setTimeout(() => {
-            //     handleUnityActionOutgoing({action: 'prefix', data: 'https://platform.dbr77.com/s3'});
+            //     handleUnityActionOutgoing({action: 'prefix', data: 'https://devsys.appworks-dev.pl/s3'});
             //     // unlockInput();
             // }, 5000);
         }
@@ -149,7 +163,9 @@ name: "Workshop",
             initalize,
             unlockInput,
             handleUnityActionOutgoing,
-            gameWindow
+            gameWindow,
+            window_height,
+            window_width
         }
     }
 }

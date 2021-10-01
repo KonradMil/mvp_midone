@@ -8,22 +8,22 @@
             </div>
             <div class="right flex  pt-2 mr-24 flex-row" style="margin-left: auto;" v-if="icons.right != undefined">
                 <div :key="'topIcon_fullscreen'" class="top-i w-30 pl-6 unity-button">
-                    <UnityButton  :alttext="''" :path="'/s3/builder_icons/fullscreen_simple.png'"  :tooltip="'Pełen ekran'" :action="'fullscreen'" position="topbuttonclick"/>
+                    <UnityButton :tooltip="''" :alttext="''" :path="'/s3/builder_icons/fullscreen_simple.png'" :action="'fullscreen'" position="topbuttonclick"/>
 <!--                    <UnityDropdown v-if="icon.type === 'dropdown'" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick" :options="icon.options"></UnityDropdown>-->
                 </div>
                 <div :key="'topIcon_logout'" class="top-i w-30 pl-6 unity-button">
-                    <UnityButton  :alttext="''" :path="'/s3/builder_icons/logout_simple.png'"  :tooltip="'Wyjdź'" :action="'logout'" position="topbuttonclick"/>
+                    <UnityButton :tooltip="''" :alttext="''" :path="'/s3/builder_icons/logout_simple.png'" :action="'logout'" position="topbuttonclick"/>
 <!--                    <UnityDropdown v-if="icon.type === 'dropdown'" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick" :options="icon.options"></UnityDropdown>-->
                 </div>
                 <div :key="'topIcon_eye'" class="top-i w-30 pl-6 unity-button">
 <!--                    <UnityButton  v-if="icon.type === 'button'" :tooltip="icon.tooltip" :alttext="icon.alttext" :path="icon.src" :action="index" position="topbuttonclick"/>-->
-                    <UnityDropdown :alttext="''" :path="'/s3/builder_icons/eye_simple3.png'" :action="'eye'"  :tooltip="'Zmiana kamery'" position="topbuttonclick" :options="icons.right['eye'].options"></UnityDropdown>
+                    <UnityDropdown :alttext="''" :path="'/s3/builder_icons/eye_simple3.png'" :action="'eye'" position="topbuttonclick" :options="icons.right['eye'].options"></UnityDropdown>
                 </div>
                 <div :key="'topIcon_save'" class="top-i w-30 pl-6 unity-button" v-if="allowedEdit">
-                    <UnityButton   :alttext="''" :path="'/s3/builder_icons/save_simple.png'" :tooltip="'Zapisz'" :action="'save'" position="topbuttonclick"/>
+                    <UnityButton tooltip="''" :alttext="''" :path="'/s3/builder_icons/save_simple.png'" :action="'save'" position="topbuttonclick"/>
                 </div>
                 <div :key="'topIcon_help'" class="top-i w-30 pl-6 unity-button" v-if="allowedEdit">
-                    <UnityButton :alttext="''" :path="'/s3/builder_icons/help_simple.png'" :action="'help'" :tooltip="'Pomoc'" position="topbuttonclick" ></UnityButton>
+                    <UnityButton :alttext="''" :path="'/s3/builder_icons/help_simple.png'" :action="'help'" position="topbuttonclick" ></UnityButton>
                 </div>
             </div>
     </div>
@@ -38,7 +38,8 @@ export default {
     name: "TopButtons",
     props: {
         icons: Array,
-        allowedEdit: Boolean
+        allowedEdit: Boolean,
+        canEditSolution: Boolean
     },
     components: {UnityDropdown, UnityButton},
     setup(props) {

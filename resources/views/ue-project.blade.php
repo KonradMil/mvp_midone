@@ -11615,7 +11615,7 @@
         <div class="row">
             <!-- Grid column -->
             <div class="col-md-2 col-12 offset-md-1">
-                <img src="{{url('images/logo_dbr_white.png')}}" style="max-width: 200px;width: 100%; padding: 30px"/>
+                <img src="{{url('s3/twopointo/logo_dbr_white.png')}}" style="max-width: 200px;width: 100%; padding: 30px"/>
             </div>
             <!-- Grid column -->
             <div class="col-md-4 col-5">

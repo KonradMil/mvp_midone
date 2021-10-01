@@ -5,12 +5,21 @@
             @apply text-theme-30;
         }
         .notification__icon {
+            height: 1.7rem !important;
+            width: 1.5rem !important;
             @apply w-5 h-5;
         }
         &.notification--bullet:before {
-            content: "";
-            width: 8px;
-            height: 8px;
+            content: attr(data-count);
+            width: 16px;
+            height: 16px;
+            right: -6px !important;
+            color: white;
+            font-size: 9px;
+            vertical-align: top;
+            line-height: 11px;
+            text-align: center;
+            padding-top: 2px;
             @apply rounded-full absolute right-0 bg-theme-6;
         }
     }

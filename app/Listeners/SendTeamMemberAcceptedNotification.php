@@ -3,6 +3,9 @@
 namespace App\Listeners;
 
 use App\Events\TeamMemberAccepted;
+use App\Models\Team;
+use App\Models\User;
+use App\Notifications\TeamInvitationAccepted;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -26,6 +29,8 @@ class SendTeamMemberAcceptedNotification
      */
     public function handle(TeamMemberAccepted $event)
     {
-        //
+        $user = User::find($event->causer->id);
+        $team = Team::find($event->subject->id);
+        $user->notify(new TeamInvitationAccepted($team));
     }
 }

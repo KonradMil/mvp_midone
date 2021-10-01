@@ -10,8 +10,7 @@
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12 xxl:col-span-6">
                 <div
-                    class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5"
-                >
+                    class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.basicData')}}</h2>
                 </div>
                 <div class="px-5 pt-5">
@@ -21,7 +20,7 @@
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
                         <strong>{{$t('challengesMain.basicInformation')}}:</strong> {{ types[challenge.type] }}
                     </div>
-                    <div class="text-gray-700 dark:text-gray-600 mt-2" style="word-break: break-all; max-height: 100px; overflow-y: scroll;">
+                    <div class="text-gray-700 dark:text-gray-600 mt-2" style="word-break: keep-all; max-height: 200px; overflow-y: scroll; white-space: pre-wrap;">
                         <strong>{{$t('challengesNew.description')}}:</strong> {{ challenge.description }}
                     </div>
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
@@ -31,18 +30,18 @@
                             v-model="challenge.solution_deadline"
                             v-if="inTeam"
                             :options="{
-                autoApply: false,
-                lang: 'pl',
-                format: 'DD.MM.YYYY',
-                showWeekNumbers: true,
-                 buttonText: {'apply':'OK','cancel':'Anuluj'},
-                dropdowns: {
-                  minYear: 2021,
-                  maxYear: null,
-                  months: true,
-                  years: true
-                }
-              }" class="form-control"/>
+                             autoApply: false,
+                             lang: 'pl',
+                             format: 'DD.MM.YYYY',
+                             showWeekNumbers: true,
+                             buttonText: {'apply':'OK','cancel':'Anuluj'},
+                             dropdowns: {
+                               minYear: 2021,
+                               maxYear: null,
+                               months: true,
+                               years: true
+                                  }
+                              }" class="form-control"/>
                         <span v-if="!inTeam"> {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }} </span>
                     </div>
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
@@ -117,6 +116,113 @@
                     </TinySlider>
                 </div>
             </div>
+            <div class="intro-y box col-span-12 xxl:col-span-6" v-if="challenge.stage === 3">
+                <div class="col-span-12 lg:col-span-4 xxl:col-span-3" >
+                    <div class="intro-y pr-1">
+                        <div class="box p-2">
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="pr-1">
+                            <div class="box px-5 py-10 mt-5">
+                                <div class="w-20 h-20 flex-none image-fit rounded-full overflow-hidden mx-auto">
+                                    <Avatar :src="'/s3/avatars/' + investor.avatar" :username="investor.name + ' ' + investor.lastname" :size="90"
+                                            color="#FFF" background-color="#930f68"/>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <div class="font-medium text-lg">{{investor.name}}  {{investor.lastname}}</div>
+                                    <div class="text-gray-600 mt-1">{{investor.type}}</div>
+                                </div>
+                            </div>
+                            <div class="box p-5 mt-5">
+                                <div class="flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
+                                    <div>
+                                        <div class="text-gray-600">Firma</div>
+                                        <div class="mt-1">Przykladowa firma</div>
+                                    </div>
+                                    <i data-feather="globe" class="w-4 h-4 text-gray-600 ml-auto"></i>
+                                </div>
+                                <div class="flex items-center border-b border-gray-200 dark:border-dark-5 py-5">
+                                    <div>
+                                        <div class="text-gray-600">Telefon</div>
+                                        <div class="mt-1">{{investor.phone}}</div>
+                                    </div>
+                                    <i data-feather="mic" class="w-4 h-4 text-gray-600 ml-auto"></i>
+                                </div>
+                                <div class="flex items-center border-b border-gray-200 dark:border-dark-5 py-5">
+                                    <div>
+                                        <div class="text-gray-600">Email</div>
+                                        <div class="mt-1">{{investor.email}}</div>
+                                    </div>
+                                    <i data-feather="mail" class="w-4 h-4 text-gray-600 ml-auto"></i>
+                                </div>
+<!--                                <div class="flex items-center pt-5">-->
+<!--                                    <div>-->
+<!--                                        <div class="text-gray-600">Data dołączenia</div>-->
+<!--                                        <div class="mt-1">{{ $dayjs(investor.created_at).format('DD.MM.YYYY') }}</div>-->
+<!--                                    </div>-->
+<!--                                    <i data-feather="clock" class="w-4 h-4 text-gray-600 ml-auto"></i>-->
+<!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="intro-y box col-span-12 xxl:col-span-6" v-if="challenge.stage === 3">
+                <div class="col-span-12 lg:col-span-4 xxl:col-span-3">
+                    <div class="intro-y pr-1">
+                        <div class="box p-2">
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="pr-1">
+                            <div class="box px-5 py-10 mt-5">
+                                <div class="w-20 h-20 flex-none image-fit rounded-full overflow-hidden mx-auto">
+                                    <Avatar :src="'/s3/avatars/' + integrator.avatar" :username="integrator.name + ' ' + integrator.lastname" :size="90"
+                                            color="#FFF" background-color="#930f68"/>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <div class="font-medium text-lg">{{integrator.name}}  {{integrator.lastname}}</div>
+                                    <div class="text-gray-600 mt-1">{{integrator.type}}</div>
+                                </div>
+                            </div>
+                            <div class="box p-5 mt-5">
+                                <div class="flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
+                                    <div>
+                                        <div class="text-gray-600">Firma</div>
+                                        <div class="mt-1">FUNDACJA INSPIRUJĄCE PRZYKŁADY</div>
+                                    </div>
+                                    <i data-feather="globe" class="w-4 h-4 text-gray-600 ml-auto"></i>
+                                </div>
+                                <div class="flex items-center border-b border-gray-200 dark:border-dark-5 py-5">
+                                    <div>
+                                        <div class="text-gray-600">Telefon</div>
+                                        <div class="mt-1">{{integrator.phone}}</div>
+                                    </div>
+                                    <i data-feather="mic" class="w-4 h-4 text-gray-600 ml-auto"></i>
+                                </div>
+                                <div class="flex items-center border-b border-gray-200 dark:border-dark-5 py-5">
+                                    <div>
+                                        <div class="text-gray-600">Email</div>
+                                        <div class="mt-1">{{integrator.email}}</div>
+                                    </div>
+                                    <i data-feather="mail" class="w-4 h-4 text-gray-600 ml-auto"></i>
+                                </div>
+<!--                                <div class="flex items-center pt-5">-->
+<!--                                    <div>-->
+<!--                                        <div class="text-gray-600">Data dołączenia</div>-->
+<!--                                        <div class="mt-1">{{ $dayjs(integrator.created_at).format('DD.MM.YYYY') }}</div>-->
+<!--                                    </div>-->
+<!--                                    <i data-feather="clock" class="w-4 h-4 text-gray-600 ml-auto"></i>-->
+<!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
             <!-- END: Daily Sales -->
 
         </div>
@@ -127,15 +233,20 @@
 import {computed, onMounted, reactive, ref} from "vue";
 import {useToast} from "vue-toastification";
 import VueEasyLightbox from 'vue-easy-lightbox'
+import Avatar from "../../../components/avatar/Avatar";
+
 
 export default {
     name: "BasicInformationPanel",
     props: {
         challenge: Object,
-        inTeam: Boolean
+        inTeam: Boolean,
+        investor: Object,
+        integrator:  Object,
     },
     components: {
-        VueEasyLightbox
+        VueEasyLightbox,
+        Avatar
     },
     setup(props) {
         const challenge = computed(() => {
@@ -159,13 +270,9 @@ export default {
         const lightBoxIndex = ref(0);
 
         onMounted(() => {
-            console.log("props.challenge");
-            console.log(props.challenge);
-            // images.value.push('/' + props.challenge.screenshot_path);
         });
 
         const showImage = (index) => {
-            console.log(index);
             lightboxVisible.value = true;
             lightBoxIndex.value = index;
         }
@@ -177,7 +284,6 @@ export default {
         const follow = () => {
             axios.post('/api/challenge/user/follow', {id: props.challenge.id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
                         challenge.value.followed = true;
                         toast.success('Teraz śledzisz to wyzwanie.');
@@ -190,7 +296,6 @@ export default {
         const unfollow = () => {
             axios.post('/api/challenge/user/unfollow', {id: props.challenge.id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
                         challenge.value.followed = false;
                         toast.success('Nie śledzisz już tego wyzwania.');
@@ -203,7 +308,6 @@ export default {
         const saveDate = () => {
             axios.post('/api/challenge/change/dates', {id: challenge.value.id, offer_deadline: challenge.value.offer_deadline, solution_deadline: challenge.value.solution_deadline})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
                         toast.success('Daty zmienione.');
                     } else {
@@ -224,7 +328,7 @@ export default {
                     return 'Oczekiwanie na oferty';
                     break;
                 case 3:
-                    return 'Podisywanie umowy';
+                    return 'Podpisywanie umowy';
                     break;
                 case 4:
                     return 'Planowanie projektu';

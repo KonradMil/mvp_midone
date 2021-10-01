@@ -4,12 +4,15 @@ namespace App\Providers;
 
 use App\Events\ChallengeAdded;
 use App\Events\ChallengeFollowed;
+use App\Events\ChallengeLiked;
 use App\Events\CommentAdded;
 use App\Events\OfferAccepted;
 use App\Events\OfferAdded;
 use App\Events\OfferPublished;
 use App\Events\OfferRejected;
 use App\Events\SolutionAdded;
+use App\Events\SolutionDisliked;
+use App\Events\SolutionLiked;
 use App\Events\SolutionRejected;
 use App\Events\TeamMemberInvited;
 use App\Events\TeamMemberAccepted;
@@ -21,6 +24,7 @@ use App\Events\ChallengePublished;
 use App\Events\SolutionPublished;
 use App\Listeners\AddActivityLog;
 use App\Listeners\SendChallengeFollowedNotification;
+use App\Listeners\SendChallengeLikedNotification;
 use App\Listeners\SendChallengeNotification;
 use App\Listeners\SendCommentAddedNotification;
 use App\Listeners\SendOfferAcceptedNotification;
@@ -28,7 +32,8 @@ use App\Listeners\SendOfferAddedNotification;
 use App\Listeners\SendOfferPublishedNotification;
 use App\Listeners\SendOfferRejectedNotification;
 use App\Listeners\SendSolutionAddedNotification;
-use App\Listeners\SendSolutionNotification;
+use App\Listeners\SendSolutionDislikedNotification;
+use App\Listeners\SendSolutionLikedNotification;
 use App\Listeners\SendSolutionRejectedNotification;
 use App\Listeners\SendTeamMemberAcceptedNotification;
 use App\Listeners\SendQuestionAddedNotification;
@@ -39,7 +44,8 @@ use App\Listeners\SendChallengePublishedNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
+use App\Events\UserRegisteredEvent;
+use App\Listeners\UserRegisteredListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -94,6 +100,14 @@ class EventServiceProvider extends ServiceProvider
             AddActivityLog::class,
             SendSolutionAddedNotification::class
         ],
+        SolutionLiked::class => [
+            AddActivityLog::class,
+            SendSolutionLikedNotification::class
+        ],
+        SolutionDisliked::class => [
+            AddActivityLog::class,
+            SendSolutionDislikedNotification::class
+        ],
         OfferPublished::class => [
             AddActivityLog::class,
             SendOfferPublishedNotification::class
@@ -118,6 +132,13 @@ class EventServiceProvider extends ServiceProvider
             AddActivityLog::class,
             SendChallengeFollowedNotification::class
         ],
+        ChallengeLiked::class => [
+            AddActivityLog::class,
+            SendChallengeLikedNotification::class
+        ],
+        UserRegisteredEvent::class => [
+            UserRegisteredListener::class
+        ]
     ];
 
     /**

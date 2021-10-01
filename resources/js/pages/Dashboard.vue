@@ -6,21 +6,29 @@
 <!--                <div class="col-span-12 mt-6 -mb-6 intro-y">-->
 <!--                    <div-->
 <!--                        class="alert alert-dismissible show box bg-theme-3 text-white flex items-center mb-6"-->
-<!--                        role="alert">-->
-<!--            <span>-->
-<!--                Najnowszy webinar 20.04.2021 - więcej na-->
-<!--              <a href="https://drb77.com"-->
+<!--                        role="alert"-->
+<!--                    >-->
+<!--            <span-->
+<!--            >Najnowszy webinar 20.04.2021 - więcej na-->
+<!--              <a-->
+<!--                  href="https://drb77.com"-->
 <!--                  class="underline ml-1"-->
-<!--                  target="blank">dbr77.com</a>.</span>-->
+<!--                  target="blank"-->
+<!--              >dbr77.com</a-->
+<!--              >.</span-->
+<!--            >-->
 <!--                        <button-->
 <!--                            type="button"-->
 <!--                            class="btn-close"-->
 <!--                            data-bs-dismiss="alert"-->
-<!--                            aria-label="Close">-->
+<!--                            aria-label="Close"-->
+<!--                        >-->
 <!--                            <XIcon class="w-4 h-4"/>-->
 <!--                        </button>-->
 <!--                    </div>-->
 <!--                </div>-->
+
+
                 <!-- BEGIN: Notification -->
                 <!-- BEGIN: General Report -->
 <!--                <div class="col-span-12 lg:col-span-8 xl:col-span-6 mt-2">-->
@@ -115,7 +123,7 @@
 <!--                                    class="w-10 h-10 flex-none image-fit rounded-full overflow-hidden"-->
 <!--                                >-->
 <!--                                    <img-->
-<!--                                        alt="Icewall Tailwind HTML Admin Template"-->
+<!--                                        alt="DBR77"-->
 <!--                                        :src="'/' + log.subject.screenshot_path"-->
 <!--                                    />-->
 <!--                                </div>-->
@@ -267,7 +275,7 @@
                                 <th class="whitespace-nowrap">NAZWA</th>
                                 <th class="text-center whitespace-nowrap">INTEGRATOR</th>
                                 <!--                                <th class="text-center whitespace-nowrap">STATUS</th>-->
-                                <th class="text-center whitespace-nowrap">AKCJE</th>
+<!--                                <th class="text-center whitespace-nowrap">AKCJE</th>-->
                             </tr>
                             </thead>
                             <tbody>
@@ -277,10 +285,10 @@
                                 class="intro-x"
                             >
                                 <td>
-                                    <a href="" class="font-medium whitespace-nowrap" v-if="solution.name == '' || solution.name == null">
+                                    <a href="" class="font-medium whitespace-nowrap" @click.prevent="" v-if="solution.name == '' || solution.name == null">
                                         {{solution.challenge.name }}
                                     </a>
-                                    <a href="" class="font-medium whitespace-nowrap" v-if="solution.name != '' && solution.name != null">
+                                    <a href="" class="font-medium whitespace-nowrap" @click.prevent="" v-if="solution.name != '' && solution.name != null">
                                         {{solution.name }}
                                     </a>
                                     <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">
@@ -300,17 +308,17 @@
                                 <!--                                        {{ faker.trueFalse[0] ? "Active" : "Inactive" }}-->
                                 <!--                                    </div>-->
                                 <!--                                </td>-->
-                                <td class="table-report__action w-56">
-                                    <div class="flex justify-center items-center">
-                                        <a class="flex items-center mr-3" href="">
-                                            <CheckSquareIcon class="w-4 h-4 mr-1"/>
-                                            Podejrzyj
-                                        </a>
-                                        <!--                                        <a class="flex items-center text-theme-6" href="">-->
-                                        <!--                                            <Trash2Icon class="w-4 h-4 mr-1" /> Delete-->
-                                        <!--                                        </a>-->
-                                    </div>
-                                </td>
+<!--                                <td class="table-report__action w-56">-->
+<!--                                    <div class="flex justify-center items-center">-->
+<!--                                        <a class="flex items-center mr-3" href=" @click.prevent=""">-->
+<!--                                            <CheckSquareIcon class="w-4 h-4 mr-1"/>-->
+<!--                                            Podejrzyj-->
+<!--                                        </a>-->
+<!--                                        &lt;!&ndash;                                        <a class="flex items-center text-theme-6" href="">&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                            <Trash2Icon class="w-4 h-4 mr-1" /> Delete&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                        </a>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                </td>-->
                             </tr>
                             </tbody>
                         </table>
@@ -436,7 +444,6 @@
 import {defineComponent, ref, provide, onMounted} from "vue";
 import ReportDonutChart from "../components/report-donut-chart/Main.vue";
 import ReportBarChart from "../components/report-bar-chart/Main.vue";
-import ReportMap from "../components/report-map/Main.vue";
 import GetDashboard from "../compositions/GetDashboard"
 import WordpressPost from "../components/wordpress-post/WordpressPost";
 
@@ -445,7 +452,6 @@ export default {
         WordpressPost,
         ReportDonutChart,
         ReportBarChart,
-        ReportMap
     },
     setup() {
         const importantNotesRef = ref();

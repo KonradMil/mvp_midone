@@ -14,7 +14,7 @@
     <![endif]-->
     <!--[if gte mso 9]><style>sup { font-size: 100% !important; }</style><![endif]-->
     <!--[if gte mso 9]>
-    <xml>
+    <xml>+
     <o:OfficeDocumentSettings>
         <o:AllowPNG></o:AllowPNG>
         <o:PixelsPerInch>96</o:PixelsPerInch>

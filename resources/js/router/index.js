@@ -9,14 +9,16 @@ import Profile from "../pages/Wizard";
 import WizardOne from "../pages/WizardOne";
 import Challenges from "../pages/Challenges/Main";
 import Projects from "../pages/Projects/Main";
+import ProjectCard from "../pages/Projects/Card";
 import AddChallenge from "../pages/Challenges/New";
 import Solutions from "../pages/Solutions/Main";
 import AddSolution from "../pages/Solutions/New";
 import Teams from "../pages/Teams/Teams";
 import NotFound from "../pages/NotFound";
 import Main from "../pages/Unity/Main";
-import MainKnowledgebase  from "../pages/KnowledgeBase/Main";
-import AddKnowledgebase  from "../pages/KnowledgeBase/Add";
+import MainHangar from "../pages/Unity/Hangars/MainHangar";
+import MainKnowledgebase from "../pages/KnowledgeBase/Main";
+import AddKnowledgebase from "../pages/KnowledgeBase/Add";
 import Profiles from "../pages/Profiles/Main";
 import ChangePassword from "../pages/Profiles/ChangePassword";
 import List from "../pages/Models/List";
@@ -31,13 +33,16 @@ import Workshop from "../pages/Unity/Workshop/Workshop";
 import NewOffer from "../pages/Offers/NewOffer";
 import Offers from "../pages/Challenges/components/Offers";
 import SolutionsPanel from "../pages/Challenges/components/SolutionsPanel";
+import ProjectsList from "../pages/Admin/ProjectsList";
+import UserList from '../pages/Admin/UserList';
 import SolutionsArchive from "../pages/Solutions/SolutionsArchive";
+import Notifications from "../pages/Notifications";
 
 export const routes = [
     {
-      name: 'reset-password',
-      path: '/reset-password/:token',
-      component: ForgotPassword,
+        name: 'reset-password',
+        path: '/reset-password/:token',
+        component: ForgotPassword,
         props: true
     },
     {
@@ -63,24 +68,18 @@ export const routes = [
         component: Main,
         props: true
     },
-    // {
-    //     name: 'challengeStudio',
-    //     path: '/studio/challenge',
-    //     component: Main,
-    //     props: true
-    // },
     {
         name: 'challengeStudio',
         path: '/studio/:type/:id',
         component: Main,
         props: true
     },
-    // {
-    //     name: 'solutionStudio',
-    //     path: '/studio/solution',
-    //     component: Main,
-    //     props: true
-    // },
+    {
+        name: 'hangarStudio',
+        path: '/hangar',
+        component: MainHangar,
+        props: true
+    },
     {
         name: 'terms',
         path: "/terms/:page",
@@ -92,9 +91,27 @@ export const routes = [
         component: SideMenu,
         children: [
             {
+                name: 'admin-projects',
+                path: '/admin/projects',
+                component: ProjectsList,
+                props: true
+            },
+            {
+                name: 'admin-users',
+                path: '/admin/users',
+                component: UserList,
+                props: true
+            },
+            {
                 name: 'workshop',
                 path: '/workshop',
                 component: Workshop,
+                props: true
+            },
+            {
+                name: 'notifications',
+                path: "/notifications",
+                component: Notifications,
                 props: true
             },
             {
@@ -139,6 +156,12 @@ export const routes = [
                 component: Projects
             },
             {
+                name: 'projectCard',
+                path: '/projects/card/:id',
+                component: ProjectCard,
+                props: true
+            },
+            {
                 name: 'addChallenge',
                 path: '/challenge/add',
                 component: AddChallenge,
@@ -148,19 +171,19 @@ export const routes = [
                 name: 'challenges',
                 path: '/challenges',
                 component: Challenges,
-                props: { type: 'normal' }
+                props: {type: 'normal'}
             },
             {
                 name: 'challengesFollowed',
                 path: '/challenges/followed',
                 component: Challenges,
-                props: { type: 'followed' }
+                props: {type: 'followed'}
             },
             {
                 name: 'challengesArchive',
                 path: '/challenges/archive',
                 component: Challenges,
-                props: { type: 'archive' }
+                props: {type: 'archive'}
             },
             {
                 name: 'internalChallenegeCard',

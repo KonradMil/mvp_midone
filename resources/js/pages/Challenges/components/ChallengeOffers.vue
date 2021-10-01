@@ -54,7 +54,7 @@
                 :options="filters['options']"
             />
         </div>
-        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5 pb-10">
             <label for="input-wizard-5" class="form-label font-medium dark:text-theme-10 text-theme-1">Dostawca głównej technologii</label>
             <Multiselect
                 class="form-control"
@@ -102,10 +102,10 @@
                                         href=""
                                         class="dark:text-gray-300 text-gray-600"
                                         content="Po zaakceptowaniu oferty staje się ona wiążąca dla obu stron.">
-                                    <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && challenge.selected_offer_id < 1">Akceptuj ofertę</button>
+                                    <button class="btn btn-primary shadow-md mr-2" @click.prevent="acceptOffer(offer)" v-if="offer.selected != 1 && challenge.selected_offer_id < 1 && acceptChallengeOffers">Akceptuj ofertę</button>
                                     </Tippy>
-                                    <button class="btn shadow-md mr-2 bg-gray-400" @click.prevent="rejectOffer(offer,index)" v-if="offer.rejected != 1 && challenge.selected_offer_id < 1" >Odrzuć ofertę</button>
-                                    <button class="btn btn-outline-secondary" @click="showDetails[offer.id] = !showDetails[offer.id]">{{$t('global.details')}}</button>
+                                    <button class="btn shadow-md mr-2 bg-gray-400" @click.prevent="rejectOffer(offer,index)" v-if="offer.rejected != 1 && challenge.selected_offer_id < 1 && acceptChallengeOffers" >Odrzuć ofertę</button>
+                                    <button class="btn btn-outline-secondary" @click="showDetails[offer.id] = !showDetails[offer.id]">{{$t('teams.details')}}</button>
                                 </div>
                                 <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                             </div>
@@ -255,7 +255,8 @@ export default {
     props: {
         challenge: Object,
         activeTab: String,
-        inTeam: Boolean
+        inTeam: Boolean,
+        acceptChallengeOffers: Boolean
     },
     emits: ["update:activeTab"],
     setup(props, context) {
@@ -325,9 +326,7 @@ export default {
             }
         }
 
-        const handleCallback = () => {
-            router.push({name: 'projects'});
-        }
+
 
         const StartFilterOffer = async () => {
             axios.post('/api/offer/user/filter', {option: filterType.value , id: props.challenge.id, technologyType: technologyType.value})
@@ -352,6 +351,16 @@ export default {
                 })
         }
 
+        const handleCallback = () => {
+            console.log('handleCallback router');
+            router.push( {path : '/projects/card/' + props.challenge.id});
+        }
+
+        const goTo = () => {
+                router.push({ path: '/projects' })
+            }
+
+
         const acceptOffer = async(offer) => {
             axios.post('/api/offer/accept', {id: offer.id})
                 .then(response => {
@@ -361,10 +370,11 @@ export default {
                         offer.rejected = 0;
                         offer.solution.selected_offer_id = offer.id;
                         props.challenge.selected_offer_id = offer.id;
+                        goTo();
                     } else {
                         // toast.error(response.data.message);
                     }
-                },handleCallback)
+                })
         }
 
         const rejectOffer = async(offer,index) => {
@@ -395,6 +405,7 @@ export default {
         });
 
         return {
+            goTo,
             isShow,
             temporary_offer_id,
             showDetails,

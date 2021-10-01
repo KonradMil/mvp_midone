@@ -1,17 +1,18 @@
 <template>
-    <TopButtons v-if="loaded" :allowedEdit="allowedEdit && (challenge.status != 1)" :icons="topIcons"></TopButtons>
-    <LeftButtons :icons="leftIcons" v-if="mode == 'edit' && allowedEdit && loaded"></LeftButtons>
+    <TopButtons v-if="loaded" :allowedEdit="allowedEdit && (challenge.status != 1)" :icons="topIcons" :canEditSolution="canEditSolution"></TopButtons>
+    <LeftButtons :icons="leftIcons" v-if="(mode == 'edit' && allowedEdit && loaded)"></LeftButtons>
     <LeftPanel></LeftPanel>
     <div @contextmenu.prevent="openMenu">
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
     <BottomPanel  v-if="loaded" :allowedEdit="allowedEdit" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
     <RightButtons  v-if="loaded" :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>
-    <RightPanel  :allowedEdit="allowedEdit" @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
+    <RightPanel  :allowedEdit="allowedEdit" :publishChallenges="publishChallenges" :canEditSolution="canEditSolution" @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
     <div v-if="!loaded" id="loader">
         <LoadingIcon icon="grid" class="w-8 h-8" />
     </div>
-
+<!--    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>-->
+<!--    <WebRTC width="100%" roomId="roomId"></WebRTC>-->
     <div id="help-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -108,6 +109,7 @@ import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
 
 import router from "../../router";
+import WebRTC from "./WebRTC";
 
 const ww = WindowWatcher();
 
@@ -119,9 +121,12 @@ export default {
         readOnly: {
             default: false,
             type: Boolean
-        }
+        },
+        publishChallenges: Boolean,
+        canEditSolution: Boolean,
+        sessionid: String
     },
-    components: {RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
+    components: {WebRTC, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
     setup(props, {emit}) {
         //GLOBAL
         const app = getCurrentInstance();
@@ -158,8 +163,16 @@ export default {
         const radialMenuLayout = ref([]);
         const animationSave = ref({layers: []});
         const saving = ref(false);
+        const sessionid = ref('');
+        const owner = ref(false);
 
-
+        if(props.sessionid === undefined) {
+            sessionid.value = Math.random().toString(36).slice(-5);
+            owner.value = true;
+        } else {
+            sessionid.value = props.sessionid;
+            owner.value = false;
+        }
 
         window_height.value = window.innerHeight;
 
@@ -169,7 +182,7 @@ export default {
         });
 
         const startTutorial = () => {
-
+            handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
         }
 
         //RUNS WHEN UNITY IS READY
@@ -248,6 +261,15 @@ export default {
             }
         }
 
+        const showLeftButtons = computed(() => {
+            if(mode == 'edit' && allowedEdit && loaded) {
+                return true;
+            } else {
+                return false;
+            }
+
+        })
+
         const checkTeam = async () => {
             if(type.value == 'challenge') {
                 await axios.post('/api/challenge/check-team', {user_id: user.id, challenge_id: challenge.value.id})
@@ -322,9 +344,9 @@ export default {
                     break;
                 case 'logout':
                     if(type.value == 'solution') {
-                       window.location.href = 'https://platform.dbr77.com/challenges/card/' + solution.value.challenge_id;
+                       window.location.href = 'https://devsys.appworks-dev.pl/challenges/card/' + solution.value.challenge_id;
                     } else {
-                        window.location.href = 'https://platform.dbr77.com/challenges/card/' + challenge.value.id;
+                        window.location.href = 'https://devsys.appworks-dev.pl/challenges/card/' + challenge.value.id;
                     }
                     break;
                 case 'orto':
@@ -395,7 +417,7 @@ export default {
                 } else {
                     getCardChallengeRepositories(id.value);
                 }
-                handleUnityActionOutgoing({action: 'prefix', data: 'https://platform.dbr77.com/s3'});
+                handleUnityActionOutgoing({action: 'prefix', data: 'https://devsys.appworks-dev.pl/s3'});
             }, 2000);
             setTimeout(() => {
                 unlockInput();
@@ -405,7 +427,7 @@ export default {
         onBeforeMount(() => {
             //ADDS LISTENERS
             bridge.value = UnityBridge();
-
+            console.log("bridge.value", bridge.value);
         });
 
         emitter.on('updateanimationSave', e => {
@@ -424,14 +446,14 @@ export default {
                             checkTeam();
                             unlockInput();
                         } else {
-                            console.log(JSON.parse(response.data.payload.save_json));
+                            console.log(response.data.payload.save_json);
                             challenge.value = response.data.payload;
-                            initialLoad.value = JSON.parse(response.data.payload.save_json);
-                            animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
+                            initialLoad.value = response.data.payload.save_json;
+                            animationSave.value = response.data.payload.save_json.animation_layers;
                             checkTeam();
                             handleUnityActionOutgoing({
                                 action: 'loadStructure',
-                                data: JSON.parse(response.data.payload.save_json)
+                                data: response.data.payload.save_json
                             });
                             unlockInput();
                         }
@@ -514,7 +536,10 @@ export default {
             unlockInput,
             modelActiveTab,
             startTutorial,
-            loaded
+            loaded,
+            sessionid,
+            owner,
+            showLeftButtons
         }
     }
 }

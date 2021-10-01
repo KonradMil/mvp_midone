@@ -1,90 +1,90 @@
 <template>
-    <div class="flex fixed w-full z-50 pb-2 h-24 bottom-0 h-28" v-if="expanded == 0" id="bottom-animation-minimalized" style="pointer-events: none;">
-        <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto; pointer-events: none;">
-            <AnimationButtons :icons="icons"></AnimationButtons>
-        </div>
-    </div>
-    <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-96 bottom-0 bg-white rounded-md bg-opacity-25" v-if="expanded == 1" id="bottom-animation-normal">
-        <div class="left flex-1 pt-2 flex-row ml-5">
-            <div class="grid grid-cols-12 w-full h-full">
-                <div class="col-span-1">
-                    <UnityButton tooltip="Dodaj linie" alttext="Dodaj linie" path="/s3/builder_icons/add_simple.png" action="addline" position="animationbuttonclick"/>
-                    <UnityButton tooltip="Maksymalizuj" alttext="Maksymalizuj" path="/s3/builder_icons/maximize_simple.png" action="maximize" position="animationbuttonclick"/>
-                    <UnityButton tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick"/>
-                    <UnityButton tooltip="Odtwórz" alttext="Odtwórz" path="/s3/builder_icons/play_simple.png" action="play" position="animationbuttonclick"/>
-                </div>
-                <div class="col-span-11 rounded-md mr-5 relative" style=" overflow-y: scroll;">
-                    <div class="grid grid-cols-12 my-3" @click="activeLineIndex = line.index; setNewAnimationLayer();" :class="(activeLineIndex == line.index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + line.index">
-                        <div class="col-span-1">
-                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);">
-<!--                                <UnityButton tooltip="" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>-->
-                                <Tippy
-                                    id="meta-title-tab"
-                                    tag="span"
-                                    :content="'Ustawienia'"
-                                    href="javascript:;"
-                                    class="w-14 py-2 text-center flex justify-center items-center"
-                                    aria-selected="false">
-                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="settingsLine(line.index)">
-                                        <img class=""
-                                             :alt="'Ustawienia'"
-                                             :src="'/s3/builder_icons/settings_simple.png'"
-                                        />
-                                    </div>
-                                </Tippy>
-                            </div>
-                            <div style="margin-left: 25%; margin-top: calc(25% - 10px)">
-<!--                                <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline"  position="animationbuttonclick"/>-->
-                                <Tippy
-                                    id="meta-title-tab"
-                                    tag="span"
-                                    :content="'Usuń linie'"
-                                    href="javascript:;"
-                                    class="w-14 py-2 text-center flex justify-center items-center"
-                                    aria-selected="false">
-                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in"  @click.native="removeLine(line.index)">
-                                        <img class=""
-                                             :alt="'Usuń linie'"
-                                             :src="'/s3/builder_icons/bin_simple.png'"
-                                        />
-                                    </div>
-                                </Tippy>
-                            </div>
-                        </div>
-                        <div class="col-span-1">
-                            <div style="border-radius: 50%; background-color: rgb(255, 255, 255); height: 56px; width: 56px; margin-left: 25%; margin-top: 25%;">
-                                <span style="font-size: 20px; font-weight: bold; top: 33%; left: 6%; position: relative;">C: {{ line.interval }}</span>
-                            </div>
-                            <div style="border-radius: 50%; background-color: rgb(255, 255, 255); height: 56px; width: 56px; margin-left: 25%; margin-top: 25%;">
-                                <span style="font-size: 20px; font-weight: bold; top: 33%; left: 6%; position: relative;">D: {{ line.delay }}</span>
-                            </div>
-                        </div>
-                        <div class="col-span-10 h-full" style="overflow-x: auto; overflow-y: hidden;">
-                            <div class="w-full  h-full">
-                                <div class="row flex h-full" >
-                                    <div class=" h-full" v-for="(animable, index) in line.animables" :key="'obiekt_' + index">
-                                        <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;" @click="activeAnimableIndex = index; showAnimableDialog();">
-                                            <img class="w-full h-full"
-                                                 :alt="animable.name.replace('models', 'models_images') + '.png'"
-                                                 :src="animable.name.replace('models', 'models_images') + '.png'"
-                                            />
-                                            <div style="width: 94%; bottom: 0; position: relative; margin-top: 85%; margin-left: 10px; font-size: 16px; font-weight: bold;">Czas trwania: {{ animable.duration }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-24 bottom-0 h-100 bg-white rounded-md bg-opacity-25" v-if="expanded == 2" id="bottom-animation-expanded">
-        <div class="left flex  pt-2 flex-row ml-24">
+<!--    <div class="flex fixed w-full z-50 pb-2 h-24 bottom-0 h-28" v-if="expanded == 0" id="bottom-animation-minimalized" style="pointer-events: none;">-->
+<!--        <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto; pointer-events: none;">-->
+<!--            <AnimationButtons :icons="icons"></AnimationButtons>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-96 bottom-0 bg-white rounded-md bg-opacity-25" v-if="expanded == 1" id="bottom-animation-normal">-->
+<!--        <div class="left flex-1 pt-2 flex-row ml-5">-->
+<!--            <div class="grid grid-cols-12 w-full h-full">-->
+<!--                <div class="col-span-1">-->
+<!--                    <UnityButton tooltip="Dodaj linie" alttext="Dodaj linie" path="/s3/builder_icons/add_simple.png" action="addline" position="animationbuttonclick"/>-->
+<!--                    <UnityButton tooltip="Maksymalizuj" alttext="Maksymalizuj" path="/s3/builder_icons/maximize_simple.png" action="maximize" position="animationbuttonclick"/>-->
+<!--                    <UnityButton tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick"/>-->
+<!--                    <UnityButton tooltip="Odtwórz" alttext="Odtwórz" path="/s3/builder_icons/play_simple.png" action="play" position="animationbuttonclick"/>-->
+<!--                </div>-->
+<!--                <div class="col-span-11 rounded-md mr-5 relative" style=" overflow-y: scroll;">-->
+<!--                    <div class="grid grid-cols-12 my-3" @click="activeLineIndex = line.index; setNewAnimationLayer();" :class="(activeLineIndex == line.index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + line.index">-->
+<!--                        <div class="col-span-1">-->
+<!--                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);">-->
+<!--&lt;!&ndash;                                <UnityButton tooltip="" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>&ndash;&gt;-->
+<!--                                <Tippy-->
+<!--                                    id="meta-title-tab"-->
+<!--                                    tag="span"-->
+<!--                                    :content="'Ustawienia'"-->
+<!--                                    href="javascript:;"-->
+<!--                                    class="w-14 py-2 text-center flex justify-center items-center"-->
+<!--                                    aria-selected="false">-->
+<!--                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="settingsLine(line.index)">-->
+<!--                                        <img class=""-->
+<!--                                             :alt="'Ustawienia'"-->
+<!--                                             :src="'/s3/builder_icons/settings_simple.png'"-->
+<!--                                        />-->
+<!--                                    </div>-->
+<!--                                </Tippy>-->
+<!--                            </div>-->
+<!--                            <div style="margin-left: 25%; margin-top: calc(25% - 10px)">-->
+<!--&lt;!&ndash;                                <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline"  position="animationbuttonclick"/>&ndash;&gt;-->
+<!--                                <Tippy-->
+<!--                                    id="meta-title-tab"-->
+<!--                                    tag="span"-->
+<!--                                    :content="'Usuń linie'"-->
+<!--                                    href="javascript:;"-->
+<!--                                    class="w-14 py-2 text-center flex justify-center items-center"-->
+<!--                                    aria-selected="false">-->
+<!--                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in"  @click.native="removeLine(line.index)">-->
+<!--                                        <img class=""-->
+<!--                                             :alt="'Usuń linie'"-->
+<!--                                             :src="'/s3/builder_icons/bin_simple.png'"-->
+<!--                                        />-->
+<!--                                    </div>-->
+<!--                                </Tippy>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-span-1">-->
+<!--                            <div style="border-radius: 50%; background-color: rgb(255, 255, 255); height: 56px; width: 56px; margin-left: 25%; margin-top: 25%;">-->
+<!--                                <span style="font-size: 20px; font-weight: bold; top: 33%; left: 6%; position: relative;">C: {{ line.interval }}</span>-->
+<!--                            </div>-->
+<!--                            <div style="border-radius: 50%; background-color: rgb(255, 255, 255); height: 56px; width: 56px; margin-left: 25%; margin-top: 25%;">-->
+<!--                                <span style="font-size: 20px; font-weight: bold; top: 33%; left: 6%; position: relative;">D: {{ line.delay }}</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-span-10 h-full" style="overflow-x: auto; overflow-y: hidden;">-->
+<!--                            <div class="w-full  h-full">-->
+<!--                                <div class="row flex h-full" >-->
+<!--                                    <div class=" h-full" v-for="(animable, index) in line.animables" :key="'obiekt_' + index">-->
+<!--                                        <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;" @click="activeAnimableIndex = index; showAnimableDialog();">-->
+<!--                                            <img class="w-full h-full"-->
+<!--                                                 :alt="animable.name.replace('models', 'models_images') + '.png'"-->
+<!--                                                 :src="animable.name.replace('models', 'models_images') + '.png'"-->
+<!--                                            />-->
+<!--                                            <div style="width: 94%; bottom: 0; position: relative; margin-top: 85%; margin-left: 10px; font-size: 16px; font-weight: bold;">Czas trwania: {{ animable.duration }}-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-24 bottom-0 h-100 bg-white rounded-md bg-opacity-25" v-if="expanded == 2" id="bottom-animation-expanded">-->
+<!--        <div class="left flex  pt-2 flex-row ml-24">-->
 
-        </div>
-    </div>
+<!--        </div>-->
+<!--    </div>-->
 </template>
 
 <script>

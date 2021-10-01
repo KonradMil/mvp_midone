@@ -13,12 +13,18 @@
     <script>
         window.unity_path = '{{env('UNITY_PATH')}}';
         window.unity_workshop_path = '{{env('UNITY_WORKSHOP_PATH')}}';
+        window.unity_tutorial_path = '{{env('UNITY_PATH')}}';
+        window.unity_hangar_path = '{{env('UNITY_HANGAR_PATH')}}';
+        window.errors = '{{json_encode(Session::get('error'))}}';
+        window.warnings = '{{json_encode(Session::get('warning'))}}';
+        window.info = '{{json_encode(Session::get('info'))}}';
+        window.success = '{{json_encode(Session::get('success'))}}';
         @php
         if(empty(Auth::user()->companies->toArray())) {
                $company = new App\Models\Company();
                $company->author_id = Auth::user()->id;
-                $company->save();
-                $company->users()->attach(Auth::user());
+               $company->save();
+               $company->users()->attach(Auth::user());
         } else {
             $company = Auth::user()->companies->toArray()[0];
         }
@@ -29,7 +35,7 @@
                'teams' => Auth::user()->teams,
                'notifications' => Auth::user()->notifications,
                'company' => $company,
-               'permissions' => \App\Http\Controllers\API\UserController::userPermissions(Auth::user())
+               'permissions' => \App\Http\Controllers\UserController::userPermissions(Auth::user())
 
            ])!!}
     </script>

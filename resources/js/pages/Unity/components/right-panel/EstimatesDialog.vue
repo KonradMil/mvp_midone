@@ -224,7 +224,7 @@ export default {
         });
 
         const partsAr = ref({});
-
+        const robots = ref([]);
         const additionalCosts = ref([]);
         const partPrices = ref({});
 
@@ -233,12 +233,14 @@ export default {
         }
 
         emitter.on('estimatesave', e => {
-            axios.post('/api/solution/estimate/save', {solution_id: props.solution.id, basicCosts: basicCosts, additionalCosts: additionalCosts.value, partPrices: partPrices.value, partsCost:partsCost.value, integrationCost: integrationCost.value })
+            axios.post('/api/solution/estimate/save', {solution_id: props.solution.id, basicCosts: basicCosts, additionalCosts: additionalCosts.value, partPrices: partPrices.value, partsAr: partsAr.value, partsCost:partsCost.value, integrationCost: integrationCost.value })
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
+                    }else{
+
                     }
-                })
+                }).catch(console.log(partsAr + '->PartsAr'))
         });
 
         const finalPartsList = () => {
@@ -250,27 +252,32 @@ export default {
                         if(partPrices.value[obj.model_name] != undefined) {
                             if(partsAr.value[obj.model_name] != undefined) {
                                 partsAr.value[obj.model_name].count += 1;
+                                console.log('partsAr.value[obj.model_name].count += 1');
                             } else {
                                 partsAr.value[obj.model_name] = {
                                     count: 1,
                                     price: partPrices.value[obj.model_name],
                                 };
+                                console.log('partsAr.value[obj.model_name] count: 1, price: partPrices.valie[obj.model_name]')
                             }
                         } else {
                             if(partsAr.value[obj.model_name] != undefined) {
                                 if(partPrices.value[obj.model_name] == undefined) {
                                     partPrices.value[obj.model_name] = 0;
+                                    console.log('partPrices.value[obj.model_name] = 0')
                                 }
-
                                 partsAr.value[obj.model_name].count += 1;
+                                console.log('partsAr.value[obj.model_name].count += 1')
                             } else {
                                 if(partPrices.value[obj.model_name] == undefined) {
                                     partPrices.value[obj.model_name] = 0;
+                                    console.log('partPrices.value[obj.model_name] = 0')
                                 }
                                 partsAr.value[obj.model_name] = {
                                     count: 1,
                                     price: 0,
                                 };
+                                console.log('partPrices.value[obj.model_name] count 1 price 0')
                             }
                         }
                     });
@@ -413,7 +420,8 @@ export default {
             addCost,
             refreshMe,
             integrationCost,
-            partsCost
+            partsCost,
+            robots
         }
     }
 }
