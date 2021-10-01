@@ -53,7 +53,6 @@
                                                    value="integrator"/>
                                             <Tippy
                                                 tag="a"
-                                                href=""
                                                 class="dark:text-gray-300 text-gray-600"
                                                 content="Podmiot świadczący usługi związane z automatyzacją stanowisk przemysłowych w zakładzie produkcyjnym.">
                                                 <label class="form-check-label"
@@ -69,7 +68,6 @@
                                                    value="investor"/>
                                             <Tippy
                                                 tag="a"
-                                                href=""
                                                 class="dark:text-gray-300 text-gray-600"
                                                 content="Przedsiębiorca zamierzający zautomatyzować stanowisko przemysłowe w zakładzie produkcyjnym.">
                                                 <label class="form-check-label"
@@ -149,40 +147,30 @@
                                     <div v-if="score === 3"
                                          class="col-span-3 h-full rounded bg-gray-200 dark:bg-dark-2"></div>
                                 </div>
-                                <a
-                                    href=""
-                                    class="intro-x text-gray-600 block mt-2 text-xs sm:text-sm"
-                                >{{ $t('register.safepassword') }}</a
-                                >
+                                <a class="intro-x text-gray-600 block mt-2 text-xs sm:text-sm cursor-default">
+                                    {{ $t('register.safepassword') }}
+                                </a>
                                 <input
                                     type="password"
                                     class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
                                     :placeholder="$t('register.passwordConfirm')"
-                                    v-model="validate.passwordConfirm.$model"
-                                />
+                                    v-model="validate.passwordConfirm.$model"/>
                                 <template v-if="validate.passwordConfirm.$error">
-                                    <div
-                                        v-for="(error, index) in validate.passwordConfirm.$errors"
+                                    <div v-for="(error, index) in validate.passwordConfirm.$errors"
                                         :key="index"
-                                        class="text-theme-6 mt-2"
-                                    >
+                                        class="text-theme-6 mt-2">
                                         {{ $t('validation.' + error.$message) }}
                                     </div>
                                 </template>
                                 <password-meter @score="onScore" :password="validate.password.$model"/>
                             </div>
-                            <div
-                                class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
-                            >
+                            <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                                 <input
                                     id="rodo"
                                     type="checkbox"
                                     class="form-check-input border mr-2"
-                                    v-model="validate.rodo.$model"
-                                />
-                                <label class="cursor-pointer select-none" for="rodo"
-                                >Akceptuję postanowienia </label
-                                >
+                                    v-model="validate.rodo.$model"/>
+                                <label class="cursor-pointer select-none" for="rodo">Akceptuję postanowienia </label>
                                 <a href="/terms/privacy-policy"
                                    class="text-theme-1 dark:text-theme-10 ml-1 cursor-pointer"
                                    @click.prevent="$router.push({path: '/terms/privacy-policy'})"> polityki

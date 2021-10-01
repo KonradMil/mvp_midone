@@ -7,7 +7,7 @@
                     <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.solutions')}}</h2>
                 </div>
                 <div class="px-5 py-5" style="background-color: rgba(241,245,248,var(--tw-bg-opacity));">
-                    <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="user.type === 'investor'">
+                    <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="user.type === 'investor' && solutionsInTeam.length !== 0">
                         <label for="input-wizard-5" class="form-label pr-5 font-medium dark:text-theme-10 text-theme-1">Filtr</label>
                         <Multiselect
                             class="form-control"
@@ -24,7 +24,7 @@
                             :options="filters['options']"
                         />
                     </div>
-                    <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="user.type === 'investor'">
+                    <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="user.type === 'investor' && solutionsInTeam.length !== 0">
                         <label for="input-wizard-5" class="form-label font-medium dark:text-theme-10 text-theme-1">Dostawca głównej technologii</label>
                         <Multiselect
                             class="form-control"
