@@ -206,8 +206,8 @@ export default {
                 .addClass("login");
             const urlParams = new URLSearchParams(window.location.search);
             console.log("urlParams", urlParams);
-            const param = urlParams.get('beam');
-            console.log("beam", beam)
+            let param = urlParams.get('beam');
+            console.log("beam", param)
             if(param != undefined && param != '') {
                 let b = atob(param).split("##");
                 console.log("b", b);
