@@ -113,12 +113,9 @@ export default {
         });
 
         const getData = () => {
-            RequestHandler('admin/projects/get', 'POST',
-                (success) => {
-                    projects.value = success;
-                },
-                (error) => {
-
+            RequestHandler('login', 'GET', {},
+                (response) => {
+                    projects.value = response.data.payload;
                 });
         }
 
