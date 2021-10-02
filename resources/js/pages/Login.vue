@@ -224,6 +224,39 @@ export default {
             error: null
         }
     },
+    onMounted() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const param = urlParams.get('beam');
+        if(param != undefined && param != '') {
+            let b = atob(param).split("##");
+
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.post('/api/login', {
+                    email: b[0],
+                    password: b[1]
+                })
+                    .then(response => {
+                        if (response.data.success) {
+                            console.log(response.data.success);
+                            let user = response.data.payload;
+                            console.log(user);
+                            // window.Laravel.isLoggedin = true;
+                            store.dispatch('login/login', {
+                                user
+                            });
+
+                            // toast.success(response.data.message)
+                            console.log(store);
+                            if (user.name !== undefined || user.name !== '') {
+                                window.location.replace('/dashboard');
+                            } else {
+                                window.location.replace('/kreator');
+                            }
+                        }
+                    })
+            })
+        }
+    },
     methods: {
         handleSubmit(e) {
             e.preventDefault()

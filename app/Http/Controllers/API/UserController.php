@@ -349,6 +349,7 @@ class UserController extends Controller
         return response()->json($response);
     }
 
+
     public function checkTwoFa(Request $request)
     {
         $user = User::where('email', '=', $request->email)->first();
