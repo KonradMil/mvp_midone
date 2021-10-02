@@ -39,9 +39,9 @@ class CommentChallengeAddedNotification extends Notification
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'message' => $this->member->name . $this->member->lastname . ' skomentował: ' . $this->challenge->name .'.',
+            'message' => $this->member->name . ' ' . $this->member->lastname . ' skomentował: ' . $this->challenge->name .'.',
             'link' => '/challenges',
-            'author' => $this->challenge->author,
+            'author' => $this->member,
             'params' => 'commentChallenge',
             'name' => 'ChallengesMain',
             'id' => '',
@@ -51,9 +51,9 @@ class CommentChallengeAddedNotification extends Notification
     public function toDatabase($notifable)
     {
         return [
-            'message' => $this->member->name . $this->member->lastname . ' skomentował: ' . $this->challenge->name .'.',
+            'message' => $this->member->name . ' ' . $this->member->lastname . ' skomentował: ' . $this->challenge->name .'.',
             'link' => '/challenges',
-            'author' => $this->challenge->author,
+            'author' => $this->member,
             'params' => 'commentChallenge',
             'name' => 'ChallengesMain',
             'id' => '',

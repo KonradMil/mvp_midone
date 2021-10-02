@@ -14,5 +14,4 @@ class CompanyRepository extends BaseRepository
     {
         parent::__construct($user);
     }
-
 }

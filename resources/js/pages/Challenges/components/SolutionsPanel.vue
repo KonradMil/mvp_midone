@@ -148,7 +148,11 @@ export default {
             StartFilterOffer();
             if(filterType.value === null){
                 technologyType.value = null;
-                solutionsInTeam.value = props.challenge.solutions;
+                if(props.challenge.stage === 3){
+
+                } else {
+                    solutionsInTeam.value = props.challenge.solutions;
+                }
             }
         }, {})
 
@@ -210,11 +214,12 @@ export default {
 
         onMounted(function () {
             permissions.value = window.Laravel.permissions;
-           if(user.type == 'investor' && props.inTeam) {
+           if(user.type == 'investor' && props.inTeam && props.challenge !== 3){
                solutions.value = props.challenge.solutions;
+           } else if(props.challenge.stage === 3){
+
            } else {
-               // filterMember();
-               solutions.value = props.challenge.solutions;
+                solutions.value = props.challenge.solutions;
            }
             checkPermissions();
         });

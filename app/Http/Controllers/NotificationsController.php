@@ -45,6 +45,7 @@ class NotificationsController extends Controller
             $data = $not['data'];
             $not->author = User::find($data['author']['id']);
         }
+
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie.',

@@ -102,7 +102,7 @@
                                         href=""
                                         class="dark:text-gray-300 text-gray-600"
                                         content="Po zaakceptowaniu oferty staje się ona wiążąca dla obu stron.">
-                                    <button class="btn btn-primary shadow-md mr-2" @click="acceptOffer(offer)" v-if="offer.selected != 1 && challenge.selected_offer_id < 1 && acceptChallengeOffers">Akceptuj ofertę</button>
+                                    <button class="btn btn-primary shadow-md mr-2" @click.prevent="acceptOffer(offer)" v-if="offer.selected != 1 && challenge.selected_offer_id < 1 && acceptChallengeOffers">Akceptuj ofertę</button>
                                     </Tippy>
                                     <button class="btn shadow-md mr-2 bg-gray-400" @click.prevent="rejectOffer(offer,index)" v-if="offer.rejected != 1 && challenge.selected_offer_id < 1 && acceptChallengeOffers" >Odrzuć ofertę</button>
                                     <button class="btn btn-outline-secondary" @click="showDetails[offer.id] = !showDetails[offer.id]">{{$t('teams.details')}}</button>
@@ -356,6 +356,11 @@ export default {
             router.push( {path : '/projects/card/' + props.challenge.id});
         }
 
+        const goTo = () => {
+                router.push({ path: '/projects' })
+            }
+
+
         const acceptOffer = async(offer) => {
             axios.post('/api/offer/accept', {id: offer.id})
                 .then(response => {
@@ -365,11 +370,11 @@ export default {
                         offer.rejected = 0;
                         offer.solution.selected_offer_id = offer.id;
                         props.challenge.selected_offer_id = offer.id;
-                        // window.location.replace('/projects');
+                        goTo();
                     } else {
                         // toast.error(response.data.message);
                     }
-                },handleCallback)
+                })
         }
 
         const rejectOffer = async(offer,index) => {
@@ -400,6 +405,7 @@ export default {
         });
 
         return {
+            goTo,
             isShow,
             temporary_offer_id,
             showDetails,
