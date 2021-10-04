@@ -174,7 +174,7 @@
                            @click.prevent="activeTab = 'project-details'"
                            :class="(activeTab == 'project-details') ? 'flex items-center mt-5 text-theme-1 dark:text-theme-10 font-medium mt-5' : 'flex items-center mt-5'">
                             <EditIcon
-                                v-if="project.accept_technical_details < 1 || project.accept_financial_details < 1"
+                                v-if="project.accept_technical_details < 1 || project.accept_financial_details < 1 && (project.accept_technical_details !== 2 && project.accept_financial_details !== 2)"
                                 class="w-4 h-4 mr-2 text-red-600"/>
                             <CheckCircleIcon
                                 v-if="project.accept_technical_details === 1 && project.accept_financial_details === 1"
@@ -197,18 +197,18 @@
                             </Tippy>
                         </a>
                         <a v-if="challenge.stage === 3 && project.accept_technical_details === 1 && project.accept_financial_details === 1"
-                           class="flex items-center mt-5" href=""
+                           class="flex items-center mt-5 cursor-pointer"
                            @click.prevent="activeTab = 'project-offer'"
-                           :class="(activeTab == 'project-offer') ? 'text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                           :class="(activeTab == 'project-offer') ? 'text-theme-1 dark:text-theme-10 font-medium cursor-pointer' : 'mt-5 cursor-pointer'">
                             <EditIcon v-if="project.accept_offer < 1" class="w-4 h-4 mr-2 text-red-600"/>
                             <CheckCircleIcon v-if="project.accept_offer === 1" class="w-4 h-4 mr-2 text-green-600"/>
                             <XCircleIcon v-if="project.accept_offer === 2" class="w-4 h-4 mr-2 text-red-600"/>
                             Podsumowanie z oferty
                         </a>
-                        <a v-if="project.accept_technical_details === 0 || project.accept_financial_details === 0"
-                           :class="(project.accept_technical_details === 1 && project.accept_financial_details === 1) ? 'flex items-center mt-5 cursor-pointer' : 'flex items-center mt-5 opacity-50 cursor-pointer'">
+                        <a v-if="project.accept_technical_details !== 1 || project.accept_financial_details !== 1"
+                           class="flex items-center mt-5 opacity-50 cursor-pointer">
                             <EditIcon
-                                v-if="project.accept_technical_details < 1 || project.accept_financial_details < 1"
+                                v-if="project.accept_technical_details !== 1 || project.accept_financial_details !== 1"
                                 class="w-4 h-4 mr-2 text-red-600"/>
                             <Tippy
                                 tag="a"
