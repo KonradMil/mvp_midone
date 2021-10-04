@@ -236,6 +236,7 @@ export default {
 
         const addNewReport = async () => {
             let report = {
+                id: 0,
                 description: '',
                 before: '',
                 after: '',
@@ -262,6 +263,7 @@ export default {
         const saveReport = async (report) => {
             RequestHandler('projects/' + props.project.id + '/local-vision/save', 'post', {
                 project_id: props.project.id,
+                report_id: report.id,
                 description: report.description,
                 before: report.before,
                 after: report.after,
@@ -280,7 +282,16 @@ export default {
                 comment: report.comment
             }, (response) => {
                 showDetails.value[report.id] = false;
-                getReports();
+                setTimeout(function (){
+                    rejects.value.forEach(function(reject){
+                        if(reject.id === report.id){
+                            rejectReport(report);
+                        }
+                    })
+                }, 500)
+                setTimeout(function (){
+                    getReports();
+                }, 500)
             });
         }
 
