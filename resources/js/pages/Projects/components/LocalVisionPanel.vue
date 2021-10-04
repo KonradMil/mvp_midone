@@ -285,11 +285,9 @@ export default {
             }, (response) => {
                 showDetails.value[report.id] = false;
                 setTimeout(function (){
-                    rejects.value.forEach(function(reject){
-                        if(reject.id === report.id){
-                            rejectReport(report);
-                        }
-                    })
+                    if(rejects.value.indexOf(report) !== -1){
+                        rejectReport(report);
+                    }
                 }, 500)
                 setTimeout(function (){
                     getReports();
@@ -306,11 +304,6 @@ export default {
                         report.author_id = user.id;
                         showDetails.value[report.id] = false;
                         getReports();
-                        rejects.value.forEach(function (reject) {
-                            if (reject.id === report.id) {
-                                rejectReport(report);
-                            }
-                        })
                     } else {
 
                     }
@@ -377,8 +370,10 @@ export default {
         }
 
         const rejectReport = async (report) => {
-            if (report.comment === null) {
-                rejects.value.push(report);
+            if (report.comment === null || report.comment === ''){
+                if(rejects.value.indexOf(report) === -1){
+                    rejects.value.push(report);
+                }
                 toast.warning('Przy odrzuceniu raportu konieczny jest komentarz!')
             } else {
                 RequestHandler('projects/' + props.project.id + '/local-vision/' + report.id + '/reject', 'post', {

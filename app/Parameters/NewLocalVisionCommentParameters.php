@@ -18,7 +18,7 @@ class NewLocalVisionCommentParameters extends Parameters
     public function __construct()
     {
         $this->validationRules = [
-            'comment' => 'required|string',
+            'comment' => 'nullable|string',
         ];
     }
 
