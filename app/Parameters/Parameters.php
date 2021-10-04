@@ -55,7 +55,7 @@ abstract class Parameters implements ParametersInterface
     }
 
     /**
-     * @param array|null $subject
+     * @param array $subject
      * @return bool
      */
     public function validate(array $subject): bool

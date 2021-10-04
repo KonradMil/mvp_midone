@@ -19,7 +19,8 @@ return [
         'wrong_credentials' => "Nieprawidłowy adres e-mail lub hasło.",
         'account_inactive' => "Twoje konto jest nieaktywne. Sprawdź swóją skrzynkę e-mail, a następnie kliknij w link aktywacyjny.",
         'socialite' => [
-            'wrong_provider' => "Niedozwolona metoda logowania."
+            'wrong_provider' => "Niedozwolona metoda logowania.",
+            'nonexistent_account' => "Konto o podanym adresie e-mail nie istnieje. Zarejestruj się."
         ]
     ]
 ];

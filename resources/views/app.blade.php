@@ -15,16 +15,18 @@
     <meta name="theme-color" content="#a9a9a9">
 </head>
 <body>
+<script>
+    window.error = @php echo Session::get('error') ? '"'.Session::get('error').'"' : 'null' @endphp;
+    window.warning = @php echo Session::get('warning') ? '"'.Session::get('warning').'"' : 'null' @endphp;
+    window.info = @php echo Session::get('info') ? '"'.Session::get('info').'"' : 'null' @endphp;
+    window.success = @php echo Session::get('success') ? '"'.Session::get('success').'"' : 'null' @endphp;
+</script>
 @if (Auth::check())
     <script>
         window.unity_path = '{{env('UNITY_PATH')}}';
         window.unity_workshop_path = '{{env('UNITY_WORKSHOP_PATH')}}';
         window.unity_tutorial_path = '{{env('UNITY_PATH')}}';
         window.unity_hangar_path = '{{env('UNITY_HANGAR_PATH')}}';
-        window.errors = '{{json_encode(Session::get('error'))}}';
-        window.warnings = '{{json_encode(Session::get('warning'))}}';
-        window.info = '{{json_encode(Session::get('info'))}}';
-        window.success = '{{json_encode(Session::get('success'))}}';
         @php
         if(empty(Auth::user()->companies->toArray())) {
                $company = new App\Models\Company();

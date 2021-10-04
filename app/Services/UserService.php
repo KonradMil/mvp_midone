@@ -2,9 +2,12 @@
 
 namespace App\Services;
 
+use App\Parameters\NewUserParameters;
 use App\Parameters\RegistrationParameters;
+use App\Parameters\SocialAuthParameters;
 use App\Repository\Eloquent\CompanyRepository;
 use App\Repository\Eloquent\UserRepository;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Company;
 
@@ -34,19 +37,20 @@ class UserService
     }
 
     /**
-     * @param RegistrationParameters $newUserParameters
+     * @param NewUserParameters $newUserParameters
      * @return Model
+     * @throws Exception
      */
-    public function addUser(RegistrationParameters $newUserParameters): Model
+    public function addUser(NewUserParameters $newUserParameters): Model
     {
 
         $userParams = [
             'email' => $newUserParameters->email,
             'password' => $newUserParameters->hashedPassword,
-            'type' => $newUserParameters->type
+            'type' => $newUserParameters->type,
         ];
 
-        if(env('APP_ENV') === 'local') {
+        if (env('APP_ENV') === 'local' && !$newUserParameters->emailVerifiedAt) {
             $userParams['email_verified_at'] = (new \DateTime('now', new \DateTimeZone('UTC')))->format('Y-m-d H:i:s');
         }
 

@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Parameters\LoginParameters;
 use App\Repository\Eloquent\UserRepository;
 use App\Services\UserService;
+use Exception;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Foundation\Application;
@@ -36,8 +37,6 @@ class AuthController extends Controller
      */
     private UserService $userService;
 
-    protected array $allowedSocialProviders = ['facebook', 'google'];
-
     /**
      * @param UserService $userService
      */
@@ -49,6 +48,7 @@ class AuthController extends Controller
     /**
      * @param Request $request
      * @return JsonResponse
+     * @throws Exception
      */
     public function register(Request $request): JsonResponse
     {
@@ -223,24 +223,6 @@ class AuthController extends Controller
         }
 
         $responseBuilder->setData('user', $user);
-        return $responseBuilder->getResponse();
-    }
-
-    /**
-     * @param string $provider
-     * @return JsonResponse
-     */
-    public function socialSignIn(string $provider): JsonResponse
-    {
-        $responseBuilder = new ResponseBuilder();
-
-        if (!in_array($provider, $this->allowedSocialProviders)) {
-            $responseBuilder->setErrorMessage(__('messages.login.socialite.wrong_provider'));
-            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
-        }
-
-        $socialiteUser = Socialite::driver($provider);
-
         return $responseBuilder->getResponse();
     }
 

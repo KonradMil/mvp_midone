@@ -19,7 +19,8 @@ return [
         'wrong_credentials' => "Your login or password is incorrect.",
         'account_inactive' => "Your account has not been activated yet. Please check your e-mail and click on activation link.",
         'socialite' => [
-            'wrong_provider' => "Login method is not allowed."
+            'wrong_provider' => "Login method is not allowed.",
+            'nonexistent_account' => "There is no account with given e-mail address. Please sign up."
         ]
     ]
 ];
