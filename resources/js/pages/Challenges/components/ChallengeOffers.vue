@@ -35,10 +35,10 @@
 
     <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9">
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-        <h2 class="font-medium text-base mr-auto"> Moje oferty </h2>
+        <h2 class="intro-y font-medium text-base mr-auto"> Moje oferty </h2>
     </div>
-        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-            <label for="input-wizard-5" class="form-label pr-5 font-medium dark:text-theme-10 text-theme-1">Filtr</label>
+        <div class="flex items-center px-5 py-7 border-b border-gray-200 dark:border-dark-5">
+            <label for="input-wizard-5" class="form-label pr-5 font-medium dark:text-theme-10 text-theme-1" style="position: absolute; margin-bottom: 90px;">Filtr</label>
             <Multiselect
                 class="form-control"
                 v-model="filterType"
@@ -54,8 +54,8 @@
                 :options="filters['options']"
             />
         </div>
-        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5 pb-10">
-            <label for="input-wizard-5" class="form-label font-medium dark:text-theme-10 text-theme-1">Dostawca głównej technologii</label>
+        <div class="flex items-center px-5 py-7 border-b border-gray-200 dark:border-dark-5 pb-10">
+            <label for="input-wizard-5" class="form-label font-medium dark:text-theme-10 text-theme-1" style="position: absolute; margin-bottom: 90px;">Dostawca głównej technologii</label>
             <Multiselect
                 class="form-control"
                 v-model="technologyType"
@@ -74,7 +74,7 @@
 <!--                <div class="option__desc"><span class="option__title">{{ props.option.title }}</span><span class="option__small">{{ props.option.desc }}</span></div>-->
 <!--            </template>-->
         </div>
-        <div v-if="guard && filterType !== null" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+        <div v-if="guard && (filterType !== null || technologyType !== null)" class="intro-y w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie ma ofert spełniających podane kryteria.
         </div>
         <div class="grid grid-cols-12 gap-6">
@@ -285,6 +285,7 @@ export default {
         watch(() => technologyType.value, (first, second) => {
             if(technologyType.value !== null){
                 StartFilterOffer();
+                console.log(offers.value.list.length + 'offers value list length in watcher')
                 if(offers.value.list ===0){
                     guard.value = true;
                 }else{
@@ -298,6 +299,7 @@ export default {
 
         watch(() => filterType.value, (first, second) => {
             StartFilterOffer();
+            console.log(offers.value.list.length + 'offers value list length in watcher')
             if(offers.value.list ===0){
                 guard.value = true;
             }else{
@@ -333,7 +335,10 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         offers.value.list = response.data.payload;
-                        toast.success('Success');
+                        if(offers.value.list.length === 0){
+                            guard.value = true;
+                        }
+                        console.log(offers.value.list.length + 'offers value list length')
                     } else {
                         toast.error('Error');
                     }
