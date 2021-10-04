@@ -56,7 +56,6 @@
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0 && challenge.stage == 1 &&  solution.archive != 1 && canPublishSolution" @click="publishSolution">{{$t('challengesMain.publish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1 && canPublishSolution" @click="unpublishSolution">{{$t('challengesMain.unpublish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive != 1" @click="switchTab">{{$t('teams.teams')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" v-if="solution.archive != 1 && solution.selected != 1" @click="showAddFileModal(solution.id)">Dodaj plik</button>
             </div>
             <div class="mt-2" v-if="user.type == 'integrator' && solution.selected == 1 && type!=='archive' && addSolutionOffer">
                 <button v-if="solution.archive != 1" class="btn btn-primary shadow-md mr-2" @click="addOffer">{{$t('challengesMain.addOffer')}}</button>
@@ -266,7 +265,6 @@ export default {
                 })
         }
 
-
         const acceptSolution = () => {
             axios.post('/api/solution/accept', {id: solution.id})
                 .then(response => {
@@ -281,15 +279,13 @@ export default {
                 })
         }
 
-        const deleteSolution = async() => {
+        const deleteSolution = async(solution) => {
             await axios.post('/api/solution/delete', {id: solution.id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Rozwiązanie zostało usunięte');
-                        emitter.emit('deletesolution', {index: props.index, id: solution.id});
-                        // router.push({name: 'challenges'});
+                        emitter.emit('deletesolution', {solution: solution});
                     } else {
-                        // toast.error(response.data.message);
                     }
                 })
         }

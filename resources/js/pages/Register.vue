@@ -5,25 +5,20 @@
             <div class="block xl:grid grid-cols-2 gap-4">
                 <!-- BEGIN: Register Info -->
                 <div class="hidden xl:flex flex-col min-h-screen">
-                    <a href="" class="-intro-x flex items-center pt-5">
+                    <a class="-intro-x flex items-center pt-5 cursor-default">
                         <img
                             alt="DBR77 Platforma Robotów "
                             class="w-2/4"
-                            src="https://dbr77.com/wp-content/uploads/2020/02/logo_dbr_white.png"
-                        />
+                            src="https://dbr77.com/wp-content/uploads/2020/02/logo_dbr_white.png"/>
                     </a>
                     <div class="my-auto">
                         <img
                             alt="DBR77 Platforma Robotów "
                             class="-intro-x w-1/2 -mt-16"
-                            src="/s3/twopointo/images/workers.svg"
-                        />
-                        <div
-                            class="-intro-x text-white font-medium text-4xl leading-tight mt-10"
-                        >
+                            src="/s3/twopointo/images/workers.svg"/>
+                        <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">
                             Pierwszy na świecie <br/>marketplace Robotów
                         </div>
-
                     </div>
                 </div>
                 <!-- END: Register Info -->
@@ -31,19 +26,13 @@
 
                 <div class="h-screen xl:h-auto flex py-15 xl:py-18 my-10 xl:my-0 ">
                     <form class="validate-form" @submit.prevent="handleSubmit">
-                        <div
-                            class="my-auto mx-auto xl:ml-20 bg-white dark:bg-dark-1 mt-20 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto"
-                        >
-                            <h2
-                                class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left"
-                            >
+                        <div class="my-auto mx-auto xl:ml-20 bg-white dark:bg-dark-1 mt-20 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
+                            <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
                                 {{ $t('register.signup') }}
                             </h2>
-
                             <div class="intro-x mt-8">
                                 <div class="mt-3"><label>{{ $t('register.iam') }}</label>
                                     <div class="flex flex-col sm:flex-row mt-2">
-
                                         <div class="form-check mr-2">
                                             <input id="radio-switch-4"
                                                    v-model="validate.type.$model"
@@ -55,8 +44,7 @@
                                                 tag="a"
                                                 class="dark:text-gray-300 text-gray-600"
                                                 content="Podmiot świadczący usługi związane z automatyzacją stanowisk przemysłowych w zakładzie produkcyjnym.">
-                                                <label class="form-check-label"
-                                                       for="radio-switch-4">{{ $t('common.integratorem') }}</label>
+                                                <label class="form-check-label" for="radio-switch-4">{{ $t('common.integratorem') }}</label>
                                             </Tippy>
                                         </div>
                                         <div class="form-check mr-2 mt-2 sm:mt-0">
@@ -76,11 +64,9 @@
                                         </div>
                                     </div>
                                     <template v-if="validate.type.$error">
-                                        <div
-                                            v-for="(error, index) in validate.type.$errors"
+                                        <div v-for="(error, index) in validate.type.$errors"
                                             :key="index"
-                                            class="text-theme-6 mt-2"
-                                        >
+                                            class="text-theme-6 mt-2">
                                             {{ $t('validation.' + error.$message) }}
                                         </div>
                                     </template>
@@ -89,14 +75,11 @@
                                     type="text"
                                     class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
                                     placeholder="Email"
-                                    v-model.trim="validate.email.$model"
-                                />
+                                    v-model.trim="validate.email.$model"/>
                                 <template v-if="validate.email.$error">
-                                    <div
-                                        v-for="(error, index) in validate.email.$errors"
-                                        :key="index"
-                                        class="text-theme-6 mt-2"
-                                    >
+                                    <div v-for="(error, index) in validate.email.$errors"
+                                         :key="index"
+                                         class="text-theme-6 mt-2">
                                         {{ $t('validation.' + error.$message) }}
                                     </div>
                                 </template>
@@ -104,14 +87,11 @@
                                     type="password"
                                     class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
                                     :placeholder="$t('login.password')" autocomplete="new-password"
-                                    v-model.trim="validate.password.$model"
-                                />
+                                    v-model.trim="validate.password.$model"/>
                                 <template v-if="validate.password.$error">
-                                    <div
-                                        v-for="(error, index) in validate.password.$errors"
-                                        :key="index"
-                                        class="text-theme-6 mt-2"
-                                    >
+                                    <div v-for="(error, index) in validate.password.$errors"
+                                         :key="index"
+                                         class="text-theme-6 mt-2">
                                         {{ $t('validation.' + error.$message) }}
                                     </div>
                                 </template>
@@ -209,31 +189,25 @@
                                     type="checkbox"
                                     class="form-check-input border mr-2"
                                     v-model="validate.rodo2.$model"/>
-                                <label class="cursor-pointer select-none" for="rodo2"
-                                >
+                                <label class="cursor-pointer select-none" for="rodo2">
                                     Akceptuję
                                 </label>
                                 <a href="/terms/price-list" class="text-theme-1 dark:text-theme-10 ml-1 cursor-pointer"
                                    @click.prevent="$router.push({path: '/terms/price-list'})"> cennik usług</a>.
                             </div>
                             <template v-if="validate.rodo2.$error">
-                                <div
-                                    v-for="(error, index) in validate.rodo2.$errors"
-                                    :key="index"
-                                    class="text-theme-6 mt-2"
-                                >
+                                <div v-for="(error, index) in validate.rodo2.$errors"
+                                     :key="index"
+                                     class="text-theme-6 mt-2">
                                     {{ $t('validation.' + error.$message) }}
                                 </div>
                             </template>
                             <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                                <button type="submit"
-                                        class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top"
-                                >
+                                <button type="submit" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">
                                     {{ $t('register.signup') }}
                                 </button>
                                 <button @click.prevent="$router.push('login')"
-                                        class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top"
-                                >
+                                        class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">
                                     {{ $t('login.login') }}
                                 </button>
                             </div>

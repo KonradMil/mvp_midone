@@ -340,7 +340,7 @@ export default {
         }
 
         const cancelDeadline = async (deadline) => {
-            RequestHandler('projects/' + props.project.id + '/visit-date/' + deadline.id + '/reject', 'post', {
+            RequestHandler('projects/' + props.project.id + '/visit-date/' + deadline.id + '/cancel', 'post', {
                 project_id: props.project.id,
                 id: deadline.id,
             }, (response) => {

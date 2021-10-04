@@ -998,6 +998,7 @@ class SolutionController extends Controller
     public function delete(Request $request): JsonResponse
     {
         $solution = Solution::find($request->input('id'));
+
         if ($solution != NULL) {
             $solution->delete();
         }

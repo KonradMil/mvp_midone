@@ -60,9 +60,9 @@
 <!--                        <div v-if="challenge.stage >= 2" v-for="(solution, index) in challenge.selected" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box solution-selected">-->
 <!--                            <SingleSolutionPost  :challenge="challenge" :user="user" :key="'selected_' + index" :solution="solution" :canAccept="false" :canEdit="false"></SingleSolutionPost>-->
 <!--                        </div>-->
-                        <div v-for="(solution, index) in solutionsInTeam" :key="index" v-if="challenge.stage > 0" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected) ? 'solution-selected' : ''">
+                        <div v-for="solution in solutionsInTeam" :key="solution.id" v-if="challenge.stage > 0" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected) ? 'solution-selected' : ''">
                                 <span v-if="user.type === 'integrator'">
-                                    <SingleSolutionPost :index="index" :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id" :canEditSolution="canEditSolution" :addSolutionOffer="addSolutionOffer" :canDeleteSolution="canDeleteSolution" :canPublishSolution="canPublishSolution"></SingleSolutionPost>
+                                    <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id" :canEditSolution="canEditSolution" :addSolutionOffer="addSolutionOffer" :canDeleteSolution="canDeleteSolution" :canPublishSolution="canPublishSolution"></SingleSolutionPost>
                                 </span>
                                 <span v-if="user.type === 'investor'">
                                     <SingleSolutionPost v-if="solution.status === 1" :challenge="challenge" :user="user" :solution="solution" :canAccept="(inTeam) && challenge.status == 1" :canEdit="false" :acceptChallengeSolutions="acceptChallengeSolutions"></SingleSolutionPost>
@@ -117,7 +117,7 @@ export default {
         const canDeleteSolution = ref(false);
 
         emitter.on('deletesolution', e => {
-            solutionsInTeam.value.splice(e.index, 1);
+            solutionsInTeam.value.splice(solutionsInTeam.value.indexOf(e.solution), 1);
             let index;
             let length = permissions.value.showSolutions.length;
             for(index = 0; index < length; index++){

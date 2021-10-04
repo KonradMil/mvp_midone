@@ -74,7 +74,7 @@ export default {
         }
 
         const getProjectSolution = () => {
-            RequestHandler('projects/' + props.id + '/solution', 'get', {}, (response) => {
+            RequestHandler('projects/' + props.challenge.id + '/solution', 'get', {}, (response) => {
                 solution.value = response.data.solution;
             });
         }

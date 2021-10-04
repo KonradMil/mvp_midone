@@ -5,7 +5,7 @@
         </div>
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
-            <div class="intro-y box col-span-6 xxl:col-span-6" v-for="(offer, index) in offers.list" :key="index">
+            <div class="intro-y box col-span-6 xxl:col-span-6" v-for="offer in offers.list" :key="offer.id">
 
                 <div :class="(offer.rejected === 1) ? 'px-5 py-5 opacity-50' : 'px-5 py-5'">
                     <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
@@ -18,7 +18,7 @@
                                 <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status < 1">{{$t('challengesMain.publishOffer')}}</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="editOffer(offer.id)" v-if="stage !== 3 && offer.status < 1">{{$t('models.edit')}}</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="changeOffer(offer.id)" v-if="stage === 3 && user.id === offer.installer_id">Zmiana oferty</button>
-                                <button class="btn btn-primary shadow-md mr-2" @click.prevent="deleteOffer(offer.id,index)" v-if="offer.status < 1 || offer.rejected == 1">{{$t('models.delete')}}</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click.prevent="deleteOffer(offer)" v-if="offer.status < 1 || offer.rejected == 1">{{$t('models.delete')}}</button>
                             </div>
                             <div v-if="stage===3">
                             <div class="flex items-center justify-center text-theme-9" v-if="project.project_accept_offer === 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
@@ -206,12 +206,12 @@ export default {
                 })
         }
 
-        const deleteOffer = async(id,index) => {
-            axios.post('/api/offer/delete', {id: id})
+        const deleteOffer = async(offer) => {
+            axios.post('/api/offer/delete', {id: offer.id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success(response.data.message);
-                        offers.value.list.splice(index,1);
+                        offers.value.list.splice(offers.value.list.indexOf(offer), 1);
                     } else {
                     }
                 })
