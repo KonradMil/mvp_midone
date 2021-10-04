@@ -14,7 +14,7 @@
                                 <span class="font-medium dark:text-theme-10 text-theme-1">{{$t('challengesMain.solution')}}</span>
                                 <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px; word-break: break-all; max-height: 100px; max-width: 200px;"> {{ offer.solution.name }}</div>
                             </div>
-                            <div class="mt-2 pl-9 pb-6" v-if="(user.id === offer.installer_id) || addSolutionOffer">
+                            <div class="mt-2 pl-9 pb-6 md:flex" v-if="(user.id === offer.installer_id) || addSolutionOffer">
                                 <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status < 1">{{$t('challengesMain.publishOffer')}}</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="editOffer(offer.id)" v-if="stage !== 3 && offer.status < 1">{{$t('models.edit')}}</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="changeOffer(offer.id)" v-if="stage === 3 && user.id === offer.installer_id">Zmiana oferty</button>
