@@ -1,5 +1,6 @@
 <template>
-    <div class="intro-y box shadow-2xl" style="width: 1200px;" v-if="guard === true">
+    <div class="intro-y"  style="width: 1200px;">
+    <div class="box shadow-2xl md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-full sm:w-1/2 max-w-5xl" v-if="guard === true">
         <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
             <h2 class="font-medium text-base mr-auto">
                 Termin wizyt
@@ -204,6 +205,7 @@
             <!--                <div class="sm:ml-auto mt-2 sm:mt-0 dark:text-gray-300">Last account activity: 36 minutes ago</div>-->
             <!--            </div>-->
         </div>
+    </div>
     </div>
 </template>
 
