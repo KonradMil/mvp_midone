@@ -45,7 +45,7 @@ class OfferPublishedNotification extends Notification
     {
         return (new MailMessage)
             ->line('Oferta została opublikowana do rozwiązania: ' . $this->challenge->name .'.')
-            ->action('Sprawdź', url('https://devsys.appworks-dev.pl/challenges/card/' . $this->challenge->id))
+            ->action('Sprawdź', url('https://staging.appworks-dev.pl/challenges/card/' . $this->challenge->id))
             ->line('Dziękujemy za korzystanie z platformy DBR77!');
     }
 

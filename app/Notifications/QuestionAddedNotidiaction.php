@@ -47,7 +47,7 @@ class QuestionAddedNotidiaction extends Notification
     {
         return (new MailMessage)
             ->line('Nowe pytanie zostało dodane do Twojego wyzwania ' . $this->challenge->name . '.')
-            ->action('Sprawdź', url('https://devsys.appworks-dev.pl/challenges/card/' . $this->challenge->id))
+            ->action('Sprawdź', url('https://staging.appworks-dev.pl/challenges/card/' . $this->challenge->id))
             ->line('Dziękujemy za korzystanie z platformy DBR77!');
     }
 
@@ -55,7 +55,7 @@ class QuestionAddedNotidiaction extends Notification
     {
         return new BroadcastMessage([
             'message' => 'Nowe pytanie zostało dodane do Twojego wyzwania: ' . $this->challenge->name,
-            'link' => url('https://devsys.appworks-dev.pl/challenges/card/' . $this->challenge->id),
+            'link' => url('https://staging.appworks-dev.pl/challenges/card/' . $this->challenge->id),
             'author' => $this->event->causer,
         ]);
     }
@@ -64,7 +64,7 @@ class QuestionAddedNotidiaction extends Notification
     {
         return [
             'message' => 'Nowe pytanie zostało dodane do Twojego wyzwania: ' . $this->challenge->name,
-            'link' => url('https://devsys.appworks-dev.pl/challenges/card/' . $this->challenge->id),
+            'link' => url('https://staging.appworks-dev.pl/challenges/card/' . $this->challenge->id),
             'author' => $this->event->causer,
         ];
     }
