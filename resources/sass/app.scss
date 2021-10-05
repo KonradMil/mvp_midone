@@ -152,12 +152,12 @@
 @import "components/pristine";
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 .top-nav>ul li .top-menu:not(.top-menu--active) .top-menu__icon:before {
-    color: #930f68
+    border-color: #930f68;
 }
-.top-menu__icon, .top-menu__title {
+.top-nav>ul li .top-menu__icon,.top-nav>ul li .top-menu__title {
     color: #930f68 !important;
 }
-.top-menu__icon:hover, .top-menu__title:hover {
+.top-nav>ul li:hover .top-menu__icon:hover,.top-nav>ul li:hover .top-menu__title {
     color: white !important;
 }
 ::-webkit-scrollbar {
