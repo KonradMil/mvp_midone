@@ -1,4 +1,5 @@
 <template>
+    <TopMenu></TopMenu>
     <div>
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">{{$t('challengesMain.challenges')}}</h2>
@@ -145,10 +146,11 @@ import GetChallengesArchive from "../../compositions/GetChallengesArchive";
 import CommentSection from "../../components/social/CommentSection";
 import {useToast} from "vue-toastification";
 import RequestHandler from "../../compositions/RequestHandler"
+import TopMenu from "../../site/components/TopMenu";
 
 export default {
     name: "ChallengesMain",
-    components: {CommentSection, Comment, GetChallenges},
+    components: {TopMenu, CommentSection, Comment, GetChallenges},
     props: {
       type: String
     },
