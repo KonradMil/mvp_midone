@@ -22,6 +22,7 @@ import locale from 'dayjs/esm/locale/pl';
 import relativeTime from 'dayjs/esm/plugin/relativeTime';
 import updateLocale from 'dayjs/esm/plugin/updateLocale';
 import {VueReCaptcha} from "vue-recaptcha-v3";
+import utc from 'dayjs/esm/plugin/utc';
 
 const emitter = mitt();
 // emitter.on('*', (type, e) => console.log(type, e) )
@@ -33,7 +34,6 @@ const i18n = createI18n({
     messages, // set locale messages
 })
 require('./bootstrap')
-
 
 window.Pusher = require('pusher-js');
 
@@ -64,9 +64,7 @@ router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
     const publicPages = ['/login', '/register', '/terms/terms-of-service', '/terms/privacy-policy', '/terms/price-list'];
     const authRequired = !publicPages.includes(to.path);
-    // console.log(to.path);
-    // console.log(store.state.login.isLoggedIn);
-    // console.log(authRequired);
+
     if (!store.state.login.isLoggedIn) {
         if (authRequired) {
             next({path: '/login'})
@@ -92,5 +90,3 @@ app.use(Toast, options);
 app.use(i18n);
 app.use(VueReCaptcha, {siteKey: process.env.MIX_RECAPTCHA_SITE_KEY});
 app.mount('#app')
-
-
