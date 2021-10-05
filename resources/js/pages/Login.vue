@@ -1,7 +1,6 @@
 <template>
     <div>
-        <DarkModeSwitcher/>
-        <div class="container sm:px-10">en
+        <div class="container sm:px-10">
             <div class="block xl:grid grid-cols-2 gap-4">
                 <!-- BEGIN: Login Info -->
                 <div class="hidden xl:flex flex-col min-h-screen">
@@ -9,32 +8,15 @@
                         <img
                             alt="DBR77 Platforma Robotów "
                             class="w-2/4 mt-36"
-                            src="/s3/twopointo/images/dbr_logo_white.svg"
+                            src="/s3/twopointo/images/dbr_logo_white_notagline.svg"
                         />
                     </a>
-                    <!--                    <div class="my-auto">-->
-                    <!--                        <img-->
-                    <!--                            alt="DBR77 Platforma Robotów "-->
-                    <!--                            class="-intro-x w-1/2 -mt-16"-->
-                    <!--                            src="/s3/twopointo/images/workers.svg"-->
-                    <!--                        />-->
-                    <!--                        <div-->
-                    <!--                            class="-intro-x text-white font-medium text-4xl leading-tight mt-10"-->
-                    <!--                        >-->
-                    <!--                            Pierwszy na świecie <br/>marketplace Robotów-->
-                    <!--                        </div>-->
-
-                    <!--                    </div>-->
                 </div>
                 <!-- END: Login Info -->
                 <!-- BEGIN: Login Form -->
                 <div class="h-screen xl:h-auto flex py-5 xl:py-0 my-10 xl:my-0">
-                    <div
-                        class="my-auto mx-auto xl:ml-20 bg-white dark:bg-dark-1 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto"
-                    >
-                        <h2
-                            class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left"
-                        >
+                    <div class="my-auto mx-auto xl:ml-20 bg-white dark:bg-dark-1 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
+                        <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
                             {{ $t('login.loginTitle') }}
                         </h2>
                         <div v-if="resendEmail"
@@ -63,38 +45,19 @@
                                 v-model="password"
                             />
                         </div>
-                        <div
-                            class="intro-x flex text-gray-700 dark:text-gray-600 text-xs sm:text-sm mt-4"
-                        >
-                            <!--                            <div class="flex items-center mr-auto">-->
-                            <!--                                <input-->
-                            <!--                                    id="remember-me"-->
-                            <!--                                    type="checkbox"-->
-                            <!--                                    class="form-check-input border mr-2"-->
-                            <!--                                />-->
-                            <!--                                <label class="cursor-pointer select-none" for="remember-me"-->
-                            <!--                                >Remember me</label-->
-                            <!--                                >-->
-                            <!--                            </div>-->
+                        <div class="intro-x flex text-gray-700 dark:text-gray-600 text-xs sm:text-sm mt-4">
                             <button @click="showAddToTeamModal">{{ $t('login.forgot') }}</button>
                         </div>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                            <button
-                                class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top"
-                                @click="handleSubmit">
+                            <button class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" @click="handleSubmit">
                                 {{ $t('login.login') }}
                             </button>
-                            <button
-                                @click="$router.replace({name:'register'})"
-                                class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">
+                            <button @click="$router.replace({name:'register'})" class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">
                                 {{ $t('login.signup') }}
                             </button>
                         </div>
                         <div class="social-auth flex flex-col intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                            <button
-                                @click="handleSocialRegistration('facebook', $event)"
-                                class="btn btn-social btn-outline-secondary py-3 px-4 w-full xl:mr-3 align-top"
-                            >
+                            <button @click="handleSocialRegistration('facebook', $event)" class="btn btn-social btn-outline-secondary py-3 px-4 w-full xl:mr-3 align-top">
                                 <div class="icon">
                                     <img src="icons/facebook.svg"/>
                                 </div>
@@ -102,10 +65,7 @@
                                     Logowanie Facebook
                                 </div>
                             </button>
-                            <button
-                                @click="handleSocialRegistration('google', $event)"
-                                class="btn btn-social btn-outline-secondary py-3 px-4 w-full xl:mr-3 align-top"
-                            >
+                            <button @click="handleSocialRegistration('google', $event)" class="btn btn-social btn-outline-secondary py-3 px-4 w-full xl:mr-3 align-top">
                                 <div class="icon">
                                     <img src="icons/google.svg"/>
                                 </div>
@@ -119,13 +79,11 @@
                         </div>
                         <div class="intro-x mt-10 xl:mt-24 text-gray-700 dark:text-gray-600 text-center xl:text-left">
                             {{ $t('login.pol1') }}<br/>
-                            <a class="text-theme-1 dark:text-theme-10" href="/terms/terms-of-service"
-                               @click.prevent="$router.push({path: '/terms/terms-of-service'})">
+                            <a class="text-theme-1 dark:text-theme-10" href="/terms/terms-of-service" @click.prevent="$router.push({path: '/terms/terms-of-service'})">
                                 {{ $t('login.pol2') }}
                             </a>
                             &
-                            <a class="text-theme-1 dark:text-theme-10" href="/terms/privacy-policy"
-                               @click.prevent="$router.push({path: '/terms/privacy-policy'})">
+                            <a class="text-theme-1 dark:text-theme-10" href="/terms/privacy-policy" @click.prevent="$router.push({path: '/terms/privacy-policy'})">
                                 {{ $t('login.pol3') }}
                             </a>
                         </div>

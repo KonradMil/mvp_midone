@@ -9,34 +9,17 @@
                         <img
                             alt="DBR77 Platforma Robotów "
                             class="w-2/4 mt-36"
-                            src="/s3/twopointo/images/dbr_logo_white.svg"
+                            src="/s3/twopointo/images/dbr_logo_white_notagline.svg"
                         />
                     </a>
-                    <!--                    <div class="my-auto">-->
-                    <!--                        <img-->
-                    <!--                            alt="DBR77 Platforma Robotów "-->
-                    <!--                            class="-intro-x w-1/2 -mt-16"-->
-                    <!--                            src="/s3/twopointo/images/workers.svg"-->
-                    <!--                        />-->
-                    <!--                        <div-->
-                    <!--                            class="-intro-x text-white font-medium text-4xl leading-tight mt-10"-->
-                    <!--                        >-->
-                    <!--                            Pierwszy na świecie <br/>marketplace Robotów-->
-                    <!--                        </div>-->
-
-                    <!--                    </div>-->
                 </div>
                 <!-- END: Register Info -->
                 <!-- BEGIN: Register Form -->
 
                 <div class="h-screen xl:h-auto flex py-15 xl:py-18 my-10 xl:my-0 ">
                     <form class="validate-form" @submit.prevent="handleSubmit">
-                        <div
-                            class="my-auto mx-auto xl:ml-20 bg-white dark:bg-dark-1 mt-20 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto"
-                        >
-                            <h2
-                                class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left"
-                            >
+                        <div class="my-auto mx-auto xl:ml-20 bg-white dark:bg-dark-1 mt-20 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
+                            <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
                                 {{ $t('register.signup') }}
                             </h2>
 
@@ -81,8 +64,7 @@
                                         <div
                                             v-for="(error, index) in validate.type.$errors"
                                             :key="index"
-                                            class="text-theme-6 mt-2"
-                                        >
+                                            class="text-theme-6 mt-2">
                                             {{ $t('validation.' + error.$message) }}
                                         </div>
                                     </template>
@@ -94,11 +76,7 @@
                                     v-model.trim="validate.email.$model"
                                 />
                                 <template v-if="validate.email.$error">
-                                    <div
-                                        v-for="(error, index) in validate.email.$errors"
-                                        :key="index"
-                                        class="text-theme-6 mt-2"
-                                    >
+                                    <div v-for="(error, index) in validate.email.$errors" :key="index" class="text-theme-6 mt-2">
                                         {{ $t('validation.' + error.$message) }}
                                     </div>
                                 </template>
@@ -112,8 +90,7 @@
                                     <div
                                         v-for="(error, index) in validate.password.$errors"
                                         :key="index"
-                                        class="text-theme-6 mt-2"
-                                    >
+                                        class="text-theme-6 mt-2">
                                         {{ $t('validation.' + error.$message) }}
                                     </div>
                                 </template>
@@ -172,18 +149,16 @@
                                 <password-meter @score="onScore" :password="validate.password.$model"/>
                             </div>
 
-                            <div
-                                class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm"
-                            >
+                            <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                                 <input
                                     id="rodo"
                                     type="checkbox"
                                     class="form-check-input border mr-2"
                                     v-model="validate.rodo.$model"
                                 />
-                                <label class="cursor-pointer select-none" for="rodo"
-                                >Akceptuję postanowienia </label
-                                >
+                                <label class="cursor-pointer select-none" for="rodo">
+                                    Akceptuję postanowienia
+                                </label>
                                 <a href="/terms/privacy-policy"
                                    class="text-theme-1 dark:text-theme-10 ml-1 cursor-pointer"
                                    @click.prevent="$router.push({path: '/terms/privacy-policy'})"> polityki
@@ -197,14 +172,11 @@
                                     {{ $t('validation.' + error.$message) }}
                                 </div>
                             </template>
-                            <div
-                                class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
-                                <input id="rodo3" type="checkbox" class="form-check-input border mr-2"
-                                       v-model="validate.rodo3.$model"/>
+                            <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
+                                <input id="rodo3" type="checkbox" class="form-check-input border mr-2" v-model="validate.rodo3.$model"/>
                                 <label class="cursor-pointer select-none" for="rodo3">Akceptuję </label>
-                                <a href="/terms/terms-of-service"
-                                   class="text-theme-1 dark:text-theme-10 mx-1 cursor-pointer"
-                                   @click.prevent="$router.push({path: '/terms/terms-of-service'})"> warunki świadczenia
+                                <a href="/terms/terms-of-service" class="text-theme-1 dark:text-theme-10 mx-1 cursor-pointer" @click.prevent="$router.push({path: '/terms/terms-of-service'})">
+                                    warunki świadczenia
                                     &#32;</a> usług na platformie DBR77.com.
                             </div>
                             <template v-if="validate.rodo3.$error">
@@ -215,39 +187,28 @@
                                     {{ $t('validation.' + error.$message) }}
                                 </div>
                             </template>
-                            <div
-                                class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
+                            <div class="intro-x flex items-center text-gray-700 dark:text-gray-600 mt-4 text-xs sm:text-sm">
                                 <input
                                     id="rodo2"
                                     type="checkbox"
                                     class="form-check-input border mr-2"
                                     v-model="validate.rodo2.$model"/>
-                                <label class="cursor-pointer select-none" for="rodo2"
-                                >
+                                <label class="cursor-pointer select-none" for="rodo2">
                                     Akceptuję
                                 </label>
-                                <a href="/terms/price-list" class="text-theme-1 dark:text-theme-10 ml-1 cursor-pointer"
-                                   @click.prevent="$router.push({path: '/terms/price-list'})"> cennik usług</a>.
+                                <a href="/terms/price-list" class="text-theme-1 dark:text-theme-10 ml-1 cursor-pointer" @click.prevent="$router.push({path: '/terms/price-list'})"> cennik usług</a>.
                             </div>
                             <template v-if="validate.rodo2.$error">
-                                <div
-                                    v-for="(error, index) in validate.rodo2.$errors"
-                                    :key="index"
-                                    class="text-theme-6 mt-2"
-                                >
+                                <div v-for="(error, index) in validate.rodo2.$errors" :key="index" class="text-theme-6 mt-2">
                                     {{ $t('validation.' + error.$message) }}
                                 </div>
                             </template>
 
                             <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                                <button type="submit"
-                                        class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top"
-                                >
+                                <button type="submit" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">
                                     {{ $t('register.signup') }}
                                 </button>
-                                <button @click.prevent="$router.push('login')"
-                                        class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top"
-                                >
+                                <button @click.prevent="$router.push('login')" class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">
                                     {{ $t('login.login') }}
                                 </button>
                             </div>

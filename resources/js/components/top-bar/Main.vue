@@ -264,7 +264,6 @@ export default defineComponent({
             store.dispatch('main/setCurrentLang', lang.value);
         }
 
-
         const searchMe = () => {
             axios.post('/api/search', {query: searchTerm.value})
                 .then(response => {
