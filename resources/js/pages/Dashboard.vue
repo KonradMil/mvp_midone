@@ -446,6 +446,7 @@ import ReportDonutChart from "../components/report-donut-chart/Main.vue";
 import ReportBarChart from "../components/report-bar-chart/Main.vue";
 import GetDashboard from "../compositions/GetDashboard"
 import WordpressPost from "../components/wordpress-post/WordpressPost";
+import DirectusCall from "../compositions/DirectusCall"
 
 export default {
     components: {
@@ -485,7 +486,7 @@ export default {
 
             GetDashboard((resp) => {
                 console.log(resp.posts);
-                posts.value = resp.posts;
+                // posts.value = resp.posts;
                 solutions.value = resp.solutions;
                 logs.value = resp.logs;
             });
@@ -493,6 +494,9 @@ export default {
 
         }
         onMounted(() => {
+            DirectusCall('items/post?access_token=aaaa&fields=*.*.*&limit=10&sort[]=sort&filter[category_id][post_category_id]=31', (val) => {
+                posts.value = val;
+            });
             deleteSolutionsOnNull();
             GetDashBoardRepository();
         });
