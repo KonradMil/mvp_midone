@@ -17,7 +17,10 @@ import Echo from 'laravel-echo';
 import mitt from 'mitt'
 import lazyPlugin from 'vue3-lazy'
 import VueCookies from 'vue3-cookies'
+import advancedFormat from 'dayjs/plugin/advancedFormat'
+import locale from 'dayjs/esm/locale/pl';
 import relativeTime from 'dayjs/esm/plugin/relativeTime';
+import updateLocale from 'dayjs/esm/plugin/updateLocale';
 import {VueReCaptcha} from "vue-recaptcha-v3";
 
 const emitter = mitt();
@@ -48,7 +51,7 @@ window.Echo = new Echo({
 const app = createApp(App)
 globalComponents(app);
 utils(app);
-dayjs.extend(relativeTime);
+
 app.config.globalProperties.$dayjs = dayjs;
 app.config.globalProperties.$axios = axios;
 app.config.globalProperties.cash = cash;
@@ -77,6 +80,11 @@ router.beforeEach((to, from, next) => {
 app.use(VueCookies, {
     expireTimes: "1h",
 });
+dayjs.extend(relativeTime);
+dayjs.extend(advancedFormat)
+dayjs.extend(utc);
+dayjs.extend(updateLocale);
+dayjs.locale(locale);
 app.use(VueFinalModal)
 app.use(router)
 app.use(store)

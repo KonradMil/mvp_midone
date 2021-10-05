@@ -862,3 +862,39 @@ html::-webkit-scrollbar {
     font-weight: bold;
     padding-bottom: 5px;
 }
+
+.social-auth {
+
+    .btn-social {
+
+        position: relative;
+        overflow: hidden;
+        justify-content: flex-start;
+        margin-bottom: 14px;
+
+        .icon {
+            position: absolute;
+            width: 2.75rem;
+            height: 100%;
+            background: #fff;
+            left: 0;
+            top: 0;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            border-right: 1px #e6e6e6 solid;
+
+            img {
+                width: 60%;
+            }
+        }
+
+        .text {
+            text-align: center;
+            width: calc(100% - 2.75rem);
+            margin-left: 2.75rem;
+        }
+    }
+}
+
+

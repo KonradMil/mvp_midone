@@ -6,9 +6,9 @@
                 <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.solutions')}}</h2>
                 </div>
-                <div class="px-5 py-5" style="background-color: rgba(241,245,248,var(--tw-bg-opacity));">
-                    <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="user.type === 'investor' && solutionsInTeam.length !== 0">
-                        <label for="input-wizard-5" class="form-label pr-5 font-medium dark:text-theme-10 text-theme-1">Filtr</label>
+                <div class="px-5 py-7" style="background-color: rgba(241,245,248,var(--tw-bg-opacity));">
+                    <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="user.type === 'investor' && solutionsInTeam.length !== 0 || (filterType !== null ||technologyType !== null)">
+                        <label for="input-wizard-5" style="position: absolute; margin-bottom: 90px;" class="form-label pr-5 font-medium dark:text-theme-10 text-theme-1">Filtr</label>
                         <Multiselect
                             class="form-control"
                             v-model="filterType"
@@ -24,8 +24,8 @@
                             :options="filters['options']"
                         />
                     </div>
-                    <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5" v-if="user.type === 'investor' && solutionsInTeam.length !== 0">
-                        <label for="input-wizard-5" class="form-label font-medium dark:text-theme-10 text-theme-1">Dostawca głównej technologii</label>
+                    <div class="flex items-center px-5 py-7 border-b border-gray-200 dark:border-dark-5" v-if="user.type === 'investor' && solutionsInTeam.length !== 0 || (filterType !== null ||technologyType !== null)">
+                        <label for="input-wizard-5" class="form-label font-medium dark:text-theme-10 text-theme-1" style="position: absolute; margin-bottom: 90px;">Dostawca głównej technologii</label>
                         <Multiselect
                             class="form-control"
                             v-model="technologyType"
@@ -44,10 +44,10 @@
                         <!--                <div class="option__desc"><span class="option__title">{{ props.option.title }}</span><span class="option__small">{{ props.option.desc }}</span></div>-->
                         <!--            </template>-->
                     </div>
-                    <div v-if="solutionsInTeam.length == 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+                    <div v-if="solutionsInTeam.length == 0 && filterType === null && technologyType === null" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
                         {{$t('challengesMain.noSolutions')}}.
                     </div>
-                    <div v-if="solutions.length == 0 && filterType !== null" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+                    <div v-if="solutionsInTeam.length == 0 && (filterType !== null || technologyType !== null)" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
                         Nie ma rozwiązań spełniających podane kryteria.
                         <div v-if="user.type == 'integrator'">
                             <p>
@@ -60,9 +60,9 @@
 <!--                        <div v-if="challenge.stage >= 2" v-for="(solution, index) in challenge.selected" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box solution-selected">-->
 <!--                            <SingleSolutionPost  :challenge="challenge" :user="user" :key="'selected_' + index" :solution="solution" :canAccept="false" :canEdit="false"></SingleSolutionPost>-->
 <!--                        </div>-->
-                        <div v-for="(solution, index) in solutionsInTeam" :key="index" v-if="challenge.stage > 0" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected) ? 'solution-selected' : ''">
+                        <div v-for="solution in solutionsInTeam" :key="solution.id" v-if="challenge.stage > 0" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected) ? 'solution-selected' : ''">
                                 <span v-if="user.type === 'integrator'">
-                                    <SingleSolutionPost :index="index" :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id" :canEditSolution="canEditSolution" :addSolutionOffer="addSolutionOffer" :canDeleteSolution="canDeleteSolution" :canPublishSolution="canPublishSolution"></SingleSolutionPost>
+                                    <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id" :canEditSolution="canEditSolution" :addSolutionOffer="addSolutionOffer" :canDeleteSolution="canDeleteSolution" :canPublishSolution="canPublishSolution"></SingleSolutionPost>
                                 </span>
                                 <span v-if="user.type === 'investor'">
                                     <SingleSolutionPost v-if="solution.status === 1" :challenge="challenge" :user="user" :solution="solution" :canAccept="(inTeam) && challenge.status == 1" :canEdit="false" :acceptChallengeSolutions="acceptChallengeSolutions"></SingleSolutionPost>
@@ -117,7 +117,7 @@ export default {
         const canDeleteSolution = ref(false);
 
         emitter.on('deletesolution', e => {
-            solutionsInTeam.value.splice(e.index, 1);
+            solutionsInTeam.value.splice(solutionsInTeam.value.indexOf(e.solution), 1);
             let index;
             let length = permissions.value.showSolutions.length;
             for(index = 0; index < length; index++){
@@ -239,7 +239,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         solutionsInTeam.value = response.data.payload;
-                        toast.success('Success!');
+                        // toast.success('Success!');
                     } else {
                         toast.error('Erro!');
                     }
@@ -268,7 +268,7 @@ export default {
             if (get_cookie(name)) {
                 document.cookie = name + "=" +
                     ((path) ? ";path=" + path : "") +
-                    ((domain) ? ";domain=devsys.appworks-dev.pl" : "") +
+                    ((domain) ? ";domain=staging.appworks-dev.pl" : "") +
                     ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
             }
         }

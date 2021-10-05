@@ -6,19 +6,29 @@
     <meta name="csrf-token" value="{{ csrf_token() }}"/>
     <title>{{env('APP_NAME')}}</title>
     <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
-    <link rel='shortcut icon' type='image/x-icon' href="/s3/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#a80085">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#a9a9a9">
 </head>
 <body>
+
+<script>
+    window.error = @php echo Session::get('error') ? '"'.Session::get('error').'"' : 'null' @endphp;
+    window.warning = @php echo Session::get('warning') ? '"'.Session::get('warning').'"' : 'null' @endphp;
+    window.info = @php echo Session::get('info') ? '"'.Session::get('info').'"' : 'null' @endphp;
+    window.success = @php echo Session::get('success') ? '"'.Session::get('success').'"' : 'null' @endphp;
+</script>
+
 @if (Auth::check())
     <script>
         window.unity_path = '{{env('UNITY_PATH')}}';
         window.unity_workshop_path = '{{env('UNITY_WORKSHOP_PATH')}}';
         window.unity_tutorial_path = '{{env('UNITY_PATH')}}';
         window.unity_hangar_path = '{{env('UNITY_HANGAR_PATH')}}';
-        window.errors = '{{json_encode(Session::get('error'))}}';
-        window.warnings = '{{json_encode(Session::get('warning'))}}';
-        window.info = '{{json_encode(Session::get('info'))}}';
-        window.success = '{{json_encode(Session::get('success'))}}';
         @php
         if(empty(Auth::user()->companies->toArray())) {
                $company = new App\Models\Company();

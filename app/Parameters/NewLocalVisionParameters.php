@@ -11,10 +11,16 @@ class NewLocalVisionParameters extends Parameters
      * @var int
      */
     public int $authorId;
+
     /**
      * @var int
      */
     public int $projectId;
+
+    /**
+     * @var int
+     */
+    public int $reportId;
 
     /**
      * @var string
@@ -44,6 +50,7 @@ class NewLocalVisionParameters extends Parameters
         $this->validationRules = [
             'authorId' => 'required|int',
             'projectId' => 'required|int',
+            'reportId' => 'nullable|int',
             'description' => 'required|string',
             'before' => 'required|string',
             'after' => 'required|string',

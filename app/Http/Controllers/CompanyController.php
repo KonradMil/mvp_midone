@@ -28,7 +28,6 @@ class CompanyController extends Controller
         $company->fill($input);
         $company->author_id = Auth::user()->id;
         $company->save();
-        $company->users()->attach(Auth::user());
 
         return response()->json([
             'success' => true,

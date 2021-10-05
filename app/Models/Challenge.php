@@ -14,9 +14,6 @@ use Spatie\Tags\HasTags;
 use BeyondCode\Comments\Traits\HasComments;
 
 
-/**
- *
- */
 class Challenge extends Model implements ReactableInterface
 {
     use Reactable, HasTags, HasComments;
@@ -74,7 +71,7 @@ class Challenge extends Model implements ReactableInterface
         'screenshot_path' => 'string',
         'allowed_publishing' => 'boolean',
         'solution_deadline' => 'timestamp',
-        'offer_deadline' => 'timestamp',
+        'offer_deadline' => 'timestamp'
     ];
 
     /**

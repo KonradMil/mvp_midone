@@ -814,12 +814,24 @@ class SolutionController extends Controller
         $content = base64_decode($ss);
         $name = uniqid('ss_') . '.jpg';
         $path = public_path('screenshots/' . $name);
-        \Illuminate\Support\Facades\File::put($path, $content);
-        Image::make($path)->resize(1000, null, function ($constraint) {
+        $image_normal = Image::make($content)->resize(1000, null, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
-        })->save($path);
-        return ['absolute_path' => $path, 'relative' => ('screenshots/' . $name)];
+        });
+        $image_normal->save(public_path('images/'. $name));
+
+        Storage::disk('s3')->putFileAs('screenshots/', new \Illuminate\Http\File(public_path('images/'. $name)), $name);
+
+        return ['absolute_path' => $path, 'relative' => ('s3/screenshots/' . $name)];
+//        $content = base64_decode($ss);
+//        $name = uniqid('ss_') . '.jpg';
+//        $path = public_path('screenshots/' . $name);
+//        \Illuminate\Support\Facades\File::put($path, $content);
+//        Image::make($path)->resize(1000, null, function ($constraint) {
+//            $constraint->aspectRatio();
+//            $constraint->upsize();
+//        })->save($path);
+//        return ['absolute_path' => $path, 'relative' => ('screenshots/' . $name)];
     }
 
     /**
@@ -915,7 +927,7 @@ class SolutionController extends Controller
         $solution->save_json = json_encode($challenge->save_json);
         $solution->published = 0;
         $solution->status = 0;
-        $solution->screenshot_path = 'screenshots/dbr_placeholder.jpeg';
+        $solution->screenshot_path = 's3/screenshots/dbr_placeholder.jpeg';
         $solution->save();
 
 //        $estimate = new Estimate();
@@ -999,6 +1011,7 @@ class SolutionController extends Controller
     public function delete(Request $request): JsonResponse
     {
         $solution = Solution::find($request->input('id'));
+
         if ($solution != NULL) {
             $solution->delete();
         }

@@ -40,11 +40,17 @@ class S3Controller extends Controller
         $headers = [
             'Content-Disposition' => sprintf('attachment; filename="%s"', array_reverse(explode('/', $path))[0])
         ];
-        Log::error($path);
-        if (strpos($path, 'unityweb') !== false || strpos($path, 'wasm') !== false || strpos($path, '.br') !== false) {
+//        Log::error($path);
+        if ((strpos($path, 'unityweb') !== false || strpos($path, 'wasm') !== false || strpos($path, '.br') !== false) && (strpos($path, 'loader') === false)) {
             $getMimeType = 'application/wasm';
             $headers['Content-Encoding'] = 'br';
         }
+        if (strpos($path, 'framework') !== false) {
+            $getMimeType = 'application/javascript';
+            $headers['Content-Encoding'] = 'br';
+        }
+
+
         $headers['Content-type'] = $getMimeType;
 
         $fs = Storage::disk('s3')->getDriver();

@@ -5,7 +5,7 @@
         </div>
         <div class="grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Profile Menu -->
-            <div class="col-span-12 lg:col-span-4 xxl:col-span-3 flex lg:block flex-col-reverse">
+            <div class="col-span-12 lg:col-span-4 xxl:col-span-3 md:col-span-2 flex lg:block flex-col-reverse">
                 <div class="intro-y box mt-5 lg:mt-0">
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
                         <a class="flex items-center" href="" @click.prevent="activeTab = 'obiekty'" :class="(activeTab == 'obiekty')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <!-- END: Profile Menu -->
-<!--            <WorkshopPanel :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></WorkshopPanel>-->
+            <!--            <WorkshopPanel :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></WorkshopPanel>-->
             <StudioWorkshop hideFooter="true" :src="''" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></StudioWorkshop>
             <Marketplace v-if="activeTab == 'marketplace'"></Marketplace>
             <OwnObjects v-if="activeTab == 'obiekty'"></OwnObjects>
@@ -44,7 +44,7 @@ import StudioWorkshop from "./StudioWorkshop";
 
 
 export default {
-name: "Workshop",
+    name: "Workshop",
     components: {OwnObjects, Marketplace, WorkshopPanel, StudioWorkshop},
     setup() {
         const app = getCurrentInstance();
@@ -76,7 +76,7 @@ name: "Workshop",
         });
 
         emitter.on('singleworkshopobject', e => {
-            if(e.action == 'delete') {
+            if (e.action == 'delete') {
                 axios.post('/api/workshop/models/delete', {id: e.id})
                     .then(response => {
                         if (response.data.success) {
@@ -86,9 +86,9 @@ name: "Workshop",
                             toast.error('Wystąpił błąd');
                         }
                     })
-            } else if (e.action == 'edit'){
+            } else if (e.action == 'edit') {
                 emitter.emit('LoadWorkshopItems', e.object);
-            } else if (e.action == 'publish'){
+            } else if (e.action == 'publish') {
                 console.log("e");
                 console.log(e);
                 axios.post('/api/workshop/models/publish', {id: e.object.id})
@@ -100,7 +100,7 @@ name: "Workshop",
                             toast.error('Wystąpił błąd');
                         }
                     })
-            }else if (e.action == 'copy'){
+            } else if (e.action == 'copy') {
                 axios.post('/api/workshop/models/copy', {id: e.id})
                     .then(response => {
                         if (response.data.success) {
@@ -144,7 +144,7 @@ name: "Workshop",
 
             }, 5000);
             // setTimeout(() => {
-            //     handleUnityActionOutgoing({action: 'prefix', data: 'https://devsys.appworks-dev.pl/s3'});
+            //     handleUnityActionOutgoing({action: 'prefix', data: 'https://staging.appworks-dev.pl/s3'});
             //     // unlockInput();
             // }, 5000);
         }

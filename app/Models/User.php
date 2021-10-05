@@ -35,6 +35,7 @@ class User extends Authenticatable implements ReacterableInterface, Commentator,
      */
     protected $fillable = [
         'name',
+        'lastname',
         'email',
         'password',
         'phone',
@@ -53,7 +54,10 @@ class User extends Authenticatable implements ReacterableInterface, Commentator,
         'twofa',
         'authy_id',
         'type',
-        'email_verified_at'
+        'email_verified_at',
+        'google_id',
+        'facebook_id',
+        'avatar'
     ];
 
     /**

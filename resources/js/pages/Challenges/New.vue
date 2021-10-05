@@ -234,7 +234,7 @@
                  buttonText: {'apply':'OK','cancel':'Anuluj'},
                 dropdowns: {
                   minYear: 2021,
-                  maxYear: null,
+                  maxYear: 2023,
                   months: true,
                   years: true
                 }
@@ -254,7 +254,7 @@
                  buttonText: {'apply':'OK','cancel':'Anuluj'},
                 dropdowns: {
                   minYear: 2021,
-                  maxYear: null,
+                  maxYear: 2023,
                   months: true,
                   years: true
                 }

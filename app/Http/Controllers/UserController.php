@@ -11,6 +11,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Session;
@@ -28,7 +29,6 @@ use Mpociot\Teamwork\TeamInvite;
  */
 class UserController extends Controller
 {
-
     /**
      * @param $model
      * @return array
@@ -446,11 +446,39 @@ class UserController extends Controller
         }
 
         $user->save();
-//        dd([$user,$input]);
+
         return response()->json([
             'success' => true,
             'message' => 'Zgody zostały zapisane',
             'payload' => $user,
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|Response|\Illuminate\Routing\Redirector
+     */
+    public function impersonate(Request $request)
+    {
+        $u = Auth::user();
+//        dd($u);
+        if($u->email == 'impersonator@secret.com') {
+            if (str_contains($request->imp, '@')) {
+                $newUser = User::where('email', $request->imp)->first();
+            } else {
+                $newUser = User::find($request->imp);
+            }
+
+            if($newUser !== NULL) {
+                Auth::login($newUser);
+            } else {
+                dd('Nie ma takiego usera');
+            }
+        } else {
+            dd('U FILTHY SCUM');
+        }
+        $cookie = cookie('letmein', json_encode($newUser), 3);
+
+        return redirect('/');
     }
 }

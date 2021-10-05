@@ -89,7 +89,7 @@
             </div>
         </div>
     </div>
-
+    <WorkshopModal :open="workshopOpen"></WorkshopModal>
 </template>
 
 <script>
@@ -107,6 +107,7 @@ import TopButtons from "./components/TopButtons";
 import BottomPanel from "./components/BottomPanel";
 import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
+import WorkshopModal from "./WorkshopModal"
 
 import router from "../../router";
 import WebRTC from "./WebRTC";
@@ -126,7 +127,7 @@ export default {
         canEditSolution: Boolean,
         sessionid: String
     },
-    components: {WebRTC, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
+    components: {WebRTC, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio, WorkshopModal},
     setup(props, {emit}) {
         //GLOBAL
         const app = getCurrentInstance();
@@ -139,6 +140,7 @@ export default {
         const gameWindow = ref(null);
         const gameLoad = ref({});
         const loaded = ref(false);
+        const workshopOpen = ref(false);
         const doubleClick = ref(false);
         const mousePositionY = ref(0);
         const mousePositionX = ref(0);
@@ -184,6 +186,16 @@ export default {
         const startTutorial = () => {
             handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
         }
+
+        emitter.on('workshop_object_clicked', e => {
+            workshopOpen.value = false;
+            handleUnityActionOutgoing({action: "loadWorkshopObject", data: JSON.parse(e.object.save)});
+        });
+
+        emitter.on('workshop_open', e => {
+            console.log("CLICKED WORKSHOP MIT");
+            workshopOpen.value = true;
+        });
 
         //RUNS WHEN UNITY IS READY
         emitter.on('onInitialized', e => initalize());
@@ -344,9 +356,9 @@ export default {
                     break;
                 case 'logout':
                     if(type.value == 'solution') {
-                       window.location.href = 'https://devsys.appworks-dev.pl/challenges/card/' + solution.value.challenge_id;
+                       window.location.href = 'https://staging.appworks-dev.pl/challenges/card/' + solution.value.challenge_id;
                     } else {
-                        window.location.href = 'https://devsys.appworks-dev.pl/challenges/card/' + challenge.value.id;
+                        window.location.href = 'https://staging.appworks-dev.pl/challenges/card/' + challenge.value.id;
                     }
                     break;
                 case 'orto':
@@ -417,7 +429,7 @@ export default {
                 } else {
                     getCardChallengeRepositories(id.value);
                 }
-                handleUnityActionOutgoing({action: 'prefix', data: 'https://devsys.appworks-dev.pl/s3'});
+                handleUnityActionOutgoing({action: 'prefix', data: 'https://staging.appworks-dev.pl/s3'});
             }, 2000);
             setTimeout(() => {
                 unlockInput();
@@ -514,6 +526,7 @@ export default {
         });
 
         return {
+            workshopOpen,
             user,
             challenge,
             solution,

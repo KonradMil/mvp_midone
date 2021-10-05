@@ -7,10 +7,7 @@
                 <div class="dropdown ml-auto sm:ml-0">
                     <div class="dropdown-menu w-40">
                         <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                            <a
-                                href=""
-                                class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                            >
+                            <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                                 <Share2Icon class="w-4 h-4 mr-2"/>
                                 {{ $t('global.sharePost') }}
                             </a>

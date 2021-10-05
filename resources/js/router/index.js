@@ -35,6 +35,7 @@ import Offers from "../pages/Challenges/components/Offers";
 import SolutionsPanel from "../pages/Challenges/components/SolutionsPanel";
 import ProjectsList from "../pages/Admin/ProjectsList";
 import UserList from '../pages/Admin/UserList';
+import Secret from '../pages/Admin/Secret';
 import SolutionsArchive from "../pages/Solutions/SolutionsArchive";
 import Notifications from "../pages/Notifications";
 
@@ -49,6 +50,11 @@ export const routes = [
         name: 'login',
         path: '/login',
         component: Login
+    },
+    {
+        name: 'secret',
+        path: '/secret',
+        component: Secret
     },
     {
         name: 'register',
@@ -250,7 +256,8 @@ export const routes = [
             {
                 name: 'dashboard',
                 path: '/dashboard',
-                component: Dashboard
+                component: Challenges,
+                props: {type: 'normal'}
             },
             {
                 name: 'profiles',

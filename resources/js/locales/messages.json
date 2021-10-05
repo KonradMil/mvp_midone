@@ -29,7 +29,8 @@
             "acceptChallengeOffer" : "Accept challenge offer",
             "addSolutionOffer" : "Add solution offer",
             "acceptChallengeSolution" : "Accept challenge solution",
-            "addChallengeSolution" : "Add challenge solution"
+            "addChallengeSolution" : "Add challenge solution",
+            "continue":  "Continue"
         },
         "validation": {
             "Value is required": "Value is required.",
@@ -335,7 +336,8 @@
             "acceptChallengeOffer" : "Akceptacja ofert",
             "addSolutionOffer" : "Dodawanie ofert",
             "acceptChallengeSolution" : "Akceptacja rozwiązań",
-            "addChallengeSolution" : "Dodawanie rozwiązań"
+            "addChallengeSolution" : "Dodawanie rozwiązań",
+            "continue": "Kontynuuj"
         },
         "topBar": {
             "profil": "Profil",

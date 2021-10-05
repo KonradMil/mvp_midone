@@ -164,6 +164,22 @@ class ProjectService
     }
 
     /**
+     * @param NewLocalVisionParameters $newLocalVisionParameters
+     * @param LocalVision $localVision
+     * @return Model
+     */
+    public function updateLocalVision(NewLocalVisionParameters $newLocalVisionParameters, LocalVision $localVision): Model
+    {
+        $localVision->description = $newLocalVisionParameters->description;
+        $localVision->before = $newLocalVisionParameters->before;
+        $localVision->after = $newLocalVisionParameters->after;
+
+        $localVision->save();
+
+        return $localVision;
+    }
+
+    /**
      * @param LocalVision $localVision
      * @return LocalVision
      */

@@ -1,6 +1,6 @@
 <template>
     <div class="webgl-content">
-        <canvas :id="containerId" v-bind:style="{ width: '62vw', height: '83vh' }"></canvas>
+        <canvas :id="containerId" v-bind:style="{ width: '60vw', height: '83vh' }"></canvas>
         <div v-if="loaded === false">
             <div class="unity-loader">
                 <div class="bar">
@@ -72,7 +72,7 @@ export default {
                 codeUrl: "/s3/" + unity_workshop_path + ".wasm.br",
                 streamingAssetsUrl: "StreamingAssets",
                 companyName: "DBR",
-                productName: "devsys.appworks-dev.pl",
+                productName: "staging.appworks-dev.pl",
                 productVersion: "1.0",
             }).then(function (instance) {
                 gameInstance.value = instance;

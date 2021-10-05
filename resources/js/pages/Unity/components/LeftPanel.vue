@@ -160,15 +160,20 @@ export default {
         const handleChange = (cat_id) => {
             subcategory.value = null;
             selectedBrand.value = null;
-            if (category.value === cat_id) {
-                category.value = null;
-                visible.value = false;
-            } else {
-                category.value = cat_id;
-                console.log(cat_id);
-                visible.value = true;
-                console.log(categories.value[cat_id]);
-                subcategories.value = categories.value[cat_id]['subcategories'];
+            if(cat_id === 9) {
+                console.log("CLICKED WORKSHOP");
+                emitter.emit('workshop_open', {status: true});
+            }  else {
+                if (category.value === cat_id) {
+                    category.value = null;
+                    visible.value = false;
+                } else {
+                    category.value = cat_id;
+                    console.log(cat_id);
+                    visible.value = true;
+                    console.log(categories.value[cat_id]);
+                    subcategories.value = categories.value[cat_id]['subcategories'];
+                }
             }
         }
 

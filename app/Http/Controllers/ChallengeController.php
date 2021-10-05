@@ -210,13 +210,15 @@ class ChallengeController extends Controller
         $content = base64_decode($ss);
         $name = uniqid('ss_') . '.jpg';
         $path = public_path('screenshots/' . $name);
-        \Illuminate\Support\Facades\File::put($path, $content);
-        Image::make($path)->resize(1000, null, function ($constraint) {
+        $image_normal = Image::make($content)->resize(1000, null, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
-        })->save($path);
+        });
+        $image_normal->save(public_path('images/'. $name));
 
-        return ['absolute_path' => $path, 'relative' => ('screenshots/' . $name)];
+        Storage::disk('s3')->putFileAs('screenshots/', new \Illuminate\Http\File(public_path('images/'. $name)), $name);
+
+        return ['absolute_path' => $path, 'relative' => ('s3/screenshots/' . $name)];
     }
 
     /**
@@ -636,7 +638,7 @@ class ChallengeController extends Controller
         $challenge->author_id = Auth::user()->id;
 
         if (!isset($request->id)) {
-            $challenge->screenshot_path = 'screenshots/dbr_placeholder.jpeg';
+            $challenge->screenshot_path = 's3/screenshots/dbr_placeholder.jpeg';
         }
         if (!isset($request->id)) {
             $challenge->status = 0;
@@ -1193,19 +1195,27 @@ class ChallengeController extends Controller
         ]);
     }
 
-    public function adminGetProjects()
+    public function adminGetProjects(): JsonResponse
     {
         $challenges = Challenge::with('solutions', function ($query) {
             $query->where('selected','=','1');
         })->with('solutions.author', 'author', 'author.own_company', 'solutions.author.own_company')->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie',
+            'payload' => $challenges
+        ]);
 
-        return response($challenges);
     }
 
     public function adminGetUsers()
     {
        $users = User::with('author')->get();
 
-        return response($users);
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie',
+            'payload' => $users
+        ]);
     }
 }

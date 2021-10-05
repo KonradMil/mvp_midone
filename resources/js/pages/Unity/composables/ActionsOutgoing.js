@@ -44,6 +44,10 @@ export default function unityActionOutgoing(gameWindow) {
         }, true)
     }
 
+    function workshopObjectLoad(object) {
+        outgoing(game, 'LoadWorkshopItems', object)
+    }
+
     function deleteObject() {
 
     }
