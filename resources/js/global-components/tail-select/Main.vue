@@ -4,7 +4,7 @@
   </select>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from "vue";
 import { setValue, init, reInit } from "./index";
 
