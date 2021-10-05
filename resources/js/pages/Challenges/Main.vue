@@ -12,10 +12,7 @@
                                 <Share2Icon class="w-4 h-4 mr-2"/>
                                 {{ $t('global.sharePost') }}
                             </a>
-                            <a
-                                href=""
-                                class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                            >
+                            <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                                 <DownloadIcon class="w-4 h-4 mr-2"/>
                                 {{ $t('global.downloadPost') }}
                             </a>
