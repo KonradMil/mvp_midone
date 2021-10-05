@@ -26,7 +26,7 @@
                     >
                         <div
                             class="relative bg-white rounded-lg text-left overflow-hidden shadow-xl p-8 w-1/5 border-solid border-4"
-                            style="border-color: #930f68;"
+                            style="border-color: #5e50ac;"
                             role="dialog"
                             ref="modal"
                             aria-modal="true"

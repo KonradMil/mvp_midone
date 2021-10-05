@@ -3,7 +3,7 @@
     <td class="w-40">
             <div class="flex">
                 <div class="w-10 h-10 image-fit zoom-in">
-                    <Avatar :username="team.name" color="#FFF" background-color="#930f68"/>
+                    <Avatar :username="team.name" color="#FFF" background-color="#5e50ac"/>
                 </div>
             </div>
         </td>

@@ -127,7 +127,7 @@
                             <div class="box px-5 py-10 mt-5">
                                 <div class="w-20 h-20 flex-none image-fit rounded-full overflow-hidden mx-auto">
                                     <Avatar :src="'/s3/avatars/' + investor.avatar" :username="investor.name + ' ' + investor.lastname" :size="90"
-                                            color="#FFF" background-color="#930f68"/>
+                                            color="#FFF" background-color="#5e50ac"/>
                                 </div>
                                 <div class="text-center mt-3">
                                     <div class="font-medium text-lg">{{investor.name}}  {{investor.lastname}}</div>
@@ -180,7 +180,7 @@
                             <div class="box px-5 py-10 mt-5">
                                 <div class="w-20 h-20 flex-none image-fit rounded-full overflow-hidden mx-auto">
                                     <Avatar :src="'/s3/avatars/' + integrator.avatar" :username="integrator.name + ' ' + integrator.lastname" :size="90"
-                                            color="#FFF" background-color="#930f68"/>
+                                            color="#FFF" background-color="#5e50ac"/>
                                 </div>
                                 <div class="text-center mt-3">
                                     <div class="font-medium text-lg">{{integrator.name}}  {{integrator.lastname}}</div>

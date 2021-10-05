@@ -153,10 +153,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 
 .top-nav>ul li .top-menu__icon:before {
-    border-color: #930f68;
+    border-color: #5e50ac;
 }
 .top-nav>ul li .top-menu__icon,.top-nav>ul li .top-menu__title {
-    color: #930f68 !important;
+    color: #5e50ac !important;
 }
 .top-nav>ul li:hover .top-menu__icon,.top-nav>ul li:hover .top-menu__title {
     color: white !important;
@@ -175,14 +175,14 @@
 //    border-radius: 100px;
 //    border-left: 0;
 //    border-right: 0;
-//    background-color: #930f68;
+//    background-color: #5e50ac;
 //}
 ::-webkit-scrollbar{
     width: 10px;
     height: 10px;
 }
 ::-webkit-scrollbar-thumb{
-    background: #930f68;
+    background: #5e50ac;
     border: 1px solid #FFFFFF;
     border-radius: 10px;
 }
@@ -330,7 +330,7 @@
 }
 
 .selected-solution {
-    border: 3px solid #930f68;
+    border: 3px solid #5e50ac;
     border-radius: 10px;
 }
 
@@ -374,7 +374,7 @@ html::-webkit-scrollbar {
 }
 
 .clrGreen {
-    background: #930f68;
+    background: #5e50ac;
 }
 
 #bottom {
@@ -382,8 +382,8 @@ html::-webkit-scrollbar {
 }
 
 .slider-tooltip {
-    border: 1px solid #930f68 !important;
-    background: #930f68 !important;
+    border: 1px solid #5e50ac !important;
+    background: #5e50ac !important;
 }
 
 .modal.modal-slide-over .modal-dialog .modal-content {
@@ -411,7 +411,7 @@ html::-webkit-scrollbar {
 }
 
 .vue-avatar--wrapper {
-    background-color: #930f68 !important;
+    background-color: #5e50ac !important;
 }
 
 .active-row {
@@ -423,15 +423,15 @@ html::-webkit-scrollbar {
 }
 
 .form-check-input[type=radio] {
-    border-color: #930f68 !important;
+    border-color: #5e50ac !important;
 }
 
 .form-check-input[type=radio]:before {
-    background-color: #930f68 !important;
+    background-color: #5e50ac !important;
 }
 
 .accordion .accordion-item .accordion-header .accordion-button:not(.collapsed) {
-    color: #930f68 !important;
+    color: #5e50ac !important;
 }
 
 .form-check-input:focus, .form-control:focus {
@@ -440,8 +440,8 @@ html::-webkit-scrollbar {
 }
 
 .form-check-input[type=checkbox] {
-    background-color: #930f68 !important;
-    border-color: #930f68 !important;
+    background-color: #5e50ac !important;
+    border-color: #5e50ac !important;
 }
 
 .select-dropdown {
@@ -449,8 +449,8 @@ html::-webkit-scrollbar {
 }
 
 .btn-primary {
-    background-color: #930f68 !important;
-    border-color: #930f68 !important;
+    background-color: #5e50ac !important;
+    border-color: #5e50ac !important;
 }
 
 .po-password-strength-bar {
