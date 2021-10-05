@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="intro-y grid grid-cols-12 gap-6 mt-5">
+        <div v-if="guard === true" class="intro-y grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Blog Layout -->
             <div class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium" v-if="projects.length == 0">
                 <div>
@@ -44,7 +44,7 @@
                     <div class="w-10 h-10 flex-none image-fit">
                         <img alt="DBR77" class="rounded-full" :src="'/' + challenge.screenshot_path"/>
                     </div>
-                    <div class="ml-3 mr-auto" @click="$router.push( {path : '/projects/card/' + challenge.id})">
+                    <div class="ml-3 mr-auto" @click.prevent="$router.push( {path : '/projects/card/' + challenge.id})">
                         <a href="" class="font-medium">{{ challenge.name }}</a>
                         <div class="flex text-gray-600 truncate text-xs mt-0.5" style="flex-direction: column;">
                             <a class="text-theme-1 dark:text-theme-10 inline-block truncate" href="">
@@ -144,29 +144,26 @@ export default {
         const toast = useToast();
         const projects = ref([]);
         const goodProjects = ref([]);
-
+        const guard = ref(false);
         const types = require("../../json/types.json");
         const sels = require("../../json/challenge.json");
 
         onMounted(function () {
-            getProjects();
+            getProjects(function(){
+                  guard.value = true;
+            });
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
         });
 
-        const getProjects = async() => {
+        const getProjects = async(callback) => {
             axios.post('/api/challenge/user/get/projects', {})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
                         projects.value = response.data.payload;
-                        // projects.value.forEach(function(project){
-                        //     console.log(project.stage + '->project.stage')
-                        //     if(project.stage === 3){
-                        //         goodProjects.value.push(project);
-                        //     }
-                        // });
+                        callback(response);
                     } else {
                         console.log('error');
                     }
@@ -249,6 +246,7 @@ export default {
         }
 
         return {
+            guard,
             getProjects,
             projects,
             goodProjects,

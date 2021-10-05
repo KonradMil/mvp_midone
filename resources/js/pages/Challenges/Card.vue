@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="guard === true" class="intro-y">
         <div class="intro-y flex items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">{{$t('challengesMain.challenge')}}</h2>
         </div>
@@ -109,17 +109,17 @@
                         </button>
                     </div>
                 </div>
-                <WhatsNext :user="user" :challenge="challenge" :solutions="challenge.solutions"></WhatsNext>
+                <WhatsNext v-if="guard === true" :user="user" :challenge="challenge" :id="id" :solutions="challenge.solutions"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
             <BasicInformationPanel :challenge="challenge" :inTeam="inTeam" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
             <TechnicalInformationPanel :challenge="challenge" v-if="activeTab == 'techniczne'"></TechnicalInformationPanel>
             <QuestionsPanel v-if="activeTab == 'pytania'" :author_id="challenge.author_id" :id="challenge.id" :challenge_stage="challenge.stage"></QuestionsPanel>
-            <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge" :inTeam="inTeam" :addChallengeSolution="addChallengeSolution" :acceptChallengeSolutions="acceptChallengeSolutions" :publishSolution="publishSolution" :addSolutionOffer="addSolutionOffer"></SolutionsPanel>
+            <SolutionsPanel v-if="activeTab == 'rozwiazania' && guard === true" :challenge="challenge" :inTeam="inTeam" :addChallengeSolution="addChallengeSolution" :acceptChallengeSolutions="acceptChallengeSolutions" :publishSolution="publishSolution" :addSolutionOffer="addSolutionOffer"></SolutionsPanel>
             <TeamsPanel v-if="(activeTab == 'teams') && ((challenge.author_id == user.id) || (solution.author_id == user.id))" :solution="solution" :challenge="challenge" :who="who" ></TeamsPanel>
-            <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :edit_offer_id="edit_offer_id"></OfferAdd>
-            <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab" :id="challenge.id" :inTeam="inTeam" :addSolutionOffer="addSolutionOffer" :stage="challenge.stage"></Offers>
-            <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam" :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
+            <OfferAdd v-if="activeTab == 'addingoffer' && guard === true" :stage="challenge.stage" :solution_id="selected_solution_id" :challenge_id="challenge.id" :edit_offer_id="edit_offer_id"></OfferAdd>
+            <Offers v-if="activeTab == 'oferty' && guard === true" v-model:activeTab="activeTab" :id="challenge.id" :inTeam="inTeam" :addSolutionOffer="addSolutionOffer" :stage="challenge.stage"></Offers>
+            <ChallengeOffers v-if="(activeTab == 'all-offers' && guard === true) && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam" :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
             <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisInformationPanel>
         </div>
     </div>
@@ -200,6 +200,7 @@ export default defineComponent({
         const publishSolution = ref(false);
         const addSolutionOffer = ref(false);
         const solution_project = ref('');
+        const guard = ref(false);
 
         watch(() => props.change, (first, second) => {
             if(props.change === 'all-offers' && user.type === 'integrator'){
@@ -251,15 +252,9 @@ export default defineComponent({
         }
 
         const checkTeam = () => {
-            console.log({user_id: user.id, challenge_id: challenge.value.id});
             axios.post('/api/challenge/check-team', {user_id: user.id, challenge_id: challenge.value.id})
                 .then(response => {
-                    console.log("response.data")
-                    console.log(response.data)
                     if (response.data.success) {
-                        console.log("user.id");
-                        console.log(user.id);
-                        console.log(challenge.value.author_id);
                         inTeam.value = response.data.payload || (user.id == challenge.value.author_id);
                     } else {
 
@@ -268,14 +263,11 @@ export default defineComponent({
         }
 
         emitter.on('changeTeamsSolution', e => () => {
-            console.log('ChangeTeamsSolution');
             activeTab.value = 'teamsSolution'
         });
 
         emitter.on('*', (type, e) => {
-            console.log(type, e);
-            console.log('HERE212');
-                if(type == 'activeTab') {
+            if(type == 'activeTab') {
                     activeTab.value = e.name;
                     solution.value = e.solution;
                     who.value = e.who;
@@ -285,7 +277,6 @@ export default defineComponent({
 
 
         emitter.on('changeToOfferAdd', e => () => {
-            console.log('BOLLOCKS');
             activeTab.value = 'addingoffer';
         });
 
@@ -294,27 +285,34 @@ export default defineComponent({
             checkPermissions();
         };
 
-        const getCardChallengeRepositories = async (id) => {
-            await axios.post('/api/challenge/user/get/card', {id: id})
+        const getCardChallengeRepositories = async (callback) => {
+            await axios.post('/api/challenge/user/get/card', {id: props.id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
-                        console.log(response.data.payload);
                         challenge.value = response.data.payload;
-                        checkTeam();
-                        filter();
-                        checkPermissions();
-                        checkSolution();
+                        callback(response);
                     } else {
-                        // toast.error(response.data.message);
                     }
                 }, handleCallback)
         }
 
         onMounted(function () {
+            if(props.change === 'all-offers' && user.type === 'integrator'){
+                activeTab.value = 'oferty';
+            } else {
+                activeTab.value = props.change
+            }
+            if(props.change === undefined){
+                activeTab.value = 'podstawowe';
+            }
             permissions.value = window.Laravel.permissions;
-            console.log(props);
-            getCardChallengeRepositories(props.id);
+            getCardChallengeRepositories(function (){
+                checkTeam();
+                filter();
+                checkPermissions();
+                checkSolution();
+                guard.value = true;
+            });
         })
 
 
@@ -424,7 +422,7 @@ export default defineComponent({
                 }
             });
             permissions.value.addSolutionOffer.forEach(function (permission) {
-                console.log('addSolutionOffer + solutions' + challenge.value.solutions);
+
                 challenge.value.solutions.forEach(function (solution){
                     if(permission == solution.id){
                         addSolutionOffer.value = true;
@@ -438,6 +436,7 @@ export default defineComponent({
             });
         }
         return {
+            guard,
             editChallenges,
             addSolutionOffer,
             publishSolution,

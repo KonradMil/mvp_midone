@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Tags\HasTags;
 
 
@@ -24,9 +24,11 @@ class Project extends Model
      * @var string[]
      */
     protected $fillable = [
-        'type', 'name', 'challenge_id', 'en_name',
+        'type', 'name', 'challenge_id', 'status', 'en_name',
         'stage','description', 'en_description',
-        'project_accept_offer', 'project_accept_details', 'project_accept_vision'
+        'accept_offer', 'accept_technical_details',
+        'accept_local_vision', 'accept_financial_details',
+        'accept_visit_date', 'selected_offer_id'
     ];
 
     /**
@@ -38,10 +40,17 @@ class Project extends Model
     }
 
     /**
-     * @return HasOne
+     * @return HasMany
      */
-    public function local_vision(): HasOne
+    public function local_visions(): HasMany
     {
-        return $this->hasOne(LocalVision::class, 'id', 'project_id');
+        return $this->hasMany(LocalVision::class, 'id', 'project_id');
+    }
+    /**
+     * @return HasMany
+     */
+    public function visit_dates(): HasMany
+    {
+        return $this->hasMany(VisitDate::class, 'id', 'project_id');
     }
 }

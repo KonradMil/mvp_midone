@@ -1,6 +1,12 @@
 <?php
 
 return [
+    'error' => "Unexpected error occurred!",
+    'save_correct' => "Saved correctly",
+    'delete_correct' => "Delete correctly",
+    'accepted' => 'Accepted',
+    'rejected'=> 'Rejected',
+    'canceled' => 'Canceled',
     'recaptcha_error' => 'Prove you are not a robot.',
     'validation' => [
         'registration' => [
@@ -22,5 +28,20 @@ return [
             'wrong_provider' => "Login method is not allowed.",
             'nonexistent_account' => "There is no account with given e-mail address. Please sign up."
         ]
-    ]
+    ],
+    'challenge' => [
+        'not_found' => "Challenge not found.",
+    ],
+    'solution' => [
+        'not_found' => "Solution not found.",
+    ],
+    'project' => [
+        'not_found' => "Project not found.",
+    ],
+    'offer' => [
+        'not_found' => "Offer not found",
+    ],
+    'user' => [
+        'not_found' => "User not found",
+    ],
 ];

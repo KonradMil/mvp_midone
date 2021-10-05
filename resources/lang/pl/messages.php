@@ -1,6 +1,12 @@
 <?php
 
 return [
+    'error' => "Wystąpił nieoczekiwany błąd!!",
+    'save_correct' => "Zapisano poprawnie",
+    'delete_correct' => "Usunięto poprawnie",
+    'accepted' => 'Zaakceptowano',
+    'rejected'=> 'Odrzucono',
+    'canceled' => 'Odwołano',
     'recaptcha_error' => 'Udowodnij że nie jesteś robotem.',
     'validation' => [
         'registration' => [
@@ -22,5 +28,20 @@ return [
             'wrong_provider' => "Niedozwolona metoda logowania.",
             'nonexistent_account' => "Konto o podanym adresie e-mail nie istnieje. Zarejestruj się."
         ]
-    ]
+    ],
+    'challenge' => [
+        'not_found' => "Wyzwania nie znaleziono.",
+    ],
+    'solution' => [
+        'not_found' => "Rozwiązania nie znaleziono.",
+    ],
+    'project' => [
+        'not_found' => "Projektu nie znaleziono.",
+    ],
+    'offer' => [
+        'not_found' => 'Oferty nie znaleziono'
+    ],
+    'user' => [
+        'not_found' => "Użytkownika nie znaleziono",
+    ],
 ];

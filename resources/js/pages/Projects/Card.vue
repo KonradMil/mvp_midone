@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="intro-y" v-if="guard === true">
         <div class="intro-y flex items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">Projekt</h2>
         </div>
@@ -9,16 +9,24 @@
                 <div class="lg:w-32 font-medium text-base lg:mt-3 ml-3 lg:mx-auto">Inicjowanie projektu</div>
             </div>
             <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
-                <button class="w-10 h-10 rounded-full btn text-gray-600 bg-gray-200 dark:bg-dark-1" @click="showModal">2</button>
-                <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Planowanie projektu</div>
+                <button class="w-10 h-10 rounded-full btn text-gray-600 bg-gray-200 dark:bg-dark-1" @click="showModal">
+                    2
+                </button>
+                <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Planowanie
+                    projektu
+                </div>
             </div>
             <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
                 <button class="w-10 h-10 rounded-full btn text-gray-600 bg-gray-200 dark:bg-dark-1">3</button>
-                <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Realizacja projektu zgodnie z ofertą</div>
+                <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Realizacja
+                    projektu zgodnie z ofertą
+                </div>
             </div>
             <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
                 <button class="w-10 h-10 rounded-full btn text-gray-600 bg-gray-200 dark:bg-dark-1">4</button>
-                <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Zamykanie projektu</div>
+                <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Zamykanie
+                    projektu
+                </div>
             </div>
             <div class="wizard__line hidden lg:block w-2/3 bg-gray-200 dark:bg-dark-1 absolute mt-5"></div>
         </div>
@@ -28,143 +36,203 @@
                 <div class="intro-y box mt-5 lg:mt-0">
                     <div class="relative flex items-center p-5">
                         <div class="w-12 h-12 image-fit">
-                            <img v-if="challenge.screenshot_path != undefined" class="rounded-full" :alt="challenge.name" :src="'/' + challenge.screenshot_path"/>
+                            <img v-if="challenge.screenshot_path != undefined" class="rounded-full"
+                                 :alt="challenge.name" :src="'/' + challenge.screenshot_path"/>
                         </div>
                         <div class="ml-4 mr-auto">
                             <div class="font-medium text-base">
-                                {{ challenge.name }} <span class="text-theme-1 dark:text-theme-10" v-if="challenge.status == 0"> - Szkic</span>
+                                {{ challenge.name }} <span class="text-theme-1 dark:text-theme-10"
+                                                           v-if="challenge.status == 0"> - Szkic</span>
                             </div>
                             <div class="text-gray-600">{{ types[challenge.type] }}</div>
                         </div>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
-                    <a href="javascript:;" class="menu">
-                        <div class="menu__icon"> <i data-feather="home"></i> </div>
-                        <div class="menu__title" @click.prevent="showMenu = !showMenu">
-                            <InfoIcon class="w-4 h-4 mr-2"/>
+                        <a href="javascript:;" class="menu">
+                            <div class="menu__icon"><i data-feather="home"></i></div>
+                            <div class="menu__title" @click.prevent="showMenu = !showMenu">
+                                <InfoIcon class="w-4 h-4 mr-2"/>
                                 Startowa karta projektu
-                            <i data-feather="chevron-down" class="menu__sub-icon"></i>
-                        </div>
-                    </a>
-                    <ul v-if="showMenu" class="intro-y pt-4 pl-5">
-                        <li class="intro-y">
-                            <a class="flex items-center"
-                               href=""
-                               @click.prevent="activeTab = 'podstawowe'"
-                               :class="(activeTab == 'podstawowe')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
-                                <ActivityIcon class="w-4 h-4 mr-2"/>
-                                {{$t('challengesMain.basicInformation')}}
-                            </a>
-                        </li>
-                        <li class="intro-y">
-                            <a class="flex items-center mt-5" href=""
-                               @click.prevent="(activeTab = 'techniczne') && (stage=2)"
-                               :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                <BoxIcon class="w-4 h-4 mr-2"/>
-                                {{$t('challengesMain.technicalDetails')}}                        </a>
-                        </li>
-                        <li class="intro-y">
-                            <a class="flex items-center mt-5" href="" v-if="challenge != undefined"
-                               @click.prevent="activeTab = 'rozwiazania'"
-                               :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                <LockIcon class="w-4 h-4 mr-2"/>
-                                <div v-if="challenge.selected != undefined && challenge.selected.length != 0">{{$t('challengesMain.solutions')}}</div><div v-if="challenge.selected == undefined || challenge.selected.length == 0">{{$t('challengesMain.solutions')}}
+                                <i data-feather="chevron-down" class="menu__sub-icon"></i>
                             </div>
-                            </a>
-                        </li>
-                        <li class="intro-y">
-                            <a v-if="!inTeam && challenge.stage >= 1"
-                               class="flex items-center mt-5" href=""
-                               @click.prevent="activeTab = 'oferty'"
-                               :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                <SettingsIcon class="w-4 h-4 mr-2"/>
-                                {{$t('challengesMain.myOffers')}}
-                            </a>
-                        </li>
-                        <li class="intro-y">
-                            <a v-if="inTeam && challenge.stage >= 1"
-                               class="flex items-center mt-5" href=""
-                               @click.prevent="activeTab = 'all-offers'"
-                               :class="(activeTab == 'all-offers')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                <SettingsIcon class="w-4 h-4 mr-2"/>
-                                {{$t('challengesMain.offers')}}
-                            </a>
-                        </li>
-                        <li class="intro-y">
-                            <a class="flex items-center mt-5" href=""
-                               @click.prevent="activeTab = 'pytania'"
-                               :class="(activeTab == 'pytania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                <SettingsIcon class="w-4 h-4 mr-2"/>
-                                {{$t('communication.questions')}}
-                            </a>
-                        </li>
-                        <li class="intro-y">
-                            <a v-if="challenge.stage === 3"
-                               class="flex items-center mt-5" href=""
-                               @click.prevent="activeTab = 'operational-analysis'"
-                               :class="(activeTab == 'operational-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                <SettingsIcon class="w-4 h-4 mr-2"/>
-                                Analiza operacyjna rozwiązania
-                            </a>
-                        </li>
-                        <li class="intro-y">
-                            <a v-if="challenge.stage === 3"
-                               class="flex items-center mt-5" href=""
-                               @click.prevent="activeTab = 'financial-analysis'"
-                               :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                <SettingsIcon class="w-4 h-4 mr-2"/>
-                                Analiza finansowa rozwiązania
-                            </a>
-                        </li>
-                        <li class="intro-y" v-if="(challenge.author_id == user.id)">
+                        </a>
+                        <ul v-if="showMenu" class="intro-y pt-4 pl-5">
+                            <li class="intro-y">
+                                <a class="flex items-center"
+                                   href=""
+                                   @click.prevent="activeTab = 'podstawowe'"
+                                   :class="(activeTab == 'podstawowe')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
+                                    <ActivityIcon class="w-4 h-4 mr-2"/>
+                                    {{ $t('challengesMain.basicInformation') }}
+                                </a>
+                            </li>
+                            <li class="intro-y">
+                                <a class="flex items-center mt-5" href=""
+                                   @click.prevent="(activeTab = 'techniczne') && (stage=2)"
+                                   :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                    <BoxIcon class="w-4 h-4 mr-2"/>
+                                    {{ $t('challengesMain.technicalDetails') }} </a>
+                            </li>
+                            <li class="intro-y">
+                                <a class="flex items-center mt-5" href="" v-if="challenge != undefined"
+                                   @click.prevent="activeTab = 'rozwiazania'"
+                                   :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                    <LockIcon class="w-4 h-4 mr-2"/>
+                                    <div v-if="challenge.selected != undefined && challenge.selected.length != 0">
+                                        Rozwiązanie
+                                    </div>
+                                    <div v-if="challenge.selected == undefined || challenge.selected.length == 0">
+                                        {{ $t('challengesMain.solutions') }}
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="intro-y">
+                                <a v-if="!inTeam && challenge.stage >= 1"
+                                   class="flex items-center mt-5" href=""
+                                   @click.prevent="activeTab = 'oferty'"
+                                   :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                    <SettingsIcon class="w-4 h-4 mr-2"/>
+                                    Oferta
+                                </a>
+                            </li>
+                            <li class="intro-y">
+                                <a v-if="inTeam && challenge.stage >= 1"
+                                   class="flex items-center mt-5" href=""
+                                   @click.prevent="activeTab = 'all-offers'"
+                                   :class="(activeTab == 'all-offers')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                    <SettingsIcon class="w-4 h-4 mr-2"/>
+                                    {{ $t('challengesMain.offers') }}
+                                </a>
+                            </li>
+                            <li class="intro-y">
+                                <a class="flex items-center mt-5" href=""
+                                   @click.prevent="activeTab = 'pytania'"
+                                   :class="(activeTab == 'pytania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                    <SettingsIcon class="w-4 h-4 mr-2"/>
+                                    {{ $t('communication.questions') }}
+                                </a>
+                            </li>
+                            <li class="intro-y">
+                                <a v-if="challenge.stage === 3"
+                                   class="flex items-center mt-5" href=""
+                                   @click.prevent="activeTab = 'operational-analysis'"
+                                   :class="(activeTab == 'operational-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                    <SettingsIcon class="w-4 h-4 mr-2"/>
+                                    Analiza operacyjna rozwiązania
+                                </a>
+                            </li>
+                            <li class="intro-y">
+                                <a v-if="challenge.stage === 3"
+                                   class="flex items-center mt-5" href=""
+                                   @click.prevent="activeTab = 'financial-analysis'"
+                                   :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                    <SettingsIcon class="w-4 h-4 mr-2"/>
+                                    Analiza finansowa rozwiązania
+                                </a>
+                            </li>
+                            <li class="intro-y" v-if="(challenge.author_id == user.id)">
                                 <a class="flex items-center mt-5" href=""
                                    @click.prevent="activeTab = 'teams'"
                                    :class="(activeTab == 'teams')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
                                     <ActivityIcon class="w-4 h-4 mr-2"/>
-                                    {{$t('teams.teams')}}
+                                    {{ $t('teams.teams') }}
                                 </a>
-                        </li>
-                    </ul>
-                        <a v-if="challenge.stage === 3 && challenge.project !== null"
-                           class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'local-vision'"
-                           :class="(activeTab == 'local-vision')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon v-if="project.project_accept_vision < 1" class="w-4 h-4 mr-2 text-red-600"/>
-                            <CheckCircleIcon v-if="project.project_accept_vision === 1" class="w-4 h-4 mr-2 text-green-600"/>
-                            <XCircleIcon v-if="project.project_accept_vision === 2" class="w-4 h-4 mr-2 text-red-600"/>
-                            Raport z wizji lokalnej
+                            </li>
+                        </ul>
+                        <a v-if="challenge.stage === 3"
+                           class="flex items-center mt-5"
+                           href=""
+                           @click.prevent="showMenuVision = !showMenuVision">
+                            <EditIcon v-if="project.accept_local_vision < 1" class="w-4 h-4 mr-2 text-red-600"/>
+                            <CheckCircleIcon v-if="project.accept_local_vision === 1"
+                                             class="w-4 h-4 mr-2 text-green-600"/>
+                            <XCircleIcon v-if="project.accept_local_vision === 2" class="w-4 h-4 mr-2 text-red-600"/>
+                            Wizja lokalna
                         </a>
-                        <a v-if="challenge.stage === 3 && challenge.project !== null"
-                           class="flex items-center mt-5" href=""
-                           @click.prevent="(activeTab = 'techniczne') && (stage=3)"
-                           :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon v-if="project.project_accept_details < 1" class="w-4 h-4 mr-2 text-red-600"/>
-                            <CheckCircleIcon v-if="project.project_accept_details === 1" class="w-4 h-4 mr-2 text-green-600"/>
-                            <XCircleIcon v-if="project.project_accept_details === 2" class="w-4 h-4 mr-2 text-red-600"/>
-                            Założenia projektu
+                        <ul v-if="showMenuVision" class="intro-y pt-4 pl-5">
+                            <li class="intro-y">
+                                <a class="flex items-center"
+                                   href=""
+                                   @click.prevent="activeTab = 'visit-date'"
+                                   :class="(activeTab == 'visit-date') ? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
+                                    <CalendarIcon class="w-4 h-4 mr-2"/>
+                                    Termin wizyt
+                                </a>
+                            </li>
+                            <li class="intro-y">
+                                <a class="flex items-center mt-5"
+                                   href=""
+                                   @click.prevent="activeTab = 'local-vision'"
+                                   :class="(activeTab == 'local-vision') ? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                                    <Edit2Icon class="w-4 h-4 mr-2"/>
+                                    Raport wizji lokalnej
+                                </a>
+                            </li>
+                        </ul>
+                        <a v-if="challenge.stage === 3 && project.accept_local_vision === 1"
+                           href=""
+                           @click.prevent="activeTab = 'project-details'"
+                           :class="(activeTab == 'project-details') ? 'flex items-center mt-5 text-theme-1 dark:text-theme-10 font-medium mt-5' : 'flex items-center mt-5'">
+                            <EditIcon
+                                v-if="project.accept_technical_details < 1 || project.accept_financial_details < 1"
+                                class="w-4 h-4 mr-2 text-red-600"/>
+                            <CheckCircleIcon
+                                v-if="project.accept_technical_details === 1 && project.accept_financial_details === 1"
+                                class="w-4 h-4 mr-2 text-green-600"/>
+                            <XCircleIcon
+                                v-if="project.accept_technical_details === 2 || project.accept_financial_details === 2"
+                                class="w-4 h-4 mr-2 text-red-600"/>
+                            Akceptacja założeń technicznych
                         </a>
-                        <a v-if="challenge.stage === 3 && challenge.project !== null"
-                           class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'oferty'"
-                           :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                            <EditIcon v-if="project.project_accept_offer < 1" class="w-4 h-4 mr-2 text-red-600"/>
-                            <CheckCircleIcon v-if="project.project_accept_offer === 1" class="w-4 h-4 mr-2 text-green-600"/>
-                            <XCircleIcon v-if="project.project_accept_offer === 2" class="w-4 h-4 mr-2 text-red-600"/>
-                            Oferta
+                        <a v-if="project.accept_local_vision === 0"
+                           :class="(project.accept_local_vision === 1) ? 'flex items-center mt-5 cursor-pointer' : 'flex items-center mt-5 opacity-50 cursor-pointer'">
+                            <EditIcon
+                                v-if="project.accept_technical_details < 1 || project.accept_financial_details < 1"
+                                class="w-4 h-4 mr-2 text-red-600"/>
+                            <Tippy
+                                tag="a"
+                                class="dark:text-gray-300 text-theme-600"
+                                content="Etap odblokuje się po zakończeniu wizji lokalnej">
+                                Akceptacja założeń technicznych
+                            </Tippy>
                         </a>
-                        <a v-if="challenge.stage === 3 && challenge.project !== null"
+                        <a v-if="challenge.stage === 3 && project.accept_technical_details === 1 && project.accept_financial_details === 1"
+                           class="flex items-center mt-5" href=""
+                           @click.prevent="activeTab = 'project-offer'"
+                           :class="(activeTab == 'project-offer') ? 'text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                            <EditIcon v-if="project.accept_offer < 1" class="w-4 h-4 mr-2 text-red-600"/>
+                            <CheckCircleIcon v-if="project.accept_offer === 1" class="w-4 h-4 mr-2 text-green-600"/>
+                            <XCircleIcon v-if="project.accept_offer === 2" class="w-4 h-4 mr-2 text-red-600"/>
+                            Podsumowanie z oferty
+                        </a>
+                        <a v-if="project.accept_technical_details === 0 || project.accept_financial_details === 0"
+                           :class="(project.accept_technical_details === 1 && project.accept_financial_details === 1) ? 'flex items-center mt-5 cursor-pointer' : 'flex items-center mt-5 opacity-50 cursor-pointer'">
+                            <EditIcon
+                                v-if="project.accept_technical_details < 1 || project.accept_financial_details < 1"
+                                class="w-4 h-4 mr-2 text-red-600"/>
+                            <Tippy
+                                tag="a"
+                                class="dark:text-gray-300 text-theme-600"
+                                content="Etap odblokuje się po zaakceptowaniu założeń technicznych">
+                                Podsumowanie z oferty
+                            </Tippy>
+                        </a>
+                        <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
                            @click.prevent="activeTab = 'report-init'"
                            :class="(activeTab == 'report-init')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <EditIcon class="w-4 h-4 mr-2 text-red-600"/>
-                            Checkpointy list fazy 1
+                            Raport z fazy inicjowania
                         </a>
-                 </div>
+                    </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="inTeam">
-                        <button type="button" class="btn btn-primary py-1 px-2" v-if="challenge.solutions.length == 0 && editChallenges" @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
-                            {{$t('models.edit')}}
+                        <button type="button" class="btn btn-primary py-1 px-2"
+                                v-if="challenge.solutions.length == 0 && editChallenges"
+                                @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
+                            {{ $t('models.edit') }}
                         </button>
-                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge, publishChallenges: publishChallenges}})">
+                        <button type="button" class="btn btn-primary py-1 px-2 ml-2"
+                                @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, type: 'challenge', load: challenge, publishChallenges: publishChallenges}})">
                             Studio 3D
                         </button>
                         <button
@@ -172,50 +240,82 @@
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
                             @click="publish(challenge.id)">
-                            {{$t('challengesMain.publish')}}
+                            {{ $t('challengesMain.publish') }}
                         </button>
                         <button
                             v-if="challenge.status == 1 && challenge.solutions.length == 0 && publishChallenges"
                             type="button"
                             class="btn btn-outline-secondary py-1 px-2 ml-auto"
                             @click="unpublish(challenge.id)">
-                            {{$t('challengesMain.unpublish')}}
+                            {{ $t('challengesMain.unpublish') }}
                         </button>
                     </div>
-                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="!inTeam && user.type == 'integrator'">
-                        <button type="button" class="btn btn-primary py-1 px-2 ml-2" @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, publishChallenges: publishChallenges ,type: 'challenge', load: challenge, readOnly: true}})">
+                    <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex"
+                         v-if="!inTeam && user.type == 'integrator'">
+                        <button type="button" class="btn btn-primary py-1 px-2 ml-2"
+                                @click="$router.push({name: 'challengeStudio', params: {id: challenge.id, publishChallenges: publishChallenges ,type: 'challenge', load: challenge, readOnly: true}})">
                             Studio 3D
                         </button>
                         <button v-if="challenge.stage == 1"
-                            type="button"
-                            class="btn btn-outline-secondary py-1 px-2 ml-auto"
-                            @click.prevent="addSolution">
-                            {{$t('challengesMain.addSolution')}}
+                                type="button"
+                                class="btn btn-outline-secondary py-1 px-2 ml-auto"
+                                @click.prevent="addSolution">
+                            {{ $t('challengesMain.addSolution') }}
                         </button>
                     </div>
                 </div>
                 <WhatsNext :user="user" :challenge="challenge" :solutions="challenge.solutions" :stage="3"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
-            <BasicInformationPanel :challenge="challenge" :inTeam="inTeam" v-if="activeTab == 'podstawowe'"></BasicInformationPanel>
-            <TechnicalInformationPanel :project="project" :challenge="challenge" :stage="stage" v-if="activeTab == 'techniczne'" :author_id="solution_project.author_id"></TechnicalInformationPanel>
-            <QuestionsPanel v-if="activeTab == 'pytania'" :author_id="challenge.author_id" :id="challenge.id" :challenge_stage="challenge.stage"></QuestionsPanel>
-            <SolutionsPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge" :inTeam="inTeam" :addChallengeSolution="addChallengeSolution" :acceptChallengeSolutions="acceptChallengeSolutions" :publishSolution="publishSolution" :addSolutionOffer="addSolutionOffer"></SolutionsPanel>
-            <TeamsPanel v-if="(activeTab == 'teams') && ((challenge.author_id == user.id) || (solution.author_id == user.id))" :solution="solution" :challenge="challenge" :who="who" ></TeamsPanel>
-            <OfferAdd v-if="activeTab == 'addingoffer'" :solution_id="selected_solution_id" :challenge_id="challenge.id" :edit_offer_id="edit_offer_id" :change_offer="change_offer"></OfferAdd>
-            <Offers v-if="activeTab == 'oferty'" v-model:activeTab="activeTab" :project="project" :stage = "challenge.stage" :id="challenge.id" :inTeam="inTeam" :addSolutionOffer="addSolutionOffer" :selected_offer_id="challenge.selected_offer_id" :author_id="solution_project.author_id" :challenge_author_id="challenge.author_id"></Offers>
-            <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam" :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
-            <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'" :solution="solution_project" ></OperationalAnalysisInformationPanel>
-            <FinancialAnalysisInformationPanel v-if="activeTab == 'financial-analysis'" :solution="solution_project" ></FinancialAnalysisInformationPanel>
-            <LocalVisionPanel v-if="activeTab == 'local-vision'" :project="project" :challenge_author_id="challenge.author_id" :challenge_id="challenge.id" :author_id="solution_project.author_id"></LocalVisionPanel>
-            <ReportInitPanel v-if="activeTab == 'report-init'" :project="project" :challenge_id="challenge.id" :author_id="solution_project.author_id"></ReportInitPanel>
+            <BasicInformationPanel :challenge="challenge" :inTeam="inTeam" v-if="activeTab == 'podstawowe'"
+                                   :investor="investor" :integrator="integrator"></BasicInformationPanel>
+            <TechnicalInformationProjectPanel :project="project" :challenge="challenge" :stage="challenge.stage"
+                                              v-if="activeTab == 'project-details'"
+                                              :author_id="solution_project.author_id"></TechnicalInformationProjectPanel>
+            <TechnicalInformationPanel :project="project" :challenge="challenge" :stage="stage"
+                                       v-if="activeTab == 'techniczne'"
+                                       :author_id="solution_project.author_id"></TechnicalInformationPanel>
+            <QuestionsPanel v-if="activeTab == 'pytania'" :author_id="challenge.author_id" :id="challenge.id"
+                            :challenge_stage="challenge.stage"></QuestionsPanel>
+            <SolutionProjectPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge" :inTeam="inTeam"
+                                  :addChallengeSolution="addChallengeSolution"
+                                  :acceptChallengeSolutions="acceptChallengeSolutions"
+                                  :publishSolution="publishSolution"
+                                  :addSolutionOffer="addSolutionOffer"></SolutionProjectPanel>
+            <TeamsPanel
+                v-if="(activeTab == 'teams') && ((challenge.author_id == user.id) || (solution.author_id == user.id))"
+                :solution="solution" :challenge="challenge" :who="who"></TeamsPanel>
+            <OfferAdd v-if="activeTab == 'addingoffer'" :stage="challenge.stage" :project="project"
+                      :solution_id="selected_solution_id" :challenge_id="challenge.id" :edit_offer_id="edit_offer_id"
+                      :change_offer="change_offer"></OfferAdd>
+            <OfferProject v-if="activeTab == 'project-offer' || activeTab == 'oferty'" v-model:activeTab="activeTab"
+                          :project="project" :integrator="integrator" :investor="investor" :stage="challenge.stage"
+                          :id="challenge.id" :inTeam="inTeam" :addSolutionOffer="addSolutionOffer"
+                          :selected_offer_id="challenge.selected_offer_id" :author_id="solution_project.author_id"
+                          :challenge_author_id="challenge.author_id" :challenge="challenge"></OfferProject>
+            <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam"
+                             :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
+            <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'"
+                                                 :solution="solution_project"></OperationalAnalysisInformationPanel>
+            <FinancialAnalysisInformationPanel v-if="activeTab == 'financial-analysis'"
+                                               :solution="solution_project"></FinancialAnalysisInformationPanel>
+            <LocalVisionPanel v-if="activeTab == 'local-vision'" :project="project" :challenge="challenge"
+                              :challenge_author_id="challenge.author_id" :challenge_id="challenge.id"
+                              :author_id="solution_project.author_id" :integrator="integrator"
+                              :investor="investor"></LocalVisionPanel>
+            <VisitDatePanel v-if="activeTab == 'visit-date'" :project="project" :challenge="challenge"
+                            :challenge_author_id="challenge.author_id" :challenge_id="challenge.id"
+                            :author_id="solution_project.author_id" :integrator="integrator"
+                            :investor="investor"></VisitDatePanel>
+            <ReportInitPanel v-if="activeTab == 'report-init'" :project="project" :challenge_id="challenge.id"
+                             :author_id="solution_project.author_id"></ReportInitPanel>
             <ModalCard :show="show" @closed="modalClosed">
                 <h3 class="intro-y text-lg font-medium mt-5">Czy na pewno chcesz przejść do następnej fazy?</h3>
                 <div class="intro-y box p-5 mt-12 sm:mt-5" style="text-align: center;">
                     <div class="relative text-gray-700 dark:text-gray-300 mr-4">
                         <button class="btn btn-primary shadow-md mr-2">Tak</button>
                         <button class="btn btn-primary shadow-md mr-2">Anuluj</button>
-                        </div>
+                    </div>
                 </div>
             </ModalCard>
         </div>
@@ -239,38 +339,44 @@ import {
 import GetCardChallenge from "../../compositions/GetCardChallenge";
 import WhatsNext from "../Challenges/WhatsNext";
 import BasicInformationPanel from "../Challenges/components/BasicInformationPanel";
-import TechnicalInformationPanel from "../Challenges/components/TechnicalInformationPanel";
+import TechnicalInformationProjectPanel from "./components/TechnicalInformationProjectPanel";
 import QuestionsPanel from "../Challenges/components/QuestionsPanel";
 import router from "../../router";
-import SolutionsPanel from "../Challenges/components/SolutionsPanel";
+import SolutionProjectPanel from "./components/SolutionProjectPanel";
 import {useToast} from "vue-toastification";
 import OfferAdd from "../Challenges/components/OfferAdd";
-import Offers from "../Challenges/components/Offers";
+import OfferProject from "./components/OfferProject";
 import TeamsPanel from "../Challenges/components/TeamsPanel";
 import ChallengeOffers from "../Challenges/components/ChallengeOffers";
+import TechnicalInformationPanel from "../Challenges/components/TechnicalInformationPanel";
 import OperationalAnalysisInformationPanel from "./components/OperationalAnalysisInformationPanel";
 import FinancialAnalysisInformationPanel from "./components/FinancialAnalysisInformationPanel";
 import LocalVisionPanel from "./components/LocalVisionPanel";
+import VisitDatePanel from "./components/VisitDatePanel";
 import ModalCard from "../../components/ModalCard";
 import ReportInitPanel from "./components/ReportInitPanel";
+import RequestHandler from "../../compositions/RequestHandler";
 
 export default defineComponent({
     name: 'projectCard',
     components: {
-        Offers,
+        OfferProject,
         OfferAdd,
         ChallengeOffers,
         TeamsPanel,
-        SolutionsPanel,
+        SolutionProjectPanel,
         QuestionsPanel,
-        TechnicalInformationPanel,
+        TechnicalInformationProjectPanel,
         BasicInformationPanel,
         WhatsNext,
         OperationalAnalysisInformationPanel,
         FinancialAnalysisInformationPanel,
         ModalCard,
         LocalVisionPanel,
-        ReportInitPanel
+        VisitDatePanel,
+        ReportInitPanel,
+        TechnicalInformationPanel,
+        RequestHandler
     },
     props: {
         id: Number,
@@ -299,26 +405,22 @@ export default defineComponent({
         const inTeam = ref(false);
         const isSolutions = ref(false);
         const isPublic = ref(false);
-        const acceptChallengeOffers = ref(false);
-        const addChallengeSolution = ref(false);
-        const acceptChallengeSolutions = ref(false);
-        const publishChallenges = ref(false);
-        const editChallenges = ref(false);
-        const publishSolution = ref(false);
-        const addSolutionOffer = ref(false);
         const solution_project = ref('');
         const show = ref(false);
         const showMenu = ref(false);
+        const showMenuVision = ref(false);
         const is_done_offer = ref(false);
         const change_offer = ref(false);
         const is_done_technical = ref(false);
         const stage = ref(0);
-
+        const investor = ref({});
+        const integrator = ref({});
+        const guard = ref(false);
 
         watch(() => props.change, (first, second) => {
-            if(props.change === 'all-offers' && user.type === 'integrator'){
+            if (props.change === 'all-offers' && user.type === 'integrator') {
                 activeTab.value = 'oferty';
-            }else{
+            } else {
                 activeTab.value = props.change;
             }
         }, {})
@@ -343,7 +445,8 @@ export default defineComponent({
         });
 
         emitter.on('changeToOffers', e => {
-            activeTab.value = 'oferty';
+            project.value.selected_offer_id = 1
+            activeTab.value = 'project-offer';
             is_done_offer.value = true;
         });
 
@@ -355,47 +458,56 @@ export default defineComponent({
             addSolutionOffer.value = e.addSolutionOffer;
         });
         emitter.on('acceptOffer', e => {
-            project.value.project_accept_offer = 1;
+            project.value.accept_offer = 1;
+            activeTab.value = 'report-init';
         });
         emitter.on('acceptLocalVision', e => {
-            project.value.project_accept_vision = 1;
+            project.value.accept_vision = 1;
+            activeTab.value = 'project-details';
         });
-        emitter.on('acceptDetails', e => {
-            project.value.project_accept_details = 1;
+        emitter.on('acceptTechnicalDetails', e => {
+            project.value.accept_technical_details = 1;
+            if (project.value.accept_technical_details === 1 && project.value.accept_financial_details === 1) {
+                activeTab.value = 'project-offer'
+            }
+        });
+        emitter.on('acceptFinancialDetails', e => {
+            project.value.accept_financial_details = 1;
+            if (project.value.accept_financial_details === 1 && project.value.accept_technical_details === 1) {
+                activeTab.value = 'project-offer'
+            }
         });
         emitter.on('rejectOffer', e => {
-            project.value.project_accept_offer = 2;
+            project.value.accept_offer = 2;
         });
         emitter.on('rejectLocalVision', e => {
-            project.value.project_accept_vision = 2;
+            project.value.accept_vision = 2;
         });
         emitter.on('rejectDetails', e => {
-            project.value.project_accept_details = 2;
+            project.value.accept_details = 2;
         });
 
         const checkSolution = () => {
-             challenge.value.solutions.forEach(function(solution){
-                if(solution.selected_offer_id === challenge.value.selected_offer_id){
+            challenge.value.solutions.forEach(function (solution) {
+                if (solution.selected_offer_id === challenge.value.selected_offer_id) {
                     solution_project.value = solution;
                 }
-             });
+            });
         }
 
         const modalClosed = () => {
             show.value = false;
         }
 
-        const showModal = async() => {
+        const showModal = async () => {
             show.value = !show.value;
-            console.log('showwww');
         }
 
         const filter = () => {
-            console.log(challenge.value.solutions + '->  solutions.value');
             challenge.value.solutions.forEach(function (solution) {
-                if(solution.author_id=== user.id) {
+                if (solution.author_id === user.id) {
                     isSolutions.value = true;
-                } else if((solution.published === 1) && (solution.author.id === user.id)) {
+                } else if ((solution.published === 1) && (solution.author.id === user.id)) {
                     isPublic.value = true;
                 }
             });
@@ -413,18 +525,17 @@ export default defineComponent({
         }
 
         emitter.on('changeTeamsSolution', e => () => {
-            console.log('ChangeTeamsSolution');
             activeTab.value = 'teamsSolution'
         });
 
         emitter.on('*', (type, e) => {
-            if(type == 'activeTab') {
-                    activeTab.value = e.name;
-                    solution.value = e.solution;
-                    who.value = e.who;
-                }
+            if (type == 'activeTab') {
+                activeTab.value = e.name;
+                solution.value = e.solution;
+                who.value = e.who;
+            }
 
-        } );
+        });
 
 
         emitter.on('changeToOfferAdd', e => () => {
@@ -432,30 +543,39 @@ export default defineComponent({
         });
 
         const handleCallback = () => {
-            checkPermissions();
         };
 
-        const getCardProjectRepositories = async (id) => {
-            await axios.post('/api/projects/get/card', {id: id})
-                .then(response => {
-                    if (response.data.success) {
-                        challenge.value = response.data.payload;
-                        project.value = response.data.project;
-                        checkTeam();
-                        filter();
-                        checkPermissions();
-                        checkSolution();
-                    } else {
-                        // toast.error(response.data.message);
-                    }
-                }, handleCallback)
+        const getCardProjectRepositories = async (callback) => {
+            RequestHandler('projects/' + props.id + '/card', 'get', {}, (response) => {
+                challenge.value = response.data.challenge;
+                project.value = response.data.project;
+                callback(response);
+            });
         }
 
         onMounted(function () {
             permissions.value = window.Laravel.permissions;
-            getCardProjectRepositories(props.id);
+            getCardProjectRepositories(function (){
+                checkTeam();
+                filter();
+                checkSolution();
+            });
+            getInvestorAndIntegrator(function () {
+
+            })
+            setTimeout(function () {
+                guard.value = true;
+            }, 1500)
         })
 
+        const getInvestorAndIntegrator = (callback) => {
+            console.log(props.id + '->props.id');
+            RequestHandler('projects/' + props.id + '/investor-integrator', 'get', {}, (response) => {
+                investor.value = response.data.investor;
+                integrator.value = response.data.integrator;
+                callback(response);
+            });
+        }
 
         provide("bind[announcementRef]", el => {
             announcementRef.value = el;
@@ -465,11 +585,11 @@ export default defineComponent({
             newProjectsRef.value = el;
         });
 
-        const delete_cookie = ( name, path = '/', domain ) => {
-            if( get_cookie( name ) ) {
+        const delete_cookie = (name, path = '/', domain) => {
+            if (get_cookie(name)) {
                 document.cookie = name + "=" +
-                    ((path) ? ";path="+path:"")+
-                    ((domain)?";domain="+domain:"") +
+                    ((path) ? ";path=" + path : "") +
+                    ((domain) ? ";domain=" + domain : "") +
                     ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
             }
         }
@@ -497,42 +617,11 @@ export default defineComponent({
             el.tns.goTo("next");
         };
 
-        const checkPermissions = () => {
-            permissions.value.acceptChallengeOffers.forEach(function (permission) {
-                if(permission == props.id){
-                    acceptChallengeOffers.value = true;
-                }
-            });
-            permissions.value.acceptChallengeSolutions.forEach(function (permission) {
-                if(permission == props.id){
-                    acceptChallengeSolutions.value = true;
-                }
-            });
-            permissions.value.publishChallenges.forEach(function (permission) {
-                if(permission == props.id){
-                    publishChallenges.value = true;
-                }
-            });
-            permissions.value.editChallenges.forEach(function (permission) {
-                if(permission == props.id){
-                    editChallenges.value = true;
-                }
-            });
-            permissions.value.addSolutionOffer.forEach(function (permission) {
-                console.log('addSolutionOffer + solutions' + challenge.value.solutions);
-                challenge.value.solutions.forEach(function (solution){
-                    if(permission == solution.id){
-                        addSolutionOffer.value = true;
-                    }
-                });
-            });
-            permissions.value.publishSolution.forEach(function (permission) {
-                if(permission == props.id){
-                    publishSolution.value = true;
-                }
-            });
-        }
         return {
+            guard,
+            investor,
+            integrator,
+            showMenuVision,
             project,
             stage,
             is_done_technical,
@@ -542,14 +631,6 @@ export default defineComponent({
             showModal,
             show,
             modalClosed,
-            editChallenges,
-            addSolutionOffer,
-            publishSolution,
-            publishChallenges,
-            acceptChallengeSolutions,
-            addChallengeSolution,
-            acceptChallengeOffers,
-            checkPermissions,
             permissions,
             filter,
             edit_offer_id,

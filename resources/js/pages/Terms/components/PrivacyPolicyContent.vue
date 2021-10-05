@@ -1,9 +1,7 @@
 <template>
     <div class="intro-y col-span-12 lg:col-span-10 xl:col-span-10">
         <div class="intro-y box lg:mt-5">
-            <div
-                class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5"
-            >
+            <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
                 <h2 class="font-medium text-base mr-auto">Polityka prywatności Platformy DBR77</h2>
             </div>
             <div id="faq-accordion-1" class="accordion p-5">
@@ -15,8 +13,7 @@
                             data-bs-toggle="collapse"
                             data-bs-target="#faq-accordion-collapse-1"
                             aria-expanded="true"
-                            aria-controls="faq-accordion-collapse-1"
-                        >
+                            aria-controls="faq-accordion-collapse-1">
                             1. Postanowienia ogólne
                         </button>
                     </div>
@@ -24,11 +21,8 @@
                         id="faq-accordion-collapse-1"
                         class="accordion-collapse collapse show"
                         aria-labelledby="faq-accordion-content-1"
-                        data-bs-parent="#faq-accordion-1"
-                    >
-                        <div
-                            class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed"
-                        >
+                        data-bs-parent="#faq-accordion-1">
+                        <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                             <ol class="list-disc ml-5 text-gray-600">
                                 <li class="pt-1">
                                     <strong>1.1 </strong> Niniejsza Polityka prywatności określa zasady gromadzenia, wykorzystywania, ujawniania, przechowywania i ochrony danych osobowych przez DBR77.
@@ -51,20 +45,15 @@
                             data-bs-toggle="collapse"
                             data-bs-target="#faq-accordion-collapse-2"
                             aria-expanded="false"
-                            aria-controls="faq-accordion-collapse-2"
-                        >
+                            aria-controls="faq-accordion-collapse-2">
                             2. Kto jest administratorem danych osobowych?
                         </button>
                     </div>
-                    <div
-                        id="faq-accordion-collapse-2"
+                    <div id="faq-accordion-collapse-2"
                         class="accordion-collapse collapse"
                         aria-labelledby="faq-accordion-content-2"
-                        data-bs-parent="#faq-accordion-1"
-                    >
-                        <div
-                            class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed"
-                        >
+                        data-bs-parent="#faq-accordion-1">
+                        <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                             <ol class="list-disc ml-5 text-gray-600">
                                 <li class="pt-1">
                                     <strong>2.1 </strong> Administratorem danych osobowych jest CAULFIELD SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ, z siedzibą w Toruniu przy ul. Żółkiewskiego 31, 87-100 Toruń, wpisaną do rejestru przedsiębiorców Krajowego Rejestru Sądowego prowadzonego przez Sąd Rejonowy w Toruniu, VII Wydział Gospodarczy Krajowego Rejestru Sądowego pod numerem KRS 0000860440, NIP 8792725331, REGON 387073039, o kapitale zakładowym 100.000 zł (sto tysięcy złotych)..
@@ -84,20 +73,15 @@
                             data-bs-toggle="collapse"
                             data-bs-target="#faq-accordion-collapse-3"
                             aria-expanded="false"
-                            aria-controls="faq-accordion-collapse-3"
-                        >
+                            aria-controls="faq-accordion-collapse-3">
                             3. Dane osobowe
                         </button>
                     </div>
-                    <div
-                        id="faq-accordion-collapse-3"
+                    <div id="faq-accordion-collapse-3"
                         class="accordion-collapse collapse"
                         aria-labelledby="faq-accordion-content-3"
-                        data-bs-parent="#faq-accordion-1"
-                    >
-                        <div
-                            class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed"
-                        >
+                        data-bs-parent="#faq-accordion-1">
+                        <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                             <ol class="list-disc ml-5 text-gray-600">
                                 <li class="pt-1">
                                     <strong>3.1 </strong> Dane osobowe” to informacje, które mogą być powiązane z określoną osobą lub mogą być wykorzystane do identyfikacji konkretnej osoby, czy to za pomocą tych danych, czy też tych danych i innych informacji, do których mamy lub możemy mieć dostęp. Wszystkie przekazane dane osobowe będą przetwarzane zgodnie z najwyższymi standardami bezpieczeństwa i poufności.
@@ -114,20 +98,15 @@
                             data-bs-toggle="collapse"
                             data-bs-target="#faq-accordion-collapse-4"
                             aria-expanded="false"
-                            aria-controls="faq-accordion-collapse-4"
-                        >
+                            aria-controls="faq-accordion-collapse-4">
                             4. Gromadzenie i wykorzystanie danych osobowych
                         </button>
                     </div>
-                    <div
-                        id="faq-accordion-collapse-4"
+                    <div id="faq-accordion-collapse-4"
                         class="accordion-collapse collapse"
                         aria-labelledby="faq-accordion-content-4"
-                        data-bs-parent="#faq-accordion-1"
-                    >
-                        <div
-                            class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed"
-                        >
+                        data-bs-parent="#faq-accordion-1">
+                        <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                             <ol class="list-disc ml-5 text-gray-600">
                                 <li class="pt-1">
                                     <strong>4.1 </strong> Gromadzimy, przetwarzamy i przechowujemy dane osobowe uzyskane od Ciebie i innych urządzeń (w tym urządzeń mobilnych), z których możesz korzystać, podczas gdy: korzystasz z naszych usług lub w inny sposób korespondujesz z nami w związku z naszymi usługami.
@@ -187,8 +166,7 @@
                             6. Twoje prawa
                         </button>
                     </div>
-                    <div
-                        id="faq-accordion-collapse-6"
+                    <div id="faq-accordion-collapse-6"
                         class="accordion-collapse collapse"
                         aria-labelledby="faq-accordion-content-6"
                         data-bs-parent="#faq-accordion-1">

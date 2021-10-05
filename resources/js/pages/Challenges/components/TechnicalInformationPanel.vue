@@ -4,16 +4,7 @@
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12 xxl:col-span-6">
                 <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-                    <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.technicalDetails')}}
-                        <div v-if="challenge.stage === 3">
-                        <div class="flex items-center justify-center text-theme-9 pt-2" v-if="project.project_accept_details === 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
-                        <div class="flex items-center justify-center text-theme-6 pt-2" v-if="project.project_accept_details === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
-                        <div class="flex items-center mr-3 pt-2" v-if="project.project_accept_details < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
-                        </div>
-                    </h2>
-                    <button v-if="stage === 3 && author_id === user.id" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveTechnicalDetails">{{$t('profiles.save')}}</button>
-                    <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary mr-6" @click.prevent="acceptTechnicalDetails">Akceptuje</button>
-                    <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary" @click.prevent="rejectTechnicalDetails">Odrzucam</button>
+                    <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.technicalDetails')}}</h2>
                 </div>
                 <div class="px-5 py-5">
                     <div
@@ -220,16 +211,7 @@
             <!-- BEGIN: Daily Sales -->
             <div class="intro-y box col-span-12 xxl:col-span-6">
                 <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-                    <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.financialDetails')}}
-                        <div v-if="challenge.stage === 3">
-                        <div class="flex items-center justify-center text-theme-9 pt-2" v-if="project.project_accept_details === 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
-                        <div class="flex items-center justify-center text-theme-6 pt-2" v-if="project.project_accept_details === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
-                        <div class="flex items-center mr-3 pt-2" v-if="project.project_accept_details < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
-                        </div>
-                    </h2>
-                    <button v-if="stage === 3 && author_id === user.id" class="btn btn-primary w-20 mt-3" style="margin-top: 3px;" @click.prevent="saveFinancialDetails">{{$t('profiles.save')}}</button>
-                    <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary mr-6" @click.prevent="acceptFinancialDetails">Akceptuje</button>
-                    <button v-if="challenge.author_id === user.id && stage === 3" class="btn btn-primary" @click.prevent="rejectFinancialDetails">Odrzucam</button>
+                    <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.financialDetails')}}</h2>
                 </div>
                 <div class="px-5 py-5">
                     <div
@@ -392,8 +374,10 @@
 </template>
 
 <script>
-import {computed, getCurrentInstance, onMounted, ref} from "vue";
+import {computed, getCurrentInstance, onBeforeMount, onMounted, ref} from "vue";
 import {useToast} from "vue-toastification";
+import UnityBridgeWorkshop from "../../Unity/Workshop/bridge_workshop";
+import router from "../../../router";
 
 export default {
     name: "TechnicalInformationPanel",
@@ -412,125 +396,16 @@ export default {
         const details = require("../../../json/challenge.json");
         const toast = useToast();
         const user = window.Laravel.user;
-        const challenge_details = ref({
-            select_work_shifts: '',
-            select_number_of_lines: '',
-            select_detail_destination: '',
-            select_detail_range: '',
-            select_detail_position: '',
-            select_detail_pick: '',
-            select_detail_size: '',
-            select_detail_material: '',
-            select_pick_quality: '',
-            select_detail_weight: ''
-        });
-
-        const saveTechnicalDetails = async () => {
-            axios.post('/api/projects/technical-details/save', {
-                id: props.challenge.technical_details.id,
-                detail_weight: props.challenge.technical_details.detail_weight,
-                pick_quality: props.challenge.technical_details.pick_quality,
-                detail_material: props.challenge.technical_details.detail_material,
-                detail_size: props.challenge.technical_details.detail_size,
-                detail_pick: props.challenge.technical_details.detail_pick,
-                detail_position: props.challenge.technical_details.detail_position,
-                detail_range: props.challenge.technical_details.detail_range,
-                detail_destination: props.challenge.technical_details.detail_destination,
-                number_of_lines: props.challenge.technical_details.number_of_lines,
-                work_shifts: props.challenge.technical_details.work_shifts,
-            })
-                .then(response => {
-                    if (response.data.success) {
-                        toast.success('Zapisano poprawnie');
-                    } else {
-
-                    }
-                })
-        }
-
-        const saveFinancialDetails = async () => {
-            axios.post('/api/projects/financial-details/save', {
-                id: props.challenge.financial_before.id,
-                days: props.challenge.financial_before.days,
-                shifts: props.challenge.financial_before.shifts,
-                shift_time: props.challenge.financial_before.shift_time,
-                weekend_shift: props.challenge.financial_before.weekend_shift,
-                breakfast: props.challenge.financial_before.breakfast,
-                stop_time: props.challenge.financial_before.stop_time,
-                operator_performance: props.challenge.financial_before.operator_performance,
-                defective: props.challenge.financial_before.defective,
-                number_of_operators: props.challenge.financial_before.number_of_operators,
-                operator_cost: props.challenge.financial_before.operator_cost,
-                absence: props.challenge.financial_before.absence,
-                cycle_time: props.challenge.financial_before.cycle_time,
-            })
-                .then(response => {
-                    if (response.data.success) {
-                        toast.success('Zapisano poprawnie');
-                    } else {
-
-                    }
-                })
-        }
-
-        const acceptTechnicalDetails = async () => {
-            axios.post('/api/projects/technical-details/accept', {id: props.challenge.id})
-                .then(response => {
-                    if (response.data.success) {
-                        toast.success('Zapisano poprawnie');
-                        emitter.emit('acceptDetails', {});
-                    } else {
-
-                    }
-                })
-        }
-        const rejectTechnicalDetails = async () => {
-            axios.post('/api/projects/technical-details/reject', {id: props.challenge.id})
-                .then(response => {
-                    if (response.data.success) {
-                        toast.success('Zapisano poprawnie');
-                        emitter.emit('rejectDetails', {});
-                    } else {
-
-                    }
-                })
-        }
-        const acceptFinancialDetails = async () => {
-            axios.post('/api/projects/financial-details/accept', {id: props.challenge.id})
-                .then(response => {
-                    if (response.data.success) {
-                        toast.success('Zaakceptowałeś szczegóły techniczne');
-                        emitter.emit('acceptDetails', {});
-                    } else {
-
-                    }
-                })
-        }
-        const rejectFinancialDetails = async () => {
-            axios.post('/api/projects/technical-details/reject', {id: props.challenge.id})
-                .then(response => {
-                    if (response.data.success) {
-                        toast.success('Odrzuciłeś szczegóły finansowe');
-                        emitter.emit('rejectDetails', {});
-                    } else {
-
-                    }
-                })
-        }
+        const example = ref({});
         onMounted(() => {
 
         });
 
         return {
+            example,
             user,
-            saveTechnicalDetails,
-            saveFinancialDetails,
             challenge,
             details,
-            acceptTechnicalDetails,
-            acceptFinancialDetails,
-            rejectTechnicalDetails,
-            rejectFinancialDetails
         }
     }
 }
