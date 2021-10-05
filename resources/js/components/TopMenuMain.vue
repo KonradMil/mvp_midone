@@ -10,9 +10,9 @@
               'top-menu--active': menu.active
             }">
 <!--                    @click="linkTo(menu, router)"-->
-                    <div class="top-menu__icon">
-                        <component :is="menu.icon" />
-                    </div>
+<!--                    <div class="top-menu__icon">-->
+<!--                        <component :is="menu.icon" />-->
+<!--                    </div>-->
                     <div class="top-menu__title">
                         {{ menu.title }}
 <!--                        <ChevronDownIcon v-if="menu.subMenu" class="top-menu__sub-icon" />-->

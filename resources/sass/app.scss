@@ -151,32 +151,49 @@
 @import "components/full-calendar";
 @import "components/pristine";
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
-.top-nav>ul li .top-menu:not(.top-menu--active) .top-menu__icon:before {
+
+.top-nav>ul li .top-menu__icon:before {
     border-color: #930f68;
 }
 .top-nav>ul li .top-menu__icon,.top-nav>ul li .top-menu__title {
     color: #930f68 !important;
 }
-.top-nav>ul li:hover .top-menu__icon:hover,.top-nav>ul li:hover .top-menu__title {
+.top-nav>ul li:hover .top-menu__icon,.top-nav>ul li:hover .top-menu__title {
     color: white !important;
 }
-::-webkit-scrollbar {
-    width: 20px;
-    background:lightgray;
+//::-webkit-scrollbar {
+//    width: 20px;
+//    background:lightgray;
+//}
+//
+//::-webkit-scrollbar-track {
+//    background-color: #e4e4e4;
+//    border-radius: 100px;
+//}
+//
+//::-webkit-scrollbar-thumb {
+//    border-radius: 100px;
+//    border-left: 0;
+//    border-right: 0;
+//    background-color: #930f68;
+//}
+::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
 }
-
-::-webkit-scrollbar-track {
-    background-color: #e4e4e4;
-    border-radius: 100px;
+::-webkit-scrollbar-thumb{
+    background: #930f68;
+    border: 1px solid #FFFFFF;
+    border-radius: 10px;
 }
-
-::-webkit-scrollbar-thumb {
-    border-radius: 100px;
-    border-left: 0;
-    border-right: 0;
-    background-color: #930f68;
+::-webkit-scrollbar-thumb:hover{
+    background: #6B104D;
 }
-
+::-webkit-scrollbar-track{
+    background: #F0F0F0;
+    border-radius: 0px;
+    box-shadow: inset 0px 0px 0px 0px #F0F0F0;
+}
 .input-shadow {
     background: #FFFFFF;
     box-shadow: 0px 5px 30px -5px rgba(94, 80, 172, 0.5);
