@@ -62,9 +62,10 @@ class ProjectController extends Controller
      * @param Request $request
      * @param ProjectRepository $projectRepository
      * @param ProjectService $projectService
+     * @param LocalVisionRepository $localVisionRepository
      * @return JsonResponse
      */
-    public function saveLocalVision(Request $request, ProjectRepository $projectRepository, ProjectService $projectService): JsonResponse
+    public function saveLocalVision(Request $request, ProjectRepository $projectRepository, ProjectService $projectService, LocalVisionRepository $localVisionRepository): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
@@ -84,19 +85,42 @@ class ProjectController extends Controller
             return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
         }
 
-        try {
-            $newLocalVision = $projectService->addLocalVision($parameters);
+        if($parameters->reportId > 0){
 
-            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
-            $responseBuilder->setData('local_vision', $newLocalVision);
+            $localVision = $localVisionRepository->find($parameters->reportId);
+
+            if(!$localVision){
+                $responseBuilder->setErrorMessage(__('messages.project.not_found'));
+                return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            }
+
+            try {
+                $updateLocalVision = $projectService->updateLocalVision($parameters, $localVision);
+
+                $responseBuilder->setSuccessMessage(__('messages.save_correct'));
+                $responseBuilder->setData('local_vision', $updateLocalVision);
+
+            } catch (QueryException $e) {
+
+                $responseBuilder->setErrorMessage(__('messages.error'));
+                return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+            }
+        } else {
+            try {
+                $newLocalVision = $projectService->addLocalVision($parameters);
+
+                $responseBuilder->setSuccessMessage(__('messages.save_correct'));
+                $responseBuilder->setData('local_vision', $newLocalVision);
 
 
-        } catch (QueryException $e) {
+            } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+                $responseBuilder->setErrorMessage(__('messages.error'));
+                return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
+            }
         }
+
 
         return $responseBuilder->getResponse();
     }

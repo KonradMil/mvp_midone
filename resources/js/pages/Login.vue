@@ -1,14 +1,14 @@
 <template>
     <div>
-        <div class="container sm:px-10">
+        <div class="container sm:px-10">en
             <div class="block xl:grid grid-cols-2 gap-4">
                 <!-- BEGIN: Login Info -->
                 <div class="hidden xl:flex flex-col min-h-screen">
-                    <a target="_blank" href="" class="-intro-x flex items-center pt-5">
+                    <a class="-intro-x flex items-center pt-5 cursor-default">
                         <img
                             alt="DBR77 Platforma Robotów "
                             class="w-2/4 mt-36"
-                            src="/s3/twopointo/images/dbr_logo_white_notagline.svg"
+                            src="/s3/twopointo/images/dbr_logo_white.svg"
                         />
                     </a>
                 </div>
