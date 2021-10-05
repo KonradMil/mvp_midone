@@ -252,7 +252,7 @@
                                 </button>
                             </div>
                             <div class="social-auth flex flex-col intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                                <button @click="handleSocialLogin('facebook', $event)"
+                                <button @click="handleSocialRegistration('facebook', $event)"
                                         class="btn btn-social btn-outline-secondary py-3 px-4 w-full xl:mr-3 align-top">
                                     <div class="icon">
                                         <img src="icons/facebook.svg"/>
@@ -261,7 +261,7 @@
                                         Rejestracja Facebook
                                     </div>
                                 </button>
-                                <button @click="handleSocialLogin('google', $event)"
+                                <button @click="handleSocialRegistration('google', $event)"
                                         class="btn btn-social btn-outline-secondary py-3 px-4 w-full xl:mr-3 align-top">
                                     <div class="icon">
                                         <img src="icons/google.svg"/>
@@ -566,7 +566,7 @@ export default {
             this.register();
         },
 
-        isSocialSignUpDataValid(displayErrors = true){
+        isSocialSignUpDataValid(displayErrors = true) {
 
             let isDataValid = true;
 
@@ -575,40 +575,40 @@ export default {
             this.socialRulesConsentError = false;
             this.socialPricingConsentError = false;
 
-            if(this.formData.type !== 'integrator' && this.formData.type !== 'investor') {
+            if (this.formData.type !== 'integrator' && this.formData.type !== 'investor') {
 
                 isDataValid = false;
 
-                if(displayErrors) {
+                if (displayErrors) {
                     this.socialAccountTypeError = true;
                 }
 
             }
 
-            if(!this.formData.rodo) {
+            if (!this.formData.rodo) {
 
                 isDataValid = false;
 
-                if(displayErrors) {
+                if (displayErrors) {
                     this.socialPrivacyPolicyConsentError = true;
                 }
 
             }
 
-            if(!this.formData.rodo3) {
+            if (!this.formData.rodo3) {
 
                 isDataValid = false;
 
-                if(displayErrors) {
+                if (displayErrors) {
                     this.socialRulesConsentError = true;
                 }
 
             }
 
-            if(!this.formData.rodo2) {
+            if (!this.formData.rodo2) {
                 isDataValid = false;
 
-                if(displayErrors) {
+                if (displayErrors) {
                     this.socialPricingConsentError = true;
                 }
             }
@@ -616,12 +616,12 @@ export default {
             return isDataValid;
         },
 
-        handleSocialLogin(provider, e) {
+        handleSocialRegistration(provider, e) {
 
             e.preventDefault();
             this.socialSignupProvider = provider;
 
-            if(this.isSocialSignUpDataValid(false)) {
+            if (this.isSocialSignUpDataValid(false)) {
                 this.continueSocialRegistration(e);
             } else {
                 this.modalSocialConsents = true;
@@ -629,14 +629,14 @@ export default {
         },
 
         continueSocialRegistration(e) {
-            if(this.isSocialSignUpDataValid()) {
+            if (this.isSocialSignUpDataValid()) {
 
                 window.location.href =
-                    "/auth/social/"+this.socialSignupProvider+"/sign_up?"
-                    +"privacyPolicyConsent=1&"
-                    +"serviceRulesConsent=1&"
-                    +"pricingConsent=1&"
-                    +"accountType="+this.formData.type;
+                    "/auth/social/" + this.socialSignupProvider + "/sign_up?"
+                    + "privacyPolicyConsent=1&"
+                    + "serviceRulesConsent=1&"
+                    + "pricingConsent=1&"
+                    + "accountType=" + this.formData.type;
 
             }
         }

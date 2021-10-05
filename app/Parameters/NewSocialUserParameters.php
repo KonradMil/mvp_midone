@@ -22,6 +22,16 @@ class NewSocialUserParameters extends Parameters
     public string $type;
 
     /**
+     * @var string|null
+     */
+    public ?string $firstName = null;
+
+    /**
+     * @var string|null
+     */
+    public ?string $lastName = null;
+
+    /**
      * @var bool
      */
     public bool $pricingConsent;
@@ -52,6 +62,16 @@ class NewSocialUserParameters extends Parameters
     public ?string $facebookId = null;
 
     /**
+     * @var string|null
+     */
+    public ?string $avatar = null;
+
+    /**
+     * @var string
+     */
+    public string $emailVerifiedAt;
+
+    /**
      *
      */
     public function __construct()
@@ -79,7 +99,7 @@ class NewSocialUserParameters extends Parameters
         ];
 
         $this->validationMessages = [
-            'type.in' => __('messages.validation.registration.wrong_account_type')
+            'type.in' => __('messages.validation.registration.wrong_account_type'),
         ];
     }
 

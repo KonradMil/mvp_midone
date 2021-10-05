@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Handlers\SocialAuthHandler;
 use App\Models\User;
+use App\Parameters\NewSocialUserParameters;
 use App\Repository\Eloquent\UserRepository;
 use App\Services\UserService;
 use Exception;
@@ -14,21 +15,26 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+/**
+ *
+ */
 class AuthController extends Controller
 {
 
+    /**
+     * @var array|string[]
+     */
     protected array $allowedSocialProviders = ['facebook', 'google'];
 
     /**
      * @throws Exception
      */
-    public function socialCallback(Request $request, UserRepository $userRepository, UserService $userService, string $provider = '')
-    : View|Factory|Redirector|Application|\Illuminate\Http\RedirectResponse
+    public function socialCallback(Request $request, UserRepository $userRepository, UserService $userService, string $provider = ''): View|Factory|Redirector|Application|\Illuminate\Http\RedirectResponse
     {
+
         if ($provider !== '' && in_array($provider, $this->allowedSocialProviders)) {
 
             if (session('social_registration')) {
@@ -36,25 +42,28 @@ class AuthController extends Controller
                 session()->remove('social_registration');
 
                 $requestHandler = new SocialAuthHandler($request);
+
+                /** @var NewSocialUserParameters $parameters */
                 $parameters = $requestHandler->getParameters();
 
-                if(!$parameters->isValid()) {
+                if (!$parameters->isValid()) {
 
-                    foreach($parameters->getMessageBag() as $msg) {
+                    $messageBag = $parameters->getMessageBag();
+
+                    foreach ($messageBag->getMessages() as $msg) {
                         foreach ($msg as $m) {
                             session()->flash('error', $m);
                         }
                     }
 
-                    return redirect('https://facebook.com');
+                    return redirect('login');
 
                 }
 
-                /** @var User $user */
-                $user = $userService->addUser($parameters);
+                $user = $userService->socialRegistration($parameters);
 
                 Auth::login($user);
-                return redirect('/login');
+                return redirect('/dashboard');
 
             } else {
 
@@ -85,7 +94,7 @@ class AuthController extends Controller
                     }
 
                     Auth::login($user);
-                    return redirect('/login');
+                    return redirect('/dashboard');
                 }
 
                 if ($provider === 'facebook') {
@@ -96,7 +105,7 @@ class AuthController extends Controller
                     }
 
                     Auth::login($user);
-                    return redirect('/login');
+                    return redirect('/dashboard');
                 }
 
             }
@@ -120,7 +129,12 @@ class AuthController extends Controller
         return Socialite::driver($provider)->redirect();
     }
 
-    public function socialSignUp(Request $request, string $provider)
+    /**
+     * @param Request $request
+     * @param string $provider
+     * @return RedirectResponse
+     */
+    public function socialSignUp(Request $request, string $provider): RedirectResponse
     {
 
         if (!in_array($provider, $this->allowedSocialProviders)) {

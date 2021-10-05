@@ -12,19 +12,19 @@
                             src="/s3/twopointo/images/dbr_logo_white.svg"
                         />
                     </a>
-<!--                    <div class="my-auto">-->
-<!--                        <img-->
-<!--                            alt="DBR77 Platforma Robotów "-->
-<!--                            class="-intro-x w-1/2 -mt-16"-->
-<!--                            src="/s3/twopointo/images/workers.svg"-->
-<!--                        />-->
-<!--                        <div-->
-<!--                            class="-intro-x text-white font-medium text-4xl leading-tight mt-10"-->
-<!--                        >-->
-<!--                            Pierwszy na świecie <br/>marketplace Robotów-->
-<!--                        </div>-->
+                    <!--                    <div class="my-auto">-->
+                    <!--                        <img-->
+                    <!--                            alt="DBR77 Platforma Robotów "-->
+                    <!--                            class="-intro-x w-1/2 -mt-16"-->
+                    <!--                            src="/s3/twopointo/images/workers.svg"-->
+                    <!--                        />-->
+                    <!--                        <div-->
+                    <!--                            class="-intro-x text-white font-medium text-4xl leading-tight mt-10"-->
+                    <!--                        >-->
+                    <!--                            Pierwszy na świecie <br/>marketplace Robotów-->
+                    <!--                        </div>-->
 
-<!--                    </div>-->
+                    <!--                    </div>-->
                 </div>
                 <!-- END: Login Info -->
                 <!-- BEGIN: Login Form -->
@@ -37,7 +37,8 @@
                         >
                             {{ $t('login.loginTitle') }}
                         </h2>
-                        <div v-if="resendEmail" class="intro-x flex flex-col text-gray-700 dark:text-gray-600 text-xs sm:text-sm mt-4">
+                        <div v-if="resendEmail"
+                             class="intro-x flex flex-col text-gray-700 dark:text-gray-600 text-xs sm:text-sm mt-4">
                             <span style="padding-bottom: 10px;">Link aktywacyjny nie dotarł?</span>
                             <button @click="resendConfirmationEmail" class="btn btn-secondary">
                                 Wyślij link ponownie
@@ -90,7 +91,10 @@
                             </button>
                         </div>
                         <div class="social-auth flex flex-col intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                            <button class="btn btn-social btn-outline-secondary py-3 px-4 w-full xl:mr-3 align-top">
+                            <button
+                                @click="handleSocialRegistration('facebook', $event)"
+                                class="btn btn-social btn-outline-secondary py-3 px-4 w-full xl:mr-3 align-top"
+                            >
                                 <div class="icon">
                                     <img src="icons/facebook.svg"/>
                                 </div>
@@ -98,7 +102,10 @@
                                     Logowanie Facebook
                                 </div>
                             </button>
-                            <button class="btn btn-social btn-outline-secondary py-3 px-4 w-full xl:mr-3 align-top">
+                            <button
+                                @click="handleSocialRegistration('google', $event)"
+                                class="btn btn-social btn-outline-secondary py-3 px-4 w-full xl:mr-3 align-top"
+                            >
                                 <div class="icon">
                                     <img src="icons/google.svg"/>
                                 </div>
@@ -112,11 +119,13 @@
                         </div>
                         <div class="intro-x mt-10 xl:mt-24 text-gray-700 dark:text-gray-600 text-center xl:text-left">
                             {{ $t('login.pol1') }}<br/>
-                            <a class="text-theme-1 dark:text-theme-10" href="/terms/terms-of-service" @click.prevent="$router.push({path: '/terms/terms-of-service'})">
+                            <a class="text-theme-1 dark:text-theme-10" href="/terms/terms-of-service"
+                               @click.prevent="$router.push({path: '/terms/terms-of-service'})">
                                 {{ $t('login.pol2') }}
                             </a>
                             &
-                            <a class="text-theme-1 dark:text-theme-10" href="/terms/privacy-policy" @click.prevent="$router.push({path: '/terms/privacy-policy'})">
+                            <a class="text-theme-1 dark:text-theme-10" href="/terms/privacy-policy"
+                               @click.prevent="$router.push({path: '/terms/privacy-policy'})">
                                 {{ $t('login.pol3') }}
                             </a>
                         </div>
@@ -268,7 +277,7 @@ export default {
 
     methods: {
 
-        handleSubmit: async function(e){
+        handleSubmit: async function (e) {
 
             e.preventDefault()
 
@@ -307,7 +316,7 @@ export default {
                             },
                             (error) => {
 
-                                if(typeof error.response.data.accountInactive !== 'undefined') {
+                                if (typeof error.response.data.accountInactive !== 'undefined') {
 
                                     this.resendEmail = true;
 
@@ -327,7 +336,12 @@ export default {
                 });
             });
 
-        }
+        },
+
+        handleSocialRegistration(provider, e) {
+            e.preventDefault();
+            window.location.href = "/auth/social/" + provider + "/sign_in";
+        },
 
     },
 
