@@ -19,6 +19,8 @@ Route::get('studio/s3/{path}', [S3Controller::class, 'reRoute'])->where('path', 
 
 Route::get('studio/challenge/{challengeId}', [StudioController::class, 'challenge']);
 
+require 'web/auth.php';
+
 Route::get('{any}', function () {
     return view('app');
 })->where('any', '.*');

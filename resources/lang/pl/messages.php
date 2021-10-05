@@ -11,7 +11,7 @@ return [
     'validation' => [
         'registration' => [
             'wrong_account_type' => "Nieprawidłowy typ konta."
-        ],
+        ]
     ],
     'registration' => [
         'account_created' => "Twoje konto zostało utworzone! Na twój adres e-mail został wysłany link aktywacyjny w celu potwierdzenia.",
@@ -23,7 +23,11 @@ return [
     ],
     'login' => [
         'wrong_credentials' => "Nieprawidłowy adres e-mail lub hasło.",
-        'account_inactive' => "Twoje konto jest nieaktywne. Sprawdź swóją skrzynkę e-mail, a następnie kliknij w link aktywacyjny."
+        'account_inactive' => "Twoje konto jest nieaktywne. Sprawdź swóją skrzynkę e-mail, a następnie kliknij w link aktywacyjny.",
+        'socialite' => [
+            'wrong_provider' => "Niedozwolona metoda logowania.",
+            'nonexistent_account' => "Konto o podanym adresie e-mail nie istnieje. Zarejestruj się."
+        ]
     ],
     'challenge' => [
         'not_found' => "Wyzwania nie znaleziono.",
@@ -35,7 +39,7 @@ return [
         'not_found' => "Projektu nie znaleziono.",
     ],
     'offer' => [
-      'not_found' => 'Oferty nie znaleziono'
+        'not_found' => 'Oferty nie znaleziono'
     ],
     'user' => [
         'not_found' => "Użytkownika nie znaleziono",
