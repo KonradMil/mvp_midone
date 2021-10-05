@@ -20,6 +20,7 @@ class LocalVisionHandler extends RequestHandler
         $parameters = new NewLocalVisionParameters();
         $parameters->authorId = Auth::user()->id;
         $parameters->projectId = (int)$this->request->route()->parameter('project_id');
+        $parameters->reportId = $this->request->get('report_id');
         $parameters->description = $this->request->get('description');
         $parameters->before = $this->request->get('before');
         $parameters->after = $this->request->get('after');

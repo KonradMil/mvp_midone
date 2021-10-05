@@ -273,11 +273,11 @@
                 <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">{{ $t('challengesMain.financialDetails') }}
                         <div v-if="challenge.stage === 3">
-                            <div class="flex items-center justify-center text-theme-9 pt-2"
+                            <div class="intro-y flex items-center justify-center text-theme-9 pt-2"
                                  v-if="project.accept_financial_details === 1 && stage === 3"><i
                                 data-feather="check-square" class="w-4 h-4 mr-2"></i>{{ $t('challengesMain.accepted') }}
                             </div>
-                            <div class="flex items-center justify-center text-theme-6 pt-2"
+                            <div class="intro-y flex items-center justify-center text-theme-6 pt-2"
                                  v-if="project.accept_financial_details === 2 && stage === 3"><i
                                 data-feather="check-square" class="w-4 h-4 mr-2"></i>{{ $t('challengesMain.rejected') }}
                             </div>
