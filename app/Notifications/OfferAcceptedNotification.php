@@ -45,7 +45,7 @@ class OfferAcceptedNotification extends Notification
     {
         return (new MailMessage)
             ->line('Oferta została zaakceptowana do wyzwania: ' . $this->challenge->name .'.')
-            ->action('Sprawdź', url('https://staging.appworks-dev.pl/challenges/card/' . $this->challenge->id))
+            ->action('Sprawdź', url(env('APP_PATH') . '/challenges/card/' . $this->challenge->id))
             ->line('Dziękujemy za korzystanie z platformy DBR77!');
     }
 
