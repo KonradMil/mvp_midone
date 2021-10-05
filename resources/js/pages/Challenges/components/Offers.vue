@@ -5,9 +5,9 @@
         </div>
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
-            <div class="intro-y box col-span-6 xxl:col-span-6" v-for="offer in offers.list" :key="offer.id">
-
-                <div :class="(offer.rejected === 1) ? 'px-5 py-5 opacity-50' : 'px-5 py-5'">
+            <transition-group name="fade">
+                <div class="intro-y box col-span-6 xxl:col-span-6" v-for="offer in offers.list" :key="offer.id">
+                    <div :class="(offer.rejected === 1) ? 'px-5 py-5 opacity-50' : 'px-5 py-5'">
                     <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
                         <div class="flex items-center">
                             <div class="pl-4 my-2">
@@ -126,6 +126,7 @@
                     </div>
                 </div>
             </div>
+            </transition-group>
             <!-- END: Announcement -->
         </div>
     </div>
@@ -270,5 +271,17 @@ export default {
 </script>
 
 <style scoped>
+
+.fade-leave-from {
+    opacity: 1;
+    transform: scale(1);
+}
+.fade-leave-to {
+    opacity: 0;
+    transform: scale(0.6);
+}
+.fade-leave-active {
+    transition: all 0.4s ease;
+}
 
 </style>

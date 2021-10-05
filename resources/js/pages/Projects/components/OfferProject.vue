@@ -7,7 +7,7 @@
                         <div class="intro-y box col-span-6 xxl:col-span-6">
                             <div class="intro -y flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
                                 <h2 class="font-medium text-base mr-auto">Oferta</h2>
-                                <div class="flex items-center mr-3" v-if="project.accept_offer < 1 && stage === 3 && user.id === investor.id"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>
+                                <div class="flex items-center mr-3" v-if="project.accept_offer < 1 && stage === 3 && user.id === investor.id && activeTab !== 'oferty'"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>
                                     Oczekuje na kontroofertę ze strony integratora
                                 </div>
                                 <div class="flex items-center justify-center" v-if="project.accept_offer > 1 && stage === 3 && user.id === integrator.id"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>

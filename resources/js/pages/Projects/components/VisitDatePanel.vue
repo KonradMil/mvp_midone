@@ -17,7 +17,9 @@
             <!--            <button v-if="challenge.selected[0].author_id === user.id" class="btn btn-primary w-20 mt-3" @click.prevent="saveDeadlines">{{$t('profiles.save')}}</button>-->
         </div>
         <div class="intro-y inbox box mt-5 overflow-y-auto" style="max-height: 521px; overflow-x: hidden;">
-            <div class="overflow-x-auto sm:overflow-x-visible" v-for="deadline in deadlines" :key="deadline.id">
+            <transition-group tag="ul" name="list">
+                <li v-for="deadline in deadlines" :key="deadline.id">
+                   <div class="overflow-x-auto sm:overflow-x-visible">
                 <div @click="showDetails[deadline.id] = !showDetails[deadline.id]" class="intro-y">
                     <div
                         :class="(showDetails[deadline.id] === true && deadline.accepted === 1) ? 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-200 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1' : 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1'">
@@ -197,6 +199,8 @@
                     </li>
                 </ul>
             </div>
+                </li>
+            </transition-group>
             <div v-if="deadlines.length === 0" class="text-theme-1 dark:text-theme-10 font-medium pl-6 py-3 pb-4"
                  style="font-size: 16px;">
                 Nie ma jeszcze żadnej propozycji terminu spotkania.
@@ -383,5 +387,17 @@ export default {
 </script>
 
 <style scoped>
+
+.list-leave-from {
+    opacity: 1;
+    transform: scale(1);
+}
+.list-leave-to {
+    opacity: 0;
+    transform: scale(0.6);
+}
+.list-leave-active {
+    transition: all 0.4s ease;
+}
 
 </style>
