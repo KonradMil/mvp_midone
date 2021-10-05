@@ -68,7 +68,7 @@
 
 <script>
 export default {
-    name: "TopMenu",
+    name: "TopMenuMain",
     setup() {
         const formattedMenu = [
             {
