@@ -104,7 +104,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="intro-y box p-5"  :class="(activeTab==='report')? '':'hidden'">
+                        <div class="intro-y box p-5" :class="(activeTab==='report')? '':'hidden'">
                             <AddReport></AddReport>
                         </div>
                     </div>

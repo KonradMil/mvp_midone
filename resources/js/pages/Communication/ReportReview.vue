@@ -46,6 +46,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="mt-3" v-else>
+                    <span class="font-medium dark:text-theme-10 text-theme-1">Brak plików</span>
+                </div>
             </div>
         </div>
     </div>
