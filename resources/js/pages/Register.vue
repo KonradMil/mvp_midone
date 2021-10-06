@@ -9,7 +9,7 @@
                         <img
                             alt="DBR77 Platforma Robotów "
                             class="w-2/4 mt-36"
-                            src="/s3/twopointo/images/dbr_logo_white.svg"
+                            src="/images/dbr_logo_white_platform.svg"
                         />
                     </a>
                 </div>

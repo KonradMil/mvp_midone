@@ -19,7 +19,7 @@ module.exports = {
       colors: {
         ...primaryColors,
         theme: {
-          1: "#930F68",
+          1: "#5e50ac",
           2: "#F1F5F8",
           3: "#97156c",
           4: "#93186b",

@@ -29,6 +29,7 @@
         window.unity_workshop_path = '{{env('UNITY_WORKSHOP_PATH')}}';
         window.unity_tutorial_path = '{{env('UNITY_PATH')}}';
         window.unity_hangar_path = '{{env('UNITY_HANGAR_PATH')}}';
+        window.app_path = '{{env('APP_URL')}}';
         @php
         if(empty(Auth::user()->companies->toArray())) {
                $company = new App\Models\Company();

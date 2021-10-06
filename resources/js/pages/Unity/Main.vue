@@ -356,9 +356,9 @@ export default {
                     break;
                 case 'logout':
                     if(type.value == 'solution') {
-                       window.location.href = 'https://staging.appworks-dev.pl/challenges/card/' + solution.value.challenge_id;
+                       window.location.href = window.app_path + '/challenges/card/' + solution.value.challenge_id;
                     } else {
-                        window.location.href = 'https://staging.appworks-dev.pl/challenges/card/' + challenge.value.id;
+                        window.location.href = window.app_path + '/challenges/card/' + challenge.value.id;
                     }
                     break;
                 case 'orto':
@@ -429,7 +429,7 @@ export default {
                 } else {
                     getCardChallengeRepositories(id.value);
                 }
-                handleUnityActionOutgoing({action: 'prefix', data: 'https://staging.appworks-dev.pl/s3'});
+                handleUnityActionOutgoing({action: 'prefix', data: window.app_path + '/s3'});
             }, 2000);
             setTimeout(() => {
                 unlockInput();

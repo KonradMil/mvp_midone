@@ -39,7 +39,7 @@
                         <div class="box">
                             <div class="flex flex-col lg:flex-row items-center p-5">
                                 <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                                    <Avatar :username="team.name" color="#FFF" background-color="#930f68"/>
+                                    <Avatar :username="team.name" color="#FFF" background-color="#5e50ac"/>
                                 </div>
                                 <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
                                     <a href="" class="font-medium">{{ team.name }}</a>
@@ -66,7 +66,7 @@
                                     <div class="p-5">
                                         <div v-for="(member, index) in team.users" class="relative flex items-center" :key="'member_' + index">
                                             <div class="w-12 h-12 flex-none image-fit">
-                                                <Avatar :src="'/s3/avatars/' + member.avatar" :username="member.name + ' ' + member.lastname" :size="40" color="#FFF" background-color="#930f68"/>
+                                                <Avatar :src="'/s3/avatars/' + member.avatar" :username="member.name + ' ' + member.lastname" :size="40" color="#FFF" background-color="#5e50ac"/>
                                             </div>
                                             <div class="ml-4 mr-auto">
                                                 <a href="" class="font-medium">{{ member.name + ' ' + member.lastname }} - {{member.type}}</a>
@@ -102,7 +102,7 @@
 <!--                            <div v-for="(invite, index) in invites" :key="'invite_' + index" class="intro-y">-->
 <!--                                <div class="box px-4 py-4 mb-3 flex items-center zoom-in">-->
 <!--                                    <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">-->
-<!--                                        <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#930f68"/>-->
+<!--                                        <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#5e50ac"/>-->
 <!--                                    </div>-->
 <!--                                    <div class="ml-4 mr-auto">-->
 <!--                                        <div class="font-medium">{{invite.team.name}}</div>-->
@@ -119,10 +119,10 @@
 <!--                            <div v-for="(invite, index) in invitesSent" :key="'inviteSent_' + index" class="intro-y">-->
 <!--                                <div class="box px-4 py-4 mb-3 flex items-center zoom-in">-->
 <!--                                    <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden" v-if="invite.user != null">-->
-<!--                                        <Avatar :src="'/s3/avatars/' + invite.user.avatar" :username="invite.user.name + ' ' + invite.user.lastname" :size="40" color="#FFF" background-color="#930f68"/>-->
+<!--                                        <Avatar :src="'/s3/avatars/' + invite.user.avatar" :username="invite.user.name + ' ' + invite.user.lastname" :size="40" color="#FFF" background-color="#5e50ac"/>-->
 <!--                                    </div>-->
 <!--                                    <div v-if="invite.user == null">-->
-<!--                                        <Avatar :src="''" :username="invite.email" :size="40" color="#FFF" background-color="#930f68"/>-->
+<!--                                        <Avatar :src="''" :username="invite.email" :size="40" color="#FFF" background-color="#5e50ac"/>-->
 
 <!--                                    </div>-->
 <!--                                    <div class="ml-4 mr-auto">-->
