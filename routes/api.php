@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 
 App::setLocale('pl');
+
+
 Route::group(['middleware' => 'web'], function () {
+
     Route::post('set/txt', [S3Controller::class, 'txtFile']);
     Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard'])->middleware();
     Route::post('search', [SearchController::class, 'search']);
