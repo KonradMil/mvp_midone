@@ -22,8 +22,7 @@
              search: false,
              hideSelected: false,
              classNames: 'w-16'
-            }"
-        >
+            }">
             <option value="Wyzwanie">Wyzwanie</option>
             <option value="Rozwiazanie">Rozwiązanie</option>
             <option value="Oferta">Oferta</option>
@@ -33,12 +32,8 @@
         </TailSelect>
     </div>
     <div class="pt-5">
-        <div
-            class="border border-gray-200 dark:border-dark-5 rounded-md p-5"
-        >
-            <div
-                class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5"
-            >
+        <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5">
+            <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
                 {{ $t('challengesNew.description') }}
             </div>
             <div class="mt-5">
@@ -46,15 +41,30 @@
             </div>
         </div>
     </div>
-    <div
-        class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5"
-    >
+    <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
         <div class="mt-5">
+            <div class="mt-3" v-if="images.length > 0">
+                <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>
+                <div class="rounded-md pt-4">
+                    <div class="row flex h-full">
+                        <div class=" h-full" v-for="(image, index) in images" :key="'image_' + index">
+                            <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
+                                <img class="w-full h-full"
+                                     :alt="image.original_name"
+                                     :src="'/' + image.path"
+                                />
+                                <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
+                                </div>
+                            </div>
+                            <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteImage(index)" class="cursor-pointer">USUŃ
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="mt-3">
                 <label class="form-label"> {{ $t('challengesNew.file') }}</label>
-                <div
-                    class="rounded-md pt-4"
-                >
+                <div class="rounded-md pt-4">
                     <div class="flex flex-wrap px-4">
                         <Dropzone
                             style="position: relative; display: flex;"
@@ -67,13 +77,11 @@
                             previewTemplate: '<div style=\'display: none\'></div>'
                             }"
                             class="dropzone">
-                            <div
-                                class="px-4 py-4 flex items-center cursor-pointer relative"
-                            >
+                            <div class="px-4 py-4 flex items-center cursor-pointer relative">
                                 <ImageIcon class="w-4 h-4 mr-2"/>
-                                <span class="text-theme-1 dark:text-theme-10 mr-1"
-                                >{{ $t('challengesNew.file') }}</span
-                                >
+                                <span class="text-theme-1 dark:text-theme-10 mr-1">
+                                    {{ $t('challengesNew.file') }}
+                                </span>
                                 {{ $t('challengesNew.fileUpload') }}
                             </div>
                         </Dropzone>
@@ -109,6 +117,8 @@ export default {
         const toast = useToast();
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
+        const images = ref([]);
+        const files = ref([]);
 
         provide("bind[dropzoneSingleRef]", el => {
             dropzoneSingleRef.value = el;
@@ -116,9 +126,9 @@ export default {
 
         onMounted( () => {
             const elDropzoneSingleRef = dropzoneSingleRef.value;
-            console.log(elDropzoneSingleRef);
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
-                console.log(resp.xhr.response);
+                files.value.push(JSON.parse(resp.xhr.response).payload);
+                images.value.push(JSON.parse(resp.xhr.response).payload);
                 file.value = JSON.parse(resp.xhr.response).payload;
                 toast.success('Pomyślnie dodano plik!');
             });
@@ -133,19 +143,21 @@ export default {
             emitter.emit('addreport', {obj: resp});
         };
 
+        const deleteImage = (index) => {
+            images.value.splice(index, 1);
+        }
+
         const saveReportRepo = async () => {
-            if(title.value === '' || description.value === '' || type.value==='' || file.value == undefined)
+            if(title.value === '' || description.value === '' || type.value==='')
             {
                toast.warning('Uzupełnij wszystkie pola!');
                isDisabled.value = true;
-            }
-            else
-                {
+            } else {
                     let resp = await SaveReport({
                         title: title.value,
                         description: description.value,
                         type: type.value,
-                        file_id : file.value.id
+                        files : files.value
                     }, handleCallback);
                     isDisabled.value = true;
                     console.log(resp);
@@ -157,13 +169,16 @@ export default {
         }
 
         return {
+            deleteImage,
+            images,
             isDisabled,
             title,
             type,
             description,
             dropzoneSingleRef,
             saveReportRepo,
-            file
+            file,
+            files
         }
     }
 }

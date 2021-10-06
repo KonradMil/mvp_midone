@@ -1,14 +1,14 @@
 <template>
     <tr >
-        <td class="w-40">
+        <td class="w-40 truncate">
             <div class="flex" v-if="rep.files != undefined">
-                <div class="w-10 h-10 image-fit zoom-in" v-if="rep.files.length != '0'">
+                <div class="w-10 h-10 image-fit" v-if="rep.files.length != '0'">
                     {{ rep.files[0].original_name }}
                 </div>
             </div>
         </td>
         <td>
-            <a href="" class="font-medium whitespace-nowrap">{{ rep.title }}</a>
+            <div class="font-medium whitespace-nowrap">{{ rep.title }}</div>
             <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">{{rep.type}}</div>
         </td>
         <td class="text-center">{{ $dayjs(rep.created_at).format('DD.MM.YYYY HH:mm') }}</td>
