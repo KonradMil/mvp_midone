@@ -411,6 +411,7 @@ class UserController extends Controller
     public function logout(): JsonResponse
     {
         try {
+            Auth::logout();
             Session::flush();
             $success = true;
             $message = 'Pomyślnie wylogowano!';
