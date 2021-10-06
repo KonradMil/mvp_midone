@@ -32,4 +32,9 @@ class TeamUser extends Pivot
         'showSolutions'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
