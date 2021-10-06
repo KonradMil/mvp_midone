@@ -9,19 +9,37 @@ use App\Repository\Eloquent\TeamInviteRepository;
 use App\Repository\Eloquent\TeamRepository;
 use App\Repository\Eloquent\UserRepository;
 
+/**
+ *
+ */
 class TeamService
 {
 
+    /**
+     * @var UserRepository
+     */
     private UserRepository $userRepository;
 
+    /**
+     * @var TeamInviteRepository
+     */
     private TeamInviteRepository $teamInviteRepository;
 
+    /**
+     * @param UserRepository $userRepository
+     * @param TeamInviteRepository $teamInviteRepository
+     */
     public function __construct(UserRepository $userRepository, TeamInviteRepository $teamInviteRepository)
     {
         $this->userRepository = $userRepository;
         $this->teamInviteRepository = $teamInviteRepository;
     }
 
+    /**
+     * @param Team $team
+     * @param $userEmail
+     * @return TeamInvite
+     */
     public function inviteUser(Team $team, $userEmail): TeamInvite
     {
         /** @var User $user */
@@ -38,7 +56,6 @@ class TeamService
 
         /** @var TeamInvite $teamInvitation */
         $teamInvitation = $this->teamInviteRepository->create($invitationParameters);
-
 
 
         return $teamInvitation;

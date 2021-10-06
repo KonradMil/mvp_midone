@@ -271,15 +271,17 @@ class TeamsController extends Controller
      * @param Request $request
      * @param TeamRepository $teamRepository
      * @param TeamService $teamService
+     * @param TeamInviteRepository $teamInviteRepository
+     * @param TeamUserRepository $teamUserRepository
      * @return JsonResponse
      */
     public function inviteUser(
-        Request $request,
-        TeamRepository $teamRepository,
-        TeamService $teamService,
+        Request              $request,
+        TeamRepository       $teamRepository,
+        TeamService          $teamService,
         TeamInviteRepository $teamInviteRepository,
-        TeamUserRepository $teamUserRepository
-    ):JsonResponse
+        TeamUserRepository   $teamUserRepository
+    ): JsonResponse
     {
 
         $responseBuilder = new ResponseBuilder();
@@ -288,7 +290,7 @@ class TeamsController extends Controller
         /** @var TeamInvitationParameters $parameters */
         $parameters = $requestHandler->getParameters();
 
-        if(!$parameters->isValid()) {
+        if (!$parameters->isValid()) {
 
             $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
             return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
@@ -300,14 +302,14 @@ class TeamsController extends Controller
 
         $user = auth()->user();
 
-        if($team->owner_id !== $user->id) {
+        if ($team->owner_id !== $user->id) {
             $responseBuilder->setErrorMessage(__('messages.no_permissions'));
             return $responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
         }
 
         $existingTeamUser = $teamUserRepository->findTeamUserByEmail($parameters->teamId, $parameters->email);
 
-        if($existingTeamUser) {
+        if ($existingTeamUser) {
 
             $responseBuilder->setInfoMessage(__('messages.team.user_exists'));
             return $responseBuilder->getResponse();
@@ -316,7 +318,7 @@ class TeamsController extends Controller
 
         $existingInvitation = $teamInviteRepository->findByEmailAndTeam($parameters->email, $parameters->teamId);
 
-        if($existingInvitation) {
+        if ($existingInvitation) {
             $responseBuilder->setInfoMessage(__('messages.team.invitation.exists'));
             return $responseBuilder->getResponse();
         }

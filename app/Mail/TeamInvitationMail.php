@@ -5,7 +5,6 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\TeamInvite;
 
 class TeamInvitationMail extends Mailable
 {
@@ -34,7 +33,7 @@ class TeamInvitationMail extends Mailable
     /**
      * Build the message
      */
-    public function build()
+    public function build(): TeamInvitationMail
     {
         return $this->view('emails.team_invitation')
             ->with([
