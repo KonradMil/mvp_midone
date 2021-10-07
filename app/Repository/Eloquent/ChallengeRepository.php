@@ -32,7 +32,7 @@ class ChallengeRepository extends BaseRepository
             'solutions', 'author', 'technicalDetails',
             'financial_before', 'teams', 'files', 'teams.users',
             'teams.users.companies', 'solutions.comments', 'solutions.comments.commentator', 'solutions.teams',
-            'solutions.teams.users', 'solutions.teams.users.companies', 'solutions.offers', 'project'
+            'solutions.teams.users', 'solutions.teams.users.companies', 'solutions.offers', 'solutions.files', 'project'
         )->find($id);
 
         $challenge->selected = $challenge->solutions()->where('selected', '=', 1)->get();

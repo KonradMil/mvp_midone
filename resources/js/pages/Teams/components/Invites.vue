@@ -4,7 +4,7 @@
                 <div class="grid-cols-12 grid">
                     <div class="col-span-12 md:col-span-6 xl:col-span-4 xxl:col-span-12 mt-2">
                         <div class="mt-3">
-                            <div v-if="invites.length == 0" class="intro-y text-lg text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+                            <div v-if="invites.length === 0" class="intro-y text-lg text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
                                 Nie otrzymałeś jeszcze żadnych zaproszeń.
                             </div>
                             <div v-for="(invite, index) in invites" :key="'invite_' + index" class="intro-y">
@@ -24,6 +24,9 @@
                                 </div>
                             </div>
                           <hr class="my-2"/>
+                            <div v-if="invitesSent.length === 0" class="intro-y text-lg text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+                                Nie wysłałeś jeszcze żadnych zaproszeń.
+                            </div>
                             <div v-for="(invite, index) in invitesSent" :key="'inviteSent_' + index" class="intro-y">
                                 <div class="box px-4 py-4 mb-3 flex items-center zoom-in">
                                     <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden" v-if="invite.user != null">

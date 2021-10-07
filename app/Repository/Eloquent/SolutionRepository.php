@@ -18,4 +18,14 @@ class SolutionRepository extends BaseRepository
     {
         parent::__construct($solution);
     }
+
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function getSolutionWithFiles(int $id)
+    {
+        return Solution::where('id','=', $id)->with('files')->first();
+    }
+
 }

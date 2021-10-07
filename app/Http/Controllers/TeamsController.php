@@ -3,18 +3,27 @@
 namespace App\Http\Controllers;
 
 
-use App\Mail\TeamInvitation;
+use App\Http\Requests\Handlers\InviteUserToTeamHandler;
+use App\Http\ResponseBuilder;
+use App\Mail\TeamInvitationMail;
 use App\Models\Challenge;
 use App\Models\Solution;
 use App\Models\Team;
 use App\Models\TeamUser;
 use App\Models\User;
+use App\Parameters\TeamInvitationParameters;
+use App\Repository\Eloquent\TeamInviteRepository;
+use App\Repository\Eloquent\TeamRepository;
+use App\Repository\Eloquent\TeamUserRepository;
+use App\Repository\Eloquent\UserRepository;
+use App\Services\TeamService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Mpociot\Teamwork\Facades\Teamwork;
 use Mpociot\Teamwork\TeamInvite;
+use Mpociot\Teamwork\Teamwork;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  *
@@ -260,47 +269,70 @@ class TeamsController extends Controller
 
     /**
      * @param Request $request
-     * @return JsonResponse|void
+     * @param TeamRepository $teamRepository
+     * @param TeamService $teamService
+     * @param TeamInviteRepository $teamInviteRepository
+     * @param TeamUserRepository $teamUserRepository
+     * @return JsonResponse
      */
-    public function inviteUser(Request $request)
+    public function inviteUser(
+        Request              $request,
+        TeamRepository       $teamRepository,
+        TeamService          $teamService,
+        TeamInviteRepository $teamInviteRepository,
+        TeamUserRepository   $teamUserRepository
+    ): JsonResponse
     {
 
-        $team = Team::find($request->team_id);
-        $user = User::where('email', '=', $request->email)->first();
-        foreach ($team->users as $member) {
-            if ($member->email === $user->email) {
+        $responseBuilder = new ResponseBuilder();
+        $requestHandler = new InviteUserToTeamHandler($request);
 
-            }
+        /** @var TeamInvitationParameters $parameters */
+        $parameters = $requestHandler->getParameters();
+
+        if (!$parameters->isValid()) {
+
+            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
 
         }
 
-        if ($user != null) {
-            $check = 0;
-            foreach ($user->teams as $teamm) {
-                if ($teamm->id == $request->team_id) {
-                    $check = 1;
-                }
-            }
-            if ($check !== 0) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Użytkownik jest już w zespole!.',
-                    'payload' => []
-                ]);
-            }
+        /** @var Team $team */
+        $team = $teamRepository->find($parameters->teamId);
+
+        $user = auth()->user();
+
+        if ($team->owner_id !== $user->id) {
+            $responseBuilder->setErrorMessage(__('messages.no_permissions'));
+            return $responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
         }
 
-        if (!Teamwork::hasPendingInvite($request->email, $request->team_id)) {
-            Teamwork::inviteToTeam($request->email, $request->team_id, function ($invite) use ($team, $user) {
-                if ($user != null) {
-                    $user->notify(new \App\Notifications\TeamInvitation($invite, $team->name));
-                } else {
-                    Mail::to($invite->email)->send(new TeamInvitation($invite, $team->name));
-                }
-            });
-        } else {
-            // Return error - user already invited
+        $existingTeamUser = $teamUserRepository->findTeamUserByEmail($parameters->teamId, $parameters->email);
+
+        if ($existingTeamUser) {
+
+            $responseBuilder->setInfoMessage(__('messages.team.user_exists'));
+            return $responseBuilder->getResponse();
+
         }
+
+        $existingInvitation = $teamInviteRepository->findByEmailAndTeam($parameters->email, $parameters->teamId);
+
+        if ($existingInvitation) {
+            $responseBuilder->setInfoMessage(__('messages.team.invitation.exists'));
+            return $responseBuilder->getResponse();
+        }
+
+        $invitation = $teamService->inviteUser($team, $parameters->email);
+
+        try {
+            Mail::to($parameters->email)->send(new TeamInvitationMail($invitation->email, $team->name, $invitation->accept_token));
+        } catch (\Exception $e) {
+            $responseBuilder->setErrorMessage($e->getMessage());
+            $responseBuilder->setWarningMessage(__('messages.email.sending_fail'));
+        }
+
+        return $responseBuilder->getResponse();
     }
 
     /**

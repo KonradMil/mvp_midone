@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="guard === true" class="intro-y grid grid-cols-12 gap-6 mt-5">
+        <div class="intro-y grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Blog Layout -->
             <div class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium" v-if="challenges.list == undefined || challenges.list.length == 0">
                 <div>
@@ -274,14 +274,13 @@ export default {
             getNewData
         }
     },
-    beforeRouteEnter
-    (to, from, next) {
+    beforeRouteEnter(to, from, next) {
         if (!window.Laravel.isLoggedin) {
             window.location.href = "/";
         }
-        // next((vm) => {
-        //     vm.getChallengeRepositories();
-        // });
+        next((vm) => {
+            vm.getChallengeRepositories();
+        });
     }
 }
 </script>

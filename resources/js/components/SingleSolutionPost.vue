@@ -56,6 +56,7 @@
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0 && challenge.stage == 1 &&  solution.archive != 1 && canPublishSolution" @click="publishSolution">{{$t('challengesMain.publish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1 && canPublishSolution" @click="unpublishSolution">{{$t('challengesMain.unpublish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive != 1" @click="switchTab">{{$t('teams.teams')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive != 1" @click="showAddFileModal">Pliki</button>
             </div>
             <div class="mt-2" v-if="user.type == 'integrator' && solution.selected == 1 && type!=='archive' && addSolutionOffer">
                 <button v-if="solution.archive != 1" class="btn btn-primary shadow-md mr-2" @click="addOffer">{{$t('challengesMain.addOffer')}}</button>
@@ -98,25 +99,24 @@
     <ModalFile :show="show" @closed="modalClosed">
         <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
             <div class="mt-5">
-<!--                <div class="mt-3" v-if="images.length > 0">-->
-<!--                    <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>-->
-<!--                    <div class="rounded-md pt-4">-->
-<!--                        <div class="row flex h-full">-->
-<!--                            <div class=" h-full" v-for="(image, index) in images" :key="'image_' + index">-->
-<!--                                <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">-->
-<!--                                    <img class="w-full h-full"-->
-<!--                                         :alt="image.original_name"-->
-<!--                                         :src="'/' + image.path"-->
-<!--                                    />-->
-<!--                                    <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteImage(index)" class="cursor-pointer">USUŃ-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <div class="mt-3 border px-4 py-4" v-if="solution.files.length > 0">
+                    <label class="form-label"> Wgrane pliki</label>
+                    <div class="rounded-md pt-4">
+                        <div class="grid grid-cols-4 h-full">
+                            <div class=" h-full" v-for="(file, index) in solution.files" :key="'file_' + index">
+                                <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
+                                    <img class="w-full h-full"
+                                         :alt="file.original_name"
+                                         :src="'/' + file.path"/>
+                                    <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
+                                    </div>
+                                </div>
+                                <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteFile(index)" class="cursor-pointer">USUŃ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="mt-3">
                     <label class="form-label"> {{ $t('challengesNew.file') }}</label>
                     <div class="rounded-md pt-4">
@@ -126,18 +126,17 @@
                                                     display: flex;"
                                 ref-key="dropzoneSingleRef"
                                 :options="{
-                              url: '/api/solution/images/store',
-                              thumbnailWidth: 150,
-                              maxFilesize: 5,
-                              maxFiles: 5,
-                              previewTemplate: '<div style=\'display: none\'></div>'
-                            }"
+                                url: '/api/challenge/images/store',
+                                thumbnailWidth: 150,
+                                maxFilesize: 8,
+                                maxFiles: 8,
+                                previewTemplate: '<div style=\'display: none\'></div>'}"
                                 class="dropzone">
                                 <div class="px-4 py-4 flex items-center cursor-pointer relative">
                                     <ImageIcon class="w-4 h-4 mr-2"/>
                                     <span class="text-theme-1 dark:text-theme-10 mr-1">
-                                                            {{ $t('challengesNew.file') }}
-                                                        </span>
+                                        {{ $t('challengesNew.file') }}
+                                    </span>
                                     {{ $t('challengesNew.fileUpload') }}
                                 </div>
                             </Dropzone>
@@ -147,8 +146,6 @@
             </div>
         </div>
     </ModalFile>
-
-    <!--    <TeamsPanelSolution v-if="activeTab && (solution.author_id === user.id)" :solution="solution"/>-->
 </template>
 
 <script>
@@ -158,6 +155,7 @@ import router from "../router";
 import {useToast} from "vue-toastification";
 import TeamsPanelSolution from "../pages/Challenges/components/TeamsPanel";
 import ModalFile from "./ModalFile";
+import RequestHandler from "../compositions/RequestHandler";
 
 export default {
     name: "SingleSolutionPost",
@@ -187,10 +185,11 @@ export default {
         const inTeam = ref(false);
         const show = ref(false);
         const dropzoneSingleRef = ref();
-        const images = ref([]);
+        const solutionFiles = ref([]);
 
         const modalClosed = () => {
             show.value = false;
+            saveFiles();
         }
 
         const showAddFileModal = (id) => {
@@ -198,8 +197,6 @@ export default {
             }
 
         const switchTab = () => {
-            console.log('Switch2244444');
-            console.log(props.solution + ' its props solution');
             emitter.emit("activeTab", {name: 'teams', who: 'solution', solution: props.solution});
         }
 
@@ -209,15 +206,24 @@ export default {
 
         });
 
+        const saveFiles = async () => {
+            RequestHandler('solution/' + props.solution.id + '/files/save', 'post', {
+                solutionFiles: solutionFiles.value
+            }, (response) => {
+            });
+        }
+
+
         onMounted(() => {
             checkTeam();
             const elDropzoneSingleRef = dropzoneSingleRef.value;
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                solutionFiles.value.push(JSON.parse(resp.xhr.response).payload);
                 images.value.push(JSON.parse(resp.xhr.response).payload);
                 toast.success('Zdjecie zostało wgrane poprawnie!');
             });
             elDropzoneSingleRef.dropzone.on("error", () => {
-                toast.error("Błąd");
+                toast.error("Maksymalnie można wgrać 8 plików!");
             });
         });
 
@@ -226,7 +232,6 @@ export default {
         }
 
         const checkTeam = () => {
-            console.log({user_id: user.id, challenge_id: props.solution.id});
             axios.post('/api/solution/check-team', {user_id: user.id, solution_id: props.solution.id})
                 .then(response => {
                     console.log("response.data")
@@ -245,7 +250,6 @@ export default {
                     console.log(response.data);
                     if (response.data.success) {
                         solution.liked = true;
-                        console.log('HOW MANY LIKES');
                         emitter.emit('liked', {id: solution.id})
                     } else {
                         // toast.error(response.data.message);
@@ -258,7 +262,6 @@ export default {
                     // console.log(response.data)
                     if (response.data.success) {
                         solution.liked = false;
-                        console.log('HOW MANY DISLIKES');
                         emitter.emit('disliked', {id: solution.id})
                     } else {
                     }
@@ -328,13 +331,18 @@ export default {
                 })
         }
 
+        const deleteFiles = (index) => {
+            solution.files.value.splice(index, 1);
+        }
+
         provide("bind[dropzoneSingleRef]", el => {
-            console.log('dropzoneSingleRef' + dropzoneSingleRef.value);
             dropzoneSingleRef.value = el;
         });
 
         return {
-            images,
+            saveFiles,
+            solutionFiles,
+            deleteFiles,
             dropzoneSingleRef,
             showAddFileModal,
             modalClosed,

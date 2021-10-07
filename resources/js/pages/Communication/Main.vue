@@ -8,12 +8,11 @@
                     </h2>
                     <!-- BEGIN: Inbox Menu -->
                     <div class="intro-y box bg-theme-1 p-5 mt-6">
-                        <button type="button" class="btn text-gray-700 dark:text-gray-300 w-full bg-white dark:bg-theme-1 mt-1" @click.prevent="activeTab = 'report'"> <i class="w-4 h-4 mr-2" data-feather="edit-3"></i>{{$t('communication.reportError')}}</button>
+                        <button type="button" class="btn text-gray-700 dark:text-gray-300 w-full bg-white dark:bg-theme-1 mt-1 pr-9" @click.prevent="activeTab = 'report'"> <i class="w-4 h-4 mr-2" data-feather="edit-3"></i>{{$t('communication.reportError')}}</button>
                         <div class="border-t border-theme-3 dark:border-dark-5 mt-6 pt-6 text-white">
-<!--                            <a href="" class="flex items-center px-3 py-2 rounded-md cursor-pointer" :class="(activeTab === 'notifications') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'notifications'"> <i class="w-4 h-4 mr-2" data-feather="mail"></i>{{$t('global.notifications')}}</a>-->
-<!--                            <a class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'teams') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'teams'" > <i class="w-4 h-4 mr-2" data-feather="star"></i>{{$t('menu.Zespoły')}}</a>-->
-<!--                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'questions') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''"  @click.prevent="activeTab = 'questions'"> <i class="w-4 h-4 mr-2" data-feather="inbox"></i> {{$t('communication.questions')}}</a>-->
-                            <a href="" class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer" :class="(activeTab === 'reports') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'reports'"> <i class="w-4 h-4 mr-2" data-feather="send"></i>{{$t('communication.reports')}}</a>
+                    <div class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer justify-center" :class="(activeTab === 'reports') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'reports'">
+                                {{$t('communication.reports')}}
+                            </div>
                         </div>
                     </div>
                     <!-- END: Inbox Menu -->
@@ -82,10 +81,7 @@
                                 <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="more-horizontal"></i> </a>
                             </div>
                             <div class="flex items-center sm:ml-auto">
-<!--                                <div class="dark:text-gray-300">1 - 50 of 5,238</div>-->
-<!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="chevron-left"></i></a>-->
-<!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="chevron-right"></i></a>-->
-<!--                                <a href="javascript:;" class="w-5 h-5 ml-5 flex items-center justify-center dark:text-gray-300"> <i class="w-4 h-4" data-feather="settings"></i></a>-->
+
                             </div>
                         </div>
                         <div class="intro-y col-span-12 overflow-auto lg:overflow-visible" :class="(activeTab==='reports')? '':'hidden'">
@@ -95,7 +91,7 @@
                                     <th class="whitespace-nowrap">Plik</th>
                                     <th class="whitespace-nowrap">Tytuł</th>
                                     <th class="text-center whitespace-nowrap">Zgłoszono dnia</th>
-                                    <th class="text-center whitespace-nowrap">ACTIONS</th>
+                                    <th class="text-center whitespace-nowrap"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -108,38 +104,7 @@
                                 </tbody>
                             </table>
                         </div>
-
-                        <div class="overflow-x-auto sm:overflow-x-visible"  :class="(activeTab==='notifications')? '':'hidden'"
-                        >
-<!--                            <Notifications class="intro-y"-->
-<!--                                 v-for="(notification, index) in notifications.list"-->
-<!--                                 :key="'notification_' + index"-->
-<!--                                 :ind="index"-->
-<!--                                 :notification="notification"-->
-<!--                            >-->
-<!--                            </Notifications>-->
-                        </div>
-                        <div class="intro-y col-span-12 overflow-auto lg:overflow-visible"  :class="(activeTab==='teams')? '':'hidden'">
-                            <table class="table table-report -mt-2">
-                                <thead>
-                                <tr>
-                                    <th class="whitespace-nowrap">Avatar</th>
-                                    <th class="whitespace-nowrap">Nazwa zespołu</th>
-                                    <th class="text-center whitespace-nowrap">Założono</th>
-                                    <th class="text-center whitespace-nowrap">Liczba członków</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-<!--                                <Teams class="intro-x"-->
-<!--                                    v-for="(team, index) in teams.list"-->
-<!--                                    :key="'team_' + index"-->
-<!--                                    :ind="index"-->
-<!--                                    :team="team">-->
-<!--                                </Teams>-->
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="intro-y box p-5"  :class="(activeTab==='report')? '':'hidden'">
+                        <div class="intro-y box p-5" :class="(activeTab==='report')? '':'hidden'">
                             <AddReport></AddReport>
                         </div>
                     </div>
@@ -194,7 +159,7 @@ export default {
         const notifications = ref([]);
         const show = ref(false);
         const showTeams = ref(false);
-        const activeTab = ref('notifications');
+        const activeTab = ref('reports');
         const teams = ref([]);
         const reports = ref([]);
         const report_id = ref(null);

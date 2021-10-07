@@ -145,17 +145,19 @@ class ReportController extends Controller
     {
         $report = new Report();
         $request = json_decode(json_encode($request->data));
-        //    dd($request);
         $report->title = $request->title;
         $report->type = $request->type;
         $report->description = $request->description;
         $report->author_id = Auth::user()->id;
         $report->save();
+        $arrayFiles = $request->files;
 
         try {
-            $file = File::find($request->file_id);
-            $report->files()->attach($file);
-            $report->files = $report->files()->get();
+            foreach($arrayFiles as $arrayFile){
+                $file = File::find($arrayFile->id);
+                $report->files()->attach($file);
+                $report->files = $report->files()->get();
+            }
         } catch (\Exception $e) {
 
         }

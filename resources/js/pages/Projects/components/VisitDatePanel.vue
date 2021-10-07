@@ -19,12 +19,11 @@
         <div class="intro-y inbox box mt-5 overflow-y-auto" style="max-height: 521px; overflow-x: hidden;">
             <transition-group tag="ul" name="list">
                 <li v-for="deadline in deadlines" :key="deadline.id">
-                   <div class="overflow-x-auto sm:overflow-x-visible">
-                <div @click="showDetails[deadline.id] = !showDetails[deadline.id]" class="intro-y">
-                    <div
-                        :class="(showDetails[deadline.id] === true && deadline.accepted === 1) ? 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-200 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1' : 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1'">
+                    <div class="overflow-x-auto sm:overflow-x-visible">
+                      <div class="intro-y">
+                    <div :class="(showDetails[deadline.id] === true && deadline.accepted === 1) ? 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-200 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1' : 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1'">
                         <div class="flex px-5 py-3 pb-5">
-                            <div class="w-70 flex-none flex items-center mr-5 mt-2"
+                            <div @click="showDetails[deadline.id] = !showDetails[deadline.id]" class="w-70 flex-none flex items-center mr-5 mt-2"
                                  v-if="deadline.author !== undefined">
                                 <Tippy
                                     tag="a"
@@ -61,14 +60,13 @@
                                     {{ deadline.author.name }} {{ deadline.author.lastname }}
                                 </div>
                             </div>
-
-                            <div class="w-64 sm:w-auto truncate pt-5 pl-6">
+                            <div @click="showDetails[deadline.id] = !showDetails[deadline.id]" class="w-64 sm:w-auto truncate pt-5 pl-6">
                                 <span class="inbox__item--highlight" v-if="deadline.author !== undefined">Proponowany termin: {{
                                         deadline.date
                                     }} {{ deadline.time }}</span>
                                 <span class="inbox__item--highlight" v-else>Dodaj termin wizyty</span>
                             </div>
-                            <div class="flex px-5 py-3 pb-5 text-theme-1" style="margin-left: 60px; max-width: 250px;"
+                            <div @click="showDetails[deadline.id] = !showDetails[deadline.id]" class="flex px-5 py-3 pb-5 text-theme-1" style="margin-left: 60px; max-width: 250px;"
                                  v-if="deadline.author === undefined">
                                 <Litepicker
                                     class="form-control"
@@ -95,12 +93,11 @@
                                 <!--                                       min="2021-09-22T00:00"-->
                                 <!--                                       max="2025-06-14T00:00">-->
                             </div>
-                            <div class="flex text-theme-1" style="max-height: 35px; margin-top: 12px;"
+                            <div @click="showDetails[deadline.id] = !showDetails[deadline.id]" class="flex text-theme-1" style="max-height: 35px; margin-top: 12px;"
                                  v-if="deadline.author === undefined">
                                 <input id="appt-time" type="time" name="appt-time" v-model="deadline.time">
                             </div>
-                            <!--                            <div v-if="deadline.author !== undefined" class="inbox__item&#45;&#45;time whitespace-nowrap ml-auto pl-10 pr-4 pt-3">{{ $dayjs(deadline.created_at).format('DD.MM.YYYY') }}</div>-->
-                            <div class="pl-8 pt-3"
+                            <div @click="showDetails[deadline.id] = !showDetails[deadline.id]" class="pl-8 pt-3"
                                  v-if="(deadline.author_id === integrator.id || deadline.author_id === investor.id)">
                                 <div class="flex items-center justify-center text-theme-9"
                                      v-if="deadline.accepted  ===  1 && deadline.status !== 1"><i
@@ -120,7 +117,7 @@
                                     class="w-4 h-4 mr-2"></i>{{ $t('challengesMain.waitingApproval') }}
                                 </div>
                             </div>
-                            <div class="pt-1 pl-6 flex" style="margin-left: auto;"
+                            <div @click="showDetails[deadline.id] = !showDetails[deadline.id]" class="pt-1 pl-6 flex" style="margin-left: auto;"
                                  v-if="deadline.accepted < 1 && deadline.status < 1 && deadline.author_id !== user.id && deadline.status !== 1 && deadline.author !== undefined  && (integrator.id === user.id || investor.id === user.id)">
                                 <Tippy
                                     tag="a"
@@ -139,8 +136,7 @@
                                     </button>
                                 </Tippy>
                             </div>
-                            <div
-                                v-if="deadline.accepted === 1 && deadline.status !== 1 && project.accept_local_vision !== 1"
+                            <div v-if="deadline.accepted === 1 && deadline.status !== 1 && project.accept_local_vision !== 1"
                                 class="pt-1 pl-6" style="margin-left: auto;">
                                 <Tippy
                                     tag="a"
@@ -171,10 +167,9 @@
                         </div>
                     </div>
                 </div>
-                <ul v-if="showDetails[deadline.id] === true && deadline.accepted === 1" class="intro-y pt-4 pl-5">
+                      <ul v-if="showDetails[deadline.id] === true && deadline.accepted === 1" class="intro-y pt-4 pl-5">
                     <li class="intro-y">
-                        <div
-                            class="sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
                             <div class="grid grid-cols-1">
                                 <div class="pl-2 pt-2">
                                     <label for="input-wizard-1" class="form-label" style="margin-left: 40px;">
@@ -188,6 +183,7 @@
                                 </div>
                                 <div class="pl-10 pt-2">
                                 <textarea
+                                    maxlength="400"
                                     :disabled="user.id !== deadline.author_id || deadline.status === 1 && project.accept_local_vision === 1"
                                     class="w-full px-3 py-2 text-gray-700 border rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-pink-700 focus:border-transparent"
                                     style="width: 900px; height: 100px; position: relative;"
@@ -198,7 +194,7 @@
                         </div>
                     </li>
                 </ul>
-            </div>
+                    </div>
                 </li>
             </transition-group>
             <div v-if="deadlines.length === 0" class="text-theme-1 dark:text-theme-10 font-medium pl-6 py-3 pb-4"
@@ -257,7 +253,7 @@ export default {
             }
             setTimeout(function () {
                 deadlines.value.unshift(deadline);
-            }, 750)
+            }, 500)
             setTimeout(function () {
                 block.value = false;
             }, 2000);
@@ -287,9 +283,9 @@ export default {
                 date: deadline.date,
                 time: deadline.time
             }, (response) => {
-                if (deadline.members === '') {
-                    deadlines.value.unshift(deadline);
-                }
+                // if (deadline.members === '') {
+                //     deadlines.value.unshift(deadline);
+                // }
                 showDetails.value[deadline.id] = false;
                 getDeadlines();
             });

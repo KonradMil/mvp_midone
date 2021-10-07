@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 use App\Events\ChallengeLiked;
 use App\Events\ChallengePublished;
-use App\Http\ResponseBuilder;
 use App\Models\Challenge;
 use App\Models\File;
 use App\Models\Financial;
@@ -16,8 +15,6 @@ use App\Models\Solution;
 use App\Models\Team;
 use App\Models\TechnicalDetails;
 use App\Models\User;
-use App\Repository\Eloquent\ChallengeRepository;
-use App\Repository\Eloquent\ProjectRepository;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -25,7 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use Symfony\Component\HttpFoundation\Response;
+use function Symfony\Component\String\s;
 
 /**
  *

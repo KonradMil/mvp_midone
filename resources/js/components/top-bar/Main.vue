@@ -23,8 +23,7 @@
                     search: false,
                     hideSelected: false,
                     classNames: 'w-16'
-              }"
-                >
+                  }">
                     <option value="pl">PL</option>
                     <option value="en">EN</option>
 
