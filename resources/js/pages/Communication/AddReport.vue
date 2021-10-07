@@ -110,7 +110,7 @@ export default {
     setup() {
         const isDisabled = ref(false);
         const title = ref('');
-        const type = ref('');
+        const type = ref('Wyzwanie');
         const description = ref('');
         const dropzoneSingleRef = ref();
         const file = ref({});
@@ -139,7 +139,6 @@ export default {
 
 
         const handleCallback = (resp) => {
-            console.log(resp);
             emitter.emit('addreport', {obj: resp});
         };
 
@@ -160,12 +159,15 @@ export default {
                         files : files.value
                     }, handleCallback);
                     isDisabled.value = true;
-                    console.log(resp);
                     emitter.emit('changetab', {val: 'reports'});
                 }
             setTimeout(()=>{
                isDisabled.value = false;
             }, 2000);
+            title.value = '',
+            description.value = '',
+            type.value = '',
+            files.value = null
         }
 
         return {
