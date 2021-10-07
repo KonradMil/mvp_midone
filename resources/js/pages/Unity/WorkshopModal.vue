@@ -18,6 +18,8 @@
 import {onMounted, ref, watch} from "vue";
 import Workshop from './Workshop/Workshop';
 
+const cash = require("cash-dom/dist/cash");
+
 export default {
     name: 'WorkshopModal',
     components: {
@@ -32,11 +34,11 @@ export default {
     setup(props) {
         watch(() => props.open, (first, second) => {
             console.log('NEW DATA', [first, second])
-            if(first == true) {
+            // if(first == true) {
                 cash("#workshop-modal").modal("show");
-            } else {
-                cash("#workshop-modal").modal("close");
-            }
+            // } else {
+            //     cash("#workshop-modal").modal("close");
+            // }
         });
 
         return {
