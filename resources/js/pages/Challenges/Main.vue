@@ -1,8 +1,7 @@
 <template>
-    <div class="mt-2">
+    <div class="mt-2" v-if="type == 'normal'">
         <TopMenuMain @tabChanged="getNewData"></TopMenuMain>
     </div>
-
     <div>
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">{{ $t('challengesMain.challenges') }}</h2>
@@ -163,13 +162,14 @@ export default {
         const guard = ref(false);
 
         const getNewData = (val) => {
-            console.log('val2', val);
-            RequestHandler('challenges/get/tab/' + val, 'POST', {},
-                (response) => {
-                    console.log(response);
-                    // }
-                    //     challenges.value = response.data.payload;
-                });
+            axios.post('api/challenges/get/tab/' + val)
+                .then(response => {
+                    if (response.data.success) {
+                        challenges.value.list = response.data.payload;
+                    } else {
+
+                    }
+                })
         }
 
         const getChallengeRepositories = async (callback) => {
@@ -180,7 +180,8 @@ export default {
                 challenges.value = GetChallengesArchive();
                 callback();
             } else {
-                challenges.value = GetChallenges();
+                getNewData(0);
+                // challenges.value = GetChallenges();
             }
         }
 
@@ -188,6 +189,7 @@ export default {
         const sels = require("../../json/challenge.json");
 
         onMounted(function () {
+            // getNewData(0);
             getChallengeRepositories(function () {
                 guard.value = true;
             });
@@ -232,7 +234,6 @@ export default {
         const like = async (challenge) => {
             axios.post('api/challenge/user/like', {id: challenge.id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
                         challenge.liked = true;
                         console.log(challenge);
@@ -252,9 +253,8 @@ export default {
                         challenge.liked = false;
                         console.log(challenge);
                         emitter.emit('disliked', {id: challenge.id})
-                        // getChallengeRepositories();
                     } else {
-                        // toast.error(response.data.message);
+
                     }
                 })
         }

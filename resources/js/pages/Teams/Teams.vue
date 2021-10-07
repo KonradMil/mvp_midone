@@ -413,7 +413,7 @@ export default {
         }
 
         const del = async (member_id,team_id) => {
-            axios.post('api/teams/user/delete', {member_id: member_id, team_id: team_id})
+            axios.post('api/teams/user/member/delete', {member_id: member_id, team_id: team_id})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {

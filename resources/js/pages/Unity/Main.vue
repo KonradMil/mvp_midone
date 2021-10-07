@@ -89,7 +89,7 @@
             </div>
         </div>
     </div>
-    <WorkshopModal :open="workshopOpen"></WorkshopModal>
+    <WorkshopModal v-if="workshopOpen" :open="workshopOpen"></WorkshopModal>
 </template>
 
 <script>
@@ -108,8 +108,6 @@ import BottomPanel from "./components/BottomPanel";
 import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
 import WorkshopModal from "./WorkshopModal"
-
-import router from "../../router";
 import WebRTC from "./WebRTC";
 
 const ww = WindowWatcher();
