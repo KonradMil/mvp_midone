@@ -22,7 +22,7 @@
                                 <div class="w-6 h-6 flex-none image-fit relative ml-5">
                                     <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
                                             :username="notification.data.author.name + ' ' + notification.data.author.lastname"
-                                            :size="35" color="#FFF" background-color="#930f68"/>
+                                            :size="35" color="#FFF" background-color="#5e50ac"/>
                                 </div>
                             </div>
                             <div class="w-64 sm:w-auto truncate" @click="goTo(notification.data.name,notification.id,notification.data.params,notification.data.id)">

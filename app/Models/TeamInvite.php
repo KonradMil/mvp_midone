@@ -9,6 +9,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TeamInvite extends Model
 {
+
+    const TYPE_INVITE = 'invite';
+
+    const TYPE_REQUEST = 'request';
+
     /**
      * @var string
      */

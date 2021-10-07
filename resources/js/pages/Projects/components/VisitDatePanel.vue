@@ -54,7 +54,7 @@
                                 <div class="w-6 h-6 flex-none image-fit relative ml-5">
                                     <Avatar :src="'/s3/avatars/' + deadline.author.avatar"
                                             :username="deadline.author.name + ' ' + deadline.author.lastname" :size="30"
-                                            color="#FFF" background-color="#930f68"/>
+                                            color="#FFF" background-color="#5e50ac"/>
                                 </div>
                                 <div class="inbox__item--sender truncate ml-3" style="width: 200px;">
                                     {{ deadline.author.name }} {{ deadline.author.lastname }}

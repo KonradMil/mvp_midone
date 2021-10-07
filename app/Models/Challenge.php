@@ -32,6 +32,15 @@ class Challenge extends Model implements ReactableInterface
     /**
      *
      */
+    const CATEGORIES = [
+        'default',
+        'test',
+        'showoff'
+    ];
+
+    /**
+     *
+     */
     const STAGES = [
         'draft',
         'awaiting solution',

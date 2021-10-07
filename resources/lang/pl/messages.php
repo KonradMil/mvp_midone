@@ -8,6 +8,10 @@ return [
     'rejected'=> 'Odrzucono',
     'canceled' => 'Odwołano',
     'recaptcha_error' => 'Udowodnij że nie jesteś robotem.',
+    'no_permissions' => 'Nie posiadasz wystarczających uprawnień, aby wykonać tą akcję.',
+    'email' => [
+        'sending_fail' => 'Wiadomość e-mail nie mogła zostać wysłana.'
+    ],
     'validation' => [
         'registration' => [
             'wrong_account_type' => "Nieprawidłowy typ konta."
@@ -44,4 +48,12 @@ return [
     'user' => [
         'not_found' => "Użytkownika nie znaleziono",
     ],
+    'team' => [
+        'not_found' => "Nie znaleziono zespołu.",
+        'user_exists' => 'Ten użytkownik jest już członkiem Twojego zespołu.',
+        'invitation' => [
+            'exists' => 'Już zaprosiłeś tego użytkownika.',
+            'sent' => 'Zaproszenie do zespołu zostało wysłane.'
+        ],
+    ]
 ];

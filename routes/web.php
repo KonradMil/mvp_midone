@@ -5,6 +5,10 @@ use App\Http\Controllers\StudioController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('testses', function() {
+        dd([\Illuminate\Support\Facades\Auth::user(), session()]);
+});
+
 Route::get('site', function () {
     return view('site.layouts.app');
 });

@@ -38,7 +38,7 @@
 <!--            >-->
 <!--                <div class="w-8 h-8 image-fit">-->
 <!--                    <Avatar :src="user.avatar_path" :username="user.name + ' ' + user.lastname" color="#FFF"-->
-<!--                            background-color="#930f68"/>-->
+<!--                            background-color="#5e50ac"/>-->
 <!--                </div>-->
 <!--                <div class="ml-3">{{ faker.users[0].name }}</div>-->
 <!--                <div-->

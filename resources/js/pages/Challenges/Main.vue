@@ -11,10 +11,7 @@
                                 <Share2Icon class="w-4 h-4 mr-2"/>
                                 {{ $t('global.sharePost') }}
                             </a>
-                            <a
-                                href=""
-                                class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
-                            >
+                            <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                                 <DownloadIcon class="w-4 h-4 mr-2"/>
                                 {{ $t('global.downloadPost') }}
                             </a>
@@ -145,10 +142,11 @@ import GetChallengesArchive from "../../compositions/GetChallengesArchive";
 import CommentSection from "../../components/social/CommentSection";
 import {useToast} from "vue-toastification";
 import RequestHandler from "../../compositions/RequestHandler"
+import TopMenuMain from "../../components/TopMenuMain"
 
 export default {
     name: "ChallengesMain",
-    components: {CommentSection, Comment, GetChallenges},
+    components: {TopMenuMain, CommentSection, Comment, GetChallenges},
     props: {
       type: String
     },
@@ -171,14 +169,12 @@ export default {
                 challenges.value = GetChallenges();
                 callback();
             }
-            callback();
         }
         const types = require("../../json/types.json");
         const sels = require("../../json/challenge.json");
 
         onMounted(function () {
             getChallengeRepositories(function(){
-                console.log('callback is here' + guard.value);
                 guard.value = true;
             });
             if (window.Laravel.user) {
