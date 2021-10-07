@@ -151,6 +151,9 @@
 @import "components/full-calendar";
 @import "components/pristine";
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+.side-nav > ul ul {
+    background-color: #271c69 !important;
+}
 .search .search__input {
     background-color: #504e4e3d !important;
 }
