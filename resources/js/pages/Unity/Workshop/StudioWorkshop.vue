@@ -65,7 +65,7 @@ export default {
 
         const instantiate = () => {
             console.log('INST');
-            console.log(document.querySelector('#' + containerId.value));
+            console.log('WORKSHOP', document.querySelector('#' + containerId.value));
             createUnityInstance(document.querySelector('#' + containerId.value), {
                 dataUrl: "/s3/" + unity_workshop_path + ".data.br",
                 frameworkUrl: "/s3/" + unity_workshop_path + ".framework.js.br",

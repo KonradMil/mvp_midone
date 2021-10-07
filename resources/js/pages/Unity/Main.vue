@@ -89,7 +89,7 @@
             </div>
         </div>
     </div>
-    <WorkshopModal :open="workshopOpen"></WorkshopModal>
+<!--    <WorkshopModal :open="workshopOpen"></WorkshopModal>-->
 </template>
 
 <script>
