@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 6396.19 1170.06">
+    <defs>
+        <clipPath id="a" transform="translate(-0.29 22.75)">
+            <rect width="6395" height="1079" style="fill:none"/>
+        </clipPath>
+        <linearGradient id="b" x1="6408.91" y1="573.72" x2="34.87" y2="567.61" gradientUnits="userSpaceOnUse">
+            <stop offset="0.01" stop-color="#5e50ac"/>
+            <stop offset="0.3" stop-color="#930f68"/>
+        </linearGradient>
+    </defs>
+    <g style="clip-path:url(#a)">
+        <path
+            d="M6367-7.3S6144.54,180.51,6311.67,576c45,106.38,81.51,206,84.52,277,8.16,192.77-156,268.57-156,268.57l-653.53-26.8L5570.35-22.75Z"
+            transform="translate(-0.29 22.75)" style="fill:#f1f5f8"/>
+        <path
+            d="M5600.09,1081.48v-1.6H.29V-.3h5599.8v0h759.7S6172,197.12,6268.16,488.52c49.17,148.9,96.31,256.29,104.69,362.12,8,100.85-58,201.71-168.65,254.29-65.85,31.29-144.55,42.38-223,42.38C5790,1147.31,5600.09,1081.48,5600.09,1081.48Z"
+            transform="translate(-0.29 22.75)" style="fill:url(#b)"/>
+    </g>
+</svg>

@@ -1,10 +1,13 @@
 <template>
-    <TopMenuMain></TopMenuMain>
+    <div class="mt-2">
+        <TopMenuMain @tabChanged="getNewData"></TopMenuMain>
+    </div>
+
     <div>
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-            <h2 class="text-lg font-medium mr-auto">{{$t('challengesMain.challenges')}}</h2>
-            <div v-if="guard === true" class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                <button class="btn btn-primary shadow-md mr-2" v-if="user.type == 'investor' && type==='normal'" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
+            <h2 class="text-lg font-medium mr-auto">{{ $t('challengesMain.challenges') }}</h2>
+            <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
+                <button class="btn btn-primary shadow-md mr-2" v-if="user.type == 'investor' && type==='normal'" @click="$router.push({name: 'addChallenge'})">{{ $t('challengesMain.addChallenge') }}</button>
                 <div class="dropdown ml-auto sm:ml-0">
                     <div class="dropdown-menu w-40">
                         <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
@@ -44,7 +47,7 @@
                         <p v-if="type==='archive'">
                             Nie masz jeszcze żadnych archiwalnych wyzwań.
                         </p>
-                        <button v-if="type==='normal'" class="btn btn-primary shadow-md mr-2 mt-2" @click="$router.push({name: 'addChallenge'})">{{$t('challengesMain.addChallenge')}}</button>
+                        <button v-if="type==='normal'" class="btn btn-primary shadow-md mr-2 mt-2" @click="$router.push({name: 'addChallenge'})">{{ $t('challengesMain.addChallenge') }}</button>
                     </div>
                 </div>
             </div>
@@ -57,15 +60,15 @@
                         <a href="" class="font-medium">{{ challenge.name }}</a>
                         <div class="flex text-gray-600 truncate text-xs mt-0.5" style="flex-direction: column;">
                             <a class="text-theme-1 dark:text-theme-10 inline-block truncate" href="">
-                                {{ types[challenge.type] }} -  {{ sels.challenge_statuses[challenge.stage]['name'] }}
+                                {{ types[challenge.type] }} - {{ sels.challenge_statuses[challenge.stage]['name'] }}
                             </a>
-                            <div class="w-full" v-if="challenge.stage == 1">Rozwiązania do: {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY')  }}</div>
-                            <div class="w-full" v-if="challenge.stage == 2">Oferty do: {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY')  }}</div>
+                            <div class="w-full" v-if="challenge.stage == 1">Rozwiązania do: {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }}</div>
+                            <div class="w-full" v-if="challenge.stage == 2">Oferty do: {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }}</div>
                         </div>
                     </div>
-                    <div class="dropdown ml-3"  v-if="challenge.author_id == user.id && challenge.status != 1">
+                    <div class="dropdown ml-3" v-if="challenge.author_id == user.id && challenge.status != 1">
                         <a
-                            href="javascript:;"
+                            href="javascript:"
                             class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300"
                             aria-expanded="false">
                             <MoreVerticalIcon class="w-5 h-5"/>
@@ -73,12 +76,12 @@
                         <div class="dropdown-menu w-40">
                             <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
                                 <a href="" @click.prevent="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});"
-                                    class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                   class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                                     <Edit2Icon class="w-4 h-4 mr-2"/>
                                     Edytuj
                                 </a>
                                 <a href="" @click.prevent="deleteChallenge(challenge.id)"
-                                    class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
+                                   class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
                                     <TrashIcon class="w-4 h-4 mr-2"/>
                                     Usuń
                                 </a>
@@ -98,8 +101,8 @@
                 </div>
                 <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
                     <Tippy v-if="!challenge.followed" tag="a" href="" @click.prevent="follow(challenge.id, index)"
-                        class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10"
-                        content="Follow">
+                           class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10"
+                           content="Follow">
                         <BookmarkIcon class="w-3 h-3"/>
                     </Tippy>
                     <Tippy v-if="challenge.followed" tag="a" href="" @click.prevent="unfollow(challenge.id, index)"
@@ -149,7 +152,7 @@ export default {
     name: "ChallengesMain",
     components: {TopMenuMain, CommentSection, Comment, GetChallenges},
     props: {
-      type: String
+        type: String
     },
     setup(props) {
         const challenges = ref([]);
@@ -159,23 +162,33 @@ export default {
         const toast = useToast();
         const guard = ref(false);
 
+        const getNewData = (val) => {
+            console.log('val2', val);
+            RequestHandler('challenges/get/tab/' + val, 'POST', {},
+                (response) => {
+                    console.log(response);
+                    // }
+                    //     challenges.value = response.data.payload;
+                });
+        }
+
         const getChallengeRepositories = async (callback) => {
-            if(props.type == 'followed') {
+            if (props.type === 'followed') {
                 challenges.value = GetChallengesFollowed();
                 callback();
-            } else if(props.type ==='archive'){
+            } else if (props.type === 'archive') {
                 challenges.value = GetChallengesArchive();
                 callback();
             } else {
                 challenges.value = GetChallenges();
-                callback();
             }
         }
+
         const types = require("../../json/types.json");
         const sels = require("../../json/challenge.json");
 
         onMounted(function () {
-            getChallengeRepositories(function(){
+            getChallengeRepositories(function () {
                 guard.value = true;
             });
             if (window.Laravel.user) {
@@ -183,7 +196,7 @@ export default {
             }
         });
 
-        const deleteChallenge = async(id) => {
+        const deleteChallenge = async (id) => {
             axios.post('/api/challenge/delete', {id: id})
                 .then(response => {
                     // console.log(response.data)
@@ -210,8 +223,8 @@ export default {
         }
 
         const unfollow = (id, index) => {
-            RequestHandler('challenge/user/unfollow', 'post', {id:id}, (val) => {
-                challenges.value.list[index].followed  = false;
+            RequestHandler('challenge/user/unfollow', 'post', {id: id}, (val) => {
+                challenges.value.list[index].followed = false;
                 toast.success('Nie śledzisz już tego wyzwania.');
             });
         }
@@ -221,8 +234,6 @@ export default {
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
-                        // console.log(response.data);
-                        // challenge.likes = challenge.likes + 1;
                         challenge.liked = true;
                         console.log(challenge);
                         emitter.emit('liked', {id: challenge.id})
@@ -238,8 +249,6 @@ export default {
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
-                        // console.log(response.data);
-                        // challenge.likes = challenge.likes + 1;
                         challenge.liked = false;
                         console.log(challenge);
                         emitter.emit('disliked', {id: challenge.id})
@@ -261,20 +270,18 @@ export default {
             getChallengeRepositories,
             follow,
             unfollow,
-            deleteChallenge
+            deleteChallenge,
+            getNewData
         }
     },
-    beforeRouteEnter(to, from, next) {
+    beforeRouteEnter
+    (to, from, next) {
         if (!window.Laravel.isLoggedin) {
             window.location.href = "/";
         }
-        next((vm) => {
-            vm.getChallengeRepositories();
-        });
+        // next((vm) => {
+        //     vm.getChallengeRepositories();
+        // });
     }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -151,18 +151,39 @@
 @import "components/full-calendar";
 @import "components/pristine";
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+.search .search__input {
+    background-color: #504e4e3d !important;
+}
+.top-nav > ul li .top-menu {
+    height: 40px !important;
+}
+.login {
+    position: relative;
+    overflow: hidden !important;
+}
+.login:before {
+    background-size: auto 120% !important;
+}
+.top-nav > ul {
+    padding-left: 10px !important;
+}
+.top-nav > ul li .top-menu .top-menu__title {
+    margin-left: 0 !important;
+    font-weight: bold;
+}
 .top-nav {
     border-bottom: 1px solid #5e50ac;
 }
 .top-nav>ul li .top-menu:not(.top-menu--active) .top-menu__icon:before {
     border: 1px solid #5e50ac;
+    background-color: #5e50ac;
 }
 //.top-nav>ul li .top-menu__icon:before {
 //
 //    background-color: #5e50ac;
 //}
 .top-nav>ul li .top-menu__icon,.top-nav>ul li .top-menu__title {
-    color: #5e50ac !important;
+    color: #fff !important;
 }
 .top-nav>ul li:hover .top-menu__icon,.top-nav>ul li:hover .top-menu__title {
     color: white !important;

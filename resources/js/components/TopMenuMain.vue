@@ -4,7 +4,8 @@
             <!-- BEGIN: First Child -->
             <li v-for="(menu, menuKey) in formattedMenu" :key="menuKey">
                 <a
-                    href="javascript:;"
+                    href="#"
+                    @click.prevent="menuChanged(menu.value)"
                     class="top-menu"
                     :class="{
               'top-menu--active': menu.active
@@ -25,28 +26,43 @@
 </template>
 
 <script>
+import {getCurrentInstance, ref} from "vue";
+
 export default {
     name: "TopMenuMain",
-    setup() {
-        const formattedMenu = [
+    emits:[
+      'tabChanged'
+    ],
+    setup(props, {emit}) {
+
+        const formattedMenu = ref([
             {
                 icon: 'ActivityIcon',
                 active: false,
-                title: 'Publiczne'
+                title: 'Publiczne',
+                value: 0
             },
             {
                 icon: 'ActivityIcon',
                 active: false,
-                title: 'Testowe'
+                title: 'Testowe',
+                value: 1
             },
             {
                 icon: 'ActivityIcon',
                 active: false,
-                title: 'Pokazowe'
+                title: 'Pokazowe',
+                value: 2
             },
-        ];
+        ]);
+
+        const menuChanged = (val) => {
+            console.log('val',val);
+            emit('tabChanged', val);
+        }
 
         return {
+            menuChanged,
             formattedMenu
         }
     }
