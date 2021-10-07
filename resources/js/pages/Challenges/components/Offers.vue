@@ -1,5 +1,5 @@
 <template>
-    <div class="col-span-9 lg:col-span-9 xxl:col-span-9">
+    <div class="intro-y col-span-9 lg:col-span-9 xxl:col-span-9" v-if="guard === true">
         <div class="intro -y flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
             <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.myOffers')}}</h2>
         </div>
@@ -165,7 +165,7 @@ export default {
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
         const offer_id = ref();
-        const guard = ref();
+        const guard = ref(false);
         const change = ref(false);
         const is_done_offer = ref(false);
 
@@ -188,11 +188,9 @@ export default {
             emitter.emit('noChangeOfferProject', {is_done_offer: is_done_offer});
         }
 
-        const getOffersRepositories = async () => {
+        const getOffersRepositories = async (callback) => {
             offers.value = GetOffers(props.id);
-            if(offers.value.list.length < 1){
-                guard.value = 1;
-            }
+            callback();
         }
 
         const publishOffer = async(offer) => {
@@ -243,7 +241,10 @@ export default {
 
 
         onMounted(() => {
-            getOffersRepositories('');
+            getOffersRepositories(function(){
+                console.log(offers.length + 'value list length');
+                guard.value = true;
+            });
             if(props.stage === 3){
                 change.value = true;
             }

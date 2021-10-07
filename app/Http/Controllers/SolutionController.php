@@ -159,7 +159,7 @@ class SolutionController extends Controller
      */
     public function getUserSolutionsArchive(): JsonResponse
     {
-        $solutions = Solution::where('archive', '=', 1)->get();
+        $solutions = Solution::where('archive', '=', 1)->with('files')->get();
         $filterSolutions = [];
 
         foreach ($solutions as $solution) {
