@@ -4,9 +4,8 @@
             <div class="modal-content">
                 <div class="modal-body p-5 text-center">
                     <div class="grid grid-cols-1 gap-6 mt-1">
-                        <!-- BEGIN: Profile Menu -->
                         <div class="col">
-                            <Workshop></Workshop>
+<!--                            <Workshop></Workshop>-->
                         </div>
                     </div>
                 </div>
@@ -18,6 +17,7 @@
 <script>
 import {onMounted, ref, watch} from "vue";
 import Workshop from './Workshop/Workshop';
+
 export default {
     name: 'WorkshopModal',
     components: {
@@ -37,9 +37,6 @@ export default {
             } else {
                 cash("#workshop-modal").modal("close");
             }
-        });
-        onMounted(() => {
-
         });
 
         return {
