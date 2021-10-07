@@ -28,19 +28,19 @@ class NewLocalVisionParameters extends Parameters
     public string $description;
 
     /**
-     * @var string
+     * @var ?string
      */
-    public string $before;
+    public ?string $before;
 
     /**
-     * @var string
+     * @var ?string
      */
-    public string $after;
+    public ?string $after;
 
     /**
-     * @var int
+     * @var ?int
      */
-    public int $accepted;
+    public ?int $accepted;
 
     /**
      *
@@ -52,8 +52,8 @@ class NewLocalVisionParameters extends Parameters
             'projectId' => 'required|int',
             'reportId' => 'nullable|int',
             'description' => 'required|string',
-            'before' => 'required|string',
-            'after' => 'required|string',
+            'before' => 'nullable|string',
+            'after' => 'nullable|string',
             'accepted' => 'nullable|int'
         ];
     }

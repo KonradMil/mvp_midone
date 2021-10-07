@@ -22,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use function Symfony\Component\String\s;
 
 /**
  *
@@ -804,7 +805,7 @@ class ChallengeController extends Controller
                 'solutions', 'author', 'technicalDetails',
                 'financial_before', 'teams', 'files', 'teams.users',
                 'teams.users.companies', 'solutions.comments', 'solutions.comments.commentator',
-                'solutions.teams', 'solutions.teams.users', 'solutions.teams.users.companies', 'solutions.offers'
+                'solutions.teams', 'solutions.teams.users', 'solutions.teams.users.companies', 'solutions.offers' , 'solutions.files'
             )->find($request->id);
 
             $user = Auth::user();

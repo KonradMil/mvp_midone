@@ -98,4 +98,13 @@ class Solution extends Model implements ReactableInterface
     {
         return $this->hasOne(Financial::class, 'id', 'financial_after_id');
     }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function files(): BelongsToMany
+    {
+        return $this->belongsToMany(File::class, 'solution_files', 'solution_id', 'file_id');
+    }
+
 }

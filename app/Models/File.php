@@ -62,7 +62,7 @@ class File extends Model
      */
     public function solutions(): BelongsToMany
     {
-        return $this->belongsToMany(File::class, 'solution_image', 'image_id', 'solution_id');
+        return $this->belongsToMany(File::class);
     }
 
 }

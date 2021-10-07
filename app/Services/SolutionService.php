@@ -2,7 +2,10 @@
 
 namespace App\Services;
 
+use App\Models\File;
+use App\Models\Solution;
 use App\Parameters\NewSolutionFilesParameters;
+use App\Repository\Eloquent\FileRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -20,49 +23,20 @@ class SolutionService
 
     /**
      * @param NewSolutionFilesParameters $solutionFilesParameters
+     * @param Solution $solution
      * @return Model
      */
-    public function addSolutionFiles(NewSolutionFilesParameters $solutionFilesParameters): Model
+    public function addSolutionFiles(NewSolutionFilesParameters $solutionFilesParameters, Solution $solution): Model
     {
-        $solutionFilesParams = [
-            'name' => $solutionFilesParameters->name,
-            'ext' => $solutionFilesParameters->ext,
-            'original_name' => $solutionFilesParameters->originalName,
-            'path' => $solutionFilesParameters->path,
-            'thumbnail' => $solutionFilesParameters->thumbnail,
-            'size' => $solutionFilesParameters->size,
-            'alt' => $solutionFilesParameters->alt
-        ];
+        $arrayFiles = $solutionFilesParameters->solutionFiles;
 
-        $ext = $request->file->extension();
-        $fileName = time() . '.' . $ext;
-        Storage::disk('s3')->putFileAs('screenshots', $request->file, $fileName);
-//        $request->file->move(public_path('uploads'), $fileName);
-        $file = new File();
-        $file->name = $fileName;
-        $file->ext = $ext;
-        $file->path = 's3/screenshots/' . $fileName;
-        $file->original_name = $request->file->getClientOriginalName();
-        $file->save();
-//        $challenge = Challenge::find($request->challenge_id);
-//        $challenge->files()->attach($file);
-        return response()->json([
-            'success' => true,
-            'message' => 'Zdjecie zostało wgrane poprawnie',
-            'payload' => $file
-        ]);
+        foreach($arrayFiles as $arrayFile){
+            $file = File::find($arrayFile['id']);
+            $solution->files()->attach($file);
+            $solution->files = $solution->files()->get();
+        }
 
-
-        $solutionFilesParams = [
-            'author_id' => Auth::user()->id,
-            'project_id' => $solutionFilesParameters->projectId,
-            'date' => $solutionFilesParameters->date,
-            'time' => $solutionFilesParameters->time
-        ];
-
-        $solutionFiles = $this->solutionFilesRepository->create($visitDateParams);
-
-        return $visitDate;
+        return $solution;
     }
 
     /**
