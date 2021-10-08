@@ -127,9 +127,6 @@ class ReportController extends Controller
         $file->original_name = $request->file->getClientOriginalName();
         $file->save();
 
-        $file->save();
-
-
         return response()->json([
             'success' => true,
             'message' => 'Plik został wgrany poprawnie',
