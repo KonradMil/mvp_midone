@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
-            <div class="mt-5">
+            <div class="mt-5" v-if="report.files !== undefined">
                 <div class="mt-3" v-if="report.files.length > 0">
                     <label class="form-label"> Pliki</label>
                     <div class="rounded-md pt-4">
