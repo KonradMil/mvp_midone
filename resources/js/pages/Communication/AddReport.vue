@@ -167,7 +167,7 @@ export default {
             }, 2000);
             title.value = '',
             description.value = '',
-            type.value = '',
+            type.value = 'Wyzwanie',
             files.value = null
         }
 
