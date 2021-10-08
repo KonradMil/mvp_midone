@@ -889,24 +889,23 @@ class SolutionController extends Controller
      */
     public function storeImage(Request $request): JsonResponse
     {
-//        $request->validate([
-//            'file' => 'required|mimes:jpg,png,JPG,jpeg|max:4096',
-//        ]);
+        $request->validate([
+            'file' => 'required|mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx,csv|max:4096',
+        ]);
+
         $ext = $request->file->extension();
         $fileName = time() . '.' . $ext;
-
-        $request->file->move(public_path('uploads'), $fileName);
+        Storage::disk('s3')->putFileAs('screenshots', $request->file, $fileName);
         $file = new File();
         $file->name = $fileName;
         $file->ext = $ext;
-        $file->path = 'uploads/' . $fileName;
+        $file->path = 's3/screenshots/' . $fileName;
         $file->original_name = $request->file->getClientOriginalName();
         $file->save();
-//        $challenge = Challenge::find($request->challenge_id);
-//        $challenge->files()->attach($file);
+
         return response()->json([
             'success' => true,
-            'message' => 'Awatar został wgrany poprawnie',
+            'message' => 'Plik został wgrany poprawnie',
             'payload' => $file
         ]);
     }
