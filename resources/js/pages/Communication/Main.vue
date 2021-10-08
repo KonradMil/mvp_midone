@@ -8,7 +8,7 @@
                     </h2>
                     <!-- BEGIN: Inbox Menu -->
                     <div class="intro-y box bg-theme-1 p-5 mt-6">
-                        <button type="button" class="btn text-gray-700 dark:text-gray-300 w-full bg-white dark:bg-theme-1 mt-1 pr-9" @click.prevent="activeTab = 'report'"> <i class="w-4 h-4 mr-2" data-feather="edit-3"></i>{{$t('communication.reportError')}}</button>
+                        <button type="button" class="btn text-gray-700 dark:text-gray-300 w-full bg-white dark:bg-theme-1 mt-1 pr-9" @click.prevent="activeTab =    'report'"> <i class="w-4 h-4 mr-2" data-feather="edit-3"></i>{{$t('communication.reportError')}}</button>
                         <div class="border-t border-theme-3 dark:border-dark-5 mt-6 pt-6 text-white">
                     <div class="flex items-center px-3 py-2 mt-2 rounded-md cursor-pointer justify-center" :class="(activeTab === 'reports') ? 'bg-theme-20 dark:bg-dark-1 font-medium' : ''" @click.prevent="activeTab = 'reports'">
                                 {{$t('communication.reports')}}
@@ -104,6 +104,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <ReportReview v-if="activeTab==='reportReview'" :report="report"></ReportReview>
                         <div class="intro-y box p-5" :class="(activeTab==='report')? '':'hidden'">
                             <AddReport></AddReport>
                         </div>
@@ -129,6 +130,7 @@ import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
 import Report from "./Report";
 import AddReport from "./AddReport";
+import ReportReview from "./ReportReview";
 import Notifications from "./NotificationsOld";
 import Teams from "./Teams";
 
@@ -148,7 +150,8 @@ export default {
         GetTeams,
         GetUsers,
         GetReports,
-        AddReport
+        AddReport,
+        ReportReview
     },
     setup(props, {emit}) {
         const app = getCurrentInstance();
@@ -163,6 +166,8 @@ export default {
         const teams = ref([]);
         const reports = ref([]);
         const report_id = ref(null);
+        const reportReview = ref(false);
+        const report = ref();
 
         emitter.on('changetab', e => {
             activeTab.value = e.val;
@@ -177,6 +182,11 @@ export default {
 
         emitter.on('addreport', e => {
             reports.value.list.push(e.obj);
+        });
+
+        emitter.on('reportReview', e => {
+            report.value = e.report;
+            activeTab.value = 'reportReview';
         });
 
 
@@ -214,6 +224,8 @@ export default {
             }
         })
         return {
+            report,
+            reportReview,
             users,
             teams,
             user,
