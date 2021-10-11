@@ -90,9 +90,7 @@
             <!-- END: Announcement -->
             <!-- BEGIN: Daily Sales -->
             <div class="intro-y box col-span-12 xxl:col-span-6">
-                <div
-                    class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5"
-                >
+                <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">{{$t('challengesNew.photo')}}</h2>
                 </div>
 
@@ -244,6 +242,7 @@ import {computed, onMounted, reactive, ref} from "vue";
 import {useToast} from "vue-toastification";
 import VueEasyLightbox from 'vue-easy-lightbox'
 import Avatar from "../../../components/avatar/Avatar";
+import $dayjs from "dayjs";
 
 
 export default {
