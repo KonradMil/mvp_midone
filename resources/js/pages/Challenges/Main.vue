@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <div class="mt-2" v-if="type == 'normal'">
             <TopMenuMain @tabChanged="getNewData" :user="user" :type="type"></TopMenuMain>

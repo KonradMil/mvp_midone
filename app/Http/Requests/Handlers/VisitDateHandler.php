@@ -4,6 +4,7 @@ namespace App\Http\Requests\Handlers;
 
 use App\Parameters\NewVisitDateMembersParameters;
 use App\Parameters\NewVisitDateParameters;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -20,7 +21,7 @@ class VisitDateHandler extends RequestHandler
         $parameters = new NewVisitDateParameters();
         $parameters->authorId = Auth::user()->id;
         $parameters->projectId = (int)$this->request->route()->parameter('project_id');
-        $parameters->date = $this->request->get('date');
+        $parameters->date = Carbon::createFromFormat('d.m.Y', $this->request->get('date'));
         $parameters->time = $this->request->get('time');
 
         return $parameters;

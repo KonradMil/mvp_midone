@@ -138,7 +138,12 @@
                                 <div class="flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
                                     <div>
                                         <div class="text-gray-600">Firma</div>
-                                        <div class="mt-1">Przykladowa firma</div>
+                                        <div class="mt-1" v-if="investor.companies !== undefined">
+                                            {{investor.companies[0].company_name}}
+                                        </div>
+                                        <div class="mt-1" v-else>
+                                            Brak firmy
+                                        </div>
                                     </div>
                                     <i data-feather="globe" class="w-4 h-4 text-gray-600 ml-auto"></i>
                                 </div>
@@ -191,7 +196,12 @@
                                 <div class="flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
                                     <div>
                                         <div class="text-gray-600">Firma</div>
-                                        <div class="mt-1">FUNDACJA INSPIRUJĄCE PRZYKŁADY</div>
+                                        <div class="mt-1"  v-if="integrator.companies !== undefined">
+                                            {{ integrator.companies[0].company_name }}
+                                        </div>
+                                        <div class="mt-1"  v-else>
+                                            Brak firmy
+                                        </div>
                                     </div>
                                     <i data-feather="globe" class="w-4 h-4 text-gray-600 ml-auto"></i>
                                 </div>
