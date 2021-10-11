@@ -1,27 +1,8 @@
 <template>
-    <div class="mt-2" v-if="type == 'normal'">
-        <TopMenuMain @tabChanged="getNewData"></TopMenuMain>
-    </div>
+
     <div>
-        <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-            <h2 class="text-lg font-medium mr-auto">{{ $t('challengesMain.challenges') }}</h2>
-            <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                <button class="btn btn-primary shadow-md mr-2" v-if="user.type == 'investor' && type==='normal'" @click="$router.push({name: 'addChallenge'})">{{ $t('challengesMain.addChallenge') }}</button>
-                <div class="dropdown ml-auto sm:ml-0">
-                    <div class="dropdown-menu w-40">
-                        <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
-                            <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                                <Share2Icon class="w-4 h-4 mr-2"/>
-                                {{ $t('global.sharePost') }}
-                            </a>
-                            <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">
-                                <DownloadIcon class="w-4 h-4 mr-2"/>
-                                {{ $t('global.downloadPost') }}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="mt-2" v-if="type == 'normal'">
+            <TopMenuMain @tabChanged="getNewData" :user="user"></TopMenuMain>
         </div>
         <div class="intro-y grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Blog Layout -->
@@ -32,7 +13,7 @@
                     </p>
                     <p v-if="user.type == 'integrator' && type==='followed'">
                         Nie obserwujesz jeszcze żadnych wyzwań.
-                    </p>T
+                    </p>
                     <p v-if="user.type == 'integrator' && type==='archive'">
                         Nie masz jeszcze żadnych archiwalnych wyzwań.
                     </p>
