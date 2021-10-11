@@ -526,8 +526,8 @@ export default {
                         description.value = response.data.payload.description;
                         category.value = String(response.data.payload.type);
                         categorytab.value = String(response.data.payload.category);
-                        solution_deadline.value = dayjs.unix(response.data.payload.solution_deadline);
-                        offer_deadline.value = dayjs.unix(response.data.payload.offer_deadline);
+                        solution_deadline.value = dayjs.unix(response.data.payload.solution_deadline).format('DD.MM.YYYY');
+                        offer_deadline.value = dayjs.unix(response.data.payload.offer_deadline).format('DD.MM.YYYY');
                         allowed_publishing.value = response.data.payload.allowed_publishing;
                         details.value.select_detail_weight = response.data.payload.technical_details.detail_weight;
                         details.value.select_pick_quality = response.data.payload.technical_details.pick_quality;
