@@ -192,6 +192,7 @@ export default {
 
         emitter.on('workshop_open', e => {
             console.log("CLICKED WORKSHOP MIT");
+            cash("#workshop-modal").modal("show");
             workshopOpen.value = true;
         });
 

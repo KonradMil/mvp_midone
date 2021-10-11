@@ -5,7 +5,7 @@
                 <div class="modal-body p-5 text-center">
                     <div class="grid grid-cols-1 gap-6 mt-1">
                         <div class="col">
-<!--                            <Workshop></Workshop>-->
+                            <Workshop></Workshop>
                         </div>
                     </div>
                 </div>
@@ -30,14 +30,14 @@ export default {
         },
     },
     setup(props) {
-        watch(() => props.open, (first, second) => {
-            console.log('NEW DATA', [first, second])
-            // if(first == true) {
-                cash("#workshop-modal").modal("show");
-            // } else {
-            //     cash("#workshop-modal").modal("close");
-            // }
-        });
+        // watch(() => props.open, (first, second) => {
+        //     console.log('NEW DATA', [first, second])
+        //     // if(first == true) {
+        //         cash("#workshop-modal").modal("show");
+        //     // } else {
+        //     //     cash("#workshop-modal").modal("close");
+        //     // }
+        // });
 
         return {
 
