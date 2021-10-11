@@ -169,9 +169,9 @@ class AuthController extends Controller
     /**
      * @param Request $request
      * @param UserRepository $userRepository
-     * @return JsonResponse
+     * @return RedirectResponse|JsonResponse
      */
-    public function login(Request $request, UserRepository $userRepository): JsonResponse
+    public function login(Request $request, UserRepository $userRepository): RedirectResponse|JsonResponse
     {
 
         $responseBuilder = new ResponseBuilder();

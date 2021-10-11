@@ -21,6 +21,8 @@ class TeamUser extends Pivot
      * @var string[]
      */
     protected $fillable = [
+        'user_id',
+        'team_id',
         'publishChallenge',
         'editChallenge',
         'owner',

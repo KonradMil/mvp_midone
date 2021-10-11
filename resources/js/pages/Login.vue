@@ -244,55 +244,62 @@ export default {
                 await this.recaptchaLoaded();
                 const recaptchaToken = await this.executeRecaptcha("login");
 
-                // RequestHandler('/sanctum/csrf-cookie', 'GET', {},
 
-                    // () => {
 
-                        RequestHandler('login', 'POST', {
-                                email: this.email,
-                                password: this.password,
-                                recaptchaToken: recaptchaToken
-                            },
-                            (response) => {
+            RequestHandler('login', 'POST', {
+                    email: this.email,
+                    password: this.password,
+                    recaptchaToken: recaptchaToken
+                },
+                (response) => {
 
-                                let twoFactory = typeof response.data.twofa !== 'undefined' ? response.data.twofa : false;
-                                let user = response.data.user;
+                    let twoFactory = typeof response.data.twofa !== 'undefined' ? response.data.twofa : false;
+                    let user = response.data.user;
 
-                                if (twoFactory) {
-                                    window.email = user.email;
-                                    this.shows = true;
-                                } else {
+                    if (twoFactory) {
+                        window.email = user.email;
+                        this.shows = true;
+                    } else {
 
-                                    store.dispatch('login/login', {user});
+                        store.dispatch('login/login', {user});
 
-                                    if (user.name !== undefined || user.name !== '') {
-                                        window.location.replace('/dashboard');
-                                    } else {
-                                        window.location.replace('/kreator');
-                                    }
-                                }
-                            },
-                            (error) => {
+                        if(window.invitationToken) {
 
-                                if (typeof error.response.data.accountInactive !== 'undefined') {
+                            if (user.name !== undefined || user.name !== '') {
+                                window.location.replace('/teams/claim_invitation?token='+window.invitationToken+'&redirect_to=dashboard');
+                            } else {
+                                window.location.replace('/teams/claim_invitation?token='+window.invitationToken+'&redirect_to=kreator');
+                            }
 
-                                    this.resendEmail = true;
+                        } else {
 
-                                }
+                            if (user.name !== undefined || user.name !== '') {
+                                window.location.replace('/dashboard');
+                            } else {
+                                window.location.replace('/kreator');
+                            }
 
-                            });
-                    // },
-                // );
+                        }
+                    }
+                },
+                (error) => {
+
+                    if (typeof error.response.data.accountInactive !== 'undefined') {
+
+                        this.resendEmail = true;
+
+                    }
+
+                });
+
             }
         },
 
         resendConfirmationEmail: async function (e) {
 
-            // RequestHandler('/sanctum/csrf-cookie', 'GET', {}, () => {
-                RequestHandler('email/verify/resend_email', 'POST', {
-                    email: this.email
-                });
-            // });
+            RequestHandler('email/verify/resend_email', 'POST', {
+                email: this.email
+            });
 
         },
 

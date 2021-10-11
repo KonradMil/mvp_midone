@@ -491,6 +491,7 @@ export default {
                isDisabled.value = false;
             }, 2000);
         }
+        
         const acceptInvite = async (id) => {
                 await AcceptInvite(id)
                 setTimeout(function () {
