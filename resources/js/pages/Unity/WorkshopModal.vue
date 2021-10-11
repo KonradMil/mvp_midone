@@ -1,5 +1,5 @@
 <template>
-    <div id="workshop-modal" class="modal" tabindex="-1" aria-hidden="false" style=" ">
+    <div id="workshop-modal" class="modal open" tabindex="-1" aria-hidden="false" style=" ">
         <div class="modal-dialog modal-xl" style="margin-top: 2rem; width: 90vw;">
             <div class="modal-content">
                 <div class="modal-body p-5 text-center">
