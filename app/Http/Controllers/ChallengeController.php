@@ -1202,7 +1202,7 @@ class ChallengeController extends Controller
     {
         $challenges = Challenge::with('solutions', function ($query) {
             $query->where('selected','=','1');
-        })->with(['solutions.author', 'author', 'author.own_company', 'solutions.author.own_company'])->get();
+        }, 'solutions.author', 'author', 'author.own_company', 'solutions.author.own_company')->get();
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie',
