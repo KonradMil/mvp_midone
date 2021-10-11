@@ -99,7 +99,7 @@
     <ModalFile :show="show" @closed="modalClosed">
         <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
             <div class="mt-5">
-                <div class="mt-3 border px-4 py-4" v-if="solution.files.length > 0">
+                <div class="mt-3 border px-4 py-4" v-if="images.length > 0">
                     <label class="form-label"> Wgrane pliki</label>
                     <div class="rounded-md pt-4">
                         <div class="grid grid-cols-4 h-full">
@@ -186,6 +186,8 @@ export default {
         const show = ref(false);
         const dropzoneSingleRef = ref();
         const solutionFiles = ref([]);
+        const guard = ref(false);
+        const images = ref(0);
 
         const modalClosed = () => {
             show.value = false;
@@ -215,6 +217,9 @@ export default {
 
 
         onMounted(() => {
+            if(props.solutions.files !== undefined){
+                images.value = props.solution.files;
+            }
             checkTeam();
             const elDropzoneSingleRef = dropzoneSingleRef.value;
             if(props.solution.files !== undefined){
@@ -334,6 +339,8 @@ export default {
         });
 
         return {
+            images,
+            guard,
             saveFiles,
             solutionFiles,
             deleteFile,
