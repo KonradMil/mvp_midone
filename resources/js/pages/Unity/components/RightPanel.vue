@@ -209,10 +209,12 @@ export default {
         });
 
         const lock = () => {
+            console.log('LOCK');
             emitter.emit('lockState', {action: 'lock'});
         }
 
         const unlock = () => {
+            console.log('UNLOCK');
             emitter.emit('lockState', {action: 'unlock'});
         }
 

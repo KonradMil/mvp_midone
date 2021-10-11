@@ -46,8 +46,7 @@
                         </div>
                     </div>
                     <div class="dropdown ml-3" v-if="challenge.author_id == user.id && challenge.status != 1">
-                        <a
-                            href="javascript:"
+                        <a href="javascript:"
                             class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300"
                             aria-expanded="false">
                             <MoreVerticalIcon class="w-5 h-5"/>
