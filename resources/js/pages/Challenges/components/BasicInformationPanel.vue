@@ -27,7 +27,7 @@
                         <strong>{{$t('challengesMain.deadlineSubmissionSolutions')}}:</strong>
                         <Litepicker
                             id="post-form-2"
-                            v-model="challenge.solution_deadline"
+                            v-model="solution_date"
                             v-if="inTeam"
                             :options="{
                              autoApply: false,
@@ -48,7 +48,7 @@
                         <strong>{{$t('challengesMain.deadlineSubmissionOffers')}}:</strong>
                         <Litepicker
                             id="post-form-3"
-                            v-model="challenge.offer_deadline"
+                            v-model="offer_date"
                             v-if="inTeam"
                             :options="{
                                 autoApply: false,
@@ -74,8 +74,8 @@
                             v-if="$dayjs().isBefore($dayjs(challenge.offer_deadline))"
                         >
                             {{$t('challengesMain.nextDeadline')}}:
-                            <span v-if="$dayjs().isAfter($dayjs(challenge.solution_deadline))">Składanie rozwiązań do: {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }}</span>
-                            <span v-if="$dayjs().isBefore($dayjs(challenge.solution_deadline))">Składanie ofert do: {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }}</span>
+                            <span v-if="$dayjs().isAfter($dayjs.unix(challenge.solution_deadline))">Składanie rozwiązań do: {{ $dayjs.unix(challenge.solution_deadline).format('DD.MM.YYYY') }}</span>
+                            <span v-if="$dayjs().isBefore($dayjs.unix(challenge.solution_deadline))">Składanie ofert do: {{ $dayjs.unix(challenge.offer_deadline).format('DD.MM.YYYY') }}</span>
                         </div>
                         <button v-if="!challenge.followed && challenge.stage < 3" class="btn btn-secondary ml-auto" @click="follow">
                             {{$t('challengesMain.follow')}}
@@ -265,6 +265,19 @@ export default {
         const toast = useToast();
         const types = require("../../../json/types.json");
         const lightboxVisible = ref(false);
+
+        const offer_date = computed ( () => {
+            return dayjs.unix(challenge.offer_deadline).format('DD.MM.YYYY');
+        }, (val) => {
+            challenge.offer_deadline = val;
+        });
+
+        const solution_date = computed ( () => {
+            return dayjs.unix(challenge.solution_deadline).format('DD.MM.YYYY');
+        }, (val) => {
+            challenge.solution_deadline = val;
+        });
+
         const images = computed(() => {
             let a = [];
             a.push('/' + props.challenge.screenshot_path);
@@ -363,7 +376,9 @@ export default {
             images,
             showImage,
             hideLightbox,
-            saveDate
+            saveDate,
+            solution_date,
+            offer_date
         }
     }
 }

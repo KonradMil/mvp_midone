@@ -55,7 +55,7 @@
                                                                         <img
                                                                             alt="DBR77"
                                                                             class="rounded-full"
-                                                                            :src="'/s3/' + project.screenshot_path"
+                                                                            :src="project.screenshot_path"
                                                                         />
                                 </div>
                             </div>
