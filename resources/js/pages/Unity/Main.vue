@@ -89,7 +89,8 @@
             </div>
         </div>
     </div>
-    <WorkshopModal v-if="workshopOpen" :open="workshopOpen"></WorkshopModal>
+    <ModalWorkshop :show="workshopOpen"></ModalWorkshop>
+<!--    <WorkshopModal v-if="workshopOpen" :open="workshopOpen"></WorkshopModal>-->
 </template>
 
 <script>
@@ -109,6 +110,7 @@ import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
 import WorkshopModal from "./WorkshopModal"
 import WebRTC from "./WebRTC";
+import ModalWorkshop from "../../components/ModalWorkshop";
 
 const ww = WindowWatcher();
 
@@ -125,7 +127,9 @@ export default {
         canEditSolution: Boolean,
         sessionid: String
     },
-    components: {WebRTC, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio, WorkshopModal},
+    components: {
+        ModalWorkshop, WebRTC, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio
+    },
     setup(props, {emit}) {
         //GLOBAL
         const app = getCurrentInstance();
@@ -192,7 +196,7 @@ export default {
 
         emitter.on('workshop_open', e => {
             console.log("CLICKED WORKSHOP MIT");
-            // cash("#workshop-modal").modal("show");
+
             workshopOpen.value = true;
         });
 
