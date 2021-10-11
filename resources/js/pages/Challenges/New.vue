@@ -444,7 +444,7 @@ export default {
             if (name.value == undefined || name.value == '') {
                 toast.error("Nazwa jest wymagana.");
             } else if (category.value == undefined || category.value == null) {
-                toast.error("Typ stanowiska jest wymagany");
+                toast.error("Typ procesu jest wymagany");
             } else {
                 let resp = await SaveChallenge({
                     id: props.challenge_id,
