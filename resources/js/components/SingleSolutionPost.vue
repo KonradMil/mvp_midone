@@ -98,8 +98,8 @@
     </div>
     <ModalFile :show="show" @closed="modalClosed">
         <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
-            <div class="mt-5" v-if="solution.files !== undefined">
-                <div class="mt-3 border px-4 py-4" v-if="solution.files.length > 0">
+            <div class="mt-5">
+                <div class="mt-3 border px-4 py-4" v-if="solution.files !== undefined">
                     <label class="form-label"> Wgrane pliki</label>
                     <div class="rounded-md pt-4">
                         <div class="grid grid-cols-4 h-full">
@@ -236,8 +236,6 @@ export default {
         const checkTeam = () => {
             axios.post('/api/solution/check-team', {user_id: user.id, solution_id: props.solution.id})
                 .then(response => {
-                    console.log("response.data")
-                    console.log(response.data)
                     if (response.data.success) {
                         inTeam.value = response.data.payload || (user.id == props.solution.author_id);
                     } else {
@@ -249,19 +247,16 @@ export default {
         const like = async (solution) => {
             axios.post('/api/solution/user/like', {id: solution.id})
                 .then(response => {
-                    console.log(response.data);
                     if (response.data.success) {
                         solution.liked = true;
                         emitter.emit('liked', {id: solution.id})
                     } else {
-                        // toast.error(response.data.message);
                     }
                 })
         }
         const dislike = async (solution) => {
             axios.post('/api/solution/user/dislike', {id: solution.id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
                         solution.liked = false;
                         emitter.emit('disliked', {id: solution.id})
@@ -303,7 +298,6 @@ export default {
                         toast.success('Rozwiązanie zostało opublikowane');
                         emitter.emit("isPublic", {isPublic: true});
                     } else {
-                        // toast.error(response.data.message);
                     }
                 })
         }
@@ -316,7 +310,6 @@ export default {
                         props.solution.rejected = 1;
                         props.solution.selected = 0;
                     } else {
-                        // toast.error(response.data.message);
                     }
                 })
         }
@@ -328,7 +321,6 @@ export default {
                         solution.status = 0;
                         toast.success('Rozwiązanie jest teraz prywatne');
                     } else {
-                        // toast.error(response.data.message);
                     }
                 })
         }
