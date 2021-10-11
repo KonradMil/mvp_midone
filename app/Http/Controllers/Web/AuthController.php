@@ -89,13 +89,9 @@ class AuthController extends Controller
                 }
 
                 if (!$user->hasVerifiedEmail()) {
-
                     $now = new \DateTime('now', new \DateTimeZone('UTC'));
                     $user->email_verified_at = $now->format('Y-m-d H:i:s');
                     $user->save();
-
-                    session()->flash('info', __('messages.login.account_inactive'));
-                    return redirect('/login');
                 }
 
                 if ($provider === 'google') {
