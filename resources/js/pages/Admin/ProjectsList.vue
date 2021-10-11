@@ -113,7 +113,7 @@ export default {
         });
 
         const getData = () => {
-            axios.get('/api/projects/get')
+            axios.get('/api/admin/projects/get')
                 .then(response => {
                     projects.value = response.data.payload;
                 })
