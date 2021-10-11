@@ -169,6 +169,7 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function prefix(val) {
+        console.log('PREFIX', val);
         game.message('NetworkBridge', 'SetDefaultUrlPrefix', val);
     }
 
