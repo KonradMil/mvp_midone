@@ -332,6 +332,7 @@ class TeamsController extends Controller
             $responseBuilder->setWarningMessage(__('messages.email.sending_fail'));
         }
 
+        $responseBuilder->setSuccessMessage(__('messages.team.invitation.sent'));
         return $responseBuilder->getResponse();
     }
 

@@ -37,6 +37,8 @@ class AuthController extends Controller
 
         if ($provider !== '' && in_array($provider, $this->allowedSocialProviders)) {
 
+            $teamInvitationToken = session('teamInvitation');
+
             if (session('social_registration')) {
 
                 session()->remove('social_registration');
@@ -63,6 +65,11 @@ class AuthController extends Controller
                 $user = $userService->socialRegistration($parameters);
 
                 Auth::login($user);
+
+                if($teamInvitationToken) {
+                    return redirect()->route('teams_claim_invitation', ['token' => $teamInvitationToken]);
+                }
+
                 return redirect('/dashboard');
 
             } else {
@@ -94,6 +101,11 @@ class AuthController extends Controller
                     }
 
                     Auth::login($user);
+
+                    if($teamInvitationToken) {
+                        return redirect()->route('teams_claim_invitation', ['token' => $teamInvitationToken]);
+                    }
+
                     return redirect('/dashboard');
                 }
 
@@ -105,6 +117,11 @@ class AuthController extends Controller
                     }
 
                     Auth::login($user);
+
+                    if($teamInvitationToken) {
+                        return redirect()->route('teams_claim_invitation', ['token' => $teamInvitationToken]);
+                    }
+
                     return redirect('/dashboard');
                 }
 
