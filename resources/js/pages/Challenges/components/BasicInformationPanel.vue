@@ -266,15 +266,15 @@ export default {
         const lightboxVisible = ref(false);
 
         const offer_date = computed ( () => {
-            return $dayjs.unix(challenge.offer_deadline).format('DD.MM.YYYY');
+            return $dayjs.unix(props.challenge.offer_deadline).format('DD.MM.YYYY');
         }, (val) => {
-            challenge.offer_deadline = val;
+            challenge.value.offer_deadline = val;
         });
 
         const solution_date = computed ( () => {
-            return $dayjs.unix(challenge.solution_deadline).format('DD.MM.YYYY');
+            return $dayjs.unix(props.challenge.solution_deadline).format('DD.MM.YYYY');
         }, (val) => {
-            challenge.solution_deadline = val;
+            challenge.value.solution_deadline = val;
         });
 
         const images = computed(() => {
