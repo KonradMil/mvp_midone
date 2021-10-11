@@ -10,7 +10,7 @@ Route::group(['prefix' => 'teams', 'middleware' => 'auth:sanctum'], function () 
     Route::post('user/add', [TeamsController::class, 'addUserToTeam']);
     Route::post('user/invite', [TeamsController::class, 'inviteUser']);
     Route::post('user/invites/get', [TeamsController::class, 'getUserInvites']);
-    Route::post('invitation/accept', [TeamsController::class, 'acceptInvite']);
+    Route::post('invite/accept', [TeamsController::class, 'acceptInvite']);
     Route::post('user/get', [TeamsController::class, 'getUserTeamsFiltered']);
     Route::post('user/delete', [TeamsController::class, 'deleteTeam']);
     Route::post('user/member/delete', [TeamsController::class, 'deleteMember']);
