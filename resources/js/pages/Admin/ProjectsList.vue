@@ -113,7 +113,7 @@ export default {
         });
 
         const getData = () => {
-            RequestHandler('login', 'GET', {},
+            RequestHandler('projects/get', 'GET', {},
                 (response) => {
                     projects.value = response.data.payload;
                 });
