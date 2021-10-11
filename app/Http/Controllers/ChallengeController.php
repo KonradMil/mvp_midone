@@ -1200,9 +1200,9 @@ class ChallengeController extends Controller
 
     public function adminGetProjects(): JsonResponse
     {
-        $challenges = Challenge::with('solutions', function ($query) {
+        $challenges = Challenge::with(['solutions', function ($query) {
             $query->where('selected','=','1');
-        }, 'solutions.author', 'author', 'author.own_company', 'solutions.author.own_company')->get();
+        }, 'solutions.author', 'author', 'author.own_company', 'solutions.author.own_company'])->get();
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie',
