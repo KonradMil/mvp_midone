@@ -2,7 +2,7 @@
 
     <div>
         <div class="mt-2" v-if="type == 'normal'">
-            <TopMenuMain @tabChanged="getNewData" :user="user"></TopMenuMain>
+            <TopMenuMain @tabChanged="getNewData" :user="user" :type="type"></TopMenuMain>
         </div>
         <div class="intro-y grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Blog Layout -->
