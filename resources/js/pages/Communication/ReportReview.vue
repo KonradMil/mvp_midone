@@ -1,5 +1,5 @@
 <template>
-    <div class="intro-y box p-5" v-if="guard === true">
+    <div class="intro-y box p-5">
         <div>
             <label for="crud-form-1" class="form-label">Tytuł wiadomości</label>
             <input id="crud-form-1"
@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
-            <div class="mt-5">
+            <div class="mt-5" v-if="report.files !== undefined">
                 <div class="mt-3" v-if="report.files.length > 0">
                     <label class="form-label"> Pliki</label>
                     <div class="rounded-md pt-4">
@@ -55,14 +55,10 @@
 </template>
 <script>
 import {onMounted, provide, ref} from "vue";
-import cash from "cash-dom";
 import GetUsers from '../../compositions/GetUsers'
-import GetReport from '../../compositions/GetReport'
 import Dropzone from '../../global-components/dropzone/Main'
-import {useToast} from "vue-toastification";
 import Avatar from "../../components/avatar/Avatar";
 import Modal from "../../components/Modal";
-import GetModel from "../../compositions/GetModel";
 
 export default {
     name: "reportReview",
@@ -73,31 +69,20 @@ export default {
         Dropzone,
     },
     props : {
-        id: Number
+        id: Number,
+        report: Object
     },
     setup(props, {emit}) {
         const users = ref([]);
         const user =ref({});
-        const report = ref('');
         const reports = ref([]);
-        const title = ref('');
-        const type = ref('');
-        const description = ref('');
         const files = ref([]);
         const dropzoneSingleRef = ref();
-        const report_id = ref(null);
         const guard = ref(false);
 
         provide("bind[dropzoneSingleRef]", el => {
             dropzoneSingleRef.value = el;
         });
-
-        const GetReportRepo = async (callback) => {
-            GetReport(report_id, (res) => {
-                report.value = res.payload[0];
-                callback();
-            })
-        }
 
         const GetUsersRepositories = async () => {
             users.value = GetUsers();
@@ -105,10 +90,6 @@ export default {
 
         onMounted(function () {
             GetUsersRepositories('');
-            GetReportRepo(function(){
-                guard.value = true;
-            });
-            report_id.value = props.id;
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
@@ -118,7 +99,6 @@ export default {
             users,
             user,
             reports,
-            report,
             files
         }
     },

@@ -4,7 +4,8 @@
     </div>
     <div>
         <label for="crud-form-1" class="form-label">Tytuł wiadomości</label>
-        <input id="crud-form-1"
+        <input maxlength="100"
+               id="crud-form-1"
                type="text"
                class="form-control w-full"
                placeholder=""
@@ -91,7 +92,7 @@
         </div>
     </div>
     <div class="modal-footer text-right">
-        <button type="button" :disabled="isDisabled" class="btn btn-primary w-20" @click="saveReportRepo">Wyślij zgłoszenie</button>
+        <button type="button" :disabled="isDisabled" class="btn btn-primary w-15" @click="saveReportRepo">Wyślij zgłoszenie</button>
     </div>
 
 </template>
@@ -110,7 +111,7 @@ export default {
     setup() {
         const isDisabled = ref(false);
         const title = ref('');
-        const type = ref('');
+        const type = ref('Wyzwanie');
         const description = ref('');
         const dropzoneSingleRef = ref();
         const file = ref({});
@@ -139,7 +140,6 @@ export default {
 
 
         const handleCallback = (resp) => {
-            console.log(resp);
             emitter.emit('addreport', {obj: resp});
         };
 
@@ -160,12 +160,15 @@ export default {
                         files : files.value
                     }, handleCallback);
                     isDisabled.value = true;
-                    console.log(resp);
                     emitter.emit('changetab', {val: 'reports'});
                 }
             setTimeout(()=>{
                isDisabled.value = false;
             }, 2000);
+            title.value = '',
+            description.value = '',
+            type.value = 'Wyzwanie',
+            files.value = null
         }
 
         return {

@@ -42,7 +42,7 @@
                                     <Avatar :username="team.name" color="#FFF" background-color="#5e50ac"/>
                                 </div>
                                 <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                                    <a href="" class="font-medium">{{ team.name }}</a>
+                                    <a class="font-medium cursor-pointer">{{ team.name }}</a>
                                     <div class="text-gray-600 text-xs mt-0.5">
                                         {{$t('teams.created')}}: {{ $dayjs(team.created_at).format('DD.MM.YYYY HH:mm') }}
                                     </div>
@@ -56,8 +56,17 @@
                                         {{$t('teams.details')}}
                                     </button>
                                     <div class="pl-2">
-                                    <button class="btn btn-danger py-1 px-2 mr-2" @click="delTeam(team.id,index)" v-if="team.owner_id === user.id"><TrashIcon></TrashIcon></button>
-<!--                                        <button class="btn btn-success mr-1 mb-2"> Adding <i data-loading-icon="spinning-circles" data-color="white" class="w-4 h-4 ml-2"></i> </button>-->
+                                        <a @click.prevent="delTeam(team.id,index)" v-if="team.owner_id === user.id" class="flex items-center text-theme-6 pl-2 cursor-pointer">
+                                            <Tippy
+                                                tag="a"
+                                                class="dark:text-gray-300 text-theme-600"
+                                                content="Usuń">
+                                                <TrashIcon/>
+                                            </Tippy>
+                                        </a>
+<!--                                    <button class="btn btn-danger py-1 px-2 mr-2" >-->
+<!--                                        <TrashIcon></TrashIcon>-->
+<!--                                    </button>-->
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +78,7 @@
                                                 <Avatar :src="'/s3/avatars/' + member.avatar" :username="member.name + ' ' + member.lastname" :size="40" color="#FFF" background-color="#5e50ac"/>
                                             </div>
                                             <div class="ml-4 mr-auto">
-                                                <a href="" class="font-medium">{{ member.name + ' ' + member.lastname }} - {{member.type}}</a>
+                                                <a class="font-medium cursor-pointer">{{ member.name + ' ' + member.lastname }} - {{member.type}}</a>
                                                 <div class="text-gray-600 mr-5 sm:mr-5" v-if="member.companies.length != 0">
                                                      {{member.companies[0].company_name}}
                                                 </div>
@@ -78,7 +87,14 @@
                                                 <button class="btn btn-outline-secondary py-1 px-2" @click="showMemberPermissionModal(team.id, member.id)">
                                                     {{ $t('global.permissions') }}
                                                 </button>
-                                                <a v-if="team.owner_id != member.id" :disabled="isDisabled" @click.prevent="del(member.id,team.id)" class="flex items-center text-theme-6 pl-2" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
+                                                <a v-if="team.owner_id != member.id" :disabled="isDisabled" @click.prevent="del(member,team)" class="flex items-center text-theme-6 pl-2 cursor-pointer">
+                                                    <Tippy
+                                                        tag="a"
+                                                        class="dark:text-gray-300 text-theme-600"
+                                                        content="Usuń">
+                                                        <TrashIcon/>
+                                                    </Tippy>
+                                                </a>
                                             </div>
                                             <div class="font-medium text-gray-700 dark:text-gray-600">
                                             </div>
@@ -397,42 +413,36 @@ export default {
                         teams.value.splice(index, 1);
                         setTimeout(() =>{
                             isDisabled.value = false;
-                        }, 2000);
+                        }, 1000);
                     } else {
                         isDisabled.value = true;
                         toast.error(response.data.message);
                         setTimeout(() =>{
                             isDisabled.value = false;
-                        }, 2000);
+                        }, 1000);
                     }
-                    setTimeout(() =>{
-                        isDisabled.value = false;
-                    }, 2000);
                 })
-            // await getTeamsRepositories();
         }
 
-        const del = async (member_id,team_id) => {
-            axios.post('api/teams/user/delete', {member_id: member_id, team_id: team_id})
+        const del = async (member,team) => {
+            axios.post('api/teams/user/member/delete', {member_id: member.id, team_id: team.id})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
+                        team.value.users.splice(member,1);
                         isDisabled.value = true;
                         toast.success(response.data.message);
                         setTimeout(() =>{
                             isDisabled.value = false;
-                        }, 2000);
+                        }, 1000);
 
                     } else {
                         isDisabled.value = true;
                         toast.error(response.data.message);
                         setTimeout(() =>{
                             isDisabled.value = false;
-                        }, 2000);
+                        }, 1000);
                     }
-                    setTimeout(() =>{
-                        isDisabled.value = false;
-                    }, 2000);
                 })
             await getTeamsRepositories();
         }
@@ -456,7 +466,7 @@ export default {
             }
             setTimeout(()=>{
                 isDisabled.value=false;
-            },5000);
+            },1000);
         }
 
         const addMember = async () => {
