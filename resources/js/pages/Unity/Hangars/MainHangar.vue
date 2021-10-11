@@ -273,7 +273,7 @@ export default {
                 // handleUnityActionOutgoing({action: 'setHangarAppearance', data: 1});
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
 
-                handleUnityActionOutgoing({action: 'prefix', data: 'https://staging.appworks-dev.pl/s3'});
+                handleUnityActionOutgoing({action: 'prefix', data: window.app_path + '/s3'});
             }, 2000);
             setTimeout(() => {
                 unlockInput();

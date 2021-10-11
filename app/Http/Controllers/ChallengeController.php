@@ -22,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use function Symfony\Component\String\s;
 
 /**
  *
@@ -111,7 +112,7 @@ class ChallengeController extends Controller
             }
             return response()->json([
                 'success' => true,
-                'message' => 'Brak projektów. Check minus',
+                'message' => 'Brak projektów.',
                 'payload' => ''
             ]);
         } else {
@@ -122,6 +123,7 @@ class ChallengeController extends Controller
             ]);
         }
     }
+
 
     /**
      * @param Request $request
@@ -622,6 +624,7 @@ class ChallengeController extends Controller
 
         $challenge->description = $request->description;
         $challenge->type = $request->type;
+        $challenge->category = $request->category;
         try {
             $challenge->solution_deadline = Carbon::createFromFormat('d.m.Y', $request->solution_deadline);
         } catch (Exception $e) {
@@ -1217,5 +1220,46 @@ class ChallengeController extends Controller
             'message' => 'Pobrano poprawnie',
             'payload' => $users
         ]);
+    }
+
+    public function getUserChallengesByTab(Request $request, $category)
+    {
+        if(Auth::user()->type == 'investor') {
+            $challenges = Challenge::where('author_id', '=', Auth::user()->id)->where('challenges.category', '=', $category)->get();
+        } else {
+            $challenges = Challenge::where('status', '=', 1)->where('challenges.category', '=', $category)->get();
+        }
+
+
+        foreach ($challenges as $challenge) {
+
+            if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like')) {
+                $challenge->liked = true;
+            } else {
+                $challenge->liked = false;
+            }
+            $challenge->comments_count = $challenge->comments()->count();
+            $challenge->likes = $challenge->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
+
+            if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Follow', 1)) {
+                $challenge->followed = true;
+            } else {
+                $challenge->followed = false;
+            }
+        }
+
+            if (!empty($challenges)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Pobrano poprawnie.',
+                    'payload' => $challenges
+                ]);
+        } else {
+            return response()->json([
+                'success' => true,
+                'message' => 'Brak projektów.',
+                'payload' => ''
+            ]);
+        }
     }
 }

@@ -23,8 +23,7 @@
                     search: false,
                     hideSelected: false,
                     classNames: 'w-16'
-              }"
-                >
+                  }">
                     <option value="pl">PL</option>
                     <option value="en">EN</option>
 
@@ -82,7 +81,7 @@
                            <div class="w-12 h-12 flex-none image-fit mr-1" style="z-index: 2;">
                             <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
                                     :username="notification.data.author.name + ' ' + notification.data.author.lastname"
-                                    :size="50" color="#FFF" background-color="#930f68"/>
+                                    :size="50" color="#FFF" background-color="#5e50ac"/>
                             <div v-if="notification.read_at === null"
                                  class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white"></div>
                         </div>
@@ -129,7 +128,7 @@
 <!--                                <div-->
 <!--                                    class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden"-->
 <!--                                >-->
-<!--                                    <Avatar :src="'uploads/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" size="40" color="#FFF" background-color="#930f68"/>-->
+<!--                                    <Avatar :src="'uploads/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" size="40" color="#FFF" background-color="#5e50ac"/>-->
 <!--                                </div>-->
 <!--                                <div class="ml-4 mr-auto">-->
 <!--                                    <div class="font-medium">{{invite.team.name}}</div>-->
@@ -158,7 +157,7 @@
                 aria-expanded="false"
             >
                 <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" :size="30"
-                        color="#FFF" background-color="#930f68"/>
+                        color="#FFF" background-color="#5e50ac"/>
             </div>
             <div class="dropdown-menu w-56">
                 <div

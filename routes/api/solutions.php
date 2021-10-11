@@ -35,6 +35,7 @@ Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function 
     Route::post('operational-analyses/get', [SolutionController::class, 'operationalAnalysesGet']);
     Route::post('financial-analyses/get', [SolutionController::class, 'financialAnalysesGet']);
     Route::post('estimate/get', [SolutionController::class, 'estimateGet']);
+    Route::post('{solution_id}/files/save', [SolutionController::class, 'saveFiles']);
 });
 
 //Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {

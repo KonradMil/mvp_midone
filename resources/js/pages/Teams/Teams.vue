@@ -39,10 +39,10 @@
                         <div class="box">
                             <div class="flex flex-col lg:flex-row items-center p-5">
                                 <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                                    <Avatar :username="team.name" color="#FFF" background-color="#930f68"/>
+                                    <Avatar :username="team.name" color="#FFF" background-color="#5e50ac"/>
                                 </div>
                                 <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                                    <a href="" class="font-medium">{{ team.name }}</a>
+                                    <a class="font-medium cursor-pointer">{{ team.name }}</a>
                                     <div class="text-gray-600 text-xs mt-0.5">
                                         {{$t('teams.created')}}: {{ $dayjs(team.created_at).format('DD.MM.YYYY HH:mm') }}
                                     </div>
@@ -56,8 +56,17 @@
                                         {{$t('teams.details')}}
                                     </button>
                                     <div class="pl-2">
-                                    <button class="btn btn-danger py-1 px-2 mr-2" @click="delTeam(team.id,index)" v-if="team.owner_id === user.id"><TrashIcon></TrashIcon></button>
-<!--                                        <button class="btn btn-success mr-1 mb-2"> Adding <i data-loading-icon="spinning-circles" data-color="white" class="w-4 h-4 ml-2"></i> </button>-->
+                                        <a @click.prevent="delTeam(team.id,index)" v-if="team.owner_id === user.id" class="flex items-center text-theme-6 pl-2 cursor-pointer">
+                                            <Tippy
+                                                tag="a"
+                                                class="dark:text-gray-300 text-theme-600"
+                                                content="Usuń">
+                                                <TrashIcon/>
+                                            </Tippy>
+                                        </a>
+<!--                                    <button class="btn btn-danger py-1 px-2 mr-2" >-->
+<!--                                        <TrashIcon></TrashIcon>-->
+<!--                                    </button>-->
                                     </div>
                                 </div>
                             </div>
@@ -66,10 +75,10 @@
                                     <div class="p-5">
                                         <div v-for="(member, index) in team.users" class="relative flex items-center" :key="'member_' + index">
                                             <div class="w-12 h-12 flex-none image-fit">
-                                                <Avatar :src="'/s3/avatars/' + member.avatar" :username="member.name + ' ' + member.lastname" :size="40" color="#FFF" background-color="#930f68"/>
+                                                <Avatar :src="'/s3/avatars/' + member.avatar" :username="member.name + ' ' + member.lastname" :size="40" color="#FFF" background-color="#5e50ac"/>
                                             </div>
                                             <div class="ml-4 mr-auto">
-                                                <a href="" class="font-medium">{{ member.name + ' ' + member.lastname }} - {{member.type}}</a>
+                                                <a class="font-medium cursor-pointer">{{ member.name + ' ' + member.lastname }} - {{member.type}}</a>
                                                 <div class="text-gray-600 mr-5 sm:mr-5" v-if="member.companies.length != 0">
                                                      {{member.companies[0].company_name}}
                                                 </div>
@@ -78,7 +87,14 @@
                                                 <button class="btn btn-outline-secondary py-1 px-2" @click="showMemberPermissionModal(team.id, member.id)">
                                                     {{ $t('global.permissions') }}
                                                 </button>
-                                                <a v-if="team.owner_id != member.id" :disabled="isDisabled" @click.prevent="del(member.id,team.id)" class="flex items-center text-theme-6 pl-2" href="javascript:;" data-toggle="modal" data-target="#delete-confirmation-modal"> <TrashIcon></TrashIcon> Delete </a>
+                                                <a v-if="team.owner_id != member.id" :disabled="isDisabled" @click.prevent="del(member,team)" class="flex items-center text-theme-6 pl-2 cursor-pointer">
+                                                    <Tippy
+                                                        tag="a"
+                                                        class="dark:text-gray-300 text-theme-600"
+                                                        content="Usuń">
+                                                        <TrashIcon/>
+                                                    </Tippy>
+                                                </a>
                                             </div>
                                             <div class="font-medium text-gray-700 dark:text-gray-600">
                                             </div>
@@ -102,7 +118,7 @@
 <!--                            <div v-for="(invite, index) in invites" :key="'invite_' + index" class="intro-y">-->
 <!--                                <div class="box px-4 py-4 mb-3 flex items-center zoom-in">-->
 <!--                                    <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden">-->
-<!--                                        <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#930f68"/>-->
+<!--                                        <Avatar :src="'/s3/avatars/' + invite.inviter.avatar" :username="invite.inviter.name + ' ' + invite.inviter.lastname" :size="40" color="#FFF" background-color="#5e50ac"/>-->
 <!--                                    </div>-->
 <!--                                    <div class="ml-4 mr-auto">-->
 <!--                                        <div class="font-medium">{{invite.team.name}}</div>-->
@@ -119,10 +135,10 @@
 <!--                            <div v-for="(invite, index) in invitesSent" :key="'inviteSent_' + index" class="intro-y">-->
 <!--                                <div class="box px-4 py-4 mb-3 flex items-center zoom-in">-->
 <!--                                    <div class="w-10 h-10 flex-none image-fit rounded-md overflow-hidden" v-if="invite.user != null">-->
-<!--                                        <Avatar :src="'/s3/avatars/' + invite.user.avatar" :username="invite.user.name + ' ' + invite.user.lastname" :size="40" color="#FFF" background-color="#930f68"/>-->
+<!--                                        <Avatar :src="'/s3/avatars/' + invite.user.avatar" :username="invite.user.name + ' ' + invite.user.lastname" :size="40" color="#FFF" background-color="#5e50ac"/>-->
 <!--                                    </div>-->
 <!--                                    <div v-if="invite.user == null">-->
-<!--                                        <Avatar :src="''" :username="invite.email" :size="40" color="#FFF" background-color="#930f68"/>-->
+<!--                                        <Avatar :src="''" :username="invite.email" :size="40" color="#FFF" background-color="#5e50ac"/>-->
 
 <!--                                    </div>-->
 <!--                                    <div class="ml-4 mr-auto">-->
@@ -397,42 +413,36 @@ export default {
                         teams.value.splice(index, 1);
                         setTimeout(() =>{
                             isDisabled.value = false;
-                        }, 2000);
+                        }, 1000);
                     } else {
                         isDisabled.value = true;
                         toast.error(response.data.message);
                         setTimeout(() =>{
                             isDisabled.value = false;
-                        }, 2000);
+                        }, 1000);
                     }
-                    setTimeout(() =>{
-                        isDisabled.value = false;
-                    }, 2000);
                 })
-            // await getTeamsRepositories();
         }
 
-        const del = async (member_id,team_id) => {
-            axios.post('api/teams/user/delete', {member_id: member_id, team_id: team_id})
+        const del = async (member,team) => {
+            axios.post('api/teams/user/member/delete', {member_id: member.id, team_id: team.id})
                 .then(response => {
                     // console.log(response.data)
                     if (response.data.success) {
+                        team.value.users.splice(member,1);
                         isDisabled.value = true;
                         toast.success(response.data.message);
                         setTimeout(() =>{
                             isDisabled.value = false;
-                        }, 2000);
+                        }, 1000);
 
                     } else {
                         isDisabled.value = true;
                         toast.error(response.data.message);
                         setTimeout(() =>{
                             isDisabled.value = false;
-                        }, 2000);
+                        }, 1000);
                     }
-                    setTimeout(() =>{
-                        isDisabled.value = false;
-                    }, 2000);
                 })
             await getTeamsRepositories();
         }
@@ -456,7 +466,7 @@ export default {
             }
             setTimeout(()=>{
                 isDisabled.value=false;
-            },5000);
+            },1000);
         }
 
         const addMember = async () => {
@@ -481,6 +491,7 @@ export default {
                isDisabled.value = false;
             }, 2000);
         }
+        
         const acceptInvite = async (id) => {
                 await AcceptInvite(id)
                 setTimeout(function () {

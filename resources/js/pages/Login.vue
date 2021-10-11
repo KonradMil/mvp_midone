@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container sm:px-10">en
+        <div class="container sm:px-10">
             <div class="block xl:grid grid-cols-2 gap-4">
                 <!-- BEGIN: Login Info -->
                 <div class="hidden xl:flex flex-col min-h-screen">
@@ -8,7 +8,7 @@
                         <img
                             alt="DBR77 Platforma Robotów "
                             class="w-2/4 mt-36"
-                            src="/s3/twopointo/images/dbr_logo_white.svg"
+                            src="/images/dbr_logo_white_platform.svg"
                         />
                     </a>
                 </div>
@@ -244,54 +244,61 @@ export default {
                 await this.recaptchaLoaded();
                 const recaptchaToken = await this.executeRecaptcha("login");
 
-                RequestHandler('/sanctum/csrf-cookie', 'GET', {},
 
-                    () => {
 
-                        RequestHandler('login', 'POST', {
-                                email: this.email,
-                                password: this.password,
-                                recaptchaToken: recaptchaToken
-                            },
-                            (response) => {
+            RequestHandler('login', 'POST', {
+                    email: this.email,
+                    password: this.password,
+                    recaptchaToken: recaptchaToken
+                },
+                (response) => {
 
-                                let twoFactory = typeof response.data.twofa !== 'undefined' ? response.data.twofa : false;
-                                let user = response.data.user;
+                    let twoFactory = typeof response.data.twofa !== 'undefined' ? response.data.twofa : false;
+                    let user = response.data.user;
 
-                                if (twoFactory) {
-                                    window.email = user.email;
-                                    this.shows = true;
-                                } else {
+                    if (twoFactory) {
+                        window.email = user.email;
+                        this.shows = true;
+                    } else {
 
-                                    store.dispatch('login/login', {user});
+                        store.dispatch('login/login', {user});
 
-                                    if (user.name !== undefined || user.name !== '') {
-                                        window.location.replace('/dashboard');
-                                    } else {
-                                        window.location.replace('/kreator');
-                                    }
-                                }
-                            },
-                            (error) => {
+                        if(window.invitationToken) {
 
-                                if (typeof error.response.data.accountInactive !== 'undefined') {
+                            if (user.name !== undefined || user.name !== '') {
+                                window.location.replace('/teams/claim_invitation?token='+window.invitationToken+'&redirect_to=dashboard');
+                            } else {
+                                window.location.replace('/teams/claim_invitation?token='+window.invitationToken+'&redirect_to=kreator');
+                            }
 
-                                    this.resendEmail = true;
+                        } else {
 
-                                }
+                            if (user.name !== undefined || user.name !== '') {
+                                window.location.replace('/dashboard');
+                            } else {
+                                window.location.replace('/kreator');
+                            }
 
-                            });
-                    },
-                );
+                        }
+                    }
+                },
+                (error) => {
+
+                    if (typeof error.response.data.accountInactive !== 'undefined') {
+
+                        this.resendEmail = true;
+
+                    }
+
+                });
+
             }
         },
 
         resendConfirmationEmail: async function (e) {
 
-            RequestHandler('/sanctum/csrf-cookie', 'GET', {}, () => {
-                RequestHandler('email/verify/resend_email', 'POST', {
-                    email: this.email
-                });
+            RequestHandler('email/verify/resend_email', 'POST', {
+                email: this.email
             });
 
         },

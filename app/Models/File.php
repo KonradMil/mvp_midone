@@ -56,4 +56,13 @@ class File extends Model
     {
         return $this->belongsToMany(File::class, 'challenge_image', 'image_id', 'challenge_id');
     }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function solutions(): BelongsToMany
+    {
+        return $this->belongsToMany(File::class);
+    }
+
 }

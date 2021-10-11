@@ -45,7 +45,7 @@ class SolutionAcceptedNotification extends Notification
     {
         return (new MailMessage)
             ->line('Rozwiązanie zostało zaakceptowane do wyzwania: ' . $this->challenge->name .'.')
-            ->action('Sprawdź', url('https://devsys.appworks-dev.pl/challenges/card/' . $this->challenge->id))
+            ->action('Sprawdź', url(env('APP_PATH') . '/challenges/card/' . $this->challenge->id))
             ->line('Dziękujemy za korzystanie z platformy DBR77!');
     }
 

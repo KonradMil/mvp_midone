@@ -29,7 +29,7 @@
     <div class="w-full flex items-center mt-3" v-if="guard !==3">
         <div class="w-8 h-8 flex-none image-fit mr-3">
             <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" :size="35" color="#FFF"
-                    background-color="#930f68"/>
+                    background-color="#5e50ac"/>
         </div>
         <div class="flex-1 relative text-gray-700">
             <form role="form" @submit.prevent>

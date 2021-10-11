@@ -522,6 +522,9 @@ export default defineComponent({
 
                     }
                 })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
 
         emitter.on('changeTeamsSolution', e => () => {

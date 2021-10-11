@@ -27,6 +27,7 @@ Route::group(['prefix' => 'challenges', 'middleware' => ['auth:sanctum', 'verifi
     Route::post('unpublish', [ChallengeController::class, 'unpublish']);
     Route::post('change/dates', [ChallengeController::class, 'changeDates']);
     Route::post('local-vision/save', [ChallengeController::class, 'localVisionSave']);
+    Route::post('get/tab/{category}', [ChallengeController::class, 'getUserChallengesByTab']);
 });
 
 // TODO cała grupa poniżej do usunięcia
@@ -37,8 +38,9 @@ Route::group(['prefix' => 'challenge', 'middleware' => ['auth:sanctum', 'verifie
     Route::post('user/get/good/projects', [ChallengeController::class, 'getUserChallengesGoodProjects']);
     Route::post('check-team', [ChallengeController::class, 'checkTeam']);
     Route::post('user/save/description', [ChallengeController::class, 'saveDescription']);
-    Route::post('user/get/followed', [ChallengeController::class, 'getUserChallengesFollowed']);
-    Route::post('user/get/archive', [ChallengeController::class, 'getUserChallengesArchive']);
+    Route::post('get/followed', [ChallengeController::class, 'getUserChallengesFollowed']);
+
+    Route::post('get/archive', [ChallengeController::class, 'getUserChallengesArchive']);
     Route::post('user/get/card', [ChallengeController::class, 'getCardData']);
     Route::post('user/create', [ChallengeController::class, 'createChallenge']);
     Route::post('user/save', [ChallengeController::class, 'saveChallenge']);

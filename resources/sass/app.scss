@@ -151,24 +151,64 @@
 @import "components/full-calendar";
 @import "components/pristine";
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
-
-::-webkit-scrollbar {
-    width: 20px;
-    background:lightgray;
+.side-nav > ul ul {
+    background-color: #271c69 !important;
+}
+.search .search__input {
+    background-color: #504e4e3d !important;
+}
+.top-nav > ul li .top-menu {
+    height: 40px !important;
+}
+.login {
+    position: relative;
+    overflow: hidden !important;
+}
+.login:before {
+    background-size: auto 120% !important;
+}
+.top-nav > ul {
+    padding-left: 10px !important;
+}
+.top-nav > ul li .top-menu .top-menu__title {
+    margin-left: 0 !important;
+    font-weight: bold;
+}
+.top-nav {
+    border-bottom: 1px solid #5e50ac;
+}
+.top-nav>ul li .top-menu:not(.top-menu--active) .top-menu__icon:before {
+    border: 1px solid #5e50ac;
+    background-color: #5e50ac;
+}
+//.top-nav>ul li .top-menu__icon:before {
+//
+//    background-color: #5e50ac;
+//}
+.top-nav>ul li .top-menu__icon,.top-nav>ul li .top-menu__title {
+    color: #fff !important;
+}
+.top-nav>ul li:hover .top-menu__icon,.top-nav>ul li:hover .top-menu__title {
+    color: white !important;
 }
 
-::-webkit-scrollbar-track {
-    background-color: #e4e4e4;
-    border-radius: 100px;
+::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
 }
-
-::-webkit-scrollbar-thumb {
-    border-radius: 100px;
-    border-left: 0;
-    border-right: 0;
-    background-color: #930f68;
+::-webkit-scrollbar-thumb{
+    background: #5e50ac;
+    border: 1px solid #FFFFFF;
+    border-radius: 10px;
 }
-
+::-webkit-scrollbar-thumb:hover{
+    background: #6B104D;
+}
+::-webkit-scrollbar-track{
+    background: #F0F0F0;
+    border-radius: 0px;
+    box-shadow: inset 0px 0px 0px 0px #F0F0F0;
+}
 .input-shadow {
     background: #FFFFFF;
     box-shadow: 0px 5px 30px -5px rgba(94, 80, 172, 0.5);
@@ -305,7 +345,7 @@
 }
 
 .selected-solution {
-    border: 3px solid #930f68;
+    border: 3px solid #5e50ac;
     border-radius: 10px;
 }
 
@@ -349,7 +389,7 @@ html::-webkit-scrollbar {
 }
 
 .clrGreen {
-    background: #930f68;
+    background: #5e50ac;
 }
 
 #bottom {
@@ -357,8 +397,8 @@ html::-webkit-scrollbar {
 }
 
 .slider-tooltip {
-    border: 1px solid #930f68 !important;
-    background: #930f68 !important;
+    border: 1px solid #5e50ac !important;
+    background: #5e50ac !important;
 }
 
 .modal.modal-slide-over .modal-dialog .modal-content {
@@ -386,7 +426,7 @@ html::-webkit-scrollbar {
 }
 
 .vue-avatar--wrapper {
-    background-color: #930f68 !important;
+    background-color: #5e50ac !important;
 }
 
 .active-row {
@@ -398,15 +438,15 @@ html::-webkit-scrollbar {
 }
 
 .form-check-input[type=radio] {
-    border-color: #930f68 !important;
+    border-color: #5e50ac !important;
 }
 
 .form-check-input[type=radio]:before {
-    background-color: #930f68 !important;
+    background-color: #5e50ac !important;
 }
 
 .accordion .accordion-item .accordion-header .accordion-button:not(.collapsed) {
-    color: #930f68 !important;
+    color: #5e50ac !important;
 }
 
 .form-check-input:focus, .form-control:focus {
@@ -415,8 +455,8 @@ html::-webkit-scrollbar {
 }
 
 .form-check-input[type=checkbox] {
-    background-color: #930f68 !important;
-    border-color: #930f68 !important;
+    background-color: #5e50ac !important;
+    border-color: #5e50ac !important;
 }
 
 .select-dropdown {
@@ -424,8 +464,8 @@ html::-webkit-scrollbar {
 }
 
 .btn-primary {
-    background-color: #930f68 !important;
-    border-color: #930f68 !important;
+    background-color: #5e50ac !important;
+    border-color: #5e50ac !important;
 }
 
 .po-password-strength-bar {

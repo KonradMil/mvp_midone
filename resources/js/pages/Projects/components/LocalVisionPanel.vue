@@ -1,7 +1,7 @@
 <template>
     <div class="intro-y" style="width: 1200px;">
-    <div class="box shadow-2xl md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-full sm:w-1/2 max-w-5xl" v-if="guard === true">
-        <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
+    <div class="intro-y box shadow-2xl md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-full sm:w-1/2 max-w-5xl" v-if="guard === true">
+        <div class="intro-y flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
             <h2 class="font-medium text-base mr-auto">
                 Wizja lokalna
             </h2>
@@ -32,12 +32,10 @@
         <div class="intro-y inbox box mt-5 overflow-y-auto" style="max-height: 521px; overflow-x: hidden;">
             <transition-group tag="ul" name="list">
             <li v-for="report in reports" :key="report.id">
-                <div @click="showDetails[report.id] = !showDetails[report.id]" class="intro-y">
-                    <div
-                        :class="(showDetails[report.id] === true) ? 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-200 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1' : 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1'">
+                <div class="intro-y">
+                    <div :class="(showDetails[report.id] === true) ? 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-200 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1' : 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1'">
                         <div class="flex px-5 py-3 pb-5">
-                            <div class="w-72 flex-none flex items-center mr-5" v-if="report.author !== undefined">
-                                <!--                                <input class="form-check-input flex-none" type="checkbox" checked>-->
+                            <div @click="showDetails[report.id] = !showDetails[report.id]" class="w-72 flex-none flex items-center mr-5" v-if="report.author !== undefined">
                                 <Tippy
                                     tag="a"
                                     class="dark:text-gray-300 text-gray-600"
@@ -60,19 +58,19 @@
                                 <div class="w-6 h-6 flex-none image-fit relative ml-5">
                                     <Avatar :src="'/s3/avatars/' + report.author.avatar"
                                             :username="report.author.name + ' ' + report.author.lastname" :size="30"
-                                            color="#FFF" background-color="#930f68"/>
+                                            color="#FFF" background-color="#5e50ac"/>
                                 </div>
                                 <div class="inbox__item--sender truncate ml-3">{{ report.author.name }}
                                     {{ report.author.lastname }}
                                 </div>
                             </div>
-                            <div class="w-64 sm:w-auto truncate pt-3 pl-6" style="max-width: 350px;">
+                            <div @click="showDetails[report.id] = !showDetails[report.id]" class="w-64 sm:w-auto truncate pt-3 pl-6" style="max-width: 350px;">
                                 <span class="inbox__item--highlight" v-if="report.author_id >= 1">{{
                                         report.description
                                     }}</span>
                                 <span class="inbox__item--highlight" v-else>Uzupełnij raport!</span>
                             </div>
-                            <div class="inbox__item--time whitespace-nowrap ml-auto pl-10 pr-4 pt-3">
+                            <div @click="showDetails[report.id] = !showDetails[report.id]" class="inbox__item--time whitespace-nowrap ml-auto pl-10 pr-4 pt-3">
                                 <p class="text-theme-9" v-if="report.accepted === 1">
                                     {{ $t('challengesMain.accepted') }}</p>
                                 <p class="text-theme-6" v-if="report.accepted === 2">
@@ -112,12 +110,12 @@
                 </div>
                 <ul v-if="showDetails[report.id] === true" class="intro-y pt-4 pl-5">
                     <li class="intro-y">
-                        <div
-                            class="sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
                             <div class="flex px-5 py-3 pb-5">
                                 <label for="input-wizard-1" class="form-label" style="width: 750px;">
                                     Czego dotyczy
                                     <textarea
+                                        maxlength="400"
                                         style="height: 100px;"
                                         :disabled="integrator.id !== user.id || report.accepted === 1 || report.accepted === 2 && project.accept_local_vision !== 1"
                                         type="text"
@@ -128,12 +126,12 @@
                         </div>
                     </li>
                     <li class="intro-y">
-                        <div
-                            class="sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
                             <div class="flex px-5 py-3 pb-5">
                                 <label for="input-wizard-1" class="form-label" style="width: 750px;">
                                     Stan początkowy
                                     <textarea
+                                        maxlength="400"
                                         style="height: 100px;"
                                         :disabled="integrator.id !== user.id || report.accepted === 1 || report.accepted === 2 && project.accept_local_vision !== 1"
                                         type="text"
@@ -144,12 +142,12 @@
                         </div>
                     </li>
                     <li class="intro-y">
-                        <div
-                            class="sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
                             <div class="flex px-5 py-3 pb-5">
                                 <label for="input-wizard-1" class="form-label" style="width: 750px;">
                                     Stan końcowy
                                     <textarea
+                                        maxlength="400"
                                         style="height: 100px;"
                                         :disabled="integrator.id !== user.id || report.accepted === 1 || report.accepted === 2 && project.accept_local_vision !== 1"
                                         type="text"
@@ -165,12 +163,12 @@
                     </li>
                     <li class="intro-y"
                         v-if="(report.comment !== '' && integrator.id === user.id) || investor.id === user.id">
-                        <div
-                            class="sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
+                        <div class="sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1">
                             <div class="flex px-5 py-3 pb-5">
                                 <label for="input-wizard-1" class="form-label" style="width: 750px;">
                                     Komentarz inwestora
                                     <textarea
+                                        maxlength="400"
                                         style="height: 100px;"
                                         :disabled="investor.id !== user.id || report.accepted === 1 || report.accepted === 2 && project.accept_local_vision !== 1"
                                         v-model="report.comment"

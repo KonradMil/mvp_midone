@@ -53,7 +53,7 @@ export default {
         const l = ref({interval: 10, delay: 0, model_name: '', cargo: {
                 model_name: "9195a37a-9a13-12e3-8591-012165a3a613",
                 model_id: "Karton średni",
-                prefab_url: "https://staging.appworks-dev.pl/models/carton_sredni",
+                prefab_url: window.app_path + "/models/carton_sredni",
                 additional_data: ""
             }, animables: []});
         const selected = ref(0);
@@ -73,7 +73,7 @@ export default {
             console.log( l.value.cargo);
             l.value.cargo.model_name = detailsAr.value[lab].model_name;
             l.value.cargo.model_id = detailsAr.value[lab].model_id;
-            l.value.cargo.prefab_url = 'https://staging.appworks-dev.pl' + detailsAr.value[lab].prefab_url;
+            l.value.cargo.prefab_url = window.app_path + detailsAr.value[lab].prefab_url;
             context.emit("update:line", lab);
 
         }, {deep: true})

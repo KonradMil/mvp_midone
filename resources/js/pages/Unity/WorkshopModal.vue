@@ -1,10 +1,9 @@
 <template>
-    <div id="workshop-modal" class="modal" tabindex="-1" aria-hidden="false" style=" ">
+    <div id="workshop-modal" class="modal open" tabindex="-1" aria-hidden="false" style=" ">
         <div class="modal-dialog modal-xl" style="margin-top: 2rem; width: 90vw;">
             <div class="modal-content">
                 <div class="modal-body p-5 text-center">
                     <div class="grid grid-cols-1 gap-6 mt-1">
-                        <!-- BEGIN: Profile Menu -->
                         <div class="col">
                             <Workshop></Workshop>
                         </div>
@@ -18,6 +17,7 @@
 <script>
 import {onMounted, ref, watch} from "vue";
 import Workshop from './Workshop/Workshop';
+
 export default {
     name: 'WorkshopModal',
     components: {
@@ -30,17 +30,14 @@ export default {
         },
     },
     setup(props) {
-        watch(() => props.open, (first, second) => {
-            console.log('NEW DATA', [first, second])
-            if(first == true) {
-                cash("#workshop-modal").modal("show");
-            } else {
-                cash("#workshop-modal").modal("close");
-            }
-        });
-        onMounted(() => {
-
-        });
+        // watch(() => props.open, (first, second) => {
+        //     console.log('NEW DATA', [first, second])
+        //     // if(first == true) {
+        //         cash("#workshop-modal").modal("show");
+        //     // } else {
+        //     //     cash("#workshop-modal").modal("close");
+        //     // }
+        // });
 
         return {
 

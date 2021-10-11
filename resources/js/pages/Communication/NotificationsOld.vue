@@ -6,7 +6,7 @@
                     <a href="javascript:;" class="w-5 h-5 flex-none ml-4 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="star"></i> </a>
                     <a href="javascript:;" class="w-5 h-5 flex-none ml-2 flex items-center justify-center text-gray-500"> <i class="w-4 h-4" data-feather="bookmark"></i> </a>
                     <div class="w-6 h-6 flex-none image-fit relative ml-5">
-                        <Avatar :src="(not.list != undefined)? '/s3/avatars/' + not.list.author.avatar : ''" :username="not.list.author.name + ' ' + not.list.author.lastname" :size="30" color="#FFF" background-color="#930f68"/>
+                        <Avatar :src="(not.list != undefined)? '/s3/avatars/' + not.list.author.avatar : ''" :username="not.list.author.name + ' ' + not.list.author.lastname" :size="30" color="#FFF" background-color="#5e50ac"/>
                     </div>
                     <div class="inbox__item--sender truncate ml-3">{{not.list.author.name + ' ' + not.list.author.lastname}}</div>
                 </div>

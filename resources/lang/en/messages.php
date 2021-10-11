@@ -8,6 +8,10 @@ return [
     'rejected'=> 'Rejected',
     'canceled' => 'Canceled',
     'recaptcha_error' => 'Prove you are not a robot.',
+    'no_permissions' => 'You are not permitted to make this action.',
+    'email' => [
+        'sending_fail' => 'Email could not be send.'
+    ],
     'validation' => [
         'registration' => [
             'wrong_account_type' => "Incorrect account type"
@@ -44,4 +48,19 @@ return [
     'user' => [
         'not_found' => "User not found",
     ],
+    'team' => [
+        'not_found' => "Team not found",
+        'user_exists' => 'This user is already a member of this team.',
+        'invitation' => [
+            'exists' => 'This user is already invited.',
+            'sent' => 'Invitation has been sent.',
+            'claim' => [
+                'team_not_found' => 'Team you were invited to does not exist.',
+                'login_request' => 'Log in to accept the invitation.',
+                'user_not_invited' => 'You cannot use someone else\'s team invitation.',
+                'unexpected_error' => 'An error occurred while accepting the invitation. If the problem persists, contact the administrator.',
+                'success' => 'The invitation to the team \":teamName\" has been accepted.'
+            ]
+        ],
+    ]
 ];

@@ -68,7 +68,7 @@
         <div class="mt-3" v-if="images.length > 0 && props.type === 'solution'">
             <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>
             <div class="rounded-md pt-4">
-                <div class="row flex h-full">
+                <div class="flex flex-col h-full">
                     <div class=" h-full" v-for="(image, index) in images" :key="'image_' + index">
                         <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
                             <img class="w-full h-full"
@@ -110,38 +110,28 @@ export default {
     setup(props, context) {
         const c = ref({description: '', name: '', solution_deadline: '', offer_deadline: ''});
         const user = window.Laravel.user;
-
-        // const select_detail_weight = ref();
         const toast = useToast();
         const types = require("../../../../json/types.json");
-        const tagss = require("../../../../json/tagsChallenge.json");
         const images = ref([]);
         const dropzoneSingleRef = ref();
 
-
         watch(c, (ca, prevLabel) => {
-            console.log('CHANGE');
             context.emit("update:object", ca);
         }, {deep: true})
 
         const deleteImage = (index) => {
             images.value.splice(index, 1);
         }
+
         provide("bind[dropzoneSingleRef]", el => {
-            console.log('providedropzoneSingleRef' + dropzoneSingleRef.value);
             dropzoneSingleRef.value = el;
         });
 
         onMounted(() => {
             c.value = props.object
-
-            console.log('dropzoneSingleRef' + dropzoneSingleRef.value);
-            console.log('dropzoneSingleRefndefined??!' + dropzoneSingleRef.value);
-                const elDropzoneSingleRef = dropzoneSingleRef.value;
+            const elDropzoneSingleRef = dropzoneSingleRef.value;
                 elDropzoneSingleRef.dropzone.on("success", (resp) => {
-                    console.log('pushImage' + images.value[0])
                     images.value.push(JSON.parse(resp.xhr.response).payload);
-                    console.log('pushImage' + images.value[0])
                     toast.success('Zdjecie zostało wgrane poprawnie!');
                 });
                 elDropzoneSingleRef.dropzone.on("error", () => {
@@ -179,7 +169,6 @@ export default {
             c,
             types,
             props
-            // select_detail_weight,
         }
     }
 }

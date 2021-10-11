@@ -771,7 +771,7 @@ class ProjectController extends Controller
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $solution = $solutionRepository->find($id);
+        $solution = $solutionRepository->getSolutionWithFiles($challenge->solution_project_id);
 
         if (!$solution) {
             $responseBuilder->setErrorMessage(__('messages.solution.not_found'));

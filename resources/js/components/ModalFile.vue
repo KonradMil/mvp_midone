@@ -30,9 +30,7 @@
                             ref="modal"
                             aria-modal="true"
                             v-show="showModal"
-                            aria-labelledby="modal-headline"
-                            style="max-width: 500px;"
-                        >
+                            aria-labelledby="modal-headline">
                             <button class="absolute top-4 right-4">
                                 <XIcon  @click="closeModal" />
                             </button>

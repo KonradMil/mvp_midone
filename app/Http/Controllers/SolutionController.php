@@ -8,6 +8,7 @@ use App\Events\SolutionDisliked;
 use App\Events\SolutionLiked;
 use App\Events\SolutionPublished;
 use App\Events\SolutionRejected;
+use App\Http\Requests\Handlers\SolutionFilesHandler;
 use App\Models\Challenge;
 use App\Models\Estimate;
 use App\Models\FinancialAnalysis;
@@ -19,11 +20,15 @@ use App\Models\Financial;
 use App\Models\Team;
 use App\Models\UnityModel;
 use App\Models\User;
+use App\Repository\Eloquent\SolutionRepository;
+use App\Services\SolutionService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Http\ResponseBuilder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  *
@@ -53,6 +58,51 @@ class SolutionController extends Controller
             'message' => 'Zdjecie zostało wgrane poprawnie',
             'payload' => $file
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @param SolutionRepository $solutionRepository
+     * @param SolutionFilesHandler $solutionFilesHandler
+     * @param SolutionService $solutionService
+     * @return JsonResponse
+     */
+    public function saveFiles(Request $request, int $id, SolutionRepository $solutionRepository, SolutionFilesHandler $solutionFilesHandler, SolutionService $solutionService): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $solutionFilesHandler = new SolutionFilesHandler($request);
+
+        $solution = $solutionRepository->find($id);
+
+        if (!$solution) {
+            $responseBuilder->setErrorMessage(__('messages.solution.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $parameters = $solutionFilesHandler->getParameters();
+
+        if (!$parameters->isValid()) {
+            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+        }
+
+        try {
+                $newSolutionFiles = $solutionService->addSolutionFiles($parameters,$solution);
+
+                $responseBuilder->setSuccessMessage(__('messages.save_correct'));
+                $responseBuilder->setData('solution', $newSolutionFiles->with('files'));
+
+
+            } catch (QueryException $e) {
+
+                $responseBuilder->setErrorMessage(__('messages.error'));
+                return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+            }
+
+        return $responseBuilder->getResponse();
     }
 
 
@@ -109,7 +159,7 @@ class SolutionController extends Controller
      */
     public function getUserSolutionsArchive(): JsonResponse
     {
-        $solutions = Solution::where('archive', '=', 1)->get();
+        $solutions = Solution::where('archive', '=', 1)->with('files')->get();
         $filterSolutions = [];
 
         foreach ($solutions as $solution) {
@@ -840,24 +890,23 @@ class SolutionController extends Controller
      */
     public function storeImage(Request $request): JsonResponse
     {
-//        $request->validate([
-//            'file' => 'required|mimes:jpg,png,JPG,jpeg|max:4096',
-//        ]);
+        $request->validate([
+            'file' => 'required|mimes:jpg,jpeg,png,pdf,doc,docx,xls,xlsx,csv|max:4096',
+        ]);
+
         $ext = $request->file->extension();
         $fileName = time() . '.' . $ext;
-
-        $request->file->move(public_path('uploads'), $fileName);
+        Storage::disk('s3')->putFileAs('screenshots', $request->file, $fileName);
         $file = new File();
         $file->name = $fileName;
         $file->ext = $ext;
-        $file->path = 'uploads/' . $fileName;
+        $file->path = 's3/screenshots/' . $fileName;
         $file->original_name = $request->file->getClientOriginalName();
         $file->save();
-//        $challenge = Challenge::find($request->challenge_id);
-//        $challenge->files()->attach($file);
+
         return response()->json([
             'success' => true,
-            'message' => 'Awatar został wgrany poprawnie',
+            'message' => 'Plik został wgrany poprawnie',
             'payload' => $file
         ]);
     }
