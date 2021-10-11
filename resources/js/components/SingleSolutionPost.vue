@@ -99,7 +99,7 @@
     <ModalFile :show="show" @closed="modalClosed">
         <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
             <div class="mt-5">
-                <div class="mt-3 border px-4 py-4" v-if="solution.files !== undefined">
+                <div class="mt-3 border px-4 py-4" v-if="solution.files.length > 0">
                     <label class="form-label"> Wgrane pliki</label>
                     <div class="rounded-md pt-4">
                         <div class="grid grid-cols-4 h-full">
