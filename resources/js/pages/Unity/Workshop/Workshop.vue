@@ -142,7 +142,7 @@ export default {
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
                 // handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
 
-            }, 5000);
+            }, 15000);
             // setTimeout(() => {
             //     handleUnityActionOutgoing({action: 'prefix', data: 'https://staging.appworks-dev.pl/s3'});
             //     // unlockInput();
