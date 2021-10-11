@@ -86,7 +86,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary w-20 mt-3" @click="save">{{$t('profiles.save')}}</button>
+                                <button class="btn btn-primary w-20 mt-8" @click="save">{{$t('profiles.save')}}</button>
                             </div>
                             <div class="w-52 mx-auto xl:mr-0 xl:ml-6">
                                 <div class="border-2 border-dashed shadow-sm border-gray-200 dark:border-dark-5 rounded-md p-5">
@@ -242,7 +242,6 @@ export default defineComponent({
         const validate = useVuelidate(rules, toRefs(formData));
 
         const save = () => {
-            console.log('here');
             if(formData.name < minLength || formData.name < minLength) {
                 // toast.warning('Imie i nazwisko musi sie skladac z conajmniej 3 znakow');
             }
@@ -263,7 +262,7 @@ export default defineComponent({
                             store.dispatch('login/login', {
                                 user
                             });
-                            toast.success('zapisano poprawnie!');
+                            toast.success('Zapisano poprawnie!');
                             // this.$router.go(0);
                         } else {
                             toast.error(response.data.message);
