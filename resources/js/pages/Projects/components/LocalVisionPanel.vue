@@ -77,13 +77,13 @@
                                     {{ $t('challengesMain.rejected') }}</p>
                                 <p v-if="report.accepted === 0">{{ $t('challengesMain.waitingApproval') }}</p>
                             </div>
-                            <div class="pt-1"
+                            <div class="pt-1 flex"
                                  v-if="report.author_id !== '' && investor.id === user.id && report.accepted === 0">
                                 <Tippy
                                     tag="a"
                                     class="dark:text-gray-300 text-gray-600"
                                     content="Akceptuj">
-                                    <button class="btn btn-primary mr-3 btn-sm" @click.prevent="acceptReport(report)">
+                                    <button class="btn btn-primary mr-3 btn-sm max-h-9" @click.prevent="acceptReport(report)">
                                         Akceptuję zmiany
                                     </button>
                                 </Tippy>
@@ -91,7 +91,7 @@
                                     tag="a"
                                     class="dark:text-gray-300 text-gray-600"
                                     content="Odrzuć">
-                                    <button class="btn btn-primary btn-sm" @click.prevent="rejectReport(report)">
+                                    <button class="btn btn-primary btn-sm max-h-9" @click.prevent="rejectReport(report)">
                                         Odrzucam zmiany
                                     </button>
                                 </Tippy>
