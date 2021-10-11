@@ -21,6 +21,7 @@
     window.warning = @php echo Session::get('warning') ? '"'.Session::get('warning').'"' : 'null' @endphp;
     window.info = @php echo Session::get('info') ? '"'.Session::get('info').'"' : 'null' @endphp;
     window.success = @php echo Session::get('success') ? '"'.Session::get('success').'"' : 'null' @endphp;
+    window.invitationToken = @php echo Session::get('teamInvitation') ? '"'.Session::get('teamInvitation').'"' : 'null' @endphp;
 </script>
 
 @if (Auth::check())

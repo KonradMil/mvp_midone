@@ -53,7 +53,14 @@ return [
         'user_exists' => 'This user is already a member of this team.',
         'invitation' => [
             'exists' => 'This user is already invited.',
-            'sent' => 'Invitation has been sent.'
+            'sent' => 'Invitation has been sent.',
+            'claim' => [
+                'team_not_found' => 'Team you were invited to does not exist.',
+                'login_request' => 'Log in to accept the invitation.',
+                'user_not_invited' => 'You cannot use someone else\'s team invitation.',
+                'unexpected_error' => 'An error occurred while accepting the invitation. If the problem persists, contact the administrator.',
+                'success' => 'The invitation to the team \":teamName\" has been accepted.'
+            ]
         ],
     ]
 ];

@@ -4,7 +4,8 @@ return [
     'main' => [
         'regards' => 'Regards!',
         'signature' => 'DBR77 Team.',
-        'action_alt' =>  "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n into your web browser:"
+        'action_alt' =>  "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n into your web browser:",
+        'mistake_info' => 'If you think you received this e-mail by accident, please ignore this message.',
     ],
     'email_confirmation' => [
         'subject' => 'DBR77 - Verify Email Address',
@@ -12,5 +13,10 @@ return [
         'line1' => "Please click the button below to verify your email address.",
         'action' => 'Verify Email Address',
         'line2' => "If you did not create an account, no further action is required.",
+    ],
+    'team_invitation' => [
+        'title' => 'Invitation to  team',
+        'paragraph1' => 'You have been invited to ":teamName" team. Please click button below to claim the invitation.',
+        'action1_text' => 'Confirm invitation',
     ]
 ];

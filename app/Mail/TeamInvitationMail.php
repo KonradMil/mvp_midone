@@ -37,7 +37,6 @@ class TeamInvitationMail extends Mailable
     {
         return $this->view('emails.team_invitation')
             ->with([
-                'email' => $this->email,
                 'teamName' => $this->teamName,
                 'confirmationToken' => $this->confirmationToken
             ]);

@@ -53,7 +53,14 @@ return [
         'user_exists' => 'Ten użytkownik jest już członkiem Twojego zespołu.',
         'invitation' => [
             'exists' => 'Już zaprosiłeś tego użytkownika.',
-            'sent' => 'Zaproszenie do zespołu zostało wysłane.'
+            'sent' => 'Zaproszenie do zespołu zostało wysłane.',
+            'claim' => [
+                'team_not_found' => 'Zespół, do którego otrzymałeś zaproszenie nie istnieje.',
+                'login_request' => 'Zaloguj się, aby przyjąć zaproszenie.',
+                'user_not_invited' => 'Nie możesz skorzystać z cudzego zaproszenia do zespołu.',
+                'unexpected_error' => 'Wystąpił błąd podczas przyjęcia zaproszenia. Jeśli problem będzie się powtarzał skontaktuj się z administratorem.',
+                'success' => 'Zaproszenie do zespołu \":teamName\" zostało przyjęte.'
+            ]
         ],
     ]
 ];

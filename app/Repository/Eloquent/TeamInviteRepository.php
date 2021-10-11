@@ -19,4 +19,9 @@ class TeamInviteRepository extends BaseRepository
             ->first();
     }
 
+    public function findByAcceptToken(string $token)
+    {
+        return TeamInvite::where('accept_token', '=', $token)->first();
+    }
+
 }
