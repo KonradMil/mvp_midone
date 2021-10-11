@@ -609,14 +609,14 @@ export default {
         }
 
         const getNewTechnical = async (callback) => {
-            RequestHandler('projects/' + props.project.id + '/technical-details', 'get', {}, (response) => {
+            RequestHandler('projects/' + props.challenge.id + '/technical-details', 'get', {}, (response) => {
                 old_technical.value = response.data.old_technical,
                 new_technical.value = response.data.new_technical,
                 callback(response);
             });
         }
         const getNewFinancial = async (callback) => {
-            RequestHandler('projects/' + props.project.id + '/financial-details', 'get', {}, (response) => {
+            RequestHandler('projects/' + props.challenge.id + '/financial-details', 'get', {}, (response) => {
                 old_financial.value = response.data.old_financial,
                 new_financial.value = response.data.new_financial,
                 callback(response);
