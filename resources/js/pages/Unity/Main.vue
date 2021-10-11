@@ -316,9 +316,6 @@ export default {
         }
 
         const allowedEdit = computed(() => {
-
-
-
             if(type.value == 'challenge') {
                 if(inTeam.value || (user.id == challenge.value.author_id)) {
                     return true;
