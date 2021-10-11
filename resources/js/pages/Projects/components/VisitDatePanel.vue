@@ -61,9 +61,8 @@
                                 </div>
                             </div>
                             <div @click="showDetails[deadline.id] = !showDetails[deadline.id]" class="w-64 sm:w-auto truncate pt-5 pl-6">
-                                <span class="inbox__item--highlight" v-if="deadline.author !== undefined">Proponowany termin: {{
-                                        deadline.date
-                                    }} {{ deadline.time }}</span>
+                                <span class="inbox__item--highlight" v-if="deadline.author !== undefined">
+                                    Proponowany termin: {{ $dayjs(deadline.date).format('DD.MM.YYYY') }} {{ deadline.time }}</span>
                                 <span class="inbox__item--highlight" v-else>Dodaj termin wizyty</span>
                             </div>
                             <div @click="showDetails[deadline.id] = !showDetails[deadline.id]" class="flex px-5 py-3 pb-5 text-theme-1" style="margin-left: 60px; max-width: 250px;"
