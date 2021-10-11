@@ -17,7 +17,7 @@ class LoginParameters extends Parameters
     public function __construct(){
 
         $this->validationRules = [
-//            'recaptchaToken' => ['required', new GoogleReCaptchaV3ValidationRule('login')],
+            'recaptchaToken' => ['required', new GoogleReCaptchaV3ValidationRule('login')],
             'email' => 'required|email',
             'password' => 'required',
         ];
