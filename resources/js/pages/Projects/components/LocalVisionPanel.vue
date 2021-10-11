@@ -15,19 +15,10 @@
                 v-if="(user.id === integrator.id || user.id === investor.id) && project.accept_local_vision < 1 && check === true"
                 class="btn btn-primary mr-6 mt-3" @click.prevent="acceptLocalVision">Zakończ etap
             </button>
-            <!--            <div v-if="challenge.selected[0].author_id === user.id" class="curs or-pointer pr-3 text-theme-3 pt-3" @click.prevent="addNewReport">-->
-            <!--                <Tippy-->
-            <!--                    tag="a"-->
-            <!--                    class="dark:text-gray-300 text-theme-600"-->
-            <!--                    content="Dodaj">-->
-            <!--                    <button class="btn btn-primary w-20 mt-3" @click.prevent="saveReports">{{$t('profiles.save')}}</button>-->
-            <!--                </Tippy>-->
-            <!--            </div>-->
             <button v-if="challenge.selected[0].author_id === user.id && project.accept_local_vision !== 1"
                     class="btn btn-primary w-15 mt-3 mr-3" @click.prevent="addNewReport">
                 Dodaj raport
             </button>
-            <!--            <button v-if="challenge.selected[0].author_id === user.id" class="btn btn-primary w-20 mt-3" @click.prevent="saveReports">{{$t('profiles.save')}}</button>-->
         </div>
         <div class="intro-y inbox box mt-5 overflow-y-auto" style="max-height: 521px; overflow-x: hidden;">
             <transition-group tag="ul" name="list">
@@ -64,7 +55,7 @@
                                     {{ report.author.lastname }}
                                 </div>
                             </div>
-                            <div @click="showDetails[report.id] = !showDetails[report.id]" class="w-64 sm:w-auto truncate pt-3 pl-6" style="max-width: 350px;">
+                            <div @click="showDetails[report.id] = !showDetails[report.id]" class="w-64 sm:w-auto truncate pt-3 pl-6" style="max-width: 200px;">
                                 <span class="inbox__item--highlight" v-if="report.author_id >= 1">{{
                                         report.description
                                     }}</span>
@@ -375,6 +366,7 @@ export default {
                     rejects.value.push(report);
                 }
                 toast.warning('Przy odrzuceniu raportu konieczny jest komentarz!')
+                showDetails.value[report.id] = !showDetails.value[report.id];
             } else {
                 RequestHandler('projects/' + props.project.id + '/local-vision/' + report.id + '/reject', 'post', {
                     project_id: props.project.id,
