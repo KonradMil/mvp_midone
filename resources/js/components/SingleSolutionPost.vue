@@ -98,7 +98,7 @@
     </div>
     <ModalFile :show="show" @closed="modalClosed">
         <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
-            <div class="mt-5">
+            <div class="mt-5" v-if="solution.files !== undefined">
                 <div class="mt-3 border px-4 py-4" v-if="solution.files.length > 0">
                     <label class="form-label"> Wgrane pliki</label>
                     <div class="rounded-md pt-4">
@@ -217,14 +217,16 @@ export default {
         onMounted(() => {
             checkTeam();
             const elDropzoneSingleRef = dropzoneSingleRef.value;
-            elDropzoneSingleRef.dropzone.on("success", (resp) => {
-                solutionFiles.value.push(JSON.parse(resp.xhr.response).payload);
-                images.value.push(JSON.parse(resp.xhr.response).payload);
-                toast.success('Zdjecie zostało wgrane poprawnie!');
-            });
-            elDropzoneSingleRef.dropzone.on("error", () => {
-                toast.error("Maksymalnie można wgrać 8 plików!");
-            });
+            if(props.solution.files !== undefined){
+                elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                    solutionFiles.value.push(JSON.parse(resp.xhr.response).payload);
+                    images.value.push(JSON.parse(resp.xhr.response).payload);
+                    toast.success('Zdjecie zostało wgrane poprawnie!');
+                });
+                elDropzoneSingleRef.dropzone.on("error", () => {
+                    toast.error("Maksymalnie można wgrać 8 plików!");
+                });
+            }
         });
 
         const addOffer = () => {
@@ -331,7 +333,7 @@ export default {
                 })
         }
 
-        const deleteFiles = (index) => {
+        const deleteFile = (index) => {
             solution.files.value.splice(index, 1);
         }
 
@@ -342,7 +344,7 @@ export default {
         return {
             saveFiles,
             solutionFiles,
-            deleteFiles,
+            deleteFile,
             dropzoneSingleRef,
             showAddFileModal,
             modalClosed,

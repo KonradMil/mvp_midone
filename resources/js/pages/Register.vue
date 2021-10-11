@@ -372,6 +372,7 @@ import {useToast} from "vue-toastification";
 import {useReCaptcha} from "vue-recaptcha-v3";
 import RequestHandler from "../compositions/RequestHandler";
 import Modal from "../components/Modal";
+import router from "../router";
 
 const toast = useToast();
 const store = useStore();
@@ -465,6 +466,10 @@ export default {
             return !validate.value.$invalid;
         };
 
+        const goTo = () => {
+                router.push({ path: '/login' })
+            };
+
         const register = async () => {
 
             await recaptchaLoaded();
@@ -477,6 +482,8 @@ export default {
                     password: formData.password,
                     token: props.token,
                     recaptchaToken: recaptchaToken
+                }, () =>{
+                    goTo();
                 });
             });
 

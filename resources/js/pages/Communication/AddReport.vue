@@ -92,7 +92,7 @@
         </div>
     </div>
     <div class="modal-footer text-right">
-        <button type="button" :disabled="isDisabled" class="btn btn-primary w-20" @click="saveReportRepo">Wyślij zgłoszenie</button>
+        <button type="button" :disabled="isDisabled" class="btn btn-primary w-15" @click="saveReportRepo">Wyślij zgłoszenie</button>
     </div>
 
 </template>
