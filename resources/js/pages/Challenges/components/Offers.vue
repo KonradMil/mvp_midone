@@ -242,7 +242,7 @@ export default {
 
         onMounted(() => {
             getOffersRepositories(function(){
-                console.log(offers.length + 'value list length');
+
                 guard.value = true;
             });
             if(props.stage === 3){

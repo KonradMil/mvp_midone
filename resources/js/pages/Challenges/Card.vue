@@ -240,9 +240,9 @@ export default defineComponent({
         }
 
         const filter = () => {
-            console.log(challenge.value.solutions + '->  solutions.value');
+
             challenge.value.solutions.forEach(function (solution) {
-                console.log(solution.author_id + 'author_id');
+
                 if(solution.author_id=== user.id) {
                     isSolutions.value = true;
                 } else if((solution.published === 1) && (solution.author.id === user.id)) {
@@ -281,7 +281,7 @@ export default defineComponent({
         });
 
         const handleCallback = () => {
-            console.log('checkPermissions' + challenge.value.solutions);
+
             checkPermissions();
         };
 
@@ -327,10 +327,10 @@ export default defineComponent({
         const publish = async(id) => {
             axios.post('/api/challenge/publish', {id: id})
                 .then(response => {
-                    console.log(response.data)
-                    console.log(response.data.success + '-> heeeeeeeeeeere')
+
+
                     if (response.data.success) {
-                        console.log(response.data.payload);
+
                         challenge.value = response.data.payload;
                         toast.success('Opublikowano.');
                     } else {
@@ -345,9 +345,9 @@ export default defineComponent({
         const unpublish = async(id) => {
             axios.post('/api/challenge/unpublish', {id: id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
-                        console.log(response.data.payload);
+
                         challenge.value = response.data.payload;
                         toast.success('Wyzwanie nie jest już publiczne.');
                     } else {
@@ -360,7 +360,7 @@ export default defineComponent({
             axios.post('/api/solution/create', {id: challenge.value.id})
                 .then(response => {
                     if (response.data.success) {
-                        console.log(response.data.payload);
+
                         router.push({path: '/studio/solution/' + response.data.payload.id});
                     } else {
                         // toast.error(response.data.message);

@@ -94,7 +94,7 @@ export default {
             getInvitesRepositories(search.value);
         }, {});
         const getInvitesRepositories = async () => {
-            console.log('asdadsadsadas');
+
            GetInvites((res) => {
                invites.value = res.payload;
                invitesSent.value = res.sent;
@@ -114,7 +114,7 @@ export default {
         }
 
         onMounted(function () {
-            console.log('ASDADSADSAFDSAFDDSAFDSF');
+
             getInvitesRepositories('');
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;

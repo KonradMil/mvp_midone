@@ -108,31 +108,31 @@ export default {
 
         //ANIMATION CONTROLLER
         function swapObjectByIndex(index, object) {
-            // console.log('IMPORTANT NOW: ');
+
 
             animation.layers.forEach((obj, index) => {
-                console.log('INDISE');
-                console.log(obj);
-                console.log(index);
-                console.log(obj.index);
-                console.log(activeLineIndex.value);
+
+
+
+
+
                 if(obj.index == activeLineIndex.value) {
                     animation.layers[index] = toRaw(object.layers);
                 }
             })
-            // console.log('END IMPORTANT NOW: ');
+
         }
 
         const getLineByInternalIndex = computed(() => {
            return toRaw(animation.layers).find(x => x.index == activeLineIndex.value);
             // animation.layers.forEach((obj) => {
-            //     console.log('obj');
-            //     console.log(toRaw(obj));
-            //     console.log(toRaw(obj).index);
-            //     console.log(obj);
-            //     console.log(obj.index);
-            //     console.log(activeLineIndex.value);
-            //     console.log('activeLineIndex.value');
+
+
+
+
+
+
+
             //    if(obj.index == activeLineIndex.value) {
             //        c = toRaw(obj);
             //    }
@@ -141,9 +141,9 @@ export default {
         });
 
         function swapAnimableObjectByIndex(object) {
-            console.log('IMPORTANT NOW: ');
-            // console.log(getLineByInternalIndex.animables[activeAnimableIndex.value]);
-            console.log(object);
+
+
+
 
             getLineByInternalIndex.value.animables[activeAnimableIndex.value].duration = object.duration;
 
@@ -153,13 +153,13 @@ export default {
             //     }
             // });
             // animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value].duration = object.duration;
-            // console.log('END IMPORTANT NOW: ');
+
         }
 
 
         function updateAnimationUnity() {
-            console.log('FINAL EMIT IMP: ');
-            console.log(animation);
+
+
             animation.layers = animation.layers.filter(value => Object.keys(value).length !== 0);
             emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: animation});
         }
@@ -170,7 +170,7 @@ export default {
         }
 
         const setNewAnimationLayer = () => {
-            console.log(activeLineIndex.value);
+
             if(Boolean(getLineByInternalIndex)) {
                 emitter.emit('unityoutgoingaction', {action: 'addLine', data: activeLineIndex.value});
             } else {
@@ -186,9 +186,9 @@ export default {
         emitter.on('animationbuttonclick', e => handleClick(e.val));
 
         // emitter.on('saveLoaded', e => {
-        //     console.log('SAVE LOADED');
-        //     console.log(e);
-        //     console.log(JSON.parse(e.save.save_json));
+
+
+
         //     animation.layers = JSON.parse(e.save.save_json).layers;
         // })
 
@@ -203,8 +203,8 @@ export default {
             //         obj.temp_index = i;
             //     }
             // });
-            console.log('HEREEE');
-            console.log(getLineByInternalIndex);
+
+
             setTimeout(() => {
                 emitter.emit('UnityLineSettings', {action: 'settingsline', data: getLineByInternalIndex});
             }, 500)
@@ -212,7 +212,7 @@ export default {
         }
 
         emitter.on('rightpanelaction', e => {
-            console.log(e);
+
             if(e.action === 'updateLine' ) {
                 if(activeLineIndex.value == undefined) {
                     activeLineIndex.value = 0;
@@ -225,7 +225,7 @@ export default {
                 swapAnimableObjectByIndex(e.data);
 
             }
-            console.log('FINAL EMIT');
+
             updateAnimationUnity();
 
             // emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: lines.value[0]});
@@ -233,22 +233,22 @@ export default {
 
         emitter.on('UnityAnimationChainUpdate', e => {
             // lines.value = e.layers.layers;
-            console.log('UPDATE ANIMATION11');
+
             if(e.layers.layers != undefined) {
                 animation.layers = e.layers.layers;
             } else {
                 animation.layers = e.layers;
             }
-            console.log('ANIMATION CHAIN UPDATGE');
-            console.log(animation);
+
+
             emitter.emit('updateanimationSave', {data: animation});
         });
 
         onMounted(() => {
-            console.log('MOUNTED LAYERS');
-            console.log(props);
-            console.log(props.animationSave);
-            console.log(props.animationSave.layers);
+
+
+
+
             animation.layers = props.animationSave.layers;
             if(toRaw(animation.layers).length > 0) {
                 animation.layers.every((obj) => {
@@ -260,7 +260,7 @@ export default {
         });
 
         const handleClick = (val) => {
-            console.log(val);
+
             switch (val) {
                 case 'maximize':
                     if (expanded.value == 0) {
@@ -283,9 +283,9 @@ export default {
                     emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: {interval: 0, cycles: 0, layers: toRaw(animation)}})
                     break;
                 case 'addline':
-                    console.log('LENGTH AL');
+
                     const l = animation.layers.length + Math.floor(Math.random() * 55);
-                    console.log(l);
+
                     emitter.emit('unityoutgoingaction', {action: 'addLine',data: l});
                     activeLineIndex.value = l;
                     setNewAnimationLayer();
@@ -294,17 +294,17 @@ export default {
 
                     break;
                 case 'settingsanimable':
-                    console.log('settingsanimable');
-                    // console.log(getLineByInternalIndex);
-                    // console.log(toRaw(getLineByInternalIndex));
-                    // console.log(getLineByInternalIndex.value.animables);
-                    // console.log(activeAnimableIndex.value);
+
+
+
+
+
                     emitter.emit('UnityAnimableSettings', {action: 'settingsanimable', data: getLineByInternalIndex.value.animables[activeAnimableIndex.value]})
                     break;
                 case 'settingsline':
-                    console.log(animation);
-                    console.log('IMPORTANT');
-                    console.log( activeLineIndex.value);
+
+
+
 
                     break;
                 case 'line':

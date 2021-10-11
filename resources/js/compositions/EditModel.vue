@@ -14,9 +14,9 @@ export default function EditModel(data,id) {
     async function editModel(data,id) {
         axios.post(`/api/model/edit/${id}`, {data})
             .then(response => {
-                // console.log(response.data)
+
                 if (response.data.success) {
-                    // console.log(response.data);
+
                     list.value = response.data.payload;
                     toast.success(response.data.message);
                 } else {

@@ -141,7 +141,7 @@ export default {
         const brands = require("../../../json/robot_brands.json");
         //LEFT BUTTON CLICKED
         emitter.on('leftbuttonclick', e => handleChange(e.val))
-        console.log(props);
+
 
 
         const getModelRepositories = async () => {
@@ -153,7 +153,7 @@ export default {
         }
 
         const selectModel = (model) => {
-            console.log(model);
+
             emitter.emit('unityoutgoingaction', {action: 'placeObject', data: model})
         }
 
@@ -161,7 +161,7 @@ export default {
             subcategory.value = null;
             selectedBrand.value = null;
             if(cat_id === 9) {
-                console.log("CLICKED WORKSHOP");
+
                 emitter.emit('workshop_open', {status: true});
             }  else {
                 if (category.value === cat_id) {
@@ -169,9 +169,9 @@ export default {
                     visible.value = false;
                 } else {
                     category.value = cat_id;
-                    console.log(cat_id);
+
                     visible.value = true;
-                    console.log(categories.value[cat_id]);
+
                     subcategories.value = categories.value[cat_id]['subcategories'];
                 }
             }
@@ -185,7 +185,7 @@ export default {
         const takeMeBack = () => {
             subcategory.value = null;
             selectedBrand.value = null;
-            console.log('BACK');
+
         }
 
         return {

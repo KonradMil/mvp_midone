@@ -87,7 +87,7 @@ export default {
         const teamsSolution = ref({});
 
         watch(teamsSolution, (lab, prevLabel) => {
-            console.log('CHANGE 2');
+
             context.emit("update:teamsSolution", lab);
         }, {deep: true});
 
@@ -100,7 +100,7 @@ export default {
                 return ts;
             }
             else{
-                console.log('Brak team unity');
+
             }
             });
 
@@ -108,7 +108,7 @@ export default {
 
 
         watch(c, (ca, prevLabel) => {
-            console.log('CHANGE');
+
             context.emit("update:comment", ca);
         }, {deep: true})
         onMounted(() => {

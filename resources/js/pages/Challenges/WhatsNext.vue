@@ -133,9 +133,9 @@ name: "WhatsNext",
         });
 
         // const filter = () => {
-        //     console.log(solutions.value + '->  solutions.value');
+
         //     solutions.value.forEach(function (solution) {
-        //         console.log(solution.author_id.value + 'author_id');
+
         //         if(solution.author_id.value === props.user.id) {
         //             isSolutions.value = true;
         //         } else if((solution.published.value === 1) && (solution.author.id.value === props.user.id)) {
@@ -145,7 +145,7 @@ name: "WhatsNext",
         // }
 
         // const getSolutionRepositories = async () => {
-        //     console.log(props.challenge.id);
+
         //     solutions.value = GetUserSolutionsChallenge(props.challenge.id);
         // }
 

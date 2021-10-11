@@ -11,9 +11,9 @@ export default function GetTeams(search,id,who,handle) {
     async function getTeams(search,id,who, handle) {
         axios.post('/api/teams/user/get', {search: search,id: id,who: who})
             .then(response => {
-                // console.log(response.data)
+
                 if (response.data.success) {
-                    // console.log(response.data);
+
                     list.value = response.data.payload;
                     handle(response.data.payload);
                 } else {

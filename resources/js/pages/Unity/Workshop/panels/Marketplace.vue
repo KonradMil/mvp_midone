@@ -41,7 +41,7 @@ export default {
                     if (response.data.success) {
                         objects.value = response.data.payload;
                     } else {
-                        console.log(response)
+
                     }
                 })
                 .catch(function (error) {

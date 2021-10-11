@@ -14,9 +14,9 @@ export default function SaveSolutionFinancials(data,id) {
     async function saveSolutionFinancials(data,id) {
         axios.post(`/api/solution/save/financials/${id}`, {data})
             .then(response => {
-                // console.log(response.data)
+
                 if (response.data.success) {
-                    // console.log(response.data);
+
                     list.value = response.data.payload;
                     toast.success(response.data.message)
                 } else {

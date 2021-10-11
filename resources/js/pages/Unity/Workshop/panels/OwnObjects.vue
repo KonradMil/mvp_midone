@@ -37,7 +37,7 @@ export default {
         });
 
         const send = (object) => {
-            console.log('SEND OBJ', object.id)
+
             emitter.emit('workshop_object_clicked', {object: object});
         }
 
@@ -47,7 +47,7 @@ export default {
                     if (response.data.success) {
                         objects.value = response.data.payload;
                     } else {
-                        console.log(response)
+
                     }
                 })
                 .catch(function (error) {

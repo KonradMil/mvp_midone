@@ -84,8 +84,8 @@ export default {
             }else{
                 guard.value = props.object.stage;
             }
-            console.log(guard.value);
-            console.log(props.object);
+
+
             comments.value = props.object.comments;
             obj.value = props.object;
         });
@@ -95,9 +95,9 @@ export default {
         emitter.on('liked', e =>  like(e.id) )
 
         const like = (id) => {
-            console.log('LIKED EVENT ON');
-            console.log([id, obj.value]);
-            console.log(obj.value.likes);
+
+
+
             if(obj.value.id === id) {
                 obj.value.likes = obj.value.likes + 1;
             }
@@ -113,9 +113,9 @@ export default {
         emitter.on('disliked', e =>  dislike(e.id) )
 
         const dislike = (id) => {
-            console.log('DISLIKED EVENT ON');
-            console.log([id, obj.value]);
-            console.log(obj.value.likes);
+
+
+
             if(obj.value.id === id) {
                 obj.value.likes = obj.value.likes - 1;
             }

@@ -191,7 +191,7 @@ export default {
         });
 
         emitter.on('workshop_open', e => {
-            console.log("CLICKED WORKSHOP MIT");
+
             // cash("#workshop-modal").modal("show");
             workshopOpen.value = true;
         });
@@ -236,31 +236,31 @@ export default {
         });
 
         const lockInput = () => {
-            // console.log('LOCK');
+
             handleUnityActionOutgoing({action: "lockInput", data: ''});
         }
 
         const unlockInput = () => {
-            // console.log('UNLOCK');
+
             handleUnityActionOutgoing({action: "unlockInput", data: ''});
         }
 
         const openMenu = (e) => {
             e.preventDefault();
-            console.log('RIGHT CLICK');
-            console.log(e);
+
+
             if (loaded.value) {
                 if (doubleClick.value) {
                     if ((mousePositionX.value > (e.clientX - 10) && mousePositionX.value < (e.clientX + 10)) && (mousePositionY.value > (e.clientY - 10) && mousePositionY.value < (e.clientY + 19))) {
                         let data = JSON.stringify({menu: currentRadialMenu.value});
-                        console.log(data);
-                        console.log('RIGHT CLICK SHOW');
+
+
                         handleUnityActionOutgoing({action: 'showRadialMenu', data: data});
                     } else {
                         doubleClick.value = false;
                     }
                 } else {
-                    console.log('ONE CLICK');
+
                     mousePositionX.value = e.clientX;
                     mousePositionY.value = e.clientY;
                     doubleClick.value = true;
@@ -285,8 +285,8 @@ export default {
             if(type.value == 'challenge') {
                 await axios.post('/api/challenge/check-team', {user_id: user.id, challenge_id: challenge.value.id})
                     .then(response => {
-                        console.log("response.data")
-                        console.log(response.data)
+
+
                         if (response.data.success) {
                             inTeam.value = response.data.payload;
                         } else {
@@ -296,7 +296,7 @@ export default {
             } else {
                 await axios.post('/api/solution/check-team', {user_id: user.id, solution_id: solution.value.id})
                     .then(response => {
-                        // console.log(response.data)
+
                         if (response.data.success) {
                             inTeam.value = response.data.payload;
                         } else {
@@ -312,9 +312,9 @@ export default {
         }
 
         const allowedEdit = computed(() => {
-            console.log('ALLOWED EDIT');
-            console.log(user.id);
-            console.log(challenge.author_id);
+
+
+
             if(type.value == 'challenge') {
                 if(inTeam.value || (user.id == challenge.value.author_id)) {
                     return true;
@@ -332,7 +332,7 @@ export default {
             });
 
         emitter.on('topbuttonclick', e => {
-            console.log(e);
+
             switch (e.val) {
                 case 'animation_mode':
                     handleUnityActionOutgoing({action: "animationMode", data: ''});
@@ -350,7 +350,7 @@ export default {
                     mode.value = 'layout';
                     break;
                 case 'fullscreen':
-                    console.log(gameWindow);
+
                     gameWindow.value.setFullscreen();
                     break;
                 case 'logout':
@@ -405,16 +405,16 @@ export default {
             try {
                 unityActionOutgoingObject.value[e.action](e.data);
             } catch (ee) {
-                console.log([ee, e]);
+
             }
         }
 
         const initalize = async () => {
-            console.log("initializeMe");
+
             setTimeout(function () {
                 loaded.value = true;
-                console.log('gameWindow.value');
-                console.log(gameWindow.value);
+
+
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
                 handleUnityActionOutgoing({
                     action: 'setSessionId',
@@ -422,7 +422,7 @@ export default {
                 });
                 // handleUnityActionOutgoing({action: 'setHangarAppearance', data: 1});
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
-                console.log('GET ME');
+
                 if(type.value == 'solution') {
                     getSolutionRepositories(id.value);
                 } else {
@@ -438,7 +438,7 @@ export default {
         onBeforeMount(() => {
             //ADDS LISTENERS
             bridge.value = UnityBridge();
-            console.log("bridge.value", bridge.value);
+
         });
 
         emitter.on('updateanimationSave', e => {
@@ -448,16 +448,16 @@ export default {
         const getCardChallengeRepositories = async (id) => {
             await axios.post('/api/challenge/user/get/card', {id: id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
-                        console.log("response.data.payload");
-                        console.log(response.data.payload);
+
+
                         if(response.data.payload.save_json == "") {
                             challenge.value = response.data.payload;
                             checkTeam();
                             unlockInput();
                         } else {
-                            console.log(response.data.payload.save_json);
+
                             challenge.value = response.data.payload;
                             initialLoad.value = response.data.payload.save_json;
                             animationSave.value = response.data.payload.save_json.animation_layers;
@@ -469,7 +469,7 @@ export default {
                             unlockInput();
                         }
 
-                        // console.log('EMIT LOAD');
+
                         // emitter.emit('saveLoaded', {save: (response.data.payload)});
                     } else {
                         // toast.error(response.data.message);
@@ -480,11 +480,11 @@ export default {
         const getSolutionRepositories = async (id) => {
             await axios.post('/api/solution/get/unity', {id: id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
-                        console.log("response.data.payload");
-                        console.log(response.data.payload);
-                        console.log(JSON.parse(response.data.payload.save_json));
+
+
+
                         solution.value = response.data.payload;
                         initialLoad.value = JSON.parse(response.data.payload.save_json);
                         animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
@@ -494,7 +494,7 @@ export default {
                             data: JSON.parse(response.data.payload.save_json)
                         });
                         unlockInput();
-                        // console.log('EMIT LOAD');
+
                         // emitter.emit('saveLoaded', {save: (response.data.payload)});
                     } else {
                         // toast.error(response.data.message);

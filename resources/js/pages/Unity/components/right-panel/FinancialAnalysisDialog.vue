@@ -283,7 +283,7 @@ export default {
         emitter.on('financialAnalysesSave', e => {
             axios.post('/api/solution/financial-analyses/save', {solution_id: props.solution.id, financialAnalyses: financialAnalyses, capitalCost: capitalCost.value, capex: capex.value, timeframe: timeframe.value})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
 
                     }
@@ -325,7 +325,7 @@ export default {
         }
 
         const npvFunction = () =>  {
-            console.log('npv Function coming' + capex.value);
+
             const cashFlow = [];
             const wacc = [];
             const dcf = [];
@@ -340,7 +340,7 @@ export default {
             for (let i = 0; i < (timeframe.value + 1); i += 1) {
                 if (i === 0) {
                     cashFlow.push(parseFloat(capex.value) * -1);
-                    console.log('npv Function inside' + capex.value);
+
                     wacc.push(100);
                     dcf.push(parseFloat(capex.value) * -1);
                     scf.push(parseFloat(capex.value) * -1);
@@ -349,7 +349,7 @@ export default {
                 } else {
                     cashFlow.push(workStationCostBefore - workStationCostAfter);
                     wacc.push(1 / ((1 + (parseFloat(capitalCost.value) / 100)) ** i));
-                    console.log('npv Function inside' + capex.value);
+
                     dcf.push(cashFlow[i] * (wacc[i]));
                     scf.push(scf[i - 1] + (workStationCostBefore - workStationCostAfter));
                     if (scf[i] > 0) {
@@ -366,14 +366,14 @@ export default {
                     }
                 }
             }
-            console.log([cashFlow, wacc, dcf, scf, sdcf, rtp]);
+
             for (let i = 0; i < rtp.length; i += 1) {
                 if (rtp[i] > 0) {
                     okresZwrotuProsty.value = (i - 1) + ((capex.value / (workStationCostBefore - workStationCostAfter)) - Math.floor((capex.value / (workStationCostBefore - workStationCostAfter))));
                     break;
                 }
             }
-            // console.log(this.localTimeframe * (workStationCostBefore - workStationCostAfter));
+
 
             for (let i = 0; i < drtp.length; i += 1) {
                 if (drtp[i] > 0) {
@@ -383,20 +383,20 @@ export default {
             }
 
             npv.value = sdcf[timeframe.value];
-            console.log([cashFlow, wacc, dcf, scf, rtp, sdcf, drtp]);
-            console.log('npv Function end' + capex.value);
+
+
         }
 
         const getChallenge = (cb) => {
             axios.post('/api/challenge/user/get/card', {id: props.solution.challenge_id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
-                        console.log("response.data.payload");
-                        console.log(response.data.payload);
+
+
 
                         try {
-                            console.log(response.data.payload.selected.estimate);
+
                             capex.value = response.data.payload.selected[0].estimate.sum;
                         }catch (e) {
                             response.data.payload.solutions.forEach((val) => {
@@ -405,7 +405,7 @@ export default {
                                 }
                             });
                         }
-                        console.log(JSON.parse(response.data.payload.save_json));
+
                         challenge.value = response.data.payload;
                         cb();
                     }

@@ -242,7 +242,7 @@ export default defineComponent({
         const validate = useVuelidate(rules, toRefs(formData));
 
         const save = () => {
-            console.log('here');
+
             if(formData.name < minLength || formData.name < minLength) {
                 // toast.warning('Imie i nazwisko musi sie skladac z conajmniej 3 znakow');
             }
@@ -257,7 +257,7 @@ export default defineComponent({
                     phone: formData.phone
                 })
                     .then(response => {
-                        console.log(response.data)
+
                         if (response.data.success) {
                             let user = response.data.payload;
                             store.dispatch('login/login', {

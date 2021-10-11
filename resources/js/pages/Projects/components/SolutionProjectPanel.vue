@@ -82,7 +82,7 @@ export default {
         const follow = () => {
             axios.post('/api/solution/follow', {id: props.challenge.id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         challenge.value.followed = true;
                         toast.success('Teraz śledzisz to rozwiązania.');
@@ -95,7 +95,7 @@ export default {
         const unfollow = () => {
             axios.post('/api/solution/unfollow', {id: props.challenge.id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         challenge.value.followed = false;
                         toast.success('Nie śledzisz już tego rozwiązania.');

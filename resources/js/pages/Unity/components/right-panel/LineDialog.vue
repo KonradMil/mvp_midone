@@ -61,16 +61,16 @@ export default {
 
 
         watch(l, (lab, prevLabel) => {
-            console.log('CHANGE');
-            console.log(l);
-            console.log(lab);
+
+
+
             context.emit("update:modelValue", lab);
         }, {deep: true})
 
 
         watch(selected, (lab, prevLabel) => {
-            console.log('CHANGE');
-            console.log( l.value.cargo);
+
+
             l.value.cargo.model_name = detailsAr.value[lab].model_name;
             l.value.cargo.model_id = detailsAr.value[lab].model_id;
             l.value.cargo.prefab_url = window.app_path + detailsAr.value[lab].prefab_url;
@@ -80,8 +80,8 @@ export default {
 
 
         onMounted(() => {
-            console.log('HERE I GOT AGAINAAAA');
-            console.log(props.modelValue);
+
+
             if (props.modelValue.data.interval != undefined && props.modelValue.data.interval != '') {
                 l.value.interval = parseInt(props.modelValue.data.interval);
             } else {
@@ -102,8 +102,8 @@ export default {
                 }
             }
 
-            console.log('HERE I GOT AGAIN');
-            console.log(props.modelValue.data);
+
+
             l.value.index = parseInt(props.modelValue.data.index);
             l.value.cargo = props.modelValue.data.cargo;
             l.value.animables = props.modelValue.data.animables;

@@ -426,7 +426,7 @@ export default {
         // }
 
         const handleCallback = (resp) => {
-            console.log('RESPPPPPPPP' + resp);
+
             if(id.value != undefined && id.value != null) {
                 toast.success('Zapisano poprawnie.');
                 router.push({path: '/challenges'})
@@ -499,7 +499,7 @@ export default {
             tags.value = tagss;
             challengeSelects.value = sels;
             const elDropzoneSingleRef = dropzoneSingleRef.value;
-            console.log(elDropzoneSingleRef);
+
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
                 images.value.push(JSON.parse(resp.xhr.response).payload);
                 toast.success('Zdjecie zostało wgrane poprawnie!');

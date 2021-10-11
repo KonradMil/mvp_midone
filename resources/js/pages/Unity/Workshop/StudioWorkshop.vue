@@ -64,10 +64,10 @@ export default {
         })
 
         const instantiate = () => {
-            console.log('INST');
-            console.log('WORKSHOP', document.querySelector('#' + containerId.value));
-            console.log('WORKSHOP PATH', unity_workshop_path);
-            console.log('window.app_path', window.app_path);
+
+
+
+
             createUnityInstance(document.querySelector('#' + containerId.value), {
                 dataUrl: "/s3/" + unity_workshop_path + ".data.br",
                 frameworkUrl: "/s3/" + unity_workshop_path + ".framework.js.br",
@@ -113,7 +113,7 @@ export default {
             // if (props.module) {
             //     params.Module = params.module
             // }
-            // console.log(containerId.value);
+
             // gameInstance.value = UnityLoader.instantiate(containerId.value, props.src, params)
         }
 

@@ -201,7 +201,7 @@ export default {
         const deleteChallenge = async (id) => {
             axios.post('/api/challenge/delete', {id: id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         toast.success('Wyzwanie usunięte');
                         window.location.reload();
@@ -214,7 +214,7 @@ export default {
         const follow = (id, index) => {
             axios.post('/api/challenge/user/follow', {id: id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         challenges.value.list[index].followed = true;
                         toast.success('Teraz śledzisz to wyzwanie.');
@@ -236,7 +236,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         challenge.liked = true;
-                        console.log(challenge);
+
                         emitter.emit('liked', {id: challenge.id})
                         // getChallengeRepositories();
                     } else {
@@ -248,10 +248,10 @@ export default {
         const dislike = async (challenge) => {
             axios.post('api/challenge/user/dislike', {id: challenge.id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         challenge.liked = false;
-                        console.log(challenge);
+
                         emitter.emit('disliked', {id: challenge.id})
                     } else {
 

@@ -204,7 +204,7 @@ export default {
         const financials = ref({});
 
         watch(financials, (lab, prevLabel) => {
-            console.log('CHANGE');
+
             context.emit("update:financials", lab);
         }, {deep: true})
 

@@ -18,11 +18,11 @@ export default {
         const getSubcategoryName = (cat, sub) => {
             props.categories.forEach(function (c) {
                 if(c.value == cat) {
-                    console.log(c.subcategories);
+
                     c.subcategories.forEach(function (s) {
 
                         if(s.value == sub) {
-                            console.log('REEE');
+
                             name.value = s.name;
                         }
                     })

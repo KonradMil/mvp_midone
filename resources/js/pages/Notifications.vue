@@ -158,7 +158,7 @@ export default defineComponent({
         const delNotifi = async (id,index) => {
             axios.post('/api/notifications/delete', {id: id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         notifications.value.splice(index,1);
                         toast.success(response.data.message);

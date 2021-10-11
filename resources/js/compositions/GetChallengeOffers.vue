@@ -11,9 +11,9 @@ export default function GetChallengeOffers(id) {
     async function getChallengeOffers(id) {
         axios.post(`/api/offer/get/challenge/offers/${id}`, {})
             .then(response => {
-                // console.log(response.data)
+
                 if (response.data.success) {
-                    // console.log(response.data);
+
                     list.value = response.data.payload;
                 } else {
                     // toast.error(response.data.message);
