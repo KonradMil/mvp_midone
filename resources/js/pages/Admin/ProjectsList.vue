@@ -113,10 +113,10 @@ export default {
         });
 
         const getData = () => {
-            RequestHandler('projects/get', 'GET', {},
-                (response) => {
+            axios.get('/api/projects/get')
+                .then(response => {
                     projects.value = response.data.payload;
-                });
+                })
         }
 
         onMounted(() => {
