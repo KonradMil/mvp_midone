@@ -42,7 +42,7 @@ export default {
         const del = async (team_id) => {
             axios.post('api/teams/user/delete', {id: team_id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         toast.success(response.data.message);
                         emitter.emit('deleteteam', {index: props.ind});

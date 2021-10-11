@@ -187,7 +187,7 @@ export default {
         const validate = useVuelidate(rules, toRefs(formData));
         // const s = this.methods.handleSubmit();
         const save = () => {
-            console.log('here');
+
             if(formData.password != formData.passwordConfirm) {
                 toast.warning('Hasła muszą być takie same');
                 return false;
@@ -221,7 +221,7 @@ export default {
             if(!a) {
                 return false;
             }
-            console.log('here');
+
             if(this.formData.password != this.formData.passwordConfirm) {
                 return false;
             }

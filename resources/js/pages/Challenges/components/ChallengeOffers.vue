@@ -285,7 +285,7 @@ export default {
         watch(() => technologyType.value, (first, second) => {
             if(technologyType.value !== null){
                 StartFilterOffer();
-                console.log(offers.value.list.length + 'offers value list length in watcher')
+
                 if(offers.value.list ===0){
                     guard.value = true;
                 }else{
@@ -299,7 +299,7 @@ export default {
 
         watch(() => filterType.value, (first, second) => {
             StartFilterOffer();
-            console.log(offers.value.list.length + 'offers value list length in watcher')
+
             if(offers.value.list ===0){
                 guard.value = true;
             }else{
@@ -338,7 +338,7 @@ export default {
                         if(offers.value.list.length === 0){
                             guard.value = true;
                         }
-                        console.log(offers.value.list.length + 'offers value list length')
+
                     } else {
                         toast.error('Error');
                     }
@@ -357,7 +357,7 @@ export default {
         }
 
         const handleCallback = () => {
-            console.log('handleCallback router');
+
             router.push( {path : '/projects/card/' + props.challenge.id});
         }
 

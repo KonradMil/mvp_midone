@@ -232,7 +232,7 @@ export default {
             }
             axios.post('/api/teams/remove-from-selected', {team_id: id, type: props.who, object_id: obj.id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         teams.value.push(team);
                         toast.success('Rozłączono pomyślnie');
@@ -252,7 +252,7 @@ export default {
             }
             axios.post('/api/teams/add-to-selected', {team_id: id, type: props.who, object_id: obj.id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         toast.success('Połączono pomyślnie');
                         teams.value.splice(index,1);
@@ -270,7 +270,7 @@ export default {
         const del = async (member_id, team_id, index) => {
             axios.post('api/teams/user/member/delete', {member_id: member_id, team_id: team_id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         isDisabled.value = true;
                         toast.success(response.data.message);

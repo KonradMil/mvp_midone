@@ -291,13 +291,13 @@ export default {
             axios.post('/api/solution/robots', {id: props.solution_id, offer_id: props.edit_offer_id})
                 .then(response => {
                     if (response.data.success) {
-                        // console.log(response.data.payload)
+
                         solution_robots.value = response.data.payload;
                     } else {
                         // toast.error(response.data.message);
                     }
                 }).catch((error) =>{
-                console.log(error + 'ErrorGetRobots');
+
             })
         };
 
@@ -351,7 +351,7 @@ export default {
 
         const getOffer = () => {
             let id = props.edit_offer_id;
-            console.log(id + '-> edit offer id');
+
             axios.post('/api/offer/get', {id: id})
                 .then(response => {
                     if (response.data.success) {

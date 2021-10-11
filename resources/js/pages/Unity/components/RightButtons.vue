@@ -50,7 +50,7 @@ export default {
         });
 
         const handleChange = (val) => {
-            console.log(val);
+
             switch(val) {
                 case 'teams':
                     emitter.emit('TeamsDialog', { val: '' });

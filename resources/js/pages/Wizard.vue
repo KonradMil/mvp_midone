@@ -138,9 +138,9 @@
 
             onMounted(() => {
                 const elDropzoneSingleRef = dropzoneSingleRef.value;
-                console.log(elDropzoneSingleRef);
+
                 elDropzoneSingleRef.dropzone.on("success", (resp) => {
-                    console.log(resp.xhr.response);
+
                     avatar_path.value = '/s3/avatars/' + JSON.parse(resp.xhr.response).payload;
                     toast.success('Avatar został załadowany poprawnie!');
                 });
@@ -156,7 +156,7 @@
             return {avatar_path};
         },
         mounted() {
-            console.log(store.state);
+
             this.name = store.state.login.user.name;
             this.lastname = store.state.login.user.lastname;
             // this.getMarkers();
@@ -185,7 +185,7 @@
                             response.data.forEach(function (item) {
                                 m.push({lat: parseFloat(item.lat), lng: parseFloat(item.lng)});
                             });
-                            console.log(m);
+
                             this.markers = m;
                         })
                 })
@@ -200,7 +200,7 @@
                             lastname: this.lastname
                         })
                             .then(response => {
-                                console.log(response.data)
+
                                 if (response.data.success) {
                                     let user = response.data.payload;
                                     store.dispatch('login/login', {

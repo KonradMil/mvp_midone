@@ -327,7 +327,7 @@ export default {
                         addSolutionOffer.value = response.data.payload.addSolutionOffer;
                         acceptChallengeSolution.value = response.data.payload.acceptChallengeSolution;
                     }else{
-                        console.log('error');
+
                     }
                 })
         }
@@ -344,11 +344,11 @@ export default {
                 acceptChallengeSolution: acceptChallengeSolution.value})
                 .then(response => {
                     if (response.data.success) {
-                        console.log(publishChallenge.value + '-> publishChallenge');
+
                         toast.success(response.data.message);
                         modalPermClosed();
                     }else{
-                        console.log('error');
+
                     }
                 })
         }
@@ -364,7 +364,7 @@ export default {
         }
 
         const getInvitesRepositories = async () => {
-            console.log('asdadsadsadas');
+
            GetInvites((res) => {
                invites.value = res.payload;
                invitesSent.value = res.sent;
@@ -406,7 +406,7 @@ export default {
         const delTeam = async (team_id,index) => {
             axios.post('/api/teams/user/delete', {team_id: team_id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         isDisabled.value = true;
                         toast.success(response.data.message);
@@ -427,7 +427,7 @@ export default {
         const del = async (member,team) => {
             axios.post('api/teams/user/member/delete', {member_id: member.id, team_id: team.id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         team.value.users.splice(member,1);
                         isDisabled.value = true;
@@ -491,7 +491,7 @@ export default {
                isDisabled.value = false;
             }, 2000);
         }
-        
+
         const acceptInvite = async (id) => {
                 await AcceptInvite(id)
                 setTimeout(function () {
@@ -501,7 +501,7 @@ export default {
         }
 
         onMounted(function () {
-            console.log('ASDADSADSAFDSAFDDSAFDSF');
+
             getTeamsRepositories('');
             getInvitesRepositories('');
             if (window.Laravel.user) {

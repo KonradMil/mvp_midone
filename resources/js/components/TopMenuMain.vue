@@ -57,7 +57,7 @@ export default {
         ]);
 
         const menuChanged = (val) => {
-            console.log('val',val);
+
             emit('tabChanged', val);
         }
 

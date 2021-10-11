@@ -77,11 +77,11 @@ export default {
                     twofa.value = true;
                 }
 
-                console.log('twofa.value');
-                console.log(twofa.value);
+
+
                 axios.post('api/user/register-authy', {phone: user.phone})
                     .then(response => {
-                        console.log(response.data)
+
                         if (response.data.success) {
                             qr.value = JSON.parse(response.data.payload).qr_code;
                             // toast.success(response.data.message);
@@ -104,7 +104,7 @@ export default {
 
                 })
                     .then(response => {
-                        console.log(response.data)
+
                         if (response.data.success) {
                             toast.success(response.data.message);
                         } else {

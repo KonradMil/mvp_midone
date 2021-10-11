@@ -31,7 +31,7 @@ export default {
     setup(props, context) {
         const c = ref({message: '', title: ''});
         watch(c, (ca, prevLabel) => {
-            console.log('CHANGE');
+
             context.emit("update:comment", ca);
         }, {deep: true})
         onMounted(() => {

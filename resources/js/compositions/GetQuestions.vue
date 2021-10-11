@@ -11,9 +11,9 @@ export default function GetQuestions(id, handle) {
     async function getQuestions(id, handle) {
         axios.post('/api/question/get', {id: id})
             .then(response => {
-                // console.log(response.data)
+
                 if (response.data.success) {
-                    // console.log(response.data);
+
                     list.value = response.data.payload;
                     handle(response.data.payload);
                 } else {

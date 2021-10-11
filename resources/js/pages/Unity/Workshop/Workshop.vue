@@ -59,8 +59,8 @@ export default {
         const window_height = ref(0);
 
         emitter.on('loadObjectWorkshop', (e) => {
-            console.log(e);
-            console.log(JSON.parse(e.object.save));
+
+
             handleUnityActionOutgoing({action: 'loadWorkshopObject', data: JSON.parse(e.object.save)});
         });
 
@@ -89,8 +89,8 @@ export default {
             } else if (e.action == 'edit') {
                 emitter.emit('LoadWorkshopItems', e.object);
             } else if (e.action == 'publish') {
-                console.log("e");
-                console.log(e);
+
+
                 axios.post('/api/workshop/models/publish', {id: e.object.id})
                     .then(response => {
                         if (response.data.success) {
@@ -115,30 +115,30 @@ export default {
 
         const handleUnityActionOutgoing = (e) => {
             try {
-                console.log("eeweee");
-                console.log(e);
-                console.log(unityActionOutgoingObject.value);
-                console.log(unityActionOutgoingObject.value[e.action]);
+
+
+
+
                 unityActionOutgoingObject.value[e.action](e.data);
             } catch (ee) {
-                console.log([ee, e]);
+
             }
         }
 
         const unlockInput = () => {
-            // console.log('UNLOCK');
+
             handleUnityActionOutgoing({action: "unlockInput", data: ''});
         }
 
         const initalize = async () => {
 
             setTimeout(function () {
-                console.log("initializeMe");
-                console.log('gameWindow.value.refs.gameWindow.setup');
-                console.log(gameWindow.value);
-                console.log(gameWindow.value.refs);
-                // console.log(gameWindow.value.refs.gameWindow);
-                // console.log(gameWindow.value.refs);
+
+
+
+
+
+
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
                 // handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
 

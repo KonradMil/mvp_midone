@@ -21,11 +21,11 @@ export default {
     setup(props, context) {
         const c = ref({url: '', participants: []});
         // watch(c, (ca, prevLabel) => {
-        //     console.log('CHANGE');
+
         //     context.emit("update:comment", ca);
         // }, {deep: true})
         onMounted(() => {
-           
+
         });
 
         return {

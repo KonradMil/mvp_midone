@@ -523,7 +523,7 @@ export default defineComponent({
                     }
                 })
                 .catch(function (error) {
-                    console.log(error);
+
                 });
         }
 
@@ -572,7 +572,7 @@ export default defineComponent({
         })
 
         const getInvestorAndIntegrator = (callback) => {
-            console.log(props.id + '->props.id');
+
             RequestHandler('projects/' + props.id + '/investor-integrator', 'get', {}, (response) => {
                 investor.value = response.data.investor;
                 integrator.value = response.data.integrator;

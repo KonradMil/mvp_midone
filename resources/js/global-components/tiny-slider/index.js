@@ -14,11 +14,11 @@ const init = (el, props) => {
 };
 
 const reInit = el => {
-    console.log(el.tns + '-> el.tns!!!!!!!!!!!!!!');
+
   try {
       el.tns.destroy();
   }  catch (error) {
-      console.log(error);
+
   }
 
   el.tns.rebuild();

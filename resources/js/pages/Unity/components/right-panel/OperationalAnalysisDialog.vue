@@ -249,7 +249,7 @@ export default {
         emitter.on('operationalAnalysesSave', e => {
             axios.post('/api/solution/operational-analyses/save', {solution_id: props.solution.id, operationalAnalyses : operationalAnalyses })
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
 
                     }
@@ -294,28 +294,28 @@ export default {
         }
 
         onMounted(() => {
-            console.log(operationalAnalyses.time_available_before + '-> time_avaible_before');
+
             getChallenge(() => {
                 operationalAnalysesFunction();
             });
             // operationalAnalysesFunction();
             // try {
-            //     console.log(challenge + '-> challenge');
+
             // } catch(e){
-            //     console.log(challenge.value + '-> challenge.value');
-            //     console.log(challenge.financial_before.days + 'challenge.financial_before_days');
+
+
             // }
-            // console.log(operationalAnalyses.time_available_before + '-> time_avaible_before');
+
         });
 
         const getChallenge = (cb) => {
             axios.post('/api/challenge/user/get/card', {id: props.solution.challenge_id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
-                        console.log("response.data.payload");
-                        console.log(response.data.payload);
-                        console.log(JSON.parse(response.data.payload.save_json));
+
+
+
                         challenge.value = response.data.payload;
                         cb();
                     }

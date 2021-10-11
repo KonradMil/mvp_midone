@@ -128,8 +128,8 @@ export default {
         });
 
         emitter.on('UnityObjectPlaced', e => {
-            console.log('PARTS PLACED INSIDE');
-            console.log(e.partsPlaced);
+
+
             parts.value = e.partsPlaced;
         });
 
@@ -143,19 +143,19 @@ export default {
                 comment.value.index = temp_comment_id.value;
                 emitter.emit('unityoutgoingaction', { action: 'updateComment', data:comment, json: true });
             } else if (content.value === 'animable') {
-                console.log('animable.value');
-                console.log(animable.value);
+
+
                 emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
             } else if (content.value === 'teams') {
                 // emitter.emit('rightpanelaction', { action: 'updateAnimable', data:animable.value });
                 if(props.type==='challenge'){
-                    console.log(props.challenge.id + '- PROPS CHALLENGE ID')
+
                     saveChallengeTeamsRepo();
                } else {
                     saveSolutionTeamsRepo();
                 }
             } else if (content.value === 'description') {
-                console.log('HEREE');
+
                 if(type.value == 'challenge') {
                     saveChallengeDescriptionRepo({name: props.challenge.name, description: props.challenge.description, id: props.challenge.id});
                 } else {
@@ -185,8 +185,8 @@ export default {
 
                 });
              } else if (content.value === 'line') {
-                console.log('HERE IMPORTA');
-                console.log({layers: line.value});
+
+
                 emitter.emit('rightpanelaction', { action: 'updateLine', data:{layers: line.value}, json: true });
             } else if (content.value === 'financial-analysis') {
                 emitter.emit('financialAnalysesSave', {});
@@ -202,7 +202,7 @@ export default {
             } else if(props.type == 'solution') {
                 return props.solution;
             } else {
-                console.log(type.value)
+
             }
         }, () => {
 
@@ -276,8 +276,8 @@ export default {
 
         emitter.on('UnityLineSettings', e => {
             content.value = 'line';
-            console.log('LINE SETING UPDATE');
-            console.log(e);
+
+
             temp_line_id.value = Math.floor(Math.random() * 99) + 1;
             line.value = e;
             currentTitle.value = 'Ustawienia lini animacji';
@@ -286,10 +286,10 @@ export default {
         });
 
         emitter.on('UnityAnimableSettings', e => {
-            console.log('I CAME');
+
             temp_animable_id.value = e.data.layer_id;
             content.value = 'animable';
-            console.log(e);
+
             animable.value = e.data;
             currentTitle.value = 'Ustawienia elementu animacji';
             showPanel();
@@ -304,9 +304,9 @@ export default {
         });
 
         emitter.on('UnityLabelSelected', e => {
-            console.log(e);
-            console.log("e");
-            console.log(e.labelSelected);
+
+
+
             temp_label_id.value = e.labelSelected.index;
             content.value = 'label';
             label.value = e.labelSelected;
@@ -315,7 +315,7 @@ export default {
         });
 
         emitter.on('UnityCommentSelected', e => {
-            console.log(e);
+
             temp_comment_id.value = e.commentSelected.index;
             comment.value = e.commentSelected;
             content.value = 'comment';

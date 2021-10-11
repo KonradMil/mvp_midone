@@ -25,7 +25,7 @@ import {VueReCaptcha} from "vue-recaptcha-v3";
 import utc from 'dayjs/esm/plugin/utc';
 
 const emitter = mitt();
-// emitter.on('*', (type, e) => console.log(type, e) )
+
 
 const options = {};
 const i18n = createI18n({

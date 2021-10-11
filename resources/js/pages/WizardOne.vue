@@ -129,7 +129,7 @@ import router from "../router";
                         krs: company.value.krs
                     })
                         .then(response => {
-                            console.log(response.data)
+
                             if (response.data.success) {
                                 if (response.data.success) {
                                     company.value.regon = response.data.payload.regon;
@@ -160,7 +160,7 @@ import router from "../router";
                 axios.get('/sanctum/csrf-cookie').then(response => {
                     axios.post('api/company/search/nip', val)
                         .then(response => {
-                            console.log(response.data)
+
                             if (response.data.success) {
                                 company.value.regon = response.data.payload.regon;
                                 company.value.nip = response.data.payload.nip;
@@ -177,7 +177,7 @@ import router from "../router";
                             }
                         })
                         .catch(function (error) {
-                            console.log(error);
+
                             toast.error(error);
                         });
                 })
@@ -199,7 +199,7 @@ import router from "../router";
                         krs: company.value.krs
                     })
                         .then(response => {
-                            console.log(response.data)
+
                             if (response.data.success) {
                                 window.location.href = '/profiles';
                                 // router.push({path: 'profiles'});

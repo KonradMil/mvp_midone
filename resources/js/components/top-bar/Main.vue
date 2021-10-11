@@ -267,7 +267,7 @@ export default defineComponent({
             axios.post('/api/search', {query: searchTerm.value})
                 .then(response => {
                     if (response.data.success) {
-                        console.log(response.data.payload);
+
                      results.value = response.data.payload;
                         showSearchDropdown();
                     } else {
@@ -291,7 +291,7 @@ export default defineComponent({
 
         const checkCounts = () => {
             user.notifications.forEach(function (notification){
-                console.log('notification.read_at' + notification.read_at);
+
                 if(notification.read_at === null){
                     counts.value++;
                 }
@@ -322,7 +322,7 @@ export default defineComponent({
            if(notifications.value.list === undefined) {
                return notifications.value;
            }  else {
-               console.log(notifications.value.list);
+
                return notifications.value.list;
            }
         });
@@ -359,7 +359,7 @@ export default defineComponent({
         const delNotifi = async (notification) => {
             axios.post('/api/notifications/delete', {id: notification.id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         if(notification.data.read_at === null){
                             counts.value--;

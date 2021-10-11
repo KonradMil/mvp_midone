@@ -91,7 +91,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         object.liked = true;
-                        console.log(solution);
+
                     } else {
 
                     }
@@ -107,7 +107,7 @@ export default {
         }
 
         const publishObject = () => {
-            console.log(object);
+
             emitter.emit('singleworkshopobject', {action: 'publish', object: object})
         }
         const copyObject = () => {

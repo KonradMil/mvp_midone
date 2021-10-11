@@ -31,7 +31,7 @@ export default {
     },
     setup(props) {
         // watch(() => props.open, (first, second) => {
-        //     console.log('NEW DATA', [first, second])
+
         //     // if(first == true) {
         //         cash("#workshop-modal").modal("show");
         //     // } else {

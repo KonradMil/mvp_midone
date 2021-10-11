@@ -64,7 +64,7 @@ export default {
 
         onMounted(function () {
             filterSolutions();
-            console.log('SolutionsArchiveMounted');
+
             // getSolutionRepositories();
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;

@@ -117,9 +117,9 @@ export default {
         const like = (post) => {
             axios.post('api/knowledgebase/post/like', {id: post.id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
-                        // console.log(response.data);
+
                         postObj.value.likes = postObj.value.likes + 1;
                         postObj.value.liked = true;
 

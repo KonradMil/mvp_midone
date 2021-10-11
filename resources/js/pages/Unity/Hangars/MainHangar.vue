@@ -212,31 +212,31 @@ export default {
         });
 
         const lockInput = () => {
-            // console.log('LOCK');
+
             handleUnityActionOutgoing({action: "lockInput", data: ''});
         }
 
         const unlockInput = () => {
-            // console.log('UNLOCK');
+
             handleUnityActionOutgoing({action: "unlockInput", data: ''});
         }
 
         const openMenu = (e) => {
             e.preventDefault();
-            console.log('RIGHT CLICK');
-            console.log(e);
+
+
             if (loaded.value) {
                 if (doubleClick.value) {
                     if ((mousePositionX.value > (e.clientX - 10) && mousePositionX.value < (e.clientX + 10)) && (mousePositionY.value > (e.clientY - 10) && mousePositionY.value < (e.clientY + 19))) {
                         let data = JSON.stringify({menu: currentRadialMenu.value});
-                        console.log(data);
-                        console.log('RIGHT CLICK SHOW');
+
+
                         handleUnityActionOutgoing({action: 'showRadialMenu', data: data});
                     } else {
                         doubleClick.value = false;
                     }
                 } else {
-                    console.log('ONE CLICK');
+
                     mousePositionX.value = e.clientX;
                     mousePositionY.value = e.clientY;
                     doubleClick.value = true;
@@ -257,12 +257,12 @@ export default {
             try {
                 unityActionOutgoingObject.value[e.action](e.data);
             } catch (ee) {
-                console.log([ee, e]);
+
             }
         }
 
         const initalize = async () => {
-            console.log("initializeMe");
+
             setTimeout(function () {
                 loaded.value = true;
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
@@ -283,7 +283,7 @@ export default {
         onBeforeMount(() => {
             //ADDS LISTENERS
             bridge.value = UnityBridge();
-            console.log("bridge.value", bridge.value);
+
         });
 
         emitter.on('updateanimationSave', e => {

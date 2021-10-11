@@ -160,12 +160,12 @@ export default {
         const getProjects = async(callback) => {
             axios.post('/api/challenge/user/get/projects', {})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         projects.value = response.data.payload;
                         callback(response);
                     } else {
-                        console.log('error');
+
                     }
                 })
         }
@@ -173,7 +173,7 @@ export default {
         const deleteChallenge = async(id) => {
             axios.post('/api/challenge/delete', {id: id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         toast.success('Wyzwanie usunięte');
                         window.location.reload();
@@ -186,7 +186,7 @@ export default {
         const follow = (id, index) => {
             axios.post('/api/challenge/user/follow', {id: id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         challenges.value.list[index].followed = true;
                         toast.success('Teraz śledzisz to wyzwanie.');
@@ -199,10 +199,10 @@ export default {
         const unfollow = (id, index) => {
             axios.post('/api/challenge/user/unfollow', {id: id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
-                        console.log(challenges.value);
-                        console.log(challenges.value.list[index]);
+
+
                         challenges.value.list[index].followed  = false;
                         toast.success('Nie śledzisz już tego wyzwania.');
                     } else {
@@ -214,12 +214,12 @@ export default {
         const like = async (challenge) => {
             axios.post('api/challenge/user/like', {id: challenge.id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
-                        // console.log(response.data);
+
                         // challenge.likes = challenge.likes + 1;
                         challenge.liked = true;
-                        console.log(challenge);
+
                         emitter.emit('liked', {id: challenge.id})
                         // getChallengeRepositories();
                     } else {
@@ -231,12 +231,12 @@ export default {
         const dislike = async (challenge) => {
             axios.post('api/challenge/user/dislike', {id: challenge.id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
-                        // console.log(response.data);
+
                         // challenge.likes = challenge.likes + 1;
                         challenge.liked = false;
-                        console.log(challenge);
+
                         emitter.emit('disliked', {id: challenge.id})
                         // getChallengeRepositories();
                     } else {

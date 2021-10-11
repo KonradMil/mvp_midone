@@ -77,29 +77,29 @@ export default {
         const deviceId = ref('');
 
         const join = async () => {
-            console.log('join');
+
             socket.value = io(props.socketURL, { rejectUnauthorized: false, transports: ['websocket'] });
-            console.log('join2');
+
             signalClient.value = new SimpleSignalClient(socket.value);
-            console.log('join3');
+
             // let constraints = ;
-            console.log('DEVICE ID', deviceId.value);
+
             // if (deviceId.value && props.enableVideo) {
             //     constraints.video = { deviceId: { exact: deviceId.value } };
             // }
-            console.log('join4');
+
             const localStream = await navigator.mediaDevices.getUserMedia({
                 video: false,
                 audio: true
             });
-            console.log('opened', localStream);
+
             joinedRoom(localStream, true);
             signalClient.value.once('discover', (discoveryData) => {
-                console.log('discovered', discoveryData)
+
                 async function connectToPeer(peerID) {
                     if (peerID == socket.value.id) return;
                     try {
-                        console.log('Connecting to peer');
+
                         const { peer } = await props.signalClient.connect(peerID, props.roomId, props.peerOptions);
                         videoList.value.forEach(v => {
                             if (v.isLocal) {
@@ -107,16 +107,16 @@ export default {
                             }
                         })
                     } catch (e) {
-                        console.log('Error connecting to peer');
+
                     }
                 }
                 discoveryData.peers.forEach((peerID) => connectToPeer(peerID));
                 // emit('opened-room', props.roomId);
             });
             signalClient.value.on('request', async (request) => {
-                console.log('requested', request)
+
                 const { peer } = await request.accept({}, props.peerOptions)
-                console.log('accepted', peer);
+
                 videoList.value.forEach(v => {
                     if (v.isLocal) {
                         onPeer(peer, v.stream);
@@ -127,7 +127,7 @@ export default {
         }
 
         const onPeer = (peer, localStream) => {
-            console.log('onPeer');
+
             peer.addStream(localStream);
             peer.on('stream', (remoteStream) => {
                 joinedRoom(remoteStream, false);
@@ -142,7 +142,7 @@ export default {
                     // emit('left-room', remoteStream.id);
                 });
                 peer.on('error', (err) => {
-                    console.log('peer error ', err);
+
                 });
             });
         }
@@ -204,7 +204,7 @@ export default {
 
         const shareScreen = async () => {
             if (navigator.mediaDevices == undefined) {
-                console.log('Error: https is required to load cameras');
+
                 return;
             }
 
@@ -214,7 +214,7 @@ export default {
                 // emit('share-started', screenStream.id);
                 signalClient.value.peers().forEach(p => onPeer(p, screenStream));
             } catch (e) {
-                console.log('Media error: ' + JSON.stringify(e));
+
             }
 
         }

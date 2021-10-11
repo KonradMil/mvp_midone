@@ -485,7 +485,7 @@ export default {
         const GetDashBoardRepository = () => {
 
             GetDashboard((resp) => {
-                console.log(resp.posts);
+
                 // posts.value = resp.posts;
                 solutions.value = resp.solutions;
                 logs.value = resp.logs;
