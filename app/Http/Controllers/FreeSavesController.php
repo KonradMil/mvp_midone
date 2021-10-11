@@ -6,5 +6,13 @@ use Illuminate\Http\Request;
 
 class FreeSavesController extends Controller
 {
-    //
+    public function __construct()
+    {
+        
+    }
+
+    public function get()
+    {
+        
+    }
 }
