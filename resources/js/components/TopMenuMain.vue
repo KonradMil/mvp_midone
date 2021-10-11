@@ -7,9 +7,7 @@
                     href="#"
                     @click.prevent="menuChanged(menu)"
                     class="top-menu"
-                    :class="{
-              'top-menu--active': menu.active
-            }">
+                    :class=" (menu.active)? 'top-menu--active' : ''">
 <!--                    @click="linkTo(menu, router)"-->
                     <div class="top-menu__icon">
 <!--                        <component :is="menu.icon" />-->

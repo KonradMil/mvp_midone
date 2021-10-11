@@ -13,7 +13,7 @@
                     </p>
                     <p v-if="user.type == 'integrator' && type==='followed'">
                         Nie obserwujesz jeszcze żadnych wyzwań.
-                    </p>T
+                    </p>
                     <p v-if="user.type == 'integrator' && type==='archive'">
                         Nie masz jeszcze żadnych archiwalnych wyzwań.
                     </p>
