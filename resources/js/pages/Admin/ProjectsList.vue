@@ -52,12 +52,10 @@
                         <td class="w-40">
                             <div class="flex">
                                 <div class="w-10 h-10 image-fit zoom-in">
-                                                                        <Tippy
-                                                                            tag="img"
+                                                                        <img
                                                                             alt="DBR77"
                                                                             class="rounded-full"
-                                                                            :src="'/s3/screenshots/' + project.screenshot_path"
-                                                                            :content="``"
+                                                                            :src="project.screenshot_path"
                                                                         />
                                 </div>
                             </div>
@@ -69,7 +67,7 @@
                             {{project.status}}
                         </td>
                         <td class="w-40">
-                            {{project.author.firstname}} {{project.author.lastname}}
+                            {{project.author.name}} {{project.author.lastname}}
                         </td>
                         <td class="w-40">
 <!--                            {{project.author.firstname}} {{project.author.lastname}}-->
