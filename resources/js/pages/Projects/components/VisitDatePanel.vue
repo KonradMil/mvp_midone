@@ -21,7 +21,7 @@
                 <li v-for="deadline in deadlines" :key="deadline.id">
                     <div class="overflow-x-auto sm:overflow-x-visible">
                       <div class="intro-y">
-                    <div :class="(showDetails[deadline.id] === true && deadline.accepted === 1) ? 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-200 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1' : 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1'">
+                    <div :class="(showDetails[deadline.id] === true && deadline.accepted === 1) ? 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-200 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-full sm:w-1/2 max-w-5xl' : 'inbox__item inline-block sm:block text-gray-700 dark:text-gray-500 bg-gray-100 dark:bg-dark-1 border-b border-gray-200 dark:border-dark-1 md:w-1/2 lg:w-1/2 xl:w-1/2 2xl:w-full sm:w-1/2 max-w-5xl'">
                         <div class="flex px-5 py-3 pb-5">
                             <div @click="showDetails[deadline.id] = !showDetails[deadline.id]" class="w-70 flex-none flex items-center mr-5 mt-2"
                                  v-if="deadline.author !== undefined">
