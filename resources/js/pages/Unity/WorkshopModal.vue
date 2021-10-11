@@ -18,8 +18,6 @@
 import {onMounted, ref, watch} from "vue";
 import Workshop from './Workshop/Workshop';
 
-const cash = require("cash-dom/dist/cash");
-
 export default {
     name: 'WorkshopModal',
     components: {

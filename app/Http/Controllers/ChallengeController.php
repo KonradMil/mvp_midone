@@ -1224,8 +1224,12 @@ class ChallengeController extends Controller
 
     public function getUserChallengesByTab(Request $request, $category)
     {
+        if(Auth::user()->type == 'investor') {
+            $challenges = Challenge::where('author_id', '=', Auth::user()->id)->where('challenges.category', '=', $category)->get();
+        } else {
+            $challenges = Challenge::where('status', '=', 1)->where('challenges.category', '=', $category)->get();
+        }
 
-        $challenges = Challenge::where('author_id', '=', Auth::user()->id)->where('challenges.category', '=', $category)->get();
 
         foreach ($challenges as $challenge) {
 
