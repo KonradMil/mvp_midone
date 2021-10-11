@@ -88,11 +88,6 @@ class AuthController extends Controller
                     return redirect('/login');
                 }
 
-                if (!$user->hasVerifiedEmail()) {
-                    session()->flash('info', __('messages.login.account_inactive'));
-                    return redirect('/login');
-                }
-
                 if ($provider === 'google') {
 
                     if (!$user->google_id) {
