@@ -17,9 +17,9 @@ import cash from "cash-dom/dist/cash";
 import unityActionOutgoing from "../composables/ActionsOutgoing";
 
 export default {
-    props: ['src', 'module', 'width', 'height', 'externalProgress', 'unityLoader', 'hideFooter'],
+    props: ['src', 'module', 'width', 'height', 'externalProgress', 'unityLoader', 'hideFooter', 'loader'],
     name: 'StudioWorkshop',
-    setup(props,{emit}) {
+    setup(props, {emit}) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const containerId = ref();
@@ -36,12 +36,11 @@ export default {
         }
 
 
-
         const message = (gameObject, method, param) => {
             if (param === null) {
                 param = ''
             }
-            if (gameInstance.value !== null){
+            if (gameInstance.value !== null) {
                 gameInstance.value.SendMessage(gameObject, method, param)
             } else {
                 console.warn('vue-unity-webgl: you\'ve sent a message to the Unity content, but it wasn\t instantiated yet.')
@@ -49,18 +48,17 @@ export default {
         }
 
 
-
         onBeforeMount(() => {
-            // if (props.unityLoader) {
+            if (!props.loader) {
                 const script = document.createElement('SCRIPT')
-             script.setAttribute('src', '/s3/unity/' + unity_path + '.loader.js')
+                script.setAttribute('src', '/s3/unity/' + unity_path + '.loader.js')
                 script.setAttribute('async', '')
                 script.setAttribute('defer', '')
                 document.body.appendChild(script)
                 script.onload = () => {
-                    emitter.emit('onload', { done:1 })
+                    emitter.emit('onloadWorkshop', {done: 1})
                 }
-            // }
+            }
         })
 
         const instantiate = () => {
@@ -79,7 +77,7 @@ export default {
             }).then(function (instance) {
                 gameInstance.value = instance;
                 loaded.value = true;
-                emitter.emit('onInitialized', { loaded: true });
+                emitter.emit('onInitialized', {loaded: true});
                 // window.addEventListener('resize', onResize);
                 // onResize();
             });
@@ -118,8 +116,8 @@ export default {
         }
 
 
-        onMounted(()=> {
-            emitter.on('onload', e =>  setTimeout(function () {
+        onMounted(() => {
+            emitter.on('onloadWorkshop', e => setTimeout(function () {
                 instantiate();
             }, 1500))
         });

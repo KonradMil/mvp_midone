@@ -30,12 +30,12 @@
             <div class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium" v-if="projects.length == 0">
                 <div>
                     <p v-if="user.type == 'integrator'">
-                        Brak aktywnych projektów.
+                        Nie masz jeszcze żadnych projektów.
                     </p>
                 </div>
                     <div v-if="user.type === 'investor'">
                         <p>
-                            Brak aktywnych projektów.
+                            Nie masz jeszcze żadnych projektów.
                         </p>
                     </div>
                 </div>

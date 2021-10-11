@@ -25,7 +25,7 @@
             </div>
             <!-- END: Profile Menu -->
             <!--            <WorkshopPanel :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></WorkshopPanel>-->
-            <StudioWorkshop hideFooter="true" :src="''" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></StudioWorkshop>
+            <StudioWorkshop hideFooter="true" :src="''" :width="window_width" :height="window_height" :loader="loader" unityLoader="/UnityLoader.js" :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></StudioWorkshop>
             <Marketplace v-if="activeTab == 'marketplace'"></Marketplace>
             <OwnObjects v-if="activeTab == 'obiekty'"></OwnObjects>
         </div>
@@ -46,6 +46,9 @@ import StudioWorkshop from "./StudioWorkshop";
 export default {
     name: "Workshop",
     components: {OwnObjects, Marketplace, WorkshopPanel, StudioWorkshop},
+    props: {
+      loader: false
+    },
     setup() {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
@@ -142,7 +145,7 @@ export default {
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
                 // handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
 
-            }, 15000);
+            }, 6000);
             // setTimeout(() => {
             //     handleUnityActionOutgoing({action: 'prefix', data: 'https://staging.appworks-dev.pl/s3'});
             //     // unlockInput();
