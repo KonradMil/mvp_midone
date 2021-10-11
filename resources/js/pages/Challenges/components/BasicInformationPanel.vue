@@ -42,7 +42,7 @@
                                years: true
                                   }
                               }" class="form-control"/>
-                        <span v-if="!inTeam"> {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }} </span>
+                        <span v-if="!inTeam"> {{ $dayjs.unix(challenge.solution_deadline).format('DD.MM.YYYY') }} </span>
                     </div>
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
                         <strong>{{$t('challengesMain.deadlineSubmissionOffers')}}:</strong>
@@ -63,7 +63,7 @@
                                 years: true
                             }
                         }" class="form-control"/>
-                        <span v-if="!inTeam"> {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }} </span>
+                        <span v-if="!inTeam"> {{ $dayjs.unix(challenge.offer_deadline).format('DD.MM.YYYY') }} </span>
                     </div>
                     <button v-if="inTeam && challenge.stage < 3" class="btn btn-secondary ml-auto my-1" @click="saveDate">
                         {{$t('challengesMain.changeDates')}}
