@@ -377,6 +377,9 @@ export default {
             // allowedEdit.value = props.allowedEdit;
             // showPanel();
             // saveChallengeDetailsRepo('');
+            window.addEventListener('keyup', (val) => {
+                console.log('KEYUP', val);
+            })
         });
 
         const saveChallengeRepo = async (data) => {

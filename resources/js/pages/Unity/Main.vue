@@ -486,9 +486,7 @@ export default {
         }
 
         onMounted(() => {
-            window.addEventListener('keyup', (val) => {
-                console.log('KEYUP', val);
-            })
+
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")
