@@ -113,11 +113,9 @@
                                     <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
                                     </div>
                                 </div>
-                                <div
-                                    v-if="user.id === solution.author_id"
-                                    style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
+                                <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
                                     class="cursor-pointer px-6">
-                                    <button class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
+                                    <button v-if="user.id === props.solution.author_id" class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
                                         Usuń
                                     </button>
                                     <button class="btn btn-outline-secondary py-1 px-2" @click="downloadFile(file.path, file.name)">
@@ -128,7 +126,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-3">
+                <div class="mt-3" v-if="solutionFiles.length <= 0">
+                    <span class="font-medium dark:text-theme-10 text-theme-1">Brak plików</span>
+                </div>
+                <div class="mt-3" v-if="user.id === props.solution.author_id">
                     <label class="form-label"> {{ $t('challengesNew.file') }}</label>
                     <div class="rounded-md pt-4">
                         <div class="flex flex-wrap px-4">
@@ -155,7 +156,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col lg:flex-row items-center p-5" style="justify-content: center;">
+            <div v-if="user.id === props.solution.author_id" class="flex flex-col lg:flex-row items-center p-5" style="justify-content: center;">
                 <button class="btn btn-outline-secondary py-1 px-2" @click="saveFiles">
                     {{ $t('global.save') }}
                 </button>
@@ -250,8 +251,9 @@ export default {
         onMounted(() => {
             getSolutionFiles();
             checkTeam();
-            const elDropzoneSingleRef = dropzoneSingleRef.value;
-            elDropzoneSingleRef.dropzone.on("success", (resp) => {
+            if(user.id === props.solution.author_id){
+                const elDropzoneSingleRef = dropzoneSingleRef.value;
+                elDropzoneSingleRef.dropzone.on("success", (resp) => {
                     solutionFiles.value.push(JSON.parse(resp.xhr.response).payload);
                     images.value.push(JSON.parse(resp.xhr.response).payload);
                     toast.success('Zdjecie zostało wgrane poprawnie!');
@@ -259,6 +261,7 @@ export default {
                 elDropzoneSingleRef.dropzone.on("error", () => {
                     toast.error("Maksymalnie można wgrać 8 plików!");
                 });
+            }
         });
 
         const addOffer = () => {
