@@ -272,7 +272,7 @@ export default {
                if(check != 'Invalid Date') {
                    return check;
                } else {
-                   return $dayjs(props.challenge.offer_deadline).format('DD.MM.YYYY');
+                   return $dayjs(props.challenge.offer_deadline, 'DD.MM.YYYY').format('DD.MM.YYYY');
                }
 
             },
@@ -289,7 +289,7 @@ export default {
                 if(check != 'Invalid Date') {
                     return check;
                 } else {
-                    return $dayjs(props.challenge.solution_deadline).format('DD.MM.YYYY')
+                    return $dayjs(props.challenge.solution_deadline,'DD.MM.YYYY').format('DD.MM.YYYY')
                 }
             },
             set: (newValue) => {
