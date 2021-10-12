@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div >
         <MobileMenu/>
         <div class="flex">
             <!-- BEGIN: Side Menu -->
@@ -125,10 +125,12 @@ export default defineComponent({
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
+
             cash("body")
                 .removeClass("error-page")
                 .removeClass("login")
                 .addClass("main");
+
             formattedMenu.value = $h.toRaw(sideMenu.value);
         });
 

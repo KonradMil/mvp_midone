@@ -48,6 +48,7 @@
             <div class="mt-2 md:flex" v-if="canAccept && type!=='archive'">
                 <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1  && solution.archive != 1 && acceptChallengeSolutions">{{$t('challengesMain.acceptSolution')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1  && solution.archive != 1 && acceptChallengeSolutions">{{$t('challengesMain.rejectSolution')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="solution.archive !== 1 && acceptChallengeSolutions" @click="showAddFileModal">Pliki</button>
             </div>
             <div class="mt-2 md:flex" v-if="canEdit || inTeam && type!=='archive'">
 <!--                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: '/studio/solution/' + solution.id});" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1">{{$t('models.edit')}}</button>-->
@@ -99,25 +100,36 @@
     <ModalFile :show="show" @closed="modalClosed">
         <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
             <div class="mt-5">
-                <div class="mt-3 border px-4 py-4" v-if="images.length > 0">
+                <div class="mt-3 border px-4 py-4" v-if="solutionFiles.length > 0">
                     <label class="form-label"> Wgrane pliki</label>
                     <div class="rounded-md pt-4">
                         <div class="grid grid-cols-4 h-full">
-                            <div class=" h-full" v-for="(file, index) in solution.files" :key="'file_' + index">
+                            <div class=" h-full" v-for="(file, index) in solutionFiles" :key="'file_' + index">
                                 <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
-                                    <img class="w-full h-full"
+                                    <img
+                                         class="w-full h-full"
                                          :alt="file.original_name"
                                          :src="'/' + file.path"/>
                                     <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
                                     </div>
                                 </div>
-                                <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteFile(index)" class="cursor-pointer">USUŃ
+                                <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
+                                    class="cursor-pointer px-6">
+                                    <button v-if="user.id === props.solution.author_id" class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
+                                        Usuń
+                                    </button>
+                                    <button class="btn btn-outline-secondary py-1 px-2" @click="downloadFile(file.path, file.name)">
+                                        Pobierz
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="mt-3">
+                <div class="mt-3" v-if="solutionFiles.length <= 0 && user.id !== props.solution.author_id">
+                    <span class="font-medium dark:text-theme-10 text-theme-1">Brak plików</span>
+                </div>
+                <div class="mt-3" v-if="user.id === props.solution.author_id">
                     <label class="form-label"> {{ $t('challengesNew.file') }}</label>
                     <div class="rounded-md pt-4">
                         <div class="flex flex-wrap px-4">
@@ -143,6 +155,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div v-if="user.id === props.solution.author_id" class="flex flex-col lg:flex-row items-center p-5" style="justify-content: center;">
+                <button class="btn btn-outline-secondary py-1 px-2" @click="saveFiles">
+                    {{ $t('global.save') }}
+                </button>
             </div>
         </div>
     </ModalFile>
@@ -187,11 +204,10 @@ export default {
         const dropzoneSingleRef = ref();
         const solutionFiles = ref([]);
         const guard = ref(false);
-        const images = ref(0);
+        const images = ref([]);
 
         const modalClosed = () => {
             show.value = false;
-            saveFiles();
         }
 
         const showAddFileModal = (id) => {
@@ -215,14 +231,28 @@ export default {
             });
         }
 
+        const downloadFile = async (url,name) => {
+            axios({
+                url: url,
+                method: 'GET',
+                responseType: 'blob',
+            }).then((response) => {
+                var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                var fileLink = document.createElement('a');
+
+                fileLink.href = fileURL;
+                fileLink.setAttribute('download', name);
+                document.body.appendChild(fileLink);
+
+                fileLink.click();
+            });
+        }
 
         onMounted(() => {
-            if(props.solutions.files !== undefined){
-                images.value = props.solution.files;
-            }
+            getSolutionFiles();
             checkTeam();
-            const elDropzoneSingleRef = dropzoneSingleRef.value;
-            if(props.solution.files !== undefined){
+            if(user.id === props.solution.author_id){
+                const elDropzoneSingleRef = dropzoneSingleRef.value;
                 elDropzoneSingleRef.dropzone.on("success", (resp) => {
                     solutionFiles.value.push(JSON.parse(resp.xhr.response).payload);
                     images.value.push(JSON.parse(resp.xhr.response).payload);
@@ -307,6 +337,16 @@ export default {
                 })
         }
 
+        const getSolutionFiles = () => {
+            axios.post('/api/solution/files/get', {id: solution.id})
+                .then(response => {
+                    if (response.data.success) {
+                        solutionFiles.value = response.data.payload;
+                    } else {
+                    }
+                })
+        }
+
         const rejectSolution = () => {
             axios.post('/api/solution/reject', {id: solution.id})
                 .then(response => {
@@ -330,8 +370,13 @@ export default {
                 })
         }
 
-        const deleteFile = (index) => {
-            solution.files.value.splice(index, 1);
+        const deleteFile = (index,file) => {
+            RequestHandler('solution/file/delete', 'post', {
+                solution_id: props.solution.id,
+                file_id: file.id,
+            }, (response) => {
+                solutionFiles.value.splice(index, 1);
+            });
         }
 
         provide("bind[dropzoneSingleRef]", el => {
@@ -339,6 +384,8 @@ export default {
         });
 
         return {
+            downloadFile,
+            getSolutionFiles,
             images,
             guard,
             saveFiles,

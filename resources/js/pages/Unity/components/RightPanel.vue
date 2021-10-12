@@ -128,8 +128,6 @@ export default {
         });
 
         emitter.on('UnityObjectPlaced', e => {
-
-
             parts.value = e.partsPlaced;
         });
 
@@ -379,11 +377,15 @@ export default {
             // allowedEdit.value = props.allowedEdit;
             // showPanel();
             // saveChallengeDetailsRepo('');
+            // window.addEventListener('keyup', (val) => {
+            //     console.log('KEYUP', val);
+            // })
         });
 
         const saveChallengeRepo = async (data) => {
 
         }
+
         const saveSolutionDescriptionRepo = async (data) => {
             SaveSolutionDescription(data)
         }

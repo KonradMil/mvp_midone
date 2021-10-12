@@ -269,10 +269,13 @@ export default {
             get: () => {
                let check = $dayjs.unix(props.challenge.offer_deadline).format('DD.MM.YYYY');
                 console.log('CHECK', check);
+                console.log('CHECK2', (check != 'Invalid Date'));
                if(check != 'Invalid Date') {
                    return check;
                } else {
-                   return $dayjs(props.challenge.offer_deadline, 'DD.MM.YYYY').format('DD.MM.YYYY');
+                   console.log('CHECK33', props.challenge.offer_deadline);
+                   return props.challenge.offer_deadline
+                   // $dayjs(props.challenge.offer_deadline, 'DD.MM.YYYY').format('DD.MM.YYYY');
                }
 
             },
@@ -286,10 +289,13 @@ export default {
             get: () => {
                 let check = $dayjs.unix(props.challenge.solution_deadline).format('DD.MM.YYYY');
                 console.log('CHECK', check);
+                console.log('CHECK2', (check != 'Invalid Date'));
                 if(check != 'Invalid Date') {
                     return check;
                 } else {
-                    return $dayjs(props.challenge.solution_deadline,'DD.MM.YYYY').format('DD.MM.YYYY')
+                    console.log('CHECK3', props.challenge.solution_deadline);
+                    return props.challenge.solution_deadline;
+                    // $dayjs(props.challenge.solution_deadline,'DD.MM.YYYY').format('DD.MM.YYYY')
                 }
             },
             set: (newValue) => {
