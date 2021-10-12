@@ -466,8 +466,6 @@ export default {
                 .then(response => {
 
                     if (response.data.success) {
-
-
                         solution.value = response.data.payload;
                         initialLoad.value = JSON.parse(response.data.payload.save_json);
                         animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
@@ -477,7 +475,6 @@ export default {
                             data: JSON.parse(response.data.payload.save_json)
                         });
                         unlockInput();
-
                         // emitter.emit('saveLoaded', {save: (response.data.payload)});
                     } else {
                         // toast.error(response.data.message);

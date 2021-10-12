@@ -25,7 +25,7 @@
             </div>
             <!-- END: Profile Menu -->
             <!--            <WorkshopPanel :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></WorkshopPanel>-->
-            <StudioWorkshop hideFooter="true" :src="''" :width="window_width" :height="window_height" :loader="loader" unityLoader="/UnityLoader.js" :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></StudioWorkshop>
+<!--            <StudioWorkshop hideFooter="true" :src="''" :width="window_width" :height="window_height" :loader="loader" unityLoader="/UnityLoader.js" :class="(activeTab == 'workshop')? '' : 'hidden'" ref="gameWindow"></StudioWorkshop>-->
             <Marketplace v-if="activeTab == 'marketplace'"></Marketplace>
             <OwnObjects v-if="activeTab == 'obiekty'"></OwnObjects>
         </div>
@@ -124,10 +124,10 @@ export default {
             setTimeout(function () {
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
             }, 6000);
-            setInterval(() => {
-                console.log('HEREAAA', {action: 'LockUnityInput', data: ''});
-                handleUnityActionOutgoing({action: 'LockUnityInput', data: ''});
-            }, 2000);
+            // setInterval(() => {
+            //     console.log('HEREAAA', {action: 'LockUnityInput', data: ''});
+            //     handleUnityActionOutgoing({action: 'LockUnityInput', data: ''});
+            // }, 2000);
             // setTimeout(() => {
             //     handleUnityActionOutgoing({action: 'prefix', data: 'https://staging.appworks-dev.pl/s3'});
             //     // unlockInput();
