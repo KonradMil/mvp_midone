@@ -269,6 +269,7 @@ export default {
             get: () => {
                let check = $dayjs.unix(props.challenge.offer_deadline).format('DD.MM.YYYY');
                 console.log('CHECK', check);
+                console.log('CHECK2', (check != 'Invalid Date'));
                if(check != 'Invalid Date') {
                    return check;
                } else {
@@ -286,6 +287,7 @@ export default {
             get: () => {
                 let check = $dayjs.unix(props.challenge.solution_deadline).format('DD.MM.YYYY');
                 console.log('CHECK', check);
+                console.log('CHECK2', (check != 'Invalid Date'));
                 if(check != 'Invalid Date') {
                     return check;
                 } else {
