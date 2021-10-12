@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div >
         <MobileMenu/>
         <div class="flex">
             <!-- BEGIN: Side Menu -->
@@ -130,6 +130,10 @@ export default defineComponent({
                 .removeClass("login")
                 .addClass("main");
             formattedMenu.value = $h.toRaw(sideMenu.value);
+
+            window.addEventListener('keyup', (val) => {
+                console.log('KEYUP', val);
+            })
         });
 
         return {
