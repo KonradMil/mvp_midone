@@ -62,8 +62,6 @@ export default {
         const window_height = ref(0);
 
         emitter.on('loadObjectWorkshop', (e) => {
-
-
             handleUnityActionOutgoing({action: 'loadWorkshopObject', data: JSON.parse(e.object.save)});
         });
 
@@ -92,8 +90,6 @@ export default {
             } else if (e.action == 'edit') {
                 emitter.emit('LoadWorkshopItems', e.object);
             } else if (e.action == 'publish') {
-
-
                 axios.post('/api/workshop/models/publish', {id: e.object.id})
                     .then(response => {
                         if (response.data.success) {
@@ -118,33 +114,16 @@ export default {
 
         const handleUnityActionOutgoing = (e) => {
             try {
-
-
-
-
                 unityActionOutgoingObject.value[e.action](e.data);
             } catch (ee) {
 
             }
         }
 
-        const unlockInput = () => {
-
-            handleUnityActionOutgoing({action: "unlockInput", data: ''});
-        }
-
         const initalize = async () => {
-
             setTimeout(function () {
-
-
-
-
-
-
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
                 // handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
-
             }, 6000);
             // setTimeout(() => {
             //     handleUnityActionOutgoing({action: 'prefix', data: 'https://staging.appworks-dev.pl/s3'});
@@ -153,9 +132,10 @@ export default {
         }
 
         //RUNS WHEN UNITY IS READY
-        emitter.on('onInitialized', e => initalize());
+        // emitter.on('onInitialized', e => initalize());
 
         onBeforeMount(() => {
+            initalize();
             //ADDS LISTENERS
             bridge.value = UnityBridgeWorkshop();
 
@@ -164,7 +144,6 @@ export default {
         return {
             activeTab,
             initalize,
-            unlockInput,
             handleUnityActionOutgoing,
             gameWindow,
             window_height,
