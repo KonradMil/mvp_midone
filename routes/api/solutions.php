@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
     Route::post('images/store', [SolutionController::class, 'storeFile']);
     Route::post('robots', [SolutionController::class, 'getRobots']);
+    Route::post('files/get', [SolutionController::class, 'getSolutionFiles']);
     Route::post('save/robot', [SolutionController::class, 'saveRobot']);
     Route::post('filter', [SolutionController::class, 'deleteSolutionsNull']);
     Route::post('user/filter', [SolutionController::class, 'filterChallengeSolutions']);

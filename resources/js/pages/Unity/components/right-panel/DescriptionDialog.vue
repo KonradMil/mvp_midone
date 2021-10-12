@@ -44,26 +44,26 @@
         </div>
         <div class="mt-3" v-if="props.type === 'solution'">
             <label for="modal-form-2" class="form-label">Pliki</label>
-            <Dropzone
-                style="position: relative;
-                                                    display: flex;"
-                ref-key="dropzoneSingleRef"
-                :options="{
-                              url: '/api/solution/images/store',
-                              thumbnailWidth: 150,
-                              maxFilesize: 5,
-                              maxFiles: 5,
-                              previewTemplate: '<div style=\'display: none\'></div>'
-                            }"
-                class="dropzone">
-                <div class="px-4 py-4 flex items-center cursor-pointer relative">
-                    <ImageIcon class="w-4 h-4 mr-2"/>
-                    <span class="text-theme-1 dark:text-theme-10 mr-1">
-                                                            {{ $t('challengesNew.file') }}
-                                                        </span>
-                    {{ $t('challengesNew.fileUpload') }}
-                </div>
-            </Dropzone>
+<!--            <Dropzone-->
+<!--                style="position: relative;-->
+<!--                                                    display: flex;"-->
+<!--                ref-key="dropzoneSingleRef"-->
+<!--                :options="{-->
+<!--                              url: '/api/solution/images/store',-->
+<!--                              thumbnailWidth: 150,-->
+<!--                              maxFilesize: 5,-->
+<!--                              maxFiles: 5,-->
+<!--                              previewTemplate: '<div style=\'display: none\'></div>'-->
+<!--                            }"-->
+<!--                class="dropzone">-->
+<!--                <div class="px-4 py-4 flex items-center cursor-pointer relative">-->
+<!--                    <ImageIcon class="w-4 h-4 mr-2"/>-->
+<!--                    <span class="text-theme-1 dark:text-theme-10 mr-1">-->
+<!--                                                            {{ $t('challengesNew.file') }}-->
+<!--                                                        </span>-->
+<!--                    {{ $t('challengesNew.fileUpload') }}-->
+<!--                </div>-->
+<!--            </Dropzone>-->
         </div>
         <div class="mt-3" v-if="images.length > 0 && props.type === 'solution'">
             <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>
@@ -105,7 +105,7 @@ export default {
         type: String
     },
     components: {
-      Dropzone
+
     },
     setup(props, context) {
         const c = ref({description: '', name: '', solution_deadline: '', offer_deadline: ''});
@@ -113,7 +113,7 @@ export default {
         const toast = useToast();
         const types = require("../../../../json/types.json");
         const images = ref([]);
-        const dropzoneSingleRef = ref();
+        // const dropzoneSingleRef = ref();
 
         watch(c, (ca, prevLabel) => {
             context.emit("update:object", ca);
@@ -123,20 +123,20 @@ export default {
             images.value.splice(index, 1);
         }
 
-        provide("bind[dropzoneSingleRef]", el => {
-            dropzoneSingleRef.value = el;
-        });
+        // provide("bind[dropzoneSingleRef]", el => {
+        //     dropzoneSingleRef.value = el;
+        // });
 
         onMounted(() => {
             c.value = props.object
-            const elDropzoneSingleRef = dropzoneSingleRef.value;
-                elDropzoneSingleRef.dropzone.on("success", (resp) => {
-                    images.value.push(JSON.parse(resp.xhr.response).payload);
-                    toast.success('Zdjecie zostało wgrane poprawnie!');
-                });
-                elDropzoneSingleRef.dropzone.on("error", () => {
-                    toast.error("Błąd");
-                });
+            // const elDropzoneSingleRef = dropzoneSingleRef.value;
+            //     elDropzoneSingleRef.dropzone.on("success", (resp) => {
+            //         images.value.push(JSON.parse(resp.xhr.response).payload);
+            //         toast.success('Zdjecie zostało wgrane poprawnie!');
+            //     });
+            //     elDropzoneSingleRef.dropzone.on("error", () => {
+            //         toast.error("Błąd");
+            //     });
 
 
             // if (props.object.name != undefined && props.object.name != '') {
@@ -163,7 +163,7 @@ export default {
 
         return {
             deleteImage,
-            dropzoneSingleRef,
+            // dropzoneSingleRef,
             images,
             user,
             c,

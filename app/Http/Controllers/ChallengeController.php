@@ -807,7 +807,7 @@ class ChallengeController extends Controller
                 'solutions', 'author', 'technicalDetails',
                 'financial_before', 'teams', 'files', 'teams.users',
                 'teams.users.companies', 'solutions.comments', 'solutions.comments.commentator',
-                'solutions.teams', 'solutions.teams.users', 'solutions.teams.users.companies', 'solutions.offers' , 'solutions.files'
+                'solutions.teams', 'solutions.teams.users', 'solutions.teams.users.companies', 'solutions.offers'
             )->find($request->id);
 
             $user = Auth::user();

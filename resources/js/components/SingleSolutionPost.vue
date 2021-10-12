@@ -221,9 +221,7 @@ export default {
 
 
         onMounted(() => {
-            if(props.solution.files !== undefined){
-                solutionFiles.value = props.solution.files;
-            }
+            getSolutionFiles();
             checkTeam();
             const elDropzoneSingleRef = dropzoneSingleRef.value;
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
@@ -309,6 +307,16 @@ export default {
                 })
         }
 
+        const getSolutionFiles = () => {
+            axios.post('/api/solution/files/get', {id: solution.id})
+                .then(response => {
+                    if (response.data.success) {
+                        solutionFiles.value = response.data.payload;
+                    } else {
+                    }
+                })
+        }
+
         const rejectSolution = () => {
             axios.post('/api/solution/reject', {id: solution.id})
                 .then(response => {
@@ -346,6 +354,7 @@ export default {
         });
 
         return {
+            getSolutionFiles,
             images,
             guard,
             saveFiles,
