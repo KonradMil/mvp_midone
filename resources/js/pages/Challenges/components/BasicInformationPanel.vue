@@ -274,7 +274,8 @@ export default {
                    return check;
                } else {
                    console.log('CHECK33', props.challenge.offer_deadline);
-                   return $dayjs(props.challenge.offer_deadline, 'DD.MM.YYYY').format('DD.MM.YYYY');
+                   return props.challenge.offer_deadline
+                   // $dayjs(props.challenge.offer_deadline, 'DD.MM.YYYY').format('DD.MM.YYYY');
                }
 
             },
@@ -293,7 +294,8 @@ export default {
                     return check;
                 } else {
                     console.log('CHECK3', props.challenge.solution_deadline);
-                    return $dayjs(props.challenge.solution_deadline,'DD.MM.YYYY').format('DD.MM.YYYY')
+                    return props.challenge.solution_deadline;
+                    // $dayjs(props.challenge.solution_deadline,'DD.MM.YYYY').format('DD.MM.YYYY')
                 }
             },
             set: (newValue) => {
