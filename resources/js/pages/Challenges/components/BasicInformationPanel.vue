@@ -269,7 +269,7 @@ export default {
             get: () => {
                let check = $dayjs.unix(props.challenge.offer_deadline).format('DD.MM.YYYY');
                 console.log('CHECK', check);
-               if(check != 'Invalid date') {
+               if(check != 'Invalid Date') {
                    return check;
                } else {
                    return $dayjs(props.challenge.offer_deadline).format('DD.MM.YYYY');
@@ -277,6 +277,7 @@ export default {
 
             },
             set: (newValue) => {
+                console.log('CHECKV', newValue);
                 challenge.value.offer_deadline = newValue;
             },
         });
@@ -285,13 +286,14 @@ export default {
             get: () => {
                 let check = $dayjs.unix(props.challenge.solution_deadline).format('DD.MM.YYYY');
                 console.log('CHECK', check);
-                if(check != 'Invalid date') {
+                if(check != 'Invalid Date') {
                     return check;
                 } else {
                     return $dayjs(props.challenge.solution_deadline).format('DD.MM.YYYY')
                 }
             },
             set: (newValue) => {
+                console.log('CHECKV', newValue);
                 challenge.value.solution_deadline = newValue;
             },
         });
