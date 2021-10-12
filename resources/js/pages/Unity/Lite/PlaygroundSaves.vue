@@ -70,9 +70,7 @@ export default {
         }
 
         onMounted(function () {
-            getSaveRepositories(function () {
-                guard.value = true;
-            });
+            getSaveRepositories();
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
