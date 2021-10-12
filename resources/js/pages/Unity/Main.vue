@@ -7,7 +7,8 @@
     </div>
     <BottomPanel v-if="loaded" :allowedEdit="allowedEdit" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
     <RightButtons v-if="loaded" :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>
-    <RightPanel :allowedEdit="allowedEdit" :publishChallenges="publishChallenges" :canEditSolution="canEditSolution" @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
+    <RightPanel :allowedEdit="allowedEdit" :publishChallenges="publishChallenges" :canEditSolution="canEditSolution"  :type="type" :challenge="challenge" :solution="solution"></RightPanel>
+<!--    @mouseover.native="lockInput" @mouseleave.native="unlockInput"-->
     <div v-if="!loaded" id="loader">
         <LoadingIcon icon="grid" class="w-8 h-8"/>
     </div>
