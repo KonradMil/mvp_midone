@@ -106,7 +106,8 @@
                         <div class="grid grid-cols-4 h-full">
                             <div class=" h-full" v-for="(file, index) in solutionFiles" :key="'file_' + index">
                                 <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
-                                    <img class="w-full h-full"
+                                    <img
+                                         class="w-full h-full"
                                          :alt="file.original_name"
                                          :src="'/' + file.path"/>
                                     <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
@@ -116,8 +117,13 @@
                                     v-if="user.id = solution.author_id"
                                     style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
                                     @click="deleteFile(index,file)"
-                                    class="cursor-pointer">
-                                    USUŃ
+                                    class="cursor-pointer px-6">
+                                    <button class="btn btn-outline-secondary py-1 px-2 mr-3" @click="saveFiles">
+                                        Usuń
+                                    </button>
+                                    <button class="btn btn-outline-secondary py-1 px-2" @click="downloadFile(file.path, file.name)">
+                                        Pobierz
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -225,6 +231,22 @@ export default {
             });
         }
 
+        const downloadFile = async (url,name) => {
+            axios({
+                url: url,
+                method: 'GET',
+                responseType: 'blob',
+            }).then((response) => {
+                var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                var fileLink = document.createElement('a');
+
+                fileLink.href = fileURL;
+                fileLink.setAttribute('download', name);
+                document.body.appendChild(fileLink);
+
+                fileLink.click();
+            });
+        }
 
         onMounted(() => {
             getSolutionFiles();
@@ -360,6 +382,7 @@ export default {
         });
 
         return {
+            downloadFile,
             getSolutionFiles,
             images,
             guard,
