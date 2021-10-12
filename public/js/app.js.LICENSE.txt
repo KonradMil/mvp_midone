@@ -10,25 +10,25 @@
  */
 
 /*!
-  * @intlify/core-base v9.1.8
+  * @intlify/core-base v9.1.6
   * (c) 2021 kazuya kawaguchi
   * Released under the MIT License.
   */
 
 /*!
-  * @intlify/devtools-if v9.1.8
+  * @intlify/devtools-if v9.1.6
   * (c) 2021 kazuya kawaguchi
   * Released under the MIT License.
   */
 
 /*!
-  * @intlify/runtime v9.1.8
+  * @intlify/runtime v9.1.6
   * (c) 2021 kazuya kawaguchi
   * Released under the MIT License.
   */
 
 /*!
-  * @intlify/vue-devtools v9.1.8
+  * @intlify/vue-devtools v9.1.6
   * (c) 2021 kazuya kawaguchi
   * Released under the MIT License.
   */
@@ -37,6 +37,12 @@
   * Bootstrap v4.6.0 (https://getbootstrap.com/)
   * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */
+
+/*!
+  * vue-router v4.0.8
+  * (c) 2021 Eduardo San Martin Morote
+  * @license MIT
   */
 
 /*!
@@ -100,7 +106,7 @@
  */
 
 /*!
- * Toastify js 1.11.1
+ * Toastify js 1.11.0
  * https://github.com/apvarun/toastify-js
  * @license MIT licensed
  *
@@ -128,13 +134,7 @@
  */
 
 /*!
- * vuex v4.0.2
- * (c) 2021 Evan You
- * @license MIT
- */
-
-/*!
-FullCalendar v5.9.0
+FullCalendar v5.7.0
 Docs & License: https://fullcalendar.io/
 (c) 2021 Adam Shaw
 */
