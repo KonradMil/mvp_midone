@@ -90,7 +90,7 @@
             </div>
         </div>
     </div>
-    <ModalWorkshop :show="workshopOpen"></ModalWorkshop>
+<!--    <ModalWorkshop :show="workshopOpen"></ModalWorkshop>-->
     <!--    <WorkshopModal v-if="workshopOpen" :open="workshopOpen"></WorkshopModal>-->
 </template>
 
