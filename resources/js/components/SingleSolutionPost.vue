@@ -99,11 +99,11 @@
     <ModalFile :show="show" @closed="modalClosed">
         <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
             <div class="mt-5">
-                <div class="mt-3 border px-4 py-4" v-if="images.length > 0">
+                <div class="mt-3 border px-4 py-4" v-if="solutionFiles.length > 0">
                     <label class="form-label"> Wgrane pliki</label>
                     <div class="rounded-md pt-4">
                         <div class="grid grid-cols-4 h-full">
-                            <div class=" h-full" v-for="(file, index) in solution.files" :key="'file_' + index">
+                            <div class=" h-full" v-for="(file, index) in solutionFiles" :key="'file_' + index">
                                 <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
                                     <img class="w-full h-full"
                                          :alt="file.original_name"
@@ -111,7 +111,7 @@
                                     <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
                                     </div>
                                 </div>
-                                <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteFile(index)" class="cursor-pointer">USUŃ
+                                <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteFile(index,file)" class="cursor-pointer">USUŃ
                                 </div>
                             </div>
                         </div>
@@ -143,6 +143,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="flex flex-col lg:flex-row items-center p-5" style="justify-content: center;">
+                <button class="btn btn-outline-secondary py-1 px-2" @click="saveFiles">
+                    {{ $t('global.save') }}
+                </button>
             </div>
         </div>
     </ModalFile>
@@ -187,11 +192,10 @@ export default {
         const dropzoneSingleRef = ref();
         const solutionFiles = ref([]);
         const guard = ref(false);
-        const images = ref(0);
+        const images = ref([]);
 
         const modalClosed = () => {
             show.value = false;
-            saveFiles();
         }
 
         const showAddFileModal = (id) => {
@@ -217,13 +221,12 @@ export default {
 
 
         onMounted(() => {
-            if(props.solutions.files !== undefined){
-                images.value = props.solution.files;
+            if(props.solution.files !== undefined){
+                solutionFiles.value = props.solution.files;
             }
             checkTeam();
             const elDropzoneSingleRef = dropzoneSingleRef.value;
-            if(props.solution.files !== undefined){
-                elDropzoneSingleRef.dropzone.on("success", (resp) => {
+            elDropzoneSingleRef.dropzone.on("success", (resp) => {
                     solutionFiles.value.push(JSON.parse(resp.xhr.response).payload);
                     images.value.push(JSON.parse(resp.xhr.response).payload);
                     toast.success('Zdjecie zostało wgrane poprawnie!');
@@ -231,7 +234,6 @@ export default {
                 elDropzoneSingleRef.dropzone.on("error", () => {
                     toast.error("Maksymalnie można wgrać 8 plików!");
                 });
-            }
         });
 
         const addOffer = () => {
@@ -330,8 +332,13 @@ export default {
                 })
         }
 
-        const deleteFile = (index) => {
-            solution.files.value.splice(index, 1);
+        const deleteFile = (index,file) => {
+            RequestHandler('solution/file/delete', 'post', {
+                solution_id: props.solution.id,
+                file_id: file.id,
+            }, (response) => {
+                solutionFiles.value.splice(index, 1);
+            });
         }
 
         provide("bind[dropzoneSingleRef]", el => {

@@ -45,6 +45,9 @@ return [
     'offer' => [
         'not_found' => "Offer not found",
     ],
+    'file' => [
+        'not_found' => "File not found",
+    ],
     'user' => [
         'not_found' => "User not found",
     ],

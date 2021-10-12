@@ -256,7 +256,7 @@
                 <button class="btn btn-outline-secondary py-1 px-2" @click="savePermissions(currentTeam_id,currentMember_id)">
                     {{ $t('global.save') }}
                 </button>
-                    </div>
+                </div>
             </div>
         </div>
     </ModalPermission>

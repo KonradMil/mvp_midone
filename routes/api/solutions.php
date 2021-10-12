@@ -29,6 +29,7 @@ Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function 
     Route::post('publish', [SolutionController::class, 'publish']);
     Route::post('unpublish', [SolutionController::class, 'unpublish']);
     Route::post('delete', [SolutionController::class, 'delete']);
+    Route::post('file/delete', [SolutionController::class, 'deleteFile']);
     Route::post('estimate/save', [SolutionController::class, 'estimateSave']);
     Route::post('financial-analyses/save', [SolutionController::class, 'financialAnalysesSave']);
     Route::post('operational-analyses/save', [SolutionController::class, 'operationalAnalysesSave']);

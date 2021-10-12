@@ -29,12 +29,23 @@ class SolutionService
     public function addSolutionFiles(NewSolutionFilesParameters $solutionFilesParameters, Solution $solution): Model
     {
         $arrayFiles = $solutionFilesParameters->solutionFiles;
+        $solutionFiles = $solution->files()->get();
+        $arrayFilesId = [];
+
+        if($solutionFiles){
+            foreach($solutionFiles as $file) {
+                $arrayFilesId[] = $file->id;
+            }
+        }
 
         foreach($arrayFiles as $arrayFile){
             $file = File::find($arrayFile['id']);
-            $solution->files()->attach($file);
+
+            if(!(in_array($arrayFile['id'], $arrayFilesId))){
+                $solution->files()->attach($file);
+            }
             $solution->files = $solution->files()->get();
-        }
+            }
 
         return $solution;
     }
@@ -346,5 +357,15 @@ class SolutionService
         $project->save();
 
         return $project;
+    }
+
+    /**
+     * @param Solution $solution
+     * @param File $file
+     * @return mixed
+     */
+    public function detachFile(Solution $solution, File $file)
+    {
+        $solution->files()->detach($file);
     }
 }

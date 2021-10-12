@@ -20,6 +20,7 @@ use App\Models\Financial;
 use App\Models\Team;
 use App\Models\UnityModel;
 use App\Models\User;
+use App\Repository\Eloquent\FileRepository;
 use App\Repository\Eloquent\SolutionRepository;
 use App\Services\SolutionService;
 use Illuminate\Http\JsonResponse;
@@ -1055,21 +1056,39 @@ class SolutionController extends Controller
 
     /**
      * @param Request $request
+     * @param SolutionRepository $solutionRepository
+     * @param FileRepository $fileRepository
+     * @param SolutionService $solutionService
      * @return JsonResponse
      */
-    public function delete(Request $request): JsonResponse
+    public function deleteFile(Request $request, SolutionRepository $solutionRepository, FileRepository $fileRepository, SolutionService $solutionService): JsonResponse
     {
-        $solution = Solution::find($request->input('id'));
+        $responseBuilder = new ResponseBuilder();
 
-        if ($solution != NULL) {
-            $solution->delete();
+        $solution = $solutionRepository->find($request->input('solution_id'));
+
+        if (!$solution) {
+            $responseBuilder->setErrorMessage(__('messages.solution.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
+        $file = $fileRepository->find($request->input('file_id'));
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Usunięto poprawnie',
-            'payload' => ''
-        ]);
+        if (!$file) {
+            $responseBuilder->setErrorMessage(__('messages.file.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        try {
+            $solutionService->detachFile($solution, $file);
+            $responseBuilder->setSuccessMessage(__('messages.delete_correct'));
+        } catch (QueryException $e) {
+
+            $responseBuilder->setErrorMessage(__('messages.error'));
+            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
+
+        return $responseBuilder->getResponse();
     }
 }

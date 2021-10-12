@@ -28,10 +28,10 @@
                     </button>
                     <button
                         v-if="challenge.author_id === user.id && challenge.stage === 3 && project.accept_technical_details !== 1 && project.accept_financial_details !== 1"
-                        class="btn btn-primary mr-6" @click.prevent="acceptTechnicalDetails">Akceptuje
+                        class="btn btn-primary mr-6" @click.prevent="acceptTechnicalDetails">Akceptuję
                     </button>
                     <button
-                        v-if="challenge.author_id === user.id && challenge.stage === 3 && project.accept_technical_details !== 1 && project.accept_financial_details !== 1"
+                        v-if="challenge.author_id === user.id && challenge.stage === 3 && project.accept_technical_details !== 1 && project.accept_financial_details !== 1 && project.accept_technical_details !== 2"
                         class="btn btn-primary" @click.prevent="rejectTechnicalDetails">Odrzucam
                     </button>
                 </div>
@@ -295,10 +295,10 @@
                     </button>
                     <button
                         v-if="challenge.author_id === user.id && stage === 3 && project.accept_financial_details !== 1"
-                        class="btn btn-primary mr-6" @click.prevent="acceptFinancialDetails">Akceptuje
+                        class="btn btn-primary mr-6" @click.prevent="acceptFinancialDetails">Akceptuję
                     </button>
                     <button
-                        v-if="challenge.author_id === user.id && stage === 3 && project.accept_financial_details !== 1"
+                        v-if="challenge.author_id === user.id && stage === 3 && project.accept_financial_details !== 1 && project.accept_financial_details !== 2"
                         class="btn btn-primary" @click.prevent="rejectFinancialDetails">Odrzucam
                     </button>
                 </div>
