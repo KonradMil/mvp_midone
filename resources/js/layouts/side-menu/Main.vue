@@ -125,15 +125,13 @@ export default defineComponent({
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
+
             cash("body")
                 .removeClass("error-page")
                 .removeClass("login")
                 .addClass("main");
-            formattedMenu.value = $h.toRaw(sideMenu.value);
 
-            window.addEventListener('keyup', (val) => {
-                console.log('KEYUP', val);
-            })
+            formattedMenu.value = $h.toRaw(sideMenu.value);
         });
 
         return {
