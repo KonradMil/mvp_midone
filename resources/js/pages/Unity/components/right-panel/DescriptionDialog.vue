@@ -28,7 +28,7 @@
                 class="form-control"
                 placeholder=""
                 maxlength = "60"
-                v-model="c.name"
+                v-model.lazy="c.name"
                 :disabled="((props.type === 'solution') && (user.type === 'investor'))"
             />
         </div>
