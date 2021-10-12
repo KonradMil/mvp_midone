@@ -112,7 +112,12 @@
                                     <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
                                     </div>
                                 </div>
-                                <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteFile(index,file)" class="cursor-pointer">USUŃ
+                                <div
+                                    v-if="user.id = solution.author_id"
+                                    style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
+                                    @click="deleteFile(index,file)"
+                                    class="cursor-pointer">
+                                    USUŃ
                                 </div>
                             </div>
                         </div>
