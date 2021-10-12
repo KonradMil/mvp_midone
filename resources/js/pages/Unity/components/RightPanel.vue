@@ -128,8 +128,6 @@ export default {
         });
 
         emitter.on('UnityObjectPlaced', e => {
-
-
             parts.value = e.partsPlaced;
         });
 

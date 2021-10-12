@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div @keyup=" (val) => {console.log('KEYUP', val);}">
         <MobileMenu/>
         <div class="flex">
             <!-- BEGIN: Side Menu -->
