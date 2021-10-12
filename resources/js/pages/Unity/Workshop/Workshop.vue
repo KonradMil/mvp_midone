@@ -123,8 +123,11 @@ export default {
         const initalize = async () => {
             setTimeout(function () {
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
-                // handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
             }, 6000);
+            setInterval(() => {
+                console.log('HEREAAA', {action: 'LockUnityInput', data: ''});
+                handleUnityActionOutgoing({action: 'LockUnityInput', data: ''});
+            }, 2000);
             // setTimeout(() => {
             //     handleUnityActionOutgoing({action: 'prefix', data: 'https://staging.appworks-dev.pl/s3'});
             //     // unlockInput();
