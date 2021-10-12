@@ -411,11 +411,8 @@ export default {
         }
 
         const initalize = async () => {
-
             setTimeout(function () {
                 loaded.value = true;
-
-
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
                 handleUnityActionOutgoing({
                     action: 'setSessionId',
@@ -449,10 +446,7 @@ export default {
         const getCardChallengeRepositories = async (id) => {
             await axios.post('/api/challenge/user/get/card', {id: id})
                 .then(response => {
-
                     if (response.data.success) {
-
-
                         if(response.data.payload.save_json == "") {
                             challenge.value = response.data.payload;
                             checkTeam();

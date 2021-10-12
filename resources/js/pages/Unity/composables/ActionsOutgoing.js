@@ -1,7 +1,6 @@
 import {watch, unref, onUnmounted} from 'vue';
 function outgoing(game, action, data, json) {
 
-
     let finalData = '';
     if(json) {
         if(data.value != undefined) {
@@ -16,7 +15,7 @@ function outgoing(game, action, data, json) {
 
         finalData = data;
     }
-
+    console.log('FINAL OUTGOING', ['NetworkBridge', action, finalData])
     game.message('NetworkBridge', action, finalData);
 
     // this.gameWindow.message('NetworkBridge', 'OrderPart', JSON.stringify({

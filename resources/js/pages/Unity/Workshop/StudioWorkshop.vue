@@ -77,7 +77,7 @@ export default {
             }).then(function (instance) {
                 gameInstance.value = instance;
                 loaded.value = true;
-                emitter.emit('onInitialized', {loaded: true});
+                // emitter.emit('onInitialized', {loaded: true});
                 // window.addEventListener('resize', onResize);
                 // onResize();
             });
