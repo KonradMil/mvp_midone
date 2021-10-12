@@ -144,7 +144,7 @@ class User extends Authenticatable implements ReacterableInterface, Commentator,
     /**
      * @return HasOne
      */
-    public function own_company(): HasOne
+    public function company(): HasOne
     {
         return $this->hasOne(Company::class, 'author_id');
     }
