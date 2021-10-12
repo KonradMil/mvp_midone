@@ -126,7 +126,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-3" v-if="solutionFiles.length <= 0">
+                <div class="mt-3" v-if="solutionFiles.length <= 0 && user.id !== props.solution.author_id">
                     <span class="font-medium dark:text-theme-10 text-theme-1">Brak plików</span>
                 </div>
                 <div class="mt-3" v-if="user.id === props.solution.author_id">
