@@ -144,7 +144,6 @@ export default {
         return {
             activeTab,
             initalize,
-            unlockInput,
             handleUnityActionOutgoing,
             gameWindow,
             window_height,
