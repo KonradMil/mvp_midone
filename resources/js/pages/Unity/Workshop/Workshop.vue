@@ -123,6 +123,7 @@ export default {
         const initalize = async () => {
             setTimeout(function () {
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
+                console.log('HEREAAA', {action: 'LockUnityInput', data: ''});
                 handleUnityActionOutgoing({action: 'LockUnityInput', data: ''});
             }, 6000);
             // setTimeout(() => {
