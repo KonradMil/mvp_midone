@@ -265,17 +265,24 @@ export default {
         const types = require("../../../json/types.json");
         const lightboxVisible = ref(false);
 
-        const offer_date = computed ( () => {
-            return $dayjs.unix(props.challenge.offer_deadline).format('DD.MM.YYYY');
-        }, (val) => {
-            challenge.value.offer_deadline = val;
+        const offer_date = computed({
+            get: () => {
+                return $dayjs.unix(props.challenge.offer_deadline).format('DD.MM.YYYY');
+            },
+            set: (newValue) => {
+                challenge.value.offer_deadline = newValue;
+            },
         });
 
-        const solution_date = computed ( () => {
-            return $dayjs.unix(props.challenge.solution_deadline).format('DD.MM.YYYY');
-        }, (val) => {
-            challenge.value.solution_deadline = val;
+        const solution_date = computed({
+            get: () => {
+                return $dayjs.unix(props.challenge.solution_deadline).format('DD.MM.YYYY');
+            },
+            set: (newValue) => {
+                challenge.value.solution_deadline = newValue;
+            },
         });
+
 
         const images = computed(() => {
             let a = [];
