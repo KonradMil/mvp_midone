@@ -48,6 +48,9 @@ return [
     'user' => [
         'not_found' => "Użytkownika nie znaleziono",
     ],
+    'file' => [
+        'not_found' => "Pliku nie znaleziono",
+    ],
     'team' => [
         'not_found' => "Nie znaleziono zespołu.",
         'user_exists' => 'Ten użytkownik jest już członkiem Twojego zespołu.',
