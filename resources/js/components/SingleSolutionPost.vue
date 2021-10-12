@@ -114,11 +114,10 @@
                                     </div>
                                 </div>
                                 <div
-                                    v-if="user.id = solution.author_id"
+                                    v-if="user.id === solution.author_id"
                                     style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
-                                    @click="deleteFile(index,file)"
                                     class="cursor-pointer px-6">
-                                    <button class="btn btn-outline-secondary py-1 px-2 mr-3" @click="saveFiles">
+                                    <button class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
                                         Usuń
                                     </button>
                                     <button class="btn btn-outline-secondary py-1 px-2" @click="downloadFile(file.path, file.name)">
