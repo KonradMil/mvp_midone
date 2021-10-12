@@ -124,10 +124,10 @@ export default {
             setTimeout(function () {
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
             }, 6000);
-            setTimeout(() => {
+            setInterval(() => {
                 console.log('HEREAAA', {action: 'LockUnityInput', data: ''});
                 handleUnityActionOutgoing({action: 'LockUnityInput', data: ''});
-            }, 20000);
+            }, 2000);
             // setTimeout(() => {
             //     handleUnityActionOutgoing({action: 'prefix', data: 'https://staging.appworks-dev.pl/s3'});
             //     // unlockInput();
