@@ -35,7 +35,6 @@ export default {
             gameInstance.value.SetFullscreen(1);
         }
 
-
         const message = (gameObject, method, param) => {
             if (param === null) {
                 param = ''
@@ -62,10 +61,6 @@ export default {
         })
 
         const instantiate = () => {
-
-
-
-
             createUnityInstance(document.querySelector('#' + containerId.value), {
                 dataUrl: "/s3/" + unity_workshop_path + ".data.br",
                 frameworkUrl: "/s3/" + unity_workshop_path + ".framework.js.br",
