@@ -47,6 +47,7 @@ class QuestionAnsweredNotidiaction extends Notification
     {
 
         return (new MailMessage)
+            ->subject('DBR77: odpowiedź na pytanie')
             ->line('Odpowiedź na Twoje pytanie została dodana w wyzwaniu ' . $this->challenge->name . '.')
             ->action('Sprawdź', url(env('APP_PATH') . '/challenges/card/' . $this->challenge->id))
             ->line('Dziękujemy za korzystanie z platformy DBR77!');

@@ -28,6 +28,7 @@ class ChallengeAdded extends Notification
     public function toMail(): MailMessage
     {
         return (new MailMessage)
+            ->subject('DBR77: wyzwanie dodane')
             ->line('The introduction to the notification.')
             ->action('Notification Action', url('/'))
             ->line('Thank you for using our application!');
