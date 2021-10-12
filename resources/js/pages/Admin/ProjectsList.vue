@@ -52,27 +52,25 @@
                         <td class="w-40">
                             <div class="flex">
                                 <div class="w-10 h-10 image-fit zoom-in">
-                                    <!--                                    <Tippy-->
-                                    <!--                                        tag="img"-->
-                                    <!--                                        alt="DBR77"-->
-                                    <!--                                        class="rounded-full"-->
-                                    <!--                                        :src="require(`@/assets/images/${faker.images[0]}`)"-->
-                                    <!--                                        :content="`Uploaded at ${faker.dates[0]}`"-->
-                                    <!--                                    />-->
+                                                                        <img
+                                                                            alt="DBR77"
+                                                                            class="rounded-full"
+                                                                            :src="project.screenshot_path"
+                                                                        />
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <a href="" class="font-medium whitespace-nowrap">
-
-                            </a>
-                            <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5">
-
-                            </div>
+                            {{project.name}}
                         </td>
-                        <td class="text-center"></td>
+                        <td class="text-center">
+                            {{project.status}}
+                        </td>
                         <td class="w-40">
-
+                            {{project.author.name}} {{project.author.lastname}}
+                        </td>
+                        <td class="w-40">
+<!--                            {{project.author.firstname}} {{project.author.lastname}}-->
                         </td>
                         <td class="table-report__action w-56">
                             <div class="flex justify-center items-center">
@@ -113,10 +111,10 @@ export default {
         });
 
         const getData = () => {
-            RequestHandler('login', 'GET', {},
-                (response) => {
+            axios.get('/api/admin/projects/get')
+                .then(response => {
                     projects.value = response.data.payload;
-                });
+                })
         }
 
         onMounted(() => {

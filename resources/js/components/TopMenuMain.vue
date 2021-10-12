@@ -7,7 +7,7 @@
                     href="#"
                     @click.prevent="menuChanged(menu)"
                     class="top-menu"
-                    :class=" (menu.active)? 'top-menu--active' : ''">
+                    :class=" (menu.active == true)? 'top-menu--active' : 'notactive'">
 <!--                    @click="linkTo(menu, router)"-->
                     <div class="top-menu__icon">
 <!--                        <component :is="menu.icon" />-->
@@ -54,6 +54,9 @@ export default {
     props: {
         user: {
             type: Object
+        },
+        type: {
+            type: String
         }
     },
     setup(props, {emit}) {

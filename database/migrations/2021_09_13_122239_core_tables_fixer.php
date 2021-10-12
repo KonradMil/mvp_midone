@@ -343,16 +343,6 @@ class CoreTablesFixer extends Migration
             DB::delete('DELETE FROM technical_details WHERE id = '.$row->id);
         }
 
-        $results = DB::select(
-            "SELECT td.id FROM technical_details td
-                    LEFT JOIN solutions s ON s.id = td.solution_id
-                    WHERE s.id is null"
-        );
-
-        foreach($results as $row) {
-            DB::delete('DELETE FROM technical_details WHERE id = '.$row->id);
-        }
-
         Schema::table('technical_details', function (Blueprint $table) {
 
             $table->unsignedBigInteger('challenge_id')->nullable()->change();

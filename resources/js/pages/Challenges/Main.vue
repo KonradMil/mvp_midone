@@ -1,8 +1,7 @@
 <template>
-
     <div>
         <div class="mt-2" v-if="type == 'normal'">
-            <TopMenuMain @tabChanged="getNewData" :user="user"></TopMenuMain>
+            <TopMenuMain @tabChanged="getNewData" :user="user" :type="type"></TopMenuMain>
         </div>
         <div class="intro-y grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Blog Layout -->
@@ -42,13 +41,12 @@
                             <a class="text-theme-1 dark:text-theme-10 inline-block truncate" href="">
                                 {{ types[challenge.type] }} - {{ sels.challenge_statuses[challenge.stage]['name'] }}
                             </a>
-                            <div class="w-full" v-if="challenge.stage == 1">Rozwiązania do: {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }}</div>
-                            <div class="w-full" v-if="challenge.stage == 2">Oferty do: {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }}</div>
+                            <div class="w-full" v-if="challenge.stage == 1">Rozwiązania do: {{ $dayjs.unix(challenge.solution_deadline).format('DD.MM.YYYY') }}</div>
+                            <div class="w-full" v-if="challenge.stage == 2">Oferty do: {{ $dayjs.unix(challenge.offer_deadline).format('DD.MM.YYYY') }}</div>
                         </div>
                     </div>
                     <div class="dropdown ml-3" v-if="challenge.author_id == user.id && challenge.status != 1">
-                        <a
-                            href="javascript:"
+                        <a href="javascript:"
                             class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300"
                             aria-expanded="false">
                             <MoreVerticalIcon class="w-5 h-5"/>

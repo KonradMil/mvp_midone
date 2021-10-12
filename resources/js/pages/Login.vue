@@ -255,6 +255,7 @@ export default {
 
                     let twoFactory = typeof response.data.twofa !== 'undefined' ? response.data.twofa : false;
                     let user = response.data.user;
+                    let company = response.data.company;
 
                     if (twoFactory) {
                         window.email = user.email;
@@ -265,18 +266,18 @@ export default {
 
                         if(window.invitationToken) {
 
-                            if (user.name !== undefined || user.name !== '') {
-                                window.location.replace('/teams/claim_invitation?token='+window.invitationToken+'&redirect_to=dashboard');
-                            } else {
+                            if(!user.name || !user.lastname || !company.nip) {
                                 window.location.replace('/teams/claim_invitation?token='+window.invitationToken+'&redirect_to=kreator');
+                            } else {
+                                window.location.replace('/teams/claim_invitation?token='+window.invitationToken+'&redirect_to=dashboard');
                             }
 
                         } else {
 
-                            if (user.name !== undefined || user.name !== '') {
-                                window.location.replace('/dashboard');
-                            } else {
+                            if(!user.name || !user.lastname || !company.nip) {
                                 window.location.replace('/kreator');
+                            } else {
+                                window.location.replace('/dashboard');
                             }
 
                         }

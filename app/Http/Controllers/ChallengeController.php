@@ -1200,9 +1200,9 @@ class ChallengeController extends Controller
 
     public function adminGetProjects(): JsonResponse
     {
-        $challenges = Challenge::with('solutions', function ($query) {
+        $challenges = Challenge::with(['solutions' => function ($query) {
             $query->where('selected','=','1');
-        })->with('solutions.author', 'author', 'author.own_company', 'solutions.author.own_company')->get();
+        }, 'solutions.author', 'author', 'author.own_company', 'solutions.author.own_company'])->get();
         return response()->json([
             'success' => true,
             'message' => 'Pobrano poprawnie',
@@ -1225,9 +1225,15 @@ class ChallengeController extends Controller
     public function getUserChallengesByTab(Request $request, $category)
     {
         if(Auth::user()->type == 'investor') {
-            $challenges = Challenge::where('author_id', '=', Auth::user()->id)->where('challenges.category', '=', $category)->get();
+            $challenges = Challenge::where('author_id', '=', Auth::user()->id)
+                ->where('challenges.category', '=', $category)
+                ->where('challenges.stage', '<', 3)
+                ->get();
         } else {
-            $challenges = Challenge::where('status', '=', 1)->where('challenges.category', '=', $category)->get();
+            $challenges = Challenge::where('status', '=', 1)
+                ->where('challenges.category', '=', $category)
+                ->where('challenges.stage', '<', 3)
+                ->get();
         }
 
 

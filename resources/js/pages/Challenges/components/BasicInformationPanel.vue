@@ -27,7 +27,7 @@
                         <strong>{{$t('challengesMain.deadlineSubmissionSolutions')}}:</strong>
                         <Litepicker
                             id="post-form-2"
-                            v-model="challenge.solution_deadline"
+                            v-model="solution_date"
                             v-if="inTeam"
                             :options="{
                              autoApply: false,
@@ -37,18 +37,18 @@
                              buttonText: {'apply':'OK','cancel':'Anuluj'},
                              dropdowns: {
                                minYear: 2021,
-                               maxYear: null,
+                                maxYear: 2024,
                                months: true,
                                years: true
                                   }
                               }" class="form-control"/>
-                        <span v-if="!inTeam"> {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }} </span>
+                        <span v-if="!inTeam"> {{ $dayjs.unix(challenge.solution_deadline).format('DD.MM.YYYY') }} </span>
                     </div>
                     <div class="text-gray-700 dark:text-gray-600 mt-2">
                         <strong>{{$t('challengesMain.deadlineSubmissionOffers')}}:</strong>
                         <Litepicker
                             id="post-form-3"
-                            v-model="challenge.offer_deadline"
+                            v-model="offer_date"
                             v-if="inTeam"
                             :options="{
                                 autoApply: false,
@@ -58,12 +58,12 @@
                                 buttonText: {'apply':'OK','cancel':'Anuluj'},
                                 dropdowns: {
                                 minYear: 2021,
-                                maxYear: null,
+                                maxYear: 2024,
                                 months: true,
                                 years: true
                             }
                         }" class="form-control"/>
-                        <span v-if="!inTeam"> {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }} </span>
+                        <span v-if="!inTeam"> {{ $dayjs.unix(challenge.offer_deadline).format('DD.MM.YYYY') }} </span>
                     </div>
                     <button v-if="inTeam && challenge.stage < 3" class="btn btn-secondary ml-auto my-1" @click="saveDate">
                         {{$t('challengesMain.changeDates')}}
@@ -74,8 +74,8 @@
                             v-if="$dayjs().isBefore($dayjs(challenge.offer_deadline))"
                         >
                             {{$t('challengesMain.nextDeadline')}}:
-                            <span v-if="$dayjs().isAfter($dayjs(challenge.solution_deadline))">Składanie rozwiązań do: {{ $dayjs(challenge.solution_deadline).format('DD.MM.YYYY') }}</span>
-                            <span v-if="$dayjs().isBefore($dayjs(challenge.solution_deadline))">Składanie ofert do: {{ $dayjs(challenge.offer_deadline).format('DD.MM.YYYY') }}</span>
+                            <span v-if="$dayjs().isAfter($dayjs.unix(challenge.solution_deadline))">Składanie rozwiązań do: {{ $dayjs.unix(challenge.solution_deadline).format('DD.MM.YYYY') }}</span>
+                            <span v-if="$dayjs().isBefore($dayjs.unix(challenge.solution_deadline))">Składanie ofert do: {{ $dayjs.unix(challenge.offer_deadline).format('DD.MM.YYYY') }}</span>
                         </div>
                         <button v-if="!challenge.followed && challenge.stage < 3" class="btn btn-secondary ml-auto" @click="follow">
                             {{$t('challengesMain.follow')}}
@@ -90,9 +90,7 @@
             <!-- END: Announcement -->
             <!-- BEGIN: Daily Sales -->
             <div class="intro-y box col-span-12 xxl:col-span-6">
-                <div
-                    class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5"
-                >
+                <div class="flex items-center px-5 py-5 sm:py-3 border-b border-gray-200 dark:border-dark-5">
                     <h2 class="font-medium text-base mr-auto">{{$t('challengesNew.photo')}}</h2>
                 </div>
 
@@ -244,6 +242,7 @@ import {computed, onMounted, reactive, ref} from "vue";
 import {useToast} from "vue-toastification";
 import VueEasyLightbox from 'vue-easy-lightbox'
 import Avatar from "../../../components/avatar/Avatar";
+import $dayjs from "dayjs";
 
 
 export default {
@@ -265,6 +264,43 @@ export default {
         const toast = useToast();
         const types = require("../../../json/types.json");
         const lightboxVisible = ref(false);
+
+        const offer_date = computed({
+            get: () => {
+               let check = $dayjs.unix(props.challenge.offer_deadline).format('DD.MM.YYYY');
+                console.log('CHECK', check);
+                console.log('CHECK2', (check != 'Invalid Date'));
+               if(check != 'Invalid Date') {
+                   return check;
+               } else {
+                   return $dayjs(props.challenge.offer_deadline, 'DD.MM.YYYY').format('DD.MM.YYYY');
+               }
+
+            },
+            set: (newValue) => {
+                console.log('CHECKV', newValue);
+                challenge.value.offer_deadline = newValue;
+            },
+        });
+
+        const solution_date = computed({
+            get: () => {
+                let check = $dayjs.unix(props.challenge.solution_deadline).format('DD.MM.YYYY');
+                console.log('CHECK', check);
+                console.log('CHECK2', (check != 'Invalid Date'));
+                if(check != 'Invalid Date') {
+                    return check;
+                } else {
+                    return $dayjs(props.challenge.solution_deadline,'DD.MM.YYYY').format('DD.MM.YYYY')
+                }
+            },
+            set: (newValue) => {
+                console.log('CHECKV', newValue);
+                challenge.value.solution_deadline = newValue;
+            },
+        });
+
+
         const images = computed(() => {
             let a = [];
             a.push('/' + props.challenge.screenshot_path);
@@ -363,7 +399,9 @@ export default {
             images,
             showImage,
             hideLightbox,
-            saveDate
+            saveDate,
+            solution_date,
+            offer_date
         }
     }
 }

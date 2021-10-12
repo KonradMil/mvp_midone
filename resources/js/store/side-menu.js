@@ -133,6 +133,11 @@ const state = () => {
                 pageName: "object-marketplace",
                 title: "Marketplace obiektów"
             },
+            {
+                icon: "InboxIcon",
+                pageName: "studio-playground-saves",
+                title: "Studio playground"
+            },
 
         ]
     };

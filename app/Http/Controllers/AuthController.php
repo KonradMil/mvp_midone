@@ -223,6 +223,7 @@ class AuthController extends Controller
         }
 
         $responseBuilder->setData('user', $user);
+        $responseBuilder->setData('company', $user->company()->getResults());
         return $responseBuilder->getResponse();
     }
 

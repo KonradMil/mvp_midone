@@ -5,14 +5,14 @@
     <div @contextmenu.prevent="openMenu">
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
-    <BottomPanel  v-if="loaded" :allowedEdit="allowedEdit" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
-    <RightButtons  v-if="loaded" :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>
-    <RightPanel  :allowedEdit="allowedEdit" :publishChallenges="publishChallenges" :canEditSolution="canEditSolution" @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
+    <BottomPanel v-if="loaded" :allowedEdit="allowedEdit" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
+    <RightButtons v-if="loaded" :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>
+    <RightPanel :allowedEdit="allowedEdit" :publishChallenges="publishChallenges" :canEditSolution="canEditSolution" @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
     <div v-if="!loaded" id="loader">
-        <LoadingIcon icon="grid" class="w-8 h-8" />
+        <LoadingIcon icon="grid" class="w-8 h-8"/>
     </div>
-<!--    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>-->
-<!--    <WebRTC width="100%" roomId="roomId"></WebRTC>-->
+    <!--    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>-->
+    <!--    <WebRTC width="100%" roomId="roomId"></WebRTC>-->
     <div id="help-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -90,7 +90,7 @@
         </div>
     </div>
     <ModalWorkshop :show="workshopOpen"></ModalWorkshop>
-<!--    <WorkshopModal v-if="workshopOpen" :open="workshopOpen"></WorkshopModal>-->
+    <!--    <WorkshopModal v-if="workshopOpen" :open="workshopOpen"></WorkshopModal>-->
 </template>
 
 <script>
@@ -170,7 +170,7 @@ export default {
         const sessionid = ref('');
         const owner = ref(false);
 
-        if(props.sessionid === undefined) {
+        if (props.sessionid === undefined) {
             sessionid.value = Math.random().toString(36).slice(-5);
             owner.value = true;
         } else {
@@ -195,7 +195,6 @@ export default {
         });
 
         emitter.on('workshop_open', e => {
-
             // cash("#workshop-modal").modal("show");
             workshopOpen.value = true;
         });
@@ -232,7 +231,7 @@ export default {
         });
 
         emitter.on('lockState', e => {
-            if(e.action == 'lock') {
+            if (e.action == 'lock') {
                 lockInput();
             } else {
                 unlockInput();
@@ -252,19 +251,15 @@ export default {
         const openMenu = (e) => {
             e.preventDefault();
 
-
             if (loaded.value) {
                 if (doubleClick.value) {
                     if ((mousePositionX.value > (e.clientX - 10) && mousePositionX.value < (e.clientX + 10)) && (mousePositionY.value > (e.clientY - 10) && mousePositionY.value < (e.clientY + 19))) {
                         let data = JSON.stringify({menu: currentRadialMenu.value});
-
-
                         handleUnityActionOutgoing({action: 'showRadialMenu', data: data});
                     } else {
                         doubleClick.value = false;
                     }
                 } else {
-
                     mousePositionX.value = e.clientX;
                     mousePositionY.value = e.clientY;
                     doubleClick.value = true;
@@ -277,16 +272,15 @@ export default {
         }
 
         const showLeftButtons = computed(() => {
-            if(mode == 'edit' && allowedEdit && loaded) {
+            if (mode == 'edit' && allowedEdit && loaded) {
                 return true;
             } else {
                 return false;
             }
-
         })
 
         const checkTeam = async () => {
-            if(type.value == 'challenge') {
+            if (type.value == 'challenge') {
                 await axios.post('/api/challenge/check-team', {user_id: user.id, challenge_id: challenge.value.id})
                     .then(response => {
 
@@ -298,9 +292,7 @@ export default {
                         }
                     })
             } else {
-                await axios.post('/api/solution/check-team', {user_id: user.id, solution_id: solution.value.id})
-                    .then(response => {
-
+                await axios.post('/api/solution/check-team', {user_id: user.id, solution_id: solution.value.id}).then(response => {
                         if (response.data.success) {
                             inTeam.value = response.data.payload;
                         } else {
@@ -308,7 +300,6 @@ export default {
                         }
                     })
             }
-
         };
 
         const changeMode = (mode) => {
@@ -316,27 +307,22 @@ export default {
         }
 
         const allowedEdit = computed(() => {
-
-
-
-            if(type.value == 'challenge') {
-                if(inTeam.value || (user.id == challenge.value.author_id)) {
+            if (type.value == 'challenge') {
+                if (inTeam.value || (user.id == challenge.value.author_id)) {
                     return true;
                 } else {
                     return false;
                 }
             } else {
-                if(inTeam.value || (user.id == solution.value.author_id)) {
+                if (inTeam.value || (user.id == solution.value.author_id)) {
                     return true;
                 } else {
                     return false;
                 }
             }
-
-            });
+        });
 
         emitter.on('topbuttonclick', e => {
-
             switch (e.val) {
                 case 'animation_mode':
                     handleUnityActionOutgoing({action: "animationMode", data: ''});
@@ -358,8 +344,8 @@ export default {
                     gameWindow.value.setFullscreen();
                     break;
                 case 'logout':
-                    if(type.value == 'solution') {
-                       window.location.href = window.app_path + '/challenges/card/' + solution.value.challenge_id;
+                    if (type.value == 'solution') {
+                        window.location.href = window.app_path + '/challenges/card/' + solution.value.challenge_id;
                     } else {
                         window.location.href = window.app_path + '/challenges/card/' + challenge.value.id;
                     }
@@ -387,7 +373,7 @@ export default {
 
 
         emitter.on('UnitySave', e => {
-            if(!saving.value) {
+            if (!saving.value) {
                 saving.value = true;
                 gameLoad.value.save_json = e.saveGame;
                 if (type.value == 'challenge' && window.location.href.indexOf("challenge") > -1) {
@@ -400,7 +386,7 @@ export default {
                         saving.value = false;
                     });
                 }
-                emitter.emit('UnitySaved', { val: '' });
+                emitter.emit('UnitySaved', {val: ''});
                 handleUnityActionOutgoing(e);
             }
         });
@@ -414,11 +400,8 @@ export default {
         }
 
         const initalize = async () => {
-
             setTimeout(function () {
                 loaded.value = true;
-
-
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
                 handleUnityActionOutgoing({
                     action: 'setSessionId',
@@ -427,7 +410,7 @@ export default {
                 // handleUnityActionOutgoing({action: 'setHangarAppearance', data: 1});
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
 
-                if(type.value == 'solution') {
+                if (type.value == 'solution') {
                     getSolutionRepositories(id.value);
                 } else {
                     getCardChallengeRepositories(id.value);
@@ -442,7 +425,6 @@ export default {
         onBeforeMount(() => {
             //ADDS LISTENERS
             bridge.value = UnityBridge();
-
         });
 
         emitter.on('updateanimationSave', e => {
@@ -452,11 +434,8 @@ export default {
         const getCardChallengeRepositories = async (id) => {
             await axios.post('/api/challenge/user/get/card', {id: id})
                 .then(response => {
-
                     if (response.data.success) {
-
-
-                        if(response.data.payload.save_json == "") {
+                        if (response.data.payload.save_json == "") {
                             challenge.value = response.data.payload;
                             checkTeam();
                             unlockInput();
@@ -486,7 +465,6 @@ export default {
                 .then(response => {
 
                     if (response.data.success) {
-
 
 
                         solution.value = response.data.payload;

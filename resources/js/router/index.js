@@ -1,10 +1,12 @@
 import {createWebHistory, createRouter} from "vue-router";
 
 import Register from '../pages/Register';
+import PlaygroundSaves from '../pages/Unity/Lite/PlaygroundSaves'
 import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 import SideMenu from '../layouts/side-menu/Main'
 import Wizard from "../pages/Wizard";
+import MainLite from "../pages/Unity/Lite/MainLite";
 import Profile from "../pages/Wizard";
 import WizardOne from "../pages/WizardOne";
 import Challenges from "../pages/Challenges/Main";
@@ -106,6 +108,18 @@ export const routes = [
                 name: 'admin-users',
                 path: '/admin/users',
                 component: UserList,
+                props: true
+            },
+            {
+                name: 'studio-playground-saves',
+                path: '/playground/saves',
+                component: PlaygroundSaves,
+                props: true
+            },
+            {
+                name: 'studio-playground',
+                path: '/playground',
+                component: MainLite,
                 props: true
             },
             {
