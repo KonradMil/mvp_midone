@@ -10,25 +10,25 @@
  */
 
 /*!
-  * @intlify/core-base v9.1.8
+  * @intlify/core-base v9.1.7
   * (c) 2021 kazuya kawaguchi
   * Released under the MIT License.
   */
 
 /*!
-  * @intlify/devtools-if v9.1.8
+  * @intlify/devtools-if v9.1.7
   * (c) 2021 kazuya kawaguchi
   * Released under the MIT License.
   */
 
 /*!
-  * @intlify/runtime v9.1.8
+  * @intlify/runtime v9.1.7
   * (c) 2021 kazuya kawaguchi
   * Released under the MIT License.
   */
 
 /*!
-  * @intlify/vue-devtools v9.1.8
+  * @intlify/vue-devtools v9.1.7
   * (c) 2021 kazuya kawaguchi
   * Released under the MIT License.
   */
@@ -75,14 +75,14 @@
  */
 
 /*!
- * Sizzle CSS Selector Engine v2.3.6
+ * Sizzle CSS Selector Engine v2.3.5
  * https://sizzlejs.com/
  *
  * Copyright JS Foundation and other contributors
  * Released under the MIT license
  * https://js.foundation/
  *
- * Date: 2021-02-16
+ * Date: 2020-03-14
  */
 
 /*!
@@ -108,17 +108,17 @@
  */
 
 /*!
- * jQuery JavaScript Library v3.6.0
+ * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
  * https://sizzlejs.com/
  *
- * Copyright OpenJS Foundation and other contributors
+ * Copyright JS Foundation and other contributors
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2021-03-02T17:08Z
+ * Date: 2020-05-04T22:49Z
  */
 
 /*!
@@ -161,8 +161,6 @@ PERFORMANCE OF THIS SOFTWARE.
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
 /*! queue-microtask. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
-
-/*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
 /*! simple-peer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
