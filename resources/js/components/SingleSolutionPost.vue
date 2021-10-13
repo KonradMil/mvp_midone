@@ -27,7 +27,12 @@
             <div class="mt-2 md:flex" v-if="canAccept && type!=='archive'">
                 <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1  && solution.archive != 1 && acceptChallengeSolutions">{{$t('challengesMain.acceptSolution')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1  && solution.archive != 1 && acceptChallengeSolutions">{{$t('challengesMain.rejectSolution')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" v-if="solution.archive !== 1 && acceptChallengeSolutions" @click="showAddFileModal">Pliki</button>
+                <div :data-count=solutionFiles.length
+                     class="dropdown-toggle notification notification--bullet cursor-pointer"
+                     role="button"
+                     aria-expanded="false">
+                    <button class="btn btn-primary shadow-md mr-2" v-if="solution.archive !== 1 && acceptChallengeSolutions" @click="showAddFileModal">Pliki</button>
+                </div>
             </div>
             <div class="mt-2 md:flex-row" v-if="canEdit || inTeam && type!=='archive'">
                 <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'challengeStudio', params: {id: solution.id, type: 'solution', canEditSolution: canEditSolution}})" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1 && canEditSolution">{{$t('models.edit')}}</button>
