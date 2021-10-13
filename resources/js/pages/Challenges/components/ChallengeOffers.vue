@@ -40,6 +40,7 @@
         <div class="flex items-center px-5 py-7 border-b border-gray-200 dark:border-dark-5">
             <label for="input-wizard-5" class="form-label pr-5 font-medium dark:text-theme-10 text-theme-1" style="position: absolute; margin-bottom: 90px;">Filtr</label>
             <Multiselect
+                :disabled="technologyType !== null"
                 class="form-control"
                 v-model="filterType"
                 mode="single"
@@ -57,6 +58,7 @@
         <div class="flex items-center px-5 py-7 border-b border-gray-200 dark:border-dark-5 pb-10">
             <label for="input-wizard-5" class="form-label font-medium dark:text-theme-10 text-theme-1" style="position: absolute; margin-bottom: 90px;">Dostawca głównej technologii</label>
             <Multiselect
+                :disabled="filterType !== null"
                 class="form-control"
                 v-model="technologyType"
                 mode="single"
@@ -69,10 +71,6 @@
                 :options="technology['options']"
                 :option-height="104"
             />
-<!--            <template slot="singleLabel" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky"><span class="option__desc"><span class="option__title">{{ props.option.title }}</span></span></template>-->
-<!--            <template slot="option" slot-scope="props"><img class="option__image" :src="props.option.img" alt="No Man’s Sky">-->
-<!--                <div class="option__desc"><span class="option__title">{{ props.option.title }}</span><span class="option__small">{{ props.option.desc }}</span></div>-->
-<!--            </template>-->
         </div>
         <div v-if="guard && (filterType !== null || technologyType !== null)" class="intro-y w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie ma ofert spełniających podane kryteria.
@@ -230,10 +228,6 @@
                 </div>
                 </div>
             </div>
-
-            <!-- END: Announcement -->
-            <!-- BEGIN: Daily Sales -->
-            <!-- END: Daily Sales -->
         </div>
     </div>
 </template>
@@ -283,31 +277,34 @@ export default {
         }, {})
 
         watch(() => technologyType.value, (first, second) => {
+            console.log(offers.value.list.length + 'length offervs value list technology')
+            StartFilterOffer();
             if(technologyType.value !== null){
-                StartFilterOffer();
-
                 if(offers.value.list ===0){
                     guard.value = true;
                 }else{
                     guard.value = false;
                 }
             }
-            // if(technologyType.value === null){
-            //     getChallengeOffersRepositories();
-            // }
+
+            if(filterType.value === null && technologyType.value === null){
+                getChallengeOffersRepositories();
+                GetTheBestOffer();
+
+            }
         }, {})
 
         watch(() => filterType.value, (first, second) => {
+            console.log(offers.value.list.length + 'length offervs value list filterType')
             StartFilterOffer();
-
             if(offers.value.list ===0){
                 guard.value = true;
             }else{
                 guard.value = false;
             }
-            if(filterType.value === null){
+            if(filterType.value === null && technologyType.value === null){
                 getChallengeOffersRepositories();
-                technologyType.value = null;
+                GetTheBestOffer();
             }
             if(filterType.value==='Cena malejąco' || filterType.value==='Cena rosnąco'
                 || filterType.value==='Czas realizacji uruchomienia u klienta' || filterType.value==='Okres gwarancji stanowiska od integratora'){
