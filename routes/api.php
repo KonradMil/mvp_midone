@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\RobochallengeController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\Crud\ChallengeController;
 use App\Http\Controllers\Crud\ModelController;
@@ -18,6 +19,8 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WorkshopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+Route::post('robochallenge', [RobochallengeController::class, 'register']);
 
 Route::post('reset-password', [UserController::class, 'reset']);
 Route::post('login', [UserController::class, 'login']);

@@ -47,7 +47,8 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
         'solution_accepted',
         'offer_accepted',
         'twofa',
-        'authy_id'
+        'authy_id',
+        'type'
     ];
 
     /**

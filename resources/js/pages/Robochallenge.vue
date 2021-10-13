@@ -55,7 +55,7 @@
                                 type="text"
                                 class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
                                 placeholder="Nr telefonu"
-                                v-model="phone"
+                                v-model="phoneNumber"
                             />
                             <input
                                 type="text"
@@ -81,7 +81,7 @@
                                 type="password"
                                 class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4"
                                 placeholder="Powtórz hasło"
-                                v-model="password"
+                                v-model="passwordConfirmation"
                             />
                         </div>
 
@@ -91,6 +91,7 @@
                                     id="cb-rules-consent"
                                     type="checkbox"
                                     class="form-check-input border mr-2"
+                                    v-model="competitionRulesConsent"
                                 />
                                 <label class="cursor-pointer select-none" for="cb-rules-consent">
                                     Oświadczam, że zapoznałem się oraz akceptuję
@@ -112,6 +113,7 @@
                                     id="cb-privacy-policy-consent"
                                     type="checkbox"
                                     class="form-check-input border mr-2"
+                                    v-model="privacyPolicyConsent"
                                 />
                                 <label class="cursor-pointer select-none" for="cb-privacy-policy-consent">
                                     Oświadczam, że zapoznałem się z oraz akceptuję
@@ -129,6 +131,7 @@
                                     id="cb-data-processing-consent"
                                     type="checkbox"
                                     class="form-check-input border mr-2"
+                                    v-model="dataProcessingConsent"
                                 />
                                 <label class="cursor-pointer select-none" for="cb-data-processing-consent">
                                     Wyrażam zgodę na przetwarzanie moich danych osobowychw w związku z udziałem w konkursie.
@@ -181,16 +184,68 @@ export default {
         return {
             firstName: "",
             lastName: "",
-            phone: "",
+            phoneNumber: "",
             companyName: "",
             email: "",
             password: "",
-            repeatedPassword: ""
+            passwordConfirmation: "",
+            competitionRulesConsent: 0,
+            privacyPolicyConsent: 0,
+            dataProcessingConsent: 0
         }
     },
     methods: {
         handleSubmit(e) {
-            e.preventDefault()
+            e.preventDefault();
+
+            this.$axios.post(
+                '/api/robochallenge',
+                {
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    phoneNumber: this.phoneNumber,
+                    companyName: this.companyName,
+                    email: this.email,
+                    password: this.password,
+                    passwordConfirmation: this.passwordConfirmation,
+                    competitionRulesConsent: this.competitionRulesConsent,
+                    privacyPolicyConsent: this.privacyPolicyConsent,
+                    dataProcessingConsent: this.dataProcessingConsent
+                }
+            ).then((response) => {
+
+                if(typeof response.data.success !== "undefined") {
+                    toast.success(response.data.success);
+
+                    this.firstName = "",
+                    this.lastName = "",
+                    this.phoneNumber = "",
+                    this.companyName = "",
+                    this.email = "",
+                    this.password = "",
+                    this.passwordConfirmation = "",
+                    this.competitionRulesConsent = 0,
+                    this.privacyPolicyConsent = 0,
+                    this.dataProcessingConsent = 0
+
+                }
+
+            }).catch(function(error){
+
+                if(error.response.data.errors !== "undefined") {
+
+                    let message = "";
+
+                    for(let k in error.response.data.errors) {
+                        message += (parseInt(k)+1) + ". "+error.response.data.errors[k]+"\n";
+                    }
+
+                    toast.error(message)
+
+                }
+
+            });
+
         }
     },
 }
