@@ -94,8 +94,12 @@
                                 />
                                 <label class="cursor-pointer select-none" for="cb-rules-consent">
                                     Oświadczam, że zapoznałem się oraz akceptuję
-                                    <a href="#" class="text-theme-1 dark:text-theme-10 mx-1 cursor-pointer">
-                                        Regulaminem
+                                    <a
+                                        href="https://cdn.dbr77.com/wp-content/uploads/2021/10/2021_10_13_Regulamin_konkursu-Robochallenge-online.pdf"
+                                        class="text-theme-1 dark:text-theme-10 mx-1 cursor-pointer"
+                                        target="_blank"
+                                    >
+                                        Regulamin
                                     </a>
                                     konkursu
                                 </label>
