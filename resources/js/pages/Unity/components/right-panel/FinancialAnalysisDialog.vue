@@ -390,18 +390,18 @@ export default {
         const getChallenge = (cb) => {
             axios.post('/api/challenge/user/get/card', {id: props.solution.challenge_id})
                 .then(response => {
-
                     if (response.data.success) {
-
-
-
                         try {
-
                             capex.value = response.data.payload.selected[0].estimate.sum;
                         }catch (e) {
                             response.data.payload.solutions.forEach((val) => {
                                 if(val.id === props.solution.id) {
-                                    capex.value = val.estimate.sum;
+                                    if(val.estimate == undefined) {
+                                        capex.value = 0;
+                                    } else {
+                                        capex.value = val.estimate.sum;
+                                    }
+
                                 }
                             });
                         }

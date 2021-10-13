@@ -1,6 +1,8 @@
 <template>
     <div>
         <div class="intro-y grid grid-cols-12 gap-6 mt-5">
+            <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'studio-playground'})">{{ $t('lite.addSave') }} </button>
+
             <!-- BEGIN: Blog Layout -->
             <div class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium" v-if="saves == undefined || saves.length == 0">
 
@@ -77,7 +79,7 @@ export default {
         });
 
         const deleteSave = async (id) => {
-            axios.post('/api/challenge/delete', {id: id})
+            axios.post('/api/playground/saves/delete', {id: id})
                 .then(response => {
 
                     if (response.data.success) {

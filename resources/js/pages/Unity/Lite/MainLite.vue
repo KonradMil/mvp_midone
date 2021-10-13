@@ -1,5 +1,7 @@
 <template>
-
+    <TopButtons v-if="loaded" :allowedEdit="true" :icons="topIcons" :canEditSolution="true"></TopButtons>
+    <LeftButtons :icons="leftIcons"></LeftButtons>
+    <LeftPanel></LeftPanel>
     <div @contextmenu.prevent="openMenu">
         <Studio hideFooter="true" :src="unity_hangar_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
@@ -20,6 +22,10 @@ import UnityBridge from "./bridge";
 import cash from "cash-dom";
 import WindowWatcher from "../../../events/WindowWatcher";
 import unityActionOutgoing from "../composables/ActionsOutgoing";
+import LeftButtons from "./../components/LeftButtons";
+import LeftPanel from "./../components/LeftPanel";
+import TopButtons from "./../components/TopButtons";
+import BottomPanel from "./../components/BottomPanel";
 
 const ww = WindowWatcher();
 
@@ -34,7 +40,9 @@ export default {
         },
         sessionid: String
     },
-    components: {Studio},
+    components: {
+       BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio
+    },
     setup(props, {emit}) {
         //GLOBAL
         const app = getCurrentInstance();

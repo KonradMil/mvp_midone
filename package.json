@@ -73,6 +73,8 @@
         "axios": "^0.21",
         "babel-loader": "^8.2.2",
         "bootstrap": "^4.0.0",
+        "browser-sync": "^2.27.5",
+        "browser-sync-webpack-plugin": "^2.3.0",
         "jquery": "^3.2",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",

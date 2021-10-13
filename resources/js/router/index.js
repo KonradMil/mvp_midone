@@ -82,6 +82,7 @@ export const routes = [
         component: Main,
         props: true
     },
+
     {
         name: 'hangarStudio',
         path: '/hangar',
@@ -92,6 +93,12 @@ export const routes = [
         name: 'terms',
         path: "/terms/:page",
         component: TermsMain,
+        props: true
+    },
+    {
+        name: 'studio-playground',
+        path: '/playground',
+        component: MainLite,
         props: true
     },
     {
@@ -116,12 +123,7 @@ export const routes = [
                 component: PlaygroundSaves,
                 props: true
             },
-            {
-                name: 'studio-playground',
-                path: '/playground',
-                component: MainLite,
-                props: true
-            },
+
             {
                 name: 'workshop',
                 path: '/workshop',

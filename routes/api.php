@@ -18,6 +18,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('search', [SearchController::class, 'search']);
     Route::post('/broadcast/auth', [NotificationsController::class, 'broadcastAuth']);
 
+    require __DIR__ . '/api/studio-lite.php';
     require __DIR__ . '/api/admin.php';
     require __DIR__ . '/api/solutions.php';
     require __DIR__ . '/api/reports.php';
