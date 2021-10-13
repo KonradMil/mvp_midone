@@ -467,10 +467,10 @@ export default {
                             animationSave.value = response.data.payload.save_json.animation_layers;
                             checkTeam();
 
-                            /*handleUnityActionOutgoing({
+                            handleUnityActionOutgoing({
                                 action: 'loadStructure',
                                 data: response.data.payload.save_json
-                            });*/
+                            });
                             unlockInput();
                         }
 
@@ -492,10 +492,10 @@ export default {
                         animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
                         checkTeam();
 
-                        handleUnityActionOutgoing({
+                        /*handleUnityActionOutgoing({
                             action: 'loadStructure',
                             data: JSON.parse(response.data.payload.save_json)
-                        });
+                        });*/
                         unlockInput();
                         // console.log('EMIT LOAD');
                         // emitter.emit('saveLoaded', {save: (response.data.payload)});
