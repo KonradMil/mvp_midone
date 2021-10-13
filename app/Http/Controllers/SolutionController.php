@@ -118,6 +118,8 @@ class SolutionController extends Controller
         $technology_option = $request->input('technologyType');
         $challenge = Challenge::find($id);
         $solutions = NULL;
+        $solutionsOkresZwrotu = NULL;
+        $solutionsNpv = NULL;
         try {
             if ($option === 'Cena rosnąco') {
                 $solutions = $challenge->solutions()->where('solutions.status', '=', 1)->join('estimates', 'solutions.id', '=', 'estimates.solution_id')->select('solutions.*')->orderBy('estimates.sum', 'DESC')->get();
@@ -132,30 +134,36 @@ class SolutionController extends Controller
             } else if ($option === null && $technology_option === null) {
                 $solutions = $challenge->solutions()->where('rejected', '=', null)->where('solutions.status', '=', 1)->get();
             } else if ($technology_option === 'FANUC') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_fanuc', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_fanuc', '>' , 0)->orderBy('number_of_fanuc', 'DESC')->get();
             } else if ($technology_option === 'KUKA') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_kuka', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_kuka', '>' , 0)->orderBy('number_of_kuka', 'DESC')->get();
             } else if ($technology_option === 'Yaskawa') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_yaskawa', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_yaskawa', '>' , 0)->orderBy('number_of_yaskawa', 'DESC')->get();
             } else if ($technology_option === 'ABB') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_abb', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_abb', '>' , 0)->orderBy('number_of_abb', 'DESC')->get();
             } else if ($technology_option === 'Universal Robots') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_universal', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_universal', '>' , 0)->orderBy('number_of_universal', 'DESC')->get();
             } else if ($technology_option === 'Mitshubishi') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_mitshubishi', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_mitshubishi', '>' , 0)->orderBy('number_of_mitshubishi', 'DESC')->get();
             } else if ($technology_option === 'Universal Robots') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_universal', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_universal', '>' , 0)->orderBy('number_of_universal', 'DESC')->get();
             } else if ($technology_option === 'TFM ROBOTICS') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_tfm', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_tfm', '>' , 0)->orderBy('number_of_tfm', 'DESC')->get();
             }
         } catch(\Exception $e){
-            $solutions = $challenge->solutions()->get();
+            if($option !== NULL){
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Filter ok',
+                    'payload' => ''
+                ]);
+            }
         }
 
         return response()->json([
             'success' => true,
             'message' => 'Filter ok',
-            'payload' => $solutions,
+            'payload' => $solutions
         ]);
     }
 
