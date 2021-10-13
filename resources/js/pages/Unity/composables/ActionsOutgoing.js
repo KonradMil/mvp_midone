@@ -4,10 +4,8 @@ function outgoing(game, action, data, json) {
     let finalData = '';
     if(json) {
         if(data.value != undefined) {
-
             finalData = JSON.stringify(data.value);
         } else {
-
             finalData = JSON.stringify(data);
         }
 
@@ -15,7 +13,7 @@ function outgoing(game, action, data, json) {
 
         finalData = data;
     }
-    console.log('FINAL OUTGOING', ['NetworkBridge', action, finalData])
+
     game.message('NetworkBridge', action, finalData);
 
     // this.gameWindow.message('NetworkBridge', 'OrderPart', JSON.stringify({
@@ -34,12 +32,10 @@ export default function unityActionOutgoing(gameWindow) {
 
     function placeObject(data) {
 
-
-
         outgoing(game, 'OrderPart', {
             model_name: data.name,
             model_id: data.id,
-            prefab_url: 'https://' + location.host + '/s3/models/' + data.model_file
+            prefab_url: window.location.protocol+'://' + location.host + '/s3/models/' + data.model_file
         }, true)
     }
 
@@ -138,7 +134,6 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function updateLabel(val) {
-
         outgoing(game, 'UpdateLabel', val, true);
     }
 
@@ -168,7 +163,6 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function prefix(val) {
-        console.log('PREFIX', val);
         game.message('NetworkBridge', 'SetDefaultUrlPrefix', val);
     }
 
@@ -185,7 +179,6 @@ export default function unityActionOutgoing(gameWindow) {
         if(val && Object.keys(val).length === 0 && val.constructor === Object) {
 
         } else {
-
             outgoing(game, 'LoadStructure', val, true);
         }
 

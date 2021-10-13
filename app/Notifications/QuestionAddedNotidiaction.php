@@ -46,6 +46,7 @@ class QuestionAddedNotidiaction extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+            ->subject('DBR77: pytanie do wyzwania')
             ->line('Nowe pytanie zostało dodane do Twojego wyzwania ' . $this->challenge->name . '.')
             ->action('Sprawdź', url(env('APP_PATH') . '/challenges/card/' . $this->challenge->id))
             ->line('Dziękujemy za korzystanie z platformy DBR77!');
