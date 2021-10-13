@@ -428,4 +428,27 @@ class TeamsController extends Controller
             'payload' => []
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getObjectTeams(Request $request): JsonResponse
+    {
+        $who = $request->get('who');
+
+        if($who == 'challenge'){
+            $challenge = Challenge::find($request->get('challenge_id'));
+            $teams = $challenge->teams;
+        } else if($who == 'solution'){
+            $solution = Solution::find($request->get('solution_id'));
+            $teams = $solution->teams;
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano poprawnie.',
+            'payload' => $teams
+        ]);
+    }
 }

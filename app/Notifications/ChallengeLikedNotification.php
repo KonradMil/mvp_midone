@@ -41,7 +41,7 @@ class ChallengeLikedNotification extends Notification
             'message' => $this->member->name . ' ' . $this->member->lastname .' lubi Twoje wyzwanie: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
-            'params' => '',
+            'params' => 'likeChallenge',
             'name' => 'internalChallenegeCard',
             'id' => $this->challenge->id,
         ]);
@@ -53,7 +53,7 @@ class ChallengeLikedNotification extends Notification
             'message' => $this->member->name . ' ' . $this->member->lastname .' lubi Twoje wyzwanie: ' . $this->challenge->name .'.',
             'link' => '/challenges/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
-            'params' => '',
+            'params' => 'likeChallenge',
             'name' => 'internalChallenegeCard',
             'id' => $this->challenge->id,
         ];
