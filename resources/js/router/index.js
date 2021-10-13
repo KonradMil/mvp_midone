@@ -32,6 +32,7 @@ import NewOffer from "../pages/Offers/NewOffer";
 import Offers from "../pages/Challenges/components/Offers";
 import SolutionsPanel from "../pages/Challenges/components/SolutionsPanel";
 import SolutionsArchive from "../pages/Solutions/SolutionsArchive";
+import Robochallenge from "../pages/Robochallenge";
 
 export const routes = [
     {
@@ -86,6 +87,11 @@ export const routes = [
         path: "/terms/:page",
         component: TermsMain,
         props: true
+    },
+    {
+        name: 'robochallenge',
+        path: '/robochallenge',
+        component: Robochallenge
     },
     {
         path: "/",
@@ -240,7 +246,6 @@ export const routes = [
                 path: '/change-password',
                 component: ChangePassword
             },
-
         ]
     },
     {
