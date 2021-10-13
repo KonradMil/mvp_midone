@@ -1,5 +1,5 @@
 <template>
-    <div class="col-span-12 lg:col-span-8 xxl:col-span-9">
+    <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" v-if="guard === true">
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12 xxl:col-span-12">
@@ -126,32 +126,27 @@ export default {
                     break;
                 }
             }
+            getChallengeSolutions();
         });
 
         const changeAddSolutionOffer = async(addSolutionOffer) => {
             emitter.emit('updateAddSolutionOffer', {addSolutionOffer: addSolutionOffer});
         }
 
-        // watch(() => solutions.value, (first, second) => {
-        // }, {})
-
         watch(() => technologyType.value, (first, second) => {
             if(technologyType.value !== null){
-                StartFilterOffer();
+                StartFilterSolutions();
             }
-            // if(technologyType.value === null){
-            //     getChallengeOffersRepositories();
-            // }
         }, {})
 
         watch(() => filterType.value, (first, second) => {
-            StartFilterOffer();
+            StartFilterSolutions();
             if(filterType.value === null){
                 technologyType.value = null;
                 if(props.challenge.stage === 3){
 
                 } else {
-                    solutionsInTeam.value = props.challenge.solutions;
+                    solutionsInTeam.value = solutions.value;
                 }
             }
         }, {})
@@ -159,7 +154,7 @@ export default {
 
         const checkPermissions = () => {
             permissions.value.addSolutionOffer.forEach(function (permission) {
-                props.challenge.solutions.forEach(function (solution){
+                solutions.value.forEach(function (solution){
                     let id = solution.id;
                    if(id === permission){
                           if(addSolutionOffer.value === false){
@@ -173,11 +168,11 @@ export default {
             permissions.value.publishChallenges.forEach(function (permission) {
                     let id = props.challenge.id
                     if(id === permission){
-                        solutionsInTeam.value = props.challenge.solutions;
+                        solutionsInTeam.value = solutions.value;
                     }
                 });
             permissions.value.publishSolution.forEach(function (permission) {
-                props.challenge.solutions.forEach(function (solution){
+                solutions.value.forEach(function (solution){
                     let id = solution.id;
                     if(id === permission){
                         if(canPublishSolution.value === false){
@@ -187,7 +182,7 @@ export default {
                 });
             });
             permissions.value.showSolutions.forEach(function (permission) {
-                props.challenge.solutions.forEach(function (solution){
+                solutions.value.forEach(function (solution){
                     let id = solution.id;
                     if(id === permission){
                         solutionsInTeam.value.push(solution);
@@ -195,7 +190,7 @@ export default {
                 });
             });
             permissions.value.canEditSolution.forEach(function (permission) {
-                props.challenge.solutions.forEach(function (solution){
+                solutions.value.forEach(function (solution){
                     let id = solution.id;
                     if(id === permission){
                             canEditSolution.value = true;
@@ -203,7 +198,7 @@ export default {
                 });
             });
             permissions.value.canDeleteSolution.forEach(function (permission) {
-                props.challenge.solutions.forEach(function (solution){
+                solutions.value.forEach(function (solution){
                     let id = solution.id;
                     if(id === permission){
                         canDeleteSolution.value = true;
@@ -214,16 +209,11 @@ export default {
 
         onMounted(function () {
             permissions.value = window.Laravel.permissions;
-           if(user.type == 'investor' && props.inTeam && props.challenge !== 3){
-               solutions.value = props.challenge.solutions;
-           } else if(props.challenge.stage === 3){
-
-           } else {
-                solutions.value = props.challenge.solutions;
-           }
-            checkPermissions();
+            getChallengeSolutions(function(){
+                checkPermissions();
+                guard.value = true;
+            })
         });
-
 
         const filterMember = () => {
             axios.post('/api/solution/filter-member', {challenge_id: challenge.value.id})
@@ -234,7 +224,17 @@ export default {
                 })
         }
 
-        const StartFilterOffer = async () => {
+        const getChallengeSolutions = (callback) => {
+            axios.post('/api/solution/all/get', {challenge_id: props.challenge.id})
+                .then(response => {
+                    if (response.data.success) {
+                        solutions.value = response.data.payload;
+                        callback();
+                    }
+                })
+        }
+
+        const StartFilterSolutions = async () => {
             axios.post('/api/solution/user/filter', {option: filterType.value , id: props.challenge.id, technologyType: technologyType.value})
                 .then(response => {
                     if (response.data.success) {
@@ -258,7 +258,6 @@ export default {
                             params: {id: response.data.payload.id, type: 'solution', load: response.data.payload}
                         });
                     } else {
-                        // toast.error(response.data.message);
                     }
                 })
         };
@@ -305,6 +304,7 @@ export default {
                 })
         }
         return {
+            getChallengeSolutions,
             canDeleteSolution,
             canPublishSolution,
             checkPermissions,

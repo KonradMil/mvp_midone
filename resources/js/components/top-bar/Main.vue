@@ -78,7 +78,7 @@
                          :key="notification.id">
                        <div class="cursor-pointer relative flex items-center transition duration-500 ease-in-out transform hover:-translate-x-10 hover:scale-100"
                             style="position: relative; overflow: hidden; width: calc(100% + 30px); padding-right: 30px;">
-                           <div class="w-12 h-12 flex-none image-fit mr-1" style="z-index: 2;">
+                           <div class="w-12 h-12 flex-none image-fit mr-1 mb-1" style="z-index: 2;">
                             <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
                                     :username="notification.data.author.name + ' ' + notification.data.author.lastname"
                                     :size="50" color="#FFF" background-color="#5e50ac"/>
@@ -373,10 +373,9 @@ export default defineComponent({
 
         const goTo = (notification,name,id,change,challenge_id,link) => {
             setRead(notification,id);
-            if(change === 'commentChallenge'){
+            if(change === 'commentChallenge' || change === 'likeChallenge'){
                 router.push({ path: '/challenges' })
-            }
-            if(change === undefined){
+            } else if (change === undefined){
                 router.push({ path: link })
             } else {
                 router.push({ name: name, params : {id: challenge_id, change: change}})

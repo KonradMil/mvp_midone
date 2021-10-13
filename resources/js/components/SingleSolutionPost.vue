@@ -11,27 +11,6 @@
             <div class="ml-3 mr-auto" @click="$router.push({path: '/studio/solution/' + solution.id});">
                 <a href="" class="font-medium">{{ solution.name }} <span v-if="solution.selected == 1" style="color: #5e50ac;"> - {{$t('challengesMain.accepted')}}</span><span v-if="solution.rejected == 1" style="color: #1a202c;"> - {{$t('challengesMain.rejected')}}</span></a>
             </div>
-            <!--        <div class="dropdown ml-3">-->
-            <!--            <a href="javascript:;"-->
-            <!--                class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300"-->
-            <!--                aria-expanded="false">-->
-            <!--                <MoreVerticalIcon class="w-5 h-5"/>-->
-            <!--            </a>-->
-            <!--            <div class="dropdown-menu w-40">-->
-            <!--                <div class="dropdown-menu__content box dark:bg-dark-1 p-2">-->
-            <!--                    <a href=""-->
-            <!--                        class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">-->
-            <!--                        <Edit2Icon class="w-4 h-4 mr-2"/>-->
-            <!--                        {{$t('challengesMain.editPost')}}-->
-            <!--                    </a>-->
-            <!--                    <a href=""-->
-            <!--                        class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">-->
-            <!--                        <TrashIcon class="w-4 h-4 mr-2"/>-->
-            <!--                        {{$t('challengesMain.deletePost')}}-->
-            <!--                    </a>-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!--        </div>-->
         </div>
         <div class="p-5 border-t border-gray-200 dark:border-dark-5" >
             <div class="h-40 xxl:h-56 image-fit">
@@ -50,17 +29,14 @@
                 <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1  && solution.archive != 1 && acceptChallengeSolutions">{{$t('challengesMain.rejectSolution')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.archive !== 1 && acceptChallengeSolutions" @click="showAddFileModal">Pliki</button>
             </div>
-            <div class="mt-2 md:flex" v-if="canEdit || inTeam && type!=='archive'">
-<!--                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: '/studio/solution/' + solution.id});" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1">{{$t('models.edit')}}</button>-->
+            <div class="mt-2 md:flex-row" v-if="canEdit || inTeam && type!=='archive'">
                 <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'challengeStudio', params: {id: solution.id, type: 'solution', canEditSolution: canEditSolution}})" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1 && canEditSolution">{{$t('models.edit')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution" v-if="challenge.stage == 1 && solution.selected != 1 && solution.archive != 1 && canDeleteSolution">{{$t('models.delete')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0 && challenge.stage == 1 &&  solution.archive != 1 && canPublishSolution" @click="publishSolution">{{$t('challengesMain.publish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1 && canPublishSolution" @click="unpublishSolution">{{$t('challengesMain.unpublish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive != 1" @click="switchTab">{{$t('teams.teams')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive != 1" @click="showAddFileModal">Pliki</button>
-            </div>
-            <div class="mt-2" v-if="user.type == 'integrator' && solution.selected == 1 && type!=='archive' && addSolutionOffer">
-                <button v-if="solution.archive != 1" class="btn btn-primary shadow-md mr-2" @click="addOffer">{{$t('challengesMain.addOffer')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="solution.archive !== 1 && user.type === 'integrator' && solution.selected === 1 && type!=='archive' && addSolutionOffer" @click="addOffer">{{$t('challengesMain.addOffer')}}</button>
             </div>
         </div>
         <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
@@ -314,8 +290,8 @@ export default {
                 })
         }
 
-        const deleteSolution = async(solution) => {
-            await axios.post('/api/solution/delete', {id: solution.id})
+        const deleteSolution = async() => {
+             axios.post('/api/solution/delete', {id: props.solution.id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Rozwiązanie zostało usunięte');

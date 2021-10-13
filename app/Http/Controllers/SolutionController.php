@@ -129,7 +129,7 @@ class SolutionController extends Controller
                 $solutions = $challenge->solutions()->where('solutions.status', '=', 1)->join('financial_analyses', 'solutions.id', '=', 'financial_analyses.solution_id')->orderBy('financial_analyses.npv', 'ASC')->select('solutions.*')->get();
             } else if ($option === 'Okres zwrotu inwestycji') {
                 $solutions = $challenge->solutions()->where('solutions.status', '=', 1)->join('financial_analyses', 'solutions.id', '=', 'financial_analyses.solution_id')->orderBy('financial_analyses.simple_payback', 'ASC')->select('solutions.*')->get();
-            } else if ($option === null) {
+            } else if ($option === null && $technology_option === null) {
                 $solutions = $challenge->solutions()->where('rejected', '=', null)->where('solutions.status', '=', 1)->get();
             } else if ($technology_option === 'FANUC') {
                 $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->orderBy('number_of_fanuc', 'DESC')->get();
@@ -152,11 +152,10 @@ class SolutionController extends Controller
             $solutions = $challenge->solutions()->get();
         }
 
-
         return response()->json([
             'success' => true,
             'message' => 'Filter ok',
-            'payload' => $solutions
+            'payload' => $solutions,
         ]);
     }
 
@@ -1063,6 +1062,25 @@ class SolutionController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
+    public function delete(Request $request): JsonResponse
+    {
+        $solution = Solution::find($request->input('id'));
+
+        if($solution){
+            $solution->delete();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Usunięto poprawnie',
+            'payload' => $solution
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function getSolutionFiles(Request $request): JsonResponse
     {
         $solution = Solution::find($request->input('id'));
@@ -1072,6 +1090,21 @@ class SolutionController extends Controller
             'success' => true,
             'message' => 'Pobrano pobrawnie',
             'payload' => $solutionFiles
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getChallengeSolutions(Request $request): JsonResponse
+    {
+        $solutions = Solution::where('challenge_id', '=' , $request->get('challenge_id'))->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pobrano pobrawnie',
+            'payload' => $solutions
         ]);
     }
 
