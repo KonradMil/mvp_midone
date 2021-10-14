@@ -202,6 +202,11 @@ export default {
         });
 
         //HANDLES ALL UNITY ACTIONS
+        emitter.on('*', e => {
+            handleUnityActionOutgoing(e);
+        });
+
+        //HANDLES ALL UNITY ACTIONS
         emitter.on('gridsizechange', e => {
             handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
         });
