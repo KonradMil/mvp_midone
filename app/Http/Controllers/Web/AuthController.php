@@ -80,6 +80,10 @@ class AuthController extends Controller
                     return redirect('/login');
                 }
 
+                if($provider === 'facebook') {
+                    dd($socialUser->getEmail());
+                }
+
                 /** @var User|null $user */
                 $user = $userRepository->findByEmail($socialUser->getEmail());
 
