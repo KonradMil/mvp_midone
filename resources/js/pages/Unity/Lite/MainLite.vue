@@ -271,6 +271,30 @@ export default {
             id.value = props.id;
         });
 
+
+        //HANDLES ALL UNITY ACTIONS
+        emitter.on('gridsizechange', e => {
+            handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
+        });
+
+        //HANDLES ALL LAYOUT ACTIONS
+        emitter.on('layoutbuttonclick', e => {
+            switch (e.val) {
+                case "edit":
+                    handleUnityActionOutgoing({action: "beginLayoutEdit", data: ''});
+                    break;
+                case "addlabel":
+                    handleUnityActionOutgoing({action: "beginLayoutLabel", data: ''});
+                    break;
+                case "addlayout":
+                    handleUnityActionOutgoing({action: "beginLayoutDraw", data: ''});
+                    break;
+                case "notatka":
+                    handleUnityActionOutgoing({action: "beginLayoutComment", data: ''});
+                    break;
+            }
+        });
+
         return {
             user,
             initialLoad,
