@@ -183,7 +183,11 @@ export default {
                     store.dispatch('login/login', {
                         user
                     })
-                    window.location.replace('/dashboard');
+                    if(user.type == 'robochallege') {
+                        window.location.replace('/playground/saves');
+                    } else {
+                        window.location.replace('/dashboard');
+                    }
                 } else {
                     toast.error(response.data.message);
                 }
