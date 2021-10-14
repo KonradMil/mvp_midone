@@ -95,6 +95,7 @@ export default {
 
         //HANDLES ALL UNITY ACTIONS
         emitter.on('unityoutgoingaction', e => {
+            console.log('unityoutgoingaction', e);
             handleUnityActionOutgoing(e);
         });
 
