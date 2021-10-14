@@ -94,9 +94,19 @@ export default {
         emitter.on('onInitialized', e => initalize());
 
         //HANDLES ALL UNITY ACTIONS
-        emitter.on('unityoutgoingaction', e => {
-            handleUnityActionOutgoing(e);
-        });
+        // emitter.on('unityoutgoingaction', e => {
+        //
+        // });
+
+
+        //HANDLES ALL UNITY ACTIONS
+        emitter.on('*', (type, e) => {
+            console.log('*', [type, e]);
+            if(type == 'unityoutgoingaction') {
+                console.log('unityoutgoingaction', e);
+                handleUnityActionOutgoing(e);
+            }
+        } )
 
         //HANDLES ALL UNITY ACTIONS
         emitter.on('gridsizechange', e => {
@@ -269,6 +279,30 @@ export default {
             mode.value = 'edit';
             type.value = props.type;
             id.value = props.id;
+        });
+
+
+        //HANDLES ALL UNITY ACTIONS
+        emitter.on('gridsizechange', e => {
+            handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
+        });
+
+        //HANDLES ALL LAYOUT ACTIONS
+        emitter.on('layoutbuttonclick', e => {
+            switch (e.val) {
+                case "edit":
+                    handleUnityActionOutgoing({action: "beginLayoutEdit", data: ''});
+                    break;
+                case "addlabel":
+                    handleUnityActionOutgoing({action: "beginLayoutLabel", data: ''});
+                    break;
+                case "addlayout":
+                    handleUnityActionOutgoing({action: "beginLayoutDraw", data: ''});
+                    break;
+                case "notatka":
+                    handleUnityActionOutgoing({action: "beginLayoutComment", data: ''});
+                    break;
+            }
         });
 
         return {
