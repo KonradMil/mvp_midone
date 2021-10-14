@@ -1,5 +1,8 @@
 {
     "en": {
+        "lite" : {
+            "addSave" : "Add"
+        },
         "global": {
             "search" : "Search...",
             "name": "Name",
@@ -58,7 +61,8 @@
             "Marketplace obiektów": "Objects marketplace",
             "Komunikacja": "Communication",
             "Pomoc" : "Support",
-            "Powiadomienia" : "Notifications"
+            "Powiadomienia" : "Notifications",
+            "Studio playground" : "Studio playground"
         },
         "subMenu": {
             "Wszystkie": "All",
@@ -307,6 +311,9 @@
         }
     },
     "pl": {
+        "lite" : {
+            "addSave" : "Dodaj"
+        },
         "global": {
             "search" : "Szukaj...",
             "name": "Nazwa",
@@ -359,7 +366,8 @@
             "Marketplace obiektów": "Marketplace obiektów",
             "Komunikacja": "Komunikacja",
             "Pomoc" : "Pomoc",
-            "Powiadomienia" : "Powiadomienia"
+            "Powiadomienia" : "Powiadomienia",
+            "Studio playground" : "Studio playground"
         },
 
         "subMenu": {

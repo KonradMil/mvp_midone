@@ -8,6 +8,7 @@ import SideMenu from '../layouts/side-menu/Main'
 import Wizard from "../pages/Wizard";
 import MainLite from "../pages/Unity/Lite/MainLite";
 import Profile from "../pages/Wizard";
+import PeerTest from "../pages/PeerTest";
 import WizardOne from "../pages/WizardOne";
 import Challenges from "../pages/Challenges/Main";
 import Projects from "../pages/Projects/Main";
@@ -82,7 +83,12 @@ export const routes = [
         component: Main,
         props: true
     },
-
+    {
+        name: 'peerTest',
+        path: '/peerTest',
+        component: PeerTest,
+        props: true
+    },
     {
         name: 'hangarStudio',
         path: '/hangar',

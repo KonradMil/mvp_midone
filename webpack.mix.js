@@ -50,7 +50,7 @@ mix.js('resources/js/app.js', 'public/js')
         [postcssImport]
         ]
 });
-mix.browserSync('homestead.test');
+// mix.browserSync('homestead.test');
 mix.version();
     //
     // [ tailwind("tailwind.config.js"),

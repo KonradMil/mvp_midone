@@ -12,6 +12,7 @@
     <div v-if="!loaded" id="loader">
         <LoadingIcon icon="grid" class="w-8 h-8"/>
     </div>
+    <Peer v-if="sessionid != ''" :sessionId="sessionid" :owner="owner"></Peer>
     <!--    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>-->
     <!--    <WebRTC width="100%" roomId="roomId"></WebRTC>-->
     <div id="help-modal" class="modal" tabindex="-1" aria-hidden="true">
@@ -112,6 +113,7 @@ import RightButtons from "./components/RightButtons";
 import WorkshopModal from "./WorkshopModal"
 import WebRTC from "./WebRTC";
 import ModalWorkshop from "../../components/ModalWorkshop";
+import Peer from "./Peer";
 
 const ww = WindowWatcher();
 
@@ -129,6 +131,7 @@ export default {
         sessionid: String
     },
     components: {
+        Peer,
         ModalWorkshop, WebRTC, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio
     },
     setup(props, {emit}) {
@@ -171,13 +174,7 @@ export default {
         const sessionid = ref('');
         const owner = ref(false);
 
-        if (props.sessionid === undefined) {
-            sessionid.value = Math.random().toString(36).slice(-5);
-            owner.value = true;
-        } else {
-            sessionid.value = props.sessionid;
-            owner.value = false;
-        }
+
 
         window_height.value = window.innerHeight;
 
@@ -416,6 +413,7 @@ export default {
                 } else {
                     getCardChallengeRepositories(id.value);
                 }
+                console.log({action: 'prefix', data: window.app_path + '/s3'});
                 handleUnityActionOutgoing({action: 'prefix', data: window.app_path + '/s3'});
             }, 2000);
             setTimeout(() => {
@@ -486,6 +484,13 @@ export default {
 
         onMounted(() => {
 
+            if (urlParams.get('sessionid') === null) {
+                sessionid.value = Math.random().toString(36).slice(-5);
+                owner.value = true;
+            } else {
+                sessionid.value = urlParams.get('sessionid');
+                owner.value = false;
+            }
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")

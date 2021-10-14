@@ -48,6 +48,15 @@ window.Echo = new Echo({
     disableStats: true,
 });
 
+// window.Echo = new Echo({
+//     authEndpoint: '/api/broadcast/auth',
+//     broadcaster: "socket.io",
+//     host: 'localhost:6001',
+//     wsHost: window.location.hostname,
+//     wsPort: 6001,
+//     forceTLS: false,
+// });
+
 const app = createApp(App)
 globalComponents(app);
 utils(app);

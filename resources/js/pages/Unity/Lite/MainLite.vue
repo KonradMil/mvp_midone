@@ -11,8 +11,6 @@
     </div>
 <!--    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>-->
 <!--    <WebRTC width="100%" roomId="roomId"></WebRTC>-->
-
-
 </template>
 
 <script>
@@ -142,8 +140,6 @@ export default {
 
         const openMenu = (e) => {
             e.preventDefault();
-
-
             if (loaded.value) {
                 if (doubleClick.value) {
                     if ((mousePositionX.value > (e.clientX - 10) && mousePositionX.value < (e.clientX + 10)) && (mousePositionY.value > (e.clientY - 10) && mousePositionY.value < (e.clientY + 19))) {
@@ -209,10 +205,51 @@ export default {
             animationSave.value.layers = e.data.layers;
         });
 
+        emitter.on('UnitySave', e => {
+            if (!saving.value) {
+                saving.value = true;
+                gameLoad.value.save_json = e.saveGame;
+                    SaveUnityFreeSave({save: gameLoad.value, id: id.value}, (sol) => {
+                        id.value = sol.id;
+                        saving.value = false;
+                    });
+                emitter.emit('UnitySaved', {val: ''});
+                handleUnityActionOutgoing(e);
+            }
+        });
+
+        const getSave = async (id) => {
+            await axios.post('/api/challenge/user/get/card', {id: id})
+                .then(response => {
+                    if (response.data.success) {
+                        if (response.data.payload.save_json == "") {
+                            challenge.value = response.data.payload;
+                            checkTeam();
+                            unlockInput();
+                        } else {
+
+                            challenge.value = response.data.payload;
+                            initialLoad.value = response.data.payload.save_json;
+                            animationSave.value = response.data.payload.save_json.animation_layers;
+                            checkTeam();
+
+                            handleUnityActionOutgoing({
+                                action: 'loadStructure',
+                                data: response.data.payload.save_json
+                            });
+                            unlockInput();
+                        }
+
+
+                        // emitter.emit('saveLoaded', {save: (response.data.payload)});
+                    } else {
+                        // toast.error(response.data.message);
+                    }
+                })
+        }
 
 
         onMounted(() => {
-
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")
