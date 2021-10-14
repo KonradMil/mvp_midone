@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\RobochallengeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\S3Controller;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 
@@ -17,6 +17,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard'])->middleware();
     Route::post('search', [SearchController::class, 'search']);
     Route::post('/broadcast/auth', [NotificationsController::class, 'broadcastAuth']);
+
+    Route::post('/robochallenge', [RobochallengeController::class, 'register']);
 
     require __DIR__ . '/api/studio-lite.php';
     require __DIR__ . '/api/admin.php';
