@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RoboHakatonMail;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -90,10 +92,10 @@ class RobochallengeController extends Controller
 
         }
 
+        Mail::to($userParameters['email'])->send(new RoboHakatonMail());
         $response['success'] = "Twoje zgłoszenie zostało wysłane pomyślnie.";
 
         return response()->json($response);
-
 
     }
 }
