@@ -574,6 +574,7 @@ class CreateCoreTables extends Migration
             $table->string('name')->nullable();
             $table->string('lastname')->nullable();
             $table->string('email')->unique();
+            $table->string('phone_number')->nullable();
             $table->integer('verified')->nullable();
             $table->timestamp('verified_at')->nullable();
             $table->string('phone')->nullable();
