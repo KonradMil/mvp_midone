@@ -94,15 +94,19 @@ export default {
         emitter.on('onInitialized', e => initalize());
 
         //HANDLES ALL UNITY ACTIONS
-        emitter.on('unityoutgoingaction', e => {
-            console.log('unityoutgoingaction', e);
-            handleUnityActionOutgoing(e);
-        });
+        // emitter.on('unityoutgoingaction', e => {
+        //
+        // });
 
 
         //HANDLES ALL UNITY ACTIONS
-        emitter.on('*', e => {
+        emitter.on('*', (e, val) => {
             console.log('*', e);
+            if(e == 'unityoutgoingaction') {
+                console.log('unityoutgoingaction', e);
+                handleUnityActionOutgoing(e);
+            }
+
         });
 
         //HANDLES ALL UNITY ACTIONS
