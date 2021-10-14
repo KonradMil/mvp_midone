@@ -150,7 +150,9 @@ export default defineComponent({
             linkTo,
             enter,
             leave,
-            user
+            user,
+            menu,
+            a
         };
     }
 });

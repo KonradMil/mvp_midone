@@ -14,25 +14,28 @@ const findActiveMenu = (subMenu, route) => {
 };
 
 const nestedMenu = (menu, route) => {
-  menu.forEach((item, key) => {
-    if (typeof item !== "string") {
-      let menuItem = menu[key];
-      menuItem.active =
-        (item.pageName === route.name ||
-          (item.subMenu && findActiveMenu(item.subMenu, route))) &&
-        !item.ignore;
+    try {
+        menu.forEach((item, key) => {
+            if (typeof item !== "string") {
+                let menuItem = menu[key];
+                menuItem.active =
+                    (item.pageName === route.name ||
+                        (item.subMenu && findActiveMenu(item.subMenu, route))) &&
+                    !item.ignore;
 
-      if (item.subMenu) {
-        menuItem.activeDropdown = findActiveMenu(item.subMenu, route);
-        menuItem = {
-          ...item,
-          ...nestedMenu(item.subMenu, route)
-        };
-      }
+                if (item.subMenu) {
+                    menuItem.activeDropdown = findActiveMenu(item.subMenu, route);
+                    menuItem = {
+                        ...item,
+                        ...nestedMenu(item.subMenu, route)
+                    };
+                }
+            }
+        });
+        return menu;
+    } catch (e) {
+
     }
-  });
-
-  return menu;
 };
 
 const linkTo = (menu, router) => {
