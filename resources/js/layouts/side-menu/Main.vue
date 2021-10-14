@@ -118,7 +118,11 @@ export default defineComponent({
         watch(
             computed(() => route.path),
             () => {
-                formattedMenu.value = $h.toRaw(sideMenu.value);
+                try {
+                    formattedMenu.value = $h.toRaw(sideMenu.value);
+                }catch (e) {
+
+                }
             }
         );
 
