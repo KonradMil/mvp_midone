@@ -108,7 +108,7 @@ export default defineComponent({
         const router = useRouter();
         const store = useStore();
         const user = ref({});
-        const menu = ref({"menu": []});
+        const menu = ref({menu: []});
         const formattedMenu = ref();
         const sideMenu = computed(() =>
             nestedMenu(menu.menu, route)
@@ -128,7 +128,7 @@ export default defineComponent({
 
             if(user.value.type == 'robochallenge') {
                 menu.value = {
-                    "menu": [
+                    menu: [
                         {
                             "icon": "HomeIcon",
                             "pageName": "studio-playground-saves",
