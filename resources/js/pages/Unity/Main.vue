@@ -470,10 +470,10 @@ export default {
                         animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
                         checkTeam();
 
-                        /*handleUnityActionOutgoing({
+                        handleUnityActionOutgoing({
                             action: 'loadStructure',
                             data: JSON.parse(response.data.payload.save_json)
-                        });*/
+                        });
                         unlockInput();
                         // emitter.emit('saveLoaded', {save: (response.data.payload)});
                     } else {
@@ -484,13 +484,6 @@ export default {
 
         onMounted(() => {
 
-            if (urlParams.get('sessionid') === null) {
-                sessionid.value = Math.random().toString(36).slice(-5);
-                owner.value = true;
-            } else {
-                sessionid.value = urlParams.get('sessionid');
-                owner.value = false;
-            }
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")
