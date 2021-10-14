@@ -1,8 +1,8 @@
 import {watch, unref, onUnmounted, getCurrentInstance} from 'vue';
 
 function outgoing(game, action, data, json) {
-    const app = getCurrentInstance();
-    const emitter = app.appContext.config.globalProperties.emitter;
+    // const app = getCurrentInstance();
+    // const emitter = app.appContext.config.globalProperties.emitter;
     let finalData = '';
     if(json) {
         if(data.value != undefined) {
@@ -16,13 +16,13 @@ function outgoing(game, action, data, json) {
         finalData = data;
     }
 
-
+    console.log(['NetworkBridge', action, finalData]);
     game.message('NetworkBridge', action, finalData);
-    try {
-        emitter.emit('unity_outgoing_multi', ['NetworkBridge', action, finalData]);
-    }catch (e) {
-
-    }
+    // try {
+    //     emitter.emit('unity_outgoing_multi', ['NetworkBridge', action, finalData]);
+    // }catch (e) {
+    //
+    // }
 }
 export default function unityActionOutgoing(gameWindow) {
     const game = gameWindow;
