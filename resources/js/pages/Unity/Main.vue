@@ -215,6 +215,7 @@ export default {
                         }
                         break;
                     case 'topbuttonclick':
+                        console.log(e.val);
                         switch (e.val) {
                             case 'animation_mode':
                                 handleUnityActionOutgoing({action: "animationMode", data: ''});
