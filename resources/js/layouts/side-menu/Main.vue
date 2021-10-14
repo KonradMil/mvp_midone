@@ -68,15 +68,12 @@
                     </template>
                     <template v-else>
                         <li :key="'robo'">
-                            <SideMenuTooltip tag="a" :content="'Konkurs Robochallenge'" href="javascript:;" class="side-menu" :class="'side-menu--active'" @click="linkTo('studio-playground-saves', router)">
+                            <SideMenuTooltip tag="a" :content="'Konkurs Robochallenge'" href="javascript:;" class="side-menu" :class="'side-menu--active'" @click="$router.push({name: 'studio-playground-saves'})">
                                 <div class="side-menu__icon">
                                     <component :is="'HomeIcon'"/>
                                 </div>
                                 <div class="side-menu__title">
                                     Konkurs Robochallenge
-                                    <div class="side-menu__sub-icon" :class="'transform rotate-180'">
-                                        <ChevronDownIcon/>
-                                    </div>
                                 </div>
                             </SideMenuTooltip>
                         </li>
