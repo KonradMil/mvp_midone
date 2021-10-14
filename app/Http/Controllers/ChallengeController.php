@@ -188,6 +188,11 @@ class ChallengeController extends Controller
         if($request->data['id']){
             try {
                 $freeSave = FreeSave::find($request->data['id']);
+                $freeSave -> name = $request->get('name');
+                $freeSave -> en_name = $request->get('e_name');
+                $freeSave -> description = $request->get('description');
+                $freeSave -> en_description = $request->get('e_description');
+
                 $j = json_decode($request->data['save']['save_json'], true);
 
                 if (!empty($j['screenshot'])) {
@@ -207,6 +212,10 @@ class ChallengeController extends Controller
             $newFreeSave = new FreeSave();
             $user = User::find(Auth::user()->id);
             $user->freeusers()->attach($newFreeSave);
+            $newFreeSave -> name = $request->get('name');
+            $newFreeSave -> en_name = $request->get('en_name');
+            $newFreeSave -> description = $request->get('description');
+            $newFreeSave -> en_description = $request->get('en_description');
 
             $j = json_decode($request->data['save']['save_json'], true);
 

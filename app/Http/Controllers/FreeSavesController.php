@@ -98,11 +98,10 @@ class FreeSavesController extends Controller
     /**
      * @param Request $request
      * @param FreeSavesRepository $freeSavesRepository
-     * @param FreeSavesHandler $freeSavesHandler
      * @param FreeSavesService $freeSavesService
      * @return JsonResponse
      */
-    public function saveData(Request $request, FreeSavesRepository $freeSavesRepository, FreeSavesHandler $freeSavesHandler, FreeSavesService $freeSavesService)
+    public function saveData(Request $request, FreeSavesRepository $freeSavesRepository,FreeSavesService $freeSavesService)
     {
         $responseBuilder = new ResponseBuilder();
 
