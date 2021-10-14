@@ -203,7 +203,7 @@ export default {
 
         //HANDLES ALL UNITY ACTIONS
         emitter.on('*', e => {
-            handleUnityActionOutgoing(e);
+            console.log('*', e);
         });
 
         //HANDLES ALL UNITY ACTIONS
