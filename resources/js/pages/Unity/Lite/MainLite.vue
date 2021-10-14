@@ -90,32 +90,12 @@ export default {
             handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
         }
 
-        //RUNS WHEN UNITY IS READY
-        emitter.on('onInitialized', e => initalize());
-
-        //HANDLES ALL UNITY ACTIONS
-        // emitter.on('unityoutgoingaction', e => {
-        //
-        // });
-
-
         //ALL EVENTS
         emitter.on('*', (type, e) => {
             console.log('*', [type, e]);
             switch (type) {
                 case 'unityoutgoingaction':
                     handleUnityActionOutgoing(e);
-                    break;
-                case 'workshop_object_clicked':
-                    workshopOpen.value = false;
-                    handleUnityActionOutgoing({action: "loadWorkshopObject", data: JSON.parse(e.object.save)});
-                    break;
-                case 'showChallenge':
-                    challenge.value = e.obj;
-                    type.value = 'challenge';
-                    break;
-                case 'workshop_open':
-                    workshopOpen.value = true;
                     break;
                 case 'gridsizechange':
                     handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
@@ -162,7 +142,6 @@ export default {
                             mode.value = 'layout';
                             break;
                         case 'fullscreen':
-
                             gameWindow.value.setFullscreen();
                             break;
                         case 'logout':
@@ -194,20 +173,20 @@ export default {
                     break;
                 case 'UnitySave':
                     if (!saving.value) {
-                        saving.value = true;
-                        gameLoad.value.save_json = e.saveGame;
-                        if (type.value == 'challenge' && window.location.href.indexOf("challenge") > -1) {
-                            SaveChallengeUnity({save: gameLoad.value, id: id.value}, () => {
-                                saving.value = false;
-                            });
-                        } else {
-                            SaveSolutionUnity({save: gameLoad.value, id: id.value}, (sol) => {
-                                id.value = sol.id;
-                                saving.value = false;
-                            });
-                        }
-                        emitter.emit('UnitySaved', {val: ''});
-                        handleUnityActionOutgoing(e);
+                        // saving.value = true;
+                        // gameLoad.value.save_json = e.saveGame;
+                        // if (type.value == 'challenge' && window.location.href.indexOf("challenge") > -1) {
+                        //     SaveChallengeUnity({save: gameLoad.value, id: id.value}, () => {
+                        //         saving.value = false;
+                        //     });
+                        // } else {
+                        //     SaveSolutionUnity({save: gameLoad.value, id: id.value}, (sol) => {
+                        //         id.value = sol.id;
+                        //         saving.value = false;
+                        //     });
+                        // }
+                        // emitter.emit('UnitySaved', {val: ''});
+                        // handleUnityActionOutgoing(e);
                     }
                     break;
                 case 'onInitialized':
@@ -235,8 +214,6 @@ export default {
                 if (doubleClick.value) {
                     if ((mousePositionX.value > (e.clientX - 10) && mousePositionX.value < (e.clientX + 10)) && (mousePositionY.value > (e.clientY - 10) && mousePositionY.value < (e.clientY + 19))) {
                         let data = JSON.stringify({menu: currentRadialMenu.value});
-
-
                         handleUnityActionOutgoing({action: 'showRadialMenu', data: data});
                     } else {
                         doubleClick.value = false;
@@ -293,33 +270,6 @@ export default {
         });
 
         const getSave = async (id) => {
-            await axios.post('/api/challenge/user/get/card', {id: id})
-                .then(response => {
-                    if (response.data.success) {
-                        if (response.data.payload.save_json == "") {
-                            challenge.value = response.data.payload;
-                            checkTeam();
-                            unlockInput();
-                        } else {
-
-                            challenge.value = response.data.payload;
-                            initialLoad.value = response.data.payload.save_json;
-                            animationSave.value = response.data.payload.save_json.animation_layers;
-                            checkTeam();
-
-                            handleUnityActionOutgoing({
-                                action: 'loadStructure',
-                                data: response.data.payload.save_json
-                            });
-                            unlockInput();
-                        }
-
-
-                        // emitter.emit('saveLoaded', {save: (response.data.payload)});
-                    } else {
-                        // toast.error(response.data.message);
-                    }
-                })
         }
 
 
