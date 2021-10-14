@@ -100,14 +100,13 @@ export default {
 
 
         //HANDLES ALL UNITY ACTIONS
-        emitter.on('*', (e, val) => {
-            console.log('*', e);
-            if(e == 'unityoutgoingaction') {
+        emitter.on('*', (type, e) => {
+            console.log('*', [type, e]);
+            if(type == 'unityoutgoingaction') {
                 console.log('unityoutgoingaction', e);
                 handleUnityActionOutgoing(e);
             }
-
-        });
+        } )
 
         //HANDLES ALL UNITY ACTIONS
         emitter.on('gridsizechange', e => {
