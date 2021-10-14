@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\API\RobochallengeController;
+use App\Http\Controllers\RobochallengeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\S3Controller;
