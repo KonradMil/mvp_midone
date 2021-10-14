@@ -305,6 +305,11 @@ export default defineComponent({
             if(props.change === undefined){
                 activeTab.value = 'podstawowe';
             }
+
+            if(window.location.hash == '#solutions') {
+                activeTab.value = 'rozwiazania';
+            }
+
             permissions.value = window.Laravel.permissions;
             getCardChallengeRepositories(function (){
                 checkTeam();

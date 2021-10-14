@@ -215,7 +215,7 @@ export default {
                         }
                         break;
                     case 'topbuttonclick':
-                        console.log('aaa', e.val);
+
                         switch (e.val) {
                             case 'animation_mode':
                                 handleUnityActionOutgoing({action: "animationMode", data: ''});
@@ -238,9 +238,9 @@ export default {
                                 break;
                             case 'logout':
                                 if (props.type == 'solution') {
-                                    window.location.href = window.app_path + '/challenges/card/' + solution.value.challenge_id;
+                                    window.location.href = window.app_path + '/challenges/card/' + solution.value.challenge_id+"#solutions";
                                 } else {
-                                    window.location.href = window.app_path + '/challenges/card/' + challenge.value.id;
+                                    window.location.href = window.app_path + '/challenges/card/' + challenge.value.id+"#solutions";
                                 }
                                 break;
                             case 'orto':
