@@ -14,7 +14,7 @@
                 <div class="side-nav__devider my-6"></div>
                 <ul>
                     <!-- BEGIN: First Child -->
-                    <template v-for="(menu, menuKey) in formattedMenu">
+                    <template v-for="(menu, menuKey) in formattedMenu" v-if="user.type == 'robochallenge'">
                         <li v-if="menu == 'devider'" :key="menu + menuKey" class="side-nav__devider my-6">
                         </li>
                         <li v-else :key="menu + menuKey" v-if="menu.admin == undefined || (user.role == 'admin')">
@@ -64,6 +64,21 @@
                                 </ul>
                             </transition>
                             <!-- END: Second Child -->
+                        </li>
+                    </template>
+                    <template v-else>
+                        <li :key="'robo'">
+                            <SideMenuTooltip tag="a" :content="'Konkurs Robochallenge'" href="javascript:;" class="side-menu" :class="'side-menu--active'" @click="linkTo('studio-playground-saves', router)">
+                                <div class="side-menu__icon">
+                                    <component :is="'HomeIcon'"/>
+                                </div>
+                                <div class="side-menu__title">
+                                    Konkurs Robochallenge
+                                    <div class="side-menu__sub-icon" :class="'transform rotate-180'">
+                                        <ChevronDownIcon/>
+                                    </div>
+                                </div>
+                            </SideMenuTooltip>
                         </li>
                     </template>
                     <!-- END: First Child -->
