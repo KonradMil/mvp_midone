@@ -14,7 +14,6 @@
     </div>
     <Peer v-if="sessionid != ''" :sessionId="sessionid" :owner="owner"></Peer>
     <!--    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>-->
-    <!--    <WebRTC width="100%" roomId="roomId"></WebRTC>-->
     <div id="help-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -111,9 +110,7 @@ import BottomPanel from "./components/BottomPanel";
 import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
 import WorkshopModal from "./WorkshopModal"
-import WebRTC from "./WebRTC";
 import ModalWorkshop from "../../components/ModalWorkshop";
-import Peer from "./Peer";
 
 const ww = WindowWatcher();
 
@@ -131,8 +128,7 @@ export default {
         sessionid: String
     },
     components: {
-        Peer,
-        ModalWorkshop, WebRTC, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio
+        ModalWorkshop, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio
     },
     setup(props, {emit}) {
         //GLOBAL

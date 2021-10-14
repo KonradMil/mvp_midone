@@ -9,8 +9,7 @@
     <div v-if="!loaded" id="loader">
         <LoadingIcon icon="grid" class="w-8 h-8" />
     </div>
-<!--    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>-->
-<!--    <WebRTC width="100%" roomId="roomId"></WebRTC>-->
+<PeerTest :unityActionOutgoingObject="unityActionOutgoingObject"></PeerTest>
 </template>
 
 <script>
@@ -24,6 +23,7 @@ import LeftButtons from "./../components/LeftButtons";
 import LeftPanel from "./../components/LeftPanel";
 import TopButtons from "./../components/TopButtons";
 import BottomPanel from "./../components/BottomPanel";
+import PeerTest from "../../PeerTest";
 
 const ww = WindowWatcher();
 
@@ -39,6 +39,7 @@ export default {
         sessionid: String
     },
     components: {
+        PeerTest,
        BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio
     },
     setup(props, {emit}) {
@@ -292,7 +293,8 @@ export default {
             loaded,
             sessionid,
             owner,
-            showLeftButtons
+            showLeftButtons,
+            unityActionOutgoingObject
         }
     }
 }
