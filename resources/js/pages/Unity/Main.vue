@@ -215,7 +215,7 @@ export default {
                         }
                         break;
                     case 'topbuttonclick':
-                        console.log(e.val);
+                        console.log('aaa', e.val);
                         switch (e.val) {
                             case 'animation_mode':
                                 handleUnityActionOutgoing({action: "animationMode", data: ''});
@@ -292,49 +292,9 @@ export default {
 
         window_height.value = window.innerHeight;
 
-        // emitter.on('showChallenge', e => {
-        //
-        // });
-
         const startTutorial = () => {
             handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
         }
-
-        // emitter.on('workshop_object_clicked', e => {
-        //
-        // });
-
-        // emitter.on('workshop_open', e => {
-        //     // cash("#workshop-modal").modal("show");
-        //
-        // });
-
-        //RUNS WHEN UNITY IS READY
-        // emitter.on('onInitialized', e => initalize());
-
-        //HANDLES ALL UNITY ACTIONS
-        // emitter.on('unityoutgoingaction', e => {
-        //     handleUnityActionOutgoing(e);
-        // });
-
-        //HANDLES ALL UNITY ACTIONS
-        emitter.on('*', e => {
-            console.log('*', e);
-        });
-
-        //HANDLES ALL UNITY ACTIONS
-        // emitter.on('gridsizechange', e => {
-        //     // handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
-        // });
-
-        //HANDLES ALL LAYOUT ACTIONS
-        // emitter.on('layoutbuttonclick', e => {
-        //
-        // });
-
-        // emitter.on('lockState', e => {
-        //
-        // });
 
         const lockInput = () => {
 
@@ -420,9 +380,6 @@ export default {
             }
         });
 
-        // emitter.on('UnitySave', e => {
-        //
-        // });
 
         const handleUnityActionOutgoing = (e) => {
             try {
@@ -461,10 +418,6 @@ export default {
             bridge.value = UnityBridge();
         });
 
-        // emitter.on('updateanimationSave', e => {
-        //     animationSave.value.layers = e.data.layers;
-        // });
-
         const getCardChallengeRepositories = async (id) => {
             await axios.post('/api/challenge/user/get/card', {id: id})
                 .then(response => {
@@ -486,9 +439,6 @@ export default {
                             });
                             unlockInput();
                         }
-
-
-                        // emitter.emit('saveLoaded', {save: (response.data.payload)});
                     } else {
                         // toast.error(response.data.message);
                     }

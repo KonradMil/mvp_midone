@@ -62,7 +62,7 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function launchTutorial () {
-        outgoing(game, 'LaunchTutorial', '');
+        outgoing(game, 'LauchAllTutorial', '');
     }
 
     function save() {
