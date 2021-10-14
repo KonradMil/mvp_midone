@@ -81,6 +81,8 @@ class AuthController extends Controller
 
                     $socialUser = Socialite::driver($provider)->user();
                 } catch (Exception $e) {
+
+                    dd($e);
                     return redirect('/login');
                 }
 
