@@ -109,7 +109,7 @@ export default defineComponent({
         const store = useStore();
         const user = ref({});
         const menu = ref([]);
-        const formattedMenu = ref([]);
+        const formattedMenu = ref({"menu": []});
         const sideMenu = computed(() =>
             nestedMenu(menu.menu, route)
         );
