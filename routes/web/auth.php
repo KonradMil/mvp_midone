@@ -7,3 +7,6 @@ Route::get('/auth/social/{provider}/sign_in', [AuthController::class, 'socialSig
 Route::get('/auth/social/{provider}/sign_up', [AuthController::class, 'socialSignUp']);
 Route::get('/auth/social/{provider}/callback', [AuthController::class, 'socialCallback']);
 
+Route::get('/reset-password/{token}', function(){
+    return view('app');
+})->name('reset_password');
