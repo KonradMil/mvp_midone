@@ -108,7 +108,7 @@ export default defineComponent({
         const router = useRouter();
         const store = useStore();
         const user = ref({});
-        const menu = require('../../json/main_menu.json');
+        const menu = ref([]);
         const formattedMenu = ref([]);
         const sideMenu = computed(() =>
             nestedMenu(menu.menu, route)
@@ -125,6 +125,22 @@ export default defineComponent({
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
+
+            if(user.value.type == 'robochallenge') {
+                menu.value = {
+                    "menu": [
+                        {
+                            "icon": "HomeIcon",
+                            "pageName": "studio-playground-saves",
+                            "title": "Konkurs"
+                        }
+                    ]
+                };
+            } else {
+                menu.value = require('../../json/main_menu.json');
+            }
+
+
 
             cash("body")
                 .removeClass("error-page")
