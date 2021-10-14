@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Handlers\FreeSavesHandler;
-use App\Http\Requests\Handlers\LocalVisionHandler;
 use App\Http\ResponseBuilder;
 use App\Models\FreeSave;
-use App\Models\User;
 use App\Repository\Eloquent\FreeSavesRepository;
 use App\Repository\Eloquent\UserRepository;
 use App\Services\FreeSaveService;
