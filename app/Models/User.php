@@ -172,4 +172,12 @@ class User extends Authenticatable implements ReacterableInterface, Commentator,
     {
         return UserController::userPermissions($this);
     }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function freesaves(): BelongsToMany
+    {
+        return $this->belongsToMany(FreeSave::class, 'free_saves_user', 'user_id');
+    }
 }

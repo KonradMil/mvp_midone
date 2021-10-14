@@ -46,7 +46,7 @@ class FreeSave extends Model implements ReactableInterface
 
 
     /**
-     * @return BelongsTo
+     * @return BelongsToMany
      */
     public function users(): BelongsToMany
     {

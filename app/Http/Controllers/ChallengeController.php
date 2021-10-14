@@ -8,6 +8,7 @@ use App\Events\ChallengePublished;
 use App\Models\Challenge;
 use App\Models\File;
 use App\Models\Financial;
+use App\Models\FreeSave;
 use App\Models\LocalVision;
 use App\Models\Offer;
 use App\Models\Project;
@@ -175,6 +176,55 @@ class ChallengeController extends Controller
             'success' => true,
             'message' => 'Zapisano edycje.',
             'payload' => $challenge
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function saveFreeSave(Request $request): JsonResponse
+    {
+        if($request->data['id']){
+            try {
+                $freeSave = FreeSave::find($request->data['id']);
+                $j = json_decode($request->data['save']['save_json'], true);
+
+                if (!empty($j['screenshot'])) {
+
+                    $path = $this->processSS($j['screenshot']);
+                    $freeSave->screenshot_path = $path['relative'];
+                    unset($j['screenshot']);
+                    $freeSave->save_json = json_encode($j);
+                }
+
+                $freeSave->save();
+
+            } catch(Exception $e){
+
+            }
+        } else {
+            $newFreeSave = new FreeSave();
+            $user = User::find(Auth::user()->id);
+            $user->freeusers()->attach($newFreeSave);
+
+            $j = json_decode($request->data['save']['save_json'], true);
+
+            if (!empty($j['screenshot'])) {
+
+                $path = $this->processSS($j['screenshot']);
+                $newFreeSave->screenshot_path = $path['relative'];
+                unset($j['screenshot']);
+                $newFreeSave->save_json = json_encode($j);
+            }
+
+            $newFreeSave->save();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Zapisano poprawnie.',
+            'payload' => $newFreeSave
         ]);
     }
 

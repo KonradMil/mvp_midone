@@ -19,13 +19,12 @@ class FreeSavesHandler extends RequestHandler
     public function getParameters(): NewFreeSaveParameters
     {
         $parameters = new NewFreeSaveParameters();
-        $parameters->authorId = Auth::user()->id;
-        $parameters->projectId = (int)$this->request->route()->parameter('project_id');
-        $parameters->reportId = $this->request->get('report_id');
+        $parameters->name = $this->request->get('name');
+        $parameters->en_name = $this->request->get('en_name');
         $parameters->description = $this->request->get('description');
-        $parameters->before = $this->request->get('before');
-        $parameters->after = $this->request->get('after');
-        $parameters->accepted = $this->request->get('accepted');
+        $parameters->en_description = $this->request->get('en_description');
+        $parameters->save_json = json_decode($this->request->data['save']['save_json'], true);
+        $parameters->screenshot_path = json_decode($this->request->data['save']['save_json'], true);
 
         return $parameters;
     }

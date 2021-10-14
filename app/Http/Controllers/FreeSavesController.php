@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Handlers\FreeSavesHandler;
 use App\Http\Requests\Handlers\LocalVisionHandler;
 use App\Http\ResponseBuilder;
+use App\Models\FreeSave;
+use App\Models\User;
 use App\Repository\Eloquent\FreeSavesRepository;
+use App\Repository\Eloquent\UserRepository;
 use App\Services\FreeSaveService;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class FreeSavesController extends Controller
@@ -18,7 +22,24 @@ class FreeSavesController extends Controller
 
     }
 
-    public function getSingleSave(Request $request, FreeSavesRepository $freeSavesRepository, int $id)
+    public function deleteSave(Request $request)
+    {
+        $id = $request->get('freesave_id');
+
+        $freeSave = FreeSave::find($id);
+
+        if($freeSave){
+           $freeSave->delete();
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Usunięto poprawnie.',
+            'payload' => ''
+        ]);
+    }
+
+    public function getSave(Request $request, FreeSavesRepository $freeSavesRepository, int $id)
     {
         $responseBuilder = new ResponseBuilder();
 
@@ -29,14 +50,27 @@ class FreeSavesController extends Controller
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $responseBuilder->setData('freesave', $freeSave);
+        $responseBuilder->setData('freeSave', $freeSave);
 
         return $responseBuilder->getResponse();
     }
 
-    public function getManySaves(Request $request, FreeSavesRepository $freeSavesRepository)
+    public function getSaves(Request $request, UserRepository $userRepository, FreeSavesRepository $freeSavesRepository)
     {
+        $responseBuilder = new ResponseBuilder();
 
+        $user = $userRepository->find(Auth::user()->id);
+
+        if (!$user) {
+            $responseBuilder->setErrorMessage(__('messages.user.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $freeSaves = $freeSavesRepository->getFreeSavesByUser($user->id);
+
+        $responseBuilder->setData('freeSaves', $freeSaves);
+
+        return $responseBuilder->getResponse();
     }
 
     public function saveData(Request $request, FreeSavesRepository $freeSavesRepository, FreeSavesHandler $freeSavesHandler, FreeSaveService $freeSaveService)
