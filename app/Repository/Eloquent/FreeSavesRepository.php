@@ -16,9 +16,9 @@ class FreeSavesRepository extends BaseRepository
 {
 
     /**
-     * @param Challenge $freesave
+     * @param FreeSave $freesave
      */
-    public function __construct(Challenge $freesave)
+    public function __construct(FreeSave $freesave)
     {
         parent::__construct($freesave);
     }
