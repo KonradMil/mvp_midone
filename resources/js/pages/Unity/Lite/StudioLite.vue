@@ -1,6 +1,5 @@
 <template>
     <div class="webgl-content">
-
         <canvas :id="containerId" v-bind:style="{ width: '100vw', height: '100vh' }"></canvas>
         <div v-if="loaded === false">
             <div class="unity-loader">
@@ -9,19 +8,15 @@
                 </div>
             </div>
         </div>
-<!--        <div class="footer" v-if="hideFooter !== true">-->
-<!--            <a class="fullscreen" @click.prevent="setFullscreen">Fullscreen</a>-->
-<!--        </div>-->
     </div>
 </template>
 
 <script>
 import {onMounted, onBeforeMount, ref, getCurrentInstance, onBeforeUnmount} from "vue";
-import cash from "cash-dom/dist/cash";
 
 export default {
     props: ['src', 'module', 'width', 'height', 'externalProgress', 'unityLoader', 'hideFooter'],
-    name: 'Studio',
+    name: 'StudioLite',
     setup(props,{emit}) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
@@ -31,11 +26,13 @@ export default {
         const progress = ref();
         const error = ref(null);
         const unity_path = window.unity_path;
+
         containerId.value = 'unity-container-' + Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
+
         const setFullscreen = () => {
             gameInstance.value.SetFullscreen(1);
         }
-4
+
         const message = (gameObject, method, param) => {
             if (param === null) {
                 param = ''
@@ -48,7 +45,6 @@ export default {
         }
 
         onBeforeMount(() => {
-            // if (props.unityLoader) {
                 const script = document.createElement('SCRIPT')
                 script.setAttribute('src', '/s3/unity/' + unity_path + '.loader.js')
                 script.setAttribute('async', '')
@@ -57,7 +53,6 @@ export default {
                 script.onload = () => {
                     emitter.emit('onload', { done:1 })
                 }
-            // }
         })
 
             onBeforeUnmount(() => {
