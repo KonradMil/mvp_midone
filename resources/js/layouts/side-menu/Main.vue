@@ -14,7 +14,7 @@
                 <div class="side-nav__devider my-6"></div>
                 <ul>
                     <!-- BEGIN: First Child -->
-                    <template v-for="(menu, menuKey) in formattedMenu" v-if="user.type == 'robochallenge'">
+                    <template v-for="(menu, menuKey) in formattedMenu" v-if="user.type != 'robochallenge'">
                         <li v-if="menu == 'devider'" :key="menu + menuKey" class="side-nav__devider my-6">
                         </li>
                         <li v-else :key="menu + menuKey" v-if="menu.admin == undefined || (user.role == 'admin')">
