@@ -39,9 +39,6 @@ export default {
             let sessionid = urlParams.get('sessionid');
             peer.value = new Peer(null, {
                 debug: 1,
-                host: 'localhost',
-                port: 9000,
-                path: '/myapp'
             });
 
             if(sessionid != null) {
