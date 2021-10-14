@@ -3,7 +3,7 @@
         <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
             <div class="w-10 h-10 flex-none image-fit">
                 <img
-                    alt="Icewall Tailwind HTML Admin Template"
+                    alt="DBR77"
                     class="rounded-full w-100"
                     :src="post.poster"/>
             </div>
@@ -42,7 +42,7 @@
         </div>
         <div class="p-5">
             <div class="h-64 w-100 object-cover" :style="'background-image: url(\'' + post.poster + '\'); background-size: cover;'">
-                    <PlayIcon v-if="!play[post.id]" @click="playVideo(post.id)" class="cursor-pointer absolute -mt-8 w-14 h-14" style="color: #fff; margin-top: 6.5rem; margin-left: 13rem; background-color: #930f68; border-radius: 50%; padding: 10px; padding-left: 15px;"/>
+                    <PlayIcon v-if="!play[post.id]" @click="playVideo(post.id)" class="cursor-pointer absolute -mt-8 w-14 h-14" style="color: #fff; margin-top: 6.5rem; margin-left: 13rem; background-color: #5e50ac; border-radius: 50%; padding: 10px; padding-left: 15px;"/>
                 <YoutubeVue3 v-if="play[post.id]" ref="youtube" :videoid="post.video_id" :loop="false" class="w-100 h-64" style="width: 100%;"/>
             </div>
             <a href="" class="block font-medium text-base mt-5"></a>
@@ -117,9 +117,9 @@ export default {
         const like = (post) => {
             axios.post('api/knowledgebase/post/like', {id: post.id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
-                        // console.log(response.data);
+
                         postObj.value.likes = postObj.value.likes + 1;
                         postObj.value.liked = true;
 

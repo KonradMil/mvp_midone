@@ -3,40 +3,19 @@
         <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4" :class="(solution.rejected == 1)? 'rejected-solution': '' ">
             <div class="w-10 h-10 flex-none image-fit">
                 <img
-                    alt="Icewall Tailwind HTML Admin Template"
+                    alt="DBR77"
                     class="rounded-full"
                     :src="'/' + solution.screenshot_path"
                 />
             </div>
             <div class="ml-3 mr-auto" @click="$router.push({path: '/studio/solution/' + solution.id});">
-                <a href="" class="font-medium">{{ solution.name }} <span v-if="solution.selected == 1" style="color: #930f68;"> - {{$t('challengesMain.accepted')}}</span><span v-if="solution.rejected == 1" style="color: #1a202c;"> - {{$t('challengesMain.rejected')}}</span></a>
+                <a href="" class="font-medium">{{ solution.name }} <span v-if="solution.selected == 1" style="color: #5e50ac;"> - {{$t('challengesMain.accepted')}}</span><span v-if="solution.rejected == 1" style="color: #1a202c;"> - {{$t('challengesMain.rejected')}}</span></a>
             </div>
-            <!--        <div class="dropdown ml-3">-->
-            <!--            <a href="javascript:;"-->
-            <!--                class="dropdown-toggle w-5 h-5 text-gray-600 dark:text-gray-300"-->
-            <!--                aria-expanded="false">-->
-            <!--                <MoreVerticalIcon class="w-5 h-5"/>-->
-            <!--            </a>-->
-            <!--            <div class="dropdown-menu w-40">-->
-            <!--                <div class="dropdown-menu__content box dark:bg-dark-1 p-2">-->
-            <!--                    <a href=""-->
-            <!--                        class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">-->
-            <!--                        <Edit2Icon class="w-4 h-4 mr-2"/>-->
-            <!--                        {{$t('challengesMain.editPost')}}-->
-            <!--                    </a>-->
-            <!--                    <a href=""-->
-            <!--                        class="flex items-center block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md">-->
-            <!--                        <TrashIcon class="w-4 h-4 mr-2"/>-->
-            <!--                        {{$t('challengesMain.deletePost')}}-->
-            <!--                    </a>-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!--        </div>-->
         </div>
         <div class="p-5 border-t border-gray-200 dark:border-dark-5" >
             <div class="h-40 xxl:h-56 image-fit">
-                <img @click="$router.push({path: '/studio/solution/' + solution.id});"
-                     alt="Icewall Tailwind HTML Admin Template"
+                <img @click="$router.push({name: 'challengeStudio', params: {id: solution.id, type: 'solution', canEditSolution: canEditSolution}});"
+                     alt="DBR77"
                      class="rounded-md"
                      :src="'/' + solution.screenshot_path"
                 />
@@ -45,19 +24,24 @@
             <div class="text-gray-700 dark:text-gray-600 mt-2" style="word-break: break-all; max-height: 100px; overflow-y: scroll;">
                 {{ solution.description }}
             </div>
-            <div class="mt-2" v-if="canAccept && type!=='archive'">
-                <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1  && solution.archive != 1">{{$t('challengesMain.acceptSolution')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1  && solution.archive != 1">{{$t('challengesMain.rejectSolution')}}</button>
+            <div class="mt-2 md:flex" v-if="canAccept && type!=='archive'">
+                <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1  && solution.archive != 1 && acceptChallengeSolutions">{{$t('challengesMain.acceptSolution')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="rejectSolution" v-if="solution.rejected != 1  && solution.archive != 1 && acceptChallengeSolutions">{{$t('challengesMain.rejectSolution')}}</button>
+                <div :data-count=solutionFiles.length
+                     class="dropdown-toggle notification notification--bullet cursor-pointer"
+                     role="button"
+                     aria-expanded="false">
+                    <button class="btn btn-primary shadow-md mr-2" v-if="solution.archive !== 1 && acceptChallengeSolutions" @click="showAddFileModal">Pliki</button>
+                </div>
             </div>
-            <div class="mt-2" v-if="canEdit || inTeam && type!=='archive'">
-                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({path: '/studio/solution/' + solution.id});" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1">{{$t('models.edit')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution" v-if="challenge.stage == 1 && solution.selected != 1 && solution.archive != 1">{{$t('models.delete')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0 && challenge.stage == 1 &&  solution.archive != 1" @click="publishSolution">{{$t('challengesMain.publish')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1" @click="unpublishSolution">{{$t('challengesMain.unpublish')}}</button>
+            <div class="mt-2 md:flex-row" v-if="canEdit || inTeam && type!=='archive'">
+                <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'challengeStudio', params: {id: solution.id, type: 'solution', canEditSolution: canEditSolution}})" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1 && canEditSolution">{{$t('models.edit')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution" v-if="challenge.stage == 1 && solution.selected != 1 && solution.archive != 1 && canDeleteSolution">{{$t('models.delete')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0 && challenge.stage == 1 &&  solution.archive != 1 && canPublishSolution" @click="publishSolution">{{$t('challengesMain.publish')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1 && canPublishSolution" @click="unpublishSolution">{{$t('challengesMain.unpublish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive != 1" @click="switchTab">{{$t('teams.teams')}}</button>
-            </div>
-            <div class="mt-2" v-if="user.type == 'integrator' && solution.selected == 1 && type!=='archive'">
-                <button v-if="solution.archive != 1" class="btn btn-primary shadow-md mr-2" @click="addOffer">{{$t('challengesMain.addOffer')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive != 1" @click="showAddFileModal">Pliki</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="solution.archive !== 1 && user.type === 'integrator' && solution.selected === 1 && type!=='archive' && addSolutionOffer" @click="addOffer">{{$t('challengesMain.addOffer')}}</button>
             </div>
         </div>
         <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
@@ -94,27 +78,100 @@
             />
         </div>
     </div>
-<!--    <TeamsPanelSolution v-if="activeTab && (solution.author_id === user.id)" :solution="solution"/>-->
+    <ModalFile :show="show" @closed="modalClosed">
+        <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
+            <div class="mt-5">
+                <div class="mt-3 border px-4 py-4" v-if="solutionFiles.length > 0">
+                    <label class="form-label"> Wgrane pliki</label>
+                    <div class="rounded-md pt-4">
+                        <div class="grid grid-cols-4 h-full">
+                            <div class=" h-full" v-for="(file, index) in solutionFiles" :key="'file_' + index">
+                                <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
+                                    <img
+                                         class="w-full h-full"
+                                         :alt="file.original_name"
+                                         :src="'/' + file.path"/>
+                                    <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
+                                    </div>
+                                </div>
+                                <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
+                                    class="cursor-pointer px-6">
+                                    <button v-if="user.id === props.solution.author_id" class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
+                                        Usuń
+                                    </button>
+                                    <button class="btn btn-outline-secondary py-1 px-2" @click="downloadFile(file.path, file.name)">
+                                        Pobierz
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3" v-if="solutionFiles.length <= 0 && user.id !== props.solution.author_id">
+                    <span class="font-medium dark:text-theme-10 text-theme-1">Brak plików</span>
+                </div>
+                <div class="mt-3" v-if="user.id === props.solution.author_id">
+                    <label class="form-label"> {{ $t('challengesNew.file') }}</label>
+                    <div class="rounded-md pt-4">
+                        <div class="flex flex-wrap px-4">
+                            <Dropzone
+                                style="position: relative;
+                                                    display: flex;"
+                                ref-key="dropzoneSingleRef"
+                                :options="{
+                                url: '/api/challenge/images/store',
+                                thumbnailWidth: 150,
+                                maxFilesize: 8,
+                                maxFiles: 8,
+                                previewTemplate: '<div style=\'display: none\'></div>'}"
+                                class="dropzone">
+                                <div class="px-4 py-4 flex items-center cursor-pointer relative">
+                                    <ImageIcon class="w-4 h-4 mr-2"/>
+                                    <span class="text-theme-1 dark:text-theme-10 mr-1">
+                                        {{ $t('challengesNew.file') }}
+                                    </span>
+                                    {{ $t('challengesNew.fileUpload') }}
+                                </div>
+                            </Dropzone>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="user.id === props.solution.author_id" class="flex flex-col lg:flex-row items-center p-5" style="justify-content: center;">
+                <button class="btn btn-outline-secondary py-1 px-2" @click="saveFiles">
+                    {{ $t('global.save') }}
+                </button>
+            </div>
+        </div>
+    </ModalFile>
 </template>
 
 <script>
 import CommentSection from "./social/CommentSection";
-import {computed, getCurrentInstance, onMounted, ref} from "vue";
+import {computed, getCurrentInstance, onMounted, provide, ref} from "vue";
 import router from "../router";
 import {useToast} from "vue-toastification";
 import TeamsPanelSolution from "../pages/Challenges/components/TeamsPanel";
+import ModalFile from "./ModalFile";
+import RequestHandler from "../compositions/RequestHandler";
 
 export default {
     name: "SingleSolutionPost",
-    components: {CommentSection, TeamsPanelSolution},
+    components: {CommentSection, TeamsPanelSolution, ModalFile},
     props: {
+        index: Number,
         challenge: Object,
         user: Object,
         solution: Object,
         canAccept: Boolean,
         canEdit: Boolean,
         activeTab: String,
-        type: String
+        type: String,
+        acceptChallengeSolutions: Boolean,
+        canDeleteSolution: Boolean,
+        canEditSolution: Boolean,
+        addSolutionOffer: Boolean,
+        canPublishSolution: Boolean
     },
     setup(props,context) {
         const toast = useToast();
@@ -124,20 +181,68 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         const activeTab = ref(false);
         const inTeam = ref(false);
+        const show = ref(false);
+        const dropzoneSingleRef = ref();
+        const solutionFiles = ref([]);
+        const guard = ref(false);
+        const images = ref([]);
+
+        const modalClosed = () => {
+            show.value = false;
+        }
+
+        const showAddFileModal = (id) => {
+                show.value = !show.value;
+            }
+
         const switchTab = () => {
-            console.log('Switch2244444');
-            console.log(props.solution + ' its props solution');
             emitter.emit("activeTab", {name: 'teams', who: 'solution', solution: props.solution});
         }
 
         const teams = computed(() => {
-            return props.solution.teams
+            return props.solution.teams;
         }, () => {
 
         });
 
+        const saveFiles = async () => {
+            RequestHandler('solution/' + props.solution.id + '/files/save', 'post', {
+                solutionFiles: solutionFiles.value
+            }, (response) => {
+            });
+        }
+
+        const downloadFile = async (url,name) => {
+            axios({
+                url: url,
+                method: 'GET',
+                responseType: 'blob',
+            }).then((response) => {
+                var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+                var fileLink = document.createElement('a');
+
+                fileLink.href = fileURL;
+                fileLink.setAttribute('download', name);
+                document.body.appendChild(fileLink);
+
+                fileLink.click();
+            });
+        }
+
         onMounted(() => {
+            getSolutionFiles();
             checkTeam();
+            if(user.id === props.solution.author_id){
+                const elDropzoneSingleRef = dropzoneSingleRef.value;
+                elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                    solutionFiles.value.push(JSON.parse(resp.xhr.response).payload);
+                    images.value.push(JSON.parse(resp.xhr.response).payload);
+                    toast.success('Zdjecie zostało wgrane poprawnie!');
+                });
+                elDropzoneSingleRef.dropzone.on("error", () => {
+                    toast.error("Maksymalnie można wgrać 8 plików!");
+                });
+            }
         });
 
         const addOffer = () => {
@@ -145,11 +250,8 @@ export default {
         }
 
         const checkTeam = () => {
-            console.log({user_id: user.id, challenge_id: props.solution.id});
             axios.post('/api/solution/check-team', {user_id: user.id, solution_id: props.solution.id})
                 .then(response => {
-                    console.log("response.data")
-                    console.log(response.data)
                     if (response.data.success) {
                         inTeam.value = response.data.payload || (user.id == props.solution.author_id);
                     } else {
@@ -161,29 +263,23 @@ export default {
         const like = async (solution) => {
             axios.post('/api/solution/user/like', {id: solution.id})
                 .then(response => {
-                    console.log(response.data);
                     if (response.data.success) {
                         solution.liked = true;
-                        console.log('HOW MANY LIKES');
                         emitter.emit('liked', {id: solution.id})
                     } else {
-                        // toast.error(response.data.message);
                     }
                 })
         }
         const dislike = async (solution) => {
             axios.post('/api/solution/user/dislike', {id: solution.id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
                         solution.liked = false;
-                        console.log('HOW MANY DISLIKES');
                         emitter.emit('disliked', {id: solution.id})
                     } else {
                     }
                 })
         }
-
 
         const acceptSolution = () => {
             axios.post('/api/solution/accept', {id: solution.id})
@@ -200,14 +296,12 @@ export default {
         }
 
         const deleteSolution = async() => {
-            axios.post('/api/solution/delete', {id: solution.id})
+             axios.post('/api/solution/delete', {id: props.solution.id})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Rozwiązanie zostało usunięte');
-                        emitter.emit('deletesolution', {index: solution.id});
-                        // router.push({name: 'challenges'});
+                        emitter.emit('deletesolution', {solution: solution});
                     } else {
-                        // toast.error(response.data.message);
                     }
                 })
         }
@@ -220,7 +314,16 @@ export default {
                         toast.success('Rozwiązanie zostało opublikowane');
                         emitter.emit("isPublic", {isPublic: true});
                     } else {
-                        // toast.error(response.data.message);
+                    }
+                })
+        }
+
+        const getSolutionFiles = () => {
+            axios.post('/api/solution/files/get', {id: solution.id})
+                .then(response => {
+                    if (response.data.success) {
+                        solutionFiles.value = response.data.payload;
+                    } else {
                     }
                 })
         }
@@ -233,7 +336,6 @@ export default {
                         props.solution.rejected = 1;
                         props.solution.selected = 0;
                     } else {
-                        // toast.error(response.data.message);
                     }
                 })
         }
@@ -245,12 +347,35 @@ export default {
                         solution.status = 0;
                         toast.success('Rozwiązanie jest teraz prywatne');
                     } else {
-                        // toast.error(response.data.message);
                     }
                 })
         }
 
+        const deleteFile = (index,file) => {
+            RequestHandler('solution/file/delete', 'post', {
+                solution_id: props.solution.id,
+                file_id: file.id,
+            }, (response) => {
+                solutionFiles.value.splice(index, 1);
+            });
+        }
+
+        provide("bind[dropzoneSingleRef]", el => {
+            dropzoneSingleRef.value = el;
+        });
+
         return {
+            downloadFile,
+            getSolutionFiles,
+            images,
+            guard,
+            saveFiles,
+            solutionFiles,
+            deleteFile,
+            dropzoneSingleRef,
+            showAddFileModal,
+            modalClosed,
+            show,
             switchTab,
             teams,
             activeTab,

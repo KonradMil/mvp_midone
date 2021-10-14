@@ -2,7 +2,7 @@
     {
         "icon": {
             "name": "StartAnimationButton",
-            "url": "https://platform.dbr77.com/s3/builder_icons/play_radial.png",
+            "url": "/s3/builder_icons/play_radial.png",
             "bundled": false,
             "type": ""
         },
@@ -20,7 +20,7 @@
     {
         "icon": {
             "name": "PauseAnimation",
-            "url": "https://platform.dbr77.com/s3/builder_icons/pause_radial.png",
+            "url": "/s3/builder_icons/pause_radial.png",
             "bundled": false,
             "type": ""
         },
@@ -38,7 +38,7 @@
     {
         "icon": {
             "name": "StopAnimation",
-            "url": "https://platform.dbr77.com/s3/builder_icons/stop_radial.png",
+            "url": "/s3/builder_icons/stop_radial.png",
             "bundled": false,
             "type": ""
         },
@@ -56,7 +56,7 @@
     {
         "icon": {
             "name": "ShowVisualRanges",
-            "url": "https://platform.dbr77.com/s3/builder_icons/ranges_radial.png",
+            "url": "/s3/builder_icons/ranges_radial.png",
             "bundled": false,
             "type": ""
         },

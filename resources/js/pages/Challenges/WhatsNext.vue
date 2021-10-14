@@ -39,7 +39,9 @@ name: "WhatsNext",
     props: {
         challenge: Object,
         user: Object,
-        solutions: Array
+        solutions: Array,
+        stage: Number,
+        id: Number,
     },
     setup(props) {
         const app = getCurrentInstance();
@@ -79,7 +81,7 @@ name: "WhatsNext",
         }, {})
 
         const isOffer = async () => {
-            axios.post('/api/offer/user/check', {id: props.challenge.id})
+            axios.post('/api/offer/user/check', {id: props.id})
                 .then(response => {
                     if (response.data.success) {
                         check.value = response.data.payload;
@@ -131,9 +133,9 @@ name: "WhatsNext",
         });
 
         // const filter = () => {
-        //     console.log(solutions.value + '->  solutions.value');
+
         //     solutions.value.forEach(function (solution) {
-        //         console.log(solution.author_id.value + 'author_id');
+
         //         if(solution.author_id.value === props.user.id) {
         //             isSolutions.value = true;
         //         } else if((solution.published.value === 1) && (solution.author.id.value === props.user.id)) {
@@ -143,19 +145,19 @@ name: "WhatsNext",
         // }
 
         // const getSolutionRepositories = async () => {
-        //     console.log(props.challenge.id);
+
         //     solutions.value = GetUserSolutionsChallenge(props.challenge.id);
         // }
 
         const doMe = () => {
             try {
-                console.log('filter is coming');
-                if(props.user.type === 'integrator') {
-                    if(isSelected.value === true && check.value === false){
-                        text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';
-                        action.value = {redirect: ''}
+                if(props.stage === 3){
+                    text.value = 'W raporcie z wizji lokalnej uzwględnij wszelkie zmiany jakie należy wprowadzić w projekcie po wizycie na zakładzie.';
+                    action.value = {redirect: '' }
+                } else if(props.user.type === 'integrator') {
+                     if(isSelected.value === true && check.value === false){
+                        text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';action.value = {redirect: ''}
                     } else if(isSolutions.value === false && props.challenge.stage === 1) {
-                        console.log('HERE');
                         text.value = 'Na tym etapie Inwestor oczekuje na rozwiązania technologiczne. Przygotuj koncepcję swojego rozwiązania.';
                         action.value = {redirect: ''}
                     } else if(isPublic.value === false && isSolutions.value === true) {
@@ -171,7 +173,7 @@ name: "WhatsNext",
                         text.value = 'Opublikuj przygotowaną ofertę.';
                         action.value = {redirect: ''}
                     }
-                } else {
+                } else if(props.user.type === 'investor'){
                     if(props.challenge.solutions < 1 && props.challenge.stage === 1) {
                         text.value = 'Oczekuj na nowe rozwiązania.';
                         buttonText.value = '';
@@ -199,10 +201,6 @@ name: "WhatsNext",
         }
 
         onMounted(() => {
-            console.log("props");
-            console.log(props);
-            console.log(props.challenge);
-            console.log(props.user);
 
         });
 

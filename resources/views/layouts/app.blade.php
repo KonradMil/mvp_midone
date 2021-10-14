@@ -11,11 +11,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+{{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
-{{--    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900&display=swap&subset=latin-ext" rel="stylesheet">--}}
     <style>
         body {
 
@@ -239,7 +239,7 @@ color: white;
             <div class="row">
                 <!-- Grid column -->
                 <div class="col-md-2 col-12 offset-md-1">
-                    <img src="{{url('images/logo_dbr_white.png')}}" style="max-width: 200px;width: 100%; padding: 30px"/>
+                    <img src="{{url('s3/twopointo/logo_dbr_white.png')}}" style="max-width: 200px;width: 100%; padding: 30px"/>
                 </div>
                 <!-- Grid column -->
 

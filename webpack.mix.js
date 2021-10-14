@@ -13,7 +13,7 @@ let postcssImport = require('postcss-import');
  */
 // mix.options({
 //     hmrOptions: {
-//         host: 'platform.dbr77.com',
+//         host: 'staging.appworks-dev.pl',
 //         port: '8080'
 //     }
 // });
@@ -50,7 +50,8 @@ mix.js('resources/js/app.js', 'public/js')
         [postcssImport]
         ]
 });
-
+// mix.browserSync('homestead.test');
+mix.version();
     //
     // [ tailwind("tailwind.config.js"),
     //     postcssImport()

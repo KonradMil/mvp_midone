@@ -57,8 +57,8 @@ name: "Avatar",
             const imgError = ref(false);
 
             const onImgError = (evt) => {
-                console.log("r");
-                console.log(evt);
+
+
                 imgError.value = true
             }
 
@@ -141,13 +141,13 @@ name: "Avatar",
                 font: `${Math.floor(props.size / 2.5)}px/${props.size}px Roboto, Arial, sans-serif`,
                 color: fontColor.value
             }
-            // console.log(initialBackgroundAndFontStyle);
+
             const backgroundAndFontStyle = (isImage.value)
                 ? imgBackgroundAndFontStyle
                 : initialBackgroundAndFontStyle
-            // console.log(backgroundAndFontStyle);
+
             Object.assign(style, backgroundAndFontStyle)
-            // console.log(style);
+
             return style
         })
 

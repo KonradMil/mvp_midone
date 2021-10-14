@@ -12,9 +12,9 @@ export default function GetInvites(handle) {
         axios.post('/api/teams/user/invites/get', {})
             .then(response => {
                 if (response.data.success) {
-                    // console.log(response.data);
+
                     list.value = response.data.payload;
-                    console.log(handle);
+
                     try {
                         handle(response.data);
                     }catch (e) {

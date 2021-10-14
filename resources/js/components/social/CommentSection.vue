@@ -26,10 +26,10 @@
             <span v-if="(current_object_focus == object.id && current_object_focus_showComments) && comments.length != 0">{{$t('CommentSection.hideComments')}}</span>
         </a>
     </div>
-    <div class="w-full flex items-center mt-3">
+    <div class="w-full flex items-center mt-3" v-if="guard !==3">
         <div class="w-8 h-8 flex-none image-fit mr-3">
             <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" :size="35" color="#FFF"
-                    background-color="#930f68"/>
+                    background-color="#5e50ac"/>
         </div>
         <div class="flex-1 relative text-gray-700">
             <form role="form" @submit.prevent>
@@ -77,14 +77,15 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         const user = window.Laravel.user;
         const guard = ref();
+
         onMounted(function () {
             if(props.object.stage===undefined){
                 guard.value = props.object.archive + 2;
             }else{
                 guard.value = props.object.stage;
             }
-            console.log(guard.value);
-            console.log(props.object);
+
+
             comments.value = props.object.comments;
             obj.value = props.object;
         });
@@ -94,9 +95,9 @@ export default {
         emitter.on('liked', e =>  like(e.id) )
 
         const like = (id) => {
-            console.log('LIKED EVENT ON');
-            console.log([id, obj.value]);
-            console.log(obj.value.likes);
+
+
+
             if(obj.value.id === id) {
                 obj.value.likes = obj.value.likes + 1;
             }
@@ -112,9 +113,9 @@ export default {
         emitter.on('disliked', e =>  dislike(e.id) )
 
         const dislike = (id) => {
-            console.log('DISLIKED EVENT ON');
-            console.log([id, obj.value]);
-            console.log(obj.value.likes);
+
+
+
             if(obj.value.id === id) {
                 obj.value.likes = obj.value.likes - 1;
             }

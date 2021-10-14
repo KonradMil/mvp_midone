@@ -14,7 +14,7 @@ export default function AddObjectTeam(who,name,id, handle) {
     async function addObjectTeam(who,name,id, handle) {
         axios.post('/api/teams/user/add/team', {who: who,name: name,id: id})
             .then(response => {
-                // console.log(response.data)
+
                 if (response.data.success) {
                     list.value = response.data.payload;
                     handle(response.data.payload);

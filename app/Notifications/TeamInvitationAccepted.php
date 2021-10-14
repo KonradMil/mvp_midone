@@ -4,21 +4,22 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class TeamInvitationAccepted extends Notification
 {
     use Queueable;
-
+    public $team;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($team)
     {
-        //
+        $this->team = $team;
     }
 
     /**
@@ -29,7 +30,7 @@ class TeamInvitationAccepted extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','broadcast', 'database'];
     }
 
     /**
@@ -45,7 +46,27 @@ class TeamInvitationAccepted extends Notification
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'message' => 'Użytkownik zaakceptował zaproszenie do Twojego zespołu: ' . $this->team->name .'.',
+            'link' => '/teams',
+            'params' => '',
+            'name' => 'Teams',
+            'id' => ''
+        ]);
+    }
 
+    public function toDatabase($notifable)
+    {
+        return [
+            'message' => 'Użytkownik zaakceptował zaproszenie do Twojego zespołu: ' . $this->team->name .'.',
+            'link' => '/teams',
+            'params' => '',
+            'name' => 'Teams',
+            'id' => '',
+        ];
+    }
     /**
      * Get the array representation of the notification.
      *

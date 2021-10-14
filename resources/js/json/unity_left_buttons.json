@@ -53,12 +53,6 @@
             "tooltip": "",
             "alttext": "",
             "value": 8
-        },
-        "geometric": {
-            "src": "\/s3/builder_icons/geometric_simple.png",
-            "tooltip": "",
-            "alttext": "",
-            "value": 9
         }
     }
 }

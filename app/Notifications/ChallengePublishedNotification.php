@@ -42,9 +42,10 @@ class ChallengePublishedNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Nowe wyzwanie zostało opublikowane.')
-                    ->action('Sprawdź', url('https://platform.dbr77.com/challenges/card/' . $this->challenge->id))
-                    ->line('Dziękujemy za korzystanie z platformy DBR77!');
+            ->subject('DBR77: wyzwanie opublikowane')
+            ->line('Nowe wyzwanie zostało opublikowane.')
+            ->action('Sprawdź', url(env('APP_PATH') . '/challenges/card/' . $this->challenge->id))
+            ->line('Dziękujemy za korzystanie z platformy DBR77!');
     }
 
     public function toBroadcast($notifiable)

@@ -1,22 +1,19 @@
 import {watch, unref, onUnmounted} from 'vue';
 function outgoing(game, action, data, json) {
-    console.log('ADASD');
-    console.log(game);
+
     let finalData = '';
     if(json) {
         if(data.value != undefined) {
-            console.log(data.value);
             finalData = JSON.stringify(data.value);
         } else {
-            console.log(data);
             finalData = JSON.stringify(data);
         }
 
     } else {
-        console.log(data);
+
         finalData = data;
     }
-    console.log(['NetworkBridge', action, finalData]);
+
     game.message('NetworkBridge', action, finalData);
 
     // this.gameWindow.message('NetworkBridge', 'OrderPart', JSON.stringify({
@@ -34,14 +31,16 @@ export default function unityActionOutgoing(gameWindow) {
     const game = gameWindow;
 
     function placeObject(data) {
-        console.log('PLACING');
-        console.log(game);
-        console.log(data);
+
         outgoing(game, 'OrderPart', {
             model_name: data.name,
             model_id: data.id,
-            prefab_url: 'https://' + location.host + '/s3/models/' + data.model_file
+            prefab_url: window.location.protocol+'//' + location.host + '/s3/models/' + data.model_file
         }, true)
+    }
+
+    function workshopObjectLoad(object) {
+        outgoing(game, 'LoadWorkshopItems', object)
     }
 
     function deleteObject() {
@@ -64,11 +63,17 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'ChangeCamera', val)
     }
 
+    function launchTutorial () {
+        outgoing(game, 'LaunchTutorial', '');
+    }
+
     function save() {
         outgoing(game, 'SaveStructure', '');
     }
 
     function loadWorkshopObject(val) {
+
+
         outgoing(game, 'LoadWorkshopItems', val, true);
     }
 
@@ -129,7 +134,6 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function updateLabel(val) {
-        console.log(val);
         outgoing(game, 'UpdateLabel', val, true);
     }
 
@@ -171,7 +175,13 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function loadStructure (val) {
-        outgoing(game, 'LoadStructure', val, true);
+
+        if(val && Object.keys(val).length === 0 && val.constructor === Object) {
+
+        } else {
+            outgoing(game, 'LoadStructure', val, true);
+        }
+
     }
 
     function getParts () {
@@ -215,6 +225,7 @@ export default function unityActionOutgoing(gameWindow) {
         removeLine,
         updateCurrentAnimation,
         prefix,
-        loadWorkshopObject
+        loadWorkshopObject,
+        launchTutorial
     };
 }

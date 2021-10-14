@@ -15,9 +15,9 @@ export default function SaveReport(data, handle) {
     async function saveReport(data) {
         axios.post('/api/report/user/create', {data})
             .then(response => {
-                // console.log(response.data)
+
                 if (response.data.success) {
-                    // console.log(response.data);
+
                     list.value = response.data.payload;
                     handle(response.data.payload);
                     toast.success(response.data.message);

@@ -1,5 +1,5 @@
 <template>
-    <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9 flex lg:block flex-col-reverse">
+    <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9 md:col-span-10 flex lg:block flex-col-reverse">
         <div v-if="objects.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie masz jeszcze żadnych upublicznionych obiektów.
         </div>
@@ -41,7 +41,7 @@ export default {
                     if (response.data.success) {
                         objects.value = response.data.payload;
                     } else {
-                        console.log(response)
+
                     }
                 })
                 .catch(function (error) {

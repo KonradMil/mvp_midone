@@ -2,27 +2,31 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\API\UserController;
-use App\Models\Challenges\Challenge;
-use App\Models\Reports\Report;
-use App\Models\Solutions\Solution;
+use App\Http\Controllers\UserController;
 use BeyondCode\Comments\Contracts\Commentator;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableInterface;
 use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
-use Mpociot\Teamwork\Traits\UserHasTeams;
 
-class User extends Authenticatable implements ReacterableInterface, Commentator
+/**
+ *
+ */
+class User extends Authenticatable implements ReacterableInterface, Commentator, MustVerifyEmail
 {
-    use HasFactory, Notifiable, Reacterable, UserHasTeams;
+    use HasFactory, Notifiable, Reacterable;
 
-    public function needsCommentApproval($model): bool
-    {
-        return false;
-    }
+    const USER_TYPE_INVESTOR = 'investor';
+
+    const USER_TYPE_INTEGRATOR = 'integrator';
+
+    const USER_TYPE_ADMIN = 'admin';
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +35,7 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
      */
     protected $fillable = [
         'name',
+        'lastname',
         'email',
         'password',
         'phone',
@@ -48,7 +53,11 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
         'offer_accepted',
         'twofa',
         'authy_id',
-        'type'
+        'type',
+        'email_verified_at',
+        'google_id',
+        'facebook_id',
+        'avatar'
     ];
 
     /**
@@ -60,6 +69,7 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
         'password',
         'remember_token',
     ];
+
 
     /**
      * The attributes that should be cast to native types.
@@ -76,37 +86,89 @@ class User extends Authenticatable implements ReacterableInterface, Commentator
         'privacy_policy' => 'boolean',
     ];
 
-    public function reports()
+    /**
+     * @param mixed $model
+     * @return bool
+     */
+    public function needsCommentApproval($model): bool
+    {
+        return false;
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function teams(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class, 'team_user')->withPivot('publishChallenge', 'editChallenge', 'acceptChallengeOffer', 'publishSolution', 'addSolutionOffer', 'acceptChallengeSolution', 'canEditSolution', 'canDeleteSolution', 'showSolutions')->using(TeamUser::class)->withTimestamps();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function reports(): HasMany
     {
         return $this->hasMany(Report::class, 'author_id');
     }
 
-    public function challenges()
+    /**
+     * @return HasMany
+     */
+    public function local_visions(): HasMany
+    {
+        return $this->hasMany(LocalVision::class, 'author_id');
+    }
+    /**
+     * @return HasMany
+     */
+    public function visit_dates(): HasMany
+    {
+        return $this->hasMany(VisitDate::class, 'author_id');
+    }
+    /**
+     * @return BelongsTo
+     */
+    public function challenges(): BelongsTo
     {
         return $this->belongsTo(Challenge::class, 'author_id');
     }
 
-    public function solutions()
+    /**
+     * @return BelongsTo
+     */
+    public function solutions(): BelongsTo
     {
         return $this->belongsTo(Solution::class, 'author_id');
     }
 
-    public function own_company()
+    /**
+     * @return HasOne
+     */
+    public function company(): HasOne
     {
         return $this->hasOne(Company::class, 'author_id');
     }
 
-    public function companies()
+    /**
+     * @return BelongsToMany
+     */
+    public function companies(): BelongsToMany
     {
-        return $this->belongsToMany(Company::class, 'user_companies', 'company_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(Company::class, 'user_companies', 'user_id', 'company_id')->withTimestamps();
     }
 
-    public function objects()
+    /**
+     * @return BelongsToMany
+     */
+    public function objects(): BelongsToMany
     {
         return $this->belongsToMany(WorkshopObject::class, 'user_workshop_objects', 'author_id', 'workshop_object_id');
     }
 
-    public function permissions()
+    /**
+     * @return array
+     */
+    public function permissions(): array
     {
         return UserController::userPermissions($this);
     }

@@ -1,11 +1,11 @@
 <template>
-    <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9 flex lg:block flex-col-reverse">
+    <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9 md:col-span-10 flex lg:block flex-col-reverse">
         <div v-if="objects.length == 0" class="text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
             Nie masz jeszcze żadnych zapisanych obiektów.
         </div>
         <div class="grid grid-cols-12 gap-6 mt-5">
-            <div v-for="(object, index) in objects" :key="'workshop_object' + index" v-if="objects.length != 0" class="box intro-y col-span-12 lg:col-span-4 xxl:col-span-4 flex lg:block flex-col-reverse">
-                <SingleWorkshopObject :object="object" :key="'obiekt_' + index" :own="true"/>
+            <div v-for="(object, index) in objects" :key="'workshop_object' + index" v-if="objects.length != 0" @click="send(object)" class="box intro-y col-span-12 lg:col-span-4 xxl:col-span-4 flex lg:block flex-col-reverse">
+                <SingleWorkshopObject :object="object" :key="'obiekt_' + index" :own="true" />
             </div>
         </div>
     </div>
@@ -36,13 +36,18 @@ export default {
             getObjects();
         });
 
+        const send = (object) => {
+
+            emitter.emit('workshop_object_clicked', {object: object});
+        }
+
         const getObjects = () => {
             axios.post('/api/workshop/models/get/all', {own: true})
                 .then(response => {
                     if (response.data.success) {
                         objects.value = response.data.payload;
                     } else {
-                        console.log(response)
+
                     }
                 })
                 .catch(function (error) {
@@ -55,6 +60,7 @@ export default {
         });
 
         return {
+            send,
             objects,
         }
     }

@@ -44,8 +44,9 @@ class OfferPublishedNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+            ->subject('DBR77: oferta opublikowana')
             ->line('Oferta została opublikowana do rozwiązania: ' . $this->challenge->name .'.')
-            ->action('Sprawdź', url('https://platform.dbr77.com/challenges/card/' . $this->challenge->id))
+            ->action('Sprawdź', url(env('APP_PATH') . '/challenges/card/' . $this->challenge->id))
             ->line('Dziękujemy za korzystanie z platformy DBR77!');
     }
 

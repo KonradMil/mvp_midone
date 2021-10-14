@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\SolutionAccepted;
-use App\Models\Challenges\Challenge;
+use App\Models\Challenge;
 use App\Models\User;
 use App\Notifications\SolutionAcceptedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;

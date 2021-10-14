@@ -13,10 +13,10 @@ return [
     |
     */
 
-'stateful' => explode(',', env(
-    'SANCTUM_STATEFUL_DOMAINS',
-    'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1,dbr2.test, devsys.dbr77.com, platform.dbr77.com, platform.dbr77.com, platform.dbr77.com'
-)),
+    'stateful' => explode(',', env(
+        'SANCTUM_STATEFUL_DOMAINS',
+        'homestead.test, localhost,localhost:3000,localhost:8000,localhost:8002,127.0.0.1,127.0.0.1:8000,::1,dbr2.test, devsys.dbr77.com, staging.appworks-dev.pl, devsys.appworks-dev.pl, staging.appworks-dev.pl:8002, staging.appworks-dev.pl'
+    )),
 
     /*
     |--------------------------------------------------------------------------

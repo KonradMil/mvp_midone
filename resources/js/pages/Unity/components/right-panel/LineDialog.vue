@@ -53,7 +53,7 @@ export default {
         const l = ref({interval: 10, delay: 0, model_name: '', cargo: {
                 model_name: "9195a37a-9a13-12e3-8591-012165a3a613",
                 model_id: "Karton średni",
-                prefab_url: "https://platform.dbr77.com/models/carton_sredni",
+                prefab_url: window.app_path + "/models/carton_sredni",
                 additional_data: ""
             }, animables: []});
         const selected = ref(0);
@@ -61,27 +61,27 @@ export default {
 
 
         watch(l, (lab, prevLabel) => {
-            console.log('CHANGE');
-            console.log(l);
-            console.log(lab);
+
+
+
             context.emit("update:modelValue", lab);
         }, {deep: true})
 
 
         watch(selected, (lab, prevLabel) => {
-            console.log('CHANGE');
-            console.log( l.value.cargo);
+
+
             l.value.cargo.model_name = detailsAr.value[lab].model_name;
             l.value.cargo.model_id = detailsAr.value[lab].model_id;
-            l.value.cargo.prefab_url = 'https://platform.dbr77.com' + detailsAr.value[lab].prefab_url;
+            l.value.cargo.prefab_url = window.app_path + detailsAr.value[lab].prefab_url;
             context.emit("update:line", lab);
 
         }, {deep: true})
 
 
         onMounted(() => {
-            console.log('HERE I GOT AGAINAAAA');
-            console.log(props.modelValue);
+
+
             if (props.modelValue.data.interval != undefined && props.modelValue.data.interval != '') {
                 l.value.interval = parseInt(props.modelValue.data.interval);
             } else {
@@ -102,8 +102,8 @@ export default {
                 }
             }
 
-            console.log('HERE I GOT AGAIN');
-            console.log(props.modelValue.data);
+
+
             l.value.index = parseInt(props.modelValue.data.index);
             l.value.cargo = props.modelValue.data.cargo;
             l.value.animables = props.modelValue.data.animables;

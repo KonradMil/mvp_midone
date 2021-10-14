@@ -224,7 +224,7 @@ export default {
     setup(props) {
         const user = window.Laravel.user;
 
-        console.log('Financial.ID!!!!' + props.financial_before.id);
+
         onMounted(() => {
 
         });

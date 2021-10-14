@@ -26,7 +26,7 @@ export default {
         const l = ref({duration: 1});
 
         watch(l, (lab, prevLabel) => {
-            console.log('CHANGE');
+
             context.emit("update:animable", lab);
         }, {deep: true})
 

@@ -2,7 +2,7 @@
 
 namespace App\Notifications;
 
-use App\Models\Challenges\Challenge;
+use App\Models\Challenge;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\BroadcastMessage;
@@ -46,8 +46,9 @@ class QuestionAddedNotidiaction extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+            ->subject('DBR77: pytanie do wyzwania')
             ->line('Nowe pytanie zostało dodane do Twojego wyzwania ' . $this->challenge->name . '.')
-            ->action('Sprawdź', url('https://platform.dbr77.com/challenges/card/' . $this->challenge->id))
+            ->action('Sprawdź', url(env('APP_PATH') . '/challenges/card/' . $this->challenge->id))
             ->line('Dziękujemy za korzystanie z platformy DBR77!');
     }
 
@@ -55,7 +56,7 @@ class QuestionAddedNotidiaction extends Notification
     {
         return new BroadcastMessage([
             'message' => 'Nowe pytanie zostało dodane do Twojego wyzwania: ' . $this->challenge->name,
-            'link' => url('https://platform.dbr77.com/challenges/card/' . $this->challenge->id),
+            'link' => url(env('APP_PATH') . '/challenges/card/' . $this->challenge->id),
             'author' => $this->event->causer,
         ]);
     }
@@ -64,7 +65,7 @@ class QuestionAddedNotidiaction extends Notification
     {
         return [
             'message' => 'Nowe pytanie zostało dodane do Twojego wyzwania: ' . $this->challenge->name,
-            'link' => url('https://platform.dbr77.com/challenges/card/' . $this->challenge->id),
+            'link' => url(env('APP_PATH') . '/challenges/card/' . $this->challenge->id),
             'author' => $this->event->causer,
         ];
     }

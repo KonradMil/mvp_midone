@@ -11,9 +11,9 @@ export default function SaveModel(data) {
     async function saveModel(data) {
         axios.post('/api/models/add', {data})
             .then(response => {
-                // console.log(response.data)
+
                 if (response.data.success) {
-                    // console.log(response.data);
+
                     list.value = response.data.payload;
                 } else {
                     // toast.error(response.data.message);

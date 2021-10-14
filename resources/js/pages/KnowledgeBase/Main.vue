@@ -54,7 +54,7 @@ export default {
         }
 
         const postsList = computed(() => {
-            console.log(posts.value);
+
            if(posts.value.list != undefined) {
                return posts.value.list;
            } else {

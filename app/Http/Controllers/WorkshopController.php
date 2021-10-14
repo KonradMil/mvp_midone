@@ -3,18 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\WorkshopObject;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Http\File;
 
+
+/**
+ *
+ */
 class WorkshopController extends Controller
 {
 
-    public function getWorkshopModels(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getWorkshopModels(Request $request): JsonResponse
     {
         $own = $request->input('own');
 
-        if(!empty($own)) {
+        if (!empty($own)) {
             $objects = WorkshopObject::where('author_id', '=', Auth::user()->id)->with('users')->get();
         } else {
             $objects = WorkshopObject::where('public', '=', 1)->with('users')->get();
@@ -27,17 +38,20 @@ class WorkshopController extends Controller
         ]);
     }
 
-    public function saveWorkshopModel(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function saveWorkshopModel(Request $request): JsonResponse
     {
 //        $id = $request->input('id');
         $j = $request->input('object')['data'];
-        if(!empty($j['id'])) {
+        if (!empty($j['id'])) {
             $object = WorkshopObject::find($j['id']);
         } else {
             $object = new WorkshopObject();
             $object->author_id = Auth::user()->id;
         }
-
 
 
         if (!empty($j['screenshot'])) {
@@ -60,26 +74,39 @@ class WorkshopController extends Controller
         ]);
     }
 
-    public function processSS($ss)
+    /**
+     * @param $ss
+     * @return array
+     */
+    public function processSS($ss): array
     {
         $content = base64_decode($ss);
         $name = uniqid('ss_') . '.jpg';
         $path = public_path('screenshots/' . $name);
-        \Illuminate\Support\Facades\File::put($path, $content);
-        Image::make($path)->resize(1000, null, function ($constraint) {
+        $image_normal = Image::make($content)->resize(1000, null, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
-        })->save($path);
+        });
+        $image_normal->save(public_path('images/'. $name));
 
-        return ['absolute_path' => $path, 'relative' => ('screenshots/' . $name)];
+        Storage::disk('s3')->putFileAs('screenshots/', new File(public_path('images/'. $name)), $name);
+
+        return ['absolute_path' => $path, 'relative' => ('s3/screenshots/' . $name)];
     }
 
+    /**
+     * @param Request $request
+     */
     public function likeObject(Request $request)
     {
 
     }
 
-    public function delete(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function delete(Request $request): JsonResponse
     {
         $model = WorkshopObject::find($request->input('id'));
         $model->delete();
@@ -91,7 +118,11 @@ class WorkshopController extends Controller
         ]);
     }
 
-    public function publish(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function publish(Request $request): JsonResponse
     {
         $model = WorkshopObject::find($request->input('id'));
         $model->public = 1;
@@ -104,7 +135,11 @@ class WorkshopController extends Controller
         ]);
     }
 
-    public function copy(Request $request)
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function copy(Request $request): JsonResponse
     {
         $model = WorkshopObject::find($request->input('id'));
         $modelNew = $model->replicate();

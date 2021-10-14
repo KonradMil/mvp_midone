@@ -1,11 +1,11 @@
 const state = () => {
+    // {
+    //     icon: "HomeIcon",
+    //         pageName: "dashboard",
+    //     title: "Dashboard",
+    // },
     return {
         menu: [
-            {
-                icon: "HomeIcon",
-                pageName: "dashboard",
-                title: "Dashboard",
-            },
             {
                 icon: "HomeIcon",
                 pageName: "models",
@@ -135,13 +135,18 @@ const state = () => {
             },
             {
                 icon: "InboxIcon",
-                pageName: "communication",
-                title: "Pomoc"
+                pageName: "studio-playground-saves",
+                title: "Studio playground"
             },
+
         ]
     };
 };
-
+// {
+//     icon: "InboxIcon",
+//         pageName: "communication",
+//     title: "Pomoc"
+// },
 // getters
 const getters = {
     menu: state => state.menu

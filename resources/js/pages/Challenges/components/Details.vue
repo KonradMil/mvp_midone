@@ -155,7 +155,7 @@ name: "Details",
         const details = ref({});
 
         watch(details, (lab, prevLabel) => {
-            console.log('CHANGE 2');
+
             context.emit("update:details", lab);
         }, {deep: true});
 

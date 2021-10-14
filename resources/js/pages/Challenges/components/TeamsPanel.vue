@@ -3,19 +3,6 @@
         <div class="col-span-12">
             <h2 class="intro-y text-lg font-medium mt-5">{{ $t('teams.teams') }}</h2>
             <div class="grid grid-cols-12 gap-6 mt-5">
-<!--                <div-->
-<!--                    class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2"-->
-<!--                >-->
-<!--                    <div class="w-56 relative text-gray-700 dark:text-gray-300 mr-4">-->
-<!--                        <input-->
-<!--                            type="text"-->
-<!--                            class="form-control w-56 box pr-10 placeholder-theme-13"-->
-<!--                            :placeholder="$t('teams.name')"-->
-<!--                            v-model="new_team_name"-->
-<!--                        />-->
-<!--                    </div>-->
-<!--                    <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="addObjectTeam">{{ $t('teams.addTeam') }}</button>-->
-<!--                </div>-->
                 <div class="intro-y col-span-6 xl:col-span-6 md:col-span-6 sm:col-span-12">
                     <h5>
                         Dostępne zespoły
@@ -25,7 +12,7 @@
                             <div class="box">
                                 <div class="flex flex-col lg:flex-row items-center p-5">
                                     <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                                        <Avatar :username="team.name" color="#FFF" background-color="#930f68"/>
+                                        <Avatar :username="team.name" color="#FFF" background-color="#5e50ac"/>
                                     </div>
                                     <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
                                         <a href="" class="font-medium">{{ team.name }}</a>
@@ -37,7 +24,7 @@
                                         </div>
                                     </div>
                                     <div class="flex mt-4 lg:mt-0">
-                                        <button v-if="challenge.stage !== 3" class="btn btn-primary py-1 px-2 mr-2" @click="addToSelected(team.id)">{{ $t('teams.add') }}</button>
+                                        <button v-if="challenge.stage !== 3" class="btn btn-primary py-1 px-2 mr-2" @click.prevent="addToSelected(team.id,index)">{{ $t('teams.add') }}</button>
                                         <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
                                             {{ $t('teams.details') }}
                                         </button>
@@ -48,7 +35,7 @@
                                         <div class="p-5">
                                             <div v-for="(member, index) in team.users" class="relative flex items-center" :key="'member_' + index">
                                                 <div class="w-12 h-12 flex-none image-fit">
-                                                    <Avatar :src="'/s3/avatars/' + member.avatar" :username="member.name + ' ' + member.lastname" :size="40" color="#FFF" background-color="#930f68"/>
+                                                    <Avatar :src="'/s3/avatars/' + member.avatar" :username="member.name + ' ' + member.lastname" :size="40" color="#FFF" background-color="#5e50ac"/>
                                                 </div>
                                                 <div class="ml-4 mr-auto">
                                                     <a href="" class="font-medium">{{ member.name + ' ' + member.lastname }}</a>
@@ -84,7 +71,7 @@
                             <div class="box">
                                 <div class="flex flex-col lg:flex-row items-center p-5">
                                     <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                                        <Avatar :username="team.name" color="#FFF" background-color="#930f68"/>
+                                        <Avatar :username="team.name" color="#FFF" background-color="#5e50ac"/>
                                     </div>
                                     <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
                                         <a href="" class="font-medium">{{ team.name }}</a>
@@ -96,7 +83,7 @@
                                         </div>
                                     </div>
                                     <div class="flex mt-4 lg:mt-0">
-                                        <button v-if="challenge.stage !== 3" class="btn btn-primary py-1 px-2 mr-2" @click="removeFromSelected(team.id, index)">Usuń</button>
+                                        <button v-if="challenge.stage !== 3" class="btn btn-primary py-1 px-2 mr-2" @click="removeFromSelected(team,team.id, index)">Usuń</button>
                                         <button class="btn btn-outline-secondary py-1 px-2" @click="showDetails[team.id] = !showDetails[team.id]">
                                             {{ $t('teams.details') }}
                                         </button>
@@ -107,7 +94,7 @@
                                         <div class="p-5">
                                             <div v-for="(member, index) in team.users" class="relative flex items-center" :key="'member_' + index">
                                                 <div class="w-12 h-12 flex-none image-fit">
-                                                    <Avatar :src="'/s3/avatars/' + member.avatar" :username="member.name + ' ' + member.lastname" :size="40" color="#FFF" background-color="#930f68"/>
+                                                    <Avatar :src="'/s3/avatars/' + member.avatar" :username="member.name + ' ' + member.lastname" :size="40" color="#FFF" background-color="#5e50ac"/>
                                                 </div>
                                                 <div class="ml-4 mr-auto">
                                                     <a href="" class="font-medium">{{ member.name + ' ' + member.lastname }}</a>
@@ -179,15 +166,7 @@ export default {
         const toast = useToast();
         const show = ref(false);
         const temporary_team_id = ref(null);
-
-
-        const teamsObject = computed(() => {
-            if (props.who === 'challenge') {
-                return props.challenge.teams;
-            } else {
-                return props.solution.teams;
-            }
-        });
+        const teamsObject = ref([]);
 
         const object = computed(() => {
             if (props.who === 'challenge') {
@@ -198,9 +177,16 @@ export default {
         });
 
         const getTeamsRepositories = async () => {
-            GetTeams('', (res) => {
-                teams.value = res;
-            });
+            if(props.who === 'solution'){
+                GetTeams('', props.solution.id, props.who,(res) => {
+                    teams.value = res;
+                });
+            }else{
+                GetTeams('', props.challenge.id, props.who,(res) => {
+                    teams.value = res;
+                });
+            }
+
         }
         const showAddToTeamModal = (id) => {
             if (temporary_team_id == null || temporary_team_id === id) {
@@ -216,7 +202,7 @@ export default {
             temporary_team_id.value = null;
         }
 
-        const removeFromSelected = (id, index) => {
+        const removeFromSelected = (team,id, index) => {
             let obj = {};
             if(props.who == 'challenge') {
                 obj = props.challenge;
@@ -225,8 +211,8 @@ export default {
             }
             axios.post('/api/teams/remove-from-selected', {team_id: id, type: props.who, object_id: obj.id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
+                        teams.value.push(team);
                         toast.success('Rozłączono pomyślnie');
                         teamsObject.value.splice(index, 1);
                     } else {
@@ -235,7 +221,7 @@ export default {
                 })
         }
 
-        const addToSelected = (id) => {
+        const addToSelected = (id,index) => {
              let obj = {};
             if(props.who == 'challenge') {
                 obj = props.challenge;
@@ -244,13 +230,13 @@ export default {
             }
             axios.post('/api/teams/add-to-selected', {team_id: id, type: props.who, object_id: obj.id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
                         toast.success('Połączono pomyślnie');
+                        teams.value.splice(index,1);
                         if (props.who === 'challenge') {
-                            props.challenge.teams.push(response.data.payload);
+                            teamsObject.value.push(response.data.payload);
                         } else {
-                            props.solution.teams.push(response.data.payload);
+                            teamsObject.value.push(response.data.payload);
                         }
                     } else {
                         toast.error('Błąd!');
@@ -261,7 +247,7 @@ export default {
         const del = async (member_id, team_id, index) => {
             axios.post('api/teams/user/member/delete', {member_id: member_id, team_id: team_id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         isDisabled.value = true;
                         toast.success(response.data.message);
@@ -328,7 +314,18 @@ export default {
             }, 2000);
         }
 
+        const getObjectTeams = async () => {
+            axios.post('/api/teams/object/get', {who: props.who, solution_id: props.solution.id, challenge_id: props.challenge.id})
+                .then(response => {
+                    if (response.data.success) {
+                       teamsObject.value = response.data.payload
+                    } else {
+                    }
+                })
+        }
+
         onMounted(function () {
+            getObjectTeams();
             teamsObject.value = new_team_name.value;
             getTeamsRepositories('');
             if (window.Laravel.user) {

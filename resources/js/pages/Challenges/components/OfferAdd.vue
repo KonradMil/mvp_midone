@@ -218,7 +218,10 @@ export default {
     props: {
         edit_offer_id: Number,
         solution_id: Number,
-        challenge_id: Number
+        challenge_id: Number,
+        change_offer: Boolean,
+        project: Object,
+        stage: Number,
     },
     setup(props) {
         const app = getCurrentInstance();
@@ -290,19 +293,20 @@ export default {
                 axios.post('/api/solution/robots', {id: props.solution_id, offer_id: props.edit_offer_id})
                     .then(response => {
                         if (response.data.success) {
-                            // console.log(response.data.payload)
+
                             solution_robots.value = response.data.payload;
                         } else {
                             // toast.error(response.data.message);
                         }
                     }).catch((error) =>{
-                       console.log(error + 'ErrorGetRobots');
+
                 })
         };
 
         const save = () => {
             axios.post('/api/offer/save', {
                 edit_id: props.edit_offer_id,
+                stage: props.stage,
                 challenge_id: props.challenge_id,
                 solution_id: props.solution_id,
                 price_of_delivery: price_of_delivery.value,
@@ -321,12 +325,11 @@ export default {
                 period_of_support: period_of_support.value,
                 offer_expires_in: offer_expires_in.value,
                 solution_robots: solution_robots.value,
+                is_changed: props.change_offer,
             }).then(response => {
                 if (response.data.success) {
-                    console.log(response.data + '-> OFFER SAVE !!');
-                    console.log(advance_upon_delivery.value + '-> delivery');
                     toast.success(response.data.message);
-                    emitter.emit('changeToOffers', {action: 'go', check: true});
+                    emitter.emit('changeToOffers', {action: 'go', check: true, is_done_offer: props.is_changed});
                 } else {
                     toast.error('Ups! Coś poszło nie tak!');
                 }
@@ -351,7 +354,7 @@ export default {
 
         const getOffer = () => {
             let id = props.edit_offer_id;
-            console.log(id + '-> edit offer id');
+
             axios.post('/api/offer/get', {id: id})
                 .then(response => {
                     if (response.data.success) {

@@ -12,9 +12,9 @@ export default function SaveQuestion(data, handle) {
     async function saveQuestion(data, handle) {
         axios.post('/api/question/create', {data})
             .then(response => {
-                // console.log(response.data)
+
                 if (response.data.success) {
-                    // console.log(response.data);
+
                     list.value = response.data.payload;
                     handle(response.data.payload);
                 } else {

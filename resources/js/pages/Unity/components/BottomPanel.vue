@@ -47,7 +47,7 @@ export default {
     props: {
         mode: String,
         animationSave: Object,
-        allowedEdit: Object
+        allowedEdit: Boolean
     },
     emits: ["update:animationSave"],
     setup(props, context) {

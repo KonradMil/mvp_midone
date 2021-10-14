@@ -12,9 +12,9 @@ export default function sendEmail(email) {
             email: email
         })
             .then(response => {
-                // console.log(response.data)
+
                 if (response.data.success) {
-                    // console.log(response.data);
+
                     list.value = response.data.success;
                 } else {
                     // toast.error(response.data.message);

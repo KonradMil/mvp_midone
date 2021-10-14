@@ -814,7 +814,7 @@ export default {
             tags.value = tagss;
             solutionSelects.value = sels;
             const elDropzoneSingleRef = dropzoneSingleRef.value;
-            console.log(elDropzoneSingleRef);
+
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
                 images.value.push(JSON.parse(resp.xhr.response).payload);
 

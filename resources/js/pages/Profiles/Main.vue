@@ -13,7 +13,7 @@
                     <div class="relative flex items-center p-5">
                         <div class="w-14 h-14 image-fit">
                             <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" :size="60"
-                                    color="#FFF" background-color="#930f68"/>
+                                    color="#FFF" background-color="#5e50ac"/>
                         </div>
                         <div class="ml-4 mr-auto">
                             <div class="font-medium text-base">{{ user.name }} {{user.lastname}}</div>
@@ -86,13 +86,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary w-20 mt-3" @click="save">{{$t('profiles.save')}}</button>
+                                <button class="btn btn-primary w-20 mt-8" @click="save">{{$t('profiles.save')}}</button>
                             </div>
                             <div class="w-52 mx-auto xl:mr-0 xl:ml-6">
                                 <div class="border-2 border-dashed shadow-sm border-gray-200 dark:border-dark-5 rounded-md p-5">
                                     <div class="h-40 relative image-fit cursor-pointer zoom-in mx-auto">
                                         <Avatar :src="'/s3/avatars/' + avatar_path" :username="user.name + ' ' + user.lastname" size="160"
-                                                color="#FFF" background-color="#930f68"/>
+                                                color="#FFF" background-color="#5e50ac"/>
                                     </div>
                                     <Dropzone
                                         ref-key="dropzoneSingleRef"
@@ -242,7 +242,7 @@ export default defineComponent({
         const validate = useVuelidate(rules, toRefs(formData));
 
         const save = () => {
-            console.log('here');
+
             if(formData.name < minLength || formData.name < minLength) {
                 // toast.warning('Imie i nazwisko musi sie skladac z conajmniej 3 znakow');
             }
@@ -257,13 +257,13 @@ export default defineComponent({
                     phone: formData.phone
                 })
                     .then(response => {
-                        console.log(response.data)
+
                         if (response.data.success) {
                             let user = response.data.payload;
                             store.dispatch('login/login', {
                                 user
                             });
-                            toast.success('zapisano poprawnie!');
+                            toast.success('Zapisano poprawnie!');
                             // this.$router.go(0);
                         } else {
                             toast.error(response.data.message);

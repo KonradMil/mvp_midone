@@ -1,90 +1,90 @@
 <template>
-    <div class="flex fixed w-full z-50 pb-2 h-24 bottom-0 h-28" v-if="expanded == 0" id="bottom-animation-minimalized" style="pointer-events: none;">
-        <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto; pointer-events: none;">
-            <AnimationButtons :icons="icons"></AnimationButtons>
-        </div>
-    </div>
-    <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-96 bottom-0 bg-white rounded-md bg-opacity-25" v-if="expanded == 1" id="bottom-animation-normal">
-        <div class="left flex-1 pt-2 flex-row ml-5">
-            <div class="grid grid-cols-12 w-full h-full">
-                <div class="col-span-1">
-                    <UnityButton tooltip="Dodaj linie" alttext="Dodaj linie" path="/s3/builder_icons/add_simple.png" action="addline" position="animationbuttonclick"/>
-                    <UnityButton tooltip="Maksymalizuj" alttext="Maksymalizuj" path="/s3/builder_icons/maximize_simple.png" action="maximize" position="animationbuttonclick"/>
-                    <UnityButton tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick"/>
-                    <UnityButton tooltip="Odtwórz" alttext="Odtwórz" path="/s3/builder_icons/play_simple.png" action="play" position="animationbuttonclick"/>
-                </div>
-                <div class="col-span-11 rounded-md mr-5 relative" style=" overflow-y: scroll;">
-                    <div class="grid grid-cols-12 my-3" @click="activeLineIndex = line.index; setNewAnimationLayer();" :class="(activeLineIndex == line.index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + line.index">
-                        <div class="col-span-1">
-                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);">
-<!--                                <UnityButton tooltip="" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>-->
-                                <Tippy
-                                    id="meta-title-tab"
-                                    tag="span"
-                                    :content="'Ustawienia'"
-                                    href="javascript:;"
-                                    class="w-14 py-2 text-center flex justify-center items-center"
-                                    aria-selected="false">
-                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="settingsLine(line.index)">
-                                        <img class=""
-                                             :alt="'Ustawienia'"
-                                             :src="'/s3/builder_icons/settings_simple.png'"
-                                        />
-                                    </div>
-                                </Tippy>
-                            </div>
-                            <div style="margin-left: 25%; margin-top: calc(25% - 10px)">
-<!--                                <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline"  position="animationbuttonclick"/>-->
-                                <Tippy
-                                    id="meta-title-tab"
-                                    tag="span"
-                                    :content="'Usuń linie'"
-                                    href="javascript:;"
-                                    class="w-14 py-2 text-center flex justify-center items-center"
-                                    aria-selected="false">
-                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in"  @click.native="removeLine(line.index)">
-                                        <img class=""
-                                             :alt="'Usuń linie'"
-                                             :src="'/s3/builder_icons/bin_simple.png'"
-                                        />
-                                    </div>
-                                </Tippy>
-                            </div>
-                        </div>
-                        <div class="col-span-1">
-                            <div style="border-radius: 50%; background-color: rgb(255, 255, 255); height: 56px; width: 56px; margin-left: 25%; margin-top: 25%;">
-                                <span style="font-size: 20px; font-weight: bold; top: 33%; left: 6%; position: relative;">C: {{ line.interval }}</span>
-                            </div>
-                            <div style="border-radius: 50%; background-color: rgb(255, 255, 255); height: 56px; width: 56px; margin-left: 25%; margin-top: 25%;">
-                                <span style="font-size: 20px; font-weight: bold; top: 33%; left: 6%; position: relative;">D: {{ line.delay }}</span>
-                            </div>
-                        </div>
-                        <div class="col-span-10 h-full" style="overflow-x: auto; overflow-y: hidden;">
-                            <div class="w-full  h-full">
-                                <div class="row flex h-full" >
-                                    <div class=" h-full" v-for="(animable, index) in line.animables" :key="'obiekt_' + index">
-                                        <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;" @click="activeAnimableIndex = index; showAnimableDialog();">
-                                            <img class="w-full h-full"
-                                                 :alt="animable.name.replace('models', 'models_images') + '.png'"
-                                                 :src="animable.name.replace('models', 'models_images') + '.png'"
-                                            />
-                                            <div style="width: 94%; bottom: 0; position: relative; margin-top: 85%; margin-left: 10px; font-size: 16px; font-weight: bold;">Czas trwania: {{ animable.duration }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-24 bottom-0 h-100 bg-white rounded-md bg-opacity-25" v-if="expanded == 2" id="bottom-animation-expanded">
-        <div class="left flex  pt-2 flex-row ml-24">
+<!--    <div class="flex fixed w-full z-50 pb-2 h-24 bottom-0 h-28" v-if="expanded == 0" id="bottom-animation-minimalized" style="pointer-events: none;">-->
+<!--        <div class="left flex  pt-2 flex-row ml-24" style="margin-right: auto; pointer-events: none;">-->
+<!--            <AnimationButtons :icons="icons"></AnimationButtons>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-96 bottom-0 bg-white rounded-md bg-opacity-25" v-if="expanded == 1" id="bottom-animation-normal">-->
+<!--        <div class="left flex-1 pt-2 flex-row ml-5">-->
+<!--            <div class="grid grid-cols-12 w-full h-full">-->
+<!--                <div class="col-span-1">-->
+<!--                    <UnityButton tooltip="Dodaj linie" alttext="Dodaj linie" path="/s3/builder_icons/add_simple.png" action="addline" position="animationbuttonclick"/>-->
+<!--                    <UnityButton tooltip="Maksymalizuj" alttext="Maksymalizuj" path="/s3/builder_icons/maximize_simple.png" action="maximize" position="animationbuttonclick"/>-->
+<!--                    <UnityButton tooltip="Minimalizuj" alttext="Minimalizuj" path="/s3/builder_icons/minimalize_simple.png" action="minimalize" position="animationbuttonclick"/>-->
+<!--                    <UnityButton tooltip="Odtwórz" alttext="Odtwórz" path="/s3/builder_icons/play_simple.png" action="play" position="animationbuttonclick"/>-->
+<!--                </div>-->
+<!--                <div class="col-span-11 rounded-md mr-5 relative" style=" overflow-y: scroll;">-->
+<!--                    <div class="grid grid-cols-12 my-3" @click="activeLineIndex = line.index; setNewAnimationLayer();" :class="(activeLineIndex == line.index)? 'active-row':'inactive-row'" style="max-height: 200px;" v-for="(line, index) in animation.layers" :key="'linia_' + line.index">-->
+<!--                        <div class="col-span-1">-->
+<!--                            <div style="margin-left: 25%; margin-top: calc(25% - 10px);">-->
+<!--&lt;!&ndash;                                <UnityButton tooltip="" alttext="Ustawienia" path="/s3/builder_icons/settings_simple.png" action="settingsline" position="animationbuttonclick"/>&ndash;&gt;-->
+<!--                                <Tippy-->
+<!--                                    id="meta-title-tab"-->
+<!--                                    tag="span"-->
+<!--                                    :content="'Ustawienia'"-->
+<!--                                    href="javascript:;"-->
+<!--                                    class="w-14 py-2 text-center flex justify-center items-center"-->
+<!--                                    aria-selected="false">-->
+<!--                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in" @click.native="settingsLine(line.index)">-->
+<!--                                        <img class=""-->
+<!--                                             :alt="'Ustawienia'"-->
+<!--                                             :src="'/s3/builder_icons/settings_simple.png'"-->
+<!--                                        />-->
+<!--                                    </div>-->
+<!--                                </Tippy>-->
+<!--                            </div>-->
+<!--                            <div style="margin-left: 25%; margin-top: calc(25% - 10px)">-->
+<!--&lt;!&ndash;                                <UnityButton tooltip="Usuń linie" alttext="Usuń linie" path="/s3/builder_icons/bin_simple.png" action="removeline"  position="animationbuttonclick"/>&ndash;&gt;-->
+<!--                                <Tippy-->
+<!--                                    id="meta-title-tab"-->
+<!--                                    tag="span"-->
+<!--                                    :content="'Usuń linie'"-->
+<!--                                    href="javascript:;"-->
+<!--                                    class="w-14 py-2 text-center flex justify-center items-center"-->
+<!--                                    aria-selected="false">-->
+<!--                                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in"  @click.native="removeLine(line.index)">-->
+<!--                                        <img class=""-->
+<!--                                             :alt="'Usuń linie'"-->
+<!--                                             :src="'/s3/builder_icons/bin_simple.png'"-->
+<!--                                        />-->
+<!--                                    </div>-->
+<!--                                </Tippy>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-span-1">-->
+<!--                            <div style="border-radius: 50%; background-color: rgb(255, 255, 255); height: 56px; width: 56px; margin-left: 25%; margin-top: 25%;">-->
+<!--                                <span style="font-size: 20px; font-weight: bold; top: 33%; left: 6%; position: relative;">C: {{ line.interval }}</span>-->
+<!--                            </div>-->
+<!--                            <div style="border-radius: 50%; background-color: rgb(255, 255, 255); height: 56px; width: 56px; margin-left: 25%; margin-top: 25%;">-->
+<!--                                <span style="font-size: 20px; font-weight: bold; top: 33%; left: 6%; position: relative;">D: {{ line.delay }}</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-span-10 h-full" style="overflow-x: auto; overflow-y: hidden;">-->
+<!--                            <div class="w-full  h-full">-->
+<!--                                <div class="row flex h-full" >-->
+<!--                                    <div class=" h-full" v-for="(animable, index) in line.animables" :key="'obiekt_' + index">-->
+<!--                                        <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;" @click="activeAnimableIndex = index; showAnimableDialog();">-->
+<!--                                            <img class="w-full h-full"-->
+<!--                                                 :alt="animable.name.replace('models', 'models_images') + '.png'"-->
+<!--                                                 :src="animable.name.replace('models', 'models_images') + '.png'"-->
+<!--                                            />-->
+<!--                                            <div style="width: 94%; bottom: 0; position: relative; margin-top: 85%; margin-left: 10px; font-size: 16px; font-weight: bold;">Czas trwania: {{ animable.duration }}-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div style="margin-left: 10%;" class="flex fixed w-4/5 z-50 pb-2 h-24 bottom-0 h-100 bg-white rounded-md bg-opacity-25" v-if="expanded == 2" id="bottom-animation-expanded">-->
+<!--        <div class="left flex  pt-2 flex-row ml-24">-->
 
-        </div>
-    </div>
+<!--        </div>-->
+<!--    </div>-->
 </template>
 
 <script>
@@ -108,31 +108,31 @@ export default {
 
         //ANIMATION CONTROLLER
         function swapObjectByIndex(index, object) {
-            // console.log('IMPORTANT NOW: ');
+
 
             animation.layers.forEach((obj, index) => {
-                console.log('INDISE');
-                console.log(obj);
-                console.log(index);
-                console.log(obj.index);
-                console.log(activeLineIndex.value);
+
+
+
+
+
                 if(obj.index == activeLineIndex.value) {
                     animation.layers[index] = toRaw(object.layers);
                 }
             })
-            // console.log('END IMPORTANT NOW: ');
+
         }
 
         const getLineByInternalIndex = computed(() => {
            return toRaw(animation.layers).find(x => x.index == activeLineIndex.value);
             // animation.layers.forEach((obj) => {
-            //     console.log('obj');
-            //     console.log(toRaw(obj));
-            //     console.log(toRaw(obj).index);
-            //     console.log(obj);
-            //     console.log(obj.index);
-            //     console.log(activeLineIndex.value);
-            //     console.log('activeLineIndex.value');
+
+
+
+
+
+
+
             //    if(obj.index == activeLineIndex.value) {
             //        c = toRaw(obj);
             //    }
@@ -141,9 +141,9 @@ export default {
         });
 
         function swapAnimableObjectByIndex(object) {
-            console.log('IMPORTANT NOW: ');
-            // console.log(getLineByInternalIndex.animables[activeAnimableIndex.value]);
-            console.log(object);
+
+
+
 
             getLineByInternalIndex.value.animables[activeAnimableIndex.value].duration = object.duration;
 
@@ -153,13 +153,13 @@ export default {
             //     }
             // });
             // animation.layers[activeLineIndex.value].animables[activeAnimableIndex.value].duration = object.duration;
-            // console.log('END IMPORTANT NOW: ');
+
         }
 
 
         function updateAnimationUnity() {
-            console.log('FINAL EMIT IMP: ');
-            console.log(animation);
+
+
             animation.layers = animation.layers.filter(value => Object.keys(value).length !== 0);
             emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: animation});
         }
@@ -170,7 +170,7 @@ export default {
         }
 
         const setNewAnimationLayer = () => {
-            console.log(activeLineIndex.value);
+
             if(Boolean(getLineByInternalIndex)) {
                 emitter.emit('unityoutgoingaction', {action: 'addLine', data: activeLineIndex.value});
             } else {
@@ -186,9 +186,9 @@ export default {
         emitter.on('animationbuttonclick', e => handleClick(e.val));
 
         // emitter.on('saveLoaded', e => {
-        //     console.log('SAVE LOADED');
-        //     console.log(e);
-        //     console.log(JSON.parse(e.save.save_json));
+
+
+
         //     animation.layers = JSON.parse(e.save.save_json).layers;
         // })
 
@@ -203,8 +203,8 @@ export default {
             //         obj.temp_index = i;
             //     }
             // });
-            console.log('HEREEE');
-            console.log(getLineByInternalIndex);
+
+
             setTimeout(() => {
                 emitter.emit('UnityLineSettings', {action: 'settingsline', data: getLineByInternalIndex});
             }, 500)
@@ -212,7 +212,7 @@ export default {
         }
 
         emitter.on('rightpanelaction', e => {
-            console.log(e);
+
             if(e.action === 'updateLine' ) {
                 if(activeLineIndex.value == undefined) {
                     activeLineIndex.value = 0;
@@ -225,7 +225,7 @@ export default {
                 swapAnimableObjectByIndex(e.data);
 
             }
-            console.log('FINAL EMIT');
+
             updateAnimationUnity();
 
             // emitter.emit('unityoutgoingaction', {action: 'updateCurrentAnimation', data: lines.value[0]});
@@ -233,22 +233,22 @@ export default {
 
         emitter.on('UnityAnimationChainUpdate', e => {
             // lines.value = e.layers.layers;
-            console.log('UPDATE ANIMATION11');
+
             if(e.layers.layers != undefined) {
                 animation.layers = e.layers.layers;
             } else {
                 animation.layers = e.layers;
             }
-            console.log('ANIMATION CHAIN UPDATGE');
-            console.log(animation);
+
+
             emitter.emit('updateanimationSave', {data: animation});
         });
 
         onMounted(() => {
-            console.log('MOUNTED LAYERS');
-            console.log(props);
-            console.log(props.animationSave);
-            console.log(props.animationSave.layers);
+
+
+
+
             animation.layers = props.animationSave.layers;
             if(toRaw(animation.layers).length > 0) {
                 animation.layers.every((obj) => {
@@ -260,7 +260,7 @@ export default {
         });
 
         const handleClick = (val) => {
-            console.log(val);
+
             switch (val) {
                 case 'maximize':
                     if (expanded.value == 0) {
@@ -283,9 +283,9 @@ export default {
                     emitter.emit('unityoutgoingaction', {action: 'runAnimation', data: {interval: 0, cycles: 0, layers: toRaw(animation)}})
                     break;
                 case 'addline':
-                    console.log('LENGTH AL');
+
                     const l = animation.layers.length + Math.floor(Math.random() * 55);
-                    console.log(l);
+
                     emitter.emit('unityoutgoingaction', {action: 'addLine',data: l});
                     activeLineIndex.value = l;
                     setNewAnimationLayer();
@@ -294,17 +294,17 @@ export default {
 
                     break;
                 case 'settingsanimable':
-                    console.log('settingsanimable');
-                    // console.log(getLineByInternalIndex);
-                    // console.log(toRaw(getLineByInternalIndex));
-                    // console.log(getLineByInternalIndex.value.animables);
-                    // console.log(activeAnimableIndex.value);
+
+
+
+
+
                     emitter.emit('UnityAnimableSettings', {action: 'settingsanimable', data: getLineByInternalIndex.value.animables[activeAnimableIndex.value]})
                     break;
                 case 'settingsline':
-                    console.log(animation);
-                    console.log('IMPORTANT');
-                    console.log( activeLineIndex.value);
+
+
+
 
                     break;
                 case 'line':

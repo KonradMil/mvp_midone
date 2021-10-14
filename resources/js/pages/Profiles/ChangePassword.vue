@@ -79,7 +79,7 @@ export default {
                         passwordNew: this.passwordNew,
                     })
                         .then(response => {
-                            console.log(response.data)
+
                             if (response.data.success) {
                                 let user = response.data.payload;
                                 store.dispatch('login/login', {

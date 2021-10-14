@@ -14,10 +14,11 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "authy/php": "4.0.0-rc2",
         "beyondcode/laravel-comments": "^1.2",
         "cybercog/laravel-love": "^8.7",
+        "doctrine/dbal": "^3.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "gusapi/gusapi": "^5.3",
@@ -38,6 +39,7 @@
         "spatie/laravel-activitylog": "^3.17",
         "spatie/laravel-tags": "^3.1",
         "spiral/roadrunner": "^2.0",
+        "timehunter/laravel-google-recaptcha-v3": "~2.5",
         "twilio/sdk": "^6.26",
         "willvincent/laravel-rateable": "^2.3"
     },
@@ -53,6 +55,7 @@
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true
+
     },
     "extra": {
         "laravel": {

@@ -234,7 +234,7 @@
                  buttonText: {'apply':'OK','cancel':'Anuluj'},
                 dropdowns: {
                   minYear: 2021,
-                  maxYear: null,
+                  maxYear: 2023,
                   months: true,
                   years: true
                 }
@@ -254,20 +254,20 @@
                  buttonText: {'apply':'OK','cancel':'Anuluj'},
                 dropdowns: {
                   minYear: 2021,
-                  maxYear: null,
+                  maxYear: 2023,
                   months: true,
                   years: true
                 }
               }" class="form-control"/>
                     </div>
                     <div class="mt-3">
-                        <label for="post-form-3" class="form-label">{{ $t('challengesNew.categories') }}*</label>
+                        <label for="post-form-3" class="form-label">Proces</label>
                         <TailSelect
                             id="post-form-3"
                             v-model="category"
                             :options="{
                                 locale: 'pl',
-                                placeholder: 'Wybierz kategorie...',
+                                placeholder: 'Wybierz proces...',
                                 limit: 'Nie można wybrać więcej',
                                 search: false,
                                 hideSelected: false,
@@ -278,27 +278,41 @@
                         </TailSelect>
                     </div>
                     <div class="mt-3">
-                        <label for="post-form-4" class="form-label">{{ $t('challengesNew.tags') }}</label>
-                        <TailSelect
-                            id="post-form-4"
-                            v-model="tagsSelected"
-                            :options="{
-                                locale: 'pl',
-                                placeholder: 'Wybierz tagi...',
-                                limit: 'Nie można wybrać więcej',
-                                 placeholderMulti: 'Wybierz do :limit tagów...',
-                search: false,
-                hideSelected: true,
-                hideDisabled: true,
-                multiLimit: 15,
-                multiShowCount: false,
-                multiContainer: true,
-                classNames: 'w-full'
-              }" multiple>
-                            <option selected disabled>{{ $t('challengesNew.selectTags') }}.</option>
-                            <option v-for="(tag,index) in tags" :value="index">{{ tag }}</option>
-                        </TailSelect>
+                        <label for="post-form-3" class="form-label">Kategoria</label>
+                        <Multiselect
+                            v-model="categorytab"
+                            :options="[{
+                                label: 'Normalna',
+                                value: 0
+                            },
+                            {
+                                label: 'Testowa',
+                                value: 1
+                            }]"
+                        />
                     </div>
+<!--                    <div class="mt-3">-->
+<!--                        <label for="post-form-4" class="form-label">{{ $t('challengesNew.tags') }}</label>-->
+<!--                        <TailSelect-->
+<!--                            id="post-form-4"-->
+<!--                            v-model="tagsSelected"-->
+<!--                            :options="{-->
+<!--                                locale: 'pl',-->
+<!--                                placeholder: 'Wybierz tagi...',-->
+<!--                                limit: 'Nie można wybrać więcej',-->
+<!--                                 placeholderMulti: 'Wybierz do :limit tagów...',-->
+<!--                search: false,-->
+<!--                hideSelected: true,-->
+<!--                hideDisabled: true,-->
+<!--                multiLimit: 15,-->
+<!--                multiShowCount: false,-->
+<!--                multiContainer: true,-->
+<!--                classNames: 'w-full'-->
+<!--              }" multiple>-->
+<!--                            <option selected disabled>{{ $t('challengesNew.selectTags') }}.</option>-->
+<!--                            <option v-for="(tag,index) in tags" :value="index">{{ tag }}</option>-->
+<!--                        </TailSelect>-->
+<!--                    </div>-->
                     <!--                    <div class="form-check flex-col items-start mt-3">-->
                     <!--                        <label for="post-form-5" class="form-check-label ml-0 mb-2"-->
                     <!--                        >{{ $t('challengesNew.publish') }}</label>-->
@@ -345,6 +359,7 @@ export default {
         const toast = useToast();
         const isDisabled = ref(false);
         const category = ref();
+        const categorytab = ref(0);
         const showModal = ref(false);
         const tab = ref('desc');
         const categories = ref();
@@ -411,7 +426,7 @@ export default {
         // }
 
         const handleCallback = (resp) => {
-            console.log('RESPPPPPPPP' + resp);
+
             if(id.value != undefined && id.value != null) {
                 toast.success('Zapisano poprawnie.');
                 router.push({path: '/challenges'})
@@ -429,13 +444,14 @@ export default {
             if (name.value == undefined || name.value == '') {
                 toast.error("Nazwa jest wymagana.");
             } else if (category.value == undefined || category.value == null) {
-                toast.error("Typ stanowiska jest wymagany");
+                toast.error("Typ procesu jest wymagany");
             } else {
                 let resp = await SaveChallenge({
                     id: props.challenge_id,
                     name: name.value,
                     description: description.value,
                     type: category.value,
+                    category: categorytab.value,
                     solution_deadline: solution_deadline.value,
                     offer_deadline: offer_deadline.value,
                     allowed_publishing: allowed_publishing.value,
@@ -483,7 +499,7 @@ export default {
             tags.value = tagss;
             challengeSelects.value = sels;
             const elDropzoneSingleRef = dropzoneSingleRef.value;
-            console.log(elDropzoneSingleRef);
+
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
                 images.value.push(JSON.parse(resp.xhr.response).payload);
                 toast.success('Zdjecie zostało wgrane poprawnie!');
@@ -509,8 +525,9 @@ export default {
                         name.value = response.data.payload.name;
                         description.value = response.data.payload.description;
                         category.value = String(response.data.payload.type);
-                        solution_deadline.value = dayjs(response.data.payload.solution_deadline).format('DD.MM.YYYY');
-                        offer_deadline.value = dayjs(response.data.payload.offer_deadline).format('DD.MM.YYYY');
+                        categorytab.value = String(response.data.payload.category);
+                        solution_deadline.value = dayjs.unix(response.data.payload.solution_deadline).format('DD.MM.YYYY');
+                        offer_deadline.value = dayjs.unix(response.data.payload.offer_deadline).format('DD.MM.YYYY');
                         allowed_publishing.value = response.data.payload.allowed_publishing;
                         details.value.select_detail_weight = response.data.payload.technical_details.detail_weight;
                         details.value.select_pick_quality = response.data.payload.technical_details.pick_quality;
@@ -571,7 +588,8 @@ export default {
             deleteImage,
             tagsSelected,
             isDisabled,
-            user
+            user,
+            categorytab
         };
     },
     beforeRouteEnter(to, from, next) {

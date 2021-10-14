@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\QuestionAdded;
-use App\Models\Challenges\Challenge;
+use App\Models\Challenge;
 use App\Models\User;
 use App\Notifications\ChallengePublishedNotification;
 use App\Notifications\QuestionAddedNotidiaction;

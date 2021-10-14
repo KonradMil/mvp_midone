@@ -1,5 +1,8 @@
 {
     "en": {
+        "lite" : {
+            "addSave" : "Add"
+        },
         "global": {
             "search" : "Search...",
             "name": "Name",
@@ -19,7 +22,18 @@
             "comment" : "Comment...",
             "select" : "Select",
             "financials" : "Financials",
-            "file" : "File"
+            "file" : "File",
+            "permissions" : "Permissions",
+            "publishChallenge" : "Publish challenge",
+            "editChallenge" : "Edit challenge",
+            "publishSolution" : "Publish solutions",
+            "canEditSolution" : "Edit solutions",
+            "canDeleteSolution" : "Delete solutions",
+            "acceptChallengeOffer" : "Accept challenge offer",
+            "addSolutionOffer" : "Add solution offer",
+            "acceptChallengeSolution" : "Accept challenge solution",
+            "addChallengeSolution" : "Add challenge solution",
+            "continue":  "Continue"
         },
         "validation": {
             "Value is required": "Value is required.",
@@ -46,7 +60,9 @@
             "Baza wiedzy": "Knowledge base",
             "Marketplace obiektów": "Objects marketplace",
             "Komunikacja": "Communication",
-            "Pomoc" : "Support"
+            "Pomoc" : "Support",
+            "Powiadomienia" : "Notifications",
+            "Studio playground" : "Studio playground"
         },
         "subMenu": {
             "Wszystkie": "All",
@@ -231,7 +247,7 @@
             "publish" : "Publish",
             "acceptPublic" : "After accepting the offer, make the challenge public",
             "cancel" : "Cancel",
-            "selectCategories" : "Select categories...",
+            "selectCategories" : "Select process type...",
             "selectTags" : "Select tags...",
             "pickPlace" : "Pick & Place",
             "assembly" : "Assembly",
@@ -295,6 +311,9 @@
         }
     },
     "pl": {
+        "lite" : {
+            "addSave" : "Dodaj"
+        },
         "global": {
             "search" : "Szukaj...",
             "name": "Nazwa",
@@ -314,7 +333,18 @@
             "comment" : "Skomentuj...",
             "select" : "Wybierz",
             "financials" : "Założenia operacyjne",
-            "file" : "Plik"
+            "file" : "Plik",
+            "permissions" : "Uprawnienia",
+            "publishChallenge" : "Publikacja wyzwania",
+            "editChallenge" : "Edycja wyzwania",
+            "publishSolution" : "Publikacja rozwiązań",
+            "canEditSolution" : "Edycja rozwiązań",
+            "canDeleteSolution" : "Usuwanie rozwiązań",
+            "acceptChallengeOffer" : "Akceptacja ofert",
+            "addSolutionOffer" : "Dodawanie ofert",
+            "acceptChallengeSolution" : "Akceptacja rozwiązań",
+            "addChallengeSolution" : "Dodawanie rozwiązań",
+            "continue": "Kontynuuj"
         },
         "topBar": {
             "profil": "Profil",
@@ -335,7 +365,9 @@
             "Baza wiedzy": "Baza wiedzy",
             "Marketplace obiektów": "Marketplace obiektów",
             "Komunikacja": "Komunikacja",
-            "Pomoc" : "Pomoc"
+            "Pomoc" : "Pomoc",
+            "Powiadomienia" : "Powiadomienia",
+            "Studio playground" : "Studio playground"
         },
 
         "subMenu": {
@@ -504,7 +536,7 @@
             "select" : "Wybierz...",
             "maxWeight": "Maksymalna waga detalu",
             "detail" : "Material detalu",
-            "way" : "Sposób pobierania metalu",
+            "way" : "Sposób pobierania detalu",
             "quality" : "Jakość chwytania detalu",
             "size" : "Wielkość detalu",
             "position" : "Czy detal jest pozycjonowany do pobrania?",
@@ -523,7 +555,7 @@
             "publish" : "Upublicznij",
             "acceptPublic" : "Po zakceptowaniu oferty dodaj do Studia 3D",
             "cancel" : "Anuluj",
-            "selectCategories" : "Wybierz kategorie...",
+            "selectCategories" : "Wybierz typ procesu...",
             "selectTags" : "Wybierz tagi...",
             "pickPlace" : "Wybierz i połóż",
             "assembly" : "Montaż",

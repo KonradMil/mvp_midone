@@ -7,7 +7,7 @@
                 <!--         BEGIN: Logo-->
                 <div class="flex-row w-full items-center">
                     <router-link :to="{ name: 'dashboard' }" tag="a" class="intro-x flex items-center  pt-4 px-12">
-                        <img alt="DBR77 Platforma Robotów " class="w-full" src="https://dbr77.com/images/logos/dbr_logo_white.svg"/>
+                        <img alt="DBR77 Platforma Robotów " class="w-full" src="/images/dbr_logo_white_notagline_platform.svg"/>
                     </router-link>
                 </div>
                 <!--         END: Logo-->
@@ -125,10 +125,12 @@ export default defineComponent({
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
+
             cash("body")
                 .removeClass("error-page")
                 .removeClass("login")
                 .addClass("main");
+
             formattedMenu.value = $h.toRaw(sideMenu.value);
         });
 

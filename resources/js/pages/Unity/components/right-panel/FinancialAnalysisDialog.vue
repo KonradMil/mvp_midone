@@ -165,7 +165,11 @@
                         </tr>
                         <tr class="hover:bg-gray-200">
                             <td class="border" colspan="3">
-                                <input type="number" v-model="capex" class="form-control finclass" placeholder="0"/>
+                                <input
+                                    type="number"
+                                    v-model="capex"
+                                    class="form-control finclass"
+                                    placeholder="0"/>
                             </td>
                         </tr>
                         <tr>
@@ -252,9 +256,9 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const challenge = ref({});
-        const capitalCost = ref(12);
+        const capitalCost = ref(0);
         const capex = ref(0);
-        const timeframe = ref(5);
+        const timeframe = ref(0);
         const okresZwrotuProsty = ref(0);
         const okresZwrotuZdyskontowany = ref(0);
         const npv = ref(0);
@@ -279,7 +283,7 @@ export default {
         emitter.on('financialAnalysesSave', e => {
             axios.post('/api/solution/financial-analyses/save', {solution_id: props.solution.id, financialAnalyses: financialAnalyses, capitalCost: capitalCost.value, capex: capex.value, timeframe: timeframe.value})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
 
                     }
@@ -290,12 +294,17 @@ export default {
         onMounted(() => {
             getChallenge((cb) =>{
                 financialAnalysesFunction();
+                npvFunction();
             });
         });
         watch([challenge.value, props.solution, okresZwrotuProsty.value, npv.value], (newValues, prevValues) => {
             financialAnalysesFunction();
+            npvFunction();
         })
 
+        watch(() => capex.value, (val) => {
+
+        });
         watch([capitalCost, capex, timeframe], (newValues, prevValues) => {
             npvFunction();
         })
@@ -316,6 +325,7 @@ export default {
         }
 
         const npvFunction = () =>  {
+
             const cashFlow = [];
             const wacc = [];
             const dcf = [];
@@ -330,6 +340,7 @@ export default {
             for (let i = 0; i < (timeframe.value + 1); i += 1) {
                 if (i === 0) {
                     cashFlow.push(parseFloat(capex.value) * -1);
+
                     wacc.push(100);
                     dcf.push(parseFloat(capex.value) * -1);
                     scf.push(parseFloat(capex.value) * -1);
@@ -338,6 +349,7 @@ export default {
                 } else {
                     cashFlow.push(workStationCostBefore - workStationCostAfter);
                     wacc.push(1 / ((1 + (parseFloat(capitalCost.value) / 100)) ** i));
+
                     dcf.push(cashFlow[i] * (wacc[i]));
                     scf.push(scf[i - 1] + (workStationCostBefore - workStationCostAfter));
                     if (scf[i] > 0) {
@@ -354,14 +366,14 @@ export default {
                     }
                 }
             }
-            console.log([cashFlow, wacc, dcf, scf, sdcf, rtp]);
+
             for (let i = 0; i < rtp.length; i += 1) {
                 if (rtp[i] > 0) {
                     okresZwrotuProsty.value = (i - 1) + ((capex.value / (workStationCostBefore - workStationCostAfter)) - Math.floor((capex.value / (workStationCostBefore - workStationCostAfter))));
                     break;
                 }
             }
-            // console.log(this.localTimeframe * (workStationCostBefore - workStationCostAfter));
+
 
             for (let i = 0; i < drtp.length; i += 1) {
                 if (drtp[i] > 0) {
@@ -371,28 +383,29 @@ export default {
             }
 
             npv.value = sdcf[timeframe.value];
-            console.log([cashFlow, wacc, dcf, scf, rtp, sdcf, drtp]);
+
+
         }
 
         const getChallenge = (cb) => {
             axios.post('/api/challenge/user/get/card', {id: props.solution.challenge_id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
-                        console.log("response.data.payload");
-                        console.log(response.data.payload);
-
                         try {
-                            console.log(response.data.payload.selected.estimate);
                             capex.value = response.data.payload.selected[0].estimate.sum;
                         }catch (e) {
                             response.data.payload.solutions.forEach((val) => {
                                 if(val.id === props.solution.id) {
-                                    capex.value = val.estimate.sum;
+                                    if(val.estimate == undefined) {
+                                        capex.value = 0;
+                                    } else {
+                                        capex.value = val.estimate.sum;
+                                    }
+
                                 }
                             });
                         }
-                        console.log(JSON.parse(response.data.payload.save_json));
+
                         challenge.value = response.data.payload;
                         cb();
                     }

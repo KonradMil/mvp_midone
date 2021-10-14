@@ -224,7 +224,7 @@ export default {
         });
 
         const partsAr = ref({});
-
+        const robots = ref([]);
         const additionalCosts = ref([]);
         const partPrices = ref({});
 
@@ -233,52 +233,59 @@ export default {
         }
 
         emitter.on('estimatesave', e => {
-            axios.post('/api/solution/estimate/save', {solution_id: props.solution.id, basicCosts: basicCosts, additionalCosts: additionalCosts.value, partPrices: partPrices.value, partsCost:partsCost.value, integrationCost: integrationCost.value })
+            axios.post('/api/solution/estimate/save', {solution_id: props.solution.id, basicCosts: basicCosts, additionalCosts: additionalCosts.value, partPrices: partPrices.value, partsAr: partsAr.value, partsCost:partsCost.value, integrationCost: integrationCost.value })
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
+                    } else {
+
                     }
-                })
+                });
         });
 
         const finalPartsList = () => {
             partsAr.value = {};
                 if(props.parts.length != undefined) {
                     props.parts.forEach((obj) => {
-                        console.log('OBJ');
-                        console.log(obj);
+
+
                         if(partPrices.value[obj.model_name] != undefined) {
                             if(partsAr.value[obj.model_name] != undefined) {
                                 partsAr.value[obj.model_name].count += 1;
+
                             } else {
                                 partsAr.value[obj.model_name] = {
                                     count: 1,
                                     price: partPrices.value[obj.model_name],
                                 };
+
                             }
                         } else {
                             if(partsAr.value[obj.model_name] != undefined) {
                                 if(partPrices.value[obj.model_name] == undefined) {
                                     partPrices.value[obj.model_name] = 0;
-                                }
 
+                                }
                                 partsAr.value[obj.model_name].count += 1;
+
                             } else {
                                 if(partPrices.value[obj.model_name] == undefined) {
                                     partPrices.value[obj.model_name] = 0;
+
                                 }
                                 partsAr.value[obj.model_name] = {
                                     count: 1,
                                     price: 0,
                                 };
+
                             }
                         }
                     });
                     try {
                         let tempChallenge = JSON.parse(challenge.value.save_json);
                         tempChallenge.parts.forEach((objC, index) => {
-                            console.log('EVERY');
-                            console.log(objC);
+
+
                             if(partsAr.value[objC.model.model_name] != undefined) {
                                 partsAr.value[objC.model.model_name].count -= 1;
                             }
@@ -292,7 +299,7 @@ export default {
 
         const partsCost = computed(() => {
             let sum = 0;
-            console.log(partsAr.value);
+
 
             for (let key in partsAr.value) {
                     sum += partsAr.value[key].price * partsAr.value[key].count;
@@ -306,11 +313,11 @@ export default {
             additionalCosts.value.forEach((obj) => {
                 sum += parseFloat(obj.price);
             });
-            console.log(basicCosts);
+
 
             for (let key in basicCosts) {
-                console.log('basicCosts.value[key]');
-                console.log(basicCosts[key]);
+
+
                 sum += parseFloat(basicCosts[key]);
             }
             return sum;
@@ -319,24 +326,24 @@ export default {
         const getEstimate = () => {
             axios.post('/api/solution/estimate/get', { solution_id: props.solution.id})
                 .then(response => {
-                    console.log('ests');
-                    console.log(response);
+
+
                     let pay = JSON.parse(response.data.payload.parts_prices);
-                    console.log(pay);
+
                     if (response.data.success) {
                         try {
 
 
                                 partPrices.value = pay;
-                                console.log('partPrices.value11');
-                                console.log(partPrices.value);
+
+
 
                         } catch (e) {
-                            console.log('ERROREK');
-                            console.log(e);
+
+
                         }
-                        console.log('partPrices.value');
-                        console.log(partPrices.value);
+
+
                         try {
                             additionalCosts.value = JSON.parse(response.data.payload.additional_costs);
                         } catch (e) {
@@ -367,11 +374,11 @@ export default {
         const getChallenge = () => {
             axios.post('/api/challenge/user/get/card', {id: props.solution.challenge_id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
-                        console.log("response.data.payload");
-                        console.log(response.data.payload);
-                        console.log(JSON.parse(response.data.payload.save_json));
+
+
+
                         challenge.value = response.data.payload;
 
                         finalPartsList();
@@ -413,7 +420,8 @@ export default {
             addCost,
             refreshMe,
             integrationCost,
-            partsCost
+            partsCost,
+            robots
         }
     }
 }

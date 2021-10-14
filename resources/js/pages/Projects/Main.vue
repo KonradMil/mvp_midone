@@ -25,26 +25,26 @@
                 </div>
             </div>
         </div>
-        <div class="intro-y grid grid-cols-12 gap-6 mt-5">
+        <div v-if="guard === true" class="intro-y grid grid-cols-12 gap-6 mt-5">
             <!-- BEGIN: Blog Layout -->
-            <div class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium" v-if="challenges.list == undefined || challenges.list.length == 0">
+            <div class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium" v-if="projects.length == 0">
                 <div>
                     <p v-if="user.type == 'integrator'">
-                        Brak aktywnych projektów.
+                        Nie masz jeszcze żadnych projektów.
                     </p>
                 </div>
                     <div v-if="user.type === 'investor'">
                         <p>
-                            Brak aktywnych projektów.
+                            Nie masz jeszcze żadnych projektów.
                         </p>
                     </div>
                 </div>
-            <div v-for="(challenge, index) in challenges.list" :key="index" class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+            <div v-for="(challenge, index) in projects" :key="index" class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
                 <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
                     <div class="w-10 h-10 flex-none image-fit">
-                        <img alt="Icewall Tailwind HTML Admin Template" class="rounded-full" :src="'/' + challenge.screenshot_path"/>
+                        <img alt="DBR77" class="rounded-full" :src="'/' + challenge.screenshot_path"/>
                     </div>
-                    <div class="ml-3 mr-auto" @click="$router.push( {path : '/challenges/card/' + challenge.id})">
+                    <div class="ml-3 mr-auto" @click.prevent="$router.push( {path : '/projects/card/' + challenge.id})">
                         <a href="" class="font-medium">{{ challenge.name }}</a>
                         <div class="flex text-gray-600 truncate text-xs mt-0.5" style="flex-direction: column;">
                             <a class="text-theme-1 dark:text-theme-10 inline-block truncate" href="">
@@ -78,9 +78,9 @@
                     </div>
                 </div>
                 <div class="p-5">
-                    <div class="h-40 xxl:h-56 image-fit" @click="$router.push( {path : '/challenges/card/' + challenge.id})">
+                    <div class="h-40 xxl:h-56 image-fit" @click="$router.push( {path : '/projects/card/' + challenge.id})">
                         <img
-                            alt="Icewall Tailwind HTML Admin Template"
+                            alt="DBR77"
                             class="rounded-md"
                             :src="'/' + challenge.screenshot_path"
                         />
@@ -127,14 +127,12 @@
 
 <script>
 import {defineComponent, ref, provide, onMounted, getCurrentInstance, watch, onUpdated} from "vue";
-import GetChallengesProjects from "../../compositions/GetChallengesProjects";
-import GetChallengesFollowed from "../../compositions/GetChallengesFollowed";
 import CommentSection from "../../components/social/CommentSection";
 import {useToast} from "vue-toastification";
 
 export default {
     name: "ProjectsMain",
-    components: {CommentSection, Comment, GetChallengesProjects},
+    components: {CommentSection, Comment},
     props: {
         type: String
     },
@@ -144,25 +142,38 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const toast = useToast();
-
-        const getChallengeRepositories = async () => {
-            challenges.value = GetChallengesProjects();
-        }
-
+        const projects = ref([]);
+        const goodProjects = ref([]);
+        const guard = ref(false);
         const types = require("../../json/types.json");
         const sels = require("../../json/challenge.json");
 
         onMounted(function () {
-            getChallengeRepositories();
+            getProjects(function(){
+                  guard.value = true;
+            });
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
         });
 
+        const getProjects = async(callback) => {
+            axios.post('/api/challenge/user/get/projects', {})
+                .then(response => {
+
+                    if (response.data.success) {
+                        projects.value = response.data.payload;
+                        callback(response);
+                    } else {
+
+                    }
+                })
+        }
+
         const deleteChallenge = async(id) => {
             axios.post('/api/challenge/delete', {id: id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         toast.success('Wyzwanie usunięte');
                         window.location.reload();
@@ -175,7 +186,7 @@ export default {
         const follow = (id, index) => {
             axios.post('/api/challenge/user/follow', {id: id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
                         challenges.value.list[index].followed = true;
                         toast.success('Teraz śledzisz to wyzwanie.');
@@ -188,10 +199,10 @@ export default {
         const unfollow = (id, index) => {
             axios.post('/api/challenge/user/unfollow', {id: id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
-                        console.log(challenges.value);
-                        console.log(challenges.value.list[index]);
+
+
                         challenges.value.list[index].followed  = false;
                         toast.success('Nie śledzisz już tego wyzwania.');
                     } else {
@@ -203,12 +214,12 @@ export default {
         const like = async (challenge) => {
             axios.post('api/challenge/user/like', {id: challenge.id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
-                        // console.log(response.data);
+
                         // challenge.likes = challenge.likes + 1;
                         challenge.liked = true;
-                        console.log(challenge);
+
                         emitter.emit('liked', {id: challenge.id})
                         // getChallengeRepositories();
                     } else {
@@ -220,12 +231,12 @@ export default {
         const dislike = async (challenge) => {
             axios.post('api/challenge/user/dislike', {id: challenge.id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
-                        // console.log(response.data);
+
                         // challenge.likes = challenge.likes + 1;
                         challenge.liked = false;
-                        console.log(challenge);
+
                         emitter.emit('disliked', {id: challenge.id})
                         // getChallengeRepositories();
                     } else {
@@ -235,13 +246,16 @@ export default {
         }
 
         return {
+            guard,
+            getProjects,
+            projects,
+            goodProjects,
             challenges,
             user,
             types,
             sels,
             like,
             dislike,
-            getChallengeRepositories,
             follow,
             unfollow,
             deleteChallenge

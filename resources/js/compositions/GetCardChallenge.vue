@@ -11,9 +11,9 @@ export default function GetCardChallenge(id) {
     async function getCardChallenge(id) {
         await  axios.post('/api/challenge/user/get/card', {id: id})
             .then(response => {
-                // console.log(response.data)
+
                 if (response.data.success) {
-                    console.log(response.data.payload);
+
                     list.value = response.data.payload;
                 } else {
                     // toast.error(response.data.message);

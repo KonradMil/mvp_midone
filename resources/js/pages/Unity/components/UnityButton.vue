@@ -43,7 +43,7 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
 
         const doAction = (name) => {
-            console.log('CLIK CLICK');
+
             emitter.emit(props.position, { val: name })
         };
 

@@ -15,7 +15,7 @@
                         <img
                             alt="DBR77 Platforma Robotów "
                             class="w-full"
-                            src="/logo_dbr_white.png"
+                            src="/s3/twopointo/logo_dbr_white.png"
                         />
                     </router-link>
                 </div>

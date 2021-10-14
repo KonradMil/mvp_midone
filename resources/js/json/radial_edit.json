@@ -2,7 +2,7 @@
     {
         "icon": {
             "name": "DeleteCurrentSelection",
-            "url":  "https://platform.dbr77.com/s3/builder_icons/radial_bin2.png",
+            "url":  "/s3/builder_icons/radial_bin2.png",
             "bundled": false,
             "type": ""
         },
@@ -20,7 +20,7 @@
     {
         "icon": {
             "name": "CopySelection",
-            "url": "https://platform.dbr77.com/s3/builder_icons/copy_radial.png",
+            "url": "/s3/builder_icons/copy_radial.png",
             "bundled": false,
             "type": ""
         },
@@ -38,7 +38,7 @@
     {
         "icon": {
             "name": "PasteSelection",
-            "url": "https://platform.dbr77.com/s3/builder_icons/paste_radial.png",
+            "url": "/s3/builder_icons/paste_radial.png",
             "bundled": false,
             "type": ""
         },
@@ -56,7 +56,7 @@
     {
         "icon": {
             "name": "MergeGroups",
-            "url": "https://platform.dbr77.com/s3/builder_icons/group_radial.png",
+            "url": "/s3/builder_icons/group_radial.png",
             "bundled": false,
             "type": ""
         },
@@ -74,7 +74,7 @@
     {
         "icon": {
             "name": "SplitGroups",
-            "url": "https://platform.dbr77.com/s3/builder_icons/ungroup_radial.png",
+            "url": "/s3/builder_icons/ungroup_radial.png",
             "bundled": false,
             "type": ""
         },
@@ -92,7 +92,7 @@
     {
         "icon": {
             "name": "BuildOnlyWithinLayouts",
-            "url": "https://platform.dbr77.com/s3/builder_icons/confine_radial.png",
+            "url": "/s3/builder_icons/confine_radial.png",
             "bundled": false,
             "type": ""
         },
@@ -110,7 +110,7 @@
     {
         "icon": {
             "name": "SettingsEdit",
-            "url": "https://platform.dbr77.com/s3/builder_icons/settings_radial2.png",
+            "url": "/s3/builder_icons/settings_radial2.png",
             "bundled": false,
             "type": ""
         },

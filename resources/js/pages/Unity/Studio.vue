@@ -69,14 +69,16 @@ export default {
             });
 
         const instantiate = () => {
-            console.log(document.querySelector('#' + containerId.value));
+
+
+
             createUnityInstance(document.querySelector('#' + containerId.value), {
                 dataUrl: "/s3/unity/" + unity_path + ".data.br",
                 frameworkUrl: "/s3/unity/" + unity_path + ".framework.js.br",
                 codeUrl: "/s3/unity/" + unity_path + ".wasm.br",
                 streamingAssetsUrl: "StreamingAssets",
                 companyName: "DBR",
-                productName: "platform.dbr77.com",
+                productName: window.app_path,
                 productVersion: "1.0",
             }).then(function (instance) {
                 gameInstance.value = instance;
@@ -115,7 +117,7 @@ export default {
             // if (props.module) {
             //     params.Module = params.module
             // }
-            // console.log(containerId.value);
+
             // gameInstance.value = UnityLoader.instantiate(containerId.value, props.src, params)
         }
 

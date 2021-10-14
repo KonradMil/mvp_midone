@@ -214,7 +214,7 @@ export default {
                     krs: company.value.krs
                 })
                     .then(response => {
-                        console.log(response.data)
+
                         if (response.data.success) {
                             if (response.data.success) {
                                 company.value.regon = response.data.payload.regon;
@@ -245,7 +245,7 @@ export default {
             axios.get('/sanctum/csrf-cookie').then(response => {
                 axios.post('api/company/search/nip', val)
                     .then(response => {
-                        console.log(response.data)
+
                         if (response.data.success) {
                             company.value.regon = response.data.payload.regon;
                             company.value.nip = response.data.payload.nip;
@@ -283,7 +283,7 @@ export default {
                     krs: company.value.krs
                 })
                     .then(response => {
-                        console.log(response.data)
+
                         if (response.data.success) {
                             router.push({path: 'profiles'});
                             // toast.success(response.data.message);
@@ -313,7 +313,7 @@ export default {
                     krs: company.value.krs
                 })
                     .then(response => {
-                        console.log(response.data)
+
                         if (response.data.success) {
                             toast.success(response.data.message);
                         } else {

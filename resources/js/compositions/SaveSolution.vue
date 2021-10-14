@@ -11,9 +11,9 @@ export default function SaveSolution(data) {
     async function saveSolution(data) {
         axios.post('/api/solution/user/create', {data})
             .then(response => {
-                // console.log(response.data)
+
                 if (response.data.success) {
-                    // console.log(response.data);
+
                     list.value = response.data.payload;
                 } else {
                     // toast.error(response.data.message);

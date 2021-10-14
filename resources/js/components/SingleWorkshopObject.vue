@@ -42,7 +42,7 @@
     <div class="p-5">
         <div class="h-40 xxl:h-56 image-fit">
             <img
-                alt="Icewall Tailwind HTML Admin Template"
+                alt="DBR77"
                 class="rounded-md"
                 :src="'/' + object.screenshot_path"
             />
@@ -91,7 +91,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         object.liked = true;
-                        console.log(solution);
+
                     } else {
 
                     }
@@ -107,6 +107,7 @@ export default {
         }
 
         const publishObject = () => {
+
             emitter.emit('singleworkshopobject', {action: 'publish', object: object})
         }
         const copyObject = () => {

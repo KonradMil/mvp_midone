@@ -1,17 +1,20 @@
 <template>
-    <TopButtons v-if="loaded" :allowedEdit="allowedEdit && (challenge.status != 1)" :icons="topIcons"></TopButtons>
-    <LeftButtons :icons="leftIcons" v-if="mode == 'edit' && allowedEdit && loaded"></LeftButtons>
+    <TopButtons v-if="loaded" :allowedEdit="allowedEdit && (challenge.status != 1)" :icons="topIcons" :canEditSolution="canEditSolution"></TopButtons>
+    <LeftButtons :icons="leftIcons" v-if="(mode == 'edit' && allowedEdit && loaded)"></LeftButtons>
     <LeftPanel></LeftPanel>
     <div @contextmenu.prevent="openMenu">
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
-    <BottomPanel  v-if="loaded" :allowedEdit="allowedEdit" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
-    <RightButtons  v-if="loaded" :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>
-    <RightPanel  :allowedEdit="allowedEdit" @mouseover.native="lockInput" @mouseleave.native="unlockInput" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
+    <BottomPanel v-if="loaded" :allowedEdit="allowedEdit" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
+    <RightButtons v-if="loaded" :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>
+    <RightPanel :allowedEdit="allowedEdit" :publishChallenges="publishChallenges" :canEditSolution="canEditSolution"  :type="type" :challenge="challenge" :solution="solution"></RightPanel>
+<!--    @mouseover.native="lockInput" @mouseleave.native="unlockInput"-->
     <div v-if="!loaded" id="loader">
-        <LoadingIcon icon="grid" class="w-8 h-8" />
+        <LoadingIcon icon="grid" class="w-8 h-8"/>
     </div>
-
+    <Peer v-if="sessionid != ''" :sessionId="sessionid" :owner="owner"></Peer>
+    <!--    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>-->
+    <!--    <WebRTC width="100%" roomId="roomId"></WebRTC>-->
     <div id="help-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -88,7 +91,8 @@
             </div>
         </div>
     </div>
-
+<!--    <ModalWorkshop :show="workshopOpen"></ModalWorkshop>-->
+    <!--    <WorkshopModal v-if="workshopOpen" :open="workshopOpen"></WorkshopModal>-->
 </template>
 
 <script>
@@ -106,8 +110,10 @@ import TopButtons from "./components/TopButtons";
 import BottomPanel from "./components/BottomPanel";
 import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
-
-import router from "../../router";
+import WorkshopModal from "./WorkshopModal"
+import WebRTC from "./WebRTC";
+import ModalWorkshop from "../../components/ModalWorkshop";
+import Peer from "./Peer";
 
 const ww = WindowWatcher();
 
@@ -119,9 +125,15 @@ export default {
         readOnly: {
             default: false,
             type: Boolean
-        }
+        },
+        publishChallenges: Boolean,
+        canEditSolution: Boolean,
+        sessionid: String
     },
-    components: {RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio},
+    components: {
+        Peer,
+        ModalWorkshop, WebRTC, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio
+    },
     setup(props, {emit}) {
         //GLOBAL
         const app = getCurrentInstance();
@@ -134,6 +146,7 @@ export default {
         const gameWindow = ref(null);
         const gameLoad = ref({});
         const loaded = ref(false);
+        const workshopOpen = ref(false);
         const doubleClick = ref(false);
         const mousePositionY = ref(0);
         const mousePositionX = ref(0);
@@ -158,6 +171,8 @@ export default {
         const radialMenuLayout = ref([]);
         const animationSave = ref({layers: []});
         const saving = ref(false);
+        const sessionid = ref('');
+        const owner = ref(false);
 
 
 
@@ -169,8 +184,18 @@ export default {
         });
 
         const startTutorial = () => {
-
+            handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
         }
+
+        emitter.on('workshop_object_clicked', e => {
+            workshopOpen.value = false;
+            handleUnityActionOutgoing({action: "loadWorkshopObject", data: JSON.parse(e.object.save)});
+        });
+
+        emitter.on('workshop_open', e => {
+            // cash("#workshop-modal").modal("show");
+            workshopOpen.value = true;
+        });
 
         //RUNS WHEN UNITY IS READY
         emitter.on('onInitialized', e => initalize());
@@ -204,7 +229,7 @@ export default {
         });
 
         emitter.on('lockState', e => {
-            if(e.action == 'lock') {
+            if (e.action == 'lock') {
                 lockInput();
             } else {
                 unlockInput();
@@ -212,31 +237,27 @@ export default {
         });
 
         const lockInput = () => {
-            // console.log('LOCK');
+
             handleUnityActionOutgoing({action: "lockInput", data: ''});
         }
 
         const unlockInput = () => {
-            // console.log('UNLOCK');
+
             handleUnityActionOutgoing({action: "unlockInput", data: ''});
         }
 
         const openMenu = (e) => {
             e.preventDefault();
-            console.log('RIGHT CLICK');
-            console.log(e);
+
             if (loaded.value) {
                 if (doubleClick.value) {
                     if ((mousePositionX.value > (e.clientX - 10) && mousePositionX.value < (e.clientX + 10)) && (mousePositionY.value > (e.clientY - 10) && mousePositionY.value < (e.clientY + 19))) {
                         let data = JSON.stringify({menu: currentRadialMenu.value});
-                        console.log(data);
-                        console.log('RIGHT CLICK SHOW');
                         handleUnityActionOutgoing({action: 'showRadialMenu', data: data});
                     } else {
                         doubleClick.value = false;
                     }
                 } else {
-                    console.log('ONE CLICK');
                     mousePositionX.value = e.clientX;
                     mousePositionY.value = e.clientY;
                     doubleClick.value = true;
@@ -248,12 +269,20 @@ export default {
             }
         }
 
+        const showLeftButtons = computed(() => {
+            if (mode == 'edit' && allowedEdit && loaded) {
+                return true;
+            } else {
+                return false;
+            }
+        })
+
         const checkTeam = async () => {
-            if(type.value == 'challenge') {
+            if (type.value == 'challenge') {
                 await axios.post('/api/challenge/check-team', {user_id: user.id, challenge_id: challenge.value.id})
                     .then(response => {
-                        console.log("response.data")
-                        console.log(response.data)
+
+
                         if (response.data.success) {
                             inTeam.value = response.data.payload;
                         } else {
@@ -261,9 +290,7 @@ export default {
                         }
                     })
             } else {
-                await axios.post('/api/solution/check-team', {user_id: user.id, solution_id: solution.value.id})
-                    .then(response => {
-                        // console.log(response.data)
+                await axios.post('/api/solution/check-team', {user_id: user.id, solution_id: solution.value.id}).then(response => {
                         if (response.data.success) {
                             inTeam.value = response.data.payload;
                         } else {
@@ -271,7 +298,6 @@ export default {
                         }
                     })
             }
-
         };
 
         const changeMode = (mode) => {
@@ -279,27 +305,22 @@ export default {
         }
 
         const allowedEdit = computed(() => {
-            console.log('ALLOWED EDIT');
-            console.log(user.id);
-            console.log(challenge.author_id);
-            if(type.value == 'challenge') {
-                if(inTeam.value || (user.id == challenge.value.author_id)) {
+            if (type.value == 'challenge') {
+                if (inTeam.value || (user.id == challenge.value.author_id)) {
                     return true;
                 } else {
                     return false;
                 }
             } else {
-                if(inTeam.value || (user.id == solution.value.author_id)) {
+                if (inTeam.value || (user.id == solution.value.author_id)) {
                     return true;
                 } else {
                     return false;
                 }
             }
-
-            });
+        });
 
         emitter.on('topbuttonclick', e => {
-            console.log(e);
             switch (e.val) {
                 case 'animation_mode':
                     handleUnityActionOutgoing({action: "animationMode", data: ''});
@@ -317,14 +338,14 @@ export default {
                     mode.value = 'layout';
                     break;
                 case 'fullscreen':
-                    console.log(gameWindow);
+
                     gameWindow.value.setFullscreen();
                     break;
                 case 'logout':
-                    if(type.value == 'solution') {
-                       window.location.href = 'https://platform.dbr77.com/challenges/card/' + solution.value.challenge_id;
+                    if (type.value == 'solution') {
+                        window.location.href = window.app_path + '/challenges/card/' + solution.value.challenge_id;
                     } else {
-                        window.location.href = 'https://platform.dbr77.com/challenges/card/' + challenge.value.id;
+                        window.location.href = window.app_path + '/challenges/card/' + challenge.value.id;
                     }
                     break;
                 case 'orto':
@@ -350,7 +371,7 @@ export default {
 
 
         emitter.on('UnitySave', e => {
-            if(!saving.value) {
+            if (!saving.value) {
                 saving.value = true;
                 gameLoad.value.save_json = e.saveGame;
                 if (type.value == 'challenge' && window.location.href.indexOf("challenge") > -1) {
@@ -363,7 +384,7 @@ export default {
                         saving.value = false;
                     });
                 }
-                emitter.emit('UnitySaved', { val: '' });
+                emitter.emit('UnitySaved', {val: ''});
                 handleUnityActionOutgoing(e);
             }
         });
@@ -372,16 +393,13 @@ export default {
             try {
                 unityActionOutgoingObject.value[e.action](e.data);
             } catch (ee) {
-                console.log([ee, e]);
+
             }
         }
 
         const initalize = async () => {
-            console.log("initializeMe");
             setTimeout(function () {
                 loaded.value = true;
-                console.log('gameWindow.value');
-                console.log(gameWindow.value);
                 unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
                 handleUnityActionOutgoing({
                     action: 'setSessionId',
@@ -389,13 +407,14 @@ export default {
                 });
                 // handleUnityActionOutgoing({action: 'setHangarAppearance', data: 1});
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
-                console.log('GET ME');
-                if(type.value == 'solution') {
+
+                if (type.value == 'solution') {
                     getSolutionRepositories(id.value);
                 } else {
                     getCardChallengeRepositories(id.value);
                 }
-                handleUnityActionOutgoing({action: 'prefix', data: 'https://platform.dbr77.com/s3'});
+                console.log({action: 'prefix', data: window.app_path + '/s3'});
+                handleUnityActionOutgoing({action: 'prefix', data: window.app_path + '/s3'});
             }, 2000);
             setTimeout(() => {
                 unlockInput();
@@ -405,7 +424,6 @@ export default {
         onBeforeMount(() => {
             //ADDS LISTENERS
             bridge.value = UnityBridge();
-
         });
 
         emitter.on('updateanimationSave', e => {
@@ -415,28 +433,26 @@ export default {
         const getCardChallengeRepositories = async (id) => {
             await axios.post('/api/challenge/user/get/card', {id: id})
                 .then(response => {
-                    // console.log(response.data)
                     if (response.data.success) {
-                        console.log("response.data.payload");
-                        console.log(response.data.payload);
-                        if(response.data.payload.save_json == "") {
+                        if (response.data.payload.save_json == "") {
                             challenge.value = response.data.payload;
                             checkTeam();
                             unlockInput();
                         } else {
-                            console.log(JSON.parse(response.data.payload.save_json));
+
                             challenge.value = response.data.payload;
-                            initialLoad.value = JSON.parse(response.data.payload.save_json);
-                            animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
+                            initialLoad.value = response.data.payload.save_json;
+                            animationSave.value = response.data.payload.save_json.animation_layers;
                             checkTeam();
+
                             handleUnityActionOutgoing({
                                 action: 'loadStructure',
-                                data: JSON.parse(response.data.payload.save_json)
+                                data: response.data.payload.save_json
                             });
                             unlockInput();
                         }
 
-                        // console.log('EMIT LOAD');
+
                         // emitter.emit('saveLoaded', {save: (response.data.payload)});
                     } else {
                         // toast.error(response.data.message);
@@ -447,21 +463,18 @@ export default {
         const getSolutionRepositories = async (id) => {
             await axios.post('/api/solution/get/unity', {id: id})
                 .then(response => {
-                    // console.log(response.data)
+
                     if (response.data.success) {
-                        console.log("response.data.payload");
-                        console.log(response.data.payload);
-                        console.log(JSON.parse(response.data.payload.save_json));
                         solution.value = response.data.payload;
                         initialLoad.value = JSON.parse(response.data.payload.save_json);
                         animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
                         checkTeam();
+
                         handleUnityActionOutgoing({
                             action: 'loadStructure',
                             data: JSON.parse(response.data.payload.save_json)
                         });
                         unlockInput();
-                        // console.log('EMIT LOAD');
                         // emitter.emit('saveLoaded', {save: (response.data.payload)});
                     } else {
                         // toast.error(response.data.message);
@@ -492,6 +505,7 @@ export default {
         });
 
         return {
+            workshopOpen,
             user,
             challenge,
             solution,
@@ -514,7 +528,10 @@ export default {
             unlockInput,
             modelActiveTab,
             startTutorial,
-            loaded
+            loaded,
+            sessionid,
+            owner,
+            showLeftButtons
         }
     }
 }

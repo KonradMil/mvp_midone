@@ -12,7 +12,7 @@ export default function AcceptInvite(id) {
         axios.post('/api/teams/user/invite/accept', {id: id})
             .then(response => {
                 if (response.data.success) {
-                    // console.log(response.data);
+
                     list.value = response.data.success;
                 } else {
                     // toast.error(response.data.message);

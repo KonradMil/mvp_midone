@@ -1,5 +1,5 @@
 <template>
-<StudioWorkshop hideFooter="true" :src="''" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"></StudioWorkshop>
+
 </template>
 
 <script>

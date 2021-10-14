@@ -44,8 +44,9 @@ class OfferAcceptedNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('Oferta została zaakceptowana do wyzwania: ' . $this->challenge->name .'.')
-            ->action('Sprawdź', url('https://platform.dbr77.com/challenges/card/' . $this->challenge->id))
+            ->subject('DBR77: Oferta zaakceptowana')
+            ->line('Zaakceptowano ofertę dla wyzwania: ' . $this->challenge->name .'.')
+            ->action('Sprawdź', url(env('APP_PATH') . '/challenges/card/' . $this->challenge->id))
             ->line('Dziękujemy za korzystanie z platformy DBR77!');
     }
 

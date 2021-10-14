@@ -11,9 +11,9 @@ export default function GetOffers(id) {
     async function getOffers(id) {
         axios.post('/api/offer/get/all', {id: id})
             .then(response => {
-                // console.log(response.data)
+
                 if (response.data.success) {
-                    // console.log(response.data);
+
                     list.value = response.data.payload;
                 } else {
                     // toast.error(response.data.message);

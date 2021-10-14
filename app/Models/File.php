@@ -2,34 +2,67 @@
 
 namespace App\Models;
 
-use App\Models\Reports\Report;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ *
+ */
 class File extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     protected $table = 'files';
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'name', 'ext', 'original_name', 'path', 'thumbnail', 'size', 'alt', 'tags', 'author_id'
     ];
 
+    /**
+     * @var string[]
+     */
     protected $casts = [
         'tags' => 'array'
     ];
 
-    public function reports(){
+    /**
+     * @return BelongsToMany
+     */
+    public function reports(): BelongsToMany
+    {
         return $this->belongsToMany(Report::class, 'file_reports');
     }
-    public function author() {
+
+    /**
+     * @return HasMany
+     */
+    public function author(): HasMany
+    {
         return $this->hasMany(User::class);
     }
 
-    public function challenges()
+    /**
+     * @return BelongsToMany
+     */
+    public function challenges(): BelongsToMany
     {
         return $this->belongsToMany(File::class, 'challenge_image', 'image_id', 'challenge_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function solutions(): BelongsToMany
+    {
+        return $this->belongsToMany(File::class);
     }
 
 }

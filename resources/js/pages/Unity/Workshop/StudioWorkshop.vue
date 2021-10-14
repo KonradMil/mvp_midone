@@ -1,6 +1,6 @@
 <template>
     <div class="webgl-content">
-        <canvas :id="containerId" v-bind:style="{ width: '62vw', height: '83vh' }"></canvas>
+        <canvas :id="containerId" v-bind:style="{ width: '60vw', height: '83vh' }"></canvas>
         <div v-if="loaded === false">
             <div class="unity-loader">
                 <div class="bar">
@@ -17,9 +17,9 @@ import cash from "cash-dom/dist/cash";
 import unityActionOutgoing from "../composables/ActionsOutgoing";
 
 export default {
-    props: ['src', 'module', 'width', 'height', 'externalProgress', 'unityLoader', 'hideFooter'],
+    props: ['src', 'module', 'width', 'height', 'externalProgress', 'unityLoader', 'hideFooter', 'loader'],
     name: 'StudioWorkshop',
-    setup(props,{emit}) {
+    setup(props, {emit}) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const containerId = ref();
@@ -35,13 +35,11 @@ export default {
             gameInstance.value.SetFullscreen(1);
         }
 
-
-
         const message = (gameObject, method, param) => {
             if (param === null) {
                 param = ''
             }
-            if (gameInstance.value !== null){
+            if (gameInstance.value !== null) {
                 gameInstance.value.SendMessage(gameObject, method, param)
             } else {
                 console.warn('vue-unity-webgl: you\'ve sent a message to the Unity content, but it wasn\t instantiated yet.')
@@ -49,35 +47,32 @@ export default {
         }
 
 
-
         onBeforeMount(() => {
-            // if (props.unityLoader) {
+            if (!props.loader) {
                 const script = document.createElement('SCRIPT')
-             script.setAttribute('src', '/s3/unity/' + unity_path + '.loader.js')
+                script.setAttribute('src', '/s3/unity/' + unity_path + '.loader.js')
                 script.setAttribute('async', '')
                 script.setAttribute('defer', '')
                 document.body.appendChild(script)
                 script.onload = () => {
-                    emitter.emit('onload', { done:1 })
+                    emitter.emit('onloadWorkshop', {done: 1})
                 }
-            // }
+            }
         })
 
         const instantiate = () => {
-            console.log('INST');
-            console.log(document.querySelector('#' + containerId.value));
             createUnityInstance(document.querySelector('#' + containerId.value), {
                 dataUrl: "/s3/" + unity_workshop_path + ".data.br",
                 frameworkUrl: "/s3/" + unity_workshop_path + ".framework.js.br",
                 codeUrl: "/s3/" + unity_workshop_path + ".wasm.br",
                 streamingAssetsUrl: "StreamingAssets",
                 companyName: "DBR",
-                productName: "platform.dbr77.com",
+                productName: window.app_path,
                 productVersion: "1.0",
             }).then(function (instance) {
                 gameInstance.value = instance;
                 loaded.value = true;
-                emitter.emit('onInitialized', { loaded: true });
+                // emitter.emit('onInitialized', {loaded: true});
                 // window.addEventListener('resize', onResize);
                 // onResize();
             });
@@ -111,13 +106,13 @@ export default {
             // if (props.module) {
             //     params.Module = params.module
             // }
-            // console.log(containerId.value);
+
             // gameInstance.value = UnityLoader.instantiate(containerId.value, props.src, params)
         }
 
 
-        onMounted(()=> {
-            emitter.on('onload', e =>  setTimeout(function () {
+        onMounted(() => {
+            emitter.on('onloadWorkshop', e => setTimeout(function () {
                 instantiate();
             }, 1500))
         });

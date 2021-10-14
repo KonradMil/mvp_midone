@@ -12,7 +12,7 @@ export default function GetNotifications(number = 5) {
         axios.post('/api/notifications/get', {number : number})
             .then(response => {
                 if (response.data.success) {
-                    // console.log(response.data);
+
                     list.value = response.data.payload;
                 } else {
                     // toast.error(response.data.message);

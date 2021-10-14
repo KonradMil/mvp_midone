@@ -5,13 +5,13 @@ const UnityBridgeWorkshop = () => {
 
     onMounted(() => {
         window.UnityWorkshopModelSave = function UnityWorkshopModelSave(str) {
-            console.log('ODEBRANE LAYERY');
-            console.log(str);
+
+
             emitter.emit('UnityWorkshopSave', { data: JSON.parse(str) })
         };
         window.UnityWorkshopModelDelete = function UnityWorkshopModelDelete(str) {
-            console.log('ODEBRANE LAYERY');
-            console.log(str);
+
+
             emitter.emit('UnityWorkshopDelete', { data: str })
         };
     });
