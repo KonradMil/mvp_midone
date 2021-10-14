@@ -75,14 +75,8 @@ class AuthController extends Controller
             } else {
 
                 try {
-                    if($provider === 'facebook') {
-                        dd(Socialite::driver($provider));
-                    }
-
                     $socialUser = Socialite::driver($provider)->user();
                 } catch (Exception $e) {
-
-                    dd($e);
                     return redirect('/login');
                 }
 
