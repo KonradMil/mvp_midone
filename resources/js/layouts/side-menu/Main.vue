@@ -108,8 +108,7 @@ export default defineComponent({
         const router = useRouter();
         const store = useStore();
         const user = ref({});
-        const a = require('../../json/main_menu.json');
-        const menu = ref(a);
+        const menu = require('../../json/main_menu.json');
         const formattedMenu = ref([]);
         const sideMenu = computed(() =>
             nestedMenu(menu.menu, route)
@@ -118,24 +117,11 @@ export default defineComponent({
         watch(
             computed(() => route.path),
             () => {
-                try {
-                    formattedMenu.value = $h.toRaw(sideMenu.value);
-                }catch (e) {
-                    console.log(a);
-                }
+                formattedMenu.value = $h.toRaw(sideMenu.value);
             }
         );
 
         onMounted(() => {
-            menu.value =  {
-                menu: [
-                    {
-                        "icon": "HomeIcon",
-                        "pageName": "studio-playground-saves",
-                        "title": "Konkurs"
-                    }
-                ]
-            }
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
@@ -154,9 +140,7 @@ export default defineComponent({
             linkTo,
             enter,
             leave,
-            user,
-            menu,
-            a
+            user
         };
     }
 });
