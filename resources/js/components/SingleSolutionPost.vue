@@ -88,9 +88,9 @@
                             <div class=" h-full" v-for="(file, index) in solutionFiles" :key="'file_' + index">
                                 <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
                                     <img
+                                        v-lazy="'/' + file.path"
                                          class="w-full h-full"
-                                         :alt="file.original_name"
-                                         :src="'/' + file.path"/>
+                                         :alt="file.original_name"/>
                                     <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
                                     </div>
                                 </div>
@@ -213,20 +213,7 @@ export default {
         }
 
         const downloadFile = async (url,name) => {
-            axios({
-                url: url,
-                method: 'GET',
-                responseType: 'blob',
-            }).then((response) => {
-                var fileURL = window.URL.createObjectURL(new Blob([response.data]));
-                var fileLink = document.createElement('a');
-
-                fileLink.href = fileURL;
-                fileLink.setAttribute('download', name);
-                document.body.appendChild(fileLink);
-
-                fileLink.click();
-            });
+            window.open('/' + url, '_blank').focus();
         }
 
         onMounted(() => {
