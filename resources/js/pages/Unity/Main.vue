@@ -237,7 +237,7 @@ export default {
                                 gameWindow.value.setFullscreen();
                                 break;
                             case 'logout':
-                                if (type.value == 'solution') {
+                                if (props.type == 'solution') {
                                     window.location.href = window.app_path + '/challenges/card/' + solution.value.challenge_id;
                                 } else {
                                     window.location.href = window.app_path + '/challenges/card/' + challenge.value.id;
@@ -269,8 +269,9 @@ export default {
                             gameLoad.value.save_json = e.saveGame;
                             console.log('HERA', type.value == 'challenge' && window.location.href.indexOf("challenge") > -1);
                             console.log('HERA1', type.value == 'challenge');
+                            console.log('HERA21', type.value);
                             console.log('HERA2', window.location.href.indexOf("challenge"));
-                            if (type.value == 'challenge' && window.location.href.indexOf("challenge") > -1) {
+                            if (props.type == 'challenge' && window.location.href.indexOf("challenge") > -1) {
                                 SaveChallengeUnity({save: gameLoad.value, id: id.value}, () => {
                                     saving.value = false;
                                 });
