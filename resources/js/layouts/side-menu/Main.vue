@@ -121,7 +121,7 @@ export default defineComponent({
                 try {
                     formattedMenu.value = $h.toRaw(sideMenu.value);
                 }catch (e) {
-
+                    console.log(a);
                 }
             }
         );
