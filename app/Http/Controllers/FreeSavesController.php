@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Handlers\FreeSavesHandler;
 use App\Http\ResponseBuilder;
-use App\Models\FreeSave;
 use App\Repository\Eloquent\FreeSavesRepository;
 use App\Repository\Eloquent\UserRepository;
-use App\Services\FreeSaveService;
+use App\Services\FreeSavesService;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,21 +20,38 @@ class FreeSavesController extends Controller
 
     }
 
-    public function deleteSave(Request $request)
+    /**
+     * @param int $id
+     * @param FreeSavesRepository $freeSavesRepository
+     * @param FreeSavesService $freeSavesService
+     * @return JsonResponse
+     */
+    public function deleteSave(int $id, FreeSavesRepository $freeSavesRepository, FreeSavesService $freeSavesService): JsonResponse
     {
-        $id = $request->get('freesave_id');
+        $responseBuilder = new ResponseBuilder();
 
-        $freeSave = FreeSave::find($id);
+        $freeSave = $freeSavesRepository->find($id);
 
-        if($freeSave){
-           $freeSave->delete();
+        if (!$freeSave) {
+            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Usunięto poprawnie.',
-            'payload' => ''
-        ]);
+        try {
+
+            $freeSavesService->deleteFreeSave($freeSave);
+
+            $responseBuilder->setSuccessMessage(__('messages.delete_correct'));
+
+        } catch (QueryException $e) {
+
+            $responseBuilder->setErrorMessage(__('messages.error'));
+            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
+
+
+        return $responseBuilder->getResponse();
     }
 
     public function getSave(Request $request, FreeSavesRepository $freeSavesRepository, int $id)
@@ -53,6 +70,12 @@ class FreeSavesController extends Controller
         return $responseBuilder->getResponse();
     }
 
+    /**
+     * @param Request $request
+     * @param UserRepository $userRepository
+     * @param FreeSavesRepository $freeSavesRepository
+     * @return JsonResponse
+     */
     public function getSaves(Request $request, UserRepository $userRepository, FreeSavesRepository $freeSavesRepository)
     {
         $responseBuilder = new ResponseBuilder();
@@ -71,7 +94,15 @@ class FreeSavesController extends Controller
         return $responseBuilder->getResponse();
     }
 
-    public function saveData(Request $request, FreeSavesRepository $freeSavesRepository, FreeSavesHandler $freeSavesHandler, FreeSaveService $freeSaveService)
+
+    /**
+     * @param Request $request
+     * @param FreeSavesRepository $freeSavesRepository
+     * @param FreeSavesHandler $freeSavesHandler
+     * @param FreeSavesService $freeSavesService
+     * @return JsonResponse
+     */
+    public function saveData(Request $request, FreeSavesRepository $freeSavesRepository, FreeSavesHandler $freeSavesHandler, FreeSavesService $freeSavesService)
     {
         $responseBuilder = new ResponseBuilder();
 
@@ -96,11 +127,9 @@ class FreeSavesController extends Controller
             }
 
             try {
-                $updateFreeSave = $freeSaveService->updateFreeSave($parameters, $freeSave);
+                $updateFreeSave = $freeSavesService->updateFreeSave($parameters, $freeSave);
 
                 $responseBuilder->setSuccessMessage(__('messages.save_correct'));
-                $responseBuilder->setData('local_vision', $freeSaveService);
-
             } catch (QueryException $e) {
 
                 $responseBuilder->setErrorMessage(__('messages.error'));
@@ -108,7 +137,7 @@ class FreeSavesController extends Controller
             }
         } else {
             try {
-                $newFreeSave = $freeSaveService->addFreeSave($parameters);
+                $newFreeSave = $freeSavesService->addFreeSave($parameters);
 
                 $responseBuilder->setSuccessMessage(__('messages.save_correct'));
                 $responseBuilder->setData('local_vision', $newFreeSave);
