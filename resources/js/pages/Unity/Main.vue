@@ -267,6 +267,9 @@ export default {
                         if (!saving.value) {
                             saving.value = true;
                             gameLoad.value.save_json = e.saveGame;
+                            console.log('HERA', type.value == 'challenge' && window.location.href.indexOf("challenge") > -1);
+                            console.log('HERA1', type.value == 'challenge');
+                            console.log('HERA2', window.location.href.indexOf("challenge"));
                             if (type.value == 'challenge' && window.location.href.indexOf("challenge") > -1) {
                                 SaveChallengeUnity({save: gameLoad.value, id: id.value}, () => {
                                     saving.value = false;
