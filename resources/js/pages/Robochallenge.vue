@@ -32,7 +32,7 @@
                     <div class="my-auto mx-auto xl:ml-20 bg-white dark:bg-dark-1 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
 
                         <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
-                            Robo Challenge
+                            RoboHakaton
                         </h2>
                         <div class="intro-x mt-2 text-gray-500">
                             Formularz zgłoszeniowy do konkursu
@@ -96,7 +96,7 @@
                                 <label class="cursor-pointer select-none" for="cb-rules-consent">
                                     Oświadczam, że zapoznałem się oraz akceptuję
                                     <a
-                                        href="https://cdn.dbr77.com/wp-content/uploads/2021/10/2021_10_13_Regulamin_konkursu-Robochallenge-online.pdf"
+                                        href="https://cdn.dbr77.com/wp-content/uploads/2021/10/Regulamin-konkursu-DBR77-RoboHakaton.pdf"
                                         class="text-theme-1 dark:text-theme-10 mx-1 cursor-pointer"
                                         target="_blank"
                                     >
@@ -134,7 +134,7 @@
                                     v-model="dataProcessingConsent"
                                 />
                                 <label class="cursor-pointer select-none" for="cb-data-processing-consent">
-                                    Wyrażam zgodę na przetwarzanie moich danych osobowychw w związku z udziałem w konkursie.
+                                    Wyrażam zgodę na przetwarzanie moich danych osobowych w związku z udziałem w konkursie.
                                 </label>
                             </div>
                         </div>
