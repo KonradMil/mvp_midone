@@ -88,7 +88,7 @@
                             <div class=" h-full" v-for="(file, index) in solutionFiles" :key="'file_' + index">
                                 <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
                                     <img
-                                        v-lazy="{ src: '/' + file.path, loading: '/s3/twopointo/images/loader.gif', error: '/s3/twopointo/images/small_placeholder.jpg' }"
+                                        v-lazy="'/' + file.path"
                                          class="w-full h-full"
                                          :alt="file.original_name"/>
                                     <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
