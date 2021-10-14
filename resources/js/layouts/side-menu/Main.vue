@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div>
         <MobileMenu/>
         <div class="flex">
             <!-- BEGIN: Side Menu -->

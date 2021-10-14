@@ -208,6 +208,39 @@ export default {
                 .removeClass("main")
                 .removeClass("error-page")
                 .addClass("login");
+            const urlParams = new URLSearchParams(window.location.search);
+            console.log("urlParams", urlParams);
+            let param = urlParams.get('beam');
+            console.log("beam", param)
+            if(param != undefined && param != '') {
+                let b = atob(param).split("##");
+                console.log("b", b);
+                axios.get('/sanctum/csrf-cookie').then(response => {
+                    axios.post('/api/login', {
+                        email: b[0],
+                        password: b[1]
+                    })
+                        .then(response => {
+                            if (response.data.success) {
+                                console.log(response.data.success);
+                                let user = response.data.payload;
+                                console.log(user);
+                                // window.Laravel.isLoggedin = true;
+                                store.dispatch('login/login', {
+                                    user
+                                });
+
+                                // toast.success(response.data.message)
+                                console.log(store);
+                                if (user.name !== undefined || user.name !== '') {
+                                    window.location.replace('/dashboard');
+                                } else {
+                                    window.location.replace('/kreator');
+                                }
+                            }
+                        })
+                })
+            }
         });
 
         return {

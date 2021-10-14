@@ -40,6 +40,7 @@ import ProjectsList from "../pages/Admin/ProjectsList";
 import UserList from '../pages/Admin/UserList';
 import Secret from '../pages/Admin/Secret';
 import SolutionsArchive from "../pages/Solutions/SolutionsArchive";
+import Robochallenge from "../pages/Robochallenge";
 import Notifications from "../pages/Notifications";
 
 export const routes = [
@@ -100,6 +101,11 @@ export const routes = [
         path: "/terms/:page",
         component: TermsMain,
         props: true
+    },
+    {
+        name: 'robochallenge',
+        path: '/robochallenge',
+        component: Robochallenge
     },
     {
         name: 'studio-playground',
@@ -292,7 +298,6 @@ export const routes = [
                 path: '/change-password',
                 component: ChangePassword
             },
-
         ]
     },
     {

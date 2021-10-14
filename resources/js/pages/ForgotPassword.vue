@@ -9,7 +9,7 @@
                         <img
                             alt="DBR77 Platforma Robotów "
                             class="w-2/4"
-                            src="https://dbr77.com/wp-content/uploads/2020/02/logo_dbr_white.png"
+                            src="https://dbr77.com/images/logos/dbr_logo_white.svg"
                         />
                     </a>
                     <div class="my-auto">

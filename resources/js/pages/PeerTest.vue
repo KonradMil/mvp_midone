@@ -10,6 +10,8 @@
 import {onMounted, ref} from "vue";
 import Peer from "peerjs";
 
+const {getCurrentInstance} = require("vue");
+
 
 export default {
     name: 'PeerTest',
@@ -22,13 +24,21 @@ export default {
         const ownId = ref('');
         const owner = ref(false);
         const urlParams = new URLSearchParams(window.location.search);
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
+
+        emitter.on('unity_outgoing_multi', e => {
+            console.log('unity_outgoing_multi', e);
+           if(conn != {}) {
+               conn.value.send(JSON.parse(e));
+           }
+        });
+
+
         onMounted(() => {
             let sessionid = urlParams.get('sessionid');
             peer.value = new Peer(null, {
-                debug: 1,
-                host: 'localhost',
-                port: 9000,
-                path: '/myapp'
+                debug: 1
             });
 
             if(sessionid != null) {
