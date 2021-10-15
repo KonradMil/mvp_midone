@@ -170,67 +170,135 @@ export default {
         const sessionid = ref('');
         const owner = ref(false);
 
+        //ALL EVENTS
+        emitter.on('*', (type, e) => {
+            console.log('*', [type, e]);
+            switch (type) {
+                    case 'unityoutgoingaction':
+                        handleUnityActionOutgoing(e);
+                        break;
+                    case 'workshop_object_clicked':
+                        workshopOpen.value = false;
+                        handleUnityActionOutgoing({action: "loadWorkshopObject", data: JSON.parse(e.object.save)});
+                        break;
+                    case 'showChallenge':
+                        challenge.value = e.obj;
+                        type.value = 'challenge';
+                        break;
+                    case 'workshop_open':
+                        workshopOpen.value = true;
+                        break;
+                    case 'gridsizechange':
+                        handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
+                        break;
+                    case 'layoutbuttonclick':
+                        switch (e.val) {
+                            case "edit":
+                                handleUnityActionOutgoing({action: "beginLayoutEdit", data: ''});
+                                break;
+                            case "addlabel":
+                                handleUnityActionOutgoing({action: "beginLayoutLabel", data: ''});
+                                break;
+                            case "addlayout":
+                                handleUnityActionOutgoing({action: "beginLayoutDraw", data: ''});
+                                break;
+                            case "notatka":
+                                handleUnityActionOutgoing({action: "beginLayoutComment", data: ''});
+                                break;
+                        }
+                        break;
+                    case 'lockState':
+                        if (e.action == 'lock') {
+                            lockInput();
+                        } else {
+                            unlockInput();
+                        }
+                        break;
+                    case 'topbuttonclick':
 
+                        switch (e.val) {
+                            case 'animation_mode':
+                                handleUnityActionOutgoing({action: "animationMode", data: ''});
+                                currentRadialMenu.value = radialMenuAnimation.value;
+                                mode.value = 'animation';
+                                break;
+                            case 'edit_mode':
+                                handleUnityActionOutgoing({action: "editMode", data: ''});
+                                currentRadialMenu.value = radialMenuEdit.value;
+                                mode.value = 'edit';
+                                break;
+                            case 'layout':
+                                handleUnityActionOutgoing({action: "layoutMode", data: ''});
+                                currentRadialMenu.value = radialMenuLayout.value;
+                                mode.value = 'layout';
+                                break;
+                            case 'fullscreen':
+
+                                gameWindow.value.setFullscreen();
+                                break;
+                            case 'logout':
+                                if (props.type == 'solution') {
+                                    window.location.href = window.app_path + '/challenges/card/' + solution.value.challenge_id+"#solutions";
+                                } else {
+                                    window.location.href = window.app_path + '/challenges/card/' + challenge.value.id+"#solutions";
+                                }
+                                break;
+                            case 'orto':
+                                handleUnityActionOutgoing({action: 'ChangeCamera', data: 2});
+                                break;
+                            case 'fpv':
+                                handleUnityActionOutgoing({action: 'ChangeCamera', data: 3});
+                                break;
+                            case 'topdown':
+                                handleUnityActionOutgoing({action: 'ChangeCamera', data: 1});
+                                break;
+                            case 'standard':
+                                handleUnityActionOutgoing({action: 'ChangeCamera', data: 0});
+                                break;
+                            case 'save':
+                                handleUnityActionOutgoing({action: 'save', data: ''});
+                                break;
+                            case 'help':
+                                cash("#help-modal").modal("show");
+                                break;
+                        }
+                        break;
+                    case 'UnitySave':
+                        if (!saving.value) {
+                            saving.value = true;
+                            gameLoad.value.save_json = e.saveGame;
+                            console.log('HERA', type.value == 'challenge' && window.location.href.indexOf("challenge") > -1);
+                            console.log('HERA1', type.value == 'challenge');
+                            console.log('HERA21', type.value);
+                            console.log('HERA2', window.location.href.indexOf("challenge"));
+                            if (props.type == 'challenge' && window.location.href.indexOf("challenge") > -1) {
+                                SaveChallengeUnity({save: gameLoad.value, id: id.value}, () => {
+                                    saving.value = false;
+                                });
+                            } else {
+                                SaveSolutionUnity({save: gameLoad.value, id: id.value}, (sol) => {
+                                    id.value = sol.id;
+                                    saving.value = false;
+                                });
+                            }
+                            emitter.emit('UnitySaved', {val: ''});
+                            handleUnityActionOutgoing(e);
+                        }
+                        break;
+                        case 'onInitialized':
+                            initalize()
+                        break;
+                            case 'updateanimationSave':
+                                animationSave.value.layers = e.data.layers;
+                        break;
+                }
+        });
 
         window_height.value = window.innerHeight;
-
-        emitter.on('showChallenge', e => {
-            challenge.value = e.obj;
-            type.value = 'challenge';
-        });
 
         const startTutorial = () => {
             handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
         }
-
-        emitter.on('workshop_object_clicked', e => {
-            workshopOpen.value = false;
-            handleUnityActionOutgoing({action: "loadWorkshopObject", data: JSON.parse(e.object.save)});
-        });
-
-        emitter.on('workshop_open', e => {
-            // cash("#workshop-modal").modal("show");
-            workshopOpen.value = true;
-        });
-
-        //RUNS WHEN UNITY IS READY
-        emitter.on('onInitialized', e => initalize());
-
-        //HANDLES ALL UNITY ACTIONS
-        emitter.on('unityoutgoingaction', e => {
-            handleUnityActionOutgoing(e);
-        });
-
-        //HANDLES ALL UNITY ACTIONS
-        emitter.on('gridsizechange', e => {
-            handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
-        });
-
-        //HANDLES ALL LAYOUT ACTIONS
-        emitter.on('layoutbuttonclick', e => {
-            switch (e.val) {
-                case "edit":
-                    handleUnityActionOutgoing({action: "beginLayoutEdit", data: ''});
-                    break;
-                case "addlabel":
-                    handleUnityActionOutgoing({action: "beginLayoutLabel", data: ''});
-                    break;
-                case "addlayout":
-                    handleUnityActionOutgoing({action: "beginLayoutDraw", data: ''});
-                    break;
-                case "notatka":
-                    handleUnityActionOutgoing({action: "beginLayoutComment", data: ''});
-                    break;
-            }
-        });
-
-        emitter.on('lockState', e => {
-            if (e.action == 'lock') {
-                lockInput();
-            } else {
-                unlockInput();
-            }
-        });
 
         const lockInput = () => {
 
@@ -316,74 +384,6 @@ export default {
             }
         });
 
-        emitter.on('topbuttonclick', e => {
-            switch (e.val) {
-                case 'animation_mode':
-                    handleUnityActionOutgoing({action: "animationMode", data: ''});
-                    currentRadialMenu.value = radialMenuAnimation.value;
-                    mode.value = 'animation';
-                    break;
-                case 'edit_mode':
-                    handleUnityActionOutgoing({action: "editMode", data: ''});
-                    currentRadialMenu.value = radialMenuEdit.value;
-                    mode.value = 'edit';
-                    break;
-                case 'layout':
-                    handleUnityActionOutgoing({action: "layoutMode", data: ''});
-                    currentRadialMenu.value = radialMenuLayout.value;
-                    mode.value = 'layout';
-                    break;
-                case 'fullscreen':
-
-                    gameWindow.value.setFullscreen();
-                    break;
-                case 'logout':
-                    if (type.value == 'solution') {
-                        window.location.href = window.app_path + '/challenges/card/' + solution.value.challenge_id;
-                    } else {
-                        window.location.href = window.app_path + '/challenges/card/' + challenge.value.id;
-                    }
-                    break;
-                case 'orto':
-                    handleUnityActionOutgoing({action: 'ChangeCamera', data: 2});
-                    break;
-                case 'fpv':
-                    handleUnityActionOutgoing({action: 'ChangeCamera', data: 3});
-                    break;
-                case 'topdown':
-                    handleUnityActionOutgoing({action: 'ChangeCamera', data: 1});
-                    break;
-                case 'standard':
-                    handleUnityActionOutgoing({action: 'ChangeCamera', data: 0});
-                    break;
-                case 'save':
-                    handleUnityActionOutgoing({action: 'save', data: ''});
-                    break;
-                case 'help':
-                    cash("#help-modal").modal("show");
-                    break;
-            }
-        });
-
-
-        emitter.on('UnitySave', e => {
-            if (!saving.value) {
-                saving.value = true;
-                gameLoad.value.save_json = e.saveGame;
-                if (type.value == 'challenge' && window.location.href.indexOf("challenge") > -1) {
-                    SaveChallengeUnity({save: gameLoad.value, id: id.value}, () => {
-                        saving.value = false;
-                    });
-                } else {
-                    SaveSolutionUnity({save: gameLoad.value, id: id.value}, (sol) => {
-                        id.value = sol.id;
-                        saving.value = false;
-                    });
-                }
-                emitter.emit('UnitySaved', {val: ''});
-                handleUnityActionOutgoing(e);
-            }
-        });
 
         const handleUnityActionOutgoing = (e) => {
             try {
@@ -422,10 +422,6 @@ export default {
             bridge.value = UnityBridge();
         });
 
-        emitter.on('updateanimationSave', e => {
-            animationSave.value.layers = e.data.layers;
-        });
-
         const getCardChallengeRepositories = async (id) => {
             await axios.post('/api/challenge/user/get/card', {id: id})
                 .then(response => {
@@ -447,9 +443,6 @@ export default {
                             });
                             unlockInput();
                         }
-
-
-                        // emitter.emit('saveLoaded', {save: (response.data.payload)});
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -479,7 +472,6 @@ export default {
         }
 
         onMounted(() => {
-
             //REMOVES PADDING
             cash("body")
                 .removeClass("main")

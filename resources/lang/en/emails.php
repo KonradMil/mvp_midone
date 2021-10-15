@@ -18,5 +18,12 @@ return [
         'title' => 'Invitation to  team',
         'paragraph1' => 'You have been invited to ":teamName" team. Please click button below to claim the invitation.',
         'action1_text' => 'Confirm invitation',
+    ],
+    'restore_password' => [
+        'subject' => 'DBR77: restore password',
+        'title' => 'Restore Password',
+        'subtitle' => 'Hello!',
+        'paragraph1' => 'We have just received a password change request for your email address on platform.dbr77.com. You can change the password by clicking on the button below.',
+        'action1_text' => 'Change password',
     ]
 ];

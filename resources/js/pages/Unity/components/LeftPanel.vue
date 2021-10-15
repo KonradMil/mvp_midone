@@ -153,7 +153,7 @@ export default {
         }
 
         const selectModel = (model) => {
-
+            console.log('unityoutgoingactionFIRST', model);
             emitter.emit('unityoutgoingaction', {action: 'placeObject', data: model})
         }
 

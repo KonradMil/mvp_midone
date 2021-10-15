@@ -37,6 +37,7 @@ class User extends Authenticatable implements ReacterableInterface, Commentator,
         'name',
         'lastname',
         'email',
+        'phone_number',
         'password',
         'phone',
         'verified',
@@ -174,10 +175,15 @@ class User extends Authenticatable implements ReacterableInterface, Commentator,
     }
 
     /**
-     * @return BelongsToMany
+     * @return BelongsTo
      */
-    public function freesaves(): BelongsToMany
+    public function freeSaves(): BelongsToMany
     {
-        return $this->belongsToMany(FreeSave::class, 'free_saves_user', 'user_id');
+        return $this->belongsToMany(FreeSave::class, 'free_saves_user', 'user_id')->withPivot(['is_owner']);
+    }
+
+    public function ownFreeSaves()
+    {
+        return $this->belongsToMany(FreeSave::class, 'free_saves_user', 'user_id')->wherePivot('is_owner','=',1);
     }
 }

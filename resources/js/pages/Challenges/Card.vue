@@ -8,10 +8,10 @@
             <div class="col-span-12 lg:col-span-4 xxl:col-span-3 flex lg:block flex-col-reverse">
                 <div class="intro-y box mt-5 lg:mt-0">
                     <div class="relative flex items-center p-5">
-                        <div class="w-12 h-12 image-fit">
-                            <img v-if="challenge.screenshot_path != undefined" class="rounded-full" :alt="challenge.name" :src="'/' + challenge.screenshot_path"/>
-                        </div>
-                        <div class="ml-4 mr-auto">
+<!--                        <div class="w-12 h-12 image-fit">-->
+<!--                            <img v-if="challenge.screenshot_path != undefined" class="rounded-full" :alt="challenge.name" :src="'/' + challenge.screenshot_path"/>-->
+<!--                        </div>-->
+                        <div class=" mr-auto">
                             <div class="font-medium text-base">
                                 {{ challenge.name }} <span class="text-theme-1 dark:text-theme-10" v-if="challenge.status == 0"> - Szkic</span>
                             </div>
@@ -305,6 +305,11 @@ export default defineComponent({
             if(props.change === undefined){
                 activeTab.value = 'podstawowe';
             }
+
+            if(window.location.hash == '#solutions') {
+                activeTab.value = 'rozwiazania';
+            }
+
             permissions.value = window.Laravel.permissions;
             getCardChallengeRepositories(function (){
                 checkTeam();

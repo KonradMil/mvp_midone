@@ -71,16 +71,19 @@ app.use(lazyPlugin, {
 })
 router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
-    const publicPages = ['/login', '/register', '/terms/terms-of-service', '/terms/privacy-policy', '/terms/price-list'];
-    const authRequired = !publicPages.includes(to.path);
+    const publicPages = ['login', 'register', 'terms', 'robochallenge', 'reset-password'];
+    console.log('to', to);
+    const authRequired = !publicPages.includes(to.name);
 
     if (!store.state.login.isLoggedIn) {
+        console.log('NOT LOGGED, AUTH REQUIRED');
         if (authRequired) {
             next({path: '/login'})
         } else {
             next();
         }
     } else {
+        console.log('WHATEVA');
         next();
     }
 })

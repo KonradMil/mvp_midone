@@ -32,10 +32,10 @@
             </div>
             <div v-for="(challenge, index) in challenges.list" :key="index" class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
                 <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
-                    <div class="w-10 h-10 flex-none image-fit">
-                        <img alt="DBR77" class="rounded-full" :src="'/' + challenge.screenshot_path"/>
-                    </div>
-                    <div class="ml-3 mr-auto" @click.prevent="$router.push( {path : '/challenges/card/' + challenge.id})">
+<!--                    <div class="w-10 h-10 flex-none image-fit">-->
+<!--                        <img alt="DBR77" class="rounded-full" :src="'/' + challenge.screenshot_path"/>-->
+<!--                    </div>-->
+                    <div class="mr-auto" @click.prevent="$router.push( {path : '/challenges/card/' + challenge.id})">
                         <a href="" class="font-medium">{{ challenge.name }}</a>
                         <div class="flex text-gray-600 truncate text-xs mt-0.5" style="flex-direction: column;">
                             <a class="text-theme-1 dark:text-theme-10 inline-block truncate" href="">

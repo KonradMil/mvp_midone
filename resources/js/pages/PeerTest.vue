@@ -34,11 +34,10 @@ export default {
            }
         });
 
-
         onMounted(() => {
             let sessionid = urlParams.get('sessionid');
             peer.value = new Peer(null, {
-                debug: 1
+                debug: 1,
             });
 
             if(sessionid != null) {
