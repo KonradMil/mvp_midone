@@ -8,7 +8,7 @@
         <div class="p-5" id="bordered-table">
             <div class="preview">
                 <div class="overflow-x-auto">
-                    <table class="table text-gray-100 bg-gradient-to-l from-pink-500 to-pink-900">
+                    <table class="table text-gray-800">
                         <thead>
                         <tr>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap"></th>

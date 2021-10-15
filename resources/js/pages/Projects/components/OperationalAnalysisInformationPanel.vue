@@ -8,9 +8,9 @@
         <div class="p-5" id="bordered-table">
             <div class="preview">
                 <div class="overflow-x-auto">
-                    <table class="table text-gray-100 bg-gradient-to-l from-pink-500 to-pink-900">
+                    <table class="table text-gray-800">
                         <thead>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap"></th>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Przed robotyzacją</th>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Po robotyzacji</th>
@@ -18,61 +18,61 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Czas dostępny (min)</td>
                             <td class="border">{{operational_analyses.time_available_before}}</td>
                             <td class="border">{{operational_analyses.time_available_after}}</td>
                             <td class="border">{{operational_analyses.time_available_change}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Czas produkcji (min)</td>
                             <td class="border">{{operational_analyses.time_production_before}}</td>
                             <td class="border">{{operational_analyses.time_production_after}}</td>
                             <td class="border">{{operational_analyses.time_production_change}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Produkcja (min)</td>
                             <td class="border">{{operational_analyses.production_before}}</td>
                             <td class="border">{{operational_analyses.production_after}}</td>
                             <td class="border">{{operational_analyses.production_change}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Czas produkcji sztuk dobrych (min)</td>
                             <td class="border">{{operational_analyses.good_arts_production_before}}</td>
                             <td class="border">{{operational_analyses.good_arts_production_after}}</td>
                             <td class="border">{{operational_analyses.good_arts_production_change}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">AR - Współczynnik dostepności</td>
                             <td class="border">{{operational_analyses.availability_factor_before}}</td>
                             <td class="border">{{operational_analyses.availability_factor_after}}</td>
                             <td class="border">{{operational_analyses.availability_factor_change}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">PR - Współczynnik produktywności</td>
                             <td class="border">{{operational_analyses.productivity_coefficient_before}}</td>
                             <td class="border">{{operational_analyses.productivity_coefficient_after}}</td>
                             <td class="border">{{operational_analyses.productivity_coefficient_change}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">QR - współczynnik jakości</td>
                             <td class="border">{{operational_analyses.quality_factor_before}}</td>
                             <td class="border">{{operational_analyses.quality_factor_after}}</td>
                             <td class="border">{{operational_analyses.quality_factor_change}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">OEE</td>
                             <td class="border">{{operational_analyses.oee_before}}</td>
                             <td class="border">{{operational_analyses.oee_after}}</td>
                             <td class="border">{{operational_analyses.oee_change}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Wielkość produkcji</td>
                             <td class="border">{{operational_analyses.production_volume_before}}</td>
                             <td class="border">{{operational_analyses.production_volume_after}}</td>
                             <td class="border">{{operational_analyses.production_volume_change}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">PPH na osobę na zmianę</td>
                             <td class="border">{{operational_analyses.pph_per_person_before}}</td>
                             <td class="border">{{operational_analyses.pph_per_person_after}}</td>
