@@ -24,6 +24,8 @@ import LeftPanel from "./../components/LeftPanel";
 import TopButtons from "./../components/TopButtons";
 import BottomPanel from "./../components/BottomPanel";
 import PeerTest from "../../PeerTest";
+import useLayoutButtonClick from "../../../composables/useLayoutButtonClick";
+import useRadialMenu from "../../../composables/radialMenu";
 
 const ww = WindowWatcher();
 
@@ -76,16 +78,6 @@ export default {
         const sessionid = ref('');
         const owner = ref(false);
 
-        if(props.sessionid === undefined) {
-            sessionid.value = Math.random().toString(36).slice(-5);
-            owner.value = true;
-        } else {
-            sessionid.value = props.sessionid;
-            owner.value = false;
-        }
-
-        window_height.value = window.innerHeight;
-
         const startTutorial = () => {
             handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
         }
@@ -101,20 +93,9 @@ export default {
                     handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
                     break;
                 case 'layoutbuttonclick':
-                    switch (e.val) {
-                        case "edit":
-                            handleUnityActionOutgoing({action: "beginLayoutEdit", data: ''});
-                            break;
-                        case "addlabel":
-                            handleUnityActionOutgoing({action: "beginLayoutLabel", data: ''});
-                            break;
-                        case "addlayout":
-                            handleUnityActionOutgoing({action: "beginLayoutDraw", data: ''});
-                            break;
-                        case "notatka":
-                            handleUnityActionOutgoing({action: "beginLayoutComment", data: ''});
-                            break;
-                    }
+                    useLayoutButtonClick(e.val, (val) => {
+                        handleUnityActionOutgoing(val);
+                    })
                     break;
                 case 'lockState':
                     if (e.action == 'lock') {
@@ -223,25 +204,9 @@ export default {
 
         const openMenu = (e) => {
             e.preventDefault();
-            if (loaded.value) {
-                if (doubleClick.value) {
-                    if ((mousePositionX.value > (e.clientX - 10) && mousePositionX.value < (e.clientX + 10)) && (mousePositionY.value > (e.clientY - 10) && mousePositionY.value < (e.clientY + 19))) {
-                        let data = JSON.stringify({menu: currentRadialMenu.value});
-                        handleUnityActionOutgoing({action: 'showRadialMenu', data: data});
-                    } else {
-                        doubleClick.value = false;
-                    }
-                } else {
-
-                    mousePositionX.value = e.clientX;
-                    mousePositionY.value = e.clientY;
-                    doubleClick.value = true;
-                    handleUnityActionOutgoing({action: 'closeRadialMenu', data: ''});
-                    setTimeout(function () {
-                        doubleClick.value = false;
-                    }, 1000);
-                }
-            }
+            useRadialMenu(loaded.value, currentRadialMenu.value, (val) => {
+                handleUnityActionOutgoing(val);
+            });
         }
 
         const showLeftButtons = computed(() => {
@@ -258,6 +223,14 @@ export default {
         }
 
         const initalize = async () => {
+            if(props.sessionid === undefined) {
+                sessionid.value = Math.random().toString(36).slice(-5);
+                owner.value = true;
+            } else {
+                sessionid.value = props.sessionid;
+                owner.value = false;
+            }
+            window_height.value = window.innerHeight;
 
             setTimeout(function () {
                 loaded.value = true;
@@ -280,7 +253,6 @@ export default {
         onBeforeMount(() => {
             //ADDS LISTENERS
             bridge.value = UnityBridge();
-
         });
 
         const getSave = async (id) => {
@@ -307,7 +279,6 @@ export default {
             type.value = props.type;
             id.value = props.id;
         });
-
 
         return {
             user,

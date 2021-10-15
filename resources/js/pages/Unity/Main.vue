@@ -8,88 +8,12 @@
     <BottomPanel v-if="loaded" :allowedEdit="allowedEdit" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
     <RightButtons v-if="loaded" :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>
     <RightPanel :allowedEdit="allowedEdit" :publishChallenges="publishChallenges" :canEditSolution="canEditSolution"  :type="type" :challenge="challenge" :solution="solution"></RightPanel>
-<!--    @mouseover.native="lockInput" @mouseleave.native="unlockInput"-->
     <div v-if="!loaded" id="loader">
         <LoadingIcon icon="grid" class="w-8 h-8"/>
     </div>
-    <Peer v-if="sessionid != ''" :sessionId="sessionid" :owner="owner"></Peer>
-    <!--    <VoiceChat :sessionId="sessionid" :owner="owner"></VoiceChat>-->
-    <div id="help-modal" class="modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-body p-10 text-center">
-                    <h3 class="intro-y text-lg font-medium mt-5">Pomoc</h3>
-                    <div class="grid grid-cols-12 gap-6 mt-5">
-                        <!-- BEGIN: Profile Menu -->
-                        <div class="col-span-12 lg:col-span-4 xxl:col-span-3 flex lg:block flex-col-reverse">
-                            <div class="intro-y box mt-5 lg:mt-0">
-                                <div class="p-5 border-t border-gray-200 dark:border-dark-5">
-                                    <a class="flex items-center"
-                                       href=""
-                                       @click.prevent="modelActiveTab = 'klawiszologia'"
-                                       :class="(modelActiveTab == 'klawiszologia')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
-                                        <ActivityIcon class="w-4 h-4 mr-2"/>
-                                        Klawiszologia
-                                    </a>
-                                    <a class="flex items-center mt-5" href=""
-                                       @click.prevent="modelActiveTab = 'faq'"
-                                       :class="(modelActiveTab == 'faq')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                        <BoxIcon class="w-4 h-4 mr-2"/>
-                                        FAQ
-                                    </a>
-                                    <a class="flex items-center mt-5" href=""
-                                       @click.prevent="modelActiveTab = 'tutorial'"
-                                       :class="(modelActiveTab == 'tutorial')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                        <SettingsIcon class="w-4 h-4 mr-2"/>
-                                        Tutorial
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END: Profile Menu -->
-                        <div class="col-span-9 lg:col-span-9 xxl:col-span-9" v-if="modelActiveTab == 'klawiszologia'">
-                            <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-                                <h2 class="font-medium text-base mr-auto"> Klawiszologia</h2>
-                            </div>
-                            <div class="grid grid-cols-12 gap-6">
-                                <!-- BEGIN: Announcement -->
-                                <div class="intro-y box col-span-12 xxl:col-span-12">
-                                    <img src="/s3/images/klawiszologia.jpeg" class="img-fluid cursor-pointer" @click="window.open('/s3/images/klawiszologia.jpeg', '_blank').focus();"/>
-                                </div>
-                                <!-- END: Announcement -->
-                            </div>
-                        </div>
-                        <div class="col-span-9 lg:col-span-9 xxl:col-span-9" v-if="modelActiveTab == 'faq'">
-                            <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-                                <h2 class="font-medium text-base mr-auto">FAQ</h2>
-                            </div>
-                            <div class="grid grid-cols-12 gap-6">
-                                <!-- BEGIN: Announcement -->
-                                <div class="intro-y box col-span-12 xxl:col-span-12">
+<!--    <Peer v-if="sessionid != ''" :sessionId="sessionid" :owner="owner"></Peer>-->
+    <HelpModal></HelpModal>
 
-                                </div>
-                                <!-- END: Announcement -->
-                            </div>
-                        </div>
-                        <div class="col-span-9 lg:col-span-9 xxl:col-span-9" v-if="modelActiveTab == 'tutorial'">
-                            <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-                                <h2 class="font-medium text-base mr-auto">Tutorial</h2>
-                            </div>
-                            <div class="grid grid-cols-12 gap-6">
-                                <!-- BEGIN: Announcement -->
-                                <div class="intro-y box col-span-6 xxl:col-span-6">
-                                    <div class="px-15 py-15">
-                                        <button class="btn btn-primary" type="button" @click="startTutorial">Rozpocznij tutorial</button>
-                                    </div>
-                                </div>
-                                <!-- END: Announcement -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 <!--    <ModalWorkshop :show="workshopOpen"></ModalWorkshop>-->
     <!--    <WorkshopModal v-if="workshopOpen" :open="workshopOpen"></WorkshopModal>-->
 </template>
@@ -109,8 +33,11 @@ import TopButtons from "./components/TopButtons";
 import BottomPanel from "./components/BottomPanel";
 import RightPanel from "./components/RightPanel";
 import RightButtons from "./components/RightButtons";
-import WorkshopModal from "./WorkshopModal"
 import ModalWorkshop from "../../components/ModalWorkshop";
+import HelpModal from "./components/HelpModal";
+import useEmitter from "../../composables/useEmitter";
+import useRadialMenu from "../../composables/radialMenu";
+import useLayoutButtonClick from "../../composables/useLayoutButtonClick";
 
 const ww = WindowWatcher();
 
@@ -128,12 +55,11 @@ export default {
         sessionid: String
     },
     components: {
-        ModalWorkshop, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio
+        HelpModal, ModalWorkshop, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio
     },
     setup(props, {emit}) {
         //GLOBAL
-        const app = getCurrentInstance();
-        const emitter = app.appContext.config.globalProperties.emitter;
+        const emitter = useEmitter();
         //INTERNAL
         const id = ref(0);
         const type = ref('challenge');
@@ -143,15 +69,13 @@ export default {
         const gameLoad = ref({});
         const loaded = ref(false);
         const workshopOpen = ref(false);
-        const doubleClick = ref(false);
-        const mousePositionY = ref(0);
-        const mousePositionX = ref(0);
+
         const initialLoad = ref({});
         const challenge = ref({});
         const solution = ref({});
         const user = window.Laravel.user;
         const inTeam = ref(false);
-        const modelActiveTab = ref('klawiszologia');
+
 
         //EXTERNAL
         const unity_path = ref('/s3/unity/AssemBrot14_05_ver2.json');
@@ -192,20 +116,9 @@ export default {
                         handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
                         break;
                     case 'layoutbuttonclick':
-                        switch (e.val) {
-                            case "edit":
-                                handleUnityActionOutgoing({action: "beginLayoutEdit", data: ''});
-                                break;
-                            case "addlabel":
-                                handleUnityActionOutgoing({action: "beginLayoutLabel", data: ''});
-                                break;
-                            case "addlayout":
-                                handleUnityActionOutgoing({action: "beginLayoutDraw", data: ''});
-                                break;
-                            case "notatka":
-                                handleUnityActionOutgoing({action: "beginLayoutComment", data: ''});
-                                break;
-                        }
+                        useLayoutButtonClick(e.val, (val) => {
+                            handleUnityActionOutgoing(val);
+                        })
                         break;
                     case 'lockState':
                         if (e.action == 'lock') {
@@ -215,7 +128,6 @@ export default {
                         }
                         break;
                     case 'topbuttonclick':
-
                         switch (e.val) {
                             case 'animation_mode':
                                 handleUnityActionOutgoing({action: "animationMode", data: ''});
@@ -233,7 +145,6 @@ export default {
                                 mode.value = 'layout';
                                 break;
                             case 'fullscreen':
-
                                 gameWindow.value.setFullscreen();
                                 break;
                             case 'logout':
@@ -267,10 +178,6 @@ export default {
                         if (!saving.value) {
                             saving.value = true;
                             gameLoad.value.save_json = e.saveGame;
-                            console.log('HERA', type.value == 'challenge' && window.location.href.indexOf("challenge") > -1);
-                            console.log('HERA1', type.value == 'challenge');
-                            console.log('HERA21', type.value);
-                            console.log('HERA2', window.location.href.indexOf("challenge"));
                             if (props.type == 'challenge' && window.location.href.indexOf("challenge") > -1) {
                                 SaveChallengeUnity({save: gameLoad.value, id: id.value}, () => {
                                     saving.value = false;
@@ -285,6 +192,9 @@ export default {
                             handleUnityActionOutgoing(e);
                         }
                         break;
+                        case 'starttutorial':
+                            handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
+                            break;
                         case 'onInitialized':
                             initalize()
                         break;
@@ -294,43 +204,23 @@ export default {
                 }
         });
 
-        window_height.value = window.innerHeight;
 
-        const startTutorial = () => {
-            handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
-        }
+
+
 
         const lockInput = () => {
-
             handleUnityActionOutgoing({action: "lockInput", data: ''});
         }
 
         const unlockInput = () => {
-
             handleUnityActionOutgoing({action: "unlockInput", data: ''});
         }
 
         const openMenu = (e) => {
             e.preventDefault();
-
-            if (loaded.value) {
-                if (doubleClick.value) {
-                    if ((mousePositionX.value > (e.clientX - 10) && mousePositionX.value < (e.clientX + 10)) && (mousePositionY.value > (e.clientY - 10) && mousePositionY.value < (e.clientY + 19))) {
-                        let data = JSON.stringify({menu: currentRadialMenu.value});
-                        handleUnityActionOutgoing({action: 'showRadialMenu', data: data});
-                    } else {
-                        doubleClick.value = false;
-                    }
-                } else {
-                    mousePositionX.value = e.clientX;
-                    mousePositionY.value = e.clientY;
-                    doubleClick.value = true;
-                    handleUnityActionOutgoing({action: 'closeRadialMenu', data: ''});
-                    setTimeout(function () {
-                        doubleClick.value = false;
-                    }, 1000);
-                }
-            }
+            useRadialMenu(loaded.value, currentRadialMenu.value, (val) => {
+                handleUnityActionOutgoing(val);
+            });
         }
 
         const showLeftButtons = computed(() => {
@@ -345,8 +235,6 @@ export default {
             if (type.value == 'challenge') {
                 await axios.post('/api/challenge/check-team', {user_id: user.id, challenge_id: challenge.value.id})
                     .then(response => {
-
-
                         if (response.data.success) {
                             inTeam.value = response.data.payload;
                         } else {
@@ -364,9 +252,6 @@ export default {
             }
         };
 
-        const changeMode = (mode) => {
-
-        }
 
         const allowedEdit = computed(() => {
             if (type.value == 'challenge') {
@@ -464,7 +349,6 @@ export default {
                             data: JSON.parse(response.data.payload.save_json)
                         });
                         unlockInput();
-                        // emitter.emit('saveLoaded', {save: (response.data.payload)});
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -490,6 +374,7 @@ export default {
             mode.value = 'edit';
             type.value = props.type;
             id.value = props.id;
+            window_height.value = window.innerHeight;
         });
 
         return {
