@@ -8,71 +8,71 @@
         <div class="p-5" id="bordered-table">
             <div class="preview">
                 <div class="overflow-x-auto">
-                    <table class="table text-gray-100 bg-gradient-to-l from-pink-500 to-pink-900">
+                    <table class="table text-gray-800">
                         <thead>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap"></th>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Przed robotyzacją</th>
                             <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Po robotyzacji</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Koszt pracy na stanowisku na godzinę za osobę</td>
                             <td class="border">{{financial_analyses.cost_per_hour_before}}</td>
                             <td class="border">{{financial_analyses.cost_per_hour_after}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Koszt pracy na stanowisku rok</td>
                             <td class="border">{{financial_analyses.cost_per_year_before}}</td>
                             <td class="border">{{financial_analyses.cost_per_year_after}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Koszt pracy na sztukę produkcji</td>
                             <td class="border">{{financial_analyses.cost_per_piece_before}}</td>
                             <td class="border">{{financial_analyses.cost_per_piece_after}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Miesieczna redukcja koszty obsługi stanowiska (ludzie)</td>
                             <td class="border">{{financial_analyses.monthly_reduction_before}}</td>
                             <td class="border">{{financial_analyses.monthly_reduction_after}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Obniżka TKW na sztukę produkcji</td>
                             <td class="border">{{financial_analyses.tkw_reduction_before}}</td>
                             <td class="border">{{financial_analyses.tkw_reduction_after}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Roczna oszczędność finansowa (dodatkowy zysk brutto)</td>
                             <td class="border">{{financial_analyses.additional_savings_before}}</td>
                             <td class="border">{{financial_analyses.additional_savings_after}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Capex</td>
                             <td class="border">{{financial_analyses.capex}}</td>
                             <td class="border">{{financial_analyses.capex}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Koszt kapitału (zakładany automatycznie)</td>
                             <td class="border">{{financial_analyses.timeframe}}</td>
                             <td class="border">{{financial_analyses.timeframe}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Zakładany okres analizy</td>
                             <td class="border">{{financial_analyses.monthly_savings_before}}</td>
                             <td class="border">{{financial_analyses.monthly_savings_before}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Średnia oszczędność miesięczna</td>
                             <td class="border">{{financial_analyses.pph_per_person_before}}</td>
                             <td class="border">{{financial_analyses.pph_per_person_after}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">Okres zwrotu prosty</td>
                             <td class="border">{{financial_analyses.simple_payback}}</td>
                             <td class="border">{{financial_analyses.simple_payback}}</td>
                         </tr>
-                        <tr class="text-left border-b-2 border-pink-300">
+                        <tr class="text-left border-b-2">
                             <td class="border">NPV</td>
                             <td class="border">{{financial_analyses.npv}}</td>
                             <td class="border">{{financial_analyses.npv}}</td>
