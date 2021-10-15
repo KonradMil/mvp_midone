@@ -85,11 +85,6 @@
         },
         {
             "icon": "InboxIcon",
-            "pageName": "studio-playground-saves",
-            "title": "Studio playground"
-        },
-        {
-            "icon": "InboxIcon",
             "pageName": "notifications",
             "title": "Powiadomienia"
         }
