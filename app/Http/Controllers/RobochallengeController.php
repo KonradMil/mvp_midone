@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\RoboHakatonMail;
+use App\Mail\RoboHakatonReportMail;
 use App\Models\Challenge;
 use App\Models\Company;
 use App\Models\FreeSave;
@@ -73,17 +74,18 @@ class RobochallengeController extends Controller
             'company_name' => $request->get('companyName')
         ];
 
-        $existingUser = User::where('email', '=', $userParameters['email'])->first();
+        $user = User::where('email', '=', $userParameters['email'])->first();
 
         $now = new \DateTime('now', new \DateTimeZone('UTC'));
 
-        if($existingUser) {
+        if($user) {
 
-            $existingUser->phone_number = $userParameters['phone_number'];
-            $existingUser->type = 'robochallenge';
-            $existingUser->updated_at = $now->format('Y-m-d H:i:s');
-            $existingUser->password = $userParameters['password'];
-            $existingUser->save();
+            $user->phone_number = $userParameters['phone_number'];
+            $user->type = 'robochallenge';
+            $user->updated_at = $now->format('Y-m-d H:i:s');
+            $user->password = $userParameters['password'];
+            $user->phone_number = $userParameters['phone_number'];
+            $user->save();
 
         } else {
 
@@ -96,6 +98,9 @@ class RobochallengeController extends Controller
         }
 
         Mail::to($userParameters['email'])->send(new RoboHakatonMail());
+        $users = User::where('type', '=', 'robochallenge')->get();
+        Mail::to('malgorzata.samborska@dbr77.com')->send(new RoboHakatonReportMail($user, $users));
+
         $response['success'] = "Twoje zgłoszenie zostało wysłane pomyślnie.";
 
         return response()->json($response);

@@ -18,6 +18,6 @@ class RoboHakatonMail extends Mailable
     {
         return $this
             ->subject("DBR77: Dziękujemy za zgłoszenie do RoboHakaton")
-            ->view('emails.registration.robo_hakaton');
+            ->view('emails.robo_hakaton');
     }
 }
