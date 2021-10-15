@@ -15,12 +15,12 @@ class CreateFreeSavesTable extends Migration
     {
         Schema::create('free_saves', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('en_name');
-            $table->longText('description');
-            $table->longText('en_description');
-            $table->longText('save_json');
-            $table->string('screenshot_path');
+            $table->string('name')->nullable();
+            $table->string('en_name')->nullable();
+            $table->longText('description')->nullable();
+            $table->longText('en_description')->nullable();
+            $table->longText('save_json')->nullable();
+            $table->string('screenshot_path')->nullable();
             $table->timestamps();
         });
 

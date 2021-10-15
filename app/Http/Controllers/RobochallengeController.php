@@ -111,9 +111,9 @@ class RobochallengeController extends Controller
 
     public function goToRoboChallengeSave(Request $request)
     {
-        $check = Auth::user()->ownFreeSaves()->where('robochallenge_task', '=', $request->task_id)->first();
+        $fs = Auth::user()->ownFreeSaves()->where('free_saves.robochallenge_task', '=', $request->task_id)->first();
 
-        if($check == NULL) {
+        if($fs == NULL) {
             $fs = new FreeSave();
             $fs->robochallenge_task = $request->task_id;
 
@@ -125,7 +125,7 @@ class RobochallengeController extends Controller
                 $ch = Challenge::find(131);
             }
 
-            $fs->save_json = $ch->save_json;
+            $fs->save_json = json_encode($ch->save_json);
             $fs->name = 'Robochallenge Zadanie '. $request->task_id;
             $fs->save();
 

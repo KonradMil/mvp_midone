@@ -109,7 +109,7 @@ export const routes = [
     },
     {
         name: 'studio-playground',
-        path: '/playground',
+        path: '/playground/:id',
         component: MainLite,
         props: true
     },

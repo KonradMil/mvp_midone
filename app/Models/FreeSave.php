@@ -14,9 +14,9 @@ use Spatie\Tags\HasTags;
 use BeyondCode\Comments\Traits\HasComments;
 
 
-class FreeSave extends Model implements ReactableInterface
+class FreeSave extends Model
 {
-    use Reactable, HasComments;
+    use HasComments;
 
 
     /**

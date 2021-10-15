@@ -199,18 +199,17 @@ export default {
         });
 
         const lockInput = () => {
-
             handleUnityActionOutgoing({action: "lockInput", data: ''});
         }
 
         const unlockInput = () => {
-
             handleUnityActionOutgoing({action: "unlockInput", data: ''});
         }
 
         const getRoboData  = () => {
             axios.post('/api/playground/save', {id: id.value})
                 .then(response => {
+                    console.log('RESP', response);
                     challenge.value = response.data;
                     initialLoad.value = response.data.save_json;
                     animationSave.value = response.data.save_json.animation_layers;
@@ -271,6 +270,7 @@ export default {
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
 
                 handleUnityActionOutgoing({action: 'prefix', data: window.app_path + '/s3'});
+                getRoboData();
             }, 2000);
             setTimeout(() => {
                 unlockInput();

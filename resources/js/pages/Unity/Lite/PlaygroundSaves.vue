@@ -17,7 +17,7 @@
                 <div class="p-10">
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 1: Optymalizacja istniejącego procesu na linii produkcyjnej</h2>
-<!--                        <button class="btn btn-primary" @click="goToRoboChallenge(1)">Studio 3D</button>-->
+                        <button class="btn btn-primary" @click="goToRoboChallenge(1)">Studio 3D</button>
                     </div>
 
                     <div class="grid grid-cols-12 gap-6 mt-1">
@@ -103,7 +103,7 @@
                 <div class="p-10">
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 2: Odtworzenie linii produkcyjnej na podstawie procesu o zadanych parametrach wydajnościowych</h2>
-<!--                        <button class="btn btn-primary" @click="goToRoboChallenge(2)">Studio 3D</button>-->
+                        <button class="btn btn-primary" @click="goToRoboChallenge(2)">Studio 3D</button>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-1">
 
@@ -195,7 +195,7 @@
                 <div class="p-10">
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 3: Znajdź 5 błędów w istniejącym procesie i uzasadnij je</h2>
-<!--                        <button class="btn btn-primary" @click="goToRoboChallenge(3)">Studio 3D</button>-->
+                        <button class="btn btn-primary" @click="goToRoboChallenge(3)">Studio 3D</button>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-1">
 
@@ -272,6 +272,7 @@ import {defineComponent, ref, provide, onMounted, getCurrentInstance, watch, onU
 import {useToast} from "vue-toastification";
 import VueEasyLightbox from 'vue-easy-lightbox'
 import RequestHandler from '../../../compositions/RequestHandler'
+import router from "../../../router";
 
 export default {
     name: "PlaygroundSaves",
@@ -301,15 +302,10 @@ export default {
         ];
 
         const goToRoboChallenge = (id) => {
-            axios.post('/api/playground/robochallenge/go', {id: id})
+            axios.post('/api/playground/robochallenge/go', {task_id: id})
                 .then(response => {
-
-                    if (response.data.success) {
-                        toast.success('Wyzwanie usunięte');
-                        window.location.reload();
-                    } else {
-
-                    }
+                    console.log(response);
+                    router.push({path: '/playground/' + response.data})
                 })
         }
 
