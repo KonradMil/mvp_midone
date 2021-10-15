@@ -404,7 +404,6 @@ export default {
             openMenu,
             lockInput,
             unlockInput,
-            modelActiveTab,
             loaded,
             sessionid,
             owner,
