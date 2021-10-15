@@ -3,7 +3,7 @@
     <LeftButtons :icons="leftIcons"></LeftButtons>
     <LeftPanel></LeftPanel>
     <div @contextmenu.prevent="openMenu">
-        <Studio hideFooter="true" :src="unity_hangar_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
+        <StudioLite hideFooter="true" :src="unity_hangar_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
     <BottomPanel  v-if="loaded" :allowedEdit="true" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
     <div v-if="!loaded" id="loader">
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Studio from "./Studio";
+import StudioLite from "./StudioLite";
 import {computed, getCurrentInstance, onBeforeMount, onMounted, reactive, ref} from "vue";
 import UnityBridge from "./bridge";
 import cash from "cash-dom";
@@ -40,7 +40,7 @@ export default {
     },
     components: {
         PeerTest,
-       BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio
+       BottomPanel, TopButtons, LeftPanel, LeftButtons, StudioLite
     },
     setup(props, {emit}) {
         //GLOBAL
@@ -90,42 +90,111 @@ export default {
             handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
         }
 
-        //RUNS WHEN UNITY IS READY
-        emitter.on('onInitialized', e => initalize());
-
-        //HANDLES ALL UNITY ACTIONS
-        emitter.on('unityoutgoingaction', e => {
-            handleUnityActionOutgoing(e);
-        });
-
-        //HANDLES ALL UNITY ACTIONS
-        emitter.on('gridsizechange', e => {
-            handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
-        });
-
-        //HANDLES ALL LAYOUT ACTIONS
-        emitter.on('layoutbuttonclick', e => {
-            switch (e.val) {
-                case "edit":
-                    handleUnityActionOutgoing({action: "beginLayoutEdit", data: ''});
+        //ALL EVENTS
+        emitter.on('*', (type, e) => {
+            console.log('*', [type, e]);
+            switch (type) {
+                case 'unityoutgoingaction':
+                    handleUnityActionOutgoing(e);
                     break;
-                case "addlabel":
-                    handleUnityActionOutgoing({action: "beginLayoutLabel", data: ''});
+                case 'gridsizechange':
+                    handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
                     break;
-                case "addlayout":
-                    handleUnityActionOutgoing({action: "beginLayoutDraw", data: ''});
+                case 'layoutbuttonclick':
+                    switch (e.val) {
+                        case "edit":
+                            handleUnityActionOutgoing({action: "beginLayoutEdit", data: ''});
+                            break;
+                        case "addlabel":
+                            handleUnityActionOutgoing({action: "beginLayoutLabel", data: ''});
+                            break;
+                        case "addlayout":
+                            handleUnityActionOutgoing({action: "beginLayoutDraw", data: ''});
+                            break;
+                        case "notatka":
+                            handleUnityActionOutgoing({action: "beginLayoutComment", data: ''});
+                            break;
+                    }
                     break;
-                case "notatka":
-                    handleUnityActionOutgoing({action: "beginLayoutComment", data: ''});
+                case 'lockState':
+                    if (e.action == 'lock') {
+                        lockInput();
+                    } else {
+                        unlockInput();
+                    }
                     break;
-            }
-        });
-
-        emitter.on('lockState', e => {
-            if(e.action == 'lock') {
-                lockInput();
-            } else {
-                unlockInput();
+                case 'topbuttonclick':
+                    console.log('aaa', e.val);
+                    switch (e.val) {
+                        case 'animation_mode':
+                            handleUnityActionOutgoing({action: "animationMode", data: ''});
+                            currentRadialMenu.value = radialMenuAnimation.value;
+                            mode.value = 'animation';
+                            break;
+                        case 'edit_mode':
+                            handleUnityActionOutgoing({action: "editMode", data: ''});
+                            currentRadialMenu.value = radialMenuEdit.value;
+                            mode.value = 'edit';
+                            break;
+                        case 'layout':
+                            handleUnityActionOutgoing({action: "layoutMode", data: ''});
+                            currentRadialMenu.value = radialMenuLayout.value;
+                            mode.value = 'layout';
+                            break;
+                        case 'fullscreen':
+                            gameWindow.value.setFullscreen();
+                            break;
+                        case 'logout':
+                            if (type.value == 'solution') {
+                                window.location.href = window.app_path + '/challenges/card/' + solution.value.challenge_id;
+                            } else {
+                                window.location.href = window.app_path + '/challenges/card/' + challenge.value.id;
+                            }
+                            break;
+                        case 'orto':
+                            handleUnityActionOutgoing({action: 'ChangeCamera', data: 2});
+                            break;
+                        case 'fpv':
+                            handleUnityActionOutgoing({action: 'ChangeCamera', data: 3});
+                            break;
+                        case 'topdown':
+                            handleUnityActionOutgoing({action: 'ChangeCamera', data: 1});
+                            break;
+                        case 'standard':
+                            handleUnityActionOutgoing({action: 'ChangeCamera', data: 0});
+                            break;
+                        case 'save':
+                            handleUnityActionOutgoing({action: 'save', data: ''});
+                            break;
+                        case 'help':
+                            cash("#help-modal").modal("show");
+                            break;
+                    }
+                    break;
+                case 'UnitySave':
+                    if (!saving.value) {
+                        // saving.value = true;
+                        // gameLoad.value.save_json = e.saveGame;
+                        // if (type.value == 'challenge' && window.location.href.indexOf("challenge") > -1) {
+                        //     SaveChallengeUnity({save: gameLoad.value, id: id.value}, () => {
+                        //         saving.value = false;
+                        //     });
+                        // } else {
+                        //     SaveSolutionUnity({save: gameLoad.value, id: id.value}, (sol) => {
+                        //         id.value = sol.id;
+                        //         saving.value = false;
+                        //     });
+                        // }
+                        // emitter.emit('UnitySaved', {val: ''});
+                        // handleUnityActionOutgoing(e);
+                    }
+                    break;
+                case 'onInitialized':
+                    initalize()
+                    break;
+                case 'updateanimationSave':
+                    animationSave.value.layers = e.data.layers;
+                    break;
             }
         });
 
@@ -139,14 +208,26 @@ export default {
             handleUnityActionOutgoing({action: "unlockInput", data: ''});
         }
 
+        const getRoboData  = () => {
+            axios.post('/api/playground/save', {id: id.value})
+                .then(response => {
+                    challenge.value = response.data;
+                    initialLoad.value = response.data.save_json;
+                    animationSave.value = response.data.save_json.animation_layers;
+
+                    handleUnityActionOutgoing({
+                        action: 'loadStructure',
+                        data: response.data.save_json
+                    });
+                })
+        }
+
         const openMenu = (e) => {
             e.preventDefault();
             if (loaded.value) {
                 if (doubleClick.value) {
                     if ((mousePositionX.value > (e.clientX - 10) && mousePositionX.value < (e.clientX + 10)) && (mousePositionY.value > (e.clientY - 10) && mousePositionY.value < (e.clientY + 19))) {
                         let data = JSON.stringify({menu: currentRadialMenu.value});
-
-
                         handleUnityActionOutgoing({action: 'showRadialMenu', data: data});
                     } else {
                         doubleClick.value = false;
@@ -202,51 +283,7 @@ export default {
 
         });
 
-        emitter.on('updateanimationSave', e => {
-            animationSave.value.layers = e.data.layers;
-        });
-
-        emitter.on('UnitySave', e => {
-            if (!saving.value) {
-                saving.value = true;
-                gameLoad.value.save_json = e.saveGame;
-                    SaveUnityFreeSave({save: gameLoad.value, id: id.value}, (sol) => {
-                        id.value = sol.id;
-                        saving.value = false;
-                    });
-                emitter.emit('UnitySaved', {val: ''});
-                handleUnityActionOutgoing(e);
-            }
-        });
-
         const getSave = async (id) => {
-            await axios.post('/api/challenge/user/get/card', {id: id})
-                .then(response => {
-                    if (response.data.success) {
-                        if (response.data.payload.save_json == "") {
-                            challenge.value = response.data.payload;
-                            checkTeam();
-                            unlockInput();
-                        } else {
-
-                            challenge.value = response.data.payload;
-                            initialLoad.value = response.data.payload.save_json;
-                            animationSave.value = response.data.payload.save_json.animation_layers;
-                            checkTeam();
-
-                            handleUnityActionOutgoing({
-                                action: 'loadStructure',
-                                data: response.data.payload.save_json
-                            });
-                            unlockInput();
-                        }
-
-
-                        // emitter.emit('saveLoaded', {save: (response.data.payload)});
-                    } else {
-                        // toast.error(response.data.message);
-                    }
-                })
         }
 
 
@@ -270,6 +307,7 @@ export default {
             type.value = props.type;
             id.value = props.id;
         });
+
 
         return {
             user,

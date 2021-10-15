@@ -34,7 +34,6 @@ export default {
            }
         });
 
-
         onMounted(() => {
             let sessionid = urlParams.get('sessionid');
             peer.value = new Peer(null, {

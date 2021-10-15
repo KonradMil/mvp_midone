@@ -18,5 +18,12 @@ return [
         'title' => 'Zaproszenie do zespołu',
         'paragraph1' => 'Zostałes(aś) zaproszony(a) do zespołu ":teamName". Kliknij przycisk poniżej, aby zaakceptować zaproszenie.',
         'action1_text' => 'Potwierdź zaproszenie',
+    ],
+    'restore_password' => [
+        'subject' => 'DBR77: odzyskiwanie hasła',
+        'title' => 'Reset Hasła',
+        'subtitle' => 'Witaj!',
+        'paragraph1' => 'Otrzymaliśmy prośbę o zmianę hasła dla Twojego adresu e-mail na platform.dbr77.com. Zmiana hasła będzie możliwa po kliknięciu w poniższy przycisk.',
+        'action1_text' => 'Zmień hasło',
     ]
 ];
