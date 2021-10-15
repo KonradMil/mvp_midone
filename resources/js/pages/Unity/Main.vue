@@ -204,10 +204,7 @@ export default {
                 }
         });
 
-
-
-
-
+        //TELL UNITY TO GIVE KEYBOARD EVENTS TO WEB
         const lockInput = () => {
             handleUnityActionOutgoing({action: "lockInput", data: ''});
         }
@@ -216,6 +213,7 @@ export default {
             handleUnityActionOutgoing({action: "unlockInput", data: ''});
         }
 
+        //RADIAL MENU OPEN/CLOSE
         const openMenu = (e) => {
             e.preventDefault();
             useRadialMenu(loaded.value, currentRadialMenu.value, (val) => {
@@ -269,7 +267,7 @@ export default {
             }
         });
 
-
+        //FUNCTION TO PASS EVENTS TO UNITY
         const handleUnityActionOutgoing = (e) => {
             try {
                 unityActionOutgoingObject.value[e.action](e.data);
@@ -287,7 +285,7 @@ export default {
                     data: Number(Math.random().toString().substr(3, length) + Date.now()).toString(36)
                 });
                 // handleUnityActionOutgoing({action: 'setHangarAppearance', data: 1});
-                handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
+                unlockInput();
 
                 if (type.value == 'solution') {
                     getSolutionRepositories(id.value);
@@ -295,6 +293,7 @@ export default {
                     getCardChallengeRepositories(id.value);
                 }
                 console.log({action: 'prefix', data: window.app_path + '/s3'});
+                //SET PREFIX FOR MODELS AND PREFABS
                 handleUnityActionOutgoing({action: 'prefix', data: window.app_path + '/s3'});
             }, 2000);
             setTimeout(() => {
@@ -303,7 +302,7 @@ export default {
         }
 
         onBeforeMount(() => {
-            //ADDS LISTENERS
+            //ADDS UNITY WINDOW LISTENERS
             bridge.value = UnityBridge();
         });
 
@@ -329,7 +328,7 @@ export default {
                             unlockInput();
                         }
                     } else {
-                        // toast.error(response.data.message);
+
                     }
                 })
         }
@@ -361,16 +360,22 @@ export default {
                 .removeClass("main")
                 .removeClass("error-page")
                 .addClass("p-0");
+
+            //INITIALIZES DATA FOR BUTTONS
             const li = require("../../json/unity_left_buttons.json");
             leftIcons.value = li.icons;
             const ri = require("../../json/unity_right_buttons.json");
             rightIcons.value = ri.icons;
             const ti = require("../../json/unity_top_buttons.json");
             topIcons.value = ti.icons;
+
+            //PRELOADES DATA FOR RADIALS
             radialMenuAnimation.value = require("../../json/radial_animation.json");
             radialMenuEdit.value = require("../../json/radial_edit.json");
             radialMenuLayout.value = require("../../json/radial_layout.json");
             currentRadialMenu.value = radialMenuEdit.value;
+
+            //INITIALIZES MAIN VALUES
             mode.value = 'edit';
             type.value = props.type;
             id.value = props.id;
@@ -400,7 +405,6 @@ export default {
             lockInput,
             unlockInput,
             modelActiveTab,
-            startTutorial,
             loaded,
             sessionid,
             owner,
