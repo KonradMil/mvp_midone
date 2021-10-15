@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Mail\RoboHakatonMail;
+use App\Models\Challenge;
 use App\Models\Company;
+use App\Models\FreeSave;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -97,5 +100,33 @@ class RobochallengeController extends Controller
 
         return response()->json($response);
 
+    }
+
+    //FUNCTIONS BELOW TO BE BURNED TO THE GROUND LATER
+
+    public function goToRoboChallengeSave(Request $request)
+    {
+        $check = Auth::user()->ownFreeSaves()->where('robochallenge_task', '=', $request->task_id)->first();
+
+        if($check == NULL) {
+            $fs = new FreeSave();
+            $fs->robochallenge_task = $request->task_id;
+
+            if ($request->task_id == 1) {
+                $ch = Challenge::find(128);
+            } else if($request->task_id == 2) {
+                $ch = Challenge::find(130);
+            } else if($request->task_id == 3) {
+                $ch = Challenge::find(131);
+            }
+
+            $fs->save_json = $ch->save_json;
+            $fs->name = 'Robochallenge Zadanie '. $request->task_id;
+            $fs->save();
+
+            $fs->users()->attach(Auth::user()->id, ['is_owner' => 1]);
+        }
+
+        return \response()->json($fs->id);
     }
 }

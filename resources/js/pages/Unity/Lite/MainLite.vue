@@ -208,6 +208,20 @@ export default {
             handleUnityActionOutgoing({action: "unlockInput", data: ''});
         }
 
+        const getRoboData  = () => {
+            axios.post('/api/playground/save', {id: id.value})
+                .then(response => {
+                    challenge.value = response.data;
+                    initialLoad.value = response.data.save_json;
+                    animationSave.value = response.data.save_json.animation_layers;
+
+                    handleUnityActionOutgoing({
+                        action: 'loadStructure',
+                        data: response.data.save_json
+                    });
+                })
+        }
+
         const openMenu = (e) => {
             e.preventDefault();
             if (loaded.value) {

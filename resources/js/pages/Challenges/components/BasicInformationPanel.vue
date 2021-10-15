@@ -71,8 +71,7 @@
                     <div class="flex items-center my-5">
                         <div
                             class="px-3 py-2 bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 rounded font-medium"
-                            v-if="$dayjs().isBefore($dayjs(challenge.offer_deadline))"
-                        >
+                            v-if="$dayjs().isBefore($dayjs(challenge.offer_deadline))">
                             {{$t('challengesMain.nextDeadline')}}:
                             <span v-if="$dayjs().isAfter($dayjs.unix(challenge.solution_deadline))">Składanie rozwiązań do: {{ $dayjs.unix(challenge.solution_deadline).format('DD.MM.YYYY') }}</span>
                             <span v-if="$dayjs().isBefore($dayjs.unix(challenge.solution_deadline))">Składanie ofert do: {{ $dayjs.unix(challenge.offer_deadline).format('DD.MM.YYYY') }}</span>
