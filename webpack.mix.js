@@ -11,6 +11,13 @@ let postcssImport = require('postcss-import');
  | file for the application as well as bundling up all the JS files.
  |
  */
+// let url = process.env.APP_URL.replace(/(^\w+:|^)\/\//, '');
+// mix.options({
+//     hmrOptions: {
+//         host: 'dbr2.test',
+//         port: 8080 // Can't use 443 here because address already in use
+//     }
+// });
 // mix.options({
 //     hmrOptions: {
 //         host: 'staging.appworks-dev.pl',
@@ -50,7 +57,7 @@ mix.js('resources/js/app.js', 'public/js')
         [postcssImport]
         ]
 });
-// mix.browserSync('homestead.test');
+// mix.browserSync('https://homestead.test');
 mix.version();
     //
     // [ tailwind("tailwind.config.js"),

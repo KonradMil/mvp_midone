@@ -1,9 +1,10 @@
+import {ref} from "vue";
 
 const doubleClick = ref(false);
 const mousePositionY = ref(0);
 const mousePositionX = ref(0);
 
-export default function useRadialMenu(loaded, currentRadialMenu, callback) {
+export default function useRadialMenu(loaded, currentRadialMenu, e, callback) {
     if (loaded) {
         if (doubleClick.value) {
             if ((mousePositionX.value > (e.clientX - 10) && mousePositionX.value < (e.clientX + 10)) && (mousePositionY.value > (e.clientY - 10) && mousePositionY.value < (e.clientY + 19))) {

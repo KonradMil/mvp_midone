@@ -140,13 +140,9 @@ class FreeSavesController extends Controller
 
                 $responseBuilder->setSuccessMessage(__('messages.save_correct'));
                 $responseBuilder->setData('local_vision', $newFreeSave);
-
-
             } catch (QueryException $e) {
-
                 $responseBuilder->setErrorMessage(__('messages.error'));
                 return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
             }
         }
 

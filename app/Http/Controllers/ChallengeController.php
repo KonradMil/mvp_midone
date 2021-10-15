@@ -185,55 +185,55 @@ class ChallengeController extends Controller
      */
     public function saveFreeSave(Request $request): JsonResponse
     {
-        if($request->data['id']){
+        if ($request->get('id')) {
             try {
-                $freeSave = FreeSave::find($request->data['id']);
-                $freeSave -> name = $request->get('name');
-                $freeSave -> en_name = $request->get('e_name');
-                $freeSave -> description = $request->get('description');
-                $freeSave -> en_description = $request->get('e_description');
+                $freeSave = FreeSave::find($request->get('id'));
+                $freeSave->name = $request->get('name');
+                $freeSave->en_name = $request->get('en_name');
+                $freeSave->description = $request->get('description');
+                $freeSave->en_description = $request->get('en_description');
 
-                $j = json_decode($request->data['save']['save_json'], true);
+                $j = $request->get('save');
 
-                if (!empty($j['screenshot'])) {
-
-                    $path = $this->processSS($j['screenshot']);
+                    $a = json_decode($j['save_json'], true);
+                if (!empty($a['screenshot'])) {
+                    $path = $this->processSS($a['screenshot']);
                     $freeSave->screenshot_path = $path['relative'];
-                    unset($j['screenshot']);
-                    $freeSave->save_json = json_encode($j);
-                }
+                    unset($a['screenshot']);
 
+                }
+                $freeSave->save_json = json_encode($a);
                 $freeSave->save();
 
-            } catch(Exception $e){
+            } catch (Exception $e) {
 
             }
         } else {
-            $newFreeSave = new FreeSave();
-            $user = User::find(Auth::user()->id);
-            $user->freeusers()->attach($newFreeSave);
-            $newFreeSave -> name = $request->get('name');
-            $newFreeSave -> en_name = $request->get('en_name');
-            $newFreeSave -> description = $request->get('description');
-            $newFreeSave -> en_description = $request->get('en_description');
-
-            $j = json_decode($request->data['save']['save_json'], true);
-
-            if (!empty($j['screenshot'])) {
-
-                $path = $this->processSS($j['screenshot']);
-                $newFreeSave->screenshot_path = $path['relative'];
-                unset($j['screenshot']);
-                $newFreeSave->save_json = json_encode($j);
-            }
-
-            $newFreeSave->save();
+//            $newFreeSave = new FreeSave();
+//            $user = User::find(Auth::user()->id);
+//            $user->freeusers()->attach($newFreeSave);
+//            $newFreeSave->name = $request->get('name');
+//            $newFreeSave->en_name = $request->get('en_name');
+//            $newFreeSave->description = $request->get('description');
+//            $newFreeSave->en_description = $request->get('en_description');
+//
+//            $j = json_decode($request->data['save']['save_json'], true);
+//
+//            if (!empty($j['screenshot'])) {
+//
+//                $path = $this->processSS($j['screenshot']);
+//                $newFreeSave->screenshot_path = $path['relative'];
+//                unset($j['screenshot']);
+//                $newFreeSave->save_json = json_encode($j);
+//            }
+//
+//            $newFreeSave->save();
         }
 
         return response()->json([
             'success' => true,
             'message' => 'Zapisano poprawnie.',
-            'payload' => $newFreeSave
+            'payload' => $freeSave
         ]);
     }
 
@@ -275,9 +275,9 @@ class ChallengeController extends Controller
             $constraint->aspectRatio();
             $constraint->upsize();
         });
-        $image_normal->save(public_path('images/'. $name));
+        $image_normal->save(public_path('images/' . $name));
 
-        Storage::disk('s3')->putFileAs('screenshots/', new \Illuminate\Http\File(public_path('images/'. $name)), $name);
+        Storage::disk('s3')->putFileAs('screenshots/', new \Illuminate\Http\File(public_path('images/' . $name)), $name);
 
         return ['absolute_path' => $path, 'relative' => ('s3/screenshots/' . $name)];
     }
@@ -871,7 +871,7 @@ class ChallengeController extends Controller
 
             $user = Auth::user();
 
-            if(!$challenge || $user->id !== $challenge->author_id && $user->type !== User::USER_TYPE_INTEGRATOR) {
+            if (!$challenge || $user->id !== $challenge->author_id && $user->type !== User::USER_TYPE_INTEGRATOR) {
                 abort(404);
             }
 
@@ -1087,7 +1087,7 @@ class ChallengeController extends Controller
         $reports = $request->input('reports');
 
 
-        foreach($reports as $report){
+        foreach ($reports as $report) {
             $vision = new LocalVision();
             $vision->project_id = $challenge->id;
             $vision->description = $report['description'];
@@ -1102,6 +1102,7 @@ class ChallengeController extends Controller
             'payload' => $challenge->id
         ]);
     }
+
     /**
      * @param Request $request
      * @return JsonResponse
@@ -1124,7 +1125,7 @@ class ChallengeController extends Controller
     public function localVisionDelete(Request $request): JsonResponse
     {
         $report = LocalVision::where('id', '=', $request->input('id'))->first();
-        if($report != null){
+        if ($report != null) {
             $report->delete();
         }
 
@@ -1134,6 +1135,7 @@ class ChallengeController extends Controller
             'payload' => ''
         ]);
     }
+
     /**
      * @param Request $request
      * @return JsonResponse
@@ -1208,6 +1210,7 @@ class ChallengeController extends Controller
             'payload' => $technical
         ]);
     }
+
     /**
      * @param Request $request
      * @return JsonResponse
@@ -1224,6 +1227,7 @@ class ChallengeController extends Controller
             'payload' => $challenge
         ]);
     }
+
     /**
      * @param Request $request
      * @return JsonResponse
@@ -1240,6 +1244,7 @@ class ChallengeController extends Controller
             'payload' => $challenge
         ]);
     }
+
     /**
      * @param Request $request
      * @return JsonResponse
@@ -1260,7 +1265,7 @@ class ChallengeController extends Controller
     public function adminGetProjects(): JsonResponse
     {
         $challenges = Challenge::with(['solutions' => function ($query) {
-            $query->where('selected','=','1');
+            $query->where('selected', '=', '1');
         }, 'solutions.author', 'author', 'author.own_company', 'solutions.author.own_company'])->get();
         return response()->json([
             'success' => true,
@@ -1272,7 +1277,7 @@ class ChallengeController extends Controller
 
     public function adminGetUsers()
     {
-       $users = User::with('author')->get();
+        $users = User::with('author')->get();
 
         return response()->json([
             'success' => true,
@@ -1283,7 +1288,7 @@ class ChallengeController extends Controller
 
     public function getUserChallengesByTab(Request $request, $category)
     {
-        if(Auth::user()->type == 'investor') {
+        if (Auth::user()->type == 'investor') {
             $challenges = Challenge::where('author_id', '=', Auth::user()->id)
                 ->where('challenges.category', '=', $category)
                 ->where('challenges.stage', '<', 3)
@@ -1313,12 +1318,12 @@ class ChallengeController extends Controller
             }
         }
 
-            if (!empty($challenges)) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Pobrano poprawnie.',
-                    'payload' => $challenges
-                ]);
+        if (!empty($challenges)) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Pobrano poprawnie.',
+                'payload' => $challenges
+            ]);
         } else {
             return response()->json([
                 'success' => true,

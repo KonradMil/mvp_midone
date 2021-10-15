@@ -3,7 +3,7 @@
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
-        "hot": "mix watch --hot",
+        "hot": "mix watch --hot --https",
         "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\"",
         "prod": "npm run production",
         "production": "mix --production",
@@ -76,6 +76,7 @@
         "axios": "^0.21",
         "babel-loader": "^8.2.2",
         "bootstrap": "^4.0.0",
+        "browser-sync": "^2.27.5",
         "browser-sync-webpack-plugin": "^2.3.0",
         "jquery": "^3.2",
         "laravel-mix": "^6.0.6",

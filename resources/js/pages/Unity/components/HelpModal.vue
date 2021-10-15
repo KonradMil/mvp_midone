@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import {ref} from "vue"
 import useEmitter from "../../../composables/useEmitter";
 export default {
     name: "HelpModal",

@@ -74,7 +74,7 @@ router.beforeEach((to, from, next) => {
     const publicPages = ['login', 'register', 'terms', 'robochallenge', 'reset-password'];
     console.log('to', to);
     const authRequired = !publicPages.includes(to.name);
-
+    console.log(store.state.login);
     if (!store.state.login.isLoggedIn) {
         console.log('NOT LOGGED, AUTH REQUIRED');
         if (authRequired) {
@@ -83,7 +83,6 @@ router.beforeEach((to, from, next) => {
             next();
         }
     } else {
-        console.log('WHATEVA');
         next();
     }
 })

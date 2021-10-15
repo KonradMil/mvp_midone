@@ -216,7 +216,7 @@ export default {
         //RADIAL MENU OPEN/CLOSE
         const openMenu = (e) => {
             e.preventDefault();
-            useRadialMenu(loaded.value, currentRadialMenu.value, (val) => {
+            useRadialMenu(loaded.value, currentRadialMenu.value, e,(val) => {
                 handleUnityActionOutgoing(val);
             });
         }

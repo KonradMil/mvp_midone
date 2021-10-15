@@ -131,7 +131,7 @@ class RobochallengeController extends Controller
 
             $fs->users()->attach(Auth::user()->id, ['is_owner' => 1]);
         }
-
+//        dd($fs);
         return \response()->json($fs->id);
     }
 }

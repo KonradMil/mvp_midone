@@ -9,6 +9,7 @@
     <div v-if="!loaded" id="loader">
         <LoadingIcon icon="grid" class="w-8 h-8" />
     </div>
+    <HelpModal></HelpModal>
 <PeerTest :unityActionOutgoingObject="unityActionOutgoingObject"></PeerTest>
 </template>
 
@@ -26,6 +27,8 @@ import BottomPanel from "./../components/BottomPanel";
 import PeerTest from "../../PeerTest";
 import useLayoutButtonClick from "../../../composables/useLayoutButtonClick";
 import useRadialMenu from "../../../composables/radialMenu";
+import {useToast} from "vue-toastification";
+import HelpModal from "../components/HelpModal";
 
 const ww = WindowWatcher();
 
@@ -41,6 +44,7 @@ export default {
         sessionid: String
     },
     components: {
+        HelpModal,
         PeerTest,
        BottomPanel, TopButtons, LeftPanel, LeftButtons, StudioLite
     },
@@ -53,14 +57,13 @@ export default {
         const type = ref('challenge');
         const mode = ref('');
         const bridge = ref();
+        const freeSave = ref({});
         const gameWindow = ref(null);
         const loaded = ref(false);
-        const doubleClick = ref(false);
-        const mousePositionY = ref(0);
-        const mousePositionX = ref(0);
         const initialLoad = ref({});
         const user = window.Laravel.user;
         const modelActiveTab = ref('klawiszologia');
+        const gameLoad = ref({});
 
         //EXTERNAL
         const unity_hangar_path = window.unity_path;
@@ -77,10 +80,8 @@ export default {
         const animationSave = ref({layers: []});
         const sessionid = ref('');
         const owner = ref(false);
-
-        const startTutorial = () => {
-            handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
-        }
+        const saving = ref(false);
+        const toast = useToast();
 
         //ALL EVENTS
         emitter.on('*', (type, e) => {
@@ -126,11 +127,7 @@ export default {
                             gameWindow.value.setFullscreen();
                             break;
                         case 'logout':
-                            if (type.value == 'solution') {
-                                window.location.href = window.app_path + '/challenges/card/' + solution.value.challenge_id;
-                            } else {
-                                window.location.href = window.app_path + '/challenges/card/' + challenge.value.id;
-                            }
+                                window.location.href = window.app_path + '/robochallenge';
                             break;
                         case 'orto':
                             handleUnityActionOutgoing({action: 'ChangeCamera', data: 2});
@@ -154,21 +151,19 @@ export default {
                     break;
                 case 'UnitySave':
                     if (!saving.value) {
-                        // saving.value = true;
-                        // gameLoad.value.save_json = e.saveGame;
-                        // if (type.value == 'challenge' && window.location.href.indexOf("challenge") > -1) {
-                        //     SaveChallengeUnity({save: gameLoad.value, id: id.value}, () => {
-                        //         saving.value = false;
-                        //     });
-                        // } else {
-                        //     SaveSolutionUnity({save: gameLoad.value, id: id.value}, (sol) => {
-                        //         id.value = sol.id;
-                        //         saving.value = false;
-                        //     });
-                        // }
-                        // emitter.emit('UnitySaved', {val: ''});
-                        // handleUnityActionOutgoing(e);
+                        saving.value = true;
+                        gameLoad.value.save_json = e.saveGame;
+                        axios.post('/api/playground/save/data', {save: gameLoad.value, id: id.value, name: freeSave.value.name, en_name: freeSave.value.en_name, description: freeSave.value.description, en_description: freeSave.value.en_description})
+                            .then(response => {
+                                saving.value = false;
+                                toast.success('Pomyślnie zapisano');
+                            })
+                        emitter.emit('UnitySaved', {val: ''});
+                        handleUnityActionOutgoing(e);
                     }
+                    break;
+                case 'starttutorial':
+                    handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
                     break;
                 case 'onInitialized':
                     initalize()
@@ -188,23 +183,23 @@ export default {
         }
 
         const getRoboData  = () => {
-            axios.post('/api/playground/save', {id: id.value})
+            axios.get('/api/playground/save/' + id.value)
                 .then(response => {
                     console.log('RESP', response);
-                    challenge.value = response.data;
-                    initialLoad.value = response.data.save_json;
-                    animationSave.value = response.data.save_json.animation_layers;
+                    freeSave.value = response.data.freeSave;
+                    initialLoad.value = response.data.freeSave.save_json;
+                    animationSave.value = response.data.freeSave.save_json.animation_layers;
 
                     handleUnityActionOutgoing({
                         action: 'loadStructure',
-                        data: response.data.save_json
+                        data: response.data.freeSave.save_json
                     });
                 })
         }
 
         const openMenu = (e) => {
             e.preventDefault();
-            useRadialMenu(loaded.value, currentRadialMenu.value, (val) => {
+            useRadialMenu(loaded.value, currentRadialMenu.value, e,(val) => {
                 handleUnityActionOutgoing(val);
             });
         }
@@ -298,12 +293,12 @@ export default {
             lockInput,
             unlockInput,
             modelActiveTab,
-            startTutorial,
             loaded,
             sessionid,
             owner,
             showLeftButtons,
-            unityActionOutgoingObject
+            unityActionOutgoingObject,
+            saving
         }
     }
 }
