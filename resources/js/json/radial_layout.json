@@ -2,7 +2,7 @@
     {
         "icon": {
             "name": "BeginLayoutEdit",
-            "url": "/s3/builder_icons/edit_radial.png",
+            "url": "/builder_icons/edit_radial.png",
             "bundled": false,
             "type": ""
         },
@@ -20,7 +20,7 @@
     {
         "icon": {
             "name": "CopyLayoutElement",
-            "url": "/s3/builder_icons/copy_radial.png",
+            "url": "/builder_icons/copy_radial.png",
             "bundled": false,
             "type": ""
         },
@@ -38,7 +38,7 @@
     {
         "icon": {
             "name": "PasteLayoutElement",
-            "url": "/s3/builder_icons/paste_radial.png",
+            "url": "/builder_icons/paste_radial.png",
             "bundled": false,
             "type": ""
         },
@@ -56,7 +56,7 @@
     {
         "icon": {
             "name": "BeginLayoutDraw",
-            "url": "/s3/builder_icons/add_layout_radial.png",
+            "url": "/builder_icons/add_layout_radial.png",
             "bundled": false,
             "type": ""
         },
@@ -74,7 +74,7 @@
     {
         "icon": {
             "name": "BeginLayoutLabel",
-            "url": "/s3/builder_icons/add_label_radial.png",
+            "url": "/builder_icons/add_label_radial.png",
             "bundled": false,
             "type": ""
         },
@@ -92,7 +92,7 @@
     {
         "icon": {
             "name": "RemoveLayout",
-            "url": "/s3/builder_icons/delete_radial.png",
+            "url": "/builder_icons/delete_radial.png",
             "bundled": false,
             "type": ""
         },
@@ -110,7 +110,7 @@
     {
         "icon": {
             "name": "SettingsLayout",
-            "url": "/s3/builder_icons/settings_radial.png",
+            "url": "/builder_icons/settings_radial.png",
             "bundled": false,
             "type": ""
         },
