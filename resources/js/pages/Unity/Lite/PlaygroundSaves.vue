@@ -17,9 +17,12 @@
                 <div class="p-10">
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 1: Optymalizacja istniejącego procesu na linii produkcyjnej</h2>
-                            <button class="btn btn-primary ml-2" @click="goToRoboChallenge(1)">Studio 3D</button>
-                            <button class="btn btn-primary ml-2" @click="show = true; tempId = 1;">Resetuj</button>
-                            <button class="btn btn-primary ml-2"  @click="showTwo = true; tempId = 1;">Do oceny</button>
+                        <template>
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(1) !== -1)" @click="goToRoboChallenge(1)">Studio 3D</button>
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(1) !== -1) && (dataAr.indexOf(1) !== -1)" @click="show = true; tempId = 1;">Resetuj</button>
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(1) !== -1) && (dataAr.indexOf(1) !== -1)" @click="showTwo = true; tempId = 1;">Do oceny</button>
+                            <span v-if="pubAr.indexOf(1) !== -1">Zadanie zgłoszone.</span>
+                        </template>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-1">
                         <div class="col-span-6 p-10">
@@ -103,9 +106,12 @@
                 <div class="p-10">
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 2: Odtworzenie linii produkcyjnej na podstawie procesu o zadanych parametrach wydajnościowych</h2>
-                            <button class="btn btn-primary ml-2"  @click="goToRoboChallenge(2)">Studio 3D</button>
-                            <button class="btn btn-primary ml-2" @click="show = true; tempId = 2;">Resetuj</button>
-                            <button class="btn btn-primary ml-2"  @click="showTwo = true; tempId = 2;">Do oceny</button>
+                        <template>
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(2) !== -1)" @click="goToRoboChallenge(2)">Studio 3D</button>
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(2) !== -1) && (dataAr.indexOf(2) !== -1)" @click="show = true; tempId = 2;">Resetuj</button>
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(2) !== -1) && (dataAr.indexOf(2) !== -1)" @click="showTwo = true; tempId = 2;">Do oceny</button>
+                            <span v-if="pubAr.indexOf(2) !== -1">Zadanie zgłoszone.</span>
+                        </template>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-1">
 
@@ -197,9 +203,12 @@
                 <div class="p-10">
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 3: Znajdź 5 błędów w istniejącym procesie i uzasadnij je</h2>
-                            <button class="btn btn-primary ml-2" @click="goToRoboChallenge(3)">Studio 3D</button>
-                            <button class="btn btn-primary ml-2"  @click="show = true; tempId = 3;">Resetuj</button>
-                            <button class="btn btn-primary ml-2"  @click="showTwo = true; tempId = 3;">Do oceny</button>
+                        <template>
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(3) !== -1)" @click="goToRoboChallenge(3)">Studio 3D</button>
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(3) !== -1) && (dataAr.indexOf(3) !== -1)" @click="show = true; tempId = 3;">Resetuj</button>
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(3) !== -1) && (dataAr.indexOf(3) !== -1)" @click="showTwo = true; tempId = 3;">Do oceny</button>
+                            <span v-if="pubAr.indexOf(3) !== -1">Zadanie zgłoszone.</span>
+                        </template>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-1">
 
