@@ -321,6 +321,8 @@ export default {
                             animationSave.value = response.data.payload.save_json.animation_layers;
                             checkTeam();
 
+                            window.unityLoad = response.data.payload.save_json;
+
                             handleUnityActionOutgoing({
                                 action: 'loadStructure',
                                 data: response.data.payload.save_json
@@ -342,6 +344,8 @@ export default {
                         initialLoad.value = JSON.parse(response.data.payload.save_json);
                         animationSave.value = JSON.parse(response.data.payload.save_json).animation_layers;
                         checkTeam();
+
+                        window.unityLoad = response.data.payload.save_json;
 
                         handleUnityActionOutgoing({
                             action: 'loadStructure',

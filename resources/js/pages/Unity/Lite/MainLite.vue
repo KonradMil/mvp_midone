@@ -187,6 +187,8 @@ export default {
                     initialLoad.value = response.data.freeSave.save_json;
                     animationSave.value = response.data.freeSave.save_json.animation_layers;
 
+                    window.unityLoad = response.data.freeSave.save_json;
+
                     handleUnityActionOutgoing({
                         action: 'loadStructure',
                         data: response.data.freeSave.save_json

@@ -75,6 +75,7 @@ app.use(VueConfirmPlugin, {
     yesText: 'Potwierdzam',
     noText: 'Anuluj',
 })
+
 app.use(VueCookies, {
     expireTimes: "1h",
 });
