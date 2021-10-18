@@ -88,7 +88,7 @@ const UnityBridge = () => {
 
         };
         window.UnityLogMessage = function UnityLogMessage(e) {
-
+            window.log_me_daddy = e;
         };
         window.UnityGoToUrl = function UnityGoToUrl(e) {
 

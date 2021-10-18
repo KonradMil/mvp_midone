@@ -48,11 +48,7 @@ window.Echo = new Echo({
     forceTLS: false,
     disableStats: true,
 });
-app.use(VueConfirmPlugin, {
-    root: '#confirm',
-    yesText: 'Potwierdzam',
-    noText: 'Anuluj',
-})
+
 // window.Echo = new Echo({
 //     authEndpoint: '/api/broadcast/auth',
 //     broadcaster: "socket.io",
@@ -74,7 +70,11 @@ app.use(lazyPlugin, {
     loading: '/s3/twopointo/images/loader.gif',
     error: '/s3/screenshots/dbr_placeholder.jpeg'
 })
-
+app.use(VueConfirmPlugin, {
+    root: '#confirm',
+    yesText: 'Potwierdzam',
+    noText: 'Anuluj',
+})
 app.use(VueCookies, {
     expireTimes: "1h",
 });
