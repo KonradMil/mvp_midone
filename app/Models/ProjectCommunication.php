@@ -19,7 +19,7 @@ class ProjectCommunication extends Model
      * @var string[]
      */
     protected $fillable = [
-        'project_id', 'author_id',
+        'project_id', 'author_id', 'personal_occupation',
         'personal_data', 'phone_number', 'email',
         'project_decision', 'is_accepted'
     ];

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProjectCommunicationsController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectRisksController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'projects', 'middleware' => 'auth:sanctum'], function () {
@@ -34,6 +36,14 @@ Route::group(['prefix' => 'projects', 'middleware' => 'auth:sanctum'], function 
     Route::get('{challenge_id}/solution', [ProjectController::class, 'getProjectSolution']);
     Route::get('{challenge_id}/investor-integrator', [ProjectController::class, 'getInvestorAndIntegrator']);
     Route::post('visit-date/end', [ProjectController::class, 'endVisitDate']);
+    Route::get('{project_id}/communications', [ProjectCommunicationsController::class, 'getCommunications']);
+    Route::post('{project_id}/communication/save', [ProjectCommunicationsController::class, 'saveCommunicationPlan']);
+    Route::post('{project_id}/communication/{id}/delete', [ProjectCommunicationsController::class, 'deleteCommunicationPlan']);
+    Route::post('{project_id}/communication/{id}/accept', [ProjectCommunicationsController::class, 'acceptProjectCommunicationPlan']);
+    Route::get('{project_id}/risk', [ProjectRisksController::class, 'getRisks']);
+    Route::post('{project_id}/risk/save', [ProjectRisksController::class, 'saveRisk']);
+    Route::post('{project_id}/risk/{id}/delete', [ProjectRisksController::class, 'deleteRisk']);
+    Route::post('{project_id}/risk/{id}/accept', [ProjectRisksController::class, 'acceptProjectRisk']);
 });
 
 

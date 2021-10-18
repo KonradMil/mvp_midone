@@ -17,6 +17,7 @@ class CreateProjectCommunicationsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('author_id');
             $table->unsignedBigInteger('project_id');
+            $table->string('personal_occupation');
             $table->string('personal_data');
             $table->unsignedInteger('phone_number')->nullable();
             $table->string('email')->nullable();
