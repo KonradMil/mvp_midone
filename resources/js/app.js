@@ -69,23 +69,7 @@ app.use(lazyPlugin, {
     loading: '/s3/twopointo/images/loader.gif',
     error: '/s3/screenshots/dbr_placeholder.jpeg'
 })
-router.beforeEach((to, from, next) => {
-    // redirect to login page if not logged in and trying to access a restricted page
-    const publicPages = ['login', 'register', 'terms', 'robochallenge', 'reset-password'];
-    console.log('to', to);
-    const authRequired = !publicPages.includes(to.name);
-    console.log(store.state.login);
-    if (!store.state.login.isLoggedIn) {
-        console.log('NOT LOGGED, AUTH REQUIRED');
-        if (authRequired) {
-            next({path: '/login'})
-        } else {
-            next();
-        }
-    } else {
-        next();
-    }
-})
+
 app.use(VueCookies, {
     expireTimes: "1h",
 });
