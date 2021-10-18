@@ -24,12 +24,6 @@ Route::get('studio/challenge/{challengeId}', [StudioController::class, 'challeng
 require 'web/auth.php';
 require 'web/teams.php';
 
-Route::get('/test', function(){
-
-    Mail::to('krystian.wieczorek@dbr77.com')->send(new RoboHakatonMail());
-
-});
-
 Route::get('{any}', function () {
     return view('app');
 })->where('any', '.*');
