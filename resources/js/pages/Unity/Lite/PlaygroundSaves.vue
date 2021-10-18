@@ -202,8 +202,11 @@
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 3: Znajdź 5 błędów w istniejącym procesie i uzasadnij je</h2>
                         <template>
-                            <button class="btn btn-primary ml-2" v-if="!pubAr.includes(3)" @click="goToRoboChallenge(3)">Studio 3D</button>
-                            <button class="btn btn-primary ml-2" v-if="!pubAr.includes(3) && dataAr.includes(3)" @click="show = true; tempId = 3;">Resetuj</button>
+                            <button class="btn btn-primary ml-2" v-if="(!pubAr.includes(3))" @click="goToRoboChallenge(3)">Studio 3D</button>
+                            <template v-if="dataAr.includes(3)">
+                                <button class="btn btn-primary ml-2" v-if="!pubAr.includes(3)" @click="show = true; tempId = 3;">Resetuj</button>
+                            </template>
+
                             <button class="btn btn-primary ml-2" v-if="!pubAr.includes(3) && dataAr.includes(3)" @click="showTwo = true; tempId = 3;">Do oceny</button>
                         </template>
                     </div>
