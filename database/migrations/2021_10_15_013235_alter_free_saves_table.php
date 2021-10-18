@@ -13,7 +13,7 @@ class AlterFreeSavesTable extends Migration
      */
     public function up()
     {
-        Schema::table('free_saves_user', function (Blueprint $table) {
+        Schema::table('free_saves', function (Blueprint $table) {
             $table->integer('robochallenge_task');
         });
     }

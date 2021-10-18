@@ -23,6 +23,7 @@ import relativeTime from 'dayjs/esm/plugin/relativeTime';
 import updateLocale from 'dayjs/esm/plugin/updateLocale';
 import {VueReCaptcha} from "vue-recaptcha-v3";
 import utc from 'dayjs/esm/plugin/utc';
+import VueConfirmPlugin from "v3confirm";
 
 const emitter = mitt();
 
@@ -47,7 +48,11 @@ window.Echo = new Echo({
     forceTLS: false,
     disableStats: true,
 });
-
+app.use(VueConfirmPlugin, {
+    root: '#confirm',
+    yesText: 'Potwierdzam',
+    noText: 'Anuluj',
+})
 // window.Echo = new Echo({
 //     authEndpoint: '/api/broadcast/auth',
 //     broadcaster: "socket.io",

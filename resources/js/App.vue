@@ -1,4 +1,5 @@
 <template>
+    <div id="confirm"></div>
         <router-view/>
 </template>
 

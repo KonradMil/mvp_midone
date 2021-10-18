@@ -17,7 +17,11 @@
                 <div class="p-10">
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 1: Optymalizacja istniejącego procesu na linii produkcyjnej</h2>
-<!--                        <button class="btn btn-primary" @click="goToRoboChallenge(1)">Studio 3D</button>-->
+                        <template v-if="dataAr.includes(1)">
+                            <button class="btn btn-primary" @click="goToRoboChallenge(1)">Studio 3D</button>
+                            <button class="btn btn-primary" @click="resetRoboChallenge(1)">Resetuj</button>
+                            <button class="btn btn-primary" @click="gradeRoboChallenge(1)">Do oceny</button>
+                        </template>
                     </div>
 
                     <div class="grid grid-cols-12 gap-6 mt-1">
@@ -103,7 +107,11 @@
                 <div class="p-10">
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 2: Odtworzenie linii produkcyjnej na podstawie procesu o zadanych parametrach wydajnościowych</h2>
-<!--                        <button class="btn btn-primary" @click="goToRoboChallenge(2)">Studio 3D</button>-->
+                        <template v-if="dataAr.includes(2)">
+                            <button class="btn btn-primary" @click="goToRoboChallenge(2)">Studio 3D</button>
+                            <button class="btn btn-primary" @click="resetRoboChallenge(2)">Resetuj</button>
+                            <button class="btn btn-primary" @click="gradeRoboChallenge(2)">Do oceny</button>
+                        </template>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-1">
 
@@ -195,7 +203,11 @@
                 <div class="p-10">
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 3: Znajdź 5 błędów w istniejącym procesie i uzasadnij je</h2>
-<!--                        <button class="btn btn-primary" @click="goToRoboChallenge(3)">Studio 3D</button>-->
+                        <template v-if="dataAr.includes(3)">
+                            <button class="btn btn-primary" @click="goToRoboChallenge(3)">Studio 3D</button>
+                            <button class="btn btn-primary" @click="resetRoboChallenge(3)">Resetuj</button>
+                            <button class="btn btn-primary" @click="gradeRoboChallenge(3)">Do oceny</button>
+                        </template>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-1">
 
@@ -273,6 +285,7 @@ import {useToast} from "vue-toastification";
 import VueEasyLightbox from 'vue-easy-lightbox'
 import RequestHandler from '../../../compositions/RequestHandler'
 import router from "../../../router";
+import {useConfirm} from "v3confirm";
 
 export default {
     name: "PlaygroundSaves",
@@ -282,6 +295,7 @@ export default {
     setup(props) {
         const saves = ref([]);
         const user = ref({});
+        const dataAr = ref([]);
         const toast = useToast();
         const guard = ref(false);
         const lightboxVisible = ref(false);
@@ -316,6 +330,13 @@ export default {
             }
         });
 
+        const getData = async () => {
+            axios.post('/api/playground/save/data/get')
+                .then(response => {
+                    dataAr.value = response.data;
+                })
+        }
+
         const deleteSave = async (id) => {
             axios.post('/api/playground/saves/delete', {id: id})
                 .then(response => {
@@ -332,6 +353,7 @@ export default {
         const lightBoxIndex = ref(0);
 
         onMounted(() => {
+            getData();
         });
 
         const showImage = (index) => {
@@ -343,7 +365,47 @@ export default {
             lightboxVisible.value = false;
         }
 
+        const confirm = useConfirm()
+
+        const resetRoboChallenge = (id) => {
+            confirm.show('Czy na pewno chcec zresetować to zadanie do stanu pierwotnego?').then((ok) => {
+                if (ok) {
+                    axios.post('/api/playground/saves/reset', {id: id})
+                        .then(response => {
+
+                            if (response.data.success) {
+                                toast.success('Zadanie zeresetowane');
+                            } else {
+                                toast.success('Wystąpił błąd.');
+                            }
+                        })
+                } else {
+
+                }
+            })
+        }
+
+        const gradeRoboChallenge = async (id) => {
+            const ok = await confirm.show('Czy na pewno skończyłeś pracować nad tym zadaniem?')
+            axios.post('/api/playground/saves/grade', {id: id})
+                .then(response => {
+                    if (response.data.success) {
+                        toast.success('Oczekuj na zakończenie konkursu.');
+                    } else {
+                        toast.success('Wystąpił błąd.');
+                    }
+                })
+            if (ok) {
+
+            } else {
+
+            }
+        }
+
+
         return {
+            resetRoboChallenge,
+            gradeRoboChallenge,
             guard,
             saves,
             user,
@@ -354,7 +416,8 @@ export default {
             hideLightbox,
             lightBoxIndex,
             images,
-            goToRoboChallenge
+            goToRoboChallenge,
+            dataAr
         }
     },
     beforeRouteEnter(to, from, next) {
