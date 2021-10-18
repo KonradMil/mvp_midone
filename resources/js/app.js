@@ -23,7 +23,6 @@ import relativeTime from 'dayjs/esm/plugin/relativeTime';
 import updateLocale from 'dayjs/esm/plugin/updateLocale';
 import {VueReCaptcha} from "vue-recaptcha-v3";
 import utc from 'dayjs/esm/plugin/utc';
-import VueConfirmPlugin from "v3confirm";
 
 const emitter = mitt();
 
@@ -69,11 +68,6 @@ app.config.globalProperties.emitter = emitter;
 app.use(lazyPlugin, {
     loading: '/s3/twopointo/images/loader.gif',
     error: '/s3/screenshots/dbr_placeholder.jpeg'
-})
-app.use(VueConfirmPlugin, {
-    root: '#confirm',
-    yesText: 'Potwierdzam',
-    noText: 'Anuluj',
 })
 
 app.use(VueCookies, {

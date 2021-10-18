@@ -1,16 +1,64 @@
 <template>
-    <div id="confirm"></div>
+    <loading :active="isLoading" :is-full-page="fullPage"></loading>
         <router-view/>
 </template>
 
 <script>
 
 import {useToast} from "vue-toastification";
-
+import {onMounted} from "vue";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 const toast = useToast();
 
 export default {
     name: "App",
+    components: {
+        Loading
+    },
+    setup() {
+        const isLoading = ref(false);
+        const fullPage = ref(true);
+        const counter = ref(0);
+        onMounted(() => {
+            window.axios.interceptors.request.use(function (config) {
+                isLoading.value = true;
+                counter.value++;
+                return config;
+            }, function (error) {
+                counter.value--;
+                if(counter.value === 0) {
+                    isLoading.value = false;
+                }
+
+
+                return Promise.reject(error);
+            });
+
+            axios.interceptors.response.use(function (response) {
+                counter.value--;
+                if(counter.value === 0) {
+                    isLoading.value = false;
+                }
+
+                return response;
+            }, function (error) {
+                counter.value--;
+                if(counter.value === 0) {
+                    isLoading.value = false;
+                }
+                // console.log(counter.value)
+
+                return Promise.reject(error);
+            });
+        })
+
+        return {
+            isLoading,
+            fullPage,
+            counter
+        }
+    },
     data() {
         return {
             isLoggedIn: false,
