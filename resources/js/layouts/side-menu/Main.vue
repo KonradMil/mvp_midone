@@ -71,7 +71,7 @@
                     </template>
                     <template v-else>
                         <li :key="'robo'">
-                            <SideMenuTooltip tag="a" :content="'Konkurs Robochallenge'" href="javascript:;" class="side-menu" :class="'side-menu--active'" @click="$router.push({name: 'studio-playground-saves'})">
+                            <SideMenuTooltip tag="a" :content="'Konkurs Robochallenge'" href="javascript:;" class="side-menu" :class="{'side-menu--active': menu.active}" @click="$router.push({name: 'studio-playground-saves'})">
                                 <div class="side-menu__icon">
                                     <component :is="'HomeIcon'"/>
                                 </div>
@@ -81,7 +81,7 @@
                             </SideMenuTooltip>
                         </li>
                         <li :key="'community'">
-                            <SideMenuTooltip tag="a" :content="'Społeczność'" href="javascript:;" class="side-menu" :class="'side-menu--active'" @click="window.open('https://community.dbr77.com', '_blank').focus();">
+                            <SideMenuTooltip tag="a" :content="'Społeczność'" href="javascript:;" class="side-menu" :class="{'side-menu--active': menu.active}" @click="goTo('https://community.dbr77.com')">
                                 <div class="side-menu__icon">
                                     <component :is="'HomeIcon'"/>
                                 </div>
@@ -139,6 +139,10 @@ export default defineComponent({
             nestedMenu(menu.menu, route)
         );
 
+        const goTo = (url) => {
+            window.open(url, '_blank').focus();
+        }
+
         watch(
             computed(() => route.path),
             () => {
@@ -165,7 +169,8 @@ export default defineComponent({
             linkTo,
             enter,
             leave,
-            user
+            user,
+            goTo
         };
     }
 });
