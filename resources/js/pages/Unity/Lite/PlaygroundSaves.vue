@@ -287,7 +287,7 @@
         <div class="intro-y box p-5 mt-12 sm:mt-5">
             <div class="relative text-gray-700 dark:text-gray-300 mr-4">
                 <button class="btn btn-primary shadow-md mr-2" @click="show = false;">Anuluj</button>
-                <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="resetRoboChallenge">Tak przywróć</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="resetRoboChallenge">Tak przywróć</button>
             </div>
         </div>
     </Modal>
@@ -301,7 +301,7 @@
         <div class="intro-y box p-5 mt-12 sm:mt-5">
             <div class="relative text-gray-700 dark:text-gray-300 mr-4">
                 <button class="btn btn-primary shadow-md mr-2" @click="showTwo = false;">Anuluj</button>
-                <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="gradeRoboChallenge">Tak skończyłem</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="gradeRoboChallenge">Tak skończyłem</button>
             </div>
         </div>
     </Modal>
