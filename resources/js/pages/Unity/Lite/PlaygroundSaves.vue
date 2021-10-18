@@ -279,7 +279,7 @@
         <!--        <h3 class="intro-y text-lg font-medium mt-5">{{ $t('teams.addMember') }}</h3>-->
         <div class="intro-y box p-5 mt-12 sm:mt-5">
             <div>
-               Czy na pewno chcesz przywrócić zapis tego zadania do stanu pierwotnego?
+                Czy na pewno chcesz przywrócić zapis tego zadania do stanu pierwotnego?
             </div>
         </div>
         <div class="intro-y box p-5 mt-12 sm:mt-5">
@@ -293,7 +293,7 @@
         <!--        <h3 class="intro-y text-lg font-medium mt-5">{{ $t('teams.addMember') }}</h3>-->
         <div class="intro-y box p-5 mt-12 sm:mt-5">
             <div>
-               Czy na pewno skończyłeś pracować nad tym zadaniem?
+                Czy na pewno skończyłeś pracować nad tym zadaniem?
             </div>
         </div>
         <div class="intro-y box p-5 mt-12 sm:mt-5">
@@ -398,24 +398,23 @@ export default {
         const resetRoboChallenge = () => {
             axios.post('/api/playground/saves/reset', {id: tempId.value})
                 .then(response => {
-
-                    if (response.data.success) {
-                        toast.success('Zadanie zeresetowane');
-                    } else {
-                        toast.success('Wystąpił błąd.');
-                    }
-                })
+                    toast.success('Zadanie zeresetowane');
+                    show.value = false;
+                }).catch(e => {
+                toast.success('Wystąpił błąd.');
+                show.value = false;
+            })
         }
 
         const gradeRoboChallenge = async () => {
             axios.post('/api/playground/saves/grade', {id: tempId.value})
                 .then(response => {
-                    if (response.data.success) {
-                        toast.success('Oczekuj na zakończenie konkursu.');
-                    } else {
-                        toast.success('Wystąpił błąd.');
-                    }
-                })
+                    toast.success('Oczekuj na zakończenie konkursu.');
+                    showTwo.value = false;
+                }).catch(e => {
+                toast.success('Wystąpił błąd.');
+                showTwo.value = false;
+            })
         }
 
         return {
