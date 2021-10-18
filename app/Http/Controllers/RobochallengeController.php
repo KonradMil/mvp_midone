@@ -131,7 +131,7 @@ class RobochallengeController extends Controller
 
             $fs->users()->attach(Auth::user()->id, ['is_owner' => 1]);
         }
-//        dd($fs);
+
         return \response()->json($fs->id);
     }
 
@@ -149,11 +149,15 @@ class RobochallengeController extends Controller
     {
         $fs = Auth::user()->ownFreeSaves()->get();
         $ar = [];
+        $arTwo = [];
         foreach ($fs as $f) {
             $ar[] = $f->robochallenge_task;
+            if($f->published) {
+                $arTwo[] = $f->robochallenge_task;
+            }
         }
 
-        return \response()->json($ar);
+        return \response()->json(['pub' => $arTwo, 'exist' => $ar]);
     }
 
     public function resetSave(Request $request)
