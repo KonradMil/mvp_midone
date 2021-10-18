@@ -10,8 +10,11 @@ use Authy\AuthyApi;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Session;
@@ -21,6 +24,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Laravel\Octane\Exceptions\DdException;
 use Mpociot\Teamwork\Facades\Teamwork;
 use Mpociot\Teamwork\TeamInvite;
 
@@ -457,9 +461,10 @@ class UserController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|Response|\Illuminate\Routing\Redirector
+     * @return Application|RedirectResponse|Redirector
+     * @throws DdException
      */
-    public function impersonate(Request $request)
+    public function impersonate(Request $request): Redirector|RedirectResponse|Application
     {
         $u = Auth::user();
 //        dd($u);
