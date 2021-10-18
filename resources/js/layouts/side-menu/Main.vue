@@ -71,7 +71,7 @@
                     </template>
                     <template v-else>
                         <li :key="'robo'">
-                            <SideMenuTooltip tag="a" :content="'Konkurs Robochallenge'" href="javascript:;" class="side-menu" :class="{'side-menu--active': menu.active}" @click="$router.push({name: 'studio-playground-saves'})">
+                            <SideMenuTooltip tag="a" :content="'Konkurs Robochallenge'" href="javascript:;" class="side-menu" @click="$router.push({name: 'studio-playground-saves'})">
                                 <div class="side-menu__icon">
                                     <component :is="'HomeIcon'"/>
                                 </div>
@@ -81,7 +81,7 @@
                             </SideMenuTooltip>
                         </li>
                         <li :key="'community'">
-                            <SideMenuTooltip tag="a" :content="'Społeczność'" href="javascript:;" class="side-menu" :class="{'side-menu--active': menu.active}" @click="goTo('https://community.dbr77.com')">
+                            <SideMenuTooltip tag="a" :content="'Społeczność'" href="javascript:;" class="side-menu" @click="goTo('https://community.dbr77.com')">
                                 <div class="side-menu__icon">
                                     <component :is="'HomeIcon'"/>
                                 </div>
