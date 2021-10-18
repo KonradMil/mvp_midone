@@ -138,7 +138,7 @@ class RobochallengeController extends Controller
 
     public function gradeSave(Request $request)
     {
-        $fs = Auth::user()->ownFreeSaves()->where('free_saves.robochallenge_task', '=', $request->task_id)->first();
+        $fs = Auth::user()->ownFreeSaves()->where('free_saves.robochallenge_task', '=', $request->id)->first();
         $fs->published = 1;
         $fs->save();
 
@@ -158,7 +158,7 @@ class RobochallengeController extends Controller
 
     public function resetSave(Request $request)
     {
-        $fs = Auth::user()->ownFreeSaves()->where('free_saves.robochallenge_task', '=', $request->task_id)->first();
+        $fs = Auth::user()->ownFreeSaves()->where('free_saves.robochallenge_task', '=', $request->id)->first();
 
         if ($request->task_id == 1) {
             $ch = Challenge::find(128);
