@@ -7,7 +7,7 @@
     ></vue-easy-lightbox>
     <div>
         <div class="intro-y grid grid-cols-12 gap-6 mt-5">
-            <!--            <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'studio-playground'})">{{ $t('lite.addSave') }}</button>-->
+            <!--            <button class="btn btn-primary ml-2 shadow-md mr-2" @click="$router.push({name: 'studio-playground'})">{{ $t('lite.addSave') }}</button>-->
 
             <!-- BEGIN: Blog Layout -->
             <!--            <div class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium" v-if="saves == undefined || saves.length == 0">-->
@@ -18,9 +18,9 @@
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 1: Optymalizacja istniejącego procesu na linii produkcyjnej</h2>
                         <template v-if="dataAr.includes(1)">
-                            <button class="btn btn-primary" @click="goToRoboChallenge(1)">Studio 3D</button>
-                            <button class="btn btn-primary" @click="resetRoboChallenge(1)">Resetuj</button>
-                            <button class="btn btn-primary" @click="gradeRoboChallenge(1)">Do oceny</button>
+                            <button class="btn btn-primary ml-2" @click="goToRoboChallenge(1)">Studio 3D</button>
+                            <button class="btn btn-primary ml-2" @click="resetRoboChallenge(1)">Resetuj</button>
+                            <button class="btn btn-primary ml-2" @click="gradeRoboChallenge(1)">Do oceny</button>
                         </template>
                     </div>
 
@@ -108,9 +108,9 @@
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 2: Odtworzenie linii produkcyjnej na podstawie procesu o zadanych parametrach wydajnościowych</h2>
                         <template v-if="dataAr.includes(2)">
-                            <button class="btn btn-primary" @click="goToRoboChallenge(2)">Studio 3D</button>
-                            <button class="btn btn-primary" @click="resetRoboChallenge(2)">Resetuj</button>
-                            <button class="btn btn-primary" @click="gradeRoboChallenge(2)">Do oceny</button>
+                            <button class="btn btn-primary ml-2" @click="goToRoboChallenge(2)">Studio 3D</button>
+                            <button class="btn btn-primary ml-2" @click="resetRoboChallenge(2)">Resetuj</button>
+                            <button class="btn btn-primary ml-2" @click="gradeRoboChallenge(2)">Do oceny</button>
                         </template>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-1">
@@ -204,9 +204,9 @@
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 3: Znajdź 5 błędów w istniejącym procesie i uzasadnij je</h2>
                         <template v-if="dataAr.includes(3)">
-                            <button class="btn btn-primary" @click="goToRoboChallenge(3)">Studio 3D</button>
-                            <button class="btn btn-primary" @click="resetRoboChallenge(3)">Resetuj</button>
-                            <button class="btn btn-primary" @click="gradeRoboChallenge(3)">Do oceny</button>
+                            <button class="btn btn-primary ml-2" @click="goToRoboChallenge(3)">Studio 3D</button>
+                            <button class="btn btn-primary ml-2" @click="resetRoboChallenge(3)">Resetuj</button>
+                            <button class="btn btn-primary ml-2" @click="gradeRoboChallenge(3)">Do oceny</button>
                         </template>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-1">
