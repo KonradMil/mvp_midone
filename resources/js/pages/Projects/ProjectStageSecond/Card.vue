@@ -156,8 +156,8 @@
                 <WhatsNext :user="user" :challenge="challenge" :solutions="challenge.solutions" :stage="3"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
-            <CommunicationPanel v-if="activeTab ==='communication'"></CommunicationPanel>
-            <RiskPanel v-if="activeTab ==='risk'"></RiskPanel>
+            <CommunicationPanel v-if="activeTab ==='communication'" :project="project"></CommunicationPanel>
+            <RiskPanel v-if="activeTab ==='risk'" :project="project"></RiskPanel>
             <ModalCard :show="show" @closed="modalClosed">
                 <h3 class="intro-y text-lg font-medium mt-5">Czy na pewno chcesz przejść do następnej fazy?</h3>
                 <div class="intro-y box p-5 mt-12 sm:mt-5" style="text-align: center;">

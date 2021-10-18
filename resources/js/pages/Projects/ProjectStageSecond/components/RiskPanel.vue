@@ -204,25 +204,18 @@ export default {
     name: "RiskPanel",
     components: {Multiselect},
     props: {
+        project: Object
     },
     setup(props) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const toast = useToast();
         const user = window.Laravel.user;
-        const deadlines = ref([]);
         const showDetails = ref([]);
-        const is_selected = ref(0);
         const guard = ref(false);
-        const block = ref(false);
-        const date = ref('');
-        const inputValue = ref('');
-        const inputEvents = ref('');
-        const newDate = new Date();
         const riskRecords = ref([]);
         const probability = require('../../../../json/probability_values.json');
         const impact = require('../../../../json/impact_values.json');
-
 
         const addNewRisk = async () => {
             let risk = {
@@ -240,102 +233,41 @@ export default {
                 riskRecords.value.unshift(risk);
             }, 500)
         }
-        const deleteDeadline = async (deadline) => {
-            RequestHandler('projects/' + props.project.id + '/visit-date/' + deadline.id + '/delete', 'post', {
+        const deleteRisk = async (risk) => {
+            RequestHandler('projects/' + props.project.id + '/visit-date/' + risk.id + '/delete', 'post', {
                 project_id: props.project.id,
-                id: deadline.id,
+                id: risk.id,
             }, (response) => {
-                deadlines.value.splice(deadlines.value.indexOf(deadline), 1);
+                riskRecords.value.splice(riskRecords.value.indexOf(risk), 1);
             });
         }
 
-        const saveMembers = async (deadline) => {
-            RequestHandler('projects/' + props.project.id + '/visit-date/' + deadline.id + '/save_members', 'post', {
-                project_id: props.project.id,
-                id: deadline.id,
-                members: deadline.members
+        const saveRisk = async (risk) => {
+            RequestHandler('projects/' + props.project.id + '/risks/save', 'post', {
+                projectId: props.project.id,
+                riskId: risk.id,
+                riskArea: risk.riskArea,
+                riskDescription: risk.riskDescription,
+                eventProbability: risk.eventProbability,
+                costImpact: risk.costImpact,
+                scheduleImpact: risk.scheduleImpact,
+                qualityImplementationImpact: risk.qualityImplementationImpact,
+                riskLimitations: risk.riskLimitations,
+                commentIntegrator: risk.commentIntegrator,
+                commentInvestor: risk.commentInvestor
             }, (response) => {
-                showDetails.value[deadline.id] = false;
-                getDeadlines();
             });
         }
 
-        const saveDeadline = async (deadline) => {
-            RequestHandler('projects/' + props.project.id + '/visit-date/save', 'post', {
-                date: deadline.date,
-                time: deadline.time
-            }, (response) => {
-                // if (deadline.members === '') {
-                //     deadlines.value.unshift(deadline);
-                // }
-                showDetails.value[deadline.id] = false;
-                getDeadlines();
-            });
-        }
-
-        const getDeadlines = async (callback) => {
+        const getRisks = async (callback) => {
             RequestHandler('projects/' + props.project.id + '/visit-date', 'get', {}, (response) => {
-               deadlines.value = response.data.deadlines
+                riskRecords.value = response.data.risks
                 callback(response);
-            });
-        }
-        const acceptDeadline = async (deadline) => {
-            RequestHandler('projects/' + props.project.id + '/visit-date/' + deadline.id + '/accept', 'post', {
-                project_id: props.project.id,
-                id: deadline.id,
-            }, (response) => {
-                deadline.accepted = 1;
-                showDetails.value[deadline.id] = false;
-                getDeadlines();
-            });
-        }
-
-        const acceptVisitDate = async () => {
-            axios.post('/api/projects/visit-date/end', {id: props.project.id})
-                .then(response => {
-                    if (response.data.success) {
-                        toast.success('Zaakceptowano');
-                        emitter.emit('acceptLocalVision', {});
-                    } else {
-
-                    }
-                })
-                .catch(function (error) {
-                    let resData = error.response.data;
-                    if (error.response.status === 400) {
-                        for (let i in resData.errors) {
-                            for (let k in resData.errors[i].messages) {
-                                toast.error(resData.errors[i].messages[k]);
-                            }
-                        }
-                    }
-                });
-        }
-
-        const rejectDeadline = async (deadline) => {
-            RequestHandler('projects/' + props.project.id + '/visit-date/' + deadline.id + '/reject', 'post', {
-                project_id: props.project.id,
-                id: deadline.id,
-            }, (response) => {
-                deadline.accepted = 2;
-                showDetails.value[deadline.id] = false;
-                getDeadlines();
-            });
-        }
-
-        const cancelDeadline = async (deadline) => {
-            RequestHandler('projects/' + props.project.id + '/visit-date/' + deadline.id + '/cancel', 'post', {
-                project_id: props.project.id,
-                id: deadline.id,
-            }, (response) => {
-                deadline.status = 1;
-                showDetails.value[deadline.id] = false;
-                getDeadlines();
             });
         }
 
         onMounted(() => {
-            getDeadlines(function () {
+            getRisks(function () {
                 guard.value = true;
             });
         });
@@ -344,24 +276,12 @@ export default {
             probability,
             impact,
             riskRecords,
-            newDate,
-            inputValue,
-            inputEvents,
-            date,
-            block,
             guard,
-            is_selected,
             showDetails,
-            deadlines,
             user,
-            deleteDeadline,
+            deleteRisk,
             addNewRisk,
-            saveDeadline,
-            acceptDeadline,
-            rejectDeadline,
-            acceptVisitDate,
-            cancelDeadline,
-            saveMembers
+            saveRisk,
         }
     }
 }

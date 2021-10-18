@@ -580,7 +580,6 @@ export default defineComponent({
         })
 
         const getInvestorAndIntegrator = (callback) => {
-
             RequestHandler('projects/' + props.id + '/investor-integrator', 'get', {}, (response) => {
                 investor.value = response.data.investor;
                 integrator.value = response.data.integrator;

@@ -24,7 +24,7 @@
                             <p v-else> Uzupełnij </p>
                         </button>
                         <div class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
-                            <button class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="addNewCommunicationPlan(communicationPlan)">
+                            <button class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="deleteCommunicationPlan(communicationPlan)">
                                 Usuń
                             </button>
                         </div>
@@ -38,7 +38,7 @@
                                             Definicja stanowiska
                                         </button>
                                         <div class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
-                                            <button class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="addNewCommunicationPlan(communicationPlan)">
+                                            <button class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="saveCommunicationPlan(communicationPlan)">
                                                 Zapisz
                                             </button>
                                         </div>
@@ -143,7 +143,7 @@
                 <div class="intro-y accordion-item" v-for="communicationPlan in communicationPlans" :key="communicationPlan.id">
                     <div id="faq-accordion-content-6" class="accordion-header">
                         <button class="accordion-button collapsed mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-2" aria-expanded="false" aria-controls="faq-accordion-collapse-2">
-                            <p v-if="communicationPlan.type !== ''">{{ communicationPlan.type }} </p>
+                            <p v-if="communicationPlan.personalOccupation !== ''">{{ communicationPlan.personalOccupation }} </p>
                             <p v-else> Uzupełnij </p>
                         </button>
                         <div class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
@@ -169,7 +169,7 @@
                                     <div id="faq-accordion-2-collapse-2" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-2" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                                             <input
-                                                v-model="communicationPlan.type"
+                                                v-model="communicationPlan.personalOccupation"
                                                 id="regular-form-2"
                                                 type="text"
                                                 class="form-control w-1/3"
@@ -186,7 +186,7 @@
                                     <div id="faq-accordion-2-collapse-3" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-3" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                                             <input
-                                                v-model="communicationPlan.personal_data"
+                                                v-model="communicationPlan.personalData"
                                                 id="regular-form-3"
                                                 type="text"
                                                 class="form-control w-1/3"
@@ -201,7 +201,7 @@
                                     <div id="faq-accordion-2-collapse-4" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-3" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                                             <input
-                                                v-model="communicationPlan.number"
+                                                v-model="communicationPlan.phoneNumber"
                                                 id="regular-form-4"
                                                 type="text"
                                                 class="form-control w-1/3"
@@ -216,7 +216,7 @@
                                     <div id="faq-accordion-2-collapse-5" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                                             <input
-                                                v-model="communicationPlan.mail"
+                                                v-model="communicationPlan.email"
                                                 id="regular-form-5"
                                                 type="text"
                                                 class="form-control w-1/3"
@@ -231,7 +231,7 @@
                                     <div id="faq-accordion-2-collapse-6" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                                             <select
-                                                :disabled="communicationPlan.type==='Manager projektu'"
+                                                :disabled="communicationPlan.personalOccupation==='Manager projektu'"
                                                 v-model="communicationPlan.decision"
                                                 class="tom-select w-1/5 tomselected h-10 border">
                                                 <option value="1" selected="true">Tak</option>
@@ -272,6 +272,7 @@ export default {
     name: "CommunicationPanel",
     components: {Multiselect, ModalCard},
     props: {
+        project: Object
     },
     setup(props) {
         const app = getCurrentInstance();
@@ -281,158 +282,83 @@ export default {
         const showDetails = ref([]);
         const communicationPlans = ref([
             {
-                type: 'Manager projektu',
-                personal_data: '',
-                number: '',
-                mail: '',
+                personalOccupation: 'Manager projektu',
+                personalData: '',
+                phoneNumber: '',
+                email: '',
                 decision: true,
             },
             {
-                type: 'Kontakt do spraw technicznych',
-                personal_data: '',
-                number: '',
-                mail: '',
+                personalOccupation: 'Kontakt do spraw technicznych',
+                personalData: '',
+                phoneNumber: '',
+                email: '',
                 decision: true,
             },
             {
-                type: 'Kontakt do spraw administracyjnych',
-                personal_data: '',
-                number: '',
-                mail: '',
+                personalOccupation: 'Kontakt do spraw administracyjnych',
+                personalData: '',
+                phoneNumber: '',
+                email: '',
                 decision: true,
             },
             {
-                type: 'Kontakt eskalacyjny',
-                personal_data: '',
-                number: '',
-                mail: '',
+                personalOccupation: 'Kontakt eskalacyjny',
+                personalData: '',
+                phoneNumber: '',
+                email: '',
                 decision: true,
             }
         ]);
         const is_selected = ref(0);
         const guard = ref(false);
-        const block = ref(false);
-        const date = ref('');
-        const inputValue = ref('');
-        const inputEvents = ref('');
         const show = ref(false);
         const addNewCommunicationPlan = async () => {
-            block.value = true;
-            let person = {
-                type: '',
-                personal_data: '',
-                number: '',
-                mail: 0,
+            let communicationPlan = {
+                personalOccupation: '',
+                personalData: '',
+                phoneNumber: '',
+                email: 0,
                 decision: ''
             }
             setTimeout(function () {
-                communicationPlans.value.unshift(person);
+                communicationPlans.value.unshift(communicationPlan);
             }, 500)
-            setTimeout(function () {
-                block.value = false;
-            }, 2000);
         }
-        const deleteDeadline = async (deadline) => {
-            RequestHandler('projects/' + props.project.id + '/visit-date/' + deadline.id + '/delete', 'post', {
+        const deleteCommunicationPlan = async (communicationPlan) => {
+            RequestHandler('projects/' + props.project.id + '/communication/' + communicationPlan.id + '/delete', 'post', {
                 project_id: props.project.id,
-                id: deadline.id,
+                id: communicationPlan.id,
             }, (response) => {
-                deadlines.value.splice(deadlines.value.indexOf(deadline), 1);
+                communicationPlans.value.splice(communicationPlans.value.indexOf(communicationPlan), 1);
             });
         }
 
-        const saveMembers = async (deadline) => {
-            RequestHandler('projects/' + props.project.id + '/visit-date/' + deadline.id + '/save_members', 'post', {
+        const saveCommunicationPlan = async (communicationPlan) => {
+            RequestHandler('projects/' + props.project.id + '/communication/' + communicationPlan.id + '/save-communication', 'post', {
                 project_id: props.project.id,
-                id: deadline.id,
-                members: deadline.members
+                id: communicationPlan.id,
+                personalOccupation: communicationPlan.personalOccupation,
+                personalData: communicationPlan.personalData,
+                phoneNumber: communicationPlan.phoneNumber,
+                email: communicationPlan.email,
             }, (response) => {
-                showDetails.value[deadline.id] = false;
-                getDeadlines();
             });
         }
 
-        const saveDeadline = async (deadline) => {
-            RequestHandler('projects/' + props.project.id + '/visit-date/save', 'post', {
-                date: deadline.date,
-                time: deadline.time
-            }, (response) => {
-                // if (deadline.members === '') {
-                //     deadlines.value.unshift(deadline);
-                // }
-                showDetails.value[deadline.id] = false;
-                getDeadlines();
-            });
-        }
-
-        const getDeadlines = async (callback) => {
-            RequestHandler('projects/' + props.project.id + '/visit-date', 'get', {}, (response) => {
-               deadlines.value = response.data.deadlines
+        const getCommunicationPlans = async (callback) => {
+            RequestHandler('projects/' + props.project.id + '/communications', 'get', {}, (response) => {
+               communicationPlans.value = response.data.communications
                 callback(response);
             });
-        }
-        const acceptDeadline = async (deadline) => {
-            RequestHandler('projects/' + props.project.id + '/visit-date/' + deadline.id + '/accept', 'post', {
-                project_id: props.project.id,
-                id: deadline.id,
-            }, (response) => {
-                deadline.accepted = 1;
-                showDetails.value[deadline.id] = false;
-                getDeadlines();
-            });
-        }
-
-        const acceptVisitDate = async () => {
-            axios.post('/api/projects/visit-date/end', {id: props.project.id})
-                .then(response => {
-                    if (response.data.success) {
-                        toast.success('Zaakceptowano');
-                        emitter.emit('acceptLocalVision', {});
-                    } else {
-
-                    }
-                })
-                .catch(function (error) {
-                    let resData = error.response.data;
-                    if (error.response.status === 400) {
-                        for (let i in resData.errors) {
-                            for (let k in resData.errors[i].messages) {
-                                toast.error(resData.errors[i].messages[k]);
-                            }
-                        }
-                    }
-                });
         }
 
         const modalClosed = () => {
             show.value = false;
         }
 
-        const rejectDeadline = async (deadline) => {
-            RequestHandler('projects/' + props.project.id + '/visit-date/' + deadline.id + '/reject', 'post', {
-                project_id: props.project.id,
-                id: deadline.id,
-            }, (response) => {
-                deadline.accepted = 2;
-                showDetails.value[deadline.id] = false;
-                getDeadlines();
-            });
-        }
-
-        const cancelDeadline = async (deadline) => {
-            RequestHandler('projects/' + props.project.id + '/visit-date/' + deadline.id + '/cancel', 'post', {
-                project_id: props.project.id,
-                id: deadline.id,
-            }, (response) => {
-                deadline.status = 1;
-                showDetails.value[deadline.id] = false;
-                getDeadlines();
-            });
-        }
-
         onMounted(() => {
-
-            getDeadlines(function () {
+            getCommunicationPlans(function () {
                 guard.value = true;
             });
         });
@@ -441,22 +367,13 @@ export default {
             showDetails,
             modalClosed,
             show,
-            inputValue,
-            inputEvents,
-            date,
-            block,
             guard,
             is_selected,
             communicationPlans,
             user,
-            deleteDeadline,
+            deleteCommunicationPlan,
             addNewCommunicationPlan,
-            saveDeadline,
-            acceptDeadline,
-            rejectDeadline,
-            acceptVisitDate,
-            cancelDeadline,
-            saveMembers
+            saveCommunicationPlan,
         }
     }
 }
