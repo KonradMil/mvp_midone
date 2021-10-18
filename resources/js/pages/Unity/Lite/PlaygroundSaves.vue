@@ -19,13 +19,11 @@
                         <h2 class="text-lg font-medium mr-auto">Zadanie 1: Optymalizacja istniejącego procesu na linii produkcyjnej</h2>
                         <template v-if="dataAr.includes(1)">
                             <button class="btn btn-primary ml-2" @click="goToRoboChallenge(1)">Studio 3D</button>
-                            <button class="btn btn-primary ml-2" @click="resetRoboChallenge(1)">Resetuj</button>
-                            <button class="btn btn-primary ml-2" @click="gradeRoboChallenge(1)">Do oceny</button>
+                            <button class="btn btn-primary ml-2" @click="show = true; tempId = 1;">Resetuj</button>
+                            <button class="btn btn-primary ml-2" @click="showTwo = true; tempId = 1;">Do oceny</button>
                         </template>
                     </div>
-
                     <div class="grid grid-cols-12 gap-6 mt-1">
-
                         <div class="col-span-6 p-10">
                             <h5 class="text-md font-medium -mt-8 mb-4 -ml-10" style="color: #5e50ac !important; font-size: 16px;">Zdjęcia:</h5>
                             <TinySlider id="one" :options="{
@@ -109,8 +107,8 @@
                         <h2 class="text-lg font-medium mr-auto">Zadanie 2: Odtworzenie linii produkcyjnej na podstawie procesu o zadanych parametrach wydajnościowych</h2>
                         <template v-if="dataAr.includes(2)">
                             <button class="btn btn-primary ml-2" @click="goToRoboChallenge(2)">Studio 3D</button>
-                            <button class="btn btn-primary ml-2" @click="resetRoboChallenge(2)">Resetuj</button>
-                            <button class="btn btn-primary ml-2" @click="gradeRoboChallenge(2)">Do oceny</button>
+                            <button class="btn btn-primary ml-2" @click="show = true; tempId = 2;">Resetuj</button>
+                            <button class="btn btn-primary ml-2" @click="showTwo = true; tempId = 2;">Do oceny</button>
                         </template>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-1">
@@ -205,8 +203,8 @@
                         <h2 class="text-lg font-medium mr-auto">Zadanie 3: Znajdź 5 błędów w istniejącym procesie i uzasadnij je</h2>
                         <template v-if="dataAr.includes(3)">
                             <button class="btn btn-primary ml-2" @click="goToRoboChallenge(3)">Studio 3D</button>
-                            <button class="btn btn-primary ml-2" @click="resetRoboChallenge(3)">Resetuj</button>
-                            <button class="btn btn-primary ml-2" @click="gradeRoboChallenge(3)">Do oceny</button>
+                            <button class="btn btn-primary ml-2" @click="show = true; tempId = 3;">Resetuj</button>
+                            <button class="btn btn-primary ml-2" @click="showTwo = true; tempId = 3;">Do oceny</button>
                         </template>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-1">
@@ -277,6 +275,34 @@
             <!-- END: Blog Layout -->
         </div>
     </div>
+    <Modal :show="show" id="res-modal">
+        <!--        <h3 class="intro-y text-lg font-medium mt-5">{{ $t('teams.addMember') }}</h3>-->
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+            <div>
+               Czy na pewno chcesz przywrócić zapis tego zadania do stanu pierwotnego?
+            </div>
+        </div>
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+            <div class="relative text-gray-700 dark:text-gray-300 mr-4">
+                <button class="btn btn-primary shadow-md mr-2" @click="show = false;">Anuluj</button>
+                <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="resetRoboChallenge">Tak przywróć</button>
+            </div>
+        </div>
+    </Modal>
+    <Modal :show="showTwo" id="grade-modal">
+        <!--        <h3 class="intro-y text-lg font-medium mt-5">{{ $t('teams.addMember') }}</h3>-->
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+            <div>
+               Czy na pewno skończyłeś pracować nad tym zadaniem?
+            </div>
+        </div>
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+            <div class="relative text-gray-700 dark:text-gray-300 mr-4">
+                <button class="btn btn-primary shadow-md mr-2" @click="showTwo = false;">Anuluj</button>
+                <button class="btn btn-primary shadow-md mr-2" :disabled="isDisabled" @click="gradeRoboChallenge">Tak skończyłem</button>
+            </div>
+        </div>
+    </Modal>
 </template>
 
 <script>
@@ -285,7 +311,6 @@ import {useToast} from "vue-toastification";
 import VueEasyLightbox from 'vue-easy-lightbox'
 import RequestHandler from '../../../compositions/RequestHandler'
 import router from "../../../router";
-import {useConfirm} from "v3confirm";
 
 export default {
     name: "PlaygroundSaves",
@@ -293,6 +318,9 @@ export default {
         VueEasyLightbox
     },
     setup(props) {
+        const show = ref(false);
+        const showTwo = ref(false);
+        const tempId = ref();
         const saves = ref([]);
         const user = ref({});
         const dataAr = ref([]);
@@ -365,29 +393,21 @@ export default {
             lightboxVisible.value = false;
         }
 
-        const confirm = useConfirm()
 
-        const resetRoboChallenge = (id) => {
-            confirm.show('Czy na pewno chcec zresetować to zadanie do stanu pierwotnego?').then((ok) => {
-                if (ok) {
-                    axios.post('/api/playground/saves/reset', {id: id})
-                        .then(response => {
+        const resetRoboChallenge = () => {
+            axios.post('/api/playground/saves/reset', {id: tempId.value})
+                .then(response => {
 
-                            if (response.data.success) {
-                                toast.success('Zadanie zeresetowane');
-                            } else {
-                                toast.success('Wystąpił błąd.');
-                            }
-                        })
-                } else {
-
-                }
-            })
+                    if (response.data.success) {
+                        toast.success('Zadanie zeresetowane');
+                    } else {
+                        toast.success('Wystąpił błąd.');
+                    }
+                })
         }
 
-        const gradeRoboChallenge = async (id) => {
-            const ok = await confirm.show('Czy na pewno skończyłeś pracować nad tym zadaniem?')
-            axios.post('/api/playground/saves/grade', {id: id})
+        const gradeRoboChallenge = async () => {
+            axios.post('/api/playground/saves/grade', {id: tempId.value})
                 .then(response => {
                     if (response.data.success) {
                         toast.success('Oczekuj na zakończenie konkursu.');
@@ -395,13 +415,7 @@ export default {
                         toast.success('Wystąpił błąd.');
                     }
                 })
-            if (ok) {
-
-            } else {
-
-            }
         }
-
 
         return {
             resetRoboChallenge,
@@ -417,7 +431,10 @@ export default {
             lightBoxIndex,
             images,
             goToRoboChallenge,
-            dataAr
+            dataAr,
+            show,
+            showTwo,
+            tempId
         }
     },
     beforeRouteEnter(to, from, next) {

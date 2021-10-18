@@ -27,6 +27,7 @@
         "@vueuse/core": "^4.6.3",
         "@websanova/vue-upload": "^2.1.0",
         "@zhuowenli/vue-feather-icons": "^5.0.2",
+        "bulma": "^0.9.3",
         "cash-dom": "^8.1.0",
         "chart.js": "^2.9.4",
         "commander": "^7.1.0",
