@@ -311,11 +311,12 @@ import {useToast} from "vue-toastification";
 import VueEasyLightbox from 'vue-easy-lightbox'
 import RequestHandler from '../../../compositions/RequestHandler'
 import router from "../../../router";
+import Modal from "../../../components/Modal"
 
 export default {
     name: "PlaygroundSaves",
     components: {
-        VueEasyLightbox
+        VueEasyLightbox, Modal
     },
     setup(props) {
         const show = ref(false);
