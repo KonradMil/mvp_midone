@@ -313,7 +313,7 @@
                 <h3 class="intro-y text-lg font-medium mt-5">Czy na pewno chcesz przejść do następnej fazy?</h3>
                 <div class="intro-y box p-5 mt-12 sm:mt-5" style="text-align: center;">
                     <div class="relative text-gray-700 dark:text-gray-300 mr-4">
-                        <button class="btn btn-primary shadow-md mr-2">Tak</button>
+                        <button class="btn btn-primary shadow-md mr-2" @click.prevent="goTo">Tak</button>
                         <button class="btn btn-primary shadow-md mr-2">Anuluj</button>
                     </div>
                 </div>
@@ -357,6 +357,7 @@ import ModalCard from "../../components/ModalCard";
 import ReportInitPanel from "./components/ReportInitPanel";
 import RequestHandler from "../../compositions/RequestHandler";
 
+
 export default defineComponent({
     name: 'projectCard',
     components: {
@@ -376,7 +377,7 @@ export default defineComponent({
         VisitDatePanel,
         ReportInitPanel,
         TechnicalInformationPanel,
-        RequestHandler
+        RequestHandler,
     },
     props: {
         id: Number,
@@ -416,6 +417,9 @@ export default defineComponent({
         const investor = ref({});
         const integrator = ref({});
         const guard = ref(false);
+        const stageSecondActive = ref(false);
+
+
 
         watch(() => props.change, (first, second) => {
             if (props.change === 'all-offers' && user.type === 'integrator') {
@@ -527,6 +531,10 @@ export default defineComponent({
                 });
         }
 
+        const goTo = () => {
+            router.push( {path : '/projects/card/second/' + props.id})
+        }
+
         emitter.on('changeTeamsSolution', e => () => {
             activeTab.value = 'teamsSolution'
         });
@@ -621,6 +629,7 @@ export default defineComponent({
         };
 
         return {
+            goTo,
             guard,
             investor,
             integrator,
@@ -653,7 +662,8 @@ export default defineComponent({
             isSolutions,
             isPublic,
             solution_project,
-            checkSolution
+            checkSolution,
+            stageSecondActive
         };
     }
 });

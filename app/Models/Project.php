@@ -53,4 +53,18 @@ class Project extends Model
     {
         return $this->hasMany(VisitDate::class, 'id', 'project_id');
     }
+    /**
+     * @return HasMany
+     */
+    public function project_communications(): HasMany
+    {
+        return $this->hasMany(ProjectCommunication::class, 'id', 'project_id');
+    }
+    /**
+     * @return HasMany
+     */
+    public function project_risks(): HasMany
+    {
+        return $this->hasMany(ProjectRisk::class, 'id', 'project_id');
+    }
 }
