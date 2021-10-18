@@ -31,6 +31,7 @@
         "commander": "^7.1.0",
         "dayjs": "^1.10.4",
         "dropzone": "^5.8.1",
+        "feather-icons": "^4.28.0",
         "heroicons": "^1.0.4",
         "highlight.js": "^10.7.0",
         "js-beautify": "^1.13.5",
