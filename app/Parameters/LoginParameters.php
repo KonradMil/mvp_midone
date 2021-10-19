@@ -22,7 +22,7 @@ class LoginParameters extends Parameters
             'password' => 'required',
         ];
 
-        $this->validationMessages['recaptchaToken.*'] = __('messages.recaptcha_error');
+//        $this->validationMessages['recaptchaToken.*'] = __('messages.recaptcha_error');
 
     }
 
