@@ -7,7 +7,7 @@
     ></vue-easy-lightbox>
     <div>
         <div class="intro-y grid grid-cols-12 gap-6 mt-5">
-            <!--            <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'studio-playground'})">{{ $t('lite.addSave') }}</button>-->
+            <!--            <button class="btn btn-primary ml-2 shadow-md mr-2" @click="$router.push({name: 'studio-playground'})">{{ $t('lite.addSave') }}</button>-->
 
             <!-- BEGIN: Blog Layout -->
             <!--            <div class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium" v-if="saves == undefined || saves.length == 0">-->
@@ -17,11 +17,12 @@
                 <div class="p-10">
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 1: Optymalizacja istniejącego procesu na linii produkcyjnej</h2>
-<!--                        <button class="btn btn-primary" @click="goToRoboChallenge(1)">Studio 3D</button>-->
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(1) !== -1)" @click="goToRoboChallenge(1)">Studio 3D</button>
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(1) !== -1) && (dataAr.indexOf(1) !== -1)" @click="show = true; tempId = 1;">Resetuj</button>
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(1) !== -1) && (dataAr.indexOf(1) !== -1)" @click="showTwo = true; tempId = 1;">Do oceny</button>
+                            <span v-if="pubAr.indexOf(1) !== -1">Zadanie zgłoszone.</span>
                     </div>
-
                     <div class="grid grid-cols-12 gap-6 mt-1">
-
                         <div class="col-span-6 p-10">
                             <h5 class="text-md font-medium -mt-8 mb-4 -ml-10" style="color: #5e50ac !important; font-size: 16px;">Zdjęcia:</h5>
                             <TinySlider id="one" :options="{
@@ -103,7 +104,10 @@
                 <div class="p-10">
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 2: Odtworzenie linii produkcyjnej na podstawie procesu o zadanych parametrach wydajnościowych</h2>
-<!--                        <button class="btn btn-primary" @click="goToRoboChallenge(2)">Studio 3D</button>-->
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(2) !== -1)" @click="goToRoboChallenge(2)">Studio 3D</button>
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(2) !== -1) && (dataAr.indexOf(2) !== -1)" @click="show = true; tempId = 2;">Resetuj</button>
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(2) !== -1) && (dataAr.indexOf(2) !== -1)" @click="showTwo = true; tempId = 2;">Do oceny</button>
+                            <span v-if="pubAr.indexOf(2) !== -1">Zadanie zgłoszone.</span>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-1">
 
@@ -195,7 +199,10 @@
                 <div class="p-10">
                     <div class="w-full flex flex-row">
                         <h2 class="text-lg font-medium mr-auto">Zadanie 3: Znajdź 5 błędów w istniejącym procesie i uzasadnij je</h2>
-<!--                        <button class="btn btn-primary" @click="goToRoboChallenge(3)">Studio 3D</button>-->
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(3) !== -1)" @click="goToRoboChallenge(3)">Studio 3D</button>
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(3) !== -1) && (dataAr.indexOf(3) !== -1)" @click="show = true; tempId = 3;">Resetuj</button>
+                            <button class="btn btn-primary ml-2" v-if="!(pubAr.indexOf(3) !== -1) && (dataAr.indexOf(3) !== -1)" @click="showTwo = true; tempId = 3;">Do oceny</button>
+                            <span v-if="pubAr.indexOf(3) !== -1">Zadanie zgłoszone.</span>
                     </div>
                     <div class="grid grid-cols-12 gap-6 mt-1">
 
@@ -265,6 +272,34 @@
             <!-- END: Blog Layout -->
         </div>
     </div>
+    <Modal :show="show" id="res-modal">
+        <!--        <h3 class="intro-y text-lg font-medium mt-5">{{ $t('teams.addMember') }}</h3>-->
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+            <div>
+                Czy na pewno chcesz przywrócić zapis tego zadania do stanu pierwotnego?
+            </div>
+        </div>
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+            <div class="relative text-gray-700 dark:text-gray-300 mr-4">
+                <button class="btn btn-primary shadow-md mr-2" @click="show = false;">Anuluj</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="resetRoboChallenge">Tak przywróć</button>
+            </div>
+        </div>
+    </Modal>
+    <Modal :show="showTwo" id="grade-modal">
+        <!--        <h3 class="intro-y text-lg font-medium mt-5">{{ $t('teams.addMember') }}</h3>-->
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+            <div>
+                Czy na pewno skończyłeś pracować nad tym zadaniem?
+            </div>
+        </div>
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+            <div class="relative text-gray-700 dark:text-gray-300 mr-4">
+                <button class="btn btn-primary shadow-md mr-2" @click="showTwo = false;">Anuluj</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="gradeRoboChallenge">Tak skończyłem</button>
+            </div>
+        </div>
+    </Modal>
 </template>
 
 <script>
@@ -273,15 +308,21 @@ import {useToast} from "vue-toastification";
 import VueEasyLightbox from 'vue-easy-lightbox'
 import RequestHandler from '../../../compositions/RequestHandler'
 import router from "../../../router";
+import Modal from "../../../components/Modal"
 
 export default {
     name: "PlaygroundSaves",
     components: {
-        VueEasyLightbox
+        VueEasyLightbox, Modal
     },
     setup(props) {
+        const show = ref(false);
+        const showTwo = ref(false);
+        const tempId = ref();
         const saves = ref([]);
         const user = ref({});
+        const dataAr = ref([]);
+        const pubAr = ref([]);
         const toast = useToast();
         const guard = ref(false);
         const lightboxVisible = ref(false);
@@ -316,6 +357,14 @@ export default {
             }
         });
 
+        const getData = async () => {
+            axios.post('/api/playground/save/data/get')
+                .then(response => {
+                    dataAr.value = response.data.exist;
+                    pubAr.value = response.data.pub;
+                })
+        }
+
         const deleteSave = async (id) => {
             axios.post('/api/playground/saves/delete', {id: id})
                 .then(response => {
@@ -332,6 +381,7 @@ export default {
         const lightBoxIndex = ref(0);
 
         onMounted(() => {
+            getData();
         });
 
         const showImage = (index) => {
@@ -343,7 +393,32 @@ export default {
             lightboxVisible.value = false;
         }
 
+
+        const resetRoboChallenge = () => {
+            axios.post('/api/playground/saves/reset', {id: tempId.value})
+                .then(response => {
+                    toast.success('Zadanie zeresetowane');
+                    show.value = false;
+                }).catch(e => {
+                toast.success('Wystąpił błąd.');
+                show.value = false;
+            })
+        }
+
+        const gradeRoboChallenge = async () => {
+            axios.post('/api/playground/saves/grade', {id: tempId.value})
+                .then(response => {
+                    toast.success('Oczekuj na zakończenie konkursu.');
+                    showTwo.value = false;
+                }).catch(e => {
+                toast.success('Wystąpił błąd.');
+                showTwo.value = false;
+            })
+        }
+
         return {
+            resetRoboChallenge,
+            gradeRoboChallenge,
             guard,
             saves,
             user,
@@ -354,7 +429,12 @@ export default {
             hideLightbox,
             lightBoxIndex,
             images,
-            goToRoboChallenge
+            goToRoboChallenge,
+            dataAr,
+            show,
+            showTwo,
+            tempId,
+            pubAr
         }
     },
     beforeRouteEnter(to, from, next) {

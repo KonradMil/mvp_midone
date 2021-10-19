@@ -49,9 +49,9 @@ class RobochallengeController extends Controller
 
         if ($validator->fails()) {
 
-            foreach($validator->getMessageBag()->getMessages() as $msg) {
+            foreach ($validator->getMessageBag()->getMessages() as $msg) {
 
-                foreach($msg as $m) {
+                foreach ($msg as $m) {
                     $response['errors'][] = $m;
                 }
 
@@ -78,7 +78,7 @@ class RobochallengeController extends Controller
 
         $now = new \DateTime('now', new \DateTimeZone('UTC'));
 
-        if($user) {
+        if ($user) {
 
             $user->phone_number = $userParameters['phone_number'];
             $user->type = 'robochallenge';
@@ -113,25 +113,69 @@ class RobochallengeController extends Controller
     {
         $fs = Auth::user()->ownFreeSaves()->where('free_saves.robochallenge_task', '=', $request->task_id)->first();
 
-        if($fs == NULL) {
+        if ($fs == NULL) {
             $fs = new FreeSave();
             $fs->robochallenge_task = $request->task_id;
 
             if ($request->task_id == 1) {
                 $ch = Challenge::find(128);
-            } else if($request->task_id == 2) {
+            } else if ($request->task_id == 2) {
                 $ch = Challenge::find(130);
-            } else if($request->task_id == 3) {
+            } else if ($request->task_id == 3) {
                 $ch = Challenge::find(131);
             }
 
             $fs->save_json = json_encode($ch->save_json);
-            $fs->name = 'Robochallenge Zadanie '. $request->task_id;
+            $fs->name = 'Robochallenge Zadanie ' . $request->task_id;
             $fs->save();
 
             $fs->users()->attach(Auth::user()->id, ['is_owner' => 1]);
         }
-//        dd($fs);
+
+        return \response()->json($fs->id);
+    }
+
+
+    public function gradeSave(Request $request)
+    {
+        $fs = Auth::user()->ownFreeSaves()->where('free_saves.robochallenge_task', '=', $request->id)->first();
+        $fs->published = 1;
+        $fs->save();
+
+        return \response()->json(true);
+    }
+
+    public function getRoboData(Request $request)
+    {
+        $fs = Auth::user()->ownFreeSaves()->get();
+        $ar = [];
+        $arTwo = [];
+        foreach ($fs as $f) {
+            $ar[] = $f->robochallenge_task;
+            if($f->published) {
+                $arTwo[] = $f->robochallenge_task;
+            }
+        }
+
+        return \response()->json(['pub' => $arTwo, 'exist' => $ar]);
+    }
+
+    public function resetSave(Request $request)
+    {
+        $fs = Auth::user()->ownFreeSaves()->where('free_saves.robochallenge_task', '=', $request->id)->first();
+
+        if ($request->task_id == 1) {
+            $ch = Challenge::find(128);
+        } else if ($request->task_id == 2) {
+            $ch = Challenge::find(130);
+        } else if ($request->task_id == 3) {
+            $ch = Challenge::find(131);
+        }
+
+        $fs->save_json = json_encode($ch->save_json);
+
+        $fs->save();
+
         return \response()->json($fs->id);
     }
 }

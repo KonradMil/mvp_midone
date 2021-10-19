@@ -29,7 +29,7 @@ class FreeSave extends Model
      */
     protected $fillable = [
        'name', 'en_name', 'save_json', 'screenshot_path',
-       'description', 'en_description'
+       'description', 'en_description', 'published'
     ];
 
     /**

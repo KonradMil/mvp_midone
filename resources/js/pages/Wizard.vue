@@ -114,7 +114,6 @@
     import Dropzone from '../global-components/dropzone/Main'
     import {useToast} from "vue-toastification";
     import {useStore} from "../store";
-    import {GoogleMap, Marker} from 'vue3-google-map'
 
     const toast = useToast();
     const store = useStore();
@@ -123,9 +122,7 @@
     export default {
         components: {
             DarkModeSwitcher,
-            Dropzone,
-            GoogleMap,
-            Marker
+            Dropzone
         },
 
         setup() {

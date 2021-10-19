@@ -150,6 +150,14 @@ class Challenge extends Model implements ReactableInterface
     /**
      * @return HasMany
      */
+    public function solutionSelected(): HasOne
+    {
+        return $this->hasOne(Solution::class)->where('selected', '=', 1);
+    }
+
+    /**
+     * @return HasMany
+     */
     public function offers(): HasMany
     {
         return $this->hasMany(Offer::class);
