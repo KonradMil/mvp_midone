@@ -5,6 +5,7 @@
     <div @contextmenu.prevent="openMenu">
         <StudioLite hideFooter="true" :src="unity_hangar_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
+    <RightPanel></RightPanel>
     <BottomPanel  v-if="loaded" :allowedEdit="true" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
     <div v-if="!loaded" id="loader">
         <LoadingIcon icon="grid" class="w-8 h-8" />
@@ -27,6 +28,7 @@ import useLayoutButtonClick from "../../../composables/useLayoutButtonClick";
 import useRadialMenu from "../../../composables/radialMenu";
 import {useToast} from "vue-toastification";
 import HelpModal from "../components/HelpModal";
+import RightPanel from "../components/RightPanel";
 
 const ww = WindowWatcher();
 
@@ -42,6 +44,7 @@ export default {
         sessionid: String
     },
     components: {
+        RightPanel,
         HelpModal,
        BottomPanel, TopButtons, LeftPanel, LeftButtons, StudioLite
     },
