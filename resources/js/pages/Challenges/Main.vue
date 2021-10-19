@@ -125,6 +125,7 @@ import CommentSection from "../../components/social/CommentSection";
 import {useToast} from "vue-toastification";
 import RequestHandler from "../../compositions/RequestHandler"
 import TopMenuMain from "../../components/TopMenuMain"
+import router from "../../router";
 
 export default {
     name: "ChallengesMain",
@@ -174,6 +175,9 @@ export default {
             });
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
+                if(user.type == 'robochallenge') {
+                    router.push({path: '/robochallenge'})
+                }
             }
         });
 

@@ -41,7 +41,11 @@
         console.info('copyLoad: SKOPIOWANE!');
 
     }
-
+    window.unity_path = '{{env('UNITY_PATH')}}';
+    window.unity_workshop_path = '{{env('UNITY_WORKSHOP_PATH')}}';
+    window.unity_tutorial_path = '{{env('UNITY_PATH')}}';
+    window.unity_hangar_path = '{{env('UNITY_HANGAR_PATH')}}';
+    window.app_path = '{{env('APP_URL')}}';
     window.error = @php echo Session::get('error') ? '"'.Session::get('error').'"' : 'null' @endphp;
     window.warning = @php echo Session::get('warning') ? '"'.Session::get('warning').'"' : 'null' @endphp;
     window.info = @php echo Session::get('info') ? '"'.Session::get('info').'"' : 'null' @endphp;
@@ -51,11 +55,7 @@
 
 @if (Auth::check())
     <script>
-        window.unity_path = '{{env('UNITY_PATH')}}';
-        window.unity_workshop_path = '{{env('UNITY_WORKSHOP_PATH')}}';
-        window.unity_tutorial_path = '{{env('UNITY_PATH')}}';
-        window.unity_hangar_path = '{{env('UNITY_HANGAR_PATH')}}';
-        window.app_path = '{{env('APP_URL')}}';
+
         @php
             if(empty(Auth::user()->companies->toArray())) {
                    $company = new App\Models\Company();
