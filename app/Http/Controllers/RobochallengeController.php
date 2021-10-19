@@ -164,11 +164,11 @@ class RobochallengeController extends Controller
     {
         $fs = Auth::user()->ownFreeSaves()->where('free_saves.robochallenge_task', '=', $request->id)->first();
 
-        if ($request->task_id == 1) {
+        if ($request->id == 1) {
             $ch = Challenge::find(128);
-        } else if ($request->task_id == 2) {
+        } else if ($request->id == 2) {
             $ch = Challenge::find(130);
-        } else if ($request->task_id == 3) {
+        } else if ($request->id == 3) {
             $ch = Challenge::find(131);
         }
 

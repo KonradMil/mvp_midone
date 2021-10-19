@@ -124,7 +124,7 @@ export default {
                             gameWindow.value.setFullscreen();
                             break;
                         case 'logout':
-                                window.location.href = window.app_path + '/robochallenge';
+                                window.location.href = window.app_path + '/playground/saves';
                             break;
                         case 'orto':
                             handleUnityActionOutgoing({action: 'ChangeCamera', data: 2});
