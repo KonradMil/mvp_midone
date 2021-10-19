@@ -8,9 +8,9 @@
                     <button class="btn btn-primary shadow-md mr-2">Add New Product</button>
                     <div class="dropdown ml-auto sm:ml-0">
                         <button class="dropdown-toggle btn px-2 box text-gray-700 dark:text-gray-300" aria-expanded="false">
-            <span class="w-5 h-5 flex items-center justify-center">
-              <PlusIcon class="w-4 h-4"/>
-            </span>
+                            <span class="w-5 h-5 flex items-center justify-center">
+                              <PlusIcon class="w-4 h-4"/>
+                            </span>
                         </button>
                         <div class="dropdown-menu w-40">
                             <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
@@ -135,7 +135,7 @@ export default {
 
         const initTabulator = () => {
             tabulator.value = new Tabulator(tableRef.value, {
-                ajaxURL: "https://dummy-data.left4code.com",
+                ajaxURL: "/api/admin/projects/get",
                 ajaxFiltering: true,
                 ajaxSorting: true,
                 printAsHtml: true,
@@ -158,7 +158,7 @@ export default {
 
                     // For HTML table
                     {
-                        title: "PRODUCT NAME",
+                        title: "Nazwa",
                         minWidth: 200,
                         responsive: 0,
                         field: "name",
@@ -167,17 +167,12 @@ export default {
                         download: false,
                         formatter(cell) {
                             return `<div>
-                <div class="font-medium whitespace-nowrap">${
-                                cell.getData().name
-                            }</div>
-                <div class="text-gray-600 text-xs whitespace-nowrap">${
-                                cell.getData().category
-                            }</div>
-              </div>`;
+                                        <div class="font-medium whitespace-nowrap">${ cell.getData().name }</div>
+                                    </div>`;
                         }
                     },
                     {
-                        title: "IMAGES",
+                        title: "Zdjęcia",
                         minWidth: 200,
                         field: "images",
                         hozAlign: "center",
@@ -186,41 +181,47 @@ export default {
                         download: false,
                         formatter(cell) {
                             return `<div class="flex lg:justify-center">
-                  <div class="intro-x w-10 h-10 image-fit">
-                    <img alt="DBR77" class="rounded-full" src="">
-                  </div>
-              </div>`;
+                                        <div class="intro-x w-10 h-10 image-fit">
+                                            <img alt="DBR77" class="rounded-full" src="` + cell.getData().screenshot_path + `">
+                                        </div>
+                                    </div>`;
                         }
                     },
                     {
-                        title: "REMAINING STOCK",
-                        minWidth: 200,
-                        field: "remaining_stock",
+                        title: "Status",
+                        minWidth: 100,
+                        field: "stage",
                         hozAlign: "center",
                         vertAlign: "middle",
                         print: false,
                         download: false
                     },
                     {
-                        title: "STATUS",
+                        title: "Rozwiązanie",
                         minWidth: 200,
-                        field: "status",
+                        field: "solution_selected.name",
+                        hozAlign: "center",
+                        vertAlign: "middle",
+                        print: false,
+                        download: false
+                    },
+                    {
+                        title: "Autor",
+                        minWidth: 200,
+                        field: "author.lastname",
                         hozAlign: "center",
                         vertAlign: "middle",
                         print: false,
                         download: false,
                         formatter(cell) {
-                            return `<div class="flex items-center lg:justify-center ${
-                                cell.getData().status ? "text-theme-9" : "text-theme-6"
-                            }">
-                <i data-feather="check-square" class="w-4 h-4 mr-2"></i> ${
-                                cell.getData().status ? "Active" : "Inactive"
-                            }
-              </div>`;
+                            return `<div class="flex items-center lg:justify-center ${ cell.getData().status ? "text-theme-9" : "text-theme-6"  }">
+                                <i data-feather="check-square" class="w-4 h-4 mr-2"></i>
+                                ${ cell.getData().status ? "Active" : "Inactive" }
+                            </div>`;
                         }
                     },
                     {
-                        title: "ACTIONS",
+                        title: "Akcje",
                         minWidth: 200,
                         field: "actions",
                         responsive: 1,
@@ -229,14 +230,15 @@ export default {
                         print: false,
                         download: false,
                         formatter() {
-                            const a = cash(`<div class="flex lg:justify-center items-center">
-                <a class="flex items-center mr-3" href="javascript:;">
-                  <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit
-                </a>
-                <a class="flex items-center text-theme-6" href="javascript:;">
-                  <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
-                </a>
-              </div>`);
+                            const a = cash(`
+                                <div class="flex lg:justify-center items-center">
+                                    <a class="flex items-center mr-3" href="javascript:;">
+                                        <i data-feather="check-square" class="w-4 h-4 mr-1"></i> Edit
+                                    </a>
+                                    <a class="flex items-center text-theme-6" href="javascript:;">
+                                        <i data-feather="trash-2" class="w-4 h-4 mr-1"></i> Delete
+                                    </a>
+                                </div>`);
                             cash(a).on("click", function () {
                                 // On click actions
                             });
