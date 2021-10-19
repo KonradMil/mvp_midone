@@ -173,24 +173,33 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function loadStructure (val) {
-
         if(val && Object.keys(val).length === 0 && val.constructor === Object) {
 
         } else {
             outgoing(game, 'LoadStructure', val, true);
         }
-
     }
 
     function getParts () {
         outgoing(game, 'GetPartsInfo', '');
     }
 
-    // function setNewAnimationLayer (val) {
-    //     outgoing(game, 'SetNewAnimationLayer', val);
-    // }
+    function removeLayout (id) {
+        outgoing(game, 'RemoveLayout', id);
+    }
+
+    function removeLabel (id) {
+        outgoing(game, 'RemoveLabel', id);
+    }
+
+    function removeComment (id) {
+        outgoing(game, 'RemoveComment', id);
+    }
 
     return {
+        removeLayout,
+        removeLabel,
+        removeComment,
         getParts,
         loadStructure,
         updateComment,

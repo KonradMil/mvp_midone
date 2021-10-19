@@ -123,10 +123,20 @@ export default {
             cash("#right-panell").modal("hide");
         }
 
+        emitter.on('UnityMenuLabelSelected', e => {
+            if(e.menu_selected == 'RemoveLayout') {
+                if(content.value == 'layout') {
+                    emitter.emit('removeLayout', {id:temp_layout_id});
+                } else if (content.value == 'label') {
+                    emitter.emit('removeLabel', {id:temp_label_id});
+                } else if (content.value == 'comment') {
+                    emitter.emit('removeComment', {id:temp_comment_id});
+                }
+            }
+        });
+
         emitter.on('UnityLineSettings', e => {
             content.value = 'line';
-
-
             temp_line_id.value = Math.floor(Math.random() * 99) + 1;
             line.value = e;
             currentTitle.value = 'Ustawienia lini animacji';
@@ -153,9 +163,6 @@ export default {
         });
 
         emitter.on('UnityLabelSelected', e => {
-
-
-
             temp_label_id.value = e.labelSelected.index;
             content.value = 'label';
             label.value = e.labelSelected;

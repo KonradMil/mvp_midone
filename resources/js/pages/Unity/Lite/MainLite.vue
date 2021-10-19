@@ -87,6 +87,15 @@ export default {
         emitter.on('*', (type, e) => {
             console.log('*', [type, e]);
             switch (type) {
+                case  'removeLayout':
+                    handleUnityActionOutgoing({action: "removeLayout", data: e.id})
+                    break;
+                case  'removeLabel':
+                    handleUnityActionOutgoing({action: "removeLabel", data: e.id})
+                    break;
+                case  'removeComment':
+                    handleUnityActionOutgoing({action: "removeComment", data: e.id})
+                    break;
                 case 'unityoutgoingaction':
                     handleUnityActionOutgoing(e);
                     break;

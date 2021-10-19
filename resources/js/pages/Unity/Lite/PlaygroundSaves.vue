@@ -224,7 +224,9 @@
                         <div class="col-span-6">
                             <h5 class="text-md font-medium mt-2 mb-2" style="color: #5e50ac !important; font-size: 16px;">Opis:</h5>
                             <div style="overflow-y: scroll; max-height: 50vh">
-                                <p>Znajdź 5 błędów w istniejącym procesie i uzasadnij je</p>
+                                <p>W istniejących procesach na określonych obszarach od 1 do 5  znajdź minimum 5  błędów, które Twoim zdaniem sprawiają iż proces ten jest nieefektywny bądź niezgodny z zasadami bezpieczeństwa. Uzasadnij swoje wybory korzystając z opcji komentarzy.
+                                    <br/>
+                                    Przed przystąpieniem do realizacji zadania zapoznaj się z instrukcją znajdującą się w załączniku.</p>
                             </div>
                         </div>
                     </div>
