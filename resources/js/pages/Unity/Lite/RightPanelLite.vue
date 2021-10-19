@@ -123,14 +123,18 @@ export default {
             cash("#right-panell").modal("hide");
         }
 
-        emitter.on('UnityMenuLabelSelected', e => {
-            if(e.menu_selected == 'RemoveLayout') {
-                if(content.value == 'layout') {
-                    emitter.emit('removeLayout', {id:temp_layout_id});
-                } else if (content.value == 'label') {
-                    emitter.emit('removeLabel', {id:temp_label_id});
-                } else if (content.value == 'comment') {
-                    emitter.emit('removeComment', {id:temp_comment_id});
+        emitter.on('*', (type, e) => {
+            console.log('HERE21', [type, e]);
+            if(type == 'UnityMenuLabelSelected') {
+                console.log('HERE23311', [type, e]);
+                if(e.menu_selected == 'RemoveLayout') {
+                    if(content.value == 'layout') {
+                        emitter.emit('removeLayout', {id:temp_layout_id});
+                    } else if (content.value == 'label') {
+                        emitter.emit('removeLabel', {id:temp_label_id});
+                    } else if (content.value == 'comment') {
+                        emitter.emit('removeComment', {id:temp_comment_id});
+                    }
                 }
             }
         });
