@@ -13,6 +13,12 @@ class FixFilesTable extends Migration
      */
     public function up()
     {
+        Schema::table('files', function (Blueprint $table){
+            $table->dropForeign('files_author_id_foreign');
+        });
+        Schema::table('files', function (Blueprint $table){
+            $table->dropColumn('author_id');
+        });
     }
 
     /**
@@ -22,8 +28,9 @@ class FixFilesTable extends Migration
      */
     public function down()
     {
-        Schema::table('files', function (Blueprint $table) {
-            $table->dropColumn('author_id');
+        Schema::table('files', function (Blueprint $table){
+            $table->unsignedBigInteger('author_id')->nullable();
+            $table->foreign('author_id')->references('id')->on('users');
         });
     }
 }
