@@ -465,11 +465,10 @@ class ChallengeController extends Controller
         foreach ($ts as $tt) {
             array_push($ars, $tt->id);
         }
-        Log::info(json_encode($ts));
+
         $c = Challenge::whereHas('teams', function ($query) use ($ars) {
             $query->whereIn('teams.id', $ars);
         })->orderBy('created_at', 'DESC')->get();
-        Log::info(json_encode($c));
 
         $merged = $challenges->merge($c);
 
@@ -1305,8 +1304,21 @@ class ChallengeController extends Controller
                 ->get();
         }
 
+        $ars = [];
 
-        foreach ($challenges as $challenge) {
+        $ts = Auth::user()->teams;
+
+        foreach ($ts as $tt) {
+            array_push($ars, $tt->id);
+        }
+
+        $c = Challenge::where('challenges.category', '=', $category)->whereHas('teams', function ($query) use ($ars) {
+            $query->whereIn('teams.id', $ars);
+        })->orderBy('created_at', 'DESC')->get();
+
+        $cc = $challenges->merge($c);
+
+        foreach ($cc as $challenge) {
 
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like')) {
                 $challenge->liked = true;
@@ -1323,11 +1335,11 @@ class ChallengeController extends Controller
             }
         }
 
-        if (!empty($challenges)) {
+        if (!empty($cc)) {
             return response()->json([
                 'success' => true,
                 'message' => 'Pobrano poprawnie.',
-                'payload' => $challenges
+                'payload' => $cc
             ]);
         } else {
             return response()->json([
