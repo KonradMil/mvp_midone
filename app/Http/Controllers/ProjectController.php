@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Handlers\FinancialHandler;
 use App\Http\Requests\Handlers\LocalVisionHandler;
+use App\Http\Requests\Handlers\ProjectFilesHandler;
 use App\Http\Requests\Handlers\TechnicalDetailsHandler;
 use App\Http\Requests\Handlers\VisitDateHandler;
 use App\Http\ResponseBuilder;
 use App\Repository\Eloquent\ChallengeRepository;
+use App\Repository\Eloquent\FileRepository;
 use App\Repository\Eloquent\LocalVisionRepository;
 use App\Repository\Eloquent\OfferRepository;
 use App\Repository\Eloquent\ProjectRepository;
@@ -27,6 +29,118 @@ class ProjectController extends Controller
     public function __construct()
     {
 
+    }
+
+    /**
+     * @param int $id
+     * @param Request $request
+     * @param ProjectRepository $projectRepository
+     * @param FileRepository $fileRepository
+     * @param ProjectService $projectService
+     * @return JsonResponse
+     */
+    public function deleteFile(int $id,Request $request, ProjectRepository $projectRepository, FileRepository $fileRepository, ProjectService $projectService): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $project = $projectRepository->find($id);
+
+        if (!$project) {
+            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $file = $fileRepository->find($request->input('file_id'));
+
+        if (!$file) {
+            $responseBuilder->setErrorMessage(__('messages.file.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        try {
+            $projectService->detachFile($project, $file);
+            $responseBuilder->setSuccessMessage(__('messages.delete_correct'));
+        } catch (QueryException $e) {
+
+            $responseBuilder->setErrorMessage(__('messages.error'));
+            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
+
+        return $responseBuilder->getResponse();
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @param ProjectRepository $projectRepository
+     * @param ProjectService $projectService
+     * @return JsonResponse
+     */
+    public function saveFiles(Request $request, int $id, ProjectRepository $projectRepository,ProjectService $projectService): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $projectFilesHandler = new ProjectFilesHandler($request);
+
+        $project = $projectRepository->find($id);
+
+        if (!$project) {
+            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $parameters = $projectFilesHandler->getParameters();
+
+        if (!$parameters->isValid()) {
+            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+        }
+
+        try {
+            $newProjectFiles = $projectService->addProjectFiles($parameters,$project);
+
+            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
+            $responseBuilder->setData('project', $newProjectFiles->with('files'));
+
+
+        } catch (QueryException $e) {
+
+            $responseBuilder->setErrorMessage(__('messages.error'));
+            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
+
+        return $responseBuilder->getResponse();
+    }
+
+    /**
+     * @param ProjectRepository $projectRepository
+     * @param int $id
+     * @param FileRepository $fileRepository
+     * @return JsonResponse
+     */
+    public function getFiles(ProjectRepository $projectRepository, int $id, FileRepository $fileRepository): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $project = $projectRepository->find($id);
+
+        if (!$project) {
+            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $projectFiles = $fileRepository->getFilesByProject($project);
+
+        if (!$projectFiles) {
+            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $responseBuilder->setData('projectFiles', $projectFiles);
+
+        return $responseBuilder->getResponse();
     }
 
     /**

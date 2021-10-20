@@ -22,12 +22,25 @@ class ProjectCommunicationRepository extends BaseRepository
 
     /**
      * @param int $projectId
+     * @param int $integratorId
      * @return Collection
      */
-    public function getAllCommunicationsByProjectId(int $projectId): Collection
+    public function getAllIntegratorCommunicationsByProjectId(int $projectId, int $integratorId): Collection
     {
         /** @var Collection|null $collection */
 
-        return ProjectCommunication::where('project_id', '=', $projectId)->orderBy('created_at', 'DESC')->with('author')->get();
+        return ProjectCommunication::where('project_id', '=', $projectId)->where('author_id', '=', $integratorId)->orderBy('created_at', 'DESC')->with('author')->get();
+    }
+
+    /**
+     * @param int $projectId
+     * @param int $investorId
+     * @return Collection
+     */
+    public function getAllInvestorCommunicationsByProjectId(int $projectId, int $investorId): Collection
+    {
+        /** @var Collection|null $collection */
+
+        return ProjectCommunication::where('project_id', '=', $projectId)->where('author_id', '=', $investorId)->orderBy('created_at', 'DESC')->with('author')->get();
     }
 }

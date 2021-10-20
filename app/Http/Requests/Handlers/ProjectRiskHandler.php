@@ -18,17 +18,17 @@ class ProjectRiskHandler extends RequestHandler
     {
         $parameters = new NewProjectRiskParameters();
         $parameters->authorId = Auth::user()->id;
-        $parameters->projectId = (int)$this->request->route()->parameter('project_id');
-        $parameters->riskId = $this->request->get('riskId');
-        $parameters->riskDescription = $this->request->get('riskDescription');
-        $parameters->riskArea = $this->request->get('riskArea');
-        $parameters->eventProbability = $this->request->get('eventProbability');
-        $parameters->costImpact = $this->request->get('costImpact');
-        $parameters->scheduleImpact = $this->request->get('scheduleImpact');
-        $parameters->qualityImplementationImpact = $this->request->get('qualityImplementationImpact');
-        $parameters->riskLimitations = $this->request->get('riskLimitations');
-        $parameters->commentIntegrator = $this->request->get('commentIntegrator');
-        $parameters->commentInvestor = $this->request->get('commentInvestor');
+        $parameters->projectId = $this->request->get('project_id');
+        $parameters->riskId = $this->request->get('risk_id');
+        $parameters->riskDescription = $this->request->get('risk_description');
+        $parameters->riskArea = $this->request->get('risk_area');
+        $parameters->eventProbability = $this->request->get('event_probability');
+        $parameters->costImpact = $this->request->get('cost_impact');
+        $parameters->scheduleImpact = $this->request->get('schedule_impact');
+        $parameters->qualityImplementationImpact = $this->request->get('quality_implementation_impact');
+        $parameters->riskLimitations = $this->request->get('risk_limitations');
+        $parameters->commentIntegrator = $this->request->get('comment_integrator');
+        $parameters->commentInvestor = $this->request->get('comment_investor');
 
         return $parameters;
     }

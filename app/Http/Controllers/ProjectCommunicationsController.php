@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Handlers\ProjectCommunicationHandler;
 use App\Http\ResponseBuilder;
 use App\Models\ProjectCommunication;
+use App\Models\User;
 use App\Repository\Eloquent\ProjectCommunicationRepository;
 use App\Repository\Eloquent\ProjectRepository;
+use App\Repository\Eloquent\UserRepository;
 use App\Services\ProjectCommunicationService;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -124,12 +126,14 @@ class ProjectCommunicationsController extends Controller
     }
 
     /**
+     * @param Request $request
      * @param int $id
      * @param ProjectRepository $projectRepository
      * @param ProjectCommunicationRepository $projectCommunicationRepository
+     * @param UserRepository $userRepository
      * @return JsonResponse
      */
-    public function getVisitDate(int $id, ProjectRepository $projectRepository, ProjectCommunicationRepository $projectCommunicationRepository): JsonResponse
+    public function getIntegratorCommunications(Request $request, int $id, ProjectRepository $projectRepository, ProjectCommunicationRepository $projectCommunicationRepository, UserRepository $userRepository): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
@@ -140,9 +144,49 @@ class ProjectCommunicationsController extends Controller
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $communications = $projectCommunicationRepository->getAllCommunicationsByProjectId($id);
+        $user = $userRepository->find($request->get('integrator_id'));
 
-        $responseBuilder->setData('deadlines', $communications);
+        if (!$user) {
+            $responseBuilder->setErrorMessage(__('messages.user.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $communications = $projectCommunicationRepository->getAllIntegratorCommunicationsByProjectId($id, $user->id);
+
+        $responseBuilder->setData('communications', $communications);
+
+        return $responseBuilder->getResponse();
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @param ProjectRepository $projectRepository
+     * @param ProjectCommunicationRepository $projectCommunicationRepository
+     * @param UserRepository $userRepository
+     * @return JsonResponse
+     */
+    public function getInvestorCommunications(Request $request, int $id, ProjectRepository $projectRepository, ProjectCommunicationRepository $projectCommunicationRepository, UserRepository $userRepository): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $project = $projectRepository->find($id);
+
+        if (!$project) {
+            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $user = $userRepository->find($request->get('investor_id'));
+
+        if (!$user) {
+            $responseBuilder->setErrorMessage(__('messages.user.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $communications = $projectCommunicationRepository->getAllInvestorCommunicationsByProjectId($id, $user->id);
+
+        $responseBuilder->setData('communications', $communications);
 
         return $responseBuilder->getResponse();
     }

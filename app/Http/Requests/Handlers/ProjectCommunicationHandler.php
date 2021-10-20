@@ -21,12 +21,12 @@ class ProjectCommunicationHandler extends RequestHandler
         $parameters = new NewProjectCommunicationParameters();
         $parameters->authorId = Auth::user()->id;
         $parameters->projectId = (int)$this->request->route()->parameter('project_id');
-        $parameters->communicationPlanId = $this->request->get('communicationPlanId');
-        $parameters->personalOccupation = $this->request->get('personalOccupation');
-        $parameters->personalData = $this->request->get('personalData');
-        $parameters->phoneNumber = $this->request->get('phoneNumber');
+        $parameters->communicationPlanId = $this->request->get('communication_plan_id');
+        $parameters->personalOccupation = $this->request->get('personal_occupation');
+        $parameters->personalData = $this->request->get('personal_data');
+        $parameters->phoneNumber = $this->request->get('phone_number');
         $parameters->email = $this->request->get('email');
-        $parameters->project_decision = $this->request->get('projectDecision');
+        $parameters->project_decision = $this->request->get('project_decision');
 
         return $parameters;
     }

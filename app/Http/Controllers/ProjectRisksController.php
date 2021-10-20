@@ -15,19 +15,20 @@ use Symfony\Component\HttpFoundation\Response;
 class ProjectRisksController extends Controller
 {
     /**
+     * @param int $id
      * @param Request $request
      * @param ProjectRepository $projectRepository
      * @param ProjectRiskService $projectRiskService
      * @param ProjectRiskRepository $projectRiskRepository
      * @return JsonResponse
      */
-    public function saveCommunicationPlan(Request $request, ProjectRepository $projectRepository, ProjectRiskService $projectRiskService, ProjectRiskRepository $projectRiskRepository): JsonResponse
+    public function saveRisk(int $id,Request $request, ProjectRepository $projectRepository, ProjectRiskService $projectRiskService, ProjectRiskRepository $projectRiskRepository): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
         $projectRiskHandler = new ProjectRiskHandler($request);
 
-        $project = $projectRepository->find($request->input('project_id'));
+        $project = $projectRepository->find($id);
 
         if (!$project) {
             $responseBuilder->setErrorMessage(__('messages.project.not_found'));
@@ -67,7 +68,6 @@ class ProjectRisksController extends Controller
 
                 $responseBuilder->setSuccessMessage(__('messages.save_correct'));
                 $responseBuilder->setData('local_vision', $newRisk);
-
 
             } catch (QueryException $e) {
 
@@ -128,7 +128,7 @@ class ProjectRisksController extends Controller
      * @param ProjectRiskRepository $projectRiskRepository
      * @return JsonResponse
      */
-    public function getVisitDate(int $id, ProjectRepository $projectRepository, ProjectRiskRepository $projectRiskRepository): JsonResponse
+    public function getRisks(int $id, ProjectRepository $projectRepository, ProjectRiskRepository $projectRiskRepository): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
@@ -141,7 +141,7 @@ class ProjectRisksController extends Controller
 
         $risks = $projectRiskRepository->getAllRisksByProjectId($id);
 
-        $responseBuilder->setData('deadlines', $risks);
+        $responseBuilder->setData('risks', $risks);
 
         return $responseBuilder->getResponse();
     }

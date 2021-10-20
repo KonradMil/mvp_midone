@@ -82,7 +82,7 @@ class NewProjectRiskParameters extends Parameters
             'costImpact' => 'nullable|int',
             'scheduleImpact' => 'nullable|int',
             'qualityImplementationImpact' => 'nullable|int',
-            'riskLimitations' => 'nullable|int',
+            'riskLimitations' => 'nullable|string',
             'commentIntegrator' => 'nullable|string',
             'commentInvestor' => 'nullable|string'
         ];

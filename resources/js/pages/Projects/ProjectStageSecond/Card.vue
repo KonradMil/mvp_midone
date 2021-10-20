@@ -92,7 +92,7 @@
                             <EditIcon v-if="project.accept_offer < 1" class="w-4 h-4 mr-2 text-red-600"/>
                             <CheckCircleIcon v-if="project.accept_offer === 1" class="w-4 h-4 mr-2 text-green-600"/>
                             <XCircleIcon v-if="project.accept_offer === 2" class="w-4 h-4 mr-2 text-red-600"/>
-                            Harmonogram wg wzoru
+                            Koncepcja stanowiska
                         </a>
                         <a v-if="project.accept_technical_details !== 1 || project.accept_financial_details !== 1"
                            class="flex items-center mt-5 opacity-50 cursor-pointer">
@@ -156,8 +156,8 @@
                 <WhatsNext :user="user" :challenge="challenge" :solutions="challenge.solutions" :stage="3"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
-            <CommunicationPanel v-if="activeTab ==='communication'" :project="project"></CommunicationPanel>
-            <RiskPanel v-if="activeTab ==='risk'" :project="project"></RiskPanel>
+            <CommunicationPanel v-if="activeTab ==='communication'" :project="project" :integrator="integrator" :investor="investor"></CommunicationPanel>
+            <RiskPanel v-if="activeTab ==='risk'" :project="project" :integrator="integrator" :investor="investor"></RiskPanel>
             <ModalCard :show="show" @closed="modalClosed">
                 <h3 class="intro-y text-lg font-medium mt-5">Czy na pewno chcesz przejść do następnej fazy?</h3>
                 <div class="intro-y box p-5 mt-12 sm:mt-5" style="text-align: center;">
@@ -177,22 +177,15 @@ import {
     ref,
     provide,
     onMounted,
-    unref,
-    toRaw,
-    computed,
     getCurrentInstance,
-    onBeforeMount,
     watch
 } from "vue";
 
-import GetCardChallenge from "../../../compositions/GetCardChallenge";
 import WhatsNext from "../../Challenges/WhatsNext";
 import BasicInformationPanel from "../../Challenges/components/BasicInformationPanel";
 import TechnicalInformationProjectPanel from "../components/TechnicalInformationProjectPanel";
 import QuestionsPanel from "../../Challenges/components/QuestionsPanel";
-import router from "../../../router";
 import SolutionProjectPanel from "../components/SolutionProjectPanel";
-import {useToast} from "vue-toastification";
 import OfferAdd from "../../Challenges/components/OfferAdd";
 import OfferProject from "../components/OfferProject";
 import TeamsPanel from "../../Challenges/components/TeamsPanel";
@@ -389,7 +382,6 @@ export default defineComponent({
 
         });
 
-
         emitter.on('changeToOfferAdd', e => () => {
             activeTab.value = 'addingoffer';
         });
@@ -421,7 +413,6 @@ export default defineComponent({
         })
 
         const getInvestorAndIntegrator = (callback) => {
-
             RequestHandler('projects/' + props.id + '/investor-integrator', 'get', {}, (response) => {
                 investor.value = response.data.investor;
                 integrator.value = response.data.integrator;

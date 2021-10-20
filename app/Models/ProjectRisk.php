@@ -13,7 +13,7 @@ class ProjectRisk extends Model
     /**
      * @var string
      */
-    public $table = 'project_communications';
+    public $table = 'project_risks';
 
     /**
      * @var string[]

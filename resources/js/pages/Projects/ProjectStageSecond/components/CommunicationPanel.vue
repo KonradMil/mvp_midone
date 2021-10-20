@@ -17,10 +17,10 @@
                 </div>
             </div>
             <div id="faq-accordion-1" class="accordion p-5 max-h-96 overflow-auto">
-                <div class="intro-y accordion-item" v-for="communicationPlan in communicationPlans" :key="communicationPlan.id">
+                <div class="intro-y accordion-item" v-for="communicationPlan in integratorCommunicationPlans" :key="communicationPlan.id">
                     <div id="faq-accordion-content-5" class="accordion-header">
                         <button class="accordion-button collapsed mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-2" aria-expanded="false" aria-controls="faq-accordion-collapse-2">
-                            <p v-if="communicationPlan.type !== ''">{{ communicationPlan.type }} </p>
+                            <p v-if="communicationPlan.personal_occupation !== ''">{{ communicationPlan.personal_occupation }} </p>
                             <p v-else> Uzupełnij </p>
                         </button>
                         <div class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
@@ -46,7 +46,7 @@
                                     <div id="faq-accordion-2-collapse-2" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-2" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                                             <input
-                                                v-model="communicationPlan.type"
+                                                v-model="communicationPlan.personal_occupation"
                                                 id="regular-form-2"
                                                 type="text"
                                                 class="form-control w-1/3"
@@ -78,7 +78,7 @@
                                     <div id="faq-accordion-2-collapse-4" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-3" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                                             <input
-                                                v-model="communicationPlan.number"
+                                                v-model="communicationPlan.phone_number"
                                                 id="regular-form-4"
                                                 type="text"
                                                 class="form-control w-1/3"
@@ -93,7 +93,7 @@
                                     <div id="faq-accordion-2-collapse-5" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                                             <input
-                                                v-model="communicationPlan.mail"
+                                                v-model="communicationPlan.email"
                                                 id="regular-form-5"
                                                 type="text"
                                                 class="form-control w-1/3"
@@ -108,8 +108,8 @@
                                     <div id="faq-accordion-2-collapse-6" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                                              <select
-                                                 :disabled="communicationPlan.type==='Manager projektu'"
-                                                 v-model="communicationPlan.decision"
+                                                 :disabled="communicationPlan.personal_occupation==='Manager projektu'"
+                                                 v-model="communicationPlan.project_decision"
                                                  class="tom-select w-1/5 tomselected h-10 border">
                                                  <option value="1" selected="true">Tak</option>
                                                  <option value="2">Nie</option>
@@ -140,10 +140,10 @@
                 </div>
             </div>
             <div id="faq-accordion-3" class="accordion p-5 max-h-96 overflow-auto">
-                <div class="intro-y accordion-item" v-for="communicationPlan in communicationPlans" :key="communicationPlan.id">
+                <div class="intro-y accordion-item" v-for="communicationPlan in investorCommunicationPlans" :key="communicationPlan.id">
                     <div id="faq-accordion-content-6" class="accordion-header">
                         <button class="accordion-button collapsed mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-2" aria-expanded="false" aria-controls="faq-accordion-collapse-2">
-                            <p v-if="communicationPlan.personalOccupation !== ''">{{ communicationPlan.personalOccupation }} </p>
+                            <p v-if="communicationPlan.personal_occupation !== ''">{{ communicationPlan.personal_occupation }} </p>
                             <p v-else> Uzupełnij </p>
                         </button>
                         <div class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
@@ -161,7 +161,7 @@
                                             Definicja stanowiska
                                         </button>
                                         <div class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
-                                            <button class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="addNewCommunicationPlan(communicationPlan)">
+                                            <button class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="saveCommunicationPlan(communicationPlan)">
                                                 Zapisz
                                             </button>
                                         </div>
@@ -169,7 +169,7 @@
                                     <div id="faq-accordion-2-collapse-2" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-2" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                                             <input
-                                                v-model="communicationPlan.personalOccupation"
+                                                v-model="communicationPlan.personal_occupation"
                                                 id="regular-form-2"
                                                 type="text"
                                                 class="form-control w-1/3"
@@ -186,7 +186,7 @@
                                     <div id="faq-accordion-2-collapse-3" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-3" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                                             <input
-                                                v-model="communicationPlan.personalData"
+                                                v-model="communicationPlan.personal_data"
                                                 id="regular-form-3"
                                                 type="text"
                                                 class="form-control w-1/3"
@@ -201,7 +201,7 @@
                                     <div id="faq-accordion-2-collapse-4" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-3" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                                             <input
-                                                v-model="communicationPlan.phoneNumber"
+                                                v-model="communicationPlan.phone_number"
                                                 id="regular-form-4"
                                                 type="text"
                                                 class="form-control w-1/3"
@@ -231,8 +231,8 @@
                                     <div id="faq-accordion-2-collapse-6" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
                                             <select
-                                                :disabled="communicationPlan.personalOccupation==='Manager projektu'"
-                                                v-model="communicationPlan.decision"
+                                                :disabled="communicationPlan.project_decision==='Manager projektu'"
+                                                v-model="communicationPlan.project_decision"
                                                 class="tom-select w-1/5 tomselected h-10 border">
                                                 <option value="1" selected="true">Tak</option>
                                                 <option value="2">Nie</option>
@@ -272,7 +272,9 @@ export default {
     name: "CommunicationPanel",
     components: {Multiselect, ModalCard},
     props: {
-        project: Object
+        project: Object,
+        integrator: Object,
+        investor: Object,
     },
     setup(props) {
         const app = getCurrentInstance();
@@ -280,49 +282,55 @@ export default {
         const toast = useToast();
         const user = window.Laravel.user;
         const showDetails = ref([]);
-        const communicationPlans = ref([
-            {
-                personalOccupation: 'Manager projektu',
-                personalData: '',
-                phoneNumber: '',
-                email: '',
-                decision: true,
-            },
-            {
-                personalOccupation: 'Kontakt do spraw technicznych',
-                personalData: '',
-                phoneNumber: '',
-                email: '',
-                decision: true,
-            },
-            {
-                personalOccupation: 'Kontakt do spraw administracyjnych',
-                personalData: '',
-                phoneNumber: '',
-                email: '',
-                decision: true,
-            },
-            {
-                personalOccupation: 'Kontakt eskalacyjny',
-                personalData: '',
-                phoneNumber: '',
-                email: '',
-                decision: true,
-            }
-        ]);
+        // const communicationPlans = ref([
+        //     {
+        //         personal_occupation: 'Manager projektu',
+        //         personal_data: '',
+        //         phone_number: '',
+        //         email: '',
+        //         project_decision: true,
+        //     },
+        //     {
+        //         personal_occupation: 'Kontakt do spraw technicznych',
+        //         personal_data: '',
+        //         phone_number: '',
+        //         email: '',
+        //         project_decision: true,
+        //     },
+        //     {
+        //         personal_occupation: 'Kontakt do spraw administracyjnych',
+        //         personal_data: '',
+        //         phone_number: '',
+        //         email: '',
+        //         project_decision: true,
+        //     },
+        //     {
+        //         personal_occupation: 'Kontakt eskalacyjny',
+        //         personal_data: '',
+        //         phone_number: '',
+        //         email: '',
+        //         project_decision: true,
+        //     }
+        // ]);
+        const integratorCommunicationPlans = ref([]);
+        const investorCommunicationPlans = ref([]);
         const is_selected = ref(0);
         const guard = ref(false);
         const show = ref(false);
         const addNewCommunicationPlan = async () => {
             let communicationPlan = {
-                personalOccupation: '',
-                personalData: '',
-                phoneNumber: '',
+                personal_occupation: '',
+                personal_data: '',
+                phone_number: '',
                 email: 0,
-                decision: ''
+                project_decision: 2
             }
             setTimeout(function () {
-                communicationPlans.value.unshift(communicationPlan);
+                if(user.value.id === props.integrator.id){
+                    integratorCommunicationPlans.value.unshift(communicationPlan);
+                } else {
+                    investorCommunicationPlans.value.unshift(communicationPlan);
+                }
             }, 500)
         }
         const deleteCommunicationPlan = async (communicationPlan) => {
@@ -330,25 +338,41 @@ export default {
                 project_id: props.project.id,
                 id: communicationPlan.id,
             }, (response) => {
-                communicationPlans.value.splice(communicationPlans.value.indexOf(communicationPlan), 1);
+                if(user.value.id === props.integrator.id){
+                    integratorCommunicationPlans.value.splice(integratorCommunicationPlans.value.indexOf(communicationPlan), 1);
+                } else {
+                    investorCommunicationPlans.value.splice(investorCommunicationPlans.value.indexOf(communicationPlan), 1);
+                }
             });
         }
 
         const saveCommunicationPlan = async (communicationPlan) => {
-            RequestHandler('projects/' + props.project.id + '/communication/' + communicationPlan.id + '/save-communication', 'post', {
+            RequestHandler('projects/' + props.project.id + '/communication/save', 'post', {
                 project_id: props.project.id,
-                id: communicationPlan.id,
-                personalOccupation: communicationPlan.personalOccupation,
-                personalData: communicationPlan.personalData,
-                phoneNumber: communicationPlan.phoneNumber,
+                communication_plan_id: communicationPlan.id,
+                personal_occupation: communicationPlan.personal_occupation,
+                personal_data: communicationPlan.personal_data,
+                phone_number: communicationPlan.phone_number,
                 email: communicationPlan.email,
+                project_decision: communicationPlan.project_decision
             }, (response) => {
             });
         }
 
-        const getCommunicationPlans = async (callback) => {
-            RequestHandler('projects/' + props.project.id + '/communications', 'get', {}, (response) => {
-               communicationPlans.value = response.data.communications
+        const getIntegratorCommunicationPlans = async (callback) => {
+            RequestHandler('projects/' + props.project.id + '/communications/integrator', 'get', {
+                integrator_id: props.integrator.id
+            }, (response) => {
+                integratorCommunicationPlans.value = response.data.communications
+                callback(response);
+            });
+        }
+
+        const getInvestorCommunicationPlans = async (callback) => {
+            RequestHandler('projects/' + props.project.id + '/communications/investor', 'get', {
+                investor_id: props.investor.id
+            }, (response) => {
+                investorCommunicationPlans.value = response.data.communications
                 callback(response);
             });
         }
@@ -358,9 +382,12 @@ export default {
         }
 
         onMounted(() => {
-            getCommunicationPlans(function () {
+            getIntegratorCommunicationPlans(function () {
                 guard.value = true;
             });
+            getInvestorCommunicationPlans(()=>{
+                guard.value = true;
+            })
         });
 
         return {
@@ -369,7 +396,8 @@ export default {
             show,
             guard,
             is_selected,
-            communicationPlans,
+            integratorCommunicationPlans,
+            investorCommunicationPlans,
             user,
             deleteCommunicationPlan,
             addNewCommunicationPlan,
