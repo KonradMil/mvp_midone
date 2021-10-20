@@ -83,7 +83,7 @@
                                 <label class="cursor-pointer select-none" for="cb-rules-consent">
                                     Oświadczam, że zapoznałem się oraz akceptuję
                                     <a
-                                        href="https://cdn.dbr77.com/wp-content/uploads/2021/10/Regulamin-konkursu-DBR77-RoboHakaton.pdf"
+                                        href="https://cdn.dbr77.com/wp-content/uploads/2021/10/Rregulamin-konkursu-DBR77-RoboHakaton-1.pdf"
                                         class="text-theme-1 dark:text-theme-10 mx-1 cursor-pointer"
                                         target="_blank"
                                     >

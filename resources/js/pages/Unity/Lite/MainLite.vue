@@ -5,12 +5,12 @@
     <div @contextmenu.prevent="openMenu">
         <StudioLite hideFooter="true" :src="unity_hangar_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
+    <RightPanelLite></RightPanelLite>
     <BottomPanel  v-if="loaded" :allowedEdit="true" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
     <div v-if="!loaded" id="loader">
         <LoadingIcon icon="grid" class="w-8 h-8" />
     </div>
     <HelpModal></HelpModal>
-<PeerTest :unityActionOutgoingObject="unityActionOutgoingObject"></PeerTest>
 </template>
 
 <script>
@@ -24,12 +24,11 @@ import LeftButtons from "./../components/LeftButtons";
 import LeftPanel from "./../components/LeftPanel";
 import TopButtons from "./../components/TopButtons";
 import BottomPanel from "./../components/BottomPanel";
-import PeerTest from "../../PeerTest";
 import useLayoutButtonClick from "../../../composables/useLayoutButtonClick";
 import useRadialMenu from "../../../composables/radialMenu";
 import {useToast} from "vue-toastification";
 import HelpModal from "../components/HelpModal";
-
+import RightPanelLite from "./RightPanelLite"
 const ww = WindowWatcher();
 
 export default {
@@ -44,8 +43,8 @@ export default {
         sessionid: String
     },
     components: {
+        RightPanelLite,
         HelpModal,
-        PeerTest,
        BottomPanel, TopButtons, LeftPanel, LeftButtons, StudioLite
     },
     setup(props, {emit}) {
@@ -87,6 +86,15 @@ export default {
         emitter.on('*', (type, e) => {
             console.log('*', [type, e]);
             switch (type) {
+                case  'removeLayout':
+                    handleUnityActionOutgoing({action: "removeLayout", data: e.id})
+                    break;
+                case  'removeLabel':
+                    handleUnityActionOutgoing({action: "removeLabel", data: e.id})
+                    break;
+                case  'removeComment':
+                    handleUnityActionOutgoing({action: "removeComment", data: e.id})
+                    break;
                 case 'unityoutgoingaction':
                     handleUnityActionOutgoing(e);
                     break;
@@ -127,7 +135,7 @@ export default {
                             gameWindow.value.setFullscreen();
                             break;
                         case 'logout':
-                                window.location.href = window.app_path + '/robochallenge';
+                                window.location.href = window.app_path + '/playground/saves';
                             break;
                         case 'orto':
                             handleUnityActionOutgoing({action: 'ChangeCamera', data: 2});
@@ -189,6 +197,8 @@ export default {
                     freeSave.value = response.data.freeSave;
                     initialLoad.value = response.data.freeSave.save_json;
                     animationSave.value = response.data.freeSave.save_json.animation_layers;
+
+                    window.unityLoad = response.data.freeSave.save_json;
 
                     handleUnityActionOutgoing({
                         action: 'loadStructure',

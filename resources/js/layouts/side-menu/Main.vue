@@ -6,9 +6,12 @@
             <nav class="side-nav">
                 <!--         BEGIN: Logo-->
                 <div class="flex-row w-full items-center">
-                    <router-link :to="{ name: 'dashboard' }" tag="a" class="intro-x flex items-center  pt-4 px-12">
+                    <router-link :to="{ name: 'dashboard' }" tag="a" v-if="user.type != 'robochallenge'" class="intro-x flex items-center  pt-4 px-12">
                         <img alt="DBR77 Platforma Robotów " class="w-full" src="/images/dbr_logo_white_notagline_platform.svg"/>
                     </router-link>
+                    <div v-else class="intro-x flex items-center  pt-4 px-12">
+                        <img alt="DBR77 Platforma Robotów " class="w-full" src="/images/dbr_logo_white_notagline_platform.svg"/>
+                    </div>
                 </div>
                 <!--         END: Logo-->
                 <div class="side-nav__devider my-6"></div>
@@ -68,12 +71,22 @@
                     </template>
                     <template v-else>
                         <li :key="'robo'">
-                            <SideMenuTooltip tag="a" :content="'Konkurs Robochallenge'" href="javascript:;" class="side-menu" :class="'side-menu--active'" @click="$router.push({name: 'studio-playground-saves'})">
+                            <SideMenuTooltip tag="a" :content="'Konkurs Robochallenge'" href="javascript:;" class="side-menu" @click="$router.push({name: 'studio-playground-saves'})">
                                 <div class="side-menu__icon">
                                     <component :is="'HomeIcon'"/>
                                 </div>
                                 <div class="side-menu__title">
                                     Konkurs Robochallenge
+                                </div>
+                            </SideMenuTooltip>
+                        </li>
+                        <li :key="'community'">
+                            <SideMenuTooltip tag="a" :content="'Społeczność'" href="javascript:;" class="side-menu" @click="goTo('https://community.dbr77.com')">
+                                <div class="side-menu__icon">
+                                    <component :is="'HomeIcon'"/>
+                                </div>
+                                <div class="side-menu__title">
+                                   Społeczność
                                 </div>
                             </SideMenuTooltip>
                         </li>
@@ -126,6 +139,10 @@ export default defineComponent({
             nestedMenu(menu.menu, route)
         );
 
+        const goTo = (url) => {
+            window.open(url, '_blank').focus();
+        }
+
         watch(
             computed(() => route.path),
             () => {
@@ -152,7 +169,8 @@ export default defineComponent({
             linkTo,
             enter,
             leave,
-            user
+            user,
+            goTo
         };
     }
 });

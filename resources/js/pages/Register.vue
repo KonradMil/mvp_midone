@@ -150,8 +150,8 @@
                                     Akceptuję postanowienia
                                 </label>
                                 <a href="/terms/privacy-policy"
-                                   class="text-theme-1 dark:text-theme-10 ml-1 cursor-pointer"
-                                   @click.prevent="$router.push({path: '/terms/privacy-policy'})"> polityki
+                                   target="_blank"
+                                   class="text-theme-1 dark:text-theme-10 ml-1 cursor-pointer"> polityki
                                     prywatności.</a>.
                             </div>
                             <template v-if="validate.rodo.$error">
@@ -167,7 +167,7 @@
                                 <input id="rodo3" type="checkbox" class="form-check-input border mr-2"
                                        v-model="validate.rodo3.$model"/>
                                 <label class="cursor-pointer select-none" for="rodo3">Akceptuję </label>
-                                <a href="/terms/terms-of-service" class="text-theme-1 dark:text-theme-10 mx-1 cursor-pointer" @click.prevent="$router.push({path: '/terms/terms-of-service'})">
+                                <a href="/terms/terms-of-service" target="_blank" class="text-theme-1 dark:text-theme-10 mx-1 cursor-pointer">
                                     warunki świadczenia
                                     &#32;</a> usług na platformie DBR77.com.
                             </div>
@@ -188,7 +188,7 @@
                                 <label class="cursor-pointer select-none" for="rodo2">
                                     Akceptuję
                                 </label>
-                                <a href="/terms/price-list" class="text-theme-1 dark:text-theme-10 ml-1 cursor-pointer" @click.prevent="$router.push({path: '/terms/price-list'})"> cennik usług</a>.
+                                <a href="/terms/price-list" target="_blank" class="text-theme-1 dark:text-theme-10 ml-1 cursor-pointer"> cennik usług</a>.
                             </div>
                             <template v-if="validate.rodo2.$error">
                                 <div v-for="(error, index) in validate.rodo2.$errors"

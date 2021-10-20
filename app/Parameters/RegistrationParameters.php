@@ -22,8 +22,8 @@ class RegistrationParameters extends NewUserParameters
     {
         parent::__construct();
 
-        $this->validationRules['recaptchaToken'] = [new GoogleReCaptchaV3ValidationRule('register')];
-        $this->validationMessages['recaptchaToken.*'] = __('messages.recaptcha_error');
+//        $this->validationRules['recaptchaToken'] = [new GoogleReCaptchaV3ValidationRule('register')];
+//        $this->validationMessages['recaptchaToken.*'] = __('messages.recaptcha_error');
 
     }
 

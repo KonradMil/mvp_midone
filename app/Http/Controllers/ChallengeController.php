@@ -179,6 +179,9 @@ class ChallengeController extends Controller
         ]);
     }
 
+
+
+
     /**
      * @param Request $request
      * @return JsonResponse
@@ -674,6 +677,7 @@ class ChallengeController extends Controller
             $technical = $challenge->technicalDetails;
         } else {
             $challenge = new Challenge();
+            $challenge->save_json = '{"parts":[],"animation_layers":{"layers":[],"groups":[]},"layouts":{"layouts":[],"labels":[],"comments":[],"robotTrackers":[]},"presentationModel":{"cameraStations":[]},"hangarModel":{"name":"","id":0,"prefabUrl":"","customData":"","limits":{"maxLimits":{"x":0.0,"y":0.0,"z":0.0},"minLimits":{"x":0.0,"y":0.0,"z":0.0}}},"cameraPosition":{"position":{"x":0.0,"y":0.0,"z":0.0},"rotation":{"x":0.0,"y":0.0,"z":0.0}},"screenshot":"","saveVersion":""}';
             $technical = new TechnicalDetails();
             $financial = new Financial();
             $financial->save();
