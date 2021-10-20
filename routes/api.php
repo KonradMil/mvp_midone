@@ -41,5 +41,3 @@ Route::group(['middleware' => 'web'], function () {
     require __DIR__ . '/api/freesaves.php';
     require __DIR__ . '/api/v2/user.php';
 });
-
-Route::group(['prefix' => 'v2', middle])

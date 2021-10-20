@@ -131,14 +131,9 @@ import {
     ref,
     provide,
     onMounted,
-    unref,
-    toRaw,
-    computed,
     getCurrentInstance,
-    onBeforeMount,
     watch
 } from "vue";
-import GetCardChallenge from "../../compositions/GetCardChallenge";
 import WhatsNext from "./WhatsNext";
 import BasicInformationPanel from "./components/BasicInformationPanel";
 import TechnicalInformationPanel from "./components/TechnicalInformationPanel";
@@ -151,6 +146,7 @@ import Offers from "./components/Offers";
 import TeamsPanel from "./components/TeamsPanel";
 import ChallengeOffers from "./components/ChallengeOffers";
 import OperationalAnalysisInformationPanel from "./components/OperationalAnalysisInformationPanel";
+import RequestHandler from '../../compositions/RequestHandler';
 
 export default defineComponent({
     name: 'Card',
@@ -362,15 +358,28 @@ export default defineComponent({
         }
 
         const addSolution = () => {
-            axios.post('/api/solution/create', {id: challenge.value.id})
-                .then(response => {
-                    if (response.data.success) {
 
-                        router.push({path: '/studio/solution/' + response.data.payload.id});
-                    } else {
-                        // toast.error(response.data.message);
-                    }
-                })
+            RequestHandler('v2/user/company/is_valid', 'POST', {}, function(response){
+
+                if(typeof response.data.isValid !== 'undefined' && !response.data.isValid) {
+
+                    window.location.replace('/profiles#fill_company_data');
+
+                } else {
+
+                    axios.post('/api/solution/create', {id: challenge.value.id})
+                        .then(response => {
+                            if (response.data.success) {
+                                router.push({path: '/studio/solution/' + response.data.payload.id});
+                            } else {
+                                // toast.error(response.data.message);
+                            }
+                        })
+
+                }
+
+            });
+
         };
 
         const delete_cookie = ( name, path = '/', domain ) => {
