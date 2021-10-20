@@ -205,6 +205,7 @@ export default defineComponent({
                 activeTab.value = props.change;
             }
         }, {})
+
         emitter.on('selectedSolution', e => {
             selected_solution_id.value = e.id;
             activeTab.value = 'addingoffer';

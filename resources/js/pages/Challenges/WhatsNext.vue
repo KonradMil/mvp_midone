@@ -62,6 +62,9 @@ name: "WhatsNext",
         const fourth = ref(false);
         const fifth = ref(false);
 
+        watch(() => props.project, (first, second) => {
+            doMe();
+        }, {deep: true});
 
         watch(() => props.challenge, (first, second) => {
            doMe();
