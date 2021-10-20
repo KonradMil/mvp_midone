@@ -38,6 +38,7 @@ export default {
 name: "WhatsNext",
     props: {
         challenge: Object,
+        project: Object,
         user: Object,
         solutions: Array,
         stage: Number,
@@ -151,10 +152,17 @@ name: "WhatsNext",
 
         const doMe = () => {
             try {
-                if(props.stage === 3){
-                    text.value = 'W raporcie z wizji lokalnej uzwględnij wszelkie zmiany jakie należy wprowadzić w projekcie po wizycie na zakładzie.';
+                if(props.challenge.stage === 3 && props.project.accept_local_vision !== 1){
+                text.value = 'W raporcie z wizji lokalnej uzwględnij wszelkie zmiany jakie należy wprowadzić w projekcie po wizycie na zakładzie.';
+                action.value = {redirect: '' }
+                } else if(props.challenge.stage === 3 && props.project.accept_local_vision === 1 && props.project.accept_financial_details !== 1 && props.project.accept_technical_details !== 1){
+                    text.value = 'Po przeprowadzeniu wizji lokalnej strony mogą uzgodnić zmiany w założeniach technicznych dla stanowiska.';
                     action.value = {redirect: '' }
-                } else if(props.user.type === 'integrator') {
+                } else if(props.challenge.stage === 3 && props.project.accept_financial_details === 1 && props.project.accept_technical_details === 1 && props.project.accept_offer !== 1){
+                    text.value = 'Po przeprowadzeniu wizji lokalnej strony mogą uzgodnić zmiany oferty na realizacje stanowiska.';
+                    action.value = {redirect: '' }
+                }
+                if(props.user.type === 'integrator' && props.challenge.stage < 3) {
                      if(isSelected.value === true && check.value === false){
                         text.value = 'Ten etap polega na zebraniu ofert finansowych do wybranego przez inwestora stanowiska. Jeżeli jesteś zainteresowany, złóż ofertę.';action.value = {redirect: ''}
                     } else if(isSolutions.value === false && props.challenge.stage === 1) {
@@ -173,7 +181,7 @@ name: "WhatsNext",
                         text.value = 'Opublikuj przygotowaną ofertę.';
                         action.value = {redirect: ''}
                     }
-                } else if(props.user.type === 'investor'){
+                } else if(props.user.type === 'investor' && props.challenge.stage < 3){
                     if(props.challenge.solutions < 1 && props.challenge.stage === 1) {
                         text.value = 'Oczekuj na nowe rozwiązania.';
                         buttonText.value = '';
@@ -201,7 +209,8 @@ name: "WhatsNext",
         }
 
         onMounted(() => {
-
+            doMe();
+            console.log('WHats next');
         });
 
         return {
