@@ -23,6 +23,7 @@ use App\Models\User;
 use App\Repository\Eloquent\FileRepository;
 use App\Repository\Eloquent\SolutionRepository;
 use App\Services\SolutionService;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\ResponseBuilder;

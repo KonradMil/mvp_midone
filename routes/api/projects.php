@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProjectCommunicationsController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectRisksController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'projects', 'middleware' => 'auth:sanctum'], function () {
@@ -12,6 +14,9 @@ Route::group(['prefix' => 'projects', 'middleware' => 'auth:sanctum'], function 
     Route::post('{project_id}/visit-date/{id}/reject', [ProjectController::class, 'rejectVisitDate']);
     Route::post('{project_id}/visit-date/{id}/cancel', [ProjectController::class, 'cancelVisitDate']);
     Route::post('{project_id}/visit-date/{id}/delete', [ProjectController::class, 'deleteVisitDate']);
+    Route::post('{project_id}/files/save', [ProjectController::class, 'saveFiles']);
+    Route::get('{project_id}/files', [ProjectController::class, 'getFiles']);
+    Route::post('{project_id}/file/delete', [ProjectController::class, 'deleteFile']);
     Route::get('{project_id}/local-vision', [ProjectController::class, 'getLocalVision']);
     Route::post('{project_id}/local-vision/save', [ProjectController::class, 'saveLocalVision']);
     Route::post('{project_id}/local-vision/{id}/accept', [ProjectController::class, 'acceptReport']);
@@ -34,6 +39,15 @@ Route::group(['prefix' => 'projects', 'middleware' => 'auth:sanctum'], function 
     Route::get('{challenge_id}/solution', [ProjectController::class, 'getProjectSolution']);
     Route::get('{challenge_id}/investor-integrator', [ProjectController::class, 'getInvestorAndIntegrator']);
     Route::post('visit-date/end', [ProjectController::class, 'endVisitDate']);
+    Route::get('{project_id}/communications/integrator', [ProjectCommunicationsController::class, 'getIntegratorCommunications']);
+    Route::get('{project_id}/communications/investor', [ProjectCommunicationsController::class, 'getInvestorCommunications']);
+    Route::post('{project_id}/communication/save', [ProjectCommunicationsController::class, 'saveCommunicationPlan']);
+    Route::post('{project_id}/communication/{id}/delete', [ProjectCommunicationsController::class, 'deleteCommunicationPlan']);
+    Route::post('{project_id}/communication/{id}/accept', [ProjectCommunicationsController::class, 'acceptProjectCommunicationPlan']);
+    Route::get('{project_id}/risks', [ProjectRisksController::class, 'getRisks']);
+    Route::post('{project_id}/risk/save', [ProjectRisksController::class, 'saveRisk']);
+    Route::post('{project_id}/risk/{id}/delete', [ProjectRisksController::class, 'deleteRisk']);
+    Route::post('{project_id}/risk/{id}/accept', [ProjectRisksController::class, 'acceptProjectRisk']);
 });
 
 

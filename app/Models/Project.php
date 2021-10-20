@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Tags\HasTags;
 
@@ -52,5 +53,27 @@ class Project extends Model
     public function visit_dates(): HasMany
     {
         return $this->hasMany(VisitDate::class, 'id', 'project_id');
+    }
+    /**
+     * @return HasMany
+     */
+    public function project_communications(): HasMany
+    {
+        return $this->hasMany(ProjectCommunication::class, 'id', 'project_id');
+    }
+    /**
+     * @return HasMany
+     */
+    public function project_risks(): HasMany
+    {
+        return $this->hasMany(ProjectRisk::class, 'id', 'project_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function files(): BelongsToMany
+    {
+        return $this->belongsToMany(File::class, 'project_files', 'project_id', 'file_id');
     }
 }

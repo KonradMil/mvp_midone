@@ -65,4 +65,12 @@ class File extends Model
         return $this->belongsToMany(File::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
+    public function projects(): BelongsToMany
+    {
+        return $this->belongsToMany(File::class);
+    }
+
 }

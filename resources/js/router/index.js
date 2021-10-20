@@ -13,6 +13,7 @@ import WizardOne from "../pages/WizardOne";
 import Challenges from "../pages/Challenges/Main";
 import Projects from "../pages/Projects/Main";
 import ProjectCard from "../pages/Projects/Card";
+import ProjectCardSecond from "../pages/Projects/ProjectStageSecond/Card";
 import AddChallenge from "../pages/Challenges/New";
 import Solutions from "../pages/Solutions/Main";
 import AddSolution from "../pages/Solutions/New";
@@ -193,6 +194,12 @@ export const routes = [
                 name: 'projectCard',
                 path: '/projects/card/:id',
                 component: ProjectCard,
+                props: true
+            },
+            {
+                name: 'projectCardStageSecond',
+                path: '/projects/card/second/:id',
+                component: ProjectCardSecond,
                 props: true
             },
             {

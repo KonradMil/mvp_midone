@@ -5,11 +5,11 @@
         </div>
         <div class="wizard flex flex-col lg:flex-row justify-center px-5 sm:px-20">
             <div class="intro-x lg:text-center flex items-center lg:block flex-1 z-10">
-                <button class="w-10 h-10 rounded-full btn btn-primary">1</button>
+                <button class="w-10 h-10 rounded-full btn text-gray-600 bg-gray-200 dark:bg-dark-1">1</button>
                 <div class="lg:w-32 font-medium text-base lg:mt-3 ml-3 lg:mx-auto">Inicjowanie projektu</div>
             </div>
             <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
-                <button class="w-10 h-10 rounded-full btn text-gray-600 bg-gray-200 dark:bg-dark-1" @click="showModal">
+                <button class="w-10 h-10 rounded-full btn btn-primary">
                     2
                 </button>
                 <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Planowanie
@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
-                <button class="w-10 h-10 rounded-full btn text-gray-600 bg-gray-200 dark:bg-dark-1">3</button>
+                <button class="w-10 h-10 rounded-full btn text-gray-600 bg-gray-200 dark:bg-dark-1"  @click="showModal">3</button>
                 <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Realizacja
                     projektu zgodnie z ofertą
                 </div>
@@ -48,131 +48,20 @@
                         </div>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5">
-                        <a href="javascript:;" class="menu">
-                            <div class="menu__icon"><i data-feather="home"></i></div>
-                            <div class="menu__title" @click.prevent="showMenu = !showMenu">
-                                <InfoIcon class="w-4 h-4 mr-2"/>
-                                Startowa karta projektu
-                                <i data-feather="chevron-down" class="menu__sub-icon"></i>
-                            </div>
-                        </a>
-                        <ul v-if="showMenu" class="intro-y pt-4 pl-5">
-                            <li class="intro-y">
-                                <a class="flex items-center"
-                                   href=""
-                                   @click.prevent="activeTab = 'podstawowe'"
-                                   :class="(activeTab == 'podstawowe')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
-                                    <ActivityIcon class="w-4 h-4 mr-2"/>
-                                    {{ $t('challengesMain.basicInformation') }}
-                                </a>
-                            </li>
-                            <li class="intro-y">
-                                <a class="flex items-center mt-5" href=""
-                                   @click.prevent="(activeTab = 'techniczne') && (stage=2)"
-                                   :class="(activeTab == 'techniczne')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                    <BoxIcon class="w-4 h-4 mr-2"/>
-                                    {{ $t('challengesMain.technicalDetails') }} </a>
-                            </li>
-                            <li class="intro-y">
-                                <a class="flex items-center mt-5" href="" v-if="challenge != undefined"
-                                   @click.prevent="activeTab = 'rozwiazania'"
-                                   :class="(activeTab == 'rozwiazania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                    <LockIcon class="w-4 h-4 mr-2"/>
-                                    <div v-if="challenge.selected != undefined && challenge.selected.length != 0">
-                                        Rozwiązanie
-                                    </div>
-                                    <div v-if="challenge.selected == undefined || challenge.selected.length == 0">
-                                        {{ $t('challengesMain.solutions') }}
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="intro-y">
-                                <a v-if="!inTeam && challenge.stage >= 1"
-                                   class="flex items-center mt-5" href=""
-                                   @click.prevent="activeTab = 'oferty'"
-                                   :class="(activeTab == 'oferty')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                    <SettingsIcon class="w-4 h-4 mr-2"/>
-                                    Oferta
-                                </a>
-                            </li>
-                            <li class="intro-y">
-                                <a v-if="inTeam && challenge.stage >= 1"
-                                   class="flex items-center mt-5" href=""
-                                   @click.prevent="activeTab = 'oferty'"
-                                   :class="(activeTab == 'oferty')? 'text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                    <SettingsIcon class="w-4 h-4 mr-2"/>
-                                    Oferta
-                                </a>
-                            </li>
-                            <li class="intro-y">
-                                <a class="flex items-center mt-5" href=""
-                                   @click.prevent="activeTab = 'pytania'"
-                                   :class="(activeTab == 'pytania')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                    <SettingsIcon class="w-4 h-4 mr-2"/>
-                                    {{ $t('communication.questions') }}
-                                </a>
-                            </li>
-                            <li class="intro-y">
-                                <a v-if="challenge.stage === 3"
-                                   class="flex items-center mt-5" href=""
-                                   @click.prevent="activeTab = 'operational-analysis'"
-                                   :class="(activeTab == 'operational-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                    <SettingsIcon class="w-4 h-4 mr-2"/>
-                                    Analiza operacyjna rozwiązania
-                                </a>
-                            </li>
-                            <li class="intro-y">
-                                <a v-if="challenge.stage === 3"
-                                   class="flex items-center mt-5" href=""
-                                   @click.prevent="activeTab = 'financial-analysis'"
-                                   :class="(activeTab == 'financial-analysis')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                    <SettingsIcon class="w-4 h-4 mr-2"/>
-                                    Analiza finansowa rozwiązania
-                                </a>
-                            </li>
-                            <li class="intro-y" v-if="(challenge.author_id == user.id)">
-                                <a class="flex items-center mt-5" href=""
-                                   @click.prevent="activeTab = 'teams'"
-                                   :class="(activeTab == 'teams')? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
-                                    <ActivityIcon class="w-4 h-4 mr-2"/>
-                                    {{ $t('teams.teams') }}
-                                </a>
-                            </li>
-                        </ul>
-                        <a v-if="challenge.stage === 3"
-                           class="flex items-center mt-5"
-                           href=""
-                           @click.prevent="showMenuVision = !showMenuVision">
+                        `<a class="flex items-center"
+                            href=""
+                            @click.prevent="activeTab = 'communication'"
+                            :class="(activeTab === 'communication') ? 'flex items-center text-theme-1 dark:text-theme-10 font-medium' : 'flex items-center'">
                             <EditIcon v-if="project.accept_local_vision < 1" class="w-4 h-4 mr-2 text-red-600"/>
                             <CheckCircleIcon v-if="project.accept_local_vision === 1"
                                              class="w-4 h-4 mr-2 text-green-600"/>
                             <XCircleIcon v-if="project.accept_local_vision === 2" class="w-4 h-4 mr-2 text-red-600"/>
-                            Wizja lokalna
+                            Plan komunikacji
                         </a>
-                        <ul v-if="showMenuVision" class="intro-y pt-4 pl-5">
-                            <li class="intro-y">
-                                <a class="flex items-center"
-                                   href=""
-                                   @click.prevent="activeTab = 'visit-date'"
-                                   :class="(activeTab == 'visit-date') ? ' text-theme-1 dark:text-theme-10 font-medium' : ''">
-                                    <CalendarIcon class="w-4 h-4 mr-2"/>
-                                    Termin wizyt
-                                </a>
-                            </li>
-                            <li class="intro-y">
-                                <a class="flex items-center mt-5"
-                                   href=""
-                                   @click.prevent="activeTab = 'local-vision'"
-                                   :class="(activeTab == 'local-vision') ? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
-                                    <Edit2Icon class="w-4 h-4 mr-2"/>
-                                    Raport wizji lokalnej
-                                </a>
-                            </li>
-                        </ul>
                         <a v-if="challenge.stage === 3 && project.accept_local_vision === 1"
                            href=""
-                           @click.prevent="activeTab = 'project-details'"
-                           :class="(activeTab == 'project-details') ? 'flex items-center mt-5 text-theme-1 dark:text-theme-10 font-medium mt-5' : 'flex items-center mt-5'">
+                           @click.prevent="activeTab = 'risk'"
+                           :class="(activeTab === 'risk') ? 'flex items-center text-theme-1 dark:text-theme-10 font-medium mt-5' : 'flex items-center mt-5'">
                             <EditIcon
                                 v-if="project.accept_technical_details < 1 || project.accept_financial_details < 1 && (project.accept_technical_details !== 2 && project.accept_financial_details !== 2)"
                                 class="w-4 h-4 mr-2 text-red-600"/>
@@ -182,7 +71,7 @@
                             <XCircleIcon
                                 v-if="project.accept_technical_details === 2 || project.accept_financial_details === 2"
                                 class="w-4 h-4 mr-2 text-red-600"/>
-                            Akceptacja założeń technicznych
+                            Mapa ryzyka w projekcie
                         </a>
                         <a v-if="project.accept_local_vision === 0"
                            :class="(project.accept_local_vision === 1) ? 'flex items-center mt-5 cursor-pointer' : 'flex items-center mt-5 opacity-50 cursor-pointer'">
@@ -193,7 +82,7 @@
                                 tag="a"
                                 class="dark:text-gray-300 text-theme-600"
                                 content="Etap odblokuje się po zakończeniu wizji lokalnej">
-                                Akceptacja założeń technicznych
+                                Koncepcja stanowiska
                             </Tippy>
                         </a>
                         <a v-if="challenge.stage === 3 && project.accept_technical_details === 1 && project.accept_financial_details === 1"
@@ -203,7 +92,7 @@
                             <EditIcon v-if="project.accept_offer < 1" class="w-4 h-4 mr-2 text-red-600"/>
                             <CheckCircleIcon v-if="project.accept_offer === 1" class="w-4 h-4 mr-2 text-green-600"/>
                             <XCircleIcon v-if="project.accept_offer === 2" class="w-4 h-4 mr-2 text-red-600"/>
-                            Podsumowanie z oferty
+                            Koncepcja stanowiska
                         </a>
                         <a v-if="project.accept_technical_details !== 1 || project.accept_financial_details !== 1"
                            class="flex items-center mt-5 opacity-50 cursor-pointer">
@@ -214,7 +103,7 @@
                                 tag="a"
                                 class="dark:text-gray-300 text-theme-600"
                                 content="Etap odblokuje się po zaakceptowaniu założeń technicznych">
-                                Podsumowanie z oferty
+                                Przygotowanie umowy
                             </Tippy>
                         </a>
                         <a v-if="challenge.stage === 3"
@@ -222,7 +111,7 @@
                            @click.prevent="activeTab = 'report-init'"
                            :class="(activeTab == 'report-init')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <EditIcon class="w-4 h-4 mr-2 text-red-600"/>
-                            Raport z fazy inicjowania
+                            Raport z fazy planowania
                         </a>
                     </div>
                     <div class="p-5 border-t border-gray-200 dark:border-dark-5 flex" v-if="inTeam">
@@ -267,53 +156,13 @@
                 <WhatsNext :user="user" :challenge="challenge" :solutions="challenge.solutions" :stage="3"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
-            <BasicInformationPanel :challenge="challenge" :inTeam="inTeam" v-if="activeTab == 'podstawowe'"
-                                   :investor="investor" :integrator="integrator"></BasicInformationPanel>
-            <TechnicalInformationProjectPanel :project="project" :challenge="challenge" :stage="challenge.stage"
-                                              v-if="activeTab == 'project-details'"
-                                              :author_id="solution_project.author_id"></TechnicalInformationProjectPanel>
-            <TechnicalInformationPanel :project="project" :challenge="challenge" :stage="stage"
-                                       v-if="activeTab == 'techniczne'"
-                                       :author_id="solution_project.author_id"></TechnicalInformationPanel>
-            <QuestionsPanel v-if="activeTab == 'pytania'" :author_id="challenge.author_id" :id="challenge.id"
-                            :challenge_stage="challenge.stage"></QuestionsPanel>
-            <SolutionProjectPanel v-if="activeTab == 'rozwiazania'" :challenge="challenge" :inTeam="inTeam"
-                                  :addChallengeSolution="addChallengeSolution"
-                                  :acceptChallengeSolutions="acceptChallengeSolutions"
-                                  :publishSolution="publishSolution"
-                                  :addSolutionOffer="addSolutionOffer"></SolutionProjectPanel>
-            <TeamsPanel
-                v-if="(activeTab == 'teams') && ((challenge.author_id == user.id) || (solution.author_id == user.id))"
-                :solution="solution" :challenge="challenge" :who="who"></TeamsPanel>
-            <OfferAdd v-if="activeTab == 'addingoffer'" :stage="challenge.stage" :project="project"
-                      :solution_id="selected_solution_id" :challenge_id="challenge.id" :edit_offer_id="edit_offer_id"
-                      :change_offer="change_offer"></OfferAdd>
-            <OfferProject v-if="activeTab == 'project-offer' || activeTab == 'oferty'" v-model:activeTab="activeTab"
-                          :project="project" :integrator="integrator" :investor="investor" :stage="challenge.stage"
-                          :id="challenge.id" :inTeam="inTeam" :addSolutionOffer="addSolutionOffer"
-                          :selected_offer_id="challenge.selected_offer_id" :author_id="solution_project.author_id"
-                          :challenge_author_id="challenge.author_id" :challenge="challenge"></OfferProject>
-            <ChallengeOffers v-if="(activeTab == 'all-offers') && inTeam" v-model:activeTab="activeTab" :inTeam="inTeam"
-                             :challenge="challenge" :acceptChallengeOffers="acceptChallengeOffers"></ChallengeOffers>
-            <OperationalAnalysisInformationPanel v-if="activeTab == 'operational-analysis'"
-                                                 :solution="solution_project"></OperationalAnalysisInformationPanel>
-            <FinancialAnalysisInformationPanel v-if="activeTab == 'financial-analysis'"
-                                               :solution="solution_project"></FinancialAnalysisInformationPanel>
-            <LocalVisionPanel v-if="activeTab == 'local-vision'" :project="project" :challenge="challenge"
-                              :challenge_author_id="challenge.author_id" :challenge_id="challenge.id"
-                              :author_id="solution_project.author_id" :integrator="integrator"
-                              :investor="investor"></LocalVisionPanel>
-            <VisitDatePanel v-if="activeTab == 'visit-date'" :project="project" :challenge="challenge"
-                            :challenge_author_id="challenge.author_id" :challenge_id="challenge.id"
-                            :author_id="solution_project.author_id" :integrator="integrator"
-                            :investor="investor"></VisitDatePanel>
-            <ReportInitPanel v-if="activeTab == 'report-init'" :project="project" :challenge_id="challenge.id"
-                             :author_id="solution_project.author_id"></ReportInitPanel>
+            <CommunicationPanel v-if="activeTab ==='communication'" :project="project" :integrator="integrator" :investor="investor"></CommunicationPanel>
+            <RiskPanel v-if="activeTab ==='risk'" :project="project" :integrator="integrator" :investor="investor"></RiskPanel>
             <ModalCard :show="show" @closed="modalClosed">
                 <h3 class="intro-y text-lg font-medium mt-5">Czy na pewno chcesz przejść do następnej fazy?</h3>
                 <div class="intro-y box p-5 mt-12 sm:mt-5" style="text-align: center;">
                     <div class="relative text-gray-700 dark:text-gray-300 mr-4">
-                        <button class="btn btn-primary shadow-md mr-2" @click.prevent="goTo">Tak</button>
+                        <button class="btn btn-primary shadow-md mr-2">Tak</button>
                         <button class="btn btn-primary shadow-md mr-2">Anuluj</button>
                     </div>
                 </div>
@@ -328,39 +177,34 @@ import {
     ref,
     provide,
     onMounted,
-    unref,
-    toRaw,
-    computed,
     getCurrentInstance,
-    onBeforeMount,
     watch
 } from "vue";
 
-import GetCardChallenge from "../../compositions/GetCardChallenge";
-import WhatsNext from "../Challenges/WhatsNext";
-import BasicInformationPanel from "../Challenges/components/BasicInformationPanel";
-import TechnicalInformationProjectPanel from "./components/TechnicalInformationProjectPanel";
-import QuestionsPanel from "../Challenges/components/QuestionsPanel";
-import router from "../../router";
-import SolutionProjectPanel from "./components/SolutionProjectPanel";
-import {useToast} from "vue-toastification";
-import OfferAdd from "../Challenges/components/OfferAdd";
-import OfferProject from "./components/OfferProject";
-import TeamsPanel from "../Challenges/components/TeamsPanel";
-import ChallengeOffers from "../Challenges/components/ChallengeOffers";
-import TechnicalInformationPanel from "../Challenges/components/TechnicalInformationPanel";
-import OperationalAnalysisInformationPanel from "./components/OperationalAnalysisInformationPanel";
-import FinancialAnalysisInformationPanel from "./components/FinancialAnalysisInformationPanel";
-import LocalVisionPanel from "./components/LocalVisionPanel";
-import VisitDatePanel from "./components/VisitDatePanel";
-import ModalCard from "../../components/ModalCard";
-import ReportInitPanel from "./components/ReportInitPanel";
-import RequestHandler from "../../compositions/RequestHandler";
-
+import WhatsNext from "../../Challenges/WhatsNext";
+import BasicInformationPanel from "../../Challenges/components/BasicInformationPanel";
+import TechnicalInformationProjectPanel from "../components/TechnicalInformationProjectPanel";
+import QuestionsPanel from "../../Challenges/components/QuestionsPanel";
+import SolutionProjectPanel from "../components/SolutionProjectPanel";
+import OfferAdd from "../../Challenges/components/OfferAdd";
+import OfferProject from "../components/OfferProject";
+import TeamsPanel from "../../Challenges/components/TeamsPanel";
+import ChallengeOffers from "../../Challenges/components/ChallengeOffers";
+import TechnicalInformationPanel from "../../Challenges/components/TechnicalInformationPanel";
+import OperationalAnalysisInformationPanel from "../components/OperationalAnalysisInformationPanel";
+import FinancialAnalysisInformationPanel from "../components/FinancialAnalysisInformationPanel";
+import LocalVisionPanel from "../components/LocalVisionPanel";
+import VisitDatePanel from "../components/VisitDatePanel";
+import ModalCard from "../../../components/ModalCard";
+import ReportInitPanel from "../components/ReportInitPanel";
+import RequestHandler from "../../../compositions/RequestHandler";
+import CommunicationPanel from "./components/CommunicationPanel";
+import RiskPanel from "./components/RiskPanel";
 
 export default defineComponent({
-    name: 'projectCard',
+    name: 'projectCardStageSecond',
     components: {
+        CommunicationPanel,
         OfferProject,
         OfferAdd,
         ChallengeOffers,
@@ -378,6 +222,7 @@ export default defineComponent({
         ReportInitPanel,
         TechnicalInformationPanel,
         RequestHandler,
+        RiskPanel
     },
     props: {
         id: Number,
@@ -386,22 +231,18 @@ export default defineComponent({
     setup(props, {emit}) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
-        const toast = useToast();
         const announcementRef = ref();
         const newProjectsRef = ref();
         const challenge = ref({});
         const project = ref({});
-        const solutions = ref({});
         const permissions = ref({});
         const solution = ref({});
-        const questions = ref({});
         const temp_offer_id = ref(null);
         const edit_offer_id = ref(null);
-        const activeTab = ref('podstawowe');
+        const activeTab = ref('communication');
         const user = window.Laravel.user;
-        // const permissions = window.Laravel.permissions;
         const selected_solution_id = ref(null);
-        const types = require("../../json/types.json");
+        const types = require("../../../json/types.json");
         const who = ref('challenge');
         const inTeam = ref(false);
         const isSolutions = ref(false);
@@ -417,9 +258,6 @@ export default defineComponent({
         const investor = ref({});
         const integrator = ref({});
         const guard = ref(false);
-        const stageSecondActive = ref(false);
-
-
 
         watch(() => props.change, (first, second) => {
             if (props.change === 'all-offers' && user.type === 'integrator') {
@@ -531,10 +369,6 @@ export default defineComponent({
                 });
         }
 
-        const goTo = () => {
-            router.push( {path : '/projects/card/second/' + props.id})
-        }
-
         emitter.on('changeTeamsSolution', e => () => {
             activeTab.value = 'teamsSolution'
         });
@@ -547,7 +381,6 @@ export default defineComponent({
             }
 
         });
-
 
         emitter.on('changeToOfferAdd', e => () => {
             activeTab.value = 'addingoffer';
@@ -628,7 +461,6 @@ export default defineComponent({
         };
 
         return {
-            goTo,
             guard,
             investor,
             integrator,
@@ -661,8 +493,7 @@ export default defineComponent({
             isSolutions,
             isPublic,
             solution_project,
-            checkSolution,
-            stageSecondActive
+            checkSolution
         };
     }
 });
