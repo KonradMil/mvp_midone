@@ -21,6 +21,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use function Symfony\Component\String\s;
@@ -464,11 +465,11 @@ class ChallengeController extends Controller
         foreach ($ts as $tt) {
             array_push($ars, $tt->id);
         }
-
+        Log::info(json_encode($ts));
         $c = Challenge::whereHas('teams', function ($query) use ($ars) {
             $query->whereIn('teams.id', $ars);
         })->orderBy('created_at', 'DESC')->get();
-
+        Log::info(json_encode($c));
 
         $merged = $challenges->merge($c);
 
