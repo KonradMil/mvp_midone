@@ -182,7 +182,7 @@ export default {
                         formatter(cell) {
                             return `<div class="flex lg:justify-center">
                                         <div class="intro-x w-10 h-10 image-fit">
-                                            <img alt="DBR77" class="rounded-full" src="` + cell.getData().screenshot_path + `">
+                                            <img alt="DBR77" class="rounded-full" src="/` + cell.getData().screenshot_path + `">
                                         </div>
                                     </div>`;
                         }
