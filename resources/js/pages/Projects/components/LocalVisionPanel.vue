@@ -219,7 +219,7 @@
                 <div class="mt-3" v-if="projectFiles.length <= 0">
                     <span class="font-medium dark:text-theme-10 text-theme-1">Brak plików</span>
                 </div>
-                <div class="mt-3" v-if="user.id === integrator.id || user.id === investor.id">
+                <div class="mt-3" v-if="user.id === integrator.id || user.id === investor.id && project.accept_local_vision !== 1">
                     <label class="form-label"> {{ $t('challengesNew.file') }}</label>
                     <div class="rounded-md pt-4">
                         <div class="flex flex-wrap px-4">
@@ -246,7 +246,7 @@
                     </div>
                 </div>
             </div>
-            <div v-if="user.id === integrator.id  || user.id === investor.id" class="flex flex-col lg:flex-row items-center p-5" style="justify-content: center;">
+            <div v-if="user.id === integrator.id  || user.id === investor.id && project.accept_local_vision !== 1" class="flex flex-col lg:flex-row items-center p-5" style="justify-content: center;">
                 <button class="btn btn-outline-secondary py-1 px-2" @click="saveFiles">
                     {{ $t('global.save') }}
                 </button>
