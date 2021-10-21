@@ -205,7 +205,7 @@
                                 </div>
                                 <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
                                      class="cursor-pointer px-6">
-                                    <button v-if="user.id === file.author_id" class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
+                                    <button v-if="user.id === file.author_id && project.accept_local_vision !== 1" class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
                                         Usuń
                                     </button>
                                     <button class="btn btn-outline-secondary py-1 px-2" @click="downloadFile(file.path, file.name)">
