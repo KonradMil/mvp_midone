@@ -1,5 +1,5 @@
 <template>
-    <tr >
+    <tr>
         <td class="w-40 truncate">
             <div class="flex" v-if="rep.files != undefined">
                 <div class="w-10 h-10 image-fit" v-if="rep.files.length != '0'">

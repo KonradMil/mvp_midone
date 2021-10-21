@@ -85,6 +85,7 @@ export default {
       id: Number,
         author_id: Number,
         challenge_stage: Number,
+        concept: Number
     },
     setup(props) {
         const addingDialog = ref(false);
@@ -120,8 +121,10 @@ export default {
        }
 
         onMounted(() => {
-            authorId.value = props.author_id;
-            getQuestions();
+            if(props.concept !== 1){
+                authorId.value = props.author_id;
+                getQuestions();
+            }
         });
 
         return {

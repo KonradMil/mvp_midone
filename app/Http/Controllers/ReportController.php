@@ -125,6 +125,7 @@ class ReportController extends Controller
         $file->ext = $ext;
         $file->path = 's3/screenshots/' . $fileName;
         $file->original_name = $request->file->getClientOriginalName();
+        $file->author_id = Auth::user()->id;
         $file->save();
 
         return response()->json([

@@ -74,4 +74,11 @@ class File extends Model
         return $this->belongsToMany(File::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
+    public function project_concepts(): BelongsToMany
+    {
+        return $this->belongsToMany(File::class);
+    }
 }

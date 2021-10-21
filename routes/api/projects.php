@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectCommunicationsController;
+use App\Http\Controllers\ProjectConceptsController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectRisksController;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,10 @@ Route::group(['prefix' => 'projects', 'middleware' => 'auth:sanctum'], function 
     Route::post('{project_id}/risk/save', [ProjectRisksController::class, 'saveRisk']);
     Route::post('{project_id}/risk/{id}/delete', [ProjectRisksController::class, 'deleteRisk']);
     Route::post('{project_id}/risk/{id}/accept', [ProjectRisksController::class, 'acceptProjectRisk']);
+    Route::get('{project_id}/concepts', [ProjectConceptsController::class, 'getProjectConcepts']);
+    Route::post('{project_id}/concept/save', [ProjectConceptsController::class, 'saveConcept']);
+    Route::post('{project_id}/concept/{id}/delete', [ProjectConceptsController::class, 'deleteConcept']);
+    Route::post('{project_id}/concept/{id}/accept', [ProjectConceptsController::class, 'acceptProjectConcept']);
 });
 
 
