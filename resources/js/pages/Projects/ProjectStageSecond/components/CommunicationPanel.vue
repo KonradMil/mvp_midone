@@ -1,5 +1,5 @@
 <template>
-    <div class="intro-y col-span-12 lg:col-span-8 xl:col-span-9">
+    <div class="intro-y col-span-12 lg:col-span-8 xl:col-span-9" v-if="guard === true">
         <div v-if="user.type === 'integrator'" class="intro-y box">
             <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
                 <h2 class="font-medium text-base mr-auto">
@@ -326,7 +326,7 @@ export default {
                 project_decision: 2
             }
             setTimeout(function () {
-                if(user.value.id === props.integrator.id){
+                if(user.id === props.integrator.id){
                     integratorCommunicationPlans.value.unshift(communicationPlan);
                 } else {
                     investorCommunicationPlans.value.unshift(communicationPlan);
@@ -360,6 +360,8 @@ export default {
         }
 
         const getIntegratorCommunicationPlans = async (callback) => {
+            console.log(props.integrator.id + 'props.integator.id');
+
             RequestHandler('projects/' + props.project.id + '/communications/integrator', 'get', {
                 integrator_id: props.integrator.id
             }, (response) => {
@@ -382,12 +384,18 @@ export default {
         }
 
         onMounted(() => {
-            getIntegratorCommunicationPlans(function () {
-                guard.value = true;
-            });
-            getInvestorCommunicationPlans(()=>{
-                guard.value = true;
-            })
+            console.log(props.integrator.id + 'props.integrator.id');
+            console.log(props.investor.id + 'props.integrator.id');
+            if(props.integrator.id !== undefined){
+                getIntegratorCommunicationPlans(function () {
+                    guard.value = true;
+                });
+            }
+            if(props.investor.id !== undefined){
+                getInvestorCommunicationPlans(()=>{
+                    guard.value = true;
+                })
+            }
         });
 
         return {

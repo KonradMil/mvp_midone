@@ -52,21 +52,21 @@
                             href=""
                             @click.prevent="activeTab = 'communication'"
                             :class="(activeTab === 'communication') ? 'flex items-center text-theme-1 dark:text-theme-10 font-medium' : 'flex items-center'">
-                            <EditIcon v-if="project.accept_local_vision < 1" class="w-4 h-4 mr-2 text-red-600"/>
-                            <CheckCircleIcon v-if="project.accept_local_vision === 1"
+                            <EditIcon v-if="project.accept_communication === 0" class="w-4 h-4 mr-2 text-red-600"/>
+                            <CheckCircleIcon v-if="project.accept_communication === 1"
                                              class="w-4 h-4 mr-2 text-green-600"/>
                             <XCircleIcon v-if="project.accept_local_vision === 2" class="w-4 h-4 mr-2 text-red-600"/>
                             Plan komunikacji
                         </a>
-                        <a v-if="challenge.stage === 3 && project.accept_local_vision === 1"
+                        <a
                            href=""
                            @click.prevent="activeTab = 'risk'"
                            :class="(activeTab === 'risk') ? 'flex items-center text-theme-1 dark:text-theme-10 font-medium mt-5' : 'flex items-center mt-5'">
                             <EditIcon
-                                v-if="project.accept_technical_details < 1 || project.accept_financial_details < 1 && (project.accept_technical_details !== 2 && project.accept_financial_details !== 2)"
+                                v-if="project.accept_risk  === 0"
                                 class="w-4 h-4 mr-2 text-red-600"/>
                             <CheckCircleIcon
-                                v-if="project.accept_technical_details === 1 && project.accept_financial_details === 1"
+                                v-if="project.accept_risk  === 1"
                                 class="w-4 h-4 mr-2 text-green-600"/>
                             <XCircleIcon
                                 v-if="project.accept_technical_details === 2 || project.accept_financial_details === 2"
@@ -405,10 +405,9 @@ export default defineComponent({
                 checkSolution();
             });
             getInvestorAndIntegrator(function () {
-
+                guard.value = true;
             })
             setTimeout(function () {
-                guard.value = true;
             }, 1500)
         })
 

@@ -33,9 +33,9 @@ class NewProjectCommunicationParameters extends Parameters
     public ?string $personalData;
 
     /**
-     * @var ?int
+     * @var ?string
      */
-    public ?int $phoneNumber;
+    public ?string $phoneNumber;
 
        /**
         * @var ?string
@@ -58,7 +58,7 @@ class NewProjectCommunicationParameters extends Parameters
             'communicationPlanId' => 'nullable|int',
             'personalOccupation' => 'required|string',
             'personalData' => 'required|string',
-            'phoneNumber' => 'nullable|int:12',
+            'phoneNumber' => 'nullable|string',
             'email' => 'nullable|string',
             'projectDecision' => 'nullable|int'
         ];

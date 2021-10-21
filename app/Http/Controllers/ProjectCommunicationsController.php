@@ -65,19 +65,15 @@ class ProjectCommunicationsController extends Controller
                 return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
             }
         } else {
-            try {
                 $newCommunicationPlan = $projectCommunicationService->addCommunicationPlan($parameters);
 
                 $responseBuilder->setSuccessMessage(__('messages.save_correct'));
                 $responseBuilder->setData('local_vision', $newCommunicationPlan);
 
-
-            } catch (QueryException $e) {
-
                 $responseBuilder->setErrorMessage(__('messages.error'));
                 return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
-            }
+
         }
 
 

@@ -26,7 +26,7 @@ class ProjectCommunicationHandler extends RequestHandler
         $parameters->personalData = $this->request->get('personal_data');
         $parameters->phoneNumber = $this->request->get('phone_number');
         $parameters->email = $this->request->get('email');
-        $parameters->project_decision = $this->request->get('project_decision');
+        $parameters->projectDecision = $this->request->get('project_decision');
 
         return $parameters;
     }
