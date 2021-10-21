@@ -487,14 +487,17 @@ export default {
                     guard.value = true;
                 });
             });
+
             const elDropzoneSingleRef = dropzoneSingleRef.value;
-            elDropzoneSingleRef.dropzone.on("success", (resp) => {
-                projectFiles.value.push(JSON.parse(resp.xhr.response).payload);
-                toast.success('Zdjecie zostało wgrane poprawnie!');
+            if(props.project.accept_local_vision !== 1){
+                elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                    projectFiles.value.push(JSON.parse(resp.xhr.response).payload);
+                    toast.success('Zdjecie zostało wgrane poprawnie!');
                 });
                 elDropzoneSingleRef.dropzone.on("error", () => {
                     toast.error("Maksymalnie można wgrać 8 plików!");
                 });
+            }
         });
 
         provide("bind[dropzoneSingleRef]", el => {
