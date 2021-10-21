@@ -49,7 +49,6 @@ class Company extends Model
         $validator = Validator::make($this->original, [
             'company_name' => 'required',
             'nip' => 'required',
-            'regon' => 'required',
             'street' => 'required',
             'house_nr' => 'required',
             'city' => 'required',
