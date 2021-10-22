@@ -103,4 +103,15 @@ class ProjectConceptService
 
         return $projectConcept;
     }
+
+    /**
+     *
+     * @param ProjectConcept $projectConcept
+     * @param File $file
+     * @return mixed
+     */
+    public function detachFile(ProjectConcept $projectConcept, File $file)
+    {
+        $projectConcept->files()->detach($file);
+    }
 }

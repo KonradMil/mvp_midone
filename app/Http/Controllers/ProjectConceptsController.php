@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Handlers\ProjectConceptHandler;
 use App\Http\ResponseBuilder;
+use App\Repository\Eloquent\FileRepository;
 use App\Repository\Eloquent\ProjectConceptRepository;
 use App\Repository\Eloquent\ProjectRepository;
 use App\Repository\Eloquent\UserRepository;
 use App\Services\ProjectConceptService;
+use App\Services\ProjectService;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -142,6 +144,53 @@ class ProjectConceptsController extends Controller
         $concepts = $projectConceptRepository->getAllProjectConceptsByProject($id);
 
         $responseBuilder->setData('concepts', $concepts);
+
+        return $responseBuilder->getResponse();
+    }
+
+    /**
+     * @param int $id
+     * @param Request $request
+     * @param ProjectRepository $projectRepository
+     * @param ProjectConceptRepository $projectConceptRepository
+     * @param FileRepository $fileRepository
+     * @param ProjectConceptService $projectConceptService
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteFile(int $id,Request $request, ProjectRepository $projectRepository, ProjectConceptRepository $projectConceptRepository, FileRepository $fileRepository, ProjectConceptService $projectConceptService): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $project = $projectRepository->find($id);
+
+        if (!$project) {
+            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $projectConcept = $projectConceptRepository->find($request->get('concept_id'));
+
+        if (!$projectConcept) {
+            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $file = $fileRepository->find($request->get('file_id'));
+
+        if (!$file) {
+            $responseBuilder->setErrorMessage(__('messages.file.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        try {
+            $projectConceptService->detachFile($projectConcept, $file);
+            $responseBuilder->setSuccessMessage(__('messages.delete_correct'));
+        } catch (QueryException $e) {
+
+            $responseBuilder->setErrorMessage(__('messages.error'));
+            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
 
         return $responseBuilder->getResponse();
     }

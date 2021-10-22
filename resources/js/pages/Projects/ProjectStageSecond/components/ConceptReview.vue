@@ -37,6 +37,9 @@
                                 </div>
                                 <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
                                      class="cursor-pointer px-6">
+                                    <button v-if="user.id === concept.author_id" class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
+                                        Usuń
+                                    </button>
                                     <button class="btn btn-outline-secondary py-1 px-2" @click="downloadFile(file.path, file.name)">
                                         Pobierz
                                     </button>
@@ -60,6 +63,7 @@ import {onMounted, provide, ref} from "vue";
 import Dropzone from '../../../../global-components/dropzone/Main'
 import Avatar from "../../../../components/avatar/Avatar";
 import QuestionsPanel  from "../../../Challenges/components/QuestionsPanel";
+import RequestHandler from "../../../../compositions/RequestHandler";
 
 export default {
     name: "ConceptReview",
@@ -69,7 +73,7 @@ export default {
         QuestionsPanel,
     },
     props : {
-        id: Number,
+        project: Object,
         concept: Object
     },
     setup(props, {emit}) {
@@ -88,12 +92,22 @@ export default {
             window.open('/' + url, '_blank').focus();
         }
 
+        const deleteFile = (index,file) => {
+            RequestHandler('projects/' + props.project.id + '/file/delete', 'post', {
+                concept_id: props.concept.id,
+                file_id: file.id,
+            }, (response) => {
+                props.concept.files.splice(index, 1);
+            });
+        }
+
         onMounted(function () {
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
             }
         })
         return {
+            deleteFile,
             images,
             downloadFile,
             guard,

@@ -53,6 +53,7 @@ Route::group(['prefix' => 'projects', 'middleware' => 'auth:sanctum'], function 
     Route::post('{project_id}/concept/save', [ProjectConceptsController::class, 'saveConcept']);
     Route::post('{project_id}/concept/{id}/delete', [ProjectConceptsController::class, 'deleteConcept']);
     Route::post('{project_id}/concept/{id}/accept', [ProjectConceptsController::class, 'acceptProjectConcept']);
+    Route::post('{project_id}/concept/file/delete', [ProjectConceptsController::class, 'deleteFile']);
 });
 
 

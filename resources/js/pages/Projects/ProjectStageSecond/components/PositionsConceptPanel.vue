@@ -84,6 +84,11 @@ export default {
             });
         }
 
+        emitter.on('addConcept', e => {
+            concepts.value.push(e.obj);
+            activeTab.value = 'all-concepts'
+        });
+
         const saveCommunicationPlan = async (communicationPlan) => {
             RequestHandler('projects/' + props.project.id + '/communication/save', 'post', {
                 project_id: props.project.id,

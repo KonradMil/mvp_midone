@@ -22,25 +22,49 @@
     </div>
     <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
         <div class="mt-5">
-            <div class="mt-3" v-if="files.length > 0">
-                <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>
+            <div class="mt-3 border px-4 py-4" v-if="files.length > 0">
+                <label class="form-label"> Wgrane pliki</label>
                 <div class="rounded-md pt-4">
-                    <div class="row flex h-full">
+                    <div class="grid grid-cols-4 h-full">
                         <div class=" h-full" v-for="(file, index) in files" :key="'file_' + index">
                             <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
-                                <img class="w-full h-full"
-                                     :alt="file.original_name"
-                                     :src="'/' + file.path"
-                                />
+                                <img
+                                    v-lazy="'/' + file.path"
+                                    class="w-full h-full"
+                                    :alt="file.original_name"/>
                                 <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
                                 </div>
                             </div>
-                            <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteFile(index)" class="cursor-pointer">USUŃ
+                            <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
+                                 class="cursor-pointer px-6">
+                                <button class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
+                                    Usuń
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+<!--            <div class="mt-3" v-if="files.length > 0">-->
+<!--                <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>-->
+<!--                <div class="rounded-md pt-4">-->
+<!--                    <div class="row flex h-full">-->
+<!--                        <div class=" h-full" v-for="(file, index) in files" :key="'file_' + index">-->
+<!--                            <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">-->
+<!--                                <img class="w-full h-full"-->
+<!--                                     :alt="file.original_name"-->
+<!--                                     :src="'/' + file.path"-->
+<!--                                />-->
+<!--                                <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteFile(index)" class="cursor-pointer">USUŃ-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="mt-3">
                 <label class="form-label"> {{ $t('challengesNew.file') }}</label>
                 <div class="rounded-md pt-4">
@@ -102,6 +126,7 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const files = ref([]);
+        const user = window.Laravel.user;
 
         provide("bind[dropzoneSingleRef]", el => {
             dropzoneSingleRef.value = el;
@@ -134,7 +159,7 @@ export default {
                 description: concept.value.description,
                 files : files.value
             }, (response) => {
-
+                emitter.emit('addConcept', {obj: concept});
             });
         }
 
@@ -155,6 +180,7 @@ export default {
         // }
 
         return {
+            user,
             saveConcept,
             deleteFile,
             isDisabled,

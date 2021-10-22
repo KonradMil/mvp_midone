@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProjectConcept extends Model
 {
@@ -42,16 +43,16 @@ class ProjectConcept extends Model
     /**
      * @return BelongsToMany
      */
-    public function questions(): BelongsToMany
-    {
-        return $this->belongsToMany(Question::class, 'project_concept_questions', 'project_concept_id', 'question_id');
-    }
-
-    /**
-     * @return BelongsToMany
-     */
     public function files(): BelongsToMany
     {
         return $this->belongsToMany(File::class, 'project_concept_files', 'project_concept_id', 'file_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function questions(): HasMany
+    {
+        return $this->hasMany(ConceptQuestion::class, 'id', 'project_concept_id');
     }
 }
