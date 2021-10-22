@@ -1,19 +1,18 @@
-import { createStore } from "vuex";
+import {createStore} from "vuex";
 import main from "./main";
-import sideMenu from "./side-menu";
-import login from "./login";
+import unity from "./unity/unity";
 import createPersistedState from "vuex-persistedstate";
+
 const store = createStore({
-  modules: {
-    main,
-    sideMenu,
-    login,
-  },
+    modules: {
+        main,
+        unity
+    },
     plugins: [createPersistedState()],
 });
 
 export function useStore() {
-  return store;
+    return store;
 }
 
 export default store;

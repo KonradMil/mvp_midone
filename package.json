@@ -59,7 +59,7 @@
         "vue3-cookies": "^1.0.1",
         "vue3-lazy": "^1.0.0-alpha.1",
         "vuex": "^4.0.0",
-        "vuex-persistedstate": "^4.0.0-beta.3",
+        "vuex-persistedstate": "^4.1.0",
         "youtube-vue3": "^0.1.10",
         "zoom-vanilla.js": "^2.0.6"
     },
