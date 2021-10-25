@@ -40,6 +40,8 @@ class FreeSavesService
         $freeSave->name = 'Zapis ' . Carbon::now()->format('d.m.Y H:i');
         $freeSave->save();
 
+        $freeSave->users()->attach(Auth::user()->id, ['is_owner' => 1]);
+
         return $freeSave->id;
     }
 

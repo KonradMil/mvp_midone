@@ -73,13 +73,35 @@ class FreeSavesController extends Controller
             return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $freeSaves = $freeSavesRepository->getFreeSavesByUser($user->id);
+        $freeSaves = $freeSavesRepository->getFreeSavesByUser($user);
 
         $this->responseBuilder->setData('freeSaves', $freeSaves);
 
         return $this->responseBuilder->getResponse();
     }
 
+    /**
+     * @param Request $request
+     * @param UserRepository $userRepository
+     * @param FreeSavesRepository $freeSavesRepository
+     * @return JsonResponse
+     */
+    public function getSave(Request $request, $id, FreeSavesRepository $freeSavesRepository)
+    {
+
+        $user = $request->user();
+
+        if (!$user) {
+            $this->responseBuilder->setErrorMessage(__('messages.user.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $freeSaves = $freeSavesRepository->find($id);
+//        dd($freeSaves);
+        $this->responseBuilder->setData('freeSaves', $freeSaves);
+
+        return $this->responseBuilder->getResponse();
+    }
 
     /**
      * @param Request $request
@@ -94,7 +116,7 @@ class FreeSavesController extends Controller
 
         $parameters = $freeSavesHandler->getParameters();
 
-        $id = $request->data['id'];
+        $id = $request->get('id');
 
         if (!$parameters->isValid()) {
             $this->responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
@@ -139,7 +161,7 @@ class FreeSavesController extends Controller
     {
             try {
                 $freeSave = $freeSavesService->createEmptySave();
-
+                $this->responseBuilder->setData('id',$freeSave);
                 $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
             } catch (QueryException $e) {
 
