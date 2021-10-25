@@ -15,9 +15,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FreeSavesController extends Controller
 {
+
+    public ResponseBuilder $responseBuilder;
+
     public function __construct()
     {
-
+        $this->responseBuilder = new ResponseBuilder();
     }
 
     /**
@@ -28,47 +31,31 @@ class FreeSavesController extends Controller
      */
     public function deleteSave(int $id, FreeSavesRepository $freeSavesRepository, FreeSavesService $freeSavesService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $freeSave = $freeSavesRepository->find($id);
 
         if (!$freeSave) {
-            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         try {
 
             $freeSavesService->deleteFreeSave($freeSave);
 
-            $responseBuilder->setSuccessMessage(__('messages.delete_correct'));
+            $this->responseBuilder->setSuccessMessage(__('messages.delete_correct'));
 
         } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+            $this->responseBuilder->setErrorMessage(__('messages.error'));
+            return $this->responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
 
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
-    public function getSave(Request $request, FreeSavesRepository $freeSavesRepository, int $id)
-    {
-        $responseBuilder = new ResponseBuilder();
-
-        $freeSave = $freeSavesRepository->find($id);
-
-        if (!$freeSave) {
-            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
-        }
-
-        $responseBuilder->setData('freeSave', $freeSave);
-
-        return $responseBuilder->getResponse();
-    }
 
     /**
      * @param Request $request
@@ -78,20 +65,19 @@ class FreeSavesController extends Controller
      */
     public function getSaves(Request $request, UserRepository $userRepository, FreeSavesRepository $freeSavesRepository)
     {
-        $responseBuilder = new ResponseBuilder();
 
-        $user = $userRepository->find(Auth::user()->id);
+        $user = $userRepository->find($request->user()->id);
 
         if (!$user) {
-            $responseBuilder->setErrorMessage(__('messages.user.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.user.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $freeSaves = $freeSavesRepository->getFreeSavesByUser($user->id);
 
-        $responseBuilder->setData('freeSaves', $freeSaves);
+        $this->responseBuilder->setData('freeSaves', $freeSaves);
 
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
 
@@ -103,7 +89,6 @@ class FreeSavesController extends Controller
      */
     public function saveData(Request $request, FreeSavesRepository $freeSavesRepository,FreeSavesService $freeSavesService)
     {
-        $responseBuilder = new ResponseBuilder();
 
         $freeSavesHandler = new FreeSavesHandler($request);
 
@@ -112,8 +97,8 @@ class FreeSavesController extends Controller
         $id = $request->data['id'];
 
         if (!$parameters->isValid()) {
-            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
-            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+            $this->responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
         }
 
         if($id > 0){
@@ -121,32 +106,48 @@ class FreeSavesController extends Controller
             $freeSave = $freeSavesRepository->find($id);
 
             if(!$freeSave){
-                $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-                return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+                $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+                return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
             }
 
             try {
                 $updateFreeSave = $freeSavesService->updateFreeSave($parameters, $freeSave);
 
-                $responseBuilder->setSuccessMessage(__('messages.save_correct'));
+                $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
             } catch (QueryException $e) {
 
-                $responseBuilder->setErrorMessage(__('messages.error'));
-                return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+                $this->responseBuilder->setErrorMessage(__('messages.error'));
+                return $this->responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
             }
         } else {
             try {
                 $newFreeSave = $freeSavesService->addFreeSave($parameters);
 
-                $responseBuilder->setSuccessMessage(__('messages.save_correct'));
-                $responseBuilder->setData('local_vision', $newFreeSave);
+                $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
+                $this->responseBuilder->setData('local_vision', $newFreeSave);
             } catch (QueryException $e) {
-                $responseBuilder->setErrorMessage(__('messages.error'));
-                return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+                $this->responseBuilder->setErrorMessage(__('messages.error'));
+                return $this->responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
             }
         }
 
 
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
+    }
+
+    public function saveEmpty(Request $request, FreeSavesRepository $freeSavesRepository,FreeSavesService $freeSavesService)
+    {
+            try {
+                $freeSave = $freeSavesService->createEmptySave();
+
+                $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
+            } catch (QueryException $e) {
+
+                $this->responseBuilder->setErrorMessage(__('messages.error'));
+                return $this->responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+            }
+
+
+        return $this->responseBuilder->getResponse();
     }
 }

@@ -75,6 +75,11 @@
         },
         {
             "icon": "InboxIcon",
+            "pageName": "studio-playground-saves",
+            "title": "Playground 3D"
+        },
+        {
+            "icon": "InboxIcon",
             "pageName": "workshop",
             "title": "Marketplace obiektów"
         },
