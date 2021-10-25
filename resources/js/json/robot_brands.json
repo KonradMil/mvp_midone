@@ -16,6 +16,10 @@
         "image": "/s3/brand_logos/mitsubishi_logo.png"
     },
     {
+        "brand": "Hyundai",
+        "image": "/s3/brand_logos/hyundai_logo.png"
+    },
+    {
         "brand": "ABB",
         "image": "/s3/brand_logos/abb_logo.png"
     },
