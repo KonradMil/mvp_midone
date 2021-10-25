@@ -21,6 +21,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use function Symfony\Component\String\s;
@@ -468,7 +469,6 @@ class ChallengeController extends Controller
         $c = Challenge::whereHas('teams', function ($query) use ($ars) {
             $query->whereIn('teams.id', $ars);
         })->orderBy('created_at', 'DESC')->get();
-
 
         $merged = $challenges->merge($c);
 
@@ -1305,8 +1305,21 @@ class ChallengeController extends Controller
                 ->get();
         }
 
+        $ars = [];
 
-        foreach ($challenges as $challenge) {
+        $ts = Auth::user()->teams;
+
+        foreach ($ts as $tt) {
+            array_push($ars, $tt->id);
+        }
+
+        $c = Challenge::where('challenges.category', '=', $category)->whereHas('teams', function ($query) use ($ars) {
+            $query->whereIn('teams.id', $ars);
+        })->orderBy('created_at', 'DESC')->get();
+
+        $cc = $challenges->merge($c);
+
+        foreach ($cc as $challenge) {
 
             if (Auth::user()->viaLoveReacter()->hasReactedTo($challenge, 'Like')) {
                 $challenge->liked = true;
@@ -1323,11 +1336,11 @@ class ChallengeController extends Controller
             }
         }
 
-        if (!empty($challenges)) {
+        if (!empty($cc)) {
             return response()->json([
                 'success' => true,
                 'message' => 'Pobrano poprawnie.',
-                'payload' => $challenges
+                'payload' => $cc
             ]);
         } else {
             return response()->json([

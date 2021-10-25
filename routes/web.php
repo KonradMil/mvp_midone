@@ -3,6 +3,7 @@
 use App\Http\Controllers\S3Controller;
 use App\Http\Controllers\StudioController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('site', function () {

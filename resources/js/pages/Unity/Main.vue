@@ -76,7 +76,6 @@ export default {
         const user = window.Laravel.user;
         const inTeam = ref(false);
 
-
         //EXTERNAL
         const unity_path = ref('/s3/unity/AssemBrot14_05_ver2.json');
         const window_width = ref('100%');

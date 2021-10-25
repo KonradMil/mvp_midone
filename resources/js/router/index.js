@@ -6,6 +6,7 @@ import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 import SideMenu from '../layouts/side-menu/Main'
 import Wizard from "../pages/Wizard";
+import AdminFreeSaves from "../pages/Admin/AdminFreeSaves";
 import MainLite from "../pages/Unity/Lite/MainLite";
 import Profile from "../pages/Wizard";
 import PeerTest from "../pages/PeerTest";
@@ -122,6 +123,12 @@ export const routes = [
                 name: 'admin-projects',
                 path: '/admin/projects',
                 component: ProjectsList,
+                props: true
+            },
+            {
+                name: 'admin-freesaves',
+                path: '/admin/free-saves',
+                component: AdminFreeSaves,
                 props: true
             },
             {

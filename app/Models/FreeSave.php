@@ -53,8 +53,8 @@ class FreeSave extends Model
         return $this->belongsToMany(User::class, 'free_saves_user', 'free_save_id');
     }
 
-    public function getOwner(): User {
-        return $this->users()->wherePivot('is_owner', 1);
+    public function getOwner(): BelongsToMany {
+        return $this->belongsToMany(User::class, 'free_saves_user', 'free_save_id')->wherePivot('is_owner', 1);
     }
 
 }
