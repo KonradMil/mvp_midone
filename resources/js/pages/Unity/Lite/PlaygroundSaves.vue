@@ -2,7 +2,7 @@
     <div>
         <div class="intro-y grid grid-cols-12 gap-6 mt-5">
             <button class="btn btn-primary ml-2 shadow-md mr-2" @click="addNewSave()">{{ $t('lite.addSave') }}</button>
-            <div v-if="saves.length > 0" v-for="(save, index) in saves" :key="index" class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
+            <div v-if="dataAr.length > 0" v-for="(save, index) in dataAr" :key="index" class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
                 <SingleFreeSave :user="user" :save="save"></SingleFreeSave>
             </div>
             <div v-else class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium">
@@ -73,12 +73,6 @@ export default {
                     }
                 })
         }
-
-
-        onMounted(() => {
-            getData();
-        });
-
 
         return {
             guard,
