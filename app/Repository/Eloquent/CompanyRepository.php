@@ -14,4 +14,9 @@ class CompanyRepository extends BaseRepository
     {
         parent::__construct($user);
     }
+
+    public function findByAuthorId($authorId)
+    {
+        return Company::where('author_id', '=', $authorId)->first();
+    }
 }

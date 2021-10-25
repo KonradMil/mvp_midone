@@ -344,6 +344,7 @@ import router from '../../router';
 import Details from "./components/Details";
 import Financials from "./components/Financials";
 import dayjs from "dayjs";
+import RequestHandler from "../../compositions/RequestHandler";
 
 
 const toast = useToast();

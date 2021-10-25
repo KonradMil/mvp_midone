@@ -24,7 +24,7 @@
     <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
         <h2 class="text-lg font-medium mr-auto">{{ $t('challengesMain.challenges') }} <span v-if="active != ''"> {{active}}</span></h2>
         <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-            <button class="btn btn-primary shadow-md mr-2" v-if="user.type == 'investor' && type==='normal'" @click="$router.push({name: 'addChallenge'})">{{ $t('challengesMain.addChallenge') }} </button>
+            <button class="btn btn-primary shadow-md mr-2" v-if="user.type == 'investor' && type==='normal'" @click="addChallenge">{{ $t('challengesMain.addChallenge') }} </button>
             <div class="dropdown ml-auto sm:ml-0">
                 <div class="dropdown-menu w-40">
                     <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
@@ -45,6 +45,8 @@
 
 <script>
 import {getCurrentInstance, ref} from "vue";
+import RequestHandler from "../compositions/RequestHandler";
+import router from "../router";
 
 export default {
     name: "TopMenuMain",
@@ -87,10 +89,29 @@ export default {
             emit('tabChanged', val.value);
         }
 
+        const addChallenge = () => {
+
+            RequestHandler('v2/user/company/is_valid', 'POST', {}, function(response){
+
+                if(typeof response.data.isValid !== 'undefined' && !response.data.isValid) {
+
+                    window.location.replace('/profiles#fill_company_data');
+
+                } else {
+
+                    router.push({name: 'addChallenge'})
+
+                }
+
+            });
+
+        }
+
         return {
             menuChanged,
             formattedMenu,
-            active
+            active,
+            addChallenge
         }
     }
 }

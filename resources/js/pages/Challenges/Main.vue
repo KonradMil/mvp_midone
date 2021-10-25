@@ -26,7 +26,7 @@
                         <p v-if="type==='archive'">
                             Nie masz jeszcze żadnych archiwalnych wyzwań.
                         </p>
-                        <button v-if="type==='normal'" class="btn btn-primary shadow-md mr-2 mt-2" @click="$router.push({name: 'addChallenge'})">{{ $t('challengesMain.addChallenge') }}</button>
+                        <button v-if="type==='normal'" class="btn btn-primary shadow-md mr-2 mt-2" @click="addChallenge">{{ $t('challengesMain.addChallenge') }}</button>
                     </div>
                 </div>
             </div>
@@ -242,6 +242,24 @@ export default {
                 })
         }
 
+        const addChallenge = () => {
+
+            RequestHandler('v2/user/company/is_valid', 'POST', {}, function(response){
+
+                if(typeof response.data.isValid !== 'undefined' && !response.data.isValid) {
+
+                    window.location.replace('/profiles#fill_company_data');
+
+                } else {
+
+                    router.push({name: 'addChallenge'})
+
+                }
+
+            });
+
+        }
+
         return {
             guard,
             challenges,
@@ -254,7 +272,8 @@ export default {
             follow,
             unfollow,
             deleteChallenge,
-            getNewData
+            getNewData,
+            addChallenge
         }
     },
     beforeRouteEnter(to, from, next) {

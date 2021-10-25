@@ -12,17 +12,20 @@ class LoginParameters extends Parameters
 
     public string $password;
 
-    public string $recaptchaToken;
+    public ?string $recaptchaToken;
 
     public function __construct(){
 
         $this->validationRules = [
-//            'recaptchaToken' => ['required', new GoogleReCaptchaV3ValidationRule('login')],
             'email' => 'required|email',
             'password' => 'required',
         ];
 
-//        $this->validationMessages['recaptchaToken.*'] = __('messages.recaptcha_error');
+        if(env('APP_ENV' !== 'local')) {
+            $this->validationRules['recaptchaToken'] = ['required', new GoogleReCaptchaV3ValidationRule('login')];
+        }
+
+        $this->validationMessages['recaptchaToken.*'] = __('messages.recaptcha_error');
 
     }
 

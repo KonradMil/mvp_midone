@@ -221,7 +221,12 @@ export default defineComponent({
             });
             avatar_path.value = '';
             cash("body")
-                .removeClass("error-page")
+                .removeClass("error-page");
+
+            if(window.location.hash === '#fill_company_data') {
+                activeTab.value = "company";
+                toast.warning("Uzupełnij dane firmy.");
+            }
 
         });
 
