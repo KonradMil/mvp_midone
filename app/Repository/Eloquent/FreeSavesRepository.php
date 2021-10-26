@@ -34,4 +34,5 @@ class FreeSavesRepository extends BaseRepository
 
         return $freeSaves = $user->freesaves()->where('user_id', '=', $user->id)->get();
     }
+
 }
