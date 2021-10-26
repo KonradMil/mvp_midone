@@ -23,6 +23,12 @@ Route::get('studio/challenge/{challengeId}', [StudioController::class, 'challeng
 require 'web/auth.php';
 require 'web/teams.php';
 
+Route::get('/test', function(){
+
+    dd(env('APP_ENV'));
+
+});
+
 Route::get('{any}', function () {
     return view('app');
 })->where('any', '.*');
