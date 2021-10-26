@@ -8,8 +8,8 @@ use App\Repository\Eloquent\FileRepository;
 use App\Repository\Eloquent\ProjectConceptRepository;
 use App\Repository\Eloquent\ProjectRepository;
 use App\Repository\Eloquent\UserRepository;
+use App\Services\ProjectCommunicationService;
 use App\Services\ProjectConceptService;
-use App\Services\ProjectService;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -185,6 +185,88 @@ class ProjectConceptsController extends Controller
         try {
             $projectConceptService->detachFile($projectConcept, $file);
             $responseBuilder->setSuccessMessage(__('messages.delete_correct'));
+        } catch (QueryException $e) {
+
+            $responseBuilder->setErrorMessage(__('messages.error'));
+            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
+
+        return $responseBuilder->getResponse();
+    }
+
+    /**
+     * @param Request $request
+     * @param ProjectRepository $projectRepository
+     * @param ProjectConceptService $projectConceptService
+     * @param ProjectConceptRepository $projectConceptRepository
+     * @return JsonResponse
+     */
+    public function acceptProjectConcept(Request $request, ProjectRepository $projectRepository, ProjectConceptService $projectConceptService, ProjectConceptRepository $projectConceptRepository): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $project = $projectRepository->find($request->input('project_id'));
+
+        if (!$project) {
+            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $projectConcept = $projectConceptRepository->find($request->get('concept_id'));
+
+        if(!$projectConcept){
+            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        try {
+            $acceptConcept = $projectConceptService->acceptProjectConcept($projectConcept);
+
+            $responseBuilder->setSuccessMessage(__('messages.accepted'));
+            $responseBuilder->setData('acceptConcept', $acceptConcept);
+
+        } catch (QueryException $e) {
+
+            $responseBuilder->setErrorMessage(__('messages.error'));
+            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
+
+        return $responseBuilder->getResponse();
+    }
+
+    /**
+     * @param Request $request
+     * @param ProjectRepository $projectRepository
+     * @param ProjectConceptService $projectConceptService
+     * @param ProjectConceptRepository $projectConceptRepository
+     * @return JsonResponse
+     */
+    public function rejectProjectConcept(Request $request, ProjectRepository $projectRepository, ProjectConceptService $projectConceptService, ProjectConceptRepository $projectConceptRepository): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $project = $projectRepository->find($request->input('project_id'));
+
+        if (!$project) {
+            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+       $conceptProject = $projectConceptRepository->find($request->get('concept_id'));
+
+        if (!$conceptProject) {
+            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        try {
+            $acceptConcept = $projectConceptService->rejectProjectConcept($conceptProject);
+
+            $responseBuilder->setSuccessMessage(__('messages.accepted'));
+            $responseBuilder->setData('acceptCommunication', $acceptConcept);
+
         } catch (QueryException $e) {
 
             $responseBuilder->setErrorMessage(__('messages.error'));

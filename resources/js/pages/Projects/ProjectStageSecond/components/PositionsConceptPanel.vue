@@ -6,22 +6,24 @@
                 Koncepcja stanowiska
             </h2>
             <div class="absolute top-4 left-80 cursor-pointer px-6">
-                <button class="btn btn-primary mr-6">
-                    Akceptuję
+                <button v-if="integrator.id === user.id" class="btn btn-primary mr-6">
+                    Potwierdzam przekazanie dokumentacji
+                </button>
+                <button v-if="investor.id === user.id" class="btn btn-primary mr-6">
+                    Potwierdzam przekazanie dokumentacji
                 </button>
             </div>
             <div class="cursor-pointer px-6">
-                <button class="btn btn-outline-secondary py-1 px-2" @click.prevent="setActiveTab('addConcept')">
+                <button class="btn btn-outline-secondary py-2 px-4" @click.prevent="setActiveTab('addConcept')">
                     Dodaj nowa dokumentacje
                 </button>
             </div>
         </div>
-            <table class="table table-report -mt-2">
+            <table class="table table-report table-auto w-6/7">
                 <thead>
                 <tr>
-                    <th class="whitespace-nowrap">Plik</th>
-                    <th class="whitespace-nowrap">Tytuł</th>
-                    <th class="text-center whitespace-nowrap">Zgłoszono dnia</th>
+                    <th class="whitespace-nowrap"></th>
+                    <th class="text-center whitespace-nowrap"></th>
                     <th class="text-center whitespace-nowrap"></th>
                 </tr>
                 </thead>
@@ -29,7 +31,10 @@
                 <Concept class="intro-x"
                          v-for="(concept, index) in concepts"
                          :key="concept.id"
-                         :concept="concept">
+                         :concept="concept"
+                         :integrator="integrator"
+                         :investor="investor"
+                         :project="project">
                 </Concept>
                 </tbody>
             </table>
@@ -43,13 +48,13 @@
 
 <script>
 import {getCurrentInstance, onMounted, ref} from "vue";
-import {useToast} from "vue-toastification";
 import RequestHandler from "../../../../compositions/RequestHandler";
 import Multiselect from '@vueform/multiselect'
 import ModalCard from "../../../../components/ModalCard";
 import AddConcept from "./AddConcept";
 import ConceptReview from "./ConceptReview";
 import Concept from "./Concept";
+
 export default {
     name: "PositionsConceptPanel",
     components: {AddConcept, Multiselect, ModalCard, ConceptReview, Concept},
@@ -59,23 +64,17 @@ export default {
         investor: Object,
     },
     setup(props) {
-
         const setActiveTab = (param) => {
             activeTab.value = param;
         }
         const activeTab = ref('all-concepts');
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
-        const toast = useToast();
         const user = window.Laravel.user;
-        const showDetails = ref([]);
-        const is_selected = ref(0);
         const guard = ref(false);
-        const show = ref(false);
         const concepts = ref([]);
         const main_concept = ref({});
-        const addNewCommunicationPlan = async () => {
-        }
+
 
         const getConcepts = async (callback) => {
             RequestHandler('projects/' + props.project.id + '/concepts', 'get', {}, (response) => {
@@ -85,31 +84,17 @@ export default {
         }
 
         emitter.on('addConcept', e => {
-            concepts.value.push(e.obj);
             activeTab.value = 'all-concepts'
+            getConcepts();
         });
 
-        const saveCommunicationPlan = async (communicationPlan) => {
-            RequestHandler('projects/' + props.project.id + '/communication/save', 'post', {
-                project_id: props.project.id,
-                communication_plan_id: communicationPlan.id,
-                personal_occupation: communicationPlan.personal_occupation,
-                personal_data: communicationPlan.personal_data,
-                phone_number: communicationPlan.phone_number,
-                email: communicationPlan.email,
-                project_decision: communicationPlan.project_decision
-            }, (response) => {
-            });
-        }
-
+        emitter.on('backToAllConcepts', e => {
+            activeTab.value = 'all-concepts'
+        });
         emitter.on('conceptReview', e => {
             main_concept.value = e.concept;
             activeTab.value = 'conceptReview';
         });
-
-        const modalClosed = () => {
-            show.value = false;
-        }
 
         onMounted(() => {
             getConcepts(()=>{
@@ -118,6 +103,7 @@ export default {
         });
 
         return {
+            user,
             main_concept,
             guard,
             getConcepts,

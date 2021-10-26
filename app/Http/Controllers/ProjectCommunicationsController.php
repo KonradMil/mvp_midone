@@ -10,6 +10,7 @@ use App\Repository\Eloquent\ProjectCommunicationRepository;
 use App\Repository\Eloquent\ProjectRepository;
 use App\Repository\Eloquent\UserRepository;
 use App\Services\ProjectCommunicationService;
+use App\Services\ProjectService;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -184,6 +185,39 @@ class ProjectCommunicationsController extends Controller
         $communications = $projectCommunicationRepository->getAllInvestorCommunicationsByProjectId($id, $user->id);
 
         $responseBuilder->setData('communications', $communications);
+
+        return $responseBuilder->getResponse();
+    }
+
+    /**
+     * @param Request $request
+     * @param ProjectRepository $projectRepository
+     * @param ProjectCommunicationService $projectCommunicationService
+     * @return JsonResponse
+     */
+    public function acceptProjectCommunicationPlan(Request $request, ProjectRepository $projectRepository, ProjectCommunicationService $projectCommunicationService): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $project = $projectRepository->find($request->input('project_id'));
+
+        if (!$project) {
+            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        try {
+            $acceptCommunication = $projectCommunicationService->acceptProjectCommunication($project);
+
+            $responseBuilder->setSuccessMessage(__('messages.accepted'));
+            $responseBuilder->setData('acceptCommunication', $acceptCommunication);
+
+        } catch (QueryException $e) {
+
+            $responseBuilder->setErrorMessage(__('messages.error'));
+            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
 
         return $responseBuilder->getResponse();
     }

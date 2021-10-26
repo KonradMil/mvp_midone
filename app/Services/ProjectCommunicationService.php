@@ -82,4 +82,29 @@ class ProjectCommunicationService
 
         return $projectCommunication;
     }
+
+    /**
+     * @param Project $project
+     * @return Project
+     */
+    public function acceptProjectCommunication(Project $project): Project
+    {
+        if(Auth::user()->type === 'investor'){
+            if($project->accept_communication == 1){
+                $project->accept_communication = 3;
+            } else {
+                $project->accept_communication = 2;
+            }
+        } else if(Auth::user()->type === 'integrator'){
+            if($project->accept_communication == 2){
+                $project->accept_communication = 3;
+            } else {
+                $project->accept_communication = 1;
+            }
+        }
+
+        $project->save();
+
+        return $project;
+    }
 }

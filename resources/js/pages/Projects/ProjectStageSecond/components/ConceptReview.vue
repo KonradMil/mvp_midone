@@ -1,23 +1,21 @@
 <template>
     <div class="intro-y box p-5">
+        <div class="absolute top-0 right-0">
+            <button class="btn btn-outline-secondary py-3 px-4" @click.prevent="backToAll">
+                Wróć
+            </button>
+        </div>
         <div>
-            <label for="crud-form-1" class="form-label">Tytuł wiadomości</label>
-            <input id="crud-form-1"
-                   type="text"
-                   class="form-control w-full"
-                   placeholder=""
-                   v-model="concept.title"
-                   disabled>
+            <label for="crud-form-1" class="form-label font-medium">Definicja stanowiska</label>
+            <div>{{concept.title}}</div>
         </div>
         <div class="pt-5">
             <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5">
                 <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
                     {{$t('challengesNew.description')}}
                 </div>
-                <div class="mt-5">
-                    <textarea
-                        v-model="concept.description"
-                        class="w-full h-36 form-control" style="width: 100%;" disabled></textarea>
+                <div class="mt-5 mb-3 pb-4">
+                    <p class="w-auto h-36 font-serif break-words">{{concept.description}}</p>
                 </div>
             </div>
         </div>
@@ -37,7 +35,7 @@
                                 </div>
                                 <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
                                      class="cursor-pointer px-6">
-                                    <button v-if="user.id === concept.author_id" class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
+                                    <button v-if="user.id === concept.author_id && concept.accepted !== 2" class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
                                         Usuń
                                     </button>
                                     <button class="btn btn-outline-secondary py-1 px-2" @click="downloadFile(file.path, file.name)">
@@ -54,15 +52,15 @@
             </div>
         </div>
         <div class="mt-3">
-            <QuestionsPanel :concept="1" ></QuestionsPanel>
+            <ConceptQuestionPanel :concept="1" :concept_id="concept.id" :project="project" :type="'concept'"></ConceptQuestionPanel>
         </div>
     </div>
 </template>
 <script>
-import {onMounted, provide, ref} from "vue";
+import {getCurrentInstance, onMounted, provide, ref} from "vue";
 import Dropzone from '../../../../global-components/dropzone/Main'
 import Avatar from "../../../../components/avatar/Avatar";
-import QuestionsPanel  from "../../../Challenges/components/QuestionsPanel";
+import ConceptQuestionPanel  from "./ConceptQuestionPanel";
 import RequestHandler from "../../../../compositions/RequestHandler";
 
 export default {
@@ -70,13 +68,15 @@ export default {
     components: {
         Avatar,
         Dropzone,
-        QuestionsPanel,
+        ConceptQuestionPanel,
     },
     props : {
         project: Object,
         concept: Object
     },
     setup(props, {emit}) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
         const user =ref({});
         const reports = ref([]);
         const files = ref([]);
@@ -87,6 +87,10 @@ export default {
         provide("bind[dropzoneSingleRef]", el => {
             dropzoneSingleRef.value = el;
         });
+
+        const backToAll = () => {
+            emitter.emit('backToAllConcepts', {});
+        }
 
         const downloadFile = async (url,name) => {
             window.open('/' + url, '_blank').focus();
@@ -107,6 +111,7 @@ export default {
             }
         })
         return {
+            backToAll,
             deleteFile,
             images,
             downloadFile,

@@ -1,6 +1,11 @@
 <template>
+    <div class="absolute top-0 right-0">
+        <button class="btn btn-outline-secondary py-3 px-4" @click.prevent="backToAll">
+            Wróć
+        </button>
+    </div>
     <div>
-        <label for="crud-form-1" class="form-label">Tytuł wiadomości</label>
+        <label for="crud-form-1" class="form-label font-medium">Definicja stanowiska</label>
         <input maxlength="100"
                id="crud-form-1"
                type="text"
@@ -163,23 +168,12 @@ export default {
             });
         }
 
-        // const saveReportRepo = async () => {
-        //     if(concept.title.value === '' || (concept.description.value === ''))
-        //     {
-        //        toast.warning('Uzupełnij wszystkie pola!');
-        //        isDisabled.value = true;
-        //     } else {
-        //             let resp = await SaveReport({
-        //                 title: concept.title.value,
-        //                 description: concept.description.value,
-        //                 files : files.value
-        //             }, handleCallback);
-        //             isDisabled.value = true;
-        //             emitter.emit('changetab', {val: 'reports'});
-        //         }
-        // }
+        const backToAll = () => {
+            emitter.emit('backToAllConcepts', {});
+        }
 
         return {
+            backToAll,
             user,
             saveConcept,
             deleteFile,

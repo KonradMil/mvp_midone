@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConceptQuestionsController;
 use App\Http\Controllers\ProjectCommunicationsController;
 use App\Http\Controllers\ProjectConceptsController;
 use App\Http\Controllers\ProjectController;
@@ -43,17 +44,21 @@ Route::group(['prefix' => 'projects', 'middleware' => 'auth:sanctum'], function 
     Route::get('{project_id}/communications/integrator', [ProjectCommunicationsController::class, 'getIntegratorCommunications']);
     Route::get('{project_id}/communications/investor', [ProjectCommunicationsController::class, 'getInvestorCommunications']);
     Route::post('{project_id}/communication/save', [ProjectCommunicationsController::class, 'saveCommunicationPlan']);
-    Route::post('{project_id}/communication/{id}/delete', [ProjectCommunicationsController::class, 'deleteCommunicationPlan']);
-    Route::post('{project_id}/communication/{id}/accept', [ProjectCommunicationsController::class, 'acceptProjectCommunicationPlan']);
+    Route::post('{project_id}/communication/delete', [ProjectCommunicationsController::class, 'deleteCommunicationPlan']);
+    Route::post('{project_id}/communication/accept', [ProjectCommunicationsController::class, 'acceptProjectCommunicationPlan']);
     Route::get('{project_id}/risks', [ProjectRisksController::class, 'getRisks']);
     Route::post('{project_id}/risk/save', [ProjectRisksController::class, 'saveRisk']);
     Route::post('{project_id}/risk/{id}/delete', [ProjectRisksController::class, 'deleteRisk']);
     Route::post('{project_id}/risk/{id}/accept', [ProjectRisksController::class, 'acceptProjectRisk']);
     Route::get('{project_id}/concepts', [ProjectConceptsController::class, 'getProjectConcepts']);
     Route::post('{project_id}/concept/save', [ProjectConceptsController::class, 'saveConcept']);
-    Route::post('{project_id}/concept/{id}/delete', [ProjectConceptsController::class, 'deleteConcept']);
-    Route::post('{project_id}/concept/{id}/accept', [ProjectConceptsController::class, 'acceptProjectConcept']);
+    Route::post('{project_id}/concept/delete', [ProjectConceptsController::class, 'deleteProjectConcept']);
+    Route::post('{project_id}/concept/accept', [ProjectConceptsController::class, 'acceptProjectConcept']);
+    Route::post('{project_id}/concept/reject', [ProjectConceptsController::class, 'rejectProjectConcept']);
     Route::post('{project_id}/concept/file/delete', [ProjectConceptsController::class, 'deleteFile']);
+    Route::post('{project_id}/concept/question/save', [ConceptQuestionsController::class, 'addConceptQuestion']);
+    Route::post('{project_id}/concept/question/answer/save', [ConceptQuestionsController::class, 'addConceptAnswer']);
+    Route::get('{project_id}/concept/questions', [ConceptQuestionsController::class, 'getConceptQuestions']);
 });
 
 
