@@ -875,7 +875,7 @@ class ChallengeController extends Controller
 
             $user = Auth::user();
 
-            if (!$challenge || $user->id !== $challenge->author_id && $user->type !== User::USER_TYPE_INTEGRATOR) {
+            if (!$challenge) {
                 abort(404);
             }
 
