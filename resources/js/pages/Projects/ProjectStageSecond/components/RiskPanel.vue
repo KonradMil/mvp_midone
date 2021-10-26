@@ -11,7 +11,7 @@
                     </button>
                 </div>
                 <div class="cursor-pointer px-6">
-                    <button @click.prevent="addNewRisk" class="btn btn-outline-secondary py-1 px-2">
+                    <button v-if="user.id === integrator.id" @click.prevent="addNewRisk" class="btn btn-outline-secondary py-2 px-4">
                         Dodaj
                     </button>
                 </div>
@@ -23,8 +23,8 @@
                             <p v-if="risk.risk_description !== ''">{{ risk.risk_description }} </p>
                             <p v-else> Uzupełnij opis </p>
                         </button>
-                        <div class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
-                            <button class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="deleteRisk(risk)">
+                        <div v-if="risk.author !== undefined" class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
+                            <button v-if="risk.author.id === user.id" class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="deleteRisk(risk)">
                                 Usuń
                             </button>
                         </div>
@@ -48,7 +48,8 @@
                                             <textarea v-model="risk.risk_description"
                                                       class="form-control"
                                                       placeholder="Type your comments"
-                                                      minlength="10">
+                                                      minlength="10"
+                                                      :disabled="!(integrator.id === user.id)">
                                             </textarea>
                                         </div>
                                     </div>
@@ -61,7 +62,7 @@
                                     </div>
                                     <div id="faq-accordion-2-collapse-3" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-3" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
-                                            <textarea v-model="risk.risk_area" class="form-control" placeholder="Type your comments" minlength="10"></textarea>
+                                            <textarea :disabled="!(integrator.id === user.id)" v-model="risk.risk_area" class="form-control" placeholder="Type your comments" minlength="10"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -74,6 +75,7 @@
                                     <div id="faq-accordion-2-collapse-4" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed w-1/4">
                                             <Multiselect
+                                                :disabled="!(integrator.id === user.id)"
                                                 v-model="risk.event_probability"
                                                 max="1"
                                                 :placeholder="risk.event_probability === null ? 'Wybierz...' : risk.event_probability"
@@ -107,6 +109,7 @@
                                     <div id="faq-accordion-2-collapse-5" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed w-1/4">
                                             <Multiselect
+                                                :disabled="!(integrator.id === user.id)"
                                                 v-model="risk.cost_impact"
                                                 :placeholder="risk.cost_impact === null ? 'Wybierz...' : risk.cost_impact"
                                                 :options="[{
@@ -135,6 +138,7 @@
                                     <div id="faq-accordion-2-collapse-5" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed w-1/4">
                                             <Multiselect
+                                                :disabled="!(integrator.id === user.id)"
                                                 v-model="risk.schedule_impact"
                                                 :placeholder="risk.schedule_impact === null ? 'Wybierz...' : risk.schedule_impact"
                                                 :options="[{
@@ -163,6 +167,7 @@
                                     <div id="faq-accordion-2-collapse-6" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed w-1/4">
                                             <Multiselect
+                                                :disabled="!(integrator.id === user.id)"
                                                 v-model="risk.quality_implementation_impact"
                                                 :placeholder="risk.quality_implementation_impact === null ? 'Wybierz...' : risk.quality_implementation_impact"
                                                 :options="[{
@@ -190,31 +195,36 @@
                                     </div>
                                     <div id="faq-accordion-2-collapse-7" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
-                                            <textarea v-model="risk.risk_limitations" class="form-control" placeholder="Type your comments" minlength="10"></textarea>
+                                            <textarea :disabled="!(integrator.id === user.id)" v-model="risk.risk_limitations" class="form-control" placeholder="Type your comments" minlength="10"></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="intro-y accordion-item">
                                     <div id="faq-accordion-2-content-8" class="accordion-header">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-4" aria-expanded="false" aria-controls="faq-accordion-collapse-4">
-                                            Komentarz Iwestora
+                                            Komentarz Integratora
                                         </button>
                                     </div>
                                     <div id="faq-accordion-2-collapse-8" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
-                                            <textarea v-model="risk.comment_investor" class="form-control" placeholder="Type your comments" minlength="10"></textarea>
+                                            <textarea :disabled="!(integrator.id === user.id)" v-model="risk.comment_integrator" class="form-control" placeholder="Type your comments" minlength="10"></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="intro-y accordion-item">
                                     <div id="faq-accordion-2-content-9" class="accordion-header">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-4" aria-expanded="false" aria-controls="faq-accordion-collapse-4">
-                                            Komentarz Integratora
+                                            Komentarz Inwestora
                                         </button>
                                     </div>
                                     <div id="faq-accordion-2-collapse-9" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
                                         <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
-                                            <textarea v-model="risk.comment_integrator" class="form-control" placeholder="Type your comments" minlength="10"></textarea>
+                                            <textarea
+                                                :disabled="!(user.id === investor.id)"
+                                                v-model="risk.comment_investor"
+                                                class="form-control"
+                                                placeholder="Type your comments"
+                                                minlength="10"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -277,7 +287,9 @@ export default {
     name: "RiskPanel",
     components: {Multiselect, ModalMatrix},
     props: {
-        project: Object
+        project: Object,
+        integrator: Object,
+        investor: Object
     },
     setup(props) {
         const app = getCurrentInstance();

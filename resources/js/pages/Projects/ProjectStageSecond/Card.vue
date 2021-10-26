@@ -5,7 +5,7 @@
         </div>
         <div class="wizard flex flex-col lg:flex-row justify-center px-5 sm:px-20">
             <div class="intro-x lg:text-center flex items-center lg:block flex-1 z-10">
-                <button class="w-10 h-10 rounded-full btn text-gray-600 bg-gray-200 dark:bg-dark-1">1</button>
+                <button class="w-10 h-10 rounded-full btn text-gray-600 bg-gray-200 dark:bg-dark-1" @click.prevent="$router.push( {path : '/projects/card/' + challenge.id})">1</button>
                 <div class="lg:w-32 font-medium text-base lg:mt-3 ml-3 lg:mx-auto">Inicjowanie projektu</div>
             </div>
             <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
@@ -52,10 +52,9 @@
                             href=""
                             @click.prevent="activeTab = 'communication'"
                             :class="(activeTab === 'communication') ? 'flex items-center text-theme-1 dark:text-theme-10 font-medium' : 'flex items-center'">
-                            <EditIcon v-if="project.accept_communication === 0" class="w-4 h-4 mr-2 text-red-600"/>
-                            <CheckCircleIcon v-if="project.accept_communication === 1"
+                            <EditIcon v-if="project.accept_communication !== 3" class="w-4 h-4 mr-2 text-red-600"/>
+                            <CheckCircleIcon v-if="project.accept_communication === 3"
                                              class="w-4 h-4 mr-2 text-green-600"/>
-                            <XCircleIcon v-if="project.accept_local_vision === 2" class="w-4 h-4 mr-2 text-red-600"/>
                             Plan komunikacji
                         </a>
                         <a
@@ -73,22 +72,9 @@
                                 class="w-4 h-4 mr-2 text-red-600"/>
                             Mapa ryzyka w projekcie
                         </a>
-                        <a v-if="project.accept_local_vision === 0"
-                           :class="(project.accept_local_vision === 1) ? 'flex items-center mt-5 cursor-pointer' : 'flex items-center mt-5 opacity-50 cursor-pointer'">
-                            <EditIcon
-                                v-if="project.accept_technical_details < 1 || project.accept_financial_details < 1"
-                                class="w-4 h-4 mr-2 text-red-600"/>
-                            <Tippy
-                                tag="a"
-                                class="dark:text-gray-300 text-theme-600"
-                                content="Etap odblokuje się po zakończeniu wizji lokalnej">
-                                Koncepcja stanowiska
-                            </Tippy>
-                        </a>
-                        <a v-if="challenge.stage === 3 && project.accept_technical_details === 1 && project.accept_financial_details === 1"
-                           class="flex items-center mt-5 cursor-pointer"
-                           @click.prevent="activeTab = 'project-offer'"
-                           :class="(activeTab == 'project-offer') ? 'text-theme-1 dark:text-theme-10 font-medium cursor-pointer' : 'mt-5 cursor-pointer'">
+                        <a class="flex items-center mt-5 cursor-pointer"
+                           @click.prevent="activeTab = 'positions-concept'"
+                           :class="(activeTab === 'positions-concept') ? 'text-theme-1 dark:text-theme-10 font-medium cursor-pointer' : 'mt-5 cursor-pointer'">
                             <EditIcon v-if="project.accept_offer < 1" class="w-4 h-4 mr-2 text-red-600"/>
                             <CheckCircleIcon v-if="project.accept_offer === 1" class="w-4 h-4 mr-2 text-green-600"/>
                             <XCircleIcon v-if="project.accept_offer === 2" class="w-4 h-4 mr-2 text-red-600"/>
@@ -108,8 +94,8 @@
                         </a>
                         <a v-if="challenge.stage === 3"
                            class="flex items-center mt-5" href=""
-                           @click.prevent="activeTab = 'report-init'"
-                           :class="(activeTab == 'report-init')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
+                           @click.prevent="activeTab = 'report-second'"
+                           :class="(activeTab == 'report-second')? ' text-theme-1 dark:text-theme-10 font-medium' : 'mt-5'">
                             <EditIcon class="w-4 h-4 mr-2 text-red-600"/>
                             Raport z fazy planowania
                         </a>
@@ -156,8 +142,10 @@
                 <WhatsNext :user="user" :challenge="challenge" :solutions="challenge.solutions" :stage="3"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
+            <ReportSecondStage v-if="activeTab ==='report-second'" :project="project"></ReportSecondStage>
             <CommunicationPanel v-if="activeTab ==='communication'" :project="project" :integrator="integrator" :investor="investor"></CommunicationPanel>
             <RiskPanel v-if="activeTab ==='risk'" :project="project" :integrator="integrator" :investor="investor"></RiskPanel>
+            <PositionsConceptPanel v-if="activeTab === 'positions-concept'" :integrator="integrator" :investor="investor" :project="project"></PositionsConceptPanel>
             <ModalCard :show="show" @closed="modalClosed">
                 <h3 class="intro-y text-lg font-medium mt-5">Czy na pewno chcesz przejść do następnej fazy?</h3>
                 <div class="intro-y box p-5 mt-12 sm:mt-5" style="text-align: center;">
@@ -200,10 +188,17 @@ import ReportInitPanel from "../components/ReportInitPanel";
 import RequestHandler from "../../../compositions/RequestHandler";
 import CommunicationPanel from "./components/CommunicationPanel";
 import RiskPanel from "./components/RiskPanel";
+import PositionsConceptPanel from "./components/PositionsConceptPanel";
+import Report from "../../Communication/Report";
+import ReportSecondStage from "./components/ReportSecondStage";
+
 
 export default defineComponent({
     name: 'projectCardStageSecond',
     components: {
+        ReportSecondStage,
+        Report,
+        PositionsConceptPanel,
         CommunicationPanel,
         OfferProject,
         OfferAdd,

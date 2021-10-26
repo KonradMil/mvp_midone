@@ -8,24 +8,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- *
- */
-class Question extends Model
+class ProjectConcept extends Model
 {
     use HasFactory;
 
     /**
      * @var string
      */
-    public $table = 'questions';
+    public $table = 'project_concepts';
 
     /**
      * @var string[]
      */
     protected $fillable = [
-        'question', 'answer',
-        'author_id', 'challenge_id'
+        'title', 'description', 'accepted', 'author_id', 'project_id'
     ];
 
     /**
@@ -37,26 +33,26 @@ class Question extends Model
     }
 
     /**
-     * @return HasMany
-     */
-    public function answers(): HasMany
-    {
-        return $this->hasMany(Question::class, 'answer');
-    }
-
-    /**
      * @return BelongsTo
      */
-    public function challenge(): BelongsTo
+    public function project(): BelongsTo
     {
-        return $this->belongsTo(Challenge::class);
+        return $this->belongsTo(Project::class);
     }
 
     /**
      * @return BelongsToMany
      */
-    public function concepts(): BelongsToMany
+    public function files(): BelongsToMany
     {
-        return $this->belongsToMany(Question::class);
+        return $this->belongsToMany(File::class, 'project_concept_files', 'project_concept_id', 'file_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function questions(): HasMany
+    {
+        return $this->hasMany(ConceptQuestion::class, 'id', 'project_concept_id');
     }
 }

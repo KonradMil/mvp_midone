@@ -68,7 +68,13 @@ class Project extends Model
     {
         return $this->hasMany(ProjectRisk::class, 'id', 'project_id');
     }
-
+    /**
+     * @return HasMany
+     */
+    public function project_concepts(): HasMany
+    {
+        return $this->hasMany(ProjectConcept::class, 'id', 'project_id');
+    }
     /**
      * @return BelongsToMany
      */

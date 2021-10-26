@@ -1,5 +1,5 @@
 <template>
-    <div class="col-span-12 lg:col-span-8 xxl:col-span-9">
+    <div class="col-span-12 lg:col-span-8 xxl:col-span-9" v-if="guard === true">
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12">
@@ -9,7 +9,8 @@
                         <h2 class="font-medium text-base mr-auto" v-if="isAnswer">Odpowiedz na pytanie</h2>
                     </div>
                     <div class="flex px-5 py-3">
-                        <textarea v-model="question" class="w-full h-36 form-control"></textarea>
+                        <textarea v-if="!isAnswer && concept_id > 0" v-model="question" class="w-full h-36 form-control"></textarea>
+                        <textarea v-if="isAnswer && concept_id > 0" v-model="questionAnswer" class="w-full h-36 form-control"></textarea>
                     </div>
                     <div class="flex px-5 py-3">
                         <button
@@ -31,7 +32,6 @@
                     <div class="p-5 flex flex-col-reverse sm:flex-row text-gray-600 border-b border-gray-200 dark:border-dark-1">
                         <div class="flex items-center mt-3 sm:mt-0 border-t sm:border-0 border-gray-200 pt-5 sm:pt-0 mt-5 sm:mt-0 -mx-5 sm:mx-0 px-5 sm:px-0">
                             <button
-                                v-if="user.type == 'integrator'"
                                 type="button"
                                 class="btn text-gray-700 dark:text-gray-300 w-full bg-white dark:bg-theme-1 mt-1"
                                 @click="addingDialog = true">
@@ -52,14 +52,14 @@
                                     <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">
                                         {{ $dayjs(q.created_at).format('DD.MM.YYYY HH:mm') }}
                                     </div>
-                                    <div class="inbox__item--time whitespace-nowrap ml-auto pl-10" v-if="authorId == user.id">
-                                        <button class="btn btn-primary" @click="answer(q.id)">Odpowiedz</button>
+                                    <div class="inbox__item--time whitespace-nowrap ml-auto pl-10" v-if="authorId == user.id || type === 'concept'">
+                                        <button class="btn btn-primary" @click="addAnswer(q.id)">Odpowiedz</button>
                                     </div>
                                 </div>
                                 <div v-if="expand[index] === true">
-                                        <div class="border px-5 py-2" v-for="(a, i) in q.answers" style="word-break: break-all;">
-                                            Odpowiedź: {{ a.question }}
-                                        </div>
+                                    <div class="border px-5 py-2" v-for="(a, i) in q.answers" style="word-break: break-all;">
+                                        Odpowiedź: {{ a.answer }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -76,14 +76,16 @@
 
 <script>
 import {onMounted, ref} from "vue";
-import SaveQuestion from "../../../compositions/SaveQuestion";
-import GetQuestions from "../../../compositions/GetQuestions";
+import RequestHandler from "../../../../compositions/RequestHandler";
 
 export default {
-    name: "QuestionsPanel",
+    name: "ConceptQuestionsPanel",
     props: {
         id: Number,
         author_id: Number,
+        type: String,
+        concept_id: Number,
+        project: Object
     },
     setup(props) {
         const addingDialog = ref(false);
@@ -95,36 +97,56 @@ export default {
         const questionId = ref(null);
         const authorId = ref(0);
         const questionAnswer = ref('');
+        const guard = ref(false);
 
-        const saveQuestion = (id) => {
-            SaveQuestion({challenge_id: props.id, question: question.value, isAnswer: questionId.value}, () => {
-                    addingDialog.value = false;
-                    getQuestions();
-                });
+        const getConceptQuestions = (callback) => {
+            RequestHandler('projects/' + props.project.id + '/concept/questions', 'get', {
+                concept_id: props.concept_id,
+            }, (response) => {
+                questions.value = response.data.conceptQuestions;
+                callback();
+            });
         }
 
-       const close = () => {
+        const saveQuestion = (id) => {
+            if(props.concept_id > 0 && !isAnswer.value){
+                RequestHandler('projects/' + props.project.id + '/concept/question/save', 'post', {
+                    concept_id: props.concept_id,
+                    question: question.value,
+                }, (response) => {
+                    addingDialog.value = false;
+                    getConceptQuestions();
+                });
+            } else if(props.concept_id > 0 && isAnswer.value){
+                RequestHandler('projects/' + props.project.id + '/concept/question/answer/save', 'post', {
+                    concept_id: props.concept_id,
+                    concept_question_id: questionId.value,
+                    answer: questionAnswer.value,
+                }, (response) => {
+                    addingDialog.value = false;
+                    getConceptQuestions();
+                });
+            }
+        }
+
+        const close = () => {
             addingDialog.value = false;
-       }
+        }
 
-       const getQuestions = () => {
-            GetQuestions(props.id, (res) => {
-                questions.value = res;
-            });
-       }
-
-       const answer = (id) => {
+        const addAnswer = (id) => {
             isAnswer.value = true;
             addingDialog.value = true;
             questionId.value = id;
-       }
+        }
 
         onMounted(() => {
-                authorId.value = props.author_id;
-                getQuestions();
+            getConceptQuestions(() => {
+                guard.value = true;
+            });
         });
 
         return {
+            guard,
             questionAnswer,
             addingDialog,
             saveQuestion,
@@ -133,7 +155,7 @@ export default {
             close,
             user,
             isAnswer,
-            answer,
+            addAnswer,
             questionId,
             expand,
             authorId

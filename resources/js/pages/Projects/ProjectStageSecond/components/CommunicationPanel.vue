@@ -1,17 +1,18 @@
 <template>
     <div class="intro-y col-span-12 lg:col-span-8 xl:col-span-9" v-if="guard === true">
-        <div v-if="user.type === 'integrator'" class="intro-y box">
+        <div v-if="user.type === 'integrator' || project.accept_communication === 3" class="intro-y box">
             <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
                 <h2 class="font-medium text-base mr-auto">
-                    Stworzenie planu komunikacji integratora
+                    Planu komunikacji integratora
                 </h2>
                 <div class="absolute top-4 left-80 cursor-pointer px-6">
-                    <button class="btn btn-primary mr-6" @click.prevent="show=true">
+                    <button v-if="project.accept_communication !== 3 && project.accept_communication !== 1" class="btn btn-primary mr-6" @click.prevent="show=true">
                         Akceptuję
                     </button>
+                    <p v-else class="text-theme-9 pt-3">{{ $t('challengesMain.accepted') }}</p>
                 </div>
                 <div class="cursor-pointer px-6">
-                    <button class="btn btn-outline-secondary py-1 px-2" @click.prevent="addNewCommunicationPlan">
+                    <button class="btn btn-outline-secondary py-2 px-4" @click.prevent="addNewCommunicationPlan">
                         Dodaj
                     </button>
                 </div>
@@ -23,8 +24,8 @@
                             <p v-if="communicationPlan.personal_occupation !== ''">{{ communicationPlan.personal_occupation }} </p>
                             <p v-else> Uzupełnij </p>
                         </button>
-                        <div class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
-                            <button class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="deleteCommunicationPlan(communicationPlan)">
+                        <div v-if="communicationPlan.author !== undefined" class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
+                            <button v-if="integrator.id === user.id" class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="deleteCommunicationPlan(communicationPlan)">
                                 Usuń
                             </button>
                         </div>
@@ -123,18 +124,19 @@
                 </div>
             </div>
         </div>
-        <div v-if="user.type === 'investor'" class="intro-y box">
+        <div v-if="user.type === 'investor' || project.accept_communication === 3" class="intro-y box mt-3">
             <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
                 <h2 class="font-medium text-base mr-auto">
-                    Stworzenie planu komunikacji inwestora
+                    Planu komunikacji inwestora
                 </h2>
                 <div class="absolute top-4 left-80 cursor-pointer px-6">
-                    <button class="btn btn-primary mr-6" @click.prevent="show=true">
+                    <button v-if="project.accept_communication < 3 && project.accept_communication !== 2" class="btn btn-primary mr-6" @click.prevent="show=true">
                         Akceptuję
                     </button>
+                    <p v-else class="text-theme-9 pt-3">{{ $t('challengesMain.accepted') }}</p>
                 </div>
                 <div class="cursor-pointer px-6">
-                    <button class="btn btn-outline-secondary py-1 px-2" @click.prevent="addNewCommunicationPlan">
+                    <button v-if="user.id === investor.id" class="btn btn-outline-secondary py-1 px-2" @click.prevent="addNewCommunicationPlan">
                         Dodaj
                     </button>
                 </div>
@@ -146,8 +148,8 @@
                             <p v-if="communicationPlan.personal_occupation !== ''">{{ communicationPlan.personal_occupation }} </p>
                             <p v-else> Uzupełnij </p>
                         </button>
-                        <div class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
-                            <button class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="addNewCommunicationPlan(communicationPlan)">
+                        <div v-if="communicationPlan.author !== undefined" class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
+                            <button v-if="user.id === investor.id" class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="addNewCommunicationPlan(communicationPlan)">
                                 Usuń
                             </button>
                         </div>
@@ -173,7 +175,7 @@
                                                 id="regular-form-2"
                                                 type="text"
                                                 class="form-control w-1/3"
-                                                placeholder="Dane personalne">
+                                                placeholder="Definicja stanowiska">
                                         </div>
                                     </div>
                                 </div>
@@ -190,7 +192,7 @@
                                                 id="regular-form-3"
                                                 type="text"
                                                 class="form-control w-1/3"
-                                                placeholder="Numer telefonu">
+                                                placeholder="Dane personalne">
                                         </div>
                                     </div>
                                 </div>
@@ -203,7 +205,7 @@
                                             <input
                                                 v-model="communicationPlan.phone_number"
                                                 id="regular-form-4"
-                                                type="text"
+                                                type="number"
                                                 class="form-control w-1/3"
                                                 placeholder="Numer telefonu">
                                         </div>
@@ -218,7 +220,7 @@
                                             <input
                                                 v-model="communicationPlan.email"
                                                 id="regular-form-5"
-                                                type="text"
+                                                type="email"
                                                 class="form-control w-1/3"
                                                 placeholder="E-mail">
                                         </div>
@@ -246,7 +248,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <ModalCard :show="show" @closed="modalClosed">
         <h3 class="intro-y text-lg font-medium mt-5">
@@ -254,8 +255,8 @@
         </h3>
         <div class="intro-y box p-5 mt-12 sm:mt-5" style="text-align: center;">
             <div class="relative text-gray-700 dark:text-gray-300 mr-4">
-                <button class="btn btn-primary shadow-md mr-2">Tak</button>
-                <button class="btn btn-primary shadow-md mr-2">Anuluj</button>
+                <button class="btn btn-primary shadow-md mr-2" @click.prevent="acceptProjectCommunication">Tak</button>
+                <button class="btn btn-primary shadow-md mr-2" @click.prevent="modalClosed">Anuluj</button>
             </div>
         </div>
     </ModalCard>
@@ -322,7 +323,7 @@ export default {
                 personal_occupation: '',
                 personal_data: '',
                 phone_number: '',
-                email: 0,
+                email: '',
                 project_decision: 2
             }
             setTimeout(function () {
@@ -334,11 +335,11 @@ export default {
             }, 500)
         }
         const deleteCommunicationPlan = async (communicationPlan) => {
-            RequestHandler('projects/' + props.project.id + '/communication/' + communicationPlan.id + '/delete', 'post', {
+            RequestHandler('projects/' + props.project.id + '/communication/delete', 'post', {
                 project_id: props.project.id,
                 id: communicationPlan.id,
             }, (response) => {
-                if(user.value.id === props.integrator.id){
+                if(user.id === props.integrator.id){
                     integratorCommunicationPlans.value.splice(integratorCommunicationPlans.value.indexOf(communicationPlan), 1);
                 } else {
                     investorCommunicationPlans.value.splice(investorCommunicationPlans.value.indexOf(communicationPlan), 1);
@@ -360,8 +361,6 @@ export default {
         }
 
         const getIntegratorCommunicationPlans = async (callback) => {
-            console.log(props.integrator.id + 'props.integator.id');
-
             RequestHandler('projects/' + props.project.id + '/communications/integrator', 'get', {
                 integrator_id: props.integrator.id
             }, (response) => {
@@ -379,13 +378,32 @@ export default {
             });
         }
 
+        const acceptProjectCommunication = async () => {
+            RequestHandler('projects/' + props.project.id + '/communication/accept', 'post', {
+                project_id: props.project.id,
+            }, (response) => {
+                if(user.type === 'investor'){
+                    if(props.project.accept_communication === 1){
+                        props.project.accept_communication = 3;
+                    } else {
+                        props.project.accept_communication = 2;
+                    }
+                } else if(user.type === 'integrator'){
+                    if(props.project.accept_communication === 2){
+                        props.project.accept_communication = 3;
+                    } else {
+                        props.project.accept_communication = 1;
+                    }
+                }
+                modalClosed();
+            });
+        }
+
         const modalClosed = () => {
             show.value = false;
         }
 
         onMounted(() => {
-            console.log(props.integrator.id + 'props.integrator.id');
-            console.log(props.investor.id + 'props.integrator.id');
             if(props.integrator.id !== undefined){
                 getIntegratorCommunicationPlans(function () {
                     guard.value = true;
@@ -399,6 +417,7 @@ export default {
         });
 
         return {
+            acceptProjectCommunication,
             showDetails,
             modalClosed,
             show,

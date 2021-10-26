@@ -5,27 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- *
- */
-class Question extends Model
+class ConceptQuestion extends Model
 {
     use HasFactory;
 
     /**
      * @var string
      */
-    public $table = 'questions';
+    public $table = 'concept_questions';
 
     /**
      * @var string[]
      */
     protected $fillable = [
-        'question', 'answer',
-        'author_id', 'challenge_id'
+        'question', 'answer', 'accepted', 'author_id', 'project_concept_id'
     ];
 
     /**
@@ -37,26 +32,18 @@ class Question extends Model
     }
 
     /**
+     * @return BelongsTo
+     */
+    public function project_concept(): BelongsTo
+    {
+        return $this->belongsTo(ProjectConcept::class);
+    }
+
+    /**
      * @return HasMany
      */
     public function answers(): HasMany
     {
-        return $this->hasMany(Question::class, 'answer');
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function challenge(): BelongsTo
-    {
-        return $this->belongsTo(Challenge::class);
-    }
-
-    /**
-     * @return BelongsToMany
-     */
-    public function concepts(): BelongsToMany
-    {
-        return $this->belongsToMany(Question::class);
+        return $this->hasMany(ConceptAnswer::class, 'concept_question_id');
     }
 }

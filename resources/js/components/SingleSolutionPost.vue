@@ -34,14 +34,19 @@
                     <button class="btn btn-primary shadow-md mr-2" v-if="solution.archive !== 1 && acceptChallengeSolutions" @click="showAddFileModal">Pliki</button>
                 </div>
             </div>
-            <div class="mt-2 md:flex-row" v-if="canEdit || inTeam && type!=='archive'">
+            <div class="mt-2 md:flex" v-if="canEdit || inTeam && type!=='archive'">
                 <button class="btn btn-primary shadow-md mr-2" @click="$router.push({name: 'challengeStudio', params: {id: solution.id, type: 'solution', canEditSolution: canEditSolution}})" v-if="challenge.stage == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1 && canEditSolution">{{$t('models.edit')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution" v-if="challenge.stage == 1 && solution.selected != 1 && solution.archive != 1 && canDeleteSolution">{{$t('models.delete')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0 && challenge.stage == 1 &&  solution.archive != 1 && canPublishSolution" @click="publishSolution">{{$t('challengesMain.publish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1) && solution.archive != 1 && canPublishSolution" @click="unpublishSolution">{{$t('challengesMain.unpublish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive != 1" @click="switchTab">{{$t('teams.teams')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive != 1" @click="showAddFileModal">Pliki</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.archive !== 1 && user.type === 'integrator' && solution.selected === 1 && type!=='archive' && addSolutionOffer" @click="addOffer">{{$t('challengesMain.addOffer')}}</button>
+                <div :data-count=solutionFiles.length
+                     class="dropdown-toggle notification notification--bullet cursor-pointer"
+                     role="button"
+                     aria-expanded="false">
+                    <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive !== 1" @click="showAddFileModal">Pliki</button>
+                </div>
             </div>
         </div>
         <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">

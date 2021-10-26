@@ -225,7 +225,7 @@
                         <div class="flex flex-wrap px-4">
                             <Dropzone
                                 style="position: relative;
-                                                    display: flex;"
+                                display: flex;"
                                 ref-key="dropzoneSingleRef"
                                 :options="{
                                 url: '/api/challenge/images/store',
