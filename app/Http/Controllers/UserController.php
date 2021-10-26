@@ -189,7 +189,7 @@ class UserController extends Controller
             $authy_api = new AuthyApi(env('AUTHY_SECRET'));
 
             $userat = $authy_api->registerUser(Auth::user()->email, Auth::user()->phone, 48);
-            dd($userat);
+//            dd($userat);
             if ($userat->ok()) {
                 $user->authy_id = $userat->id();
             }
