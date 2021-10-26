@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 use League\Flysystem\FileNotFoundException;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -111,6 +112,26 @@ class S3Controller extends Controller
 //        $myfile = fopen("mateusz.txt", "w") or die("Unable to open file!");
         $myfile = File::put('mateusz.txt', $request->file_string);
         Storage::disk('s3')->putFileAs('uploads', 'mateusz.txt', 'mateusz.txt');
+    }
+
+    /**
+     * @param $screenshot
+     * @return array
+     */
+    public static function processScreenshot($screenshot): array
+    {
+        $content = base64_decode($screenshot);
+        $name = uniqid('ss_') . '.jpg';
+        $path = public_path('screenshots/' . $name);
+        $image_normal = Image::make($content)->resize(1000, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $image_normal->save(public_path('images/' . $name));
+
+        Storage::disk('s3')->putFileAs('screenshots/', new \Illuminate\Http\File(public_path('images/' . $name)), $name);
+
+        return ['absolute_path' => $path, 'relative' => ('s3/screenshots/' . $name)];
     }
 
 }

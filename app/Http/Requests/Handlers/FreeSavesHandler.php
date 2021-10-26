@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Handlers;
 
+use App\Http\Controllers\S3Controller;
 use App\Parameters\NewFreeSaveParameters;
 use App\Parameters\NewLocalVisionCommentParameters;
 use App\Parameters\NewLocalVisionParameters;
@@ -23,8 +24,11 @@ class FreeSavesHandler extends RequestHandler
         $parameters->en_name = $this->request->get('en_name');
         $parameters->description = $this->request->get('description');
         $parameters->en_description = $this->request->get('en_description');
-        $parameters->save_json = json_decode($this->request->data['save']['save_json'], true);
-        $parameters->screenshot_path = json_decode($this->request->data['save']['save_json'], true);
+        $save =  json_decode($this->request->get('save'), true);
+        $img = S3Controller::processScreenshot($save['screenshot']);
+        unset($save['screenshot']);
+        $parameters->save_json = json_encode($save);
+        $parameters->screenshot_path = $img['relative'];
 
         return $parameters;
     }
