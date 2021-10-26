@@ -183,6 +183,7 @@ class UserController extends Controller
         }
 
         $user->twofa = !$user->twofa;
+        $user->save();
 
         if ($user->twofa) {
             $authy_api = new AuthyApi(env('AUTHY_SECRET'));
