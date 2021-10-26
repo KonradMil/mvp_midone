@@ -226,6 +226,7 @@ export default defineComponent({
             if(window.location.hash === '#fill_company_data') {
                 activeTab.value = "company";
                 toast.warning("Uzupełnij dane firmy.");
+                window.location.hash = "";
             }
 
         });
