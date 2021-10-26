@@ -36,6 +36,7 @@ class TeamInvitationMail extends Mailable
     public function build(): TeamInvitationMail
     {
         return $this->view('emails.team_invitation')
+            ->subject("DBR77: Zaproszenie do zespołu")
             ->with([
                 'teamName' => $this->teamName,
                 'confirmationToken' => $this->confirmationToken
