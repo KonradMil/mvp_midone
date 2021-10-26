@@ -9,7 +9,7 @@ export default function GetChallengesFollowed() {
     const list = ref([]);
 
     async function getChallengesFollowed() {
-        axios.post('/api/challenge/user/get/followed', {})
+        axios.post('/api/challenges/get/followed', {})
             .then(response => {
 
                 if (response.data.success) {
