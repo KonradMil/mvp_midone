@@ -53,12 +53,12 @@
                                         {{ $dayjs(q.created_at).format('DD.MM.YYYY HH:mm') }}
                                     </div>
                                     <div class="inbox__item--time whitespace-nowrap ml-auto pl-10" v-if="authorId == user.id">
-                                        <button class="btn btn-primary" @click="answer(q.id)">Odpowiedz</button>
+                                        <button v-if="challenge_stage!==3" class="btn btn-primary" @click="answer(q.id)">Odpowiedz</button>
                                     </div>
                                 </div>
                                 <div v-if="expand[index] === true">
                                         <div class="border px-5 py-2" v-for="(a, i) in q.answers" style="word-break: break-all;">
-                                            Odpowiedź: {{ a.question }}
+                                            Odpowiedź: {{a.question}}
                                         </div>
                                 </div>
                             </div>
@@ -82,8 +82,9 @@ import GetQuestions from "../../../compositions/GetQuestions";
 export default {
     name: "QuestionsPanel",
     props: {
-        id: Number,
+      id: Number,
         author_id: Number,
+        challenge_stage: Number,
     },
     setup(props) {
         const addingDialog = ref(false);
@@ -94,13 +95,12 @@ export default {
         const isAnswer = ref(false);
         const questionId = ref(null);
         const authorId = ref(0);
-        const questionAnswer = ref('');
 
-        const saveQuestion = (id) => {
+        const saveQuestion = () => {
             SaveQuestion({challenge_id: props.id, question: question.value, isAnswer: questionId.value}, () => {
-                    addingDialog.value = false;
-                    getQuestions();
-                });
+                addingDialog.value = false;
+                getQuestions();
+            });
         }
 
        const close = () => {
@@ -120,12 +120,11 @@ export default {
        }
 
         onMounted(() => {
-                authorId.value = props.author_id;
-                getQuestions();
+            authorId.value = props.author_id;
+            getQuestions();
         });
 
         return {
-            questionAnswer,
             addingDialog,
             saveQuestion,
             question,
