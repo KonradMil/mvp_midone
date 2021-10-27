@@ -50,12 +50,12 @@
             </div>
         </div>
         <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
-            <Tippy
-                tag="a"
-                class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 mr-2"
-                content="Bookmark">
-                <BookmarkIcon class="w-3 h-3"/>
-            </Tippy>
+<!--            <Tippy-->
+<!--                tag="a"-->
+<!--                class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 mr-2"-->
+<!--                content="Bookmark">-->
+<!--                <BookmarkIcon class="w-3 h-3"/>-->
+<!--            </Tippy>-->
             <div class="intro-x flex mr-2">
             </div>
             <Tippy v-if="!solution.liked && solution.archive != 1"
