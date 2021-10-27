@@ -45,14 +45,13 @@
                      class="dropdown-toggle notification notification--bullet cursor-pointer"
                      role="button"
                      aria-expanded="false">
-                    <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive !== 1" @click="showAddFileModal">Pliki</button>
+                    <button class="btn btn-primary shadow-md mr-2" v-if="canEdit && solution.archive != 1" @click="showAddFileModal">Pliki</button>
                 </div>
             </div>
         </div>
         <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
             <Tippy
                 tag="a"
-                href=""
                 class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 mr-2"
                 content="Bookmark">
                 <BookmarkIcon class="w-3 h-3"/>
@@ -101,7 +100,7 @@
                                 </div>
                                 <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
                                     class="cursor-pointer px-6">
-                                    <button v-if="user.id === props.solution.author_id" class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
+                                    <button v-if="user.id === props.solution.author_id && props.solution.status !== 1" class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
                                         Usuń
                                     </button>
                                     <button class="btn btn-outline-secondary py-1 px-2" @click="downloadFile(file.path, file.name)">
@@ -115,7 +114,7 @@
                 <div class="mt-3" v-if="solutionFiles.length <= 0 && user.id !== props.solution.author_id">
                     <span class="font-medium dark:text-theme-10 text-theme-1">Brak plików</span>
                 </div>
-                <div class="mt-3" v-if="user.id === props.solution.author_id">
+                <div class="mt-3" v-if="user.id === props.solution.author_id && props.solution.status !== 1">
                     <label class="form-label"> {{ $t('challengesNew.file') }}</label>
                     <div class="rounded-md pt-4">
                         <div class="flex flex-wrap px-4">
@@ -142,7 +141,7 @@
                     </div>
                 </div>
             </div>
-            <div v-if="user.id === props.solution.author_id" class="flex flex-col lg:flex-row items-center p-5" style="justify-content: center;">
+            <div v-if="user.id === props.solution.author_id && props.solution.status !== 1" class="flex flex-col lg:flex-row items-center p-5" style="justify-content: center;">
                 <button class="btn btn-outline-secondary py-1 px-2" @click="saveFiles">
                     {{ $t('global.save') }}
                 </button>
@@ -224,12 +223,12 @@ export default {
         onMounted(() => {
             getSolutionFiles();
             checkTeam();
-            if(user.id === props.solution.author_id){
+            if(user.id === props.solution.author_id && props.solution.status !== 1){
                 const elDropzoneSingleRef = dropzoneSingleRef.value;
                 elDropzoneSingleRef.dropzone.on("success", (resp) => {
                     solutionFiles.value.push(JSON.parse(resp.xhr.response).payload);
                     images.value.push(JSON.parse(resp.xhr.response).payload);
-                    toast.success('Zdjecie zostało wgrane poprawnie!');
+                    toast.success('Plik został wgrany poprawnie!');
                 });
                 elDropzoneSingleRef.dropzone.on("error", () => {
                     toast.error("Maksymalnie można wgrać 8 plików!");
