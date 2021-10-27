@@ -2,25 +2,25 @@
     "icons": {
         "edit": {
             "src": "\/s3/builder_icons/edit_simple.png",
-            "tooltip": "",
+            "tooltip": "Edycja layoutu",
             "alttext": "",
             "type": "button"
         },
         "addlabel": {
             "src": "\/s3/builder_icons/addlabel_radial.png",
-            "tooltip": "",
+            "tooltip": "Pole tekstowe",
             "alttext": "",
             "type": "button"
         },
         "addlayout": {
             "src": "\/s3/builder_icons/addlayout_radial.png",
-            "tooltip": "",
+            "tooltip": "Obszar",
             "alttext": "",
             "type": "button"
         },
         "notatka": {
             "src": "\/s3/builder_icons/notatka_simple.png",
-            "tooltip": "",
+            "tooltip": "Notatka",
             "alttext": "",
             "type": "button"
         }
