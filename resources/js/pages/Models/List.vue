@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="col-span-12 lg:col-span-4">
-            <div class="intro-y box p-5" style="z-index: 99999;">
+            <div class="intro-y box p-5" style="z-index: 9999;">
                 <div class="mt-3">
                     <label for="post-form-3" class="form-label">{{ $t('models.cat') }}</label>
                     <TailSelect
@@ -20,7 +20,7 @@
                     </TailSelect>
                 </div>
             </div>
-            <div class="intro-y box p-5" v-if="category != ''" style="z-index: 99999;">
+            <div class="intro-y box p-5" v-if="category != ''" style="z-index: 9999;">
                 <div class="mt-3">
                     <label for="post-form-3" class="form-label">{{ $t('models.subcat') }}</label>
                     <TailSelect
