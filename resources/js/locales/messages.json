@@ -33,7 +33,11 @@
             "addSolutionOffer" : "Add solution offer",
             "acceptChallengeSolution" : "Accept challenge solution",
             "addChallengeSolution" : "Add challenge solution",
-            "continue":  "Continue"
+            "continue":  "Continue",
+            "follow": "Follow",
+            "unfollow": "Unfollow",
+            "like": "Like",
+            "unlike": "Not like"
         },
         "validation": {
             "Value is required": "Value is required.",
@@ -344,7 +348,11 @@
             "addSolutionOffer" : "Dodawanie ofert",
             "acceptChallengeSolution" : "Akceptacja rozwiązań",
             "addChallengeSolution" : "Dodawanie rozwiązań",
-            "continue": "Kontynuuj"
+            "continue": "Kontynuuj",
+            "follow": "Obserwuj",
+            "unfollow": "Przestań obserwować",
+            "like": "Lubię",
+            "unlike": "Nie lubię"
         },
         "topBar": {
             "profil": "Profil",
