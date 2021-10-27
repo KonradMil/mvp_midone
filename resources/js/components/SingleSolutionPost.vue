@@ -1,12 +1,16 @@
 <template>
     <div  :class="(solution.selected == 1)? 'selected-solution': '' ">
         <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4" :class="(solution.rejected == 1)? 'rejected-solution': '' ">
+              <span v-if="user.type === 'investor' && check === 'true'" class="numberCircle clrGreen absolute top-3 right-3">
+                  <span>
+                      {{ index + 1}}
+                  </span>
+              </span>
             <div class="w-10 h-10 flex-none image-fit">
                 <img
                     alt="DBR77"
                     class="rounded-full"
-                    :src="'/' + solution.screenshot_path"
-                />
+                    :src="'/' + solution.screenshot_path"/>
             </div>
             <div class="ml-3 mr-auto" @click="$router.push({path: '/studio/solution/' + solution.id});">
                 <a href="" class="font-medium">{{ solution.name }} <span v-if="solution.selected == 1" style="color: #5e50ac;"> - {{$t('challengesMain.accepted')}}</span><span v-if="solution.rejected == 1" style="color: #1a202c;"> - {{$t('challengesMain.rejected')}}</span></a>
@@ -17,8 +21,7 @@
                 <img @click="$router.push({name: 'challengeStudio', params: {id: solution.id, type: 'solution', canEditSolution: canEditSolution}});"
                      alt="DBR77"
                      class="rounded-md"
-                     :src="'/' + solution.screenshot_path"
-                />
+                     :src="'/' + solution.screenshot_path"/>
             </div>
             <a href="" class="block font-medium text-base mt-5"></a>
             <div class="text-gray-700 dark:text-gray-600 mt-2" style="word-break: break-all; max-height: 100px; overflow-y: scroll;">
@@ -50,12 +53,12 @@
             </div>
         </div>
         <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
-            <Tippy
-                tag="a"
-                class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 mr-2"
-                content="Bookmark">
-                <BookmarkIcon class="w-3 h-3"/>
-            </Tippy>
+<!--            <Tippy-->
+<!--                tag="a"-->
+<!--                class="intro-x w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-dark-5 dark:bg-dark-5 dark:text-gray-300 text-gray-600 mr-2"-->
+<!--                content="Bookmark">-->
+<!--                <BookmarkIcon class="w-3 h-3"/>-->
+<!--            </Tippy>-->
             <div class="intro-x flex mr-2">
             </div>
             <Tippy v-if="!solution.liked && solution.archive != 1"
@@ -175,7 +178,8 @@ export default {
         canDeleteSolution: Boolean,
         canEditSolution: Boolean,
         addSolutionOffer: Boolean,
-        canPublishSolution: Boolean
+        canPublishSolution: Boolean,
+        check: String
     },
     setup(props,context) {
         const toast = useToast();
