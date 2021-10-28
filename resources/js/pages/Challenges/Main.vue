@@ -80,25 +80,25 @@
                 <div class="flex items-center px-5 py-3 border-t border-gray-200 dark:border-dark-5">
                     <Tippy v-if="!challenge.followed" tag="a" href="" @click.prevent="follow(challenge.id, index)"
                            class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10"
-                           content="Follow">
+                           :content="$t('global.follow')">
                         <BookmarkIcon class="w-3 h-3"/>
                     </Tippy>
                     <Tippy v-if="challenge.followed" tag="a" href="" @click.prevent="unfollow(challenge.id, index)"
                            class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white"
-                           content="Unfollow">
+                           :content="$t('global.unfollow')">
                         <BookmarkIcon class="w-3 h-3"/>
                     </Tippy>
                     <div class="intro-x flex mr-2">
                     </div>
                     <Tippy v-if="!challenge.liked" @click.prevent="like(challenge)" tag="a" href=""
                            class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 ml-auto"
-                           content="Like">
+                           :content="$t('global.like')">
                         <ThumbsUpIcon class="w-3 h-3"/>
                     </Tippy>
                     <Tippy v-if="challenge.liked"
                            @click.prevent="dislike(challenge)" tag="a" href=""
                            class="intro-x w-8 h-8 flex items-center justify-center rounded-full bg-theme-1 text-white ml-2 ml-auto"
-                           content="Unlike">
+                           :content="$t('global.unlike')">
                         <ThumbsUpIcon class="w-3 h-3"/>
                     </Tippy>
                 </div>

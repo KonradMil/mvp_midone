@@ -183,10 +183,13 @@ class UserController extends Controller
         }
 
         $user->twofa = !$user->twofa;
+        $user->save();
 
         if ($user->twofa) {
             $authy_api = new AuthyApi(env('AUTHY_SECRET'));
+
             $userat = $authy_api->registerUser(Auth::user()->email, Auth::user()->phone, 48);
+//            dd($userat);
             if ($userat->ok()) {
                 $user->authy_id = $userat->id();
             }
