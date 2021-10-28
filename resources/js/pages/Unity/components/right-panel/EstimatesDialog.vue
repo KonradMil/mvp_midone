@@ -3,8 +3,9 @@
         <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
             <div class="intro-y col-span-12">
 
+                <p class="alert alert-warning show">Przed wprowadzeniem zmian upewnij się, że kursor znajduje się we właściwym polu.</p><br>
                 <div class="intro-y col-span-12 sm:col-span-12" >
-                    <h4>Części i urządzenia</h4>
+                    <h3>Części i urządzenia</h3>
                 </div>
                 <button class="btn btn-primary hidden sm:flex my-2"  @click="refreshMe">
                     Aktualizuj części
@@ -33,11 +34,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="border dark:border-dark-5 whitespace-nowrap">Suma</th>
-                                    <td class="border">
-                                        <span v-if="partPrices[index] != undefined">
-                                            {{part.count * partPrices[index]}}
-                                        </span>
+                                    <td class="border" colspan="2">
+                                        Suma: <span v-if="partPrices[index] != undefined">{{part.count * partPrices[index]}}</span>
                                     </td>
                                 </tr>
                             </tbody>
