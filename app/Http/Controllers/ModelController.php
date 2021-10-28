@@ -52,7 +52,7 @@ class ModelController extends Controller
                 $models = UnityModel::where('name', 'LIKE', '%'. $request->search . '%')->take(80)->get();
             }
         } else {
-            $models = UnityModel::take(40)->get();
+            $models = UnityModel::get();
         }
 
         return response()->json([
