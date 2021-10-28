@@ -152,6 +152,11 @@
 @import "components/pristine";
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 
+.grecaptcha-badge {
+    opacity: 0;
+    visibility: hidden;
+}
+
 .side-nav {
     z-index: 9999999999999;
 }
