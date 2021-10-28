@@ -9,8 +9,6 @@
                  v-if="project.accept_local_vision === 1"><i data-feather="check-square" class="w-4 h-4 mr-2"></i>Zakończono
                 etap
             </div>
-            <!--            <div class="flex items-center justify-center text-theme-6" style="margin-right: 650px;" v-if="project.accept_local_vision === 2"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>-->
-            <!--            <div class="flex items-center mr-3" style="margin-right: 500px;" v-if="project.accept_local_vision < 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>-->
             <button
                 v-if="(user.id === integrator.id || user.id === investor.id) && project.accept_local_vision < 1 && check === true"
                 class="btn btn-primary mr-6 mt-3" @click.prevent="acceptLocalVision">Zakończ etap
@@ -180,16 +178,13 @@
                  style="font-size: 16px;">
                 Nie ma jeszcze żadnych raportów.
             </div>
-            <!--            <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">-->
-            <!--                <div class="sm:ml-auto mt-2 sm:mt-0 dark:text-gray-300">Last account activity: 36 minutes ago</div>-->
-            <!--            </div>-->
         </div>
     </div>
     </div>
 </template>
 
 <script>
-import {computed, getCurrentInstance, onMounted, reactive, ref, watch} from "vue";
+import {getCurrentInstance, onMounted, ref, watch} from "vue";
 import {useToast} from "vue-toastification";
 import Avatar from "../../../components/avatar/Avatar";
 import RequestHandler from "../../../compositions/RequestHandler";
@@ -218,10 +213,6 @@ export default {
         const guard = ref(false);
         const rejects = ref([]);
         const check = ref(false);
-
-        watch(() => reports.value, (first, second) => {
-
-        }, {})
 
         const removeReport = async (index) => {
             reports.value.splice(index, 1);

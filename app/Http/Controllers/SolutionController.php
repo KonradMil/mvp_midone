@@ -1107,7 +1107,26 @@ class SolutionController extends Controller
      */
     public function getChallengeSolutions(Request $request): JsonResponse
     {
-        $solutions = Solution::where('challenge_id', '=' , $request->get('challenge_id'))->get();
+//        $query = Solution::query();
+//        $query->where('author_id', '=', Auth::user()->id);
+
+//        if (isset($input->rating)) {
+//            $query->whereIn('rating', [($input->rating - 0.5), $input->rating, ($input->rating + 0.5)]);
+//        }
+
+//        $solutions = $query->with('comments', 'comments.commentator')->get();
+
+        $solutions = Solution::where('challenge_id', '=' , $request->get('challenge_id'))->with('comments.commentator')->get();
+
+        foreach ($solutions as $solution) {
+            if (Auth::user()->viaLoveReacter()->hasReactedTo($solution)) {
+                $solution->liked = true;
+            } else {
+                $solution->liked = false;
+            }
+            $solution->comments_count = $solution->comments()->count();
+            $solution->likes = $solution->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
+        }
 
         return response()->json([
             'success' => true,
