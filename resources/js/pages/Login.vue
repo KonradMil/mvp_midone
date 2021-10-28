@@ -49,7 +49,7 @@
                             <button @click="showAddToTeamModal">{{ $t('login.forgot') }}</button>
                         </div>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                            <button class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" @click="handleSubmit">
+                            <button class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" @click.prevent="handleSubmit">
                                 {{ $t('login.login') }}
                             </button>
                             <button @click="$router.replace({name:'register'})" class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">
@@ -140,7 +140,6 @@
 
 <script>
 import {onMounted, ref} from "vue";
-import DarkModeSwitcher from "../components/dark-mode-switcher/Main.vue";
 import cash from "cash-dom";
 import {useToast} from "vue-toastification";
 import {useStore} from '../store';
@@ -155,17 +154,19 @@ const store = useStore();
 export default {
 
     components: {
-        DarkModeSwitcher,
         Modal
     },
 
     setup() {
-
         const {executeRecaptcha, recaptchaLoaded} = useReCaptcha();
-
         const show = ref(false);
         const emailNew = ref('');
         const twofa_code = ref('');
+        const email = ref('');
+        const password = ref('');
+        const shows = ref(false);
+        const error = ref(null);
+        const resendEmail = ref(false);
 
         const showAddToTeamModal = () => {
             show.value = true;
@@ -183,11 +184,7 @@ export default {
                     store.dispatch('login/login', {
                         user
                     })
-                    if(user.type == 'robochallege') {
-                        window.location.replace('/playground/saves');
-                    } else {
-                        window.location.replace('/dashboard');
-                    }
+                    window.location.replace('/dashboard');
                 } else {
                     toast.error(response.data.message);
                 }
@@ -207,47 +204,81 @@ export default {
             }
         }
 
+        const handleSubmit = async () => {
+            if (password.value.length > 0) {
+                await recaptchaLoaded();
+                const recaptchaToken = await executeRecaptcha("login");
+
+                RequestHandler('login', 'POST', {
+                        email: email.value,
+                        password: password.value,
+                        recaptchaToken: recaptchaToken
+                    },
+                    (response) => {
+
+                        let twoFactory = typeof response.data.twofa !== 'undefined' ? response.data.twofa : false;
+                        let user = response.data.user;
+                        let company = response.data.company;
+
+                        if (twoFactory) {
+                            window.email = user.email;
+                            shows.value = true;
+                        } else {
+
+                            store.dispatch('login/login', {user});
+
+                            if (window.invitationToken) {
+
+                                if (!user.name || !user.lastname || !company.nip) {
+                                    window.location.replace('/teams/claim_invitation?token=' + window.invitationToken + '&redirect_to=kreator');
+                                } else {
+                                    window.location.replace('/teams/claim_invitation?token=' + window.invitationToken + '&redirect_to=dashboard');
+                                }
+
+                            } else {
+
+                                if (!user.name || !user.lastname || !company.nip) {
+                                    window.location.replace('/kreator');
+                                } else {
+                                    window.location.replace('/dashboard');
+                                }
+
+                            }
+                        }
+                    },
+                    (error) => {
+                        if (typeof error.response.data.accountInactive !== 'undefined') {
+                            resendEmail.value = true;
+                        }
+
+                    });
+            }
+        }
+
+        const resendConfirmationEmail = async (e) => {
+
+            RequestHandler('email/verify/resend_email', 'POST', {
+                email: email.value
+            });
+
+        }
+
+        const handleSocialRegistration = (provider, e) => {
+            e.preventDefault();
+            window.location.href = "/auth/social/" + provider + "/sign_in";
+        }
+
         onMounted(() => {
             cash("body")
                 .removeClass("main")
                 .removeClass("error-page")
                 .addClass("login");
-            const urlParams = new URLSearchParams(window.location.search);
-            console.log("urlParams", urlParams);
-            let param = urlParams.get('beam');
-            console.log("beam", param)
-            if(param != undefined && param != '') {
-                let b = atob(param).split("##");
-                console.log("b", b);
-                axios.get('/sanctum/csrf-cookie').then(response => {
-                    axios.post('/api/login', {
-                        email: b[0],
-                        password: b[1]
-                    })
-                        .then(response => {
-                            if (response.data.success) {
-                                console.log(response.data.success);
-                                let user = response.data.payload;
-                                console.log(user);
-                                // window.Laravel.isLoggedin = true;
-                                store.dispatch('login/login', {
-                                    user
-                                });
-
-                                // toast.success(response.data.message)
-                                console.log(store);
-                                if (user.name !== undefined || user.name !== '') {
-                                    window.location.replace('/dashboard');
-                                } else {
-                                    window.location.replace('/kreator');
-                                }
-                            }
-                        })
-                })
-            }
         });
 
         return {
+            handleSubmit,
+            handleSocialRegistration,
+            resendConfirmationEmail,
             show,
             emailNew,
             showAddToTeamModal,
@@ -257,95 +288,12 @@ export default {
             checkTwoFa,
             executeRecaptcha,
             recaptchaLoaded,
+            email,
+            password,
+            shows,
+            error,
+            resendEmail
         };
-    },
-
-    data() {
-        return {
-            email: "",
-            password: "",
-            shows: false,
-            error: null,
-            resendEmail: false,
-        }
-    },
-
-    methods: {
-
-        handleSubmit: async function (e) {
-
-            e.preventDefault()
-
-            if (this.password.length > 0) {
-
-                await this.recaptchaLoaded();
-                const recaptchaToken = await this.executeRecaptcha("login");
-
-
-
-            RequestHandler('login', 'POST', {
-                    email: this.email,
-                    password: this.password,
-                    recaptchaToken: recaptchaToken
-                },
-                (response) => {
-
-                    let twoFactory = typeof response.data.twofa !== 'undefined' ? response.data.twofa : false;
-                    let user = response.data.user;
-                    let company = response.data.company;
-
-                    if (twoFactory) {
-                        window.email = user.email;
-                        this.shows = true;
-                    } else {
-
-                        store.dispatch('login/login', {user});
-
-                        if(window.invitationToken) {
-
-                            if(!user.name || !user.lastname || !company.nip) {
-                                window.location.replace('/teams/claim_invitation?token='+window.invitationToken+'&redirect_to=kreator');
-                            } else {
-                                window.location.replace('/teams/claim_invitation?token='+window.invitationToken+'&redirect_to=dashboard');
-                            }
-
-                        } else {
-
-                            if(!user.name || !user.lastname || !company.nip) {
-                                window.location.replace('/kreator');
-                            } else {
-                                window.location.replace('/dashboard');
-                            }
-
-                        }
-                    }
-                },
-                (error) => {
-
-                    if (typeof error.response.data.accountInactive !== 'undefined') {
-
-                        this.resendEmail = true;
-
-                    }
-
-                });
-
-            }
-        },
-
-        resendConfirmationEmail: async function (e) {
-
-            RequestHandler('email/verify/resend_email', 'POST', {
-                email: this.email
-            });
-
-        },
-
-        handleSocialRegistration(provider, e) {
-            e.preventDefault();
-            window.location.href = "/auth/social/" + provider + "/sign_in";
-        },
-
     },
 
     beforeRouteEnter(to, from, next) {
