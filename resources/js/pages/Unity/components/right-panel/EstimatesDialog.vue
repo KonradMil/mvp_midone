@@ -16,29 +16,33 @@
                         <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Nazwa</th>
                         <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Ilość</th>
                         <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Cena</th>
-                        <th class="border border-b-2 dark:border-dark-5 whitespace-nowrap">Suma</th>
                     </tr>
                     </thead>
-                    <tbody>
                         <template v-for="(part, index) in partsAr">
-                            <tr class="hover:bg-gray-200">
-                                <td class="border">
-                                    {{index}}
-                                </td>
-                                <td class="border">
-                                    {{part.count}}
-                                </td>
-                                <td class="border">
-                                    <input type="text" v-if="partPrices[index] != undefined" class="form-control"   pattern="[0-9]+([\.,][0-9]+)?" step="0.01" v-model="partPrices[index]">
-                                </td>
-                                <td class="border">
-                                    <span v-if="partPrices[index] != undefined">
-                                        {{part.count * partPrices[index]}}
-                                    </span>
-                                </td>
-                            </tr>
+
+                            <tbody class="hover:bg-gray-200 border-b-2 ">
+                                <tr>
+                                    <td class="border" rowspan="2">
+                                        {{index}}
+                                    </td>
+                                    <td class="border">
+                                        {{part.count}}
+                                    </td>
+                                    <td class="border">
+                                        <input type="text" v-if="partPrices[index] != undefined" class="form-control"   pattern="[0-9]+([\.,][0-9]+)?" step="0.01" v-model="partPrices[index]">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="border dark:border-dark-5 whitespace-nowrap">Suma</th>
+                                    <td class="border">
+                                        <span v-if="partPrices[index] != undefined">
+                                            {{part.count * partPrices[index]}}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+
                         </template>
-                    </tbody>
                 </table>
             </div>
             <div class="divide-gray-200"></div>
