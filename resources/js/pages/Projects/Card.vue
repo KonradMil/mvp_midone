@@ -360,6 +360,7 @@ import ModalCard from "../../components/ModalCard";
 import ModalSuccess from "../../components/ModalSuccess";
 import ReportInitPanel from "./components/ReportInitPanel";
 import RequestHandler from "../../compositions/RequestHandler";
+import router from "../../router";
 
 export default defineComponent({
     name: 'projectCard',
