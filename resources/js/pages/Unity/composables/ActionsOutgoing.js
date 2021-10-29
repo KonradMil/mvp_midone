@@ -49,6 +49,10 @@ export default function unityActionOutgoing(gameWindow) {
         // outgoing(game, 'SetSesionID', id)
     }
 
+    function takeScreenshot (id) {
+        outgoing(game, 'TakeScreenshot', id)
+    }
+
     function setHangarAppearance (id) {
         outgoing(game, 'SetHangarApperance', id)
     }
@@ -233,6 +237,7 @@ export default function unityActionOutgoing(gameWindow) {
         updateCurrentAnimation,
         prefix,
         loadWorkshopObject,
-        launchTutorial
+        launchTutorial,
+        takeScreenshot
     };
 }

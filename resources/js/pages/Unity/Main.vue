@@ -173,6 +173,12 @@ export default {
                                 break;
                         }
                         break;
+                        case 'SaveScreenshot':
+                            axios.post('/api/save/screenshot', {data: e})
+                                .then(response => {
+
+                                })
+                            break;
                     case 'UnitySave':
                         if (!saving.value) {
                             saving.value = true;
@@ -383,6 +389,18 @@ export default {
             type.value = props.type;
             id.value = props.id;
             window_height.value = window.innerHeight;
+
+            window.onkeydown = evt => {
+                switch (evt.keyCode) {
+                    //F1
+                    case 112:
+                       handleUnityActionOutgoing({action: 'TakeScreenshot', data: ''});
+                        break;
+                    default:
+                        return true;
+                }
+                return false;
+            };
         });
 
         return {
