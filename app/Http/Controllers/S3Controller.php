@@ -136,6 +136,15 @@ class S3Controller extends Controller
 
     public function save8KScreenshot(Request $request)
     {
-        return response()->json(self::processScreenshot($request->get('data')));
+
+        $content = base64_decode($request->get('data'));
+        $name = uniqid('ss_') . '.jpg';
+        $path = public_path('screenshots/' . $name);
+        $image_normal = Image::make($content);
+        $image_normal->save(public_path('images/' . $name));
+
+        Storage::disk('s3')->putFileAs('screenshots/', new \Illuminate\Http\File(public_path('images/' . $name)), $name);
+
+        return response()->json(['absolute_path' => $path, 'relative' => ('s3/screenshots/' . $name)]);
     }
 }
