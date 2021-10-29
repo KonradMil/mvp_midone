@@ -395,7 +395,7 @@ export default {
                 console.log(evt.key);
                 switch (evt.keyCode) {
                     //F1
-                    case 112:
+                    case 77:
                        handleUnityActionOutgoing({action: 'TakeScreenshot', data: ''});
                         break;
                     default:
