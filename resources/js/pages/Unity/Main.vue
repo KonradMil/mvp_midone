@@ -391,6 +391,8 @@ export default {
             window_height.value = window.innerHeight;
 
             window.onkeydown = evt => {
+                console.log(evt.keyCode);
+                console.log(evt.key);
                 switch (evt.keyCode) {
                     //F1
                     case 112:
