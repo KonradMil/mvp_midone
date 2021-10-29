@@ -1091,7 +1091,14 @@ class SolutionController extends Controller
      */
     public function getChallengeSolutions(Request $request): JsonResponse
     {
-        $solutions = Solution::where('challenge_id', '=' , $request->get('challenge_id'))->with('comments.commentator', 'challenge')->orderBy('created_at', 'DESC')->get();
+        if(Auth::user()->type === 'investor'){
+            $solutions = Solution::where('challenge_id', '=' , $request->get('challenge_id'))
+                ->where('status', '=', 1)->with('comments.commentator', 'challenge')->orderBy('created_at', 'DESC')->get();
+        } else if(Auth::user()->type === 'integrator'){
+            $solutions = Solution::where('challenge_id', '=' , $request->get('challenge_id'))
+                ->with('comments.commentator', 'challenge')->orderBy('created_at', 'DESC')->get();
+        }
+
 
         foreach ($solutions as $solution) {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($solution)) {
