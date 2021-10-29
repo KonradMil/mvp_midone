@@ -174,6 +174,7 @@ export default {
                         }
                         break;
                         case 'SaveScreenshot':
+                            console.log(e);
                             axios.post('/api/save/screenshot', {data: e})
                                 .then(response => {
 
