@@ -37,7 +37,7 @@ class SolutionRepository extends BaseRepository
      */
     public function getAllSolutionsByUserId(int $id) : Collection
     {
-        $solutions = Solution::where('author_id', '=', $id)->where('archive', '=', 0)->orderBy('created_at', 'DESC')->with('comments.commentator', 'challenge')->get();
+        $solutions = Solution::where('author_id', '=', $id)->where('archive', '!=', 1)->orderBy('created_at', 'DESC')->with('comments.commentator', 'challenge')->get();
 
         foreach ($solutions as $solution) {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($solution)) {
@@ -59,7 +59,7 @@ class SolutionRepository extends BaseRepository
      */
     public function getAllUserSolutionsByChallengeName(Challenge $challenge, int $userId) : Collection
     {
-        $solutions = $challenge->solutions()->where('solutions.archive', '=', 0)->where('solutions.author_id', '=', $userId)
+        $solutions = $challenge->solutions()->where('solutions.archive', '!=', 1)->where('solutions.author_id', '=', $userId)
             ->orderBy('created_at', 'DESC')->get();
 
 
