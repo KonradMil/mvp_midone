@@ -26,14 +26,14 @@
             <span v-if="(current_object_focus == object.id && current_object_focus_showComments) && comments.length != 0">{{$t('CommentSection.hideComments')}}</span>
         </a>
     </div>
-    <div class="w-full flex items-center mt-3" v-if="guard !==3">
+    <div class="w-full flex items-center mt-3" v-if="guard !==3 || type_solution === 'all'">
         <div class="w-8 h-8 flex-none image-fit mr-3">
             <Avatar :src="'/s3/avatars/' + user.avatar" :username="user.name + ' ' + user.lastname" :size="35" color="#FFF"
                     background-color="#5e50ac"/>
         </div>
         <div class="flex-1 relative text-gray-700">
             <form role="form" @submit.prevent>
-                <input v-if="guard !==3"
+                <input v-if="guard !==3 || type_solution === 'all'"
                        @keyup.enter="addCommentObject(object.id)"
                        type="text"
                        v-model="message"
@@ -61,7 +61,7 @@ export default {
         user: Object,
         type: String,
         challenge_stage: Number,
-        solution_archive: Number,
+        type_solution: String,
     },
     components: {
         Avatar,
@@ -95,9 +95,6 @@ export default {
         emitter.on('liked', e =>  like(e.id) )
 
         const like = (id) => {
-
-
-
             if(obj.value.id === id) {
                 obj.value.likes = obj.value.likes + 1;
             }
@@ -113,9 +110,6 @@ export default {
         emitter.on('disliked', e =>  dislike(e.id) )
 
         const dislike = (id) => {
-
-
-
             if(obj.value.id === id) {
                 obj.value.likes = obj.value.likes - 1;
             }
