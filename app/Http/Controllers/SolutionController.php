@@ -289,25 +289,6 @@ class SolutionController extends Controller
         ]);
     }
 
-//    public function saveRobot(Request $request)
-//    {
-//        $solution = Solution::find($request->input('solution_id'));
-//        $save = json_decode($solution->save_json);
-//        $id = $request->input('robot_id');
-////        foreach ($save->parts as $part) {
-////            $model = UnityModel::find($id);
-////            if($model->category != NULL) {
-////                $model->guarantee_period = $request->input('guarantee_period');
-////                $model->save();
-////            }
-////        }
-//        return response()->json([
-//            'success' => true,
-//            'message' => 'Zapisano poprawnie.',
-//            'payload' => $model
-//        ]);
-//    }
-
     /**
      * @param Request $request
      * @return JsonResponse
@@ -1110,7 +1091,14 @@ class SolutionController extends Controller
      */
     public function getChallengeSolutions(Request $request): JsonResponse
     {
-        $solutions = Solution::where('challenge_id', '=' , $request->get('challenge_id'))->with('comments.commentator', 'challenge')->orderBy('created_at', 'DESC')->get();
+        if(Auth::user()->type === 'investor'){
+            $solutions = Solution::where('challenge_id', '=' , $request->get('challenge_id'))
+                ->where('status', '=', 1)->with('comments.commentator', 'challenge')->orderBy('created_at', 'DESC')->get();
+        } else if(Auth::user()->type === 'integrator'){
+            $solutions = Solution::where('challenge_id', '=' , $request->get('challenge_id'))
+                ->with('comments.commentator', 'challenge')->orderBy('created_at', 'DESC')->get();
+        }
+
 
         foreach ($solutions as $solution) {
             if (Auth::user()->viaLoveReacter()->hasReactedTo($solution)) {
@@ -1171,9 +1159,10 @@ class SolutionController extends Controller
      * @param int $id
      * @param SolutionRepository $solutionRepository
      * @param UserRepository $userRepository
+     * @param ChallengeRepository $challengeRepository
      * @return JsonResponse
      */
-    public function getAllSolutionsUser(int $id, SolutionRepository $solutionRepository, UserRepository $userRepository): JsonResponse
+    public function getAllSolutionsUser(int $id, SolutionRepository $solutionRepository, UserRepository $userRepository, ChallengeRepository $challengeRepository): JsonResponse
     {
         $responseBuilder = new ResponseBuilder();
 
@@ -1191,7 +1180,15 @@ class SolutionController extends Controller
             return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
+        $challengesName = $challengeRepository->getChallengesNameBySolutions($solutions);
+
+        if (!$challengesName) {
+            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
         $responseBuilder->setData('solutions', $solutions);
+        $responseBuilder->setData('challengesName', $challengesName);
 
         return $responseBuilder->getResponse();
     }
