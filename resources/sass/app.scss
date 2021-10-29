@@ -151,7 +151,9 @@
 @import "components/full-calendar";
 @import "components/pristine";
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
-
+.overx {
+    overflow-y: scroll !important;
+}
 .grecaptcha-badge {
     opacity: 0;
     visibility: hidden;

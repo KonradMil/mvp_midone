@@ -52,47 +52,49 @@
             </div>
             <div class="notification-content pt-2 dropdown-menu">
                 <div
-                    class="notification-content__box dropdown-menu__content box dark:bg-dark-6 overflow-y-auto" style="max-height: 400px;">
-                    <div class="flex items-center sticky top-0" style="z-index: 1;">
-                        <div class="pb-5">
-                            <button class="btn btn-primary shadow-md mr-2 truncate" style="max-width: 150px; max-height: 45px;" @click.prevent="$router.push({path: '/notifications'})">Zobacz wszystko</button>
-                        </div>
-                        <!--                        <div class="notification-content__title pr-10">{{$t('global.notifications')}}</div>-->
-                        <div class="pb-5">
-                            <button class="btn btn-primary shadow-md mr-2 truncate" style="max-width: 150px; max-height: 45px;" @click.prevent="readAll">{{ $t('global.readAll') }}</button>
-                        </div>
+                    class="notification-content__box dropdown-menu__content box dark:bg-dark-6" style="max-height: 400px;">
+                    <div class="flex items-center sticky top-0 p-5" style="z-index: 1;">
+                        <button class="btn btn-sm btn-primary shadow-md mr-2 truncate" style="max-width: 150px; max-height: 45px;" @click.prevent="$router.push({path: '/notifications'})">Zobacz wszystko</button>
+                            <!--                        <div class="notification-content__title pr-10">{{$t('global.notifications')}}</div>-->
+                        <button class="btn btn-sm btn-primary shadow-md mr-2 truncate" style="max-width: 150px; max-height: 45px;" @click.prevent="readAll">{{$t('global.readAll')}}</button>
                     </div>
-                    <div style="overflow: hidden;" class="test mt-5" v-for="notification in notificationsComp" :key="notification.id">
-                        <div class="cursor-pointer relative flex items-center transition duration-500 ease-in-out transform hover:-translate-x-10 hover:scale-100"
-                             style="position: relative; overflow: hidden; width: calc(100% + 30px); padding-right: 30px;">
-                            <div class="w-12 h-12 flex-none image-fit mr-1 mb-1" style="z-index: 2;">
-                                <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
-                                        :username="notification.data.author.name + ' ' + notification.data.author.lastname"
-                                        :size="50" color="#FFF" background-color="#5e50ac"/>
-                                <div v-if="notification.read_at === null"
-                                     class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white"></div>
-                            </div>
-                            <div :class="(notification.read_at === null) ? 'ml-2 overflow-hidden' : 'ml-2 overflow-hidden opacity-50'">
-                                <div class="flex items-center">
-                                    <a href="#" class="font-medium truncate mr-5"></a>
+
+                    <div class="overflow-y-auto p-5 pt-0" style="max-height: 330px;padding-bottom: 20px;">
+                        <div style="overflow: hidden;"
+                             class="test mt-5"
+                             v-for="notification in notificationsComp"
+                             :key="notification.id"
+                        >
+                            <div class="cursor-pointer relative flex items-center transition duration-500 ease-in-out transform hover:-translate-x-10 hover:scale-100"
+                                 style="position: relative; overflow: hidden; width: calc(100% + 30px); padding-right: 30px;">
+                                <div class="w-12 h-12 flex-none image-fit mr-1 mb-1" style="z-index: 2;">
+                                    <Avatar :src="'/s3/avatars/' + notification.data.author.avatar"
+                                            :username="notification.data.author.name + ' ' + notification.data.author.lastname"
+                                            :size="50" color="#FFF" background-color="#5e50ac"/>
+                                    <div v-if="notification.read_at === null"
+                                         class="w-3 h-3 bg-theme-9 absolute right-0 bottom-0 rounded-full border-2 border-white"></div>
+                                </div>
+                                <div :class="(notification.read_at === null) ? 'ml-2 overflow-hidden font-medium' : 'ml-2 overflow-hidden opacity-50'" >
+
                                     <div class="text-xs text-gray-500 ml-auto whitespace-nowrap">
                                         {{ $dayjs(notification.created_at).format('DD.MM.YYYY HH:mm') }}
                                     </div>
-                                </div>
-                                <div class="w-full truncate text-gray-600 mt-0.5" @click="goTo(notification,notification.data.name,notification.id,notification.data.params,notification.data.id, notification.data.link)">
-                                    {{ notification.data.message }}
-                                </div>
 
+                                    <div class="w-full text-black-600 mt-0.5" @click="goTo(notification,notification.data.name,notification.id,notification.data.params,notification.data.id, notification.data.link)">
+                                        {{ notification.data.message }}
+                                    </div>
+
+                                </div>
+                                <a  style="margin-right: -8px; margin-top: 6px; position: absolute; text-align: center; right: 0; top: 0; bottom: 0; width: 30px; vertical-align: middle; display: flex; align-items: center; justify-content: center;"
+                                    class="text-theme-6"
+                                    @click.prevent=delNotifi(notification)
+                                    href="javascript:;"
+                                    data-toggle="modal"
+                                    data-target="#delete-confirmation-modal">
+                                    <TrashIcon style="width: 16px;">
+                                    </TrashIcon>
+                                </a>
                             </div>
-                            <a style="margin-right: -8px; margin-top: 6px; position: absolute; text-align: center; right: 0; top: 0; bottom: 0; width: 30px; vertical-align: middle; display: flex; align-items: center; justify-content: center;"
-                               class="text-theme-6"
-                               @click.prevent=delNotifi(notification)
-                               href="javascript:;"
-                               data-toggle="modal"
-                               data-target="#delete-confirmation-modal">
-                                <TrashIcon style="width: 16px;">
-                                </TrashIcon>
-                            </a>
                         </div>
                     </div>
                     <div v-if="notifications.length === 0" class="relative flex items-center mt-5">
