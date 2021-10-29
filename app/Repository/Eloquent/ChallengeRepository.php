@@ -81,4 +81,21 @@ class ChallengeRepository extends BaseRepository
 
         return $challenge;
     }
+
+    /**
+     * @param Collection $solutions
+     * @return array
+     */
+    public function getChallengesNameBySolutions(Collection $solutions): array
+    {
+        $challengesName = [];
+        foreach($solutions as $solution){
+            $challenge = $solution->challenge;
+            if (!(in_array($challenge->name, $challengesName))) {
+                $challengesName[] = $challenge->name;
+            }
+        }
+
+        return $challengesName;
+    }
 }

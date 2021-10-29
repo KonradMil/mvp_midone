@@ -26,7 +26,7 @@
                             :preserve-search="true"
                             :preselect-first="true"
                             valueProp="value"
-                            :options="challengeNames"
+                            :options="challengesName"
                         />
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                         <div v-if="archiveSolutions.length == 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
                         <div>
                             <p>
-                                {{$t('challengesMain.noSolutionsInform')}}.
+                                Nie masz jeszcze żadnych archiwalnych rozwiązań.
                             </p>
                         </div>
                     </div>
@@ -84,7 +84,7 @@ export default {
         const user = window.Laravel.user;
         const archiveSolutions = ref([]);
         const allSolutions = ref([]);
-        const challengeNames = ref([]);
+        const challengesName = ref([]);
         const challengeName = ref(null);
 
         watch(()=> challengeName.value, ()=>{
@@ -114,36 +114,28 @@ export default {
         const getAllUserSolutions = async (callback) => {
             RequestHandler('solution/' + user.id + '/all', 'get', {}, (response) => {
                 allSolutions.value = response.data.solutions;
-                callback(response.data.solutions);
+                challengesName.value = response.data.challengesName;
+                callback();
             });
         }
 
         const getChallengeSolutionsByChallengeName = async (callback) => {
+            allSolutions.length = 0;
             RequestHandler('solution/' + user.id + '/challenge/solutions', 'get', {
                 challengeName: challengeName.value
             }, (response) => {
-                allSolutions.value = response.data.solutions;
+                setTimeout(()=> {
+                    allSolutions.value = response.data.solutions
+                },500);
                 callback(response.data.solutions);
             });
-        }
-
-        const addSolutionChallengeName = async(response) =>{
-            let i =0;
-            challengeNames.value.push(allSolutions.value[i].challenge.name)
-            for(i=1; i < response.length; i++){
-                if(i+1 < response.length){
-                    if(allSolutions.value[i].challenge.name !== allSolutions.value[i+1].challenge.name){
-                        challengeNames.value.push(allSolutions.value[i].challenge.name);
-                    }
-                }
-            }
         }
 
         onMounted(function () {
             if(props.type === 'all'){
                 console.log('all solutions start')
-                getAllUserSolutions((response)=>{
-                    addSolutionChallengeName(response);
+                getAllUserSolutions(()=>{
+                    // addSolutionChallengeName(response);
                 });
             } else if(props.type === 'archive'){
                 console.log('Archive solutions start')
@@ -161,7 +153,7 @@ export default {
             getAllUserSolutions,
             getChallengeSolutionsByChallengeName,
             challengeName,
-            challengeNames,
+            challengesName,
             allSolutions,
             archiveSolutions,
             types,
