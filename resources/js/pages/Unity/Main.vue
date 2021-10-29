@@ -7,14 +7,14 @@
     </div>
     <BottomPanel v-if="loaded" :allowedEdit="allowedEdit" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
     <RightButtons v-if="loaded" :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>
-    <RightPanel :allowedEdit="allowedEdit" :publishChallenges="publishChallenges" :canEditSolution="canEditSolution"  :type="type" :challenge="challenge" :solution="solution"></RightPanel>
+    <RightPanel :allowedEdit="allowedEdit" :publishChallenges="publishChallenges" :canEditSolution="canEditSolution" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
     <div v-if="!loaded" id="loader">
         <LoadingIcon icon="grid" class="w-8 h-8"/>
     </div>
-<!--    <Peer v-if="sessionid != ''" :sessionId="sessionid" :owner="owner"></Peer>-->
+    <!--    <Peer v-if="sessionid != ''" :sessionId="sessionid" :owner="owner"></Peer>-->
     <HelpModal></HelpModal>
 
-<!--    <ModalWorkshop :show="workshopOpen"></ModalWorkshop>-->
+    <!--    <ModalWorkshop :show="workshopOpen"></ModalWorkshop>-->
     <!--    <WorkshopModal v-if="workshopOpen" :open="workshopOpen"></WorkshopModal>-->
 </template>
 
@@ -97,117 +97,118 @@ export default {
         emitter.on('*', (type, e) => {
             console.log('*', [type, e]);
             switch (type) {
-                    case 'unityoutgoingaction':
-                        handleUnityActionOutgoing(e);
-                        break;
-                    case 'workshop_object_clicked':
-                        workshopOpen.value = false;
-                        handleUnityActionOutgoing({action: "loadWorkshopObject", data: JSON.parse(e.object.save)});
-                        break;
-                    case 'showChallenge':
-                        challenge.value = e.obj;
-                        type.value = 'challenge';
-                        break;
-                    case 'workshop_open':
-                        workshopOpen.value = true;
-                        break;
-                    case 'gridsizechange':
-                        handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
-                        break;
-                    case 'layoutbuttonclick':
-                        useLayoutButtonClick(e.val, (val) => {
-                            handleUnityActionOutgoing(val);
-                        })
-                        break;
-                    case 'lockState':
-                        if (e.action == 'lock') {
-                            lockInput();
-                        } else {
-                            unlockInput();
-                        }
-                        break;
-                    case 'topbuttonclick':
-                        switch (e.val) {
-                            case 'animation_mode':
-                                handleUnityActionOutgoing({action: "animationMode", data: ''});
-                                currentRadialMenu.value = radialMenuAnimation.value;
-                                mode.value = 'animation';
-                                break;
-                            case 'edit_mode':
-                                handleUnityActionOutgoing({action: "editMode", data: ''});
-                                currentRadialMenu.value = radialMenuEdit.value;
-                                mode.value = 'edit';
-                                break;
-                            case 'layout':
-                                handleUnityActionOutgoing({action: "layoutMode", data: ''});
-                                currentRadialMenu.value = radialMenuLayout.value;
-                                mode.value = 'layout';
-                                break;
-                            case 'fullscreen':
-                                gameWindow.value.setFullscreen();
-                                break;
-                            case 'logout':
-                                if (props.type == 'solution') {
-                                    window.location.href = window.app_path + '/challenges/card/' + solution.value.challenge_id+"#solutions";
-                                } else {
-                                    window.location.href = window.app_path + '/challenges/card/' + challenge.value.id+"#solutions";
-                                }
-                                break;
-                            case 'orto':
-                                handleUnityActionOutgoing({action: 'ChangeCamera', data: 2});
-                                break;
-                            case 'fpv':
-                                handleUnityActionOutgoing({action: 'ChangeCamera', data: 3});
-                                break;
-                            case 'topdown':
-                                handleUnityActionOutgoing({action: 'ChangeCamera', data: 1});
-                                break;
-                            case 'standard':
-                                handleUnityActionOutgoing({action: 'ChangeCamera', data: 0});
-                                break;
-                            case 'save':
-                                handleUnityActionOutgoing({action: 'save', data: ''});
-                                break;
-                            case 'help':
-                                cash("#help-modal").modal("show");
-                                break;
-                        }
-                        break;
-                        case 'SaveScreenshot':
-                            console.log(e);
-                            axios.post('/api/save/screenshot', {data: e})
-                                .then(response => {
-
-                                })
+                case 'unityoutgoingaction':
+                    handleUnityActionOutgoing(e);
+                    break;
+                case 'workshop_object_clicked':
+                    workshopOpen.value = false;
+                    handleUnityActionOutgoing({action: "loadWorkshopObject", data: JSON.parse(e.object.save)});
+                    break;
+                case 'showChallenge':
+                    challenge.value = e.obj;
+                    type.value = 'challenge';
+                    break;
+                case 'workshop_open':
+                    workshopOpen.value = true;
+                    break;
+                case 'gridsizechange':
+                    handleUnityActionOutgoing({action: "changeGridSize", data: e.val});
+                    break;
+                case 'layoutbuttonclick':
+                    useLayoutButtonClick(e.val, (val) => {
+                        handleUnityActionOutgoing(val);
+                    })
+                    break;
+                case 'lockState':
+                    if (e.action == 'lock') {
+                        lockInput();
+                    } else {
+                        unlockInput();
+                    }
+                    break;
+                case 'topbuttonclick':
+                    switch (e.val) {
+                        case 'animation_mode':
+                            handleUnityActionOutgoing({action: "animationMode", data: ''});
+                            currentRadialMenu.value = radialMenuAnimation.value;
+                            mode.value = 'animation';
                             break;
-                    case 'UnitySave':
-                        if (!saving.value) {
-                            saving.value = true;
-                            gameLoad.value.save_json = e.saveGame;
-                            if (props.type == 'challenge' && window.location.href.indexOf("challenge") > -1) {
-                                SaveChallengeUnity({save: gameLoad.value, id: id.value}, () => {
-                                    saving.value = false;
-                                });
+                        case 'edit_mode':
+                            handleUnityActionOutgoing({action: "editMode", data: ''});
+                            currentRadialMenu.value = radialMenuEdit.value;
+                            mode.value = 'edit';
+                            break;
+                        case 'layout':
+                            handleUnityActionOutgoing({action: "layoutMode", data: ''});
+                            currentRadialMenu.value = radialMenuLayout.value;
+                            mode.value = 'layout';
+                            break;
+                        case 'fullscreen':
+                            gameWindow.value.setFullscreen();
+                            break;
+                        case 'logout':
+                            if (props.type == 'solution') {
+                                window.location.href = window.app_path + '/challenges/card/' + solution.value.challenge_id + "#solutions";
                             } else {
-                                SaveSolutionUnity({save: gameLoad.value, id: id.value}, (sol) => {
-                                    id.value = sol.id;
-                                    saving.value = false;
-                                });
+                                window.location.href = window.app_path + '/challenges/card/' + challenge.value.id + "#solutions";
                             }
-                            emitter.emit('UnitySaved', {val: ''});
-                            handleUnityActionOutgoing(e);
-                        }
-                        break;
-                        case 'starttutorial':
-                            handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
                             break;
-                        case 'onInitialized':
-                            initalize()
-                        break;
-                            case 'updateanimationSave':
-                                animationSave.value.layers = e.data.layers;
-                        break;
-                }
+                        case 'orto':
+                            handleUnityActionOutgoing({action: 'ChangeCamera', data: 2});
+                            break;
+                        case 'fpv':
+                            handleUnityActionOutgoing({action: 'ChangeCamera', data: 3});
+                            break;
+                        case 'topdown':
+                            handleUnityActionOutgoing({action: 'ChangeCamera', data: 1});
+                            break;
+                        case 'standard':
+                            handleUnityActionOutgoing({action: 'ChangeCamera', data: 0});
+                            break;
+                        case 'save':
+                            handleUnityActionOutgoing({action: 'save', data: ''});
+                            break;
+                        case 'help':
+                            cash("#help-modal").modal("show");
+                            break;
+                    }
+                    break;
+
+                case 'UnitySave':
+                    if (!saving.value) {
+                        saving.value = true;
+                        gameLoad.value.save_json = e.saveGame;
+                        if (props.type == 'challenge' && window.location.href.indexOf("challenge") > -1) {
+                            SaveChallengeUnity({save: gameLoad.value, id: id.value}, () => {
+                                saving.value = false;
+                            });
+                        } else {
+                            SaveSolutionUnity({save: gameLoad.value, id: id.value}, (sol) => {
+                                id.value = sol.id;
+                                saving.value = false;
+                            });
+                        }
+                        emitter.emit('UnitySaved', {val: ''});
+                        handleUnityActionOutgoing(e);
+                    }
+                    break;
+                case 'starttutorial':
+                    handleUnityActionOutgoing({action: 'launchTutorial', data: ''});
+                    break;
+                case 'onInitialized':
+                    initalize()
+                    break;
+                case 'updateanimationSave':
+                    animationSave.value.layers = e.data.layers;
+                    break;
+                case 'SaveScreenshot':
+                    console.log(e);
+                    axios.post('/api/save/screenshot', {data: e.saveGame})
+                        .then(response => {
+                            console.log('response', response);
+                        })
+                    break;
+            }
         });
 
         //TELL UNITY TO GIVE KEYBOARD EVENTS TO WEB
@@ -222,7 +223,7 @@ export default {
         //RADIAL MENU OPEN/CLOSE
         const openMenu = (e) => {
             e.preventDefault();
-            useRadialMenu(loaded.value, currentRadialMenu.value, e,(val) => {
+            useRadialMenu(loaded.value, currentRadialMenu.value, e, (val) => {
                 handleUnityActionOutgoing(val);
             });
         }
@@ -246,13 +247,16 @@ export default {
                         }
                     })
             } else {
-                await axios.post('/api/solution/check-team', {user_id: user.id, solution_id: solution.value.id}).then(response => {
-                        if (response.data.success) {
-                            inTeam.value = response.data.payload;
-                        } else {
+                await axios.post('/api/solution/check-team', {
+                    user_id: user.id,
+                    solution_id: solution.value.id
+                }).then(response => {
+                    if (response.data.success) {
+                        inTeam.value = response.data.payload;
+                    } else {
 
-                        }
-                    })
+                    }
+                })
             }
         };
 
@@ -398,7 +402,7 @@ export default {
                     //F1
                     case 'm':
                         console.log('TAKE ME');
-                       handleUnityActionOutgoing({action: 'takeScreenshot', data: ''});
+                        handleUnityActionOutgoing({action: 'takeScreenshot', data: ''});
                         break;
                     case 'l':
                         console.log('TAKE ME');

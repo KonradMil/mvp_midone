@@ -136,7 +136,6 @@ class S3Controller extends Controller
 
     public function save8KScreenshot(Request $request)
     {
-        dd($request->all());
-        return response()->json(self::processScreenshot($request->get('screenshot')));
+        return response()->json(self::processScreenshot($request->get('data')));
     }
 }
