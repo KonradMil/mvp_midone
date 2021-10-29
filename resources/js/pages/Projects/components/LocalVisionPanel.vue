@@ -256,8 +256,7 @@
 </template>
 
 <script>
-import {computed, getCurrentInstance, onMounted, provide, reactive, ref, watch} from "vue";
-import {getCurrentInstance, onMounted, ref, watch} from "vue";
+import {getCurrentInstance, onMounted, provide, ref} from "vue";
 import {useToast} from "vue-toastification";
 import Avatar from "../../../components/avatar/Avatar";
 import RequestHandler from "../../../compositions/RequestHandler";
