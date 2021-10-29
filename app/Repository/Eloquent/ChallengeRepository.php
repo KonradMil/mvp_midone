@@ -70,4 +70,15 @@ class ChallengeRepository extends BaseRepository
 
         return $challenge;
     }
+
+    /**
+     * @param string $challengeName
+     * @return Model
+     */
+    public function getChallengeByName(string $challengeName): Model
+    {
+        $challenge = Challenge::where('name', '=', $challengeName)->first();
+
+        return $challenge;
+    }
 }

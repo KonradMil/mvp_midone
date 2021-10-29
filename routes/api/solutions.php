@@ -39,6 +39,8 @@ Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function 
     Route::post('estimate/get', [SolutionController::class, 'estimateGet']);
     Route::post('{solution_id}/files/save', [SolutionController::class, 'saveFiles']);
     Route::post('all/get', [SolutionController::class, 'getChallengeSolutions']);
+    Route::get('{user_id}/all', [SolutionController::class, 'getAllSolutionsUser']);
+    Route::get('{user_id}/challenge/solutions', [SolutionController::class, 'getChallengeSolutionsByChallengeName']);
 });
 
 //Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {

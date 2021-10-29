@@ -250,10 +250,16 @@ export const routes = [
                 component: Solutions
             },
             {
+                name: 'solutionsAll',
+                path: '/solutions/all',
+                component: SolutionsArchive,
+                props: {type: 'all'}
+            },
+            {
                 name: 'solutionsArchive',
                 path: '/solutions/archive',
                 component: SolutionsArchive,
-                props: true
+                props: {type: 'archive'}
             },
             {
                 name: 'knowledgebase',

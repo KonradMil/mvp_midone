@@ -7,14 +7,10 @@
             </h2>
             <div class="flex items-center justify-center text-theme-1" style="margin-right: 400px;"
                  v-if="project.accept_visit_date === 1"><i data-feather="check-square" class="w-4 h-4 mr-2"></i></div>
-            <!--            <div class="flex items-center justify-center text-theme-6" style="margin-right: 650px;" v-if="project.accept_visit_date === 2"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>-->
-            <!--            <div class="flex items-center mr-3" style="margin-right: 400px;" v-if="project.accept_visit_date < 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>-->
-            <!--            <button v-if="challenge_author_id === user.id" class="btn btn-primary mr-6 mt-3" @click.prevent="acceptVisitDate">Zakończ wizytację</button>-->
             <div v-if="(integrator.id === user.id || investor.id === user.id) && project.accept_local_vision < 1"
                  class="pr-2">
                 <button class="btn btn-primary w-15 mt-3" @click.prevent="addNewDeadline">Dodaj termin</button>
             </div>
-            <!--            <button v-if="challenge.selected[0].author_id === user.id" class="btn btn-primary w-20 mt-3" @click.prevent="saveDeadlines">{{$t('profiles.save')}}</button>-->
         </div>
         <div class="intro-y inbox box mt-5 overflow-y-auto" style="max-height: 521px; overflow-x: hidden;">
             <transition-group tag="ul" name="list">
@@ -84,13 +80,6 @@
                                        years: true
                                         }
                                      }"/>
-                                <!--                                <input style="height: 40px;"-->
-                                <!--                                       type="datetime-local"-->
-                                <!--                                       id="meeting-time"-->
-                                <!--                                       name="meeting-time"-->
-                                <!--                                       v-model="newDate"-->
-                                <!--                                       min="2021-09-22T00:00"-->
-                                <!--                                       max="2025-06-14T00:00">-->
                             </div>
                             <div @click="showDetails[deadline.id] = !showDetails[deadline.id]" class="flex text-theme-1" style="max-height: 35px; margin-top: 12px;"
                                  v-if="deadline.author === undefined">
@@ -196,21 +185,17 @@
                     </div>
                 </li>
             </transition-group>
-            <div v-if="deadlines.length === 0" class="text-theme-1 dark:text-theme-10 font-medium pl-6 py-3 pb-4"
+            <div v-if="deadlines.length === 0" class="intro-y text-theme-1 dark:text-theme-10 font-medium pl-6 py-3 pb-4"
                  style="font-size: 16px;">
                 Nie ma jeszcze żadnej propozycji terminu spotkania.
             </div>
-            <!--            <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">-->
-            <!--                <div class="sm:ml-auto mt-2 sm:mt-0 dark:text-gray-300">Last account activity: 36 minutes ago</div>-->
-            <!--            </div>-->
         </div>
     </div>
     </div>
 </template>
 
 <script>
-import {computed, getCurrentInstance, onMounted, reactive, ref, watch} from "vue";
-
+import {getCurrentInstance, onMounted, ref} from "vue";
 import {useToast} from "vue-toastification";
 import RequestHandler from "../../../compositions/RequestHandler";
 
@@ -282,9 +267,6 @@ export default {
                 date: deadline.date,
                 time: deadline.time
             }, (response) => {
-                // if (deadline.members === '') {
-                //     deadlines.value.unshift(deadline);
-                // }
                 showDetails.value[deadline.id] = false;
                 getDeadlines();
             });

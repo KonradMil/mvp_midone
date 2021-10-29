@@ -298,6 +298,7 @@ export default {
                     }
                 })
         }
+
         return {
             getChallengeSolutions,
             canDeleteSolution,

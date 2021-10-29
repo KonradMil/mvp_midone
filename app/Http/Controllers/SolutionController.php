@@ -20,8 +20,10 @@ use App\Models\Financial;
 use App\Models\Team;
 use App\Models\UnityModel;
 use App\Models\User;
+use App\Repository\Eloquent\ChallengeRepository;
 use App\Repository\Eloquent\FileRepository;
 use App\Repository\Eloquent\SolutionRepository;
+use App\Repository\Eloquent\UserRepository;
 use App\Services\SolutionService;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
@@ -1108,7 +1110,17 @@ class SolutionController extends Controller
      */
     public function getChallengeSolutions(Request $request): JsonResponse
     {
-        $solutions = Solution::where('challenge_id', '=' , $request->get('challenge_id'))->get();
+        $solutions = Solution::where('challenge_id', '=' , $request->get('challenge_id'))->with('comments.commentator', 'challenge')->orderBy('created_at', 'DESC')->get();
+
+        foreach ($solutions as $solution) {
+            if (Auth::user()->viaLoveReacter()->hasReactedTo($solution)) {
+                $solution->liked = true;
+            } else {
+                $solution->liked = false;
+            }
+            $solution->comments_count = $solution->comments()->count();
+            $solution->likes = $solution->viaLoveReactant()->getReactionCounterOfType('Like')->getCount();
+        }
 
         return response()->json([
             'success' => true,
@@ -1151,6 +1163,73 @@ class SolutionController extends Controller
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
+
+        return $responseBuilder->getResponse();
+    }
+
+    /**
+     * @param int $id
+     * @param SolutionRepository $solutionRepository
+     * @param UserRepository $userRepository
+     * @return JsonResponse
+     */
+    public function getAllSolutionsUser(int $id, SolutionRepository $solutionRepository, UserRepository $userRepository): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $user = $userRepository->find($id);
+
+        if (!$user) {
+            $responseBuilder->setErrorMessage(__('messages.user.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $solutions = $solutionRepository->getAllSolutionsByUserId($user->id);
+
+        if (!$solutions) {
+            $responseBuilder->setErrorMessage(__('messages.solution.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $responseBuilder->setData('solutions', $solutions);
+
+        return $responseBuilder->getResponse();
+    }
+
+    /**
+     * @param int $userId
+     * @param Request $request
+     * @param SolutionRepository $solutionRepository
+     * @param UserRepository $userRepository
+     * @param ChallengeRepository $challengeRepository
+     * @return JsonResponse
+     */
+    public function getChallengeSolutionsByChallengeName(int $userId, Request $request, SolutionRepository $solutionRepository, UserRepository $userRepository, ChallengeRepository $challengeRepository): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $user = $userRepository->find($userId);
+
+        if (!$user) {
+            $responseBuilder->setErrorMessage(__('messages.user.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $challenge = $challengeRepository->getChallengeByName($request->get('challengeName'));
+
+        if (!$challenge) {
+            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $solutions = $solutionRepository->getAllUserSolutionsByChallengeName($challenge, $userId);
+
+        if (!$solutions) {
+            $responseBuilder->setErrorMessage(__('messages.solution.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $responseBuilder->setData('solutions', $solutions);
 
         return $responseBuilder->getResponse();
     }

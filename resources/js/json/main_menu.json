@@ -43,6 +43,12 @@
             "subMenu": [
                 {
                     "icon": "",
+                    "pageName": "solutionsAll",
+                    "title": "Wszystkie",
+                    "ignore": true
+                },
+                {
+                    "icon": "",
                     "pageName": "solutionsArchive",
                     "title": "Archiwalne",
                     "ignore": true
