@@ -393,10 +393,15 @@ export default {
             window.onkeydown = evt => {
                 console.log(evt.keyCode);
                 console.log(evt.key);
-                switch (evt.keyCode) {
+                switch (evt.key) {
                     //F1
-                    case 77:
-                       handleUnityActionOutgoing({action: 'TakeScreenshot', data: ''});
+                    case 'm':
+                        console.log('TAKE ME');
+                       handleUnityActionOutgoing({action: 'takeScreenshot', data: ''});
+                        break;
+                    case 'l':
+                        console.log('TAKE ME');
+                        handleUnityActionOutgoing({action: 'takeScreenshot', data: ''});
                         break;
                     default:
                         return true;
