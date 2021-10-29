@@ -13,6 +13,7 @@ App::setLocale('pl');
 
 Route::group(['middleware' => 'web'], function () {
 
+    Route::post('save/screenshot', [S3Controller::class, 'save8KScreenshot']);
     Route::post('set/txt', [S3Controller::class, 'txtFile']);
     Route::post('dashboard/get', [DashboardController::class, 'getDataForDashboard'])->middleware();
     Route::post('search', [SearchController::class, 'search']);
