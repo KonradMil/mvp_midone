@@ -492,7 +492,7 @@ export default {
             if(props.project.accept_local_vision !== 1){
                 elDropzoneSingleRef.dropzone.on("success", (resp) => {
                     projectFiles.value.push(JSON.parse(resp.xhr.response).payload);
-                    toast.success('Zdjecie zostało wgrane poprawnie!');
+                    toast.success('Plik został wgrany poprawnie!');
                 });
                 elDropzoneSingleRef.dropzone.on("error", () => {
                     toast.error("Maksymalnie można wgrać 8 plików!");
