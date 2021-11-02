@@ -60,7 +60,7 @@ class SolutionRepository extends BaseRepository
     public function getAllUserSolutionsByChallengeName(Challenge $challenge, int $userId) : Collection
     {
         $solutions = $challenge->solutions()->where('solutions.archive', '=', null)->where('solutions.author_id', '=', $userId)
-            ->orderBy('created_at', 'DESC')->get();
+            ->with('challenge')->orderBy('created_at', 'DESC')->get();
 
 
         foreach ($solutions as $solution) {
