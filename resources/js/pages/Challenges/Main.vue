@@ -126,6 +126,7 @@ import {useToast} from "vue-toastification";
 import RequestHandler from "../../compositions/RequestHandler"
 import TopMenuMain from "../../components/TopMenuMain"
 import router from "../../router";
+import dayjs from "dayjs";
 
 export default {
     name: "ChallengesMain",
@@ -140,6 +141,7 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         const toast = useToast();
         const guard = ref(false);
+
 
         const getNewData = (val) => {
             axios.post('api/challenges/get/tab/' + val)

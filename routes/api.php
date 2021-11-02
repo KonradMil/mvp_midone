@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\App;
 
 App::setLocale('pl');
 
-
 Route::group(['middleware' => 'web'], function () {
 
     Route::post('save/screenshot', [S3Controller::class, 'save8KScreenshot']);

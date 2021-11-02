@@ -1,25 +1,25 @@
 <template>
     <div class="flex-initial pl-2">
-        <div class="mt-3" v-if="props.type !== 'solution'">
-            <label for="modal-form-3" class="form-label">Solution deadline</label>
-            <input
-                id="modal-form-3"
-                type="text"
-                class="form-control"
-                placeholder=""
-                v-model="c.solution_deadline"
-            />
-        </div>
-        <div class="mt-3" v-if="props.type !== 'solution'">
-            <label for="modal-form-4" class="form-label">Offer deadline</label>
-            <input
-                id="modal-form-4"
-                type="text"
-                class="form-control"
-                placeholder=""
-                v-model="c.offer_deadline"
-            />
-        </div>
+<!--        <div class="mt-3" v-if="props.type !== 'solution'">-->
+<!--            <label for="modal-form-3" class="form-label">Solution deadline</label>-->
+<!--            <input-->
+<!--                id="modal-form-3"-->
+<!--                type="text"-->
+<!--                class="form-control"-->
+<!--                placeholder=""-->
+<!--                v-model="c.solution_deadline"-->
+<!--            />-->
+<!--        </div>-->
+<!--        <div class="mt-3" v-if="props.type !== 'solution'">-->
+<!--            <label for="modal-form-4" class="form-label">Offer deadline</label>-->
+<!--            <input-->
+<!--                id="modal-form-4"-->
+<!--                type="text"-->
+<!--                class="form-control"-->
+<!--                placeholder=""-->
+<!--                v-model="c.offer_deadline"-->
+<!--            />-->
+<!--        </div>-->
         <div class="mt-3">
             <label for="modal-form-1" class="form-label">Tytuł</label>
             <input
@@ -108,7 +108,7 @@ export default {
 
     },
     setup(props, context) {
-        const c = ref({description: '', name: '', solution_deadline: '', offer_deadline: ''});
+        const c = ref({description: '', name: ''});
         const user = window.Laravel.user;
         const toast = useToast();
         const types = require("../../../../json/types.json");

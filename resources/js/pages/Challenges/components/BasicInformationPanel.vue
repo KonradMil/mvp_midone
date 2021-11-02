@@ -34,6 +34,7 @@
                              lang: 'pl',
                              format: 'DD.MM.YYYY',
                              showWeekNumbers: true,
+                             minDate: now,
                              buttonText: {'apply':'OK','cancel':'Anuluj'},
                              dropdowns: {
                                minYear: 2021,
@@ -51,6 +52,7 @@
                             v-model="offer_date"
                             v-if="inTeam"
                             :options="{
+                                minDate: now,
                                 autoApply: false,
                                 lang: 'pl',
                                 format: 'DD.MM.YYYY',
@@ -242,6 +244,7 @@ import {useToast} from "vue-toastification";
 import VueEasyLightbox from 'vue-easy-lightbox'
 import Avatar from "../../../components/avatar/Avatar";
 import $dayjs from "dayjs";
+import dayjs from "dayjs";
 
 
 export default {
@@ -263,6 +266,7 @@ export default {
         const toast = useToast();
         const types = require("../../../json/types.json");
         const lightboxVisible = ref(false);
+        const now = dayjs().valueOf();
 
         const offer_date = computed({
             get: () => {
@@ -404,7 +408,8 @@ export default {
             hideLightbox,
             saveDate,
             solution_date,
-            offer_date
+            offer_date,
+            now
         }
     }
 }

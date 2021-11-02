@@ -226,13 +226,16 @@
                         <Litepicker
                             id="post-form-2"
                             v-model="solution_deadline"
-                            :options="{
+                            :options="
+                {
                 autoApply: false,
                 lang: 'pl',
                 format: 'DD.MM.YYYY',
                 showWeekNumbers: true,
+                minDate: now,
                  buttonText: {'apply':'OK','cancel':'Anuluj'},
                 dropdowns: {
+
                   minYear: 2021,
                   maxYear: 2023,
                   months: true,
@@ -247,6 +250,7 @@
                             v-model="offer_deadline"
                             :options="{
                 autoApply: false,
+                minDate: now,
                 showWeekNumbers: true,
                 lang: 'pl',
                 format: 'DD.MM.YYYY',
@@ -411,6 +415,7 @@ export default {
             cycle_time: 0
         });
         const id = ref(null);
+        const now = dayjs().valueOf();
         const types = require("../../json/types.json");
         const tagss = require("../../json/tagsChallenge.json");
         const sels = require("../../json/challenge.json");
@@ -590,7 +595,8 @@ export default {
             tagsSelected,
             isDisabled,
             user,
-            categorytab
+            categorytab,
+            now
         };
     },
     beforeRouteEnter(to, from, next) {
