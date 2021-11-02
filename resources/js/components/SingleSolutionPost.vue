@@ -10,22 +10,22 @@
                 <img
                     alt="DBR77"
                     class="rounded-full"
-                    :src="'/' + solution.screenshot_path"/>
+                    :src="'/' + props.solution.screenshot_path"/>
             </div>
-            <div class="ml-3 mr-auto" @click="$router.push({path: '/studio/solution/' + solution.id});">
-                <a href="" class="font-medium">{{ solution.name }} <span v-if="solution.selected == 1" style="color: #5e50ac;"> - {{$t('challengesMain.accepted')}}</span><span v-if="solution.rejected == 1" style="color: #1a202c;"> - {{$t('challengesMain.rejected')}}</span></a>
+            <div class="ml-3 mr-auto" @click="$router.push({path: '/studio/solution/' + props.solution.id});">
+                <a href="" class="font-medium">{{ props.solution.name }} <span v-if="props.solution.selected == 1" style="color: #5e50ac;"> - {{$t('challengesMain.accepted')}}</span><span v-if="props.solution.rejected == 1" style="color: #1a202c;"> - {{$t('challengesMain.rejected')}}</span></a>
             </div>
         </div>
         <div class="p-5 border-t border-gray-200 dark:border-dark-5" >
             <div class="h-40 xxl:h-56 image-fit">
-                <img @click="$router.push({name: 'challengeStudio', params: {id: solution.id, type: 'solution', canEditSolution: canEditSolution}});"
+                <img @click="$router.push({name: 'challengeStudio', params: {id: props.solution.id, type: 'solution', canEditSolution: canEditSolution}});"
                      alt="DBR77"
                      class="rounded-md"
-                     :src="'/' + solution.screenshot_path"/>
+                     :src="'/' + props.solution.screenshot_path"/>
             </div>
             <a href="" class="block font-medium text-base mt-5"></a>
             <div class="text-gray-700 dark:text-gray-600 mt-2" style="word-break: break-all; max-height: 100px; overflow-y: scroll;">
-                {{ solution.description }}
+                {{ props.solution.description }}
             </div>
             <div class="mt-2 md:flex" v-if="canAccept && type!=='archive'">
                 <button class="btn btn-primary shadow-md mr-2" @click="acceptSolution" v-if="solution.selected != 1  && solution.archive != 1 && acceptChallengeSolutions">{{$t('challengesMain.acceptSolution')}}</button>
@@ -71,10 +71,10 @@
                 <img
                     alt="DBR77"
                     class="rounded-full"
-                    :src="'/' + solution.challenge.screenshot_path"/>
+                    :src="'/' + props.solution.challenge.screenshot_path"/>
             </div>
             <div v-if="type === 'all' || type === 'archive'" class="ml-3 mr-auto">
-                <div class="font-medium">{{ solution.challenge.name }}</div>
+                <div class="font-medium">{{ props.solution.challenge.name }}</div>
             </div>
             <Tippy v-if="!solution.liked && solution.archive != 1"
                    @click.prevent="like(solution)"
