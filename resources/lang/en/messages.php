@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'unfollow' => "Stopped following",
     'error' => "Unexpected error occurred!",
     'save_correct' => "Saved correctly",
     'delete_correct' => "Delete correctly",
