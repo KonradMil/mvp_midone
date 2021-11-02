@@ -74,7 +74,7 @@
                     :src="'/' + solution.challenge.screenshot_path"/>
             </div>
             <div v-if="type === 'all' || type === 'archive'" class="ml-3 mr-auto">
-                <a href="" class="font-medium">{{ solution.challenge.name }}</a>
+                <div class="font-medium">{{ solution.challenge.name }}</div>
             </div>
             <Tippy v-if="!solution.liked && solution.archive != 1"
                    @click.prevent="like(solution)"

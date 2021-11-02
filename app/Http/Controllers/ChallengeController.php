@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Events\ChallengeLiked;
 use App\Events\ChallengePublished;
+use App\Http\ResponseBuilder;
 use App\Models\Challenge;
 use App\Models\File;
 use App\Models\Financial;
@@ -16,11 +17,15 @@ use App\Models\Solution;
 use App\Models\Team;
 use App\Models\TechnicalDetails;
 use App\Models\User;
+use App\Repository\Eloquent\ChallengeRepository;
+use App\Services\ChallengeService;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -549,20 +554,48 @@ class ChallengeController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param int $id
+     * @param ChallengeRepository $challengeRepository
+     * @param ChallengeService $challengeService
      * @return JsonResponse
      */
-    public function unfollowChallenge(Request $request): JsonResponse
+    public function unfollowChallenge(int $id, ChallengeRepository $challengeRepository, ChallengeService $challengeService): JsonResponse
     {
-        $id = $request->input('id');
-        $challenge = Challenge::find($id);
-        Auth::user()->viaLoveReacter()->unreactTo($challenge, 'Follow');
+        $responseBuilder = new ResponseBuilder();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Polajkowano.',
-            'payload' => ''
-        ]);
+        $challenge = $challengeRepository->find($id);
+
+        if (!$challenge) {
+            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        try {
+
+            $challengeService->unFollowChallenge($challenge);
+            $responseBuilder->setSuccessMessage(__('messages.unfollow'));
+
+        } catch (QueryException $e) {
+
+            $responseBuilder->setErrorMessage(__('messages.error'));
+            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
+
+        $responseBuilder->setData('challenge', $challenge);
+
+        return $responseBuilder->getResponse();
+
+
+//        $id = $request->input('id');
+//        $challenge = Challenge::find($id);
+//        Auth::user()->viaLoveReacter()->unreactTo($challenge, 'Follow');
+//
+//        return response()->json([
+//            'success' => true,
+//            'message' => 'Polajkowano.',
+//            'payload' => ''
+//        ]);
     }
 
     /**

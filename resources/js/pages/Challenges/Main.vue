@@ -208,7 +208,7 @@ export default {
         }
 
         const unfollow = (id, index) => {
-            RequestHandler('challenge/user/unfollow', 'post', {id: id}, (val) => {
+            RequestHandler('challenge/' + id +'/user/unfollow', 'post', {}, (val) => {
                 challenges.value.list[index].followed = false;
                 toast.success('Nie śledzisz już tego wyzwania.');
             });
