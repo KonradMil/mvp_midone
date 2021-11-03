@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\ResponseBuilder;
 use App\Models\Challenge;
 use App\Models\File;
 use App\Models\Report;
+use App\Repository\Eloquent\ReportRepository;
+use App\Repository\Eloquent\UserRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  *
@@ -45,11 +49,41 @@ class ReportController extends Controller
     }
 
     /**
+     * @param int $userId
+     * @param Request $request
+     * @param UserRepository $userRepository
+     * @param ReportRepository $reportRepository
+     * @return JsonResponse
+     */
+    public function getAdminReports(int $userId, UserRepository $userRepository, ReportRepository $reportRepository): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $user = $userRepository->find($userId);
+
+        if (!$user) {
+            $responseBuilder->setErrorMessage(__('messages.user.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $reports = $reportRepository->getAllReports();
+
+        if (!$reports) {
+            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $responseBuilder->setData('reports', $reports);
+
+        return $responseBuilder->getResponse();
+    }
+
+    /**
      * @return JsonResponse
      */
     public function getUserReports(): JsonResponse
     {
-        $reports = Auth::user()->reports()->with('files')->get();
+        $reports = Auth::user()->reports()->with('files', 'author')->get();
 
         return response()->json([
             'success' => true,
