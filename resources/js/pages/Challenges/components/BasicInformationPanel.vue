@@ -102,12 +102,21 @@
                           }">
                         <div class="h-64 px-2" @click="showImage(0)">
                             <div class="h-full image-fit rounded-md overflow-hidden">
-                                <img :alt="challenge.name" :src="'/' + challenge.screenshot_path"/>
+                                <img
+                                    :alt="challenge.name"
+                                    :src="'/' + challenge.screenshot_path"/>
                             </div>
                         </div>
                         <div class="h-64 px-2" v-for="(file, index) in challenge.files" @click="showImage(index + 1)">
-                            <div class="h-full image-fit rounded-md overflow-hidden">
-                                <img :alt="challenge.name" :src="'/' + file.path"/>
+                            <div  v-if="file.ext !== 'png' && file.ext !== 'jpg' && file.ext !== 'jpeg'" class="h-full image-fit rounded-md overflow-hidden" @click.prevent="downloadFile(file.path)">
+                                <img class="w-full h-full"
+                                     :alt="file.original_name"
+                                     :src="'/' + file.path"/>
+                            </div>
+                            <div v-else class="h-full image-fit rounded-md overflow-hidden">
+                                <img class="w-full h-full"
+                                     :alt="file.original_name"
+                                     :src="'/' + file.path"/>
                             </div>
                         </div>
                     </TinySlider>
@@ -309,6 +318,10 @@ export default {
         })
         const lightBoxIndex = ref(0);
 
+        const downloadFile = async (url) => {
+            window.open('/' + url, '_blank').focus();
+        }
+
         onMounted(() => {
         });
 
@@ -377,6 +390,7 @@ export default {
         });
 
         return {
+            downloadFile,
             stage,
             challenge,
             types,
