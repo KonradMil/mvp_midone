@@ -68,10 +68,9 @@ class ModelController extends Controller
      */
     public function getModels(Request $request)
     {
-//        dd($request->search);
+
         $se = $request->search;
         if(!empty($se)) {
-//            if(is_array($se)){
                 if ($this->isempty($se['category']) && $this->isempty($se['subcategory'])) {
                     $models = UnityModel::where('category', '=', $se['category'])->where('subcategory', '=', $se['subcategory'])->get();
                 } elseif ($this->isempty($se['category'])) {
@@ -81,9 +80,6 @@ class ModelController extends Controller
                 } else {
                     $models = UnityModel::take(10)->get();
                 }
-//            } else {
-//                $models = UnityModel::where('name', 'LIKE', '%'. $request->search . '%')->take(10)->get();
-//            }
         } else {
             $models = UnityModel::take(10)->get();
         }
