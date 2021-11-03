@@ -17,30 +17,6 @@
 <body>
 
 <script>
-
-    window.copyLoad = function () {
-
-        if(typeof window.unityLoad === 'undefined') {
-            console.info("copyLoad: Czekam na dane...");
-            return;
-        }
-
-        var textarea = document.createElement('textarea');
-        document.body.appendChild(textarea);
-
-        if(typeof window.unityLoad === 'string') {
-            textarea.value = window.unityLoad;
-        } else if(typeof window.unityLoad === 'string') {
-            textarea.value = JSON.stringify(window.unityLoad);
-        }
-
-        textarea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textarea);
-
-        console.info('copyLoad: SKOPIOWANE!');
-
-    }
     window.unity_path = '{{env('UNITY_PATH')}}';
     window.unity_workshop_path = '{{env('UNITY_WORKSHOP_PATH')}}';
     window.unity_tutorial_path = '{{env('UNITY_PATH')}}';
