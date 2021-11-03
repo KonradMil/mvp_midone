@@ -104,7 +104,7 @@ export default {
 
             if(typeof window.unityLoad === 'string') {
                 cash('#copy-load-modal textarea').val(window.unityLoad);
-            } else if(typeof window.unityLoad === 'string') {
+            } else if(typeof window.unityLoad === 'object') {
                 cash('#copy-load-modal textarea').val(JSON.stringify(window.unityLoad));
             }
 
