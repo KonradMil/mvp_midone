@@ -88,15 +88,23 @@
                             <table class="table table-report -mt-2">
                                 <thead>
                                 <tr>
-                                    <th class="whitespace-nowrap">Plik</th>
+                                    <th class="whitespace-nowrap">Autor</th>
                                     <th class="whitespace-nowrap">Tytuł</th>
                                     <th class="text-center whitespace-nowrap">Zgłoszono dnia</th>
                                     <th class="text-center whitespace-nowrap"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <Report class="intro-x"
+                                <Report v-if="user.admin !== 1"
+                                        class="intro-x"
                                         v-for="(report, index) in reports.list"
+                                        :key="'report_' + index"
+                                        :ind="index"
+                                        :report="report">
+                                </Report>
+                                <Report v-if="user.admin === 1"
+                                        class="intro-x"
+                                        v-for="(report, index) in reports"
                                         :key="'report_' + index"
                                         :ind="index"
                                         :report="report">
@@ -133,6 +141,7 @@ import AddReport from "./AddReport";
 import ReportReview from "./ReportReview";
 import Notifications from "./NotificationsOld";
 import Teams from "./Teams";
+import RequestHandler from "../../compositions/RequestHandler";
 
 const store = useStore();
 
@@ -158,7 +167,7 @@ export default {
         const emitter = app.appContext.config.globalProperties.emitter;
         const showDetails = ref([]);
         const users = ref([]);
-        const user =ref({});
+        const user = window.Laravel.user;
         const notifications = ref([]);
         const show = ref(false);
         const showTeams = ref(false);
@@ -168,6 +177,7 @@ export default {
         const report_id = ref(null);
         const reportReview = ref(false);
         const report = ref();
+        const guard = ref(false);
 
         emitter.on('changetab', e => {
             activeTab.value = e.val;
@@ -191,7 +201,18 @@ export default {
 
 
         const GetReportsRepositiories = async () => {
-            reports.value = GetReports();
+            if(user.admin === 1){
+                console.log('Here sadsadsada')
+                RequestHandler('report/' + user.id + '/admin', 'get', {}, (response) => {
+                    console.log('reports')
+                    console.log(reports.value)
+                    reports.value = response.data.reports
+                    console.log(reports.value)
+                    console.log('after')
+                });
+            }else {
+                reports.value = GetReports();
+            }
         }
         const GetUsersRepositories = async () => {
             users.value = GetUsers();
@@ -215,7 +236,7 @@ export default {
             GetUsersRepositories('');
             GetNotificationsReposistories('');
             GetTeamsRepositiories('');
-            GetReportsRepositiories();
+            GetReportsRepositiories('');
 
             cash("body")
                 .removeClass("error-page")
@@ -224,6 +245,7 @@ export default {
             }
         })
         return {
+            guard,
             report,
             reportReview,
             users,
