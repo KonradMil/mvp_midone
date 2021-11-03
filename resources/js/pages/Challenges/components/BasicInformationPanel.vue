@@ -104,12 +104,21 @@
                           }">
                         <div class="h-64 px-2" @click="showImage(0)">
                             <div class="h-full image-fit rounded-md overflow-hidden">
-                                <img :alt="challenge.name" :src="'/' + challenge.screenshot_path"/>
+                                <img
+                                    :alt="challenge.name"
+                                    :src="'/' + challenge.screenshot_path"/>
                             </div>
                         </div>
                         <div class="h-64 px-2" v-for="(file, index) in challenge.files" @click="showImage(index + 1)">
-                            <div class="h-full image-fit rounded-md overflow-hidden">
-                                <img :alt="challenge.name" :src="'/' + file.path"/>
+                            <div  v-if="file.ext !== 'png' && file.ext !== 'jpg' && file.ext !== 'jpeg'" class="h-full image-fit rounded-md overflow-hidden" @click.prevent="downloadFile(file.path)">
+                                <img class="w-full h-full"
+                                     :alt="file.original_name"
+                                     :src="'/' + file.path"/>
+                            </div>
+                            <div v-else class="h-full image-fit rounded-md overflow-hidden">
+                                <img class="w-full h-full"
+                                     :alt="file.original_name"
+                                     :src="'/' + file.path"/>
                             </div>
                         </div>
                     </TinySlider>
@@ -245,6 +254,7 @@ import VueEasyLightbox from 'vue-easy-lightbox'
 import Avatar from "../../../components/avatar/Avatar";
 import $dayjs from "dayjs";
 import dayjs from "dayjs";
+import RequestHandler from "../../../compositions/RequestHandler";
 
 
 export default {
@@ -271,19 +281,14 @@ export default {
         const offer_date = computed({
             get: () => {
                let check = $dayjs.unix(props.challenge.offer_deadline).format('DD.MM.YYYY');
-                console.log('CHECK', check);
-                console.log('CHECK2', (check != 'Invalid Date'));
                if(check != 'Invalid Date') {
                    return check;
                } else {
-                   console.log('CHECK33', props.challenge.offer_deadline);
                    return props.challenge.offer_deadline
-                   // $dayjs(props.challenge.offer_deadline, 'DD.MM.YYYY').format('DD.MM.YYYY');
                }
 
             },
             set: (newValue) => {
-                console.log('CHECKV', newValue);
                 challenge.value.offer_deadline = newValue;
             },
         });
@@ -291,18 +296,13 @@ export default {
         const solution_date = computed({
             get: () => {
                 let check = $dayjs.unix(props.challenge.solution_deadline).format('DD.MM.YYYY');
-                console.log('CHECK', check);
-                console.log('CHECK2', (check != 'Invalid Date'));
                 if(check != 'Invalid Date') {
                     return check;
                 } else {
-                    console.log('CHECK3', props.challenge.solution_deadline);
                     return props.challenge.solution_deadline;
-                    // $dayjs(props.challenge.solution_deadline,'DD.MM.YYYY').format('DD.MM.YYYY')
                 }
             },
             set: (newValue) => {
-                console.log('CHECKV', newValue);
                 challenge.value.solution_deadline = newValue;
             },
         });
@@ -321,6 +321,10 @@ export default {
             return a;
         })
         const lightBoxIndex = ref(0);
+
+        const downloadFile = async (url) => {
+            window.open('/' + url, '_blank').focus();
+        }
 
         onMounted(() => {
         });
@@ -347,15 +351,9 @@ export default {
         }
 
         const unfollow = () => {
-            axios.post('/api/challenge/user/unfollow', {id: props.challenge.id})
-                .then(response => {
-                    if (response.data.success) {
-                        challenge.value.followed = false;
-                        toast.success('Nie śledzisz już tego wyzwania.');
-                    } else {
-
-                    }
-                })
+            RequestHandler('challenge/' + challenge.value.id +'/user/unfollow', 'post', {}, (val) => {
+                challenge.value.followed = false;
+            });
         }
 
         const saveDate = () => {
@@ -396,6 +394,7 @@ export default {
         });
 
         return {
+            downloadFile,
             stage,
             challenge,
             types,
