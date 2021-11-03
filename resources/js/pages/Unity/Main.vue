@@ -13,7 +13,7 @@
     </div>
 <!--    <Peer v-if="sessionid != ''" :sessionId="sessionid" :owner="owner"></Peer>-->
     <HelpModal></HelpModal>
-    <CopyLoadModal :loadContent="unityLoad"></CopyLoadModal>
+    <CopyLoadModal></CopyLoadModal>
 <!--    <ModalWorkshop :show="workshopOpen"></ModalWorkshop>-->
     <!--    <WorkshopModal v-if="workshopOpen" :open="workshopOpen"></WorkshopModal>-->
 </template>
@@ -94,7 +94,6 @@ export default {
         const saving = ref(false);
         const sessionid = ref('');
         const owner = ref(false);
-        let unityLoad = ref(null);
 
         window.copyLoad = function () {
 
@@ -346,7 +345,7 @@ export default {
                             animationSave.value = response.data.payload.save_json.animation_layers;
                             checkTeam();
 
-                            unityLoad = response.data.payload.save_json;
+                            window.unityLoad = response.data.payload.save_json;
 
                             handleUnityActionOutgoing({
                                 action: 'loadStructure',
