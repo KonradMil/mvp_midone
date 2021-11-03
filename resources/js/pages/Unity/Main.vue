@@ -13,7 +13,7 @@
     </div>
     <!--    <Peer v-if="sessionid != ''" :sessionId="sessionid" :owner="owner"></Peer>-->
     <HelpModal></HelpModal>
-
+    <CopyLoadModal></CopyLoadModal>
     <!--    <ModalWorkshop :show="workshopOpen"></ModalWorkshop>-->
     <!--    <WorkshopModal v-if="workshopOpen" :open="workshopOpen"></WorkshopModal>-->
 </template>
@@ -38,6 +38,7 @@ import HelpModal from "./components/HelpModal";
 import useEmitter from "../../composables/useEmitter";
 import useRadialMenu from "../../composables/radialMenu";
 import useLayoutButtonClick from "../../composables/useLayoutButtonClick";
+import CopyLoadModal from "./components/CopyLoadModal";
 
 const ww = WindowWatcher();
 
@@ -55,6 +56,7 @@ export default {
         sessionid: String
     },
     components: {
+        CopyLoadModal,
         HelpModal, ModalWorkshop, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio
     },
     setup(props, {emit}) {
@@ -92,6 +94,23 @@ export default {
         const saving = ref(false);
         const sessionid = ref('');
         const owner = ref(false);
+
+        window.copyLoad = function () {
+
+            if(typeof window.unityLoad === 'undefined') {
+                console.info("copyLoad: Czekam na dane...");
+                return;
+            }
+
+            if(typeof window.unityLoad === 'string') {
+                cash('#copy-load-modal textarea').val(window.unityLoad);
+            } else if(typeof window.unityLoad === 'string') {
+                cash('#copy-load-modal textarea').val(JSON.stringify(window.unityLoad));
+            }
+
+            cash('#copy-load-modal').modal('show');
+
+        }
 
         //ALL EVENTS
         emitter.on('*', (type, e) => {
@@ -439,8 +458,7 @@ export default {
             unlockInput,
             loaded,
             sessionid,
-            owner,
-            showLeftButtons
+            owner
         }
     }
 }
