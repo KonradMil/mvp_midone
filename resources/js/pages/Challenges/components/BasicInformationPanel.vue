@@ -242,6 +242,7 @@ import {useToast} from "vue-toastification";
 import VueEasyLightbox from 'vue-easy-lightbox'
 import Avatar from "../../../components/avatar/Avatar";
 import $dayjs from "dayjs";
+import RequestHandler from "../../../compositions/RequestHandler";
 
 
 export default {
@@ -267,19 +268,14 @@ export default {
         const offer_date = computed({
             get: () => {
                let check = $dayjs.unix(props.challenge.offer_deadline).format('DD.MM.YYYY');
-                console.log('CHECK', check);
-                console.log('CHECK2', (check != 'Invalid Date'));
                if(check != 'Invalid Date') {
                    return check;
                } else {
-                   console.log('CHECK33', props.challenge.offer_deadline);
                    return props.challenge.offer_deadline
-                   // $dayjs(props.challenge.offer_deadline, 'DD.MM.YYYY').format('DD.MM.YYYY');
                }
 
             },
             set: (newValue) => {
-                console.log('CHECKV', newValue);
                 challenge.value.offer_deadline = newValue;
             },
         });
@@ -287,18 +283,13 @@ export default {
         const solution_date = computed({
             get: () => {
                 let check = $dayjs.unix(props.challenge.solution_deadline).format('DD.MM.YYYY');
-                console.log('CHECK', check);
-                console.log('CHECK2', (check != 'Invalid Date'));
                 if(check != 'Invalid Date') {
                     return check;
                 } else {
-                    console.log('CHECK3', props.challenge.solution_deadline);
                     return props.challenge.solution_deadline;
-                    // $dayjs(props.challenge.solution_deadline,'DD.MM.YYYY').format('DD.MM.YYYY')
                 }
             },
             set: (newValue) => {
-                console.log('CHECKV', newValue);
                 challenge.value.solution_deadline = newValue;
             },
         });
@@ -343,15 +334,9 @@ export default {
         }
 
         const unfollow = () => {
-            axios.post('/api/challenge/user/unfollow', {id: props.challenge.id})
-                .then(response => {
-                    if (response.data.success) {
-                        challenge.value.followed = false;
-                        toast.success('Nie śledzisz już tego wyzwania.');
-                    } else {
-
-                    }
-                })
+            RequestHandler('challenge/' + challenge.value.id +'/user/unfollow', 'post', {}, (val) => {
+                challenge.value.followed = false;
+            });
         }
 
         const saveDate = () => {
