@@ -986,34 +986,17 @@ class SolutionController extends Controller
         $solution->challenge_id = $request->input('id');
         $solution->installer_id = Auth::user()->id;
         $solution->financial_after_id = $financial->id;
+
+        foreach($challenge->save_json->parts as $part) {
+            $part->model->sourceType = 'challenge';
+        }
+
         $solution->save_json = json_encode($challenge->save_json);
         $solution->published = 0;
         $solution->status = 0;
         $solution->screenshot_path = 's3/screenshots/dbr_placeholder.jpeg';
         $solution->save();
 
-//        $estimate = new Estimate();
-//        $estimate->solution_id = $solution->id;
-//        $estimate->save();
-//        $financial_analyses = new FinancialAnalysis();
-//        $financial_analyses->solution_id = $solution->id;
-//        $financial_analyses->save();
-//        $operational_analyses = new OperationalAnalysis();
-//        $operational_analyses->solution_id = $solution->id;
-//        $operational_analyses->save();
-
-//        $financial->days = $request -> days;
-//        $financial->shifts = $request -> shifts;
-//        $financial->shift_time = $request -> shift_time;
-//        $financial->weekend_shift = $request -> weekend_shift;
-//        $financial->breakfast = $request -> breakfast;
-//        $financial->stop_time = $request -> stop_time;
-//        $financial->operator_performance = $request -> operator_performance;
-//        $financial->defective = $request -> defective;
-//        $financial->number_of_operators = $request -> number_of_operators;
-//        $financial->operator_cost = $request -> operator_cost;
-//        $financial->absence = $request -> absence;
-//        $financial->cycle_time = $request -> cycle_time;
         $financial->challenge_id = $challenge->id;
         $financial->save();
 

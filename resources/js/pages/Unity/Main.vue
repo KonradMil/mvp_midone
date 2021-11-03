@@ -284,7 +284,7 @@ export default {
         const initalize = async () => {
             setTimeout(function () {
                 loaded.value = true;
-                unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
+                unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value, type.value);
                 handleUnityActionOutgoing({
                     action: 'setSessionId',
                     data: Number(Math.random().toString().substr(3, length) + Date.now()).toString(36)
