@@ -219,7 +219,10 @@ export default {
 
         const showAddFileModal = (id) => {
                 show.value = !show.value;
+            if(user.id === props.solution.author_id && props.solution.status !== 1) {
+                refreshDropzone();
             }
+        }
 
         const switchTab = () => {
             emitter.emit("activeTab", {name: 'teams', who: 'solution', solution: props.solution});
@@ -238,6 +241,18 @@ export default {
             });
         }
 
+        const refreshDropzone = async () => {
+            const elDropzoneSingleRef = dropzoneSingleRef.value;
+            elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                solutionFiles.value.push(JSON.parse(resp.xhr.response).payload);
+                images.value.push(JSON.parse(resp.xhr.response).payload);
+                toast.success('Plik został wgrany poprawnie!');
+            });
+            elDropzoneSingleRef.dropzone.on("error", () => {
+                toast.error("Maksymalnie można wgrać 8 plików!");
+            });
+        }
+
         const downloadFile = async (url,name) => {
             window.open('/' + url, '_blank').focus();
         }
@@ -245,17 +260,6 @@ export default {
         onMounted(() => {
             getSolutionFiles();
             checkTeam();
-            if(user.id === props.solution.author_id && props.solution.status !== 1){
-                const elDropzoneSingleRef = dropzoneSingleRef.value;
-                elDropzoneSingleRef.dropzone.on("success", (resp) => {
-                    solutionFiles.value.push(JSON.parse(resp.xhr.response).payload);
-                    images.value.push(JSON.parse(resp.xhr.response).payload);
-                    toast.success('Plik został wgrany poprawnie!');
-                });
-                elDropzoneSingleRef.dropzone.on("error", () => {
-                    toast.error("Maksymalnie można wgrać 8 plików!");
-                });
-            }
         });
 
         const addOffer = () => {
@@ -323,7 +327,8 @@ export default {
             axios.post('/api/solution/publish', {id: solution.id})
                 .then(response => {
                     if (response.data.success) {
-                        solution.status = 1;
+                        props.solution.status = 1;
+                              solution.status = 1;
                         toast.success('Rozwiązanie zostało opublikowane');
                         emitter.emit("isPublic", {isPublic: true});
                     } else {
@@ -358,6 +363,7 @@ export default {
                 .then(response => {
                     if (response.data.success) {
                         solution.status = 0;
+                        props.solution.status = 0;
                         toast.success('Rozwiązanie jest teraz prywatne');
                     } else {
                     }
