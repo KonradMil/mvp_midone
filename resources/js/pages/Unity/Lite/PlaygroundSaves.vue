@@ -55,6 +55,7 @@ export default {
         }
 
         const addNewSave = () => {
+            if()
             axios.post('/api/playground/freesaves/add')
                 .then(response => {
                     router.push({path: '/playground/' + response.data.id});
