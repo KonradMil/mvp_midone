@@ -124,7 +124,7 @@ class FreeSavesController extends Controller
                 $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
                 return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
             }
-
+//            $s3 = S3Controller::processScreenshot($parameters->screenshot_path)
             $newFreeSave = $freeSavesService->updateFreeSave($parameters, $freeSave);
         } else {
             $newFreeSave = $freeSavesService->createEmptySave();

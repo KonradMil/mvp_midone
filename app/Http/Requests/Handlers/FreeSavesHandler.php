@@ -28,6 +28,7 @@ class FreeSavesHandler extends RequestHandler
         $img = S3Controller::processScreenshot($save['screenshot']);
         unset($save['screenshot']);
         $parameters->save_json = json_encode($save);
+        dd($img);
         $parameters->screenshot_path = $img['relative'];
 
         return $parameters;

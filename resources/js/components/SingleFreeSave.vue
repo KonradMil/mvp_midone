@@ -7,7 +7,7 @@
         </div>
         <div class="p-5 border-t border-gray-200 dark:border-dark-5" >
             <div class="h-40 xxl:h-56 image-fit">
-                <img @click="$router.push({path: 'studio-playground/' + save.id})"
+                <img @click="$router.push({path: '/playground/' + save.id})"
                      alt="DBR77"
                      class="rounded-md"
                      :src="'/' + save.screenshot_path"
