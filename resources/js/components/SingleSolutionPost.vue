@@ -212,7 +212,7 @@ export default {
         const solutionFiles = ref([]);
         const guard = ref(false);
         const images = ref([]);
-        const isPublishSolution = ref('');
+        const isPublishSolution = ref('true');
 
         const modalClosed = () => {
             show.value = false;
@@ -392,7 +392,6 @@ export default {
                 console.log('anotherSolution')
                 await router.push({name: 'challengeStudio', params: {id: props.solution.id, type: 'solution', canEditSolution: props.canEditSolution}})
             } else if(props.solution.status === 1){
-                isPublishSolution.value = 'true';
                 console.log('publishSolution')
                 await router.push({name: 'challengeStudio', params: {id: props.solution.id, type: 'solution', canEditSolution: props.canEditSolution, isPublishSolution: isPublishSolution.value}})
             }
