@@ -1,7 +1,7 @@
 <template>
     <TopButtons v-if="loaded" :allowedEdit="allowedEdit && (challenge.status != 1)" :icons="topIcons" :canEditSolution="canEditSolution"></TopButtons>
     <LeftButtons :icons="leftIcons" v-if="(mode == 'edit' && allowedEdit && loaded)"></LeftButtons>
-    <LeftPanel></LeftPanel>
+    <LeftPanel :sourceType="type"></LeftPanel>
     <div @contextmenu.prevent="openMenu">
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>

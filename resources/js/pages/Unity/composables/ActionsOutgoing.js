@@ -24,7 +24,7 @@ function outgoing(game, action, data, json) {
     //
     // }
 }
-export default function unityActionOutgoing(gameWindow, sourceType = null) {
+export default function unityActionOutgoing(gameWindow) {
 
     const game = gameWindow;
 
@@ -34,7 +34,7 @@ export default function unityActionOutgoing(gameWindow, sourceType = null) {
             model_name: data.name,
             model_id: data.id,
             prefab_url: window.location.protocol+'//' + location.host + '/s3/models/' + data.model_file,
-            sourceType: sourceType ? sourceType : null
+            sourceType: data.sourceType !== undefined ? data.sourceType : null
         }, true)
     }
 
