@@ -625,31 +625,17 @@ class SolutionController extends Controller
         $estimate->parts_cost = (float)$input['partsCost'];
         $estimate->sum += (float)$input['partsCost'];
         $estimate->mechanical_integration = (float)$input['basicCosts']['mechanical_integration'];
-        $estimate->sum += (float)$input['basicCosts']['mechanical_integration'];
         $estimate->electrical_integration = (float)$input['basicCosts']['electrical_integration'];
-        $estimate->sum += (float)$input['basicCosts']['electrical_integration'];
         $estimate->workstation_integration = (float)$input['basicCosts']['workstation_integration'];
-        $estimate->sum += (float)$input['basicCosts']['workstation_integration'];
         $estimate->programming_robot = (float)$input['basicCosts']['programming_robot'];
-        $estimate->sum += (float)$input['basicCosts']['programming_robot'];
         $estimate->programming_plc = (float)$input['basicCosts']['programming_plc'];
-        $estimate->sum += (float)$input['basicCosts']['programming_plc'];
         $estimate->documentation_ce = (float)$input['basicCosts']['documentation_ce'];
-        $estimate->sum += (float)$input['basicCosts']['documentation_ce'];
         $estimate->training = (float)$input['basicCosts']['training'];
-        $estimate->sum += (float)$input['basicCosts']['training'];
         $estimate->project = (float)$input['basicCosts']['project'];
-        $estimate->sum += (float)$input['basicCosts']['project'];
         $estimate->margin = (float)$input['basicCosts']['margin'];
-        $estimate->sum += (float)$input['basicCosts']['margin'];
         $estimate->parts_prices = json_encode($input['partPrices']);
         $estimate->additional_costs = json_encode($input['additionalCosts']);
         $estimate->parts_ar = json_encode($input['partsAr']);
-
-//        foreach($estimate as $key => $value){
-//            if($key != solution_id)
-//            $estimate->sum += (float)($key);
-//        }
 
         $estimate->save();
 
