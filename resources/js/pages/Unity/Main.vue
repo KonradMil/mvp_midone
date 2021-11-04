@@ -7,7 +7,7 @@
     </div>
     <BottomPanel v-if="loaded" :allowedEdit="allowedEdit" :mode="mode" v-model:animationSave="animationSave"></BottomPanel>
     <RightButtons v-if="loaded" :allowedEdit="allowedEdit" :icons="rightIcons" :type="type"></RightButtons>
-    <RightPanel :allowedEdit="allowedEdit" :publishChallenges="publishChallenges" :canEditSolution="canEditSolution" :type="type" :challenge="challenge" :solution="solution"></RightPanel>
+    <RightPanel :allowedEdit="allowedEdit" :publishChallenges="publishChallenges" :canEditSolution="canEditSolution" :type="type" :challenge="challenge" :solution="solution" :isPublishSolution="isPublishSolution"></RightPanel>
     <div v-if="!loaded" id="loader">
         <LoadingIcon icon="grid" class="w-8 h-8"/>
     </div>
@@ -53,7 +53,8 @@ export default {
         },
         publishChallenges: Boolean,
         canEditSolution: Boolean,
-        sessionid: String
+        sessionid: String,
+        isPublishSolution: String,
     },
     components: {
         CopyLoadModal,
@@ -94,6 +95,7 @@ export default {
         const saving = ref(false);
         const sessionid = ref('');
         const owner = ref(false);
+        const isPublishSolution = ref('');
 
         window.copyLoad = function () {
 
@@ -287,7 +289,9 @@ export default {
                 } else {
                     return false;
                 }
-            } else {
+            } else if(isPublishSolution.value === 'true'){
+                  return false;
+            }else {
                 if (inTeam.value || (user.id == solution.value.author_id)) {
                     return true;
                 } else {
@@ -411,6 +415,7 @@ export default {
             //INITIALIZES MAIN VALUES
             mode.value = 'edit';
             type.value = props.type;
+            isPublishSolution.value = props.isPublishSolution;
             id.value = props.id;
             window_height.value = window.innerHeight;
 
@@ -435,6 +440,7 @@ export default {
         });
 
         return {
+            isPublishSolution,
             workshopOpen,
             user,
             challenge,
