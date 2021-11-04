@@ -12,13 +12,13 @@
                     class="rounded-full"
                     :src="'/' + props.solution.screenshot_path"/>
             </div>
-            <div class="ml-3 mr-auto" @click="$router.push({path: '/studio/solution/' + props.solution.id});">
+            <div class="ml-3 mr-auto" @click="goTo('normalSolution')">
                 <a href="" class="font-medium">{{ props.solution.name }} <span v-if="props.solution.selected == 1" style="color: #5e50ac;"> - {{$t('challengesMain.accepted')}}</span><span v-if="props.solution.rejected == 1" style="color: #1a202c;"> - {{$t('challengesMain.rejected')}}</span></a>
             </div>
         </div>
         <div class="p-5 border-t border-gray-200 dark:border-dark-5" >
             <div class="h-40 xxl:h-56 image-fit">
-                <img @click="$router.push({name: 'challengeStudio', params: {id: props.solution.id, type: 'solution', canEditSolution: canEditSolution}});"
+                <img @click="goTo('anotherSolution')"
                      alt="DBR77"
                      class="rounded-md"
                      :src="'/' + props.solution.screenshot_path"/>
@@ -212,6 +212,7 @@ export default {
         const solutionFiles = ref([]);
         const guard = ref(false);
         const images = ref([]);
+        const isPublishSolution = ref('');
 
         const modalClosed = () => {
             show.value = false;
@@ -383,7 +384,23 @@ export default {
             dropzoneSingleRef.value = el;
         });
 
+        const goTo = async(link) => {
+            if(link === 'normalSolution' && props.solution.status !== 1){
+                console.log('normalSolution')
+                await router.push({path: '/studio/solution/' + props.solution.id})
+            } else if(link === 'anotherSolution' && props.solution.status !== 1){
+                console.log('anotherSolution')
+                await router.push({name: 'challengeStudio', params: {id: props.solution.id, type: 'solution', canEditSolution: props.canEditSolution}})
+            } else if(props.solution.status === 1){
+                isPublishSolution.value = 'true';
+                console.log('publishSolution')
+                await router.push({name: 'challengeStudio', params: {id: props.solution.id, type: 'solution', canEditSolution: props.canEditSolution, isPublishSolution: isPublishSolution.value}})
+            }
+        }
+
         return {
+            isPublishSolution,
+            goTo,
             downloadFile,
             getSolutionFiles,
             images,

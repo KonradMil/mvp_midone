@@ -52,7 +52,8 @@ export default {
         },
         publishChallenges: Boolean,
         canEditSolution: Boolean,
-        sessionid: String
+        sessionid: String,
+        isPublishSolution: String,
     },
     components: {
         HelpModal, ModalWorkshop, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio
@@ -92,6 +93,7 @@ export default {
         const saving = ref(false);
         const sessionid = ref('');
         const owner = ref(false);
+        const isPublishSolution = ref('');
 
         //ALL EVENTS
         emitter.on('*', (type, e) => {
@@ -257,7 +259,9 @@ export default {
                 } else {
                     return false;
                 }
-            } else {
+            } else if(isPublishSolution.value === 'true'){
+                  return false;
+            }else {
                 if (inTeam.value || (user.id == solution.value.author_id)) {
                     return true;
                 } else {
@@ -381,11 +385,13 @@ export default {
             //INITIALIZES MAIN VALUES
             mode.value = 'edit';
             type.value = props.type;
+            isPublishSolution.value = props.isPublishSolution;
             id.value = props.id;
             window_height.value = window.innerHeight;
         });
 
         return {
+            isPublishSolution,
             workshopOpen,
             user,
             challenge,
