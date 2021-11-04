@@ -133,10 +133,10 @@ export default defineComponent({
         const router = useRouter();
         const store = useStore();
         const user = ref({});
-        const menu = require('../../json/main_menu.json');
+        const menu = ref([]);
         const formattedMenu = ref([]);
         const sideMenu = computed(() =>
-            nestedMenu(menu.menu, route)
+            nestedMenu(menu.value.menu, route)
         );
 
         const goTo = (url) => {
@@ -153,6 +153,12 @@ export default defineComponent({
         onMounted(() => {
             if (window.Laravel.user) {
                 user.value = window.Laravel.user;
+
+                if(user.value.type == 'admin') {
+                    menu.value = require('../../json/admin_menu.json');
+                } else {
+                    menu.value = require('../../json/main_menu.json');
+                }
             }
 
             cash("body")

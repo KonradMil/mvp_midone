@@ -11,13 +11,33 @@ class ShowroomSlide extends Model
 
     protected $table = 'showroom_slide';
 
+    /**
+     *
+     */
+    const TYPES = [
+        "text",
+        "files",
+        "images",
+        "html"
+    ];
+
     protected $fillable = [
         'name',
+        'menu_name',
+        'type',
         'content'
     ];
 
     public function showroom()
     {
         return $this->belongsTo(Showroom::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function getTypeName(): string
+    {
+        return self::TYPES[$this->attributes['type']];
     }
 }

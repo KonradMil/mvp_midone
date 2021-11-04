@@ -1,0 +1,39 @@
+{
+    "menu": [
+        {
+            "icon": "HomeIcon",
+            "pageName": "dashboard-admin",
+            "title": "Dashboard"
+        },
+        {
+            "icon": "HomeIcon",
+            "pageName": "models",
+            "title": "Modele"
+        },
+        {
+            "icon": "BoxIcon",
+            "pageName": "users-admin",
+            "title": "Użytkownicy"
+        },
+        {
+            "icon": "BoxIcon",
+            "pageName": "challenges-admin",
+            "title": "Wyzwania"
+        },
+        {
+            "icon": "BoxIcon",
+            "pageName": "showrooms-admin",
+            "title": "Showroomy"
+        },
+        {
+            "icon": "HomeIcon",
+            "pageName": "contests-admin",
+            "title": "Konkursy"
+        },
+        {
+            "icon": "InboxIcon",
+            "pageName": "saas-admin",
+            "title": "SAASy"
+        }
+    ]
+}
