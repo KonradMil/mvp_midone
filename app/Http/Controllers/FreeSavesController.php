@@ -126,17 +126,13 @@ class FreeSavesController extends Controller
                 return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
             }
 
-            $updateFreeSave = $freeSavesService->updateFreeSave($parameters, $freeSave);
-
-            $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
+            $newFreeSave = $freeSavesService->updateFreeSave($parameters, $freeSave);
         } else {
-            $newFreeSave = $freeSavesService->addFreeSave($parameters);
-
-            $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
-            $this->responseBuilder->setData('local_vision', $newFreeSave);
+            $newFreeSave = $freeSavesService->createEmptySave();
         }
 
-
+        $this->responseBuilder->setData('free_save', $newFreeSave);
+        $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
         return $this->responseBuilder->getResponse();
     }
 
