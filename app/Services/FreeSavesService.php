@@ -58,6 +58,7 @@ class FreeSavesService
         $freeSave->description = $newFreeSaveParameters->description;
         $freeSave->en_description = $newFreeSaveParameters->en_description;
         $freeSave->save_json = $newFreeSaveParameters->save_json;
+        $freeSave->screenshot_path = $newFreeSaveParameters->screenshot_path;
 
         $freeSave->save();
 
