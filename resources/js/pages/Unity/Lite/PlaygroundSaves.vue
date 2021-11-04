@@ -1,7 +1,7 @@
 <template>
     <div>
+        <button class="btn btn-primary ml-2 shadow-md mr-2" @click="addNewSave()">{{ $t('lite.addSave') }}</button>
         <div class="intro-y grid grid-cols-12 gap-6 mt-5">
-            <button class="btn btn-primary ml-2 shadow-md mr-2" @click="addNewSave()">{{ $t('lite.addSave') }}</button>
             <div v-if="dataAr.length > 0" v-for="(save, index) in dataAr" :key="index" class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
                 <SingleFreeSave :user="user" :save="save"></SingleFreeSave>
             </div>
@@ -55,7 +55,6 @@ export default {
         }
 
         const addNewSave = () => {
-            if()
             axios.post('/api/playground/freesaves/add')
                 .then(response => {
                     router.push({path: '/playground/' + response.data.id});
