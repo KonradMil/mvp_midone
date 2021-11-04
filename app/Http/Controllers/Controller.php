@@ -25,13 +25,15 @@ class Controller extends BaseController
 
     public function __call($method, $arguments)
     {
-        try {
-            return call_user_func_array($method, $arguments);
-        } catch (\Exception $e) {
-           Log::error($e->getMessage());
-            report($e);
-            $this->responseBuilder->setErrorMessage(__('messages.error'));
-            return $this->responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+        if(env('APP_ENV') != 'local') {
+            try {
+                return call_user_func_array($method, $arguments);
+            } catch (\Exception $e) {
+                Log::error($e->getMessage());
+                report($e);
+                $this->responseBuilder->setErrorMessage(__('messages.error'));
+                return $this->responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+            }
         }
     }
 }
