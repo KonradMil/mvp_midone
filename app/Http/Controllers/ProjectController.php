@@ -7,7 +7,6 @@ use App\Http\Requests\Handlers\LocalVisionHandler;
 use App\Http\Requests\Handlers\ProjectFilesHandler;
 use App\Http\Requests\Handlers\TechnicalDetailsHandler;
 use App\Http\Requests\Handlers\VisitDateHandler;
-use App\Http\ResponseBuilder;
 use App\Repository\Eloquent\ChallengeRepository;
 use App\Repository\Eloquent\FileRepository;
 use App\Repository\Eloquent\LocalVisionRepository;
@@ -18,18 +17,12 @@ use App\Repository\Eloquent\UserRepository;
 use App\Repository\Eloquent\VisitDateRepository;
 use App\Services\ChallengeService;
 use App\Services\ProjectService;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProjectController extends Controller
 {
-
-    public function __construct()
-    {
-
-    }
 
     /**
      * @param int $id
@@ -39,35 +32,27 @@ class ProjectController extends Controller
      * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function deleteFile(int $id,Request $request, ProjectRepository $projectRepository, FileRepository $fileRepository, ProjectService $projectService): JsonResponse
+    public function deleteFile(int $id, Request $request, ProjectRepository $projectRepository, FileRepository $fileRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
-
         $project = $projectRepository->find($id);
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $file = $fileRepository->find($request->input('file_id'));
 
         if (!$file) {
-            $responseBuilder->setErrorMessage(__('messages.file.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.file.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
-            $projectService->detachFile($project, $file);
-            $responseBuilder->setSuccessMessage(__('messages.delete_correct'));
-        } catch (QueryException $e) {
+        $projectService->detachFile($project, $file);
+        $this->responseBuilder->setSuccessMessage(__('messages.delete_correct'));
 
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -77,41 +62,31 @@ class ProjectController extends Controller
      * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function saveFiles(Request $request, int $id, ProjectRepository $projectRepository,ProjectService $projectService): JsonResponse
+    public function saveFiles(Request $request, int $id, ProjectRepository $projectRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
-
         $projectFilesHandler = new ProjectFilesHandler($request);
 
         $project = $projectRepository->find($id);
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $parameters = $projectFilesHandler->getParameters();
 
         if (!$parameters->isValid()) {
-            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
-            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+            $this->responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
         }
 
-        try {
-            $newProjectFiles = $projectService->addProjectFiles($parameters,$project);
+        $newProjectFiles = $projectService->addProjectFiles($parameters, $project);
 
-            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
-            $responseBuilder->setData('project', $newProjectFiles->with('files'));
+        $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
+        $this->responseBuilder->setData('project', $newProjectFiles->with('files'));
 
 
-        } catch (QueryException $e) {
-
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -122,25 +97,24 @@ class ProjectController extends Controller
      */
     public function getFiles(ProjectRepository $projectRepository, int $id, FileRepository $fileRepository): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
 
         $project = $projectRepository->find($id);
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $projectFiles = $fileRepository->getFilesByProject($project);
 
         if (!$projectFiles) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $responseBuilder->setData('projectFiles', $projectFiles);
+        $this->responseBuilder->setData('projectFiles', $projectFiles);
 
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -151,25 +125,25 @@ class ProjectController extends Controller
      */
     public function getProjectCard(ChallengeRepository $challengeRepository, ProjectRepository $projectRepository, int $id): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
         $challenge = $challengeRepository->getFullChallengeById($id);
 
         if (!$challenge) {
-            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $project = $projectRepository->getProjectByChallengeId($id);
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $responseBuilder->setData('challenge', $challenge);
-        $responseBuilder->setData('project', $project);
+        $this->responseBuilder->setData('challenge', $challenge);
+        $this->responseBuilder->setData('project', $project);
 
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -181,62 +155,47 @@ class ProjectController extends Controller
      */
     public function saveLocalVision(Request $request, ProjectRepository $projectRepository, ProjectService $projectService, LocalVisionRepository $localVisionRepository): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
 
         $localVisionHandler = new LocalVisionHandler($request);
 
         $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $parameters = $localVisionHandler->getParameters();
 
         if (!$parameters->isValid()) {
-            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
-            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+            $this->responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
         }
 
-        if($parameters->reportId > 0){
+        if ($parameters->reportId > 0) {
 
             $localVision = $localVisionRepository->find($parameters->reportId);
 
-            if(!$localVision){
-                $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-                return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            if (!$localVision) {
+                $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+                return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
             }
 
-            try {
-                $updateLocalVision = $projectService->updateLocalVision($parameters, $localVision);
+            $updateLocalVision = $projectService->updateLocalVision($parameters, $localVision);
 
-                $responseBuilder->setSuccessMessage(__('messages.save_correct'));
-                $responseBuilder->setData('local_vision', $updateLocalVision);
+            $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
+            $this->responseBuilder->setData('local_vision', $updateLocalVision);
 
-            } catch (QueryException $e) {
-
-                $responseBuilder->setErrorMessage(__('messages.error'));
-                return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-            }
         } else {
-            try {
-                $newLocalVision = $projectService->addLocalVision($parameters);
+            $newLocalVision = $projectService->addLocalVision($parameters);
 
-                $responseBuilder->setSuccessMessage(__('messages.save_correct'));
-                $responseBuilder->setData('local_vision', $newLocalVision);
+            $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
+            $this->responseBuilder->setData('local_vision', $newLocalVision);
 
-
-            } catch (QueryException $e) {
-
-                $responseBuilder->setErrorMessage(__('messages.error'));
-                return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-            }
         }
 
 
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -248,23 +207,23 @@ class ProjectController extends Controller
      */
     public function getLocalVision(int $id, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($id);
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $reports = $localVisionRepository->getAllLocalVisionsByProjectId($id);
 
         $check = $projectService->checkLocalVision($id);
 
-        $responseBuilder->setData('reports', $reports);
-        $responseBuilder->setData('check', $check);
+        $this->responseBuilder->setData('reports', $reports);
+        $this->responseBuilder->setData('check', $check);
 
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -275,36 +234,27 @@ class ProjectController extends Controller
      */
     public function deleteReport(Request $request, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $localVision = $localVisionRepository->find($request->input('id'));
 
         if (!$localVision) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
+        $projectService->deleteReport($localVision);
 
-            $projectService->deleteReport($localVision);
+        $this->responseBuilder->setSuccessMessage(__('messages.delete_correct'));
 
-            $responseBuilder->setSuccessMessage(__('messages.delete_correct'));
-
-        } catch (QueryException $e) {
-
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -316,13 +266,13 @@ class ProjectController extends Controller
      */
     public function saveFinancialDetails(Request $request, ChallengeRepository $challengeRepository, int $id, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {
-            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $financialHandler = new FinancialHandler($request);
@@ -330,27 +280,17 @@ class ProjectController extends Controller
         $parameters = $financialHandler->getParameters();
 
         if (!$parameters->isValid()) {
-            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
-            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
-        }
-
-        try {
-
-            $newFinancial = $projectService->addFinancialDetails($parameters);
-
-            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
-            $responseBuilder->setData('new_technical', $newFinancial);
-
-
-        } catch (QueryException $e) {
-
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
+            $this->responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
         }
 
 
-        return $responseBuilder->getResponse();
+        $newFinancial = $projectService->addFinancialDetails($parameters);
+
+        $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
+        $this->responseBuilder->setData('new_technical', $newFinancial);
+
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -362,13 +302,13 @@ class ProjectController extends Controller
      */
     public function saveTechnicalDetails(Request $request, int $id, ChallengeRepository $challengeRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {
-            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $technicalDetailsHandler = new TechnicalDetailsHandler($request);
@@ -376,26 +316,16 @@ class ProjectController extends Controller
         $parameters = $technicalDetailsHandler->getParameters();
 
         if (!$parameters->isValid()) {
-            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
-            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+            $this->responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
         }
 
-        try {
+        $newTechnicalDetails = $projectService->addTechnicalDetails($parameters);
 
-            $newTechnicalDetails = $projectService->addTechnicalDetails($parameters);
-
-            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
-            $responseBuilder->setData('new_technical', $newTechnicalDetails);
+        $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
 
 
-        } catch (QueryException $e) {
-
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -407,36 +337,28 @@ class ProjectController extends Controller
      */
     public function acceptOffer(Request $request, ProjectRepository $projectRepository, OfferRepository $offerRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $offer = $offerRepository->find($request->input('new_offer_id'));
 
         if (!$offer) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
-            $projectService->acceptOffer($project, $offer);
+        $projectService->acceptOffer($project, $offer);
 
-            $responseBuilder->setSuccessMessage(__('messages.accepted'));
-            $responseBuilder->setData('project', $project);
+        $this->responseBuilder->setSuccessMessage(__('messages.accepted'));
+        $this->responseBuilder->setData('project', $project);
 
-        } catch (QueryException $e) {
-
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -448,38 +370,31 @@ class ProjectController extends Controller
      */
     public function rejectOffer(Request $request, ProjectRepository $projectRepository, OfferRepository $offerRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $offer = $offerRepository->find($request->input('new_offer_id'));
 
         if (!$offer) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $feedback = $request->input('feedback');
 
-        try {
-            $projectService->rejectOffer($project, $offer, $feedback);
+        $projectService->rejectOffer($project, $offer, $feedback);
 
-            $responseBuilder->setSuccessMessage(__('messages.rejected'));
-            $responseBuilder->setData('project', $project);
+        $this->responseBuilder->setSuccessMessage(__('messages.rejected'));
+        $this->responseBuilder->setData('project', $project);
 
-        } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -490,29 +405,22 @@ class ProjectController extends Controller
      */
     public function acceptTechnicalDetails(ProjectRepository $projectRepository, int $id, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($id);
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
-            $projectService->acceptTechnicalDetails($project);
+        $projectService->acceptTechnicalDetails($project);
 
-            $responseBuilder->setSuccessMessage(__('messages.accepted'));
-            $responseBuilder->setData('project', $project);
+        $this->responseBuilder->setSuccessMessage(__('messages.accepted'));
+        $this->responseBuilder->setData('project', $project);
 
-        } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -523,29 +431,22 @@ class ProjectController extends Controller
      */
     public function rejectTechnicalDetails(ProjectRepository $projectRepository, int $id, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($id);
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
-            $projectService->rejectTechnicalDetails($project);
+        $projectService->rejectTechnicalDetails($project);
 
-            $responseBuilder->setSuccessMessage(__('messages.rejected'));
-            $responseBuilder->setData('project', $project);
+        $this->responseBuilder->setSuccessMessage(__('messages.rejected'));
+        $this->responseBuilder->setData('project', $project);
 
-        } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -556,30 +457,23 @@ class ProjectController extends Controller
      */
     public function acceptFinancialDetails(ProjectRepository $projectRepository, int $id, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($id);
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
 
-            $projectService->acceptFinancialDetails($project);
+        $projectService->acceptFinancialDetails($project);
 
-            $responseBuilder->setSuccessMessage(__('messages.accepted'));
-            $responseBuilder->setData('project', $project);
+        $this->responseBuilder->setSuccessMessage(__('messages.accepted'));
+        $this->responseBuilder->setData('project', $project);
 
-        } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -590,30 +484,23 @@ class ProjectController extends Controller
      */
     public function rejectFinancialDetails(ProjectRepository $projectRepository, int $id, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($id);
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
 
-            $projectService->rejectFinancialDetails($project);
+        $projectService->rejectFinancialDetails($project);
 
-            $responseBuilder->setSuccessMessage(__('messages.rejected'));
-            $responseBuilder->setData('project', $project);
+        $this->responseBuilder->setSuccessMessage(__('messages.rejected'));
+        $this->responseBuilder->setData('project', $project);
 
-        } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -622,30 +509,24 @@ class ProjectController extends Controller
      * @param ProjectService $projectService
      * @return JsonResponse
      */
-    public function endLocalVision(Request $request, ProjectRepository $projectRepository,ProjectService $projectService): JsonResponse
+    public function endLocalVision(Request $request, ProjectRepository $projectRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
-            $projectService->endLocalVision($project);
 
-            $responseBuilder->setData('visit_date', $project);
+        $projectService->endLocalVision($project);
 
-        } catch (QueryException $e) {
+        $this->responseBuilder->setData('visit_date', $project);
 
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -657,36 +538,29 @@ class ProjectController extends Controller
      */
     public function acceptReport(Request $request, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $localVision = $localVisionRepository->find($request->input('id'));
 
         if (!$localVision) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
-            $acceptLocalVision = $projectService->acceptReport($localVision);
+        $acceptLocalVision = $projectService->acceptReport($localVision);
 
-            $responseBuilder->setSuccessMessage(__('messages.accepted'));
-            $responseBuilder->setData('visit_date', $acceptLocalVision);
+        $this->responseBuilder->setSuccessMessage(__('messages.accepted'));
+        $this->responseBuilder->setData('visit_date', $acceptLocalVision);
 
-        } catch (QueryException $e) {
 
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -698,36 +572,30 @@ class ProjectController extends Controller
      */
     public function rejectReport(Request $request, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $localVision = $localVisionRepository->find($request->input('id'));
 
         if (!$localVision) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
-            $rejectLocalVision = $projectService->rejectReport($localVision);
 
-            $responseBuilder->setSuccessMessage(__('messages.rejected'));
-            $responseBuilder->setData('visit_date', $rejectLocalVision);
+        $rejectLocalVision = $projectService->rejectReport($localVision);
 
-        } catch (QueryException $e) {
+        $this->responseBuilder->setSuccessMessage(__('messages.rejected'));
+        $this->responseBuilder->setData('visit_date', $rejectLocalVision);
 
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -739,20 +607,20 @@ class ProjectController extends Controller
      */
     public function saveCommentLocalVision(Request $request, ProjectRepository $projectRepository, LocalVisionRepository $localVisionRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $localVision = $localVisionRepository->find($request->input('id'));
 
         if (!$localVision) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $localVisionHandler = new LocalVisionHandler($request);
@@ -760,25 +628,17 @@ class ProjectController extends Controller
         $parameters = $localVisionHandler->getCommentParameters();
 
         if (!$parameters->isValid()) {
-            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
-            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+            $this->responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
         }
 
-        try {
-            $addCommentLocalVision = $projectService->addCommentLocalVision($parameters, $localVision);
 
-            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
-            $responseBuilder->setData('local_vision', $addCommentLocalVision);
+        $addCommentLocalVision = $projectService->addCommentLocalVision($parameters, $localVision);
 
+        $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
+        $this->responseBuilder->setData('local_vision', $addCommentLocalVision);
 
-        } catch (QueryException $e) {
-
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
 
     }
 
@@ -790,34 +650,27 @@ class ProjectController extends Controller
      */
     public function getTechnicalDetails(int $id, ChallengeService $challengeService, ChallengeRepository $challengeRepository): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
         $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {
-            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $details = $challengeService->getTechnicalDetailsByChallengeId($id);
 
         if (!$details) {
-            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
 
-            $responseBuilder->setData('old_technical', $details[0]);
-            $responseBuilder->setData('new_technical', $details[1]);
+        $this->responseBuilder->setData('old_technical', $details[0]);
+        $this->responseBuilder->setData('new_technical', $details[1]);
 
-        } catch(QueryException $e) {
 
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-       ;
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -828,36 +681,28 @@ class ProjectController extends Controller
      */
     public function getFinancialDetails(int $id, ChallengeService $challengeService, ChallengeRepository $challengeRepository): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {
-            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $details = $challengeService->getFinancialDetailsByChallengeId($id);
 
         if (!$details) {
-            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
-        }
-
-        try {
-
-            $responseBuilder->setData('old_financial', $details[0]);
-            $responseBuilder->setData('new_financial', $details[1]);
-
-        } catch(QueryException $e) {
-
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
+            $this->responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
 
-        return $responseBuilder->getResponse();
+        $this->responseBuilder->setData('old_financial', $details[0]);
+        $this->responseBuilder->setData('new_financial', $details[1]);
+
+
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -869,32 +714,32 @@ class ProjectController extends Controller
      */
     public function getProjectSolution(int $id, SolutionRepository $solutionRepository, ChallengeRepository $challengeRepository, ProjectRepository $projectRepository): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {
-            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $project = $projectRepository->getProjectByChallengeId($challenge->id);
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $solution = $solutionRepository->getSolutionWithFiles($challenge->solution_project_id);
 
         if (!$solution) {
-            $responseBuilder->setErrorMessage(__('messages.solution.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.solution.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $responseBuilder->setData('solution', $solution);
+        $this->responseBuilder->setData('solution', $solution);
 
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -906,41 +751,41 @@ class ProjectController extends Controller
      */
     public function getInvestorAndIntegrator(int $id, UserRepository $userRepository, ChallengeRepository $challengeRepository, SolutionRepository $solutionRepository): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {
-            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $investor = $userRepository->getUserWithCompanies($challenge->author_id);
 
         if (!$investor) {
-            $responseBuilder->setErrorMessage(__('messages.user.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.user.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $solution = $solutionRepository->find($challenge->solution_project_id);
 
         if (!$solution) {
-            $responseBuilder->setErrorMessage(__('messages.solution.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.solution.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
 
         $integrator = $userRepository->getUserWithCompanies($solution->author_id);
 
         if (!$integrator) {
-            $responseBuilder->setErrorMessage(__('messages.user.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.user.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        $responseBuilder->setData('investor', $investor);
-        $responseBuilder->setData('integrator', $integrator);
+        $this->responseBuilder->setData('investor', $investor);
+        $this->responseBuilder->setData('integrator', $integrator);
 
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -952,20 +797,20 @@ class ProjectController extends Controller
      */
     public function saveMembersVisitDate(Request $request, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $visitDate = $visitDateRepository->find($request->input('id'));
 
         if (!$visitDate) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $visitDateHandler = new VisitDateHandler($request);
@@ -973,26 +818,18 @@ class ProjectController extends Controller
         $parameters = $visitDateHandler->getMembersParameters();
 
         if (!$parameters->isValid()) {
-            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
-            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+            $this->responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
         }
 
-        try {
 
-            $addMembersVisitDate = $projectService->addMembersVisitDate($parameters, $visitDate);
+        $addMembersVisitDate = $projectService->addMembersVisitDate($parameters, $visitDate);
 
-            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
-            $responseBuilder->setData('visit_date', $addMembersVisitDate);
+        $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
+        $this->responseBuilder->setData('visit_date', $addMembersVisitDate);
 
 
-        } catch (QueryException $e) {
-
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
 
     }
 
@@ -1003,33 +840,25 @@ class ProjectController extends Controller
      */
     public function saveVisitDate(Request $request, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $visitDateHandler = new VisitDateHandler($request);
 
         $parameters = $visitDateHandler->getParameters();
 
         if (!$parameters->isValid()) {
-            $responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
-            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+            $this->responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
         }
 
-        try {
 
-            $newVisitDate = $projectService->addVisitDate($parameters);
+        $newVisitDate = $projectService->addVisitDate($parameters);
 
-            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
-            $responseBuilder->setData('visit_date', $newVisitDate);
+        $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
+        $this->responseBuilder->setData('visit_date', $newVisitDate);
 
 
-        } catch (QueryException $e) {
-
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -1040,20 +869,20 @@ class ProjectController extends Controller
      */
     public function getVisitDate(int $id, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($id);
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $deadlines = $visitDateRepository->getAllVisitDateByProjectId($id);
 
-        $responseBuilder->setData('deadlines', $deadlines);
+        $this->responseBuilder->setData('deadlines', $deadlines);
 
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -1065,38 +894,30 @@ class ProjectController extends Controller
      */
     public function acceptVisitDate(Request $request, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $visitDate = $visitDateRepository->find($request->input('id'));
 
         if (!$visitDate) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
 
-            $acceptVisitDate = $projectService->acceptVisitDate($visitDate);
+        $acceptVisitDate = $projectService->acceptVisitDate($visitDate);
 
-            $responseBuilder->setSuccessMessage(__('messages.project.accepted'));
-            $responseBuilder->setData('visit_date', $acceptVisitDate);
+        $this->responseBuilder->setSuccessMessage(__('messages.project.accepted'));
+        $this->responseBuilder->setData('visit_date', $acceptVisitDate);
 
 
-        } catch (QueryException $e) {
-
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -1108,38 +929,29 @@ class ProjectController extends Controller
      */
     public function rejectVisitDate(Request $request, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $visitDate = $visitDateRepository->find($request->input('id'));
 
         if (!$visitDate) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
 
-            $rejectVisitDate = $projectService->rejectVisitDate($visitDate);
+        $rejectVisitDate = $projectService->rejectVisitDate($visitDate);
 
-            $responseBuilder->setSuccessMessage(__('messages.rejected'));
-            $responseBuilder->setData('visit_date', $rejectVisitDate);
+        $this->responseBuilder->setSuccessMessage(__('messages.rejected'));
+        $this->responseBuilder->setData('visit_date', $rejectVisitDate);
 
-
-        } catch (QueryException $e) {
-
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -1151,38 +963,29 @@ class ProjectController extends Controller
      */
     public function cancelVisitDate(Request $request, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $visitDate = $visitDateRepository->find($request->input('id'));
 
         if (!$visitDate) {
-            $responseBuilder->setErrorMessage(__('messages.canceled'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.canceled'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
 
-            $cancelVisitDate = $projectService->cancelVisitDate($visitDate);
+        $cancelVisitDate = $projectService->cancelVisitDate($visitDate);
 
-            $responseBuilder->setSuccessMessage(__('messages.save_correct'));
-            $responseBuilder->setData('visit_date', $cancelVisitDate);
+        $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
+        $this->responseBuilder->setData('visit_date', $cancelVisitDate);
 
-
-        } catch (QueryException $e) {
-
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -1194,34 +997,28 @@ class ProjectController extends Controller
      */
     public function deleteVisitDate(Request $request, ProjectRepository $projectRepository, VisitDateRepository $visitDateRepository, ProjectService $projectService): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $visitDate = $visitDateRepository->find($request->input('id'));
 
         if (!$visitDate) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
 
-            $projectService->deleteVisitDate($visitDate);
+        $projectService->deleteVisitDate($visitDate);
 
-            $responseBuilder->setSuccessMessage(__('messages.delete_correct'));
-        } catch (QueryException $e) {
+        $this->responseBuilder->setSuccessMessage(__('messages.delete_correct'));
 
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-
-        return $responseBuilder->getResponse();
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -1234,46 +1031,39 @@ class ProjectController extends Controller
      */
     public function getOffersProject(Request $request, int $id, ChallengeRepository $challengeRepository, ProjectRepository $projectRepository, OfferRepository $offerRepository): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {
-            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $old_offer = $offerRepository->getSelectedOfferByChallenge($challenge);
 
         if (!$old_offer) {
-            $responseBuilder->setErrorMessage(__('messages.offer.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.offer.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
 
-        try {
-
-            $new_offer = null;
-            if ($project->selected_offer_id > 0) {
-                $new_offer = $offerRepository->getSelectedOfferByProject($project);
-            }
-
-            $responseBuilder->setData('old_offer', $old_offer);
-            $responseBuilder->setData('new_offer', $new_offer);
-        } catch (QueryException $e) {
-
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+        $new_offer = null;
+        if ($project->selected_offer_id > 0) {
+            $new_offer = $offerRepository->getSelectedOfferByProject($project);
         }
 
-        return $responseBuilder->getResponse();
+        $this->responseBuilder->setData('old_offer', $old_offer);
+        $this->responseBuilder->setData('new_offer', $new_offer);
+
+        return $this->responseBuilder->getResponse();
     }
 
     /**
@@ -1286,34 +1076,30 @@ class ProjectController extends Controller
      */
     public function getOffersProjectIntegrator(Request $request, int $id, ChallengeRepository $challengeRepository, ProjectRepository $projectRepository, OfferRepository $offerRepository): JsonResponse
     {
-        $responseBuilder = new ResponseBuilder();
+
 
         $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {
-            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $project = $projectRepository->find($request->input('project_id'));
 
         if (!$project) {
-            $responseBuilder->setErrorMessage(__('messages.project.not_found'));
-            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
-        try {
-            $offers = $offerRepository->getProjectOffers($project,$challenge->selected_offer_id);
-            $old_offer = $offerRepository->getSelectedOfferByChallenge($challenge);
+        $offers = $offerRepository->getProjectOffers($project, $challenge->selected_offer_id);
+        $old_offer = $offerRepository->getSelectedOfferByChallenge($challenge);
 
-            $responseBuilder->setData('offers', $offers);
-            $responseBuilder->setData('old_offer', $old_offer);
-        } catch (QueryException $e) {
-            $responseBuilder->setErrorMessage(__('messages.error'));
-            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+        $this->responseBuilder->setData('offers', $offers);
+        $this->responseBuilder->setData('old_offer', $old_offer);
 
-        return $responseBuilder->getResponse();
+
+        return $this->responseBuilder->getResponse();
     }
 
 }

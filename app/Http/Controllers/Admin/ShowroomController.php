@@ -15,15 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 class ShowroomController extends Controller
 {
 
-
-    protected ResponseBuilder $responseBuilder;
-
-    public function __construct()
-    {
-        $this->responseBuilder = new ResponseBuilder();
-    }
-
-
     public function index(ShowroomRepository $repository)
     {
         $showrooms = $repository->all();
@@ -49,33 +40,25 @@ class ShowroomController extends Controller
             return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
         }
 
-        try {
-            if($request->showroom_id != null) {
-                $check = $repository->find($request->showroom_id);
-                if($check == null) {
-                    $check = new Showroom();
-                }
-            } else {
+        if ($request->showroom_id != null) {
+            $check = $repository->find($request->showroom_id);
+            if ($check == null) {
                 $check = new Showroom();
             }
-
-            $saveShowroom = $showroomService->saveShowroom($parameters, $check);
-
-            $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
-            $this->responseBuilder->setData('showroom', $saveShowroom);
-
-
-        } catch (QueryException $e) {
-
-            $this->responseBuilder->setErrorMessage(__('messages.error'));
-            return $this->responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-
+        } else {
+            $check = new Showroom();
         }
+
+        $saveShowroom = $showroomService->saveShowroom($parameters, $check);
+
+        $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
+        $this->responseBuilder->setData('showroom', $saveShowroom);
+
 
         return $this->responseBuilder->getResponse();
     }
 
-    public function deleteShowroom()
+    public function deleteShowroom(Request $request, ShowroomRepository $repository)
     {
 
     }
