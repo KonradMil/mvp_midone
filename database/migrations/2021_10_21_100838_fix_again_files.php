@@ -14,7 +14,7 @@ class FixAgainFiles extends Migration
     public function up()
     {
         Schema::table('files', function (Blueprint $table) {
-            $table->unsignedBigInteger('author_id');
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->foreign('author_id')->references('id')->on('users');
         });
     }
