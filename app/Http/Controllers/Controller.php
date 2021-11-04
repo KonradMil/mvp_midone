@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Exceptions\Handler;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class Controller extends BaseController
@@ -27,6 +28,7 @@ class Controller extends BaseController
         try {
             return call_user_func_array($method, $arguments);
         } catch (\Exception $e) {
+           Log::error($e->getMessage());
             report($e);
             $this->responseBuilder->setErrorMessage(__('messages.error'));
             return $this->responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
