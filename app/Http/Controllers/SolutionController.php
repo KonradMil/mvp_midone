@@ -132,23 +132,23 @@ class SolutionController extends Controller
             } else if ($option === 'Okres zwrotu inwestycji') {
                 $solutions = $challenge->solutions()->where('solutions.status', '=', 1)->join('financial_analyses', 'solutions.id', '=', 'financial_analyses.solution_id')->orderBy('financial_analyses.simple_payback', 'ASC')->select('solutions.*')->get();
             } else if ($option === null && $technology_option === null) {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('solutions.status', '=', 1)->get();
+                $solutions = $challenge->solutions()->where('solutions.status', '=', 1)->get();
             } else if ($technology_option === 'FANUC') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_fanuc', '>' , 0)->orderBy('number_of_fanuc', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('status', '=', 1)->where('number_of_fanuc', '>' , 0)->orderBy('number_of_fanuc', 'DESC')->get();
             } else if ($technology_option === 'KUKA') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_kuka', '>' , 0)->orderBy('number_of_kuka', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('status', '=', 1)->where('number_of_kuka', '>' , 0)->orderBy('number_of_kuka', 'DESC')->get();
             } else if ($technology_option === 'Yaskawa') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_yaskawa', '>' , 0)->orderBy('number_of_yaskawa', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('status', '=', 1)->where('number_of_yaskawa', '>' , 0)->orderBy('number_of_yaskawa', 'DESC')->get();
             } else if ($technology_option === 'ABB') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_abb', '>' , 0)->orderBy('number_of_abb', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('status', '=', 1)->where('number_of_abb', '>' , 0)->orderBy('number_of_abb', 'DESC')->get();
             } else if ($technology_option === 'Universal Robots') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_universal', '>' , 0)->orderBy('number_of_universal', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('status', '=', 1)->where('number_of_universal', '>' , 0)->orderBy('number_of_universal', 'DESC')->get();
             } else if ($technology_option === 'Mitshubishi') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_mitshubishi', '>' , 0)->orderBy('number_of_mitshubishi', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('status', '=', 1)->where('number_of_mitshubishi', '>' , 0)->orderBy('number_of_mitshubishi', 'DESC')->get();
             } else if ($technology_option === 'Universal Robots') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_universal', '>' , 0)->orderBy('number_of_universal', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('status', '=', 1)->where('number_of_universal', '>' , 0)->orderBy('number_of_universal', 'DESC')->get();
             } else if ($technology_option === 'TFM ROBOTICS') {
-                $solutions = $challenge->solutions()->where('rejected', '=', null)->where('status', '=', 1)->where('number_of_tfm', '>' , 0)->orderBy('number_of_tfm', 'DESC')->get();
+                $solutions = $challenge->solutions()->where('status', '=', 1)->where('number_of_tfm', '>' , 0)->orderBy('number_of_tfm', 'DESC')->get();
             }
         } catch(\Exception $e){
             if($option !== NULL){
