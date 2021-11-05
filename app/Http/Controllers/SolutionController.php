@@ -1085,6 +1085,8 @@ class SolutionController extends Controller
         ]);
     }
 
+
+
     /**
      * @param Request $request
      * @return JsonResponse
@@ -1151,6 +1153,27 @@ class SolutionController extends Controller
             return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
 
         }
+
+        return $responseBuilder->getResponse();
+    }
+
+    /**
+     * @param int $id
+     * @param SolutionRepository $solutionRepository
+     * @return JsonResponse
+     */
+    public function getSolution(int $id, SolutionRepository $solutionRepository): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $solution = $solutionRepository->find($id);
+
+        if (!$solution) {
+            $responseBuilder->setErrorMessage(__('messages.solution.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $responseBuilder->setData('solution', $solution);
 
         return $responseBuilder->getResponse();
     }

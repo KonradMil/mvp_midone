@@ -56,8 +56,8 @@
                 <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution" v-if="solution.selected != 1 && solution.status !== 1">{{$t('models.delete')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0" @click="publishSolution">{{$t('challengesMain.publish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1)" @click="unpublishSolution">{{$t('challengesMain.unpublish')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" @click="switchTab">{{$t('teams.teams')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" v-if="solution.selected === 1" @click="addOffer">{{$t('challengesMain.addOffer')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="goToCard('showTeams')">{{$t('teams.teams')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="solution.selected === 1" @click="goToCard('addOffer')">{{$t('challengesMain.addOffer')}}</button>
                 <div :data-count=solutionFiles.length
                      class="dropdown-toggle notification notification--bullet cursor-pointer"
                      role="button"
@@ -129,7 +129,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-3" v-if="solutionFiles.length <= 0 && user.id !== props.solution.author_id">
+                <div class="mt-3" v-if="solutionFiles.length <= 0">
                     <span class="font-medium dark:text-theme-10 text-theme-1">Brak plików</span>
                 </div>
                 <div class="mt-3" v-if="user.id === props.solution.author_id && props.solution.status !== 1">
@@ -267,6 +267,20 @@ export default {
             emitter.emit('selectedSolution', {id: solution.id});
         }
 
+        const goToCard = (type) => {
+            if(type === 'addOffer'){
+                console.log('addOffer')
+                solution.value = props.solution
+                console.log(solution.value)
+                router.push({ name: 'internalChallenegeCard', params : {id: solution.challenge.id, fromAllAddOffer: 'true', solutionFromAll_id: props.solution.id}})
+            } else if (type === 'showTeams'){
+                console.log('showTeams')
+                solution.value = props.solution
+                console.log(solution.value)
+                router.push({ name: 'internalChallenegeCard', params : {id: solution.challenge.id, fromAllTeamsSolution: 'true', solutionFromAll_id: props.solution.id}})
+            }
+        };
+
         const checkTeam = () => {
             axios.post('/api/solution/check-team', {user_id: user.id, solution_id: props.solution.id})
                 .then(response => {
@@ -398,6 +412,7 @@ export default {
         }
 
         return {
+            goToCard,
             isPublishSolution,
             goTo,
             downloadFile,

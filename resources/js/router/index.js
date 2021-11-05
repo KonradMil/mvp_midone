@@ -239,7 +239,7 @@ export const routes = [
                 name: 'internalChallenegeCard',
                 path: '/challenges/card/:id',
                 component: Card,
-                props: true
+                props: true,
             },
             {
                 name: 'addSolution',
