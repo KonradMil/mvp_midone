@@ -160,8 +160,10 @@ export default {
                 case 'UnitySave':
                     if (!saving.value) {
                         saving.value = true;
-                        gameLoad.value.save_json = e.saveGame;
-                        axios.post('/api/playground/save/data', {save: gameLoad.value, id: id.value, name: freeSave.value.name, en_name: freeSave.value.en_name, description: freeSave.value.description, en_description: freeSave.value.en_description})
+                        gameLoad.value.save_json = e.saveGame[1].save_game;
+                        console.log(e.saveGame);
+                        console.log(freeSave.value);
+                        axios.post('/api/playground/freesaves/save', {save: e.saveGame, id: id.value, name: freeSave.value.name, en_name: freeSave.value.en_name, description: freeSave.value.description, en_description: freeSave.value.en_description})
                             .then(response => {
                                 saving.value = false;
                                 toast.success('Pomyślnie zapisano');
@@ -191,18 +193,18 @@ export default {
         }
 
         const getRoboData  = () => {
-            axios.get('/api/playground/save/' + id.value)
+            axios.get('/api/playground/freesave/get/' + id.value)
                 .then(response => {
                     console.log('RESP', response);
-                    freeSave.value = response.data.freeSave;
-                    initialLoad.value = response.data.freeSave.save_json;
-                    animationSave.value = response.data.freeSave.save_json.animation_layers;
+                    freeSave.value = response.data.freeSaves;
+                    initialLoad.value = response.data.freeSaves.save_json;
+                    animationSave.value = response.data.freeSaves.save_json.animation_layers;
 
-                    window.unityLoad = response.data.freeSave.save_json;
+                    window.unityLoad = response.data.freeSaves.save_json;
 
                     handleUnityActionOutgoing({
                         action: 'loadStructure',
-                        data: response.data.freeSave.save_json
+                        data: response.data.freeSaves.save_json
                     });
                 })
         }
@@ -307,7 +309,8 @@ export default {
             owner,
             showLeftButtons,
             unityActionOutgoingObject,
-            saving
+            saving,
+            freeSave
         }
     }
 }

@@ -14,6 +14,7 @@ import WizardOne from "../pages/WizardOne";
 import Challenges from "../pages/Challenges/Main";
 import Projects from "../pages/Projects/Main";
 import ProjectCard from "../pages/Projects/Card";
+import ProjectCardSecond from "../pages/Projects/ProjectStageSecond/Card";
 import AddChallenge from "../pages/Challenges/New";
 import Solutions from "../pages/Solutions/Main";
 import AddSolution from "../pages/Solutions/New";
@@ -203,6 +204,12 @@ export const routes = [
                 props: true
             },
             {
+                name: 'projectCardStageSecond',
+                path: '/projects/card/second/:id',
+                component: ProjectCardSecond,
+                props: true
+            },
+            {
                 name: 'addChallenge',
                 path: '/challenge/add',
                 component: AddChallenge,
@@ -243,10 +250,16 @@ export const routes = [
                 component: Solutions
             },
             {
+                name: 'solutionsAll',
+                path: '/solutions/all',
+                component: SolutionsArchive,
+                props: {type: 'all'}
+            },
+            {
                 name: 'solutionsArchive',
                 path: '/solutions/archive',
                 component: SolutionsArchive,
-                props: true
+                props: {type: 'archive'}
             },
             {
                 name: 'knowledgebase',

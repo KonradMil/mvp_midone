@@ -70,4 +70,32 @@ class ChallengeRepository extends BaseRepository
 
         return $challenge;
     }
+
+    /**
+     * @param string $challengeName
+     * @return Model
+     */
+    public function getChallengeByName(string $challengeName): Model
+    {
+        $challenge = Challenge::where('name', '=', $challengeName)->first();
+
+        return $challenge;
+    }
+
+    /**
+     * @param Collection $solutions
+     * @return array
+     */
+    public function getChallengesNameBySolutions(Collection $solutions): array
+    {
+        $challengesName = [];
+        foreach($solutions as $solution){
+            $challenge = $solution->challenge;
+            if (!(in_array($challenge->name, $challengesName))) {
+                $challengesName[] = $challenge->name;
+            }
+        }
+
+        return $challengesName;
+    }
 }

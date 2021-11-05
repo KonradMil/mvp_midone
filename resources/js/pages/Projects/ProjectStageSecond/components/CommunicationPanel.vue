@@ -1,0 +1,439 @@
+<template>
+    <div class="intro-y col-span-12 lg:col-span-8 xl:col-span-9" v-if="guard === true">
+        <div v-if="user.type === 'integrator' || project.accept_communication === 3" class="intro-y box">
+            <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
+                <h2 class="font-medium text-base mr-auto">
+                    Planu komunikacji integratora
+                </h2>
+                <div class="absolute top-4 left-80 cursor-pointer px-6">
+                    <button v-if="project.accept_communication !== 3 && project.accept_communication !== 1" class="btn btn-primary mr-6" @click.prevent="show=true">
+                        Akceptuję
+                    </button>
+                    <p v-else class="text-theme-9 pt-3">{{ $t('challengesMain.accepted') }}</p>
+                </div>
+                <div class="cursor-pointer px-6">
+                    <button class="btn btn-outline-secondary py-2 px-4" @click.prevent="addNewCommunicationPlan">
+                        Dodaj
+                    </button>
+                </div>
+            </div>
+            <div id="faq-accordion-1" class="accordion p-5 max-h-96 overflow-auto">
+                <div class="intro-y accordion-item" v-for="communicationPlan in integratorCommunicationPlans" :key="communicationPlan.id">
+                    <div id="faq-accordion-content-5" class="accordion-header">
+                        <button class="accordion-button collapsed mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-2" aria-expanded="false" aria-controls="faq-accordion-collapse-2">
+                            <p v-if="communicationPlan.personal_occupation !== ''">{{ communicationPlan.personal_occupation }} </p>
+                            <p v-else> Uzupełnij </p>
+                        </button>
+                        <div v-if="communicationPlan.author !== undefined" class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
+                            <button v-if="integrator.id === user.id" class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="deleteCommunicationPlan(communicationPlan)">
+                                Usuń
+                            </button>
+                        </div>
+                    </div>
+                    <div id="faq-accordion-collapse-5" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-2" data-bs-parent="#faq-accordion-1">
+                        <div class="intro-y accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
+                            <div id="faq-accordion-2" class="intro-y accordion p-5">
+                                <div class="intro-y accordion-item">
+                                    <div id="faq-accordion-2-content-2" class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-2" aria-expanded="false" aria-controls="faq-accordion-collapse-2">
+                                            Definicja stanowiska
+                                        </button>
+                                        <div class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
+                                            <button class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="saveCommunicationPlan(communicationPlan)">
+                                                Zapisz
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="faq-accordion-2-collapse-2" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-2" data-bs-parent="#faq-accordion-1">
+                                        <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
+                                            <input
+                                                v-model="communicationPlan.personal_occupation"
+                                                id="regular-form-2"
+                                                type="text"
+                                                class="form-control w-1/3"
+                                                placeholder="Dane personalne">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="intro-y accordion-item">
+                                    <div id="faq-accordion-2-content-3" class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-3" aria-expanded="false" aria-controls="faq-accordion-collapse-3">
+                                            Dane personalne
+                                        </button>
+                                    </div>
+                                    <div id="faq-accordion-2-collapse-3" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-3" data-bs-parent="#faq-accordion-1">
+                                        <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
+                                            <input
+                                                v-model="communicationPlan.personal_data"
+                                                id="regular-form-3"
+                                                type="text"
+                                                class="form-control w-1/3"
+                                                placeholder="Numer telefonu">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="intro-y accordion-item">
+                                    <div id="faq-accordion-2-content-4" class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-3" aria-expanded="false" aria-controls="faq-accordion-collapse-3">Numer telefonu</button>
+                                    </div>
+                                    <div id="faq-accordion-2-collapse-4" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-3" data-bs-parent="#faq-accordion-1">
+                                        <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
+                                            <input
+                                                v-model="communicationPlan.phone_number"
+                                                id="regular-form-4"
+                                                type="text"
+                                                class="form-control w-1/3"
+                                                placeholder="Numer telefonu">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="intro-y accordion-item">
+                                    <div id="faq-accordion-2-content-5" class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-4" aria-expanded="false" aria-controls="faq-accordion-collapse-4"> E-mail </button>
+                                    </div>
+                                    <div id="faq-accordion-2-collapse-5" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
+                                        <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
+                                            <input
+                                                v-model="communicationPlan.email"
+                                                id="regular-form-5"
+                                                type="text"
+                                                class="form-control w-1/3"
+                                                placeholder="E-mail">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="intro-y accordion-item">
+                                    <div id="faq-accordion-2-content-6" class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-4" aria-expanded="false" aria-controls="faq-accordion-collapse-4">Decyzyjność w projekcie</button>
+                                    </div>
+                                    <div id="faq-accordion-2-collapse-6" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
+                                        <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
+                                             <select
+                                                 :disabled="communicationPlan.personal_occupation==='Manager projektu'"
+                                                 v-model="communicationPlan.project_decision"
+                                                 class="tom-select w-1/5 tomselected h-10 border">
+                                                 <option value="1" selected="true">Tak</option>
+                                                 <option value="2">Nie</option>
+                                             </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-if="user.type === 'investor' || project.accept_communication === 3" class="intro-y box mt-3">
+            <div class="flex items-center p-5 border-b border-gray-200 dark:border-dark-5">
+                <h2 class="font-medium text-base mr-auto">
+                    Planu komunikacji inwestora
+                </h2>
+                <div class="absolute top-4 left-80 cursor-pointer px-6">
+                    <button v-if="project.accept_communication < 3 && project.accept_communication !== 2" class="btn btn-primary mr-6" @click.prevent="show=true">
+                        Akceptuję
+                    </button>
+                    <p v-else class="text-theme-9 pt-3">{{ $t('challengesMain.accepted') }}</p>
+                </div>
+                <div class="cursor-pointer px-6">
+                    <button v-if="user.id === investor.id" class="btn btn-outline-secondary py-1 px-2" @click.prevent="addNewCommunicationPlan">
+                        Dodaj
+                    </button>
+                </div>
+            </div>
+            <div id="faq-accordion-3" class="accordion p-5 max-h-96 overflow-auto">
+                <div class="intro-y accordion-item" v-for="communicationPlan in investorCommunicationPlans" :key="communicationPlan.id">
+                    <div id="faq-accordion-content-6" class="accordion-header">
+                        <button class="accordion-button collapsed mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-2" aria-expanded="false" aria-controls="faq-accordion-collapse-2">
+                            <p v-if="communicationPlan.personal_occupation !== ''">{{ communicationPlan.personal_occupation }} </p>
+                            <p v-else> Uzupełnij </p>
+                        </button>
+                        <div v-if="communicationPlan.author !== undefined" class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
+                            <button v-if="user.id === investor.id" class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="addNewCommunicationPlan(communicationPlan)">
+                                Usuń
+                            </button>
+                        </div>
+                    </div>
+                    <div id="faq-accordion-collapse-6" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-2" data-bs-parent="#faq-accordion-1">
+                        <div class="intro-y accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
+                            <div id="faq-accordion-4" class="intro-y accordion p-5">
+                                <div class="intro-y accordion-item">
+                                    <div id="faq-accordion-3-content-6" class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-2" aria-expanded="false" aria-controls="faq-accordion-collapse-2">
+                                            Definicja stanowiska
+                                        </button>
+                                        <div class="absolute top-0 right-0 cursor-pointer px-6 pt-2">
+                                            <button class="intro-x btn btn-outline-secondary py-1 px-2" @click.prevent="saveCommunicationPlan(communicationPlan)">
+                                                Zapisz
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="faq-accordion-2-collapse-2" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-2" data-bs-parent="#faq-accordion-1">
+                                        <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
+                                            <input
+                                                v-model="communicationPlan.personal_occupation"
+                                                id="regular-form-2"
+                                                type="text"
+                                                class="form-control w-1/3"
+                                                placeholder="Definicja stanowiska">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="intro-y accordion-item">
+                                    <div id="faq-accordion-2-content-3" class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-3" aria-expanded="false" aria-controls="faq-accordion-collapse-3">
+                                            Dane personalne
+                                        </button>
+                                    </div>
+                                    <div id="faq-accordion-2-collapse-3" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-3" data-bs-parent="#faq-accordion-1">
+                                        <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
+                                            <input
+                                                v-model="communicationPlan.personal_data"
+                                                id="regular-form-3"
+                                                type="text"
+                                                class="form-control w-1/3"
+                                                placeholder="Dane personalne">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="intro-y accordion-item">
+                                    <div id="faq-accordion-2-content-4" class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-3" aria-expanded="false" aria-controls="faq-accordion-collapse-3">Numer telefonu</button>
+                                    </div>
+                                    <div id="faq-accordion-2-collapse-4" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-3" data-bs-parent="#faq-accordion-1">
+                                        <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
+                                            <input
+                                                v-model="communicationPlan.phone_number"
+                                                id="regular-form-4"
+                                                type="number"
+                                                class="form-control w-1/3"
+                                                placeholder="Numer telefonu">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="intro-y accordion-item">
+                                    <div id="faq-accordion-2-content-5" class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-4" aria-expanded="false" aria-controls="faq-accordion-collapse-4"> E-mail </button>
+                                    </div>
+                                    <div id="faq-accordion-2-collapse-5" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
+                                        <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
+                                            <input
+                                                v-model="communicationPlan.email"
+                                                id="regular-form-5"
+                                                type="email"
+                                                class="form-control w-1/3"
+                                                placeholder="E-mail">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="intro-y accordion-item">
+                                    <div id="faq-accordion-2-content-6" class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-accordion-collapse-4" aria-expanded="false" aria-controls="faq-accordion-collapse-4">Decyzyjność w projekcie</button>
+                                    </div>
+                                    <div id="faq-accordion-2-collapse-6" class="accordion-collapse collapse" aria-labelledby="faq-accordion-content-4" data-bs-parent="#faq-accordion-1">
+                                        <div class="accordion-body text-gray-700 dark:text-gray-600 leading-relaxed">
+                                            <select
+                                                :disabled="communicationPlan.project_decision==='Manager projektu'"
+                                                v-model="communicationPlan.project_decision"
+                                                class="tom-select w-1/5 tomselected h-10 border">
+                                                <option value="1" selected="true">Tak</option>
+                                                <option value="2">Nie</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ModalCard :show="show" @closed="modalClosed">
+        <h3 class="intro-y text-lg font-medium mt-5">
+            Potwierdzam zgodność danych. Potwierdzam, że osoby wskazane do reprezentacji mają prawo do zawierania umów oraz zaciagania zobowiązań.
+        </h3>
+        <div class="intro-y box p-5 mt-12 sm:mt-5" style="text-align: center;">
+            <div class="relative text-gray-700 dark:text-gray-300 mr-4">
+                <button class="btn btn-primary shadow-md mr-2" @click.prevent="acceptProjectCommunication">Tak</button>
+                <button class="btn btn-primary shadow-md mr-2" @click.prevent="modalClosed">Anuluj</button>
+            </div>
+        </div>
+    </ModalCard>
+</template>
+
+<script>
+import {getCurrentInstance, onMounted, ref} from "vue";
+import {useToast} from "vue-toastification";
+import RequestHandler from "../../../../compositions/RequestHandler";
+import Multiselect from '@vueform/multiselect'
+import ModalCard from "../../../../components/ModalCard";
+
+export default {
+    name: "CommunicationPanel",
+    components: {Multiselect, ModalCard},
+    props: {
+        project: Object,
+        integrator: Object,
+        investor: Object,
+    },
+    setup(props) {
+        const app = getCurrentInstance();
+        const emitter = app.appContext.config.globalProperties.emitter;
+        const toast = useToast();
+        const user = window.Laravel.user;
+        const showDetails = ref([]);
+        // const communicationPlans = ref([
+        //     {
+        //         personal_occupation: 'Manager projektu',
+        //         personal_data: '',
+        //         phone_number: '',
+        //         email: '',
+        //         project_decision: true,
+        //     },
+        //     {
+        //         personal_occupation: 'Kontakt do spraw technicznych',
+        //         personal_data: '',
+        //         phone_number: '',
+        //         email: '',
+        //         project_decision: true,
+        //     },
+        //     {
+        //         personal_occupation: 'Kontakt do spraw administracyjnych',
+        //         personal_data: '',
+        //         phone_number: '',
+        //         email: '',
+        //         project_decision: true,
+        //     },
+        //     {
+        //         personal_occupation: 'Kontakt eskalacyjny',
+        //         personal_data: '',
+        //         phone_number: '',
+        //         email: '',
+        //         project_decision: true,
+        //     }
+        // ]);
+        const integratorCommunicationPlans = ref([]);
+        const investorCommunicationPlans = ref([]);
+        const is_selected = ref(0);
+        const guard = ref(false);
+        const show = ref(false);
+        const addNewCommunicationPlan = async () => {
+            let communicationPlan = {
+                personal_occupation: '',
+                personal_data: '',
+                phone_number: '',
+                email: '',
+                project_decision: 2
+            }
+            setTimeout(function () {
+                if(user.id === props.integrator.id){
+                    integratorCommunicationPlans.value.unshift(communicationPlan);
+                } else {
+                    investorCommunicationPlans.value.unshift(communicationPlan);
+                }
+            }, 500)
+        }
+        const deleteCommunicationPlan = async (communicationPlan) => {
+            RequestHandler('projects/' + props.project.id + '/communication/delete', 'post', {
+                project_id: props.project.id,
+                id: communicationPlan.id,
+            }, (response) => {
+                if(user.id === props.integrator.id){
+                    integratorCommunicationPlans.value.splice(integratorCommunicationPlans.value.indexOf(communicationPlan), 1);
+                } else {
+                    investorCommunicationPlans.value.splice(investorCommunicationPlans.value.indexOf(communicationPlan), 1);
+                }
+            });
+        }
+
+        const saveCommunicationPlan = async (communicationPlan) => {
+            RequestHandler('projects/' + props.project.id + '/communication/save', 'post', {
+                project_id: props.project.id,
+                communication_plan_id: communicationPlan.id,
+                personal_occupation: communicationPlan.personal_occupation,
+                personal_data: communicationPlan.personal_data,
+                phone_number: communicationPlan.phone_number,
+                email: communicationPlan.email,
+                project_decision: communicationPlan.project_decision
+            }, (response) => {
+            });
+        }
+
+        const getIntegratorCommunicationPlans = async (callback) => {
+            RequestHandler('projects/' + props.project.id + '/communications/integrator', 'get', {
+                integrator_id: props.integrator.id
+            }, (response) => {
+                integratorCommunicationPlans.value = response.data.communications
+                callback(response);
+            });
+        }
+
+        const getInvestorCommunicationPlans = async (callback) => {
+            RequestHandler('projects/' + props.project.id + '/communications/investor', 'get', {
+                investor_id: props.investor.id
+            }, (response) => {
+                investorCommunicationPlans.value = response.data.communications
+                callback(response);
+            });
+        }
+
+        const acceptProjectCommunication = async () => {
+            RequestHandler('projects/' + props.project.id + '/communication/accept', 'post', {
+                project_id: props.project.id,
+            }, (response) => {
+                if(user.type === 'investor'){
+                    if(props.project.accept_communication === 1){
+                        props.project.accept_communication = 3;
+                    } else {
+                        props.project.accept_communication = 2;
+                    }
+                } else if(user.type === 'integrator'){
+                    if(props.project.accept_communication === 2){
+                        props.project.accept_communication = 3;
+                    } else {
+                        props.project.accept_communication = 1;
+                    }
+                }
+                modalClosed();
+            });
+        }
+
+        const modalClosed = () => {
+            show.value = false;
+        }
+
+        onMounted(() => {
+            if(props.integrator.id !== undefined){
+                getIntegratorCommunicationPlans(function () {
+                    guard.value = true;
+                });
+            }
+            if(props.investor.id !== undefined){
+                getInvestorCommunicationPlans(()=>{
+                    guard.value = true;
+                })
+            }
+        });
+
+        return {
+            acceptProjectCommunication,
+            showDetails,
+            modalClosed,
+            show,
+            guard,
+            is_selected,
+            integratorCommunicationPlans,
+            investorCommunicationPlans,
+            user,
+            deleteCommunicationPlan,
+            addNewCommunicationPlan,
+            saveCommunicationPlan,
+        }
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

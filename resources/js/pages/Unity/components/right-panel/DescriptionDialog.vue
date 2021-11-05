@@ -111,7 +111,7 @@ export default {
 
     },
     setup(props, context) {
-        const c = ref({description: '', name: '', solution_deadline: '', offer_deadline: ''});
+        const c = ref({description: '', name: ''});
         const user = window.Laravel.user;
         const toast = useToast();
         const types = require("../../../../json/types.json");

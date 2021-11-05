@@ -264,7 +264,7 @@
                         </button>
                     </div>
                 </div>
-                <WhatsNext :user="user" :challenge="challenge" :solutions="challenge.solutions" :stage="3"></WhatsNext>
+                <WhatsNext :user="user" :challenge="challenge" :solutions="challenge.solutions" :project="project" :stage="3"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
             <BasicInformationPanel :challenge="challenge" :inTeam="inTeam" v-if="activeTab == 'podstawowe'"
@@ -313,11 +313,20 @@
                 <h3 class="intro-y text-lg font-medium mt-5">Czy na pewno chcesz przejść do następnej fazy?</h3>
                 <div class="intro-y box p-5 mt-12 sm:mt-5" style="text-align: center;">
                     <div class="relative text-gray-700 dark:text-gray-300 mr-4">
-                        <button class="btn btn-primary shadow-md mr-2">Tak</button>
+                        <button class="btn btn-primary shadow-md mr-2" @click.prevent="goTo">Tak</button>
                         <button class="btn btn-primary shadow-md mr-2">Anuluj</button>
                     </div>
                 </div>
             </ModalCard>
+            <ModalSuccess :show="showSuccess" @closed="modalClosed">
+                <div class="p-5 text-center">
+                    <CheckCircleIcon class="w-16 h-16 text-theme-9 mx-auto mt-3"></CheckCircleIcon>
+                    <div class="text-3xl mt-5">Gratulacje zakończyłeś pierwszą faze projektu! Kontynuuj projekt przechodząc do drugiej fazy!</div>
+                </div>
+                <div class="px-5 pb-8 text-center">
+                    <button type="button" data-dismiss="modal" class="btn btn-primary w-24" @click.prevent="modalClosed">Ok</button>
+                </div>
+            </ModalSuccess>
         </div>
     </div>
 </template>
@@ -328,20 +337,14 @@ import {
     ref,
     provide,
     onMounted,
-    unref,
-    toRaw,
-    computed,
     getCurrentInstance,
-    onBeforeMount,
     watch
 } from "vue";
 
-import GetCardChallenge from "../../compositions/GetCardChallenge";
 import WhatsNext from "../Challenges/WhatsNext";
 import BasicInformationPanel from "../Challenges/components/BasicInformationPanel";
 import TechnicalInformationProjectPanel from "./components/TechnicalInformationProjectPanel";
 import QuestionsPanel from "../Challenges/components/QuestionsPanel";
-import router from "../../router";
 import SolutionProjectPanel from "./components/SolutionProjectPanel";
 import {useToast} from "vue-toastification";
 import OfferAdd from "../Challenges/components/OfferAdd";
@@ -354,8 +357,10 @@ import FinancialAnalysisInformationPanel from "./components/FinancialAnalysisInf
 import LocalVisionPanel from "./components/LocalVisionPanel";
 import VisitDatePanel from "./components/VisitDatePanel";
 import ModalCard from "../../components/ModalCard";
+import ModalSuccess from "../../components/ModalSuccess";
 import ReportInitPanel from "./components/ReportInitPanel";
 import RequestHandler from "../../compositions/RequestHandler";
+import router from "../../router";
 
 export default defineComponent({
     name: 'projectCard',
@@ -372,11 +377,12 @@ export default defineComponent({
         OperationalAnalysisInformationPanel,
         FinancialAnalysisInformationPanel,
         ModalCard,
+        ModalSuccess,
         LocalVisionPanel,
         VisitDatePanel,
         ReportInitPanel,
         TechnicalInformationPanel,
-        RequestHandler
+        RequestHandler,
     },
     props: {
         id: Number,
@@ -390,15 +396,12 @@ export default defineComponent({
         const newProjectsRef = ref();
         const challenge = ref({});
         const project = ref({});
-        const solutions = ref({});
         const permissions = ref({});
         const solution = ref({});
-        const questions = ref({});
         const temp_offer_id = ref(null);
         const edit_offer_id = ref(null);
         const activeTab = ref('podstawowe');
         const user = window.Laravel.user;
-        // const permissions = window.Laravel.permissions;
         const selected_solution_id = ref(null);
         const types = require("../../json/types.json");
         const who = ref('challenge');
@@ -416,6 +419,10 @@ export default defineComponent({
         const investor = ref({});
         const integrator = ref({});
         const guard = ref(false);
+        const showSuccess = ref(false);
+        const stageSecondActive = ref(false);
+
+
 
         watch(() => props.change, (first, second) => {
             if (props.change === 'all-offers' && user.type === 'integrator') {
@@ -460,6 +467,7 @@ export default defineComponent({
         emitter.on('acceptOffer', e => {
             project.value.accept_offer = 1;
             activeTab.value = 'report-init';
+            showSuccess.value = true;
         });
         emitter.on('acceptLocalVision', e => {
             project.value.accept_vision = 1;
@@ -497,6 +505,7 @@ export default defineComponent({
 
         const modalClosed = () => {
             show.value = false;
+            showSuccess.value = false;
         }
 
         const showModal = async () => {
@@ -527,6 +536,10 @@ export default defineComponent({
                 });
         }
 
+        const goTo = () => {
+            router.push( {path : '/projects/card/second/' + props.id})
+        }
+
         emitter.on('changeTeamsSolution', e => () => {
             activeTab.value = 'teamsSolution'
         });
@@ -545,9 +558,6 @@ export default defineComponent({
             activeTab.value = 'addingoffer';
         });
 
-        const handleCallback = () => {
-        };
-
         const getCardProjectRepositories = async (callback) => {
             RequestHandler('projects/' + props.id + '/card', 'get', {}, (response) => {
                 challenge.value = response.data.challenge;
@@ -555,13 +565,15 @@ export default defineComponent({
                 callback(response);
             });
         }
-
         onMounted(function () {
             permissions.value = window.Laravel.permissions;
             getCardProjectRepositories(function (){
                 checkTeam();
                 filter();
                 checkSolution();
+                if(project.value.accept_offer === 1){
+                        showSuccess.value = true;
+                }
             });
             getInvestorAndIntegrator(function () {
 
@@ -572,7 +584,6 @@ export default defineComponent({
         })
 
         const getInvestorAndIntegrator = (callback) => {
-
             RequestHandler('projects/' + props.id + '/investor-integrator', 'get', {}, (response) => {
                 investor.value = response.data.investor;
                 integrator.value = response.data.integrator;
@@ -621,6 +632,8 @@ export default defineComponent({
         };
 
         return {
+            goTo,
+            showSuccess,
             guard,
             investor,
             integrator,
@@ -653,7 +666,8 @@ export default defineComponent({
             isSolutions,
             isPublic,
             solution_project,
-            checkSolution
+            checkSolution,
+            stageSecondActive
         };
     }
 });

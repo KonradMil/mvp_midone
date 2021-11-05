@@ -9,8 +9,6 @@
                  v-if="project.accept_local_vision === 1"><i data-feather="check-square" class="w-4 h-4 mr-2"></i>Zakończono
                 etap
             </div>
-            <!--            <div class="flex items-center justify-center text-theme-6" style="margin-right: 650px;" v-if="project.accept_local_vision === 2"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>-->
-            <!--            <div class="flex items-center mr-3" style="margin-right: 500px;" v-if="project.accept_local_vision < 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>-->
             <button
                 v-if="(user.id === integrator.id || user.id === investor.id) && project.accept_local_vision < 1 && check === true"
                 class="btn btn-primary mr-6 mt-3" @click.prevent="acceptLocalVision">Zakończ etap
@@ -19,6 +17,12 @@
                     class="btn btn-primary w-15 mt-3 mr-3" @click.prevent="addNewReport">
                 Dodaj raport
             </button>
+            <div :data-count=projectFiles.length
+                 class="dropdown-toggle notification notification--bullet cursor-pointer"
+                 role="button"
+                 aria-expanded="false">
+                <button class="btn btn-primary w-15 mt-3 mr-1" v-if="user.id === integrator.id || user.id === investor.id" @click="showAddFileModal">Pliki</button>
+            </div>
         </div>
         <div class="intro-y inbox box mt-5 overflow-y-auto" style="max-height: 521px; overflow-x: hidden;">
             <transition-group tag="ul" name="list">
@@ -180,19 +184,83 @@
                  style="font-size: 16px;">
                 Nie ma jeszcze żadnych raportów.
             </div>
-            <!--            <div class="p-5 flex flex-col sm:flex-row items-center text-center sm:text-left text-gray-600">-->
-            <!--                <div class="sm:ml-auto mt-2 sm:mt-0 dark:text-gray-300">Last account activity: 36 minutes ago</div>-->
-            <!--            </div>-->
         </div>
     </div>
     </div>
+    <ModalFile :show="show" @closed="modalClosed">
+        <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
+            <div class="mt-5">
+                <div class="mt-3 border px-4 py-4" v-if="projectFiles.length > 0">
+                    <label class="form-label"> Wgrane pliki</label>
+                    <div class="rounded-md pt-4">
+                        <div class="grid grid-cols-4 h-full">
+                            <div class=" h-full" v-for="(file, index) in projectFiles" :key="'file_' + index">
+                                <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
+                                    <img
+                                        v-lazy="'/' + file.path"
+                                        class="w-full h-full"
+                                        :alt="file.original_name"/>
+                                    <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
+                                    </div>
+                                </div>
+                                <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
+                                     class="cursor-pointer px-6">
+                                    <button v-if="user.id === file.author_id && project.accept_local_vision !== 1" class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
+                                        Usuń
+                                    </button>
+                                    <button class="btn btn-outline-secondary py-1 px-2" @click="downloadFile(file.path, file.name)">
+                                        Pobierz
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3" v-if="projectFiles.length <= 0">
+                    <span class="font-medium dark:text-theme-10 text-theme-1">Brak plików</span>
+                </div>
+                <div class="mt-3" v-if="user.id === integrator.id || user.id === investor.id && project.accept_local_vision !== 1">
+                    <label class="form-label"> {{ $t('challengesNew.file') }}</label>
+                    <div class="rounded-md pt-4">
+                        <div class="flex flex-wrap px-4">
+                            <Dropzone
+                                style="position: relative;
+                                display: flex;"
+                                ref-key="dropzoneSingleRef"
+                                :options="{
+                                url: '/api/challenge/images/store',
+                                thumbnailWidth: 150,
+                                maxFilesize: 8,
+                                maxFiles: 8,
+                                previewTemplate: '<div style=\'display: none\'></div>'}"
+                                class="dropzone">
+                                <div class="px-4 py-4 flex items-center cursor-pointer relative">
+                                    <ImageIcon class="w-4 h-4 mr-2"/>
+                                    <span class="text-theme-1 dark:text-theme-10 mr-1">
+                                        {{ $t('challengesNew.file') }}
+                                    </span>
+                                    {{ $t('challengesNew.fileUpload') }}
+                                </div>
+                            </Dropzone>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="user.id === integrator.id  || user.id === investor.id && project.accept_local_vision !== 1" class="flex flex-col lg:flex-row items-center p-5" style="justify-content: center;">
+                <button class="btn btn-outline-secondary py-1 px-2" @click="saveFiles">
+                    {{ $t('global.save') }}
+                </button>
+            </div>
+        </div>
+    </ModalFile>
 </template>
 
 <script>
-import {computed, getCurrentInstance, onMounted, reactive, ref, watch} from "vue";
+import {getCurrentInstance, onMounted, provide, ref} from "vue";
 import {useToast} from "vue-toastification";
 import Avatar from "../../../components/avatar/Avatar";
 import RequestHandler from "../../../compositions/RequestHandler";
+import ModalFile from "../../../components/ModalFile";
 
 export default {
     name: "LocalVisionPanel",
@@ -206,7 +274,7 @@ export default {
         investor: Object,
     },
     components: {
-        Avatar
+        Avatar, ModalFile
     },
     setup(props) {
         const app = getCurrentInstance();
@@ -218,10 +286,10 @@ export default {
         const guard = ref(false);
         const rejects = ref([]);
         const check = ref(false);
+        const show = ref(false);
+        const projectFiles = ref([]);
+        const dropzoneSingleRef = ref();
 
-        watch(() => reports.value, (first, second) => {
-
-        }, {})
 
         const removeReport = async (index) => {
             reports.value.splice(index, 1);
@@ -311,6 +379,13 @@ export default {
                 });
         }
 
+        const getFiles = async (callback) => {
+            RequestHandler('projects/' + props.project.id + '/files', 'get', {}, (response) => {
+                projectFiles.value = response.data.projectFiles
+                callback(response);
+            });
+        }
+
         const getReports = async (callback) => {
             RequestHandler('projects/' + props.project.id + '/local-vision', 'get', {}, (response) => {
                 reports.value = response.data.reports,
@@ -379,13 +454,64 @@ export default {
             }
         }
 
+        const saveFiles = async () => {
+            RequestHandler('projects/' + props.project.id + '/files/save', 'post', {
+                projectFiles: projectFiles.value
+            }, (response) => {
+            });
+        }
+
+        const deleteFile = (index,file) => {
+            RequestHandler('projects/' + props.project.id + '/file/delete', 'post', {
+                file_id: file.id,
+            }, (response) => {
+                projectFiles.value.splice(index, 1);
+            });
+        }
+
+        const showAddFileModal = (id) => {
+            show.value = !show.value;
+        }
+
+        const modalClosed = () => {
+            show.value = false;
+        }
+
+        const downloadFile = async (url,name) => {
+            window.open('/' + url, '_blank').focus();
+        }
+
         onMounted(() => {
             getReports(function () {
-                guard.value = true;
+                getFiles(()=>{
+                    guard.value = true;
+                });
             });
+
+            const elDropzoneSingleRef = dropzoneSingleRef.value;
+            if(props.project.accept_local_vision !== 1){
+                elDropzoneSingleRef.dropzone.on("success", (resp) => {
+                    projectFiles.value.push(JSON.parse(resp.xhr.response).payload);
+                    toast.success('Plik został wgrany poprawnie!');
+                });
+                elDropzoneSingleRef.dropzone.on("error", () => {
+                    toast.error("Maksymalnie można wgrać 8 plików!");
+                });
+            }
+        });
+
+        provide("bind[dropzoneSingleRef]", el => {
+            dropzoneSingleRef.value = el;
         });
 
         return {
+            saveFiles,
+            downloadFile,
+            deleteFile,
+            projectFiles,
+            showAddFileModal,
+            modalClosed,
+            show,
             check,
             rejects,
             guard,

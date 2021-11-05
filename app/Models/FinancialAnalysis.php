@@ -31,6 +31,8 @@ class FinancialAnalysis extends Model
         'cost_per_piece_after',
         'monthly_reduction_before',
         'monthly_reduction_after',
+        'monthly_savings_before',
+        'monthly_savings_after',
         'tkw_reduction_before',
         'tkw_reduction_after',
         'additional_savings_before',

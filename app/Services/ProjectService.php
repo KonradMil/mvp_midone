@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\File;
 use App\Models\Financial;
 use App\Models\LocalVision;
 use App\Models\Offer;
@@ -11,6 +12,7 @@ use App\Models\VisitDate;
 use App\Parameters\NewFinancialParameters;
 use App\Parameters\NewLocalVisionCommentParameters;
 use App\Parameters\NewLocalVisionParameters;
+use App\Parameters\NewProjectFilesParameters;
 use App\Parameters\NewTechnicalDetailsParameters;
 use App\Parameters\NewVisitDateMembersParameters;
 use App\Parameters\NewVisitDateParameters;
@@ -64,6 +66,35 @@ class ProjectService
         $this->technicalDetailsRepository = $technicalDetailsRepository;
         $this->financialRepository = $financialRepository;
         $this->offerRepository = $offerRepository;
+    }
+
+    /**
+     * @param NewProjectFilesParameters $projectFilesParameters
+     * @param Project $project
+     * @return Model
+     */
+    public function addProjectFiles(NewProjectFilesParameters $projectFilesParameters, Project $project): Model
+    {
+        $arrayFiles = $projectFilesParameters->projectFiles;
+        $projectFiles = $project->files()->get();
+        $arrayFilesId = [];
+
+        if($projectFiles){
+            foreach($projectFiles as $file) {
+                $arrayFilesId[] = $file->id;
+            }
+        }
+
+        foreach($arrayFiles as $arrayFile){
+            $file = File::find($arrayFile['id']);
+
+            if(!(in_array($arrayFile['id'], $arrayFilesId))){
+                $project->files()->attach($file);
+            }
+            $project->files = $project->files()->get();
+        }
+
+        return $project;
     }
 
     /**
@@ -392,5 +423,16 @@ class ProjectService
         $project->save();
 
         return $project;
+    }
+
+    /**
+     *
+     * @param Project $project
+     * @param File $file
+     * @return mixed
+     */
+    public function detachFile(Project $project, File $file)
+    {
+        $project->files()->detach($file);
     }
 }

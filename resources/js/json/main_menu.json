@@ -43,6 +43,12 @@
             "subMenu": [
                 {
                     "icon": "",
+                    "pageName": "solutionsAll",
+                    "title": "Wszystkie",
+                    "ignore": true
+                },
+                {
+                    "icon": "",
                     "pageName": "solutionsArchive",
                     "title": "Archiwalne",
                     "ignore": true
@@ -72,6 +78,11 @@
             "icon": "InboxIcon",
             "pageName": "knowledgebase",
             "title": "Baza wiedzy"
+        },
+        {
+            "icon": "InboxIcon",
+            "pageName": "studio-playground-saves",
+            "title": "Studio playground"
         },
         {
             "icon": "InboxIcon",

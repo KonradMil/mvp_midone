@@ -138,12 +138,13 @@
                                 </div>
                                 <div class="mt-5">
                                     <div class="mt-3" v-if="images.length > 0">
-                                        <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>
+                                        <label class="form-label"> {{ $t('challengesNew.uploadedFiles') }}</label>
                                         <div class="rounded-md pt-4">
                                             <div class="row flex h-full">
                                                 <div class=" h-full" v-for="(image, index) in images" :key="'image_' + index">
                                                     <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
-                                                        <img class="w-full h-full"
+                                                        <img v-lazy="'/' + image.path"
+                                                             class="w-full h-full"
                                                              :alt="image.original_name"
                                                              :src="'/' + image.path"
                                                         />
@@ -157,7 +158,7 @@
                                         </div>
                                     </div>
                                     <div class="mt-3">
-                                        <label class="form-label"> {{ $t('challengesNew.uploadPhoto') }}</label>
+                                        <label class="form-label"> {{ $t('challengesNew.fileUpload') }}</label>
                                         <div class="rounded-md pt-4">
                                             <div class="flex flex-wrap px-4">
                                                 <Dropzone
@@ -165,12 +166,12 @@
                                                     display: flex;"
                                                     ref-key="dropzoneSingleRef"
                                                     :options="{
-                              url: '/api/challenge/images/store',
-                              thumbnailWidth: 150,
-                              maxFilesize: 5,
-                              maxFiles: 5,
-                              previewTemplate: '<div style=\'display: none\'></div>'
-                            }"
+                                                    url: '/api/challenge/images/store',
+                                                    thumbnailWidth: 150,
+                                                    maxFilesize: 5,
+                                                    maxFiles: 5,
+                                                    previewTemplate: '<div style=\'display: none\'></div>'
+                                                    }"
                                                     class="dropzone">
                                                     <div class="px-4 py-4 flex items-center cursor-pointer relative">
                                                         <ImageIcon class="w-4 h-4 mr-2"/>
@@ -226,13 +227,16 @@
                         <Litepicker
                             id="post-form-2"
                             v-model="solution_deadline"
-                            :options="{
+                            :options="
+                {
                 autoApply: false,
                 lang: 'pl',
                 format: 'DD.MM.YYYY',
                 showWeekNumbers: true,
+                minDate: now,
                  buttonText: {'apply':'OK','cancel':'Anuluj'},
                 dropdowns: {
+
                   minYear: 2021,
                   maxYear: 2023,
                   months: true,
@@ -247,6 +251,7 @@
                             v-model="offer_deadline"
                             :options="{
                 autoApply: false,
+                minDate: now,
                 showWeekNumbers: true,
                 lang: 'pl',
                 format: 'DD.MM.YYYY',
@@ -411,6 +416,7 @@ export default {
             cycle_time: 0
         });
         const id = ref(null);
+        const now = dayjs().valueOf();
         const types = require("../../json/types.json");
         const tagss = require("../../json/tagsChallenge.json");
         const sels = require("../../json/challenge.json");
@@ -590,7 +596,8 @@ export default {
             tagsSelected,
             isDisabled,
             user,
-            categorytab
+            categorytab,
+            now
         };
     },
     beforeRouteEnter(to, from, next) {
