@@ -13,7 +13,8 @@
 <!--                        </div>-->
                         <div class=" mr-auto">
                             <div class="font-medium text-base">
-                                {{ challenge.name }} <span class="text-theme-1 dark:text-theme-10" v-if="challenge.status == 0"> - Szkic</span>
+                                {{ challenge.name }}
+                                <span class="text-theme-1 dark:text-theme-10" v-if="challenge.status == 0"> - Szkic</span>
                             </div>
                             <div class="text-gray-600">{{ types[challenge.type] }}</div>
                         </div>

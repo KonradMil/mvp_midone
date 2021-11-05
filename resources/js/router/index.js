@@ -6,6 +6,8 @@ import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 import SideMenu from '../layouts/side-menu/Main'
 import Wizard from "../pages/Wizard";
+import ShowroomList from "../pages/Admin/Showrooms/ShoowromsList"
+import AddEditShowroom from "../pages/Admin/Showrooms/AddEditShowroom"
 import AdminFreeSaves from "../pages/Admin/AdminFreeSaves";
 import MainLite from "../pages/Unity/Lite/MainLite";
 import Profile from "../pages/Wizard";
@@ -120,21 +122,21 @@ export const routes = [
         component: SideMenu,
         children: [
             {
-                name: 'admin-projects',
-                path: '/admin/projects',
-                component: ProjectsList,
+                name: 'admin-showroom',
+                path: '/admin/showrooms',
+                component: ShowroomList,
+                props: true
+            },
+            {
+                name: 'admin-add-edit-showroom',
+                path: '/admin/showrooms/add',
+                component: AddEditShowroom,
                 props: true
             },
             {
                 name: 'admin-freesaves',
                 path: '/admin/free-saves',
                 component: AdminFreeSaves,
-                props: true
-            },
-            {
-                name: 'admin-users',
-                path: '/admin/users',
-                component: UserList,
                 props: true
             },
             {

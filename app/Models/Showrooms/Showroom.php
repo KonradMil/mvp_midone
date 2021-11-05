@@ -13,7 +13,7 @@ class Showroom extends Model
     protected $table = 'showrooms';
 
     protected $fillable = [
-        'name', 'custom_css'
+        'name', 'custom_css', 'custom_functions', 'description', 'organization', 'organization_logo', 'dominant_color'
     ];
 
     public function challenge()

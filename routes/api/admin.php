@@ -1,10 +1,15 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ChallengeController;
+use App\Http\Controllers\Admin\ShowroomController;
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum', 'web']], function () {
-    Route::get('projects/get', [AdminController::class, 'adminGetProjects']);
-    Route::get('free_saves/get', [AdminController::class, 'adminGetFreeSaves']);
-    Route::get('users/get', [ChallengeController::class, 'adminGetUsers']);
+    Route::group(['prefix' => 'projects'], function () {
+
+    });
+    Route::group(['prefix' => 'users'], function () {
+
+    });
+    Route::group(['prefix' => 'showrooms'], function () {
+        Route::get('get', [ShowroomController::class, 'index']);
+    });
 });

@@ -19,12 +19,7 @@ class ShowroomController extends Controller
     {
         $showrooms = $repository->all();
 
-        if (!empty($showrooms)) {
-            $this->responseBuilder->setErrorMessage(__('messages.showroom.not_found'));
-            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
-        } else {
-            $this->responseBuilder->setData('showrooms', $showrooms);
-        }
+        $this->responseBuilder->setData('showrooms', $showrooms);
 
         return $this->responseBuilder->getResponse();
     }
