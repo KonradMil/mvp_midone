@@ -16,7 +16,7 @@
     <ModalSuccess :show="showSuccess" @closed="modalClosed">
         <div class="p-5 text-center">
             <CheckCircleIcon class="w-16 h-16 text-theme-9 mx-auto mt-3"></CheckCircleIcon>
-            <div class="text-3xl mt-5">Gratulacje Twoje rozwiązanie zostało zaakceptowane! W tym przypadku tryb edycji został wyłączony.</div>
+            <div class="text-3xl mt-5">Twoje rozwiązanie zostało opublikowane! Tryb edycji został wyłączony.</div>
         </div>
         <div class="px-5 pb-8 text-center">
             <button type="button" data-dismiss="modal" class="btn btn-primary w-24" @click.prevent="modalClosed">Ok</button>
