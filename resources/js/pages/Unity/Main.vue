@@ -482,7 +482,8 @@ export default {
             unlockInput,
             loaded,
             sessionid,
-            owner
+            owner,
+            showLeftButtons
         }
     }
 }
