@@ -238,7 +238,7 @@ export default {
 
                             } else {
                                 if(url_params.value['redirect'] != undefined) {
-                                    window.location.replace(url_params.value['redirect']);
+                                    window.location.replace('https://' + url_params.value['redirect']);
                                 } else {
                                     if (!user.name || !user.lastname || !company.nip) {
                                         window.location.replace('/kreator');
