@@ -15,6 +15,16 @@
     <HelpModal></HelpModal>
     <CopyLoadModal></CopyLoadModal>
     <!--    <ModalWorkshop :show="workshopOpen"></ModalWorkshop>-->
+    <ModalSuccess :show="showSuccess" @closed="modalClosed">
+        <div class="p-5 text-center">
+            <CheckCircleIcon class="w-16 h-16 text-theme-9 mx-auto mt-3"></CheckCircleIcon>
+            <div class="text-3xl mt-5">Twoje rozwiązanie zostało opublikowane! Tryb edycji został wyłączony.</div>
+        </div>
+        <div class="px-5 pb-8 text-center">
+            <button type="button" data-dismiss="modal" class="btn btn-primary w-24" @click.prevent="modalClosed">Ok</button>
+        </div>
+    </ModalSuccess>
+<!--    <ModalWorkshop :show="workshopOpen"></ModalWorkshop>-->
     <!--    <WorkshopModal v-if="workshopOpen" :open="workshopOpen"></WorkshopModal>-->
 </template>
 
@@ -39,6 +49,7 @@ import useEmitter from "../../composables/useEmitter";
 import useRadialMenu from "../../composables/radialMenu";
 import useLayoutButtonClick from "../../composables/useLayoutButtonClick";
 import CopyLoadModal from "./components/CopyLoadModal";
+import ModalSuccess from "../../components/ModalSuccess";
 
 const ww = WindowWatcher();
 
@@ -58,7 +69,7 @@ export default {
     },
     components: {
         CopyLoadModal,
-        HelpModal, ModalWorkshop, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio
+        HelpModal, ModalWorkshop, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio, ModalSuccess
     },
     setup(props, {emit}) {
         //GLOBAL
@@ -96,6 +107,7 @@ export default {
         const sessionid = ref('');
         const owner = ref(false);
         const isPublishSolution = ref('');
+        const showSuccess = ref(false);
 
         window.copyLoad = function () {
 
@@ -114,6 +126,9 @@ export default {
 
         }
 
+        const modalClosed = () => {
+            showSuccess.value = false;
+        }
         //ALL EVENTS
         emitter.on('*', (type, e) => {
             console.log('*', [type, e]);
@@ -290,6 +305,7 @@ export default {
                     return false;
                 }
             } else if(isPublishSolution.value === 'true'){
+                  showSuccess.value = true;
                   return false;
             }else {
                 if (inTeam.value || (user.id == solution.value.author_id)) {
@@ -440,6 +456,8 @@ export default {
         });
 
         return {
+            modalClosed,
+            showSuccess,
             isPublishSolution,
             workshopOpen,
             user,
