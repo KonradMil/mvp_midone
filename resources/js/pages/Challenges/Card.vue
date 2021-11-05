@@ -165,7 +165,11 @@ export default defineComponent({
     },
     props: {
         id: Number,
-        change: String
+        change: String,
+        fromAllAddOffer: String,
+        fromAllTeamsSolution: String,
+        solutionFromAll: Object,
+        solutionFromAll_id: Number,
     },
     setup(props, {emit}) {
         const app = getCurrentInstance();
@@ -180,7 +184,7 @@ export default defineComponent({
         const questions = ref({});
         const temp_offer_id = ref(null);
         const edit_offer_id = ref(null);
-        const activeTab = ref('podstawowe');
+        const activeTab = ref('');
         const user = window.Laravel.user;
         // const permissions = window.Laravel.permissions;
         const selected_solution_id = ref(null);
@@ -294,26 +298,39 @@ export default defineComponent({
                 }, handleCallback)
         }
 
+        const getSingleSolution = async (id) => {
+                RequestHandler('solution/' + id, 'GET', {}, (response) => {
+                    solution.value = response.data.solution;
+                });
+        }
+
         onMounted(function () {
             if(props.change === 'all-offers' && user.type === 'integrator'){
                 activeTab.value = 'oferty';
             } else {
                 activeTab.value = props.change
             }
-            if(props.change === undefined){
-                activeTab.value = 'podstawowe';
-            }
-
             if(window.location.hash == '#solutions') {
                 activeTab.value = 'rozwiazania';
             }
-
             permissions.value = window.Laravel.permissions;
             getCardChallengeRepositories(function (){
                 checkTeam();
                 filter();
                 checkPermissions();
                 checkSolution();
+                if(props.change === undefined){
+                    if(props.fromAllAddOffer == 'true'){
+                        selected_solution_id.value = props.solutionFromAll_id;
+                        activeTab.value = 'addingoffer';
+                    } else if(props.fromAllTeamsSolution == 'true'){
+                        getSingleSolution(props.solutionFromAll_id)
+                        activeTab.value = 'teams';
+                        who.value = 'solution';
+                    }else if(props.fromAllAddOffer != 'true' && props.fromAllTeamsSolution != 'true'){
+                        activeTab.value = 'podstawowe';
+                    }
+                }
                 guard.value = true;
             });
         })

@@ -39,5 +39,8 @@ Route::group(['middleware' => 'web'], function () {
     require __DIR__ . '/api/offers.php';
     require __DIR__ . '/api/projects.php';
     require __DIR__ . '/api/freesaves.php';
+
     require __DIR__ . '/api/v2/user.php';
+    require __DIR__ . '/api/v2/studio.php';
+
 });

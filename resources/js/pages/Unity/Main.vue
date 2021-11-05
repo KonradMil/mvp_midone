@@ -169,9 +169,9 @@ export default {
                             break;
                         case 'logout':
                             if (props.type == 'solution') {
-                                window.location.href = window.app_path + 'challenges/card/' + solution.value.challenge_id + "#solutions";
+                                window.location.href = window.app_path + '/challenges/card/' + solution.value.challenge_id + "#solutions";
                             } else {
-                                window.location.href = window.app_path + 'challenges/card/' + challenge.value.id + "#solutions";
+                                window.location.href = window.app_path + '/challenges/card/' + challenge.value.id + "#solutions";
                             }
                             break;
                         case 'orto':

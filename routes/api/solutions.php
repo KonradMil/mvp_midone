@@ -41,6 +41,7 @@ Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function 
     Route::post('all/get', [SolutionController::class, 'getChallengeSolutions']);
     Route::get('{user_id}/all', [SolutionController::class, 'getAllSolutionsUser']);
     Route::get('{user_id}/challenge/solutions', [SolutionController::class, 'getChallengeSolutionsByChallengeName']);
+    Route::get('{solution_id}', [SolutionController::class, 'getSolution']);
 });
 
 //Route::group(['prefix' => 'solution', 'middleware' => 'auth:sanctum'], function () {
