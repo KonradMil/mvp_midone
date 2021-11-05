@@ -1056,9 +1056,16 @@ class SolutionController extends Controller
      */
     public function delete(Request $request): JsonResponse
     {
+        /** @var Solution $solution */
         $solution = Solution::find($request->input('id'));
 
         if($solution){
+            $estimate = $solution->estimate()->first();
+
+            if($estimate) {
+                $estimate->delete();
+            }
+
             $solution->delete();
         }
 
