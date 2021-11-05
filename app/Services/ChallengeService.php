@@ -4,6 +4,7 @@ namespace App\Services;
 
 
 use App\Models\Challenge;
+use App\Models\File;
 use App\Models\Financial;
 use App\Models\TechnicalDetails;
 use App\Repository\Eloquent\ChallengeRepository;
@@ -78,5 +79,15 @@ class ChallengeService
         Auth::user()->viaLoveReacter()->unreactTo($challenge, 'Follow');
 
         return $challenge;
+    }
+
+    /**
+     * @param Challenge $challenge
+     * @param File $file
+     * @return mixed
+     */
+    public function detachFile(Challenge $challenge, File $file)
+    {
+        $challenge->files()->detach($file);
     }
 }

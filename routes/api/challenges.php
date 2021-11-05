@@ -28,6 +28,7 @@ Route::group(['prefix' => 'challenges', 'middleware' => ['auth:sanctum', 'verifi
     Route::post('change/dates', [ChallengeController::class, 'changeDates']);
     Route::post('local-vision/save', [ChallengeController::class, 'localVisionSave']);
     Route::post('get/tab/{category}', [ChallengeController::class, 'getUserChallengesByTab']);
+    Route::post('{challenge_id}/file/delete', [ChallengeController::class, 'deleteFile']);
 });
 
 // TODO cała grupa poniżej do usunięcia
