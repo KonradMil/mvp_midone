@@ -1,18 +1,28 @@
 <template>
     <div class="dropdown">
-        <button
-            class="dropdown-toggle"
-            aria-expanded="false"
-        >
-            <div class="w-20 py-2 text-center flex justify-center items-center">
-                <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in">
-                    <img class=""
-                         :alt="alttext"
-                         :src="path"
-                    />
+
+            <button class="dropdown-toggle" aria-expanded="false">
+                <Tippy
+                    v-if="tooltip != ''"
+                    id="meta-title-tab"
+                    tag="a"
+                    :content="tooltip"
+                    href="javascript:;"
+                    class="w-14 py-2 text-center"
+                    aria-selected="false"
+                    @click=""
+                >
+                <div class="w-20 py-2 text-center flex justify-center items-center">
+                    <div class="w-14 h-14 flex-none image-fit overflow-hidden zoom-in">
+                        <img class=""
+                             :alt="alttext"
+                             :src="path"
+                        />
+                    </div>
                 </div>
-            </div>
-        </button>
+        </Tippy>
+            </button>
+
         <div class="dropdown-menu w-75">
             <div class="dropdown-menu__content box dark:bg-dark-1 p-2">
                 <a  @click.prevent="doAction(option.action)"

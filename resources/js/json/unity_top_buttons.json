@@ -26,24 +26,27 @@
         "right": {
             "fullscreen": {
                 "src": "\/s3/builder_icons/fullscreen_simple.png",
-                "tooltip": "Pełen ekran",
+                "tooltip": "Pełny ekran",
                 "alttext": "",
                 "type": "button",
-                "position": "right"
+                "position": "right",
+                "action": "fullscreen"
             },
             "logout": {
                 "src": "\/s3/builder_icons/logout_simple.png",
                 "tooltip": "Wyjdź",
                 "alttext": "",
                 "type": "button",
-                "position": "right"
+                "position": "right",
+                "action": "logout"
             },
             "eye": {
                 "src": "\/s3/builder_icons/eye_simple3.png",
-                "tooltip": "Kamery",
+                "tooltip": "Ustawienia kamery",
                 "alttext": "",
                 "type": "dropdown",
                 "position": "right",
+                "action": "eye",
                 "options": [
                     {
                         "name" : "Standardowa kamera",
@@ -68,14 +71,16 @@
                 "tooltip": "Zapisz",
                 "alttext": "",
                 "type": "button",
-                "position": "right"
+                "position": "right",
+                "action": "save"
             },
             "help": {
                 "src": "\/s3/builder_icons/help_simple.png",
                 "tooltip": "Pomoc",
                 "alttext": "",
                 "type": "button",
-                "position": "right"
+                "position": "right",
+                "action": "help"
             }
         }
     }
