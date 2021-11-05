@@ -18,6 +18,7 @@ use App\Models\Team;
 use App\Models\TechnicalDetails;
 use App\Models\User;
 use App\Repository\Eloquent\ChallengeRepository;
+use App\Repository\Eloquent\FileRepository;
 use App\Services\ChallengeService;
 use Carbon\Carbon;
 use Exception;
@@ -803,9 +804,25 @@ class ChallengeController extends Controller
                 $challenge->files()->detach($file);
             }
         }
-        foreach ($request->images as $image) {
-            $challenge->files()->attach($image->id);
+
+        if(!isset($request->id)){
+            foreach ($request->images as $image) {
+                $challenge->files()->attach($image->id);
+            }
+        } else {
+            $array = [];
+            $arrayFiles = $challenge->files()->get();
+            foreach($arrayFiles as $file){
+                $array[] = $file->id;
+            }
+            foreach ($request->images as $image) {
+                if (!(in_array($image->id, $array))) {
+                    $challenge->files()->attach($image->id);
+                }
+            }
         }
+
+
         if (!isset($request->id)) {
             foreach ($challenge->teams as $team) {
                 $challenge->teams()->detach($team);
@@ -1382,5 +1399,44 @@ class ChallengeController extends Controller
                 'payload' => ''
             ]);
         }
+    }
+
+    /**
+     * @param int $id
+     * @param Request $request
+     * @param ChallengeRepository $challengeRepository
+     * @param FileRepository $fileRepository
+     * @param ChallengeService $challengeService
+     * @return JsonResponse
+     */
+    public function deleteFile(int $id, Request $request, ChallengeRepository $challengeRepository, FileRepository $fileRepository, ChallengeService $challengeService): JsonResponse
+    {
+        $responseBuilder = new ResponseBuilder();
+
+        $challenge = $challengeRepository->find($id);
+
+        if (!$challenge) {
+            $responseBuilder->setErrorMessage(__('messages.challenge.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $file = $fileRepository->find($request->input('file_id'));
+
+        if (!$file) {
+            $responseBuilder->setErrorMessage(__('messages.file.not_found'));
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        try {
+            $challengeService->detachFile($challenge, $file);
+            $responseBuilder->setSuccessMessage(__('messages.delete_correct'));
+        } catch (QueryException $e) {
+
+            $responseBuilder->setErrorMessage(__('messages.error'));
+            return $responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        }
+
+        return $responseBuilder->getResponse();
     }
 }

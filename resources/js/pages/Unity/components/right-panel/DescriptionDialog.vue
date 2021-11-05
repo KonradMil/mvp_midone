@@ -1,25 +1,8 @@
 <template>
     <div class="flex-initial pl-2">
-<!--        <div class="mt-3" v-if="props.type !== 'solution'">-->
-<!--            <label for="modal-form-3" class="form-label">Solution deadline</label>-->
-<!--            <input-->
-<!--                id="modal-form-3"-->
-<!--                type="text"-->
-<!--                class="form-control"-->
-<!--                placeholder=""-->
-<!--                v-model="c.solution_deadline"-->
-<!--            />-->
-<!--        </div>-->
-<!--        <div class="mt-3" v-if="props.type !== 'solution'">-->
-<!--            <label for="modal-form-4" class="form-label">Offer deadline</label>-->
-<!--            <input-->
-<!--                id="modal-form-4"-->
-<!--                type="text"-->
-<!--                class="form-control"-->
-<!--                placeholder=""-->
-<!--                v-model="c.offer_deadline"-->
-<!--            />-->
-<!--        </div>-->
+
+        <p class="alert alert-warning show">Przed wprowadzeniem zmian upewnij się, że kursor znajduje się we właściwym polu.</p><br>
+
         <div class="mt-3">
             <label for="modal-form-1" class="form-label">Tytuł</label>
             <input

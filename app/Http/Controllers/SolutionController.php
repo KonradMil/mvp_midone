@@ -609,31 +609,17 @@ class SolutionController extends Controller
         $estimate->parts_cost = (float)$input['partsCost'];
         $estimate->sum += (float)$input['partsCost'];
         $estimate->mechanical_integration = (float)$input['basicCosts']['mechanical_integration'];
-        $estimate->sum += (float)$input['basicCosts']['mechanical_integration'];
         $estimate->electrical_integration = (float)$input['basicCosts']['electrical_integration'];
-        $estimate->sum += (float)$input['basicCosts']['electrical_integration'];
         $estimate->workstation_integration = (float)$input['basicCosts']['workstation_integration'];
-        $estimate->sum += (float)$input['basicCosts']['workstation_integration'];
         $estimate->programming_robot = (float)$input['basicCosts']['programming_robot'];
-        $estimate->sum += (float)$input['basicCosts']['programming_robot'];
         $estimate->programming_plc = (float)$input['basicCosts']['programming_plc'];
-        $estimate->sum += (float)$input['basicCosts']['programming_plc'];
         $estimate->documentation_ce = (float)$input['basicCosts']['documentation_ce'];
-        $estimate->sum += (float)$input['basicCosts']['documentation_ce'];
         $estimate->training = (float)$input['basicCosts']['training'];
-        $estimate->sum += (float)$input['basicCosts']['training'];
         $estimate->project = (float)$input['basicCosts']['project'];
-        $estimate->sum += (float)$input['basicCosts']['project'];
         $estimate->margin = (float)$input['basicCosts']['margin'];
-        $estimate->sum += (float)$input['basicCosts']['margin'];
         $estimate->parts_prices = json_encode($input['partPrices']);
         $estimate->additional_costs = json_encode($input['additionalCosts']);
         $estimate->parts_ar = json_encode($input['partsAr']);
-
-//        foreach($estimate as $key => $value){
-//            if($key != solution_id)
-//            $estimate->sum += (float)($key);
-//        }
 
         $estimate->save();
 
@@ -970,34 +956,17 @@ class SolutionController extends Controller
         $solution->challenge_id = $request->input('id');
         $solution->installer_id = Auth::user()->id;
         $solution->financial_after_id = $financial->id;
+
+        foreach($challenge->save_json->parts as $part) {
+            $part->model->sourceType = 'challenge';
+        }
+
         $solution->save_json = json_encode($challenge->save_json);
         $solution->published = 0;
         $solution->status = 0;
         $solution->screenshot_path = 's3/screenshots/dbr_placeholder.jpeg';
         $solution->save();
 
-//        $estimate = new Estimate();
-//        $estimate->solution_id = $solution->id;
-//        $estimate->save();
-//        $financial_analyses = new FinancialAnalysis();
-//        $financial_analyses->solution_id = $solution->id;
-//        $financial_analyses->save();
-//        $operational_analyses = new OperationalAnalysis();
-//        $operational_analyses->solution_id = $solution->id;
-//        $operational_analyses->save();
-
-//        $financial->days = $request -> days;
-//        $financial->shifts = $request -> shifts;
-//        $financial->shift_time = $request -> shift_time;
-//        $financial->weekend_shift = $request -> weekend_shift;
-//        $financial->breakfast = $request -> breakfast;
-//        $financial->stop_time = $request -> stop_time;
-//        $financial->operator_performance = $request -> operator_performance;
-//        $financial->defective = $request -> defective;
-//        $financial->number_of_operators = $request -> number_of_operators;
-//        $financial->operator_cost = $request -> operator_cost;
-//        $financial->absence = $request -> absence;
-//        $financial->cycle_time = $request -> cycle_time;
         $financial->challenge_id = $challenge->id;
         $financial->save();
 
@@ -1056,9 +1025,16 @@ class SolutionController extends Controller
      */
     public function delete(Request $request): JsonResponse
     {
+        /** @var Solution $solution */
         $solution = Solution::find($request->input('id'));
 
         if($solution){
+            $estimate = $solution->estimate()->first();
+
+            if($estimate) {
+                $estimate->delete();
+            }
+
             $solution->delete();
         }
 
