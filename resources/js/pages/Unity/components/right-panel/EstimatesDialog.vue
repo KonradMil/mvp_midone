@@ -258,7 +258,8 @@ export default {
 
                 parts.forEach((obj) => {
 
-                    if(typeof obj.sourceType !== undefined && obj.sourceType === 'solution') {
+                    //1091 - id modelu "Operator - Ethan"
+                    if(typeof obj.sourceType !== undefined && obj.sourceType === 'solution' && parseInt(obj.model_id) !== 1091) {
 
                         if (partPrices.value[obj.model_name] !== undefined) {
                             if (partsAr.value[obj.model_name] !== undefined) {
