@@ -108,14 +108,18 @@
                     <div class="rounded-md pt-4">
                         <div class="grid grid-cols-4 h-full">
                             <div class=" h-full" v-for="(file, index) in solutionFiles" :key="'file_' + index">
+                                <Tippy class="dark:text-gray-300 text-gray-600"
+                                       :content="file.original_name">
                                 <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
-                                    <img
-                                        v-lazy="'/' + file.path"
-                                         class="w-full h-full"
-                                         :alt="file.original_name"/>
+                                          <img
+                                            v-lazy="'/' + file.path"
+                                            class="w-full h-full"
+                                            :alt="file.original_name"/>
                                     <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
+
                                     </div>
                                 </div>
+                                </Tippy>
                                 <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
                                     class="cursor-pointer px-6">
                                     <button v-if="user.id === props.solution.author_id && props.solution.status !== 1" class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
