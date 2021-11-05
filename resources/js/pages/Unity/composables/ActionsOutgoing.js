@@ -25,15 +25,16 @@ function outgoing(game, action, data, json) {
     // }
 }
 export default function unityActionOutgoing(gameWindow) {
-    const game = gameWindow;
 
+    const game = gameWindow;
 
     function placeObject(data) {
 
         outgoing(game, 'OrderPart', {
             model_name: data.name,
             model_id: data.id,
-            prefab_url: window.location.protocol+'//' + location.host + '/s3/models/' + data.model_file
+            prefab_url: window.location.protocol+'//' + location.host + '/s3/models/' + data.model_file,
+            sourceType: data.sourceType !== undefined ? data.sourceType : null
         }, true)
     }
 

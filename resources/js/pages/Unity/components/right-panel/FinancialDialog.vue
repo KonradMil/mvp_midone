@@ -1,6 +1,8 @@
 <template>
-    <div
-        class="mt-2">
+    <div class="mt-2">
+
+        <p class="alert alert-warning show">Przed wprowadzeniem zmian upewnij się, że kursor znajduje się we właściwym polu.</p><br>
+
         <div class="" id="hoverable-table">
             <div class="preview">
                 <div class="overflow-x-auto">
