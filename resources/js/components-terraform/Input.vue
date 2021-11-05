@@ -2,7 +2,7 @@
     <input :type="type"
            class="intro-y form-control box placeholder-theme-13"
            :class="classes"
-           :placeholder="placeholder"
+           :placeholder="$t(placeholder)"
            :value="val"
            @input="$emit('update:val', $event.target.value)"/>
 </template>
