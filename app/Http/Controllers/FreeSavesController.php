@@ -16,12 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 class FreeSavesController extends Controller
 {
 
-    public ResponseBuilder $responseBuilder;
-
-    public function __construct()
-    {
-        $this->responseBuilder = new ResponseBuilder();
-    }
 
     /**
      * @param int $id
@@ -109,9 +103,8 @@ class FreeSavesController extends Controller
      * @param FreeSavesService $freeSavesService
      * @return JsonResponse
      */
-    public function saveData(Request $request, FreeSavesRepository $freeSavesRepository,FreeSavesService $freeSavesService)
+    public function saveData(Request $request, FreeSavesRepository $freeSavesRepository, FreeSavesService $freeSavesService)
     {
-
         $freeSavesHandler = new FreeSavesHandler($request);
 
         $parameters = $freeSavesHandler->getParameters();
@@ -123,51 +116,30 @@ class FreeSavesController extends Controller
             return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
         }
 
-        if($id > 0){
+        if ($id > 0) {
 
             $freeSave = $freeSavesRepository->find($id);
 
-            if(!$freeSave){
+            if (!$freeSave) {
                 $this->responseBuilder->setErrorMessage(__('messages.project.not_found'));
                 return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
             }
-
-            try {
-                $updateFreeSave = $freeSavesService->updateFreeSave($parameters, $freeSave);
-
-                $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
-            } catch (QueryException $e) {
-
-                $this->responseBuilder->setErrorMessage(__('messages.error'));
-                return $this->responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-            }
+//            $s3 = S3Controller::processScreenshot($parameters->screenshot_path)
+            $newFreeSave = $freeSavesService->updateFreeSave($parameters, $freeSave);
         } else {
-            try {
-                $newFreeSave = $freeSavesService->addFreeSave($parameters);
-
-                $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
-                $this->responseBuilder->setData('local_vision', $newFreeSave);
-            } catch (QueryException $e) {
-                $this->responseBuilder->setErrorMessage(__('messages.error'));
-                return $this->responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-            }
+            $newFreeSave = $freeSavesService->createEmptySave();
         }
 
-
+        $this->responseBuilder->setData('free_save', $newFreeSave);
+        $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
         return $this->responseBuilder->getResponse();
     }
 
-    public function saveEmpty(Request $request, FreeSavesRepository $freeSavesRepository,FreeSavesService $freeSavesService)
+    public function saveEmpty(Request $request, FreeSavesRepository $freeSavesRepository, FreeSavesService $freeSavesService)
     {
-            try {
-                $freeSave = $freeSavesService->createEmptySave();
-                $this->responseBuilder->setData('id',$freeSave);
-                $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
-            } catch (QueryException $e) {
-
-                $this->responseBuilder->setErrorMessage(__('messages.error'));
-                return $this->responseBuilder->getResponse(Response::HTTP_INTERNAL_SERVER_ERROR);
-            }
+        $freeSave = $freeSavesService->createEmptySave();
+        $this->responseBuilder->setData('id', $freeSave);
+        $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
 
 
         return $this->responseBuilder->getResponse();

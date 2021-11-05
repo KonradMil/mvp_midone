@@ -49,7 +49,7 @@ Route::group(['prefix' => 'challenge', 'middleware' => ['auth:sanctum', 'verifie
     Route::post('user/like', [ChallengeController::class, 'likeChallenge']);
     Route::post('user/dislike', [ChallengeController::class, 'dislikeChallenge']);
     Route::post('user/follow', [ChallengeController::class, 'followChallenge']);
-    Route::post('user/unfollow', [ChallengeController::class, 'unfollowChallenge']);
+    Route::post('{challenge_id}/user/unfollow', [ChallengeController::class, 'unfollowChallenge']);
     Route::post('images/store', [ChallengeController::class, 'storeImage']);
     Route::post('publish', [ChallengeController::class, 'publish']);
     Route::post('unpublish', [ChallengeController::class, 'unpublish']);

@@ -3,9 +3,11 @@
 namespace App\Services;
 
 
+use App\Models\Challenge;
 use App\Models\Financial;
 use App\Models\TechnicalDetails;
 use App\Repository\Eloquent\ChallengeRepository;
+use Illuminate\Support\Facades\Auth;
 
 /**
  *
@@ -65,5 +67,16 @@ class ChallengeService
         }
 
         return $array;
+    }
+
+    /**
+     * @param Challenge $challenge
+     * @return Challenge
+     */
+    public function unFollowChallenge(Challenge $challenge): Challenge
+    {
+        Auth::user()->viaLoveReacter()->unreactTo($challenge, 'Follow');
+
+        return $challenge;
     }
 }

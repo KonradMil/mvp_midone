@@ -114,7 +114,8 @@ const UnityBridge = () => {
 
             emitter.emit('UnityRegisterCameraPosition', { cameraPosition: JSON.parse(str) })
         };
-        window.SaveScreenshot = function SaveScreenshot(str) {
+        window.UnitySaveScreenshoot = function SaveScreenshoot(str) {
+            window.eightk = str;
             emitter.emit('SaveScreenshot', { saveGame: str})
             // window.v.unity.saveGame(str);
         };

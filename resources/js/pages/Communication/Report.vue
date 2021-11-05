@@ -1,11 +1,13 @@
 <template>
-    <tr >
+    <tr>
         <td class="w-40 truncate">
-            <div class="flex" v-if="rep.files != undefined">
-                <div class="w-10 h-10 image-fit" v-if="rep.files.length != '0'">
-                    {{ rep.files[0].original_name }}
-                </div>
-            </div>
+            <div class="font-medium whitespace-nowrap" v-if="rep.author !== undefined">{{ rep.author.name }} {{ rep.author.lastname }}</div>
+            <div class="text-gray-600 text-xs whitespace-nowrap mt-0.5" v-if="rep.author !== undefined">{{ rep.author.email }}</div>
+<!--            <div class="flex" v-if="rep.files != undefined">-->
+<!--                <div class="w-10 h-10 image-fit" v-if="rep.files.length != '0'">-->
+<!--                    {{ rep.files[0].original_name }}-->
+<!--                </div>-->
+<!--            </div>-->
         </td>
         <td>
             <div class="font-medium whitespace-nowrap">{{ rep.title }}</div>

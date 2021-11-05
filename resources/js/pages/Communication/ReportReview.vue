@@ -42,6 +42,12 @@
                                     <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
                                     </div>
                                 </div>
+                                <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
+                                     class="cursor-pointer px-6">
+                                    <button class="btn btn-outline-secondary py-1 px-2" @click="downloadFile(file.path, file.name)">
+                                        Pobierz
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -88,6 +94,10 @@ export default {
             users.value = GetUsers();
         }
 
+        const downloadFile = async (url,name) => {
+            window.open('/' + url, '_blank').focus();
+        }
+
         onMounted(function () {
             GetUsersRepositories('');
             if (window.Laravel.user) {
@@ -95,6 +105,7 @@ export default {
             }
         })
         return {
+            downloadFile,
             guard,
             users,
             user,

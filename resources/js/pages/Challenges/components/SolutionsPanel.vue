@@ -55,12 +55,12 @@
                         </div>
                     </div>
                     <div class="intro-y grid grid-cols-12 gap-6 mt-5">
-                        <div v-for="solution in solutionsInTeam" :key="solution.id" v-if="challenge.stage > 0" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected) ? 'solution-selected' : ''">
+                        <div v-for="(solution, index) in solutionsInTeam" :key="solution.id" v-if="challenge.stage > 0" class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected) ? 'solution-selected' : ''">
                                 <span v-if="user.type === 'integrator'">
                                     <SingleSolutionPost :user="user" :challenge="challenge" :solution="solution" :canAccept="(user.id === challenge.author_id) && challenge.status == 1" :canEdit="user.id === solution.author_id" :canEditSolution="canEditSolution" :addSolutionOffer="addSolutionOffer" :canDeleteSolution="canDeleteSolution" :canPublishSolution="canPublishSolution"></SingleSolutionPost>
                                 </span>
                                 <span v-if="user.type === 'investor'">
-                                    <SingleSolutionPost v-if="solution.status === 1" :challenge="challenge" :user="user" :solution="solution" :canAccept="(inTeam) && challenge.status == 1" :canEdit="false" :acceptChallengeSolutions="acceptChallengeSolutions"></SingleSolutionPost>
+                                    <SingleSolutionPost v-if="solution.status === 1" :check="(technologyType === null && filterType === null) ? 'false' : 'true'" :index="index" :challenge="challenge" :user="user" :solution="solution" :canAccept="(inTeam) && challenge.status == 1" :canEdit="false" :acceptChallengeSolutions="acceptChallengeSolutions"></SingleSolutionPost>
                                 </span>
                         </div>
                     </div>
@@ -298,6 +298,7 @@ export default {
                     }
                 })
         }
+
         return {
             getChallengeSolutions,
             canDeleteSolution,

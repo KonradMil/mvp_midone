@@ -50,7 +50,7 @@ export default function unityActionOutgoing(gameWindow) {
     }
 
     function takeScreenshot (id) {
-        outgoing(game, 'TakeScreenshot', id)
+        outgoing(game, 'TakeScreenshoot', id)
     }
 
     function setHangarAppearance (id) {
