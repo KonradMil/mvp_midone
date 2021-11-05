@@ -1,7 +1,6 @@
 <template>
-    <button type="button" class="btn" :class="classes + ' ' + buttonType"
-            @click="$router.push({name: 'addChallenge', params: {challenge_id: challenge.id }});">
-        {{ $t(text) }}
+    <button type="button" class="btn flex items-center" :class="classes + ' ' + buttonType" @click="$emit('buttonClicked')">
+        <slot></slot>{{ $t(text) }}
     </button>
 </template>
 
@@ -24,7 +23,7 @@ export default {
         }
     },
     emits: [
-        'clicked'
+        'buttonClicked'
     ],
     setup(props, {emit}) {
         const buttonType = computed(() => {

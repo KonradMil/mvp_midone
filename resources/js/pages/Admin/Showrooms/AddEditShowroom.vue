@@ -8,13 +8,14 @@
                         @click.prevent="$router.back()">
                     Powrót
                 </button>
-                <button
-                    class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
-                    aria-expanded="false"
-                    @click.prevent="saveShowroom">
-                    <SaveIcon class="w-4 h-4 mr-2"/>
-                    {{ $t('global.save') }}
-                </button>
+<!--                <button-->
+<!--                    class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"-->
+<!--                    aria-expanded="false"-->
+<!--                    @click.prevent="saveShowroom">-->
+<!--                    <SaveIcon class="w-4 h-4 mr-2"/>-->
+
+<!--                </button>-->
+                <Button text="global.save" classes="mr-2 ml-auto sm:ml-0" @buttonClicked="saveShowroom"><SaveIcon class="w-4 h-4 mr-2"/></Button>
             </div>
         </div>
         <div class="pos intro-y grid grid-cols-12 gap-5 mt-5">
@@ -28,7 +29,7 @@
                 </div>
                 <div class="post intro-y box mt-5">
                     <div class="post__tabs nav nav-tabs flex-col sm:flex-row bg-gray-300 dark:bg-dark-2 text-gray-600" role="tablist">
-                        <a id="default-tab"
+                        <Tippy id="default-tab"
                             content="Adjust the meta title"
                             data-toggle="tab"
                             data-target="#default-tab"
@@ -39,10 +40,10 @@
                             @click="tab = 'default'">
                             <CodeIcon class="w-4 h-4 mr-2"/>
                             Podstawowe informacje
-                        </a>
+                        </Tippy>
                     </div>
                     <div class="post__tabs nav nav-tabs flex-col sm:flex-row bg-gray-300 dark:bg-dark-2 text-gray-600" role="tablist">
-                        <a id="slides-tab"
+                        <Tippy id="slides-tab"
                            content="Adjust the meta title"
                            data-toggle="tab"
                            data-target="#slides-tab"
@@ -53,7 +54,7 @@
                            @click="tab = 'default'">
                             <CodeIcon class="w-4 h-4 mr-2"/>
                             Slajdy
-                        </a>
+                        </Tippy>
                     </div>
                     <div class="post__content tab-content">
                         <div id="content" class="tab-pane p-5 active" role="tabpanel" aria-labelledby="content-tab">
@@ -115,7 +116,7 @@
             <!-- END: Post Content -->
             <!-- BEGIN: Post Info -->
             <div class="col-span-12 lg:col-span-4">
-                <div class="intro-y box p-5">
+                <Box classes="p-5">
                     <div class="my-3">
                         <Label title="Organizacja"></Label>
                         <Input type="text" placeholder="Nazwa organizacji" v-model:val="showroom.organization"></Input>
@@ -127,7 +128,7 @@
                         <Label title="Kolor dominujący"></Label>
                         <Swatches @colorSelected="selectedColor" class="mt-2"></Swatches>
                     </div>
-                </div>
+                </Box>
             </div>
             <!-- END: Post Info -->
         </div>
@@ -144,10 +145,12 @@ import Dropzone from "../../../components-terraform/Dropzone";
 import Swatches from "../../../components-terraform/Swatches";
 import Label from "../../../components-terraform/Label";
 import Input from "../../../components-terraform/Input";
+import Box from "../../../components-terraform/Box";
+import Button from "../../../components-terraform/Button";
 
 export default {
     name: "AddEditShowroom",
-    components: {Input, Swatches, Dropzone, Multiselect, Label},
+    components: {Button, Box, Input, Swatches, Dropzone, Multiselect, Label},
     props: {
         showroom_id: Number,
     },
