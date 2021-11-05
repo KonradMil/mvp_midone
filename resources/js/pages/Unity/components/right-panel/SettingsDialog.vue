@@ -4,6 +4,11 @@
     >
         <!--                <div class="font-medium text-base">Profile Settings</div>-->
         <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+
+            <div class="intro-y col-span-12">
+                <p class="alert alert-warning show">Przed wprowadzeniem zmian upewnij się, że kursor znajduje się we właściwym polu.</p><br>
+            </div>
+
             <div class="intro-y col-span-12">
                 <label for="input-wizard-1" class="form-label">
                     Max waga

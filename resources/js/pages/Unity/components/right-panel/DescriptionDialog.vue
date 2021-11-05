@@ -1,5 +1,8 @@
 <template>
     <div class="flex-initial pl-2">
+
+        <p class="alert alert-warning show">Przed wprowadzeniem zmian upewnij się, że kursor znajduje się we właściwym polu.</p><br>
+
         <div class="mt-3" v-if="props.type !== 'solution'">
             <label for="modal-form-3" class="form-label">Solution deadline</label>
             <input
