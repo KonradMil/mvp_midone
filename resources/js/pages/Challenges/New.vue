@@ -134,7 +134,7 @@
                             <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
                                 <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
                                     <ChevronDownIcon class="w-4 h-4 mr-2"/>
-                                    {{ $t('challengesNew.photo') }}
+                                    {{ $t('challengesNew.files') }}
                                 </div>
                                 <div class="mt-5">
                                     <div class="mt-3" v-if="images.length > 0">
@@ -509,7 +509,7 @@ export default {
 
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
                 images.value.push(JSON.parse(resp.xhr.response).payload);
-                toast.success('Zdjecie zostało wgrane poprawnie!');
+                toast.success('Plik został wgrany poprawnie!');
             });
             elDropzoneSingleRef.dropzone.on("error", () => {
                 toast.error("Błąd");

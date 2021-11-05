@@ -269,14 +269,10 @@ export default {
 
         const goToCard = (type) => {
             if(type === 'addOffer'){
-                console.log('addOffer')
                 solution.value = props.solution
-                console.log(solution.value)
                 router.push({ name: 'internalChallenegeCard', params : {id: solution.challenge.id, fromAllAddOffer: 'true', solutionFromAll_id: props.solution.id}})
             } else if (type === 'showTeams'){
-                console.log('showTeams')
                 solution.value = props.solution
-                console.log(solution.value)
                 router.push({ name: 'internalChallenegeCard', params : {id: solution.challenge.id, fromAllTeamsSolution: 'true', solutionFromAll_id: props.solution.id}})
             }
         };
