@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use League\Flysystem\FileNotFoundException;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -146,5 +147,14 @@ class S3Controller extends Controller
         Storage::disk('s3')->putFileAs('screenshots/', new \Illuminate\Http\File(public_path('images/' . $name)), $name);
 
         return response()->json(['absolute_path' => $path, 'relative' => ('s3/screenshots/' . $name)]);
+    }
+
+    public static function saveFile($file)
+    {
+        $name = Str::random(20);
+
+        Storage::disk('s3')->putFileAs('uploads/', $file, $name);
+
+        return '/s3/uploads/' . $name;
     }
 }

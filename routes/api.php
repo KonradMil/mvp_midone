@@ -21,6 +21,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/robochallenge', [RobochallengeController::class, 'register']);
 
     require __DIR__ . '/api/studio-lite.php';
+    require __DIR__ . '/api/files.php';
     require __DIR__ . '/api/admin.php';
     require __DIR__ . '/api/solutions.php';
     require __DIR__ . '/api/reports.php';
