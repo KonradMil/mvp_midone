@@ -310,7 +310,6 @@ export default {
                     return false;
                 }
             } else if(isPublishSolution.value === 'true' || isAcceptedSolution.value === 'true'){
-                  showSuccess.value = true;
                   return false;
             }else {
                 if (inTeam.value || (user.id == solution.value.author_id)) {
