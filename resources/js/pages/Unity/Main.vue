@@ -13,7 +13,7 @@
     </div>
 <!--    <Peer v-if="sessionid != ''" :sessionId="sessionid" :owner="owner"></Peer>-->
     <HelpModal></HelpModal>
-    <ModalSuccess :show="showSuccess" @closed="modalClosed">
+    <ModalSuccess :show="showSuccess && loaded" @closed="modalClosed">
         <div class="p-5 text-center">
             <CheckCircleIcon class="w-16 h-16 text-theme-9 mx-auto mt-3"></CheckCircleIcon>
             <div class="text-3xl mt-5">
@@ -269,7 +269,6 @@ export default {
             }
         };
 
-
         const allowedEdit = computed(() => {
             if (type.value == 'challenge') {
                 if (inTeam.value || (user.id == challenge.value.author_id)) {
@@ -374,6 +373,16 @@ export default {
                             data: JSON.parse(response.data.payload.save_json)
                         });
                         unlockInput();
+                        console.log('USTAWIENIE STATUSU')
+                        if(solution.value.status === 1 && solution.value.selected !== 1){
+                            console.log('USTAWIENIE STATUSU PUBLIKACJA')
+                            showSuccess.value = true;
+                            isPublishSolution.value = 'true';
+                        }else if(solution.value.status === 1 && solution.value.selected === 1){
+                            console.log('USTAWIENIE STATUSU AKCEPTACJA')
+                            showSuccess.value = true;
+                            isAcceptedSolution.value = 'true';
+                        }
                     } else {
                         // toast.error(response.data.message);
                     }
