@@ -16,7 +16,10 @@
     <ModalSuccess :show="showSuccess" @closed="modalClosed">
         <div class="p-5 text-center">
             <CheckCircleIcon class="w-16 h-16 text-theme-9 mx-auto mt-3"></CheckCircleIcon>
-            <div class="text-3xl mt-5">Twoje rozwiązanie zostało opublikowane! Tryb edycji został wyłączony.</div>
+            <div class="text-3xl mt-5">
+               <p v-if="isPublishSolution === 'true'">Twoje rozwiązanie zostało opublikowane. Wszelkie zmiany nie zostaną zapisane. Jeżeli chcesz wprowadzić zmiany, cofnij publikację rozwiązania.</p>
+               <p v-if="isAcceptedSolution === 'true'">Twoje rozwiązanie zostało zaakceptowane przez Inwestora. Wszelkie zmiany nie zostaną zapisane.</p>
+            </div>
         </div>
         <div class="px-5 pb-8 text-center">
             <button type="button" data-dismiss="modal" class="btn btn-primary w-24" @click.prevent="modalClosed">Ok</button>
@@ -63,6 +66,7 @@ export default {
         canEditSolution: Boolean,
         sessionid: String,
         isPublishSolution: String,
+        isAcceptedSolution: String,
     },
     components: {
         HelpModal, ModalWorkshop, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio, ModalSuccess
@@ -103,6 +107,7 @@ export default {
         const sessionid = ref('');
         const owner = ref(false);
         const isPublishSolution = ref('');
+        const isAcceptedSolution = ref('');
         const showSuccess = ref(false);
 
         const modalClosed = () => {
@@ -272,7 +277,7 @@ export default {
                 } else {
                     return false;
                 }
-            } else if(isPublishSolution.value === 'true'){
+            } else if(isPublishSolution.value === 'true' || isAcceptedSolution.value === 'true'){
                   showSuccess.value = true;
                   return false;
             }else {
@@ -400,11 +405,13 @@ export default {
             mode.value = 'edit';
             type.value = props.type;
             isPublishSolution.value = props.isPublishSolution;
+            isAcceptedSolution.value = props.isAcceptedSolution;
             id.value = props.id;
             window_height.value = window.innerHeight;
         });
 
         return {
+            isAcceptedSolution,
             modalClosed,
             showSuccess,
             isPublishSolution,
