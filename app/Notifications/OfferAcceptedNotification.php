@@ -46,7 +46,7 @@ class OfferAcceptedNotification extends Notification
         return (new MailMessage)
             ->subject('DBR77: Oferta zaakceptowana')
             ->line('Zaakceptowano ofertę dla wyzwania: ' . $this->challenge->name .'.')
-            ->action('Sprawdź', url(env('APP_PATH') . '/challenges/card/' . $this->challenge->id))
+            ->action('Sprawdź', url(env('APP_PATH') . '/projects/card/' . $this->challenge->id))
             ->line('Dziękujemy za korzystanie z platformy DBR77!');
     }
 
@@ -54,10 +54,10 @@ class OfferAcceptedNotification extends Notification
     {
         return new BroadcastMessage([
             'message' => 'Oferta została zaakceptowana do wyzwania: ' . $this->challenge->name .'.',
-            'link' => '/challenges/card/' . $this->challenge->id,
+            'link' => '/projects/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
             'params' => 'all-offers',
-            'name' => 'internalChallenegeCard',
+            'name' => 'projectCard',
             'id' => $this->challenge->id,
         ]);
     }
@@ -66,10 +66,10 @@ class OfferAcceptedNotification extends Notification
     {
         return [
             'message' => 'Oferta została zaakceptowana do wyzwania: ' . $this->challenge->name .'.',
-            'link' => '/challenges/card/' . $this->challenge->id,
+            'link' => '/projects/card/' . $this->challenge->id,
             'author' => $this->challenge->author,
             'params' => 'all-offers',
-            'name' => 'internalChallenegeCard',
+            'name' => 'projectCard',
             'id' => $this->challenge->id,
         ];
     }
