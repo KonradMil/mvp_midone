@@ -167,6 +167,7 @@ export default {
         const shows = ref(false);
         const error = ref(null);
         const resendEmail = ref(false);
+        const url_params = ref();
 
         const showAddToTeamModal = () => {
             show.value = true;
@@ -236,13 +237,15 @@ export default {
                                 }
 
                             } else {
-
-                                if (!user.name || !user.lastname || !company.nip) {
-                                    window.location.replace('/kreator');
+                                if(url_params.value['redirect'] != undefined) {
+                                    window.location.replace('https://' + url_params.value['redirect']);
                                 } else {
-                                    window.location.replace('/dashboard');
+                                    if (!user.name || !user.lastname || !company.nip) {
+                                        window.location.replace('/kreator');
+                                    } else {
+                                        window.location.replace('/dashboard');
+                                    }
                                 }
-
                             }
                         }
                     },
@@ -269,6 +272,8 @@ export default {
         }
 
         onMounted(() => {
+            const urlSearchParams = new URLSearchParams(window.location.search);
+            url_params.value  = Object.fromEntries(urlSearchParams.entries());
             cash("body")
                 .removeClass("main")
                 .removeClass("error-page")
