@@ -645,14 +645,14 @@ export default {
             } else if(type === 'shifts'){
                 if(object < 0){
                     new_financial.value.shifts = 0;
-                }else if(object > 10){
-                    new_financial.value.shifts = 10;
+                }else if(object > 100){
+                    new_financial.value.shifts = 100;
                 }
             } else if(type === 'weekendShift'){
                 if(object < 0){
                     new_financial.value.weekend_shift = 0;
-                }else if(object > 10){
-                    new_financial.value.weekend_shift = 10;
+                }else if(object > 100){
+                    new_financial.value.weekend_shift = 100;
                 }
             }else if(type === 'shiftTime'){
                 if(object < 0){
