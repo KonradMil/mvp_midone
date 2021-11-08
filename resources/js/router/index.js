@@ -39,6 +39,7 @@ import ForgotPassword from "../pages/ForgotPassword";
 import Workshop from "../pages/Unity/Workshop/Workshop";
 import NewOffer from "../pages/Offers/NewOffer";
 import Offers from "../pages/Challenges/components/Offers";
+import ShowroomLogin from "../pages/Admin/Showrooms/ShowroomLogin";
 import SolutionsPanel from "../pages/Challenges/components/SolutionsPanel";
 import ProjectsList from "../pages/Admin/ProjectsList";
 import UserList from '../pages/Admin/UserList';
@@ -63,6 +64,11 @@ export const routes = [
         name: 'secret',
         path: '/secret',
         component: Secret
+    },
+    {
+        name: 'showroom-login',
+        path: '/showroom/:organization',
+        component: ShowroomLogin
     },
     {
         name: 'register',

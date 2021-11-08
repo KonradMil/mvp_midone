@@ -151,6 +151,19 @@
 @import "components/full-calendar";
 @import "components/pristine";
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+.text-editor-wrapper button{
+    font-size: inherit;
+    font-family: inherit;
+    color: #4f4f4f;
+    margin: .1rem;
+    border: 1px solid #5e50ac;
+    border-radius: .3rem;
+    padding: .1rem .4rem;
+    background: white;
+    accent-color: #5e50ac;
+}
+
 .overx {
     overflow-y: scroll !important;
 }

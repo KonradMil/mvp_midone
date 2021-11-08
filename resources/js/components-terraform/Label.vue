@@ -1,5 +1,5 @@
 <template>
-    <label class="form-label">{{$t(title)}}</label>
+    <label class="form-label" :title="$t(title)">{{$t(title)}}</label>
 </template>
 
 <script>

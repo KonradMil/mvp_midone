@@ -93,4 +93,15 @@ class FileController extends Controller
 
         return $responseBuilder->getResponse();
     }
+
+    public function saveAnyFile(Request $request)
+    {
+        $files = $request->files->all();
+        $ar = [];
+        foreach ($files as $file) {
+            $ar[] = S3Controller::saveFile($file[0]);
+        }
+
+        return response()->json($ar);
+    }
 }

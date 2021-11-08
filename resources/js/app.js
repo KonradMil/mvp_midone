@@ -23,6 +23,7 @@ import relativeTime from 'dayjs/esm/plugin/relativeTime';
 import updateLocale from 'dayjs/esm/plugin/updateLocale';
 import {VueReCaptcha} from "vue-recaptcha-v3";
 import utc from 'dayjs/esm/plugin/utc';
+import { vfmPlugin } from 'vue-final-modal'
 
 const emitter = mitt();
 
@@ -69,7 +70,7 @@ app.use(lazyPlugin, {
     loading: '/s3/twopointo/images/loader.gif',
     error: '/s3/screenshots/dbr_placeholder.jpeg'
 })
-
+app.use(vfmPlugin);
 app.use(VueCookies, {
     expireTimes: "1h",
 });

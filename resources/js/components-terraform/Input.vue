@@ -1,6 +1,6 @@
 <template>
     <input :type="type"
-           class="intro-y form-control box placeholder-theme-13"
+           class="form-control placeholder-gray-600"
            :class="classes"
            :placeholder="$t(placeholder)"
            :value="val"

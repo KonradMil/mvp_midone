@@ -11,5 +11,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:sanctum', 'web']], fun
     });
     Route::group(['prefix' => 'showrooms'], function () {
         Route::get('get', [ShowroomController::class, 'index']);
+        Route::post('save', [ShowroomController::class, 'saveShowroom']);
     });
 });

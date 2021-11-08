@@ -3,19 +3,10 @@
         <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
             <h2 class="text-lg font-medium mr-auto">{{ $t('challengesNew.new') }}</h2>
             <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                <button class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"
-                        aria-expanded="false"
-                        @click.prevent="$router.back()">
-                    Powrót
-                </button>
-<!--                <button-->
-<!--                    class="dropdown-toggle btn btn-primary mr-2 shadow-md flex items-center  ml-auto sm:ml-0"-->
-<!--                    aria-expanded="false"-->
-<!--                    @click.prevent="saveShowroom">-->
-<!--                    <SaveIcon class="w-4 h-4 mr-2"/>-->
-
-<!--                </button>-->
-                <Button text="global.save" classes="mr-2 ml-auto sm:ml-0" @buttonClicked="saveShowroom"><SaveIcon class="w-4 h-4 mr-2"/></Button>
+                <Button text="Powrót" classes="mr-2 ml-auto sm:ml-0" @buttonClicked="$router.back()"></Button>
+                <Button text="global.save" classes="mr-2 ml-auto sm:ml-0" @buttonClicked="saveShowroom">
+                    <SaveIcon class="w-4 h-4 mr-2"/>
+                </Button>
             </div>
         </div>
         <div class="pos intro-y grid grid-cols-12 gap-5 mt-5">
@@ -28,93 +19,73 @@
                            v-model="showroom.name"/>
                 </div>
                 <div class="post intro-y box mt-5">
-                    <div class="post__tabs nav nav-tabs flex-col sm:flex-row bg-gray-300 dark:bg-dark-2 text-gray-600" role="tablist">
-                        <Tippy id="default-tab"
+                    <div class="post__tabs nav nav-tabs flex-col sm:flex-row flex-wrap bg-gray-300 dark:bg-dark-2 text-gray-600" role="tablist">
+                        <Tippy
+                            id="content-tab"
+                            tag="a"
+                            content="Fill in the article content"
+                            data-toggle="tab"
+                            data-target="#content"
+                            href="javascript:;"
+                            class="w-full sm:w-80 py-4 text-center flex justify-center items-center active"
+                            role="tab"
+                            aria-controls="content"
+                            aria-selected="true"
+                            @click="tab = 'basic'">
+                            <CodeIcon class="w-4 h-4 mr-2"/>
+                            Podstawowe informacje
+                        </Tippy>
+                        <Tippy
+                            id="meta-title-tab"
+                            tag="a"
                             content="Adjust the meta title"
                             data-toggle="tab"
-                            data-target="#default-tab"
+                            data-target="#meta-title"
                             href="javascript:;"
                             class="w-full sm:w-40 py-4 text-center flex justify-center items-center"
                             role="tab"
                             aria-selected="false"
-                            @click="tab = 'default'">
-                            <CodeIcon class="w-4 h-4 mr-2"/>
-                            Podstawowe informacje
-                        </Tippy>
-                    </div>
-                    <div class="post__tabs nav nav-tabs flex-col sm:flex-row bg-gray-300 dark:bg-dark-2 text-gray-600" role="tablist">
-                        <Tippy id="slides-tab"
-                           content="Adjust the meta title"
-                           data-toggle="tab"
-                           data-target="#slides-tab"
-                           href="javascript:;"
-                           class="w-full sm:w-40 py-4 text-center flex justify-center items-center"
-                           role="tab"
-                           aria-selected="false"
-                           @click="tab = 'default'">
-                            <CodeIcon class="w-4 h-4 mr-2"/>
+                            @click="tab = 'slides'">
+                            <FileTextIcon class="w-4 h-4 mr-2"/>
                             Slajdy
                         </Tippy>
                     </div>
                     <div class="post__content tab-content">
-                        <div id="content" class="tab-pane p-5 active" role="tabpanel" aria-labelledby="content-tab">
+                        <div id="content" class="tab-pane p-5 active" role="tabpanel" aria-labelledby="content-tab" v-if="tab == 'basic'">
                             <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5">
                                 <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
-                                    <div class="w-22 mr-3">
-
-                                    </div>
+                                   ID studio playground
+                                </div>
+                                <div class="mt-5">
+                                    <Input type="text" placeholder="" v-model:val="showroom.challenge_id"></Input>
+                                </div>
+                                <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5 mt-3">
                                     {{ $t('challengesNew.description') }}
                                 </div>
                                 <div class="mt-5">
                                     <textarea v-model="showroom.description" class="w-full h-36 form-control" style="width: 100%;"></textarea>
-                               </div>
+                                </div>
+                                <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5 mt-3">
+                                    Dodatkowy css
+                                </div>
                                 <div class="mt-5">
                                     <textarea v-model="showroom.custom_css" class="w-full h-36 form-control" style="width: 100%;"></textarea>
                                 </div>
-                                <div class="mt-5">
-                                    <textarea v-model="showroom.custom_functions" class="w-full h-36 form-control" style="width: 100%;"></textarea>
-                                </div>
-                            </div>
-                            <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
-                                <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
-                                    <ChevronDownIcon class="w-4 h-4 mr-2"/>
-                                    {{ $t('challengesNew.photo') }}
+                                <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5 mt-3">
+                                    Preładowane funckcje Unity
                                 </div>
                                 <div class="mt-5">
-                                    <div class="mt-3" v-if="files.length > 0">
-                                        <label class="form-label"> {{ $t('challengesNew.uploadedPhotos') }}</label>
-                                        <div class="rounded-md pt-4">
-                                            <div class="row flex h-full">
-                                                <div class=" h-full" v-for="(file, index) in files" :key="'image_' + index">
-                                                    <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
-                                                        <img class="w-full h-full"
-                                                             :alt="file.original_name"
-                                                             :src="'/' + file.path"
-                                                        />
-                                                        <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
-                                                        </div>
-                                                    </div>
-                                                    <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteFile(index)" class="cursor-pointer">USUŃ
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3">
-                                        <div class="rounded-md pt-4">
-                                            <div class="flex flex-wrap px-4">
-                                                <Dropzone></Dropzone>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <JSONObjectCreator column-number="2" :column-names="['Nazwa funkcji', 'Dane']" @update="updateCustomFunctions"></JSONObjectCreator>
                                 </div>
                             </div>
+                        </div>
+                        <div id="slides" class="tab-pane p-5 active" role="tabpanel" aria-labelledby="content-tab"  v-if="tab == 'slides'">
+                            <Slides :slides="slides"></Slides>
+                            <AddSlide @saveSlide="updateSlides"></AddSlide>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- END: Post Content -->
-            <!-- BEGIN: Post Info -->
             <div class="col-span-12 lg:col-span-4">
                 <Box classes="p-5">
                     <div class="my-3">
@@ -122,15 +93,11 @@
                         <Input type="text" placeholder="Nazwa organizacji" v-model:val="showroom.organization"></Input>
                     </div>
                     <div class="my-3">
-
-                    </div>
-                    <div class="my-3">
                         <Label title="Kolor dominujący"></Label>
                         <Swatches @colorSelected="selectedColor" class="mt-2"></Swatches>
                     </div>
                 </Box>
             </div>
-            <!-- END: Post Info -->
         </div>
     </div>
 </template>
@@ -147,10 +114,14 @@ import Label from "../../../components-terraform/Label";
 import Input from "../../../components-terraform/Input";
 import Box from "../../../components-terraform/Box";
 import Button from "../../../components-terraform/Button";
+import JSONObjectCreator from "../../../components-terraform/JSONObjectCreator";
+import Slides from "./Slides"
+import AddSlide from "./AddSlide";
+import RequestHandler from "../../../compositions/RequestHandler";
 
 export default {
     name: "AddEditShowroom",
-    components: {Button, Box, Input, Swatches, Dropzone, Multiselect, Label},
+    components: {AddSlide, JSONObjectCreator, Button, Box, Input, Swatches, Dropzone, Multiselect, Label, Slides},
     props: {
         showroom_id: Number,
     },
@@ -161,7 +132,8 @@ export default {
         const user = window.Laravel.user;
         const showModal = ref(false);
         const files = ref([]);
-        const tab = ref('');
+        const tab = ref('basic');
+        const slides = ref([]);
 
 
         const showroom = reactive({
@@ -170,7 +142,8 @@ export default {
             dominantColor: '',
             organization: '',
             custom_functions: '',
-            custom_css: ''
+            custom_css: '',
+            challenge_id: ''
         })
 
         const modalClosed = () => {
@@ -178,7 +151,10 @@ export default {
         }
 
         const saveShowroom = () => {
-
+            RequestHandler('admin/showrooms/save', 'POST', {
+                    showroom: showroom,
+                    slides: slides.value
+            });
         }
 
         const deleteFile = () => {
@@ -187,6 +163,14 @@ export default {
 
         const selectedColor = (color) => {
             showroom.dominantColor = color;
+        }
+
+        const updateCustomFunctions = (data) => {
+            showroom.custom_functions = data;
+        }
+
+        const updateSlides = (slide) => {
+            slides.value.push(slide);
         }
 
         onMounted(() => {
@@ -198,6 +182,7 @@ export default {
         });
 
         return {
+            slides,
             modalClosed,
             showModal,
             files,
@@ -206,7 +191,9 @@ export default {
             deleteFile,
             selectedColor,
             showroom,
-            tab
+            tab,
+            updateCustomFunctions,
+            updateSlides
         };
     },
     beforeRouteEnter(to, from, next) {
