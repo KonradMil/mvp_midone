@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import {computed, onMounted, reactive, ref, watch} from "vue";
+import {onMounted, ref, watch} from "vue";
 import Button from "./Button";
 import Input from "./Input";
 import Label from "./Label";
