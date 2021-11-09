@@ -297,6 +297,7 @@ class SolutionController extends Controller
     {
         $solution = Solution::find($request->input('id'));
         $estimate = Estimate::where('solution_id', '=', $solution->id)->first();
+        $robots = [];
 
         if (!empty($request->input('offer_id'))) {
             $offer = Offer::find($request->input('offer_id'));
@@ -304,7 +305,6 @@ class SolutionController extends Controller
         } else {
             if ($estimate != NULL) {
                 $save = json_decode($estimate->parts_ar);
-                $robots = [];
                 if ($save != NULL) {
                     foreach ($save as $key => $val) {
                         if ($val->count > 0) {
