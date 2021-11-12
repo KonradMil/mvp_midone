@@ -264,7 +264,7 @@
                         </button>
                     </div>
                 </div>
-                <WhatsNext :user="user" :challenge="challenge" :solutions="challenge.solutions" :project="project" :stage="3"></WhatsNext>
+                <WhatsNext :user="user" :challenge="challenge" :solutions="challenge.solutions" :project="project" :stage="3" :id="challenge.id"></WhatsNext>
             </div>
             <!-- END: Profile Menu -->
             <BasicInformationPanel :challenge="challenge" :inTeam="inTeam" v-if="activeTab == 'podstawowe'"
@@ -286,7 +286,7 @@
                 v-if="(activeTab == 'teams') && ((challenge.author_id == user.id) || (solution.author_id == user.id))"
                 :solution="solution" :challenge="challenge" :who="who"></TeamsPanel>
             <OfferAdd v-if="activeTab == 'addingoffer'" :stage="challenge.stage" :project="project"
-                      :solution_id="selected_solution_id" :challenge_id="challenge.id" :edit_offer_id="edit_offer_id"
+                      :solution_id="challenge.solution_project_id" :challenge_id="challenge.id" :edit_offer_id="edit_offer_id"
                       :change_offer="change_offer"></OfferAdd>
             <OfferProject v-if="activeTab == 'project-offer' || activeTab == 'oferty'" v-model:activeTab="activeTab"
                           :project="project" :integrator="integrator" :investor="investor" :stage="challenge.stage"
@@ -346,7 +346,6 @@ import BasicInformationPanel from "../Challenges/components/BasicInformationPane
 import TechnicalInformationProjectPanel from "./components/TechnicalInformationProjectPanel";
 import QuestionsPanel from "../Challenges/components/QuestionsPanel";
 import SolutionProjectPanel from "./components/SolutionProjectPanel";
-import {useToast} from "vue-toastification";
 import OfferAdd from "../Challenges/components/OfferAdd";
 import OfferProject from "./components/OfferProject";
 import TeamsPanel from "../Challenges/components/TeamsPanel";
@@ -391,7 +390,6 @@ export default defineComponent({
     setup(props, {emit}) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
-        const toast = useToast();
         const announcementRef = ref();
         const newProjectsRef = ref();
         const challenge = ref({});
@@ -421,7 +419,7 @@ export default defineComponent({
         const guard = ref(false);
         const showSuccess = ref(false);
         const stageSecondActive = ref(false);
-
+        const secondGuard  = ref(false);
 
 
         watch(() => props.change, (first, second) => {
@@ -495,14 +493,6 @@ export default defineComponent({
             project.value.accept_details = 2;
         });
 
-        const checkSolution = () => {
-            challenge.value.solutions.forEach(function (solution) {
-                if (solution.selected_offer_id === challenge.value.selected_offer_id) {
-                    solution_project.value = solution;
-                }
-            });
-        }
-
         const modalClosed = () => {
             show.value = false;
             showSuccess.value = false;
@@ -510,30 +500,6 @@ export default defineComponent({
 
         const showModal = async () => {
             show.value = !show.value;
-        }
-
-        const filter = () => {
-            challenge.value.solutions.forEach(function (solution) {
-                if (solution.author_id === user.id) {
-                    isSolutions.value = true;
-                } else if ((solution.published === 1) && (solution.author.id === user.id)) {
-                    isPublic.value = true;
-                }
-            });
-        }
-
-        const checkTeam = () => {
-            axios.post('/api/challenge/check-team', {user_id: user.id, challenge_id: challenge.value.id})
-                .then(response => {
-                    if (response.data.success) {
-                        inTeam.value = response.data.payload || (user.id == challenge.value.author_id);
-                    } else {
-
-                    }
-                })
-                .catch(function (error) {
-
-                });
         }
 
         const goTo = () => {
@@ -558,36 +524,31 @@ export default defineComponent({
             activeTab.value = 'addingoffer';
         });
 
-        const getCardProjectRepositories = async (callback) => {
+        const getCardProjectRepositories = async () => {
             RequestHandler('projects/' + props.id + '/card', 'get', {}, (response) => {
                 challenge.value = response.data.challenge;
                 project.value = response.data.project;
-                callback(response);
-            });
-        }
-        onMounted(function () {
-            permissions.value = window.Laravel.permissions;
-            getCardProjectRepositories(function (){
-                checkTeam();
-                filter();
-                checkSolution();
                 if(project.value.accept_offer === 1){
-                        showSuccess.value = true;
+                    showSuccess.value = true
                 }
             });
-            getInvestorAndIntegrator(function () {
+        }
 
-            })
-            setTimeout(function () {
-                guard.value = true;
-            }, 1500)
+        const initialize = async() => {
+            await getInvestorAndIntegrator();
+            await getCardProjectRepositories();
+            guard.value = true;
+        }
+
+        onMounted(function () {
+            permissions.value = window.Laravel.permissions;
+            initialize();
         })
 
-        const getInvestorAndIntegrator = (callback) => {
+        const getInvestorAndIntegrator = () => {
             RequestHandler('projects/' + props.id + '/investor-integrator', 'get', {}, (response) => {
                 investor.value = response.data.investor;
                 integrator.value = response.data.integrator;
-                callback(response);
             });
         }
 
@@ -632,6 +593,7 @@ export default defineComponent({
         };
 
         return {
+            secondGuard,
             goTo,
             showSuccess,
             guard,
@@ -648,7 +610,6 @@ export default defineComponent({
             show,
             modalClosed,
             permissions,
-            filter,
             edit_offer_id,
             who,
             temp_offer_id,
@@ -666,7 +627,6 @@ export default defineComponent({
             isSolutions,
             isPublic,
             solution_project,
-            checkSolution,
             stageSecondActive
         };
     }

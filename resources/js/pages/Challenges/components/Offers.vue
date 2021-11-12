@@ -1,13 +1,16 @@
 <template>
     <div class="intro-y col-span-9 lg:col-span-9 xxl:col-span-9" v-if="guard === true">
-        <div class="intro -y flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+        <div class="intro-y box flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
             <h2 class="font-medium text-base mr-auto">{{$t('challengesMain.myOffers')}}</h2>
         </div>
-        <div class="grid grid-cols-12 gap-6">
+        <div v-if="offers.length < 1" class="intro-y box w-full text-theme-1 dark:text-theme-10 font-medium pl-5 py-3" style="font-size: 16px;">
+            Nie masz jeszcze żadnych ofert.
+        </div>
+        <div class="grid grid-cols-12 gap-6 pt-2">
             <!-- BEGIN: Announcement -->
             <transition-group name="fade">
-                <div class="intro-y box col-span-6 xxl:col-span-6" v-for="offer in offers.list" :key="offer.id">
-                    <div :class="(offer.rejected === 1) ? 'px-5 py-5 opacity-50' : 'px-5 py-5'">
+                <div class="intro-y box col-span-6 xxl:col-span-6" v-for="offer in offers" :key="offer.id">
+                    <div :class="(offer.status === 2) ? 'px-5 py-5 opacity-50' : 'px-5 py-5'">
                     <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
                         <div class="flex items-center">
                             <div class="pl-4 my-2">
@@ -15,23 +18,14 @@
                                 <div class="ark:text-theme-10 text-theme-1 pt-1" style="font-size: 16px; word-break: break-all; max-height: 100px; max-width: 200px;"> {{ offer.solution.name }}</div>
                             </div>
                             <div class="mt-2 pl-9 pb-6 md:flex" v-if="(user.id === offer.installer_id) || addSolutionOffer">
-                                <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status < 1">{{$t('challengesMain.publishOffer')}}</button>
-                                <button class="btn btn-primary shadow-md mr-2" @click="editOffer(offer.id)" v-if="stage !== 3 && offer.status < 1">{{$t('models.edit')}}</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status === 0">{{$t('challengesMain.publishOffer')}}</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click="editOffer(offer.id)" v-if="stage !== 3 && offer.status === 0">{{$t('models.edit')}}</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="changeOffer(offer.id)" v-if="stage === 3 && user.id === offer.installer_id">Zmiana oferty</button>
-                                <button class="btn btn-primary shadow-md mr-2" @click.prevent="deleteOffer(offer)" v-if="offer.status < 1 || offer.rejected == 1">{{$t('models.delete')}}</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click.prevent="deleteOffer(offer)" v-if="offer.status === 0 || offer.status === 2">{{$t('models.delete')}}</button>
                             </div>
-                            <div v-if="stage===3">
-                            <div class="flex items-center justify-center text-theme-9" v-if="project.project_accept_offer === 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
-                            <div class="flex items-center justify-center text-theme-6" v-if="project.project_accept_offer === 2 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
-                            <div class="flex items-center mr-3" v-if="project.project_accept_offer < 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
-                            </div>
-                            <div class="" v-if="user.id === challenge_author_id && stage === 3">
-                                  <button class="btn btn-primary shadow-md mr-2" style="margin-left: 90px;" @click.prevent="acceptProjectOffer">Akceptuje</button>
-                                  <button class="btn btn-primary shadow-md mr-2" @click.prevent="rejectProjectOffer">Odrzucam</button>
-                            </div>
-                            <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1 && stage !== 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
-                            <div class="flex items-center justify-center text-theme-6" v-if="offer.rejected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
-                            <div class="flex items-center mr-3" v-if="(offer.rejected != 1) && (offer.selected != 1) && (offer.status == 1) && stage !== 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
+                            <div class="flex items-center justify-center text-theme-9" v-if="offer.status === 3 && stage !== 3"><i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
+                            <div class="flex items-center justify-center text-theme-6" v-if="offer.status === 2"><i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.rejected')}}</div>
+                            <div class="flex items-center mr-3" v-if="offer.status === 1 && stage !== 3"><i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.waitingApproval')}}</div>
                         </div>
                         <div class="flex items-center mt-5">
                             <div class="border-l-2 border-theme-1 pl-4">
@@ -138,6 +132,7 @@ import GetOffers from "../../../compositions/GetOffers";
 import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
 import {useToast} from "vue-toastification";
 import OfferAdd from "./OfferAdd";
+import RequestHandler from "../../../compositions/RequestHandler";
 
 const toast = useToast();
 
@@ -169,9 +164,6 @@ export default {
         const change = ref(false);
         const is_done_offer = ref(false);
 
-        watch(() => offers.value.list, (first, second) => {
-        }, {})
-
         const switchTab = () => {
             context.emit("update:activeTab", 'addingoffer');
         }
@@ -189,60 +181,27 @@ export default {
         }
 
         const getOffersRepositories = async (callback) => {
-            offers.value = GetOffers(props.id);
-            callback();
+            RequestHandler('offer/' + props.id + '/all', 'get', {}, (response) => {
+                offers.value = response.data.offers
+                callback();
+            });
+            // offers.value = GetOffers(props.id);
         }
 
         const publishOffer = async(offer) => {
-            axios.post('/api/offer/publish', {id: offer.id})
-                .then(response => {
-                    if (response.data.success) {
-                        offer.status = 1;
-                        toast.success('Oferta zostało opublikowane');
-                    } else {
-                        // toast.error(response.data.message);
-                    }
-                })
+            RequestHandler('offer/' + props.id + '/publish', 'post', {offer_id: offer.id}, (response) => {
+                offer.status = 1;
+            });
         }
 
         const deleteOffer = async(offer) => {
-            axios.post('/api/offer/delete', {id: offer.id})
-                .then(response => {
-                    if (response.data.success) {
-                        toast.success(response.data.message);
-                        offers.value.list.splice(offers.value.list.indexOf(offer), 1);
-                    } else {
-                    }
-                })
+            RequestHandler('offer/' + props.id + '/delete', 'post', {offer_id: offer.id}, (response) => {
+                offers.value.splice(offers.value.indexOf(offer), 1);
+            });
         }
-
-        const acceptProjectOffer = async () => {
-            axios.post('/api/projects/project-offer/accept', {id: props.id})
-                .then(response => {
-                    if (response.data.success) {
-                        toast.success('Zaakceptowałeś oferte');
-                        emitter.emit('acceptOffer', {});
-                    } else {
-
-                    }
-                })
-        }
-        const rejectProjectOffer = async () => {
-            axios.post('/api/projects/project-offer/reject', {id: props.id})
-                .then(response => {
-                    if (response.data.success) {
-                        toast.success('Odrzuciłeś oferte');
-                        emitter.emit('rejectOffer', {});
-                    } else {
-
-                    }
-                })
-        }
-
 
         onMounted(() => {
             getOffersRepositories(function(){
-
                 guard.value = true;
             });
             if(props.stage === 3){
@@ -251,8 +210,6 @@ export default {
         });
 
         return {
-            rejectProjectOffer,
-            acceptProjectOffer,
             noChangeOffer,
             is_done_offer,
             changeOffer,
@@ -272,17 +229,5 @@ export default {
 </script>
 
 <style scoped>
-
-.fade-leave-from {
-    opacity: 1;
-    transform: scale(1);
-}
-.fade-leave-to {
-    opacity: 0;
-    transform: scale(0.6);
-}
-.fade-leave-active {
-    transition: all 0.4s ease;
-}
 
 </style>

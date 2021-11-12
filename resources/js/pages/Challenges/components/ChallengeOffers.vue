@@ -1,45 +1,12 @@
 <template>
-<!--    <div class="col-span-12 lg:col-span-8 xxl:col-span-9">-->
-<!--        <div class="grid grid-cols-12 gap-6">-->
-<!--            &lt;!&ndash; BEGIN: Announcement &ndash;&gt;-->
-<!--            <div class="intro-y box col-span-12 xxl:col-span-12">-->
-<!--                <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">-->
-<!--                    <h2 class="font-medium text-base mr-auto"> Wszystkie oferty</h2>-->
-<!--                </div>-->
-<!--                <div class="px-5 pt-5">-->
-<!--                    <div v-if="offers.length == 0" class="w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">-->
-<!--                        <div v-if="user.type == 'integrator'">-->
-<!--                            <p>-->
-<!--                                W tej chwili nie masz żadnych ofert.-->
-<!--                            </p>-->
-<!--                        </div>-->
-
-<!--                    </div>-->
-<!--                                        <div class="intro-y grid grid-cols-12 gap-6 mt-5">-->
-<!--                                            <div v-for="(solution, index) in challenge.solutions" :key="index"-->
-<!--                                                 class="intro-y col-span-6 md:col-span-4 xl:col-span-6 box" :class="(solution.selected)? 'solution-selected': ''">-->
-<!--                                                <div v-if="!solution.rejected">-->
-<!--                                                    <div v-if="user.type == 'integrator'">-->
-<!--                                                        <SingleSolutionPost v-if="solution.author_id === user.id" :user="user" :solution="solution" :canAccept="user.id === challenge.author_id" :canEdit="user.id === solution.author_id"></SingleSolutionPost>-->
-<!--                                                    </div>-->
-<!--                                                    <div v-if="user.type == 'investor'">-->
-<!--                                                        <SingleSolutionPost v-if="solution.status === 1" :user="user" :solution="solution" :canAccept="user.id === challenge.author_id" :canEdit="user.id === solution.author_id"></SingleSolutionPost>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-    <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9">
+    <div class="intro-y box col-span-12 lg:col-span-8 xxl:col-span-9" v-if="guard === true">
         <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
-        <h2 class="intro-y font-medium text-base mr-auto"> Moje oferty </h2>
-    </div>
-        <div class="flex items-center px-5 py-7 border-b border-gray-200 dark:border-dark-5">
+           <h2 class="intro-y font-medium text-base mr-auto"> Moje oferty </h2>
+       </div>
+        <div class="flex items-center px-5 py-7 border-b border-gray-200 dark:border-dark-5" v-if="offers.length > 0 || (technologyType !== null || filterType !== null)">
             <label for="input-wizard-5" class="form-label pr-5 font-medium dark:text-theme-10 text-theme-1" style="position: absolute; margin-bottom: 90px;">Filtr</label>
             <Multiselect
+                @select="StartFilterOffer"
                 :disabled="technologyType !== null"
                 class="form-control"
                 v-model="filterType"
@@ -55,9 +22,10 @@
                 :options="filters['options']"
             />
         </div>
-        <div class="flex items-center px-5 py-7 border-b border-gray-200 dark:border-dark-5 pb-10">
+        <div class="flex items-center px-5 py-7 border-b border-gray-200 dark:border-dark-5 pb-10" v-if="offers.length > 0 || (technologyType !== null || filterType !== null)">
             <label for="input-wizard-5" class="form-label font-medium dark:text-theme-10 text-theme-1" style="position: absolute; margin-bottom: 90px;">Dostawca głównej technologii</label>
             <Multiselect
+                @select="StartFilterOffer"
                 :disabled="filterType !== null"
                 class="form-control"
                 v-model="technologyType"
@@ -72,12 +40,15 @@
                 :option-height="104"
             />
         </div>
-        <div v-if="guard && (filterType !== null || technologyType !== null)" class="intro-y w-full text-theme-1 dark:text-theme-10 font-medium pl-2 py-3" style="font-size: 16px;">
+        <div v-if="offers.length < 1 && (technologyType !== null && filterType !== null)" class="intro-y w-full text-theme-1 dark:text-theme-10 font-medium pl-5 py-3" style="font-size: 16px;">
             Nie ma ofert spełniających podane kryteria.
         </div>
-        <div class="grid grid-cols-12 gap-6">
+        <div v-if="offers.length < 1 && (technologyType === null || filterType === null)" class="intro-y w-full text-theme-1 dark:text-theme-10 font-medium pl-5 py-3" style="font-size: 16px;">
+            Nie masz jeszcze żadnych ofert.
+        </div>
+        <div class="grid grid-cols-12 gap-6" >
             <!-- BEGIN: Announcement -->
-            <div  v-for="(offer, index) in offers.list" :key="index" class="col-span-12 col-span-12 xxl:col-span-6">
+            <div  v-for="(offer, index) in offers" :key="index" class="col-span-12 col-span-12 xxl:col-span-6">
                 <div :class="(offer.id === theBestOffer.id && (filterType === 'Ranking' || filterType === null) && technologyType === null) ? 'best-offer': ''">
                 <div class="intro-y box"  v-if="challenge.selected_offer_id < 1 || offer.selected == 1">
                     <div class="px-5 py-5" >
@@ -100,12 +71,12 @@
                                         href=""
                                         class="dark:text-gray-300 text-gray-600"
                                         content="Po zaakceptowaniu oferty staje się ona wiążąca dla obu stron.">
-                                    <button class="btn btn-primary shadow-md mr-2" @click.prevent="acceptOffer(offer)" v-if="offer.selected != 1 && challenge.selected_offer_id < 1 && acceptChallengeOffers">Akceptuj ofertę</button>
+                                    <button class="btn btn-primary shadow-md mr-2" @click.prevent="acceptOffer(offer)" v-if="offer.status === 1 && challenge.selected_offer_id < 1 && acceptChallengeOffers">Akceptuj ofertę</button>
                                     </Tippy>
-                                    <button class="btn shadow-md mr-2 bg-gray-400" @click.prevent="rejectOffer(offer,index)" v-if="offer.rejected != 1 && challenge.selected_offer_id < 1 && acceptChallengeOffers" >Odrzuć ofertę</button>
+                                    <button class="btn shadow-md mr-2 bg-gray-400" @click.prevent="showModalRejectOffer(offer,index)" v-if="offer.status === 1 && challenge.selected_offer_id < 1 && acceptChallengeOffers" >Odrzuć ofertę</button>
                                     <button class="btn btn-outline-secondary" @click="showDetails[offer.id] = !showDetails[offer.id]">{{$t('teams.details')}}</button>
                                 </div>
-                                <div class="flex items-center justify-center text-theme-9" v-if="offer.selected == 1"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
+                                <div class="flex items-center justify-center text-theme-9" v-if="offer.status === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i> Zaakceptowano </div>
                             </div>
                             <div class="flex items-center mt-5" v-if="showDetails[offer.id] !== true && (filterType === 'Cene malejąco' || filterType === 'Cena rosnąco')">
                                 <div class="border-2 border-theme-1 p-2">
@@ -230,19 +201,37 @@
             </div>
         </div>
     </div>
+    <ModalRejectOffer :show="show" @closed="modalClosed">
+        <h3 class="intro-y text-lg font-medium mt-5">Dodaj komentarz dlaczego odrzucasz ofertę!</h3>
+        <div class="intro-y box p-5 mt-12 sm:mt-5" style="text-align: center;">
+            <div class="relative text-gray-700 dark:text-gray-300 mr-4">
+                <textarea
+                    maxlength = "1000"
+                    class="w-full px-3 py-2 text-gray-700 border rounded-lg border border-transparent outline-none ring-2 ring-pink-700 border-transparent"
+                    style="width: 600px; height: 100px; position: relative;"
+                    v-model="feedback"/>
+                <div class="flex pt-2" style="margin-left: 210px;">
+                    <button class="btn btn-primary shadow-md mr-2" @click.prevent="rejectChallengeOffer">Odrzuć</button>
+                    <button class="btn btn-primary shadow-md mr-2" @click.prevent="modalClosed">Anuluj</button>
+                </div>
+            </div>
+        </div>
+    </ModalRejectOffer>
 </template>
 
 <script>
 import {getCurrentInstance, onMounted, ref, watch} from "vue";
-import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
 import {useToast} from "vue-toastification";
 import router from "../../../router";
 import Multiselect from '@vueform/multiselect';
 import DarkModeSwitcher from "../../../components/dark-mode-switcher/Main";
+import RequestHandler from "../../../compositions/RequestHandler";
+import ModalRejectOffer from "../../../components/ModalRejectOffer";
 
 
 export default {
     components: {
+        ModalRejectOffer,
         Multiselect
     },
     name: "ChallengeOffers",
@@ -257,7 +246,7 @@ export default {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
         const toast = useToast();
-        const offers = ref([]);
+        let offers = ref([]);
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
         const filters = require('../../../json/offer_filters.json');
@@ -267,75 +256,58 @@ export default {
         const filterType = ref(null);
         const technologyType = ref(null);
         const theBestOffer = ref('');
-        const guard = ref();
+        const guard = ref(false);
         const show = ref(false);
         const temporary_offer_id = ref(null);
         const showDetails = ref([]);
         const isShow = ref(false);
+        const feedback = ref('');
+        const isOffers = ref(false);
+        const currentOffer = ref({});
 
-        watch(() => offers.value.list, (first, second) => {
-        }, {})
+        const showModalRejectOffer = async(offer,index) =>{
+            show.value = true;
+            currentOffer.value = offer;
+        }
 
-        watch(() => technologyType.value, (first, second) => {
-            console.log(offers.value.list.length + 'length offervs value list technology')
-            StartFilterOffer();
-            if(technologyType.value !== null){
-                if(offers.value.list ===0){
-                    guard.value = true;
-                }else{
-                    guard.value = false;
-                }
+        const modalClosed = () => {
+            show.value = !show.value
+        }
+
+        watch(()=> offers.value, ()=>{
+            console.log('offers.value.length')
+            console.log(offers.value.length)
+        })
+
+        watch(()=> technologyType.value, ()=>{
+            if(technologyType.value === null && filterType.value === null){
+                getChallengeOffersRepositories();
             }
+        },{})
 
+        watch(()=> filterType.value, ()=>{
             if(filterType.value === null && technologyType.value === null){
                 getChallengeOffersRepositories();
-                GetTheBestOffer();
-
             }
-        }, {})
-
-        watch(() => filterType.value, (first, second) => {
-            console.log(offers.value.list.length + 'length offervs value list filterType')
-            StartFilterOffer();
-            if(offers.value.list ===0){
-                guard.value = true;
-            }else{
-                guard.value = false;
-            }
-            if(filterType.value === null && technologyType.value === null){
-                getChallengeOffersRepositories();
-                GetTheBestOffer();
-            }
-            if(filterType.value==='Cena malejąco' || filterType.value==='Cena rosnąco'
-                || filterType.value==='Czas realizacji uruchomienia u klienta' || filterType.value==='Okres gwarancji stanowiska od integratora'){
-                isShow.value = true;
-            }
-        }, {})
+        },{})
 
         const switchTab = () => {
             context.emit("update:activeTab", 'addingoffer');
         }
 
-        const getChallengeOffersRepositories = async () => {
-            offers.value = GetChallengeOffers(props.challenge.id);
-            if(offers.value.list.length < 1){
-                guard.value = 1;
-            }else{
-                guard.value = 0;
-            }
+        const getChallengeOffersRepositories = async (callback) => {
+            RequestHandler('offer/' + props.challenge.id + '/offers', 'get', {}, (response) => {
+                offers.value = response.data.offers;
+                callback();
+            });
         }
-
 
 
         const StartFilterOffer = async () => {
             axios.post('/api/offer/user/filter', {option: filterType.value , id: props.challenge.id, technologyType: technologyType.value})
                 .then(response => {
                     if (response.data.success) {
-                        offers.value.list = response.data.payload;
-                        if(offers.value.list.length === 0){
-                            guard.value = true;
-                        }
-
+                            setTimeout(offers.value = response.data.payload,500)
                     } else {
                         toast.error('Error');
                     }
@@ -353,15 +325,9 @@ export default {
                 })
         }
 
-        const handleCallback = () => {
-
-            router.push( {path : '/projects/card/' + props.challenge.id});
-        }
-
         const goTo = () => {
                 router.push({ path: '/projects' })
             }
-
 
         const acceptOffer = async(offer) => {
             axios.post('/api/offer/accept', {id: offer.id})
@@ -379,34 +345,53 @@ export default {
                 })
         }
 
-        const rejectOffer = async(offer,index) => {
-            axios.post('/api/offer/reject', {id: offer.id})
-                .then(response => {
-                    if (response.data.success) {
-                        toast.success('Oferta została odrzucona');
-                        offer.rejected = 1;
-                        offer.selected = 0;
-                        offer.solution.selected_offer_id = 0;
-                        if(offer.id === props.challenge.selected_offer_id){
-                            props.challenge.selected_offer_id = 0;
-                        }
-                        offers.value.list.splice(index,1);
-                        // const offerIndex = offers.value.list.findIndex(a => a.id === offer.id);
-                        // if (offerIndex !== -1) {
-                        //     offers.value.list.splice(offerIndex,1);
-                        // }
-                    } else {
-                        // toast.error(response.data.message);
-                    }
-                })
+        const rejectChallengeOffer = async () => {
+            RequestHandler('offer/' + props.challenge.id + '/reject', 'post', {offer_id: currentOffer.value.id, comment: feedback.value}, (response) => {
+                offers.value.splice(offers.value.indexOf(currentOffer),1);
+                modalClosed();
+                feedback.value = '';
+            });
+        }
+
+        // const rejectChallengeOffer = async() => {
+        //     axios.post('/api/offer/reject', {id: currentOffer.value.id})
+        //         .then(response => {
+        //             if (response.data.success) {
+        //                 toast.success('Oferta została odrzucona');
+        //                 currentOffer.value.rejected = 1;
+        //                 currentOffer.value.selected = 0;
+        //                 currentOffer.value.solution.selected_offer_id = 0;
+        //                 if(currentOffer.value.id === props.challenge.selected_offer_id){
+        //                     props.challenge.selected_offer_id = 0;
+        //                 }
+        //                 offers.value.splice(offers.value.indexOf(currentOffer),1);
+        //             } else {
+        //             }
+        //         })
+        // }
+        const filter = async() => {
+            await StartFilterOffer();
+        }
+
+        const Initialize = async() =>{
+            await  getChallengeOffersRepositories(()=>{
+                guard.value = true;
+            });
+            await  GetTheBestOffer();
         }
 
         onMounted(() => {
-            getChallengeOffersRepositories('');
-            GetTheBestOffer();
+            Initialize();
         });
 
         return {
+            currentOffer,
+            showModalRejectOffer,
+            isOffers,
+            GetTheBestOffer,
+            getChallengeOffersRepositories,
+            feedback,
+            modalClosed,
             goTo,
             isShow,
             temporary_offer_id,
@@ -417,7 +402,7 @@ export default {
             StartFilterOffer,
             filterType,
             check,
-            rejectOffer,
+            rejectChallengeOffer,
             acceptOffer,
             switchTab,
             offers,
