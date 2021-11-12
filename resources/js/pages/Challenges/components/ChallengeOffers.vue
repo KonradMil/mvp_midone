@@ -1,6 +1,6 @@
 <template>
-    <div class="intro-y box col-span-12 lg:col-span-8 xxl:col-span-9" v-if="guard === true">
-        <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
+    <div class="intro-y col-span-12 lg:col-span-8 xxl:col-span-9" v-if="guard === true">
+        <div class="flex box items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
            <h2 class="intro-y font-medium text-base mr-auto"> Moje oferty </h2>
        </div>
         <div class="flex items-center px-5 py-7 border-b border-gray-200 dark:border-dark-5" v-if="offers.length > 0 || (technologyType !== null || filterType !== null)">
@@ -40,13 +40,13 @@
                 :option-height="104"
             />
         </div>
-        <div v-if="offers.length < 1 && (technologyType !== null && filterType !== null)" class="intro-y w-full text-theme-1 dark:text-theme-10 font-medium pl-5 py-3" style="font-size: 16px;">
+        <div v-if="offers.length < 1 && (technologyType !== null && filterType !== null)" class="intro-y box w-full text-theme-1 dark:text-theme-10 font-medium pl-5 py-3" style="font-size: 16px;">
             Nie ma ofert spełniających podane kryteria.
         </div>
-        <div v-if="offers.length < 1 && (technologyType === null || filterType === null)" class="intro-y w-full text-theme-1 dark:text-theme-10 font-medium pl-5 py-3" style="font-size: 16px;">
+        <div v-if="offers.length < 1 && (technologyType === null || filterType === null)" class="intro-y box w-full text-theme-1 dark:text-theme-10 font-medium pl-5 py-3" style="font-size: 16px;">
             Nie masz jeszcze żadnych ofert.
         </div>
-        <div class="grid grid-cols-12 gap-6" >
+        <div class="grid grid-cols-12 gap-6" v-if="offers.length > 0">
             <!-- BEGIN: Announcement -->
             <div  v-for="(offer, index) in offers" :key="index" class="col-span-12 col-span-12 xxl:col-span-6">
                 <div :class="(offer.id === theBestOffer.id && (filterType === 'Ranking' || filterType === null) && technologyType === null) ? 'best-offer': ''">
