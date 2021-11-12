@@ -332,6 +332,9 @@ export default defineComponent({
                     }
                 }
                 guard.value = true;
+                if(challenge.value.stage === 3){
+                    window.location.replace('/projects/card/' + challenge.value.id);
+                }
             });
         })
 

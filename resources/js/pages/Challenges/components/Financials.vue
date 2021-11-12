@@ -213,14 +213,14 @@ export default {
             } else if(type === 'shifts'){
                 if(object < 0){
                     props.financials.shifts = 0;
-                }else if(object > 10){
-                    props.financials.shifts = 10;
+                }else if(object > 100){
+                    props.financials.shifts = 100;
                 }
             } else if(type === 'weekendShift'){
                 if(object < 0){
                     props.financials.weekend_shift = 0;
-                }else if(object > 10){
-                    props.financials.weekend_shift = 10;
+                }else if(object > 100){
+                    props.financials.weekend_shift = 100;
                 }
             }else if(type === 'shiftTime'){
                 if(object < 0){
