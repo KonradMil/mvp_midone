@@ -151,7 +151,11 @@
 @import "components/full-calendar";
 @import "components/pristine";
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
-
+.fanuc-bg {
+    background-image: url('/images/fanuc_background3.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .text-editor-wrapper button{
     font-size: inherit;
     font-family: inherit;

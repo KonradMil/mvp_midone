@@ -8,6 +8,7 @@ use App\Http\Requests\Handlers\Admin\ShowroomSlideHandler;
 use App\Http\ResponseBuilder;
 use App\Models\Showrooms\Showroom;
 use App\Models\Showrooms\ShowroomSlide;
+use App\Models\Showrooms\ShowroomVisitor;
 use App\Parameters\Admin\ShowroomSlideParameters;
 use App\Repository\Eloquent\Admin\ShowroomRepository;
 use App\Services\Admin\ShowroomService;
@@ -30,8 +31,6 @@ class ShowroomController extends Controller
 
     public function saveShowroom(Request $request, ShowroomRepository $repository, ShowroomService $showroomService, ShowroomSlideService $showroomSlideService)
     {
-//        $showroom = $request->get('showroom');
-//        $slides = $request->get('slides');
         $showroomHandler = new ShowroomHandler($request);
         $showroomSlideHandler = new ShowroomSlideHandler($request);
 
@@ -89,6 +88,28 @@ class ShowroomController extends Controller
     }
 
     public function removeSlide()
+    {
+
+    }
+
+    public function loginVisitor(Request $request, $organization)
+    {
+        $check = ShowroomVisitor::where('email', '=', $request->email)->first();
+
+        if($check != null) {
+            session(['showroom_logged' => 'true']);
+        } else {
+            $check = new ShowroomVisitor();
+            $check->email = $request->email;
+            $check->save();
+        }
+
+        $this->responseBuilder->setSuccessMessage('Zalogowano poprawnie.');
+
+        return $this->responseBuilder->getResponse();
+    }
+
+    public function showroom(Request $request, $organization)
     {
 
     }

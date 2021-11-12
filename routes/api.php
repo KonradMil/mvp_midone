@@ -20,6 +20,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::post('/robochallenge', [RobochallengeController::class, 'register']);
 
+    require __DIR__ . '/api/v2/showroom.php';
     require __DIR__ . '/api/studio-lite.php';
     require __DIR__ . '/api/files.php';
     require __DIR__ . '/api/admin.php';

@@ -23,6 +23,7 @@ import AddSolution from "../pages/Solutions/New";
 import Teams from "../pages/Teams/Teams";
 import NotFound from "../pages/NotFound";
 import Main from "../pages/Unity/Main";
+import Showroom from "../pages/Unity/Showroom/Showroom";
 import MainHangar from "../pages/Unity/Hangars/MainHangar";
 import MainKnowledgebase from "../pages/KnowledgeBase/Main";
 import AddKnowledgebase from "../pages/KnowledgeBase/Add";
@@ -67,8 +68,14 @@ export const routes = [
     },
     {
         name: 'showroom-login',
-        path: '/showroom/:organization',
+        path: '/showroom/:organization/login',
         component: ShowroomLogin
+    },
+    {
+        name: 'showroom',
+        path: '/showroom/play/:organization',
+        component: Showroom,
+        props: true
     },
     {
         name: 'register',

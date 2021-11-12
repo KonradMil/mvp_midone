@@ -9,7 +9,7 @@ class ShowroomVisitor extends Model
 {
     use HasFactory;
 
-    protected $table = 'showroom_visitor';
+    protected $table = 'showroom_visitors';
 
     protected $fillable = [
       'email'
