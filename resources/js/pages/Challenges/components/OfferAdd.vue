@@ -333,7 +333,6 @@ export default {
                 });
             }else {
                 RequestHandler('offer/solution/save', 'post', {
-                    project_id: props.project.id,
                     stage: props.stage,
                     offer_id: props.edit_offer_id,
                     challenge_id: props.challenge_id,
