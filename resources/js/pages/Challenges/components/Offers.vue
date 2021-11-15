@@ -10,7 +10,7 @@
             <!-- BEGIN: Announcement -->
             <transition-group name="fade">
                 <div class="intro-y box col-span-6 xxl:col-span-6" v-for="offer in offers" :key="offer.id">
-                    <div :class="(offer.status === 2) ? 'px-5 py-5 opacity-50' : 'px-5 py-5'">
+                    <div :class="(offer.status === 2) ? 'px-5 py-5 opacity-50 hover:opacity-100' : 'px-5 py-5'">
                     <div id="latest-tasks-new" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
                         <div class="flex items-center">
                             <div class="pl-4 my-2">
@@ -21,6 +21,7 @@
                                 <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status === 0">{{$t('challengesMain.publishOffer')}}</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="editOffer(offer.id)" v-if="stage !== 3 && offer.status === 0">{{$t('models.edit')}}</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="changeOffer(offer.id)" v-if="stage === 3 && user.id === offer.installer_id">Zmiana oferty</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click.prevent="checkRejectOffer(offer)" v-if="offer.status === 2">Sprawdź czemu odrzucono!</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click.prevent="deleteOffer(offer)" v-if="offer.status === 0 || offer.status === 2">{{$t('models.delete')}}</button>
                             </div>
                             <div class="flex items-center justify-center text-theme-9" v-if="offer.status === 3 && stage !== 3"><i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
@@ -124,22 +125,33 @@
             <!-- END: Announcement -->
         </div>
     </div>
+    <ModalSuccess :show="show" @closed="modalClosed">
+        <div class="p-5 text-center">
+            <XCircleIcon class="w-16 h-16 text-theme-6 mx-auto mt-3"></XCircleIcon>
+            <div class="text-xl mt-5 break-words">
+                {{currentFeedback}}
+            </div>
+        </div>
+        <div class="px-5 pb-8 text-center">
+            <button type="button" data-dismiss="modal" class="btn btn-primary w-24" @click.prevent="modalClosed">Ok</button>
+        </div>
+    </ModalSuccess>
 </template>
 
 <script>
 import {getCurrentInstance, onMounted, ref, watch} from "vue";
-import GetOffers from "../../../compositions/GetOffers";
-import GetChallengeOffers from "../../../compositions/GetChallengeOffers";
 import {useToast} from "vue-toastification";
 import OfferAdd from "./OfferAdd";
 import RequestHandler from "../../../compositions/RequestHandler";
+import ModalSuccess from "../../../components/ModalSuccess";
 
 const toast = useToast();
 
 export default {
     name: "Offers",
     components :{
-      OfferAdd
+        OfferAdd,
+        ModalSuccess,
     },
     props: {
         activeTab: String,
@@ -163,6 +175,17 @@ export default {
         const guard = ref(false);
         const change = ref(false);
         const is_done_offer = ref(false);
+        const show = ref(false);
+        const currentFeedback = ref('');
+
+        const checkRejectOffer = (offer) =>{
+            currentFeedback.value = offer.comment;
+            show.value = true;
+        }
+
+        const modalClosed = () => {
+            show.value = !show.value
+        }
 
         const switchTab = () => {
             context.emit("update:activeTab", 'addingoffer');
@@ -185,7 +208,6 @@ export default {
                 offers.value = response.data.offers
                 callback();
             });
-            // offers.value = GetOffers(props.id);
         }
 
         const publishOffer = async(offer) => {
@@ -210,6 +232,10 @@ export default {
         });
 
         return {
+            currentFeedback,
+            checkRejectOffer,
+            modalClosed,
+            show,
             noChangeOffer,
             is_done_offer,
             changeOffer,

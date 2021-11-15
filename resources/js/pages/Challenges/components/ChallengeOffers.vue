@@ -207,7 +207,7 @@
             <div class="relative text-gray-700 dark:text-gray-300 mr-4">
                 <textarea
                     maxlength = "1000"
-                    class="w-full px-3 py-2 text-gray-700 border rounded-lg border border-transparent outline-none ring-2 ring-pink-700 border-transparent"
+                    class="w-full px-3 py-2 text-gray-700 border rounded-lg border border-transparent outline-none ring-2 border-transparent"
                     style="width: 600px; height: 100px; position: relative;"
                     v-model="feedback"/>
                 <div class="flex pt-2" style="margin-left: 210px;">
@@ -274,11 +274,6 @@ export default {
             show.value = !show.value
         }
 
-        watch(()=> offers.value, ()=>{
-            console.log('offers.value.length')
-            console.log(offers.value.length)
-        })
-
         watch(()=> technologyType.value, ()=>{
             if(technologyType.value === null && filterType.value === null){
                 getChallengeOffersRepositories();
@@ -326,23 +321,13 @@ export default {
         }
 
         const goTo = () => {
-                router.push({ path: '/projects' })
+            router.push( {path : '/projects/card/' + props.challenge.id})
             }
 
-        const acceptOffer = async(offer) => {
-            axios.post('/api/offer/accept', {id: offer.id})
-                .then(response => {
-                    if (response.data.success) {
-                        toast.success('Oferta została zaakceptowane');
-                        offer.selected = 1;
-                        offer.rejected = 0;
-                        offer.solution.selected_offer_id = offer.id;
-                        props.challenge.selected_offer_id = offer.id;
-                        goTo();
-                    } else {
-                        // toast.error(response.data.message);
-                    }
-                })
+        const acceptOffer = async (offer) => {
+            RequestHandler('offer/' + props.challenge.id + '/accept', 'post', {offer_id: offer.id}, (response) => {
+                goTo();
+            });
         }
 
         const rejectChallengeOffer = async () => {
@@ -351,26 +336,6 @@ export default {
                 modalClosed();
                 feedback.value = '';
             });
-        }
-
-        // const rejectChallengeOffer = async() => {
-        //     axios.post('/api/offer/reject', {id: currentOffer.value.id})
-        //         .then(response => {
-        //             if (response.data.success) {
-        //                 toast.success('Oferta została odrzucona');
-        //                 currentOffer.value.rejected = 1;
-        //                 currentOffer.value.selected = 0;
-        //                 currentOffer.value.solution.selected_offer_id = 0;
-        //                 if(currentOffer.value.id === props.challenge.selected_offer_id){
-        //                     props.challenge.selected_offer_id = 0;
-        //                 }
-        //                 offers.value.splice(offers.value.indexOf(currentOffer),1);
-        //             } else {
-        //             }
-        //         })
-        // }
-        const filter = async() => {
-            await StartFilterOffer();
         }
 
         const Initialize = async() =>{

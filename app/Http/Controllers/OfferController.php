@@ -398,8 +398,7 @@ class OfferController extends Controller
      * @param ChallengeRepository $challengeRepository
      * @return JsonResponse
      */
-    public
-    function saveSolutionOffer(Request $request, OfferRepository $offerRepository, OfferService $offerService, SolutionRepository $solutionRepository, ProjectRepository $projectRepository, ChallengeRepository $challengeRepository): JsonResponse
+    public function saveSolutionOffer(Request $request, OfferRepository $offerRepository, OfferService $offerService, SolutionRepository $solutionRepository, ProjectRepository $projectRepository, ChallengeRepository $challengeRepository): JsonResponse
     {
         $offerHandler = new OfferHandler($request);
 
@@ -445,136 +444,13 @@ class OfferController extends Controller
         }
 
         return $this->responseBuilder->getResponse();
-
-//        $stage = $request->stage;
-//
-//        if($stage == 3){
-//            $challenge = Challenge::find($request->challenge_id);
-//            $project = Project::where('challenge_id', '=' , $challenge->id)->first();
-//            $old_offer = Offer::find($challenge->selected_offer_id);
-//
-//            $new_offer = new Offer();
-//            $new_offer->challenge_id = $challenge->id;
-//            $new_offer->solution_id = $challenge->solution_project_id;
-//            $c = 0;
-//            $sum = 0;
-//            if (isset($request->solution_robots)) {
-//                foreach ($request->solution_robots as $robot) {
-//                    $c++;
-//                    $sum += $robot['guarantee_period'];
-//                }
-//            }
-//            if ($c > 0) {
-//                $new_offer->avg_guarantee = (float)($sum / $c);
-//            }
-//            $new_offer->installer_id = Auth::user()->id;
-//            $new_offer->robots = json_encode($request->solution_robots);
-//            $new_offer->price_of_delivery = $request->price_of_delivery;
-//            $new_offer->weeks_to_start = $request->weeks_to_start;
-//            $new_offer->time_to_start = $request->time_to_start;
-//            $new_offer->time_to_fix = $request->time_to_fix;
-//            $new_offer->advance_upon_start = $request->advance_upon_start;
-//            $new_offer->advance_upon_delivery = $request->advance_upon_delivery;
-//            $new_offer->advance_upon_agreement = $request->advance_upon_agreement;
-//            $new_offer->years_of_guarantee = $request->years_of_guarantee;
-//            $new_offer->service_support_scope = $request->service_support_scope;
-//            $new_offer->maintenance_frequency = $request->maintenance_frequency;
-//            $new_offer->price_of_maintenance = $request->price_of_maintenance;
-//            $new_offer->reaction_time = $request->reaction_time;
-//            $new_offer->intervention_price = $request->intervention_price;
-//            $new_offer->work_hour_price = $request->work_hour_price;
-//            $new_offer->period_of_support = $request->period_of_support;
-//            $new_offer->offer_expires_in = $request->offer_expires_in;
-//            $new_offer->project_id = $project->id;
-//            $new_offer->save();
-//            $project->selected_offer_id = $new_offer->id;
-//            $project->save();
-//
-//            return response()->json([
-//                'success' => true,
-//                'message' => 'Dodano kontrofertę poprawnie.',
-//                'payload' => $new_offer,
-//                'project' => $old_offer,
-//            ]);
-//        } else if ($request->edit_id != null) {
-//            $offer = Offer::find($request->edit_id);
-//            $offer->price_of_delivery = $request->price_of_delivery;
-//            $offer->weeks_to_start = $request->weeks_to_start;
-//            $offer->time_to_start = $request->time_to_start;
-//            $offer->time_to_fix = $request->time_to_fix;
-//            $offer->advance_upon_start = $request->advance_upon_start;
-//            $offer->advance_upon_delivery = $request->advance_upon_delivery;
-//            $offer->advance_upon_agreement = $request->advance_upon_agreement;
-//            $offer->years_of_guarantee = $request->years_of_guarantee;
-//            $offer->service_support_scope = $request->service_support_scope;
-//            $offer->maintenance_frequency = $request->maintenance_frequency;
-//            $offer->price_of_maintenance = $request->price_of_maintenance;
-//            $offer->reaction_time = $request->reaction_time;
-//            $offer->intervention_price = $request->intervention_price;
-//            $offer->work_hour_price = $request->work_hour_price;
-//            $offer->period_of_support = $request->period_of_support;
-//            $offer->offer_expires_in = $request->offer_expires_in;
-//            $challenge = Challenge::find($request->challenge_id);
-//
-//            $offer->save();
-//            $challenge->save();
-//            return response()->json([
-//                'success' => true,
-//                'message' => 'Edytowano oferte poprawnie.',
-//                'payload' => $offer
-//            ]);
-//        } else {
-//            $check = new Offer();
-//            $c = 0;
-//            $sum = 0;
-//            if (isset($request->solution_robots)) {
-//                foreach ($request->solution_robots as $robot) {
-//                    $c++;
-//                    $sum += $robot['guarantee_period'];
-//                }
-//            }
-//            if ($c > 0) {
-//                $check->avg_guarantee = (float)($sum / $c);
-//            }
-//            $check->robots = json_encode($request->solution_robots);
-//            $check->challenge_id = $request->challenge_id;
-//            $check->solution_id = $request->solution_id;
-//            $check->installer_id = Auth::user()->id;
-//            $check->price_of_delivery = $request->price_of_delivery;
-//            $check->weeks_to_start = $request->weeks_to_start;
-//            $check->time_to_start = $request->time_to_start;
-//            $check->time_to_fix = $request->time_to_fix;
-//            $check->advance_upon_start = $request->advance_upon_start;
-//            $check->advance_upon_delivery = $request->advance_upon_delivery;
-//            $check->advance_upon_agreement = $request->advance_upon_agreement;
-//            $check->years_of_guarantee = $request->years_of_guarantee;
-//            $check->service_support_scope = $request->service_support_scope;
-//            $check->maintenance_frequency = $request->maintenance_frequency;
-//            $check->price_of_maintenance = $request->price_of_maintenance;
-//            $check->reaction_time = $request->reaction_time;
-//            $check->intervention_price = $request->intervention_price;
-//            $check->work_hour_price = $request->work_hour_price;
-//            $check->period_of_support = $request->period_of_support;
-//            $check->offer_expires_in = $request->offer_expires_in;
-//            $check->save();
-//            $solution = Solution::find($check->solution_id);
-//
-//            event(new OfferAdded($check, $check->installer, 'Dodałeś nową ofertę do rozwiązania: ' . $solution->name, []));
-//
-//            return response()->json([
-//                'success' => true,
-//                'message' => 'Dodano oferte poprawnie.',
-//                'payload' => $check
-//            ]);
-//        }
     }
 
     /**
      * @param Request $request
      * @return JsonResponse
      */
-    public
-    function addOffer(Request $request): JsonResponse
+    public function addOffer(Request $request): JsonResponse
     {
         $offer = new Offer();
         $sol = Solution::find($request->solution_id);
@@ -600,8 +476,7 @@ class OfferController extends Controller
      * @param OfferService $offerService
      * @return JsonResponse
      */
-    public
-    function publishOffer(int $challengeId, Request $request, ChallengeRepository $challengeRepository, OfferRepository $offerRepository, OfferService $offerService): JsonResponse
+    public function publishOffer(int $challengeId, Request $request, ChallengeRepository $challengeRepository, OfferRepository $offerRepository, OfferService $offerService): JsonResponse
     {
         $challenge = $challengeRepository->find($challengeId);
 
@@ -631,8 +506,7 @@ class OfferController extends Controller
      * @param OfferService $offerService
      * @return JsonResponse
      */
-    public
-    function acceptOffer(int $challengeId, Request $request, ChallengeRepository $challengeRepository, OfferRepository $offerRepository, OfferService $offerService): JsonResponse
+    public function acceptOffer(int $challengeId, Request $request, ChallengeRepository $challengeRepository, OfferRepository $offerRepository, OfferService $offerService): JsonResponse
     {
         $challenge = $challengeRepository->find($challengeId);
 
@@ -648,6 +522,7 @@ class OfferController extends Controller
             return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
+        $this->responseBuilder->setSuccessMessage(__('messages.accepted'));
         $offerService->acceptOffer($offer);
 
         return $this->responseBuilder->getResponse();
@@ -661,8 +536,7 @@ class OfferController extends Controller
      * @param OfferService $offerService
      * @return JsonResponse
      */
-    public
-    function rejectOffer(int $challengeId, Request $request, ChallengeRepository $challengeRepository, OfferRepository $offerRepository, OfferService $offerService, SolutionRepository $solutionRepository): JsonResponse
+    public function rejectOffer(int $challengeId, Request $request, ChallengeRepository $challengeRepository, OfferRepository $offerRepository, OfferService $offerService, SolutionRepository $solutionRepository): JsonResponse
     {
         $challenge = $challengeRepository->find($challengeId);
 
@@ -692,7 +566,10 @@ class OfferController extends Controller
             return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
+        $this->responseBuilder->setSuccessMessage(__('messages.rejected'));
         $offerService->rejectOffer($offer, $challenge, $solution, $comment);
+        $this->responseBuilder->setData('offer', $offer);
+
 
         return $this->responseBuilder->getResponse();
     }
