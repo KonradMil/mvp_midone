@@ -3,7 +3,7 @@
         <div class="flex box items-center px-5 py-3 border-b border-gray-200 dark:border-dark-5">
            <h2 class="intro-y font-medium text-base mr-auto"> Moje oferty </h2>
        </div>
-        <div class="flex items-center px-5 py-7 border-b border-gray-200 dark:border-dark-5" v-if="offers.length > 0 || (technologyType !== null || filterType !== null)">
+        <div class="flex items-center px-5 py-7 border-b border-gray-200 dark:border-dark-5 mt-2" v-if="offers.length > 0 || (technologyType !== null || filterType !== null)">
             <label for="input-wizard-5" class="form-label pr-5 font-medium dark:text-theme-10 text-theme-1" style="position: absolute; margin-bottom: 90px;">Filtr</label>
             <Multiselect
                 @select="StartFilterOffer"
