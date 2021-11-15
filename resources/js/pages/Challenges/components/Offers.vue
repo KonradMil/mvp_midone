@@ -21,7 +21,7 @@
                                 <button class="btn btn-primary shadow-md mr-2" @click="publishOffer(offer)" v-if="offer.status === 0">{{$t('challengesMain.publishOffer')}}</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="editOffer(offer.id)" v-if="stage !== 3 && offer.status === 0">{{$t('models.edit')}}</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click="changeOffer(offer.id)" v-if="stage === 3 && user.id === offer.installer_id">Zmiana oferty</button>
-                                <button class="btn btn-primary shadow-md mr-2" @click.prevent="checkRejectOffer(offer)" v-if="offer.status === 2">Sprawdź czemu odrzucono!</button>
+                                <button class="btn btn-primary shadow-md mr-2" @click.prevent="checkRejectOffer(offer)" v-if="offer.status === 2">Sprawdź powód odrzucenia!</button>
                                 <button class="btn btn-primary shadow-md mr-2" @click.prevent="deleteOffer(offer)" v-if="offer.status === 0 || offer.status === 2">{{$t('models.delete')}}</button>
                             </div>
                             <div class="flex items-center justify-center text-theme-9" v-if="offer.status === 3 && stage !== 3"><i data-feather="check-square" class="w-4 h-4 mr-2"></i>{{$t('challengesMain.accepted')}}</div>
