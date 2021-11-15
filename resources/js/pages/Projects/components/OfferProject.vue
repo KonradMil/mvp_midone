@@ -14,7 +14,7 @@
                                     Pierwotna oferta
                                 </div>
                             </div>
-                             <div :class="(old_offer.rejected === 1) ? 'px-5 py-5 opacity-50' : 'px-5 py-5'">
+                             <div :class="(old_offer.status === 2) ? 'px-5 py-5 opacity-50' : 'px-5 py-5'">
                                 <div id="latest-tasks-new2" class="tab-pane active" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
                                     <div class="flex items-center mb-5">
                                         <div class="pl-4 my-2">
@@ -132,7 +132,7 @@
                     <div class="flex items-center mr-3 text-theme-1" v-if="project.accept_offer === 0"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Oczekuje na akceptacje inwestora</div>
                     <div class="flex items-center mr-3 text-theme-9" v-if="project.accept_offer === 1 && stage === 3"> <i data-feather="check-square" class="w-4 h-4 mr-2"></i>Zaakceptowano</div>
                 </div>
-                <div :class="(new_offer.rejected === 1) ? 'px-5 py-5 opacity-50' : 'px-5 py-5'">
+                <div :class="(new_offer.status === 2) ? 'px-5 py-5 opacity-50' : 'px-5 py-5'">
                     <div id="latest-tasks-two" class="tab-pane acftive" role="tabpanel" aria-labelledby="latest-tasks-new-tab">
                         <div class="flex items-center mb-5">
                             <div class="pl-4 my-2">
@@ -411,7 +411,7 @@ export default {
         const user = window.Laravel.user;
         const values = require('../../../json/offer_values.json');
         const offer_id = ref();
-        const guard = ref();
+        const guard = ref(false);
         const change = ref(false);
         const is_done_offer = ref(false);
         const new_offer = ref({});

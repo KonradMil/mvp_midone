@@ -7,9 +7,6 @@
                 <div class="intro-y col-span-12 sm:col-span-12" >
                     <h3>Części i urządzenia</h3>
                 </div>
-                <button class="btn btn-primary hidden sm:flex my-2"  @click="refreshMe">
-                    Aktualizuj części
-                </button>
 
                 <table class="table">
                     <thead>
@@ -42,6 +39,10 @@
 
                         </template>
                 </table>
+
+                <button class="btn btn-primary hidden sm:flex my-2"  @click="refreshMe">
+                    Aktualizuj
+                </button>
             </div>
             <div class="divide-gray-200"></div>
             <div class="intro-y col-span-12 sm:col-span-12" >
@@ -157,7 +158,7 @@
             </div>
             <div class="intro-y col-span-12 sm:col-span-12" >
             <button class="btn btn-primary hidden sm:flex mt-2"  @click="refreshMe">
-                Aktualizuj części
+                Aktualizuj
             </button>
             </div>
             <div class="intro-y col-span-12 sm:col-span-12" >
