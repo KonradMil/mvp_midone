@@ -24,6 +24,8 @@ import updateLocale from 'dayjs/esm/plugin/updateLocale';
 import {VueReCaptcha} from "vue-recaptcha-v3";
 import utc from 'dayjs/esm/plugin/utc';
 import { vfmPlugin } from 'vue-final-modal'
+import * as Sentry from "@sentry/vue";
+import { Integrations } from "@sentry/tracing";
 
 const emitter = mitt();
 
@@ -51,7 +53,21 @@ window.Echo = new Echo({
     disableStats: true,
 });
 
-const app = createApp(App)
+
+const app = createApp(App);
+
+Sentry.init({
+    app,
+    dsn: "https://ce18a456c29d459a803ba67f4ebeb3d8@o1060388.ingest.sentry.io/6072548",
+    integrations: [
+        new Integrations.BrowserTracing({
+            routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+            tracingOrigins: ["platform.dbr77.com", /^\//],
+        }),
+    ],
+    tracesSampleRate: 1.0,
+});
+
 globalComponents(app);
 utils(app);
 

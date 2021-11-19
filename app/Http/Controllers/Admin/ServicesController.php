@@ -48,7 +48,7 @@ class ServicesController extends Controller
         }
 
         $saveSaas = $SAASService->saveService($parameters, $check);
-        $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
+//        $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
         $this->responseBuilder->setData('saas',  $saveSaas);
 
         return $this->responseBuilder->getResponse();
@@ -67,7 +67,6 @@ class ServicesController extends Controller
     {
         $data = Studio::where('organization_slug', '=', $organization)->first();
 
-        $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
         $this->responseBuilder->setData('saas',  $data);
 
         return $this->responseBuilder->getResponse();
@@ -106,11 +105,12 @@ class ServicesController extends Controller
 
     public function logInServiceUser(Request $request, $organization)
     {
-        $serviceUser = StudioUser::where('email', '=', $request->email)->first();
         $studio = Studio::where('organization_slug', '=', $organization)->first();
+        $serviceUser = StudioUser::where('email', '=', $request->email . $studio->email_regexp)->first();
+
 
         if($serviceUser != NULL) {
-            if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            if(Auth::attempt(['email' => $request->email . $studio->email_regexp, 'password' => $request->password])) {
                 session(['service_logged' => 'true']);
                 session(['service' => $studio->organization_slug]);
                 $this->responseBuilder->setSuccessMessage(__('Zalogowano'));

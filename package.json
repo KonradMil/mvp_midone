@@ -18,6 +18,8 @@
         "@heroicons/vue": "^1.0.4",
         "@left4code/tw-starter": "^1.0.14",
         "@popperjs/core": "^2.9.1",
+        "@sentry/tracing": "^6.15.0",
+        "@sentry/vue": "^6.15.0",
         "@tiptap/extension-bubble-menu": "^2.0.0-beta.45",
         "@tiptap/extension-bullet-list": "^2.0.0-beta.20",
         "@tiptap/extension-dropcursor": "^2.0.0-beta.21",

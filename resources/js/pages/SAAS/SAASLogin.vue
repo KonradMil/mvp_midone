@@ -18,11 +18,7 @@
                         </div>
                     </div>
                     <template v-if="registerShow">
-                        <div class="rounded-md shadow-sm -space-y-px" >
-                            <div class="input-group mt-2">
-                                <TerraInput type="password" placeholder="Hasło" v-model:val="password"></TerraInput>
-                            </div>
-                        </div>
+
                         <div class="rounded-md shadow-sm -space-y-px" >
                             <div class="input-group mt-2">
                                 <TerraInput type="password" placeholder="Powtórz hasło" v-model:val="password_repeat"></TerraInput>
@@ -76,16 +72,15 @@ export default {
         const toast = useToast();
         const login = () => {
             RequestHandler('saas/login/' + props.organization, 'POST', {
-                email: email.value
+                email: email.value,
+                password: password.value
             }, () => {
                 window.location.href = '/playground/saves';
             });
         }
 
         const getData = () => {
-            RequestHandler('saas/' + props.organization + '/data', 'POST', {}, (response) => {
-                console.log(response);
-                console.log(response.data);
+            RequestHandler('saas/' + props.organization + '/data', 'GET', {}, (response) => {
                 organization.value = response.data.saas;
             });
         }
@@ -98,7 +93,7 @@ export default {
                     email: email.value + organization.value.email_regexp,
                     password: password.value
                 }, () => {
-                    router.push({path: '/kreator'});
+                    window.location.reload();
                 });
             }
         }
