@@ -17,9 +17,15 @@ class ShowroomHandler extends RequestHandler
     public function getParameters(): ShowroomParameters
     {
         $parameters = new ShowroomParameters();
-        $parameters->name = $this->request->get('name');
-        $parameters->custom_css = $this->request->get('custom_css');
-        $parameters->challenge_id = $this->request->get('challenge_id');
+        $showroom = $this->request->get('showroom');
+        $parameters->name = $showroom['name'];
+        $parameters->description = $showroom['description'];
+        $parameters->custom_css = $showroom['custom_css'];
+        $parameters->custom_functions = json_encode($showroom['custom_functions']);
+        $parameters->organization = $showroom['organization'];
+        $parameters->dominant_color = $showroom['dominantColor'] ?? '';
+        $parameters->organization_logo = $showroom['organization_logo'] ?? '';
+        $parameters->challenge_id = $showroom['challenge_id'];
 
         return $parameters;
     }

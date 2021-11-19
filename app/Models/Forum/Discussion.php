@@ -13,12 +13,12 @@ class Discussion extends Model
     public $timestamps = true;
 
     protected $table = 'chatter_discussions';
-    protected $fillable = ['title', 'category_id', 'color', 'last_reply_at'];
+    protected $fillable = ['title', 'category_id', 'color', 'last_reply_at', 'sticky'];
     protected $dates = ['deleted_at', 'last_reply_at'];
 
     public function user()
     {
-        return $this->belongsTo(config('chatter.user.namespace'));
+        return $this->belongsTo(User::class);
     }
 
     public function category()

@@ -127,6 +127,9 @@ import GetModelsUnity from "../../../compositions/GetModelsUnity";
 
 export default {
     name: "LeftPanel",
+    props: {
+      sourceType: String
+    },
     setup(props, {emit}) {
         const app = getCurrentInstance();
         const emitter = app.appContext.config.globalProperties.emitter;
@@ -139,6 +142,7 @@ export default {
         const visible = ref(false);
         const models = ref([]);
         const brands = require("../../../json/robot_brands.json");
+
         //LEFT BUTTON CLICKED
         emitter.on('leftbuttonclick', e => handleChange(e.val))
 
@@ -154,7 +158,9 @@ export default {
 
         const selectModel = (model) => {
             console.log('unityoutgoingactionFIRST', model);
-            emitter.emit('unityoutgoingaction', {action: 'placeObject', data: model})
+            let data = model;
+            data.sourceType = props.sourceType;
+            emitter.emit('unityoutgoingaction', {action: 'placeObject', data: data})
         }
 
         const handleChange = (cat_id) => {

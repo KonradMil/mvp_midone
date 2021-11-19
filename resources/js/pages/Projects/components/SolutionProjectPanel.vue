@@ -1,5 +1,5 @@
 <template>
-    <div class="col-span-12 lg:col-span-8 xxl:col-span-9">
+    <div class="col-span-12 lg:col-span-8 xxl:col-span-9" v-if="guard === true">
         <div class="grid grid-cols-12 gap-6">
             <!-- BEGIN: Announcement -->
             <div class="intro-y box col-span-12 xxl:col-span-12">
@@ -105,8 +105,13 @@ export default {
                 })
         }
 
+        const initialize = async() =>{
+            await getProjectSolution();
+            guard.value = true;
+        }
+
         onMounted(function () {
-            getProjectSolution();
+            initialize();
         });
 
         return {

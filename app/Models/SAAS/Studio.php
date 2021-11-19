@@ -13,7 +13,7 @@ class Studio extends Model
     protected $table = 'studios';
 
     protected $fillable = [
-        'name', 'organization_name', 'organization_logo',
+        'name', 'organization_name', 'organization_logo', 'organization_slug',
         'email_regexp', 'max_users', 'paid'
     ];
 

@@ -9,7 +9,7 @@ class ShowroomSlide extends Model
 {
     use HasFactory;
 
-    protected $table = 'showroom_slide';
+    protected $table = 'showroom_slides';
 
     /**
      *

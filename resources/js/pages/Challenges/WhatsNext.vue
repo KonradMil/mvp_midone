@@ -1,5 +1,5 @@
 <template>
-    <div class="intro-y box p-5 bg-theme-1 text-white mt-5">
+    <div class="intro-y box p-5 bg-theme-1 text-white mt-5" v-if="guard === true">
         <div class="flex items-center">
             <div class="font-medium text-lg">{{$t('challengesMain.nextStep')}}</div>
 <!--            <div-->
@@ -55,7 +55,7 @@ name: "WhatsNext",
         const isSolutions = ref(false);
         const isSelected = ref(false);
         const check = ref(false);
-
+        const guard = ref(false);
         const first = ref(false);
         const second = ref(false);
         const third = ref(false);
@@ -208,15 +208,19 @@ name: "WhatsNext",
             } catch (e) {
 
             }
+        }
 
+        const initialize = async() =>{
+            await doMe();
+            guard.value = true;
         }
 
         onMounted(() => {
-            doMe();
-            console.log('WHats next');
+            initialize();
         });
 
         return {
+            guard,
             first,
             second,
             third,

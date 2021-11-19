@@ -11,6 +11,16 @@
             "title": "Modele"
         },
         {
+            "icon": "HomeIcon",
+            "pageName": "admin-discussion",
+            "title": "Forum Posty"
+        },
+        {
+            "icon": "HomeIcon",
+            "pageName": "admin-category",
+            "title": "Forum Kategorie"
+        },
+        {
             "icon": "BoxIcon",
             "pageName": "users-admin",
             "title": "Użytkownicy"
@@ -22,8 +32,13 @@
         },
         {
             "icon": "BoxIcon",
-            "pageName": "showrooms-admin",
+            "pageName": "admin-showroom",
             "title": "Showroomy"
+        },
+        {
+            "icon": "BoxIcon",
+            "pageName": "admin-saas",
+            "title": "Serwisy"
         },
         {
             "icon": "HomeIcon",

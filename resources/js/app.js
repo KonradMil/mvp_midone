@@ -23,6 +23,7 @@ import relativeTime from 'dayjs/esm/plugin/relativeTime';
 import updateLocale from 'dayjs/esm/plugin/updateLocale';
 import {VueReCaptcha} from "vue-recaptcha-v3";
 import utc from 'dayjs/esm/plugin/utc';
+import { vfmPlugin } from 'vue-final-modal'
 
 const emitter = mitt();
 
@@ -33,7 +34,9 @@ const i18n = createI18n({
     fallbackLocale: 'en', // set fallback locale
     messages, // set locale messages
 })
+require('lite-youtube-embed');
 require('./bootstrap')
+
 
 window.Pusher = require('pusher-js');
 
@@ -48,15 +51,6 @@ window.Echo = new Echo({
     disableStats: true,
 });
 
-// window.Echo = new Echo({
-//     authEndpoint: '/api/broadcast/auth',
-//     broadcaster: "socket.io",
-//     host: 'localhost:6001',
-//     wsHost: window.location.hostname,
-//     wsPort: 6001,
-//     forceTLS: false,
-// });
-
 const app = createApp(App)
 globalComponents(app);
 utils(app);
@@ -69,7 +63,7 @@ app.use(lazyPlugin, {
     loading: '/s3/twopointo/images/loader.gif',
     error: '/s3/screenshots/dbr_placeholder.jpeg'
 })
-
+app.use(vfmPlugin);
 app.use(VueCookies, {
     expireTimes: "1h",
 });

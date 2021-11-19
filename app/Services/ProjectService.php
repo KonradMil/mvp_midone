@@ -179,7 +179,6 @@ class ProjectService
      */
     public function addLocalVision(NewLocalVisionParameters $newLocalVisionParameters): Model
     {
-
         $localVisionParams = [
             'author_id' => Auth::user()->id,
             'project_id' => $newLocalVisionParameters->projectId,

@@ -20,7 +20,9 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::post('/robochallenge', [RobochallengeController::class, 'register']);
 
+    require __DIR__ . '/api/v2/showroom.php';
     require __DIR__ . '/api/studio-lite.php';
+    require __DIR__ . '/api/files.php';
     require __DIR__ . '/api/admin.php';
     require __DIR__ . '/api/solutions.php';
     require __DIR__ . '/api/reports.php';
@@ -35,6 +37,8 @@ Route::group(['middleware' => 'web'], function () {
     require __DIR__ . '/api/notifications.php';
     require __DIR__ . '/api/teams.php';
     require __DIR__ . '/api/models.php';
+    require __DIR__ . '/api/services.php';
+    require __DIR__ . '/api/showrooms.php';
     require __DIR__ . '/api/workshop_models.php';
     require __DIR__ . '/api/offers.php';
     require __DIR__ . '/api/projects.php';

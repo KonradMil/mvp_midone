@@ -38,7 +38,7 @@
                 </div>
                 <!-- END: Slide Over Body -->
                 <!-- BEGIN: Slide Over Footer -->
-                <div v-if="solution.status === 0" class="modal-footer text-right w-full bottom-0">
+                <div v-if="solution.status === 0 || (content == 'label' || content == 'comment' || content == 'layout' || content == 'line' || content == 'animable' || content == 'description')" class="modal-footer text-right w-full bottom-0">
                     <button v-if="challenge.stage != 3" type="button" data-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1">
                         Anuluj
                     </button>

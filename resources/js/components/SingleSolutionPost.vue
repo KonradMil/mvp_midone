@@ -12,13 +12,13 @@
                     class="rounded-full"
                     :src="'/' + props.solution.screenshot_path"/>
             </div>
-            <div class="ml-3 mr-auto" @click="goTo('normalSolution')">
+            <div class="ml-3 mr-auto" @click="goTo">
                 <a href="" class="font-medium">{{ props.solution.name }} <span v-if="props.solution.selected == 1" style="color: #5e50ac;"> - {{$t('challengesMain.accepted')}}</span><span v-if="props.solution.rejected == 1" style="color: #1a202c;"> - {{$t('challengesMain.rejected')}}</span></a>
             </div>
         </div>
         <div class="p-5 border-t border-gray-200 dark:border-dark-5" >
             <div class="h-40 xxl:h-56 image-fit">
-                <img @click="goTo('anotherSolution')"
+                <img @click="goTo"
                      alt="DBR77"
                      class="rounded-md"
                      :src="'/' + props.solution.screenshot_path"/>
@@ -56,8 +56,8 @@
                 <button class="btn btn-primary shadow-md mr-2" @click="deleteSolution" v-if="solution.selected != 1 && solution.status !== 1">{{$t('models.delete')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 0" @click="publishSolution">{{$t('challengesMain.publish')}}</button>
                 <button class="btn btn-primary shadow-md mr-2" v-if="solution.status == 1 && !(solution.selected == 1 || solution.rejected == 1)" @click="unpublishSolution">{{$t('challengesMain.unpublish')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" @click="switchTab">{{$t('teams.teams')}}</button>
-                <button class="btn btn-primary shadow-md mr-2" v-if="solution.selected === 1" @click="addOffer">{{$t('challengesMain.addOffer')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" @click="goToCard('showTeams')">{{$t('teams.teams')}}</button>
+                <button class="btn btn-primary shadow-md mr-2" v-if="solution.selected === 1" @click="goToCard('addOffer')">{{$t('challengesMain.addOffer')}}</button>
                 <div :data-count=solutionFiles.length
                      class="dropdown-toggle notification notification--bullet cursor-pointer"
                      role="button"
@@ -108,14 +108,18 @@
                     <div class="rounded-md pt-4">
                         <div class="grid grid-cols-4 h-full">
                             <div class=" h-full" v-for="(file, index) in solutionFiles" :key="'file_' + index">
+                                <Tippy class="dark:text-gray-300 text-gray-600"
+                                       :content="file.original_name">
                                 <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
-                                    <img
-                                        v-lazy="'/' + file.path"
-                                         class="w-full h-full"
-                                         :alt="file.original_name"/>
+                                          <img
+                                            v-lazy="'/' + file.path"
+                                            class="w-full h-full"
+                                            :alt="file.original_name"/>
                                     <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
+
                                     </div>
                                 </div>
+                                </Tippy>
                                 <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;"
                                     class="cursor-pointer px-6">
                                     <button v-if="user.id === props.solution.author_id && props.solution.status !== 1" class="btn btn-outline-secondary py-1 px-2 mr-3" @click="deleteFile(index,file)">
@@ -129,7 +133,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-3" v-if="solutionFiles.length <= 0 && user.id !== props.solution.author_id">
+                <div class="mt-3" v-if="solutionFiles.length <= 0">
                     <span class="font-medium dark:text-theme-10 text-theme-1">Brak plików</span>
                 </div>
                 <div class="mt-3" v-if="user.id === props.solution.author_id && props.solution.status !== 1">
@@ -213,6 +217,7 @@ export default {
         const guard = ref(false);
         const images = ref([]);
         const isPublishSolution = ref('true');
+        const isAcceptedSolution = ref('true');
 
         const modalClosed = () => {
             show.value = false;
@@ -266,6 +271,16 @@ export default {
         const addOffer = () => {
             emitter.emit('selectedSolution', {id: solution.id});
         }
+
+        const goToCard = (type) => {
+            if(type === 'addOffer'){
+                solution.value = props.solution
+                router.push({ name: 'internalChallenegeCard', params : {id: solution.challenge.id, fromAllAddOffer: 'true', solutionFromAll_id: props.solution.id}})
+            } else if (type === 'showTeams'){
+                solution.value = props.solution
+                router.push({ name: 'internalChallenegeCard', params : {id: solution.challenge.id, fromAllTeamsSolution: 'true', solutionFromAll_id: props.solution.id}})
+            }
+        };
 
         const checkTeam = () => {
             axios.post('/api/solution/check-team', {user_id: user.id, solution_id: props.solution.id})
@@ -384,20 +399,22 @@ export default {
             dropzoneSingleRef.value = el;
         });
 
-        const goTo = async(link) => {
-            if(link === 'normalSolution' && props.solution.status !== 1){
-                console.log('normalSolution')
-                await router.push({path: '/studio/solution/' + props.solution.id})
-            } else if(link === 'anotherSolution' && props.solution.status !== 1){
+        const goTo = async() => {
+           if(props.solution.status !== 1){
                 console.log('anotherSolution')
                 await router.push({name: 'challengeStudio', params: {id: props.solution.id, type: 'solution', canEditSolution: props.canEditSolution}})
-            } else if(props.solution.status === 1){
+            } else if(props.solution.status === 1 && props.solution.selected !== 1){
                 console.log('publishSolution')
                 await router.push({name: 'challengeStudio', params: {id: props.solution.id, type: 'solution', canEditSolution: props.canEditSolution, isPublishSolution: isPublishSolution.value}})
+            } else if(props.solution.status === 1 && props.solution.selected === 1){
+                console.log('acceptedSolution')
+                await router.push({name: 'challengeStudio', params: {id: props.solution.id, type: 'solution', canEditSolution: props.canEditSolution, isAcceptedSolution: isAcceptedSolution.value}})
             }
         }
 
         return {
+            isAcceptedSolution,
+            goToCard,
             isPublishSolution,
             goTo,
             downloadFile,

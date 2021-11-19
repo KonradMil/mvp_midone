@@ -1,0 +1,29 @@
+{
+    "menu": [
+        {
+            "icon": "InboxIcon",
+            "pageName": "studio-playground-saves",
+            "title": "Studio playground"
+        },
+        {
+            "icon": "InboxIcon",
+            "pageName": "workshop",
+            "title": "Marketplace obiektów"
+        },
+        {
+            "icon": "InboxIcon",
+            "pageName": "knowledgebase",
+            "title": "Baza wiedzy"
+        },
+        {
+            "icon": "InboxIcon",
+            "pageName": "communication",
+            "title": "Pomoc"
+        },
+        {
+            "icon": "InboxIcon",
+            "pageName": "notifications",
+            "title": "Powiadomienia"
+        }
+    ]
+}

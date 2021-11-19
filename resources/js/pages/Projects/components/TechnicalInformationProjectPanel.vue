@@ -320,6 +320,7 @@
                                 </div>
                                 <input :disabled="challenge.selected[0].author_id !== user.id"
                                        v-if="stage === 3"
+                                       @input="checkLength(new_financial.days, 'days')"
                                        type="number"
                                        v-model="new_financial.days"
                                        class="form-control"/>
@@ -336,6 +337,7 @@
                                 <input :disabled="challenge.selected[0].author_id !== user.id"
                                        v-if="stage === 3"
                                        type="number"
+                                       @input="checkLength(new_financial.shifts, 'shifts')"
                                        v-model="new_financial.shifts "
                                        class="form-control"/>
                             </div>
@@ -351,6 +353,7 @@
                                 <input :disabled="challenge.selected[0].author_id !== user.id"
                                        v-if="stage === 3"
                                        type="number"
+                                       @input="checkLength(new_financial.shift_time, 'shiftTime')"
                                        v-model="new_financial.shift_time"
                                        class="form-control"/>
                             </div>
@@ -366,6 +369,7 @@
                                 <input :disabled="challenge.selected[0].author_id !== user.id"
                                        v-if="stage === 3"
                                        type="number"
+                                       @input="checkLength(new_financial.weekend_shift, 'weekendShift')"
                                        v-model="new_financial.weekend_shift"
                                        class="form-control"/>
                             </div>
@@ -381,6 +385,7 @@
                                 <input :disabled="challenge.selected[0].author_id !== user.id"
                                        v-if="stage === 3"
                                        type="number"
+                                       @input="checkLength(new_financial.breakfast, 'breakfast')"
                                        v-model="new_financial.breakfast "
                                        class="form-control"/>
                             </div>
@@ -396,6 +401,7 @@
                                 <input :disabled="challenge.selected[0].author_id !== user.id"
                                        v-if="stage === 3"
                                        type="number"
+                                       @input="checkLength(new_financial.stop_time, 'stopTime')"
                                        v-model="new_financial.stop_time"
                                        class="form-control"/>
                             </div>
@@ -412,6 +418,7 @@
                                 <input :disabled="challenge.selected[0].author_id !== user.id"
                                        v-if="stage === 3"
                                        type="number"
+                                       @input="checkLength(new_financial.operator_performance, 'operatorPerformance')"
                                        v-model="new_financial.operator_performance"
                                        class="form-control"/>
                             </div>
@@ -427,6 +434,7 @@
                                 <input :disabled="challenge.selected[0].author_id !== user.id"
                                        v-if="stage === 3"
                                        type="number"
+                                       @input="checkLength(new_financial.defective, 'defective')"
                                        v-model="new_financial.defective"
                                        class="form-control"/>
                             </div>
@@ -443,6 +451,7 @@
                                 <input :disabled="challenge.selected[0].author_id !== user.id"
                                        v-if="stage === 3"
                                        type="number"
+                                       @input="checkLength(new_financial.number_of_operators, 'numberOfOperators')"
                                        v-model="new_financial.number_of_operators"
                                        class="form-control"/>
                             </div>
@@ -458,6 +467,7 @@
                                 <input :disabled="challenge.selected[0].author_id !== user.id"
                                        v-if="stage === 3"
                                        type="number"
+                                       @input="checkLength(new_financial.operator_cost, 'operatorCost')"
                                        v-model="new_financial.operator_cost"
                                        class="form-control"/>
                             </div>
@@ -473,6 +483,7 @@
                                 <input :disabled="challenge.selected[0].author_id !== user.id"
                                        v-if="stage === 3"
                                        type="number"
+                                       @input="checkLength(new_financial.absence, 'absence')"
                                        v-model="new_financial.absence"
                                        class="form-control"/>
                             </div>
@@ -488,6 +499,7 @@
                                 <input :disabled="challenge.selected[0].author_id !== user.id"
                                        v-if="stage === 3"
                                        type="number"
+                                       @input="checkLength(new_financial.cycle_time, 'cycleTime')"
                                        v-model="new_financial.cycle_time"
                                        class="form-control"/>
                             </div>
@@ -623,6 +635,81 @@ export default {
             });
         }
 
+        const checkLength = (object, type) => {
+            if(type === 'days'){
+                if(object < 0){
+                    new_financial.value.days = 0;
+                }else if(object > 366){
+                    new_financial.value.days = 366;
+                }
+            } else if(type === 'shifts'){
+                if(object < 0){
+                    new_financial.value.shifts = 0;
+                }else if(object > 100){
+                    new_financial.value.shifts = 100;
+                }
+            } else if(type === 'weekendShift'){
+                if(object < 0){
+                    new_financial.value.weekend_shift = 0;
+                }else if(object > 100){
+                    new_financial.value.weekend_shift = 100;
+                }
+            }else if(type === 'shiftTime'){
+                if(object < 0){
+                    new_financial.value.shift_time = 0;
+                }else if(object > 24){
+                    new_financial.value.shift_time = 24;
+                }
+            } else if(type === 'breakfast'){
+                if(object < 0){
+                    new_financial.value.breakfast = 0;
+                }else if(object > 60){
+                    new_financial.value.breakfast = 60;
+                }
+            } else if(type === 'stopTime'){
+                if(object < 0){
+                    new_financial.value.stop_time = 0;
+                }else if(object > 100){
+                    new_financial.value.stop_time = 100;
+                }
+            } else if(type === 'operatorPerformance'){
+                if(object < 0){
+                    new_financial.value.operator_performance = 0;
+                }else if(object > 100){
+                    new_financial.value.operator_performance = 100;
+                }
+            } else if(type === 'defective') {
+                if(object < 0){
+                    new_financial.value.defective = 0;
+                }else if(object > 100){
+                    new_financial.value.defective = 100;
+                }
+            } else if(type === 'numberOfOperators'){
+                if(object < 0){
+                    new_financial.value.number_of_operators = 0;
+                }else if(object > 1000){
+                    new_financial.value.number_of_operators = 1000;
+                }
+            } else if(type === 'operatorCost'){
+                if(object < 0){
+                    new_financial.value.operator_cost = 0;
+                }
+            } else if(type === 'absence'){
+                if(object < 0){
+                    new_financial.value.absence = 0;
+                } else if(object > 100){
+                    new_financial.value.absence = 100;
+                }
+            } else if(type === 'cycleTime'){
+                if(object < 0){
+                    new_financial.value.cycle_time = 0;
+                } else if(object > 60){
+                    new_financial.value.cycle_time = 60;
+                }
+            }
+
+        }
+
 
         onMounted(() => {
             getNewTechnical((response) => {
@@ -635,6 +722,7 @@ export default {
         });
 
         return {
+            checkLength,
             error,
             guard,
             example,

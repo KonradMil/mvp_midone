@@ -207,6 +207,7 @@ import {getCurrentInstance, onMounted, ref} from "vue";
 import {useToast} from "vue-toastification";
 import Multiselect from '@vueform/multiselect';
 import Slider from '@vueform/slider'
+import RequestHandler from "../../../compositions/RequestHandler";
 
 
 export default {
@@ -304,37 +305,93 @@ export default {
         };
 
         const save = () => {
-            axios.post('/api/offer/save', {
-                edit_id: props.edit_offer_id,
-                stage: props.stage,
-                challenge_id: props.challenge_id,
-                solution_id: props.solution_id,
-                price_of_delivery: price_of_delivery.value,
-                weeks_to_start: weeks_to_start.value,
-                time_to_start: time_to_start.value,
-                time_to_fix: time_to_fix.value,
-                advance_upon_start: advance_upon_start.value,
-                advance_upon_delivery: advance_upon_delivery.value,
-                advance_upon_agreement: advance_upon_agreement.value,
-                years_of_guarantee: years_of_guarantee.value,
-                maintenance_frequency: maintenance_frequency.value,
-                price_of_maintenance: price_of_maintenance.value,
-                reaction_time: reaction_time.value,
-                intervention_price: intervention_price.value,
-                work_hour_price: work_hour_price.value,
-                period_of_support: period_of_support.value,
-                offer_expires_in: offer_expires_in.value,
-                solution_robots: solution_robots.value,
-                is_changed: props.change_offer,
-            }).then(response => {
-                if (response.data.success) {
-                    toast.success(response.data.message);
+            if(props.stage === 3){
+                RequestHandler('offer/project/save', 'post', {
+                    project_id: props.project.id,
+                    stage: props.stage,
+                    offer_id: props.edit_offer_id,
+                    challenge_id: props.challenge_id,
+                    solution_id: props.solution_id,
+                    price_of_delivery: price_of_delivery.value,
+                    weeks_to_start: weeks_to_start.value,
+                    time_to_start: time_to_start.value,
+                    time_to_fix: time_to_fix.value,
+                    advance_upon_start: advance_upon_start.value,
+                    advance_upon_delivery: advance_upon_delivery.value,
+                    advance_upon_agreement: advance_upon_agreement.value,
+                    years_of_guarantee: years_of_guarantee.value,
+                    maintenance_frequency: maintenance_frequency.value,
+                    price_of_maintenance: price_of_maintenance.value,
+                    reaction_time: reaction_time.value,
+                    intervention_price: intervention_price.value,
+                    work_hour_price: work_hour_price.value,
+                    period_of_support: period_of_support.value,
+                    offer_expires_in: offer_expires_in.value,
+                    solution_robots: solution_robots.value,
+                }, (response) => {
                     emitter.emit('changeToOffers', {action: 'go', check: true, is_done_offer: props.is_changed});
-                } else {
-                    toast.error('Ups! Coś poszło nie tak!');
-                }
-            })
+                });
+            }else {
+                RequestHandler('offer/solution/save', 'post', {
+                    stage: props.stage,
+                    offer_id: props.edit_offer_id,
+                    challenge_id: props.challenge_id,
+                    solution_id: props.solution_id,
+                    price_of_delivery: price_of_delivery.value,
+                    weeks_to_start: weeks_to_start.value,
+                    time_to_start: time_to_start.value,
+                    time_to_fix: time_to_fix.value,
+                    advance_upon_start: advance_upon_start.value,
+                    advance_upon_delivery: advance_upon_delivery.value,
+                    advance_upon_agreement: advance_upon_agreement.value,
+                    years_of_guarantee: years_of_guarantee.value,
+                    maintenance_frequency: maintenance_frequency.value,
+                    price_of_maintenance: price_of_maintenance.value,
+                    reaction_time: reaction_time.value,
+                    intervention_price: intervention_price.value,
+                    work_hour_price: work_hour_price.value,
+                    period_of_support: period_of_support.value,
+                    offer_expires_in: offer_expires_in.value,
+                    solution_robots: solution_robots.value,
+                }, (response) => {
+                    emitter.emit('changeToOffers', {action: 'go', check: true, is_done_offer: props.is_changed});
+                });
+            }
+
         }
+
+        // const save = () => {
+        //     axios.post('/api/offer/save', {
+        //         edit_id: props.edit_offer_id,
+        //         stage: props.stage,
+        //         challenge_id: props.challenge_id,
+        //         solution_id: props.solution_id,
+        //         price_of_delivery: price_of_delivery.value,
+        //         weeks_to_start: weeks_to_start.value,
+        //         time_to_start: time_to_start.value,
+        //         time_to_fix: time_to_fix.value,
+        //         advance_upon_start: advance_upon_start.value,
+        //         advance_upon_delivery: advance_upon_delivery.value,
+        //         advance_upon_agreement: advance_upon_agreement.value,
+        //         years_of_guarantee: years_of_guarantee.value,
+        //         maintenance_frequency: maintenance_frequency.value,
+        //         price_of_maintenance: price_of_maintenance.value,
+        //         reaction_time: reaction_time.value,
+        //         intervention_price: intervention_price.value,
+        //         work_hour_price: work_hour_price.value,
+        //         period_of_support: period_of_support.value,
+        //         offer_expires_in: offer_expires_in.value,
+        //         solution_robots: solution_robots.value,
+        //         is_changed: props.change_offer,
+        //     }).then(response => {
+        //         if (response.data.success) {
+        //             toast.success(response.data.message);
+        //             emitter.emit('changeToOffers', {action: 'go', check: true, is_done_offer: props.is_changed});
+        //         } else {
+        //             toast.error('Ups! Coś poszło nie tak!');
+        //         }
+        //     })
+        // }
 
         const segregateRobots = () => {
             solution_save.value.map((obj) => {

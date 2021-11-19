@@ -4,11 +4,11 @@
 </template>
 
 <script>
-
 import {useToast} from "vue-toastification";
 import {onMounted, ref} from "vue";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+
 const toast = useToast();
 
 export default {
@@ -20,6 +20,7 @@ export default {
         const isLoading = ref(false);
         const fullPage = ref(true);
         const counter = ref(0);
+
         onMounted(() => {
             window.axios.interceptors.request.use(function (config) {
                 isLoading.value = true;
@@ -30,7 +31,6 @@ export default {
                 if(counter.value === 0) {
                     isLoading.value = false;
                 }
-
 
                 return Promise.reject(error);
             });
@@ -47,7 +47,6 @@ export default {
                 if(counter.value === 0) {
                     isLoading.value = false;
                 }
-                // console.log(counter.value)
 
                 return Promise.reject(error);
             });
