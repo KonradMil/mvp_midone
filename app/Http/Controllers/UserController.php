@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Mail\ChangePassword;
 use App\Mail\ForgotPassword;
 use App\Models\Challenge;
+use App\Models\SAAS\Studio;
+use App\Models\SAAS\StudioUser;
 use App\Models\Solution;
 use Authy\AuthyApi;
 use GuzzleHttp\Client;
@@ -418,6 +420,12 @@ class UserController extends Controller
     public function logout(): JsonResponse
     {
         try {
+            $link = '/login';
+            if(Auth::user()->type == 'saas') {
+                $su = StudioUser::where('email', '=', Auth::user()->email)->first();
+                $s = Studio::find($su->studio_id);
+                $link = '/saas/' . $s->organization_slug . '/login';
+            }
             Auth::logout();
             Session::flush();
             $success = true;
@@ -431,7 +439,10 @@ class UserController extends Controller
         $response = [
             'success' => $success,
             'message' => $message,
+            'logout_link' => $link
         ];
+
+
         return response()->json($response);
     }
 
