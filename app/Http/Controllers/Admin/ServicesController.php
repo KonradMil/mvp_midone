@@ -34,7 +34,7 @@ class ServicesController extends Controller
         $parameters = $saasHandler->getParameters();
 
         if (!$parameters->isValid()) {
-            $this->responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
+            $this->responseBuilder->setErrorMessage($parameters->getMessageBag());
             return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
         }
 
@@ -117,11 +117,11 @@ class ServicesController extends Controller
                 $this->responseBuilder->setData('service-user',  $serviceUser);
                 return $this->responseBuilder->getResponse();
             } else {
-                $this->responseBuilder->setErrorMessagesFromMB('Błędne hasło');
+                $this->responseBuilder->setErrorMessage('Błędne hasło');
                 return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
             }
         } else {
-            $this->responseBuilder->setErrorMessagesFromMB('Błędny email');
+            $this->responseBuilder->setErrorMessage('Błędny email');
             return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
         }
     }
