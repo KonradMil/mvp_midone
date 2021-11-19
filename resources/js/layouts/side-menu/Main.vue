@@ -6,7 +6,7 @@
             <nav class="side-nav">
                 <!--         BEGIN: Logo-->
                 <div class="flex-row w-full items-center">
-                    <router-link :to="{ name: 'dashboard' }" tag="a" v-if="user.type != 'robochallenge'" class="intro-x flex items-center  pt-4 px-12">
+                    <router-link :to="{ name: 'dashboard' }" tag="a" v-if="user.type != 'saas'" class="intro-x flex items-center  pt-4 px-12">
                         <img alt="DBR77 Platforma Robotów " class="w-full" src="/images/dbr_logo_white_notagline_platform.svg"/>
                     </router-link>
                     <div v-else class="intro-x flex items-center  pt-4 px-12">

@@ -2,7 +2,7 @@
     <div>
         <div class="flex items-center border-b border-gray-200 dark:border-dark-5 px-5 py-4">
             <div class="ml-3 mr-auto">
-                <a href="" class="font-medium">{{ save.name }}</a>
+                <span class="font-medium">{{ save.name }}</span>
             </div>
         </div>
         <div class="p-5 border-t border-gray-200 dark:border-dark-5" >
@@ -10,7 +10,7 @@
                 <img @click="$router.push({path: '/playground/' + save.id})"
                      alt="DBR77"
                      class="rounded-md"
-                     :src="'/' + save.screenshot_path"
+                     v-lazy="'/' + save.screenshot_path"
                 />
             </div>
         </div>
