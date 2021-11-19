@@ -204,6 +204,7 @@ export default {
         solution: Object,
         parts: Array
     },
+
     setup(props) {
         //GLOBAL
         const app = getCurrentInstance();
@@ -246,14 +247,23 @@ export default {
                 });
         });
 
-        const finalPartsList = () => {
+        const finalPartsList = (parts = null) => {
+
             partsAr.value = {};
-                if(props.parts.length != undefined) {
-                    props.parts.forEach((obj) => {
 
+            if(!parts) {
+                parts = props.parts;
+            }
 
-                        if(partPrices.value[obj.model_name] != undefined) {
-                            if(partsAr.value[obj.model_name] != undefined) {
+            if(parts.length !== undefined) {
+
+                parts.forEach((obj) => {
+
+                    //1091 - id modelu "Operator - Ethan"
+                    if(typeof obj.sourceType !== undefined && obj.sourceType === 'solution' && parseInt(obj.model_id) !== 1091) {
+
+                        if (partPrices.value[obj.model_name] !== undefined) {
+                            if (partsAr.value[obj.model_name] !== undefined) {
                                 partsAr.value[obj.model_name].count += 1;
 
                             } else {
@@ -264,15 +274,15 @@ export default {
 
                             }
                         } else {
-                            if(partsAr.value[obj.model_name] != undefined) {
-                                if(partPrices.value[obj.model_name] == undefined) {
+                            if (partsAr.value[obj.model_name] !== undefined) {
+                                if (partPrices.value[obj.model_name] === undefined) {
                                     partPrices.value[obj.model_name] = 0;
 
                                 }
                                 partsAr.value[obj.model_name].count += 1;
 
                             } else {
-                                if(partPrices.value[obj.model_name] == undefined) {
+                                if (partPrices.value[obj.model_name] === undefined) {
                                     partPrices.value[obj.model_name] = 0;
 
                                 }
@@ -283,26 +293,28 @@ export default {
 
                             }
                         }
-                    });
-                    try {
-                        let tempChallenge = JSON.parse(challenge.value.save_json);
-                        tempChallenge.parts.forEach((objC, index) => {
-
-
-                            if(partsAr.value[objC.model.model_name] != undefined) {
-                                partsAr.value[objC.model.model_name].count -= 1;
-                            }
-                        })
-                    }catch (e) {
-
                     }
+                });
+
+                try {
+                    let tempChallenge = JSON.parse(challenge.value.save_json);
+                    tempChallenge.parts.forEach((objC, index) => {
+
+
+                        if(partsAr.value[objC.model.model_name] !== undefined) {
+                            partsAr.value[objC.model.model_name].count -= 1;
+                        }
+                    })
+                }catch (e) {
 
                 }
+
+            }
+
         };
 
         const partsCost = computed(() => {
             let sum = 0;
-
 
             for (let key in partsAr.value) {
                     sum += partsAr.value[key].price * partsAr.value[key].count;
@@ -366,7 +378,6 @@ export default {
                 })
         }
 
-
         const refreshMe = () => {
             getParts();
             setTimeout(() => {
@@ -379,13 +390,8 @@ export default {
                 .then(response => {
 
                     if (response.data.success) {
-
-
-
                         challenge.value = response.data.payload;
-
                         finalPartsList();
-
                     }
                 })
         }
@@ -408,6 +414,10 @@ export default {
                 getEstimate();
             }
 
+        });
+
+        emitter.on('UnityObjectPlaced', e => {
+            finalPartsList(e.partsPlaced);
         });
 
         return {

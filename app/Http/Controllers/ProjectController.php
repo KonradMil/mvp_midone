@@ -840,8 +840,6 @@ class ProjectController extends Controller
      */
     public function saveVisitDate(Request $request, ProjectService $projectService): JsonResponse
     {
-
-
         $visitDateHandler = new VisitDateHandler($request);
 
         $parameters = $visitDateHandler->getParameters();
@@ -850,7 +848,6 @@ class ProjectController extends Controller
             $this->responseBuilder->setErrorMessagesFromMB($parameters->getMessageBag());
             return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
         }
-
 
         $newVisitDate = $projectService->addVisitDate($parameters);
 
@@ -1031,8 +1028,6 @@ class ProjectController extends Controller
      */
     public function getOffersProject(Request $request, int $id, ChallengeRepository $challengeRepository, ProjectRepository $projectRepository, OfferRepository $offerRepository): JsonResponse
     {
-
-
         $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {
@@ -1053,7 +1048,6 @@ class ProjectController extends Controller
             $this->responseBuilder->setErrorMessage(__('messages.offer.not_found'));
             return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
-
 
         $new_offer = null;
         if ($project->selected_offer_id > 0) {
@@ -1076,8 +1070,6 @@ class ProjectController extends Controller
      */
     public function getOffersProjectIntegrator(Request $request, int $id, ChallengeRepository $challengeRepository, ProjectRepository $projectRepository, OfferRepository $offerRepository): JsonResponse
     {
-
-
         $challenge = $challengeRepository->find($id);
 
         if (!$challenge) {

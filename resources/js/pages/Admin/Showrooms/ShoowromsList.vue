@@ -1,5 +1,6 @@
 <template>
-    <table-lite
+    <Button classes="m-2" type="primary" text="Dodaj showroom" @buttonClicked="$router.push({path: '/admin/showrooms/add'})"></Button>
+    <vue-table-lite
         :is-loading="table.isLoading"
         :columns="table.columns"
         :rows="table.rows"
@@ -8,16 +9,19 @@
         :messages="table.messages"
         @do-search="doSearch"
         @is-finished="table.isLoading = false"
-    ></table-lite>
+    ></vue-table-lite>
 </template>
 
 <script>
 import VueTableLite from 'vue3-table-lite'
+import RequestHandler from "../../../compositions/RequestHandler";
 import {onMounted, reactive} from "vue";
+import Button from "../../../components-terraform/Button";
 
 export default {
     name: "ShowroomsList",
     components: {
+        Button,
         VueTableLite
     },
     setup() {
@@ -64,11 +68,13 @@ export default {
         };
 
         const getData = () => {
-
+            RequestHandler('admin/showrooms/get', 'get', {}, (response) => {
+              table.rows = response.showrooms;
+            });
         }
 
         onMounted(() => {
-
+            getData();
         });
 
         return {

@@ -66,7 +66,15 @@
             "Komunikacja": "Communication",
             "Pomoc" : "Support",
             "Powiadomienia" : "Notifications",
-            "Studio playground" : "Studio playground"
+            "Studio playground" : "Studio playground",
+            "Forum Posty": "Forum Posts",
+            "Forum Kategorie": "Forum Categories",
+            "Showroomy": "Showrooms",
+            "Serwisy": "Services",
+            "SAAS": "Services",
+            "Konkursy": "Contests",
+            "Użytkownicy": "Users",
+            "Modele": "Models"
         },
         "subMenu": {
             "Wszystkie": "All",
@@ -225,6 +233,7 @@
             "description" : "Description",
             "details" : "Details",
             "photo" : "Photos",
+            "files" : "Files",
             "uploadPhoto" : "Upload photos",
             "uploadedPhotos" : "Uploaded photos",
             "uploadedFiles" : "Uploaded files",
@@ -376,7 +385,15 @@
             "Komunikacja": "Komunikacja",
             "Pomoc" : "Pomoc",
             "Powiadomienia" : "Powiadomienia",
-            "Studio playground" : "Studio playground"
+            "Studio playground" : "Studio playground",
+            "Forum Posty": "Forum Posty",
+            "Forum Kategorie": "Forum Kategorie",
+            "Showroomy": "Showroomy",
+            "Serwisy": "Serwisy",
+            "SAAS": "Serwisy",
+            "Konkursy": "Konkursy",
+            "Użytkownicy": "Użytkownicy",
+            "Modele": "Models"
         },
 
         "subMenu": {
@@ -538,6 +555,7 @@
             "description" : "Opis",
             "details" : "Szczegóły",
             "photo" : "Zdjęcia",
+            "files" : "Pliki",
             "uploadPhoto" : "Wgraj zdjęcia",
             "uploadedPhotos" : "Wgrane zdjęcia",
             "uploadedFiles" : "Wgrane pliki",

@@ -6,7 +6,7 @@
     </div>
     <div class="grid  gap-2" :class="'grid-cols-' + columnNumber">
         <template v-for="(row,i) in data" :key="'row_' + i">
-            <Input v-for="(n,index) in parseInt(columnNumber)" classes="col" :key="'input_row_' + i + '_input_' + index" placeholder="" type="text" v-model:val="row[index]"></Input>
+            <TerraInput v-for="(n,index) in parseInt(columnNumber)" classes="col" :key="'input_row_' + i + '_input_' + index" placeholder="" type="text" v-model:val="row[index]"></TerraInput>
         </template>
     </div>
     <Button type="primary" classes="mt-2 flex-wrap" @buttonClicked="addRow" text="Dodaj rząd"></Button>
@@ -15,12 +15,12 @@
 <script>
 import {onMounted, ref, watch} from "vue";
 import Button from "./Button";
-import Input from "./Input";
+import TerraInput from "./TerraInput";
 import Label from "./Label";
 
 export default {
     name: "JSONObjectCreator",
-    components: {Input, Button, Label},
+    components: {TerraInput, Button, Label},
     props: {
         columnNumber: {
             type: Number,

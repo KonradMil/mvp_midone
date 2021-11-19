@@ -23,6 +23,9 @@ import relativeTime from 'dayjs/esm/plugin/relativeTime';
 import updateLocale from 'dayjs/esm/plugin/updateLocale';
 import {VueReCaptcha} from "vue-recaptcha-v3";
 import utc from 'dayjs/esm/plugin/utc';
+import { vfmPlugin } from 'vue-final-modal'
+import * as Sentry from "@sentry/vue";
+import { Integrations } from "@sentry/tracing";
 
 const emitter = mitt();
 
@@ -33,7 +36,9 @@ const i18n = createI18n({
     fallbackLocale: 'en', // set fallback locale
     messages, // set locale messages
 })
+require('lite-youtube-embed');
 require('./bootstrap')
+
 
 window.Pusher = require('pusher-js');
 
@@ -48,16 +53,21 @@ window.Echo = new Echo({
     disableStats: true,
 });
 
-// window.Echo = new Echo({
-//     authEndpoint: '/api/broadcast/auth',
-//     broadcaster: "socket.io",
-//     host: 'localhost:6001',
-//     wsHost: window.location.hostname,
-//     wsPort: 6001,
-//     forceTLS: false,
-// });
 
-const app = createApp(App)
+const app = createApp(App);
+
+Sentry.init({
+    app,
+    dsn: "https://ce18a456c29d459a803ba67f4ebeb3d8@o1060388.ingest.sentry.io/6072548",
+    integrations: [
+        new Integrations.BrowserTracing({
+            routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+            tracingOrigins: ["platform.dbr77.com", /^\//],
+        }),
+    ],
+    tracesSampleRate: 1.0,
+});
+
 globalComponents(app);
 utils(app);
 
@@ -69,7 +79,7 @@ app.use(lazyPlugin, {
     loading: '/s3/twopointo/images/loader.gif',
     error: '/s3/screenshots/dbr_placeholder.jpeg'
 })
-
+app.use(vfmPlugin);
 app.use(VueCookies, {
     expireTimes: "1h",
 });

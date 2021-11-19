@@ -9,7 +9,7 @@
 
 <script>
 export default {
-    name: "Input",
+    name: "TerraInput",
     props: {
         type: {
             type: String,

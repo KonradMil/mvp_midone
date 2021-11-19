@@ -1,7 +1,7 @@
 <template>
     <TopButtons v-if="loaded" :allowedEdit="allowedEdit && (challenge.status != 1)" :icons="topIcons" :canEditSolution="canEditSolution"></TopButtons>
     <LeftButtons :icons="leftIcons" v-if="(mode == 'edit' && allowedEdit && loaded)"></LeftButtons>
-    <LeftPanel></LeftPanel>
+    <LeftPanel :sourceType="type"></LeftPanel>
     <div @contextmenu.prevent="openMenu">
         <Studio hideFooter="true" :src="unity_path" :width="window_width" :height="window_height" unityLoader="/UnityLoader.js" ref="gameWindow"/>
     </div>
@@ -15,6 +15,19 @@
     <HelpModal></HelpModal>
     <CopyLoadModal></CopyLoadModal>
     <!--    <ModalWorkshop :show="workshopOpen"></ModalWorkshop>-->
+    <ModalSuccess :show="showSuccess && loaded" @closed="modalClosed">
+        <div class="p-5 text-center">
+            <CheckCircleIcon class="w-16 h-16 text-theme-9 mx-auto mt-3"></CheckCircleIcon>
+            <div class="text-3xl mt-5">
+               <p v-if="isPublishSolution === 'true'">Twoje rozwiązanie zostało opublikowane. Wszelkie zmiany nie zostaną zapisane. Jeżeli chcesz wprowadzić zmiany, cofnij publikację rozwiązania.</p>
+               <p v-if="isAcceptedSolution === 'true'">Twoje rozwiązanie zostało zaakceptowane przez Inwestora. Wszelkie zmiany nie zostaną zapisane.</p>
+            </div>
+        </div>
+        <div class="px-5 pb-8 text-center">
+            <button type="button" data-dismiss="modal" class="btn btn-primary w-24" @click.prevent="modalClosed">Ok</button>
+        </div>
+    </ModalSuccess>
+<!--    <ModalWorkshop :show="workshopOpen"></ModalWorkshop>-->
     <!--    <WorkshopModal v-if="workshopOpen" :open="workshopOpen"></WorkshopModal>-->
 </template>
 
@@ -39,6 +52,7 @@ import useEmitter from "../../composables/useEmitter";
 import useRadialMenu from "../../composables/radialMenu";
 import useLayoutButtonClick from "../../composables/useLayoutButtonClick";
 import CopyLoadModal from "./components/CopyLoadModal";
+import ModalSuccess from "../../components/ModalSuccess";
 
 const ww = WindowWatcher();
 
@@ -55,10 +69,11 @@ export default {
         canEditSolution: Boolean,
         sessionid: String,
         isPublishSolution: String,
+        isAcceptedSolution: String,
     },
     components: {
         CopyLoadModal,
-        HelpModal, ModalWorkshop, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio
+        HelpModal, ModalWorkshop, RightButtons, RightPanel, BottomPanel, TopButtons, LeftPanel, LeftButtons, Studio, ModalSuccess
     },
     setup(props, {emit}) {
         //GLOBAL
@@ -96,6 +111,8 @@ export default {
         const sessionid = ref('');
         const owner = ref(false);
         const isPublishSolution = ref('');
+        const isAcceptedSolution = ref('');
+        const showSuccess = ref(false);
 
         window.copyLoad = function () {
 
@@ -114,6 +131,9 @@ export default {
 
         }
 
+        const modalClosed = () => {
+            showSuccess.value = false;
+        }
         //ALL EVENTS
         emitter.on('*', (type, e) => {
             console.log('*', [type, e]);
@@ -289,7 +309,7 @@ export default {
                 } else {
                     return false;
                 }
-            } else if(isPublishSolution.value === 'true'){
+            } else if(isPublishSolution.value === 'true' || isAcceptedSolution.value === 'true'){
                   return false;
             }else {
                 if (inTeam.value || (user.id == solution.value.author_id)) {
@@ -312,7 +332,7 @@ export default {
         const initalize = async () => {
             setTimeout(function () {
                 loaded.value = true;
-                unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value);
+                unityActionOutgoingObject.value = unityActionOutgoing(gameWindow.value, type.value);
                 handleUnityActionOutgoing({
                     action: 'setSessionId',
                     data: Number(Math.random().toString().substr(3, length) + Date.now()).toString(36)
@@ -385,6 +405,13 @@ export default {
                             data: JSON.parse(response.data.payload.save_json)
                         });
                         unlockInput();
+                        if(solution.value.status === 1 && solution.value.selected !== 1){
+                            showSuccess.value = true;
+                            isPublishSolution.value = 'true';
+                        }else if(solution.value.status === 1 && solution.value.selected === 1){
+                            showSuccess.value = true;
+                            isAcceptedSolution.value = 'true';
+                        }
                     } else {
                         // toast.error(response.data.message);
                     }
@@ -416,30 +443,15 @@ export default {
             mode.value = 'edit';
             type.value = props.type;
             isPublishSolution.value = props.isPublishSolution;
+            isAcceptedSolution.value = props.isAcceptedSolution;
             id.value = props.id;
             window_height.value = window.innerHeight;
-
-            window.onkeydown = evt => {
-                console.log(evt.keyCode);
-                console.log(evt.key);
-                switch (evt.key) {
-                    //F1
-                    case 'm':
-                        console.log('TAKE ME');
-                        handleUnityActionOutgoing({action: 'takeScreenshot', data: ''});
-                        break;
-                    case 'l':
-                        console.log('TAKE ME');
-                        handleUnityActionOutgoing({action: 'takeScreenshot', data: ''});
-                        break;
-                    default:
-                        return true;
-                }
-                return false;
-            };
         });
 
         return {
+            isAcceptedSolution,
+            modalClosed,
+            showSuccess,
             isPublishSolution,
             workshopOpen,
             user,
@@ -464,7 +476,8 @@ export default {
             unlockInput,
             loaded,
             sessionid,
-            owner
+            owner,
+            showLeftButtons
         }
     }
 }

@@ -156,6 +156,8 @@ export default defineComponent({
 
                 if(user.value.type == 'admin') {
                     menu.value = require('../../json/admin_menu.json');
+                } else if (user.value.type == 'saas') {
+                    menu.value = require('../../json/services_menu.json');
                 } else {
                     menu.value = require('../../json/main_menu.json');
                 }
@@ -164,6 +166,8 @@ export default defineComponent({
             cash("body")
                 .removeClass("error-page")
                 .removeClass("login")
+                .removeClass("fanuc-bg")
+                .removeClass("saas-bg")
                 .addClass("main");
 
             formattedMenu.value = $h.toRaw(sideMenu.value);

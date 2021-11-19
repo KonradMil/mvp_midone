@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'publish' => 'Published',
     'unfollow' => "Stopped following",
     'error' => "Unexpected error occurred!",
     'save_correct' => "Saved correctly",

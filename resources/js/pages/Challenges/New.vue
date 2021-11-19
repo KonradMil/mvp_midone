@@ -134,13 +134,13 @@
                             <div class="border border-gray-200 dark:border-dark-5 rounded-md p-5 mt-5">
                                 <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5">
                                     <ChevronDownIcon class="w-4 h-4 mr-2"/>
-                                    {{ $t('challengesNew.photo') }}
+                                    {{ $t('challengesNew.files') }}
                                 </div>
                                 <div class="mt-5">
                                     <div class="mt-3" v-if="images.length > 0">
                                         <label class="form-label"> {{ $t('challengesNew.uploadedFiles') }}</label>
                                         <div class="rounded-md pt-4">
-                                            <div class="row flex h-full">
+                                            <div class="grid grid-cols-4 h-full">
                                                 <div class=" h-full" v-for="(image, index) in images" :key="'image_' + index">
                                                     <div class="pos-image__preview image-fit w-44 h-46 rounded-md m-5" style="overflow: hidden;">
                                                         <img v-lazy="'/' + image.path"
@@ -151,7 +151,7 @@
                                                         <div style="width: 94%; bottom: 0; position: relative; margin-top: 100%; margin-left: 10px; font-size: 16px; font-weight: bold;">
                                                         </div>
                                                     </div>
-                                                    <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteImage(index)" class="cursor-pointer">USUŃ
+                                                    <div style="width: 94%; bottom: 0; position: relative;  margin-left: 10px; font-size: 16px; font-weight: bold;" @click="deleteImage(image,index)" class="cursor-pointer">USUŃ
                                                     </div>
                                                 </div>
                                             </div>
@@ -387,7 +387,6 @@ export default {
         const solution_deadline = ref("");
         const offer_deadline = ref("");
         const challengeSelects = ref();
-
         const images = ref([]);
         const teams = ref([]);
         const teamsAllowed = ref([]);
@@ -417,6 +416,7 @@ export default {
         });
         const id = ref(null);
         const now = dayjs().valueOf();
+        const canDeleteImage = ref(false);
         const types = require("../../json/types.json");
         const tagss = require("../../json/tagsChallenge.json");
         const sels = require("../../json/challenge.json");
@@ -497,8 +497,16 @@ export default {
 
         }
 
-        const deleteImage = (index) => {
-            images.value.splice(index, 1);
+        const deleteImage = (image,index) => {
+            if(canDeleteImage.value === true){
+                RequestHandler('challenges/' + props.challenge_id + '/file/delete', 'post', {
+                    file_id: image.id,
+                }, (response) => {
+                    images.value.splice(index, 1);
+                });
+            } else {
+                images.value.splice(index, 1);
+            }
         }
 
         onMounted(() => {
@@ -509,7 +517,7 @@ export default {
 
             elDropzoneSingleRef.dropzone.on("success", (resp) => {
                 images.value.push(JSON.parse(resp.xhr.response).payload);
-                toast.success('Zdjecie zostało wgrane poprawnie!');
+                toast.success('Plik został wgrany poprawnie!');
             });
             elDropzoneSingleRef.dropzone.on("error", () => {
                 toast.error("Błąd");
@@ -520,6 +528,7 @@ export default {
             if (props.challenge_id != undefined) {
                 id.value = props.challenge_id;
                 getChallengeCardRepositories();
+                canDeleteImage.value = true;
                 // getTeamsRepositories();
             }
         });
@@ -569,6 +578,7 @@ export default {
         }
 
         return {
+            canDeleteImage,
             categories,
             category,
             tags,
