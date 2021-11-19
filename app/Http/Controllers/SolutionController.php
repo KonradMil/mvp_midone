@@ -296,6 +296,7 @@ class SolutionController extends Controller
     public function getRobots(Request $request): JsonResponse
     {
         $solution = Solution::find($request->input('id'));
+
         $estimate = Estimate::where('solution_id', '=', $solution->id)->first();
         $robots = [];
 
