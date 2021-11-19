@@ -6,9 +6,16 @@ import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 import SideMenu from '../layouts/side-menu/Main'
 import Wizard from "../pages/Wizard";
+import CategoryAdmin from "../pages/Admin/Community/CategoryAdmin"
+import PostsAdmin from "../pages/Admin/Community/PostsAdmin"
 import ShowroomList from "../pages/Admin/Showrooms/ShoowromsList"
 import AddEditShowroom from "../pages/Admin/Showrooms/AddEditShowroom"
+import AddEditSAAS from "../pages/Admin/SAAS/AddEditSAAS"
+import SAASList from "../pages/Admin/SAAS/SAASList"
 import AdminFreeSaves from "../pages/Admin/AdminFreeSaves";
+import AddCategoryAdmin from "../pages/Admin/Community/AddCategoryAdmin";
+import AddDiscussionAdmin from "../pages/Admin/Community/AddDiscussionAdmin";
+import DiscussionAdmin from "../pages/Admin/Community/DiscussionAdmin";
 import MainLite from "../pages/Unity/Lite/MainLite";
 import Profile from "../pages/Wizard";
 import PeerTest from "../pages/PeerTest";
@@ -40,14 +47,12 @@ import ForgotPassword from "../pages/ForgotPassword";
 import Workshop from "../pages/Unity/Workshop/Workshop";
 import NewOffer from "../pages/Offers/NewOffer";
 import Offers from "../pages/Challenges/components/Offers";
-import ShowroomLogin from "../pages/Admin/Showrooms/ShowroomLogin";
-import SolutionsPanel from "../pages/Challenges/components/SolutionsPanel";
-import ProjectsList from "../pages/Admin/ProjectsList";
-import UserList from '../pages/Admin/UserList';
+import ShowroomLogin from "../pages/Showrooms/ShowroomLogin";
 import Secret from '../pages/Admin/Secret';
 import SolutionsArchive from "../pages/Solutions/SolutionsArchive";
 import Robochallenge from "../pages/Robochallenge";
 import Notifications from "../pages/Notifications";
+import SAASLogin from "../pages/SAAS/SAASLogin";
 
 export const routes = [
     {
@@ -69,7 +74,14 @@ export const routes = [
     {
         name: 'showroom-login',
         path: '/showroom/:organization/login',
-        component: ShowroomLogin
+        component: ShowroomLogin,
+        props: true
+    },
+    {
+        name: 'saas-login',
+        path: '/saas/:organization/login',
+        component: SAASLogin,
+        props: true
     },
     {
         name: 'showroom',
@@ -135,9 +147,51 @@ export const routes = [
         component: SideMenu,
         children: [
             {
+                name: 'admin-saas',
+                path: '/admin/saas',
+                component: SAASList,
+                props: true
+            },
+            {
+                name: 'admin-add-saas',
+                path: '/admin/add/saas',
+                component: AddEditSAAS,
+                props: true
+            },
+            {
                 name: 'admin-showroom',
                 path: '/admin/showrooms',
                 component: ShowroomList,
+                props: true
+            },
+            {
+                name: 'admin-add-post',
+                path: '/admin/add/post',
+                component: AddDiscussionAdmin,
+                props: true
+            },
+            {
+                name: 'admin-add-category',
+                path: '/admin/add/category',
+                component: AddCategoryAdmin,
+                props: true
+            },
+            {
+                name: 'admin-category',
+                path: '/admin/categories',
+                component: CategoryAdmin,
+                props: true
+            },
+            {
+                name: 'admin-discussion',
+                path: '/admin/discussion',
+                component: DiscussionAdmin,
+                props: true
+            },
+            {
+                name: 'admin-posts',
+                path: '/admin/posts',
+                component: PostsAdmin,
                 props: true
             },
             {

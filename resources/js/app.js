@@ -34,7 +34,9 @@ const i18n = createI18n({
     fallbackLocale: 'en', // set fallback locale
     messages, // set locale messages
 })
+require('lite-youtube-embed');
 require('./bootstrap')
+
 
 window.Pusher = require('pusher-js');
 
@@ -48,15 +50,6 @@ window.Echo = new Echo({
     forceTLS: false,
     disableStats: true,
 });
-
-// window.Echo = new Echo({
-//     authEndpoint: '/api/broadcast/auth',
-//     broadcaster: "socket.io",
-//     host: 'localhost:6001',
-//     wsHost: window.location.hostname,
-//     wsPort: 6001,
-//     forceTLS: false,
-// });
 
 const app = createApp(App)
 globalComponents(app);

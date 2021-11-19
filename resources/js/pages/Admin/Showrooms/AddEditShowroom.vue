@@ -57,7 +57,7 @@
                                    ID studio playground
                                 </div>
                                 <div class="mt-5">
-                                    <Input type="text" placeholder="" v-model:val="showroom.challenge_id"></Input>
+                                    <TerraInput type="text" placeholder="" v-model:val="showroom.challenge_id"></TerraInput>
                                 </div>
                                 <div class="font-medium flex items-center border-b border-gray-200 dark:border-dark-5 pb-5 mt-3">
                                     {{ $t('challengesNew.description') }}
@@ -90,7 +90,7 @@
                 <Box classes="p-5">
                     <div class="my-3">
                         <Label title="Organizacja"></Label>
-                        <Input type="text" placeholder="Nazwa organizacji" v-model:val="showroom.organization"></Input>
+                        <TerraInput type="text" placeholder="Nazwa organizacji" v-model:val="showroom.organization"></TerraInput>
                     </div>
                     <div class="my-3">
                         <Label title="Kolor dominujący"></Label>
@@ -111,7 +111,7 @@ import Multiselect from '@vueform/multiselect'
 import Dropzone from "../../../components-terraform/Dropzone";
 import Swatches from "../../../components-terraform/Swatches";
 import Label from "../../../components-terraform/Label";
-import Input from "../../../components-terraform/Input";
+import TerraInput from "../../../components-terraform/TerraInput";
 import Box from "../../../components-terraform/Box";
 import Button from "../../../components-terraform/Button";
 import JSONObjectCreator from "../../../components-terraform/JSONObjectCreator";
@@ -121,7 +121,7 @@ import RequestHandler from "../../../compositions/RequestHandler";
 
 export default {
     name: "AddEditShowroom",
-    components: {AddSlide, JSONObjectCreator, Button, Box, Input, Swatches, Dropzone, Multiselect, Label, Slides},
+    components: {AddSlide, JSONObjectCreator, Button, Box, TerraInput, Swatches, Dropzone, Multiselect, Label, Slides},
     props: {
         showroom_id: Number,
     },

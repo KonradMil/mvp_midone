@@ -116,7 +116,7 @@ export default {
         }
 
         const getRoboData = () => {
-            axios.get('/api/showroom/get/' + props.organization)
+            axios.get('/api/showroom/' + props.organization + '/data')
                 .then(response => {
                     console.log('RESP', response);
                     freeSave.value = response.data.freeSaves;

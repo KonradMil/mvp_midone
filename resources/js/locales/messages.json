@@ -66,7 +66,15 @@
             "Komunikacja": "Communication",
             "Pomoc" : "Support",
             "Powiadomienia" : "Notifications",
-            "Studio playground" : "Studio playground"
+            "Studio playground" : "Studio playground",
+            "Forum Posty": "Forum Posts",
+            "Forum Kategorie": "Forum Categories",
+            "Showroomy": "Showrooms",
+            "Serwisy": "Services",
+            "SAAS": "Services",
+            "Konkursy": "Contests",
+            "Użytkownicy": "Users",
+            "Modele": "Models"
         },
         "subMenu": {
             "Wszystkie": "All",
@@ -377,7 +385,15 @@
             "Komunikacja": "Komunikacja",
             "Pomoc" : "Pomoc",
             "Powiadomienia" : "Powiadomienia",
-            "Studio playground" : "Studio playground"
+            "Studio playground" : "Studio playground",
+            "Forum Posty": "Forum Posty",
+            "Forum Kategorie": "Forum Kategorie",
+            "Showroomy": "Showroomy",
+            "Serwisy": "Serwisy",
+            "SAAS": "Serwisy",
+            "Konkursy": "Konkursy",
+            "Użytkownicy": "Użytkownicy",
+            "Modele": "Models"
         },
 
         "subMenu": {

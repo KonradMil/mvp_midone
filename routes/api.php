@@ -37,6 +37,8 @@ Route::group(['middleware' => 'web'], function () {
     require __DIR__ . '/api/notifications.php';
     require __DIR__ . '/api/teams.php';
     require __DIR__ . '/api/models.php';
+    require __DIR__ . '/api/services.php';
+    require __DIR__ . '/api/showrooms.php';
     require __DIR__ . '/api/workshop_models.php';
     require __DIR__ . '/api/offers.php';
     require __DIR__ . '/api/projects.php';

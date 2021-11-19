@@ -51,6 +51,7 @@
         "js-beautify": "^1.13.5",
         "laravel-echo": "^1.11.2",
         "lines-and-columns": "^1.1.6",
+        "lite-youtube-embed": "^0.2.0",
         "litepicker": "^2.0.11",
         "mitt": "^2.1.0",
         "pusher-js": "^7.0.3",
@@ -64,6 +65,7 @@
         "vue-easy-lightbox": "^1.2.0",
         "vue-final-modal": "^3.4.3",
         "vue-i18n": "^9.0.0",
+        "vue-lite-youtube-embed": "^1.0.1",
         "vue-loading-overlay": "^4.0.4",
         "vue-recaptcha-v3": "^2.0.1",
         "vue-router": "^4.0.3",
@@ -75,7 +77,6 @@
         "vue3-table-lite": "^1.0.8",
         "vuex": "^4.0.0",
         "vuex-persistedstate": "^4.1.0",
-        "youtube-vue3": "^0.1.10",
         "zoom-vanilla.js": "^2.0.6"
     },
     "devDependencies": {

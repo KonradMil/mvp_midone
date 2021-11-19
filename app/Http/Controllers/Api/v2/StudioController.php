@@ -16,8 +16,9 @@ class StudioController extends Controller
     private function checkKey(Request $request){
 
         return $request->get('key') === $this->unityKey;
-
     }
+
+
 
     public function getChallengeSave(Request $request, ChallengeRepository $challengeRepository)
     {

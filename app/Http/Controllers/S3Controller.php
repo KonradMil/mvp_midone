@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -157,4 +158,24 @@ class S3Controller extends Controller
 
         return '/s3/uploads/' . $name;
     }
+
+//    public function s3Proccess($file, $name)
+//    {
+//        $fileStream = $file->openFile();
+//        $response = Http::acceptJson()->withToken(env('AIODS_S3_TOKEN'))->attach(
+//            'file', $fileStream, $file->getClientOriginalName()
+//        )->post("https://cdn.appworks-dev.pl/api/upload/image/$name");
+//        if ($response->failed()) {
+//            return response()->json([
+//                's3_status' => $response->status(),
+//                's3_json' => $response->json(),
+//            ]);
+//        }
+//        $rsJson = $response->json();
+//        if ($rsJson['status'] === 'success') {
+//            $upload->path = "$name.$ext";
+//            $upload->url = $rsJson['s3_url'];
+//            $upload->disk = 's3';
+//        }
+//    }
 }

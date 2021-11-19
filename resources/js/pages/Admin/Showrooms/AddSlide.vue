@@ -1,7 +1,7 @@
 <template>
     <Box>
         <Label title="Tytuł"/>
-        <Input type="text" placeholder="" v-model:val="slide.title"/>
+        <TerraInput type="text" placeholder="" v-model:val="slide.title"/>
     </Box>
     <Box>
         <Label title="Typ slajdu"></Label>
@@ -16,7 +16,7 @@
 
 <script>
 import {reactive, ref, toRaw} from "vue";
-import Input from "../../../components-terraform/Input";
+import TerraInput from "../../../components-terraform/TerraInput";
 import Box from "../../../components-terraform/Box";
 import Select from "../../../components-terraform/Select";
 import Label from "../../../components-terraform/Label";
@@ -26,7 +26,7 @@ import TextEditor from "../../../components-terraform/TextEditor";
 
 export default {
     name: "AddSlide",
-    components: {TextEditor, Button, TextArea, Box, Select, Label, Input},
+    components: {TextEditor, Button, TextArea, Box, Select, Label, TerraInput},
     props: {
 
     },

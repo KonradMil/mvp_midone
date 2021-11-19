@@ -8,7 +8,7 @@
             <div v-else class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium">
                 <div>
                     <p>
-                        W tej chwili nie masz żadnych zapisanych luźnych projektów.
+                        W tej chwili nie masz żadnych zapisanych projektów.
                     </p>
                 </div>
             </div>
