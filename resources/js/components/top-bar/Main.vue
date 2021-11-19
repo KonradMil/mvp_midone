@@ -198,11 +198,7 @@ export default defineComponent({
                         if (response.data.success) {
                             store.dispatch('login/logout')
                             toast.success(response.data.message);
-                            if(window.Laravel.user.type == 'saas') {
                                 this.$router.go(response.data.logout_link);
-                            } else {
-                                this.$router.go('/login');
-                            }
 
                         } else {
                             toast.error(response.data.message);

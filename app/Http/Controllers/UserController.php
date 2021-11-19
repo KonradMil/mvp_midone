@@ -421,8 +421,9 @@ class UserController extends Controller
     {
         try {
             $link = '/login';
-            if(Auth::user()->type == 'saas') {
-                $su = StudioUser::where('email', '=', Auth::user()->email)->first();
+            $u = User::find(Auth::user()->id);
+            if($u->type == 'saas') {
+                $su = StudioUser::where('email', '=', $u->email)->first();
                 $s = Studio::find($su->studio_id);
                 $link = '/saas/' . $s->organization_slug . '/login';
             }
