@@ -52,7 +52,7 @@
                                     <div class="inbox__item--time whitespace-nowrap ml-auto pl-10">
                                         {{ $dayjs(q.created_at).format('DD.MM.YYYY HH:mm') }}
                                     </div>
-                                    <div class="inbox__item--time whitespace-nowrap ml-auto pl-10" v-if="authorId == user.id">
+                                    <div class="inbox__item--time whitespace-nowrap ml-auto pl-10" v-if="authorId == user.id || inTeam">
                                         <button v-if="challenge_stage!==3" class="btn btn-primary" @click="answer(q.id)">Odpowiedz</button>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import SaveQuestion from "../../../compositions/SaveQuestion";
 import GetQuestions from "../../../compositions/GetQuestions";
 
@@ -85,6 +85,7 @@ export default {
       id: Number,
         author_id: Number,
         challenge_stage: Number,
+        teams: Array
     },
     setup(props) {
         const addingDialog = ref(false);
@@ -102,6 +103,17 @@ export default {
                 getQuestions();
             });
         }
+
+        const inTeam = computed(() => {
+           let check = false;
+           props.teams.forEach((val) => {
+              if(user.value.teamsAr.includes(val.id)) {
+                  check = true;
+              }
+           });
+
+           return check;
+        })
 
        const close = () => {
             addingDialog.value = false;
@@ -135,7 +147,8 @@ export default {
             answer,
             questionId,
             expand,
-            authorId
+            authorId,
+            inTeam
         }
     }
 }
