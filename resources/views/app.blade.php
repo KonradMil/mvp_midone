@@ -41,11 +41,15 @@
             } else {
                 $company = Auth::user()->companies->toArray()[0];
             }
+            $teams = Auth::user()->teams;
+            $t = $teams->only(['id']);
+            $teamsAr = $t->all();
         @endphp
             window.Laravel = {!!json_encode([
                'isLoggedin' => true,
                'user' => Auth::user(),
-               'teams' => Auth::user()->teams,
+               'teams' => $teams,
+               'teamsar' => $teamsAr,
                'notifications' => Auth::user()->notifications,
                'company' => $company,
                'permissions' => \App\Http\Controllers\UserController::userPermissions(Auth::user())
