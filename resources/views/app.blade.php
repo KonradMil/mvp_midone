@@ -44,7 +44,7 @@
             $teams = Auth::user()->teams;
             $teamsAr = [];
             foreach ($teams as $team) {
-                $$teamsAr[] = $team->id;
+                $teamsAr[] = $team->id;
             }
 
         @endphp
