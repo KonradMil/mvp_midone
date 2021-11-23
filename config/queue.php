@@ -58,7 +58,14 @@ return [
             'suffix' => env('SQS_SUFFIX'),
             'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
         ],
-
+        'cloudtasks' => [
+            'driver' => 'cloudtasks',
+            'project' => env('CLOUD_TASKS_PROJECT', ''),
+            'location' => env('CLOUD_TASKS_LOCATION', ''),
+            'handler' => env('CLOUD_TASKS_HANDLER', ''),
+            'queue' => env('CLOUD_TASKS_QUEUE', 'default'),
+            'service_account_email' => env('CLOUD_TASKS_SERVICE_EMAIL', ''),
+        ],
         'redis' => [
             'driver' => 'redis',
             'connection' => 'default',
