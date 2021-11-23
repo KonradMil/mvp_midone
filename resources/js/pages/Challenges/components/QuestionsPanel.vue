@@ -107,7 +107,7 @@ export default {
         const inTeam = computed(() => {
            let check = false;
            props.teams.forEach((val) => {
-              if(user.value.teamsAr.includes(val.id)) {
+              if(window.Laravel.teamsar.includes(val.id)) {
                   check = true;
               }
            });

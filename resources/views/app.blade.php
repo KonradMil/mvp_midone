@@ -42,8 +42,11 @@
                 $company = Auth::user()->companies->toArray()[0];
             }
             $teams = Auth::user()->teams;
-            $t = $teams->only(['id']);
-            $teamsAr = $t->all();
+            $teamsAr = [];
+            foreach ($teams as $team) {
+                $t[] = $team->id;
+            }
+
         @endphp
             window.Laravel = {!!json_encode([
                'isLoggedin' => true,
