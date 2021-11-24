@@ -4,6 +4,9 @@ const UnityBridge = () => {
     const emitter = app.appContext.config.globalProperties.emitter;
 
     onMounted(() => {
+        window.SceneLoaded = function SceneLoaded() {
+            emitter.emit('SceneLoaded', '');
+        };
         window.UnityPerformanceIssue = function UnityPerformanceIssue(str) {
 
 

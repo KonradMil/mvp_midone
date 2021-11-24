@@ -51,7 +51,7 @@ export default {
         }
 
         const getData = () => {
-            RequestHandler('showroom/' + props.organization + '/data', 'POST', {}, (response) => {
+            RequestHandler('showroom/' + props.organization + '/data', 'GET', {}, (response) => {
                 organization.value = response.data.showroom;
             });
         }

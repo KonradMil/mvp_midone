@@ -53,6 +53,10 @@ import SolutionsArchive from "../pages/Solutions/SolutionsArchive";
 import Robochallenge from "../pages/Robochallenge";
 import Notifications from "../pages/Notifications";
 import SAASLogin from "../pages/SAAS/SAASLogin";
+import ContestsLogin from "../pages/Contests/ContestsLogin";
+import AddEditContest from "../pages/Admin/Contests/AddEditContest";
+import ContestsList from "../pages/Admin/Contests/ContestsList";
+import ContestsMainPage from "../pages/Contests/ContestsMainPage";
 
 export const routes = [
     {
@@ -81,6 +85,12 @@ export const routes = [
         name: 'saas-login',
         path: '/saas/:organization/login',
         component: SAASLogin,
+        props: true
+    },
+    {
+        name: 'contest-login',
+        path: '/contest/:organization/login',
+        component: ContestsLogin,
         props: true
     },
     {
@@ -196,7 +206,7 @@ export const routes = [
             },
             {
                 name: 'admin-add-edit-showroom',
-                path: '/admin/showrooms/add',
+                path: '/admin/showrooms/add/:showroom_id',
                 component: AddEditShowroom,
                 props: true
             },
@@ -207,12 +217,29 @@ export const routes = [
                 props: true
             },
             {
+                name: 'contest-admin-list',
+                path: '/admin/contests/:organization/main',
+                component: ContestsList,
+                props: true
+            },
+            {
+                name: 'contest-main-page',
+                path: '/contests/:organization/main',
+                component: ContestsMainPage,
+                props: true
+            },
+            {
+                name: 'contest-add',
+                path: '/contests/add',
+                component: AddEditContest,
+                props: true
+            },
+            {
                 name: 'studio-playground-saves',
                 path: '/playground/saves',
                 component: PlaygroundSaves,
                 props: true
             },
-
             {
                 name: 'workshop',
                 path: '/workshop',

@@ -132,6 +132,10 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'ShowRadialMenu', val);
     }
 
+    function ShowroomMode(val) {
+        outgoing(game, 'ShowroomMode', val, true);
+    }
+
     function updateComment(val) {
         outgoing(game, 'UpdateComment', val, true);
     }
@@ -239,6 +243,7 @@ export default function unityActionOutgoing(gameWindow) {
         prefix,
         loadWorkshopObject,
         launchTutorial,
-        takeScreenshot
+        takeScreenshot,
+        ShowroomMode
     };
 }

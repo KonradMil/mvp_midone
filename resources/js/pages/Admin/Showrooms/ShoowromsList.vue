@@ -68,8 +68,9 @@ export default {
         };
 
         const getData = () => {
-            RequestHandler('admin/showrooms/get', 'get', {}, (response) => {
-              table.rows = response.showrooms;
+            RequestHandler('admin/showrooms/get?id=' + props.showroom_id, 'get', {}, (response) => {
+                console.log(response);
+              table.rows = response.data.showrooms;
             });
         }
 

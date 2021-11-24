@@ -76,6 +76,11 @@ const UnityBridge = () => {
         window.EnterBuildMode = function EnterBuildMode() {
 
         };
+
+        window.SceneLoaded = function SceneLoaded() {
+            emitter.emit('SceneLoaded', '');
+        };
+
         window.EnterSelectMode = function EnterSelectMode() {
 
         };
@@ -86,16 +91,15 @@ const UnityBridge = () => {
         window.UnityLogMessage = function UnityLogMessage(e) {
 
         };
+
         window.UnityGoToUrl = function UnityGoToUrl(e) {
-
-
             var win = window.open(JSON.parse(e).websiteUrl, '_blank');
             win.focus();
             // window.location.replace(e);
         };
         window.UnityPartPresentation = function UnityPartPresentation(str) {
 
-
+            console.log('METERO CHUJ', str);
             // window.v.unity.partsPresentation = JSON.parse(str);
 
 

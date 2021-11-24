@@ -6,6 +6,18 @@
     <div v-if="!loaded" id="loader">
         <LoadingIcon icon="grid" class="w-8 h-8"/>
     </div>
+    <Modal :show="show" @closed="">
+<!--        <h3 class="intro-y text-lg font-medium mt-5">{{ $t('teams.addMember') }}</h3>-->
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+
+        </div>
+        <div class="intro-y box p-5 mt-12 sm:mt-5">
+            <div class="relative text-gray-700 dark:text-gray-300 mr-4">
+
+                <button class="btn btn-primary shadow-md mr-2" @click="show = false;">Zamknij</button>
+            </div>
+        </div>
+    </Modal>
 </template>
 
 <script>
@@ -18,6 +30,7 @@ import unityActionOutgoing from "../composables/ActionsOutgoing";
 import TopButtons from "./../components/TopButtons";
 import {useToast} from "vue-toastification";
 import useEmitter from "../../../composables/useEmitter";
+import Modal from "../../../components/Modal";
 
 const ww = WindowWatcher();
 
@@ -32,7 +45,7 @@ export default {
         sessionid: String
     },
     components: {
-        StudioLite, TopButtons
+        StudioLite, TopButtons, Modal
     },
     setup(props, {emit}) {
         //GLOBAL
@@ -60,6 +73,7 @@ export default {
         const owner = ref(false);
         const saving = ref(false);
         const toast = useToast();
+        const show = ref(false);
 
         //ALL EVENTS
         emitter.on('*', (type, e) => {
@@ -119,16 +133,31 @@ export default {
             axios.get('/api/showroom/' + props.organization + '/data')
                 .then(response => {
                     console.log('RESP', response);
-                    freeSave.value = response.data.freeSaves;
-                    initialLoad.value = response.data.freeSaves.save_json;
-                    animationSave.value = response.data.freeSaves.save_json.animation_layers;
+                    freeSave.value = response.data.showroom;
+                    initialLoad.value = response.data.showroom.challenge.save_json;
+                    animationSave.value = response.data.showroom.challenge.save_json.animation_layers;
 
-                    window.unityLoad = response.data.freeSaves.save_json;
+                    window.unityLoad = response.data.showroom.challenge.save_json;
 
                     handleUnityActionOutgoing({
                         action: 'loadStructure',
-                        data: response.data.freeSaves.save_json
+                        data: response.data.showroom.challenge.save_json
                     });
+                    setTimeout(() => {
+                        try {
+                            JSON.parse(response.data.showroom.custom_functions).forEach((val) => {
+                                console.log('VAL', val);
+                                handleUnityActionOutgoing({
+                                    action: val.action,
+                                    data: val.data
+                                });
+                            })
+                        }catch (e) {
+                            console.log('IMP RESP', response.data.showroom.custom_functions)
+                            console.log(e);
+                        }
+                    }, 55000);
+
                 })
         }
 
@@ -160,7 +189,7 @@ export default {
 
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
 
-                handleUnityActionOutgoing({action: 'prefix', data: window.app_path + '/s3'});
+                handleUnityActionOutgoing({action: 'prefix', data: window.app_path + 's3'});
                 getRoboData();
             }, 2000);
             setTimeout(() => {
@@ -204,7 +233,8 @@ export default {
             owner,
             unityActionOutgoingObject,
             saving,
-            freeSave
+            freeSave,
+            show
         }
     }
 }

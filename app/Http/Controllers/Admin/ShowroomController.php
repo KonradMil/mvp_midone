@@ -118,7 +118,6 @@ class ShowroomController extends Controller
     {
         $showroom = Showroom::where('organization_slug', '=', $organization)->with('challenge')->first();
 
-        $this->responseBuilder->setSuccessMessage(__('messages.save_correct'));
         $this->responseBuilder->setData('showroom',  $showroom);
 
         return $this->responseBuilder->getResponse();
