@@ -46,6 +46,10 @@ export default function unityActionOutgoing(gameWindow) {
 
     }
 
+    function ShowRoundMenu(val) {
+        outgoing(game, 'ShowRoundMenu', val, true)
+    }
+
     function setSessionId(id) {
         // outgoing(game, 'SetSesionID', id)
     }
@@ -205,7 +209,17 @@ export default function unityActionOutgoing(gameWindow) {
         outgoing(game, 'RemoveComment', id);
     }
 
+    function FocusOnPoint (val) {
+        outgoing(game, 'FocusOnPoint', val, true);
+    }
+
+    function ReceiveVisualInfo (val) {
+        outgoing(game, 'ReceiveVisualInfo', val, true);
+    }
+
     return {
+        ReceiveVisualInfo,
+        FocusOnPoint,
         removeLayout,
         removeLabel,
         removeComment,
@@ -244,6 +258,7 @@ export default function unityActionOutgoing(gameWindow) {
         loadWorkshopObject,
         launchTutorial,
         takeScreenshot,
-        ShowroomMode
+        ShowroomMode,
+        ShowRoundMenu
     };
 }

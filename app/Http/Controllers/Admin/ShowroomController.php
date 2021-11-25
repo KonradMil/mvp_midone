@@ -10,6 +10,7 @@ use App\Models\SAAS\Studio;
 use App\Models\Showrooms\Showroom;
 use App\Models\Showrooms\ShowroomSlide;
 use App\Models\Showrooms\ShowroomVisitor;
+use App\Models\UnityModel;
 use App\Parameters\Admin\ShowroomSlideParameters;
 use App\Repository\Eloquent\Admin\ShowroomRepository;
 use App\Services\Admin\ShowroomService;
@@ -139,5 +140,12 @@ class ShowroomController extends Controller
         $this->responseBuilder->setSuccessMessage('Zalogowano poprawnie.');
 
         return $this->responseBuilder->getResponse();
+    }
+
+    public function getPartData(Request $request)
+    {
+        $um = UnityModel::where('name', '=', $request->part)->first();
+
+        return response()->json([ 'model' => $um]);
     }
 }

@@ -12,7 +12,7 @@ class Contest extends Model
     protected $table = 'contests';
 
     protected $fillable = [
-      'name', 'description'
+      'name', 'name_slug', 'organization_name', 'max_users'
     ];
 
     public function tasks()
