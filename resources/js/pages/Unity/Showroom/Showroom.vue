@@ -240,11 +240,14 @@ export default {
                 case 'topbuttonclick':
                     console.log('aaa', e.val);
                     switch (e.val) {
+                        case 'menu':
+                            handleUnityActionOutgoing({action: 'ShowRoundMenu', data: carousel_menu.value});
+                            break;
+                        case 'orto':
+                            handleUnityActionOutgoing({action: 'ChangeCamera', data: 2});
+                            break;
                         case 'fullscreen':
                             gameWindow.value.setFullscreen();
-                            break;
-                        case 'logout':
-                            window.location.href = window.app_path + '/playground/saves';
                             break;
                         case 'orto':
                             handleUnityActionOutgoing({action: 'ChangeCamera', data: 2});
@@ -257,9 +260,6 @@ export default {
                             break;
                         case 'standard':
                             handleUnityActionOutgoing({action: 'ChangeCamera', data: 0});
-                            break;
-                        case 'help':
-                            cash("#help-modal").modal("show");
                             break;
                     }
                     break;
@@ -286,9 +286,9 @@ export default {
                 });
             })
 
-            setTimeout(() => {
+            // setTimeout(() => {
                 handleUnityActionOutgoing({action: 'ShowRoundMenu', data: carousel_menu.value});
-            }, 2000);
+            // }, 2000);
         }
 
         const getRoboData = () => {
@@ -441,7 +441,7 @@ export default {
                 .removeClass("error-page")
                 .addClass("p-0");
 
-            const ti = require("../../../json/unity_top_buttons.json");
+            const ti = require("../../../json/fanuc_top_buttons.json");
             topIcons.value = ti.icons;
             mode.value = 'edit';
         });

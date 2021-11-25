@@ -1,0 +1,99 @@
+{
+    "icons": {
+        "left_none": {
+            "movie_one": {
+                "src": "\/s3/builder_icons/movie_one_fanuc.png",
+                "tooltip": "Zapisz",
+                "alttext": "",
+                "type": "button",
+                "position": "left",
+                "action": "movie_one"
+            },
+            "movie_two": {
+                "src": "\/s3/builder_icons/movie_two_fanuc.png",
+                "tooltip": "Zapisz",
+                "alttext": "",
+                "type": "button",
+                "position": "left",
+                "action": "movie_two"
+            },
+            "robot_one": {
+                "src": "\/s3/builder_icons/robot_one_fanuc2.png",
+                "tooltip": "Zapisz",
+                "alttext": "",
+                "type": "button",
+                "position": "left",
+                "action": "robot_one"
+            },
+            "robot_two": {
+                "src": "\/s3/builder_icons/robot_two_fanuc2.png",
+                "tooltip": "Zapisz",
+                "alttext": "",
+                "type": "button",
+                "position": "left",
+                "action": "robot_two"
+            },
+            "assembly": {
+                "src": "\/s3/builder_icons/assembly_fanuc.png",
+                "tooltip": "Zapisz",
+                "alttext": "",
+                "type": "button",
+                "position": "left",
+                "action": "robot_two"
+            },
+            "cinema": {
+                "src": "\/s3/builder_icons/cinema_mode_fanuc.png",
+                "tooltip": "Zapisz",
+                "alttext": "",
+                "type": "button",
+                "position": "left",
+                "action": "robot_two"
+            }
+        },
+        "right": {
+            "menu": {
+                "src": "\/s3/fanuc/menu_fanuc.png",
+                "tooltip": "Menu",
+                "alttext": "",
+                "type": "button",
+                "position": "right",
+                "action": "menu"
+            },
+            "fullscreen": {
+                "src": "\/s3/fanuc/fanuc_fullscreen.png",
+                "tooltip": "Pełny ekran",
+                "alttext": "",
+                "type": "button",
+                "position": "right",
+                "action": "fullscreen"
+            },
+            "eye": {
+                "src": "\/s3/builder_icons/oko_fanuc.png",
+                "tooltip": "Ustawienia kamery",
+                "alttext": "",
+                "type": "dropdown",
+                "position": "right",
+                "action": "eye",
+                "options": [
+                    {
+                        "name" : "Standardowa kamera",
+                        "action": "standard"
+                    },
+                    {
+                        "name" : "Kamera z góry",
+                        "action": "topdown"
+                    },
+                    {
+                        "name" : "Kamera ortograficzna",
+                        "action": "orto"
+                    },
+                    {
+                        "name" : "Kamera pierwszoosobowa",
+                        "action": "fpv"
+                    }
+                ]
+            }
+
+        }
+    }
+}
