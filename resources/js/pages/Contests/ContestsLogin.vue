@@ -71,16 +71,16 @@ export default {
         const registerShow = ref(false);
         const toast = useToast();
         const login = () => {
-            RequestHandler('saas/login/' + props.organization, 'POST', {
+            RequestHandler('contest/login/' + props.organization, 'POST', {
                 email: email.value,
                 password: password.value
             }, () => {
-                window.location.href = '/playground/saves';
+                window.location.href = '/contest/' + props.organization;
             });
         }
 
         const getData = () => {
-            RequestHandler('saas/' + props.organization + '/data', 'GET', {}, (response) => {
+            RequestHandler('contest/' + props.organization + '/data', 'GET', {}, (response) => {
                 organization.value = response.data.saas;
             });
         }
@@ -89,8 +89,8 @@ export default {
             if(password.value !== password_repeat.value) {
                 toast.error('Hasła nie są takie same');
             } else {
-                RequestHandler('saas/register/' + props.organization, 'POST', {
-                    email: email.value + organization.value.email_regexp,
+                RequestHandler('contest/register/' + props.organization, 'POST', {
+                    email: email.value,
                     password: password.value
                 }, () => {
                     window.location.reload();
