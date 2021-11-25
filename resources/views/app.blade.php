@@ -27,6 +27,7 @@
     window.info = @php echo Session::get('info') ? '"'.Session::get('info').'"' : 'null' @endphp;
     window.success = @php echo Session::get('success') ? '"'.Session::get('success').'"' : 'null' @endphp;
     window.invitationToken = @php echo Session::get('teamInvitation') ? '"'.Session::get('teamInvitation').'"' : 'null' @endphp;
+    window.impersonationToken = @php echo Session::get('impersonationToken')  ? '"' . Session::get('impersonationToken') . '"' : 'null' @endphp;
 </script>
 
 @if (Auth::check())

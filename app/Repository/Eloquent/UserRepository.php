@@ -30,11 +30,17 @@ class UserRepository extends BaseRepository
 
     /**
      * @param integer $id
+     * @return mixed
      */
     public function getUserWithCompanies(int $id)
     {
         $user = User::where('id', '=', $id)->with('companies')->first();
 
         return $user;
+    }
+
+    public function findImpersonator(string $impersonationToken)
+    {
+        return User::where('impersonation_token', '=', $impersonationToken)->first();
     }
 }

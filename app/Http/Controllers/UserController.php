@@ -8,15 +8,12 @@ use App\Models\Challenge;
 use App\Models\SAAS\Studio;
 use App\Models\SAAS\StudioUser;
 use App\Models\Solution;
+use App\Repository\Eloquent\UserRepository;
 use Authy\AuthyApi;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Session;
@@ -29,6 +26,7 @@ use Illuminate\Support\Str;
 use Laravel\Octane\Exceptions\DdException;
 use Mpociot\Teamwork\Facades\Teamwork;
 use Mpociot\Teamwork\TeamInvite;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  *
@@ -422,7 +420,7 @@ class UserController extends Controller
         try {
             $link = '/login';
             $u = User::find(Auth::user()->id);
-            if($u->type == 'saas') {
+            if ($u->type == 'saas') {
                 $su = StudioUser::where('email', '=', $u->email)->first();
                 $s = Studio::find($su->studio_id);
                 $link = '/saas/' . $s->organization_slug . '/login';
@@ -476,30 +474,64 @@ class UserController extends Controller
 
     /**
      * @param Request $request
-     * @return Application|RedirectResponse|Redirector
-     * @throws DdException
+     * @param UserRepository $userRepository
+     * @return JsonResponse
      */
-    public function impersonate(Request $request): Redirector|RedirectResponse|Application
+    public function impersonate(Request $request, UserRepository $userRepository): JsonResponse
     {
-        $u = Auth::user();
-//        dd($u);
-        if($u->email == 'impersonator@secret.com') {
-            if (str_contains($request->imp, '@')) {
-                $newUser = User::where('email', $request->imp)->first();
-            } else {
-                $newUser = User::find($request->imp);
-            }
 
-            if($newUser !== NULL) {
-                Auth::login($newUser);
-            } else {
-                dd('Nie ma takiego usera');
-            }
-        } else {
-            dd('U FILTHY SCUM');
+        $user = Auth::user();
+
+        if ($user->can_impersonate !== 1) {
+            $this->responseBuilder->setErrorMessage("Unauthorized");
+            return $this->responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
         }
-        $cookie = cookie('letmein', json_encode($newUser), 3);
 
-        return redirect('/');
+        $email = $request->get('email');
+
+        if (!$email) {
+            $this->responseBuilder->setErrorMessage('You must provide a valid email address.');
+            return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+        }
+
+        $userToImpersonate = $userRepository->findByEmail($email);
+
+        if (!$userToImpersonate) {
+            $this->responseBuilder->setErrorMessage('User not found.');
+            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+        }
+
+        $impersonationToken = Hash::make($user->id . $user->email . microtime());
+        $user->impersonation_token = $impersonationToken;
+        $user->save();
+
+        Session::put('impersonationToken', $impersonationToken);
+        Auth::login($userToImpersonate);
+
+        $this->responseBuilder->setSuccessMessage("OK");
+        return $this->responseBuilder->getResponse();
+    }
+
+    /**
+     * @param Request $request
+     * @param UserRepository $userRepository
+     * @return JsonResponse
+     */
+    public function endImpersonation(Request $request, UserRepository $userRepository): JsonResponse
+    {
+        $impersonationToken = $request->get('impersonationToken');
+        $impersonator = $userRepository->findImpersonator($impersonationToken);
+
+        if($impersonator) {
+
+            Session::remove('impersonationToken');
+            $impersonator->impersonation_token = null;
+            $impersonator->save();
+
+            Auth::login($impersonator);
+        }
+
+        $this->responseBuilder->setSuccessMessage("OK");
+        return $this->responseBuilder->getResponse();
     }
 }

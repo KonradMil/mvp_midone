@@ -13,7 +13,7 @@ Route::get('site', function () {
 Route::get('projekty-ue', function () {
     return view('ue-project');
 });
-Route::get('impersonate', [UserController::class, 'impersonate'])->middleware('web');
+
 Route::get('s3/{path}', [S3Controller::class, 'reRoute'])->where('path', '(.*)');
 Route::get('models/{path}', [S3Controller::class, 'reRoutes'])->where('path', '(.*)');
 Route::get('studio/s3/{path}', [S3Controller::class, 'reRoute'])->where('path', '(.*)');
