@@ -52,7 +52,7 @@
         },
         "right": {
             "menu": {
-                "src": "\/s3/fanuc/menu_fanuc.png",
+                "src": "\/s3/builder_icons/menu_fanuc.png",
                 "tooltip": "Menu",
                 "alttext": "",
                 "type": "button",
