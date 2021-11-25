@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\ResponseBuilder;
 use App\Mail\ChangePassword;
 use App\Mail\ForgotPassword;
 use App\Models\Challenge;
@@ -480,25 +481,26 @@ class UserController extends Controller
     public function impersonate(Request $request, UserRepository $userRepository): JsonResponse
     {
 
-        $user = Auth::user();
+        $responseBuilder = new ResponseBuilder();
 
+        $user = Auth::user();
         if ($user->can_impersonate !== 1) {
-            $this->responseBuilder->setErrorMessage("Unauthorized");
-            return $this->responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
+            $responseBuilder->setErrorMessage("Unauthorized");
+            return $responseBuilder->getResponse(Response::HTTP_UNAUTHORIZED);
         }
 
         $email = $request->get('email');
 
         if (!$email) {
-            $this->responseBuilder->setErrorMessage('You must provide a valid email address.');
-            return $this->responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
+            $responseBuilder->setErrorMessage('You must provide a valid email address.');
+            return $responseBuilder->getResponse(Response::HTTP_BAD_REQUEST);
         }
 
         $userToImpersonate = $userRepository->findByEmail($email);
 
         if (!$userToImpersonate) {
-            $this->responseBuilder->setErrorMessage('User not found.');
-            return $this->responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
+            $responseBuilder->setErrorMessage('User not found.');
+            return $responseBuilder->getResponse(Response::HTTP_NOT_FOUND);
         }
 
         $impersonationToken = Hash::make($user->id . $user->email . microtime());
@@ -508,8 +510,8 @@ class UserController extends Controller
         Session::put('impersonationToken', $impersonationToken);
         Auth::login($userToImpersonate);
 
-        $this->responseBuilder->setSuccessMessage("OK");
-        return $this->responseBuilder->getResponse();
+        $responseBuilder->setSuccessMessage("OK");
+        return $responseBuilder->getResponse();
     }
 
     /**
