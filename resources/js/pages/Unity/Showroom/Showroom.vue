@@ -7,11 +7,11 @@
         <LoadingIcon icon="grid" class="w-8 h-8"/>
     </div>
     <Modal :show="show" @closed="">
-<!--      MODAL CONTENT-->
+        <!--      MODAL CONTENT-->
         <FanucAnalysisModal></FanucAnalysisModal>
         <FanucDownload></FanucDownload>
         <FanucBusinessCase></FanucBusinessCase>
-<!--      MODAL CONTENT END-->
+        <!--      MODAL CONTENT END-->
         <div class="intro-y box p-5 mt-12 sm:mt-5">
             <div class="relative text-gray-700 dark:text-gray-300 mr-4">
 
@@ -198,13 +198,19 @@ export default {
                     console.log('EEE', e);
                     switch (e.round_menu_picked.method) {
                         case 'models':
-                            handleUnityActionOutgoing({action: 'FocusOnPoint', data: {position: {x:24, y:8.5, z:15}, rotation: {x: 20, y: -33, z: 0}}});
+                            handleUnityActionOutgoing({
+                                action: 'FocusOnPoint',
+                                data: {position: {x: 24, y: 8.5, z: 15}, rotation: {x: 20, y: -33, z: 0}}
+                            });
                             break;
                         case 'business':
                             show.value = true;
                             break;
                         case 'analysis':
-                            handleUnityActionOutgoing({action: 'FocusOnPoint', data: {position: {x: -3.4, y:8.55, z:-29}, rotation: {x: 24, y: 0, z: 0}}});
+                            handleUnityActionOutgoing({
+                                action: 'FocusOnPoint',
+                                data: {position: {x: -3.4, y: 8.55, z: -29}, rotation: {x: 24, y: 0, z: 0}}
+                            });
                             break;
                         case 'knowledge':
                             show.value = true;
@@ -352,7 +358,7 @@ export default {
                         if (response.data.model.axis !== undefined || response.data.model.axis !== "") {
                             options.push({
                                 name: 'Osie',
-                                value: response.data.model.axis  || 'mm',
+                                value: response.data.model.axis || 'mm',
                                 type: '',
                                 image_url: window.location.origin + '/s3/fanuc/axis.jpeg'
                             });
@@ -381,23 +387,45 @@ export default {
                                 image_url: window.location.origin + '/s3/fanuc/kg.jpeg'
                             });
                         }
+
+
+                        console.log('model', response.data.model);
+
+                        // console.log('OPTIONS', {action: 'ReceiveVisualInfo', data: {
+                        //         documentation_url: response.data.model.tech_sheet || '',
+                        //         model_name: response.data.model.name,
+                        //         model_id: response.data.model.id,
+                        //         focus_distance: parseInt(response.data.model.cooperation),
+                        //         options,
+                        //     }});
+
+                        let du = '';
+                        let mn = '';
+                        let mi = '';
+                        let fd = 5;
+
+                        if (response.data.model.tech_sheet != undefined && response.data.model.tech_sheet != null && response.data.model.tech_sheet != '') {
+                            du = response.data.model.tech_sheet;
+                        }
+
+                        if (response.data.model.name != undefined && response.data.model.name != null && response.data.model.name != '') {
+                            mn = response.data.model.name;
+                        }
+
+                        if (response.data.model.id != undefined && response.data.model.id != null && response.data.model.id != '') {
+                            mi = response.data.model.id;
+                        }
+
+                        handleUnityActionOutgoing({
+                            action: 'ReceiveVisualInfo', data: {
+                                documentation_url: du,
+                                model_name: mn,
+                                model_id: mi,
+                                focus_distance: parseInt(fd),
+                                options,
+                            }
+                        });
                     }
-
-                    console.log('OPTIONS', {action: 'ReceiveVisualInfo', data: {
-                            documentation_url: response.data.model.tech_sheet || '',
-                            model_name: response.data.model.name,
-                            model_id: response.data.model.id,
-                            focus_distance: parseInt(response.data.model.cooperation),
-                            options,
-                        }});
-
-                    handleUnityActionOutgoing({action: 'ReceiveVisualInfo', data: {
-                            documentation_url: response.data.model.tech_sheet,
-                            model_name: response.data.model.name,
-                            model_id: response.data.model.id,
-                            focus_distance: parseInt(response.data.model.cooperation),
-                            options,
-                        }});
                 })
         }
 
