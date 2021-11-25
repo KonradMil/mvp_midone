@@ -352,7 +352,7 @@ export default {
                         if (response.data.model.axis !== undefined || response.data.model.axis !== "") {
                             options.push({
                                 name: 'Osie',
-                                value: response.data.model.axis,
+                                value: response.data.model.axis  || 'mm',
                                 type: '',
                                 image_url: window.location.origin + '/s3/fanuc/axis.jpeg'
                             });
@@ -360,7 +360,7 @@ export default {
                         if (response.data.model.range !== undefined) {
                             options.push({
                                 name: 'Zasięg',
-                                value: response.data.model.range + 'mm',
+                                value: response.data.model.max_range_mm + 'mm' || 'mm',
                                 type: '',
                                 image_url: window.location.origin + '/s3/fanuc/metr.jpeg'
                             });
@@ -368,7 +368,7 @@ export default {
                         if (response.data.model.repetity !== undefined) {
                             options.push({
                                 name: 'Powtarzalność',
-                                value: response.data.model.repetity + 'mm',
+                                value: response.data.model.repetity + 'mm' || 'mm',
                                 type: '',
                                 image_url: window.location.origin + '/s3/fanuc/powtarzalnosc.jpeg'
                             });
@@ -376,7 +376,7 @@ export default {
                         if (response.data.model.load !== undefined) {
                             options.push({
                                 name: 'Udźwig',
-                                value: response.data.model.load + 'kg',
+                                value: response.data.model.max_load_kg + 'kg' || 'kg',
                                 type: '',
                                 image_url: window.location.origin + '/s3/fanuc/kg.jpeg'
                             });
