@@ -330,7 +330,7 @@ export default {
 
                 handleUnityActionOutgoing({action: 'unlockUnityInput', data: ''});
 
-                handleUnityActionOutgoing({action: 'prefix', data: window.app_path + 's3/'});
+                handleUnityActionOutgoing({action: 'prefix', data: window.app_path + '/s3/'});
                 getRoboData();
             }, 2000);
             setTimeout(() => {
