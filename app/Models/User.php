@@ -58,7 +58,7 @@ class User extends Authenticatable implements ReacterableInterface, Commentator,
         'email_verified_at',
         'google_id',
         'facebook_id',
-        'avatar'
+        'avatar',
     ];
 
     /**

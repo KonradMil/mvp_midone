@@ -161,8 +161,16 @@
                             <HelpCircleIcon class="w-4 h-4 mr-2"/>
                             {{ $t('topBar.help') }}
                         </a>
+                        <a v-if="user.can_impersonate === 1" href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md" @click.prevent="$router.push({path: '/impersonate'})">
+                            <UserIcon class="w-4 h-4 mr-2"/>
+                            Zaloguj jako...
+                        </a>
                     </div>
                     <div class="p-2 border-t border-theme-27 dark:border-dark-3">
+                        <a v-if="impersonationToken !== null" href="" @click.prevent="unimpersonate" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md">
+                            <ToggleRightIcon class="w-4 h-4 mr-2"/>
+                            Zakończ podszywanie
+                        </a>
                         <a href="" @click.prevent="logout" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md">
                             <ToggleRightIcon class="w-4 h-4 mr-2"/>
                             {{ $t('topBar.logout') }}
@@ -185,6 +193,7 @@ import {useI18n} from 'vue-i18n'
 import DarkModeSwitcher from "../dark-mode-switcher/Main";
 import {useToast} from "vue-toastification";
 import Results from "./Results";
+import RequestHandler from "../../compositions/RequestHandler";
 
 const toast = useToast();
 
@@ -217,6 +226,8 @@ export default defineComponent({
         const results = ref({});
         const searchTerm = ref('');
         const counts = ref(0);
+        const impersonationToken = window.impersonationToken;
+
         const changeLang = () => {
             locale.value = lang.value;
             store.dispatch('main/setCurrentLang', lang.value);
@@ -344,6 +355,21 @@ export default defineComponent({
             notifications.value = user.notifications;
         });
 
+        const unimpersonate = () => {
+
+            RequestHandler(
+                'user/unimpersonate',
+                'POST',
+                {
+                    impersonationToken: impersonationToken
+                },
+                function(){
+                    location.href = '/dashboard';
+                }
+            );
+
+        }
+
         return {
             checkCounts,
             counts,
@@ -362,7 +388,9 @@ export default defineComponent({
             invites,
             searchMe,
             searchTerm,
-            results
+            results,
+            impersonationToken,
+            unimpersonate
         };
     }
 });

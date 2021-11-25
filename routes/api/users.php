@@ -8,6 +8,9 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:sanctum'], function () {
     Route::post('register-authy', [UserController::class, 'registerAuthy']);
 });
 
+Route::post('user/impersonate', [UserController::class, 'impersonate']);
+Route::post('user/unimpersonate', [UserController::class, 'endImpersonation']);
+
 Route::get('testme', [UserController::class, 'test']);
 Route::post('check/twofa', [UserController::class, 'checkTwoFa']);
 Route::post('reset-password', [UserController::class, 'reset']);

@@ -53,6 +53,7 @@ import SolutionsArchive from "../pages/Solutions/SolutionsArchive";
 import Robochallenge from "../pages/Robochallenge";
 import Notifications from "../pages/Notifications";
 import SAASLogin from "../pages/SAAS/SAASLogin";
+import Impersonate from "../pages/Impersonate";
 import ContestsLogin from "../pages/Contests/ContestsLogin";
 import AddEditContest from "../pages/Admin/Contests/AddEditContest";
 import ContestsList from "../pages/Admin/Contests/ContestsList";
@@ -156,6 +157,11 @@ export const routes = [
         path: "/",
         component: SideMenu,
         children: [
+            {
+                name: 'impersonate',
+                path: '/impersonate',
+                component: Impersonate
+            },
             {
                 name: 'admin-saas',
                 path: '/admin/saas',
