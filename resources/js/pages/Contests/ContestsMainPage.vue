@@ -1,20 +1,18 @@
 <template>
     <div>
-        <button class="btn btn-primary ml-2 shadow-md mr-2 mt-2" @click="addNewSave()">{{ $t('lite.addSave') }}</button>
         <div class="intro-y grid grid-cols-12 gap-6 mt-5">
             <div v-if="dataAr.length > 0" v-for="(save, index) in dataAr" :key="index" class="intro-y col-span-12 md:col-span-6 xl:col-span-4 box">
-                <SingleFreeSave :user="user" :save="save"></SingleFreeSave>
+<!--                <SingleFreeSave :user="user" :save="save"></SingleFreeSave>-->
             </div>
             <div v-else class="intro-y col-span-12 box pl-2 py-5 text-theme-1 dark:text-theme-10 font-medium">
                 <div>
                     <p>
-                        W tej chwili nie masz żadnych zapisanych projektów.
+                       Konkurs zostanie uruchomiony wkrótce. Zostaniesz o tym poinformowany.
                     </p>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
@@ -28,6 +26,11 @@ import SingleFreeSave from "../../components/SingleFreeSave";
 
 export default {
     name: "ContestsMainPage",
+    props: {
+        organization: {
+            type: String
+        }
+    },
     components: {
         SingleFreeSave,
         VueEasyLightbox, Modal
@@ -48,16 +51,9 @@ export default {
         });
 
         const getData = async () => {
-            axios.get('/api/playground/freesaves/get/all')
+            axios.get('/api/contest/' + props.organization + '/get/all')
                 .then(response => {
-                    dataAr.value = response.data.freeSaves;
-                })
-        }
-
-        const addNewSave = () => {
-            axios.post('/api/playground/freesaves/add')
-                .then(response => {
-                    router.push({path: '/playground/' + response.data.id});
+                    // dataAr.value = response.data.freeSaves;
                 })
         }
 
@@ -79,8 +75,7 @@ export default {
             saves,
             user,
             deleteSave,
-            dataAr,
-            addNewSave
+            dataAr
         }
     },
     beforeRouteEnter(to, from, next) {

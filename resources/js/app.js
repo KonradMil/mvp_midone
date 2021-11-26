@@ -62,7 +62,7 @@ Sentry.init({
     integrations: [
         new Integrations.BrowserTracing({
             routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-            tracingOrigins: ["platform.dbr77.com", /^\//],
+            tracingOrigins: ["platform.dbr77.com", "dbr2.test", /^\//],
         }),
     ],
     tracesSampleRate: 1.0,

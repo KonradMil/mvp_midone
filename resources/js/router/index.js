@@ -230,7 +230,7 @@ export const routes = [
             },
             {
                 name: 'contest-main-page',
-                path: '/contests/:organization/main',
+                path: '/contest/:organization/main',
                 component: ContestsMainPage,
                 props: true
             },

@@ -9,6 +9,7 @@ use App\Repository\Eloquent\Admin\ContestRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class ContestController extends Controller
@@ -35,7 +36,7 @@ class ContestController extends Controller
     {
         $serviceUser = ContestUser::where('email', '=', $request->email)->first();
         $contest = Contest::where('name_slug', '=', $name_slug)->first();
-
+//        Log::info(json_encode([$name_slug, $contest]));
         if($serviceUser == NULL) {
             $serviceUser = new ContestUser();
             $serviceUser->email = $request->email;
@@ -51,13 +52,31 @@ class ContestController extends Controller
             $user->type = 'contest';
             $user->save();
             Auth::login($user);
+
+            session(['contest_logged' => 'true']);
+            session(['contest' => $contest->organization_slug]);
+
+            $this->responseBuilder->setSuccessMessage(__('Zarejestrowano'));
+            $this->responseBuilder->setData('contest-user',  $serviceUser);
+        } else {
+            $user = User::where('email', '=', $request->email)->first();
+            if(Auth::attempt(['email' => $user->email, 'password' => $request->password])) {
+                Auth::login($user);
+                session(['contest_logged' => 'true']);
+                session(['contest' => $contest->organization_slug]);
+
+                $this->responseBuilder->setSuccessMessage(__('Zarejestrowano'));
+                $this->responseBuilder->setData('contest-user',  $serviceUser);
+            } else {
+                session(['contest_logged' => 'true']);
+                session(['contest' => $contest->organization_slug]);
+
+                $this->responseBuilder->setErrorMessage(__('Błędne hasło'));
+//                $this->responseBuilder->setData('contest-user',  $serviceUser);
+            }
         }
 
-        session(['contest_logged' => 'true']);
-        session(['contest' => $contest->organization_slug]);
 
-        $this->responseBuilder->setSuccessMessage(__('Zarejestrowano'));
-        $this->responseBuilder->setData('contest-user',  $serviceUser);
 
         return $this->responseBuilder->getResponse();
     }

@@ -2,14 +2,14 @@
     <div class="min-h-full flex items-center justify-center py-12 px-4 mt-24 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8">
             <Box classes="mt-4 p-5" style="background-color: rgba(255,255,255,0.66)">
-                <div content="pt-8" v-if="organization != undefined">
-                    <img class="mx-auto h-20 w-auto" :src="organization.organization_logo" :alt="organization.name"/>
+                <div content="pt-8">
+                    <img class="mx-auto h-20 w-auto" :src="'/images/dbr_logo_color_notagline.svg'"/>
                 </div>
                 <form class="mt-8 space-y-6" action="#" method="POST">
                     <div class="rounded-md shadow-sm -space-y-px">
                         <div class="input-group mt-2">
                             <TerraInput type="text" placeholder="e-mail" v-model:val="email"></TerraInput>
-                            <div v-if="organization != undefined" class="input-group-text">{{ organization.email_regexp }}</div>
+<!--                            <div v-if="organization != undefined" class="input-group-text">{{ organization.email_regexp }}</div>-->
                         </div>
                     </div>
                     <div class="rounded-md shadow-sm -space-y-px" >
@@ -75,7 +75,7 @@ export default {
                 email: email.value,
                 password: password.value
             }, () => {
-                window.location.href = '/contest/' + props.organization;
+                window.location.href = '/contest/' + props.organization + '/main';
             });
         }
 
