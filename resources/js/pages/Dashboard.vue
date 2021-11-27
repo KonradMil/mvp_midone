@@ -442,8 +442,6 @@
 
 <script>
 import {defineComponent, ref, provide, onMounted} from "vue";
-import ReportDonutChart from "../components/report-donut-chart/Main.vue";
-import ReportBarChart from "../components/report-bar-chart/Main.vue";
 import GetDashboard from "../compositions/GetDashboard"
 import WordpressPost from "../components/wordpress-post/WordpressPost";
 import DirectusCall from "../compositions/DirectusCall"
@@ -451,14 +449,11 @@ import DirectusCall from "../compositions/DirectusCall"
 export default {
     components: {
         WordpressPost,
-        ReportDonutChart,
-        ReportBarChart,
     },
     setup() {
         const importantNotesRef = ref();
         const posts = ref([]);
         const solutions = ref([]);
-        const types = require("../json/types.json");
         const logs = ref([]);
 
         provide("bind[importantNotesRef]", el => {
@@ -506,7 +501,6 @@ export default {
             nextImportantNotes,
             posts,
             solutions,
-            types,
             logs
         };
     },

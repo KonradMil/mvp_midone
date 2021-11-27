@@ -6,22 +6,19 @@
             <nav class="side-nav">
                 <!--         BEGIN: Logo-->
                 <div class="flex-row w-full items-center">
-                    <router-link :to="{ name: 'dashboard' }" tag="a" v-if="user.type != 'saas'" class="intro-x flex items-center  pt-4 px-12">
+                    <router-link :to="{ name: 'dashboard' }" tag="a" class="intro-x flex items-center  pt-4 px-12">
                         <img alt="DBR77 Platforma Robotów " class="w-full" src="/images/dbr_logo_white_notagline_platform.svg"/>
                     </router-link>
-                    <div v-else class="intro-x flex items-center  pt-4 px-12">
-                        <img alt="DBR77 Platforma Robotów " class="w-full" src="/images/dbr_logo_white_notagline_platform.svg"/>
-                    </div>
                 </div>
                 <!--         END: Logo-->
                 <div class="side-nav__devider my-6"></div>
                 <ul>
                     <!-- BEGIN: First Child -->
-                    <template v-for="(menu, menuKey) in formattedMenu" v-if="user.type != 'robochallenge'">
+                    <template v-for="(menu, menuKey) in formattedMenu" >
                         <li v-if="menu == 'devider'" :key="menu + menuKey" class="side-nav__devider my-6">
                         </li>
                         <li v-else :key="menu + menuKey" v-if="menu.admin == undefined || (user.role == 'admin')">
-                            <SideMenuTooltip tag="a" v-if="user.role != 'investor' && menu.pageName != 'solutions' && !(menu.title == 'Rozwiązania' && user.type == 'investor')" :content="menu.title" href="javascript:;" class="side-menu" :class="{'side-menu--active': menu.active,'side-menu--open': menu.activeDropdown}" @click="linkTo(menu, router)">
+                            <SideMenuTooltip tag="a"  :content="menu.title" href="javascript:;" class="side-menu" :class="{'side-menu--active': menu.active,'side-menu--open': menu.activeDropdown}" @click="linkTo(menu, router)">
                                 <div class="side-menu__icon">
                                     <component :is="menu.icon"/>
                                 </div>
@@ -36,7 +33,7 @@
                             <transition @enter="enter" @leave="leave">
                                 <ul v-if="menu.subMenu && menu.activeDropdown">
                                     <li v-for="(subMenu, subMenuKey) in menu.subMenu" :key="subMenuKey">
-                                        <SideMenuTooltip v-if="!(subMenu.pageName == 'challengesArchive' && user.type == 'integrator') && !((subMenu.pageName == 'solutionsArchive' && subMenu.pageName == 'solutionsAll') && user.type == 'investor')" tag="a" :content="subMenu.title" href="javascript:;" class="side-menu" :class="{ 'side-menu--active': subMenu.active }" @click="linkTo(subMenu, router)">
+                                        <SideMenuTooltip  tag="a" :content="subMenu.title" href="javascript:;" class="side-menu" :class="{ 'side-menu--active': subMenu.active }" @click="linkTo(subMenu, router)">
                                             <div class="side-menu__icon">
                                                 <ActivityIcon/>
                                             </div>
@@ -69,28 +66,6 @@
                             <!-- END: Second Child -->
                         </li>
                     </template>
-                    <template v-else>
-                        <li :key="'robo'">
-                            <SideMenuTooltip tag="a" :content="'Konkurs Robochallenge'" href="javascript:;" class="side-menu" @click="$router.push({name: 'studio-playground-saves'})">
-                                <div class="side-menu__icon">
-                                    <component :is="'HomeIcon'"/>
-                                </div>
-                                <div class="side-menu__title">
-                                    Konkurs Robochallenge
-                                </div>
-                            </SideMenuTooltip>
-                        </li>
-                        <li :key="'community'">
-                            <SideMenuTooltip tag="a" :content="'Społeczność'" href="javascript:;" class="side-menu" @click="goTo('https://community.dbr77.com')">
-                                <div class="side-menu__icon">
-                                    <component :is="'HomeIcon'"/>
-                                </div>
-                                <div class="side-menu__title">
-                                   Społeczność
-                                </div>
-                            </SideMenuTooltip>
-                        </li>
-                    </template>
                     <!-- END: First Child -->
                 </ul>
             </nav>
@@ -112,7 +87,6 @@ import {useStore} from "../../store";
 import {helper as $h} from "../../utils/helper";
 import TopBar from "../../components/top-bar/Main.vue";
 import MobileMenu from "../../components/mobile-menu/Main.vue";
-import DarkModeSwitcher from "../../components/dark-mode-switcher/Main.vue";
 import SideMenuTooltip from "../../components/side-menu-tooltip/Main.vue";
 import {linkTo, nestedMenu, enter, leave} from "./index";
 
@@ -156,8 +130,6 @@ export default defineComponent({
 
                 if(user.value.type == 'admin') {
                     menu.value = require('../../json/admin_menu.json');
-                } else if (user.value.type == 'saas') {
-                    menu.value = require('../../json/services_menu.json');
                 } else {
                     menu.value = require('../../json/main_menu.json');
                 }

@@ -20,22 +20,11 @@
                     Aby zacząć uzupełnij podstawowe dane.
                 </div>
             </div>
-            <div
-                class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"
-            >
-<!--                <GoogleMap-->
-<!--                    api-key="AIzaSyBsKJBCpnTAnjhzE1psl0yIUO3YDWny2Ew"-->
-<!--                    style="width: 100%; height: 500px"-->
-<!--                    :center="{ lat: 53.0510715, lng: 18.6029603 }"-->
-<!--                    :zoom="15"-->
-<!--                >-->
-<!--                    <Marker v-for="marker in markers" :options="{ position: marker }"/>-->
-<!--                </GoogleMap>-->
+            <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
+
 
             </div>
-            <div
-                class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5"
-            >
+            <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
                 <!--                <div class="font-medium text-base">Profile Settings</div>-->
                 <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                     <div class="col-span-2"></div>
@@ -71,23 +60,22 @@
 '    background-size: contain;\n'+
 '    background-repeat: no-repeat;\n'+
 '    margin: 0 auto;'"></div>
-<!--                            <img class="avatar-preview"  :src="avatar_path"/>-->
                         </div>
-                        <Dropzone
-                            ref-key="dropzoneSingleRef"
-                            :options="{
-                              url: '/api/avatar/store',
-                              thumbnailWidth: 150,
-                              maxFilesize: 4,
-                              maxFiles: 1,
-                              previewTemplate: '<div style=\'display: none\'></div>'
-                            }"
-                            style="height: 153px;"
-                            class="dropzone">
-                            <div class="text-lg font-medium">
-                                Kliknij lub upuść swój awatar
-                            </div>
-                        </Dropzone>
+<!--                        <Dropzone-->
+<!--                            ref-key="dropzoneSingleRef"-->
+<!--                            :options="{-->
+<!--                              url: '/api/avatar/store',-->
+<!--                              thumbnailWidth: 150,-->
+<!--                              maxFilesize: 4,-->
+<!--                              maxFiles: 1,-->
+<!--                              previewTemplate: '<div style=\'display: none\'></div>'-->
+<!--                            }"-->
+<!--                            style="height: 153px;"-->
+<!--                            class="dropzone">-->
+<!--                            <div class="text-lg font-medium">-->
+<!--                                Kliknij lub upuść swój awatar-->
+<!--                            </div>-->
+<!--                        </Dropzone>-->
 <!--                        <button v-if="avatar_path != ''" @onClick="avatar_path.value = ''"-->
 <!--                                class="btn btn-danger mr-1 mb-2">-->
 <!--                            <TrashIcon class="w-5 h-5"/>-->
@@ -111,7 +99,6 @@
     import {defineComponent, ref, onMounted, provide} from "vue";
     import DarkModeSwitcher from "../components/dark-mode-switcher/Main.vue";
     import cash from "cash-dom";
-    import Dropzone from '../global-components/dropzone/Main'
     import {useToast} from "vue-toastification";
     import {useStore} from "../store";
 
@@ -121,13 +108,11 @@
 
     export default {
         components: {
-            DarkModeSwitcher,
-            Dropzone
+            DarkModeSwitcher
         },
 
         setup() {
             const toast = useToast();
-            const dropzoneSingleRef = ref();
             const avatar_path = ref();
             provide("bind[dropzoneSingleRef]", el => {
                 dropzoneSingleRef.value = el;

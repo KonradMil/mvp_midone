@@ -56,17 +56,17 @@ window.Echo = new Echo({
 
 const app = createApp(App);
 
-Sentry.init({
-    app,
-    dsn: "https://ce18a456c29d459a803ba67f4ebeb3d8@o1060388.ingest.sentry.io/6072548",
-    integrations: [
-        new Integrations.BrowserTracing({
-            routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-            tracingOrigins: ["platform.dbr77.com", "dbr2.test", /^\//],
-        }),
-    ],
-    tracesSampleRate: 1.0,
-});
+// Sentry.init({
+//     app,
+//     dsn: "https://ce18a456c29d459a803ba67f4ebeb3d8@o1060388.ingest.sentry.io/6072548",
+//     integrations: [
+//         new Integrations.BrowserTracing({
+//             routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+//             tracingOrigins: ["platform.dbr77.com", "dbr2.test", /^\//],
+//         }),
+//     ],
+//     tracesSampleRate: 1.0,
+// });
 
 globalComponents(app);
 utils(app);

@@ -20,72 +20,7 @@ class CreateCoreTables extends Migration
     public function up()
     {
 
-        Schema::connection(config('activitylog.database_connection'))->create('activity_log', function (Blueprint $table) {
 
-            $table->bigIncrements('id');
-            $table->string('log_name')->nullable();
-            $table->text('description');
-            $table->nullableMorphs('subject', 'subject');
-            $table->nullableMorphs('causer', 'causer');
-            $table->json('properties')->nullable();
-            $table->timestamps();
-            $table->index('log_name');
-
-        });
-
-        Schema::create('challenge_files', function (Blueprint $table) {
-
-            $table->id();
-            $table->integer('challenge_id');
-            $table->integer('file_id');
-            $table->integer('type')->default(1);
-            $table->timestamps();
-
-        });
-
-        Schema::create('challenge_image', function (Blueprint $table) {
-
-            $table->id();
-            $table->integer('challenge_id');
-            $table->integer('image_id');
-            $table->timestamps();
-
-        });
-
-        Schema::create('challenges', function (Blueprint $table) {
-
-            $table->id();
-            $table->integer('type');
-            $table->string('name', 255)->nullable();
-            $table->longText('description')->nullable();
-            $table->timestamp('solution_deadline');
-            $table->timestamp('offer_deadline');
-            $table->integer('status');
-            $table->integer('stage');
-            $table->longText('save_json')->nullable();
-            $table->string('screenshot_path', 255)->nullable();
-            $table->integer('author_id');
-            $table->integer('financial_before_id');
-            $table->timestamps();
-            $table->unsignedBigInteger('love_reactant_id')->nullable();
-            $table->integer('allowed_publishing')->nullable();
-            $table->unsignedBigInteger('technical_details_id')->nullable();
-            $table->unsignedBigInteger('selected_offer_id')->nullable();
-
-            $table->index('love_reactant_id', 'challenges_love_reactant_id_foreign');
-
-        });
-
-        Schema::create('comments', function (Blueprint $table) {
-
-            $table->increments('id');
-            $table->morphs('commentable');
-            $table->text('comment');
-            $table->boolean('is_approved')->default(false);
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->timestamps();
-
-        });
 
         Schema::create('companies', function (Blueprint $table) {
 
@@ -109,27 +44,6 @@ class CreateCoreTables extends Migration
 
         });
 
-        Schema::create('estimates', function (Blueprint $table) {
-
-            $table->id();
-            $table->integer('solution_id');
-            $table->double('integration_cost', 8, 2);
-            $table->double('parts_cost', 8, 2);
-            $table->double('mechanical_integration', 8, 2);
-            $table->double('electrical_integration', 8, 2);
-            $table->double('workstation_integration', 8, 2);
-            $table->double('programming_robot', 8, 2);
-            $table->double('programming_plc', 8, 2);
-            $table->double('documentation_ce', 8, 2);
-            $table->double('training', 8, 2);
-            $table->double('project', 8, 2);
-            $table->double('margin', 8, 2);
-            $table->json('parts_prices');
-            $table->json('additional_costs');
-            $table->double('sum');
-            $table->timestamps();
-
-        });
 
         Schema::create('failed_jobs', function (Blueprint $table) {
 
@@ -166,25 +80,6 @@ class CreateCoreTables extends Migration
 
         });
 
-        Schema::create('financials', function (Blueprint $table) {
-
-            $table->id();
-            $table->integer('days')->default(260);
-            $table->integer('shifts')->default(4);
-            $table->integer('shift_time')->default(8);
-            $table->integer('weekend_shift')->default(0);
-            $table->integer('breakfast')->default(30);
-            $table->integer('stop_time')->default(20);
-            $table->integer('operator_performance')->default(90);
-            $table->integer('defective')->default(5);
-            $table->integer('number_of_operators')->default(2);
-            $table->integer('operator_cost')->default(4500);
-            $table->integer('absence')->default(12);
-            $table->integer('cycle_time')->nullable();
-            $table->timestamps();
-            $table->integer('challenge_id')->nullable();
-
-        });
 
         Schema::create('jobs', function (Blueprint $table) {
 
@@ -200,141 +95,8 @@ class CreateCoreTables extends Migration
 
         });
 
-        Schema::create('knowledgebase_videos', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('src');
-            $table->string('poster');
-            $table->string('description');
-            $table->integer('category');
-            $table->integer('published');
-            $table->string('video_id');
-            $table->timestamps();
-            $table->unsignedBigInteger('love_reactant_id')->nullable();
 
-            $table->index('love_reactant_id', 'knowledgebase_videos_love_reactant_id_foreign');
-        });
 
-        Schema::create((new ReactionCounter())->getTable(), function (Blueprint $table) {
-
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('reactant_id');
-            $table->unsignedBigInteger('reaction_type_id');
-            $table->unsignedBigInteger('count');
-            $table->decimal('weight', 13, 2);
-            $table->timestamps();
-
-            $table->index([
-                'reactant_id',
-                'reaction_type_id',
-            ], 'love_reactant_reaction_counters_reactant_reaction_type_index');
-
-            $table->index('reaction_type_id', 'love_reactant_reaction_counters_reaction_type_id_foreign');
-
-        });
-
-        Schema::create((new ReactionTotal())->getTable(), function (Blueprint $table) {
-
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('reactant_id');
-            $table->unsignedBigInteger('count');
-            $table->decimal('weight', 13, 2);
-            $table->timestamps();
-
-            $table->index('reactant_id', 'love_reactant_reaction_totals_reactant_id_foreign');
-
-        });
-
-        Schema::create((new Reactant)->getTable(), function (Blueprint $table) {
-
-            $table->bigIncrements('id');
-            $table->string('type');
-            $table->timestamps();
-
-            $table->index('type');
-
-        });
-
-        Schema::create((new Reacter())->getTable(), function (Blueprint $table) {
-
-            $table->bigIncrements('id');
-            $table->string('type');
-            $table->timestamps();
-
-            $table->index('type');
-
-        });
-
-        Schema::create((new Reaction())->getTable(), function (Blueprint $table) {
-
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('reactant_id');
-            $table->unsignedBigInteger('reacter_id');
-            $table->unsignedBigInteger('reaction_type_id');
-            $table->decimal('rate', 4, 2);
-            $table->timestamps();
-
-            $table->index([
-                'reactant_id',
-                'reaction_type_id',
-            ]);
-
-            $table->index([
-                'reactant_id',
-                'reacter_id',
-                'reaction_type_id',
-            ]);
-
-            $table->index([
-                'reactant_id',
-                'reacter_id',
-            ]);
-
-            $table->index([
-                'reacter_id',
-                'reaction_type_id',
-            ]);
-
-            $table->index('reaction_type_id', 'love_reactions_reaction_type_id_foreign');
-
-        });
-
-        Schema::create((new ReactionType())->getTable(), function (Blueprint $table) {
-
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->tinyInteger('mass');
-            $table->timestamps();
-
-            $table->index('name');
-
-        });
-
-        Schema::create('models', function (Blueprint $table) {
-
-            $table->id();
-            $table->string('name');
-            $table->integer('category');
-            $table->integer('subcategory');
-            $table->double('price', 8, 2)->nullable();
-            $table->string('model_file');
-            $table->string('brand')->nullable();
-            $table->string('model')->nullable();
-            $table->string('max_load_kg')->nullable();
-            $table->string('max_range_mm')->nullable();
-            $table->string('axis')->nullable();
-            $table->string('max_speed_mms')->nullable();
-            $table->string('tech_sheet')->nullable();
-            $table->string('connection_method')->nullable();
-            $table->string('range')->nullable();
-            $table->string('repetity')->nullable();
-            $table->string('load')->nullable();
-            $table->timestamps();
-
-            $table->index('category', 'category');
-            $table->index('subcategory', 'subcategory');
-
-        });
 
         Schema::create('notifications', function (Blueprint $table) {
 
@@ -347,37 +109,6 @@ class CreateCoreTables extends Migration
 
         });
 
-        Schema::create('offers', function (Blueprint $table) {
-
-            $table->id();
-            $table->unsignedInteger('challenge_id')->nullable()->default(0);
-            $table->unsignedInteger('solution_id')->nullable()->default(1);
-            $table->unsignedInteger('installer_id')->nullable();
-            $table->unsignedInteger('price_of_delivery')->nullable()->default(1);
-            $table->integer('weeks_to_start')->nullable();
-            $table->integer('time_to_start')->nullable()->default(1);
-            $table->integer('time_to_fix')->nullable()->default(0);
-            $table->integer('advance_upon_start')->nullable()->default(0);
-            $table->integer('advance_upon_delivery')->nullable()->default(0);
-            $table->integer('advance_upon_agreement')->nullable()->default(1);
-            $table->integer('selected')->nullable();
-            $table->integer('rejected')->nullable();
-            $table->string('years_of_guarantee')->nullable()->default("0");
-            $table->integer('service_support_scope')->nullable()->default(1);
-            $table->string('maintenance_frequency')->nullable()->default("1");
-            $table->float('price_of_maintenance')->nullable();
-            $table->string('reaction_time')->nullable();
-            $table->float('intervention_price')->nullable();
-            $table->float('work_hour_price')->nullable();
-            $table->string('period_of_support', 155)->nullable();
-            $table->integer('offer_expires_in')->nullable()->default(30);
-            $table->integer('status')->nullable()->default(0);
-            $table->float('avg_guarantee')->nullable();
-            $table->longText('robots')->nullable();
-            $table->float('points')->nullable();
-            $table->timestamps();
-
-        });
 
         Schema::create('password_resets', function (Blueprint $table) {
 
@@ -387,113 +118,6 @@ class CreateCoreTables extends Migration
 
         });
 
-        Schema::create('posts', function (Blueprint $table) {
-
-            $table->id();
-            $table->integer('wp_id')->nullable();
-            $table->string('status', 50)->nullable();
-            $table->string('title')->nullable();
-            $table->string('slug')->nullable();
-            $table->integer('type_investor', false)->nullable();
-            $table->integer('type_installer', false)->nullable();
-            $table->text('excerpt')->nullable();
-            $table->text('thumbnail')->nullable();
-            $table->mediumText('content')->nullable();
-            $table->timestamps();
-
-        });
-
-        Schema::create('questions', function (Blueprint $table) {
-
-            $table->id();
-            $table->longText('question')->nullable();
-            $table->longText('answer')->nullable();
-            $table->integer('author_id')->nullable();
-            $table->integer('challenge_id');
-            $table->timestamps();
-
-        });
-
-        Schema::create('ratings', function (Blueprint $table) {
-
-            $table->unsignedInteger('id')->autoIncrement();
-            $table->timestamps();
-            $table->integer('rating');
-            $table->morphs('rateable');
-            $table->unsignedBigInteger('user_id');
-            $table->index('rateable_id');
-            $table->index('rateable_type');
-            $table->index('user_id', 'ratings_user_id_foreign');
-
-        });
-
-        Schema::create('reports', function (Blueprint $table) {
-
-            $table->id();
-            $table->string('title')->nullable();
-            $table->string('type')->nullable();
-            $table->string('description')->nullable();
-            $table->integer('author_id')->nullable();
-            $table->timestamps();
-
-        });
-
-        Schema::create('solutions', function (Blueprint $table) {
-
-            $table->id();
-            $table->timestamp('deadline_offered')->nullable();
-            $table->timestamp('published_at')->nullable();
-            $table->double('price', 8, 2)->nullable();
-            $table->integer('author_id');
-            $table->integer('challenge_id');
-            $table->integer('installer_id')->nullable();
-            $table->integer('financial_after_id')->nullable();
-            $table->longText('save_json')->nullable();
-            $table->integer('selected_offer_id')->nullable();
-            $table->integer('selected')->nullable();
-            $table->integer('rejected')->nullable();
-            $table->string('name')->nullable()->default('Rozwiązanie');
-            $table->string('screenshot_path')->nullable();
-            $table->mediumText('description')->nullable();
-            $table->integer('status');
-            $table->tinyInteger('archive')->nullable();
-            $table->integer('published');
-            $table->integer('number_of_fanuc')->default(0);
-            $table->integer('number_of_yaskawa')->default(0);
-            $table->integer('number_of_abb')->default(0);
-            $table->integer('number_of_mitshubishi')->default(0);
-            $table->integer('number_of_kuka')->default(0);
-            $table->integer('number_of_tfm')->default(0);
-            $table->integer('number_of_universal')->default(0);
-            $table->timestamps();
-            $table->unsignedBigInteger('love_reactant_id')->nullable();
-
-            $table->index('love_reactant_id', 'solutions_love_reactant_id_foreign');
-        });
-
-        Schema::create('taggables', function (Blueprint $table) {
-
-            $table->unsignedBigInteger('tag_id');
-            $table->morphs('taggable');
-
-            $table->unique(['tag_id', 'taggable_id', 'taggable_type']);
-        });
-
-        Schema::create('tags', function (Blueprint $table) {
-            $table->id();
-            $table->json('name');
-            $table->json('slug');
-            $table->string('type')->nullable();
-            $table->integer('order_column')->nullable();
-            $table->timestamps();
-        });
-
-        Schema::create('team_challenge', function (Blueprint $table) {
-            $table->id();
-            $table->integer('challenge_id');
-            $table->integer('team_id');
-            $table->timestamps();
-        });
 
         Schema::create('team_invites', function (Blueprint $table) {
 
@@ -519,14 +143,6 @@ class CreateCoreTables extends Migration
 
         });
 
-        Schema::create('team_solution', function (Blueprint $table) {
-
-            $table->id();
-            $table->integer('solution_id');
-            $table->integer('team_id');
-            $table->timestamps();
-
-        });
 
         Schema::create('team_user', function (Blueprint $table) {
 
@@ -539,25 +155,6 @@ class CreateCoreTables extends Migration
 
         });
 
-        Schema::create('technical_details', function (Blueprint $table) {
-
-            $table->id();
-            $table->integer('challenge_id')->nullable();
-            $table->integer('solution_id')->nullable();
-            $table->integer('detail_weight')->default(0);
-            $table->integer('pick_quality')->default(0);
-            $table->integer('detail_material')->default(0);
-            $table->integer('detail_size')->default(0);
-            $table->integer('detail_pick')->default(0);
-            $table->integer('detail_position')->default(0);
-            $table->integer('detail_range')->default(0);
-            $table->integer('detail_destination')->default(0);
-            $table->integer('number_of_lines')->default(1);
-            $table->integer('cycle_time')->default(0);
-            $table->integer('work_shifts')->default(0);
-            $table->timestamps();
-
-        });
 
         Schema::create('user_companies', function (Blueprint $table) {
 
@@ -605,28 +202,6 @@ class CreateCoreTables extends Migration
 
         });
 
-        Schema::create('user_workshop_objects', function (Blueprint $table) {
-
-            $table->id();
-            $table->integer('user_id');
-            $table->integer('workshop_object_id');
-            $table->timestamps();
-
-        });
-
-        Schema::create('workshop_objects', function (Blueprint $table) {
-
-            $table->id();
-            $table->string('name')->nullable();
-            $table->mediumText('description')->nullable();
-            $table->integer('type')->nullable();
-            $table->json('save')->nullable();
-            $table->integer('author_id');
-            $table->integer('public')->nullable();
-            $table->string('screenshot_path');
-            $table->timestamps();
-
-        });
 
     }
 
@@ -638,46 +213,19 @@ class CreateCoreTables extends Migration
      */
     public function down()
     {
-        Schema::connection(config('activitylog.database_connection'))->dropIfExists('activity_log');
-        Schema::dropIfExists('challenge_files');
-        Schema::dropIfExists('challenge_image');
-        Schema::dropIfExists('challenges');
-        Schema::dropIfExists('comments');
         Schema::dropIfExists('companies');
         Schema::dropIfExists('estimates');
         Schema::dropIfExists('failed_jobs');
-        Schema::dropIfExists('file_reports');
         Schema::dropIfExists('files');
-        Schema::dropIfExists('financials');
         Schema::dropIfExists('jobs');
-        Schema::dropIfExists('knowledgebase_videos');
-        Schema::dropIfExists((new ReactionCounter())->getTable());
-        Schema::dropIfExists((new ReactionTotal())->getTable());
-        Schema::dropIfExists((new Reactant())->getTable());
-        Schema::dropIfExists((new Reacter())->getTable());
-        Schema::dropIfExists((new Reaction())->getTable());
-        Schema::dropIfExists((new ReactionType())->getTable());
-        Schema::dropIfExists('models');
         Schema::dropIfExists('notifications');
-        Schema::dropIfExists('offers');
         Schema::dropIfExists('password_resets');
-        Schema::dropIfExists('posts');
-        Schema::dropIfExists('questions');
-        Schema::dropIfExists('ratings');
         Schema::dropIfExists('reports');
-        Schema::dropIfExists('solutions');
-        Schema::dropIfExists('taggables');
-        Schema::dropIfExists('tags');
-        Schema::dropIfExists('team_challenge');
         Schema::dropIfExists('team_invites');
         Schema::dropIfExists('teams');
-        Schema::dropIfExists('team_solution');
         Schema::dropIfExists('team_user');
-        Schema::dropIfExists('technical_details');
         Schema::dropIfExists('user_companies');
         Schema::dropIfExists('users');
-        Schema::dropIfExists('user_workshop_objects');
-        Schema::dropIfExists('workshop_objects');
     }
 
 }
